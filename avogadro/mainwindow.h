@@ -30,6 +30,10 @@ namespace QtOpenGL {
 class GLWidget;
 }
 
+namespace QtGui {
+class ScenePlugin;
+}
+
 class MainWindow : public QMainWindow
 {
 Q_OBJECT
@@ -57,6 +61,8 @@ private:
   QStringList         m_recentFiles;
 
   QList<QAction*>     m_actionRecentFiles;
+
+  QtGui::ScenePlugin *m_scenePlugin;
 
   void updateRecentFiles();
 };
