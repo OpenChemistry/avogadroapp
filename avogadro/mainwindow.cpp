@@ -90,12 +90,14 @@ MainWindow::MainWindow(const QString &fileName)
   qDebug() << "Calling load plugins again! This is to debug plugin loading...";
   plugin->load();
 
-  QList<Avogadro::QtGui::ExtensionPluginFactory *> extensions =
-      plugin->pluginFactories<Avogadro::QtGui::ExtensionPluginFactory>();
+  QList<QtGui::ExtensionPluginFactory *> extensions =
+      plugin->pluginFactories<QtGui::ExtensionPluginFactory>();
   qDebug() << "Extension plugins dynamically found..." << extensions.size();
-  foreach (Avogadro::QtGui::ExtensionPluginFactory *factory, extensions) {
+  foreach (QtGui::ExtensionPluginFactory *factory, extensions) {
     QtGui::ExtensionPlugin *extension = factory->createExtensionInstance();
+    extension->setParent(this);
     qDebug() << "extension:" << extension->name() << extension->menuPath();
+    buildMenu(extension);
   }
 }
 
@@ -227,6 +229,49 @@ void MainWindow::updateRecentFiles()
   }
   for (; i < 10; ++i)
     m_actionRecentFiles[i]->setVisible(false);
+}
+
+void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
+{
+  foreach (QAction *action, extension->actions()) {
+    QStringList path = extension->menuPath(action);
+    qDebug() << "Menu:" << extension->name() << path;
+    if (path.size() < 1)
+      continue;
+    // First ensure the top-level menu is present (create it if needed).
+    QMenu *menu(NULL);
+    foreach (QAction *topMenu, menuBar()->actions()) {
+      if (topMenu->text() == path.at(0)) {
+        menu = topMenu->menu();
+        break;
+      }
+    }
+    if (!menu)
+      menu = menuBar()->addMenu(path.at(0));
+
+    // Build up submenus if necessary.
+    QMenu *nextMenu(NULL);
+    for (int i = 1; i < path.size(); ++i) {
+      if (nextMenu) {
+        menu = nextMenu;
+        nextMenu = NULL;
+      }
+      const QString menuText = path[i];
+      foreach (QAction *menuAction, menu->actions()) {
+        if (menuAction->text() == menuText) {
+          nextMenu = menuAction->menu();
+          break;
+        }
+      }
+      if (!nextMenu)
+        nextMenu = menu->addMenu(path.at(i));
+      menu = nextMenu;
+      nextMenu = NULL;
+    }
+    // Now we actually add the action we got (it should have set the text etc).
+    menu->addAction(action);
+  }
+
 }
 
 } // End of Avogadro namespace
