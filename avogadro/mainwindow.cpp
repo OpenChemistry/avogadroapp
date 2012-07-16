@@ -94,7 +94,9 @@ MainWindow::MainWindow(const QString &fileName) : m_molecule(0), m_scenePlugin(0
   qDebug() << "Extension plugins dynamically found..." << extensions.size();
   foreach (Avogadro::QtGui::ExtensionPluginFactory *factory, extensions) {
     Avogadro::QtGui::ExtensionPlugin *extension = factory->createExtensionInstance();
+    extension->setParent(this);
     qDebug() << "extension:" << extension->name() << extension->menuPath();
+    buildMenu(extension);
   }
 }
 
@@ -226,6 +228,50 @@ void MainWindow::updateRecentFiles()
   }
   for (; i < 10; ++i)
     m_actionRecentFiles[i]->setVisible(false);
+}
+
+void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
+{
+  QList<QAction *> actions = extension->actions();
+  foreach (QAction *action, extension->actions()) {
+    QStringList path = extension->menuPath(action);
+    qDebug() << "Menu:" << extension->name() << path;
+    if (path.size() < 1)
+      continue;
+    // First ensure the top-level menu is present (create it if needed).
+    QMenu *menu(NULL);
+    foreach (QAction *topMenu, menuBar()->actions()) {
+      if (topMenu->text() == path.at(0)) {
+        menu = topMenu->menu();
+        break;
+      }
+    }
+    if (!menu)
+      menu = menuBar()->addMenu(path.at(0));
+
+    // Build up submenus if necessary.
+    QMenu *nextMenu(NULL);
+    for (int i = 1; i < path.size(); ++i) {
+      if (nextMenu) {
+        menu = nextMenu;
+        nextMenu = NULL;
+      }
+      const QString menuText = path[i];
+      foreach (QAction *actions, menu->actions()) {
+        if (actions->text() == menuText) {
+          nextMenu = actions->menu();
+          break;
+        }
+      }
+      if (!nextMenu)
+        nextMenu = menu->addMenu(path.at(i));
+      menu = nextMenu;
+      nextMenu = NULL;
+    }
+    // Now we actually add the action we got (it should have set the text etc).
+    menu->addAction(action);
+  }
+
 }
 
 } // End of Avogadro namespace
