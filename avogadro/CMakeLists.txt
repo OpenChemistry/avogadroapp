@@ -5,6 +5,12 @@ list(APPEND CMAKE_MODULE_PATH ${AvogadroLibs_CMAKE_DIR})
 find_package(Eigen3 REQUIRED)
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
 
+if(WIN32)
+  if(MSVC)
+    add_definitions("-D_CRT_SECURE_NO_WARNINGS")
+  endif()
+  set(Boost_USE_STATIC_LIBS ON)
+endif()
 find_package(Boost
   COMPONENTS thread filesystem program_options system iostreams)
 if(WIN32)
