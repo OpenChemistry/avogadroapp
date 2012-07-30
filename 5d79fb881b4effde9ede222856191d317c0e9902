@@ -1,0 +1,9 @@
+Change-Id: I5d79fb881b4effde9ede222856191d317c0e9902
+Code-Review+2: Marcus D. Hanwell <marcus.hanwell@kitware.com>
+Verified+1: Marcus D. Hanwell <marcus.hanwell@kitware.com>
+Code-Review+1: David C. Lonie <david.lonie@kitware.com>
+Submitted-by: Marcus D. Hanwell <marcus.hanwell@kitware.com>
+Submitted-at: Mon, 30 Jul 2012 09:33:03 -0400
+Reviewed-on: http://review.source.kitware.com/6625
+Project: avogadroapp
+Branch: refs/heads/master
