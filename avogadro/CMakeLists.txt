@@ -45,4 +45,12 @@ target_link_libraries(avogadro ${Boost_LIBRARIES}
   ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY}
   ${QT_QTOPENGL_LIBRARY}
   )
-install(TARGETS avogadro DESTINATION "${INSTALL_RUNTIME_DIR}")
+install(TARGETS avogadro
+  RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
+  BUNDLE DESTINATION .
+  )
+
+
+# Keep "add_subdirectory(lastinstall)" last: fixup_bundle needs to be
+# *after* all other install(TARGETS and install(FILES calls
+add_subdirectory(lastinstall)
