@@ -41,7 +41,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(avogadro MACOSX_BUNDLE ${avogadro_srcs} ${moc_srcs} ${ui_srcs})
 target_link_libraries(avogadro ${Boost_LIBRARIES}
-  AvogadroCore AvogadroIO AvogadroQtOpenGL
+  AvogadroCore AvogadroIO AvogadroQtOpenGL AvogadroQtGui
   ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY}
   ${QT_QTOPENGL_LIBRARY}
   )

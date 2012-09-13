@@ -30,6 +30,11 @@ namespace QtOpenGL {
 class GLWidget;
 }
 
+namespace QtGui {
+class ScenePlugin;
+class ExtensionPlugin;
+}
+
 class MainWindow : public QMainWindow
 {
 Q_OBJECT
@@ -58,7 +63,11 @@ private:
 
   QList<QAction*>     m_actionRecentFiles;
 
+  QtGui::ScenePlugin *m_scenePlugin;
+
   void updateRecentFiles();
+
+  void buildMenu(QtGui::ExtensionPlugin *extension);
 };
 
 } // End Avogadro namespace

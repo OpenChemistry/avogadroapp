@@ -20,6 +20,10 @@
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cmlformat.h>
 #include <avogadro/qtopengl/glwidget.h>
+#include <avogadro/qtgui/pluginmanager.h>
+#include <avogadro/qtgui/sceneplugin.h>
+#include <avogadro/qtgui/scenepluginmodel.h>
+#include <avogadro/qtgui/extensionplugin.h>
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
@@ -34,13 +38,31 @@
 #include <QtGui/QStatusBar>
 #include <QtGui/QToolBar>
 
+#include <QtGui/QDockWidget>
+#include <QtGui/QTreeView>
+#include <QtGui/QHeaderView>
+
 namespace Avogadro {
 
-MainWindow::MainWindow(const QString &fileName) : m_molecule(0)
+MainWindow::MainWindow(const QString &fileName)
+  : m_molecule(0), m_scenePlugin(0)
 {
+  // The central widget - OpenGL.
   m_glWidget = new QtOpenGL::GLWidget(this);
   setCentralWidget(m_glWidget);
   setWindowTitle(tr("Avogadro"));
+
+  // Create the view plugins.
+  QTreeView *treeView = new QTreeView(this);
+  treeView->setRootIsDecorated(false);
+  treeView->header()->hide();
+  treeView->setUniformRowHeights(true);
+  QtGui::ScenePluginModel *model = new QtGui::ScenePluginModel(treeView);
+  treeView->setModel(model);
+  QDockWidget *dock = new QDockWidget(this);
+  dock->setWidget(treeView);
+  dock->setAllowedAreas(Qt::LeftDockWidgetArea);
+  addDockWidget(Qt::LeftDockWidgetArea, dock);
 
   // Create the menus.
   QMenu *file = menuBar()->addMenu(tr("&File"));
@@ -57,6 +79,26 @@ MainWindow::MainWindow(const QString &fileName) : m_molecule(0)
 
   openFile(fileName);
   statusBar()->showMessage(tr("Ready..."), 2000);
+
+  QtGui::PluginManager *plugin = QtGui::PluginManager::instance();
+  plugin->load();
+  if (plugin->scenePluginFactories().size()) {
+    m_scenePlugin = plugin->scenePluginFactories()[0]->createSceneInstance();
+    m_scenePlugin->setParent(this);
+    model->addItem(m_scenePlugin);
+  }
+  qDebug() << "Calling load plugins again! This is to debug plugin loading...";
+  plugin->load();
+
+  QList<QtGui::ExtensionPluginFactory *> extensions =
+      plugin->pluginFactories<QtGui::ExtensionPluginFactory>();
+  qDebug() << "Extension plugins dynamically found..." << extensions.size();
+  foreach (QtGui::ExtensionPluginFactory *factory, extensions) {
+    QtGui::ExtensionPlugin *extension = factory->createExtensionInstance();
+    extension->setParent(this);
+    qDebug() << "extension:" << extension->name() << extension->menuPath();
+    buildMenu(extension);
+  }
 }
 
 MainWindow::~MainWindow()
@@ -79,14 +121,9 @@ void MainWindow::setMolecule(Core::Molecule *mol)
   Rendering::Scene &scene = m_glWidget->renderer().scene();
   scene.clear();
 
-  for (size_t i = 0; i < mol->atomCount(); ++i) {
-    Core::Atom atom = mol->atom(i);
-    unsigned char atomicNumber = atom.atomicNumber();
-    const unsigned char *c = Core::Elements::color(atomicNumber);
-    Vector3ub color(c[0], c[1], c[2]);
-    scene.addSphere(atom.position3d().cast<float>(), color,
-                    static_cast<float>(0.2f * Core::Elements::radiusVDW(atomicNumber)));
-  }
+  if (m_scenePlugin)
+    m_scenePlugin->process(*m_molecule, scene);
+
   m_glWidget->resetCamera();
 }
 
@@ -192,6 +229,49 @@ void MainWindow::updateRecentFiles()
   }
   for (; i < 10; ++i)
     m_actionRecentFiles[i]->setVisible(false);
+}
+
+void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
+{
+  foreach (QAction *action, extension->actions()) {
+    QStringList path = extension->menuPath(action);
+    qDebug() << "Menu:" << extension->name() << path;
+    if (path.size() < 1)
+      continue;
+    // First ensure the top-level menu is present (create it if needed).
+    QMenu *menu(NULL);
+    foreach (QAction *topMenu, menuBar()->actions()) {
+      if (topMenu->text() == path.at(0)) {
+        menu = topMenu->menu();
+        break;
+      }
+    }
+    if (!menu)
+      menu = menuBar()->addMenu(path.at(0));
+
+    // Build up submenus if necessary.
+    QMenu *nextMenu(NULL);
+    for (int i = 1; i < path.size(); ++i) {
+      if (nextMenu) {
+        menu = nextMenu;
+        nextMenu = NULL;
+      }
+      const QString menuText = path[i];
+      foreach (QAction *menuAction, menu->actions()) {
+        if (menuAction->text() == menuText) {
+          nextMenu = menuAction->menu();
+          break;
+        }
+      }
+      if (!nextMenu)
+        nextMenu = menu->addMenu(path.at(i));
+      menu = nextMenu;
+      nextMenu = NULL;
+    }
+    // Now we actually add the action we got (it should have set the text etc).
+    menu->addAction(action);
+  }
+
 }
 
 } // End of Avogadro namespace
