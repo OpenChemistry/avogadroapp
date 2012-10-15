@@ -163,8 +163,9 @@ void MainWindow::openFile(const QString &fileName)
     return;
 
   Io::CmlFormat cml;
-  cml.readFile(fileName.toStdString());
-  if (cml.molecule()) {
+  Core::Molecule *molecule = new Core::Molecule;
+  bool success = cml.readFile(fileName.toStdString(), *molecule);
+  if (success) {
     m_recentFiles.prepend(fileName);
     updateRecentFiles();
     setMolecule(cml.molecule());
@@ -174,6 +175,7 @@ void MainWindow::openFile(const QString &fileName)
   }
   else {
     statusBar()->showMessage(tr("Failed to read %1").arg(fileName), 2500);
+    delete molecule;
   }
 }
 
