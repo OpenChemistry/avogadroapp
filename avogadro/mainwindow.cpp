@@ -163,17 +163,19 @@ void MainWindow::openFile(const QString &fileName)
     return;
 
   Io::CmlFormat cml;
-  cml.readFile(fileName.toStdString());
-  if (cml.molecule()) {
+  Core::Molecule *molecule_ = new Core::Molecule;
+  bool success = cml.readFile(fileName.toStdString(), *molecule_);
+  if (success) {
     m_recentFiles.prepend(fileName);
     updateRecentFiles();
-    setMolecule(cml.molecule());
+    setMolecule(molecule_);
     statusBar()->showMessage(tr("Molecule loaded (%1 atoms, %2 bonds)")
-                             .arg(cml.molecule()->atomCount())
-                             .arg(cml.molecule()->bondCount()), 2500);
+                             .arg(molecule_->atomCount())
+                             .arg(molecule_->bondCount()), 2500);
   }
   else {
     statusBar()->showMessage(tr("Failed to read %1").arg(fileName), 2500);
+    delete molecule_;
   }
 }
 
