@@ -15,10 +15,12 @@
 ******************************************************************************/
 
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 #include <avogadro/core/molecule.h>
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cmlformat.h>
+#include <avogadro/qtopengl/editor.h>
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/qtgui/pluginmanager.h>
 #include <avogadro/qtgui/sceneplugin.h>
@@ -27,6 +29,7 @@
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
+#include <QtCore/QCoreApplication>
 #include <QtCore/QString>
 #include <QtCore/QDebug>
 #include <QtCore/QFileInfo>
@@ -45,48 +48,38 @@
 namespace Avogadro {
 
 MainWindow::MainWindow(const QString &fileName)
-  : m_molecule(0), m_scenePlugin(0)
+  : m_ui(new Ui::MainWindow),
+    m_molecule(0),
+    m_scenePluginModel(0)
 {
-  // The central widget - OpenGL.
-  m_glWidget = new QtOpenGL::GLWidget(this);
-  setCentralWidget(m_glWidget);
-  setWindowTitle(tr("Avogadro"));
+  m_ui->setupUi(this);
 
-  // Create the view plugins.
-  QTreeView *treeView = new QTreeView(this);
-  treeView->setRootIsDecorated(false);
-  treeView->header()->hide();
-  treeView->setUniformRowHeights(true);
-  QtGui::ScenePluginModel *model = new QtGui::ScenePluginModel(treeView);
-  treeView->setModel(model);
-  QDockWidget *dock = new QDockWidget(this);
-  dock->setWidget(treeView);
-  dock->setAllowedAreas(Qt::LeftDockWidgetArea);
-  addDockWidget(Qt::LeftDockWidgetArea, dock);
+  // Create the scene plugin model
+  m_scenePluginModel = new QtGui::ScenePluginModel(m_ui->scenePluginTreeView);
+  m_ui->scenePluginTreeView->setModel(m_scenePluginModel);
+  connect(m_scenePluginModel,
+          SIGNAL(pluginStateChanged(Avogadro::QtGui::ScenePlugin*)),
+          SLOT(updateScenePlugins()));
+  /// @todo HACK the molecule should trigger the update
+  connect(&m_ui->glWidget->editor(), SIGNAL(moleculeChanged()),
+          SLOT(updateScenePlugins()));
 
-  // Create the menus.
-  QMenu *file = menuBar()->addMenu(tr("&File"));
-  QAction *open = file->addAction(tr("&Open"));
-  connect(open, SIGNAL(triggered()), SLOT(openFile()));
-  QAction *quit = file->addAction(tr("&Quit"));
-  connect(quit, SIGNAL(triggered()), SLOT(close()));
-
-  // Create the toolbars
-  QToolBar *fileToolBar = addToolBar(tr("File"));
-  fileToolBar->addAction(open);
+  // Connect the menu actions
+  connect(m_ui->actionNewMolecule, SIGNAL(triggered()), SLOT(newMolecule()));
+  connect(m_ui->actionOpen, SIGNAL(triggered()), SLOT(openFile()));
+  connect(m_ui->actionQuit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
   readSettings();
 
-  openFile(fileName);
-  statusBar()->showMessage(tr("Ready..."), 2000);
-
   QtGui::PluginManager *plugin = QtGui::PluginManager::instance();
   plugin->load();
-  if (plugin->scenePluginFactories().size()) {
-    m_scenePlugin = plugin->scenePluginFactories()[0]->createSceneInstance();
-    m_scenePlugin->setParent(this);
-    model->addItem(m_scenePlugin);
+  for (int i = 0; i < plugin->scenePluginFactories().size(); ++i) {
+    QtGui::ScenePlugin *scenePlugin =
+        plugin->scenePluginFactories().at(i)->createSceneInstance();
+    scenePlugin->setParent(this);
+    m_scenePluginModel->addItem(scenePlugin);
   }
+
   qDebug() << "Calling load plugins again! This is to debug plugin loading...";
   plugin->load();
 
@@ -99,6 +92,9 @@ MainWindow::MainWindow(const QString &fileName)
     qDebug() << "extension:" << extension->name() << extension->menuPath();
     buildMenu(extension);
   }
+
+  openFile(fileName);
+  statusBar()->showMessage(tr("Ready..."), 2000);
 }
 
 MainWindow::~MainWindow()
@@ -113,18 +109,22 @@ void MainWindow::closeEvent(QCloseEvent *e)
   QMainWindow::closeEvent(e);
 }
 
+void MainWindow::newMolecule()
+{
+  setMolecule(new Core::Molecule);
+}
+
 void MainWindow::setMolecule(Core::Molecule *mol)
 {
+  // Clear the scene to prevent dangling identifiers:
+  m_ui->glWidget->renderer().scene().clear();
   if (m_molecule)
     delete m_molecule;
   m_molecule = mol;
-  Rendering::Scene &scene = m_glWidget->renderer().scene();
-  scene.clear();
 
-  if (m_scenePlugin)
-    m_scenePlugin->process(*m_molecule, scene);
-
-  m_glWidget->resetCamera();
+  m_ui->glWidget->editor().setMolecule(mol);
+  updateScenePlugins();
+  m_ui->glWidget->resetCamera();
 }
 
 void MainWindow::writeSettings()
@@ -191,27 +191,11 @@ void MainWindow::updateRecentFiles()
   m_recentFiles.removeDuplicates();
   while (m_recentFiles.size() > 10)
     m_recentFiles.removeLast();
+
   // Populate the recent file actions list if necessary.
   if (m_actionRecentFiles.isEmpty()) {
-    QMenu *fileMenu(NULL);
-    foreach (QAction *menu, menuBar()->actions())
-      if (menu->text() == tr("&File"))
-        fileMenu = menu->menu();
-    if (!fileMenu)
-      return;
-    // We want to go after Open in the file menu.
-    bool next(false);
-    QAction *before(NULL);
-    foreach (QAction *menu, fileMenu->actions()) {
-      if (menu->text() == "&Open")
-        next = true;
-      else if (next)
-        before = menu;
-    }
-    QMenu *recentMenu = new QMenu(tr("&Recent files"));
-    fileMenu->insertMenu(before, recentMenu);
     for (int i = 0; i < 10; ++i) {
-      m_actionRecentFiles.push_back(recentMenu->addAction(""));
+      m_actionRecentFiles.push_back(m_ui->menuRecentFiles->addAction(""));
       m_actionRecentFiles.back()->setVisible(false);
       connect(m_actionRecentFiles.back(), SIGNAL(triggered()),
               SLOT(openRecentFile()));
@@ -231,6 +215,19 @@ void MainWindow::updateRecentFiles()
   }
   for (; i < 10; ++i)
     m_actionRecentFiles[i]->setVisible(false);
+}
+
+void MainWindow::updateScenePlugins() const
+{
+  Rendering::Scene &scene = m_ui->glWidget->renderer().scene();
+  scene.clear();
+  if (m_molecule) {
+    foreach (QtGui::ScenePlugin *scenePlugin,
+             m_scenePluginModel->activeScenePlugins()) {
+      scenePlugin->process(*m_molecule, scene);
+    }
+  }
+  m_ui->glWidget->update();
 }
 
 void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
