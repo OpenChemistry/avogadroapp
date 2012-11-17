@@ -20,6 +20,10 @@
 #include <QtGui/QMainWindow>
 #include <QtCore/QString>
 
+namespace Ui {
+class MainWindow;
+}
+
 namespace Avogadro {
 
 namespace Core {
@@ -32,6 +36,7 @@ class GLWidget;
 
 namespace QtGui {
 class ScenePlugin;
+class ScenePluginModel;
 class ExtensionPlugin;
 }
 
@@ -48,24 +53,27 @@ public:
   void writeSettings();
   void readSettings();
 
+signals:
+  void moleculeChanged(Core::Molecule *molecue);
+
 protected:
   void closeEvent(QCloseEvent *event);
 
 protected slots:
+  void newMolecule();
   void openFile();
   void openFile(const QString &fileName);
   void openRecentFile();
+  void updateRecentFiles();
+  void updateScenePlugins();
 
 private:
-  QtOpenGL::GLWidget *m_glWidget;
-  Core::Molecule     *m_molecule;
-  QStringList         m_recentFiles;
+  Ui::MainWindow *m_ui;
+  Core::Molecule *m_molecule;
+  QtGui::ScenePluginModel *m_scenePluginModel;
 
-  QList<QAction*>     m_actionRecentFiles;
-
-  QtGui::ScenePlugin *m_scenePlugin;
-
-  void updateRecentFiles();
+  QStringList m_recentFiles;
+  QList<QAction*> m_actionRecentFiles;
 
   void buildMenu(QtGui::ExtensionPlugin *extension);
 };

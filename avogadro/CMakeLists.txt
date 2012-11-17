@@ -32,9 +32,9 @@ qt4_wrap_cpp(moc_srcs
   mainwindow.h
 )
 
-#qt4_wrap_ui(ui_srcs
-#  mainwindow.ui
-#)
+qt4_wrap_ui(ui_srcs
+  mainwindow.ui
+)
 
 # Need to add current binary dir to include path for UI file headers
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
