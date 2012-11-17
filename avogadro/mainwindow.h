@@ -53,6 +53,9 @@ public:
   void writeSettings();
   void readSettings();
 
+signals:
+  void moleculeChanged(Core::Molecule *molecue);
+
 protected:
   void closeEvent(QCloseEvent *event);
 

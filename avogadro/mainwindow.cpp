@@ -90,6 +90,8 @@ MainWindow::MainWindow(const QString &fileName)
     QtGui::ExtensionPlugin *extension = factory->createExtensionInstance();
     extension->setParent(this);
     qDebug() << "extension:" << extension->name() << extension->menuPath();
+    connect(this, SIGNAL(moleculeChanged(Core::Molecule*)),
+            extension, SLOT(setMolecule(Core::Molecule*)));
     buildMenu(extension);
   }
 
@@ -116,11 +118,18 @@ void MainWindow::newMolecule()
 
 void MainWindow::setMolecule(Core::Molecule *mol)
 {
+  if (m_molecule == mol)
+    return;
+
   // Clear the scene to prevent dangling identifiers:
   m_ui->glWidget->renderer().scene().clear();
+
+  // Set molecule
   if (m_molecule)
     delete m_molecule;
   m_molecule = mol;
+
+  emit moleculeChanged(m_molecule);
 
   m_ui->glWidget->editor().setMolecule(mol);
   updateScenePlugins();
