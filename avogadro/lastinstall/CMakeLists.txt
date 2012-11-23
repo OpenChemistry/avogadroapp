@@ -18,6 +18,12 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
     set(dirs "${CMAKE_PREFIX_PATH}/bin" "${CMAKE_PREFIX_PATH}/lib")
   endif()
 
+  set(plugins "")
+  foreach(plugin ${AvogadroLibs_PLUGINS})
+    get_property(location TARGET ${plugin} PROPERTY LOCATION)
+    list(APPEND plugins ${location})
+  endforeach()
+
   include(DeployQt4)
-  install_qt4_executable(${exe} "" "" "${dirs}")
+  install_qt4_executable(${exe} "${plugins}" "" "${dirs}" "lib/avogadro2/plugins")
 endif()
