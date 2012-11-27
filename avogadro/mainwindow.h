@@ -67,6 +67,9 @@ protected slots:
   void updateRecentFiles();
   void updateScenePlugins();
 
+  void updateTool();
+  void updateElement();
+
 private:
   Ui::MainWindow *m_ui;
   Core::Molecule *m_molecule;
@@ -75,6 +78,9 @@ private:
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 
+  QVector<unsigned char> m_elementLookup;
+  void buildElements();
+  void addElement(unsigned char atomicNum);
   void buildMenu(QtGui::ExtensionPlugin *extension);
 };
 

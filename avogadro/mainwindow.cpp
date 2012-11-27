@@ -63,11 +63,22 @@ MainWindow::MainWindow(const QString &fileName)
   /// @todo HACK the molecule should trigger the update
   connect(&m_ui->glWidget->editor(), SIGNAL(moleculeChanged()),
           SLOT(updateScenePlugins()));
+  connect(&m_ui->glWidget->manipulator(), SIGNAL(moleculeChanged()),
+          SLOT(updateScenePlugins()));
 
   // Connect the menu actions
   connect(m_ui->actionNewMolecule, SIGNAL(triggered()), SLOT(newMolecule()));
   connect(m_ui->actionOpen, SIGNAL(triggered()), SLOT(openFile()));
   connect(m_ui->actionQuit, SIGNAL(triggered()), qApp, SLOT(quit()));
+
+  // Connect the temporary tool/element selectors
+  updateTool();
+  buildElements();
+  updateElement();
+  connect(m_ui->toolComboBox, SIGNAL(currentIndexChanged(int)),
+          SLOT(updateTool()));
+  connect(m_ui->elementComboBox, SIGNAL(currentIndexChanged(int)),
+          SLOT(updateElement()));
 
   readSettings();
 
@@ -95,7 +106,10 @@ MainWindow::MainWindow(const QString &fileName)
     buildMenu(extension);
   }
 
+  // try to open the file passed in. If opening fails, create a new molecule.
   openFile(fileName);
+  if (!m_molecule)
+    newMolecule();
   statusBar()->showMessage(tr("Ready..."), 2000);
 }
 
@@ -132,6 +146,7 @@ void MainWindow::setMolecule(Core::Molecule *mol)
   emit moleculeChanged(m_molecule);
 
   m_ui->glWidget->editor().setMolecule(mol);
+  m_ui->glWidget->manipulator().setMolecule(mol);
   updateScenePlugins();
   m_ui->glWidget->resetCamera();
 }
@@ -239,6 +254,20 @@ void MainWindow::updateScenePlugins()
   m_ui->glWidget->update();
 }
 
+void MainWindow::updateTool()
+{
+  m_ui->glWidget->setActiveTool(static_cast<QtOpenGL::GLWidget::Tool>(
+                                  m_ui->toolComboBox->currentIndex()));
+  m_ui->elementComboBox->setEnabled(
+        m_ui->glWidget->activeTool() == QtOpenGL::GLWidget::EditTool);
+}
+
+void MainWindow::updateElement()
+{
+  m_ui->glWidget->editor().setAtomicNumber(
+        m_elementLookup.at(m_ui->elementComboBox->currentIndex()));
+}
+
 void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
 {
   foreach (QAction *action, extension->actions()) {
@@ -280,6 +309,38 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
     menu->addAction(action);
   }
 
+}
+
+void MainWindow::buildElements()
+{
+  m_ui->elementComboBox->clear();
+  m_elementLookup.clear();
+
+  // Add common elements to the top.
+  addElement(1); // Hydrogen
+  addElement(5); // Boron
+  addElement(6); // Carbon
+  addElement(7); // Nitrogen
+  addElement(8); // Oxygen
+  addElement(9); // Fluorine
+  addElement(15); // Phosphorus
+  addElement(16); // Sulfur
+  addElement(17); // Chlorine
+  addElement(35); // Bromine
+
+  m_ui->elementComboBox->insertSeparator(m_ui->elementComboBox->count());
+
+  // And the rest...
+  for (unsigned char i = 1; i < Core::Elements::elementCount(); ++i)
+    addElement(i);
+}
+
+void MainWindow::addElement(unsigned char atomicNum)
+{
+  m_ui->elementComboBox->addItem(QString("%1 (%2)")
+                                 .arg(Core::Elements::name(atomicNum))
+                                 .arg(QString::number(atomicNum)));
+  m_elementLookup.push_back(atomicNum);
 }
 
 } // End of Avogadro namespace
