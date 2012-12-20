@@ -84,26 +84,31 @@ MainWindow::MainWindow(const QString &fileName)
 
   QtGui::PluginManager *plugin = QtGui::PluginManager::instance();
   plugin->load();
-  for (int i = 0; i < plugin->scenePluginFactories().size(); ++i) {
-    QtGui::ScenePlugin *scenePlugin =
-        plugin->scenePluginFactories().at(i)->createSceneInstance();
-    scenePlugin->setParent(this);
-    m_scenePluginModel->addItem(scenePlugin);
+  QList<QtGui::ScenePluginFactory *> scenePluginFactories =
+      plugin->pluginFactories<QtGui::ScenePluginFactory>();
+  foreach (QtGui::ScenePluginFactory *factory, scenePluginFactories) {
+    QtGui::ScenePlugin *scenePlugin = factory->createInstance();
+    if (scenePlugin) {
+      scenePlugin->setParent(this);
+      m_scenePluginModel->addItem(scenePlugin);
+    }
   }
 
-  qDebug() << "Calling load plugins again! This is to debug plugin loading...";
+  // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
 
   QList<QtGui::ExtensionPluginFactory *> extensions =
       plugin->pluginFactories<QtGui::ExtensionPluginFactory>();
   qDebug() << "Extension plugins dynamically found..." << extensions.size();
   foreach (QtGui::ExtensionPluginFactory *factory, extensions) {
-    QtGui::ExtensionPlugin *extension = factory->createExtensionInstance();
-    extension->setParent(this);
-    qDebug() << "extension:" << extension->name() << extension->menuPath();
-    connect(this, SIGNAL(moleculeChanged(Core::Molecule*)),
-            extension, SLOT(setMolecule(Core::Molecule*)));
-    buildMenu(extension);
+    QtGui::ExtensionPlugin *extension = factory->createInstance();
+    if (extension) {
+      extension->setParent(this);
+      qDebug() << "extension:" << extension->name() << extension->menuPath();
+      connect(this, SIGNAL(moleculeChanged(Core::Molecule*)),
+              extension, SLOT(setMolecule(Core::Molecule*)));
+      buildMenu(extension);
+    }
   }
 
   // try to open the file passed in. If opening fails, create a new molecule.
