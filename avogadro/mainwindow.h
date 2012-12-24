@@ -26,10 +26,6 @@ class MainWindow;
 
 namespace Avogadro {
 
-namespace Core {
-class Molecule;
-}
-
 namespace QtOpenGL {
 class GLWidget;
 }
@@ -38,6 +34,7 @@ namespace QtGui {
 class ScenePlugin;
 class ScenePluginModel;
 class ExtensionPlugin;
+class Molecule;
 }
 
 class MainWindow : public QMainWindow
@@ -47,14 +44,14 @@ public:
   MainWindow(const QString &filename = QString());
   ~MainWindow();
 
-  void setMolecule(Core::Molecule *molecule);
-  Core::Molecule * molecule() { return m_molecule; }
+  void setMolecule(QtGui::Molecule *molecule);
+  QtGui::Molecule * molecule() { return m_molecule; }
 
   void writeSettings();
   void readSettings();
 
 signals:
-  void moleculeChanged(Core::Molecule *molecue);
+  void moleculeChanged(QtGui::Molecule *molecue);
 
 protected:
   void closeEvent(QCloseEvent *event);
@@ -72,7 +69,7 @@ protected slots:
 
 private:
   Ui::MainWindow *m_ui;
-  Core::Molecule *m_molecule;
+  QtGui::Molecule *m_molecule;
   QtGui::ScenePluginModel *m_scenePluginModel;
 
   QStringList m_recentFiles;

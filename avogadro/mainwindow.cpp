@@ -17,7 +17,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <avogadro/core/molecule.h>
+#include <avogadro/qtgui/molecule.h>
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cmlformat.h>
 #include <avogadro/qtopengl/editor.h>
@@ -47,6 +47,8 @@
 
 namespace Avogadro {
 
+using QtGui::Molecule;
+
 MainWindow::MainWindow(const QString &fileName)
   : m_ui(new Ui::MainWindow),
     m_molecule(0),
@@ -57,6 +59,9 @@ MainWindow::MainWindow(const QString &fileName)
   // Create the scene plugin model
   m_scenePluginModel = new QtGui::ScenePluginModel(m_ui->scenePluginTreeView);
   m_ui->scenePluginTreeView->setModel(m_scenePluginModel);
+  m_ui->scenePluginTreeView->setAlternatingRowColors(true);
+  m_ui->scenePluginTreeView->header()->stretchLastSection();
+  m_ui->scenePluginTreeView->header()->setVisible(false);
   connect(m_scenePluginModel,
           SIGNAL(pluginStateChanged(Avogadro::QtGui::ScenePlugin*)),
           SLOT(updateScenePlugins()));
@@ -105,8 +110,8 @@ MainWindow::MainWindow(const QString &fileName)
     if (extension) {
       extension->setParent(this);
       qDebug() << "extension:" << extension->name() << extension->menuPath();
-      connect(this, SIGNAL(moleculeChanged(Core::Molecule*)),
-              extension, SLOT(setMolecule(Core::Molecule*)));
+      connect(this, SIGNAL(moleculeChanged(QtGui::Molecule*)),
+              extension, SLOT(setMolecule(QtGui::Molecule*)));
       buildMenu(extension);
     }
   }
@@ -132,10 +137,10 @@ void MainWindow::closeEvent(QCloseEvent *e)
 
 void MainWindow::newMolecule()
 {
-  setMolecule(new Core::Molecule);
+  setMolecule(new QtGui::Molecule);
 }
 
-void MainWindow::setMolecule(Core::Molecule *mol)
+void MainWindow::setMolecule(QtGui::Molecule *mol)
 {
   if (m_molecule == mol)
     return;
@@ -192,7 +197,7 @@ void MainWindow::openFile(const QString &fileName)
     return;
 
   Io::CmlFormat cml;
-  Core::Molecule *molecule_ = new Core::Molecule;
+  Molecule *molecule_ = new Molecule;
   bool success = cml.readFile(fileName.toStdString(), *molecule_);
   if (success) {
     m_recentFiles.prepend(fileName);
