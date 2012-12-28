@@ -22,7 +22,7 @@
 #include <avogadro/io/cmlformat.h>
 #include <avogadro/qtopengl/editor.h>
 #include <avogadro/qtopengl/glwidget.h>
-#include <avogadro/qtgui/pluginmanager.h>
+#include <avogadro/qtplugins/pluginmanager.h>
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
 #include <avogadro/qtgui/extensionplugin.h>
