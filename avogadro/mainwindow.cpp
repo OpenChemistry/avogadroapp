@@ -113,6 +113,7 @@ MainWindow::MainWindow(const QString &fileName)
       qDebug() << "extension:" << extension->name() << extension->menuPath();
       connect(this, SIGNAL(moleculeChanged(QtGui::Molecule*)),
               extension, SLOT(setMolecule(QtGui::Molecule*)));
+      connect(extension, SIGNAL(moleculeReady(int)), SLOT(moleculeReady(int)));
       buildMenu(extension);
     }
   }
@@ -134,6 +135,17 @@ void MainWindow::closeEvent(QCloseEvent *e)
 {
   writeSettings();
   QMainWindow::closeEvent(e);
+}
+
+void MainWindow::moleculeReady(int)
+{
+  QtGui::ExtensionPlugin *extension =
+      qobject_cast<QtGui::ExtensionPlugin *>(sender());
+  if (extension) {
+    QtGui::Molecule *mol = new QtGui::Molecule(this);
+    if (extension->readMolecule(*mol))
+      setMolecule(mol);
+  }
 }
 
 void MainWindow::newMolecule()
