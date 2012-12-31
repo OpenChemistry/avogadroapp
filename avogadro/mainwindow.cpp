@@ -20,6 +20,7 @@
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cmlformat.h>
+#include <avogadro/io/cjsonformat.h>
 #include <avogadro/qtopengl/editor.h>
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/qtplugins/pluginmanager.h>
@@ -184,10 +185,8 @@ void MainWindow::readSettings()
 
 void MainWindow::openFile()
 {
-  QString fileName = QFileDialog::getOpenFileName(this,
-                                                  tr("Open CML file"),
-                                                  "",
-                                                  tr("Chemical Markup Language (*.cml)"));
+  QString fileName = QFileDialog::getOpenFileName(this, tr("Open chemical file"),
+    "", tr("Chemical files (*.cml *.cjson)"));
   openFile(fileName);
 }
 
@@ -196,9 +195,19 @@ void MainWindow::openFile(const QString &fileName)
   if (fileName.isEmpty())
     return;
 
-  Io::CmlFormat cml;
-  Molecule *molecule_ = new Molecule;
-  bool success = cml.readFile(fileName.toStdString(), *molecule_);
+  QFileInfo info(fileName);
+  Molecule *molecule_(NULL);
+  bool success(false);
+  if (info.suffix() == "cml") {
+    Io::CmlFormat cml;
+    molecule_ = new Molecule;
+    success = cml.readFile(fileName.toStdString(), *molecule_);
+  }
+  else if (info.suffix() == "cjson") {
+    Io::CjsonFormat cjson;
+    molecule_ = new Molecule;
+    success = cjson.readFile(fileName.toStdString(), *molecule_);
+  }
   if (success) {
     m_recentFiles.prepend(fileName);
     updateRecentFiles();
@@ -206,6 +215,7 @@ void MainWindow::openFile(const QString &fileName)
     statusBar()->showMessage(tr("Molecule loaded (%1 atoms, %2 bonds)")
                              .arg(molecule_->atomCount())
                              .arg(molecule_->bondCount()), 2500);
+    setWindowTitle(tr("Avogadro - %1").arg(fileName));
   }
   else {
     statusBar()->showMessage(tr("Failed to read %1").arg(fileName), 2500);
