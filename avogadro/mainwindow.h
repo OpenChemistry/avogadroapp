@@ -57,6 +57,7 @@ protected:
   void closeEvent(QCloseEvent *event);
 
 protected slots:
+  void moleculeReady(int number);
   void newMolecule();
   void openFile();
   void openFile(const QString &fileName);
