@@ -18,6 +18,8 @@ if(ENABLE_TESTING)
   enable_testing()
 endif()
 
+option(Avogadro_ENABLE_RPC "Enable RPC server" ON)
+
 add_subdirectory(avogadro)
 
 option(BUILD_DOCUMENTATION "Build project documentation" OFF)
