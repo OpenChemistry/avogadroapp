@@ -21,6 +21,10 @@
 #include "mainwindow.h"
 #include <avogadro/io/cmlformat.h>
 
+#ifdef Avogadro_ENABLE_RPC
+#include "rpclistener.h"
+#endif
+
 int main(int argc, char *argv[])
 {
   QCoreApplication::setOrganizationName("OpenChemistry");
@@ -44,6 +48,12 @@ int main(int argc, char *argv[])
     fileName = argv[1];
   Avogadro::MainWindow *window = new Avogadro::MainWindow(fileName);
   window->show();
+
+#ifdef Avogadro_ENABLE_RPC
+  // create rpc listener
+  Avogadro::RpcListener listener;
+  listener.start();
+#endif
 
   return app.exec();
 }

@@ -36,6 +36,15 @@ qt4_wrap_ui(ui_srcs
   mainwindow.ui
 )
 
+if(Avogadro_ENABLE_RPC)
+  list(APPEND avogadro_srcs rpclistener.cpp)
+  qt4_wrap_cpp(moc_srcs rpclistener.h)
+  # MoleQueue is required for its RPC functions.
+  find_package(MoleQueue REQUIRED)
+  include_directories(${MoleQueue_INCLUDE_DIRS})
+  add_definitions("-DAvogadro_ENABLE_RPC")
+endif()
+
 # Need to add current binary dir to include path for UI file headers
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
@@ -45,6 +54,9 @@ target_link_libraries(avogadro ${Boost_LIBRARIES}
   ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY}
   ${QT_QTOPENGL_LIBRARY}
   )
+if(Avogadro_ENABLE_RPC)
+  target_link_libraries(avogadro mqlocalsocketconnectionlistener)
+endif()
 install(TARGETS avogadro
   RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
   BUNDLE DESTINATION .
