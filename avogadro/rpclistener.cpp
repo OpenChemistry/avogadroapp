@@ -20,6 +20,10 @@
 
 #include "qjsonvalue.h"
 #include "qjsonobject.h"
+#include "qjsondocument.h"
+
+#include <avogadro/qtgui/molecule.h>
+#include <avogadro/io/cjsonformat.h>
 
 #include "mainwindow.h"
 
@@ -84,6 +88,49 @@ void RpcListener::messageReceived(const MoleQueue::Message &message)
       MoleQueue::Message response = message.generateResponse();
       response.setResult(true);
       response.send();
+    }
+    else {
+      // send error response
+      MoleQueue::Message errorMessage = message.generateErrorResponse();
+      errorMessage.setErrorCode(-1);
+      errorMessage.setErrorMessage("No Active Avogadro Window");
+      errorMessage.send();
+    }
+  }
+  else if (method == "loadFromChemicalJson") {
+    // find main window
+    MainWindow *window = 0;
+    foreach (QWidget *widget, QApplication::topLevelWidgets())
+      if ((window = qobject_cast<MainWindow *>(widget)))
+        break;
+
+    if (window) {
+      QJsonDocument doc;
+      doc.setObject(params["chemicalJson"].toObject());;
+
+      // read json
+      Io::CjsonFormat cjson;
+      QtGui::Molecule *molecule = new QtGui::Molecule;
+      bool success = cjson.readString(doc.toJson().constData(), *molecule);
+      if (success) {
+        window->setMolecule(molecule);
+
+        // send response
+        MoleQueue::Message response = message.generateResponse();
+        response.setResult(true);
+        response.send();
+      }
+      else {
+        delete molecule;
+
+        // send error response
+        MoleQueue::Message errorMessage = message.generateErrorResponse();
+        errorMessage.setErrorCode(-1);
+        errorMessage.setErrorMessage(
+              QString("Failed to read Chemical JSON: %1")
+                .arg(QString::fromStdString(cjson.error())));
+        errorMessage.send();
+      }
     }
     else {
       // send error response
