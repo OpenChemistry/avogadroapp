@@ -27,6 +27,12 @@ class JsonRpc;
 
 namespace Avogadro {
 
+namespace QtGui {
+class Molecule;
+}
+
+class MainWindow;
+
 class RpcListener : public QObject
 {
   Q_OBJECT
@@ -37,6 +43,12 @@ public:
 
   void start();
 
+signals:
+  /**
+   * Calls the MainWidow::setMolecule() method with @p molecule.
+   */
+  void callSetMolecule(Avogadro::QtGui::Molecule *molecule);
+
 private slots:
   void connectionError(MoleQueue::ConnectionListener::Error, const QString &);
   void messageReceived(const MoleQueue::Message &message);
@@ -44,6 +56,7 @@ private slots:
 private:
   MoleQueue::JsonRpc *m_rpc;
   MoleQueue::ConnectionListener *m_connectionListener;
+  MainWindow *m_window;
 };
 
 } // End Avogadro namespace
