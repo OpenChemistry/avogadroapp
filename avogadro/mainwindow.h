@@ -44,7 +44,10 @@ public:
   MainWindow(const QString &filename = QString());
   ~MainWindow();
 
-  void setMolecule(QtGui::Molecule *molecule);
+public slots:
+  void setMolecule(Avogadro::QtGui::Molecule *molecule);
+
+public:
   QtGui::Molecule * molecule() { return m_molecule; }
 
   void writeSettings();
