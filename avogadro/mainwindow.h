@@ -20,6 +20,10 @@
 #include <QtGui/QMainWindow>
 #include <QtCore/QString>
 
+#ifdef QTTESTING
+class pqTestUtility;
+#endif
+
 namespace Ui {
 class MainWindow;
 }
@@ -47,6 +51,10 @@ public:
 public slots:
   void setMolecule(Avogadro::QtGui::Molecule *molecule);
 
+#ifdef QTTESTING
+  void playTest(const QString &fileName, bool exit = true);
+#endif
+
 public:
   QtGui::Molecule * molecule() { return m_molecule; }
 
@@ -71,6 +79,14 @@ protected slots:
   void updateTool();
   void updateElement();
 
+#ifdef QTTESTING
+protected slots:
+  void record();
+  void play();
+  void playTest();
+  void popup();
+#endif
+
 private:
   Ui::MainWindow *m_ui;
   QtGui::Molecule *m_molecule;
@@ -80,6 +96,13 @@ private:
   QList<QAction*> m_actionRecentFiles;
 
   QVector<unsigned char> m_elementLookup;
+
+#ifdef QTTESTING
+  pqTestUtility *m_testUtility;
+  QString m_testFile;
+  bool m_testExit;
+#endif
+
   void buildElements();
   void addElement(unsigned char atomicNum);
   void buildMenu(QtGui::ExtensionPlugin *extension);

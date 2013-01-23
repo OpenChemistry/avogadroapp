@@ -44,9 +44,18 @@ int main(int argc, char *argv[])
   QGLFormat::setDefaultFormat(defaultFormat);
 
   QString fileName;
-  if (argc > 1)
-    fileName = argv[1];
+  QString testFile;
+  QStringList args = QCoreApplication::arguments();
+  for (QStringList::const_iterator it = args.constBegin() + 1;
+       it != args.constEnd(); ++it) {
+    if (*it == "--test-file" && it + 1 != args.constEnd())
+      testFile = *(++it);
+    else // Assume it is a file name.
+      fileName = *it;
+  }
+
   Avogadro::MainWindow *window = new Avogadro::MainWindow(fileName);
+  window->playTest(testFile);
   window->show();
 
 #ifdef Avogadro_ENABLE_RPC
