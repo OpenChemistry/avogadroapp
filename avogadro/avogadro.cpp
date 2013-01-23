@@ -44,9 +44,36 @@ int main(int argc, char *argv[])
   QGLFormat::setDefaultFormat(defaultFormat);
 
   QString fileName;
-  if (argc > 1)
-    fileName = argv[1];
+#ifdef QTTESTING
+  QString testFile;
+  bool testExit = true;
+#endif
+  QStringList args = QCoreApplication::arguments();
+  for (QStringList::const_iterator it = args.constBegin() + 1;
+       it != args.constEnd(); ++it) {
+    if (*it == "--test-file" && it + 1 != args.constEnd()) {
+#ifdef QTTESTING
+      testFile = *(++it);
+#else
+      qWarning("Avogadro called with --test-file but testing is disabled.");
+#endif
+    }
+    else if (*it == "--test-no-exit") {
+#ifdef QTTESTING
+      testExit = false;
+#else
+      qWarning("Avogadro called with --test-no-exit but testing is disabled.");
+#endif
+    }
+    else { // Assume it is a file name.
+      fileName = *it;
+    }
+  }
+
   Avogadro::MainWindow *window = new Avogadro::MainWindow(fileName);
+#ifdef QTTESTING
+  window->playTest(testFile, testExit);
+#endif
   window->show();
 
 #ifdef Avogadro_ENABLE_RPC

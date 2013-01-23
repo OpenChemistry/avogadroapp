@@ -45,8 +45,113 @@
 #include <QtGui/QDockWidget>
 #include <QtGui/QTreeView>
 #include <QtGui/QHeaderView>
+#include <QtGui/QPushButton>
+
+#ifdef QTTESTING
+# include <pqTestUtility.h>
+# include <pqEventObserver.h>
+# include <pqEventSource.h>
+# include <QXmlStreamReader>
+#endif
 
 namespace Avogadro {
+
+#ifdef QTTESTING
+class XMLEventObserver : public pqEventObserver
+{
+  QXmlStreamWriter* XMLStream;
+  QString XMLString;
+
+public:
+  XMLEventObserver(QObject* p) : pqEventObserver(p)
+  {
+    this->XMLStream = NULL;
+  }
+  ~XMLEventObserver()
+  {
+    delete this->XMLStream;
+  }
+
+protected:
+  virtual void setStream(QTextStream* stream)
+  {
+    if (this->XMLStream) {
+      this->XMLStream->writeEndElement();
+      this->XMLStream->writeEndDocument();
+      delete this->XMLStream;
+      this->XMLStream = NULL;
+    }
+    if (this->Stream)
+      *this->Stream << this->XMLString;
+
+    this->XMLString = QString();
+    pqEventObserver::setStream(stream);
+    if (this->Stream) {
+      this->XMLStream = new QXmlStreamWriter(&this->XMLString);
+      this->XMLStream->setAutoFormatting(true);
+      this->XMLStream->writeStartDocument();
+      this->XMLStream->writeStartElement("events");
+    }
+  }
+
+  virtual void onRecordEvent(const QString& widget, const QString& command,
+                             const QString& arguments)
+  {
+    if(this->XMLStream) {
+      this->XMLStream->writeStartElement("event");
+      this->XMLStream->writeAttribute("widget", widget);
+      this->XMLStream->writeAttribute("command", command);
+      this->XMLStream->writeAttribute("arguments", arguments);
+      this->XMLStream->writeEndElement();
+    }
+  }
+};
+
+class XMLEventSource : public pqEventSource
+{
+  typedef pqEventSource Superclass;
+  QXmlStreamReader *XMLStream;
+
+public:
+  XMLEventSource(QObject* p): Superclass(p) { this->XMLStream = NULL;}
+  ~XMLEventSource() { delete this->XMLStream; }
+
+protected:
+  virtual void setContent(const QString& xmlfilename)
+  {
+    delete this->XMLStream;
+    this->XMLStream = NULL;
+
+    QFile xml(xmlfilename);
+    if (!xml.open(QIODevice::ReadOnly)) {
+      qDebug() << "Failed to load " << xmlfilename;
+      return;
+    }
+    QByteArray data = xml.readAll();
+    this->XMLStream = new QXmlStreamReader(data);
+  }
+
+  int getNextEvent(QString& widget, QString& command, QString& arguments)
+  {
+    if (this->XMLStream->atEnd())
+      return DONE;
+    while (!this->XMLStream->atEnd()) {
+      QXmlStreamReader::TokenType token = this->XMLStream->readNext();
+      if (token == QXmlStreamReader::StartElement) {
+        if (this->XMLStream->name() == "event")
+          break;
+      }
+    }
+    if (this->XMLStream->atEnd())
+      return DONE;
+
+    widget = this->XMLStream->attributes().value("widget").toString();
+    command = this->XMLStream->attributes().value("command").toString();
+    arguments = this->XMLStream->attributes().value("arguments").toString();
+    return SUCCESS;
+  }
+};
+#endif
 
 using QtGui::Molecule;
 
@@ -126,6 +231,25 @@ MainWindow::MainWindow(const QString &fileName)
   if (!m_molecule)
     newMolecule();
   statusBar()->showMessage(tr("Ready..."), 2000);
+
+#ifdef QTTESTING
+  QMenu *menu = menuBar()->addMenu(tr("&Testing"));
+  QAction *actionRecord = new QAction(this);
+  actionRecord->setText(tr("Record test..."));
+  menu->addAction(actionRecord);
+  QAction *actionPlay = new QAction(this);
+  actionPlay->setText(tr("Play test..."));
+  menu->addAction(actionPlay);
+
+  connect(actionRecord, SIGNAL(triggered()), SLOT(record()));
+  connect(actionPlay, SIGNAL(triggered()), SLOT(play()));
+
+  m_testUtility = new pqTestUtility(this);
+  m_testUtility->addEventObserver("xml", new XMLEventObserver(this));
+  m_testUtility->addEventSource("xml", new XMLEventSource(this));
+
+  m_testExit = true;
+#endif
 }
 
 MainWindow::~MainWindow()
@@ -179,6 +303,16 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   updateScenePlugins();
   m_ui->glWidget->resetCamera();
 }
+
+#ifdef QTTESTING
+void MainWindow::playTest(const QString &fileName, bool exit)
+{
+  m_testFile = fileName;
+  m_testExit = exit;
+
+  QTimer::singleShot(200, this, SLOT(playTest()));
+}
+#endif
 
 void MainWindow::writeSettings()
 {
@@ -305,6 +439,43 @@ void MainWindow::updateElement()
   m_ui->glWidget->editor().setAtomicNumber(
         m_elementLookup.at(m_ui->elementComboBox->currentIndex()));
 }
+
+#ifdef QTTESTING
+void MainWindow::record()
+{
+  QString fileName = QFileDialog::getSaveFileName(this, "Test file name",
+                                                  QString(), "XML Files (*.xml)");
+  if (!fileName.isEmpty())
+    m_testUtility->recordTests(fileName);
+}
+
+void MainWindow::play()
+{
+  QString fileName = QFileDialog::getOpenFileName(this, "Test file name",
+                                                  QString(), "XML Files (*.xml)");
+  if (!fileName.isEmpty())
+    m_testUtility->playTests(fileName);
+}
+
+void MainWindow::playTest()
+{
+  if (!m_testFile.isEmpty()) {
+    m_testUtility->playTests(m_testFile);
+    if (m_testExit)
+      close();
+  }
+}
+
+void MainWindow::popup()
+{
+  QDialog dialog;
+  QHBoxLayout* hbox = new QHBoxLayout(&dialog);
+  QPushButton button("Click to Close", &dialog);
+  hbox->addWidget(&button);
+  QObject::connect(&button, SIGNAL(clicked()), &dialog, SLOT(accept()));
+  dialog.exec();
+}
+#endif
 
 void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
 {
