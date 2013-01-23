@@ -26,6 +26,8 @@ qt4_wrap_ui(ui_srcs
   mainwindow.ui
 )
 
+qt4_add_resources(rcc_srcs avogadro.qrc)
+
 if(Avogadro_ENABLE_RPC)
   list(APPEND avogadro_srcs rpclistener.cpp)
   qt4_wrap_cpp(moc_srcs rpclistener.h)
@@ -38,7 +40,8 @@ endif()
 # Need to add current binary dir to include path for UI file headers
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(avogadro MACOSX_BUNDLE ${avogadro_srcs} ${moc_srcs} ${ui_srcs})
+add_executable(avogadro MACOSX_BUNDLE ${avogadro_srcs} ${moc_srcs} ${ui_srcs}
+  ${rcc_srcs})
 target_link_libraries(avogadro
   AvogadroCore AvogadroIO AvogadroQtOpenGL AvogadroQtGui AvogadroQtPlugins
   ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY}

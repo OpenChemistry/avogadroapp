@@ -57,6 +57,9 @@ MainWindow::MainWindow(const QString &fileName)
 {
   m_ui->setupUi(this);
 
+  QIcon icon(":/icons/avogadro.png");
+  setWindowIcon(icon);
+
   // Create the scene plugin model
   m_scenePluginModel = new QtGui::ScenePluginModel(m_ui->scenePluginTreeView);
   m_ui->scenePluginTreeView->setModel(m_scenePluginModel);
