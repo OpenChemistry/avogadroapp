@@ -37,6 +37,10 @@ if(Avogadro_ENABLE_RPC)
   add_definitions("-DAvogadro_ENABLE_RPC")
 endif()
 
+if(ENABLE_TESTING)
+  find_package(QtTesting REQUIRED)
+endif()
+
 # Need to add current binary dir to include path for UI file headers
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
