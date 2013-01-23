@@ -18,10 +18,6 @@ set(avogadro_srcs
   mainwindow.cpp
 )
 
-qt4_wrap_cpp(moc_srcs
-  mainwindow.h
-)
-
 qt4_wrap_ui(ui_srcs
   mainwindow.ui
 )
@@ -37,11 +33,19 @@ if(Avogadro_ENABLE_RPC)
   add_definitions("-DAvogadro_ENABLE_RPC")
 endif()
 
+if(ENABLE_TESTING)
+  find_package(QtTesting REQUIRED)
+  include_directories(${QtTesting_INCLUDE_DIRS})
+  link_directories(${QtTesting_LIBRARY_DIR})
+  add_definitions(-DQTTESTING)
+endif()
+
 # Need to add current binary dir to include path for UI file headers
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(avogadro MACOSX_BUNDLE ${avogadro_srcs} ${moc_srcs} ${ui_srcs}
+add_executable(avogadro MACOSX_BUNDLE ${avogadro_srcs} ${ui_srcs}
   ${rcc_srcs})
+set_target_properties(avogadro PROPERTIES AUTOMOC TRUE)
 target_link_libraries(avogadro
   AvogadroCore AvogadroIO AvogadroQtOpenGL AvogadroQtGui AvogadroQtPlugins
   ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY}
@@ -49,6 +53,9 @@ target_link_libraries(avogadro
   )
 if(Avogadro_ENABLE_RPC)
   target_link_libraries(avogadro mqlocalsocketconnectionlistener)
+endif()
+if(ENABLE_TESTING)
+  target_link_libraries(avogadro QtTesting)
 endif()
 install(TARGETS avogadro
   RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
