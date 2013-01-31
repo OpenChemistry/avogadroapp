@@ -171,6 +171,9 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
 
   emit moleculeChanged(m_molecule);
 
+  connect(m_molecule, SIGNAL(changed(unsigned int)),
+          SLOT(updateScenePlugins()));
+
   m_ui->glWidget->editor().setMolecule(mol);
   m_ui->glWidget->manipulator().setMolecule(mol);
   updateScenePlugins();
