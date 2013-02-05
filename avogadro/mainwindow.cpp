@@ -367,6 +367,7 @@ void MainWindow::buildElements()
   addElement(35); // Bromine
 
   m_ui->elementComboBox->insertSeparator(m_ui->elementComboBox->count());
+  m_elementLookup.push_back(0); // for the separator
 
   // And the rest...
   for (unsigned char i = 1; i < Core::Elements::elementCount(); ++i)
