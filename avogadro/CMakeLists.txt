@@ -40,6 +40,11 @@ endif()
 # Need to add current binary dir to include path for UI file headers
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+# if we are building statically then we need HDF5 targets
+if (NOT BUILD_SHARED_LIBS)
+  find_package(HDF5 REQUIRED COMPONENTS C)
+endif()
+
 add_executable(avogadro MACOSX_BUNDLE ${avogadro_srcs} ${moc_srcs} ${ui_srcs}
   ${rcc_srcs})
 target_link_libraries(avogadro
