@@ -155,7 +155,7 @@ protected:
 
 using QtGui::Molecule;
 
-MainWindow::MainWindow(const QString &fileName)
+MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   : m_ui(new Ui::MainWindow),
     m_molecule(0),
     m_scenePluginModel(0)
@@ -194,6 +194,13 @@ MainWindow::MainWindow(const QString &fileName)
   connect(m_ui->elementComboBox, SIGNAL(currentIndexChanged(int)),
           SLOT(updateElement()));
 
+  // If disable settings, ensure we create a cleared QSettings object.
+  if (disableSettings) {
+    QSettings settings;
+    settings.clear();
+    settings.sync();
+  }
+  // The default settings will be used if everything was cleared.
   readSettings();
 
   QtGui::PluginManager *plugin = QtGui::PluginManager::instance();
@@ -328,7 +335,7 @@ void MainWindow::readSettings()
 {
   QSettings settings;
   settings.beginGroup("MainWindow");
-  resize(settings.value("size", QSize(400, 300)).toSize());
+  resize(settings.value("size", QSize(800, 600)).toSize());
   move(settings.value("pos", QPoint(20, 20)).toPoint());
   settings.endGroup();
   m_recentFiles = settings.value("recentFiles", QStringList()).toStringList();

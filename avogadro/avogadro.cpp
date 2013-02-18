@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
   QGLFormat::setDefaultFormat(defaultFormat);
 
   QString fileName;
+  bool disableSettings = false;
 #ifdef QTTESTING
   QString testFile;
   bool testExit = true;
@@ -65,12 +66,16 @@ int main(int argc, char *argv[])
       qWarning("Avogadro called with --test-no-exit but testing is disabled.");
 #endif
     }
+    else if (*it == "--disable-settings") {
+      disableSettings = true;
+    }
     else { // Assume it is a file name.
       fileName = *it;
     }
   }
 
-  Avogadro::MainWindow *window = new Avogadro::MainWindow(fileName);
+  Avogadro::MainWindow *window = new Avogadro::MainWindow(fileName,
+                                                          disableSettings);
 #ifdef QTTESTING
   window->playTest(testFile, testExit);
 #endif
