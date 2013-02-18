@@ -1,3 +1,4 @@
+find_package(AvogadroLibs REQUIRED NO_MODULE)
 # The data repository should be at the side of ours.
 find_path(AVOGADRO_DATA_ROOT .avogadro.data
   ${AvogadroApp_SOURCE_DIR}/../avogadrodata
@@ -24,4 +25,7 @@ foreach(xml ${test_xml})
     COMMAND avogadro
       --disable-settings
       --test-file "${AVOGADRO_DATA}/tests/avogadro/xml/${xml}")
+  # Ensure we pass in an absolute path to the prefix so that we find the plugins
+  set_tests_properties(avogadro-${name} PROPERTIES
+    ENVIRONMENT "AVOGADRO_PLUGIN_DIR=${AvogadroLibs_INSTALL_PREFIX}")
 endforeach()

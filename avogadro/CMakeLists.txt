@@ -1,4 +1,4 @@
-find_package(AvogadroLibs REQUIRED)
+find_package(AvogadroLibs REQUIRED NO_MODULE)
 include_directories(${AvogadroLibs_INCLUDE_DIRS})
 list(APPEND CMAKE_MODULE_PATH ${AvogadroLibs_CMAKE_DIR})
 find_package(Eigen3 REQUIRED)
