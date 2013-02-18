@@ -21,5 +21,7 @@ foreach(xml ${test_xml})
   get_filename_component(name "${xml}" NAME_WE)
   message("Adding test: ${name} from XML")
   add_test(NAME avogadro-${name}
-    COMMAND avogadro --test-file "${AVOGADRO_DATA}/tests/avogadro/xml/${xml}")
+    COMMAND avogadro
+      --disable-settings
+      --test-file "${AVOGADRO_DATA}/tests/avogadro/xml/${xml}")
 endforeach()
