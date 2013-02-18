@@ -45,7 +45,7 @@ class MainWindow : public QMainWindow
 {
 Q_OBJECT
 public:
-  MainWindow(const QString &filename = QString());
+  MainWindow(const QString &filename = QString(), bool disableSettings = false);
   ~MainWindow();
 
 public slots:
