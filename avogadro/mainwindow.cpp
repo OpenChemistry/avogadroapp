@@ -203,7 +203,7 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   // The default settings will be used if everything was cleared.
   readSettings();
 
-  QtGui::PluginManager *plugin = QtGui::PluginManager::instance();
+  QtPlugins::PluginManager *plugin = QtPlugins::PluginManager::instance();
   plugin->load();
   QList<QtGui::ScenePluginFactory *> scenePluginFactories =
       plugin->pluginFactories<QtGui::ScenePluginFactory>();
