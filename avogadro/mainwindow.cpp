@@ -27,6 +27,7 @@
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
 #include <avogadro/qtgui/extensionplugin.h>
+#include <avogadro/qtgui/periodictableview.h>
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
@@ -214,6 +215,12 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
       m_scenePluginModel->addItem(scenePlugin);
     }
   }
+
+  QMenu *menuTop = menuBar()->addMenu(tr("&Extensions"));
+  QAction *showPeriodicTable = new QAction("&Periodic Table", this);
+  menuTop->addAction(showPeriodicTable);
+  QtGui::PeriodicTableView *periodicTable = new QtGui::PeriodicTableView(this);
+  connect(showPeriodicTable, SIGNAL(triggered()), periodicTable, SLOT(show()));
 
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
