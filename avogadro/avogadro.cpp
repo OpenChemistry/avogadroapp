@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 {
   QCoreApplication::setOrganizationName("OpenChemistry");
   QCoreApplication::setOrganizationDomain("openchemistry.org");
-  QCoreApplication::setApplicationName("Avogaro");
+  QCoreApplication::setApplicationName("Avogadro");
 
   QApplication app(argc, argv);
 
