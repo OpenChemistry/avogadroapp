@@ -20,7 +20,6 @@
 
 #include "qjsonvalue.h"
 #include "qjsonobject.h"
-#include "qjsondocument.h"
 
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/io/cjsonformat.h>
@@ -106,13 +105,13 @@ void RpcListener::messageReceived(const MoleQueue::Message &message)
   }
   else if (method == "loadFromChemicalJson") {
     if (m_window) {
-      QJsonDocument doc;
-      doc.setObject(params["chemicalJson"].toObject());;
+      // get chemical json data
+      QByteArray data = params["chemicalJson"].toString().toAscii();
 
       // read json
       Io::CjsonFormat cjson;
       QtGui::Molecule *molecule = new QtGui::Molecule;
-      bool success = cjson.readString(doc.toJson().constData(), *molecule);
+      bool success = cjson.readString(data.constData(), *molecule);
       if (success) {
         emit callSetMolecule(molecule);
 
