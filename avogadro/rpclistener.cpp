@@ -20,10 +20,9 @@
 
 #include "qjsonvalue.h"
 #include "qjsonobject.h"
-#include "qjsondocument.h"
 
 #include <avogadro/qtgui/molecule.h>
-#include <avogadro/io/cjsonformat.h>
+#include <avogadro/io/fileformatmanager.h>
 
 #include "mainwindow.h"
 
@@ -104,15 +103,16 @@ void RpcListener::messageReceived(const MoleQueue::Message &message)
       errorMessage.send();
     }
   }
-  else if (method == "loadFromChemicalJson") {
+  else if (method == "loadMolecule") {
     if (m_window) {
-      QJsonDocument doc;
-      doc.setObject(params["chemicalJson"].toObject());;
+      // get molecule data and format
+      QByteArray content = params["content"].toString().toAscii();
+      QByteArray format = params["format"].toString().toAscii();
 
-      // read json
-      Io::CjsonFormat cjson;
+      // read molecule data
       QtGui::Molecule *molecule = new QtGui::Molecule;
-      bool success = cjson.readString(doc.toJson().constData(), *molecule);
+      bool success = Avogadro::Io::FileFormatManager::instance().readString(
+        *molecule, content.constData(), format.constData());
       if (success) {
         emit callSetMolecule(molecule);
 
@@ -129,7 +129,8 @@ void RpcListener::messageReceived(const MoleQueue::Message &message)
         errorMessage.setErrorCode(-1);
         errorMessage.setErrorMessage(
               QString("Failed to read Chemical JSON: %1")
-                .arg(QString::fromStdString(cjson.error())));
+                .arg(QString::fromStdString(
+                  Avogadro::Io::FileFormatManager::instance().error())));
         errorMessage.send();
       }
     }
