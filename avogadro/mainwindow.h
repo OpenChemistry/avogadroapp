@@ -37,6 +37,7 @@ class GLWidget;
 namespace QtGui {
 class ScenePlugin;
 class ScenePluginModel;
+class ToolPlugin;
 class ExtensionPlugin;
 class Molecule;
 }
@@ -76,9 +77,6 @@ protected slots:
   void updateRecentFiles();
   void updateScenePlugins();
 
-  void updateTool();
-  void updateElement();
-
 #ifdef QTTESTING
 protected slots:
   void record();
@@ -95,17 +93,14 @@ private:
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 
-  QVector<unsigned char> m_elementLookup;
-
 #ifdef QTTESTING
   pqTestUtility *m_testUtility;
   QString m_testFile;
   bool m_testExit;
 #endif
 
-  void buildElements();
-  void addElement(unsigned char atomicNum);
   void buildMenu(QtGui::ExtensionPlugin *extension);
+  void buildTools(QList<Avogadro::QtGui::ToolPlugin *> toolList);
 };
 
 } // End Avogadro namespace

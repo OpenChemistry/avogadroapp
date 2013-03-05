@@ -21,11 +21,11 @@
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cmlformat.h>
 #include <avogadro/io/cjsonformat.h>
-#include <avogadro/qtopengl/editor.h>
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/qtplugins/pluginmanager.h>
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
+#include <avogadro/qtgui/toolplugin.h>
 #include <avogadro/qtgui/extensionplugin.h>
 #include <avogadro/qtgui/periodictableview.h>
 #include <avogadro/rendering/glrenderer.h>
@@ -175,25 +175,11 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   connect(m_scenePluginModel,
           SIGNAL(pluginStateChanged(Avogadro::QtGui::ScenePlugin*)),
           SLOT(updateScenePlugins()));
-  /// @todo HACK the molecule should trigger the update
-  connect(&m_ui->glWidget->editor(), SIGNAL(moleculeChanged()),
-          SLOT(updateScenePlugins()));
-  connect(&m_ui->glWidget->manipulator(), SIGNAL(moleculeChanged()),
-          SLOT(updateScenePlugins()));
 
   // Connect the menu actions
   connect(m_ui->actionNewMolecule, SIGNAL(triggered()), SLOT(newMolecule()));
   connect(m_ui->actionOpen, SIGNAL(triggered()), SLOT(openFile()));
   connect(m_ui->actionQuit, SIGNAL(triggered()), qApp, SLOT(quit()));
-
-  // Connect the temporary tool/element selectors
-  updateTool();
-  buildElements();
-  updateElement();
-  connect(m_ui->toolComboBox, SIGNAL(currentIndexChanged(int)),
-          SLOT(updateTool()));
-  connect(m_ui->elementComboBox, SIGNAL(currentIndexChanged(int)),
-          SLOT(updateElement()));
 
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
@@ -206,6 +192,17 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
 
   QtPlugins::PluginManager *plugin = QtPlugins::PluginManager::instance();
   plugin->load();
+
+  QList<QtGui::ToolPluginFactory *> toolPluginFactories =
+      plugin->pluginFactories<QtGui::ToolPluginFactory>();
+  QList<QtGui::ToolPlugin*> toolPlugins;
+  foreach (QtGui::ToolPluginFactory *factory, toolPluginFactories) {
+    QtGui::ToolPlugin *tool = factory->createInstance();
+    if (tool)
+      toolPlugins << tool;
+  }
+  buildTools(toolPlugins);
+
   QList<QtGui::ScenePluginFactory *> scenePluginFactories =
       plugin->pluginFactories<QtGui::ScenePluginFactory>();
   foreach (QtGui::ScenePluginFactory *factory, scenePluginFactories) {
@@ -312,8 +309,6 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   connect(m_molecule, SIGNAL(changed(unsigned int)),
           SLOT(updateScenePlugins()));
 
-  m_ui->glWidget->editor().setMolecule(mol);
-  m_ui->glWidget->manipulator().setMolecule(mol);
   updateScenePlugins();
   m_ui->glWidget->resetCamera();
 }
@@ -440,20 +435,6 @@ void MainWindow::updateScenePlugins()
   m_ui->glWidget->update();
 }
 
-void MainWindow::updateTool()
-{
-  m_ui->glWidget->setActiveTool(static_cast<QtOpenGL::GLWidget::Tool>(
-                                  m_ui->toolComboBox->currentIndex()));
-  m_ui->elementComboBox->setEnabled(
-        m_ui->glWidget->activeTool() == QtOpenGL::GLWidget::EditTool);
-}
-
-void MainWindow::updateElement()
-{
-  m_ui->glWidget->editor().setAtomicNumber(
-        m_elementLookup.at(m_ui->elementComboBox->currentIndex()));
-}
-
 #ifdef QTTESTING
 void MainWindow::record()
 {
@@ -531,40 +512,42 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
     // Now we actually add the action we got (it should have set the text etc).
     menu->addAction(action);
   }
-
 }
 
-void MainWindow::buildElements()
+void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)
 {
-  m_ui->elementComboBox->clear();
-  m_elementLookup.clear();
+  foreach (QtGui::ToolPlugin *toolPlugin, toolList) {
+    // Setup tool:
+    toolPlugin->setParent(this);
+    toolPlugin->setGLWidget(m_ui->glWidget);
+    toolPlugin->setMolecule(m_molecule);
 
-  // Add common elements to the top.
-  addElement(1); // Hydrogen
-  addElement(5); // Boron
-  addElement(6); // Carbon
-  addElement(7); // Nitrogen
-  addElement(8); // Oxygen
-  addElement(9); // Fluorine
-  addElement(15); // Phosphorus
-  addElement(16); // Sulfur
-  addElement(17); // Chlorine
-  addElement(35); // Bromine
+    // Connect tool:
+    connect(this, SIGNAL(moleculeChanged(QtGui::Molecule*)),
+            toolPlugin, SLOT(setMolecule(QtGui::Molecule*)));
 
-  m_ui->elementComboBox->insertSeparator(m_ui->elementComboBox->count());
-  m_elementLookup.push_back(0); // for the separator
+    // Setup tool selection
+    QAction *toolAction = toolPlugin->activateAction();
+    m_ui->toolComboBox->addItem(toolAction->text());
 
-  // And the rest...
-  for (unsigned char i = 1; i < Core::Elements::elementCount(); ++i)
-    addElement(i);
-}
+    // Setup tool widget
+    QWidget *toolWidget = toolPlugin->toolWidget();
+    if (!toolWidget)
+      toolWidget = new QWidget();
+    m_ui->toolWidgetStack->addWidget(toolWidget);
+  }
 
-void MainWindow::addElement(unsigned char atomicNum)
-{
-  m_ui->elementComboBox->addItem(QString("%1 (%2)")
-                                 .arg(Core::Elements::name(atomicNum))
-                                 .arg(QString::number(atomicNum)));
-  m_elementLookup.push_back(atomicNum);
+  connect(m_ui->toolComboBox, SIGNAL(currentIndexChanged(int)),
+          m_ui->toolWidgetStack, SLOT(setCurrentIndex(int)));
+  connect(m_ui->toolComboBox, SIGNAL(currentIndexChanged(QString)),
+          m_ui->glWidget, SLOT(setActiveTool(QString)));
+
+  /// @todo Where to put these? For now just throw them into the glwidget, but
+  /// we should have a better place for them (maybe a singleton ToolWrangler?)
+  m_ui->glWidget->setTools(toolList);
+  m_ui->glWidget->setDefaultTool(tr("Navigate tool"));
+  if (!toolList.isEmpty())
+    m_ui->glWidget->setActiveTool(toolList.first());
 }
 
 } // End of Avogadro namespace
