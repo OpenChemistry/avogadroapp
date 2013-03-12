@@ -19,8 +19,8 @@
 
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/core/elements.h>
-#include <avogadro/io/cmlformat.h>
-#include <avogadro/io/cjsonformat.h>
+#include <avogadro/io/fileformat.h>
+#include <avogadro/io/fileformatmanager.h>
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/qtplugins/pluginmanager.h>
 #include <avogadro/qtgui/sceneplugin.h>
@@ -39,6 +39,7 @@
 #include <QtGui/QCloseEvent>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
+#include <QtGui/QMessageBox>
 #include <QtGui/QFileDialog>
 #include <QtGui/QStatusBar>
 #include <QtGui/QToolBar>
@@ -179,6 +180,8 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   // Connect the menu actions
   connect(m_ui->actionNewMolecule, SIGNAL(triggered()), SLOT(newMolecule()));
   connect(m_ui->actionOpen, SIGNAL(triggered()), SLOT(openFile()));
+  connect(m_ui->actionSaveAs, SIGNAL(triggered()), SLOT(saveFile()));
+  connect(m_ui->actionExport, SIGNAL(triggered()), SLOT(exportFile()));
   connect(m_ui->actionQuit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
   // If disable settings, ensure we create a cleared QSettings object.
@@ -234,6 +237,15 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
               extension, SLOT(setMolecule(QtGui::Molecule*)));
       connect(extension, SIGNAL(moleculeReady(int)), SLOT(moleculeReady(int)));
       buildMenu(extension);
+      foreach (Io::FileFormat *format, extension->fileFormats()) {
+        qDebug() << "Registering " << format->identifier().c_str();
+        if (!Io::FileFormatManager::registerFormat(format)) {
+          qWarning() << tr("Error while loading FileFormat with id '%1'.")
+                        .arg(QString::fromStdString(format->identifier()));
+          // Need to delete the format if the manager didn't take ownership:
+          delete format;
+        }
+      }
     }
   }
 
@@ -346,8 +358,22 @@ void MainWindow::readSettings()
 
 void MainWindow::openFile()
 {
-  QString fileName = QFileDialog::getOpenFileName(this, tr("Open chemical file"),
-    "", tr("Chemical files (*.cml *.cjson)"));
+  std::vector<const Io::FileFormat *> formats =
+      Io::FileFormatManager::instance().fileFormats(Io::FileFormat::Read
+                                                    | Io::FileFormat::File);
+
+  QString filter(generateFilterString(formats));
+
+  QSettings settings;
+  QString dir = settings.value("MainWindow/lastOpenDir").toString();
+
+  QString fileName = QFileDialog::getOpenFileName(this,
+                                                  tr("Open chemical file"),
+                                                  dir, filter);
+
+  dir = QFileInfo(fileName).absoluteDir().absolutePath();
+  settings.setValue("MainWindow/lastOpenDir", dir);
+
   openFile(fileName);
 }
 
@@ -356,20 +382,9 @@ void MainWindow::openFile(const QString &fileName)
   if (fileName.isEmpty())
     return;
 
-  QFileInfo info(fileName);
-  Molecule *molecule_(NULL);
-  bool success(false);
-  if (info.suffix() == "cml") {
-    Io::CmlFormat cml;
-    molecule_ = new Molecule;
-    success = cml.readFile(fileName.toStdString(), *molecule_);
-  }
-  else if (info.suffix() == "cjson") {
-    Io::CjsonFormat cjson;
-    molecule_ = new Molecule;
-    success = cjson.readFile(fileName.toStdString(), *molecule_);
-  }
-  if (success) {
+  Molecule *molecule_(new Molecule());
+  if (Io::FileFormatManager::instance().readFile(*molecule_,
+                                                 fileName.toStdString())) {
     m_recentFiles.prepend(fileName);
     updateRecentFiles();
     setMolecule(molecule_);
@@ -420,6 +435,69 @@ void MainWindow::updateRecentFiles()
   }
   for (; i < 10; ++i)
     m_actionRecentFiles[i]->setVisible(false);
+}
+
+void MainWindow::saveFile()
+{
+  std::vector<const Io::FileFormat *> formats =
+      Io::FileFormatManager::instance().fileFormats(Io::FileFormat::Write
+                                                    | Io::FileFormat::File);
+
+  QString filter(QString("%1 (*.cml);;%2 (*.cjson)")
+                 .arg(tr("Chemical Markup Language"))
+                 .arg(tr("Chemical JSON")));
+
+  QSettings settings;
+  QString dir = settings.value("MainWindow/lastSaveDir").toString();
+
+  QString fileName = QFileDialog::getSaveFileName(this,
+                                                  tr("Save chemical file"),
+                                                  "", filter);
+
+  dir = QFileInfo(fileName).absoluteDir().absolutePath();
+  settings.setValue("MainWindow/lastSaveDir", dir);
+
+  saveFile(fileName);
+}
+
+void MainWindow::exportFile()
+{
+  std::vector<const Io::FileFormat *> formats =
+      Io::FileFormatManager::instance().fileFormats(Io::FileFormat::Write
+                                                    | Io::FileFormat::File);
+
+  QString filter(generateFilterString(formats, false));
+
+  QSettings settings;
+  QString dir = settings.value("MainWindow/lastSaveDir").toString();
+
+  QString fileName = QFileDialog::getSaveFileName(this,
+                                                  tr("Export chemical file"),
+                                                  "", filter);
+
+  dir = QFileInfo(fileName).absoluteDir().absolutePath();
+  settings.setValue("MainWindow/lastSaveDir", dir);
+
+  saveFile(fileName);
+}
+
+void MainWindow::saveFile(const QString &fileName)
+{
+  if (fileName.isEmpty() || !m_molecule)
+    return;
+
+  if (Io::FileFormatManager::instance().writeFile(*m_molecule,
+                                                  fileName.toStdString())) {
+    m_recentFiles.prepend(fileName);
+    updateRecentFiles();
+    statusBar()->showMessage(tr("Molecule saved (%1)").arg(fileName));
+    setWindowTitle(tr("Avogadro - %1").arg(fileName));
+  }
+  else {
+    QMessageBox::critical(this, tr("Error saving file"),
+                          tr("The file could not be saved."),
+                          QMessageBox::Ok, QMessageBox::Ok);
+  }
 }
 
 void MainWindow::updateScenePlugins()
@@ -548,6 +626,60 @@ void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)
   m_ui->glWidget->setDefaultTool(tr("Navigate tool"));
   if (!toolList.isEmpty())
     m_ui->glWidget->setActiveTool(toolList.first());
+}
+
+QString MainWindow::generateFilterString(
+    const std::vector<const Io::FileFormat *> &formats, bool addAllEntry)
+{
+  QString result;
+
+  // Create a map that groups the file extensions by name:
+  QMap<QString, QString> formatMap;
+  for (std::vector<const Io::FileFormat*>::const_iterator it = formats.begin(),
+       itEnd = formats.end(); it != itEnd; ++it) {
+    QString name(QString::fromStdString((*it)->name()));
+    std::vector<std::string> exts = (*it)->fileExtensions();
+    for (std::vector<std::string>::const_iterator eit = exts.begin(),
+         eitEnd = exts.end(); eit != eitEnd; ++eit) {
+      QString ext(QString::fromStdString(*eit));
+      if (!formatMap.values(name).contains(ext)) {
+        formatMap.insertMulti(name, ext);
+      }
+    }
+  }
+
+  // This is a list of "extensions" returned by OB that are not actually
+  // file extensions, but rather the full filename of the file. These
+  // will be used as-is in the filter string, while others will be prepended
+  // with "*.".
+  QStringList nonExtensions;
+  nonExtensions
+      << "POSCAR"  // VASP input geometry
+      << "CONTCAR" // VASP output geometry
+      << "HISTORY" // DL-POLY history file
+      << "CONFIG"  // DL-POLY config file
+         ;
+
+  // This holds all known extensions:
+  QStringList allExtensions;
+
+  foreach (const QString &desc, formatMap.uniqueKeys()) {
+    QStringList extensions;
+    foreach (QString extension, formatMap.values(desc)) {
+      if (!nonExtensions.contains(extension))
+        extension.prepend("*.");
+      extensions << extension;
+    }
+    allExtensions << extensions;
+    result += QString("%1 (%2);;").arg(desc, extensions.join(" "));
+  }
+
+  if (addAllEntry) {
+    result.prepend(tr("All supported formats (%1);;All files (*);;")
+                   .arg(allExtensions.join(" ")));
+  }
+
+  return result;
 }
 
 } // End of Avogadro namespace

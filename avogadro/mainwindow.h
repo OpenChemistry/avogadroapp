@@ -34,6 +34,10 @@ namespace QtOpenGL {
 class GLWidget;
 }
 
+namespace Io {
+class FileFormat;
+}
+
 namespace QtGui {
 class ScenePlugin;
 class ScenePluginModel;
@@ -75,6 +79,9 @@ protected slots:
   void openFile(const QString &fileName);
   void openRecentFile();
   void updateRecentFiles();
+  void saveFile();
+  void exportFile();
+  void saveFile(const QString &fileName);
   void updateScenePlugins();
 
 #ifdef QTTESTING
@@ -101,6 +108,9 @@ private:
 
   void buildMenu(QtGui::ExtensionPlugin *extension);
   void buildTools(QList<Avogadro::QtGui::ToolPlugin *> toolList);
+  QString generateFilterString(
+      const std::vector<const Io::FileFormat *> &formats,
+      bool addAllEntry = true);
 };
 
 } // End Avogadro namespace
