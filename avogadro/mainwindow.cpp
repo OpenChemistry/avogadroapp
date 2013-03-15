@@ -596,8 +596,6 @@ void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)
 {
   foreach (QtGui::ToolPlugin *toolPlugin, toolList) {
     // Setup tool:
-    toolPlugin->setParent(this);
-    toolPlugin->setGLWidget(m_ui->glWidget);
     toolPlugin->setMolecule(m_molecule);
 
     // Connect tool:
