@@ -316,6 +316,16 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
     delete m_molecule;
   m_molecule = mol;
 
+  // If the molecule is empty, make the editor active. Otherwise, use the
+  // navigator tool.
+  if (m_molecule) {
+    int index = m_molecule->atomCount() > 0
+        ? m_ui->toolComboBox->findText("Navigate")
+        : m_ui->toolComboBox->findText("Draw");
+    if (index >= 0)
+      m_ui->toolComboBox->setCurrentIndex(index);
+  }
+
   emit moleculeChanged(m_molecule);
 
   connect(m_molecule, SIGNAL(changed(unsigned int)),
