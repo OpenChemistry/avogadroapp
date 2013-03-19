@@ -513,11 +513,18 @@ void MainWindow::saveFile(const QString &fileName)
 void MainWindow::updateScenePlugins()
 {
   Rendering::Scene &scene = m_ui->glWidget->renderer().scene();
-  scene.clear();
+
+  // Build up the scene with the scene plugins, creating the appropriate nodes.
+  Rendering::GroupNode &node = scene.rootNode();
+  node.clear();
+
   if (m_molecule) {
+    Rendering::GroupNode *moleculeNode = new Rendering::GroupNode(&node);
+
     foreach (QtGui::ScenePlugin *scenePlugin,
              m_scenePluginModel->activeScenePlugins()) {
-      scenePlugin->process(*m_molecule, scene);
+      Rendering::GroupNode *engineNode = new Rendering::GroupNode(moleculeNode);
+      scenePlugin->process(*m_molecule, *engineNode);
     }
   }
   m_ui->glWidget->update();
