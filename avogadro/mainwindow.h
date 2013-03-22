@@ -81,7 +81,9 @@ protected slots:
   void updateRecentFiles();
   void saveFile();
   void exportFile();
-  void saveFile(const QString &fileName);
+  /// If specified, use the FileFormat @a writer to save the file. This method
+  /// takes ownership of @a writer and will delete it before returning.
+  void saveFile(const QString &fileName, Io::FileFormat *writer = NULL);
   void updateScenePlugins();
 
 #ifdef QTTESTING

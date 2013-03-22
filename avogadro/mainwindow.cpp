@@ -19,6 +19,8 @@
 
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/core/elements.h>
+#include <avogadro/io/cjsonformat.h>
+#include <avogadro/io/cmlformat.h>
 #include <avogadro/io/fileformat.h>
 #include <avogadro/io/fileformatmanager.h>
 #include <avogadro/qtopengl/glwidget.h>
@@ -37,6 +39,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QSettings>
 #include <QtGui/QCloseEvent>
+#include <QtGui/QInputDialog>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
 #include <QtGui/QMessageBox>
@@ -47,6 +50,7 @@
 #include <QtGui/QDockWidget>
 #include <QtGui/QTreeView>
 #include <QtGui/QHeaderView>
+#include <QtGui/QProgressDialog>
 #include <QtGui/QPushButton>
 
 #ifdef QTTESTING
@@ -392,9 +396,84 @@ void MainWindow::openFile(const QString &fileName)
   if (fileName.isEmpty())
     return;
 
+  // Extract file extension
+  QFileInfo info(fileName);
+  QString ext = info.suffix();
+  if (ext.isEmpty())
+    ext = info.fileName();
+  ext = ext.toLower();
+
+  // Lookup readers that can handle this extension
+  std::vector<const Io::FileFormat*> matches(
+    Io::FileFormatManager::instance().fileFormatsFromFileExtension(
+          ext.toStdString(), Io::FileFormat::Read | Io::FileFormat::File));
+
+  if (matches.empty()) {
+    QMessageBox::information(this, tr("Cannot open file"),
+                             tr("Avogadro doesn't know how to open files of "
+                                "type '%1'.").arg(ext));
+    return;
+  }
+
+  Io::FileFormat *reader = NULL;
+  if (matches.size() == 1) {
+    // One reader found -- use it.
+    reader = matches.front()->newInstance();
+  }
+  else {
+    // Multiple readers found. Ask the user which they'd like to use
+    QStringList idents;
+    for (std::vector<const Io::FileFormat*>::const_iterator
+         it = matches.begin(), itEnd = matches.end(); it != itEnd; ++it) {
+      idents << QString::fromStdString((*it)->identifier());
+    }
+
+    // See if they used one before:
+    QString lastIdent = QSettings().value(
+          QString("MainWindow/fileReader/%1/lastUsed").arg(ext)).toString();
+
+    int lastIdentIndex = idents.indexOf(lastIdent);
+    if (lastIdentIndex < 0)
+      lastIdentIndex = 0;
+
+    bool ok = false;
+    QString item =
+        QInputDialog::getItem(this, tr("Select reader"),
+                              tr("Avogadro found multiple backends that can "
+                                 "read this file. Which one should be used?"),
+                              idents, lastIdentIndex, false, &ok);
+    int index = idents.indexOf(item);
+
+    if (!ok
+        || index < 0
+        || index + 1 > static_cast<int>(matches.size()))
+      return;
+
+    reader = matches[index]->newInstance();
+  }
+
+  if (!reader) // newInstance failed?
+    return;
+
+  // Store chosen reader for next time
+  QString ident = QString::fromStdString(reader->identifier());
+  QSettings().setValue(QString("MainWindow/fileReader/%1/lastUsed")
+                       .arg(ext), ident);
+
+  // Setup a progress dialog in case file loading is slow
+  QProgressDialog progDialog(this);
+  progDialog.setRange(0, 0);
+  progDialog.setValue(0);
+  progDialog.setMinimumDuration(750);
+  progDialog.setWindowTitle(tr("Reading File"));
+  progDialog.setLabelText(tr("Opening file '%1'\nwith '%2'")
+                          .arg(fileName).arg(ident));
+  /// @todo Add API to abort file ops
+  progDialog.setCancelButton(NULL);
+  progDialog.show();
+
   Molecule *molecule_(new Molecule());
-  if (Io::FileFormatManager::instance().readFile(*molecule_,
-                                                 fileName.toStdString())) {
+  if (reader->readFile(fileName.toStdString(), *molecule_)) {
     m_recentFiles.prepend(fileName);
     updateRecentFiles();
     setMolecule(molecule_);
@@ -404,9 +483,14 @@ void MainWindow::openFile(const QString &fileName)
     setWindowTitle(tr("Avogadro - %1").arg(fileName));
   }
   else {
-    statusBar()->showMessage(tr("Failed to read %1").arg(fileName), 2500);
+    QMessageBox::critical(this, tr("File error"),
+                          tr("Error while reading file '%1':\n%2")
+                          .arg(fileName)
+                          .arg(QString::fromStdString(reader->error())));
     delete molecule_;
   }
+
+  delete reader;
 }
 
 void MainWindow::openRecentFile()
@@ -449,10 +533,6 @@ void MainWindow::updateRecentFiles()
 
 void MainWindow::saveFile()
 {
-  std::vector<const Io::FileFormat *> formats =
-      Io::FileFormatManager::instance().fileFormats(Io::FileFormat::Write
-                                                    | Io::FileFormat::File);
-
   QString filter(QString("%1 (*.cml);;%2 (*.cjson)")
                  .arg(tr("Chemical Markup Language"))
                  .arg(tr("Chemical JSON")));
@@ -464,10 +544,19 @@ void MainWindow::saveFile()
                                                   tr("Save chemical file"),
                                                   "", filter);
 
-  dir = QFileInfo(fileName).absoluteDir().absolutePath();
+  QFileInfo info(fileName);
+  dir = info.absoluteDir().absolutePath();
   settings.setValue("MainWindow/lastSaveDir", dir);
 
-  saveFile(fileName);
+  // Create one of our writers to save the file:
+  QString extension = info.suffix().toLower();
+  Io::FileFormat *writer = NULL;
+  if (extension == "cml")
+    writer = new Io::CmlFormat;
+  else if (extension == "cjson")
+    writer = new Io::CjsonFormat;
+
+  saveFile(fileName, writer);
 }
 
 void MainWindow::exportFile()
@@ -491,13 +580,91 @@ void MainWindow::exportFile()
   saveFile(fileName);
 }
 
-void MainWindow::saveFile(const QString &fileName)
+void MainWindow::saveFile(const QString &fileName, Io::FileFormat *writer)
 {
   if (fileName.isEmpty() || !m_molecule)
     return;
 
-  if (Io::FileFormatManager::instance().writeFile(*m_molecule,
-                                                  fileName.toStdString())) {
+  // If a writer was not specified, look one up in the format manager.
+  if (writer == NULL) {
+    // Extract file extension
+    QFileInfo info(fileName);
+    QString ext = info.suffix();
+    if (ext.isEmpty())
+      ext = info.fileName();
+    ext = ext.toLower();
+
+    // Lookup writers that can handle this extension
+    std::vector<const Io::FileFormat*> matches(
+          Io::FileFormatManager::instance().fileFormatsFromFileExtension(
+            ext.toStdString(), Io::FileFormat::Write | Io::FileFormat::File));
+
+    if (matches.empty()) {
+      QMessageBox::information(this, tr("Cannot save file"),
+                               tr("Avogadro doesn't know how to write files of "
+                                  "type '%1'.").arg(ext));
+      return;
+    }
+
+    if (matches.size() == 1) {
+      // One writer found -- use it.
+      writer = matches.front()->newInstance();
+    }
+    else {
+      // Multiple writers found. Ask the user which they'd like to use
+      QStringList idents;
+      for (std::vector<const Io::FileFormat*>::const_iterator
+           it = matches.begin(), itEnd = matches.end(); it != itEnd; ++it) {
+        idents << QString::fromStdString((*it)->identifier());
+      }
+
+      // See if they used one before:
+      QString lastIdent = QSettings().value(
+            QString("MainWindow/fileWriter/%1/lastUsed").arg(ext)).toString();
+
+      int lastIdentIndex = idents.indexOf(lastIdent);
+      if (lastIdentIndex < 0)
+        lastIdentIndex = 0;
+
+      bool ok = false;
+      QString item =
+          QInputDialog::getItem(this, tr("Select writer"),
+                                tr("Avogadro found multiple backends that can "
+                                   "save this file. Which one should be used?"),
+                                idents, lastIdentIndex, false, &ok);
+      int index = idents.indexOf(item);
+
+      if (!ok
+          || index < 0
+          || index + 1 > static_cast<int>(matches.size()))
+        return;
+
+      writer = matches[index]->newInstance();
+
+      // Store chosen writer for next time
+      QSettings().setValue(QString("MainWindow/fileWriter/%1/lastUsed")
+                           .arg(ext), item);
+    }
+  }
+
+  if (!writer) // newInstance failed?
+    return;
+
+  QString ident = QString::fromStdString(writer->identifier());
+
+  // Setup a progress dialog in case file writing is slow
+  QProgressDialog progDialog(this);
+  progDialog.setRange(0, 0);
+  progDialog.setValue(0);
+  progDialog.setMinimumDuration(750);
+  progDialog.setWindowTitle(tr("Writing File"));
+  progDialog.setLabelText(tr("Writing file '%1'\nwith '%2'")
+                          .arg(fileName).arg(ident));
+  /// @todo Add API to abort file ops
+  progDialog.setCancelButton(NULL);
+  progDialog.show();
+
+  if (writer->writeFile(fileName.toStdString(), *m_molecule)) {
     m_recentFiles.prepend(fileName);
     updateRecentFiles();
     statusBar()->showMessage(tr("Molecule saved (%1)").arg(fileName));
@@ -508,6 +675,8 @@ void MainWindow::saveFile(const QString &fileName)
                           tr("The file could not be saved."),
                           QMessageBox::Ok, QMessageBox::Ok);
   }
+
+  delete writer;
 }
 
 void MainWindow::updateScenePlugins()
