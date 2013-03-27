@@ -13,13 +13,17 @@ find_package(Qt4 4.7 COMPONENTS QtCore QtGui QtOpenGL QtNetwork REQUIRED)
 include_directories(SYSTEM ${QT_INCLUDES})
 add_definitions(${QT_DEFINITIONS})
 
+configure_file(avogadroappconfig.h.in avogadroappconfig.h)
+
 set(avogadro_srcs
   avogadro.cpp
   mainwindow.cpp
+  aboutdialog.cpp
 )
 
 qt4_wrap_ui(ui_srcs
   mainwindow.ui
+  aboutdialog.ui
 )
 
 qt4_add_resources(rcc_srcs avogadro.qrc)

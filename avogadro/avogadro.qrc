@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/" >
     <file>icons/avogadro.png</file>
+    <file>icons/Avogadro2_About.png</file>
   </qresource>
 </RCC>
