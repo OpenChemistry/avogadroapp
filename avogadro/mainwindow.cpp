@@ -16,6 +16,7 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "aboutdialog.h"
 
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/core/elements.h>
@@ -273,6 +274,11 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
 
   m_testExit = true;
 #endif
+
+  QMenu *helpMenu = menuBar()->addMenu(tr("&Help"));
+  QAction *about = new QAction("&About", this);
+  helpMenu->addAction(about);
+  connect(about, SIGNAL(triggered()), SLOT(about()));
 }
 
 MainWindow::~MainWindow()
@@ -695,6 +701,12 @@ QString MainWindow::generateFilterString(
   }
 
   return result;
+}
+
+void MainWindow::about()
+{
+  AboutDialog about(this);
+  about.exec();
 }
 
 } // End of Avogadro namespace

@@ -83,6 +83,7 @@ protected slots:
   void exportFile();
   void saveFile(const QString &fileName);
   void updateScenePlugins();
+  void about();
 
 #ifdef QTTESTING
 protected slots:
