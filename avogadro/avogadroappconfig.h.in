@@ -1,0 +1,1 @@
+#cmakedefine AvogadroApp_VERSION "@AvogadroApp_VERSION@"
