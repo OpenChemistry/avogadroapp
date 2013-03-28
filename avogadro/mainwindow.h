@@ -92,6 +92,9 @@ protected slots:
   void popup();
 #endif
 
+private slots:
+  void showAboutDialog();
+
 private:
   Ui::MainWindow *m_ui;
   QtGui::Molecule *m_molecule;
