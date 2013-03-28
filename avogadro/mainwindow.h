@@ -76,12 +76,19 @@ protected slots:
   void moleculeReady(int number);
   void newMolecule();
   void openFile();
-  void openFile(const QString &fileName);
+  void importFile();
+  /// If specified, use the FileFormat @a reader to save the file. This method
+  /// takes ownership of @a reader and will delete it before returning. If not
+  /// specified, a reader will be selected based on fileName's extension.
+  void openFile(const QString &fileName, Io::FileFormat *reader = NULL);
   void openRecentFile();
   void updateRecentFiles();
   void saveFile();
   void exportFile();
-  void saveFile(const QString &fileName);
+  /// If specified, use the FileFormat @a writer to save the file. This method
+  /// takes ownership of @a writer and will delete it before returning. If not
+  /// specified, a writer will be selected based on fileName's extension.
+  void saveFile(const QString &fileName, Io::FileFormat *writer = NULL);
   void updateScenePlugins();
 
 #ifdef QTTESTING
