@@ -54,6 +54,7 @@ target_link_libraries(avogadro
   AvogadroCore AvogadroIO AvogadroQtOpenGL AvogadroQtGui AvogadroQtPlugins
   ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY}
   ${QT_QTOPENGL_LIBRARY}
+  MoleQueueClient
   )
 if(Avogadro_ENABLE_RPC)
   target_link_libraries(avogadro mqlocalsocketconnectionlistener)

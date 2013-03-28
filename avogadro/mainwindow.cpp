@@ -56,6 +56,8 @@
 # include <QXmlStreamReader>
 #endif
 
+#include <molequeue/client/jsonrpcclient.h>
+
 namespace Avogadro {
 
 #ifdef QTTESTING
@@ -221,6 +223,11 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   menuTop->addAction(showPeriodicTable);
   QtGui::PeriodicTableView *periodicTable = new QtGui::PeriodicTableView(this);
   connect(showPeriodicTable, SIGNAL(triggered()), periodicTable, SLOT(show()));
+
+  // add find similar molecules in mongochem entry
+  menuTop->addAction(tr("Find Similar Molecules in MongoChem"),
+                     this,
+                     SLOT(findSimilarMoleculesInMongoChem()));
 
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
@@ -528,6 +535,37 @@ void MainWindow::updateScenePlugins()
     }
   }
   m_ui->glWidget->update();
+}
+
+void MainWindow::findSimilarMoleculesInMongoChem()
+{
+  if (!m_molecule)
+    return;
+
+  // get inchi for molecule
+  std::string inchi;
+  Io::FileFormatManager &ffm = Io::FileFormatManager::instance();
+  if (!ffm.writeString(*m_molecule, inchi, "inchi")){
+    qDebug() << "error converting molecule to inchi.";
+    return;
+  }
+
+  // connect to mongochem
+  MoleQueue::JsonRpcClient *client = new MoleQueue::JsonRpcClient(this);
+  if (!client->connectToServer("mongochem")) {
+      qDebug() << "failed to connect to mongochem";
+      return;
+  }
+
+  // send request
+  QJsonObject request(client->emptyRequest());
+  request["method"] = QLatin1String("findSimilarMolecules");
+
+  QJsonObject params;
+  params["identifier"] = QLatin1String(inchi.c_str());
+  params["inputFormat"] = QLatin1String("inchi");
+  request["params"] = params;
+  client->sendRequest(request);
 }
 
 #ifdef QTTESTING

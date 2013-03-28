@@ -83,6 +83,7 @@ protected slots:
   void exportFile();
   void saveFile(const QString &fileName);
   void updateScenePlugins();
+  void findSimilarMoleculesInMongoChem();
 
 #ifdef QTTESTING
 protected slots:
