@@ -15,6 +15,7 @@ add_definitions(${QT_DEFINITIONS})
 
 set(avogadro_srcs
   avogadro.cpp
+  backgroundfileformat.cpp
   mainwindow.cpp
 )
 

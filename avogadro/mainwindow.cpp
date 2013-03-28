@@ -17,6 +17,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "backgroundfileformat.h"
+
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cjsonformat.h>
@@ -38,6 +40,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QFileInfo>
 #include <QtCore/QSettings>
+#include <QtCore/QThread>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QInputDialog>
 #include <QtGui/QMenu>
@@ -498,6 +501,14 @@ void MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
 
   QString ident = QString::fromStdString(reader->identifier());
 
+  // Prepare the background thread
+  QThread fileThread(this);
+  Molecule *molecule_(new Molecule());
+  BackgroundFileFormat threadedReader(reader);
+  threadedReader.moveToThread(&fileThread);
+  threadedReader.setMolecule(molecule_);
+  threadedReader.setFileName(fileName);
+
   // Setup a progress dialog in case file loading is slow
   QProgressDialog progDialog(this);
   progDialog.setRange(0, 0);
@@ -508,10 +519,21 @@ void MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
                           .arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
   progDialog.setCancelButton(NULL);
-  progDialog.show();
+  connect(&fileThread, SIGNAL(started()), &threadedReader, SLOT(read()));
+  connect(&threadedReader, SIGNAL(finished()), &fileThread, SLOT(quit()));
 
-  Molecule *molecule_(new Molecule());
-  if (reader->readFile(fileName.toStdString(), *molecule_)) {
+  // Start the file operation
+  fileThread.start();
+  progDialog.show();
+  while (fileThread.isRunning())
+    qApp->processEvents(QEventLoop::AllEvents, 500);
+
+  if (progDialog.wasCanceled()) {
+    delete molecule_;
+    return;
+  }
+
+  if (threadedReader.success()) {
     m_recentFiles.prepend(fileName);
     updateRecentFiles();
     setMolecule(molecule_);
@@ -524,11 +546,9 @@ void MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
     QMessageBox::critical(this, tr("File error"),
                           tr("Error while reading file '%1':\n%2")
                           .arg(fileName)
-                          .arg(QString::fromStdString(reader->error())));
+                          .arg(threadedReader.error()));
     delete molecule_;
   }
-
-  delete reader;
 }
 
 void MainWindow::openRecentFile()
@@ -696,6 +716,13 @@ void MainWindow::saveFile(const QString &fileName, Io::FileFormat *writer)
 
   QString ident = QString::fromStdString(writer->identifier());
 
+  // Prepare the background thread
+  QThread fileThread(this);
+  BackgroundFileFormat threadedWriter(writer);
+  threadedWriter.moveToThread(&fileThread);
+  threadedWriter.setMolecule(m_molecule);
+  threadedWriter.setFileName(fileName);
+
   // Setup a progress dialog in case file writing is slow
   QProgressDialog progDialog(this);
   progDialog.setRange(0, 0);
@@ -706,9 +733,19 @@ void MainWindow::saveFile(const QString &fileName, Io::FileFormat *writer)
                           .arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
   progDialog.setCancelButton(NULL);
-  progDialog.show();
+  connect(&fileThread, SIGNAL(started()), &threadedWriter, SLOT(read()));
+  connect(&threadedWriter, SIGNAL(finished()), &fileThread, SLOT(quit()));
 
-  if (writer->writeFile(fileName.toStdString(), *m_molecule)) {
+  // Start the file operation
+  fileThread.start();
+  progDialog.show();
+  while (fileThread.isRunning())
+    qApp->processEvents(QEventLoop::AllEvents, 500);
+
+  if (progDialog.wasCanceled())
+    return;
+
+  if (threadedWriter.success()) {
     m_recentFiles.prepend(fileName);
     updateRecentFiles();
     statusBar()->showMessage(tr("Molecule saved (%1)").arg(fileName));
@@ -716,11 +753,10 @@ void MainWindow::saveFile(const QString &fileName, Io::FileFormat *writer)
   }
   else {
     QMessageBox::critical(this, tr("Error saving file"),
-                          tr("The file could not be saved."),
+                          tr("The file could not be saved.\n")
+                          + threadedWriter.error(),
                           QMessageBox::Ok, QMessageBox::Ok);
   }
-
-  delete writer;
 }
 
 void MainWindow::updateScenePlugins()
