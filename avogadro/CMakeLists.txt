@@ -17,6 +17,7 @@ configure_file(avogadroappconfig.h.in avogadroappconfig.h)
 
 set(avogadro_srcs
   avogadro.cpp
+  backgroundfileformat.cpp
   mainwindow.cpp
   aboutdialog.cpp
 )

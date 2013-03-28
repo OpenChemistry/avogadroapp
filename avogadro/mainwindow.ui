@@ -40,7 +40,9 @@
     </widget>
     <addaction name="menuNew"/>
     <addaction name="menuRecentFiles"/>
+    <addaction name="separator"/>
     <addaction name="actionOpen"/>
+    <addaction name="actionImport"/>
     <addaction name="separator"/>
     <addaction name="actionSaveAs"/>
     <addaction name="actionExport"/>
@@ -134,6 +136,14 @@
   <action name="actionExport">
    <property name="text">
     <string>&amp;Export...</string>
+   </property>
+  </action>
+  <action name="actionImport">
+   <property name="text">
+    <string>&amp;Import</string>
+   </property>
+   <property name="toolTip">
+    <string>Select a file to import into Avogadro</string>
    </property>
   </action>
  </widget>
