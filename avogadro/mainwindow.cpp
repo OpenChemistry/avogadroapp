@@ -437,7 +437,7 @@ void MainWindow::importFile()
 
 void MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
 {
-  if (fileName.isEmpty() || !m_molecule)
+  if (fileName.isEmpty())
     return;
 
   // If a reader was not specified, look one up in the format manager.
