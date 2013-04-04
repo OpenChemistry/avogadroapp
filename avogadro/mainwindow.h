@@ -40,7 +40,6 @@ class FileFormat;
 
 namespace QtGui {
 class ScenePlugin;
-class ScenePluginModel;
 class ToolPlugin;
 class ExtensionPlugin;
 class Molecule;
@@ -105,7 +104,6 @@ private slots:
 private:
   Ui::MainWindow *m_ui;
   QtGui::Molecule *m_molecule;
-  QtGui::ScenePluginModel *m_scenePluginModel;
 
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
