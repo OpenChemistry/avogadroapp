@@ -61,7 +61,10 @@ target_link_libraries(avogadro
   ${QT_QTOPENGL_LIBRARY}
   )
 if(Avogadro_ENABLE_RPC)
-  target_link_libraries(avogadro mqlocalsocketconnectionlistener)
+  target_link_libraries(avogadro
+    mqlocalsocketconnectionlistener
+    MoleQueueClient
+  )
 endif()
 if(ENABLE_TESTING)
   target_link_libraries(avogadro QtTesting)

@@ -19,10 +19,13 @@
 
 #include <QObject>
 
+#include <qjsonobject.h>
+
 #include <molequeue/transport/connectionlistener.h>
 
 namespace MoleQueue {
 class JsonRpc;
+class JsonRpcClient;
 }
 
 namespace Avogadro {
@@ -51,12 +54,14 @@ signals:
 
 private slots:
   void connectionError(MoleQueue::ConnectionListener::Error, const QString &);
+  void receivePingResponse(const QJsonObject &response = QJsonObject());
   void messageReceived(const MoleQueue::Message &message);
 
 private:
   MoleQueue::JsonRpc *m_rpc;
   MoleQueue::ConnectionListener *m_connectionListener;
   MainWindow *m_window;
+  MoleQueue::JsonRpcClient *m_pingClient;
 };
 
 } // End Avogadro namespace
