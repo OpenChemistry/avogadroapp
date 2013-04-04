@@ -49,8 +49,18 @@ endif()
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # if we are building statically then we need HDF5 targets
-if (NOT BUILD_SHARED_LIBS)
+if(NOT BUILD_SHARED_LIBS)
   find_package(HDF5 REQUIRED COMPONENTS C)
+endif()
+
+# Handle Mac OS X specific icons etc.
+if(APPLE)
+  list(APPEND avogadro_srcs icons/avogadro.icns)
+  set(MACOSX_BUNDLE_ICON_FILE avogadro.icns)
+  set(MACOSX_BUNDLE_NAME "Avogadro2")
+  set(MACOSX_BUNDLE_BUNDLE_VERSION "${AvogadroApp_VERSION}")
+  set_source_files_properties(icons/avogadro.icns PROPERTIES
+    MACOSX_PACKAGE_LOCATION Resources)
 endif()
 
 add_executable(avogadro MACOSX_BUNDLE ${avogadro_srcs} ${ui_srcs} ${rcc_srcs})
@@ -66,6 +76,9 @@ if(Avogadro_ENABLE_RPC)
     MoleQueueClient
   )
 endif()
+if(APPLE)
+  set_target_properties(avogadro PROPERTIES OUTPUT_NAME ${MACOSX_BUNDLE_NAME})
+endif()
 if(ENABLE_TESTING)
   target_link_libraries(avogadro QtTesting)
 endif()
@@ -73,7 +86,6 @@ install(TARGETS avogadro
   RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
   BUNDLE DESTINATION .
   )
-
 
 # Keep "add_subdirectory(lastinstall)" last: fixup_bundle needs to be
 # *after* all other install(TARGETS and install(FILES calls
