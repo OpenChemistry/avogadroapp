@@ -840,13 +840,6 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
 void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)
 {
   foreach (QtGui::ToolPlugin *toolPlugin, toolList) {
-    // Setup tool:
-    toolPlugin->setMolecule(m_molecule);
-
-    // Connect tool:
-    connect(this, SIGNAL(moleculeChanged(QtGui::Molecule*)),
-            toolPlugin, SLOT(setMolecule(QtGui::Molecule*)));
-
     // Setup tool selection
     QAction *toolAction = toolPlugin->activateAction();
     m_ui->toolComboBox->addItem(toolAction->text());
