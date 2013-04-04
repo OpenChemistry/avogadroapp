@@ -72,7 +72,7 @@ target_link_libraries(avogadro
   )
 if(Avogadro_ENABLE_RPC)
   target_link_libraries(avogadro
-    mqlocalsocketconnectionlistener
+    MoleQueueServerCore
     MoleQueueClient
   )
 endif()
