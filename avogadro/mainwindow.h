@@ -88,7 +88,6 @@ protected slots:
   /// takes ownership of @a writer and will delete it before returning. If not
   /// specified, a writer will be selected based on fileName's extension.
   void saveFile(const QString &fileName, Io::FileFormat *writer = NULL);
-  void updateScenePlugins();
 
 #ifdef QTTESTING
 protected slots:
