@@ -134,9 +134,9 @@ void RpcListener::receivePingResponse(const QJsonObject &response)
              "Otherwise, this instance of avogadro may be started without "
              "RPC capabilities\n(this will prevent RPC enabled applications "
              "from communicating with Avogadro)."));
-      QStringList items;
-      items << tr("Replace the dead server with a new instance.");
-      items << tr("Start without RPC capabilities.");
+    QStringList items;
+    items << tr("Replace the dead server with a new instance.");
+    items << tr("Start without RPC capabilities.");
     bool ok(false);
     QString item(QInputDialog::getItem(NULL, title, label, items, 0, false,
                                        &ok));
