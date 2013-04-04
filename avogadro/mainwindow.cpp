@@ -164,11 +164,11 @@ protected:
 #endif
 
 using QtGui::Molecule;
+using QtGui::ScenePluginModel;
 
 MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   : m_ui(new Ui::MainWindow),
-    m_molecule(0),
-    m_scenePluginModel(0)
+    m_molecule(0)
 {
   m_ui->setupUi(this);
 
@@ -176,14 +176,11 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   setWindowIcon(icon);
 
   // Create the scene plugin model
-  m_scenePluginModel = new QtGui::ScenePluginModel(m_ui->scenePluginTreeView);
-  m_ui->scenePluginTreeView->setModel(m_scenePluginModel);
+  ScenePluginModel &scenePluginModel = m_ui->glWidget->sceneModel();
+  m_ui->scenePluginTreeView->setModel(&scenePluginModel);
   m_ui->scenePluginTreeView->setAlternatingRowColors(true);
   m_ui->scenePluginTreeView->header()->stretchLastSection();
   m_ui->scenePluginTreeView->header()->setVisible(false);
-  connect(m_scenePluginModel,
-          SIGNAL(pluginStateChanged(Avogadro::QtGui::ScenePlugin*)),
-          SLOT(updateScenePlugins()));
 
   // Connect the menu actions
   connect(m_ui->actionNewMolecule, SIGNAL(triggered()), SLOT(newMolecule()));
@@ -219,10 +216,8 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
       plugin->pluginFactories<QtGui::ScenePluginFactory>();
   foreach (QtGui::ScenePluginFactory *factory, scenePluginFactories) {
     QtGui::ScenePlugin *scenePlugin = factory->createInstance();
-    if (scenePlugin) {
-      scenePlugin->setParent(this);
-      m_scenePluginModel->addItem(scenePlugin);
-    }
+    if (scenePlugin)
+      scenePluginModel.addItem(scenePlugin);
   }
 
   QMenu *menuTop = menuBar()->addMenu(tr("&Extensions"));
@@ -323,7 +318,7 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
     return;
 
   // Clear the scene to prevent dangling identifiers:
-  m_ui->glWidget->renderer().scene().clear();
+  m_ui->glWidget->clearScene();
 
   // Set molecule
   if (m_molecule)
@@ -342,10 +337,8 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
 
   emit moleculeChanged(m_molecule);
 
-  connect(m_molecule, SIGNAL(changed(unsigned int)),
-          SLOT(updateScenePlugins()));
-
-  updateScenePlugins();
+  m_ui->glWidget->setMolecule(m_molecule);
+  m_ui->glWidget->updateScene();
   m_ui->glWidget->resetCamera();
 }
 
@@ -763,26 +756,6 @@ void MainWindow::saveFile(const QString &fileName, Io::FileFormat *writer)
                           + threadedWriter.error(),
                           QMessageBox::Ok, QMessageBox::Ok);
   }
-}
-
-void MainWindow::updateScenePlugins()
-{
-  Rendering::Scene &scene = m_ui->glWidget->renderer().scene();
-
-  // Build up the scene with the scene plugins, creating the appropriate nodes.
-  Rendering::GroupNode &node = scene.rootNode();
-  node.clear();
-
-  if (m_molecule) {
-    Rendering::GroupNode *moleculeNode = new Rendering::GroupNode(&node);
-
-    foreach (QtGui::ScenePlugin *scenePlugin,
-             m_scenePluginModel->activeScenePlugins()) {
-      Rendering::GroupNode *engineNode = new Rendering::GroupNode(moleculeNode);
-      scenePlugin->process(*m_molecule, *engineNode);
-    }
-  }
-  m_ui->glWidget->update();
 }
 
 #ifdef QTTESTING

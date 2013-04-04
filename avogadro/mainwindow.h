@@ -40,7 +40,6 @@ class FileFormat;
 
 namespace QtGui {
 class ScenePlugin;
-class ScenePluginModel;
 class ToolPlugin;
 class ExtensionPlugin;
 class Molecule;
@@ -89,7 +88,6 @@ protected slots:
   /// takes ownership of @a writer and will delete it before returning. If not
   /// specified, a writer will be selected based on fileName's extension.
   void saveFile(const QString &fileName, Io::FileFormat *writer = NULL);
-  void updateScenePlugins();
 
 #ifdef QTTESTING
 protected slots:
@@ -105,7 +103,6 @@ private slots:
 private:
   Ui::MainWindow *m_ui;
   QtGui::Molecule *m_molecule;
-  QtGui::ScenePluginModel *m_scenePluginModel;
 
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
