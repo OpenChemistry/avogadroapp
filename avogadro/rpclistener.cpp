@@ -16,7 +16,9 @@
 
 #include "rpclistener.h"
 
-#include <QApplication>
+#include <QtGui/QApplication>
+
+#include <QtCore/QTimer>
 
 #include "qjsonvalue.h"
 #include "qjsonobject.h"
@@ -26,18 +28,24 @@
 
 #include "mainwindow.h"
 
+#include <molequeue/client/jsonrpcclient.h>
 #include <molequeue/transport/jsonrpc.h>
 #include <molequeue/transport/localsocketconnectionlistener.h>
 
 namespace Avogadro {
 
 RpcListener::RpcListener(QObject *parent_)
-  : QObject(parent_)
+  : QObject(parent_),
+    m_pingSuccessful(false)
 {
   m_rpc = new MoleQueue::JsonRpc(this);
 
   m_connectionListener =
     new MoleQueue::LocalSocketConnectionListener(this, "avogadro");
+
+  connect(m_connectionListener,
+          SIGNAL(connectionError(MoleQueue::ConnectionListener::Error,QString)),
+          SLOT(connectionError(MoleQueue::ConnectionListener::Error,QString)));
 
   m_rpc->addConnectionListener(m_connectionListener);
 
@@ -72,8 +80,50 @@ void RpcListener::start()
 void RpcListener::connectionError(MoleQueue::ConnectionListener::Error error,
                                   const QString &message)
 {
-  Q_UNUSED(error)
-  qDebug() << "RpcListener connection error: " << message;
+  qDebug() << "Error starting RPC server:" << message;
+  if (error == MoleQueue::ConnectionListener::AddressInUseError) {
+    // Try to ping the existing server to see if it is alive:
+    MoleQueue::JsonRpcClient client(this);
+    bool alive(client.connectToServer(
+                 m_connectionListener->connectionString()));
+    QJsonObject request(client.emptyRequest());
+    request["method"] = QLatin1String("internalPing");
+    QTimer timeout;
+    timeout.setInterval(200);
+    timeout.setSingleShot(true);
+    m_pingSuccessful = false;
+
+    if (alive) {
+      qDebug() << "Pinging existing server.";
+      connect(&client, SIGNAL(resultReceived(QJsonObject)),
+              SLOT(receivePing(QJsonObject)));
+      alive = client.sendRequest(request);
+      timeout.start();
+    }
+
+    // Wait for request
+    if (alive) {
+      while (!m_pingSuccessful && timeout.isActive())
+        qApp->processEvents();
+      alive = m_pingSuccessful;
+    }
+
+    // Clobber the existing server
+    if (!alive) {
+      qDebug() << "Dead RPC server detected. Replacing with new instance.";
+      m_connectionListener->stop(true);
+      m_connectionListener->start();
+    }
+    else {
+      qDebug() << "Other server is alive. Not starting new instance.";
+    }
+  }
+}
+
+void RpcListener::receivePing(const QJsonObject &response)
+{
+  m_pingSuccessful = response.value("result").isString()
+     && response.value("result").toString() == QString("pong");
 }
 
 void RpcListener::messageReceived(const MoleQueue::Message &message)

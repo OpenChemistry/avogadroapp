@@ -51,12 +51,14 @@ signals:
 
 private slots:
   void connectionError(MoleQueue::ConnectionListener::Error, const QString &);
+  void receivePing(const QJsonObject &response);
   void messageReceived(const MoleQueue::Message &message);
 
 private:
   MoleQueue::JsonRpc *m_rpc;
   MoleQueue::ConnectionListener *m_connectionListener;
   MainWindow *m_window;
+  bool m_pingSuccessful;
 };
 
 } // End Avogadro namespace
