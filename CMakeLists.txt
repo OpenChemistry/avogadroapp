@@ -38,7 +38,7 @@ if(BUILD_DOCUMENTATION)
   add_subdirectory(docs)
 endif()
 
-include(CPack)
+include(AvogadroCPack)
 
 if(ENABLE_TESTING)
   include(BuildPackageTest)
