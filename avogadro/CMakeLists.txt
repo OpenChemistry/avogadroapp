@@ -4,12 +4,18 @@ list(APPEND CMAKE_MODULE_PATH ${AvogadroLibs_CMAKE_DIR})
 find_package(Eigen3 REQUIRED)
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
 
-if(WIN32 AND MSVC)
+if(MSVC)
   add_definitions("-D_CRT_SECURE_NO_WARNINGS")
 endif()
 
 # Find the Qt components we need.
-find_package(Qt4 4.7 COMPONENTS QtCore QtGui QtOpenGL QtNetwork REQUIRED)
+if(WIN32)
+  set(qtmain QtMain)
+else()
+  unset(qtmain)
+endif()
+find_package(Qt4 4.7
+  COMPONENTS QtCore QtGui QtOpenGL QtNetwork ${qtmain} REQUIRED)
 include_directories(SYSTEM ${QT_INCLUDES})
 add_definitions(${QT_DEFINITIONS})
 
@@ -31,7 +37,6 @@ qt4_add_resources(rcc_srcs avogadro.qrc)
 
 if(Avogadro_ENABLE_RPC)
   list(APPEND avogadro_srcs rpclistener.cpp)
-  qt4_wrap_cpp(moc_srcs rpclistener.h)
   # MoleQueue is required for its RPC functions.
   find_package(MoleQueue REQUIRED)
   include_directories(${MoleQueue_INCLUDE_DIRS})
@@ -61,9 +66,12 @@ if(APPLE)
   set(MACOSX_BUNDLE_BUNDLE_VERSION "${AvogadroApp_VERSION}")
   set_source_files_properties(icons/avogadro.icns PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources)
+elseif(WIN32)
+  list(APPEND avogadro_srcs icons/avogadro.rc)
 endif()
 
-add_executable(avogadro MACOSX_BUNDLE ${avogadro_srcs} ${ui_srcs} ${rcc_srcs})
+add_executable(avogadro WIN32 MACOSX_BUNDLE
+  ${avogadro_srcs} ${ui_srcs} ${rcc_srcs})
 set_target_properties(avogadro PROPERTIES AUTOMOC TRUE)
 target_link_libraries(avogadro
   AvogadroCore AvogadroIO AvogadroQtOpenGL AvogadroQtGui AvogadroQtPlugins
