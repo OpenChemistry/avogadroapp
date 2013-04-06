@@ -62,7 +62,6 @@ endif()
 if(APPLE)
   list(APPEND avogadro_srcs icons/avogadro.icns)
   set(MACOSX_BUNDLE_ICON_FILE avogadro.icns)
-  set(MACOSX_BUNDLE_NAME "Avogadro2")
   set(MACOSX_BUNDLE_BUNDLE_VERSION "${AvogadroApp_VERSION}")
   set_source_files_properties(icons/avogadro.icns PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources)
