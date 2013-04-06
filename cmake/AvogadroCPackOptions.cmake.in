@@ -1,0 +1,18 @@
+# This file is configured at cmake time, loaded at cpack time.
+
+# NSIS specific settings
+if(CPACK_GENERATOR MATCHES "NSIS")
+  set(CPACK_NSIS_MUI_ICON "@CMAKE_SOURCE_DIR@/avogadro/icons\\\\avogadro.ico")
+  set(CPACK_NSIS_HELP_LINK "http:\\\\openchemistry.org")
+  set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\openchemistry.org")
+  set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\Avogadro2.exe")
+  set(CPACK_NSIS_MENU_LINKS
+    "http://wiki.openchemistry.org/Avogadro2_@CPACK_PACKAGE_VERSION@"
+    "Release Notes"
+    "http://openchemistry.org/" "Open Chemistry Project")
+  set(CPACK_NSIS_MODIFY_PATH ON)
+endif(CPACK_GENERATOR MATCHES "NSIS")
+
+if("${CPACK_GENERATOR}" STREQUAL "PackageMaker")
+  set(CPACK_PACKAGE_DEFAULT_LOCATION "/Applications")
+endif("${CPACK_GENERATOR}" STREQUAL "PackageMaker")

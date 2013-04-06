@@ -12,7 +12,11 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
   endif()
 
   get_target_property(output_name avogadro OUTPUT_NAME)
-  set(exe "${pfx}${output_name}${sfx}")
+  if(output_name)
+    set(exe "${pfx}${output_name}${sfx}")
+  else()
+    set(exe "${pfx}avogadro${sfx}")
+  endif()
 
   set(dirs "")
   if(CMAKE_PREFIX_PATH)

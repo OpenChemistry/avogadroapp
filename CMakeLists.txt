@@ -19,6 +19,15 @@ set(AvogadroApp_VERSION
 find_package(Git)
 determine_version(${AvogadroApp_SOURCE_DIR} ${GIT_EXECUTABLE} "AvogadroApp")
 
+if(APPLE)
+  set(MACOSX_BUNDLE_NAME "Avogadro2")
+  set(prefix "${MACOSX_BUNDLE_NAME}.app/Contents")
+  set(INSTALL_INCLUDE_DIR "${prefix}/${INSTALL_INCLUDE_DIR}")
+  set(INSTALL_LIBRARY_DIR "${prefix}/${INSTALL_LIBRARY_DIR}")
+  set(INSTALL_ARCHIVE_DIR "${prefix}/${INSTALL_ARCHIVE_DIR}")
+  set(INSTALL_CMAKE_DIR   "${prefix}/Resources")
+endif()
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 option(ENABLE_TESTING "Enable testing and building the tests." OFF)
@@ -38,7 +47,7 @@ if(BUILD_DOCUMENTATION)
   add_subdirectory(docs)
 endif()
 
-include(CPack)
+include(AvogadroCPack)
 
 if(ENABLE_TESTING)
   include(BuildPackageTest)
