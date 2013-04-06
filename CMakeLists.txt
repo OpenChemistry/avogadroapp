@@ -47,6 +47,13 @@ if(BUILD_DOCUMENTATION)
   add_subdirectory(docs)
 endif()
 
+install(
+  FILES
+    README.md
+    CONTRIBUTING.md
+    COPYING
+  DESTINATION "${INSTALL_DOC_DIR}/avogadro2")
+
 include(AvogadroCPack)
 
 if(ENABLE_TESTING)
