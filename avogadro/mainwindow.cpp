@@ -17,7 +17,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "aboutdialog.h"
-
+#include "menubuilder.h"
 #include "backgroundfileformat.h"
 
 #include <avogadro/qtgui/molecule.h>
@@ -168,7 +168,8 @@ using QtGui::ScenePluginModel;
 
 MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   : m_ui(new Ui::MainWindow),
-    m_molecule(0)
+    m_molecule(0),
+    m_menuBuilder(new MenuBuilder)
 {
   m_ui->setupUi(this);
 
@@ -181,14 +182,6 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   m_ui->scenePluginTreeView->setAlternatingRowColors(true);
   m_ui->scenePluginTreeView->header()->stretchLastSection();
   m_ui->scenePluginTreeView->header()->setVisible(false);
-
-  // Connect the menu actions
-  connect(m_ui->actionNewMolecule, SIGNAL(triggered()), SLOT(newMolecule()));
-  connect(m_ui->actionOpen, SIGNAL(triggered()), SLOT(openFile()));
-  connect(m_ui->actionImport, SIGNAL(triggered()), SLOT(importFile()));
-  connect(m_ui->actionSaveAs, SIGNAL(triggered()), SLOT(saveFile()));
-  connect(m_ui->actionExport, SIGNAL(triggered()), SLOT(exportFile()));
-  connect(m_ui->actionQuit, SIGNAL(triggered()), qApp, SLOT(quit()));
 
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
@@ -236,7 +229,6 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
     QtGui::ExtensionPlugin *extension = factory->createInstance();
     if (extension) {
       extension->setParent(this);
-      qDebug() << "extension:" << extension->name() << extension->menuPath();
       connect(this, SIGNAL(moleculeChanged(QtGui::Molecule*)),
               extension, SLOT(setMolecule(QtGui::Molecule*)));
       connect(extension, SIGNAL(moleculeReady(int)), SLOT(moleculeReady(int)));
@@ -253,41 +245,22 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
     }
   }
 
-  // try to open the file passed in. If opening fails, create a new molecule.
+  // Build up the standard menus, incorporate dynamic menus.
+  buildMenu();
+  updateRecentFiles();
+
+  // Try to open the file passed in. If opening fails, create a new molecule.
   openFile(fileName);
   if (!m_molecule)
     newMolecule();
   statusBar()->showMessage(tr("Ready..."), 2000);
-
-#ifdef QTTESTING
-  QMenu *menu = menuBar()->addMenu(tr("&Testing"));
-  QAction *actionRecord = new QAction(this);
-  actionRecord->setText(tr("Record test..."));
-  menu->addAction(actionRecord);
-  QAction *actionPlay = new QAction(this);
-  actionPlay->setText(tr("Play test..."));
-  menu->addAction(actionPlay);
-
-  connect(actionRecord, SIGNAL(triggered()), SLOT(record()));
-  connect(actionPlay, SIGNAL(triggered()), SLOT(play()));
-
-  m_testUtility = new pqTestUtility(this);
-  m_testUtility->addEventObserver("xml", new XMLEventObserver(this));
-  m_testUtility->addEventSource("xml", new XMLEventSource(this));
-
-  m_testExit = true;
-#endif
-
-  QMenu *helpMenu = menuBar()->addMenu(tr("&Help"));
-  QAction *about = new QAction("&About", this);
-  helpMenu->addAction(about);
-  connect(about, SIGNAL(triggered()), SLOT(showAboutDialog()));
 }
 
 MainWindow::~MainWindow()
 {
   writeSettings();
   delete m_molecule;
+  delete m_menuBuilder;
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)
@@ -370,7 +343,6 @@ void MainWindow::readSettings()
   move(settings.value("pos", QPoint(20, 20)).toPoint());
   settings.endGroup();
   m_recentFiles = settings.value("recentFiles", QStringList()).toStringList();
-  updateRecentFiles();
 }
 
 void MainWindow::openFile()
@@ -563,18 +535,6 @@ void MainWindow::updateRecentFiles()
   while (m_recentFiles.size() > 10)
     m_recentFiles.removeLast();
 
-  // Populate the recent file actions list if necessary.
-  if (m_actionRecentFiles.isEmpty()) {
-    for (int i = 0; i < 10; ++i) {
-      m_actionRecentFiles.push_back(m_ui->menuRecentFiles->addAction(""));
-      m_actionRecentFiles.back()->setVisible(false);
-      connect(m_actionRecentFiles.back(), SIGNAL(triggered()),
-              SLOT(openRecentFile()));
-    }
-    m_actionRecentFiles[0]->setText(tr("No recent files"));
-    m_actionRecentFiles[0]->setVisible(true);
-    m_actionRecentFiles[0]->setEnabled(false);
-  }
   int i = 0;
   foreach (const QString &file, m_recentFiles) {
     QFileInfo fileInfo(file);
@@ -795,46 +755,80 @@ void MainWindow::popup()
 }
 #endif
 
+void MainWindow::buildMenu()
+{
+#ifdef QTTESTING
+  QStringList testingPath;
+  testingPath << tr("&Testing");
+  QAction *actionRecord = new QAction(this);
+  actionRecord->setText(tr("Record test..."));
+  m_menuBuilder->addAction(testingPath, actionRecord, 10);
+  QAction *actionPlay = new QAction(this);
+  actionPlay->setText(tr("Play test..."));
+  m_menuBuilder->addAction(testingPath, actionPlay, 5);
+
+  connect(actionRecord, SIGNAL(triggered()), SLOT(record()));
+  connect(actionPlay, SIGNAL(triggered()), SLOT(play()));
+
+  m_testUtility = new pqTestUtility(this);
+  m_testUtility->addEventObserver("xml", new XMLEventObserver(this));
+  m_testUtility->addEventSource("xml", new XMLEventSource(this));
+
+  m_testExit = true;
+#endif
+
+  // Add the standard menu items.
+  QStringList path;
+  path << "&File";
+  QAction *action = new QAction(tr("&New"), this);
+  m_menuBuilder->addAction(path, action, 200);
+  connect(action, SIGNAL(triggered()), SLOT(newMolecule()));
+  action = new QAction(tr("&Open"), this);
+  m_menuBuilder->addAction(path, action, 90);
+  connect(action, SIGNAL(triggered()), SLOT(openFile()));
+  action = new QAction(tr("Save &As"), this);
+  m_menuBuilder->addAction(path, action, 80);
+  connect(action, SIGNAL(triggered()), SLOT(saveFile()));
+
+  action = new QAction(tr("&Import"), this);
+  m_menuBuilder->addAction(path, action, 70);
+  connect(action, SIGNAL(triggered()), SLOT(importFile()));
+
+  action = new QAction(tr("&Export"), this);
+  m_menuBuilder->addAction(path, action, 60);
+  connect(action, SIGNAL(triggered()), SLOT(exportFile()));
+
+  action = new QAction(tr("&Quit"), this);
+  m_menuBuilder->addAction(path, action, -50);
+  connect(action, SIGNAL(triggered()), qApp, SLOT(quit()));
+
+  QStringList helpPath;
+  helpPath << tr("&Help");
+  QAction *about = new QAction("&About", this);
+  m_menuBuilder->addAction(helpPath, about, 20);
+  connect(about, SIGNAL(triggered()), SLOT(showAboutDialog()));
+
+  // Populate the recent file actions list.
+  path << "Recent Files";
+  for (int i = 0; i < 10; ++i) {
+    action = new QAction(QString::number(i), this);
+    m_actionRecentFiles.push_back(action);
+    action->setVisible(false);
+    m_menuBuilder->addAction(path, action, 100 - i);
+    connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
+  }
+  m_actionRecentFiles[0]->setText(tr("No recent files"));
+  m_actionRecentFiles[0]->setVisible(true);
+  m_actionRecentFiles[0]->setEnabled(false);
+
+  // Now actually add all menu entries.
+  m_menuBuilder->buildMenu(menuBar());
+}
+
 void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
 {
-  foreach (QAction *action, extension->actions()) {
-    QStringList path = extension->menuPath(action);
-    qDebug() << "Menu:" << extension->name() << path;
-    if (path.size() < 1)
-      continue;
-    // First ensure the top-level menu is present (create it if needed).
-    QMenu *menu(NULL);
-    foreach (QAction *topMenu, menuBar()->actions()) {
-      if (topMenu->text() == path.at(0)) {
-        menu = topMenu->menu();
-        break;
-      }
-    }
-    if (!menu)
-      menu = menuBar()->addMenu(path.at(0));
-
-    // Build up submenus if necessary.
-    QMenu *nextMenu(NULL);
-    for (int i = 1; i < path.size(); ++i) {
-      if (nextMenu) {
-        menu = nextMenu;
-        nextMenu = NULL;
-      }
-      const QString menuText = path[i];
-      foreach (QAction *menuAction, menu->actions()) {
-        if (menuAction->text() == menuText) {
-          nextMenu = menuAction->menu();
-          break;
-        }
-      }
-      if (!nextMenu)
-        nextMenu = menu->addMenu(path.at(i));
-      menu = nextMenu;
-      nextMenu = NULL;
-    }
-    // Now we actually add the action we got (it should have set the text etc).
-    menu->addAction(action);
-  }
+  foreach (QAction *action, extension->actions())
+    m_menuBuilder->addAction(extension->menuPath(action), action);
 }
 
 void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)

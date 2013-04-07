@@ -20,36 +20,9 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>19</height>
+     <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu_File">
-    <property name="title">
-     <string>&amp;File</string>
-    </property>
-    <widget class="QMenu" name="menuNew">
-     <property name="title">
-      <string>&amp;New</string>
-     </property>
-     <addaction name="actionNewMolecule"/>
-    </widget>
-    <widget class="QMenu" name="menuRecentFiles">
-     <property name="title">
-      <string>Recent Files</string>
-     </property>
-    </widget>
-    <addaction name="menuNew"/>
-    <addaction name="menuRecentFiles"/>
-    <addaction name="separator"/>
-    <addaction name="actionOpen"/>
-    <addaction name="actionImport"/>
-    <addaction name="separator"/>
-    <addaction name="actionSaveAs"/>
-    <addaction name="actionExport"/>
-    <addaction name="separator"/>
-    <addaction name="actionQuit"/>
-   </widget>
-   <addaction name="menu_File"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QDockWidget" name="scenePluginDock">
