@@ -16,10 +16,11 @@ add_definitions(${QT_DEFINITIONS})
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
 
 set(avogadro_srcs
+  aboutdialog.cpp
   avogadro.cpp
   backgroundfileformat.cpp
   mainwindow.cpp
-  aboutdialog.cpp
+  menubuilder.cpp
 )
 
 qt4_wrap_ui(ui_srcs

@@ -30,6 +30,8 @@ class MainWindow;
 
 namespace Avogadro {
 
+class MenuBuilder;
+
 namespace QtOpenGL {
 class GLWidget;
 }
@@ -107,12 +109,15 @@ private:
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 
+  MenuBuilder *m_menuBuilder;
+
 #ifdef QTTESTING
   pqTestUtility *m_testUtility;
   QString m_testFile;
   bool m_testExit;
 #endif
 
+  void buildMenu();
   void buildMenu(QtGui::ExtensionPlugin *extension);
   void buildTools(QList<Avogadro::QtGui::ToolPlugin *> toolList);
   QString generateFilterString(
