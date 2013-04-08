@@ -35,6 +35,32 @@ if(INSTALL_BUNDLE_FILES)
   find_package(AvogadroLibs REQUIRED NO_MODULE)
   install(DIRECTORY "${AvogadroLibs_LIBRARY_DIR}/avogadro2"
     DESTINATION ${INSTALL_LIBRARY_DIR})
+
+  find_program(OBABEL_EXE obabel)
+  if(OBABEL_EXE)
+    install(FILES ${OBABEL_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
+      PERMISSIONS
+        OWNER_READ OWNER_EXECUTE
+        GROUP_READ GROUP_EXECUTE
+        WORLD_READ WORLD_EXECUTE)
+    get_filename_component(BABEL_DIR "${OBABEL_EXE}" PATH)
+    if(WIN32)
+      file(GLOB BABEL_PLUGINS ${BABEL_DIR}/*.obf)
+      install(
+        FILES
+          ${BABEL_PLUGINS}
+          ${BABEL_DIR}/inchi.dll
+          ${BABEL_DIR}/libxml2.dll
+        DESTINATION ${INSTALL_RUNTIME_DIR})
+      install(DIRECTORY "${BABEL_DIR}/data"
+        DESTINATION ${INSTALL_RUNTIME_DIR})
+    elseif(APPLE)
+      install(DIRECTORY "${BABEL_DIR}/../lib/openbabel"
+        DESTINATION ${INSTALL_LIBRARY_DIR})
+      install(DIRECTORY "${BABEL_DIR}/../share/openbabel"
+        DESTINATION ${INSTALL_DATA_DIR})
+    endif()
+  endif()
 endif()
 
 include(CPack)
