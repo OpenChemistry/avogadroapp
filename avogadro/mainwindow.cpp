@@ -778,37 +778,37 @@ void MainWindow::buildMenu()
   m_testExit = true;
 #endif
 
-  // Add the standard menu items.
+  // Add the standard menu items:
   QStringList path;
   path << "&File";
   // New
   QAction *action = new QAction(tr("&New"), this);
   action->setShortcut(QKeySequence("Ctrl+N"));
-  m_menuBuilder->addAction(path, action, 200);
+  m_menuBuilder->addAction(path, action, 999);
   connect(action, SIGNAL(triggered()), SLOT(newMolecule()));
   // Open
   action = new QAction(tr("&Open"), this);
   action->setShortcut(QKeySequence("Ctrl+O"));
-  m_menuBuilder->addAction(path, action, 90);
+  m_menuBuilder->addAction(path, action, 970);
   connect(action, SIGNAL(triggered()), SLOT(openFile()));
   // Save As
   action = new QAction(tr("Save &As"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+S"));
-  m_menuBuilder->addAction(path, action, 80);
+  m_menuBuilder->addAction(path, action, 960);
   connect(action, SIGNAL(triggered()), SLOT(saveFile()));
   // Import
   action = new QAction(tr("&Import"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+O"));
-  m_menuBuilder->addAction(path, action, 70);
+  m_menuBuilder->addAction(path, action, 950);
   connect(action, SIGNAL(triggered()), SLOT(importFile()));
   // Export
   action = new QAction(tr("&Export"), this);
-  m_menuBuilder->addAction(path, action, 60);
+  m_menuBuilder->addAction(path, action, 940);
   connect(action, SIGNAL(triggered()), SLOT(exportFile()));
   // Quit
   action = new QAction(tr("&Quit"), this);
   action->setShortcut(QKeySequence("Ctrl+Q"));
-  m_menuBuilder->addAction(path, action, -50);
+  m_menuBuilder->addAction(path, action, -200);
   connect(action, SIGNAL(triggered()), qApp, SLOT(quit()));
 
   QStringList helpPath;
@@ -823,7 +823,7 @@ void MainWindow::buildMenu()
     action = new QAction(QString::number(i), this);
     m_actionRecentFiles.push_back(action);
     action->setVisible(false);
-    m_menuBuilder->addAction(path, action, 100 - i);
+    m_menuBuilder->addAction(path, action, 995 - i);
     connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
   }
   m_actionRecentFiles[0]->setText(tr("No recent files"));
