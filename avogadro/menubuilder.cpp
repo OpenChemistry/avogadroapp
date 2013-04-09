@@ -43,6 +43,14 @@ bool lessThan(const PriorityText &left, const PriorityText &right)
   else
     return left.priority > right.priority;
 }
+
+/** Round @a x up to the next multiple of 100. */
+int floor100(int x)
+{
+  return x >= 0 ? (x / 100) * 100
+                : ((x - 99) / 100) * 100;
+}
+
 }
 
 MenuBuilder::MenuBuilder()
@@ -143,7 +151,17 @@ void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
   }
 
   qSort(actionText.begin(), actionText.end(), lessThan);
+
+  // When an action's priority is below this value, insert a separator.
+  // Separators are inserted as needed at multiples of 100.
+  int sepLimit = floor100(actionText.isEmpty() ? 0
+                                               : actionText.first().priority);
   foreach (const PriorityText &text, actionText) {
+    qDebug() << text.priority << sepLimit << text.text;
+    if (text.priority < sepLimit) {
+      menu->addSeparator();
+      sepLimit = floor100(text.priority);
+    }
     if (actions[text.text]) {
       menu->addAction(actions[text.text]);
     }
