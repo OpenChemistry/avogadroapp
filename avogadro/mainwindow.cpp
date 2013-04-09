@@ -235,7 +235,6 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
       connect(extension, SIGNAL(moleculeReady(int)), SLOT(moleculeReady(int)));
       buildMenu(extension);
       foreach (Io::FileFormat *format, extension->fileFormats()) {
-        qDebug() << "Registering " << format->identifier().c_str();
         if (!Io::FileFormatManager::registerFormat(format)) {
           qWarning() << tr("Error while loading FileFormat with id '%1'.")
                         .arg(QString::fromStdString(format->identifier()));
