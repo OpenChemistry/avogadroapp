@@ -31,6 +31,10 @@ class QMenuBar;
  * This class allows you to build up a list of menu entries, order them by
  * priority/section and then add them to a QMenu once all elements have been
  * added.
+ *
+ * Separators are inserted as needed when priorities cross multiples of 100
+ * (e.g. The ranges ..., (-100)-(-1), 0-99, 100-199, ... will be grouped
+ * together).
  */
 
 namespace Avogadro {
