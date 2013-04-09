@@ -44,6 +44,7 @@
 #include <QtCore/QThread>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QInputDialog>
+#include <QtGui/QKeySequence>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
 #include <QtGui/QMessageBox>
@@ -780,25 +781,33 @@ void MainWindow::buildMenu()
   // Add the standard menu items.
   QStringList path;
   path << "&File";
+  // New
   QAction *action = new QAction(tr("&New"), this);
+  action->setShortcut(QKeySequence("Ctrl+N"));
   m_menuBuilder->addAction(path, action, 200);
   connect(action, SIGNAL(triggered()), SLOT(newMolecule()));
+  // Open
   action = new QAction(tr("&Open"), this);
+  action->setShortcut(QKeySequence("Ctrl+O"));
   m_menuBuilder->addAction(path, action, 90);
   connect(action, SIGNAL(triggered()), SLOT(openFile()));
+  // Save As
   action = new QAction(tr("Save &As"), this);
+  action->setShortcut(QKeySequence("Ctrl+Shift+S"));
   m_menuBuilder->addAction(path, action, 80);
   connect(action, SIGNAL(triggered()), SLOT(saveFile()));
-
+  // Import
   action = new QAction(tr("&Import"), this);
+  action->setShortcut(QKeySequence("Ctrl+Shift+O"));
   m_menuBuilder->addAction(path, action, 70);
   connect(action, SIGNAL(triggered()), SLOT(importFile()));
-
+  // Export
   action = new QAction(tr("&Export"), this);
   m_menuBuilder->addAction(path, action, 60);
   connect(action, SIGNAL(triggered()), SLOT(exportFile()));
-
+  // Quit
   action = new QAction(tr("&Quit"), this);
+  action->setShortcut(QKeySequence("Ctrl+Q"));
   m_menuBuilder->addAction(path, action, -50);
   connect(action, SIGNAL(triggered()), qApp, SLOT(quit()));
 
