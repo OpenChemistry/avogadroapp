@@ -60,6 +60,14 @@ if(INSTALL_BUNDLE_FILES)
       install(DIRECTORY "${BABEL_DIR}/../share/openbabel"
         DESTINATION ${INSTALL_DATA_DIR})
     endif()
+    install(FILES ${AvogadroApp_SOURCE_DIR}/cmake/COPYING.openbabel
+      DESTINATION ${INSTALL_DOC_DIR}/openbabel)
+    file(READ "${AvogadroApp_SOURCE_DIR}/cmake/COPYING.openbabel" ob_license)
+    file(READ "${AvogadroApp_SOURCE_DIR}/COPYING" avo_license)
+    file(WRITE "${AvogadroApp_BINARY_DIR}/COPYING.txt"
+      "${avo_license}\n\nOpen Babel components licensed under GPLv2\n\n"
+      "${ob_license}")
+    set(CPACK_RESOURCE_FILE_LICENSE "${AvogadroApp_BINARY_DIR}/COPYING.txt")
   endif()
 endif()
 
