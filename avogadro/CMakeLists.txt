@@ -66,6 +66,10 @@ if(APPLE)
   set(MACOSX_BUNDLE_BUNDLE_VERSION "${AvogadroApp_VERSION}")
   set_source_files_properties(icons/avogadro.icns PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources)
+elseif(UNIX)
+  install(FILES "icons/avogadro2.desktop" DESTINATION "${INSTALL_XDG_APPS_DIR}")
+  install(FILES "icons/avogadro.png" DESTINATION "${INSTALL_XDG_ICON_DIR}"
+    RENAME "avogadro2.png")
 elseif(WIN32)
   list(APPEND avogadro_srcs icons/avogadro.rc)
 endif()
