@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=Avogadro2
+Comment=Advanced molecular editor
+Exec=avogadro2 %f
+Icon=avogadro2
+Terminal=false
+Type=Application
+Categories=Qt;Science;Chemistry;Physics;Education;
+StartupNotify=true
+MimeType=chemical/x-cml;chemical/x-xyz
