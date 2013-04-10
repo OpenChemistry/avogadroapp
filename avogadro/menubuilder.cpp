@@ -157,7 +157,6 @@ void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
   int sepLimit = floor100(actionText.isEmpty() ? 0
                                                : actionText.first().priority);
   foreach (const PriorityText &text, actionText) {
-    qDebug() << text.priority << sepLimit << text.text;
     if (text.priority < sepLimit) {
       menu->addSeparator();
       sepLimit = floor100(text.priority);
