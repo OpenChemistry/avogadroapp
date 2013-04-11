@@ -19,8 +19,8 @@ else()
   set(CPACK_RESOURCE_FILE_LICENSE "${AvogadroApp_SOURCE_DIR}/COPYING")
 endif()
 
-set(CPACK_PACKAGE_EXECUTABLES "avogadro" "Avogadro2")
-set(CPACK_CREATE_DESKTOP_LINKS "avogadro")
+set(CPACK_PACKAGE_EXECUTABLES "avogadro2" "Avogadro2")
+set(CPACK_CREATE_DESKTOP_LINKS "avogadro2")
 
 configure_file("${CMAKE_CURRENT_LIST_DIR}/AvogadroCPackOptions.cmake.in"
   "${AvogadroApp_BINARY_DIR}/AvogadroCPackOptions.cmake" @ONLY)
