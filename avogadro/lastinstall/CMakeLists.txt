@@ -29,6 +29,18 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
     list(APPEND plugins ${location})
   endforeach()
 
+  # Find and fixup the Open Babel plugins (if installed)
+  find_program(OBABEL_EXE obabel)
+  if(INSTALL_BUNDLE_FILES AND OBABEL_EXE AND APPLE)
+    get_filename_component(BABEL_DIR "${OBABEL_EXE}" PATH)
+    file(GLOB BABEL_PLUGINS
+      RELATIVE ${BABEL_DIR}/../lib/openbabel/2.3.2/
+      ${BABEL_DIR}/../lib/openbabel/2.3.2/*.so)
+    foreach(plugin ${BABEL_PLUGINS})
+      list(APPEND ob_plugins ${INSTALL_LIBRARY_DIR}/openbabel/2.3.2/${plugin})
+    endforeach()
+  endif()
+
   include(DeployQt4)
-  install_qt4_executable(${exe} "${plugins}" "" "${dirs}" "lib/avogadro2/plugins")
+  install_qt4_executable(${exe} "${plugins}" "${ob_plugins}" "${dirs}" "lib/avogadro2/plugins;lib/openbabel/2.3.2")
 endif()
