@@ -102,9 +102,29 @@ protected slots:
 private slots:
   void showAboutDialog();
 
+  /**
+   * @brief Register file formats from extensions when ready.
+   */
+  void fileFormatsReady();
+
+  /**
+   * @brief Attempt to read any files requested on the command line, intended to
+   * be called after the fileFormatsReady slot is triggered for formats added by
+   * extensions. Any that are successfully read will be removed from the list,
+   * after the timeout triggers the list will be cleared.
+   */
+  void readQueuedFiles();
+
+  /**
+   * @brief Clear the list of queued files, triggered by a timeout to allow
+   * delayed file readying within the first few seconds of application start up.
+   */
+  void clearQueuedFiles();
+
 private:
   Ui::MainWindow *m_ui;
   QtGui::Molecule *m_molecule;
+  QList<QString> m_queuedFiles;
 
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;

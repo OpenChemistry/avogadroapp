@@ -166,6 +166,7 @@ protected:
 
 using QtGui::Molecule;
 using QtGui::ScenePluginModel;
+using QtGui::ExtensionPlugin;
 
 MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   : m_ui(new Ui::MainWindow),
@@ -233,15 +234,8 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
       connect(this, SIGNAL(moleculeChanged(QtGui::Molecule*)),
               extension, SLOT(setMolecule(QtGui::Molecule*)));
       connect(extension, SIGNAL(moleculeReady(int)), SLOT(moleculeReady(int)));
+      connect(extension, SIGNAL(fileFormatsReady()), SLOT(fileFormatsReady()));
       buildMenu(extension);
-      foreach (Io::FileFormat *format, extension->fileFormats()) {
-        if (!Io::FileFormatManager::registerFormat(format)) {
-          qWarning() << tr("Error while loading FileFormat with id '%1'.")
-                        .arg(QString::fromStdString(format->identifier()));
-          // Need to delete the format if the manager didn't take ownership:
-          delete format;
-        }
-      }
     }
   }
 
@@ -250,7 +244,10 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   updateRecentFiles();
 
   // Try to open the file passed in. If opening fails, create a new molecule.
-  openFile(fileName);
+  m_queuedFiles.append(fileName);
+  // Give the plugins 5 seconds before timing out queued files.
+  QTimer::singleShot(5000, this, SLOT(clearQueuedFiles()));
+  readQueuedFiles();
   if (!m_molecule)
     newMolecule();
   statusBar()->showMessage(tr("Ready..."), 2000);
@@ -924,6 +921,43 @@ void MainWindow::showAboutDialog()
 {
   AboutDialog about(this);
   about.exec();
+}
+
+void MainWindow::fileFormatsReady()
+{
+  ExtensionPlugin *extension(qobject_cast<ExtensionPlugin *>(sender()));
+  if (!extension)
+    return;
+  foreach (Io::FileFormat *format, extension->fileFormats()) {
+    if (!Io::FileFormatManager::registerFormat(format)) {
+      qWarning() << tr("Error while loading FileFormat with id '%1'.")
+                    .arg(QString::fromStdString(format->identifier()));
+      // Need to delete the format if the manager didn't take ownership:
+      delete format;
+    }
+  }
+  //readQueuedFiles();
+}
+
+void MainWindow::readQueuedFiles()
+{
+  if (m_queuedFiles.size()) {
+    // Currently only read one file, this should be extended to allow multiple
+    // files once the interface supports that concept.
+    openFile(m_queuedFiles.front());
+    if (m_molecule)
+      m_queuedFiles.clear();
+  }
+}
+
+void MainWindow::clearQueuedFiles()
+{
+  if (!m_queuedFiles.isEmpty()) {
+    QMessageBox::warning(this, tr("Cannot open file"),
+                         tr("Avogadro timed out and doesn't know how to open"
+                            " '%1'.").arg(m_queuedFiles.front()));
+    m_queuedFiles.clear();
+  }
 }
 
 } // End of Avogadro namespace
