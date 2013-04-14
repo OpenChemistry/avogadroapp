@@ -24,12 +24,15 @@
 class pqTestUtility;
 #endif
 
+class QProgressDialog;
+class QThread;
+
 namespace Ui {
 class MainWindow;
 }
 
 namespace Avogadro {
-
+class BackgroundFileFormat;
 class MenuBuilder;
 
 namespace QtOpenGL {
@@ -122,7 +125,7 @@ protected slots:
    * takes ownership of @a reader and will delete it before returning. If not
    * specified, a reader will be selected based on fileName's extension.
    */
-  void openFile(const QString &fileName, Io::FileFormat *reader = NULL);
+  bool openFile(const QString &fileName, Io::FileFormat *reader = NULL);
 
   /**
    * Open file in the recent files list.
@@ -182,6 +185,12 @@ private slots:
    */
   void clearQueuedFiles();
 
+  /**
+   * @brief The background file reader thread has completed, set the active
+   * molecule, and clean up after the threaded read.
+   */
+  void backgroundReaderFinished();
+
 private:
   Ui::MainWindow *m_ui;
   QtGui::Molecule *m_molecule;
@@ -191,6 +200,12 @@ private:
   QList<QAction*> m_actionRecentFiles;
 
   MenuBuilder *m_menuBuilder;
+
+  // These variables take care of background file reading.
+  QThread *m_fileReadThread;
+  BackgroundFileFormat *m_threadedReader;
+  QProgressDialog *m_fileReadProgress;
+  QtGui::Molecule *m_fileReadMolecule;
 
 #ifdef QTTESTING
   pqTestUtility *m_testUtility;
