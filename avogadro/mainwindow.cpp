@@ -166,11 +166,16 @@ protected:
 
 using QtGui::Molecule;
 using QtGui::ScenePluginModel;
+using QtGui::ExtensionPlugin;
 
 MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   : m_ui(new Ui::MainWindow),
     m_molecule(0),
-    m_menuBuilder(new MenuBuilder)
+    m_menuBuilder(new MenuBuilder),
+    m_fileReadThread(NULL),
+    m_threadedReader(NULL),
+    m_fileReadProgress(NULL),
+    m_fileReadMolecule(NULL)
 {
   m_ui->setupUi(this);
 
@@ -233,15 +238,8 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
       connect(this, SIGNAL(moleculeChanged(QtGui::Molecule*)),
               extension, SLOT(setMolecule(QtGui::Molecule*)));
       connect(extension, SIGNAL(moleculeReady(int)), SLOT(moleculeReady(int)));
+      connect(extension, SIGNAL(fileFormatsReady()), SLOT(fileFormatsReady()));
       buildMenu(extension);
-      foreach (Io::FileFormat *format, extension->fileFormats()) {
-        if (!Io::FileFormatManager::registerFormat(format)) {
-          qWarning() << tr("Error while loading FileFormat with id '%1'.")
-                        .arg(QString::fromStdString(format->identifier()));
-          // Need to delete the format if the manager didn't take ownership:
-          delete format;
-        }
-      }
     }
   }
 
@@ -250,7 +248,12 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   updateRecentFiles();
 
   // Try to open the file passed in. If opening fails, create a new molecule.
-  openFile(fileName);
+  if (!fileName.isEmpty()) {
+    m_queuedFiles.append(fileName);
+    // Give the plugins 5 seconds before timing out queued files.
+    QTimer::singleShot(5000, this, SLOT(clearQueuedFiles()));
+    readQueuedFiles();
+  }
   if (!m_molecule)
     newMolecule();
   statusBar()->showMessage(tr("Ready..."), 2000);
@@ -373,7 +376,10 @@ void MainWindow::openFile()
   else if (extension == "cjson")
     reader = new Io::CjsonFormat;
 
-  openFile(fileName, reader);
+  if (!openFile(fileName, reader)) {
+    QMessageBox::information(this, tr("Cannot open file"),
+                             tr("Can't open supplied file %1").arg(fileName));
+  }
 }
 
 void MainWindow::importFile()
@@ -397,13 +403,16 @@ void MainWindow::importFile()
   dir = QFileInfo(fileName).absoluteDir().absolutePath();
   settings.setValue("MainWindow/lastOpenDir", dir);
 
-  openFile(fileName);
+  if (!openFile(fileName)) {
+    QMessageBox::information(this, tr("Cannot open file"),
+                             tr("Can't open supplied file %1").arg(fileName));
+  }
 }
 
-void MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
+bool MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
 {
   if (fileName.isEmpty())
-    return;
+    return false;
 
   // If a reader was not specified, look one up in the format manager.
   if (reader == NULL) {
@@ -419,24 +428,20 @@ void MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
           Io::FileFormatManager::instance().fileFormatsFromFileExtension(
             ext.toStdString(), Io::FileFormat::Read | Io::FileFormat::File));
 
-    if (matches.empty()) {
-      QMessageBox::information(this, tr("Cannot open file"),
-                               tr("Avogadro doesn't know how to open files of "
-                                  "type '%1'.").arg(ext));
-      return;
-      }
+    if (matches.empty())
+      return false;
 
     if (matches.size() == 1) {
       // One reader found -- use it.
       reader = matches.front()->newInstance();
-      }
+    }
     else {
       // Multiple readers found. Ask the user which they'd like to use
       QStringList idents;
       for (std::vector<const Io::FileFormat*>::const_iterator
            it = matches.begin(), itEnd = matches.end(); it != itEnd; ++it) {
         idents << QString::fromStdString((*it)->identifier());
-        }
+      }
 
       // See if they used one before:
       QString lastIdent = QSettings().value(
@@ -457,76 +462,100 @@ void MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
       if (!ok
           || index < 0
           || index + 1 > static_cast<int>(matches.size()))
-        return;
+        return false;
 
       reader = matches[index]->newInstance();
 
       // Store chosen reader for next time
       QSettings().setValue(QString("MainWindow/fileReader/%1/lastUsed")
                            .arg(ext), item);
-      }
     }
+  }
 
   if (!reader) // newInstance failed?
-    return;
+    return false;
 
   QString ident = QString::fromStdString(reader->identifier());
 
-  // Prepare the background thread
-  QThread fileThread(this);
-  Molecule *molecule_(new Molecule());
-  BackgroundFileFormat threadedReader(reader);
-  threadedReader.moveToThread(&fileThread);
-  threadedReader.setMolecule(molecule_);
-  threadedReader.setFileName(fileName);
+  // Prepare the background thread to read in the selected file.
+  if (!m_fileReadThread)
+    m_fileReadThread = new QThread(this);
+  if (m_threadedReader)
+    m_threadedReader->deleteLater();
+  m_threadedReader = new BackgroundFileFormat(reader);
+  if (m_fileReadMolecule)
+    m_fileReadMolecule->deleteLater();
+  m_fileReadMolecule = new Molecule(this);
+  m_fileReadMolecule->setData("fileName", fileName.toStdString());
+  m_threadedReader->moveToThread(m_fileReadThread);
+  m_threadedReader->setMolecule(m_fileReadMolecule);
+  m_threadedReader->setFileName(fileName);
 
   // Setup a progress dialog in case file loading is slow
-  QProgressDialog progDialog(this);
-  progDialog.setRange(0, 0);
-  progDialog.setValue(0);
-  progDialog.setMinimumDuration(750);
-  progDialog.setWindowTitle(tr("Reading File"));
-  progDialog.setLabelText(tr("Opening file '%1'\nwith '%2'")
-                          .arg(fileName).arg(ident));
+  m_fileReadProgress = new QProgressDialog(this);
+  m_fileReadProgress->setRange(0, 0);
+  m_fileReadProgress->setValue(0);
+  m_fileReadProgress->setMinimumDuration(750);
+  m_fileReadProgress->setWindowTitle(tr("Reading File"));
+  m_fileReadProgress->setLabelText(tr("Opening file '%1'\nwith '%2'")
+                                   .arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
-  progDialog.setCancelButton(NULL);
-  connect(&fileThread, SIGNAL(started()), &threadedReader, SLOT(read()));
-  connect(&threadedReader, SIGNAL(finished()), &fileThread, SLOT(quit()));
+  m_fileReadProgress->setCancelButton(NULL);
+  connect(m_fileReadThread, SIGNAL(started()), m_threadedReader, SLOT(read()));
+  connect(m_threadedReader, SIGNAL(finished()), m_fileReadThread, SLOT(quit()));
+  connect(m_threadedReader, SIGNAL(finished()),
+          SLOT(backgroundReaderFinished()));
 
   // Start the file operation
-  fileThread.start();
-  progDialog.show();
-  while (fileThread.isRunning())
-    qApp->processEvents(QEventLoop::AllEvents, 500);
+  m_fileReadThread->start();
+  m_fileReadProgress->show();
 
-  if (progDialog.wasCanceled()) {
-    delete molecule_;
-    return;
+  return true;
+}
+
+void MainWindow::backgroundReaderFinished()
+{
+  QString fileName = m_fileReadMolecule->data("fileName").toString().c_str();
+  if (m_fileReadProgress->wasCanceled()) {
+    delete m_fileReadMolecule;
   }
-
-  if (threadedReader.success()) {
-    m_recentFiles.prepend(fileName);
-    updateRecentFiles();
-    setMolecule(molecule_);
+  else if (m_threadedReader->success()) {
+    if (!fileName.isEmpty()) {
+      m_recentFiles.prepend(fileName);
+      updateRecentFiles();
+    }
+    setMolecule(m_fileReadMolecule);
     statusBar()->showMessage(tr("Molecule loaded (%1 atoms, %2 bonds)")
-                             .arg(molecule_->atomCount())
-                             .arg(molecule_->bondCount()), 2500);
+                             .arg(m_molecule->atomCount())
+                             .arg(m_molecule->bondCount()), 2500);
     setWindowTitle(tr("Avogadro - %1").arg(fileName));
   }
   else {
     QMessageBox::critical(this, tr("File error"),
                           tr("Error while reading file '%1':\n%2")
                           .arg(fileName)
-                          .arg(threadedReader.error()));
-    delete molecule_;
+                          .arg(m_threadedReader->error()));
+    delete m_fileReadMolecule;
   }
+  m_fileReadThread->deleteLater();
+  m_fileReadThread = NULL;
+  m_threadedReader->deleteLater();
+  m_threadedReader = NULL;
+  m_fileReadMolecule = NULL;
+  m_fileReadProgress->deleteLater();
+  m_fileReadProgress = NULL;
 }
 
 void MainWindow::openRecentFile()
 {
   QAction *action = qobject_cast<QAction *>(sender());
-  if (action)
-    openFile(action->data().toString());
+  if (action) {
+    QString fileName = action->data().toString();
+    if(!openFile(fileName)) {
+      QMessageBox::information(this, tr("Cannot open file"),
+                               tr("Can't open supplied file %1").arg(fileName));
+    }
+  }
 }
 
 void MainWindow::updateRecentFiles()
@@ -924,6 +953,42 @@ void MainWindow::showAboutDialog()
 {
   AboutDialog about(this);
   about.exec();
+}
+
+void MainWindow::fileFormatsReady()
+{
+  ExtensionPlugin *extension(qobject_cast<ExtensionPlugin *>(sender()));
+  if (!extension)
+    return;
+  foreach (Io::FileFormat *format, extension->fileFormats()) {
+    if (!Io::FileFormatManager::registerFormat(format)) {
+      qWarning() << tr("Error while loading FileFormat with id '%1'.")
+                    .arg(QString::fromStdString(format->identifier()));
+      // Need to delete the format if the manager didn't take ownership:
+      delete format;
+    }
+  }
+  readQueuedFiles();
+}
+
+void MainWindow::readQueuedFiles()
+{
+  if (m_queuedFiles.size()) {
+    // Currently only read one file, this should be extended to allow multiple
+    // files once the interface supports that concept.
+    if (openFile(m_queuedFiles.front()))
+      m_queuedFiles.clear();
+  }
+}
+
+void MainWindow::clearQueuedFiles()
+{
+  if (!m_queuedFiles.isEmpty()) {
+    QMessageBox::warning(this, tr("Cannot open file"),
+                         tr("Avogadro timed out and doesn't know how to open"
+                            " '%1'.").arg(m_queuedFiles.front()));
+    m_queuedFiles.clear();
+  }
 }
 
 } // End of Avogadro namespace
