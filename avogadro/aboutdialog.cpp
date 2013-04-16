@@ -18,6 +18,8 @@
 #include "ui_aboutdialog.h"
 #include "avogadroappconfig.h"
 
+#include <avogadro/core/version.h>
+
 namespace Avogadro
 {
 
@@ -31,7 +33,7 @@ AboutDialog::AboutDialog(QWidget* parent_)
                "</p></body></html>");
 
   m_ui->version->setText(html.arg("20").arg(AvogadroApp_VERSION));
-  m_ui->libsVersion->setText(html.arg("10").arg(AvogadroLibs_VERSION));
+  m_ui->libsVersion->setText(html.arg("10").arg(version()));
   m_ui->qtVersion->setText(html.arg("10").arg(qVersion()));
 }
 
