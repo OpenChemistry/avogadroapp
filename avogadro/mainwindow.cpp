@@ -42,6 +42,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QSettings>
 #include <QtCore/QThread>
+#include <QtCore/QTimer>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QInputDialog>
 #include <QtGui/QKeySequence>
