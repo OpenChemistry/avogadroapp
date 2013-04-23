@@ -57,7 +57,11 @@
    <widget class="QWidget" name="dockWidgetContents">
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QComboBox" name="toolComboBox"/>
+      <widget class="QLabel" name="toolName">
+       <property name="text">
+        <string>Tool name</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QStackedWidget" name="toolWidgetStack"/>

@@ -191,6 +191,13 @@ private slots:
    */
   void backgroundReaderFinished();
 
+  /**
+   * @brief Called when a toolbar action is clicked. The sender is expected to
+   * be the action, and the parent of the action should be the toolPlugin to
+   * activate.
+   */
+  void toolActivated();
+
 private:
   Ui::MainWindow *m_ui;
   QtGui::Molecule *m_molecule;
@@ -206,6 +213,8 @@ private:
   BackgroundFileFormat *m_threadedReader;
   QProgressDialog *m_fileReadProgress;
   QtGui::Molecule *m_fileReadMolecule;
+  QToolBar *m_fileToolBar;
+  QToolBar *m_toolToolBar;
 
 #ifdef QTTESTING
   pqTestUtility *m_testUtility;
