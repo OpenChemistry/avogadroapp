@@ -43,6 +43,7 @@
 #include <QtCore/QSettings>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
+#include <QtGui/QActionGroup>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QInputDialog>
 #include <QtGui/QKeySequence>
@@ -167,6 +168,7 @@ protected:
 
 using QtGui::Molecule;
 using QtGui::ScenePluginModel;
+using QtGui::ToolPlugin;
 using QtGui::ExtensionPlugin;
 
 MainWindow::MainWindow(const QString &fileName, bool disableSettings)
@@ -176,12 +178,18 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
     m_fileReadThread(NULL),
     m_threadedReader(NULL),
     m_fileReadProgress(NULL),
-    m_fileReadMolecule(NULL)
+    m_fileReadMolecule(NULL),
+    m_fileToolBar(new QToolBar(this)),
+    m_toolToolBar(new QToolBar(this))
 {
   m_ui->setupUi(this);
 
   QIcon icon(":/icons/avogadro.png");
   setWindowIcon(icon);
+
+  m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  addToolBar(m_fileToolBar);
+  addToolBar(m_toolToolBar);
 
   // Create the scene plugin model
   ScenePluginModel &scenePluginModel = m_ui->glWidget->sceneModel();
@@ -305,11 +313,12 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   // If the molecule is empty, make the editor active. Otherwise, use the
   // navigator tool.
   if (m_molecule) {
-    int index = m_molecule->atomCount() > 0
-        ? m_ui->toolComboBox->findText("Navigate")
-        : m_ui->toolComboBox->findText("Draw");
-    if (index >= 0)
-      m_ui->toolComboBox->setCurrentIndex(index);
+    QString targetToolName = m_molecule->atomCount() > 0 ? tr("Navigate tool")
+                                                         : tr("Editor tool");
+    foreach (ToolPlugin *toolPlugin, m_ui->glWidget->tools()) {
+      if (toolPlugin->name() == targetToolName)
+        toolPlugin->activateAction()->trigger();
+    }
   }
 
   emit moleculeChanged(m_molecule);
@@ -545,6 +554,23 @@ void MainWindow::backgroundReaderFinished()
   m_fileReadMolecule = NULL;
   m_fileReadProgress->deleteLater();
   m_fileReadProgress = NULL;
+}
+
+void MainWindow::toolActivated()
+{
+  if (QAction *action = qobject_cast<QAction*>(sender())) {
+    if (ToolPlugin *toolPlugin = qobject_cast<ToolPlugin*>(action->parent())) {
+      if (m_ui->glWidget->tools().contains(toolPlugin)) {
+        bool ok;
+        int index = action->data().toInt(&ok);
+        if (ok && index < m_ui->toolWidgetStack->count()) {
+          m_ui->glWidget->setActiveTool(toolPlugin);
+          m_ui->toolWidgetStack->setCurrentIndex(index);
+          m_ui->toolName->setText(action->text());
+        }
+      }
+    }
+  }
 }
 
 void MainWindow::openRecentFile()
@@ -815,12 +841,14 @@ void MainWindow::buildMenu()
   action->setShortcut(QKeySequence("Ctrl+N"));
   action->setIcon(QIcon::fromTheme("document-new"));
   m_menuBuilder->addAction(path, action, 999);
+  m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(newMolecule()));
   // Open
   action = new QAction(tr("&Open"), this);
   action->setShortcut(QKeySequence("Ctrl+O"));
   action->setIcon(QIcon::fromTheme("document-open"));
   m_menuBuilder->addAction(path, action, 970);
+  m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(openFile()));
   // Save As
   action = new QAction(tr("Save &As"), this);
@@ -833,6 +861,7 @@ void MainWindow::buildMenu()
   action->setShortcut(QKeySequence("Ctrl+Shift+O"));
   action->setIcon(QIcon::fromTheme("document-import"));
   m_menuBuilder->addAction(path, action, 950);
+  m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(importFile()));
   // Export
   action = new QAction(tr("&Export"), this);
@@ -879,22 +908,29 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
 
 void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)
 {
+  QActionGroup *toolActions = new QActionGroup(this);
+  int index = 0;
   foreach (QtGui::ToolPlugin *toolPlugin, toolList) {
-    // Setup tool selection
-    QAction *toolAction = toolPlugin->activateAction();
-    m_ui->toolComboBox->addItem(toolAction->text());
+    // Add action to toolbar
+    QAction *action = toolPlugin->activateAction();
+    if (action->parent() != toolPlugin)
+      action->setParent(toolPlugin);
+    action->setCheckable(true);
+    if (index + 1 < 10)
+      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index + 1)));
+    action->setData(index);
+    toolActions->addAction(action);
+    connect(action, SIGNAL(triggered()), SLOT(toolActivated()));
 
     // Setup tool widget
     QWidget *toolWidget = toolPlugin->toolWidget();
     if (!toolWidget)
       toolWidget = new QWidget();
     m_ui->toolWidgetStack->addWidget(toolWidget);
+    ++index;
   }
 
-  connect(m_ui->toolComboBox, SIGNAL(currentIndexChanged(int)),
-          m_ui->toolWidgetStack, SLOT(setCurrentIndex(int)));
-  connect(m_ui->toolComboBox, SIGNAL(currentIndexChanged(QString)),
-          m_ui->glWidget, SLOT(setActiveTool(QString)));
+  m_toolToolBar->addActions(toolActions->actions());
 
   /// @todo Where to put these? For now just throw them into the glwidget, but
   /// we should have a better place for them (maybe a singleton ToolWrangler?)
