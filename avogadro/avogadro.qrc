@@ -1,6 +1,15 @@
 <RCC>
-  <qresource prefix="/" >
-    <file>icons/avogadro.png</file>
-    <file>icons/Avogadro2_About.png</file>
-  </qresource>
+    <qresource prefix="/">
+        <file>icons/avogadro.png</file>
+        <file>icons/Avogadro2_About.png</file>
+        <file>icons/freedesktop-fallback/document-export.png</file>
+        <file>icons/freedesktop-fallback/document-import.png</file>
+        <file>icons/freedesktop-fallback/document-new.png</file>
+        <file>icons/freedesktop-fallback/document-open-recent.png</file>
+        <file>icons/freedesktop-fallback/document-open.png</file>
+        <file>icons/freedesktop-fallback/document-save-all.png</file>
+        <file>icons/freedesktop-fallback/document-save-as.png</file>
+        <file>icons/freedesktop-fallback/document-save.png</file>
+        <file>icons/freedesktop-fallback/help-about.png</file>
+    </qresource>
 </RCC>

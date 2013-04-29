@@ -839,46 +839,46 @@ void MainWindow::buildMenu()
   // New
   QAction *action = new QAction(tr("&New"), this);
   action->setShortcut(QKeySequence("Ctrl+N"));
-  action->setIcon(QIcon::fromTheme("document-new"));
+  action->setIcon(standardIcon("document-new"));
   m_menuBuilder->addAction(path, action, 999);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(newMolecule()));
   // Open
   action = new QAction(tr("&Open"), this);
   action->setShortcut(QKeySequence("Ctrl+O"));
-  action->setIcon(QIcon::fromTheme("document-open"));
+  action->setIcon(standardIcon("document-open"));
   m_menuBuilder->addAction(path, action, 970);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(openFile()));
   // Save As
   action = new QAction(tr("Save &As"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+S"));
-  action->setIcon(QIcon::fromTheme("document-save-as"));
+  action->setIcon(standardIcon("document-save-as"));
   m_menuBuilder->addAction(path, action, 960);
   connect(action, SIGNAL(triggered()), SLOT(saveFile()));
   // Import
   action = new QAction(tr("&Import"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+O"));
-  action->setIcon(QIcon::fromTheme("document-import"));
+  action->setIcon(standardIcon("document-import"));
   m_menuBuilder->addAction(path, action, 950);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(importFile()));
   // Export
   action = new QAction(tr("&Export"), this);
   m_menuBuilder->addAction(path, action, 940);
-  action->setIcon(QIcon::fromTheme("document-export"));
+  action->setIcon(standardIcon("document-export"));
   connect(action, SIGNAL(triggered()), SLOT(exportFile()));
   // Quit
   action = new QAction(tr("&Quit"), this);
   action->setShortcut(QKeySequence("Ctrl+Q"));
-  action->setIcon(QIcon::fromTheme("application-exit"));
+  action->setIcon(standardIcon("application-exit"));
   m_menuBuilder->addAction(path, action, -200);
   connect(action, SIGNAL(triggered()), qApp, SLOT(quit()));
 
   QStringList helpPath;
   helpPath << tr("&Help");
   QAction *about = new QAction("&About", this);
-  about->setIcon(QIcon::fromTheme("help-about"));
+  about->setIcon(standardIcon("help-about"));
   m_menuBuilder->addAction(helpPath, about, 20);
   connect(about, SIGNAL(triggered()), SLOT(showAboutDialog()));
 
@@ -887,7 +887,7 @@ void MainWindow::buildMenu()
   for (int i = 0; i < 10; ++i) {
     action = new QAction(QString::number(i), this);
     m_actionRecentFiles.push_back(action);
-    action->setIcon(QIcon::fromTheme("document-open-recent"));
+    action->setIcon(standardIcon("document-open-recent"));
     action->setVisible(false);
     m_menuBuilder->addAction(path, action, 995 - i);
     connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
@@ -992,6 +992,12 @@ QString MainWindow::generateFilterString(
   }
 
   return result;
+}
+
+QIcon MainWindow::standardIcon(const QString &name)
+{
+  return QIcon::fromTheme(name, QIcon(QString(":/icons/freedesktop-fallback/"
+                                              "%1.png").arg(name)));
 }
 
 void MainWindow::showAboutDialog()
