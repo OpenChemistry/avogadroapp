@@ -305,9 +305,9 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   // Clear the scene to prevent dangling identifiers:
   m_ui->glWidget->clearScene();
 
-  // Set molecule
-  if (m_molecule)
-    delete m_molecule;
+  // Set molecule. Wait until after emitting MoleculeChanged to delete the
+  // old one.
+  QtGui::Molecule *oldMolecule(m_molecule);
   m_molecule = mol;
 
   // If the molecule is empty, make the editor active. Otherwise, use the
@@ -322,6 +322,9 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   }
 
   emit moleculeChanged(m_molecule);
+
+  if (oldMolecule)
+    oldMolecule->deleteLater();
 
   m_ui->glWidget->setMolecule(m_molecule);
   m_ui->glWidget->updateScene();
