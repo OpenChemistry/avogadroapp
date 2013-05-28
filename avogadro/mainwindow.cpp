@@ -67,6 +67,10 @@
 # include <QXmlStreamReader>
 #endif
 
+#ifdef Avogadro_ENABLE_RPC
+#include <molequeue/client/client.h>
+#endif // Avogadro_ENABLE_RPC
+
 namespace Avogadro {
 
 #ifdef QTTESTING
@@ -263,6 +267,12 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
     QTimer::singleShot(5000, this, SLOT(clearQueuedFiles()));
     readQueuedFiles();
   }
+
+#ifdef Avogadro_ENABLE_RPC
+  // Wait a few seconds to attempt registering with MoleQueue.
+  QTimer::singleShot(5000, this, SLOT(registerMoleQueue()));
+#endif // Avogadro_ENABLE_RPC
+
   if (!m_molecule)
     newMolecule();
   statusBar()->showMessage(tr("Ready..."), 2000);
@@ -943,6 +953,27 @@ void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)
     m_ui->glWidget->setActiveTool(toolList.first());
 }
 
+QString MainWindow::extensionToWildCard(const QString &extension)
+{
+  // This is a list of "extensions" returned by OB that are not actually
+  // file extensions, but rather the full filename of the file. These
+  // will be used as-is in the filter string, while others will be prepended
+  // with "*.".
+  static QStringList nonExtensions;
+  if (nonExtensions.empty()) {
+    nonExtensions
+        << "POSCAR"  // VASP input geometry
+        << "CONTCAR" // VASP output geometry
+        << "HISTORY" // DL-POLY history file
+        << "CONFIG"  // DL-POLY config file
+           ;
+  }
+
+  if (nonExtensions.contains(extension))
+    return extension;
+  return QString("*.%1").arg(extension);
+}
+
 QString MainWindow::generateFilterString(
     const std::vector<const Io::FileFormat *> &formats, bool addAllEntry)
 {
@@ -963,28 +994,13 @@ QString MainWindow::generateFilterString(
     }
   }
 
-  // This is a list of "extensions" returned by OB that are not actually
-  // file extensions, but rather the full filename of the file. These
-  // will be used as-is in the filter string, while others will be prepended
-  // with "*.".
-  QStringList nonExtensions;
-  nonExtensions
-      << "POSCAR"  // VASP input geometry
-      << "CONTCAR" // VASP output geometry
-      << "HISTORY" // DL-POLY history file
-      << "CONFIG"  // DL-POLY config file
-         ;
-
   // This holds all known extensions:
   QStringList allExtensions;
 
   foreach (const QString &desc, formatMap.uniqueKeys()) {
     QStringList extensions;
-    foreach (QString extension, formatMap.values(desc)) {
-      if (!nonExtensions.contains(extension))
-        extension.prepend("*.");
-      extensions << extension;
-    }
+    foreach (QString extension, formatMap.values(desc))
+      extensions << extensionToWildCard(extension);
     allExtensions << extensions;
     result += QString("%1 (%2);;").arg(desc, extensions.join(" "));
   }
@@ -1001,6 +1017,36 @@ QIcon MainWindow::standardIcon(const QString &name)
 {
   return QIcon::fromTheme(name, QIcon(QString(":/icons/fallback/"
                                               "%1.png").arg(name)));
+}
+
+void MainWindow::registerMoleQueue()
+{
+#ifdef Avogadro_ENABLE_RPC
+  MoleQueue::Client client;
+  if (!client.connectToServer() || !client.isConnected())
+    return;
+
+  // Get all extensions;
+  typedef std::vector<std::string> StringList;
+  Io::FileFormatManager &ffm = Io::FileFormatManager::instance();
+  StringList exts = ffm.fileExtensions(Io::FileFormat::Read
+                                       | Io::FileFormat::File);
+
+  // Create patterns list
+  QList<QRegExp> patterns;
+  for (StringList::const_iterator it = exts.begin(), itEnd = exts.end();
+       it != itEnd; ++it) {
+    patterns << QRegExp(extensionToWildCard(QString::fromStdString(*it)),
+                        Qt::CaseInsensitive, QRegExp::Wildcard);
+  }
+
+  // Register the executable:
+  client.registerOpenWith("Avogadro2 (new)", qApp->applicationFilePath(),
+                          patterns);
+
+  client.registerOpenWith("Avogadro2 (running)", "avogadro", "openFile",
+                          patterns);
+#endif // Avogadro_ENABLE_RPC
 }
 
 void MainWindow::showAboutDialog()
