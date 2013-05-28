@@ -11,5 +11,8 @@
         <file>icons/fallback/document-save-as.png</file>
         <file>icons/fallback/document-save.png</file>
         <file>icons/fallback/help-about.png</file>
+        <file>icons/fallback/edit-copy.png</file>
+        <file>icons/fallback/edit-cut.png</file>
+        <file>icons/fallback/edit-paste.png</file>
     </qresource>
 </RCC>
