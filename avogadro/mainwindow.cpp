@@ -761,7 +761,7 @@ void MainWindow::saveFile(const QString &fileName, Io::FileFormat *writer)
                           .arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
   progDialog.setCancelButton(NULL);
-  connect(&fileThread, SIGNAL(started()), &threadedWriter, SLOT(read()));
+  connect(&fileThread, SIGNAL(started()), &threadedWriter, SLOT(write()));
   connect(&threadedWriter, SIGNAL(finished()), &fileThread, SLOT(quit()));
 
   // Start the file operation
