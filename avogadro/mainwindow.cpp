@@ -28,6 +28,7 @@
 #include <avogadro/io/fileformatmanager.h>
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/qtplugins/pluginmanager.h>
+#include <avogadro/qtgui/fileformatdialog.h>
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
 #include <avogadro/qtgui/toolplugin.h>
@@ -39,6 +40,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QString>
 #include <QtCore/QDebug>
+#include <QtCore/QEventLoop>
 #include <QtCore/QFileInfo>
 #include <QtCore/QSettings>
 #include <QtCore/QThread>
@@ -170,6 +172,7 @@ protected:
 };
 #endif
 
+using QtGui::FileFormatDialog;
 using QtGui::Molecule;
 using QtGui::ScenePluginModel;
 using QtGui::ToolPlugin;
@@ -407,95 +410,28 @@ void MainWindow::openFile()
 
 void MainWindow::importFile()
 {
-  std::vector<const Io::FileFormat *> formats =
-      Io::FileFormatManager::instance().fileFormats(Io::FileFormat::Read
-                                                    | Io::FileFormat::File);
-
-  QString filter(generateFilterString(formats));
-
   QSettings settings;
   QString dir = settings.value("MainWindow/lastOpenDir").toString();
 
-  QString fileName = QFileDialog::getOpenFileName(this,
-                                                  tr("Import chemical file"),
-                                                  dir, filter);
+  FileFormatDialog::FormatFilePair reply =
+      QtGui::FileFormatDialog::fileToRead(this, tr("Import Molecule"), dir);
 
-  if (fileName.isEmpty()) // user cancel
+  if (reply.first == NULL) // user cancel
     return;
 
-  dir = QFileInfo(fileName).absoluteDir().absolutePath();
+  dir = QFileInfo(reply.second).absoluteDir().absolutePath();
   settings.setValue("MainWindow/lastOpenDir", dir);
 
-  if (!openFile(fileName)) {
+  if (!openFile(reply.second, reply.first->newInstance())) {
     QMessageBox::information(this, tr("Cannot open file"),
-                             tr("Can't open supplied file %1").arg(fileName));
+                             tr("Can't open supplied file %1")
+                             .arg(reply.second));
   }
 }
 
 bool MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
 {
-  if (fileName.isEmpty())
-    return false;
-
-  // If a reader was not specified, look one up in the format manager.
-  if (reader == NULL) {
-    // Extract file extension
-    QFileInfo info(fileName);
-    QString ext = info.suffix();
-    if (ext.isEmpty())
-      ext = info.fileName();
-    ext = ext.toLower();
-
-    // Lookup readers that can handle this extension
-    std::vector<const Io::FileFormat*> matches(
-          Io::FileFormatManager::instance().fileFormatsFromFileExtension(
-            ext.toStdString(), Io::FileFormat::Read | Io::FileFormat::File));
-
-    if (matches.empty())
-      return false;
-
-    if (matches.size() == 1) {
-      // One reader found -- use it.
-      reader = matches.front()->newInstance();
-    }
-    else {
-      // Multiple readers found. Ask the user which they'd like to use
-      QStringList idents;
-      for (std::vector<const Io::FileFormat*>::const_iterator
-           it = matches.begin(), itEnd = matches.end(); it != itEnd; ++it) {
-        idents << QString::fromStdString((*it)->identifier());
-      }
-
-      // See if they used one before:
-      QString lastIdent = QSettings().value(
-            QString("MainWindow/fileReader/%1/lastUsed").arg(ext)).toString();
-
-      int lastIdentIndex = idents.indexOf(lastIdent);
-      if (lastIdentIndex < 0)
-        lastIdentIndex = 0;
-
-      bool ok = false;
-      QString item =
-          QInputDialog::getItem(this, tr("Select reader"),
-                                tr("Avogadro found multiple backends that can "
-                                   "read this file. Which one should be used?"),
-                                idents, lastIdentIndex, false, &ok);
-      int index = idents.indexOf(item);
-
-      if (!ok
-          || index < 0
-          || index + 1 > static_cast<int>(matches.size()))
-        return false;
-
-      reader = matches[index]->newInstance();
-
-      // Store chosen reader for next time
-      QSettings().setValue(QString("MainWindow/fileReader/%1/lastUsed")
-                           .arg(ext), item);
-    }
-  }
-
-  if (!reader) // newInstance failed?
+  if (fileName.isEmpty() || reader == NULL)
     return false;
 
   QString ident = QString::fromStdString(reader->identifier());
@@ -650,96 +586,24 @@ void MainWindow::saveFile()
 
 void MainWindow::exportFile()
 {
-  std::vector<const Io::FileFormat *> formats =
-      Io::FileFormatManager::instance().fileFormats(Io::FileFormat::Write
-                                                    | Io::FileFormat::File);
-
-  QString filter(generateFilterString(formats, false));
-
   QSettings settings;
   QString dir = settings.value("MainWindow/lastSaveDir").toString();
 
-  QString fileName = QFileDialog::getSaveFileName(this,
-                                                  tr("Export chemical file"),
-                                                  dir, filter);
+  FileFormatDialog::FormatFilePair reply =
+      QtGui::FileFormatDialog::fileToWrite(this, tr("Export Molecule"), dir);
 
-  if (fileName.isEmpty()) // user cancel
+  if (reply.first == NULL) // user cancel
     return;
 
-  dir = QFileInfo(fileName).absoluteDir().absolutePath();
+  dir = QFileInfo(reply.second).absoluteDir().absolutePath();
   settings.setValue("MainWindow/lastSaveDir", dir);
 
-  saveFile(fileName);
+  saveFile(reply.second, reply.first->newInstance());
 }
 
 void MainWindow::saveFile(const QString &fileName, Io::FileFormat *writer)
 {
-  if (fileName.isEmpty() || !m_molecule)
-    return;
-
-  // If a writer was not specified, look one up in the format manager.
-  if (writer == NULL) {
-    // Extract file extension
-    QFileInfo info(fileName);
-    QString ext = info.suffix();
-    if (ext.isEmpty())
-      ext = info.fileName();
-    ext = ext.toLower();
-
-    // Lookup writers that can handle this extension
-    std::vector<const Io::FileFormat*> matches(
-          Io::FileFormatManager::instance().fileFormatsFromFileExtension(
-            ext.toStdString(), Io::FileFormat::Write | Io::FileFormat::File));
-
-    if (matches.empty()) {
-      QMessageBox::information(this, tr("Cannot save file"),
-                               tr("Avogadro doesn't know how to write files of "
-                                  "type '%1'.").arg(ext));
-      return;
-    }
-
-    if (matches.size() == 1) {
-      // One writer found -- use it.
-      writer = matches.front()->newInstance();
-    }
-    else {
-      // Multiple writers found. Ask the user which they'd like to use
-      QStringList idents;
-      for (std::vector<const Io::FileFormat*>::const_iterator
-           it = matches.begin(), itEnd = matches.end(); it != itEnd; ++it) {
-        idents << QString::fromStdString((*it)->identifier());
-      }
-
-      // See if they used one before:
-      QString lastIdent = QSettings().value(
-            QString("MainWindow/fileWriter/%1/lastUsed").arg(ext)).toString();
-
-      int lastIdentIndex = idents.indexOf(lastIdent);
-      if (lastIdentIndex < 0)
-        lastIdentIndex = 0;
-
-      bool ok = false;
-      QString item =
-          QInputDialog::getItem(this, tr("Select writer"),
-                                tr("Avogadro found multiple backends that can "
-                                   "save this file. Which one should be used?"),
-                                idents, lastIdentIndex, false, &ok);
-      int index = idents.indexOf(item);
-
-      if (!ok
-          || index < 0
-          || index + 1 > static_cast<int>(matches.size()))
-        return;
-
-      writer = matches[index]->newInstance();
-
-      // Store chosen writer for next time
-      QSettings().setValue(QString("MainWindow/fileWriter/%1/lastUsed")
-                           .arg(ext), item);
-    }
-  }
-
-  if (!writer) // newInstance failed?
+  if (fileName.isEmpty() || !m_molecule || !writer)
     return;
 
   QString ident = QString::fromStdString(writer->identifier());

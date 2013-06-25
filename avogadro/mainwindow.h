@@ -121,9 +121,8 @@ protected slots:
   void importFile();
 
   /**
-   * If specified, use the FileFormat @a reader to save the file. This method
-   * takes ownership of @a reader and will delete it before returning. If not
-   * specified, a reader will be selected based on fileName's extension.
+   * Use the FileFormat @a reader to load @a fileName. This method
+   * takes ownership of @a reader and will delete it before returning.
    */
   bool openFile(const QString &fileName, Io::FileFormat *reader = NULL);
 
@@ -150,10 +149,9 @@ protected slots:
 
   /**
    * If specified, use the FileFormat @a writer to save the file. This method
-   * takes ownership of @a writer and will delete it before returning. If not
-   * specified, a writer will be selected based on fileName's extension.
+   * takes ownership of @a writer and will delete it before returning.
    */
-  void saveFile(const QString &fileName, Io::FileFormat *writer = NULL);
+  void saveFile(const QString &fileName, Io::FileFormat *writer);
 
 #ifdef QTTESTING
 protected slots:
