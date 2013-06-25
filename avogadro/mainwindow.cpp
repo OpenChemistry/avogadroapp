@@ -767,8 +767,22 @@ void MainWindow::saveFile(const QString &fileName, Io::FileFormat *writer)
   // Start the file operation
   fileThread.start();
   progDialog.show();
-  while (fileThread.isRunning())
-    qApp->processEvents(QEventLoop::AllEvents, 500);
+
+  // Wait for the writer to finish:
+  QEventLoop waiter;
+  QTimer timeout;
+  timeout.setSingleShot(true);
+  connect(&timeout, SIGNAL(timeout()), &waiter, SLOT(quit()));
+  connect(&fileThread, SIGNAL(finished()), &waiter, SLOT(quit()));
+  timeout.start(30000); // ms
+  waiter.exec();
+
+  if (!timeout.isActive()) {
+    QMessageBox::critical(this, tr("Error saving file"),
+                          tr("Timeout waiting for file writer to finish."),
+                          QMessageBox::Ok, QMessageBox::Ok);
+    return;
+  }
 
   if (progDialog.wasCanceled())
     return;
