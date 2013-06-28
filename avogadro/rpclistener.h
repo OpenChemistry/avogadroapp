@@ -26,6 +26,7 @@
 namespace MoleQueue {
 class JsonRpc;
 class JsonRpcClient;
+class Message;
 }
 
 namespace Avogadro {
