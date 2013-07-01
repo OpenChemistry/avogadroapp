@@ -121,11 +121,10 @@ protected slots:
   void importFile();
 
   /**
-   * If specified, use the FileFormat @a reader to save the file. This method
-   * takes ownership of @a reader and will delete it before returning. If not
-   * specified, a reader will be selected based on fileName's extension.
+   * Use the FileFormat @a reader to load @a fileName. This method
+   * takes ownership of @a reader and will delete it before returning.
    */
-  bool openFile(const QString &fileName, Io::FileFormat *reader = NULL);
+  bool openFile(const QString &fileName, Io::FileFormat *reader);
 
   /**
    * Open file in the recent files list.
@@ -150,10 +149,9 @@ protected slots:
 
   /**
    * If specified, use the FileFormat @a writer to save the file. This method
-   * takes ownership of @a writer and will delete it before returning. If not
-   * specified, a writer will be selected based on fileName's extension.
+   * takes ownership of @a writer and will delete it before returning.
    */
-  void saveFile(const QString &fileName, Io::FileFormat *writer = NULL);
+  bool saveFile(const QString &fileName, Io::FileFormat *writer);
 
 #ifdef QTTESTING
 protected slots:
@@ -199,6 +197,12 @@ private slots:
   void backgroundReaderFinished();
 
   /**
+   * @brief The background file writer thread has completed, set the active
+   * molecule, and clean up after the threaded write.
+   */
+  void backgroundWriterFinished();
+
+  /**
    * @brief Called when a toolbar action is clicked. The sender is expected to
    * be the action, and the parent of the action should be the toolPlugin to
    * activate.
@@ -217,9 +221,12 @@ private:
 
   // These variables take care of background file reading.
   QThread *m_fileReadThread;
+  QThread *m_fileWriteThread;
   BackgroundFileFormat *m_threadedReader;
-  QProgressDialog *m_fileReadProgress;
+  BackgroundFileFormat *m_threadedWriter;
+  QProgressDialog *m_progressDialog;
   QtGui::Molecule *m_fileReadMolecule;
+
   QToolBar *m_fileToolBar;
   QToolBar *m_toolToolBar;
 
