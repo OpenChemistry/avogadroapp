@@ -192,6 +192,10 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
 {
   m_ui->setupUi(this);
 
+  // Switch to our fallback icons if there are no platform-specific icons.
+  if (!QIcon::hasThemeIcon("document-new"))
+    QIcon::setThemeName("fallback");
+
   QIcon icon(":/icons/avogadro.png");
   setWindowIcon(icon);
 
@@ -741,46 +745,46 @@ void MainWindow::buildMenu()
   // New
   QAction *action = new QAction(tr("&New"), this);
   action->setShortcut(QKeySequence("Ctrl+N"));
-  action->setIcon(standardIcon("document-new"));
+  action->setIcon(QIcon::fromTheme("document-new"));
   m_menuBuilder->addAction(path, action, 999);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(newMolecule()));
   // Open
   action = new QAction(tr("&Open"), this);
   action->setShortcut(QKeySequence("Ctrl+O"));
-  action->setIcon(standardIcon("document-open"));
+  action->setIcon(QIcon::fromTheme("document-open"));
   m_menuBuilder->addAction(path, action, 970);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(openFile()));
   // Save As
   action = new QAction(tr("Save &As"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+S"));
-  action->setIcon(standardIcon("document-save-as"));
+  action->setIcon(QIcon::fromTheme("document-save-as"));
   m_menuBuilder->addAction(path, action, 960);
   connect(action, SIGNAL(triggered()), SLOT(saveFile()));
   // Import
   action = new QAction(tr("&Import"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+O"));
-  action->setIcon(standardIcon("document-import"));
+  action->setIcon(QIcon::fromTheme("document-import"));
   m_menuBuilder->addAction(path, action, 950);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(importFile()));
   // Export
   action = new QAction(tr("&Export"), this);
   m_menuBuilder->addAction(path, action, 940);
-  action->setIcon(standardIcon("document-export"));
+  action->setIcon(QIcon::fromTheme("document-export"));
   connect(action, SIGNAL(triggered()), SLOT(exportFile()));
   // Quit
   action = new QAction(tr("&Quit"), this);
   action->setShortcut(QKeySequence("Ctrl+Q"));
-  action->setIcon(standardIcon("application-exit"));
+  action->setIcon(QIcon::fromTheme("application-exit"));
   m_menuBuilder->addAction(path, action, -200);
   connect(action, SIGNAL(triggered()), qApp, SLOT(quit()));
 
   QStringList helpPath;
   helpPath << tr("&Help");
   QAction *about = new QAction("&About", this);
-  about->setIcon(standardIcon("help-about"));
+  about->setIcon(QIcon::fromTheme("help-about"));
   m_menuBuilder->addAction(helpPath, about, 20);
   connect(about, SIGNAL(triggered()), SLOT(showAboutDialog()));
 
@@ -789,7 +793,7 @@ void MainWindow::buildMenu()
   for (int i = 0; i < 10; ++i) {
     action = new QAction(QString::number(i), this);
     m_actionRecentFiles.push_back(action);
-    action->setIcon(standardIcon("document-open-recent"));
+    action->setIcon(QIcon::fromTheme("document-open-recent"));
     action->setVisible(false);
     m_menuBuilder->addAction(path, action, 995 - i);
     connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
@@ -900,12 +904,6 @@ QString MainWindow::generateFilterString(
   }
 
   return result;
-}
-
-QIcon MainWindow::standardIcon(const QString &name)
-{
-  return QIcon::fromTheme(name, QIcon(QString(":/icons/fallback/"
-                                              "%1.png").arg(name)));
 }
 
 void MainWindow::registerMoleQueue()

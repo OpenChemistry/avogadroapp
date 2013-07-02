@@ -265,15 +265,6 @@ private:
   QString generateFilterString(
       const std::vector<const Io::FileFormat *> &formats,
       bool addAllEntry = true);
-
-  /**
-   * Helper function for loading a freedesktop QIcon in a cross-platform way.
-   * @param name The freedesktop name of the icon:
-   * http://standards.freedesktop.org/icon-naming-spec/icon-naming-spec-latest.html
-   * @note The icons in avogadro/icons/freedesktop-fallback/ are used if the
-   * current platform doesn't support freedesktop icon themes.
-   */
-  static QIcon standardIcon(const QString &name);
 };
 
 } // End Avogadro namespace
