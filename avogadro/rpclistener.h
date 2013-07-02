@@ -21,11 +21,12 @@
 
 #include <qjsonobject.h>
 
-#include <molequeue/transport/connectionlistener.h>
+#include <molequeue/servercore/connectionlistener.h>
 
 namespace MoleQueue {
 class JsonRpc;
 class JsonRpcClient;
+class Message;
 }
 
 namespace Avogadro {

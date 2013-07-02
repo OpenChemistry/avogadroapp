@@ -186,6 +186,13 @@ private slots:
   void clearQueuedFiles();
 
   /**
+   * @brief Register molequeue open-with handlers for RPC and executable file
+   * handling. Called 5 seconds after startup to give extensions a chance to
+   * register file formats.
+   */
+  void registerMoleQueue();
+
+  /**
    * @brief The background file reader thread has completed, set the active
    * molecule, and clean up after the threaded read.
    */
@@ -236,6 +243,14 @@ private:
    * Initialize the tool plugins.
    */
   void buildTools(QList<Avogadro::QtGui::ToolPlugin *> toolList);
+
+  /**
+   * Convenience function that converts a file extension to a wildcard
+   * expression, e.g. "out" to "*.out". This method also checks for "extensions"
+   * that aren't really extensions but full filenames, e.g. HISTORY files from
+   * DL-POLY. These are returned unmodified.
+   */
+  static QString extensionToWildCard(const QString &extension);
 
   /**
    * Convenience function to generate a filter string for the supplied formats.
