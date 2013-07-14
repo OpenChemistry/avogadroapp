@@ -80,8 +80,10 @@ set_target_properties(avogadro PROPERTIES AUTOMOC TRUE)
 target_link_libraries(avogadro
   AvogadroCore AvogadroIO AvogadroQtOpenGL AvogadroQtGui AvogadroQtPlugins
   ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY}
-  ${QT_QTOPENGL_LIBRARY}
-  )
+  ${QT_QTOPENGL_LIBRARY})
+if(WIN32)
+  target_link_libraries(avogadro ${QT_QTMAIN_LIBRARY}
+endif()
 if(Avogadro_ENABLE_RPC)
   target_link_libraries(avogadro
     MoleQueueServerCore
