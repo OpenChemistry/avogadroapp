@@ -82,7 +82,7 @@ target_link_libraries(avogadro
   ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY}
   ${QT_QTOPENGL_LIBRARY})
 if(WIN32)
-  target_link_libraries(avogadro ${QT_QTMAIN_LIBRARY}
+  target_link_libraries(avogadro ${QT_QTMAIN_LIBRARY})
 endif()
 if(Avogadro_ENABLE_RPC)
   target_link_libraries(avogadro
