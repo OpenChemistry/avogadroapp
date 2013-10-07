@@ -72,6 +72,9 @@
 #include <molequeue/client/client.h>
 #endif // Avogadro_ENABLE_RPC
 
+using Avogadro::Io::FileFormat;
+using Avogadro::Io::FileFormatManager;
+
 namespace Avogadro {
 
 #ifdef QTTESTING
@@ -188,7 +191,8 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
     m_progressDialog(NULL),
     m_fileReadMolecule(NULL),
     m_fileToolBar(new QToolBar(this)),
-    m_toolToolBar(new QToolBar(this))
+    m_toolToolBar(new QToolBar(this)),
+    m_moleculeDirty(false)
 {
   m_ui->setupUi(this);
 
@@ -284,6 +288,8 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   if (!m_molecule)
     newMolecule();
   statusBar()->showMessage(tr("Ready..."), 2000);
+
+  updateWindowTitle();
 }
 
 MainWindow::~MainWindow()
@@ -295,6 +301,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeEvent(QCloseEvent *e)
 {
+  if (!saveFileIfNeeded()) {
+    e->ignore();
+    return;
+  }
   writeSettings();
   QMainWindow::closeEvent(e);
 }
@@ -320,6 +330,12 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   if (m_molecule == mol)
     return;
 
+  if (!saveFileIfNeeded()) {
+    if (mol)
+      mol->deleteLater();
+    return;
+  }
+
   // Clear the scene to prevent dangling identifiers:
   m_ui->glWidget->clearScene();
 
@@ -337,16 +353,50 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
       if (toolPlugin->name() == targetToolName)
         toolPlugin->activateAction()->trigger();
     }
+    connect(m_molecule, SIGNAL(changed(uint)), SLOT(markMoleculeDirty()));
   }
 
-  emit moleculeChanged(m_molecule);
 
-  if (oldMolecule)
+  emit moleculeChanged(m_molecule);
+  markMoleculeClean();
+  updateWindowTitle();
+
+  if (oldMolecule) {
+    oldMolecule->disconnect(this);
     oldMolecule->deleteLater();
+  }
 
   m_ui->glWidget->setMolecule(m_molecule);
   m_ui->glWidget->updateScene();
   m_ui->glWidget->resetCamera();
+}
+
+void MainWindow::markMoleculeDirty()
+{
+  if (!m_moleculeDirty) {
+    m_moleculeDirty = true;
+    updateWindowTitle();
+  }
+}
+
+void MainWindow::markMoleculeClean()
+{
+  if (m_moleculeDirty) {
+    m_moleculeDirty = false;
+    updateWindowTitle();
+  }
+}
+
+void MainWindow::updateWindowTitle()
+{
+  QString fileName = tr("Untitled");
+
+  if (m_molecule && m_molecule->hasData("fileName"))
+    fileName = QString::fromStdString(m_molecule->data("fileName").toString());
+
+  setWindowTitle(tr("%1%2 - Avogadro")
+                 .arg(QFileInfo(fileName).fileName())
+                 .arg(m_moleculeDirty ? "*" : ""));
 }
 
 #ifdef QTTESTING
@@ -381,6 +431,9 @@ void MainWindow::readSettings()
 
 void MainWindow::openFile()
 {
+  if (!saveFileIfNeeded())
+    return;
+
   QString filter(QString("%1 (*.cml);;%2 (*.cjson)")
                  .arg(tr("Chemical Markup Language"))
                  .arg(tr("Chemical JSON")));
@@ -415,6 +468,9 @@ void MainWindow::openFile()
 
 void MainWindow::importFile()
 {
+  if (!saveFileIfNeeded())
+    return;
+
   QSettings settings;
   QString dir = settings.value("MainWindow/lastOpenDir").toString();
 
@@ -481,20 +537,23 @@ bool MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
 
 void MainWindow::backgroundReaderFinished()
 {
-  QString fileName = m_fileReadMolecule->data("fileName").toString().c_str();
+  QString fileName = m_threadedReader->fileName();
   if (m_progressDialog->wasCanceled()) {
     delete m_fileReadMolecule;
   }
   else if (m_threadedReader->success()) {
     if (!fileName.isEmpty()) {
+      m_fileReadMolecule->setData("fileName", fileName.toStdString());
       m_recentFiles.prepend(fileName);
       updateRecentFiles();
+    }
+    else {
+      m_fileReadMolecule->setData("fileName", Core::Variant());
     }
     setMolecule(m_fileReadMolecule);
     statusBar()->showMessage(tr("Molecule loaded (%1 atoms, %2 bonds)")
                              .arg(m_molecule->atomCount())
                              .arg(m_molecule->bondCount()), 2500);
-    setWindowTitle(tr("Avogadro - %1").arg(fileName));
   }
   else {
     QMessageBox::critical(this, tr("File error"),
@@ -512,14 +571,18 @@ void MainWindow::backgroundReaderFinished()
   m_progressDialog = NULL;
 }
 
-void MainWindow::backgroundWriterFinished()
+bool MainWindow::backgroundWriterFinished()
 {
   QString fileName = m_threadedWriter->fileName();
+  bool success = false;
   if (!m_progressDialog->wasCanceled()) {
     if (m_threadedWriter->success()) {
       statusBar()->showMessage(tr("File written: %1")
                                .arg(fileName));
-      setWindowTitle(tr("Avogadro - %1").arg(fileName));
+      m_molecule->setData("fileName", fileName.toStdString());
+      markMoleculeClean();
+      updateWindowTitle();
+      success = true;
       }
     else {
       QMessageBox::critical(this, tr("File error"),
@@ -534,6 +597,7 @@ void MainWindow::backgroundWriterFinished()
   m_threadedWriter = NULL;
   m_progressDialog->deleteLater();
   m_progressDialog = NULL;
+  return success;
 }
 
 void MainWindow::toolActivated()
@@ -589,7 +653,60 @@ void MainWindow::updateRecentFiles()
     m_actionRecentFiles[i]->setVisible(false);
 }
 
-void MainWindow::saveFile()
+bool MainWindow::saveFile(bool async)
+{
+  if (!m_molecule)
+    return false;
+
+  if (!m_molecule->hasData("fileName"))
+    return saveFileAs(async);
+
+  std::string fileName = m_molecule->data("fileName").toString();
+  QString extension =
+      QFileInfo(QString::fromStdString(fileName)).suffix().toLower();
+
+  // Was the original format standard, or imported?
+  if (extension == QLatin1String("cml")) {
+    return saveFileAs(QString::fromStdString(fileName), new Io::CmlFormat,
+                      async);
+  }
+  else if (extension == QLatin1String("cjson")) {
+    return saveFileAs(QString::fromStdString(fileName), new Io::CjsonFormat,
+                      async);
+  }
+
+
+  // is the imported format writable?
+  bool writable = !FileFormatManager::instance().fileFormatsFromFileExtension(
+        extension.toStdString(), FileFormat::File | FileFormat::Read).empty();
+  if (writable) {
+    // Warn the user that the format may lose data.
+    QMessageBox box(this);
+    box.setModal(true);
+    box.setWindowTitle(tr("Avogadro"));
+    box.setText(tr("This file was imported from a non-standard format which "
+                   "may not be able to write all of the information in the "
+                   "molecule.\n\nWould you like to export to the current "
+                   "format, or save in a standard format?"));
+    QPushButton *saveButton(box.addButton(QMessageBox::Save));
+    QPushButton *cancelButton(box.addButton(QMessageBox::Cancel));
+    QPushButton *exportButton(box.addButton(tr("Export"),
+                                            QMessageBox::DestructiveRole));
+    box.setDefaultButton(saveButton);
+    box.exec();
+    if (box.clickedButton() == saveButton)
+      return saveFileAs(async);
+    else if (box.clickedButton() == cancelButton)
+      return false;
+    else if (box.clickedButton() == exportButton)
+      return exportFile(async);
+  }
+
+  // Otherwise, prompt for a new valid format.
+  return saveFileAs(async);
+}
+
+bool MainWindow::saveFileAs(bool async)
 {
   QString filter(QString("%1 (*.cml);;%2 (*.cjson)")
                  .arg(tr("Chemical Markup Language"))
@@ -603,7 +720,7 @@ void MainWindow::saveFile()
                                                   dir, filter);
 
   if (fileName.isEmpty()) // user cancel
-    return;
+    return false;
 
   QFileInfo info(fileName);
   dir = info.absoluteDir().absolutePath();
@@ -617,10 +734,10 @@ void MainWindow::saveFile()
   else if (extension == "cjson")
     writer = new Io::CjsonFormat;
 
-  saveFile(fileName, writer);
+  return saveFileAs(fileName, writer, async);
 }
 
-void MainWindow::exportFile()
+bool MainWindow::exportFile(bool async)
 {
   QSettings settings;
   QString dir = settings.value("MainWindow/lastSaveDir").toString();
@@ -629,15 +746,16 @@ void MainWindow::exportFile()
       QtGui::FileFormatDialog::fileToWrite(this, tr("Export Molecule"), dir);
 
   if (reply.first == NULL) // user cancel
-    return;
+    return false;
 
   dir = QFileInfo(reply.second).absoluteDir().absolutePath();
   settings.setValue("MainWindow/lastSaveDir", dir);
 
-  saveFile(reply.second, reply.first->newInstance());
+  return saveFileAs(reply.second, reply.first->newInstance(), async);
 }
 
-bool MainWindow::saveFile(const QString &fileName, Io::FileFormat *writer)
+bool MainWindow::saveFileAs(const QString &fileName, Io::FileFormat *writer,
+                            bool async)
 {
   if (fileName.isEmpty() || writer == NULL) {
     delete writer;
@@ -670,14 +788,22 @@ bool MainWindow::saveFile(const QString &fileName, Io::FileFormat *writer)
           m_threadedWriter, SLOT(write()));
   connect(m_threadedWriter, SIGNAL(finished()),
           m_fileWriteThread, SLOT(quit()));
-  connect(m_threadedWriter, SIGNAL(finished()),
-          SLOT(backgroundWriterFinished()));
 
   // Start the file operation
   m_progressDialog->show();
-  m_fileWriteThread->start();
-
-  return true;
+  if (async) {
+    connect(m_threadedWriter, SIGNAL(finished()),
+            SLOT(backgroundWriterFinished()));
+    m_fileWriteThread->start();
+    return true;
+  }
+  else {
+    QTimer::singleShot(0, m_fileWriteThread, SLOT(start()));
+    QEventLoop loop;
+    connect(m_fileWriteThread, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
+    return backgroundWriterFinished();
+  }
 }
 
 #ifdef QTTESTING
@@ -756,12 +882,18 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(path, action, 970);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(openFile()));
+  // Save
+  action = new QAction(tr("&Save"), this);
+  action->setShortcut(QKeySequence("Ctrl+S"));
+  action->setIcon(QIcon::fromTheme("document-save"));
+  m_menuBuilder->addAction(path, action, 965);
+  connect(action, SIGNAL(triggered()), SLOT(saveFile()));
   // Save As
   action = new QAction(tr("Save &As"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+S"));
   action->setIcon(QIcon::fromTheme("document-save-as"));
   m_menuBuilder->addAction(path, action, 960);
-  connect(action, SIGNAL(triggered()), SLOT(saveFile()));
+  connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
   // Import
   action = new QAction(tr("&Import"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+O"));
@@ -779,7 +911,7 @@ void MainWindow::buildMenu()
   action->setShortcut(QKeySequence("Ctrl+Q"));
   action->setIcon(QIcon::fromTheme("application-exit"));
   m_menuBuilder->addAction(path, action, -200);
-  connect(action, SIGNAL(triggered()), qApp, SLOT(quit()));
+  connect(action, SIGNAL(triggered()), this, SLOT(close()));
 
   QStringList helpPath;
   helpPath << tr("&Help");
@@ -904,6 +1036,34 @@ QString MainWindow::generateFilterString(
   }
 
   return result;
+}
+
+bool MainWindow::saveFileIfNeeded()
+{
+  if (m_moleculeDirty) {
+    int response =
+        QMessageBox::question(
+          this, tr("Avogadro"),
+          tr("Do you want to save the changes you made in the document?\n\n"
+             "Your changes will be lost if you don't save them."),
+          QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
+          QMessageBox::Save);
+
+    switch (static_cast<QMessageBox::StandardButton>(response)) {
+    case QMessageBox::Save:
+      // Synchronous save -- needed so that we don't lose changes if the writer
+      // fails:
+      return saveFile(/*async=*/false);
+    case QMessageBox::Discard:
+      markMoleculeClean();
+      return true;
+    default:
+    case QMessageBox::Cancel:
+      return false;
+    }
+  }
+
+  return true;
 }
 
 void MainWindow::registerMoleQueue()
