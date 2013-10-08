@@ -68,6 +68,21 @@ public:
 public slots:
   void setMolecule(Avogadro::QtGui::Molecule *molecule);
 
+  /**
+   * Update internal state to reflect that the molecule has been modified.
+   */
+  void markMoleculeDirty();
+
+  /**
+   * Update internal state to reflect that the molecule is not modified.
+   */
+  void markMoleculeClean();
+
+  /**
+   * Update the main window title.
+   */
+  void updateWindowTitle();
+
 #ifdef QTTESTING
   void playTest(const QString &fileName, bool exit = true);
 #endif
@@ -137,21 +152,48 @@ protected slots:
   void updateRecentFiles();
 
   /**
+   * Save the current molecule to its current fileName. If it is not a standard
+   * format, offer to export and warn about possible data loss.
+   * If @a async is true (default), the file is loaded asynchronously.
+   * @return If @a async is true, this function returns true if a suitable
+   * writer was found (not if the write was successful). If @a async is
+   * false, the return value indicates whether or not the file was written
+   * successfully.
+   */
+  bool saveFile(bool async = true);
+
+  /**
    * Prompt for a file location, and attempt to save the active molecule to the
    * specified location.
+   * If @a async is true (default), the file is loaded asynchronously.
+   * @return If @a async is true, this function returns true if a suitable
+   * writer was found (not if the write was successful). If @a async is
+   * false, the return value indicates whether or not the file was written
+   * successfully.
    */
-  void saveFile();
+  bool saveFileAs(bool async = true);
 
   /**
    * Export a file, using the full selection of formats capable of writing.
+   * If @a async is true (default), the file is loaded asynchronously.
+   * @return If @a async is true, this function returns true if a suitable
+   * writer was found (not if the write was successful). If @a async is
+   * false, the return value indicates whether or not the file was written
+   * successfully.
    */
-  void exportFile();
+  bool exportFile(bool async = true);
 
   /**
    * If specified, use the FileFormat @a writer to save the file. This method
    * takes ownership of @a writer and will delete it before returning.
+   * If @a async is true (default), the file is loaded asynchronously.
+   * @return If @a async is true, this function returns true if the write begins
+   * successfully (not if the writer completes). If @a async is
+   * false, the return value indicates whether or not the file was written
+   * successfully.
    */
-  bool saveFile(const QString &fileName, Io::FileFormat *writer);
+  bool saveFileAs(const QString &fileName, Io::FileFormat *writer,
+                  bool async = true);
 
 #ifdef QTTESTING
 protected slots:
@@ -200,7 +242,7 @@ private slots:
    * @brief The background file writer thread has completed, set the active
    * molecule, and clean up after the threaded write.
    */
-  void backgroundWriterFinished();
+  bool backgroundWriterFinished();
 
   /**
    * @brief Called when a toolbar action is clicked. The sender is expected to
@@ -229,6 +271,8 @@ private:
 
   QToolBar *m_fileToolBar;
   QToolBar *m_toolToolBar;
+
+  bool m_moleculeDirty;
 
 #ifdef QTTESTING
   pqTestUtility *m_testUtility;
@@ -265,6 +309,12 @@ private:
   QString generateFilterString(
       const std::vector<const Io::FileFormat *> &formats,
       bool addAllEntry = true);
+
+  /**
+   * Prompt to save the current molecule if is has been modified. Returns false
+   * if the molecule is not saved, or the user cancels.
+   */
+  bool saveFileIfNeeded();
 };
 
 } // End Avogadro namespace
