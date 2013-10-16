@@ -70,6 +70,12 @@ void MenuBuilder::addAction(const QStringList &pathList, QAction *action,
     m_menuActions[path] = list;
     m_menuPaths[QString(path).replace("&", "")] = pathList;
   }
+  if (priority == -1) {
+    bool hasPriority;
+    int newPriority = action->property("menu priority").toInt(&hasPriority);
+    if (hasPriority)
+      priority = newPriority;
+  }
   m_priorities[action] = priority;
 }
 
