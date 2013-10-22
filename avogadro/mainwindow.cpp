@@ -28,6 +28,7 @@
 #include <avogadro/io/fileformatmanager.h>
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/qtplugins/pluginmanager.h>
+#include <avogadro/qtgui/customelementdialog.h>
 #include <avogadro/qtgui/fileformatdialog.h>
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
@@ -174,6 +175,7 @@ protected:
 };
 #endif
 
+using QtGui::CustomElementDialog;
 using QtGui::FileFormatDialog;
 using QtGui::Molecule;
 using QtGui::ScenePluginModel;
@@ -567,8 +569,11 @@ void MainWindow::backgroundReaderFinished()
   m_threadedReader->deleteLater();
   m_threadedReader = NULL;
   m_fileReadMolecule = NULL;
+  m_progressDialog->hide();
   m_progressDialog->deleteLater();
   m_progressDialog = NULL;
+
+  reassignCustomElements();
 }
 
 bool MainWindow::backgroundWriterFinished()
@@ -615,6 +620,12 @@ void MainWindow::toolActivated()
       }
     }
   }
+}
+
+void MainWindow::reassignCustomElements()
+{
+  if (m_molecule && m_molecule->hasCustomElements())
+    CustomElementDialog::resolve(this, *m_molecule);
 }
 
 void MainWindow::openRecentFile()
