@@ -442,7 +442,7 @@ void MainWindow::openFile()
   QString dir = settings.value("MainWindow/lastOpenDir").toString();
 
   QString fileName = QFileDialog::getOpenFileName(this,
-                                                  tr("Save chemical file"),
+                                                  tr("Open chemical file"),
                                                   dir, filter);
 
   if (fileName.isEmpty()) // user cancel
