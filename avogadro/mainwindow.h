@@ -280,6 +280,9 @@ private:
   bool m_testExit;
 #endif
 
+  /** Show a dialog to remap custom elements, if present. */
+  void reassignCustomElements();
+
   /**
    * Build the main menu, delayed until all plugins have registered actions.
    */
