@@ -30,6 +30,10 @@ int main(int argc, char *argv[])
   QCoreApplication::setOrganizationName("OpenChemistry");
   QCoreApplication::setOrganizationDomain("openchemistry.org");
   QCoreApplication::setApplicationName("Avogadro");
+#ifdef Q_WS_MAC
+  // Native Mac applications do not have icons in the menus
+  QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+#endif
 
   QApplication app(argc, argv);
 
