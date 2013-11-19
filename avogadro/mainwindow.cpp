@@ -19,6 +19,7 @@
 #include "aboutdialog.h"
 #include "menubuilder.h"
 #include "backgroundfileformat.h"
+#include "avogadroappconfig.h"
 
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/core/elements.h>
@@ -396,9 +397,10 @@ void MainWindow::updateWindowTitle()
   if (m_molecule && m_molecule->hasData("fileName"))
     fileName = QString::fromStdString(m_molecule->data("fileName").toString());
 
-  setWindowTitle(tr("%1%2 - Avogadro")
+  setWindowTitle(tr("%1%2 - Avogadro %3")
                  .arg(QFileInfo(fileName).fileName())
-                 .arg(m_moleculeDirty ? "*" : ""));
+                 .arg(m_moleculeDirty ? "*" : "")
+                 .arg(AvogadroApp_VERSION));
 }
 
 #ifdef QTTESTING
