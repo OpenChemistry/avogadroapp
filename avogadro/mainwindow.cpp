@@ -267,6 +267,10 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
               extension, SLOT(setMolecule(QtGui::Molecule*)));
       connect(extension, SIGNAL(moleculeReady(int)), SLOT(moleculeReady(int)));
       connect(extension, SIGNAL(fileFormatsReady()), SLOT(fileFormatsReady()));
+      connect(extension, SIGNAL(requestActiveTool(QString)),
+              SLOT(setActiveTool(QString)));
+      connect(extension, SIGNAL(requestActiveDisplayTypes(QStringList)),
+              SLOT(setActiveDisplayTypes(QStringList)));
       buildMenu(extension);
     }
   }
@@ -350,12 +354,9 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   // If the molecule is empty, make the editor active. Otherwise, use the
   // navigator tool.
   if (m_molecule) {
-    QString targetToolName = m_molecule->atomCount() > 0 ? tr("Navigate tool")
-                                                         : tr("Editor tool");
-    foreach (ToolPlugin *toolPlugin, m_ui->glWidget->tools()) {
-      if (toolPlugin->name() == targetToolName)
-        toolPlugin->activateAction()->trigger();
-    }
+    QString targetToolName = m_molecule->atomCount() > 0 ? "Navigator"
+                                                         : "Editor";
+    setActiveTool(targetToolName);
     connect(m_molecule, SIGNAL(changed(uint)), SLOT(markMoleculeDirty()));
   }
 
@@ -817,6 +818,25 @@ bool MainWindow::saveFileAs(const QString &fileName, Io::FileFormat *writer,
     loop.exec();
     return backgroundWriterFinished();
   }
+}
+
+void MainWindow::setActiveTool(QString toolName)
+{
+  foreach (ToolPlugin *toolPlugin, m_ui->glWidget->tools())
+    if (toolPlugin->objectName() == toolName)
+      toolPlugin->activateAction()->trigger();
+}
+
+void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
+{
+  ScenePluginModel &scenePluginModel = m_ui->glWidget->sceneModel();
+  foreach (QtGui::ScenePlugin *scene, scenePluginModel.scenePlugins())
+    scene->setEnabled(false);
+  foreach (QtGui::ScenePlugin *scene, scenePluginModel.scenePlugins())
+    foreach (const QString &name, displayTypes)
+      if (scene->objectName() == name)
+        scene->setEnabled(true);
+  m_ui->glWidget->updateScene();
 }
 
 #ifdef QTTESTING

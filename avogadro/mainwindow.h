@@ -195,6 +195,18 @@ protected slots:
   bool saveFileAs(const QString &fileName, Io::FileFormat *writer,
                   bool async = true);
 
+  /**
+   * Set the active tool for the currently active widget by name.
+   * @param toolName Name of the tool to select.
+   */
+  void setActiveTool(QString toolName);
+
+  /**
+   * @brief Set the active display types, and cause the scene to be updated.
+   * @param displayTypes A list of
+   */
+  void setActiveDisplayTypes(QStringList displayTypes);
+
 #ifdef QTTESTING
 protected slots:
   void record();
