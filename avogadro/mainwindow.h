@@ -195,6 +195,12 @@ protected slots:
   bool saveFileAs(const QString &fileName, Io::FileFormat *writer,
                   bool async = true);
 
+  /**
+   * Set the active tool for the currently active widget by name.
+   * @param toolName Name of the tool to select.
+   */
+  void setActiveTool(QString toolName);
+
 #ifdef QTTESTING
 protected slots:
   void record();

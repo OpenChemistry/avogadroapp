@@ -350,12 +350,9 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   // If the molecule is empty, make the editor active. Otherwise, use the
   // navigator tool.
   if (m_molecule) {
-    QString targetToolName = m_molecule->atomCount() > 0 ? tr("Navigate tool")
-                                                         : tr("Editor tool");
-    foreach (ToolPlugin *toolPlugin, m_ui->glWidget->tools()) {
-      if (toolPlugin->name() == targetToolName)
-        toolPlugin->activateAction()->trigger();
-    }
+    QString targetToolName = m_molecule->atomCount() > 0 ? "Navigator"
+                                                         : "Editor";
+    setActiveTool(targetToolName);
     connect(m_molecule, SIGNAL(changed(uint)), SLOT(markMoleculeDirty()));
   }
 
@@ -816,6 +813,16 @@ bool MainWindow::saveFileAs(const QString &fileName, Io::FileFormat *writer,
     connect(m_fileWriteThread, SIGNAL(finished()), &loop, SLOT(quit()));
     loop.exec();
     return backgroundWriterFinished();
+  }
+}
+
+void MainWindow::setActiveTool(QString toolName)
+{
+  foreach (ToolPlugin *toolPlugin, m_ui->glWidget->tools()) {
+    if (toolPlugin->objectName() == toolName)
+      toolPlugin->activateAction()->trigger();
+    else
+      qDebug() << toolPlugin->objectName();
   }
 }
 
