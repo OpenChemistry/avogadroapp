@@ -2,7 +2,7 @@
 
   This source file is part of the Avogadro project.
 
-  Copyright 2012 Kitware, Inc.
+  Copyright 2012-2013 Kitware, Inc.
 
   This source code is released under the New BSD License, (the "License").
 
@@ -36,6 +36,11 @@ class Molecule;
 }
 
 class MainWindow;
+
+/**
+ * @brief The RpcListener class is used to implement the remote procedure call
+ * interface for the Avogadro application.
+ */
 
 class RpcListener : public QObject
 {

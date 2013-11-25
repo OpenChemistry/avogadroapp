@@ -2,7 +2,7 @@
 
   This source file is part of the Avogadro project.
 
-  Copyright 2012 Kitware, Inc.
+  Copyright 2012-2013 Kitware, Inc.
 
   This source code is released under the New BSD License, (the "License").
 
@@ -35,6 +35,10 @@
 
 namespace Avogadro {
 
+using std::string;
+using Io::FileFormatManager;
+using QtGui::Molecule;
+
 RpcListener::RpcListener(QObject *parent_)
   : QObject(parent_),
     m_pingClient(NULL)
@@ -53,17 +57,15 @@ RpcListener::RpcListener(QObject *parent_)
   connect(m_rpc, SIGNAL(messageReceived(const MoleQueue::Message&)),
           this, SLOT(messageReceived(const MoleQueue::Message&)));
 
-  // find the main window
+  // Find the main window.
   m_window = 0;
   foreach (QWidget *widget, QApplication::topLevelWidgets())
     if ((m_window = qobject_cast<MainWindow *>(widget)))
       break;
 
   if (m_window) {
-    connect(this,
-            SIGNAL(callSetMolecule(Avogadro::QtGui::Molecule*)),
-            m_window,
-            SLOT(setMolecule(Avogadro::QtGui::Molecule*)));
+    connect(this, SIGNAL(callSetMolecule(Avogadro::QtGui::Molecule*)),
+            m_window, SLOT(setMolecule(Avogadro::QtGui::Molecule*)));
   }
 }
 
@@ -159,17 +161,30 @@ void RpcListener::messageReceived(const MoleQueue::Message &message)
 
   if (method == "openFile") {
     if (m_window) {
-      // call openFile()
-      QString fileName = params["fileName"].toString();
-      QMetaObject::invokeMethod(m_window,
-                                "openFile",
-                                Qt::DirectConnection,
-                                Q_ARG(QString, fileName));
+      // Read the supplied file.
+      string fileName = params["fileName"].toString().toStdString();
+      Molecule *molecule = new Molecule(this);
+      bool success =
+          FileFormatManager::instance().readFile(*molecule, fileName);
+      if (success) {
+        emit callSetMolecule(molecule);
 
-      // set response
-      MoleQueue::Message response = message.generateResponse();
-      response.setResult(true);
-      response.send();
+        // set response
+        MoleQueue::Message response = message.generateResponse();
+        response.setResult(true);
+        response.send();
+      }
+      else {
+        delete molecule;
+
+        // send error response
+        MoleQueue::Message errorMessage = message.generateErrorResponse();
+        errorMessage.setErrorCode(-1);
+        errorMessage.setErrorMessage(QString("Failed to read file: %1")
+                                     .arg(QString::fromStdString(
+                                            FileFormatManager::instance().error())));
+        errorMessage.send();
+      }
     }
     else {
       // send error response
@@ -182,13 +197,13 @@ void RpcListener::messageReceived(const MoleQueue::Message &message)
   else if (method == "loadMolecule") {
     if (m_window) {
       // get molecule data and format
-      QByteArray content = params["content"].toString().toAscii();
-      QByteArray format = params["format"].toString().toAscii();
+      string content = params["content"].toString().toStdString();
+      string format = params["format"].toString().toStdString();
 
       // read molecule data
-      QtGui::Molecule *molecule = new QtGui::Molecule;
-      bool success = Avogadro::Io::FileFormatManager::instance().readString(
-        *molecule, content.constData(), format.constData());
+      Molecule *molecule = new Molecule(this);
+      bool success = FileFormatManager::instance().readString(*molecule,
+                                                              content, format);
       if (success) {
         emit callSetMolecule(molecule);
 
@@ -203,10 +218,9 @@ void RpcListener::messageReceived(const MoleQueue::Message &message)
         // send error response
         MoleQueue::Message errorMessage = message.generateErrorResponse();
         errorMessage.setErrorCode(-1);
-        errorMessage.setErrorMessage(
-              QString("Failed to read Chemical JSON: %1")
-                .arg(QString::fromStdString(
-                  Avogadro::Io::FileFormatManager::instance().error())));
+        errorMessage.setErrorMessage(QString("Failed to read Chemical JSON: %1")
+                                     .arg(QString::fromStdString(
+                                            FileFormatManager::instance().error())));
         errorMessage.send();
       }
     }
