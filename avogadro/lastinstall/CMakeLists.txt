@@ -42,5 +42,5 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
   endif()
 
   include(DeployQt4)
-  install_qt4_executable(${exe} "${plugins}" "${ob_plugins}" "${dirs}" "lib/avogadro2/plugins;lib/openbabel/2.3.2")
+  install_qt4_executable(${exe} "${plugins}" "${ob_plugins}" "${dirs}" "lib/avogadro2/plugins")
 endif()
