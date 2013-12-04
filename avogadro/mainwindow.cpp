@@ -217,6 +217,9 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   m_ui->scenePluginTreeView->header()->stretchLastSection();
   m_ui->scenePluginTreeView->header()->setVisible(false);
 
+  // Connect to the invalid context signal, check whether GL is initialized.
+  connect(m_ui->glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
+
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
     QSettings settings;
@@ -623,6 +626,18 @@ void MainWindow::toolActivated()
       }
     }
   }
+}
+
+void MainWindow::rendererInvalid()
+{
+  QtOpenGL::GLWidget *widget = qobject_cast<QtOpenGL::GLWidget *>(sender());
+  QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
+                       tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
+                       .arg(widget ? widget->error() : tr("Unknown error")));
+  // Process events, and then set a single shot timer. This is needed to ensure
+  // the RPC server also exits cleanly.
+  QApplication::processEvents();
+  QTimer::singleShot(500, this, SLOT(close()));
 }
 
 void MainWindow::reassignCustomElements()
