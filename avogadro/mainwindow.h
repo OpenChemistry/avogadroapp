@@ -263,6 +263,11 @@ private slots:
    */
   void toolActivated();
 
+  /**
+   * @brief Triggered if a renderer cannot get a valid context.
+   */
+  void rendererInvalid();
+
 private:
   Ui::MainWindow *m_ui;
   QtGui::Molecule *m_molecule;
