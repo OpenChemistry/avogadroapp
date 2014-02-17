@@ -17,7 +17,7 @@
 #include "menubuilder.h"
 
 #include <QtCore/QDebug>
-#include <QtGui/QMenuBar>
+#include <QtWidgets/QMenuBar>
 
 namespace Avogadro {
 

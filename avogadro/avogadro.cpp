@@ -14,8 +14,8 @@
 
 ******************************************************************************/
 
-#include <QtGui/QApplication>
-#include <QtGui/QMessageBox>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QMessageBox>
 #include <QtOpenGL/QGLFormat>
 
 #include "mainwindow.h"

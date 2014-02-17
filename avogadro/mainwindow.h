@@ -17,7 +17,7 @@
 #ifndef AVOGADRO_MAINWINDOW_H
 #define AVOGADRO_MAINWINDOW_H
 
-#include <QtGui/QMainWindow>
+#include <QtWidgets/QMainWindow>
 #include <QtCore/QString>
 
 #ifdef QTTESTING
