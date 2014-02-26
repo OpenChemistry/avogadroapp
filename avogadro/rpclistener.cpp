@@ -16,8 +16,8 @@
 
 #include "rpclistener.h"
 
-#include <QtGui/QApplication>
-#include <QtGui/QInputDialog>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QInputDialog>
 
 #include <QtCore/QTimer>
 

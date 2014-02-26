@@ -46,22 +46,22 @@
 #include <QtCore/QSettings>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
-#include <QtGui/QActionGroup>
+#include <QtWidgets/QActionGroup>
 #include <QtGui/QCloseEvent>
-#include <QtGui/QInputDialog>
+#include <QtWidgets/QInputDialog>
 #include <QtGui/QKeySequence>
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QMessageBox>
-#include <QtGui/QFileDialog>
-#include <QtGui/QStatusBar>
-#include <QtGui/QToolBar>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QFileDialog>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QToolBar>
 
-#include <QtGui/QDockWidget>
-#include <QtGui/QTreeView>
-#include <QtGui/QHeaderView>
-#include <QtGui/QProgressDialog>
-#include <QtGui/QPushButton>
+#include <QtWidgets/QDockWidget>
+#include <QtWidgets/QTreeView>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QProgressDialog>
+#include <QtWidgets/QPushButton>
 
 #ifdef QTTESTING
 # include <pqTestUtility.h>

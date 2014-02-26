@@ -10,14 +10,14 @@ endif()
 
 # Find the Qt components we need.
 if(WIN32)
-  set(qtmain QtMain)
+  set(qtmain Main)
+  find_package(Qt5Main REQUIRED)
 else()
   unset(qtmain)
 endif()
-find_package(Qt4 4.7
-  COMPONENTS QtCore QtGui QtOpenGL QtNetwork ${qtmain} REQUIRED)
-include_directories(SYSTEM ${QT_INCLUDES})
-add_definitions(${QT_DEFINITIONS})
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5OpenGL REQUIRED)
+find_package(Qt5Network REQUIRED)
 
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
 
@@ -29,12 +29,12 @@ set(avogadro_srcs
   menubuilder.cpp
 )
 
-qt4_wrap_ui(ui_srcs
+qt5_wrap_ui(ui_srcs
   mainwindow.ui
   aboutdialog.ui
 )
 
-qt4_add_resources(rcc_srcs avogadro.qrc)
+qt5_add_resources(rcc_srcs avogadro.qrc)
 
 if(Avogadro_ENABLE_RPC)
   list(APPEND avogadro_srcs rpclistener.cpp)
@@ -76,19 +76,11 @@ endif()
 
 add_executable(avogadro WIN32 MACOSX_BUNDLE
   ${avogadro_srcs} ${ui_srcs} ${rcc_srcs})
+qt5_use_modules(avogadro Widgets OpenGL Network ${qtmain})
 set_target_properties(avogadro PROPERTIES AUTOMOC TRUE)
-target_link_libraries(avogadro
-  AvogadroCore AvogadroIO AvogadroQtOpenGL AvogadroQtGui AvogadroQtPlugins
-  ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTNETWORK_LIBRARY}
-  ${QT_QTOPENGL_LIBRARY})
-if(WIN32)
-  target_link_libraries(avogadro ${QT_QTMAIN_LIBRARY})
-endif()
+target_link_libraries(avogadro AvogadroQtOpenGL AvogadroQtGui AvogadroQtPlugins)
 if(Avogadro_ENABLE_RPC)
-  target_link_libraries(avogadro
-    MoleQueueServerCore
-    MoleQueueClient
-  )
+  target_link_libraries(avogadro MoleQueueServerCore MoleQueueClient)
 endif()
 if(APPLE)
   set_target_properties(avogadro PROPERTIES OUTPUT_NAME ${MACOSX_BUNDLE_NAME})
