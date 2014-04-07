@@ -48,6 +48,7 @@ class ScenePlugin;
 class ToolPlugin;
 class ExtensionPlugin;
 class Molecule;
+class MoleculeModel;
 }
 
 /**
@@ -268,9 +269,15 @@ private slots:
    */
   void rendererInvalid();
 
+  /**
+   * @brief Change the active molecule
+   */
+  void moleculeActivated(const QModelIndex &index);
+
 private:
   Ui::MainWindow *m_ui;
   QtGui::Molecule *m_molecule;
+  QtGui::MoleculeModel *m_moleculeModel;
   QList<QString> m_queuedFiles;
 
   QStringList m_recentFiles;

@@ -21,7 +21,6 @@
 #include "backgroundfileformat.h"
 #include "avogadroappconfig.h"
 
-#include <avogadro/qtgui/molecule.h>
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cjsonformat.h>
 #include <avogadro/io/cmlformat.h>
@@ -36,6 +35,8 @@
 #include <avogadro/qtgui/toolplugin.h>
 #include <avogadro/qtgui/extensionplugin.h>
 #include <avogadro/qtgui/periodictableview.h>
+#include <avogadro/qtgui/molecule.h>
+#include <avogadro/qtgui/moleculemodel.h>
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
@@ -185,7 +186,8 @@ using QtGui::ExtensionPlugin;
 
 MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   : m_ui(new Ui::MainWindow),
-    m_molecule(0),
+    m_molecule(NULL),
+    m_moleculeModel(NULL),
     m_menuBuilder(new MenuBuilder),
     m_fileReadThread(NULL),
     m_fileWriteThread(NULL),
@@ -216,6 +218,15 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   m_ui->scenePluginTreeView->setAlternatingRowColors(true);
   m_ui->scenePluginTreeView->header()->stretchLastSection();
   m_ui->scenePluginTreeView->header()->setVisible(false);
+
+  // Create the molecule model
+  m_moleculeModel = new QtGui::MoleculeModel(this);
+  m_ui->moleculeView->setModel(m_moleculeModel);
+  m_ui->moleculeView->setAlternatingRowColors(true);
+  m_ui->moleculeView->header()->stretchLastSection();
+  m_ui->moleculeView->header()->setVisible(false);
+  connect(m_ui->moleculeView, SIGNAL(activated(QModelIndex)),
+          SLOT(moleculeActivated(QModelIndex)));
 
   // Connect to the invalid context signal, check whether GL is initialized.
   connect(m_ui->glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
@@ -337,7 +348,7 @@ void MainWindow::newMolecule()
 
 void MainWindow::setMolecule(QtGui::Molecule *mol)
 {
-  if (m_molecule == mol)
+  if (!mol || m_molecule == mol)
     return;
 
   if (!saveFileIfNeeded()) {
@@ -349,8 +360,12 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   // Clear the scene to prevent dangling identifiers:
   m_ui->glWidget->clearScene();
 
-  // Set molecule. Wait until after emitting MoleculeChanged to delete the
-  // old one.
+  // Set the new molecule, ensure both molecules are in the model.
+  if (m_molecule && !m_moleculeModel->molecules().contains(m_molecule))
+    m_moleculeModel->addItem(m_molecule);
+  if (!m_moleculeModel->molecules().contains(mol))
+    m_moleculeModel->addItem(mol);
+
   QtGui::Molecule *oldMolecule(m_molecule);
   m_molecule = mol;
 
@@ -363,15 +378,12 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
     connect(m_molecule, SIGNAL(changed(uint)), SLOT(markMoleculeDirty()));
   }
 
-
   emit moleculeChanged(m_molecule);
   markMoleculeClean();
   updateWindowTitle();
 
-  if (oldMolecule) {
+  if (oldMolecule)
     oldMolecule->disconnect(this);
-    oldMolecule->deleteLater();
-  }
 
   m_ui->glWidget->setMolecule(m_molecule);
   m_ui->glWidget->updateScene();
@@ -561,7 +573,7 @@ void MainWindow::backgroundReaderFinished()
     setMolecule(m_fileReadMolecule);
     statusBar()->showMessage(tr("Molecule loaded (%1 atoms, %2 bonds)")
                              .arg(m_molecule->atomCount())
-                             .arg(m_molecule->bondCount()), 2500);
+                             .arg(m_molecule->bondCount()), 5000);
   }
   else {
     QMessageBox::critical(this, tr("File error"),
@@ -638,6 +650,14 @@ void MainWindow::rendererInvalid()
   // the RPC server also exits cleanly.
   QApplication::processEvents();
   QTimer::singleShot(500, this, SLOT(close()));
+}
+
+void MainWindow::moleculeActivated(const QModelIndex &idx)
+{
+  QtGui::Molecule *mol =
+    qobject_cast<QtGui::Molecule *>(static_cast<QObject *>(idx.internalPointer()));
+  if (mol)
+    setMolecule(mol);
 }
 
 void MainWindow::reassignCustomElements()
