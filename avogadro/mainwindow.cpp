@@ -187,6 +187,7 @@ using QtGui::ExtensionPlugin;
 MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   : m_molecule(NULL),
     m_moleculeModel(NULL),
+    m_queuedFilesStarted(false),
     m_menuBuilder(new MenuBuilder),
     m_fileReadThread(NULL),
     m_fileWriteThread(NULL),
@@ -259,7 +260,7 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   buildMenu();
   updateRecentFiles();
 
-  // Try to open the file(s) passed in. If opening fails, create a new molecule.
+  // Try to open the file(s) passed in.
   if (!fileNames.isEmpty()) {
     m_queuedFiles = fileNames;
     // Give the plugins 5 seconds before timing out queued files.
@@ -268,7 +269,7 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
 
 #ifdef Avogadro_ENABLE_RPC
   // Wait a few seconds to attempt registering with MoleQueue.
-  QTimer::singleShot(5000, this, SLOT(registerMoleQueue()));
+  QTimer::singleShot(3000, this, SLOT(registerMoleQueue()));
 #endif // Avogadro_ENABLE_RPC
 
   statusBar()->showMessage(tr("Ready..."), 2000);
@@ -1206,12 +1207,13 @@ void MainWindow::fileFormatsReady()
 
 void MainWindow::readQueuedFiles()
 {
+  m_queuedFilesStarted = true;
   if (!m_queuedFiles.empty()) {
     QString file = m_queuedFiles.first();
     m_queuedFiles.removeFirst();
     const Io::FileFormat *format = QtGui::FileFormatDialog::findFileFormat(
           this, tr("Select file reader"), file,
-          Io::FileFormat::File | Io::FileFormat::Read);
+          Io::FileFormat::File | Io::FileFormat::Read, "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : NULL)) {
       QMessageBox::warning(this, tr("Cannot open file"),
@@ -1223,7 +1225,7 @@ void MainWindow::readQueuedFiles()
 
 void MainWindow::clearQueuedFiles()
 {
-  if (!m_queuedFiles.isEmpty()) {
+  if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
     QMessageBox::warning(this, tr("Cannot open files"),
                          tr("Avogadro timed out and cannot open"
                             " '%1'.").arg(m_queuedFiles.join("\n")));

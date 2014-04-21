@@ -275,6 +275,7 @@ private slots:
 private:
   QtGui::Molecule *m_molecule;
   QtGui::MoleculeModel *m_moleculeModel;
+  bool m_queuedFilesStarted;
   QStringList m_queuedFiles;
 
   QStringList m_recentFiles;
