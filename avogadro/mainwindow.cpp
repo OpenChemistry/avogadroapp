@@ -233,12 +233,6 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
       scenePluginModel.addItem(scenePlugin);
   }
 
-  QMenu *menuTop = menuBar()->addMenu(tr("&Extensions"));
-  QAction *showPeriodicTable = new QAction("&Periodic Table", this);
-  menuTop->addAction(showPeriodicTable);
-  QtGui::PeriodicTableView *periodicTable = new QtGui::PeriodicTableView(this);
-  connect(showPeriodicTable, SIGNAL(triggered()), periodicTable, SLOT(show()));
-
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
 
@@ -1002,6 +996,14 @@ void MainWindow::buildMenu()
   action->setIcon(QIcon::fromTheme("application-exit"));
   m_menuBuilder->addAction(path, action, -200);
   connect(action, SIGNAL(triggered()), this, SLOT(close()));
+
+  // Periodic table.
+  QStringList extensionsPath;
+  extensionsPath << tr("&Extensions");
+  action = new QAction("&Periodic Table", this);
+  m_menuBuilder->addAction(extensionsPath, action, 0);
+  QtGui::PeriodicTableView *periodicTable = new QtGui::PeriodicTableView(this);
+  connect(action, SIGNAL(triggered()), periodicTable, SLOT(show()));
 
   QStringList helpPath;
   helpPath << tr("&Help");
