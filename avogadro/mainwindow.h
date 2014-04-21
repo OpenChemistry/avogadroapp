@@ -18,7 +18,7 @@
 #define AVOGADRO_MAINWINDOW_H
 
 #include <QtWidgets/QMainWindow>
-#include <QtCore/QString>
+#include <QtCore/QStringList>
 
 #ifdef QTTESTING
 class pqTestUtility;
@@ -61,7 +61,7 @@ class MainWindow : public QMainWindow
 {
 Q_OBJECT
 public:
-  MainWindow(const QString &filename = QString(), bool disableSettings = false);
+  MainWindow(const QStringList &fileNames, bool disableSettings = false);
   ~MainWindow();
 
 public slots:
@@ -275,7 +275,7 @@ private slots:
 private:
   QtGui::Molecule *m_molecule;
   QtGui::MoleculeModel *m_moleculeModel;
-  QList<QString> m_queuedFiles;
+  QStringList m_queuedFiles;
 
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;

@@ -184,7 +184,7 @@ using QtGui::ScenePluginModel;
 using QtGui::ToolPlugin;
 using QtGui::ExtensionPlugin;
 
-MainWindow::MainWindow(const QString &fileName, bool disableSettings)
+MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   : m_molecule(NULL),
     m_moleculeModel(NULL),
     m_menuBuilder(new MenuBuilder),
@@ -259,12 +259,11 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   buildMenu();
   updateRecentFiles();
 
-  // Try to open the file passed in. If opening fails, create a new molecule.
-  if (!fileName.isEmpty()) {
-    m_queuedFiles.append(fileName);
+  // Try to open the file(s) passed in. If opening fails, create a new molecule.
+  if (!fileNames.isEmpty()) {
+    m_queuedFiles = fileNames;
     // Give the plugins 5 seconds before timing out queued files.
     QTimer::singleShot(5000, this, SLOT(clearQueuedFiles()));
-    readQueuedFiles();
   }
 
 #ifdef Avogadro_ENABLE_RPC
@@ -272,8 +271,6 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   QTimer::singleShot(5000, this, SLOT(registerMoleQueue()));
 #endif // Avogadro_ENABLE_RPC
 
-  if (!m_molecule)
-    newMolecule();
   statusBar()->showMessage(tr("Ready..."), 2000);
 
   updateWindowTitle();
@@ -612,6 +609,9 @@ void MainWindow::backgroundReaderFinished()
   m_progressDialog = NULL;
 
   reassignCustomElements();
+
+  if (!m_queuedFiles.empty())
+    readQueuedFiles();
 }
 
 bool MainWindow::backgroundWriterFinished()
@@ -1206,25 +1206,27 @@ void MainWindow::fileFormatsReady()
 
 void MainWindow::readQueuedFiles()
 {
-  if (m_queuedFiles.size()) {
-    // Currently only read one file, this should be extended to allow multiple
-    // files once the interface supports that concept.
-
+  if (!m_queuedFiles.empty()) {
+    QString file = m_queuedFiles.first();
+    m_queuedFiles.removeFirst();
     const Io::FileFormat *format = QtGui::FileFormatDialog::findFileFormat(
-          this, tr("Select file reader"), m_queuedFiles.front(),
+          this, tr("Select file reader"), file,
           Io::FileFormat::File | Io::FileFormat::Read);
 
-    if (openFile(m_queuedFiles.front(), format ? format->newInstance() : NULL))
-      m_queuedFiles.clear();
+    if (!openFile(file, format ? format->newInstance() : NULL)) {
+      QMessageBox::warning(this, tr("Cannot open file"),
+                           tr("Avogadro timed out and doesn't know how to open"
+                              " '%1'.").arg(file));
+    }
   }
 }
 
 void MainWindow::clearQueuedFiles()
 {
   if (!m_queuedFiles.isEmpty()) {
-    QMessageBox::warning(this, tr("Cannot open file"),
-                         tr("Avogadro timed out and doesn't know how to open"
-                            " '%1'.").arg(m_queuedFiles.front()));
+    QMessageBox::warning(this, tr("Cannot open files"),
+                         tr("Avogadro timed out and cannot open"
+                            " '%1'.").arg(m_queuedFiles.join("\n")));
     m_queuedFiles.clear();
   }
 }
