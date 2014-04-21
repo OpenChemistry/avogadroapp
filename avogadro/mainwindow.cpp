@@ -2,7 +2,7 @@
 
   This source file is part of the Avogadro project.
 
-  Copyright 2012 Kitware, Inc.
+  Copyright 2012-2014 Kitware, Inc.
 
   This source code is released under the New BSD License, (the "License").
 
@@ -72,7 +72,7 @@
 #endif
 
 #ifdef Avogadro_ENABLE_RPC
-#include <molequeue/client/client.h>
+# include <molequeue/client/client.h>
 #endif // Avogadro_ENABLE_RPC
 
 using Avogadro::Io::FileFormat;
@@ -121,7 +121,7 @@ protected:
   virtual void onRecordEvent(const QString& widget, const QString& command,
                              const QString& arguments)
   {
-    if(this->XMLStream) {
+    if (this->XMLStream) {
       this->XMLStream->writeStartElement("event");
       this->XMLStream->writeAttribute("widget", widget);
       this->XMLStream->writeAttribute("command", command);
@@ -185,8 +185,7 @@ using QtGui::ToolPlugin;
 using QtGui::ExtensionPlugin;
 
 MainWindow::MainWindow(const QString &fileName, bool disableSettings)
-  : m_ui(new Ui::MainWindow),
-    m_molecule(NULL),
+  : m_molecule(NULL),
     m_moleculeModel(NULL),
     m_menuBuilder(new MenuBuilder),
     m_fileReadThread(NULL),
@@ -199,38 +198,6 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
     m_toolToolBar(new QToolBar(this)),
     m_moleculeDirty(false)
 {
-  m_ui->setupUi(this);
-
-  // Switch to our fallback icons if there are no platform-specific icons.
-  if (!QIcon::hasThemeIcon("document-new"))
-    QIcon::setThemeName("fallback");
-
-  QIcon icon(":/icons/avogadro.png");
-  setWindowIcon(icon);
-
-  m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-  addToolBar(m_fileToolBar);
-  addToolBar(m_toolToolBar);
-
-  // Create the scene plugin model
-  ScenePluginModel &scenePluginModel = m_ui->glWidget->sceneModel();
-  m_ui->scenePluginTreeView->setModel(&scenePluginModel);
-  m_ui->scenePluginTreeView->setAlternatingRowColors(true);
-  m_ui->scenePluginTreeView->header()->stretchLastSection();
-  m_ui->scenePluginTreeView->header()->setVisible(false);
-
-  // Create the molecule model
-  m_moleculeModel = new QtGui::MoleculeModel(this);
-  m_ui->moleculeView->setModel(m_moleculeModel);
-  m_ui->moleculeView->setAlternatingRowColors(true);
-  m_ui->moleculeView->header()->stretchLastSection();
-  m_ui->moleculeView->header()->setVisible(false);
-  connect(m_ui->moleculeView, SIGNAL(activated(QModelIndex)),
-          SLOT(moleculeActivated(QModelIndex)));
-
-  // Connect to the invalid context signal, check whether GL is initialized.
-  connect(m_ui->glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
-
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
     QSettings settings;
@@ -240,6 +207,11 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   // The default settings will be used if everything was cleared.
   readSettings();
 
+  // Now set up the interface.
+  setupInterface();
+  ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
+
+  // Now load the plugins.
   QtPlugins::PluginManager *plugin = QtPlugins::PluginManager::instance();
   plugin->load();
 
@@ -313,6 +285,60 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   updateWindowTitle();
 }
 
+void MainWindow::setupInterface()
+{
+  // We take care of setting up the main interface here, along with any custom
+  // pieces that might be added for saved settings etc.
+  m_glWidget = new QtOpenGL::GLWidget(this);
+  setCentralWidget(m_glWidget);
+
+  // Our tool dock.
+  m_toolDock = new QDockWidget(tr("Tool"), this);
+  addDockWidget(Qt::LeftDockWidgetArea, m_toolDock);
+
+  // Our scene/view dock.
+  QDockWidget *sceneDock = new QDockWidget(tr("Display Types"), this);
+  m_sceneTreeView = new QTreeView(sceneDock);
+  sceneDock->setWidget(m_sceneTreeView);
+  addDockWidget(Qt::LeftDockWidgetArea, sceneDock);
+
+  // Our molecule dock.
+  QDockWidget *moleculeDock = new QDockWidget(tr("Molecules"), this);
+  m_moleculeTreeView = new QTreeView(moleculeDock);
+  moleculeDock->setWidget(m_moleculeTreeView);
+  addDockWidget(Qt::LeftDockWidgetArea, moleculeDock);
+
+  // Switch to our fallback icons if there are no platform-specific icons.
+  if (!QIcon::hasThemeIcon("document-new"))
+    QIcon::setThemeName("fallback");
+
+  QIcon icon(":/icons/avogadro.png");
+  setWindowIcon(icon);
+
+  m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  addToolBar(m_fileToolBar);
+  addToolBar(m_toolToolBar);
+
+  // Create the scene plugin model
+  ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
+  m_sceneTreeView->setModel(&scenePluginModel);
+  m_sceneTreeView->setAlternatingRowColors(true);
+  m_sceneTreeView->header()->stretchLastSection();
+  m_sceneTreeView->header()->setVisible(false);
+
+  // Create the molecule model
+  m_moleculeModel = new QtGui::MoleculeModel(this);
+  m_moleculeTreeView->setModel(m_moleculeModel);
+  m_moleculeTreeView->setAlternatingRowColors(true);
+  m_moleculeTreeView->header()->stretchLastSection();
+  m_moleculeTreeView->header()->setVisible(false);
+  connect(m_moleculeTreeView, SIGNAL(activated(QModelIndex)),
+          SLOT(moleculeActivated(QModelIndex)));
+
+  // Connect to the invalid context signal, check whether GL is initialized.
+  connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
+}
+
 MainWindow::~MainWindow()
 {
   writeSettings();
@@ -358,7 +384,7 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   }
 
   // Clear the scene to prevent dangling identifiers:
-  m_ui->glWidget->clearScene();
+  m_glWidget->clearScene();
 
   // Set the new molecule, ensure both molecules are in the model.
   if (m_molecule && !m_moleculeModel->molecules().contains(m_molecule))
@@ -385,9 +411,9 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   if (oldMolecule)
     oldMolecule->disconnect(this);
 
-  m_ui->glWidget->setMolecule(m_molecule);
-  m_ui->glWidget->updateScene();
-  m_ui->glWidget->resetCamera();
+  m_glWidget->setMolecule(m_molecule);
+  m_glWidget->updateScene();
+  m_glWidget->resetCamera();
 }
 
 void MainWindow::markMoleculeDirty()
@@ -627,14 +653,10 @@ void MainWindow::toolActivated()
 {
   if (QAction *action = qobject_cast<QAction*>(sender())) {
     if (ToolPlugin *toolPlugin = qobject_cast<ToolPlugin*>(action->parent())) {
-      if (m_ui->glWidget->tools().contains(toolPlugin)) {
-        bool ok;
-        int index = action->data().toInt(&ok);
-        if (ok && index < m_ui->toolWidgetStack->count()) {
-          m_ui->glWidget->setActiveTool(toolPlugin);
-          m_ui->toolWidgetStack->setCurrentIndex(index);
-          m_ui->toolName->setText(action->text());
-        }
+      if (m_glWidget->tools().contains(toolPlugin)) {
+        m_glWidget->setActiveTool(toolPlugin);
+        m_toolDock->setWidget(toolPlugin->toolWidget());
+        m_toolDock->setWindowTitle(action->text());
       }
     }
   }
@@ -857,21 +879,21 @@ bool MainWindow::saveFileAs(const QString &fileName, Io::FileFormat *writer,
 
 void MainWindow::setActiveTool(QString toolName)
 {
-  foreach (ToolPlugin *toolPlugin, m_ui->glWidget->tools())
+  foreach (ToolPlugin *toolPlugin, m_glWidget->tools())
     if (toolPlugin->objectName() == toolName)
       toolPlugin->activateAction()->trigger();
 }
 
 void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel &scenePluginModel = m_ui->glWidget->sceneModel();
+  ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
   foreach (QtGui::ScenePlugin *scene, scenePluginModel.scenePlugins())
     scene->setEnabled(false);
   foreach (QtGui::ScenePlugin *scene, scenePluginModel.scenePlugins())
     foreach (const QString &name, displayTypes)
       if (scene->objectName() == name)
         scene->setEnabled(true);
-  m_ui->glWidget->updateScene();
+  m_glWidget->updateScene();
 }
 
 #ifdef QTTESTING
@@ -1027,12 +1049,6 @@ void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)
     action->setData(index);
     toolActions->addAction(action);
     connect(action, SIGNAL(triggered()), SLOT(toolActivated()));
-
-    // Setup tool widget
-    QWidget *toolWidget = toolPlugin->toolWidget();
-    if (!toolWidget)
-      toolWidget = new QWidget();
-    m_ui->toolWidgetStack->addWidget(toolWidget);
     ++index;
   }
 
@@ -1040,10 +1056,10 @@ void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)
 
   /// @todo Where to put these? For now just throw them into the glwidget, but
   /// we should have a better place for them (maybe a singleton ToolWrangler?)
-  m_ui->glWidget->setTools(toolList);
-  m_ui->glWidget->setDefaultTool(tr("Navigate tool"));
+  m_glWidget->setTools(toolList);
+  m_glWidget->setDefaultTool(tr("Navigate tool"));
   if (!toolList.isEmpty())
-    m_ui->glWidget->setActiveTool(toolList.first());
+    m_glWidget->setActiveTool(toolList.first());
 }
 
 QString MainWindow::extensionToWildCard(const QString &extension)

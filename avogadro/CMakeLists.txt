@@ -30,7 +30,6 @@ set(avogadro_srcs
 )
 
 qt5_wrap_ui(ui_srcs
-  mainwindow.ui
   aboutdialog.ui
 )
 

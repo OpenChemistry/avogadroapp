@@ -2,7 +2,7 @@
 
   This source file is part of the Avogadro project.
 
-  Copyright 2012-2013 Kitware, Inc.
+  Copyright 2012-2014 Kitware, Inc.
 
   This source code is released under the New BSD License, (the "License").
 
@@ -26,12 +26,10 @@ class pqTestUtility;
 
 class QProgressDialog;
 class QThread;
-
-namespace Ui {
-class MainWindow;
-}
+class QTreeView;
 
 namespace Avogadro {
+
 class BackgroundFileFormat;
 class MenuBuilder;
 
@@ -275,7 +273,6 @@ private slots:
   void moleculeActivated(const QModelIndex &index);
 
 private:
-  Ui::MainWindow *m_ui;
   QtGui::Molecule *m_molecule;
   QtGui::MoleculeModel *m_moleculeModel;
   QList<QString> m_queuedFiles;
@@ -298,11 +295,21 @@ private:
 
   bool m_moleculeDirty;
 
+  QtOpenGL::GLWidget *m_glWidget;
+  QTreeView *m_sceneTreeView;
+  QTreeView *m_moleculeTreeView;
+  QDockWidget *m_toolDock;
+
 #ifdef QTTESTING
   pqTestUtility *m_testUtility;
   QString m_testFile;
   bool m_testExit;
 #endif
+
+  /**
+   * Set up the main window widgets, connect signals and slots, etc.
+   */
+  void setupInterface();
 
   /** Show a dialog to remap custom elements, if present. */
   void reassignCustomElements();
