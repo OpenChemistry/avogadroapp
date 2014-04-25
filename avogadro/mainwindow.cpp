@@ -20,6 +20,7 @@
 #include "menubuilder.h"
 #include "backgroundfileformat.h"
 #include "avogadroappconfig.h"
+#include "viewfactory.h"
 
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cjsonformat.h>
@@ -37,6 +38,7 @@
 #include <avogadro/qtgui/periodictableview.h>
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/qtgui/moleculemodel.h>
+#include <avogadro/qtgui/multiviewwidget.h>
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
@@ -197,7 +199,8 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
     m_fileReadMolecule(NULL),
     m_fileToolBar(new QToolBar(this)),
     m_toolToolBar(new QToolBar(this)),
-    m_moleculeDirty(false)
+    m_moleculeDirty(false),
+    m_viewFactory(new ViewFactory)
 {
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
@@ -208,13 +211,12 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   // The default settings will be used if everything was cleared.
   readSettings();
 
-  // Now set up the interface.
-  setupInterface();
-  ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
-
   // Now load the plugins.
   QtPlugins::PluginManager *plugin = QtPlugins::PluginManager::instance();
   plugin->load();
+
+  // Now set up the interface.
+  setupInterface();
 
   QList<QtGui::ToolPluginFactory *> toolPluginFactories =
       plugin->pluginFactories<QtGui::ToolPluginFactory>();
@@ -225,14 +227,6 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
       toolPlugins << tool;
   }
   buildTools(toolPlugins);
-
-  QList<QtGui::ScenePluginFactory *> scenePluginFactories =
-      plugin->pluginFactories<QtGui::ScenePluginFactory>();
-  foreach (QtGui::ScenePluginFactory *factory, scenePluginFactories) {
-    QtGui::ScenePlugin *scenePlugin = factory->createInstance();
-    if (scenePlugin)
-      scenePluginModel.addItem(scenePlugin);
-  }
 
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
@@ -277,12 +271,23 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   updateWindowTitle();
 }
 
+MainWindow::~MainWindow()
+{
+  writeSettings();
+  delete m_molecule;
+  delete m_menuBuilder;
+  delete m_viewFactory;
+}
+
 void MainWindow::setupInterface()
 {
   // We take care of setting up the main interface here, along with any custom
   // pieces that might be added for saved settings etc.
-  m_glWidget = new QtOpenGL::GLWidget(this);
-  setCentralWidget(m_glWidget);
+  m_multiViewWidget = new QtGui::MultiViewWidget(this);
+  m_multiViewWidget->setFactory(m_viewFactory);
+  setCentralWidget(m_multiViewWidget);
+  QtOpenGL::GLWidget *glWidget = new QtOpenGL::GLWidget(this);
+  m_multiViewWidget->addWidget(glWidget);
 
   // Our tool dock.
   m_toolDock = new QDockWidget(tr("Tool"), this);
@@ -312,8 +317,6 @@ void MainWindow::setupInterface()
   addToolBar(m_toolToolBar);
 
   // Create the scene plugin model
-  ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
-  m_sceneTreeView->setModel(&scenePluginModel);
   m_sceneTreeView->setAlternatingRowColors(true);
   m_sceneTreeView->header()->stretchLastSection();
   m_sceneTreeView->header()->setVisible(false);
@@ -327,15 +330,12 @@ void MainWindow::setupInterface()
   connect(m_moleculeTreeView, SIGNAL(activated(QModelIndex)),
           SLOT(moleculeActivated(QModelIndex)));
 
+  m_glWidget = NULL;
+  viewActivated(glWidget);
   // Connect to the invalid context signal, check whether GL is initialized.
   connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
-}
-
-MainWindow::~MainWindow()
-{
-  writeSettings();
-  delete m_molecule;
-  delete m_menuBuilder;
+  connect(m_multiViewWidget, SIGNAL(activeWidgetChanged(QWidget*)),
+          SLOT(viewActivated(QWidget*)));
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)
@@ -675,6 +675,26 @@ void MainWindow::moleculeActivated(const QModelIndex &idx)
     qobject_cast<QtGui::Molecule *>(static_cast<QObject *>(idx.internalPointer()));
   if (mol)
     setMolecule(mol);
+}
+
+void MainWindow::viewActivated(QWidget *widget)
+{
+  QtPlugins::PluginManager *plugin = QtPlugins::PluginManager::instance();
+  QtOpenGL::GLWidget *glWidget(qobject_cast<QtOpenGL::GLWidget *>(widget));
+  if (glWidget && m_glWidget != glWidget) {
+    m_glWidget = glWidget;
+    ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
+    if (scenePluginModel.scenePlugins().empty()) {
+      QList<QtGui::ScenePluginFactory *> scenePluginFactories =
+          plugin->pluginFactories<QtGui::ScenePluginFactory>();
+      foreach (QtGui::ScenePluginFactory *factory, scenePluginFactories) {
+        QtGui::ScenePlugin *scenePlugin = factory->createInstance();
+        if (scenePlugin)
+          scenePluginModel.addItem(scenePlugin);
+      }
+    }
+    m_sceneTreeView->setModel(&m_glWidget->sceneModel());
+  }
 }
 
 void MainWindow::reassignCustomElements()

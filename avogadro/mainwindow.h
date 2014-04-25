@@ -32,6 +32,7 @@ namespace Avogadro {
 
 class BackgroundFileFormat;
 class MenuBuilder;
+class ViewFactory;
 
 namespace QtOpenGL {
 class GLWidget;
@@ -47,6 +48,7 @@ class ToolPlugin;
 class ExtensionPlugin;
 class Molecule;
 class MoleculeModel;
+class MultiViewWidget;
 }
 
 /**
@@ -272,6 +274,11 @@ private slots:
    */
   void moleculeActivated(const QModelIndex &index);
 
+  /**
+   * @brief Change the active view widget, initialize plugins if needed.
+   */
+  void viewActivated(QWidget *widget);
+
 private:
   QtGui::Molecule *m_molecule;
   QtGui::MoleculeModel *m_moleculeModel;
@@ -296,10 +303,13 @@ private:
 
   bool m_moleculeDirty;
 
+  QtGui::MultiViewWidget *m_multiViewWidget;
   QtOpenGL::GLWidget *m_glWidget;
   QTreeView *m_sceneTreeView;
   QTreeView *m_moleculeTreeView;
   QDockWidget *m_toolDock;
+
+  ViewFactory *m_viewFactory;
 
 #ifdef QTTESTING
   pqTestUtility *m_testUtility;
@@ -341,15 +351,15 @@ private:
   /**
    * Convenience function to generate a filter string for the supplied formats.
    */
-  QString generateFilterString(
-      const std::vector<const Io::FileFormat *> &formats,
-      bool addAllEntry = true);
+  QString generateFilterString(const std::vector<const Io::FileFormat *> &formats,
+                               bool addAllEntry = true);
 
   /**
    * Prompt to save the current molecule if is has been modified. Returns false
    * if the molecule is not saved, or the user cancels.
    */
   bool saveFileIfNeeded();
+
 };
 
 } // End Avogadro namespace

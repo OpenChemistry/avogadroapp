@@ -27,6 +27,7 @@ set(avogadro_srcs
   backgroundfileformat.cpp
   mainwindow.cpp
   menubuilder.cpp
+  viewfactory.cpp
 )
 
 qt5_wrap_ui(ui_srcs
