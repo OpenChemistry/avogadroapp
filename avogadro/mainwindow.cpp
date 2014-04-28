@@ -15,7 +15,6 @@
 ******************************************************************************/
 
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include "aboutdialog.h"
 #include "menubuilder.h"
 #include "backgroundfileformat.h"
@@ -42,7 +41,7 @@
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
-#include <QtCore/QCoreApplication>
+#include <QtWidgets/QApplication>
 #include <QtCore/QString>
 #include <QtCore/QDebug>
 #include <QtCore/QFileInfo>
@@ -59,6 +58,7 @@
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QHBoxLayout>
 
 #include <QtWidgets/QDockWidget>
 #include <QtWidgets/QTreeView>
@@ -673,10 +673,12 @@ void MainWindow::viewActivated(QWidget *widget)
   QtPlugins::PluginManager *plugin = QtPlugins::PluginManager::instance();
   QtOpenGL::GLWidget *glWidget(qobject_cast<QtOpenGL::GLWidget *>(widget));
   if (glWidget && m_glWidget != glWidget) {
+    bool firstRun(false);
     m_glWidget = glWidget;
     // First the scene plugins need to be built/added.
     ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
     if (scenePluginModel.scenePlugins().empty()) {
+      firstRun = true;
       QList<QtGui::ScenePluginFactory *> scenePluginFactories =
           plugin->pluginFactories<QtGui::ScenePluginFactory>();
       foreach (QtGui::ScenePluginFactory *factory, scenePluginFactories) {
@@ -699,6 +701,8 @@ void MainWindow::viewActivated(QWidget *widget)
         m_glWidget->setActiveTool(tr("Navigate tool"));
       }
     }
+    if (firstRun)
+      m_glWidget->updateScene();
   }
 }
 
