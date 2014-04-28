@@ -686,17 +686,18 @@ void MainWindow::viewActivated(QWidget *widget)
       }
     }
     m_sceneTreeView->setModel(&m_glWidget->sceneModel());
-    if (!m_tools.isEmpty())
-      m_glWidget->setActiveTool(m_tools.first());
+
     // Now for the tools.
-    QList<QtGui::ToolPluginFactory *> toolPluginFactories =
-        plugin->pluginFactories<QtGui::ToolPluginFactory>();
-    foreach (QtGui::ToolPluginFactory *factory, toolPluginFactories) {
-      QtGui::ToolPlugin *tool = factory->createInstance();
-      if (tool)
-        m_glWidget->addTool(tool);
-      m_glWidget->setDefaultTool(tr("Navigate tool"));
-      m_glWidget->setActiveTool(tr("Navigate tool"));
+    if (m_glWidget->tools().empty()) {
+      QList<QtGui::ToolPluginFactory *> toolPluginFactories =
+          plugin->pluginFactories<QtGui::ToolPluginFactory>();
+      foreach (QtGui::ToolPluginFactory *factory, toolPluginFactories) {
+        QtGui::ToolPlugin *tool = factory->createInstance();
+        if (tool)
+          m_glWidget->addTool(tool);
+        m_glWidget->setDefaultTool(tr("Navigate tool"));
+        m_glWidget->setActiveTool(tr("Navigate tool"));
+      }
     }
   }
 }
