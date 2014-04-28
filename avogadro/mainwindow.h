@@ -308,6 +308,7 @@ private:
   QTreeView *m_sceneTreeView;
   QTreeView *m_moleculeTreeView;
   QDockWidget *m_toolDock;
+  QList<QtGui::ToolPlugin *> m_tools;
 
   ViewFactory *m_viewFactory;
 
@@ -338,7 +339,7 @@ private:
   /**
    * Initialize the tool plugins.
    */
-  void buildTools(QList<Avogadro::QtGui::ToolPlugin *> toolList);
+  void buildTools();
 
   /**
    * Convenience function that converts a file extension to a wildcard

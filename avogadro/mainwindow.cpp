@@ -218,16 +218,6 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   // Now set up the interface.
   setupInterface();
 
-  QList<QtGui::ToolPluginFactory *> toolPluginFactories =
-      plugin->pluginFactories<QtGui::ToolPluginFactory>();
-  QList<QtGui::ToolPlugin*> toolPlugins;
-  foreach (QtGui::ToolPluginFactory *factory, toolPluginFactories) {
-    QtGui::ToolPlugin *tool = factory->createInstance();
-    if (tool)
-      toolPlugins << tool;
-  }
-  buildTools(toolPlugins);
-
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
 
@@ -332,6 +322,7 @@ void MainWindow::setupInterface()
 
   m_glWidget = NULL;
   viewActivated(glWidget);
+  buildTools();
   // Connect to the invalid context signal, check whether GL is initialized.
   connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
   connect(m_multiViewWidget, SIGNAL(activeWidgetChanged(QWidget*)),
@@ -647,10 +638,10 @@ bool MainWindow::backgroundWriterFinished()
 void MainWindow::toolActivated()
 {
   if (QAction *action = qobject_cast<QAction*>(sender())) {
-    if (ToolPlugin *toolPlugin = qobject_cast<ToolPlugin*>(action->parent())) {
-      if (m_glWidget->tools().contains(toolPlugin)) {
-        m_glWidget->setActiveTool(toolPlugin);
-        m_toolDock->setWidget(toolPlugin->toolWidget());
+    if (m_glWidget) {
+      m_glWidget->setActiveTool(action->data().toString());
+      if (m_glWidget->activeTool()) {
+        m_toolDock->setWidget(m_glWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
       }
     }
@@ -683,6 +674,7 @@ void MainWindow::viewActivated(QWidget *widget)
   QtOpenGL::GLWidget *glWidget(qobject_cast<QtOpenGL::GLWidget *>(widget));
   if (glWidget && m_glWidget != glWidget) {
     m_glWidget = glWidget;
+    // First the scene plugins need to be built/added.
     ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
     if (scenePluginModel.scenePlugins().empty()) {
       QList<QtGui::ScenePluginFactory *> scenePluginFactories =
@@ -694,6 +686,18 @@ void MainWindow::viewActivated(QWidget *widget)
       }
     }
     m_sceneTreeView->setModel(&m_glWidget->sceneModel());
+    if (!m_tools.isEmpty())
+      m_glWidget->setActiveTool(m_tools.first());
+    // Now for the tools.
+    QList<QtGui::ToolPluginFactory *> toolPluginFactories =
+        plugin->pluginFactories<QtGui::ToolPluginFactory>();
+    foreach (QtGui::ToolPluginFactory *factory, toolPluginFactories) {
+      QtGui::ToolPlugin *tool = factory->createInstance();
+      if (tool)
+        m_glWidget->addTool(tool);
+      m_glWidget->setDefaultTool(tr("Navigate tool"));
+      m_glWidget->setActiveTool(tr("Navigate tool"));
+    }
   }
 }
 
@@ -1057,19 +1061,31 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
     m_menuBuilder->addAction(extension->menuPath(action), action);
 }
 
-void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)
+void MainWindow::buildTools()
 {
+  QtPlugins::PluginManager *plugin = QtPlugins::PluginManager::instance();
+
+  // Now the tool plugins need to be built/added.
+  QList<QtGui::ToolPluginFactory *> toolPluginFactories =
+      plugin->pluginFactories<QtGui::ToolPluginFactory>();
+  foreach (QtGui::ToolPluginFactory *factory, toolPluginFactories) {
+    QtGui::ToolPlugin *tool = factory->createInstance();
+    if (tool)
+      m_tools << tool;
+  }
+
   QActionGroup *toolActions = new QActionGroup(this);
   int index = 0;
-  foreach (QtGui::ToolPlugin *toolPlugin, toolList) {
-    // Add action to toolbar
+  foreach (QtGui::ToolPlugin *toolPlugin, m_tools) {
+    // Add action to toolbar.
+    toolPlugin->setParent(this);
     QAction *action = toolPlugin->activateAction();
     if (action->parent() != toolPlugin)
       action->setParent(toolPlugin);
     action->setCheckable(true);
     if (index + 1 < 10)
       action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index + 1)));
-    action->setData(index);
+    action->setData(toolPlugin->name());
     toolActions->addAction(action);
     connect(action, SIGNAL(triggered()), SLOT(toolActivated()));
     ++index;
@@ -1077,12 +1093,12 @@ void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)
 
   m_toolToolBar->addActions(toolActions->actions());
 
-  /// @todo Where to put these? For now just throw them into the glwidget, but
-  /// we should have a better place for them (maybe a singleton ToolWrangler?)
-  m_glWidget->setTools(toolList);
-  m_glWidget->setDefaultTool(tr("Navigate tool"));
-  if (!toolList.isEmpty())
-    m_glWidget->setActiveTool(toolList.first());
+  if (m_glWidget) {
+    m_glWidget->setTools(m_tools);
+    m_glWidget->setDefaultTool(tr("Navigate tool"));
+    if (!m_tools.isEmpty())
+      m_glWidget->setActiveTool(m_tools.first());
+  }
 }
 
 QString MainWindow::extensionToWildCard(const QString &extension)
