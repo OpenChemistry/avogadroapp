@@ -357,17 +357,12 @@ void MainWindow::newMolecule()
 
 void MainWindow::setMolecule(QtGui::Molecule *mol)
 {
-  if (!mol || m_molecule == mol)
+  if (!mol)
     return;
-
-  if (!saveFileIfNeeded()) {
-    if (mol)
-      mol->deleteLater();
-    return;
-  }
 
   // Clear the scene to prevent dangling identifiers:
-  m_glWidget->clearScene();
+  if (mol != m_glWidget->molecule())
+    m_glWidget->clearScene();
 
   // Set the new molecule, ensure both molecules are in the model.
   if (m_molecule && !m_moleculeModel->molecules().contains(m_molecule))
@@ -394,9 +389,11 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   if (oldMolecule)
     oldMolecule->disconnect(this);
 
-  m_glWidget->setMolecule(m_molecule);
-  m_glWidget->updateScene();
-  m_glWidget->resetCamera();
+  if (mol != m_glWidget->molecule()) {
+    m_glWidget->setMolecule(m_molecule);
+    m_glWidget->updateScene();
+    m_glWidget->resetCamera();
+  }
 }
 
 void MainWindow::markMoleculeDirty()
