@@ -714,7 +714,9 @@ void MainWindow::viewActivated(QWidget *widget)
         }
       }
     }
+    m_molecule = m_glWidget->molecule();
   }
+  updateWindowTitle();
 }
 
 void MainWindow::reassignCustomElements()
