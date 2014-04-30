@@ -701,8 +701,22 @@ void MainWindow::viewActivated(QWidget *widget)
         m_glWidget->setActiveTool(tr("Navigate tool"));
       }
     }
-    if (firstRun)
+    if (firstRun) {
       m_glWidget->updateScene();
+    }
+    else {
+      // Figure out the active tool - reflect this in the toolbar.
+      QtGui::ToolPlugin *tool = m_glWidget->activeTool();
+      if (tool) {
+        QString name = tool->name();
+        foreach(QAction *action, m_toolToolBar->actions()) {
+          if (action->data().toString() == name)
+            action->setChecked(true);
+          else
+            action->setChecked(false);
+        }
+      }
+    }
   }
 }
 
