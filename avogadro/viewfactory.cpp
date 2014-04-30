@@ -17,6 +17,7 @@
 #include "viewfactory.h"
 
 #include <avogadro/qtopengl/glwidget.h>
+#include <avogadro/qtopengl/editglwidget.h>
 
 namespace Avogadro {
 
@@ -37,6 +38,8 @@ QWidget * ViewFactory::createView(const QString &view)
 {
   if (view == "3D View")
     return new QtOpenGL::GLWidget;
+  else if (view == "3D Editor")
+    return new QtOpenGL::EditGLWidget;
   return NULL;
 }
 

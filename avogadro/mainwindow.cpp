@@ -27,6 +27,7 @@
 #include <avogadro/io/fileformat.h>
 #include <avogadro/io/fileformatmanager.h>
 #include <avogadro/qtopengl/glwidget.h>
+#include <avogadro/qtopengl/editglwidget.h>
 #include <avogadro/qtplugins/pluginmanager.h>
 #include <avogadro/qtgui/customelementdialog.h>
 #include <avogadro/qtgui/fileformatdialog.h>
@@ -76,9 +77,6 @@
 #ifdef Avogadro_ENABLE_RPC
 # include <molequeue/client/client.h>
 #endif // Avogadro_ENABLE_RPC
-
-using Avogadro::Io::FileFormat;
-using Avogadro::Io::FileFormatManager;
 
 namespace Avogadro {
 
@@ -179,12 +177,24 @@ protected:
 };
 #endif
 
+using std::string;
+using std::vector;
+using Io::FileFormat;
+using Io::FileFormatManager;
 using QtGui::CustomElementDialog;
 using QtGui::FileFormatDialog;
 using QtGui::Molecule;
+using QtGui::RWMolecule;
+using QtGui::ScenePlugin;
+using QtGui::ScenePluginFactory;
 using QtGui::ScenePluginModel;
 using QtGui::ToolPlugin;
+using QtGui::ToolPluginFactory;
 using QtGui::ExtensionPlugin;
+using QtGui::ExtensionPluginFactory;
+using QtOpenGL::EditGLWidget;
+using QtOpenGL::GLWidget;
+using QtPlugins::PluginManager;
 
 MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   : m_molecule(NULL),
@@ -212,7 +222,7 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   readSettings();
 
   // Now load the plugins.
-  QtPlugins::PluginManager *plugin = QtPlugins::PluginManager::instance();
+  PluginManager *plugin = PluginManager::instance();
   plugin->load();
 
   // Now set up the interface.
@@ -221,11 +231,11 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
 
-  QList<QtGui::ExtensionPluginFactory *> extensions =
-      plugin->pluginFactories<QtGui::ExtensionPluginFactory>();
+  QList<ExtensionPluginFactory *> extensions =
+      plugin->pluginFactories<ExtensionPluginFactory>();
   qDebug() << "Extension plugins dynamically found..." << extensions.size();
-  foreach (QtGui::ExtensionPluginFactory *factory, extensions) {
-    QtGui::ExtensionPlugin *extension = factory->createInstance();
+  foreach (ExtensionPluginFactory *factory, extensions) {
+    ExtensionPlugin *extension = factory->createInstance();
     if (extension) {
       extension->setParent(this);
       connect(this, SIGNAL(moleculeChanged(QtGui::Molecule*)),
@@ -276,7 +286,7 @@ void MainWindow::setupInterface()
   m_multiViewWidget = new QtGui::MultiViewWidget(this);
   m_multiViewWidget->setFactory(m_viewFactory);
   setCentralWidget(m_multiViewWidget);
-  QtOpenGL::GLWidget *glWidget = new QtOpenGL::GLWidget(this);
+  GLWidget *glWidget = new GLWidget(this);
   m_multiViewWidget->addWidget(glWidget);
 
   // Our tool dock.
@@ -341,10 +351,9 @@ void MainWindow::closeEvent(QCloseEvent *e)
 
 void MainWindow::moleculeReady(int)
 {
-  QtGui::ExtensionPlugin *extension =
-      qobject_cast<QtGui::ExtensionPlugin *>(sender());
+  ExtensionPlugin *extension = qobject_cast<ExtensionPlugin *>(sender());
   if (extension) {
-    QtGui::Molecule *mol = new QtGui::Molecule(this);
+    Molecule *mol = new Molecule(this);
     if (extension->readMolecule(*mol))
       setMolecule(mol);
   }
@@ -352,10 +361,10 @@ void MainWindow::moleculeReady(int)
 
 void MainWindow::newMolecule()
 {
-  setMolecule(new QtGui::Molecule);
+  setMolecule(new Molecule(this));
 }
 
-void MainWindow::setMolecule(QtGui::Molecule *mol)
+void MainWindow::setMolecule(Molecule *mol)
 {
   if (!mol)
     return;
@@ -370,7 +379,7 @@ void MainWindow::setMolecule(QtGui::Molecule *mol)
   if (!m_moleculeModel->molecules().contains(mol))
     m_moleculeModel->addItem(mol);
 
-  QtGui::Molecule *oldMolecule(m_molecule);
+  Molecule *oldMolecule(m_molecule);
   m_molecule = mol;
 
   // If the molecule is empty, make the editor active. Otherwise, use the
@@ -480,7 +489,7 @@ void MainWindow::openFile()
 
   // Create one of our readers to read the file:
   QString extension = info.suffix().toLower();
-  Io::FileFormat *reader = NULL;
+  FileFormat *reader = NULL;
   if (extension == "cml")
     reader = new Io::CmlFormat;
   else if (extension == "cjson")
@@ -647,7 +656,7 @@ void MainWindow::toolActivated()
 
 void MainWindow::rendererInvalid()
 {
-  QtOpenGL::GLWidget *widget = qobject_cast<QtOpenGL::GLWidget *>(sender());
+  GLWidget *widget = qobject_cast<GLWidget *>(sender());
   QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
                        tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
                        .arg(widget ? widget->error() : tr("Unknown error")));
@@ -659,27 +668,28 @@ void MainWindow::rendererInvalid()
 
 void MainWindow::moleculeActivated(const QModelIndex &idx)
 {
-  QtGui::Molecule *mol =
-    qobject_cast<QtGui::Molecule *>(static_cast<QObject *>(idx.internalPointer()));
+  Molecule *mol =
+    qobject_cast<Molecule *>(static_cast<QObject *>(idx.internalPointer()));
   if (mol)
     setMolecule(mol);
 }
 
 void MainWindow::viewActivated(QWidget *widget)
 {
-  QtPlugins::PluginManager *plugin = QtPlugins::PluginManager::instance();
-  QtOpenGL::GLWidget *glWidget(qobject_cast<QtOpenGL::GLWidget *>(widget));
-  if (glWidget && m_glWidget != glWidget) {
+  PluginManager *plugin = PluginManager::instance();
+  if (GLWidget *glWidget = qobject_cast<GLWidget *>(widget)) {
+    if (m_glWidget == glWidget)
+      return;
     bool firstRun(false);
     m_glWidget = glWidget;
     // First the scene plugins need to be built/added.
     ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
     if (scenePluginModel.scenePlugins().empty()) {
       firstRun = true;
-      QList<QtGui::ScenePluginFactory *> scenePluginFactories =
-          plugin->pluginFactories<QtGui::ScenePluginFactory>();
-      foreach (QtGui::ScenePluginFactory *factory, scenePluginFactories) {
-        QtGui::ScenePlugin *scenePlugin = factory->createInstance();
+      QList<ScenePluginFactory *> scenePluginFactories =
+          plugin->pluginFactories<ScenePluginFactory>();
+      foreach (ScenePluginFactory *factory, scenePluginFactories) {
+        ScenePlugin *scenePlugin = factory->createInstance();
         if (scenePlugin)
           scenePluginModel.addItem(scenePlugin);
       }
@@ -688,10 +698,10 @@ void MainWindow::viewActivated(QWidget *widget)
 
     // Now for the tools.
     if (m_glWidget->tools().empty()) {
-      QList<QtGui::ToolPluginFactory *> toolPluginFactories =
-          plugin->pluginFactories<QtGui::ToolPluginFactory>();
-      foreach (QtGui::ToolPluginFactory *factory, toolPluginFactories) {
-        QtGui::ToolPlugin *tool = factory->createInstance();
+      QList<ToolPluginFactory *> toolPluginFactories =
+          plugin->pluginFactories<ToolPluginFactory>();
+      foreach (ToolPluginFactory *factory, toolPluginFactories) {
+        ToolPlugin *tool = factory->createInstance();
         if (tool)
           m_glWidget->addTool(tool);
         m_glWidget->setDefaultTool(tr("Navigate tool"));
@@ -703,7 +713,7 @@ void MainWindow::viewActivated(QWidget *widget)
     }
     else {
       // Figure out the active tool - reflect this in the toolbar.
-      QtGui::ToolPlugin *tool = m_glWidget->activeTool();
+      ToolPlugin *tool = m_glWidget->activeTool();
       if (tool) {
         QString name = tool->name();
         foreach(QAction *action, m_toolToolBar->actions()) {
@@ -714,9 +724,12 @@ void MainWindow::viewActivated(QWidget *widget)
         }
       }
     }
-    m_molecule = m_glWidget->molecule();
+    if (m_molecule != m_glWidget->molecule() && m_glWidget->molecule()) {
+      m_molecule = m_glWidget->molecule();
+      emit moleculeChanged(m_molecule);
+      updateWindowTitle();
+    }
   }
-  updateWindowTitle();
 }
 
 void MainWindow::reassignCustomElements()
@@ -731,9 +744,9 @@ void MainWindow::openRecentFile()
   if (action) {
     QString fileName = action->data().toString();
 
-    const Io::FileFormat *format = FileFormatDialog::findFileFormat(
+    const FileFormat *format = FileFormatDialog::findFileFormat(
           this, tr("Select file reader"), fileName,
-          Io::FileFormat::File | Io::FileFormat::Read);
+          FileFormat::File | FileFormat::Read);
 
     if(!openFile(fileName, format ? format->newInstance() : NULL)) {
       QMessageBox::information(this, tr("Cannot open file"),
@@ -769,7 +782,7 @@ bool MainWindow::saveFile(bool async)
   if (!m_molecule->hasData("fileName"))
     return saveFileAs(async);
 
-  std::string fileName = m_molecule->data("fileName").toString();
+  string fileName = m_molecule->data("fileName").toString();
   QString extension =
       QFileInfo(QString::fromStdString(fileName)).suffix().toLower();
 
@@ -836,7 +849,7 @@ bool MainWindow::saveFileAs(bool async)
 
   // Create one of our writers to save the file:
   QString extension = info.suffix().toLower();
-  Io::FileFormat *writer = NULL;
+  FileFormat *writer = NULL;
   if (extension == "cml")
     writer = new Io::CmlFormat;
   else if (extension == "cjson")
@@ -924,9 +937,9 @@ void MainWindow::setActiveTool(QString toolName)
 void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 {
   ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
-  foreach (QtGui::ScenePlugin *scene, scenePluginModel.scenePlugins())
+  foreach (ScenePlugin *scene, scenePluginModel.scenePlugins())
     scene->setEnabled(false);
-  foreach (QtGui::ScenePlugin *scene, scenePluginModel.scenePlugins())
+  foreach (ScenePlugin *scene, scenePluginModel.scenePlugins())
     foreach (const QString &name, displayTypes)
       if (scene->objectName() == name)
         scene->setEnabled(true);
@@ -1081,20 +1094,20 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
 
 void MainWindow::buildTools()
 {
-  QtPlugins::PluginManager *plugin = QtPlugins::PluginManager::instance();
+  PluginManager *plugin = PluginManager::instance();
 
   // Now the tool plugins need to be built/added.
-  QList<QtGui::ToolPluginFactory *> toolPluginFactories =
-      plugin->pluginFactories<QtGui::ToolPluginFactory>();
-  foreach (QtGui::ToolPluginFactory *factory, toolPluginFactories) {
-    QtGui::ToolPlugin *tool = factory->createInstance();
+  QList<ToolPluginFactory *> toolPluginFactories =
+      plugin->pluginFactories<ToolPluginFactory>();
+  foreach (ToolPluginFactory *factory, toolPluginFactories) {
+    ToolPlugin *tool = factory->createInstance();
     if (tool)
       m_tools << tool;
   }
 
   QActionGroup *toolActions = new QActionGroup(this);
   int index = 0;
-  foreach (QtGui::ToolPlugin *toolPlugin, m_tools) {
+  foreach (ToolPlugin *toolPlugin, m_tools) {
     // Add action to toolbar.
     toolPlugin->setParent(this);
     QAction *action = toolPlugin->activateAction();
@@ -1147,11 +1160,11 @@ QString MainWindow::generateFilterString(
 
   // Create a map that groups the file extensions by name:
   QMap<QString, QString> formatMap;
-  for (std::vector<const Io::FileFormat*>::const_iterator it = formats.begin(),
+  for (vector<const FileFormat*>::const_iterator it = formats.begin(),
        itEnd = formats.end(); it != itEnd; ++it) {
     QString name(QString::fromStdString((*it)->name()));
-    std::vector<std::string> exts = (*it)->fileExtensions();
-    for (std::vector<std::string>::const_iterator eit = exts.begin(),
+    vector<string> exts = (*it)->fileExtensions();
+    for (vector<string>::const_iterator eit = exts.begin(),
          eitEnd = exts.end(); eit != eitEnd; ++eit) {
       QString ext(QString::fromStdString(*eit));
       if (!formatMap.values(name).contains(ext)) {
@@ -1216,9 +1229,8 @@ void MainWindow::registerMoleQueue()
 
   // Get all extensions;
   typedef std::vector<std::string> StringList;
-  Io::FileFormatManager &ffm = Io::FileFormatManager::instance();
-  StringList exts = ffm.fileExtensions(Io::FileFormat::Read
-                                       | Io::FileFormat::File);
+  FileFormatManager &ffm = FileFormatManager::instance();
+  StringList exts = ffm.fileExtensions(FileFormat::Read | FileFormat::File);
 
   // Create patterns list
   QList<QRegExp> patterns;
@@ -1248,8 +1260,8 @@ void MainWindow::fileFormatsReady()
   ExtensionPlugin *extension(qobject_cast<ExtensionPlugin *>(sender()));
   if (!extension)
     return;
-  foreach (Io::FileFormat *format, extension->fileFormats()) {
-    if (!Io::FileFormatManager::registerFormat(format)) {
+  foreach (FileFormat *format, extension->fileFormats()) {
+    if (!FileFormatManager::registerFormat(format)) {
       qWarning() << tr("Error while loading FileFormat with id '%1'.")
                     .arg(QString::fromStdString(format->identifier()));
       // Need to delete the format if the manager didn't take ownership:
@@ -1265,9 +1277,9 @@ void MainWindow::readQueuedFiles()
   if (!m_queuedFiles.empty()) {
     QString file = m_queuedFiles.first();
     m_queuedFiles.removeFirst();
-    const Io::FileFormat *format = QtGui::FileFormatDialog::findFileFormat(
+    const FileFormat *format = QtGui::FileFormatDialog::findFileFormat(
           this, tr("Select file reader"), file,
-          Io::FileFormat::File | Io::FileFormat::Read, "Avogadro:");
+          FileFormat::File | FileFormat::Read, "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : NULL)) {
       QMessageBox::warning(this, tr("Cannot open file"),
