@@ -288,7 +288,7 @@ void MainWindow::setupInterface()
   m_multiViewWidget = new QtGui::MultiViewWidget(this);
   m_multiViewWidget->setFactory(m_viewFactory);
   setCentralWidget(m_multiViewWidget);
-  VTK::vtkGLWidget *glWidget = new VTK::vtkGLWidget(this);
+  GLWidget *glWidget = new GLWidget(this);
   m_multiViewWidget->addWidget(glWidget);
 
   // Our tool dock.
