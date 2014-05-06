@@ -18,6 +18,7 @@
 
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/qtopengl/editglwidget.h>
+#include <avogadro/vtk/vtkglwidget.h>
 
 namespace Avogadro {
 
@@ -31,7 +32,7 @@ ViewFactory::~ViewFactory()
 
 QStringList ViewFactory::views() const
 {
-  return QStringList() << "3D View" << "3D Editor";
+  return QStringList() << "3D View" << "3D Editor" << "VTK";
 }
 
 QWidget * ViewFactory::createView(const QString &view)
@@ -40,6 +41,8 @@ QWidget * ViewFactory::createView(const QString &view)
     return new QtOpenGL::GLWidget;
   else if (view == "3D Editor")
     return new QtOpenGL::EditGLWidget;
+  else if (view == "VTK")
+    return new VTK::vtkGLWidget;
   return NULL;
 }
 

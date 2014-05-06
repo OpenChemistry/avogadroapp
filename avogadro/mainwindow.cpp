@@ -78,6 +78,8 @@
 # include <molequeue/client/client.h>
 #endif // Avogadro_ENABLE_RPC
 
+#include <avogadro/vtk/vtkglwidget.h>
+
 namespace Avogadro {
 
 #ifdef QTTESTING
@@ -286,7 +288,7 @@ void MainWindow::setupInterface()
   m_multiViewWidget = new QtGui::MultiViewWidget(this);
   m_multiViewWidget->setFactory(m_viewFactory);
   setCentralWidget(m_multiViewWidget);
-  GLWidget *glWidget = new GLWidget(this);
+  VTK::vtkGLWidget *glWidget = new VTK::vtkGLWidget(this);
   m_multiViewWidget->addWidget(glWidget);
 
   // Our tool dock.
@@ -726,6 +728,35 @@ void MainWindow::viewActivated(QWidget *widget)
     }
     if (m_molecule != m_glWidget->molecule() && m_glWidget->molecule()) {
       m_molecule = m_glWidget->molecule();
+      emit moleculeChanged(m_molecule);
+      updateWindowTitle();
+    }
+  }
+  if (VTK::vtkGLWidget *glWidget = qobject_cast<VTK::vtkGLWidget*>(widget)) {
+    //if (m_glWidget == glWidget)
+    //  return;
+    bool firstRun(false);
+    //m_glWidget = glWidget;
+    // First the scene plugins need to be built/added.
+    ScenePluginModel &scenePluginModel = glWidget->sceneModel();
+    if (scenePluginModel.scenePlugins().empty()) {
+      firstRun = true;
+      QList<ScenePluginFactory *> scenePluginFactories =
+          plugin->pluginFactories<ScenePluginFactory>();
+      foreach (ScenePluginFactory *factory, scenePluginFactories) {
+        ScenePlugin *scenePlugin = factory->createInstance();
+        if (scenePlugin)
+          scenePluginModel.addItem(scenePlugin);
+      }
+    }
+    m_sceneTreeView->setModel(&glWidget->sceneModel());
+
+    glWidget->setMolecule(m_molecule);
+    if (firstRun) {
+      glWidget->updateScene();
+    }
+    if (m_molecule != glWidget->molecule() && glWidget->molecule()) {
+      m_molecule = glWidget->molecule();
       emit moleculeChanged(m_molecule);
       updateWindowTitle();
     }
