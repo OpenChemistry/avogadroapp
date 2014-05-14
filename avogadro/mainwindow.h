@@ -304,7 +304,6 @@ private:
   bool m_moleculeDirty;
 
   QtGui::MultiViewWidget *m_multiViewWidget;
-  QtOpenGL::GLWidget *m_glWidget;
   QTreeView *m_sceneTreeView;
   QTreeView *m_moleculeTreeView;
   QDockWidget *m_toolDock;

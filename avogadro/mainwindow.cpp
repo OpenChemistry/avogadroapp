@@ -332,11 +332,10 @@ void MainWindow::setupInterface()
   connect(m_moleculeTreeView, SIGNAL(activated(QModelIndex)),
           SLOT(moleculeActivated(QModelIndex)));
 
-  m_glWidget = NULL;
   viewActivated(glWidget);
   buildTools();
   // Connect to the invalid context signal, check whether GL is initialized.
-  connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
+  //connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
   connect(m_multiViewWidget, SIGNAL(activeWidgetChanged(QWidget*)),
           SLOT(viewActivated(QWidget*)));
 }
@@ -366,14 +365,18 @@ void MainWindow::newMolecule()
   setMolecule(new Molecule(this));
 }
 
+template <class T>
+void setWidgetMolecule(T *glWidget, Molecule *mol)
+{
+  glWidget->setMolecule(mol);
+  glWidget->updateScene();
+  glWidget->resetCamera();
+}
+
 void MainWindow::setMolecule(Molecule *mol)
 {
   if (!mol)
     return;
-
-  // Clear the scene to prevent dangling identifiers:
-  if (mol != m_glWidget->molecule())
-    m_glWidget->clearScene();
 
   // Set the new molecule, ensure both molecules are in the model.
   if (m_molecule && !m_moleculeModel->molecules().contains(m_molecule))
@@ -400,10 +403,14 @@ void MainWindow::setMolecule(Molecule *mol)
   if (oldMolecule)
     oldMolecule->disconnect(this);
 
-  if (mol != m_glWidget->molecule()) {
-    m_glWidget->setMolecule(m_molecule);
-    m_glWidget->updateScene();
-    m_glWidget->resetCamera();
+  // Check if the molecule needs to update the current one.
+  if (QtOpenGL::GLWidget *glWidget =
+      qobject_cast<QtOpenGL::GLWidget *>(m_multiViewWidget->activeWidget())) {
+    setWidgetMolecule(glWidget, mol);
+  }
+  else if (VTK::vtkGLWidget *vtkWidget =
+           qobject_cast<VTK::vtkGLWidget *>(m_multiViewWidget->activeWidget())) {
+    setWidgetMolecule(vtkWidget, mol);
   }
 }
 
@@ -646,10 +653,11 @@ bool MainWindow::backgroundWriterFinished()
 void MainWindow::toolActivated()
 {
   if (QAction *action = qobject_cast<QAction*>(sender())) {
-    if (m_glWidget) {
-      m_glWidget->setActiveTool(action->data().toString());
-      if (m_glWidget->activeTool()) {
-        m_toolDock->setWidget(m_glWidget->activeTool()->toolWidget());
+    if (QtOpenGL::GLWidget *glWidget =
+        qobject_cast<QtOpenGL::GLWidget *>(m_multiViewWidget->activeWidget())) {
+      glWidget->setActiveTool(action->data().toString());
+      if (glWidget->activeTool()) {
+        m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
       }
     }
@@ -680,12 +688,9 @@ void MainWindow::viewActivated(QWidget *widget)
 {
   PluginManager *plugin = PluginManager::instance();
   if (GLWidget *glWidget = qobject_cast<GLWidget *>(widget)) {
-    if (m_glWidget == glWidget)
-      return;
     bool firstRun(false);
-    m_glWidget = glWidget;
     // First the scene plugins need to be built/added.
-    ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
+    ScenePluginModel &scenePluginModel = glWidget->sceneModel();
     if (scenePluginModel.scenePlugins().empty()) {
       firstRun = true;
       QList<ScenePluginFactory *> scenePluginFactories =
@@ -696,26 +701,26 @@ void MainWindow::viewActivated(QWidget *widget)
           scenePluginModel.addItem(scenePlugin);
       }
     }
-    m_sceneTreeView->setModel(&m_glWidget->sceneModel());
+    m_sceneTreeView->setModel(&glWidget->sceneModel());
 
     // Now for the tools.
-    if (m_glWidget->tools().empty()) {
+    if (glWidget->tools().empty()) {
       QList<ToolPluginFactory *> toolPluginFactories =
           plugin->pluginFactories<ToolPluginFactory>();
       foreach (ToolPluginFactory *factory, toolPluginFactories) {
         ToolPlugin *tool = factory->createInstance();
         if (tool)
-          m_glWidget->addTool(tool);
-        m_glWidget->setDefaultTool(tr("Navigate tool"));
-        m_glWidget->setActiveTool(tr("Navigate tool"));
+          glWidget->addTool(tool);
+        glWidget->setDefaultTool(tr("Navigate tool"));
+        glWidget->setActiveTool(tr("Navigate tool"));
       }
     }
     if (firstRun) {
-      m_glWidget->updateScene();
+      glWidget->updateScene();
     }
     else {
       // Figure out the active tool - reflect this in the toolbar.
-      ToolPlugin *tool = m_glWidget->activeTool();
+      ToolPlugin *tool = glWidget->activeTool();
       if (tool) {
         QString name = tool->name();
         foreach(QAction *action, m_toolToolBar->actions()) {
@@ -726,15 +731,13 @@ void MainWindow::viewActivated(QWidget *widget)
         }
       }
     }
-    if (m_molecule != m_glWidget->molecule() && m_glWidget->molecule()) {
-      m_molecule = m_glWidget->molecule();
+    if (m_molecule != glWidget->molecule() && glWidget->molecule()) {
+      m_molecule = glWidget->molecule();
       emit moleculeChanged(m_molecule);
       updateWindowTitle();
     }
   }
   if (VTK::vtkGLWidget *glWidget = qobject_cast<VTK::vtkGLWidget*>(widget)) {
-    //if (m_glWidget == glWidget)
-    //  return;
     bool firstRun(false);
     //m_glWidget = glWidget;
     // First the scene plugins need to be built/added.
@@ -751,7 +754,6 @@ void MainWindow::viewActivated(QWidget *widget)
     }
     m_sceneTreeView->setModel(&glWidget->sceneModel());
 
-    glWidget->setMolecule(m_molecule);
     if (firstRun) {
       glWidget->updateScene();
     }
@@ -960,21 +962,37 @@ bool MainWindow::saveFileAs(const QString &fileName, Io::FileFormat *writer,
 
 void MainWindow::setActiveTool(QString toolName)
 {
-  foreach (ToolPlugin *toolPlugin, m_glWidget->tools())
-    if (toolPlugin->objectName() == toolName)
-      toolPlugin->activateAction()->trigger();
+  if (GLWidget *glWidget =
+      qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget())) {
+    foreach (ToolPlugin *toolPlugin, glWidget->tools())
+      if (toolPlugin->objectName() == toolName)
+        toolPlugin->activateAction()->trigger();
+  }
 }
 
 void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel &scenePluginModel = m_glWidget->sceneModel();
-  foreach (ScenePlugin *scene, scenePluginModel.scenePlugins())
+  ScenePluginModel *scenePluginModel(NULL);
+  GLWidget *glWidget(NULL);
+  VTK::vtkGLWidget *vtkWidget(NULL);
+  if ((glWidget = qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget()))) {
+    scenePluginModel = &glWidget->sceneModel();
+  }
+  else if ((vtkWidget =
+           qobject_cast<VTK::vtkGLWidget *>(m_multiViewWidget->activeWidget()))) {
+    scenePluginModel = &vtkWidget->sceneModel();
+  }
+
+  foreach (ScenePlugin *scene, scenePluginModel->scenePlugins())
     scene->setEnabled(false);
-  foreach (ScenePlugin *scene, scenePluginModel.scenePlugins())
+  foreach (ScenePlugin *scene, scenePluginModel->scenePlugins())
     foreach (const QString &name, displayTypes)
       if (scene->objectName() == name)
         scene->setEnabled(true);
-  m_glWidget->updateScene();
+  if (glWidget)
+    glWidget->updateScene();
+  else if (vtkWidget)
+    vtkWidget->updateScene();
 }
 
 #ifdef QTTESTING
@@ -1154,13 +1172,6 @@ void MainWindow::buildTools()
   }
 
   m_toolToolBar->addActions(toolActions->actions());
-
-  if (m_glWidget) {
-    m_glWidget->setTools(m_tools);
-    m_glWidget->setDefaultTool(tr("Navigate tool"));
-    if (!m_tools.isEmpty())
-      m_glWidget->setActiveTool(m_tools.first());
-  }
 }
 
 QString MainWindow::extensionToWildCard(const QString &extension)
