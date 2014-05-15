@@ -39,6 +39,7 @@
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/qtgui/moleculemodel.h>
 #include <avogadro/qtgui/multiviewwidget.h>
+#include <avogadro/qtgui/rwmolecule.h>
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
@@ -196,6 +197,7 @@ using QtGui::ExtensionPlugin;
 using QtGui::ExtensionPluginFactory;
 using QtOpenGL::EditGLWidget;
 using QtOpenGL::GLWidget;
+using VTK::vtkGLWidget;
 using QtPlugins::PluginManager;
 
 MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
@@ -300,6 +302,10 @@ void MainWindow::setupInterface()
   m_sceneTreeView = new QTreeView(sceneDock);
   sceneDock->setWidget(m_sceneTreeView);
   addDockWidget(Qt::LeftDockWidgetArea, sceneDock);
+
+  // Our view dock.
+  m_viewDock = new QDockWidget(tr("View Configuration"), this);
+  addDockWidget(Qt::LeftDockWidgetArea, m_viewDock);
 
   // Our molecule dock.
   QDockWidget *moleculeDock = new QDockWidget(tr("Molecules"), this);
@@ -664,6 +670,11 @@ void MainWindow::toolActivated()
   }
 }
 
+void MainWindow::viewConfigActivated()
+{
+
+}
+
 void MainWindow::rendererInvalid()
 {
   GLWidget *widget = qobject_cast<GLWidget *>(sender());
@@ -684,37 +695,48 @@ void MainWindow::moleculeActivated(const QModelIndex &idx)
     setMolecule(mol);
 }
 
+bool populatePluginModel(ScenePluginModel &model)
+{
+  if (!model.scenePlugins().empty())
+    return false;
+  PluginManager *plugin = PluginManager::instance();
+  QList<ScenePluginFactory *> scenePluginFactories =
+      plugin->pluginFactories<ScenePluginFactory>();
+  foreach (ScenePluginFactory *factory, scenePluginFactories) {
+    ScenePlugin *scenePlugin = factory->createInstance();
+    if (scenePlugin)
+      model.addItem(scenePlugin);
+  }
+  return true;
+}
+
+template<class T>
+bool populateTools(T* glWidget)
+{
+
+  if (!glWidget->tools().isEmpty())
+    return false;
+  PluginManager *plugin = PluginManager::instance();
+  QList<ToolPluginFactory *> toolPluginFactories =
+      plugin->pluginFactories<ToolPluginFactory>();
+  foreach (ToolPluginFactory *factory, toolPluginFactories) {
+    ToolPlugin *tool = factory->createInstance();
+    if (tool)
+      glWidget->addTool(tool);
+  }
+  glWidget->setDefaultTool(QObject::tr("Navigate tool"));
+  glWidget->setActiveTool(QObject::tr("Navigate tool"));
+  return true;
+}
+
 void MainWindow::viewActivated(QWidget *widget)
 {
-  PluginManager *plugin = PluginManager::instance();
-  if (GLWidget *glWidget = qobject_cast<GLWidget *>(widget)) {
-    bool firstRun(false);
-    // First the scene plugins need to be built/added.
-    ScenePluginModel &scenePluginModel = glWidget->sceneModel();
-    if (scenePluginModel.scenePlugins().empty()) {
-      firstRun = true;
-      QList<ScenePluginFactory *> scenePluginFactories =
-          plugin->pluginFactories<ScenePluginFactory>();
-      foreach (ScenePluginFactory *factory, scenePluginFactories) {
-        ScenePlugin *scenePlugin = factory->createInstance();
-        if (scenePlugin)
-          scenePluginModel.addItem(scenePlugin);
-      }
-    }
-    m_sceneTreeView->setModel(&glWidget->sceneModel());
 
-    // Now for the tools.
-    if (glWidget->tools().empty()) {
-      QList<ToolPluginFactory *> toolPluginFactories =
-          plugin->pluginFactories<ToolPluginFactory>();
-      foreach (ToolPluginFactory *factory, toolPluginFactories) {
-        ToolPlugin *tool = factory->createInstance();
-        if (tool)
-          glWidget->addTool(tool);
-        glWidget->setDefaultTool(tr("Navigate tool"));
-        glWidget->setActiveTool(tr("Navigate tool"));
-      }
-    }
+  if (GLWidget *glWidget = qobject_cast<GLWidget *>(widget)) {
+    bool firstRun = populatePluginModel(glWidget->sceneModel());
+    m_sceneTreeView->setModel(&glWidget->sceneModel());
+    populateTools(glWidget);
+
     if (firstRun) {
       glWidget->updateScene();
     }
@@ -737,28 +759,23 @@ void MainWindow::viewActivated(QWidget *widget)
       updateWindowTitle();
     }
   }
-  if (VTK::vtkGLWidget *glWidget = qobject_cast<VTK::vtkGLWidget*>(widget)) {
-    bool firstRun(false);
-    //m_glWidget = glWidget;
-    // First the scene plugins need to be built/added.
-    ScenePluginModel &scenePluginModel = glWidget->sceneModel();
-    if (scenePluginModel.scenePlugins().empty()) {
-      firstRun = true;
-      QList<ScenePluginFactory *> scenePluginFactories =
-          plugin->pluginFactories<ScenePluginFactory>();
-      foreach (ScenePluginFactory *factory, scenePluginFactories) {
-        ScenePlugin *scenePlugin = factory->createInstance();
-        if (scenePlugin)
-          scenePluginModel.addItem(scenePlugin);
-      }
+  else if (EditGLWidget *editWidget = qobject_cast<EditGLWidget *>(widget)) {
+    bool firstRun = populatePluginModel(editWidget->sceneModel());
+    m_sceneTreeView->setModel(&editWidget->sceneModel());
+    populateTools(editWidget);
+    if (firstRun) {
+      editWidget->setMolecule(new RWMolecule(this));
     }
-    m_sceneTreeView->setModel(&glWidget->sceneModel());
+  }
+  else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
+    bool firstRun = populatePluginModel(vtkWidget->sceneModel());
+    m_sceneTreeView->setModel(&vtkWidget->sceneModel());
 
     if (firstRun) {
-      glWidget->updateScene();
+      vtkWidget->updateScene();
     }
-    if (m_molecule != glWidget->molecule() && glWidget->molecule()) {
-      m_molecule = glWidget->molecule();
+    if (m_molecule != vtkWidget->molecule() && vtkWidget->molecule()) {
+      m_molecule = vtkWidget->molecule();
       emit moleculeChanged(m_molecule);
       updateWindowTitle();
     }

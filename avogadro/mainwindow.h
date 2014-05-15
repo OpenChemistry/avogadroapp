@@ -265,6 +265,12 @@ private slots:
   void toolActivated();
 
   /**
+   * @brief When a view configuration is activated let the user configure the
+   * view plugins properties.
+   */
+  void viewConfigActivated();
+
+  /**
    * @brief Triggered if a renderer cannot get a valid context.
    */
   void rendererInvalid();
@@ -307,6 +313,7 @@ private:
   QTreeView *m_sceneTreeView;
   QTreeView *m_moleculeTreeView;
   QDockWidget *m_toolDock;
+  QDockWidget *m_viewDock;
   QList<QtGui::ToolPlugin *> m_tools;
 
   ViewFactory *m_viewFactory;
