@@ -19,7 +19,6 @@
 #include <QtOpenGL/QGLFormat>
 
 #include "mainwindow.h"
-#include <avogadro/io/cmlformat.h>
 
 #ifdef Avogadro_ENABLE_RPC
 #include "rpclistener.h"

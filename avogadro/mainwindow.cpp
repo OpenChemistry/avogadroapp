@@ -659,11 +659,19 @@ bool MainWindow::backgroundWriterFinished()
 void MainWindow::toolActivated()
 {
   if (QAction *action = qobject_cast<QAction*>(sender())) {
-    if (QtOpenGL::GLWidget *glWidget =
-        qobject_cast<QtOpenGL::GLWidget *>(m_multiViewWidget->activeWidget())) {
+    if (GLWidget *glWidget =
+        qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget())) {
       glWidget->setActiveTool(action->data().toString());
       if (glWidget->activeTool()) {
         m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
+        m_toolDock->setWindowTitle(action->text());
+      }
+    }
+    if (EditGLWidget *editWidget =
+        qobject_cast<EditGLWidget *>(m_multiViewWidget->activeWidget())) {
+      editWidget->setActiveTool(action->data().toString());
+      if (editWidget->activeTool()) {
+        m_toolDock->setWidget(editWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
       }
     }
@@ -982,6 +990,12 @@ void MainWindow::setActiveTool(QString toolName)
   if (GLWidget *glWidget =
       qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget())) {
     foreach (ToolPlugin *toolPlugin, glWidget->tools())
+      if (toolPlugin->objectName() == toolName)
+        toolPlugin->activateAction()->trigger();
+  }
+  else if (EditGLWidget *editWidget =
+      qobject_cast<EditGLWidget *>(m_multiViewWidget->activeWidget())) {
+    foreach (ToolPlugin *toolPlugin, editWidget->tools())
       if (toolPlugin->objectName() == toolName)
         toolPlugin->activateAction()->trigger();
   }
