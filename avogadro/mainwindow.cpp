@@ -202,6 +202,7 @@ using QtPlugins::PluginManager;
 
 MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   : m_molecule(NULL),
+    m_rwMolecule(NULL),
     m_moleculeModel(NULL),
     m_queuedFilesStarted(false),
     m_menuBuilder(new MenuBuilder),
@@ -215,6 +216,7 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
     m_editToolBar(new QToolBar(this)),
     m_toolToolBar(new QToolBar(this)),
     m_moleculeDirty(false),
+    m_undo(NULL), m_redo(NULL),
     m_viewFactory(new ViewFactory)
 {
   // If disable settings, ensure we create a cleared QSettings object.
@@ -745,7 +747,7 @@ void MainWindow::moleculeActivated(const QModelIndex &idx)
     setMolecule(rwMol);
 }
 
-bool populatePluginModel(ScenePluginModel &model)
+bool populatePluginModel(ScenePluginModel &model, bool editOnly = false)
 {
   if (!model.scenePlugins().empty())
     return false;
@@ -754,8 +756,18 @@ bool populatePluginModel(ScenePluginModel &model)
       plugin->pluginFactories<ScenePluginFactory>();
   foreach (ScenePluginFactory *factory, scenePluginFactories) {
     ScenePlugin *scenePlugin = factory->createInstance();
-    if (scenePlugin)
+    if (editOnly && scenePlugin) {
+      if (scenePlugin->objectName() == "BallStick"
+          || scenePlugin->objectName() == "OverlayAxes") {
+        model.addItem(scenePlugin);
+      }
+      else {
+        delete scenePlugin;
+      }
+    }
+    else if (scenePlugin) {
       model.addItem(scenePlugin);
+    }
   }
   return true;
 }
@@ -807,14 +819,14 @@ void MainWindow::viewActivated(QWidget *widget)
       }
     }
     if (m_molecule != glWidget->molecule() && glWidget->molecule()) {
+      m_rwMolecule = 0;
       m_molecule = glWidget->molecule();
       emit moleculeChanged(m_molecule);
       m_moleculeModel->setActiveMolecule(m_molecule);
-      updateWindowTitle();
     }
   }
   else if (EditGLWidget *editWidget = qobject_cast<EditGLWidget *>(widget)) {
-    bool firstRun = populatePluginModel(editWidget->sceneModel());
+    bool firstRun = populatePluginModel(editWidget->sceneModel(), true);
     m_sceneTreeView->setModel(&editWidget->sceneModel());
     populateTools(editWidget);
 
@@ -827,6 +839,12 @@ void MainWindow::viewActivated(QWidget *widget)
       m_moleculeModel->setActiveMolecule(rwMol);
       editWidget->setMolecule(rwMol);
       editWidget->updateScene();
+      m_rwMolecule = rwMol;
+      m_molecule = NULL;
+      connect(&rwMol->undoStack(), SIGNAL(canRedoChanged(bool)),
+              m_redo, SLOT(setEnabled(bool)));
+      connect(&rwMol->undoStack(), SIGNAL(canUndoChanged(bool)),
+              m_undo, SLOT(setEnabled(bool)));
     }
     else {
       m_moleculeModel->setActiveMolecule(editWidget->molecule());
@@ -841,6 +859,12 @@ void MainWindow::viewActivated(QWidget *widget)
             action->setChecked(false);
         }
       }
+    }
+    if (m_rwMolecule != editWidget->molecule() && editWidget->molecule()) {
+      m_molecule = 0;
+      m_rwMolecule = editWidget->molecule();
+      //emit moleculeChanged(m_rwMolecule);
+      m_moleculeModel->setActiveMolecule(m_rwMolecule);
     }
   }
   else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
@@ -857,12 +881,14 @@ void MainWindow::viewActivated(QWidget *widget)
       m_moleculeModel->setActiveMolecule(vtkWidget->molecule());
     }
     if (m_molecule != vtkWidget->molecule() && vtkWidget->molecule()) {
+      m_rwMolecule = NULL;
       m_molecule = vtkWidget->molecule();
       emit moleculeChanged(m_molecule);
       m_moleculeModel->setActiveMolecule(m_molecule);
-      updateWindowTitle();
     }
   }
+  updateWindowTitle();
+  activeMoleculeEdited();
 }
 
 void MainWindow::reassignCustomElements()
@@ -1148,6 +1174,44 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
     vtkWidget->updateScene();
 }
 
+void MainWindow::undoEdit()
+{
+  if (m_rwMolecule) {
+    m_rwMolecule->undoStack().undo();
+    m_rwMolecule->emitChanged(Molecule::Atoms | Molecule::Added);
+    activeMoleculeEdited();
+  }
+}
+
+void MainWindow::redoEdit()
+{
+  if (m_rwMolecule) {
+    m_rwMolecule->undoStack().redo();
+    m_rwMolecule->emitChanged(Molecule::Atoms | Molecule::Added);
+    activeMoleculeEdited();
+  }
+}
+
+void MainWindow::activeMoleculeEdited()
+{
+  if (!m_undo || !m_redo)
+    return;
+  if (m_rwMolecule) {
+    if (m_rwMolecule->undoStack().canUndo())
+      m_undo->setEnabled(true);
+    else
+      m_undo->setEnabled(false);
+    if (m_rwMolecule->undoStack().canRedo())
+      m_redo->setEnabled(true);
+    else
+      m_redo->setEnabled(false);
+  }
+  else {
+    m_undo->setEnabled(false);
+    m_redo->setEnabled(false);
+  }
+}
+
 #ifdef QTTESTING
 void MainWindow::record()
 {
@@ -1254,6 +1318,22 @@ void MainWindow::buildMenu()
   action->setIcon(QIcon::fromTheme("application-exit"));
   m_menuBuilder->addAction(path, action, -200);
   connect(action, SIGNAL(triggered()), this, SLOT(close()));
+
+  // Undo/redo
+  QStringList editPath;
+  editPath << tr("&Edit");
+  m_undo = new QAction(tr("&Undo"), this);
+  m_undo->setIcon(QIcon::fromTheme("edit-undo"));
+  m_undo->setShortcut(QKeySequence("Ctrl+Z"));
+  m_redo = new QAction(tr("&Redo"), this);
+  m_redo->setIcon(QIcon::fromTheme("edit-redo"));
+  m_redo->setShortcut(QKeySequence("Ctrl+Shift+Z"));
+  m_undo->setEnabled(false);
+  m_redo->setEnabled(false);
+  connect(m_undo, SIGNAL(triggered()), SLOT(undoEdit()));
+  connect(m_redo, SIGNAL(triggered()), SLOT(redoEdit()));
+  m_menuBuilder->addAction(editPath, m_undo, 1);
+  m_menuBuilder->addAction(editPath, m_redo, 0);
 
   // Periodic table.
   QStringList extensionsPath;

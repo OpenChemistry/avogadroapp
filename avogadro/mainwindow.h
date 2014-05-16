@@ -210,6 +210,10 @@ protected slots:
    */
   void setActiveDisplayTypes(QStringList displayTypes);
 
+  void undoEdit();
+  void redoEdit();
+  void activeMoleculeEdited();
+
 #ifdef QTTESTING
 protected slots:
   void record();
@@ -289,6 +293,7 @@ private slots:
 
 private:
   QtGui::Molecule *m_molecule;
+  QtGui::RWMolecule *m_rwMolecule;
   QtGui::MoleculeModel *m_moleculeModel;
   bool m_queuedFilesStarted;
   QStringList m_queuedFiles;
@@ -318,6 +323,9 @@ private:
   QDockWidget *m_toolDock;
   QDockWidget *m_viewDock;
   QList<QtGui::ToolPlugin *> m_tools;
+
+  QAction *m_undo;
+  QAction *m_redo;
 
   ViewFactory *m_viewFactory;
 
