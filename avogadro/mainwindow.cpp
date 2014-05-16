@@ -212,6 +212,7 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
     m_progressDialog(NULL),
     m_fileReadMolecule(NULL),
     m_fileToolBar(new QToolBar(this)),
+    m_editToolBar(new QToolBar(this)),
     m_toolToolBar(new QToolBar(this)),
     m_moleculeDirty(false),
     m_viewFactory(new ViewFactory)
@@ -322,6 +323,7 @@ void MainWindow::setupInterface()
 
   m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   addToolBar(m_fileToolBar);
+  addToolBar(m_editToolBar);
   addToolBar(m_toolToolBar);
 
   // Create the scene plugin model
@@ -745,6 +747,8 @@ void MainWindow::viewActivated(QWidget *widget)
     m_sceneTreeView->setModel(&glWidget->sceneModel());
     populateTools(glWidget);
 
+    m_editToolBar->setDisabled(true);
+
     if (firstRun) {
       setActiveTool("Navigator");
       glWidget->updateScene();
@@ -774,6 +778,9 @@ void MainWindow::viewActivated(QWidget *widget)
     bool firstRun = populatePluginModel(editWidget->sceneModel());
     m_sceneTreeView->setModel(&editWidget->sceneModel());
     populateTools(editWidget);
+
+    m_editToolBar->setDisabled(false);
+
     if (firstRun) {
       setActiveTool("Editor");
       RWMolecule *rwMol = new RWMolecule(this);
@@ -800,6 +807,8 @@ void MainWindow::viewActivated(QWidget *widget)
   else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
     bool firstRun = populatePluginModel(vtkWidget->sceneModel());
     m_sceneTreeView->setModel(&vtkWidget->sceneModel());
+
+    m_editToolBar->setDisabled(true);
 
     if (firstRun) {
       setActiveTool("Navigator");
@@ -1227,23 +1236,32 @@ void MainWindow::buildTools()
       m_tools << tool;
   }
 
+  QActionGroup *editActions = new QActionGroup(this);
   QActionGroup *toolActions = new QActionGroup(this);
   int index = 0;
   foreach (ToolPlugin *toolPlugin, m_tools) {
     // Add action to toolbar.
     toolPlugin->setParent(this);
     QAction *action = toolPlugin->activateAction();
-    if (action->parent() != toolPlugin)
-      action->setParent(toolPlugin);
+    action->setParent(toolPlugin);
     action->setCheckable(true);
     if (index + 1 < 10)
       action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index + 1)));
     action->setData(toolPlugin->objectName());
-    toolActions->addAction(action);
+    if (toolPlugin->objectName() == "Editor"
+        || toolPlugin->objectName() == "Manipulator"
+        || toolPlugin->objectName() == "BondCentric") {
+      editActions->addAction(action);
+    }
+    else {
+      qDebug() << toolPlugin->objectName() << "added";
+      toolActions->addAction(action);
+    }
     connect(action, SIGNAL(triggered()), SLOT(toolActivated()));
     ++index;
   }
 
+  m_editToolBar->addActions(editActions->actions());
   m_toolToolBar->addActions(toolActions->actions());
 }
 

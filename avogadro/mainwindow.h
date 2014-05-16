@@ -305,6 +305,7 @@ private:
   QtGui::Molecule *m_fileReadMolecule;
 
   QToolBar *m_fileToolBar;
+  QToolBar *m_editToolBar;
   QToolBar *m_toolToolBar;
 
   bool m_moleculeDirty;
