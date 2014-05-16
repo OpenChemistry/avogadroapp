@@ -19,7 +19,6 @@
 #include <QtOpenGL/QGLFormat>
 
 #include "mainwindow.h"
-#include <avogadro/io/cmlformat.h>
 
 #ifdef Avogadro_ENABLE_RPC
 #include "rpclistener.h"
@@ -47,7 +46,7 @@ int main(int argc, char *argv[])
   defaultFormat.setSampleBuffers(true);
   QGLFormat::setDefaultFormat(defaultFormat);
 
-  QString fileName;
+  QStringList fileNames;
   bool disableSettings = false;
 #ifdef QTTESTING
   QString testFile;
@@ -80,11 +79,11 @@ int main(int argc, char *argv[])
       return EXIT_FAILURE;
     }
     else { // Assume it is a file name.
-      fileName = *it;
+      fileNames << *it;
     }
   }
 
-  Avogadro::MainWindow *window = new Avogadro::MainWindow(fileName,
+  Avogadro::MainWindow *window = new Avogadro::MainWindow(fileNames,
                                                           disableSettings);
 #ifdef QTTESTING
   window->playTest(testFile, testExit);

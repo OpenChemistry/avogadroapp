@@ -2,7 +2,7 @@
 
   This source file is part of the Avogadro project.
 
-  Copyright 2012-2013 Kitware, Inc.
+  Copyright 2012-2014 Kitware, Inc.
 
   This source code is released under the New BSD License, (the "License").
 
@@ -18,7 +18,7 @@
 #define AVOGADRO_MAINWINDOW_H
 
 #include <QtWidgets/QMainWindow>
-#include <QtCore/QString>
+#include <QtCore/QStringList>
 
 #ifdef QTTESTING
 class pqTestUtility;
@@ -26,14 +26,13 @@ class pqTestUtility;
 
 class QProgressDialog;
 class QThread;
-
-namespace Ui {
-class MainWindow;
-}
+class QTreeView;
 
 namespace Avogadro {
+
 class BackgroundFileFormat;
 class MenuBuilder;
+class ViewFactory;
 
 namespace QtOpenGL {
 class GLWidget;
@@ -48,6 +47,9 @@ class ScenePlugin;
 class ToolPlugin;
 class ExtensionPlugin;
 class Molecule;
+class MoleculeModel;
+class MultiViewWidget;
+class RWMolecule;
 }
 
 /**
@@ -62,11 +64,12 @@ class MainWindow : public QMainWindow
 {
 Q_OBJECT
 public:
-  MainWindow(const QString &filename = QString(), bool disableSettings = false);
+  MainWindow(const QStringList &fileNames, bool disableSettings = false);
   ~MainWindow();
 
 public slots:
   void setMolecule(Avogadro::QtGui::Molecule *molecule);
+  void setMolecule(Avogadro::QtGui::RWMolecule *molecule);
 
   /**
    * Update internal state to reflect that the molecule has been modified.
@@ -207,6 +210,10 @@ protected slots:
    */
   void setActiveDisplayTypes(QStringList displayTypes);
 
+  void undoEdit();
+  void redoEdit();
+  void activeMoleculeEdited();
+
 #ifdef QTTESTING
 protected slots:
   void record();
@@ -264,14 +271,32 @@ private slots:
   void toolActivated();
 
   /**
+   * @brief When a view configuration is activated let the user configure the
+   * view plugins properties.
+   */
+  void viewConfigActivated();
+
+  /**
    * @brief Triggered if a renderer cannot get a valid context.
    */
   void rendererInvalid();
 
+  /**
+   * @brief Change the active molecule
+   */
+  void moleculeActivated(const QModelIndex &index);
+
+  /**
+   * @brief Change the active view widget, initialize plugins if needed.
+   */
+  void viewActivated(QWidget *widget);
+
 private:
-  Ui::MainWindow *m_ui;
   QtGui::Molecule *m_molecule;
-  QList<QString> m_queuedFiles;
+  QtGui::RWMolecule *m_rwMolecule;
+  QtGui::MoleculeModel *m_moleculeModel;
+  bool m_queuedFilesStarted;
+  QStringList m_queuedFiles;
 
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
@@ -287,15 +312,33 @@ private:
   QtGui::Molecule *m_fileReadMolecule;
 
   QToolBar *m_fileToolBar;
+  QToolBar *m_editToolBar;
   QToolBar *m_toolToolBar;
 
   bool m_moleculeDirty;
+
+  QtGui::MultiViewWidget *m_multiViewWidget;
+  QTreeView *m_sceneTreeView;
+  QTreeView *m_moleculeTreeView;
+  QDockWidget *m_toolDock;
+  QDockWidget *m_viewDock;
+  QList<QtGui::ToolPlugin *> m_tools;
+
+  QAction *m_undo;
+  QAction *m_redo;
+
+  ViewFactory *m_viewFactory;
 
 #ifdef QTTESTING
   pqTestUtility *m_testUtility;
   QString m_testFile;
   bool m_testExit;
 #endif
+
+  /**
+   * Set up the main window widgets, connect signals and slots, etc.
+   */
+  void setupInterface();
 
   /** Show a dialog to remap custom elements, if present. */
   void reassignCustomElements();
@@ -313,7 +356,7 @@ private:
   /**
    * Initialize the tool plugins.
    */
-  void buildTools(QList<Avogadro::QtGui::ToolPlugin *> toolList);
+  void buildTools();
 
   /**
    * Convenience function that converts a file extension to a wildcard
@@ -326,15 +369,15 @@ private:
   /**
    * Convenience function to generate a filter string for the supplied formats.
    */
-  QString generateFilterString(
-      const std::vector<const Io::FileFormat *> &formats,
-      bool addAllEntry = true);
+  QString generateFilterString(const std::vector<const Io::FileFormat *> &formats,
+                               bool addAllEntry = true);
 
   /**
    * Prompt to save the current molecule if is has been modified. Returns false
    * if the molecule is not saved, or the user cancels.
    */
   bool saveFileIfNeeded();
+
 };
 
 } // End Avogadro namespace

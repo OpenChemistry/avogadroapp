@@ -2,7 +2,7 @@
 
   This source file is part of the Avogadro project.
 
-  Copyright 2012 Kitware, Inc.
+  Copyright 2012-2014 Kitware, Inc.
 
   This source code is released under the New BSD License, (the "License").
 
@@ -15,19 +15,19 @@
 ******************************************************************************/
 
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include "aboutdialog.h"
 #include "menubuilder.h"
 #include "backgroundfileformat.h"
 #include "avogadroappconfig.h"
+#include "viewfactory.h"
 
-#include <avogadro/qtgui/molecule.h>
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cjsonformat.h>
 #include <avogadro/io/cmlformat.h>
 #include <avogadro/io/fileformat.h>
 #include <avogadro/io/fileformatmanager.h>
 #include <avogadro/qtopengl/glwidget.h>
+#include <avogadro/qtopengl/editglwidget.h>
 #include <avogadro/qtplugins/pluginmanager.h>
 #include <avogadro/qtgui/customelementdialog.h>
 #include <avogadro/qtgui/fileformatdialog.h>
@@ -36,10 +36,14 @@
 #include <avogadro/qtgui/toolplugin.h>
 #include <avogadro/qtgui/extensionplugin.h>
 #include <avogadro/qtgui/periodictableview.h>
+#include <avogadro/qtgui/molecule.h>
+#include <avogadro/qtgui/moleculemodel.h>
+#include <avogadro/qtgui/multiviewwidget.h>
+#include <avogadro/qtgui/rwmolecule.h>
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
-#include <QtCore/QCoreApplication>
+#include <QtWidgets/QApplication>
 #include <QtCore/QString>
 #include <QtCore/QDebug>
 #include <QtCore/QFileInfo>
@@ -56,6 +60,7 @@
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QHBoxLayout>
 
 #include <QtWidgets/QDockWidget>
 #include <QtWidgets/QTreeView>
@@ -71,11 +76,10 @@
 #endif
 
 #ifdef Avogadro_ENABLE_RPC
-#include <molequeue/client/client.h>
+# include <molequeue/client/client.h>
 #endif // Avogadro_ENABLE_RPC
 
-using Avogadro::Io::FileFormat;
-using Avogadro::Io::FileFormatManager;
+#include <avogadro/vtk/vtkglwidget.h>
 
 namespace Avogadro {
 
@@ -120,7 +124,7 @@ protected:
   virtual void onRecordEvent(const QString& widget, const QString& command,
                              const QString& arguments)
   {
-    if(this->XMLStream) {
+    if (this->XMLStream) {
       this->XMLStream->writeStartElement("event");
       this->XMLStream->writeAttribute("widget", widget);
       this->XMLStream->writeAttribute("command", command);
@@ -176,16 +180,31 @@ protected:
 };
 #endif
 
+using std::string;
+using std::vector;
+using Io::FileFormat;
+using Io::FileFormatManager;
 using QtGui::CustomElementDialog;
 using QtGui::FileFormatDialog;
 using QtGui::Molecule;
+using QtGui::RWMolecule;
+using QtGui::ScenePlugin;
+using QtGui::ScenePluginFactory;
 using QtGui::ScenePluginModel;
 using QtGui::ToolPlugin;
+using QtGui::ToolPluginFactory;
 using QtGui::ExtensionPlugin;
+using QtGui::ExtensionPluginFactory;
+using QtOpenGL::EditGLWidget;
+using QtOpenGL::GLWidget;
+using VTK::vtkGLWidget;
+using QtPlugins::PluginManager;
 
-MainWindow::MainWindow(const QString &fileName, bool disableSettings)
-  : m_ui(new Ui::MainWindow),
-    m_molecule(0),
+MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
+  : m_molecule(NULL),
+    m_rwMolecule(NULL),
+    m_moleculeModel(NULL),
+    m_queuedFilesStarted(false),
     m_menuBuilder(new MenuBuilder),
     m_fileReadThread(NULL),
     m_fileWriteThread(NULL),
@@ -194,32 +213,12 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
     m_progressDialog(NULL),
     m_fileReadMolecule(NULL),
     m_fileToolBar(new QToolBar(this)),
+    m_editToolBar(new QToolBar(this)),
     m_toolToolBar(new QToolBar(this)),
-    m_moleculeDirty(false)
+    m_moleculeDirty(false),
+    m_undo(NULL), m_redo(NULL),
+    m_viewFactory(new ViewFactory)
 {
-  m_ui->setupUi(this);
-
-  // Switch to our fallback icons if there are no platform-specific icons.
-  if (!QIcon::hasThemeIcon("document-new"))
-    QIcon::setThemeName("fallback");
-
-  QIcon icon(":/icons/avogadro.png");
-  setWindowIcon(icon);
-
-  m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-  addToolBar(m_fileToolBar);
-  addToolBar(m_toolToolBar);
-
-  // Create the scene plugin model
-  ScenePluginModel &scenePluginModel = m_ui->glWidget->sceneModel();
-  m_ui->scenePluginTreeView->setModel(&scenePluginModel);
-  m_ui->scenePluginTreeView->setAlternatingRowColors(true);
-  m_ui->scenePluginTreeView->header()->stretchLastSection();
-  m_ui->scenePluginTreeView->header()->setVisible(false);
-
-  // Connect to the invalid context signal, check whether GL is initialized.
-  connect(m_ui->glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
-
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
     QSettings settings;
@@ -229,41 +228,21 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   // The default settings will be used if everything was cleared.
   readSettings();
 
-  QtPlugins::PluginManager *plugin = QtPlugins::PluginManager::instance();
+  // Now load the plugins.
+  PluginManager *plugin = PluginManager::instance();
   plugin->load();
 
-  QList<QtGui::ToolPluginFactory *> toolPluginFactories =
-      plugin->pluginFactories<QtGui::ToolPluginFactory>();
-  QList<QtGui::ToolPlugin*> toolPlugins;
-  foreach (QtGui::ToolPluginFactory *factory, toolPluginFactories) {
-    QtGui::ToolPlugin *tool = factory->createInstance();
-    if (tool)
-      toolPlugins << tool;
-  }
-  buildTools(toolPlugins);
-
-  QList<QtGui::ScenePluginFactory *> scenePluginFactories =
-      plugin->pluginFactories<QtGui::ScenePluginFactory>();
-  foreach (QtGui::ScenePluginFactory *factory, scenePluginFactories) {
-    QtGui::ScenePlugin *scenePlugin = factory->createInstance();
-    if (scenePlugin)
-      scenePluginModel.addItem(scenePlugin);
-  }
-
-  QMenu *menuTop = menuBar()->addMenu(tr("&Extensions"));
-  QAction *showPeriodicTable = new QAction("&Periodic Table", this);
-  menuTop->addAction(showPeriodicTable);
-  QtGui::PeriodicTableView *periodicTable = new QtGui::PeriodicTableView(this);
-  connect(showPeriodicTable, SIGNAL(triggered()), periodicTable, SLOT(show()));
+  // Now set up the interface.
+  setupInterface();
 
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
 
-  QList<QtGui::ExtensionPluginFactory *> extensions =
-      plugin->pluginFactories<QtGui::ExtensionPluginFactory>();
+  QList<ExtensionPluginFactory *> extensions =
+      plugin->pluginFactories<ExtensionPluginFactory>();
   qDebug() << "Extension plugins dynamically found..." << extensions.size();
-  foreach (QtGui::ExtensionPluginFactory *factory, extensions) {
-    QtGui::ExtensionPlugin *extension = factory->createInstance();
+  foreach (ExtensionPluginFactory *factory, extensions) {
+    ExtensionPlugin *extension = factory->createInstance();
     if (extension) {
       extension->setParent(this);
       connect(this, SIGNAL(moleculeChanged(QtGui::Molecule*)),
@@ -282,21 +261,18 @@ MainWindow::MainWindow(const QString &fileName, bool disableSettings)
   buildMenu();
   updateRecentFiles();
 
-  // Try to open the file passed in. If opening fails, create a new molecule.
-  if (!fileName.isEmpty()) {
-    m_queuedFiles.append(fileName);
+  // Try to open the file(s) passed in.
+  if (!fileNames.isEmpty()) {
+    m_queuedFiles = fileNames;
     // Give the plugins 5 seconds before timing out queued files.
     QTimer::singleShot(5000, this, SLOT(clearQueuedFiles()));
-    readQueuedFiles();
   }
 
 #ifdef Avogadro_ENABLE_RPC
   // Wait a few seconds to attempt registering with MoleQueue.
-  QTimer::singleShot(5000, this, SLOT(registerMoleQueue()));
+  QTimer::singleShot(3000, this, SLOT(registerMoleQueue()));
 #endif // Avogadro_ENABLE_RPC
 
-  if (!m_molecule)
-    newMolecule();
   statusBar()->showMessage(tr("Ready..."), 2000);
 
   updateWindowTitle();
@@ -307,6 +283,71 @@ MainWindow::~MainWindow()
   writeSettings();
   delete m_molecule;
   delete m_menuBuilder;
+  delete m_viewFactory;
+}
+
+void MainWindow::setupInterface()
+{
+  // We take care of setting up the main interface here, along with any custom
+  // pieces that might be added for saved settings etc.
+  m_multiViewWidget = new QtGui::MultiViewWidget(this);
+  m_multiViewWidget->setFactory(m_viewFactory);
+  setCentralWidget(m_multiViewWidget);
+  GLWidget *glWidget = new GLWidget(this);
+  m_multiViewWidget->addWidget(glWidget);
+
+  // Our tool dock.
+  m_toolDock = new QDockWidget(tr("Tool"), this);
+  addDockWidget(Qt::LeftDockWidgetArea, m_toolDock);
+
+  // Our scene/view dock.
+  QDockWidget *sceneDock = new QDockWidget(tr("Display Types"), this);
+  m_sceneTreeView = new QTreeView(sceneDock);
+  sceneDock->setWidget(m_sceneTreeView);
+  addDockWidget(Qt::LeftDockWidgetArea, sceneDock);
+
+  // Our view dock.
+  m_viewDock = new QDockWidget(tr("View Configuration"), this);
+  addDockWidget(Qt::LeftDockWidgetArea, m_viewDock);
+
+  // Our molecule dock.
+  QDockWidget *moleculeDock = new QDockWidget(tr("Molecules"), this);
+  m_moleculeTreeView = new QTreeView(moleculeDock);
+  moleculeDock->setWidget(m_moleculeTreeView);
+  addDockWidget(Qt::LeftDockWidgetArea, moleculeDock);
+
+  // Switch to our fallback icons if there are no platform-specific icons.
+  if (!QIcon::hasThemeIcon("document-new"))
+    QIcon::setThemeName("fallback");
+
+  QIcon icon(":/icons/avogadro.png");
+  setWindowIcon(icon);
+
+  m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  addToolBar(m_fileToolBar);
+  addToolBar(m_editToolBar);
+  addToolBar(m_toolToolBar);
+
+  // Create the scene plugin model
+  m_sceneTreeView->setAlternatingRowColors(true);
+  m_sceneTreeView->header()->stretchLastSection();
+  m_sceneTreeView->header()->setVisible(false);
+
+  // Create the molecule model
+  m_moleculeModel = new QtGui::MoleculeModel(this);
+  m_moleculeTreeView->setModel(m_moleculeModel);
+  m_moleculeTreeView->setAlternatingRowColors(true);
+  m_moleculeTreeView->header()->stretchLastSection();
+  m_moleculeTreeView->header()->setVisible(false);
+  connect(m_moleculeTreeView, SIGNAL(activated(QModelIndex)),
+          SLOT(moleculeActivated(QModelIndex)));
+
+  viewActivated(glWidget);
+  buildTools();
+  // Connect to the invalid context signal, check whether GL is initialized.
+  //connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
+  connect(m_multiViewWidget, SIGNAL(activeWidgetChanged(QWidget*)),
+          SLOT(viewActivated(QWidget*)));
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)
@@ -321,10 +362,9 @@ void MainWindow::closeEvent(QCloseEvent *e)
 
 void MainWindow::moleculeReady(int)
 {
-  QtGui::ExtensionPlugin *extension =
-      qobject_cast<QtGui::ExtensionPlugin *>(sender());
+  ExtensionPlugin *extension = qobject_cast<ExtensionPlugin *>(sender());
   if (extension) {
-    QtGui::Molecule *mol = new QtGui::Molecule(this);
+    Molecule *mol = new Molecule(this);
     if (extension->readMolecule(*mol))
       setMolecule(mol);
   }
@@ -332,50 +372,95 @@ void MainWindow::moleculeReady(int)
 
 void MainWindow::newMolecule()
 {
-  setMolecule(new QtGui::Molecule);
+  setMolecule(new Molecule(this));
 }
 
-void MainWindow::setMolecule(QtGui::Molecule *mol)
+template <class T, class M>
+void setWidgetMolecule(T *glWidget, M *mol)
 {
-  if (m_molecule == mol)
+  glWidget->setMolecule(mol);
+  glWidget->updateScene();
+  glWidget->resetCamera();
+}
+
+void MainWindow::setMolecule(Molecule *mol)
+{
+  if (!mol)
     return;
 
-  if (!saveFileIfNeeded()) {
-    if (mol)
-      mol->deleteLater();
-    return;
-  }
+  // Set the new molecule, ensure both molecules are in the model.
+  if (m_molecule && !m_moleculeModel->molecules().contains(m_molecule))
+    m_moleculeModel->addItem(m_molecule);
+  if (!m_moleculeModel->molecules().contains(mol))
+    m_moleculeModel->addItem(mol);
 
-  // Clear the scene to prevent dangling identifiers:
-  m_ui->glWidget->clearScene();
-
-  // Set molecule. Wait until after emitting MoleculeChanged to delete the
-  // old one.
-  QtGui::Molecule *oldMolecule(m_molecule);
+  Molecule *oldMolecule(m_molecule);
   m_molecule = mol;
 
   // If the molecule is empty, make the editor active. Otherwise, use the
   // navigator tool.
   if (m_molecule) {
-    QString targetToolName = m_molecule->atomCount() > 0 ? "Navigator"
-                                                         : "Editor";
-    setActiveTool(targetToolName);
+    //QString targetToolName = m_molecule->atomCount() > 0 ? "Navigator"
+    //                                                     : "Editor";
+    //setActiveTool(targetToolName);
     connect(m_molecule, SIGNAL(changed(uint)), SLOT(markMoleculeDirty()));
   }
-
 
   emit moleculeChanged(m_molecule);
   markMoleculeClean();
   updateWindowTitle();
+  m_moleculeModel->setActiveMolecule(m_molecule);
 
-  if (oldMolecule) {
+  if (oldMolecule)
     oldMolecule->disconnect(this);
-    oldMolecule->deleteLater();
-  }
 
-  m_ui->glWidget->setMolecule(m_molecule);
-  m_ui->glWidget->updateScene();
-  m_ui->glWidget->resetCamera();
+  // Check if the molecule needs to update the current one.
+  QWidget *w = m_multiViewWidget->activeWidget();
+  if (GLWidget *glWidget = qobject_cast<QtOpenGL::GLWidget *>(w)) {
+    setWidgetMolecule(glWidget, mol);
+  }
+  else if (EditGLWidget *editWidget = qobject_cast<EditGLWidget *>(w)) {
+    RWMolecule *rwMol = new RWMolecule(*mol, this);
+    qDebug() << "rwMol with" << rwMol->atomCount() << "atoms";
+    m_moleculeModel->addItem(rwMol);
+    m_moleculeModel->setActiveMolecule(rwMol);
+    setWidgetMolecule(editWidget, rwMol);
+  }
+  else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget *>(w)) {
+    setWidgetMolecule(vtkWidget, mol);
+  }
+}
+
+void MainWindow::setMolecule(RWMolecule *rwMol)
+{
+  if (!rwMol)
+    return;
+
+  // It will ensure the molecule is unique.
+  m_moleculeModel->addItem(rwMol);
+
+  //emit moleculeChanged(m_molecule);
+  //markMoleculeClean();
+  //updateWindowTitle();
+  m_moleculeModel->setActiveMolecule(rwMol);
+
+  // Check if the molecule needs to update the current one.
+  QWidget *w = m_multiViewWidget->activeWidget();
+  if (GLWidget *glWidget = qobject_cast<QtOpenGL::GLWidget *>(w)) {
+    Molecule *mol = new Molecule(*rwMol, this);
+    m_moleculeModel->addItem(mol);
+    m_moleculeModel->setActiveMolecule(mol);
+    setWidgetMolecule(glWidget, mol);
+  }
+  else if (EditGLWidget *editWidget = qobject_cast<EditGLWidget *>(w)) {
+    setWidgetMolecule(editWidget, rwMol);
+  }
+  else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget *>(w)) {
+    Molecule *mol = new Molecule(*rwMol, this);
+    m_moleculeModel->addItem(mol);
+    m_moleculeModel->setActiveMolecule(mol);
+    setWidgetMolecule(vtkWidget, mol);
+  }
 }
 
 void MainWindow::markMoleculeDirty()
@@ -462,7 +547,7 @@ void MainWindow::openFile()
 
   // Create one of our readers to read the file:
   QString extension = info.suffix().toLower();
-  Io::FileFormat *reader = NULL;
+  FileFormat *reader = NULL;
   if (extension == "cml")
     reader = new Io::CmlFormat;
   else if (extension == "cjson")
@@ -561,7 +646,7 @@ void MainWindow::backgroundReaderFinished()
     setMolecule(m_fileReadMolecule);
     statusBar()->showMessage(tr("Molecule loaded (%1 atoms, %2 bonds)")
                              .arg(m_molecule->atomCount())
-                             .arg(m_molecule->bondCount()), 2500);
+                             .arg(m_molecule->bondCount()), 5000);
   }
   else {
     QMessageBox::critical(this, tr("File error"),
@@ -580,6 +665,9 @@ void MainWindow::backgroundReaderFinished()
   m_progressDialog = NULL;
 
   reassignCustomElements();
+
+  if (!m_queuedFiles.empty())
+    readQueuedFiles();
 }
 
 bool MainWindow::backgroundWriterFinished()
@@ -590,7 +678,7 @@ bool MainWindow::backgroundWriterFinished()
     if (m_threadedWriter->success()) {
       statusBar()->showMessage(tr("File written: %1")
                                .arg(fileName));
-      m_molecule->setData("fileName", fileName.toStdString());
+      m_threadedWriter->molecule()->setData("fileName", fileName.toStdString());
       markMoleculeClean();
       updateWindowTitle();
       success = true;
@@ -614,23 +702,33 @@ bool MainWindow::backgroundWriterFinished()
 void MainWindow::toolActivated()
 {
   if (QAction *action = qobject_cast<QAction*>(sender())) {
-    if (ToolPlugin *toolPlugin = qobject_cast<ToolPlugin*>(action->parent())) {
-      if (m_ui->glWidget->tools().contains(toolPlugin)) {
-        bool ok;
-        int index = action->data().toInt(&ok);
-        if (ok && index < m_ui->toolWidgetStack->count()) {
-          m_ui->glWidget->setActiveTool(toolPlugin);
-          m_ui->toolWidgetStack->setCurrentIndex(index);
-          m_ui->toolName->setText(action->text());
-        }
+    if (GLWidget *glWidget =
+        qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget())) {
+      glWidget->setActiveTool(action->data().toString());
+      if (glWidget->activeTool()) {
+        m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
+        m_toolDock->setWindowTitle(action->text());
+      }
+    }
+    if (EditGLWidget *editWidget =
+        qobject_cast<EditGLWidget *>(m_multiViewWidget->activeWidget())) {
+      editWidget->setActiveTool(action->data().toString());
+      if (editWidget->activeTool()) {
+        m_toolDock->setWidget(editWidget->activeTool()->toolWidget());
+        m_toolDock->setWindowTitle(action->text());
       }
     }
   }
 }
 
+void MainWindow::viewConfigActivated()
+{
+
+}
+
 void MainWindow::rendererInvalid()
 {
-  QtOpenGL::GLWidget *widget = qobject_cast<QtOpenGL::GLWidget *>(sender());
+  GLWidget *widget = qobject_cast<GLWidget *>(sender());
   QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
                        tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
                        .arg(widget ? widget->error() : tr("Unknown error")));
@@ -638,6 +736,159 @@ void MainWindow::rendererInvalid()
   // the RPC server also exits cleanly.
   QApplication::processEvents();
   QTimer::singleShot(500, this, SLOT(close()));
+}
+
+void MainWindow::moleculeActivated(const QModelIndex &idx)
+{
+  QObject *obj = static_cast<QObject *>(idx.internalPointer());
+  if (Molecule *mol = qobject_cast<Molecule *>(obj))
+    setMolecule(mol);
+  else if (RWMolecule *rwMol = qobject_cast<RWMolecule *>(obj))
+    setMolecule(rwMol);
+}
+
+bool populatePluginModel(ScenePluginModel &model, bool editOnly = false)
+{
+  if (!model.scenePlugins().empty())
+    return false;
+  PluginManager *plugin = PluginManager::instance();
+  QList<ScenePluginFactory *> scenePluginFactories =
+      plugin->pluginFactories<ScenePluginFactory>();
+  foreach (ScenePluginFactory *factory, scenePluginFactories) {
+    ScenePlugin *scenePlugin = factory->createInstance();
+    if (editOnly && scenePlugin) {
+      if (scenePlugin->objectName() == "BallStick"
+          || scenePlugin->objectName() == "OverlayAxes") {
+        model.addItem(scenePlugin);
+      }
+      else {
+        delete scenePlugin;
+      }
+    }
+    else if (scenePlugin) {
+      model.addItem(scenePlugin);
+    }
+  }
+  return true;
+}
+
+template<class T>
+bool populateTools(T* glWidget)
+{
+  if (!glWidget->tools().isEmpty())
+    return false;
+  PluginManager *plugin = PluginManager::instance();
+  QList<ToolPluginFactory *> toolPluginFactories =
+      plugin->pluginFactories<ToolPluginFactory>();
+  foreach (ToolPluginFactory *factory, toolPluginFactories) {
+    ToolPlugin *tool = factory->createInstance();
+    if (tool)
+      glWidget->addTool(tool);
+  }
+  glWidget->setDefaultTool(QObject::tr("Navigate tool"));
+  glWidget->setActiveTool(QObject::tr("Navigate tool"));
+  return true;
+}
+
+void MainWindow::viewActivated(QWidget *widget)
+{
+
+  if (GLWidget *glWidget = qobject_cast<GLWidget *>(widget)) {
+    bool firstRun = populatePluginModel(glWidget->sceneModel());
+    m_sceneTreeView->setModel(&glWidget->sceneModel());
+    populateTools(glWidget);
+
+    m_editToolBar->setDisabled(true);
+
+    if (firstRun) {
+      setActiveTool("Navigator");
+      glWidget->updateScene();
+    }
+    else {
+      m_moleculeModel->setActiveMolecule(glWidget->molecule());
+      // Figure out the active tool - reflect this in the toolbar.
+      ToolPlugin *tool = glWidget->activeTool();
+      if (tool) {
+        QString name = tool->objectName();
+        foreach(QAction *action, m_toolToolBar->actions()) {
+          if (action->data().toString() == name)
+            action->setChecked(true);
+          else
+            action->setChecked(false);
+        }
+      }
+    }
+    if (m_molecule != glWidget->molecule() && glWidget->molecule()) {
+      m_rwMolecule = 0;
+      m_molecule = glWidget->molecule();
+      emit moleculeChanged(m_molecule);
+      m_moleculeModel->setActiveMolecule(m_molecule);
+    }
+  }
+  else if (EditGLWidget *editWidget = qobject_cast<EditGLWidget *>(widget)) {
+    bool firstRun = populatePluginModel(editWidget->sceneModel(), true);
+    m_sceneTreeView->setModel(&editWidget->sceneModel());
+    populateTools(editWidget);
+
+    m_editToolBar->setDisabled(false);
+
+    if (firstRun) {
+      setActiveTool("Editor");
+      RWMolecule *rwMol = new RWMolecule(this);
+      m_moleculeModel->addItem(rwMol);
+      m_moleculeModel->setActiveMolecule(rwMol);
+      editWidget->setMolecule(rwMol);
+      editWidget->updateScene();
+      m_rwMolecule = rwMol;
+      m_molecule = NULL;
+      connect(&rwMol->undoStack(), SIGNAL(canRedoChanged(bool)),
+              m_redo, SLOT(setEnabled(bool)));
+      connect(&rwMol->undoStack(), SIGNAL(canUndoChanged(bool)),
+              m_undo, SLOT(setEnabled(bool)));
+    }
+    else {
+      m_moleculeModel->setActiveMolecule(editWidget->molecule());
+      // Figure out the active tool - reflect this in the toolbar.
+      ToolPlugin *tool = editWidget->activeTool();
+      if (tool) {
+        QString name = tool->objectName();
+        foreach(QAction *action, m_toolToolBar->actions()) {
+          if (action->data().toString() == name)
+            action->setChecked(true);
+          else
+            action->setChecked(false);
+        }
+      }
+    }
+    if (m_rwMolecule != editWidget->molecule() && editWidget->molecule()) {
+      m_molecule = 0;
+      m_rwMolecule = editWidget->molecule();
+      //emit moleculeChanged(m_rwMolecule);
+      m_moleculeModel->setActiveMolecule(m_rwMolecule);
+    }
+  }
+  else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
+    bool firstRun = populatePluginModel(vtkWidget->sceneModel());
+    m_sceneTreeView->setModel(&vtkWidget->sceneModel());
+
+    m_editToolBar->setDisabled(true);
+
+    if (firstRun) {
+      setActiveTool("Navigator");
+      vtkWidget->updateScene();
+    }
+    else {
+      m_moleculeModel->setActiveMolecule(vtkWidget->molecule());
+    }
+    if (m_molecule != vtkWidget->molecule() && vtkWidget->molecule()) {
+      m_rwMolecule = NULL;
+      m_molecule = vtkWidget->molecule();
+      emit moleculeChanged(m_molecule);
+      m_moleculeModel->setActiveMolecule(m_molecule);
+    }
+  }
+  updateWindowTitle();
+  activeMoleculeEdited();
 }
 
 void MainWindow::reassignCustomElements()
@@ -652,9 +903,9 @@ void MainWindow::openRecentFile()
   if (action) {
     QString fileName = action->data().toString();
 
-    const Io::FileFormat *format = FileFormatDialog::findFileFormat(
+    const FileFormat *format = FileFormatDialog::findFileFormat(
           this, tr("Select file reader"), fileName,
-          Io::FileFormat::File | Io::FileFormat::Read);
+          FileFormat::File | FileFormat::Read);
 
     if(!openFile(fileName, format ? format->newInstance() : NULL)) {
       QMessageBox::information(this, tr("Cannot open file"),
@@ -684,13 +935,23 @@ void MainWindow::updateRecentFiles()
 
 bool MainWindow::saveFile(bool async)
 {
-  if (!m_molecule)
+  QObject *molObj = m_moleculeModel->activeMolecule();
+
+  if (!molObj)
     return false;
 
-  if (!m_molecule->hasData("fileName"))
+  Molecule *mol = qobject_cast<Molecule *>(molObj);
+  if (!mol) {
+    RWMolecule *rwMol = qobject_cast<RWMolecule *>(molObj);
+    if (!rwMol)
+      return false;
+    return saveFileAs(async);
+  }
+
+  if (!mol->hasData("fileName"))
     return saveFileAs(async);
 
-  std::string fileName = m_molecule->data("fileName").toString();
+  string fileName = mol->data("fileName").toString();
   QString extension =
       QFileInfo(QString::fromStdString(fileName)).suffix().toLower();
 
@@ -757,11 +1018,13 @@ bool MainWindow::saveFileAs(bool async)
 
   // Create one of our writers to save the file:
   QString extension = info.suffix().toLower();
-  Io::FileFormat *writer = NULL;
-  if (extension == "cml")
+  FileFormat *writer = NULL;
+  if (extension == "cml" || extension.isEmpty())
     writer = new Io::CmlFormat;
   else if (extension == "cjson")
     writer = new Io::CjsonFormat;
+  if (extension.isEmpty())
+    fileName += ".cml";
 
   return saveFileAs(fileName, writer, async);
 }
@@ -793,14 +1056,34 @@ bool MainWindow::saveFileAs(const QString &fileName, Io::FileFormat *writer,
 
   QString ident = QString::fromStdString(writer->identifier());
 
-  // Prepare the background thread to write the selected file.
+  // Figure out what molecule willl be saved, perform conversion if necessary.
+  QObject *molObj = m_moleculeModel->activeMolecule();
+
+  if (!molObj) {
+    delete writer;
+    return false;
+  }
+
+  // Initialize out writer.
   if (!m_fileWriteThread)
     m_fileWriteThread = new QThread(this);
   if (m_threadedWriter)
     m_threadedWriter->deleteLater();
   m_threadedWriter = new BackgroundFileFormat(writer);
+
+  Molecule *mol = qobject_cast<Molecule *>(molObj);
+  if (!mol) {
+    RWMolecule *rwMol = qobject_cast<RWMolecule *>(molObj);
+    if (!rwMol) {
+      delete writer;
+      return false;
+    }
+    mol = new Molecule(*rwMol, m_threadedWriter);
+  }
+
+  // Prepare the background thread to write the selected file.
   m_threadedWriter->moveToThread(m_fileWriteThread);
-  m_threadedWriter->setMolecule(m_molecule);
+  m_threadedWriter->setMolecule(mol);
   m_threadedWriter->setFileName(fileName);
 
   // Setup a progress dialog in case file loading is slow
@@ -837,21 +1120,96 @@ bool MainWindow::saveFileAs(const QString &fileName, Io::FileFormat *writer,
 
 void MainWindow::setActiveTool(QString toolName)
 {
-  foreach (ToolPlugin *toolPlugin, m_ui->glWidget->tools())
-    if (toolPlugin->objectName() == toolName)
-      toolPlugin->activateAction()->trigger();
+  if (GLWidget *glWidget =
+      qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget())) {
+    foreach (ToolPlugin *toolPlugin, glWidget->tools()) {
+      if (toolPlugin->objectName() == toolName) {
+        toolPlugin->activateAction()->triggered();
+        glWidget->setActiveTool(toolPlugin);
+      }
+    }
+  }
+  else if (EditGLWidget *editWidget =
+      qobject_cast<EditGLWidget *>(m_multiViewWidget->activeWidget())) {
+    foreach (ToolPlugin *toolPlugin, editWidget->tools()) {
+      if (toolPlugin->objectName() == toolName) {
+        toolPlugin->activateAction()->triggered();
+        editWidget->setActiveTool(toolPlugin);
+      }
+    }
+  }
+
+  if (!toolName.isEmpty()) {
+    foreach(QAction *action, m_toolToolBar->actions()) {
+      if (action->data().toString() == toolName)
+        action->setChecked(true);
+      else
+        action->setChecked(false);
+    }
+  }
 }
 
 void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel &scenePluginModel = m_ui->glWidget->sceneModel();
-  foreach (QtGui::ScenePlugin *scene, scenePluginModel.scenePlugins())
+  ScenePluginModel *scenePluginModel(NULL);
+  GLWidget *glWidget(NULL);
+  VTK::vtkGLWidget *vtkWidget(NULL);
+  if ((glWidget = qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget()))) {
+    scenePluginModel = &glWidget->sceneModel();
+  }
+  else if ((vtkWidget =
+           qobject_cast<VTK::vtkGLWidget *>(m_multiViewWidget->activeWidget()))) {
+    scenePluginModel = &vtkWidget->sceneModel();
+  }
+
+  foreach (ScenePlugin *scene, scenePluginModel->scenePlugins())
     scene->setEnabled(false);
-  foreach (QtGui::ScenePlugin *scene, scenePluginModel.scenePlugins())
+  foreach (ScenePlugin *scene, scenePluginModel->scenePlugins())
     foreach (const QString &name, displayTypes)
       if (scene->objectName() == name)
         scene->setEnabled(true);
-  m_ui->glWidget->updateScene();
+  if (glWidget)
+    glWidget->updateScene();
+  else if (vtkWidget)
+    vtkWidget->updateScene();
+}
+
+void MainWindow::undoEdit()
+{
+  if (m_rwMolecule) {
+    m_rwMolecule->undoStack().undo();
+    m_rwMolecule->emitChanged(Molecule::Atoms | Molecule::Added);
+    activeMoleculeEdited();
+  }
+}
+
+void MainWindow::redoEdit()
+{
+  if (m_rwMolecule) {
+    m_rwMolecule->undoStack().redo();
+    m_rwMolecule->emitChanged(Molecule::Atoms | Molecule::Added);
+    activeMoleculeEdited();
+  }
+}
+
+void MainWindow::activeMoleculeEdited()
+{
+  if (!m_undo || !m_redo)
+    return;
+  if (m_rwMolecule) {
+    if (m_rwMolecule->undoStack().canUndo())
+      m_undo->setEnabled(true);
+    else
+      m_undo->setEnabled(false);
+    if (m_rwMolecule->undoStack().canRedo())
+      m_redo->setEnabled(true);
+    else
+      m_redo->setEnabled(false);
+  }
+  else {
+    m_undo->setEnabled(false);
+    m_redo->setEnabled(false);
+  }
 }
 
 #ifdef QTTESTING
@@ -961,6 +1319,30 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(path, action, -200);
   connect(action, SIGNAL(triggered()), this, SLOT(close()));
 
+  // Undo/redo
+  QStringList editPath;
+  editPath << tr("&Edit");
+  m_undo = new QAction(tr("&Undo"), this);
+  m_undo->setIcon(QIcon::fromTheme("edit-undo"));
+  m_undo->setShortcut(QKeySequence("Ctrl+Z"));
+  m_redo = new QAction(tr("&Redo"), this);
+  m_redo->setIcon(QIcon::fromTheme("edit-redo"));
+  m_redo->setShortcut(QKeySequence("Ctrl+Shift+Z"));
+  m_undo->setEnabled(false);
+  m_redo->setEnabled(false);
+  connect(m_undo, SIGNAL(triggered()), SLOT(undoEdit()));
+  connect(m_redo, SIGNAL(triggered()), SLOT(redoEdit()));
+  m_menuBuilder->addAction(editPath, m_undo, 1);
+  m_menuBuilder->addAction(editPath, m_redo, 0);
+
+  // Periodic table.
+  QStringList extensionsPath;
+  extensionsPath << tr("&Extensions");
+  action = new QAction("&Periodic Table", this);
+  m_menuBuilder->addAction(extensionsPath, action, 0);
+  QtGui::PeriodicTableView *periodicTable = new QtGui::PeriodicTableView(this);
+  connect(action, SIGNAL(triggered()), periodicTable, SLOT(show()));
+
   QStringList helpPath;
   helpPath << tr("&Help");
   QAction *about = new QAction("&About", this);
@@ -992,38 +1374,46 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
     m_menuBuilder->addAction(extension->menuPath(action), action);
 }
 
-void MainWindow::buildTools(QList<QtGui::ToolPlugin *> toolList)
+void MainWindow::buildTools()
 {
+  PluginManager *plugin = PluginManager::instance();
+
+  // Now the tool plugins need to be built/added.
+  QList<ToolPluginFactory *> toolPluginFactories =
+      plugin->pluginFactories<ToolPluginFactory>();
+  foreach (ToolPluginFactory *factory, toolPluginFactories) {
+    ToolPlugin *tool = factory->createInstance();
+    if (tool)
+      m_tools << tool;
+  }
+
+  QActionGroup *editActions = new QActionGroup(this);
   QActionGroup *toolActions = new QActionGroup(this);
   int index = 0;
-  foreach (QtGui::ToolPlugin *toolPlugin, toolList) {
-    // Add action to toolbar
+  foreach (ToolPlugin *toolPlugin, m_tools) {
+    // Add action to toolbar.
+    toolPlugin->setParent(this);
     QAction *action = toolPlugin->activateAction();
-    if (action->parent() != toolPlugin)
-      action->setParent(toolPlugin);
+    action->setParent(toolPlugin);
     action->setCheckable(true);
     if (index + 1 < 10)
       action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index + 1)));
-    action->setData(index);
-    toolActions->addAction(action);
+    action->setData(toolPlugin->objectName());
+    if (toolPlugin->objectName() == "Editor"
+        || toolPlugin->objectName() == "Manipulator"
+        || toolPlugin->objectName() == "BondCentric") {
+      editActions->addAction(action);
+    }
+    else {
+      qDebug() << toolPlugin->objectName() << "added";
+      toolActions->addAction(action);
+    }
     connect(action, SIGNAL(triggered()), SLOT(toolActivated()));
-
-    // Setup tool widget
-    QWidget *toolWidget = toolPlugin->toolWidget();
-    if (!toolWidget)
-      toolWidget = new QWidget();
-    m_ui->toolWidgetStack->addWidget(toolWidget);
     ++index;
   }
 
+  m_editToolBar->addActions(editActions->actions());
   m_toolToolBar->addActions(toolActions->actions());
-
-  /// @todo Where to put these? For now just throw them into the glwidget, but
-  /// we should have a better place for them (maybe a singleton ToolWrangler?)
-  m_ui->glWidget->setTools(toolList);
-  m_ui->glWidget->setDefaultTool(tr("Navigate tool"));
-  if (!toolList.isEmpty())
-    m_ui->glWidget->setActiveTool(toolList.first());
 }
 
 QString MainWindow::extensionToWildCard(const QString &extension)
@@ -1054,11 +1444,11 @@ QString MainWindow::generateFilterString(
 
   // Create a map that groups the file extensions by name:
   QMap<QString, QString> formatMap;
-  for (std::vector<const Io::FileFormat*>::const_iterator it = formats.begin(),
+  for (vector<const FileFormat*>::const_iterator it = formats.begin(),
        itEnd = formats.end(); it != itEnd; ++it) {
     QString name(QString::fromStdString((*it)->name()));
-    std::vector<std::string> exts = (*it)->fileExtensions();
-    for (std::vector<std::string>::const_iterator eit = exts.begin(),
+    vector<string> exts = (*it)->fileExtensions();
+    for (vector<string>::const_iterator eit = exts.begin(),
          eitEnd = exts.end(); eit != eitEnd; ++eit) {
       QString ext(QString::fromStdString(*eit));
       if (!formatMap.values(name).contains(ext)) {
@@ -1123,9 +1513,8 @@ void MainWindow::registerMoleQueue()
 
   // Get all extensions;
   typedef std::vector<std::string> StringList;
-  Io::FileFormatManager &ffm = Io::FileFormatManager::instance();
-  StringList exts = ffm.fileExtensions(Io::FileFormat::Read
-                                       | Io::FileFormat::File);
+  FileFormatManager &ffm = FileFormatManager::instance();
+  StringList exts = ffm.fileExtensions(FileFormat::Read | FileFormat::File);
 
   // Create patterns list
   QList<QRegExp> patterns;
@@ -1155,8 +1544,8 @@ void MainWindow::fileFormatsReady()
   ExtensionPlugin *extension(qobject_cast<ExtensionPlugin *>(sender()));
   if (!extension)
     return;
-  foreach (Io::FileFormat *format, extension->fileFormats()) {
-    if (!Io::FileFormatManager::registerFormat(format)) {
+  foreach (FileFormat *format, extension->fileFormats()) {
+    if (!FileFormatManager::registerFormat(format)) {
       qWarning() << tr("Error while loading FileFormat with id '%1'.")
                     .arg(QString::fromStdString(format->identifier()));
       // Need to delete the format if the manager didn't take ownership:
@@ -1168,25 +1557,28 @@ void MainWindow::fileFormatsReady()
 
 void MainWindow::readQueuedFiles()
 {
-  if (m_queuedFiles.size()) {
-    // Currently only read one file, this should be extended to allow multiple
-    // files once the interface supports that concept.
+  m_queuedFilesStarted = true;
+  if (!m_queuedFiles.empty()) {
+    QString file = m_queuedFiles.first();
+    m_queuedFiles.removeFirst();
+    const FileFormat *format = QtGui::FileFormatDialog::findFileFormat(
+          this, tr("Select file reader"), file,
+          FileFormat::File | FileFormat::Read, "Avogadro:");
 
-    const Io::FileFormat *format = QtGui::FileFormatDialog::findFileFormat(
-          this, tr("Select file reader"), m_queuedFiles.front(),
-          Io::FileFormat::File | Io::FileFormat::Read);
-
-    if (openFile(m_queuedFiles.front(), format ? format->newInstance() : NULL))
-      m_queuedFiles.clear();
+    if (!openFile(file, format ? format->newInstance() : NULL)) {
+      QMessageBox::warning(this, tr("Cannot open file"),
+                           tr("Avogadro timed out and doesn't know how to open"
+                              " '%1'.").arg(file));
+    }
   }
 }
 
 void MainWindow::clearQueuedFiles()
 {
-  if (!m_queuedFiles.isEmpty()) {
-    QMessageBox::warning(this, tr("Cannot open file"),
-                         tr("Avogadro timed out and doesn't know how to open"
-                            " '%1'.").arg(m_queuedFiles.front()));
+  if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
+    QMessageBox::warning(this, tr("Cannot open files"),
+                         tr("Avogadro timed out and cannot open"
+                            " '%1'.").arg(m_queuedFiles.join("\n")));
     m_queuedFiles.clear();
   }
 }
