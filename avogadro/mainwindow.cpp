@@ -676,7 +676,7 @@ bool MainWindow::backgroundWriterFinished()
     if (m_threadedWriter->success()) {
       statusBar()->showMessage(tr("File written: %1")
                                .arg(fileName));
-      m_molecule->setData("fileName", fileName.toStdString());
+      m_threadedWriter->molecule()->setData("fileName", fileName.toStdString());
       markMoleculeClean();
       updateWindowTitle();
       success = true;
@@ -909,13 +909,23 @@ void MainWindow::updateRecentFiles()
 
 bool MainWindow::saveFile(bool async)
 {
-  if (!m_molecule)
+  QObject *molObj = m_moleculeModel->activeMolecule();
+
+  if (!molObj)
     return false;
 
-  if (!m_molecule->hasData("fileName"))
+  Molecule *mol = qobject_cast<Molecule *>(molObj);
+  if (!mol) {
+    RWMolecule *rwMol = qobject_cast<RWMolecule *>(molObj);
+    if (!rwMol)
+      return false;
+    return saveFileAs(async);
+  }
+
+  if (!mol->hasData("fileName"))
     return saveFileAs(async);
 
-  string fileName = m_molecule->data("fileName").toString();
+  string fileName = mol->data("fileName").toString();
   QString extension =
       QFileInfo(QString::fromStdString(fileName)).suffix().toLower();
 
@@ -983,10 +993,12 @@ bool MainWindow::saveFileAs(bool async)
   // Create one of our writers to save the file:
   QString extension = info.suffix().toLower();
   FileFormat *writer = NULL;
-  if (extension == "cml")
+  if (extension == "cml" || extension.isEmpty())
     writer = new Io::CmlFormat;
   else if (extension == "cjson")
     writer = new Io::CjsonFormat;
+  if (extension.isEmpty())
+    fileName += ".cml";
 
   return saveFileAs(fileName, writer, async);
 }
@@ -1018,14 +1030,34 @@ bool MainWindow::saveFileAs(const QString &fileName, Io::FileFormat *writer,
 
   QString ident = QString::fromStdString(writer->identifier());
 
-  // Prepare the background thread to write the selected file.
+  // Figure out what molecule willl be saved, perform conversion if necessary.
+  QObject *molObj = m_moleculeModel->activeMolecule();
+
+  if (!molObj) {
+    delete writer;
+    return false;
+  }
+
+  // Initialize out writer.
   if (!m_fileWriteThread)
     m_fileWriteThread = new QThread(this);
   if (m_threadedWriter)
     m_threadedWriter->deleteLater();
   m_threadedWriter = new BackgroundFileFormat(writer);
+
+  Molecule *mol = qobject_cast<Molecule *>(molObj);
+  if (!mol) {
+    RWMolecule *rwMol = qobject_cast<RWMolecule *>(molObj);
+    if (!rwMol) {
+      delete writer;
+      return false;
+    }
+    mol = new Molecule(*rwMol, m_threadedWriter);
+  }
+
+  // Prepare the background thread to write the selected file.
   m_threadedWriter->moveToThread(m_fileWriteThread);
-  m_threadedWriter->setMolecule(m_molecule);
+  m_threadedWriter->setMolecule(mol);
   m_threadedWriter->setFileName(fileName);
 
   // Setup a progress dialog in case file loading is slow
