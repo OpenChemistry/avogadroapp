@@ -405,6 +405,7 @@ void MainWindow::setMolecule(Molecule *mol)
   emit moleculeChanged(m_molecule);
   markMoleculeClean();
   updateWindowTitle();
+  m_moleculeModel->setActiveMolecule(m_molecule);
 
   if (oldMolecule)
     oldMolecule->disconnect(this);
@@ -749,6 +750,7 @@ void MainWindow::viewActivated(QWidget *widget)
       glWidget->updateScene();
     }
     else {
+      m_moleculeModel->setActiveMolecule(glWidget->molecule());
       // Figure out the active tool - reflect this in the toolbar.
       ToolPlugin *tool = glWidget->activeTool();
       if (tool) {
@@ -764,6 +766,7 @@ void MainWindow::viewActivated(QWidget *widget)
     if (m_molecule != glWidget->molecule() && glWidget->molecule()) {
       m_molecule = glWidget->molecule();
       emit moleculeChanged(m_molecule);
+      m_moleculeModel->setActiveMolecule(m_molecule);
       updateWindowTitle();
     }
   }
@@ -775,10 +778,12 @@ void MainWindow::viewActivated(QWidget *widget)
       setActiveTool("Editor");
       RWMolecule *rwMol = new RWMolecule(this);
       m_moleculeModel->addItem(rwMol);
+      m_moleculeModel->setActiveMolecule(rwMol);
       editWidget->setMolecule(rwMol);
       editWidget->updateScene();
     }
     else {
+      m_moleculeModel->setActiveMolecule(editWidget->molecule());
       // Figure out the active tool - reflect this in the toolbar.
       ToolPlugin *tool = editWidget->activeTool();
       if (tool) {
@@ -800,9 +805,13 @@ void MainWindow::viewActivated(QWidget *widget)
       setActiveTool("Navigator");
       vtkWidget->updateScene();
     }
+    else {
+      m_moleculeModel->setActiveMolecule(vtkWidget->molecule());
+    }
     if (m_molecule != vtkWidget->molecule() && vtkWidget->molecule()) {
       m_molecule = vtkWidget->molecule();
       emit moleculeChanged(m_molecule);
+      m_moleculeModel->setActiveMolecule(m_molecule);
       updateWindowTitle();
     }
   }
