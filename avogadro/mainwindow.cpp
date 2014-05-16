@@ -373,8 +373,8 @@ void MainWindow::newMolecule()
   setMolecule(new Molecule(this));
 }
 
-template <class T>
-void setWidgetMolecule(T *glWidget, Molecule *mol)
+template <class T, class M>
+void setWidgetMolecule(T *glWidget, M *mol)
 {
   glWidget->setMolecule(mol);
   glWidget->updateScene();
@@ -413,12 +413,50 @@ void MainWindow::setMolecule(Molecule *mol)
     oldMolecule->disconnect(this);
 
   // Check if the molecule needs to update the current one.
-  if (QtOpenGL::GLWidget *glWidget =
-      qobject_cast<QtOpenGL::GLWidget *>(m_multiViewWidget->activeWidget())) {
+  QWidget *w = m_multiViewWidget->activeWidget();
+  if (GLWidget *glWidget = qobject_cast<QtOpenGL::GLWidget *>(w)) {
     setWidgetMolecule(glWidget, mol);
   }
-  else if (VTK::vtkGLWidget *vtkWidget =
-           qobject_cast<VTK::vtkGLWidget *>(m_multiViewWidget->activeWidget())) {
+  else if (EditGLWidget *editWidget = qobject_cast<EditGLWidget *>(w)) {
+    RWMolecule *rwMol = new RWMolecule(*mol, this);
+    qDebug() << "rwMol with" << rwMol->atomCount() << "atoms";
+    m_moleculeModel->addItem(rwMol);
+    m_moleculeModel->setActiveMolecule(rwMol);
+    setWidgetMolecule(editWidget, rwMol);
+  }
+  else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget *>(w)) {
+    setWidgetMolecule(vtkWidget, mol);
+  }
+}
+
+void MainWindow::setMolecule(RWMolecule *rwMol)
+{
+  if (!rwMol)
+    return;
+
+  // It will ensure the molecule is unique.
+  m_moleculeModel->addItem(rwMol);
+
+  //emit moleculeChanged(m_molecule);
+  //markMoleculeClean();
+  //updateWindowTitle();
+  m_moleculeModel->setActiveMolecule(rwMol);
+
+  // Check if the molecule needs to update the current one.
+  QWidget *w = m_multiViewWidget->activeWidget();
+  if (GLWidget *glWidget = qobject_cast<QtOpenGL::GLWidget *>(w)) {
+    Molecule *mol = new Molecule(*rwMol, this);
+    m_moleculeModel->addItem(mol);
+    m_moleculeModel->setActiveMolecule(mol);
+    setWidgetMolecule(glWidget, mol);
+  }
+  else if (EditGLWidget *editWidget = qobject_cast<EditGLWidget *>(w)) {
+    setWidgetMolecule(editWidget, rwMol);
+  }
+  else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget *>(w)) {
+    Molecule *mol = new Molecule(*rwMol, this);
+    m_moleculeModel->addItem(mol);
+    m_moleculeModel->setActiveMolecule(mol);
     setWidgetMolecule(vtkWidget, mol);
   }
 }
@@ -700,10 +738,11 @@ void MainWindow::rendererInvalid()
 
 void MainWindow::moleculeActivated(const QModelIndex &idx)
 {
-  Molecule *mol =
-    qobject_cast<Molecule *>(static_cast<QObject *>(idx.internalPointer()));
-  if (mol)
+  QObject *obj = static_cast<QObject *>(idx.internalPointer());
+  if (Molecule *mol = qobject_cast<Molecule *>(obj))
     setMolecule(mol);
+  else if (RWMolecule *rwMol = qobject_cast<RWMolecule *>(obj))
+    setMolecule(rwMol);
 }
 
 bool populatePluginModel(ScenePluginModel &model)
