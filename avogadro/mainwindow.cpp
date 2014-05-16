@@ -396,9 +396,9 @@ void MainWindow::setMolecule(Molecule *mol)
   // If the molecule is empty, make the editor active. Otherwise, use the
   // navigator tool.
   if (m_molecule) {
-    QString targetToolName = m_molecule->atomCount() > 0 ? "Navigator"
-                                                         : "Editor";
-    setActiveTool(targetToolName);
+    //QString targetToolName = m_molecule->atomCount() > 0 ? "Navigator"
+    //                                                     : "Editor";
+    //setActiveTool(targetToolName);
     connect(m_molecule, SIGNAL(changed(uint)), SLOT(markMoleculeDirty()));
   }
 
@@ -721,7 +721,6 @@ bool populatePluginModel(ScenePluginModel &model)
 template<class T>
 bool populateTools(T* glWidget)
 {
-
   if (!glWidget->tools().isEmpty())
     return false;
   PluginManager *plugin = PluginManager::instance();
@@ -746,13 +745,14 @@ void MainWindow::viewActivated(QWidget *widget)
     populateTools(glWidget);
 
     if (firstRun) {
+      setActiveTool("Navigator");
       glWidget->updateScene();
     }
     else {
       // Figure out the active tool - reflect this in the toolbar.
       ToolPlugin *tool = glWidget->activeTool();
       if (tool) {
-        QString name = tool->name();
+        QString name = tool->objectName();
         foreach(QAction *action, m_toolToolBar->actions()) {
           if (action->data().toString() == name)
             action->setChecked(true);
@@ -772,7 +772,24 @@ void MainWindow::viewActivated(QWidget *widget)
     m_sceneTreeView->setModel(&editWidget->sceneModel());
     populateTools(editWidget);
     if (firstRun) {
-      editWidget->setMolecule(new RWMolecule(this));
+      setActiveTool("Editor");
+      RWMolecule *rwMol = new RWMolecule(this);
+      m_moleculeModel->addItem(rwMol);
+      editWidget->setMolecule(rwMol);
+      editWidget->updateScene();
+    }
+    else {
+      // Figure out the active tool - reflect this in the toolbar.
+      ToolPlugin *tool = editWidget->activeTool();
+      if (tool) {
+        QString name = tool->objectName();
+        foreach(QAction *action, m_toolToolBar->actions()) {
+          if (action->data().toString() == name)
+            action->setChecked(true);
+          else
+            action->setChecked(false);
+        }
+      }
     }
   }
   else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
@@ -780,6 +797,7 @@ void MainWindow::viewActivated(QWidget *widget)
     m_sceneTreeView->setModel(&vtkWidget->sceneModel());
 
     if (firstRun) {
+      setActiveTool("Navigator");
       vtkWidget->updateScene();
     }
     if (m_molecule != vtkWidget->molecule() && vtkWidget->molecule()) {
@@ -989,15 +1007,30 @@ void MainWindow::setActiveTool(QString toolName)
 {
   if (GLWidget *glWidget =
       qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget())) {
-    foreach (ToolPlugin *toolPlugin, glWidget->tools())
-      if (toolPlugin->objectName() == toolName)
-        toolPlugin->activateAction()->trigger();
+    foreach (ToolPlugin *toolPlugin, glWidget->tools()) {
+      if (toolPlugin->objectName() == toolName) {
+        toolPlugin->activateAction()->triggered();
+        glWidget->setActiveTool(toolPlugin);
+      }
+    }
   }
   else if (EditGLWidget *editWidget =
       qobject_cast<EditGLWidget *>(m_multiViewWidget->activeWidget())) {
-    foreach (ToolPlugin *toolPlugin, editWidget->tools())
-      if (toolPlugin->objectName() == toolName)
-        toolPlugin->activateAction()->trigger();
+    foreach (ToolPlugin *toolPlugin, editWidget->tools()) {
+      if (toolPlugin->objectName() == toolName) {
+        toolPlugin->activateAction()->triggered();
+        editWidget->setActiveTool(toolPlugin);
+      }
+    }
+  }
+
+  if (!toolName.isEmpty()) {
+    foreach(QAction *action, m_toolToolBar->actions()) {
+      if (action->data().toString() == toolName)
+        action->setChecked(true);
+      else
+        action->setChecked(false);
+    }
   }
 }
 
@@ -1196,7 +1229,7 @@ void MainWindow::buildTools()
     action->setCheckable(true);
     if (index + 1 < 10)
       action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index + 1)));
-    action->setData(toolPlugin->name());
+    action->setData(toolPlugin->objectName());
     toolActions->addAction(action);
     connect(action, SIGNAL(triggered()), SLOT(toolActivated()));
     ++index;
