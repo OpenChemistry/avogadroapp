@@ -332,6 +332,8 @@ void MainWindow::setupInterface()
   m_sceneTreeView->setAlternatingRowColors(true);
   m_sceneTreeView->header()->stretchLastSection();
   m_sceneTreeView->header()->setVisible(false);
+  connect(m_sceneTreeView, SIGNAL(activated(QModelIndex)),
+          SLOT(sceneItemActivated(QModelIndex)));
 
   // Create the molecule model
   m_moleculeModel = new QtGui::MoleculeModel(this);
@@ -745,6 +747,15 @@ void MainWindow::moleculeActivated(const QModelIndex &idx)
     setMolecule(mol);
   else if (RWMolecule *rwMol = qobject_cast<RWMolecule *>(obj))
     setMolecule(rwMol);
+}
+
+void MainWindow::sceneItemActivated(const QModelIndex &idx)
+{
+  if (!idx.isValid())
+    return;
+  QObject *obj = static_cast<QObject *>(idx.internalPointer());
+  if (ScenePlugin *scene = qobject_cast<ScenePlugin *>(obj))
+    m_viewDock->setWidget(scene->setupWidget());
 }
 
 bool populatePluginModel(ScenePluginModel &model, bool editOnly = false)
