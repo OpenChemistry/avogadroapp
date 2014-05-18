@@ -287,6 +287,11 @@ private slots:
   void moleculeActivated(const QModelIndex &index);
 
   /**
+   * @brief Change the configuration dialog to reflect active scene item.
+   */
+  void sceneItemActivated(const QModelIndex &index);
+
+  /**
    * @brief Change the active view widget, initialize plugins if needed.
    */
   void viewActivated(QWidget *widget);
