@@ -68,6 +68,8 @@
 #include <QtWidgets/QProgressDialog>
 #include <QtWidgets/QPushButton>
 
+#include <QtOpenGL/QGLFramebufferObject>
+
 #ifdef QTTESTING
 # include <pqTestUtility.h>
 # include <pqEventObserver.h>
@@ -902,6 +904,66 @@ void MainWindow::viewActivated(QWidget *widget)
   activeMoleculeEdited();
 }
 
+void MainWindow::exportGraphics()
+{
+  QGLWidget *glWidget =
+      qobject_cast<QGLWidget *>(m_multiViewWidget->activeWidget());
+  QStringList filters;
+  // Omit "common image formats" on Mac
+  #ifdef Q_WS_MAC
+    filters
+  #else
+    filters << tr("Common image formats")
+              + " (*.png *.jpg *.jpeg)"
+  #endif
+            << tr("All files") + " (* *.*)"
+            << tr("BMP") + " (*.bmp)"
+            << tr("PNG") + " (*.png)"
+            << tr("JPEG") + " (*.jpg *.jpeg)";
+
+  // Use QFileInfo to get the parts of the path we want
+  QString baseFileName;
+  if (m_molecule)
+    baseFileName = m_molecule->data("fileName").toString().c_str();
+  QFileInfo info(baseFileName);
+
+  QString fileName = QFileDialog::getSaveFileName(this,
+                                                  tr("Export Bitmap Graphics"),
+                                                  "",
+                                                  "PNG (*.png)");
+
+  if (fileName.isEmpty())
+    return;
+  qDebug() << "Exported filename:" << fileName;
+
+  // render it (with alpha channel)
+  QImage exportImage;
+  glWidget->raise();
+  glWidget->repaint();
+  if (QGLFramebufferObject::hasOpenGLFramebufferObjects()) {
+    exportImage = glWidget->grabFrameBuffer(true);
+  }
+  else {
+    QPixmap pixmap = QPixmap::grabWindow(glWidget->winId());
+    exportImage = pixmap.toImage();
+  }
+
+  // Now we embed molecular information into the file, if possible
+  if (m_molecule) {
+    string tmpMdl;
+    bool ok = FileFormatManager::instance().writeString(*m_molecule, tmpMdl,
+                                                        "mdl");
+    if (ok)
+      exportImage.setText("molfile", tmpMdl.c_str());
+  }
+
+  if (!exportImage.save(fileName)) {
+    QMessageBox::warning(this, tr("Avogadro"),
+                         tr("Cannot save file %1.").arg(fileName));
+    return;
+  }
+}
+
 void MainWindow::reassignCustomElements()
 {
   if (m_molecule && m_molecule->hasCustomElements())
@@ -1323,6 +1385,11 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(path, action, 940);
   action->setIcon(QIcon::fromTheme("document-export"));
   connect(action, SIGNAL(triggered()), SLOT(exportFile()));
+  // Export graphics
+  action = new QAction(tr("Export Bitmap Graphics"), this);
+  m_menuBuilder->addAction(path, action, 941);
+  action->setIcon(QIcon::fromTheme("document-export"));
+  connect(action, SIGNAL(triggered()), SLOT(exportGraphics()));
   // Quit
   action = new QAction(tr("&Quit"), this);
   action->setShortcut(QKeySequence("Ctrl+Q"));

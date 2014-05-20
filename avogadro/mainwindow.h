@@ -296,6 +296,8 @@ private slots:
    */
   void viewActivated(QWidget *widget);
 
+  void exportGraphics();
+
 private:
   QtGui::Molecule *m_molecule;
   QtGui::RWMolecule *m_rwMolecule;
