@@ -67,6 +67,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QProgressDialog>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QColorDialog>
 
 #include <QtOpenGL/QGLFramebufferObject>
 
@@ -1285,6 +1286,34 @@ void MainWindow::activeMoleculeEdited()
   }
 }
 
+void MainWindow::setBackgroundColor()
+{
+  Rendering::Scene *scene(NULL);
+  GLWidget *glWidget(NULL);
+  EditGLWidget *editWidget(NULL);
+  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+    scene = &glWidget->renderer().scene();
+  }
+  else if ((editWidget =
+           qobject_cast<EditGLWidget*>(m_multiViewWidget->activeWidget()))) {
+    scene = &editWidget->renderer().scene();
+  }
+  if (scene) {
+    Vector4ub cColor = scene->backgroundColor();
+    QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
+    QColor color = QColorDialog::getColor(qtColor, this);
+    if (color.isValid()) {
+      cColor[0] = static_cast<unsigned char>(color.red());
+      cColor[1] = static_cast<unsigned char>(color.green());
+      cColor[2] = static_cast<unsigned char>(color.blue());
+      cColor[3] = static_cast<unsigned char>(color.alpha());
+      scene->setBackgroundColor(cColor);
+      if (glWidget)
+        glWidget->updateGL();
+    }
+  }
+}
+
 #ifdef QTTESTING
 void MainWindow::record()
 {
@@ -1412,6 +1441,13 @@ void MainWindow::buildMenu()
   connect(m_redo, SIGNAL(triggered()), SLOT(redoEdit()));
   m_menuBuilder->addAction(editPath, m_undo, 1);
   m_menuBuilder->addAction(editPath, m_redo, 0);
+
+  // View menu
+  QStringList viewPath;
+  viewPath << tr("&View");
+  action = new QAction(tr("Set background color..."), this);
+  m_menuBuilder->addAction(viewPath, action, 100);
+  connect(action, SIGNAL(triggered()), SLOT(setBackgroundColor()));
 
   // Periodic table.
   QStringList extensionsPath;

@@ -298,6 +298,8 @@ private slots:
 
   void exportGraphics();
 
+  void setBackgroundColor();
+
 private:
   QtGui::Molecule *m_molecule;
   QtGui::RWMolecule *m_rwMolecule;
