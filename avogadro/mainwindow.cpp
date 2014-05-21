@@ -1310,7 +1310,51 @@ void MainWindow::setBackgroundColor()
       scene->setBackgroundColor(cColor);
       if (glWidget)
         glWidget->updateGL();
+      else if (editWidget)
+        editWidget->updateGL();
     }
+  }
+}
+
+void MainWindow::setProjectionPerspective()
+{
+  Rendering::GLRenderer *renderer(NULL);
+  GLWidget *glWidget(NULL);
+  EditGLWidget *editWidget(NULL);
+  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+    renderer = &glWidget->renderer();
+  }
+  else if ((editWidget =
+           qobject_cast<EditGLWidget*>(m_multiViewWidget->activeWidget()))) {
+    renderer = &editWidget->renderer();
+  }
+  if (renderer) {
+    renderer->setProjection(Rendering::Perspective);
+    if (glWidget)
+      glWidget->updateGL();
+    else if (editWidget)
+      editWidget->updateGL();
+  }
+}
+
+void MainWindow::setProjectionOrthographic()
+{
+  Rendering::GLRenderer *renderer(NULL);
+  GLWidget *glWidget(NULL);
+  EditGLWidget *editWidget(NULL);
+  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+    renderer = &glWidget->renderer();
+  }
+  else if ((editWidget =
+           qobject_cast<EditGLWidget*>(m_multiViewWidget->activeWidget()))) {
+    renderer = &editWidget->renderer();
+  }
+  if (renderer) {
+    renderer->setProjection(Rendering::Orthographic);
+    if (glWidget)
+      glWidget->updateGL();
+    else if (editWidget)
+      editWidget->updateGL();
   }
 }
 
@@ -1448,6 +1492,26 @@ void MainWindow::buildMenu()
   action = new QAction(tr("Set background color..."), this);
   m_menuBuilder->addAction(viewPath, action, 100);
   connect(action, SIGNAL(triggered()), SLOT(setBackgroundColor()));
+
+  viewPath << tr("Projection");
+  m_viewPerspective = new QAction(tr("Perspective"), this);
+  m_viewPerspective->setCheckable(true);
+  m_viewPerspective->setChecked(true);
+  m_menuBuilder->addAction(viewPath, m_viewPerspective, 10);
+  connect(m_viewPerspective, SIGNAL(triggered()),
+          SLOT(setProjectionPerspective()));
+
+  m_viewOrthographic = new QAction(tr("Orthographic"), this);
+  m_viewOrthographic->setCheckable(true);
+  m_viewOrthographic->setChecked(false);
+  m_menuBuilder->addAction(viewPath, m_viewOrthographic, 10);
+  connect(m_viewOrthographic, SIGNAL(triggered()),
+          SLOT(setProjectionOrthographic()));
+
+  connect(m_viewPerspective, SIGNAL(triggered()),
+          m_viewOrthographic, SLOT(toggle()));
+  connect(m_viewOrthographic, SIGNAL(triggered()),
+          m_viewPerspective, SLOT(toggle()));
 
   // Periodic table.
   QStringList extensionsPath;

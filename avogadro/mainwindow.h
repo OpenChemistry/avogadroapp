@@ -300,6 +300,10 @@ private slots:
 
   void setBackgroundColor();
 
+  void setProjectionOrthographic();
+
+  void setProjectionPerspective();
+
 private:
   QtGui::Molecule *m_molecule;
   QtGui::RWMolecule *m_rwMolecule;
@@ -335,6 +339,8 @@ private:
 
   QAction *m_undo;
   QAction *m_redo;
+  QAction *m_viewPerspective;
+  QAction *m_viewOrthographic;
 
   ViewFactory *m_viewFactory;
 
