@@ -22,6 +22,11 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
   if(CMAKE_PREFIX_PATH)
     set(dirs "${CMAKE_PREFIX_PATH}/bin" "${CMAKE_PREFIX_PATH}/lib")
   endif()
+  # The VTK dlls are not in the CMAKE_PREFIX_PATH when built against
+  # a "build tree" of VTK:
+  get_property(loc TARGET vtkChartsCore PROPERTY LOCATION_RELEASE)
+  get_filename_component(vtk_dlls_dir "${loc}" PATH)
+  set(dirs ${dirs} "${vtk_dlls_dir}")
 
   set(plugins "")
   foreach(plugin ${AvogadroLibs_PLUGINS})
@@ -41,6 +46,6 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
     endforeach()
   endif()
 
-  include(DeployQt4)
-  install_qt4_executable(${exe} "${plugins}" "${ob_plugins}" "${dirs}" "lib/avogadro2/plugins")
+  include(DeployQt5)
+  install_qt5_executable(${exe} "${plugins}" "${ob_plugins}" "${dirs}" "")
 endif()
