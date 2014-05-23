@@ -67,6 +67,9 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QProgressDialog>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QColorDialog>
+
+#include <QtOpenGL/QGLFramebufferObject>
 
 #ifdef QTTESTING
 # include <pqTestUtility.h>
@@ -902,6 +905,66 @@ void MainWindow::viewActivated(QWidget *widget)
   activeMoleculeEdited();
 }
 
+void MainWindow::exportGraphics()
+{
+  QGLWidget *glWidget =
+      qobject_cast<QGLWidget *>(m_multiViewWidget->activeWidget());
+  QStringList filters;
+  // Omit "common image formats" on Mac
+  #ifdef Q_WS_MAC
+    filters
+  #else
+    filters << tr("Common image formats")
+              + " (*.png *.jpg *.jpeg)"
+  #endif
+            << tr("All files") + " (* *.*)"
+            << tr("BMP") + " (*.bmp)"
+            << tr("PNG") + " (*.png)"
+            << tr("JPEG") + " (*.jpg *.jpeg)";
+
+  // Use QFileInfo to get the parts of the path we want
+  QString baseFileName;
+  if (m_molecule)
+    baseFileName = m_molecule->data("fileName").toString().c_str();
+  QFileInfo info(baseFileName);
+
+  QString fileName = QFileDialog::getSaveFileName(this,
+                                                  tr("Export Bitmap Graphics"),
+                                                  "",
+                                                  "PNG (*.png)");
+
+  if (fileName.isEmpty())
+    return;
+  qDebug() << "Exported filename:" << fileName;
+
+  // render it (with alpha channel)
+  QImage exportImage;
+  glWidget->raise();
+  glWidget->repaint();
+  if (QGLFramebufferObject::hasOpenGLFramebufferObjects()) {
+    exportImage = glWidget->grabFrameBuffer(true);
+  }
+  else {
+    QPixmap pixmap = QPixmap::grabWindow(glWidget->winId());
+    exportImage = pixmap.toImage();
+  }
+
+  // Now we embed molecular information into the file, if possible
+  if (m_molecule) {
+    string tmpMdl;
+    bool ok = FileFormatManager::instance().writeString(*m_molecule, tmpMdl,
+                                                        "mdl");
+    if (ok)
+      exportImage.setText("molfile", tmpMdl.c_str());
+  }
+
+  if (!exportImage.save(fileName)) {
+    QMessageBox::warning(this, tr("Avogadro"),
+                         tr("Cannot save file %1.").arg(fileName));
+    return;
+  }
+}
+
 void MainWindow::reassignCustomElements()
 {
   if (m_molecule && m_molecule->hasCustomElements())
@@ -1223,6 +1286,78 @@ void MainWindow::activeMoleculeEdited()
   }
 }
 
+void MainWindow::setBackgroundColor()
+{
+  Rendering::Scene *scene(NULL);
+  GLWidget *glWidget(NULL);
+  EditGLWidget *editWidget(NULL);
+  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+    scene = &glWidget->renderer().scene();
+  }
+  else if ((editWidget =
+           qobject_cast<EditGLWidget*>(m_multiViewWidget->activeWidget()))) {
+    scene = &editWidget->renderer().scene();
+  }
+  if (scene) {
+    Vector4ub cColor = scene->backgroundColor();
+    QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
+    QColor color = QColorDialog::getColor(qtColor, this);
+    if (color.isValid()) {
+      cColor[0] = static_cast<unsigned char>(color.red());
+      cColor[1] = static_cast<unsigned char>(color.green());
+      cColor[2] = static_cast<unsigned char>(color.blue());
+      cColor[3] = static_cast<unsigned char>(color.alpha());
+      scene->setBackgroundColor(cColor);
+      if (glWidget)
+        glWidget->updateGL();
+      else if (editWidget)
+        editWidget->updateGL();
+    }
+  }
+}
+
+void MainWindow::setProjectionPerspective()
+{
+  Rendering::GLRenderer *renderer(NULL);
+  GLWidget *glWidget(NULL);
+  EditGLWidget *editWidget(NULL);
+  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+    renderer = &glWidget->renderer();
+  }
+  else if ((editWidget =
+           qobject_cast<EditGLWidget*>(m_multiViewWidget->activeWidget()))) {
+    renderer = &editWidget->renderer();
+  }
+  if (renderer) {
+    renderer->setProjection(Rendering::Perspective);
+    if (glWidget)
+      glWidget->updateGL();
+    else if (editWidget)
+      editWidget->updateGL();
+  }
+}
+
+void MainWindow::setProjectionOrthographic()
+{
+  Rendering::GLRenderer *renderer(NULL);
+  GLWidget *glWidget(NULL);
+  EditGLWidget *editWidget(NULL);
+  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+    renderer = &glWidget->renderer();
+  }
+  else if ((editWidget =
+           qobject_cast<EditGLWidget*>(m_multiViewWidget->activeWidget()))) {
+    renderer = &editWidget->renderer();
+  }
+  if (renderer) {
+    renderer->setProjection(Rendering::Orthographic);
+    if (glWidget)
+      glWidget->updateGL();
+    else if (editWidget)
+      editWidget->updateGL();
+  }
+}
+
 #ifdef QTTESTING
 void MainWindow::record()
 {
@@ -1323,6 +1458,11 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(path, action, 940);
   action->setIcon(QIcon::fromTheme("document-export"));
   connect(action, SIGNAL(triggered()), SLOT(exportFile()));
+  // Export graphics
+  action = new QAction(tr("Export Bitmap Graphics"), this);
+  m_menuBuilder->addAction(path, action, 941);
+  action->setIcon(QIcon::fromTheme("document-export"));
+  connect(action, SIGNAL(triggered()), SLOT(exportGraphics()));
   // Quit
   action = new QAction(tr("&Quit"), this);
   action->setShortcut(QKeySequence("Ctrl+Q"));
@@ -1345,6 +1485,33 @@ void MainWindow::buildMenu()
   connect(m_redo, SIGNAL(triggered()), SLOT(redoEdit()));
   m_menuBuilder->addAction(editPath, m_undo, 1);
   m_menuBuilder->addAction(editPath, m_redo, 0);
+
+  // View menu
+  QStringList viewPath;
+  viewPath << tr("&View");
+  action = new QAction(tr("Set background color..."), this);
+  m_menuBuilder->addAction(viewPath, action, 100);
+  connect(action, SIGNAL(triggered()), SLOT(setBackgroundColor()));
+
+  viewPath << tr("Projection");
+  m_viewPerspective = new QAction(tr("Perspective"), this);
+  m_viewPerspective->setCheckable(true);
+  m_viewPerspective->setChecked(true);
+  m_menuBuilder->addAction(viewPath, m_viewPerspective, 10);
+  connect(m_viewPerspective, SIGNAL(triggered()),
+          SLOT(setProjectionPerspective()));
+
+  m_viewOrthographic = new QAction(tr("Orthographic"), this);
+  m_viewOrthographic->setCheckable(true);
+  m_viewOrthographic->setChecked(false);
+  m_menuBuilder->addAction(viewPath, m_viewOrthographic, 10);
+  connect(m_viewOrthographic, SIGNAL(triggered()),
+          SLOT(setProjectionOrthographic()));
+
+  connect(m_viewPerspective, SIGNAL(triggered()),
+          m_viewOrthographic, SLOT(toggle()));
+  connect(m_viewOrthographic, SIGNAL(triggered()),
+          m_viewPerspective, SLOT(toggle()));
 
   // Periodic table.
   QStringList extensionsPath;
