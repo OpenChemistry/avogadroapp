@@ -1329,7 +1329,7 @@ void MainWindow::setProjectionPerspective()
     renderer = &editWidget->renderer();
   }
   if (renderer) {
-    renderer->setProjection(Rendering::Perspective);
+    renderer->camera().setProjectionType(Rendering::Perspective);
     if (glWidget)
       glWidget->updateGL();
     else if (editWidget)
@@ -1350,7 +1350,7 @@ void MainWindow::setProjectionOrthographic()
     renderer = &editWidget->renderer();
   }
   if (renderer) {
-    renderer->setProjection(Rendering::Orthographic);
+    renderer->camera().setProjectionType(Rendering::Orthographic);
     if (glWidget)
       glWidget->updateGL();
     else if (editWidget)
