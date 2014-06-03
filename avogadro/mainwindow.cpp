@@ -935,7 +935,8 @@ void MainWindow::exportGraphics()
 
   if (fileName.isEmpty())
     return;
-  qDebug() << "Exported filename:" << fileName;
+  if (QFileInfo(fileName).suffix().isEmpty())
+    fileName += ".png";
 
   // render it (with alpha channel)
   QImage exportImage;
@@ -950,12 +951,12 @@ void MainWindow::exportGraphics()
   }
 
   // Now we embed molecular information into the file, if possible
-  if (m_molecule) {
-    string tmpMdl;
-    bool ok = FileFormatManager::instance().writeString(*m_molecule, tmpMdl,
-                                                        "mdl");
+  if (m_molecule && m_molecule->atomCount() < 1000) {
+    string tmpCml;
+    bool ok = FileFormatManager::instance().writeString(*m_molecule, tmpCml,
+                                                        "cml");
     if (ok)
-      exportImage.setText("molfile", tmpMdl.c_str());
+      exportImage.setText("CML", tmpCml.c_str());
   }
 
   if (!exportImage.save(fileName)) {
