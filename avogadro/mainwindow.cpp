@@ -235,9 +235,6 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   PluginManager *plugin = PluginManager::instance();
   plugin->load();
 
-  // Now set up the interface.
-  setupInterface();
-
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
 
@@ -257,8 +254,12 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
       connect(extension, SIGNAL(requestActiveDisplayTypes(QStringList)),
               SLOT(setActiveDisplayTypes(QStringList)));
       buildMenu(extension);
+      m_extensions.append(extension);
     }
   }
+
+  // Now set up the interface.
+  setupInterface();
 
   // Build up the standard menus, incorporate dynamic menus.
   buildMenu();
@@ -806,13 +807,16 @@ bool populateTools(T* glWidget)
 
 void MainWindow::viewActivated(QWidget *widget)
 {
-
   if (GLWidget *glWidget = qobject_cast<GLWidget *>(widget)) {
     bool firstRun = populatePluginModel(glWidget->sceneModel());
     m_sceneTreeView->setModel(&glWidget->sceneModel());
     populateTools(glWidget);
 
     m_editToolBar->setDisabled(true);
+    foreach (ExtensionPlugin *extension, m_extensions) {
+      extension->setScene(&glWidget->renderer().scene());
+      extension->setCamera(&glWidget->renderer().camera());
+    }
 
     if (firstRun) {
       setActiveTool("Navigator");
