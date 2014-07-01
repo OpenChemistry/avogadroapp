@@ -336,6 +336,7 @@ private:
   QDockWidget *m_toolDock;
   QDockWidget *m_viewDock;
   QList<QtGui::ToolPlugin *> m_tools;
+  QList<QtGui::ExtensionPlugin *> m_extensions;
 
   QAction *m_undo;
   QAction *m_redo;

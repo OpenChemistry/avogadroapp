@@ -235,9 +235,6 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   PluginManager *plugin = PluginManager::instance();
   plugin->load();
 
-  // Now set up the interface.
-  setupInterface();
-
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
 
@@ -257,8 +254,12 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
       connect(extension, SIGNAL(requestActiveDisplayTypes(QStringList)),
               SLOT(setActiveDisplayTypes(QStringList)));
       buildMenu(extension);
+      m_extensions.append(extension);
     }
   }
+
+  // Now set up the interface.
+  setupInterface();
 
   // Build up the standard menus, incorporate dynamic menus.
   buildMenu();
@@ -296,7 +297,7 @@ void MainWindow::setupInterface()
   m_multiViewWidget = new QtGui::MultiViewWidget(this);
   m_multiViewWidget->setFactory(m_viewFactory);
   setCentralWidget(m_multiViewWidget);
-  GLWidget *glWidget = new GLWidget(this);
+  EditGLWidget *glWidget = new EditGLWidget(this);
   m_multiViewWidget->addWidget(glWidget);
 
   // Our tool dock.
@@ -566,14 +567,11 @@ void MainWindow::openFile()
 
 void MainWindow::importFile()
 {
-  if (!saveFileIfNeeded())
-    return;
-
   QSettings settings;
   QString dir = settings.value("MainWindow/lastOpenDir").toString();
 
   FileFormatDialog::FormatFilePair reply =
-      QtGui::FileFormatDialog::fileToRead(this, tr("Import Molecule"), dir);
+      QtGui::FileFormatDialog::fileToRead(this, tr("Open Molecule"), dir);
 
   if (reply.first == NULL) // user cancel
     return;
@@ -806,13 +804,16 @@ bool populateTools(T* glWidget)
 
 void MainWindow::viewActivated(QWidget *widget)
 {
-
   if (GLWidget *glWidget = qobject_cast<GLWidget *>(widget)) {
     bool firstRun = populatePluginModel(glWidget->sceneModel());
     m_sceneTreeView->setModel(&glWidget->sceneModel());
     populateTools(glWidget);
 
     m_editToolBar->setDisabled(true);
+    foreach (ExtensionPlugin *extension, m_extensions) {
+      extension->setScene(&glWidget->renderer().scene());
+      extension->setCamera(&glWidget->renderer().camera());
+    }
 
     if (firstRun) {
       setActiveTool("Navigator");
@@ -1434,29 +1435,32 @@ void MainWindow::buildMenu()
   action->setIcon(QIcon::fromTheme("document-open"));
   m_menuBuilder->addAction(path, action, 970);
   m_fileToolBar->addAction(action);
-  connect(action, SIGNAL(triggered()), SLOT(openFile()));
+  connect(action, SIGNAL(triggered()), SLOT(importFile()));
   // Save
   action = new QAction(tr("&Save"), this);
   action->setShortcut(QKeySequence("Ctrl+S"));
   action->setIcon(QIcon::fromTheme("document-save"));
   m_menuBuilder->addAction(path, action, 965);
+  m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFile()));
   // Save As
   action = new QAction(tr("Save &As"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+S"));
   action->setIcon(QIcon::fromTheme("document-save-as"));
   m_menuBuilder->addAction(path, action, 960);
+  m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
   // Import
-  action = new QAction(tr("&Import"), this);
+  /*action = new QAction(tr("&Import"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+O"));
   action->setIcon(QIcon::fromTheme("document-import"));
   m_menuBuilder->addAction(path, action, 950);
   m_fileToolBar->addAction(action);
-  connect(action, SIGNAL(triggered()), SLOT(importFile()));
+  connect(action, SIGNAL(triggered()), SLOT(importFile()));*/
   // Export
   action = new QAction(tr("&Export"), this);
   m_menuBuilder->addAction(path, action, 940);
+  m_fileToolBar->addAction(action);
   action->setIcon(QIcon::fromTheme("document-export"));
   connect(action, SIGNAL(triggered()), SLOT(exportFile()));
   // Export graphics
