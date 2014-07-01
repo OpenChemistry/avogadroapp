@@ -567,14 +567,11 @@ void MainWindow::openFile()
 
 void MainWindow::importFile()
 {
-  if (!saveFileIfNeeded())
-    return;
-
   QSettings settings;
   QString dir = settings.value("MainWindow/lastOpenDir").toString();
 
   FileFormatDialog::FormatFilePair reply =
-      QtGui::FileFormatDialog::fileToRead(this, tr("Import Molecule"), dir);
+      QtGui::FileFormatDialog::fileToRead(this, tr("Open Molecule"), dir);
 
   if (reply.first == NULL) // user cancel
     return;
@@ -1438,29 +1435,32 @@ void MainWindow::buildMenu()
   action->setIcon(QIcon::fromTheme("document-open"));
   m_menuBuilder->addAction(path, action, 970);
   m_fileToolBar->addAction(action);
-  connect(action, SIGNAL(triggered()), SLOT(openFile()));
+  connect(action, SIGNAL(triggered()), SLOT(importFile()));
   // Save
   action = new QAction(tr("&Save"), this);
   action->setShortcut(QKeySequence("Ctrl+S"));
   action->setIcon(QIcon::fromTheme("document-save"));
   m_menuBuilder->addAction(path, action, 965);
+  m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFile()));
   // Save As
   action = new QAction(tr("Save &As"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+S"));
   action->setIcon(QIcon::fromTheme("document-save-as"));
   m_menuBuilder->addAction(path, action, 960);
+  m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
   // Import
-  action = new QAction(tr("&Import"), this);
+  /*action = new QAction(tr("&Import"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+O"));
   action->setIcon(QIcon::fromTheme("document-import"));
   m_menuBuilder->addAction(path, action, 950);
   m_fileToolBar->addAction(action);
-  connect(action, SIGNAL(triggered()), SLOT(importFile()));
+  connect(action, SIGNAL(triggered()), SLOT(importFile()));*/
   // Export
   action = new QAction(tr("&Export"), this);
   m_menuBuilder->addAction(path, action, 940);
+  m_fileToolBar->addAction(action);
   action->setIcon(QIcon::fromTheme("document-export"));
   connect(action, SIGNAL(triggered()), SLOT(exportFile()));
   // Export graphics
