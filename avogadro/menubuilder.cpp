@@ -62,6 +62,10 @@ void MenuBuilder::addAction(const QStringList &pathList, QAction *action,
 {
   QString path(pathList.join("|"));
   if (m_menuActions.contains(path)) {
+#ifdef Q_OS_MAC
+    // If we're on Mac, make sure to filter out the action icon
+    action->setIcon(QIcon());
+#endif
     m_menuActions[path].append(action);
   }
   else {

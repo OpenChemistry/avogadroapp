@@ -1425,35 +1425,45 @@ void MainWindow::buildMenu()
   // New
   QAction *action = new QAction(tr("&New"), this);
   action->setShortcut(QKeySequence("Ctrl+N"));
+#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-new"));
+#endif
   m_menuBuilder->addAction(path, action, 999);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(newMolecule()));
   // Open
   action = new QAction(tr("&Open"), this);
   action->setShortcut(QKeySequence("Ctrl+O"));
+#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-open"));
+#endif
   m_menuBuilder->addAction(path, action, 970);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(importFile()));
   // Save
   action = new QAction(tr("&Save"), this);
   action->setShortcut(QKeySequence("Ctrl+S"));
+#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-save"));
+#endif
   m_menuBuilder->addAction(path, action, 965);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFile()));
   // Save As
   action = new QAction(tr("Save &As"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+S"));
+#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-save-as"));
+#endif
   m_menuBuilder->addAction(path, action, 960);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
   // Import
   /*action = new QAction(tr("&Import"), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+O"));
+#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-import"));
+#endif
   m_menuBuilder->addAction(path, action, 950);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(importFile()));*/
@@ -1461,17 +1471,23 @@ void MainWindow::buildMenu()
   action = new QAction(tr("&Export"), this);
   m_menuBuilder->addAction(path, action, 940);
   m_fileToolBar->addAction(action);
+#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
+#endif
   connect(action, SIGNAL(triggered()), SLOT(exportFile()));
   // Export graphics
   action = new QAction(tr("Export Bitmap Graphics"), this);
   m_menuBuilder->addAction(path, action, 941);
+#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
+#endif
   connect(action, SIGNAL(triggered()), SLOT(exportGraphics()));
   // Quit
   action = new QAction(tr("&Quit"), this);
   action->setShortcut(QKeySequence("Ctrl+Q"));
+#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("application-exit"));
+#endif
   m_menuBuilder->addAction(path, action, -200);
   connect(action, SIGNAL(triggered()), this, SLOT(close()));
 
@@ -1479,10 +1495,14 @@ void MainWindow::buildMenu()
   QStringList editPath;
   editPath << tr("&Edit");
   m_undo = new QAction(tr("&Undo"), this);
+#ifndef Q_OS_MAC
   m_undo->setIcon(QIcon::fromTheme("edit-undo"));
+#endif
   m_undo->setShortcut(QKeySequence("Ctrl+Z"));
   m_redo = new QAction(tr("&Redo"), this);
+#ifndef Q_OS_MAC
   m_redo->setIcon(QIcon::fromTheme("edit-redo"));
+#endif
   m_redo->setShortcut(QKeySequence("Ctrl+Shift+Z"));
   m_undo->setEnabled(false);
   m_redo->setEnabled(false);
@@ -1529,7 +1549,9 @@ void MainWindow::buildMenu()
   QStringList helpPath;
   helpPath << tr("&Help");
   QAction *about = new QAction("&About", this);
+#ifndef Q_OS_MAC
   about->setIcon(QIcon::fromTheme("help-about"));
+#endif
   m_menuBuilder->addAction(helpPath, about, 20);
   connect(about, SIGNAL(triggered()), SLOT(showAboutDialog()));
 
@@ -1538,7 +1560,9 @@ void MainWindow::buildMenu()
   for (int i = 0; i < 10; ++i) {
     action = new QAction(QString::number(i), this);
     m_actionRecentFiles.push_back(action);
+#ifndef Q_OS_MAC
     action->setIcon(QIcon::fromTheme("document-open-recent"));
+#endif
     action->setVisible(false);
     m_menuBuilder->addAction(path, action, 995 - i);
     connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
