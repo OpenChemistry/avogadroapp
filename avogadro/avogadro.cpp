@@ -2,7 +2,7 @@
 
   This source file is part of the Avogadro project.
 
-  Copyright 2012 Kitware, Inc.
+  Copyright 2012-2014 Kitware, Inc.
 
   This source code is released under the New BSD License, (the "License").
 
@@ -21,7 +21,7 @@
 #include "mainwindow.h"
 
 #ifdef Avogadro_ENABLE_RPC
-#include "rpclistener.h"
+# include "rpclistener.h"
 #endif
 
 int main(int argc, char *argv[])
