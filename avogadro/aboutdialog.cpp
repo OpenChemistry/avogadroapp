@@ -20,8 +20,7 @@
 
 #include <avogadro/core/version.h>
 
-namespace Avogadro
-{
+namespace Avogadro {
 
 AboutDialog::AboutDialog(QWidget* parent_)
   : QDialog(parent_), m_ui(new Ui::AboutDialog)

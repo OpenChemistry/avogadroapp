@@ -17,9 +17,8 @@
 #ifndef AVOGADRO_RPCLISTENER_H
 #define AVOGADRO_RPCLISTENER_H
 
-#include <QObject>
-
-#include <qjsonobject.h>
+#include <QtCore/QObject>
+#include <QtCore/QJsonObject>
 
 #include <molequeue/servercore/connectionlistener.h>
 

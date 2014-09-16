@@ -2,7 +2,7 @@
 
  This source file is part of the Avogadro project.
 
- Copyright 2013 Kitware, Inc.
+ Copyright 2013-2014 Kitware, Inc.
 
  This source code is released under the New BSD License, (the "License").
 
@@ -14,8 +14,8 @@
 
  ******************************************************************************/
 
-#ifndef ABOUTDIALOG_H_
-#define ABOUTDIALOG_H_
+#ifndef AVOGADRO_ABOUTDIALOG_H
+#define AVOGADRO_ABOUTDIALOG_H
 
 #include <QtWidgets/QDialog>
 
@@ -23,8 +23,7 @@ namespace Ui {
 class AboutDialog;
 }
 
-namespace Avogadro
-{
+namespace Avogadro {
 
 class AboutDialog : public QDialog
 {
@@ -37,6 +36,6 @@ private:
   Ui::AboutDialog *m_ui;
 };
 
-} /* namespace Avogadro */
+} // End Avogadro namespace
 
-#endif /* ABOUTDIALOG_H_ */
+#endif // AVOGADRO_ABOUTDIALOG_H

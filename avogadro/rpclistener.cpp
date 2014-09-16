@@ -15,19 +15,16 @@
 ******************************************************************************/
 
 #include "rpclistener.h"
+#include "mainwindow.h"
 
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QInputDialog>
 
 #include <QtCore/QTimer>
-
-#include "qjsonvalue.h"
-#include "qjsonobject.h"
+#include <QtCore/QJsonValue>
 
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/io/fileformatmanager.h>
-
-#include "mainwindow.h"
 
 #include <molequeue/client/jsonrpcclient.h>
 #include <molequeue/servercore/jsonrpc.h>
