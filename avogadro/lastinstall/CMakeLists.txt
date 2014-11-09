@@ -20,7 +20,9 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
 
   set(dirs "")
   if(CMAKE_PREFIX_PATH)
-    set(dirs "${CMAKE_PREFIX_PATH}/bin" "${CMAKE_PREFIX_PATH}/lib")
+    foreach(dir ${CMAKE_PREFIX_PATH})
+      list(APPEND dirs "${dir}/bin" "${dir}/lib")
+    endforeach()
   endif()
   # The VTK dlls are not in the CMAKE_PREFIX_PATH when built against
   # a "build tree" of VTK:
@@ -45,7 +47,7 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
       list(APPEND ob_plugins ${INSTALL_LIBRARY_DIR}/openbabel/2.3.2/${plugin})
     endforeach()
   endif()
-
+  include(InstallRequiredSystemLibraries)
   include(DeployQt5)
   install_qt5_executable(${exe} "${plugins}" "${ob_plugins}" "${dirs}" "")
 endif()
