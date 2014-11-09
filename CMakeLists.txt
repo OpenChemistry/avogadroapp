@@ -1,4 +1,9 @@
-cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8.11 FATAL_ERROR)
+
+# Use the new policy for linking to qtmain
+if(POLICY CMP0020)
+#  cmake_policy(SET CMP0020 NEW)
+endif()
 
 project(AvogadroApp)
 
