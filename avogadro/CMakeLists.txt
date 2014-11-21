@@ -64,8 +64,15 @@ if(APPLE)
   list(APPEND avogadro_srcs icons/avogadro.icns)
   set(MACOSX_BUNDLE_ICON_FILE avogadro.icns)
   set(MACOSX_BUNDLE_BUNDLE_VERSION "${AvogadroApp_VERSION}")
+  set(MACOSX_BUNDLE_INFO_STRING "Avogadro - version ${AvogadroApp_VERSION}")
+
+  # Change following line to point to actual icns file in bundle.
+  set(MACOSX_BUNDLE_GUI_IDENTIFIER "cc.avogadro")
+  set(MACOSX_BUNDLE_BUNDLE_NAME "Avogadro")
+
   set_source_files_properties(icons/avogadro.icns PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources)
+
 elseif(UNIX)
   install(FILES "icons/avogadro2.desktop" DESTINATION "${INSTALL_XDG_APPS_DIR}")
   install(FILES "icons/avogadro.png" DESTINATION "${INSTALL_XDG_ICON_DIR}"
