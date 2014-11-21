@@ -129,6 +129,22 @@ void MenuBuilder::buildMenu(QMenuBar *menu)
   // Now to iterate through the top level entries.
   foreach (const QString &path, m_topLevelMenus.keys())
     buildMenu(m_topLevelMenus[path], path);
+
+  // Check each of the menus for initial or final separators
+  // (which just look weird)
+  foreach (const QString &path, m_topLevelMenus.keys()) {
+    QMenu *menu = m_topLevelMenus[path];
+
+    //    qDebug() << " menu: " << menu->title();
+
+    QAction *firstAction = menu->actions().first();
+    if (firstAction->isSeparator())
+      menu->removeAction(firstAction);
+
+    QAction *lastAction = menu->actions().last();
+    if (lastAction->isSeparator())
+      menu->removeAction(lastAction);
+  }
 }
 
 void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
@@ -138,7 +154,7 @@ void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
   QMap<QString, QAction *> actions;
   QList<QString> submenuPaths;
   QMap<QString, QString> submenuMap;
-  // Find our concreate entries, and submenus.
+  // Find our concrete entries, and submenus.
   foreach (const QString &key, m_menuActions.keys()) {
     if (QString(key).replace("&", "") == path)
       items.append(m_menuActions[key]);
