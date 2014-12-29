@@ -41,9 +41,14 @@ int main(int argc, char *argv[])
                              "This system does not support OpenGL!");
     return 1;
   }
+
+  // Use high-resolution (e.g., 2x) icons if available
+  app.setAttribute(Qt::AA_UseHighDpiPixmaps);
+
   // Set up the default format for our GL contexts.
   QGLFormat defaultFormat = QGLFormat::defaultFormat();
   defaultFormat.setSampleBuffers(true);
+  defaultFormat.setAlpha(true);
   QGLFormat::setDefaultFormat(defaultFormat);
 
   QStringList fileNames;
