@@ -45,6 +45,7 @@ if(Avogadro_ENABLE_RPC)
 endif()
 
 if(ENABLE_TESTING)
+  find_package(Qt5Test REQUIRED)
   find_package(QtTesting REQUIRED NO_MODULE)
   include_directories(${QtTesting_INCLUDE_DIRS})
   link_directories(${QtTesting_LIBRARY_DIR})
