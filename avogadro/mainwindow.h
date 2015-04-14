@@ -69,7 +69,6 @@ public:
 
 public slots:
   void setMolecule(Avogadro::QtGui::Molecule *molecule);
-  void setMolecule(Avogadro::QtGui::RWMolecule *molecule);
 
   /**
    * Update internal state to reflect that the molecule has been modified.

@@ -297,7 +297,7 @@ void MainWindow::setupInterface()
   m_multiViewWidget = new QtGui::MultiViewWidget(this);
   m_multiViewWidget->setFactory(m_viewFactory);
   setCentralWidget(m_multiViewWidget);
-  EditGLWidget *glWidget = new EditGLWidget(this);
+  GLWidget *glWidget = new GLWidget(this);
   m_multiViewWidget->addWidget(glWidget);
 
   // Our tool dock.
@@ -406,9 +406,9 @@ void MainWindow::setMolecule(Molecule *mol)
   // If the molecule is empty, make the editor active. Otherwise, use the
   // navigator tool.
   if (m_molecule) {
-    //QString targetToolName = m_molecule->atomCount() > 0 ? "Navigator"
-    //                                                     : "Editor";
-    //setActiveTool(targetToolName);
+    QString targetToolName = m_molecule->atomCount() > 0 ? "Navigator"
+                                                         : "Editor";
+    setActiveTool(targetToolName);
     connect(m_molecule, SIGNAL(changed(uint)), SLOT(markMoleculeDirty()));
   }
 
@@ -425,52 +425,14 @@ void MainWindow::setMolecule(Molecule *mol)
   if (GLWidget *glWidget = qobject_cast<QtOpenGL::GLWidget *>(w)) {
     setWidgetMolecule(glWidget, mol);
   }
-  else if (EditGLWidget *editWidget = qobject_cast<EditGLWidget *>(w)) {
-    RWMolecule *rwMol = new RWMolecule(*mol, this);
-    qDebug() << "rwMol with" << rwMol->atomCount() << "atoms";
-    m_moleculeModel->addItem(rwMol);
-    m_moleculeModel->setActiveMolecule(rwMol);
-    setWidgetMolecule(editWidget, rwMol);
-  }
   else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget *>(w)) {
-    setWidgetMolecule(vtkWidget, mol);
-  }
-}
-
-void MainWindow::setMolecule(RWMolecule *rwMol)
-{
-  if (!rwMol)
-    return;
-
-  // It will ensure the molecule is unique.
-  m_moleculeModel->addItem(rwMol);
-
-  //emit moleculeChanged(m_molecule);
-  //markMoleculeClean();
-  //updateWindowTitle();
-  m_moleculeModel->setActiveMolecule(rwMol);
-
-  // Check if the molecule needs to update the current one.
-  QWidget *w = m_multiViewWidget->activeWidget();
-  if (GLWidget *glWidget = qobject_cast<QtOpenGL::GLWidget *>(w)) {
-    Molecule *mol = new Molecule(*rwMol, this);
-    m_moleculeModel->addItem(mol);
-    m_moleculeModel->setActiveMolecule(mol);
-    setWidgetMolecule(glWidget, mol);
-  }
-  else if (EditGLWidget *editWidget = qobject_cast<EditGLWidget *>(w)) {
-    setWidgetMolecule(editWidget, rwMol);
-  }
-  else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget *>(w)) {
-    Molecule *mol = new Molecule(*rwMol, this);
-    m_moleculeModel->addItem(mol);
-    m_moleculeModel->setActiveMolecule(mol);
     setWidgetMolecule(vtkWidget, mol);
   }
 }
 
 void MainWindow::markMoleculeDirty()
 {
+  activeMoleculeEdited();
   if (!m_moleculeDirty) {
     m_moleculeDirty = true;
     updateWindowTitle();
@@ -746,8 +708,6 @@ void MainWindow::moleculeActivated(const QModelIndex &idx)
   QObject *obj = static_cast<QObject *>(idx.internalPointer());
   if (Molecule *mol = qobject_cast<Molecule *>(obj))
     setMolecule(mol);
-  else if (RWMolecule *rwMol = qobject_cast<RWMolecule *>(obj))
-    setMolecule(rwMol);
 }
 
 void MainWindow::sceneItemActivated(const QModelIndex &idx)
@@ -809,7 +769,7 @@ void MainWindow::viewActivated(QWidget *widget)
     m_sceneTreeView->setModel(&glWidget->sceneModel());
     populateTools(glWidget);
 
-    m_editToolBar->setDisabled(true);
+    m_editToolBar->setEnabled(true);
     foreach (ExtensionPlugin *extension, m_extensions) {
       extension->setScene(&glWidget->renderer().scene());
       extension->setCamera(&glWidget->renderer().camera());
@@ -838,48 +798,6 @@ void MainWindow::viewActivated(QWidget *widget)
       m_molecule = glWidget->molecule();
       emit moleculeChanged(m_molecule);
       m_moleculeModel->setActiveMolecule(m_molecule);
-    }
-  }
-  else if (EditGLWidget *editWidget = qobject_cast<EditGLWidget *>(widget)) {
-    bool firstRun = populatePluginModel(editWidget->sceneModel(), true);
-    m_sceneTreeView->setModel(&editWidget->sceneModel());
-    populateTools(editWidget);
-
-    m_editToolBar->setDisabled(false);
-
-    if (firstRun) {
-      setActiveTool("Editor");
-      RWMolecule *rwMol = new RWMolecule(this);
-      m_moleculeModel->addItem(rwMol);
-      m_moleculeModel->setActiveMolecule(rwMol);
-      editWidget->setMolecule(rwMol);
-      editWidget->updateScene();
-      m_rwMolecule = rwMol;
-      m_molecule = NULL;
-      connect(&rwMol->undoStack(), SIGNAL(canRedoChanged(bool)),
-              m_redo, SLOT(setEnabled(bool)));
-      connect(&rwMol->undoStack(), SIGNAL(canUndoChanged(bool)),
-              m_undo, SLOT(setEnabled(bool)));
-    }
-    else {
-      m_moleculeModel->setActiveMolecule(editWidget->molecule());
-      // Figure out the active tool - reflect this in the toolbar.
-      ToolPlugin *tool = editWidget->activeTool();
-      if (tool) {
-        QString name = tool->objectName();
-        foreach(QAction *action, m_toolToolBar->actions()) {
-          if (action->data().toString() == name)
-            action->setChecked(true);
-          else
-            action->setChecked(false);
-        }
-      }
-    }
-    if (m_rwMolecule != editWidget->molecule() && editWidget->molecule()) {
-      m_molecule = 0;
-      m_rwMolecule = editWidget->molecule();
-      //emit moleculeChanged(m_rwMolecule);
-      m_moleculeModel->setActiveMolecule(m_rwMolecule);
     }
   }
   else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
@@ -1149,12 +1067,8 @@ bool MainWindow::saveFileAs(const QString &fileName, Io::FileFormat *writer,
 
   Molecule *mol = qobject_cast<Molecule *>(molObj);
   if (!mol) {
-    RWMolecule *rwMol = qobject_cast<RWMolecule *>(molObj);
-    if (!rwMol) {
-      delete writer;
-      return false;
-    }
-    mol = new Molecule(*rwMol, m_threadedWriter);
+    delete writer;
+    return false;
   }
 
   // Prepare the background thread to write the selected file.
@@ -1252,18 +1166,18 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 
 void MainWindow::undoEdit()
 {
-  if (m_rwMolecule) {
-    m_rwMolecule->undoStack().undo();
-    m_rwMolecule->emitChanged(Molecule::Atoms | Molecule::Added);
+  if (m_molecule) {
+    m_molecule->undoMolecule()->undoStack().undo();
+    m_molecule->emitChanged(Molecule::Atoms | Molecule::Added);
     activeMoleculeEdited();
   }
 }
 
 void MainWindow::redoEdit()
 {
-  if (m_rwMolecule) {
-    m_rwMolecule->undoStack().redo();
-    m_rwMolecule->emitChanged(Molecule::Atoms | Molecule::Added);
+  if (m_molecule) {
+    m_molecule->undoMolecule()->undoStack().redo();
+    m_molecule->emitChanged(Molecule::Atoms | Molecule::Added);
     activeMoleculeEdited();
   }
 }
@@ -1272,12 +1186,12 @@ void MainWindow::activeMoleculeEdited()
 {
   if (!m_undo || !m_redo)
     return;
-  if (m_rwMolecule) {
-    if (m_rwMolecule->undoStack().canUndo())
+  if (m_molecule) {
+    if (m_molecule->undoMolecule()->undoStack().canUndo())
       m_undo->setEnabled(true);
     else
       m_undo->setEnabled(false);
-    if (m_rwMolecule->undoStack().canRedo())
+    if (m_molecule->undoMolecule()->undoStack().canRedo())
       m_redo->setEnabled(true);
     else
       m_redo->setEnabled(false);
