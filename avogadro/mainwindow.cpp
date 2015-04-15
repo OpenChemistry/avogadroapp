@@ -27,7 +27,6 @@
 #include <avogadro/io/fileformat.h>
 #include <avogadro/io/fileformatmanager.h>
 #include <avogadro/qtopengl/glwidget.h>
-#include <avogadro/qtopengl/editglwidget.h>
 #include <avogadro/qtplugins/pluginmanager.h>
 #include <avogadro/qtgui/customelementdialog.h>
 #include <avogadro/qtgui/fileformatdialog.h>
@@ -198,7 +197,6 @@ using QtGui::ToolPlugin;
 using QtGui::ToolPluginFactory;
 using QtGui::ExtensionPlugin;
 using QtGui::ExtensionPluginFactory;
-using QtOpenGL::EditGLWidget;
 using QtOpenGL::GLWidget;
 using VTK::vtkGLWidget;
 using QtPlugins::PluginManager;
@@ -675,14 +673,6 @@ void MainWindow::toolActivated()
         m_toolDock->setWindowTitle(action->text());
       }
     }
-    if (EditGLWidget *editWidget =
-        qobject_cast<EditGLWidget *>(m_multiViewWidget->activeWidget())) {
-      editWidget->setActiveTool(action->data().toString());
-      if (editWidget->activeTool()) {
-        m_toolDock->setWidget(editWidget->activeTool()->toolWidget());
-        m_toolDock->setWindowTitle(action->text());
-      }
-    }
   }
 }
 
@@ -1119,15 +1109,6 @@ void MainWindow::setActiveTool(QString toolName)
       }
     }
   }
-  else if (EditGLWidget *editWidget =
-      qobject_cast<EditGLWidget *>(m_multiViewWidget->activeWidget())) {
-    foreach (ToolPlugin *toolPlugin, editWidget->tools()) {
-      if (toolPlugin->objectName() == toolName) {
-        toolPlugin->activateAction()->triggered();
-        editWidget->setActiveTool(toolPlugin);
-      }
-    }
-  }
 
   if (!toolName.isEmpty()) {
     foreach(QAction *action, m_toolToolBar->actions()) {
@@ -1206,14 +1187,8 @@ void MainWindow::setBackgroundColor()
 {
   Rendering::Scene *scene(NULL);
   GLWidget *glWidget(NULL);
-  EditGLWidget *editWidget(NULL);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
     scene = &glWidget->renderer().scene();
-  }
-  else if ((editWidget =
-           qobject_cast<EditGLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scene = &editWidget->renderer().scene();
-  }
   if (scene) {
     Vector4ub cColor = scene->backgroundColor();
     QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
@@ -1226,8 +1201,6 @@ void MainWindow::setBackgroundColor()
       scene->setBackgroundColor(cColor);
       if (glWidget)
         glWidget->updateGL();
-      else if (editWidget)
-        editWidget->updateGL();
     }
   }
 }
@@ -1236,20 +1209,12 @@ void MainWindow::setProjectionPerspective()
 {
   Rendering::GLRenderer *renderer(NULL);
   GLWidget *glWidget(NULL);
-  EditGLWidget *editWidget(NULL);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
     renderer = &glWidget->renderer();
-  }
-  else if ((editWidget =
-           qobject_cast<EditGLWidget*>(m_multiViewWidget->activeWidget()))) {
-    renderer = &editWidget->renderer();
-  }
   if (renderer) {
     renderer->camera().setProjectionType(Rendering::Perspective);
     if (glWidget)
       glWidget->updateGL();
-    else if (editWidget)
-      editWidget->updateGL();
   }
 }
 
@@ -1257,20 +1222,12 @@ void MainWindow::setProjectionOrthographic()
 {
   Rendering::GLRenderer *renderer(NULL);
   GLWidget *glWidget(NULL);
-  EditGLWidget *editWidget(NULL);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
     renderer = &glWidget->renderer();
-  }
-  else if ((editWidget =
-           qobject_cast<EditGLWidget*>(m_multiViewWidget->activeWidget()))) {
-    renderer = &editWidget->renderer();
-  }
   if (renderer) {
     renderer->camera().setProjectionType(Rendering::Orthographic);
     if (glWidget)
       glWidget->updateGL();
-    else if (editWidget)
-      editWidget->updateGL();
   }
 }
 
