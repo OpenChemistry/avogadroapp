@@ -7,7 +7,7 @@ details on developing and contributing to the project. The GitHub issue
 tracker can be used to report bugs, make feature requests, etc.
 
 Our [wiki][Wiki] is used to document features, flesh out designs and host other
-documentation. Our API is [documented using Doxygen][Doxygen] with updated
+documentation. Our API is documented using Doxygen with updated
 documentation generated nightly. We have several [mailing lists][MailingLists]
 to coordinate development and to provide support.
 

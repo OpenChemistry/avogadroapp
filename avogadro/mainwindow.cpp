@@ -848,11 +848,29 @@ void MainWindow::exportGraphics()
     fileName += ".png";
 
   // render it (with alpha channel)
+  Rendering::Scene *scene(NULL);
+  GLWidget *viewWidget(NULL);
+  EditGLWidget *editWidget(NULL);
+  if ((viewWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+    scene = &viewWidget->renderer().scene();
+  }
+  else if ((editWidget =
+           qobject_cast<EditGLWidget*>(m_multiViewWidget->activeWidget()))) {
+    scene = &editWidget->renderer().scene();
+  }
+  Vector4ub cColor = scene->backgroundColor();
+  unsigned char alpha = cColor[3];
+  cColor[3] = 0; // 100% transparent for export
+  scene->setBackgroundColor(cColor);
+
   QImage exportImage;
   glWidget->raise();
   glWidget->repaint();
   if (QGLFramebufferObject::hasOpenGLFramebufferObjects()) {
-    exportImage = glWidget->grabFrameBuffer(true);
+    // by using renderPixmap, we can scale the export size arbitrarily
+    unsigned int scale = 2;
+    QPixmap pixmap = glWidget->renderPixmap( glWidget->width()*scale, glWidget->height()*scale );
+    exportImage = pixmap.toImage();
   }
   else {
     QPixmap pixmap = QPixmap::grabWindow(glWidget->winId());
@@ -871,8 +889,12 @@ void MainWindow::exportGraphics()
   if (!exportImage.save(fileName)) {
     QMessageBox::warning(this, tr("Avogadro"),
                          tr("Cannot save file %1.").arg(fileName));
-    return;
   }
+
+  // set the GL widget back to the right background color (i.e., not 100% transparent)
+  cColor[3] = alpha; // previous color
+  scene->setBackgroundColor(cColor);
+  glWidget->repaint();
 }
 
 void MainWindow::reassignCustomElements()
