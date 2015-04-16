@@ -850,13 +850,8 @@ void MainWindow::exportGraphics()
   // render it (with alpha channel)
   Rendering::Scene *scene(NULL);
   GLWidget *viewWidget(NULL);
-  EditGLWidget *editWidget(NULL);
   if ((viewWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
     scene = &viewWidget->renderer().scene();
-  }
-  else if ((editWidget =
-           qobject_cast<EditGLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scene = &editWidget->renderer().scene();
   }
   Vector4ub cColor = scene->backgroundColor();
   unsigned char alpha = cColor[3];
