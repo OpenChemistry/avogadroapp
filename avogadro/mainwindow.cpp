@@ -269,6 +269,9 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
     // Give the plugins 5 seconds before timing out queued files.
     QTimer::singleShot(5000, this, SLOT(clearQueuedFiles()));
   }
+  else {
+    newMolecule();
+  }
 
 #ifdef Avogadro_ENABLE_RPC
   // Wait a few seconds to attempt registering with MoleQueue.
