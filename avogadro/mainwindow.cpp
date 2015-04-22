@@ -308,6 +308,7 @@ void MainWindow::setupInterface()
   // Our scene/view dock.
   QDockWidget *sceneDock = new QDockWidget(tr("Display Types"), this);
   m_sceneTreeView = new QTreeView(sceneDock);
+  m_sceneTreeView->setIndentation(0);
   sceneDock->setWidget(m_sceneTreeView);
   addDockWidget(Qt::LeftDockWidgetArea, sceneDock);
 
@@ -318,6 +319,7 @@ void MainWindow::setupInterface()
   // Our molecule dock.
   QDockWidget *moleculeDock = new QDockWidget(tr("Molecules"), this);
   m_moleculeTreeView = new QTreeView(moleculeDock);
+  m_moleculeTreeView->setIndentation(0);
   moleculeDock->setWidget(m_moleculeTreeView);
   addDockWidget(Qt::LeftDockWidgetArea, moleculeDock);
 
@@ -343,9 +345,13 @@ void MainWindow::setupInterface()
   // Create the molecule model
   m_moleculeModel = new QtGui::MoleculeModel(this);
   m_moleculeTreeView->setModel(m_moleculeModel);
+  m_moleculeTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_moleculeTreeView->setAlternatingRowColors(true);
-  m_moleculeTreeView->header()->stretchLastSection();
+  m_moleculeTreeView->header()->setStretchLastSection(false);
   m_moleculeTreeView->header()->setVisible(false);
+  m_moleculeTreeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+  m_moleculeTreeView->header()->setSectionResizeMode(1, QHeaderView::Fixed);
+  m_moleculeTreeView->header()->resizeSection(1, 30);
   connect(m_moleculeTreeView, SIGNAL(activated(QModelIndex)),
           SLOT(moleculeActivated(QModelIndex)));
 
@@ -699,8 +705,23 @@ void MainWindow::rendererInvalid()
 void MainWindow::moleculeActivated(const QModelIndex &idx)
 {
   QObject *obj = static_cast<QObject *>(idx.internalPointer());
-  if (Molecule *mol = qobject_cast<Molecule *>(obj))
-    setMolecule(mol);
+  if (Molecule *mol = qobject_cast<Molecule *>(obj)) {
+    if (idx.column() == 0)
+      setMolecule(mol);
+    if (idx.column() == 1) {
+      if (m_molecule == mol) {
+        QList<Molecule *> molecules = m_moleculeModel->molecules();
+        int molIdx = molecules.indexOf(mol);
+        if (molIdx > 0)
+          setMolecule(molecules[molIdx - 1]);
+        else if (molIdx == 0 && molecules.size() > 1)
+          setMolecule(molecules[1]);
+        else
+          setMolecule(0);
+      }
+      m_moleculeModel->removeItem(mol);
+    }
+  }
 }
 
 void MainWindow::sceneItemActivated(const QModelIndex &idx)
