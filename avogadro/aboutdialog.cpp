@@ -34,6 +34,13 @@ AboutDialog::AboutDialog(QWidget* parent_)
   m_ui->version->setText(html.arg("20").arg(AvogadroApp_VERSION));
   m_ui->libsVersion->setText(html.arg("10").arg(version()));
   m_ui->qtVersion->setText(html.arg("10").arg(qVersion()));
+
+  // Add support for a 2x replacement (mainly Mac OS X retina at this point).
+  if (window()->devicePixelRatio() == 2) {
+    QPixmap pix(":/icons/Avogadro2_About@2x.png");
+    pix.setDevicePixelRatio(2);
+    m_ui->Image->setPixmap(pix);
+  }
 }
 
 AboutDialog::~AboutDialog()
