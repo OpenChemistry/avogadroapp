@@ -315,6 +315,8 @@ void MainWindow::setupInterface()
   // Our view dock.
   m_viewDock = new QDockWidget(tr("View Configuration"), this);
   addDockWidget(Qt::LeftDockWidgetArea, m_viewDock);
+  // put display types on top of view config
+  tabifyDockWidget(m_viewDock, sceneDock);
 
   // Our molecule dock.
   QDockWidget *moleculeDock = new QDockWidget(tr("Molecules"), this);
@@ -1422,6 +1424,11 @@ void MainWindow::buildMenu()
   connect(m_redo, SIGNAL(triggered()), SLOT(redoEdit()));
   m_menuBuilder->addAction(editPath, m_undo, 1);
   m_menuBuilder->addAction(editPath, m_redo, 0);
+
+#ifdef Q_OS_MAC
+  // hide the file toolbar on Mac
+  m_fileToolBar->hide();
+#endif
 
   // View menu
   QStringList viewPath;
