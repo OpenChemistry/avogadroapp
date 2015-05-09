@@ -1152,7 +1152,15 @@ void MainWindow::setActiveTool(QString toolName)
   }
 
   if (!toolName.isEmpty()) {
+    // check view tools
     foreach(QAction *action, m_toolToolBar->actions()) {
+      if (action->data().toString() == toolName)
+        action->setChecked(true);
+      else
+        action->setChecked(false);
+    }
+    // check edit tools
+    foreach(QAction *action, m_editToolBar->actions()) {
       if (action->data().toString() == toolName)
         action->setChecked(true);
       else
