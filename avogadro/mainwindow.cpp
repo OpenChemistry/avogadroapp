@@ -1149,6 +1149,10 @@ void MainWindow::setActiveTool(QString toolName)
       if (toolPlugin->objectName() == toolName) {
         toolPlugin->activateAction()->triggered();
         glWidget->setActiveTool(toolPlugin);
+
+        // update the settings widget
+        m_toolDock->setWidget(toolPlugin->toolWidget());
+        m_toolDock->setWindowTitle(toolPlugin->activateAction()->text());
       }
     }
   }
