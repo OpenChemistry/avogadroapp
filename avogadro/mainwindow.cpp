@@ -682,6 +682,17 @@ void MainWindow::toolActivated()
       if (glWidget->activeTool()) {
         m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
+
+        // uncheck the toolbar
+        foreach(QAction *barAction, m_toolToolBar->actions()) {
+          if (action->data().toString() != barAction->data().toString())
+            barAction->setChecked(false);
+        }
+        foreach(QAction *barAction, m_editToolBar->actions()) {
+          if (action->data().toString() != barAction->data().toString())
+            barAction->setChecked(false);
+        }
+
       }
     }
   }
