@@ -17,8 +17,8 @@ include(DetermineVersion)
 
 # Set up our version.
 set(AvogadroApp_VERSION_MAJOR   "0")
-set(AvogadroApp_VERSION_MINOR   "7")
-set(AvogadroApp_VERSION_PATCH   "2")
+set(AvogadroApp_VERSION_MINOR   "8")
+set(AvogadroApp_VERSION_PATCH   "0")
 set(AvogadroApp_VERSION
   "${AvogadroApp_VERSION_MAJOR}.${AvogadroApp_VERSION_MINOR}.${AvogadroApp_VERSION_PATCH}")
 find_package(Git)
