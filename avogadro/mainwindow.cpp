@@ -721,16 +721,20 @@ void MainWindow::moleculeActivated(const QModelIndex &idx)
   if (Molecule *mol = qobject_cast<Molecule *>(obj)) {
     if (idx.column() == 0)
       setMolecule(mol);
+
+    // Deleting a molecule, we must also create a new one if it is the last.
     if (idx.column() == 1) {
       if (m_molecule == mol) {
         QList<Molecule *> molecules = m_moleculeModel->molecules();
         int molIdx = molecules.indexOf(mol);
         if (molIdx > 0)
           setMolecule(molecules[molIdx - 1]);
-        else if (molIdx == 0 && molecules.size() > 1)
+        else if (molIdx == 0 && molecules.size() > 1) {
           setMolecule(molecules[1]);
-        else
-          setMolecule(0);
+        }
+        else {
+          newMolecule();
+        }
       }
       m_moleculeModel->removeItem(mol);
     }
