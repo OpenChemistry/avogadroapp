@@ -4,7 +4,7 @@ list(APPEND CMAKE_MODULE_PATH ${AvogadroLibs_CMAKE_DIR})
 find_package(Eigen3 REQUIRED)
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
 
-option(USE_VTK "Build with VTK support" ON)
+option(USE_VTK "Build with VTK support" OFF)
 if(USE_VTK)
   find_package(VTK COMPONENTS vtkGUISupportQt vtkRenderingOpenGL REQUIRED)
   include(${VTK_USE_FILE})
