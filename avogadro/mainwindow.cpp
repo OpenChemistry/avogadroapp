@@ -81,7 +81,9 @@
 # include <molequeue/client/client.h>
 #endif // Avogadro_ENABLE_RPC
 
-#include <avogadro/vtk/vtkglwidget.h>
+#ifdef AVO_USE_VTK
+# include <avogadro/vtk/vtkglwidget.h>
+#endif
 
 namespace Avogadro {
 
@@ -198,8 +200,10 @@ using QtGui::ToolPluginFactory;
 using QtGui::ExtensionPlugin;
 using QtGui::ExtensionPluginFactory;
 using QtOpenGL::GLWidget;
-using VTK::vtkGLWidget;
 using QtPlugins::PluginManager;
+#ifdef AVO_USE_VTK
+using VTK::vtkGLWidget;
+#endif
 
 MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
   : m_molecule(NULL),
@@ -434,9 +438,11 @@ void MainWindow::setMolecule(Molecule *mol)
   if (GLWidget *glWidget = qobject_cast<QtOpenGL::GLWidget *>(w)) {
     setWidgetMolecule(glWidget, mol);
   }
+#ifdef AVO_USE_VTK
   else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget *>(w)) {
     setWidgetMolecule(vtkWidget, mol);
   }
+#endif
 }
 
 void MainWindow::markMoleculeDirty()
@@ -831,6 +837,7 @@ void MainWindow::viewActivated(QWidget *widget)
       m_moleculeModel->setActiveMolecule(m_molecule);
     }
   }
+#ifdef AVO_USE_VTK
   else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
     bool firstRun = populatePluginModel(vtkWidget->sceneModel());
     m_sceneTreeView->setModel(&vtkWidget->sceneModel());
@@ -851,6 +858,7 @@ void MainWindow::viewActivated(QWidget *widget)
       m_moleculeModel->setActiveMolecule(m_molecule);
     }
   }
+#endif
   updateWindowTitle();
   activeMoleculeEdited();
 }
@@ -1194,14 +1202,18 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 {
   ScenePluginModel *scenePluginModel(NULL);
   GLWidget *glWidget(NULL);
+#ifdef AVO_USE_VTK
   VTK::vtkGLWidget *vtkWidget(NULL);
+#endif
   if ((glWidget = qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget()))) {
     scenePluginModel = &glWidget->sceneModel();
   }
+#ifdef AVO_USE_VTK
   else if ((vtkWidget =
            qobject_cast<VTK::vtkGLWidget *>(m_multiViewWidget->activeWidget()))) {
     scenePluginModel = &vtkWidget->sceneModel();
   }
+#endif
 
   foreach (ScenePlugin *scene, scenePluginModel->scenePlugins())
     scene->setEnabled(false);
@@ -1211,8 +1223,10 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
         scene->setEnabled(true);
   if (glWidget)
     glWidget->updateScene();
+#ifdef AVO_USE_VTK
   else if (vtkWidget)
     vtkWidget->updateScene();
+#endif
 }
 
 void MainWindow::undoEdit()

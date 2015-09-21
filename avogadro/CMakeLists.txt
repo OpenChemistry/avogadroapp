@@ -8,6 +8,7 @@ option(USE_VTK "Build with VTK support" OFF)
 if(USE_VTK)
   find_package(VTK COMPONENTS vtkGUISupportQt vtkRenderingOpenGL REQUIRED)
   include(${VTK_USE_FILE})
+  add_definitions(-DAVO_USE_VTK)
 endif()
 
 if(MSVC)
