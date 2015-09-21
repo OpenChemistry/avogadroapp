@@ -17,7 +17,9 @@
 #include "viewfactory.h"
 
 #include <avogadro/qtopengl/glwidget.h>
-#include <avogadro/vtk/vtkglwidget.h>
+#ifdef AVO_USE_VTK
+# include <avogadro/vtk/vtkglwidget.h>
+#endif
 
 namespace Avogadro {
 
@@ -31,15 +33,22 @@ ViewFactory::~ViewFactory()
 
 QStringList ViewFactory::views() const
 {
-  return QStringList() << "3D View" << "VTK";
+  QStringList views;
+  views << "3D View";
+#ifdef AVO_USE_VTK
+  views << "VTK";
+#endif
+  return views;
 }
 
 QWidget * ViewFactory::createView(const QString &view)
 {
   if (view == "3D View")
     return new QtOpenGL::GLWidget;
+#ifdef AVO_USE_VTK
   else if (view == "VTK")
     return new VTK::vtkGLWidget;
+#endif
   return NULL;
 }
 
