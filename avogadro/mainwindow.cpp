@@ -1252,14 +1252,24 @@ void MainWindow::activeMoleculeEdited()
   if (!m_undo || !m_redo)
     return;
   if (m_molecule) {
-    if (m_molecule->undoMolecule()->undoStack().canUndo())
+    if (m_molecule->undoMolecule()->undoStack().canUndo()) {
       m_undo->setEnabled(true);
-    else
+      m_undo->setText(tr("&Undo %1")
+                      .arg(m_molecule->undoMolecule()->undoStack().undoText()));
+    }
+    else {
       m_undo->setEnabled(false);
-    if (m_molecule->undoMolecule()->undoStack().canRedo())
+      m_undo->setText(tr("&Undo"));
+    }
+    if (m_molecule->undoMolecule()->undoStack().canRedo()) {
       m_redo->setEnabled(true);
-    else
+      m_redo->setText(tr("&Redo %1")
+                      .arg(m_molecule->undoMolecule()->undoStack().redoText()));
+    }
+    else {
       m_redo->setEnabled(false);
+      m_redo->setText(tr("&Redo"));
+    }
   }
   else {
     m_undo->setEnabled(false);
