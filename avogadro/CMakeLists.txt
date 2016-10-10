@@ -16,9 +16,7 @@ if(MSVC)
 endif()
 
 # Find the Qt components we need.
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5OpenGL REQUIRED)
-find_package(Qt5Network REQUIRED)
+find_package(Qt5 COMPONENTS Widgets Qt5OpenGL Qt5Network REQUIRED)
 
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
 
@@ -46,7 +44,7 @@ if(Avogadro_ENABLE_RPC)
 endif()
 
 if(ENABLE_TESTING)
-  find_package(Qt5Test REQUIRED)
+  find_package(Qt5 COMPONENTS Test REQUIRED)
   find_package(QtTesting REQUIRED NO_MODULE)
   include_directories(${QtTesting_INCLUDE_DIRS})
   link_directories(${QtTesting_LIBRARY_DIR})
@@ -104,7 +102,6 @@ else()
   set_target_properties(avogadro PROPERTIES OUTPUT_NAME "avogadro2")
 endif()
 if(ENABLE_TESTING)
-  find_package(Qt5Test REQUIRED)
   target_link_libraries(avogadro QtTesting)
 endif()
 install(TARGETS avogadro
