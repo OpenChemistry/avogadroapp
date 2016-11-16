@@ -218,7 +218,6 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
     m_progressDialog(NULL),
     m_fileReadMolecule(NULL),
     m_fileToolBar(new QToolBar(this)),
-    m_editToolBar(new QToolBar(this)),
     m_toolToolBar(new QToolBar(this)),
     m_moleculeDirty(false),
     m_undo(NULL), m_redo(NULL),
@@ -338,7 +337,6 @@ void MainWindow::setupInterface()
 
   m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   addToolBar(m_fileToolBar);
-  addToolBar(m_editToolBar);
   addToolBar(m_toolToolBar);
 
   // Create the scene plugin model
@@ -694,10 +692,6 @@ void MainWindow::toolActivated()
           if (action->data().toString() != barAction->data().toString())
             barAction->setChecked(false);
         }
-        foreach(QAction *barAction, m_editToolBar->actions()) {
-          if (action->data().toString() != barAction->data().toString())
-            barAction->setChecked(false);
-        }
 
       }
     }
@@ -806,7 +800,6 @@ void MainWindow::viewActivated(QWidget *widget)
     m_sceneTreeView->setModel(&glWidget->sceneModel());
     populateTools(glWidget);
 
-    m_editToolBar->setEnabled(true);
     foreach (ExtensionPlugin *extension, m_extensions) {
       extension->setScene(&glWidget->renderer().scene());
       extension->setCamera(&glWidget->renderer().camera());
@@ -841,8 +834,6 @@ void MainWindow::viewActivated(QWidget *widget)
   else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
     bool firstRun = populatePluginModel(vtkWidget->sceneModel());
     m_sceneTreeView->setModel(&vtkWidget->sceneModel());
-
-    m_editToolBar->setDisabled(true);
 
     if (firstRun) {
       setActiveTool("Navigator");
@@ -1183,13 +1174,6 @@ void MainWindow::setActiveTool(QString toolName)
   if (!toolName.isEmpty()) {
     // check view tools
     foreach(QAction *action, m_toolToolBar->actions()) {
-      if (action->data().toString() == toolName)
-        action->setChecked(true);
-      else
-        action->setChecked(false);
-    }
-    // check edit tools
-    foreach(QAction *action, m_editToolBar->actions()) {
       if (action->data().toString() == toolName)
         action->setChecked(true);
       else
@@ -1564,32 +1548,25 @@ void MainWindow::buildTools()
       m_tools << tool;
   }
 
-  QActionGroup *editActions = new QActionGroup(this);
+  // sort them based on priority
+
   QActionGroup *toolActions = new QActionGroup(this);
-  int index = 0;
+  int index = 1;
   foreach (ToolPlugin *toolPlugin, m_tools) {
     // Add action to toolbar.
     toolPlugin->setParent(this);
     QAction *action = toolPlugin->activateAction();
     action->setParent(toolPlugin);
     action->setCheckable(true);
-    if (index + 1 < 10)
-      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index + 1)));
+    if (index < 10)
+      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index)));
     action->setData(toolPlugin->objectName());
-    if (toolPlugin->objectName() == "Editor"
-        || toolPlugin->objectName() == "Manipulator"
-        || toolPlugin->objectName() == "BondCentric") {
-      editActions->addAction(action);
-    }
-    else {
-      qDebug() << toolPlugin->objectName() << "added";
-      toolActions->addAction(action);
-    }
+    qDebug() << toolPlugin->objectName() << "added";
+    toolActions->addAction(action);
     connect(action, SIGNAL(triggered()), SLOT(toolActivated()));
     ++index;
   }
 
-  m_editToolBar->addActions(editActions->actions());
   m_toolToolBar->addActions(toolActions->actions());
 }
 
