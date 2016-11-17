@@ -1397,14 +1397,21 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(newMolecule()));
   // Open
-  action = new QAction(tr("&Open"), this);
+  action = new QAction(tr("&Open..."), this);
   action->setShortcut(QKeySequence("Ctrl+O"));
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-open"));
 #endif
-  m_menuBuilder->addAction(path, action, 970);
+  m_menuBuilder->addAction(path, action, 998);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(importFile()));
+
+  // open recent 995 - 985
+
+  // Separator (after open recent)
+  action = new QAction("", this);
+  action->setSeparator(true);
+  m_menuBuilder->addAction(path, action, 980);
   // Save
   action = new QAction(tr("&Save"), this);
   action->setShortcut(QKeySequence("Ctrl+S"));
@@ -1415,7 +1422,7 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFile()));
   // Save As
-  action = new QAction(tr("Save &As"), this);
+  action = new QAction(tr("Save &As..."), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+S"));
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-save-as"));
@@ -1433,20 +1440,23 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(importFile()));*/
   // Export
-  action = new QAction(tr("&Export"), this);
-  m_menuBuilder->addAction(path, action, 940);
+  QStringList exportPath = path;
+  exportPath << tr("Export");
+  action = new QAction(tr("&Molecule..."), this);
+  m_menuBuilder->addAction(exportPath, action, 10);
   m_fileToolBar->addAction(action);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
   connect(action, SIGNAL(triggered()), SLOT(exportFile()));
   // Export graphics
-  action = new QAction(tr("Export Bitmap Graphics"), this);
-  m_menuBuilder->addAction(path, action, 941);
+  action = new QAction(tr("&Graphics..."), this);
+  m_menuBuilder->addAction(exportPath, action, 10);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
   connect(action, SIGNAL(triggered()), SLOT(exportGraphics()));
+
   // Quit
   action = new QAction(tr("&Quit"), this);
   action->setShortcut(QKeySequence("Ctrl+Q"));
@@ -1455,6 +1465,22 @@ void MainWindow::buildMenu()
 #endif
   m_menuBuilder->addAction(path, action, -200);
   connect(action, SIGNAL(triggered()), this, SLOT(close()));
+
+  // Populate the recent file actions list.
+  path << "Open Recent";
+  for (int i = 0; i < 10; ++i) {
+    action = new QAction(QString::number(i), this);
+    m_actionRecentFiles.push_back(action);
+#ifndef Q_OS_MAC
+    action->setIcon(QIcon::fromTheme("document-open-recent"));
+#endif
+    action->setVisible(false);
+    m_menuBuilder->addAction(path, action, 995 - i);
+    connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
+  }
+  m_actionRecentFiles[0]->setText(tr("No recent files"));
+  m_actionRecentFiles[0]->setVisible(true);
+  m_actionRecentFiles[0]->setEnabled(false);
 
   // Undo/redo
   QStringList editPath;
@@ -1524,22 +1550,6 @@ void MainWindow::buildMenu()
 #endif
   m_menuBuilder->addAction(helpPath, about, 20);
   connect(about, SIGNAL(triggered()), SLOT(showAboutDialog()));
-
-  // Populate the recent file actions list.
-  path << "Recent Files";
-  for (int i = 0; i < 10; ++i) {
-    action = new QAction(QString::number(i), this);
-    m_actionRecentFiles.push_back(action);
-#ifndef Q_OS_MAC
-    action->setIcon(QIcon::fromTheme("document-open-recent"));
-#endif
-    action->setVisible(false);
-    m_menuBuilder->addAction(path, action, 995 - i);
-    connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
-  }
-  m_actionRecentFiles[0]->setText(tr("No recent files"));
-  m_actionRecentFiles[0]->setVisible(true);
-  m_actionRecentFiles[0]->setEnabled(false);
 
   // Now actually add all menu entries.
   m_menuBuilder->buildMenu(menuBar());
