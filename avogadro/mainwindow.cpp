@@ -15,6 +15,7 @@
 ******************************************************************************/
 
 #include "mainwindow.h"
+#include "PQRWidget.h"
 #include "aboutdialog.h"
 #include "menubuilder.h"
 #include "backgroundfileformat.h"
@@ -941,6 +942,12 @@ void MainWindow::exportGraphics()
   glWidget->repaint();
 }
 
+void MainWindow::importFromPQR()
+{
+  PQRWidget *m_pqr = new PQRWidget(this);
+  m_pqr->show();
+}
+
 void MainWindow::reassignCustomElements()
 {
   if (m_molecule && m_molecule->hasCustomElements())
@@ -1455,7 +1462,13 @@ void MainWindow::buildMenu()
 #endif
   m_menuBuilder->addAction(path, action, -200);
   connect(action, SIGNAL(triggered()), this, SLOT(close()));
-
+  //Import from PQR
+  action = new QAction(tr("Import From PQR"), this);
+  m_menuBuilder->addAction(path, action, 942);
+#ifndef Q_OS_MAC
+  action->setIcon(QIcon::fromTheme("document-import"));
+#endif
+  connect(action, SIGNAL(triggered()), SLOT(importFromPQR()));
   // Undo/redo
   QStringList editPath;
   editPath << tr("&Edit");

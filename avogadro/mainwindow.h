@@ -297,6 +297,8 @@ private slots:
 
   void exportGraphics();
 
+  void importFromPQR();
+
   void setBackgroundColor();
 
   void setProjectionOrthographic();

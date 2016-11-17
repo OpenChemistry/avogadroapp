@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PQRWidget</class>
+ <widget class="QWidget" name="PQRWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1050</width>
+    <height>727</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLineEdit" name="molName">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>25</y>
+     <width>697</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="searchTypeBox">
+   <property name="geometry">
+    <rect>
+     <x>143</x>
+     <y>25</y>
+     <width>80</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>name</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>tag</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>synonym</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>formula</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>inchi</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="downloadButton">
+   <property name="geometry">
+    <rect>
+     <x>934</x>
+     <y>677</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Download</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>26</x>
+     <y>648</y>
+     <width>110</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Molecule selected: </string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="mol2Line">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>648</y>
+     <width>697</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>681</width>
+     <height>584</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>26</x>
+     <y>22</y>
+     <width>110</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Search By: </string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="extensionType">
+   <property name="geometry">
+    <rect>
+     <x>934</x>
+     <y>648</y>
+     <width>93</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>mol2</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>svg</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>json</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="searchButton">
+   <property name="geometry">
+    <rect>
+     <x>934</x>
+     <y>22</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Search</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>26</x>
+     <y>677</y>
+     <width>110</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Download Folder: </string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="downloadFolder">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>680</y>
+     <width>697</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>C:/mol2</string>
+   </property>
+  </widget>
+  <widget class="QGraphicsView" name="svgPreview">
+   <property name="geometry">
+    <rect>
+     <x>730</x>
+     <y>60</y>
+     <width>300</width>
+     <height>300</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
