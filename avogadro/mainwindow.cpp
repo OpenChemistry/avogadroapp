@@ -1549,6 +1549,12 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
     m_menuBuilder->addAction(extension->menuPath(action), action);
 }
 
+// TODO: this would be a lovely C++11 lambda
+bool ToolSort(const ToolPlugin *a, const ToolPlugin *b)
+{
+  return a->priority() < b->priority();
+}
+
 void MainWindow::buildTools()
 {
   PluginManager *plugin = PluginManager::instance();
@@ -1563,6 +1569,7 @@ void MainWindow::buildTools()
   }
 
   // sort them based on priority
+  std::sort(m_tools.begin(), m_tools.end(), ToolSort);
 
   QActionGroup *toolActions = new QActionGroup(this);
   int index = 1;
