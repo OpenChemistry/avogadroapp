@@ -1441,7 +1441,7 @@ void MainWindow::buildMenu()
   connect(action, SIGNAL(triggered()), SLOT(importFile()));*/
   // Export
   QStringList exportPath = path;
-  exportPath << tr("Export");
+  exportPath << tr("&Export");
   action = new QAction(tr("&Molecule..."), this);
   m_menuBuilder->addAction(exportPath, action, 10);
   m_fileToolBar->addAction(action);
