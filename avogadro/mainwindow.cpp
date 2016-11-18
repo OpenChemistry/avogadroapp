@@ -15,6 +15,7 @@
 ******************************************************************************/
 
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "aboutdialog.h"
 #include "menubuilder.h"
 #include "backgroundfileformat.h"
@@ -221,8 +222,11 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
     m_toolToolBar(new QToolBar(this)),
     m_moleculeDirty(false),
     m_undo(NULL), m_redo(NULL),
-    m_viewFactory(new ViewFactory)
+    m_viewFactory(new ViewFactory),
+    m_ui(new Ui::MainWindow)
 {
+  m_ui->setupUi(this);
+
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
     QSettings settings;
@@ -292,6 +296,7 @@ MainWindow::~MainWindow()
   delete m_molecule;
   delete m_menuBuilder;
   delete m_viewFactory;
+  delete m_ui;
 }
 
 void MainWindow::setupInterface()
@@ -1372,7 +1377,6 @@ void MainWindow::buildMenu()
   m_testExit = true;
 #endif
 
-  // Add the standard menu items:
   QStringList path;
   path << "&File";
   // New
@@ -1540,7 +1544,7 @@ void MainWindow::buildMenu()
   connect(about, SIGNAL(triggered()), SLOT(showAboutDialog()));
 
   // Now actually add all menu entries.
-  m_menuBuilder->buildMenu(menuBar());
+  m_menuBuilder->buildMenuBar(menuBar());
 }
 
 void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
@@ -1655,7 +1659,7 @@ bool MainWindow::saveFileIfNeeded()
 {
   if (m_moleculeDirty) {
     int response =
-        QMessageBox::question(
+        QMessageBox::warning(
           this, tr("Avogadro"),
           tr("Do you want to save the changes you made in the document?\n\n"
              "Your changes will be lost if you don't save them."),

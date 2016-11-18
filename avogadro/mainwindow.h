@@ -2,7 +2,7 @@
 
   This source file is part of the Avogadro project.
 
-  Copyright 2012-2014 Kitware, Inc.
+  Copyright 2012-2016 Kitware, Inc.
 
   This source code is released under the New BSD License, (the "License").
 
@@ -27,6 +27,11 @@ class pqTestUtility;
 class QProgressDialog;
 class QThread;
 class QTreeView;
+
+namespace Ui {
+class MainWindow;
+class AboutDialog;
+}
 
 namespace Avogadro {
 
@@ -348,6 +353,8 @@ private:
   QString m_testFile;
   bool m_testExit;
 #endif
+
+  Ui::MainWindow *m_ui; // used for the default menu bar
 
   /**
    * Set up the main window widgets, connect signals and slots, etc.
