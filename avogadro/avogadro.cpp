@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
   // call some Objective-C++
   removeMacSpecificMenuItems();
   // Native Mac applications do not have icons in the menus
-//  QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+  QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
 #endif
 
   QCoreApplication::setOrganizationName("OpenChemistry");
