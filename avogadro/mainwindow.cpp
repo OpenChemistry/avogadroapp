@@ -345,6 +345,8 @@ void MainWindow::setupInterface()
   m_sceneTreeView->header()->setVisible(false);
   connect(m_sceneTreeView, SIGNAL(activated(QModelIndex)),
           SLOT(sceneItemActivated(QModelIndex)));
+  connect(m_sceneTreeView, SIGNAL(clicked(QModelIndex)),
+          SLOT(sceneItemActivated(QModelIndex)));
 
   // Create the molecule model
   m_moleculeModel = new QtGui::MoleculeModel(this);
@@ -357,6 +359,8 @@ void MainWindow::setupInterface()
   m_moleculeTreeView->header()->setSectionResizeMode(1, QHeaderView::Fixed);
   m_moleculeTreeView->header()->resizeSection(1, 30);
   connect(m_moleculeTreeView, SIGNAL(activated(QModelIndex)),
+          SLOT(moleculeActivated(QModelIndex)));
+  connect(m_moleculeTreeView, SIGNAL(clicked(QModelIndex)),
           SLOT(moleculeActivated(QModelIndex)));
 
   viewActivated(glWidget);
