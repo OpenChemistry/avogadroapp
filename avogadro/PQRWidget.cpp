@@ -9,14 +9,15 @@ PQRWidget::PQRWidget(QWidget* parent) :
     ui(new Ui::PQRWidget)
 {
   ui->setupUi(this);
-  connect(ui->searchButton, SIGNAL(clicked(bool)), this, SLOT(searchAction()));
-	connect(ui->downloadButton, SIGNAL(clicked(bool)), this, SLOT(downloadMol()));
 
 	ui->tableWidget->setColumnCount(3);
 	ui->tableWidget->setHorizontalHeaderLabels(QStringList() << "Name" << "Formula" << "Mass");
 	ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 	ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
 	ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+
+  connect(ui->searchButton, SIGNAL(clicked(bool)), this, SLOT(searchAction()));
+	connect(ui->downloadButton, SIGNAL(clicked(bool)), this, SLOT(downloadMol()));
 	connect(ui->tableWidget, SIGNAL(cellDoubleClicked(int, int)),
 		this, SLOT(molSelected(int, int)));
 
@@ -25,22 +26,36 @@ PQRWidget::PQRWidget(QWidget* parent) :
 
 PQRWidget::~PQRWidget()
 {
-    delete ui;
     delete request;
+    delete ui;
 }
 
+/**
+* @brief Called when the search button is clicked to send a query to PQR
+*/
 void PQRWidget::searchAction()
 {
     QString url = "https://pqr.pitt.edu/api/browse/"+ui->molName->text() + "/" + ui->searchTypeBox->currentText();
     request->sendRequest(url);
 }
 
+/**
+* @brief Called when a table result is double clicked to display preview information
+* about the result before downloading.
+* @param row The row of the result selected.
+* @param col The column of the result selected.
+*/
 void PQRWidget::molSelected(int row, int col)
 {
 	currentlySelectedMol = request->molSelected(row);
 }
 
-void PQRWidget::downloadMol() {
+/**
+* @brief Called when the download button is clicked to send a request to download
+* molecule information from PQR.
+*/
+void PQRWidget::downloadMol()
+{
 	QString mol2url = currentlySelectedMol;
 	if (mol2url != "N/A" && mol2url != "") {
 		QString ext = ui->extensionType->currentText();
@@ -59,4 +74,4 @@ void PQRWidget::downloadMol() {
 	}
 }
 
-}
+} //namespace Avogadro

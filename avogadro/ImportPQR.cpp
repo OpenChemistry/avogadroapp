@@ -20,7 +20,7 @@ ImportPQR::ImportPQR(QTableWidget* tw, QGraphicsView* gv, QLineEdit* fn, QLineEd
 /**
 * @brief Free the ui pointers
 */
-void ImportPQR::~ImportPQR()
+ImportPQR::~ImportPQR()
 {
   delete results;
   delete reply;
@@ -179,7 +179,7 @@ void ImportPQR::getFile()
 	QFile *file;
   //make sure filename box isn't blank
   if(filename->text() == NULL) {
-    file = new QFile(currentDownloadFolder + "/" + currentFilenam);
+    file = new QFile(currentDownloadFolder + "/" + currentFilename);
   } else {
     file = new QFile(currentDownloadFolder + "/" + filename->text());
   }

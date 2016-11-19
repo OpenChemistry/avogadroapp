@@ -1,28 +1,34 @@
 #ifndef IMPORTPQR_H
 #define IMPORTPQR_H
 
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QUrl>
-#include <QNetworkRequest>
-#include <QVariantMap>
-#include <QTextBrowser>
-#include <QTableWidget>
-#include <QTableWidgetItem>
-#include <QLineEdit>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QPixmap>
-#include <QDateTime>
-#include <QFile>
-#include <QIcon>
-#include <QSize>
-#include <QDir>
-#include <QLabel>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
+
+#include <QtCore/QUrl>
+#include <QtCore/QVariantMap>
+#include <QtCore/QDateTime>
+#include <QtCore/QFile>
+#include <QtCore/QSize>
+#include <QtCore/QDir>
+
+#include <QtWidgets/QTextBrowser>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTableWidgetItem>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QGraphicsScene>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QProgressBar>
+
+#include <QtGui/QPixmap>
+#include <QtGui/QIcon>
+
 #include <QtSvg/QGraphicsSvgItem>
 #include <QtSvg/QSvgRenderer>
-#include <QProgressBar>
+
 #include <cctype>
+
 #include "json.h"
 
 /**
@@ -166,4 +172,4 @@ private:
 	float elementToMass(std::string);
 };
 }
-#endif // REQUEST_H
+#endif // IMPORTPQR_H
