@@ -15,7 +15,6 @@
 ******************************************************************************/
 
 #include "mainwindow.h"
-#include "PQRWidget.h"
 #include "aboutdialog.h"
 #include "menubuilder.h"
 #include "backgroundfileformat.h"
@@ -219,7 +218,6 @@ MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
     m_progressDialog(NULL),
     m_fileReadMolecule(NULL),
     m_fileToolBar(new QToolBar(this)),
-    m_editToolBar(new QToolBar(this)),
     m_toolToolBar(new QToolBar(this)),
     m_moleculeDirty(false),
     m_undo(NULL), m_redo(NULL),
@@ -339,7 +337,6 @@ void MainWindow::setupInterface()
 
   m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   addToolBar(m_fileToolBar);
-  addToolBar(m_editToolBar);
   addToolBar(m_toolToolBar);
 
   // Create the scene plugin model
@@ -347,6 +344,8 @@ void MainWindow::setupInterface()
   m_sceneTreeView->header()->stretchLastSection();
   m_sceneTreeView->header()->setVisible(false);
   connect(m_sceneTreeView, SIGNAL(activated(QModelIndex)),
+          SLOT(sceneItemActivated(QModelIndex)));
+  connect(m_sceneTreeView, SIGNAL(clicked(QModelIndex)),
           SLOT(sceneItemActivated(QModelIndex)));
 
   // Create the molecule model
@@ -360,6 +359,8 @@ void MainWindow::setupInterface()
   m_moleculeTreeView->header()->setSectionResizeMode(1, QHeaderView::Fixed);
   m_moleculeTreeView->header()->resizeSection(1, 30);
   connect(m_moleculeTreeView, SIGNAL(activated(QModelIndex)),
+          SLOT(moleculeActivated(QModelIndex)));
+  connect(m_moleculeTreeView, SIGNAL(clicked(QModelIndex)),
           SLOT(moleculeActivated(QModelIndex)));
 
   viewActivated(glWidget);
@@ -695,10 +696,6 @@ void MainWindow::toolActivated()
           if (action->data().toString() != barAction->data().toString())
             barAction->setChecked(false);
         }
-        foreach(QAction *barAction, m_editToolBar->actions()) {
-          if (action->data().toString() != barAction->data().toString())
-            barAction->setChecked(false);
-        }
 
       }
     }
@@ -807,7 +804,6 @@ void MainWindow::viewActivated(QWidget *widget)
     m_sceneTreeView->setModel(&glWidget->sceneModel());
     populateTools(glWidget);
 
-    m_editToolBar->setEnabled(true);
     foreach (ExtensionPlugin *extension, m_extensions) {
       extension->setScene(&glWidget->renderer().scene());
       extension->setCamera(&glWidget->renderer().camera());
@@ -842,8 +838,6 @@ void MainWindow::viewActivated(QWidget *widget)
   else if (vtkGLWidget *vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
     bool firstRun = populatePluginModel(vtkWidget->sceneModel());
     m_sceneTreeView->setModel(&vtkWidget->sceneModel());
-
-    m_editToolBar->setDisabled(true);
 
     if (firstRun) {
       setActiveTool("Navigator");
@@ -940,12 +934,6 @@ void MainWindow::exportGraphics()
   cColor[3] = alpha; // previous color
   scene->setBackgroundColor(cColor);
   glWidget->repaint();
-}
-
-void MainWindow::importFromPQR()
-{
-  PQRWidget *m_pqr = new PQRWidget(this);
-  m_pqr->show();
 }
 
 void MainWindow::reassignCustomElements()
@@ -1195,13 +1183,6 @@ void MainWindow::setActiveTool(QString toolName)
       else
         action->setChecked(false);
     }
-    // check edit tools
-    foreach(QAction *action, m_editToolBar->actions()) {
-      if (action->data().toString() == toolName)
-        action->setChecked(true);
-      else
-        action->setChecked(false);
-    }
   }
 }
 
@@ -1404,14 +1385,21 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(newMolecule()));
   // Open
-  action = new QAction(tr("&Open"), this);
+  action = new QAction(tr("&Open..."), this);
   action->setShortcut(QKeySequence("Ctrl+O"));
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-open"));
 #endif
-  m_menuBuilder->addAction(path, action, 970);
+  m_menuBuilder->addAction(path, action, 998);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(importFile()));
+
+  // open recent 995 - 985
+
+  // Separator (after open recent)
+  action = new QAction("", this);
+  action->setSeparator(true);
+  m_menuBuilder->addAction(path, action, 980);
   // Save
   action = new QAction(tr("&Save"), this);
   action->setShortcut(QKeySequence("Ctrl+S"));
@@ -1422,7 +1410,7 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFile()));
   // Save As
-  action = new QAction(tr("Save &As"), this);
+  action = new QAction(tr("Save &As..."), this);
   action->setShortcut(QKeySequence("Ctrl+Shift+S"));
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-save-as"));
@@ -1440,20 +1428,23 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(importFile()));*/
   // Export
-  action = new QAction(tr("&Export"), this);
-  m_menuBuilder->addAction(path, action, 940);
+  QStringList exportPath = path;
+  exportPath << tr("&Export");
+  action = new QAction(tr("&Molecule..."), this);
+  m_menuBuilder->addAction(exportPath, action, 10);
   m_fileToolBar->addAction(action);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
   connect(action, SIGNAL(triggered()), SLOT(exportFile()));
   // Export graphics
-  action = new QAction(tr("Export Bitmap Graphics"), this);
-  m_menuBuilder->addAction(path, action, 941);
+  action = new QAction(tr("&Graphics..."), this);
+  m_menuBuilder->addAction(exportPath, action, 10);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
   connect(action, SIGNAL(triggered()), SLOT(exportGraphics()));
+
   // Quit
   action = new QAction(tr("&Quit"), this);
   action->setShortcut(QKeySequence("Ctrl+Q"));
@@ -1462,13 +1453,23 @@ void MainWindow::buildMenu()
 #endif
   m_menuBuilder->addAction(path, action, -200);
   connect(action, SIGNAL(triggered()), this, SLOT(close()));
-  //Import from PQR
-  action = new QAction(tr("Import From PQR"), this);
-  m_menuBuilder->addAction(path, action, 942);
+
+  // Populate the recent file actions list.
+  path << "Open Recent";
+  for (int i = 0; i < 10; ++i) {
+    action = new QAction(QString::number(i), this);
+    m_actionRecentFiles.push_back(action);
 #ifndef Q_OS_MAC
-  action->setIcon(QIcon::fromTheme("document-import"));
+    action->setIcon(QIcon::fromTheme("document-open-recent"));
 #endif
-  connect(action, SIGNAL(triggered()), SLOT(importFromPQR()));
+    action->setVisible(false);
+    m_menuBuilder->addAction(path, action, 995 - i);
+    connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
+  }
+  m_actionRecentFiles[0]->setText(tr("No recent files"));
+  m_actionRecentFiles[0]->setVisible(true);
+  m_actionRecentFiles[0]->setEnabled(false);
+
   // Undo/redo
   QStringList editPath;
   editPath << tr("&Edit");
@@ -1538,22 +1539,6 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(helpPath, about, 20);
   connect(about, SIGNAL(triggered()), SLOT(showAboutDialog()));
 
-  // Populate the recent file actions list.
-  path << "Recent Files";
-  for (int i = 0; i < 10; ++i) {
-    action = new QAction(QString::number(i), this);
-    m_actionRecentFiles.push_back(action);
-#ifndef Q_OS_MAC
-    action->setIcon(QIcon::fromTheme("document-open-recent"));
-#endif
-    action->setVisible(false);
-    m_menuBuilder->addAction(path, action, 995 - i);
-    connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
-  }
-  m_actionRecentFiles[0]->setText(tr("No recent files"));
-  m_actionRecentFiles[0]->setVisible(true);
-  m_actionRecentFiles[0]->setEnabled(false);
-
   // Now actually add all menu entries.
   m_menuBuilder->buildMenu(menuBar());
 }
@@ -1562,6 +1547,12 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin *extension)
 {
   foreach (QAction *action, extension->actions())
     m_menuBuilder->addAction(extension->menuPath(action), action);
+}
+
+// TODO: this would be a lovely C++11 lambda
+bool ToolSort(const ToolPlugin *a, const ToolPlugin *b)
+{
+  return a->priority() < b->priority();
 }
 
 void MainWindow::buildTools()
@@ -1577,32 +1568,26 @@ void MainWindow::buildTools()
       m_tools << tool;
   }
 
-  QActionGroup *editActions = new QActionGroup(this);
+  // sort them based on priority
+  std::sort(m_tools.begin(), m_tools.end(), ToolSort);
+
   QActionGroup *toolActions = new QActionGroup(this);
-  int index = 0;
+  int index = 1;
   foreach (ToolPlugin *toolPlugin, m_tools) {
     // Add action to toolbar.
     toolPlugin->setParent(this);
     QAction *action = toolPlugin->activateAction();
     action->setParent(toolPlugin);
     action->setCheckable(true);
-    if (index + 1 < 10)
-      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index + 1)));
+    if (index < 10)
+      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index)));
     action->setData(toolPlugin->objectName());
-    if (toolPlugin->objectName() == "Editor"
-        || toolPlugin->objectName() == "Manipulator"
-        || toolPlugin->objectName() == "BondCentric") {
-      editActions->addAction(action);
-    }
-    else {
-      qDebug() << toolPlugin->objectName() << "added";
-      toolActions->addAction(action);
-    }
+    qDebug() << toolPlugin->objectName() << "added";
+    toolActions->addAction(action);
     connect(action, SIGNAL(triggered()), SLOT(toolActivated()));
     ++index;
   }
 
-  m_editToolBar->addActions(editActions->actions());
   m_toolToolBar->addActions(toolActions->actions());
 }
 
