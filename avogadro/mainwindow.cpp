@@ -937,7 +937,7 @@ void MainWindow::exportGraphics()
   glWidget->repaint();
 }
 
-+void MainWindow::importFromPQR()
+void MainWindow::importFromPQR()
 {
   PQRWidget *m_pqr = new PQRWidget(this);
   m_pqr->show();
