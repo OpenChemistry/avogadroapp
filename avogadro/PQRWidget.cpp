@@ -8,7 +8,6 @@ PQRWidget::PQRWidget(QWidget* parent) :
     QDialog(parent),
     ui(new Ui::PQRWidget)
 {
-	request = new ImportPQR();
   ui->setupUi(this);
   connect(ui->searchButton, SIGNAL(clicked(bool)), this, SLOT(searchAction()));
 	connect(ui->downloadButton, SIGNAL(clicked(bool)), this, SLOT(downloadMol()));
@@ -20,6 +19,8 @@ PQRWidget::PQRWidget(QWidget* parent) :
 	ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
 	connect(ui->tableWidget, SIGNAL(cellDoubleClicked(int, int)),
 		this, SLOT(molSelected(int, int)));
+
+  request = new ImportPQR(ui->tableWidget, ui->svgPreview, ui->filename, ui->nameDisplay, ui->formulaDisplay);
 }
 
 PQRWidget::~PQRWidget()
@@ -30,22 +31,17 @@ PQRWidget::~PQRWidget()
 
 void PQRWidget::searchAction()
 {
-    QString molName = "https://pqr.pitt.edu/api/browse/"+ui->molName->text() + "/" + ui->searchTypeBox->currentText();
-    request->sendRequest(molName, ui->tableWidget);
+    QString url = "https://pqr.pitt.edu/api/browse/"+ui->molName->text() + "/" + ui->searchTypeBox->currentText();
+    request->sendRequest(url);
 }
 
-void PQRWidget::molSelected(int row, int col) {
-	QString mol2 = request->getMol2Url(row);
-	ui->mol2Line->setText(mol2);
-
-  //set svg
-  QString url = "https://pqr.pitt.edu/static/data/svg/"+ mol2 + ".svg";
-  request->updateSVGPreview(url, mol2.remove(0, 3), ui->svgPreview);
-
+void PQRWidget::molSelected(int row, int col)
+{
+	currentlySelectedMol = request->molSelected(row);
 }
 
 void PQRWidget::downloadMol() {
-	QString mol2url = ui->mol2Line->text();
+	QString mol2url = currentlySelectedMol;
 	if (mol2url != "N/A" && mol2url != "") {
 		QString ext = ui->extensionType->currentText();
 		if (ext == "mol2") {

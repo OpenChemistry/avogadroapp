@@ -31,6 +31,7 @@ private slots:
 	void downloadMol();
 
 private:
+    QString currentlySelectedMol;
     Ui::PQRWidget *ui;
     ImportPQR *request;
 

@@ -20,38 +20,91 @@
 #include <QDir>
 #include <QLabel>
 #include <QtSvg/QGraphicsSvgItem>
+#include <QtSvg/QSvgRenderer>
 #include <QProgressBar>
 #include <cctype>
 #include "json.h"
 
+/**
+ * @brief The ImportPQR class sends and receives network requests to PQR and
+ * updates ui elements from the widget.
+ */
+
 namespace Avogadro {
 
-class ImportPQR : public QObject {
+class ImportPQR : public QObject
+{
 	Q_OBJECT
+
 public:
-	ImportPQR();
-  void sendRequest(QString, QTableWidget*);
+	/**
+	* @brief Constuctor to initialize the NetworkAcessManager and set pointers to
+	* the widget's ui elements.
+	* @param tw Pointer to ui's table widget
+	* @param gv Pointer to ui's graphics view for SVG preview
+	* @param fn Pointer to the filename LineEdit
+	* @param nd Pointer to the name display
+	* @param fd Pointer to the formula display
+	*/
+	ImportPQR(QTableWidget*, QGraphicsView*, QLineEdit*, QLineEdit*, QLabel*);
+
+	/**
+	* @brief Free the ui pointers
+	*/
+	~ImportPQR();
+
+	/**
+	* @brief Sends a network request to search for molecules from PQR;
+	* @param url The url to query
+	*/
+  void sendRequest(QString);
+
+	/**
+	* @brief Sends a network request to download a file from PQR
+	* @param url The url to send the request to
+	* @param mol2 The mol2 representation of the molecule to download
+	* @param downlaodFolder The path of the download folder
+	* @param ext The file extension to download
+	*/
 	void sendRequest(QString, QString, QString, QString);
-	QString getMol2Url(int);
-	void updateSVGPreview(QString, QString, QGraphicsView*);
+
+	/**
+	* @brief Called when a molecule is selected to display information about the
+	* molecule and start grabbing the SVG preview.
+	* @param num The row number of the table result selected
+	* @returns The mol2 of the result for the widget to reference
+	*/
+	QString molSelected(int);
+
+	/**
+	* @brief Sends a network request to get the SVG for the download preview
+	* @param url The url to send request to
+	* @param mol2 The mol2 representation of the molecule to query a SVG for
+	*/
+	void updateSVGPreview(QString, QString);
+
 private slots:
+	/**
+	* @brief Parses the JSON response from querying PQR
+	*/
   void parseJson();
+
+	/**
+	* @brief Creates a file after requesting a file from PQR
+	*/
 	void getFile();
+
+	/**
+	* @brief Creates a temporary file for the SVG preview and attempts to render
+	* it into the QGraphicsView
+	*/
 	void setSVG();
 
 private:
-	QNetworkReply *reply;
-	Json::Reader *read;
-	Json::Value root;
-  QNetworkAccessManager *oNetworkAccessManager;
-  QVariantMap m_jsonResult;
-	QProgressBar* progress;
-	QGraphicsView* svgPreview;
-	QPixmap svgImage;
-	QGraphicsScene* svgScene;
-	QTableWidget* table;
-	QString currentFilename;
-	QString currentDownloadFolder;
+	/**
+	* @brief The result struct holds all data received in each result from
+	* querying PQR
+	*/
 	struct result {
 		QString inchikey;
 		QString name;
@@ -63,12 +116,54 @@ private:
 		QString *tags;
 		QString *synonyms;
 	};
-
-	QString resultToString(result);
-	float getMolMass(QString);
-	float elementToMass(std::string);
-	QString parseSubscripts(QString);
+	/** An array to hold all results from a query */
 	result *results;
+
+	/** Holds a reply from a network request */
+	QNetworkReply *reply;
+	/** Jsoncpp reader to read JSON results */
+	Json::Reader *read;
+	/** Holds a node of JSON results */
+	Json::Value root;
+	/** Used to send/receive network request */
+  QNetworkAccessManager *oNetworkAccessManager;
+	/** Used to parse JSON results */
+  QVariantMap m_jsonResult;
+
+	/** Pointers to a widget's ui elements */
+	QTableWidget* table;
+	QLineEdit* filename;
+	QLineEdit* nameDisplay;
+	QLabel* formulaDisplay;
+	QGraphicsView* svgPreview;
+
+	/** Used to render SVG previews */
+	QGraphicsSvgItem *svgimg;
+	QPixmap svgImage;
+	QGraphicsScene* svgScene;
+
+	/** Variables to fold file downlaod information for getFile() */
+	QString currentFilename;
+	QString currentDownloadFolder;
+
+	/**
+	* @brief Takes a formula string and returns a QString with subscript tags
+	* @param formula The formula string
+	*/
+	QString parseSubscripts(QString);
+
+	/**
+	* @brief Takes a formula string and returns the molecular mass of the molecule
+	* @param formula The formula string
+	*/
+	float getMolMass(QString);
+
+	/**
+	* @brief Takes a single element string and returns the atomic mass of that element
+	* @param element The element string
+	* @returns The atomic mass
+	*/
+	float elementToMass(std::string);
 };
 }
 #endif // REQUEST_H

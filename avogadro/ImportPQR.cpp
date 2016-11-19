@@ -2,29 +2,54 @@
 
 namespace Avogadro {
 
-ImportPQR::ImportPQR()
+/**
+* @brief Constuctor to initialize the NetworkAcessManager and set pointers to
+* the widget's ui elements.
+*/
+ImportPQR::ImportPQR(QTableWidget* tw, QGraphicsView* gv, QLineEdit* fn, QLineEdit* nd, QLabel* fd)
 {
+  //set pointers to ui elements now instead of in individual functions
+  table = tw; //pointer to ui table
+  svgPreview = gv; //svg GraphicsView
+  filename = fn; //filename LineEdit
+  nameDisplay = nd; //name
+  formulaDisplay = fd; //formula
   oNetworkAccessManager = new QNetworkAccessManager(this);
-
 }
 
-
-/*
- * Sends a request to search for molecules
- */
-void ImportPQR::sendRequest(QString url, QTableWidget* tw)
+/**
+* @brief Free the ui pointers
+*/
+void ImportPQR::~ImportPQR()
 {
-  //QUrl httpRequest(url);
-  //QNetworkRequest request;
-//  request.setSslConfiguration(QSslConfiguration::defaultConfiguration()); // Set default ssl config
-  //request.setUrl(httpRequest); // Set the url
+  delete results;
+  delete reply;
+  delete read;
+  delete oNetworkAccessManager;
+  delete table;
+  delete filename;
+  delete formulaDisplay;
+  delete svgPreview;
+  delete svgimg;
+  delete svgScene;
+}
+
+/**
+* @brief Sends a network request to search for molecules from PQR;
+* @param url The url to query
+*/
+void ImportPQR::sendRequest(QString url)
+{
   reply = oNetworkAccessManager->get(QNetworkRequest(QUrl(url)));
-	table = tw; //pointer to ui table
 	connect(reply, SIGNAL(finished()), this, SLOT(parseJson()));
 }
 
-/*
-* Sends a request to download a mol2 file
+/**
+* @brief Sends a network request to download a file from PQR
+* @param url The url to send the request to
+* @param mol2 The mol2 representation of the molecule to download
+* @param downlaodFolder The path of the download folder
+* @param ext The file extension to download
 */
 void ImportPQR::sendRequest(QString url, QString mol2, QString downloadFolder, QString ext)
 {
@@ -33,12 +58,9 @@ void ImportPQR::sendRequest(QString url, QString mol2, QString downloadFolder, Q
 	request.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
 	request.setRawHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
 	request.setRawHeader("Accept-Language", "en - US, en; q = 0.8");
-
-//	request.setSslConfiguration(QSslConfiguration::defaultConfiguration()); // Set default ssl config
 	request.setUrl(httpRequest); // Set the url
 
 	reply = oNetworkAccessManager->get(request);
-	//reply = oNetworkAccessManager->get(QNetworkRequest(httpRequest));
 
 	//see if user wants to change the download folder
 	if (downloadFolder.isNull() || downloadFolder.isEmpty()) {
@@ -48,16 +70,40 @@ void ImportPQR::sendRequest(QString url, QString mol2, QString downloadFolder, Q
 		currentDownloadFolder = downloadFolder;
 	}
 
-	currentFilename = mol2+ext; //filename to be downloaded
+	currentFilename = mol2+ext; //default filename to be downloaded
 
 	connect(reply, SIGNAL(finished()), this, SLOT(getFile()));
 }
 
-void ImportPQR::updateSVGPreview(QString url, QString mol2, QGraphicsView* gv)
+/**
+* @brief Called when a molecule is selected to display information about the
+* molecule and start grabbing the SVG preview.
+* @param num The row number of the table result selected
+* @returns The mol2 of the result for the widget to reference
+*/
+QString ImportPQR::molSelected(int num) {
+		QString mol2 = results[num].mol2url;
+    QString url = "https://pqr.pitt.edu/static/data/svg/"+ mol2 + ".svg";
+
+    //default filename
+    filename->setText(mol2.remove(0, 3));
+    formulaDisplay->setText(parseSubscripts(results[num].formula));
+    nameDisplay->setText(results[num].name);
+
+    this->updateSVGPreview(url, mol2.remove(0, 3));
+    return mol2;
+}
+
+/**
+* @brief Sends a network request to get the SVG for the download preview
+* @param url The url to send request to
+* @param mol2 The mol2 representation of the molecule to query a SVG for
+*/
+void ImportPQR::updateSVGPreview(QString url, QString mol2)
 {
-  svgPreview = gv;
   QUrl httpRequest(url);
   QNetworkRequest request;
+  //had trouble grabbing the svgs from PQR without this
   request.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
   request.setRawHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36");
   request.setRawHeader("Accept-Language", "en - US, en; q = 0.8");
@@ -67,54 +113,9 @@ void ImportPQR::updateSVGPreview(QString url, QString mol2, QGraphicsView* gv)
   connect(reply, SIGNAL(finished()), this, SLOT(setSVG()));
 }
 
-void ImportPQR::setSVG()
-{
-  QDir *dir = new QDir();
-  dir->mkpath("temp");
-
-  QFile *file = new QFile("temp/currentPreview.svg");
-
-  if (file->open(QFile::WriteOnly))
-  {
-    file->write(reply->readAll());
-    file->flush();
-    file->close();
-  }
-  svgScene = new QGraphicsScene(this);
-//  svgScene->addPixmap(QIcon("temp/currentPreview.svg").pixmap(100, QIcon::Normal, QIcon::Off));
-
-
-  QGraphicsSvgItem *svgimg = new QGraphicsSvgItem("C:/test.svg");
-
-  svgScene->addItem(svgimg);
-  //svgScene->setSceneRect(QRect(0, 0, 200, 200));
-  svgPreview->setScene(svgScene);
-  svgPreview->fitInView(svgScene->sceneRect());
-  delete file;
-  delete dir;
-  reply->deleteLater();
-}
-
-void ImportPQR::getFile()
-{
-	QDir *dir = new QDir();
-	dir->mkpath(currentDownloadFolder);
-
-	QFile *file = new QFile(currentDownloadFolder + "/" + currentFilename);
-
-	if (file->open(QFile::WriteOnly))
-	{
-		file->write(reply->readAll());
-		file->flush();
-		file->close();
-	}
-	delete file;
-	delete dir;
-	reply->deleteLater();
-}
-/*
- * Runs when the request is finished and has received a response
- */
+/**
+* @brief Parses the JSON response from querying PQR
+*/
 void ImportPQR::parseJson()
 {
     if (reply->error() == QNetworkReply::NoError)
@@ -124,6 +125,7 @@ void ImportPQR::parseJson()
     QByteArray bytes = reply->readAll();
     QString jsonString(bytes);
 
+    //parse the json
 		read->parse(jsonString.toStdString().c_str(), root);
 
 		int resultSize = root.size();
@@ -166,7 +168,71 @@ void ImportPQR::parseJson()
 	reply->deleteLater();
 }
 
-//parses formula and returns a formula with rich text subscripts
+/**
+* @brief Creates a file after requesting a file from PQR
+*/
+void ImportPQR::getFile()
+{
+	QDir *dir = new QDir();
+	dir->mkpath(currentDownloadFolder);
+
+	QFile *file;
+  //make sure filename box isn't blank
+  if(filename->text() == NULL) {
+    file = new QFile(currentDownloadFolder + "/" + currentFilenam);
+  } else {
+    file = new QFile(currentDownloadFolder + "/" + filename->text());
+  }
+	if (file->open(QFile::WriteOnly))
+	{
+		file->write(reply->readAll());
+		file->flush();
+		file->close();
+	}
+	delete file;
+	delete dir;
+	reply->deleteLater();
+}
+
+/**
+* @brief Creates a temporary file for the SVG preview and attempts to render
+* it into the QGraphicsView
+*/
+void ImportPQR::setSVG()
+{
+  QDir *dir = new QDir();
+  dir->mkpath("temp");
+
+  QFile *file = new QFile("temp/currentPreview.svg");
+
+  if (file->open(QFile::WriteOnly))
+  {
+    file->write(reply->readAll());
+    file->flush();
+    file->close();
+  }
+
+  //attempt to render svg WIP
+  svgScene = new QGraphicsScene(this);
+  //svgScene->addPixmap(QIcon("temp/currentPreview.svg").pixmap(100, QIcon::Normal, QIcon::Off));
+  QSvgRenderer *test = new QSvgRenderer(QString("temp/currentPreview.svg"));
+  svgimg = new QGraphicsSvgItem();
+  svgimg->setSharedRenderer(test);
+  svgScene->addItem(svgimg);
+  //svgimg->setTransform(QTransform(test->viewBoxF().width() / (test->viewBoxF().width() + 1.0), 0.0, 0.0, test->viewBoxF().height() / (test->viewBoxF().height() + 1.0), 0.5, 0.5));
+  svgPreview->setScene(svgScene);
+  svgScene->setSceneRect(svgScene->itemsBoundingRect());
+  svgPreview->fitInView(svgimg, Qt::KeepAspectRatio);
+
+  delete file;
+  delete dir;
+  reply->deleteLater();
+}
+
+/**
+* @brief Takes a formula string and returns a QString with subscript tags
+* @param formula The formula string
+*/
 QString ImportPQR::parseSubscripts(QString formula)
 {
   std::string str = formula.toStdString();
@@ -183,7 +249,10 @@ QString ImportPQR::parseSubscripts(QString formula)
   return toReturn;
 }
 
-//parses formula in form H20 and returns the molecular mass
+/**
+* @brief Takes a formula string and returns the molecular mass of the molecule
+* @param formula The formula string
+*/
 float ImportPQR::getMolMass(QString formula) {
 	std::string str = formula.toStdString();
 	float totalMass = 0.0;
@@ -231,7 +300,11 @@ float ImportPQR::getMolMass(QString formula) {
 	return totalMass;
 }
 
-//ugly code but most efficient way I could think of to grab atomic weights
+/**
+* @brief Takes a single element string and returns the atomic mass of that element
+* @param element The element string
+* @returns The atomic mass
+*/
 float ImportPQR::elementToMass(std::string element) {
 	if (element == "H") {
 		return 1.0079;
@@ -563,14 +636,6 @@ float ImportPQR::elementToMass(std::string element) {
 	else if (element == "Hs") {
 		return 277.0;
 	}
-}
-
-//grabs stored mol2 for ui
-QString ImportPQR::getMol2Url(int num) {
-	if (results != NULL) {
-		return results[num].mol2url;
-	}
-	return "N/A";
 }
 
 }
