@@ -864,12 +864,12 @@ void MainWindow::exportGraphics()
       qobject_cast<QGLWidget *>(m_multiViewWidget->activeWidget());
   QStringList filters;
   // Omit "common image formats" on Mac
-  #ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
     filters
-  #else
+#else
     filters << tr("Common image formats")
               + " (*.png *.jpg *.jpeg)"
-  #endif
+#endif
             << tr("All files") + " (* *.*)"
             << tr("BMP") + " (*.bmp)"
             << tr("PNG") + " (*.png)"
