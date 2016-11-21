@@ -20,19 +20,26 @@
 
 #include "mainwindow.h"
 
+#ifdef Q_OS_MAC
+void removeMacSpecificMenuItems();
+#endif
+
 #ifdef Avogadro_ENABLE_RPC
 # include "rpclistener.h"
 #endif
 
 int main(int argc, char *argv[])
 {
-  QCoreApplication::setOrganizationName("OpenChemistry");
-  QCoreApplication::setOrganizationDomain("openchemistry.org");
-  QCoreApplication::setApplicationName("Avogadro");
-#ifdef Q_WS_MAC
+#ifdef Q_OS_MAC
+  // call some Objective-C++
+  removeMacSpecificMenuItems();
   // Native Mac applications do not have icons in the menus
   QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
 #endif
+
+  QCoreApplication::setOrganizationName("OpenChemistry");
+  QCoreApplication::setOrganizationDomain("openchemistry.org");
+  QCoreApplication::setApplicationName("Avogadro");
 
 #ifdef Q_OS_WIN
   // We need to ensure desktop OpenGL is loaded for our rendering.

@@ -61,6 +61,10 @@ endif()
 
 # Handle Mac OS X specific icons etc.
 if(APPLE)
+  # add some Objective-C++ code
+  list(APPEND avogadro_srcs mac.mm)
+  set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -framework Cocoa")
+
   list(APPEND avogadro_srcs icons/avogadro.icns)
   set(MACOSX_BUNDLE_ICON_FILE avogadro.icns)
   set(MACOSX_BUNDLE_BUNDLE_VERSION "${AvogadroApp_VERSION}")
