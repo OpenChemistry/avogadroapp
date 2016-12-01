@@ -16,8 +16,8 @@ include(InstallLocation)
 include(DetermineVersion)
 
 # Set up our version.
-set(AvogadroApp_VERSION_MAJOR   "0")
-set(AvogadroApp_VERSION_MINOR   "9")
+set(AvogadroApp_VERSION_MAJOR   "1")
+set(AvogadroApp_VERSION_MINOR   "90")
 set(AvogadroApp_VERSION_PATCH   "0")
 set(AvogadroApp_VERSION
   "${AvogadroApp_VERSION_MAJOR}.${AvogadroApp_VERSION_MINOR}.${AvogadroApp_VERSION_PATCH}")
