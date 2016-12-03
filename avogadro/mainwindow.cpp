@@ -20,7 +20,7 @@
 #include "backgroundfileformat.h"
 #include "avogadroappconfig.h"
 #include "viewfactory.h"
-
+#include "PQRWidget.h"
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cjsonformat.h>
 #include <avogadro/io/cmlformat.h>
@@ -936,6 +936,12 @@ void MainWindow::exportGraphics()
   glWidget->repaint();
 }
 
+void MainWindow::importFromPQR()
+{
+  PQRWidget *m_pqr = new PQRWidget(this);
+  m_pqr->show();
+}
+
 void MainWindow::reassignCustomElements()
 {
   if (m_molecule && m_molecule->hasCustomElements())
@@ -1469,6 +1475,14 @@ void MainWindow::buildMenu()
   m_actionRecentFiles[0]->setText(tr("No recent files"));
   m_actionRecentFiles[0]->setVisible(true);
   m_actionRecentFiles[0]->setEnabled(false);
+
+  //Import from PQR
+  action = new QAction(tr("Import From PQR"), this);
+  m_menuBuilder->addAction(path, action, 942);
+#ifndef Q_OS_MAC
+  action->setIcon(QIcon::fromTheme("document-import"));
+#endif
+  connect(action, SIGNAL(triggered()), SLOT(importFromPQR()));
 
   // Undo/redo
   QStringList editPath;

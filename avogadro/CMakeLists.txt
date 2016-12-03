@@ -16,7 +16,7 @@ if(MSVC)
 endif()
 
 # Find the Qt components we need.
-find_package(Qt5 COMPONENTS Widgets OpenGL Network REQUIRED)
+find_package(Qt5 COMPONENTS Widgets OpenGL Network Svg REQUIRED)
 
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
 
@@ -27,10 +27,14 @@ set(avogadro_srcs
   mainwindow.cpp
   menubuilder.cpp
   viewfactory.cpp
+  jsoncpp.cpp
+  ImportPQR.cpp
+  PQRWidget.cpp
 )
 
 qt5_wrap_ui(ui_srcs
   aboutdialog.ui
+  PQRWidget.ui
 )
 
 qt5_add_resources(rcc_srcs avogadro.qrc)
@@ -87,7 +91,7 @@ endif()
 
 add_executable(avogadro WIN32 MACOSX_BUNDLE
   ${avogadro_srcs} ${ui_srcs} ${rcc_srcs})
-qt5_use_modules(avogadro Widgets OpenGL Network Concurrent)
+qt5_use_modules(avogadro Widgets OpenGL Network Concurrent Svg)
 if(WIN32)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD")
   target_link_libraries(avogadro Qt5::WinMain)
