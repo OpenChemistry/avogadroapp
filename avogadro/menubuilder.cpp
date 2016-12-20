@@ -87,7 +87,7 @@ void MenuBuilder::buildMenuBar(QMenuBar *menuBar)
 {
   // Get expected top level entries to the menu, inducing expected order on them.
   QStringList orderedFirst, orderedEnd;
-  orderedFirst << tr("&File") << tr("&Edit") << tr("&View") << tr("&Tools");
+  orderedFirst << tr("&File") << tr("&Edit") << tr("&View") << tr("&Build");
   orderedEnd << tr("&Settings") << tr("&Window") << tr("&Help");
 
   // grab the existing menus

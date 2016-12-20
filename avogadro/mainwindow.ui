@@ -27,19 +27,6 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuHelp">
-    <property name="title">
-     <string>&amp;Help</string>
-    </property>
-    <addaction name="actionAbout"/>
-    <addaction name="separator"/>
-    <addaction name="actionAvogadro_Help"/>
-    <addaction name="actionFAQ"/>
-    <addaction name="actionAvogadro_Forum"/>
-    <addaction name="separator"/>
-    <addaction name="actionReport_a_Bug"/>
-    <addaction name="actionAvogadro_Website"/>
-   </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>&amp;File</string>
@@ -56,12 +43,6 @@
     <addaction name="actionExport"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
-   </widget>
-   <widget class="QMenu" name="menuSettings">
-    <property name="title">
-     <string>Se&amp;ttings</string>
-    </property>
-    <addaction name="configureAvogadroAction"/>
    </widget>
    <widget class="QMenu" name="menuBuild">
     <property name="title">
@@ -84,9 +65,6 @@
     <addaction name="actionCopy"/>
     <addaction name="actionPaste"/>
     <addaction name="actionClear"/>
-    <addaction name="separator"/>
-    <addaction name="actionSelect_All"/>
-    <addaction name="actionSelect_None"/>
    </widget>
    <widget class="QMenu" name="menuExtensions">
     <property name="title">
@@ -104,8 +82,6 @@
    <addaction name="menuBuild"/>
    <addaction name="menuSelect"/>
    <addaction name="menuExtensions"/>
-   <addaction name="menuSettings"/>
-   <addaction name="menuHelp"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
