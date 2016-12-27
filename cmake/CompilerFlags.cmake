@@ -11,12 +11,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
   if(HAVE_GCC_ERROR_RETURN_TYPE)
     set(CMAKE_CXX_FLAGS_ERROR "-Werror=return-type")
   endif()
-  check_cxx_compiler_flag("-std=c++03" HAVE_GCC_STD_CPP_03)
-  if(HAVE_GCC_STD_CPP_03)
-    set(CMAKE_CXX_FLAGS_STD_CPP "-std=c++03 -pedantic -Wshadow -Wextra")
-  else()
-    set(CMAKE_CXX_FLAGS_STD_CPP "-ansi")
-  endif()
+  set(CMAKE_CXX_FLAGS_WARN "${CMAKE_CXX_FLAGS_WARN} -pedantic -Wshadow -Wextra")
 
   # If we are compiling on Linux then set some extra linker flags too
   if(CMAKE_SYSTEM_NAME MATCHES Linux)
@@ -28,10 +23,10 @@ if(CMAKE_COMPILER_IS_GNUCXX)
       "-Wl,--fatal-warnings -Wl,--no-undefined -lc ${CMAKE_EXE_LINKER_FLAGS}")
   endif()
 
-  set(CMAKE_CXX_FLAGS_WARN "${CMAKE_CXX_FLAGS_WARN} ${CMAKE_CXX_FLAGS_STD_CPP}")
   # Set up the debug CXX_FLAGS for extra warnings
   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO
     "${CMAKE_CXX_FLAGS_RELWITHDEBINFO} ${CMAKE_CXX_FLAGS_WARN}")
   set(CMAKE_CXX_FLAGS_DEBUG
     "${CMAKE_CXX_FLAGS_DEBUG} ${CMAKE_CXX_FLAGS_WARN} ${CMAKE_CXX_FLAGS_ERROR}")
+  set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 endif()

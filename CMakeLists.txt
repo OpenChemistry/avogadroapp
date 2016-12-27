@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.11 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
 # Use the new policy for linking to qtmain
 if(POLICY CMP0020)
@@ -8,6 +8,14 @@ endif()
 project(AvogadroApp)
 
 set(CMAKE_MODULE_PATH ${AvogadroApp_SOURCE_DIR}/cmake)
+
+# Request C++11 standard, using new CMake variables.
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_EXTENSIONS False)
+# Set symbol visibility defaults for all targets.
+set(CMAKE_CXX_VISIBILITY_PRESET "hidden")
+set(CMAKE_VISIBILITY_INLINES_HIDDEN True)
 
 include(BuildType)
 include(BuildLocation)
