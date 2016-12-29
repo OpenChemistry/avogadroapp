@@ -88,14 +88,17 @@ void MenuBuilder::buildMenuBar(QMenuBar *menuBar)
   // Get expected top level entries to the menu, inducing expected order on them.
   QStringList orderedFirst, orderedEnd;
   orderedFirst << tr("&File") << tr("&Edit") << tr("&View") << tr("&Build");
-  orderedEnd << tr("&Settings") << tr("&Window") << tr("&Help");
+  orderedFirst << tr("&Select"); // all in the mainwindow.ui
+
+  // not in the UI
+  orderedEnd << tr("Se&ttings") << tr("&Window") << tr("&Help");
 
   // grab the existing menus
   foreach (QMenu *menu,  menuBar->findChildren<QMenu*>()) {
     QString title = menu->title();
 
     if (!orderedFirst.contains(title) && !orderedEnd.contains(title))
-      continue; // not a top-level menu
+      continue; // not a standard top-level menu
 
     title.replace("&", ""); // remove the shortcut marks
     m_topLevelMenus[title] = menu;
@@ -119,7 +122,8 @@ void MenuBuilder::buildMenuBar(QMenuBar *menuBar)
   foreach (QString text, orderedFirst) {
     QString plainText = text;
     plainText.replace("&", "");
-    if (topLevelStrings.contains(plainText)) {
+    if (topLevelStrings.contains(plainText)
+      && !m_topLevelMenus.contains(plainText)) {
       m_topLevelMenus[plainText] = menuBar->addMenu(text);
       topLevelStrings.remove(plainText);
     }

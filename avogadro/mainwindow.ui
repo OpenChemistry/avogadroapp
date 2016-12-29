@@ -66,11 +66,6 @@
     <addaction name="actionPaste"/>
     <addaction name="actionClear"/>
    </widget>
-   <widget class="QMenu" name="menuExtensions">
-    <property name="title">
-     <string>E&amp;xtensions</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuSelect">
     <property name="title">
      <string>&amp;Select</string>
@@ -81,7 +76,6 @@
    <addaction name="menuView"/>
    <addaction name="menuBuild"/>
    <addaction name="menuSelect"/>
-   <addaction name="menuExtensions"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
