@@ -267,7 +267,7 @@
   </action>
   <action name="actionPaste">
    <property name="text">
-    <string>&amp;Paste</string>
+    <string>Paste</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+V</string>
