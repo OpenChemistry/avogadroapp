@@ -83,29 +83,48 @@ void MenuBuilder::addAction(const QStringList &pathList, QAction *action,
   m_priorities[action] = priority;
 }
 
-void MenuBuilder::buildMenu(QMenuBar *menu)
+void MenuBuilder::buildMenuBar(QMenuBar *menuBar)
 {
-  menu->clear();
+  // Get expected top level entries to the menu, inducing expected order on them.
+  QStringList orderedFirst, orderedEnd;
+  orderedFirst << tr("&File") << tr("&Edit") << tr("&View") << tr("&Build");
+  orderedFirst << tr("&Select"); // all in the mainwindow.ui
 
+  // not in the UI
+  orderedEnd << tr("Se&ttings") << tr("&Window") << tr("&Help");
+
+  // grab the existing menus
+  foreach (QMenu *menu,  menuBar->findChildren<QMenu*>()) {
+    QString title = menu->title();
+
+    if (!orderedFirst.contains(title) && !orderedEnd.contains(title))
+      continue; // not a standard top-level menu
+
+    title.replace("&", ""); // remove the shortcut marks
+    m_topLevelMenus[title] = menu;
+  }
+
+  // look through the paths we're given by the calling code
   QMap<QString, QString> topLevelStrings;
   foreach (QStringList list, m_menuPaths) {
     if (list.empty())
       continue;
+
     // Build a list of unique top level menu entries.
+    // Make sure to check against the list of already-built menus
     QString topLevel = list[0];
     topLevel.replace("&", "");
-    if (!topLevelStrings.contains(topLevel))
+    if (!topLevelStrings.contains(topLevel)
+        && !m_topLevelMenus.contains(topLevel))
       topLevelStrings[topLevel] = list[0];
   }
-  // Now add top level entries to the menu, inducing expected order on them.
-  QStringList orderedFirst, orderedEnd;
-  orderedFirst << tr("&File") << tr("&Edit") << tr("&View") << tr("&Tools");
-  orderedEnd << tr("&Window") << tr("&Settings") << tr("&Help");
+
   foreach (QString text, orderedFirst) {
     QString plainText = text;
     plainText.replace("&", "");
-    if (topLevelStrings.contains(plainText)) {
-      m_topLevelMenus[plainText] = menu->addMenu(text);
+    if (topLevelStrings.contains(plainText)
+      && !m_topLevelMenus.contains(plainText)) {
+      m_topLevelMenus[plainText] = menuBar->addMenu(text);
       topLevelStrings.remove(plainText);
     }
   }
@@ -114,14 +133,14 @@ void MenuBuilder::buildMenu(QMenuBar *menu)
     remaining.next();
     if (orderedEnd.contains(remaining.value()))
       continue;
-    m_topLevelMenus[remaining.key()] = menu->addMenu(remaining.value());
+    m_topLevelMenus[remaining.key()] = menuBar->addMenu(remaining.value());
     topLevelStrings.remove(remaining.key());
   }
   foreach (QString text, orderedEnd) {
     QString plainText = text;
     plainText.replace("&", "");
     if (topLevelStrings.contains(plainText)) {
-      m_topLevelMenus[plainText] = menu->addMenu(text);
+      m_topLevelMenus[plainText] = menuBar->addMenu(text);
       topLevelStrings.remove(plainText);
     }
   }
@@ -138,7 +157,7 @@ void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
   QMap<QString, QAction *> actions;
   QList<QString> submenuPaths;
   QMap<QString, QString> submenuMap;
-  // Find our concreate entries, and submenus.
+  // Find our concrete entries, and submenus.
   foreach (const QString &key, m_menuActions.keys()) {
     if (QString(key).replace("&", "") == path)
       items.append(m_menuActions[key]);
@@ -160,7 +179,7 @@ void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
     }
   }
 
-  qSort(actionText.begin(), actionText.end(), lessThan);
+//  qSort(actionText.begin(), actionText.end(), lessThan);
 
   // When an action's priority is below this value, insert a separator.
   // Separators are inserted as needed at multiples of 100.
@@ -171,11 +190,39 @@ void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
       menu->addSeparator();
       sepLimit = floor100(text.priority);
     }
+
     if (actions[text.text]) {
-      menu->addAction(actions[text.text]);
+      // check to see if it's in the menu already
+      bool replacedItem = false;
+      foreach(QAction *action, menu->actions()) {
+        if (action->text() == text.text) {
+          // insert the new action and then remove the old one
+          menu->insertAction(action, actions[text.text]);
+          menu->removeAction(action);
+          replacedItem = true;
+          break;
+        }
+      }
+      if (!replacedItem)
+        menu->addAction(actions[text.text]);
     }
     else {
-      buildMenu(menu->addMenu(text.text), submenuMap[text.text]);
+      // check if a sub-menu already exists
+      bool replacedSubmenu = false;
+      foreach (QAction *action, menu->actions()) {
+        if (action->text() == text.text) {
+          // build the new submenu, insert,
+          // then remove the placeholder
+          QMenu *subMenu = new QMenu(text.text, menu);
+          buildMenu(subMenu, submenuMap[text.text]);
+          menu->insertMenu(action, subMenu);
+          menu->removeAction(action);
+          replacedSubmenu = true;
+          break;
+        }
+      }
+      if (!replacedSubmenu)
+        buildMenu(menu->addMenu(text.text), submenuMap[text.text]);
     }
   }
 }

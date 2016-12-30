@@ -31,6 +31,7 @@ set(avogadro_srcs
 
 qt5_wrap_ui(ui_srcs
   aboutdialog.ui
+  mainwindow.ui
 )
 
 qt5_add_resources(rcc_srcs avogadro.qrc)

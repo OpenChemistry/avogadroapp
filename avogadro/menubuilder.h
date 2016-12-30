@@ -55,12 +55,12 @@ public:
   void addAction(const QStringList &path, QAction *action, int priority = -1);
 
   /**
-   * @brief Populate the supplied menu with the items added to builder. Ordering
+   * @brief Populate the supplied menu bar with the items added to builder. Ordering
    * is attempted, ensuring File is first, Help is last and ordering by priority
    * and then alphanumerically.
    * @param menu The menu to be populated.
    */
-  void buildMenu(QMenuBar *menu);
+  void buildMenuBar(QMenuBar *menuBar);
 
   /**
    * @brief Populate a menu with the appropriate sub-entries.
