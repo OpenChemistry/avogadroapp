@@ -175,7 +175,7 @@ void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
     if (m_menuPaths[subPath].size() > level) {
       actionText.append(PriorityText(m_menuPaths[subPath][level], group));
       submenuMap[m_menuPaths[subPath][level]] = subPath;
-      actions[subPath] = NULL;
+      actions[subPath] = nullptr;
     }
   }
 

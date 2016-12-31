@@ -97,7 +97,7 @@ class XMLEventObserver : public pqEventObserver
 public:
   XMLEventObserver(QObject* p) : pqEventObserver(p)
   {
-    this->XMLStream = NULL;
+    this->XMLStream = nullptr;
   }
   ~XMLEventObserver()
   {
@@ -111,7 +111,7 @@ protected:
       this->XMLStream->writeEndElement();
       this->XMLStream->writeEndDocument();
       delete this->XMLStream;
-      this->XMLStream = NULL;
+      this->XMLStream = nullptr;
     }
     if (this->Stream)
       *this->Stream << this->XMLString;
@@ -145,14 +145,14 @@ class XMLEventSource : public pqEventSource
   QXmlStreamReader *XMLStream;
 
 public:
-  XMLEventSource(QObject* p): Superclass(p) { this->XMLStream = NULL;}
+  XMLEventSource(QObject* p): Superclass(p) { this->XMLStream = nullptr;}
   ~XMLEventSource() { delete this->XMLStream; }
 
 protected:
   virtual void setContent(const QString& xmlfilename)
   {
     delete this->XMLStream;
-    this->XMLStream = NULL;
+    this->XMLStream = nullptr;
 
     QFile xml(xmlfilename);
     if (!xml.open(QIODevice::ReadOnly)) {
@@ -207,21 +207,21 @@ using VTK::vtkGLWidget;
 #endif
 
 MainWindow::MainWindow(const QStringList &fileNames, bool disableSettings)
-  : m_molecule(NULL),
-    m_rwMolecule(NULL),
-    m_moleculeModel(NULL),
+  : m_molecule(nullptr),
+    m_rwMolecule(nullptr),
+    m_moleculeModel(nullptr),
     m_queuedFilesStarted(false),
     m_menuBuilder(new MenuBuilder),
-    m_fileReadThread(NULL),
-    m_fileWriteThread(NULL),
-    m_threadedReader(NULL),
-    m_threadedWriter(NULL),
-    m_progressDialog(NULL),
-    m_fileReadMolecule(NULL),
+    m_fileReadThread(nullptr),
+    m_fileWriteThread(nullptr),
+    m_threadedReader(nullptr),
+    m_threadedWriter(nullptr),
+    m_progressDialog(nullptr),
+    m_fileReadMolecule(nullptr),
     m_fileToolBar(new QToolBar(this)),
     m_toolToolBar(new QToolBar(this)),
     m_moleculeDirty(false),
-    m_undo(NULL), m_redo(NULL),
+    m_undo(nullptr), m_redo(nullptr),
     m_viewFactory(new ViewFactory),
     m_ui(new Ui::MainWindow)
 {
@@ -537,7 +537,7 @@ void MainWindow::openFile()
 
   // Create one of our readers to read the file:
   QString extension = info.suffix().toLower();
-  FileFormat *reader = NULL;
+  FileFormat *reader = nullptr;
   if (extension == "cml")
     reader = new Io::CmlFormat;
   else if (extension == "cjson")
@@ -557,7 +557,7 @@ void MainWindow::importFile()
   FileFormatDialog::FormatFilePair reply =
       QtGui::FileFormatDialog::fileToRead(this, tr("Open Molecule"), dir);
 
-  if (reply.first == NULL) // user cancel
+  if (reply.first == nullptr) // user cancel
     return;
 
   dir = QFileInfo(reply.second).absoluteDir().absolutePath();
@@ -572,7 +572,7 @@ void MainWindow::importFile()
 
 bool MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
 {
-  if (fileName.isEmpty() || reader == NULL) {
+  if (fileName.isEmpty() || reader == nullptr) {
     delete reader;
     return false;
   }
@@ -602,7 +602,7 @@ bool MainWindow::openFile(const QString &fileName, Io::FileFormat *reader)
   m_progressDialog->setLabelText(tr("Opening file '%1'\nwith '%2'")
                                    .arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
-  m_progressDialog->setCancelButton(NULL);
+  m_progressDialog->setCancelButton(nullptr);
   connect(m_fileReadThread, SIGNAL(started()), m_threadedReader, SLOT(read()));
   connect(m_threadedReader, SIGNAL(finished()), m_fileReadThread, SLOT(quit()));
   connect(m_threadedReader, SIGNAL(finished()),
@@ -643,13 +643,13 @@ void MainWindow::backgroundReaderFinished()
     delete m_fileReadMolecule;
   }
   m_fileReadThread->deleteLater();
-  m_fileReadThread = NULL;
+  m_fileReadThread = nullptr;
   m_threadedReader->deleteLater();
-  m_threadedReader = NULL;
-  m_fileReadMolecule = NULL;
+  m_threadedReader = nullptr;
+  m_fileReadMolecule = nullptr;
   m_progressDialog->hide();
   m_progressDialog->deleteLater();
-  m_progressDialog = NULL;
+  m_progressDialog = nullptr;
 
   reassignCustomElements();
 
@@ -678,11 +678,11 @@ bool MainWindow::backgroundWriterFinished()
       }
     }
   m_fileWriteThread->deleteLater();
-  m_fileWriteThread = NULL;
+  m_fileWriteThread = nullptr;
   m_threadedWriter->deleteLater();
-  m_threadedWriter = NULL;
+  m_threadedWriter = nullptr;
   m_progressDialog->deleteLater();
-  m_progressDialog = NULL;
+  m_progressDialog = nullptr;
   return success;
 }
 
@@ -852,7 +852,7 @@ void MainWindow::viewActivated(QWidget *widget)
       m_moleculeModel->setActiveMolecule(vtkWidget->molecule());
     }
     if (m_molecule != vtkWidget->molecule() && vtkWidget->molecule()) {
-      m_rwMolecule = NULL;
+      m_rwMolecule = nullptr;
       m_molecule = vtkWidget->molecule();
       emit moleculeChanged(m_molecule);
       m_moleculeModel->setActiveMolecule(m_molecule);
@@ -897,8 +897,8 @@ void MainWindow::exportGraphics()
     fileName += ".png";
 
   // render it (with alpha channel)
-  Rendering::Scene *scene(NULL);
-  GLWidget *viewWidget(NULL);
+  Rendering::Scene *scene(nullptr);
+  GLWidget *viewWidget(nullptr);
   if ((viewWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
     scene = &viewWidget->renderer().scene();
   }
@@ -957,7 +957,7 @@ void MainWindow::openRecentFile()
           this, tr("Select file reader"), fileName,
           FileFormat::File | FileFormat::Read);
 
-    if(!openFile(fileName, format ? format->newInstance() : NULL)) {
+    if(!openFile(fileName, format ? format->newInstance() : nullptr)) {
       QMessageBox::information(this, tr("Cannot open file"),
                                tr("Can't open supplied file %1").arg(fileName));
     }
@@ -1068,7 +1068,7 @@ bool MainWindow::saveFileAs(bool async)
 
   // Create one of our writers to save the file:
   QString extension = info.suffix().toLower();
-  FileFormat *writer = NULL;
+  FileFormat *writer = nullptr;
   if (extension == "cml" || extension.isEmpty())
     writer = new Io::CmlFormat;
   else if (extension == "cjson")
@@ -1087,7 +1087,7 @@ bool MainWindow::exportFile(bool async)
   FileFormatDialog::FormatFilePair reply =
       QtGui::FileFormatDialog::fileToWrite(this, tr("Export Molecule"), dir);
 
-  if (reply.first == NULL) // user cancel
+  if (reply.first == nullptr) // user cancel
     return false;
 
   dir = QFileInfo(reply.second).absoluteDir().absolutePath();
@@ -1099,7 +1099,7 @@ bool MainWindow::exportFile(bool async)
 bool MainWindow::saveFileAs(const QString &fileName, Io::FileFormat *writer,
                             bool async)
 {
-  if (fileName.isEmpty() || writer == NULL) {
+  if (fileName.isEmpty() || writer == nullptr) {
     delete writer;
     return false;
   }
@@ -1141,7 +1141,7 @@ bool MainWindow::saveFileAs(const QString &fileName, Io::FileFormat *writer,
   m_progressDialog->setLabelText(tr("Writing file '%1'\nwith '%2'")
                                    .arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
-  m_progressDialog->setCancelButton(NULL);
+  m_progressDialog->setCancelButton(nullptr);
   connect(m_fileWriteThread, SIGNAL(started()),
           m_threadedWriter, SLOT(write()));
   connect(m_threadedWriter, SIGNAL(finished()),
@@ -1193,10 +1193,10 @@ void MainWindow::setActiveTool(QString toolName)
 
 void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel *scenePluginModel(NULL);
-  GLWidget *glWidget(NULL);
+  ScenePluginModel *scenePluginModel(nullptr);
+  GLWidget *glWidget(nullptr);
 #ifdef AVO_USE_VTK
-  VTK::vtkGLWidget *vtkWidget(NULL);
+  VTK::vtkGLWidget *vtkWidget(nullptr);
 #endif
   if ((glWidget = qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget()))) {
     scenePluginModel = &glWidget->sceneModel();
@@ -1272,8 +1272,8 @@ void MainWindow::activeMoleculeEdited()
 
 void MainWindow::setBackgroundColor()
 {
-  Rendering::Scene *scene(NULL);
-  GLWidget *glWidget(NULL);
+  Rendering::Scene *scene(nullptr);
+  GLWidget *glWidget(nullptr);
   if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
     scene = &glWidget->renderer().scene();
   if (scene) {
@@ -1294,8 +1294,8 @@ void MainWindow::setBackgroundColor()
 
 void MainWindow::setProjectionPerspective()
 {
-  Rendering::GLRenderer *renderer(NULL);
-  GLWidget *glWidget(NULL);
+  Rendering::GLRenderer *renderer(nullptr);
+  GLWidget *glWidget(nullptr);
   if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
     renderer = &glWidget->renderer();
   if (renderer) {
@@ -1307,8 +1307,8 @@ void MainWindow::setProjectionPerspective()
 
 void MainWindow::setProjectionOrthographic()
 {
-  Rendering::GLRenderer *renderer(NULL);
-  GLWidget *glWidget(NULL);
+  Rendering::GLRenderer *renderer(nullptr);
+  GLWidget *glWidget(nullptr);
   if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
     renderer = &glWidget->renderer();
   if (renderer) {
@@ -1744,7 +1744,7 @@ void MainWindow::readQueuedFiles()
           this, tr("Select file reader"), file,
           FileFormat::File | FileFormat::Read, "Avogadro:");
 
-    if (!openFile(file, format ? format->newInstance() : NULL)) {
+    if (!openFile(file, format ? format->newInstance() : nullptr)) {
       QMessageBox::warning(this, tr("Cannot open file"),
                            tr("Avogadro timed out and doesn't know how to open"
                               " '%1'.").arg(file));

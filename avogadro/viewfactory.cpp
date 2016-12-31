@@ -49,7 +49,7 @@ QWidget * ViewFactory::createView(const QString &view)
   else if (view == "VTK")
     return new VTK::vtkGLWidget;
 #endif
-  return NULL;
+  return nullptr;
 }
 
 } // End Avogadro namespace
