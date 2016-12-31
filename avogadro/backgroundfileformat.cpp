@@ -24,7 +24,7 @@ BackgroundFileFormat::BackgroundFileFormat(Io::FileFormat *format,
                                            QObject *aparent) :
   QObject(aparent),
   m_format(format),
-  m_molecule(NULL),
+  m_molecule(nullptr),
   m_success(false)
 {
 }

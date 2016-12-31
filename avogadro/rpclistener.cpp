@@ -38,7 +38,7 @@ using QtGui::Molecule;
 
 RpcListener::RpcListener(QObject *parent_)
   : QObject(parent_),
-    m_pingClient(NULL)
+    m_pingClient(nullptr)
 {
   m_rpc = new MoleQueue::JsonRpc(this);
 
@@ -109,7 +109,7 @@ void RpcListener::receivePingResponse(const QJsonObject &response)
   // Disconnect and remove the ping client the first time this is called:
   if (m_pingClient) {
     m_pingClient->deleteLater();
-    m_pingClient = NULL;
+    m_pingClient = nullptr;
   }
   else {
     // In case the single shot timeout is triggered after the slot is called
@@ -137,7 +137,7 @@ void RpcListener::receivePingResponse(const QJsonObject &response)
     items << tr("Replace the dead server with a new instance.");
     items << tr("Start without RPC capabilities.");
     bool ok(false);
-    QString item(QInputDialog::getItem(NULL, title, label, items, 0, false,
+    QString item(QInputDialog::getItem(nullptr, title, label, items, 0, false,
                                        &ok));
 
     if (ok && item == items.first()) {
