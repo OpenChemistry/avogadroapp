@@ -1500,11 +1500,6 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(editPath, m_undo, 1);
   m_menuBuilder->addAction(editPath, m_redo, 0);
 
-#ifdef Q_OS_MAC
-  // hide the file toolbar on Mac
-//  m_fileToolBar->hide();
-#endif
-
   // View menu
   QStringList viewPath;
   viewPath << tr("&View");
