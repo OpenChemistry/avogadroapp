@@ -317,6 +317,8 @@ void MainWindow::setupInterface()
   QDockWidget *sceneDock = new QDockWidget(tr("Display Types"), this);
   m_sceneTreeView = new QTreeView(sceneDock);
   m_sceneTreeView->setIndentation(0);
+  m_sceneTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
+  m_sceneTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
   sceneDock->setWidget(m_sceneTreeView);
   addDockWidget(Qt::LeftDockWidgetArea, sceneDock);
 
@@ -330,6 +332,8 @@ void MainWindow::setupInterface()
   QDockWidget *moleculeDock = new QDockWidget(tr("Molecules"), this);
   m_moleculeTreeView = new QTreeView(moleculeDock);
   m_moleculeTreeView->setIndentation(0);
+  m_moleculeTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
+  m_moleculeTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
   moleculeDock->setWidget(m_moleculeTreeView);
   addDockWidget(Qt::LeftDockWidgetArea, moleculeDock);
 
@@ -341,7 +345,9 @@ void MainWindow::setupInterface()
   setWindowIcon(icon);
 
   m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+#ifndef Q_OS_MAC
   addToolBar(m_fileToolBar);
+#endif
   addToolBar(m_toolToolBar);
 
   // Create the scene plugin model
@@ -1496,7 +1502,7 @@ void MainWindow::buildMenu()
 
 #ifdef Q_OS_MAC
   // hide the file toolbar on Mac
-  m_fileToolBar->hide();
+//  m_fileToolBar->hide();
 #endif
 
   // View menu
