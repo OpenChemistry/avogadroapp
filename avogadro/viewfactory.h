@@ -28,7 +28,7 @@ public:
   ~ViewFactory();
 
   QStringList views() const;
-  QWidget * createView(const QString &view);
+  QWidget* createView(const QString& view);
 };
 
 } // End namespace Avogadro

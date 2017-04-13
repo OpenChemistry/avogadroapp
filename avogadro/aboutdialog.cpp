@@ -15,8 +15,8 @@
  ******************************************************************************/
 
 #include "aboutdialog.h"
-#include "ui_aboutdialog.h"
 #include "avogadroappconfig.h"
+#include "ui_aboutdialog.h"
 
 #include <avogadro/core/version.h>
 
@@ -27,8 +27,8 @@ AboutDialog::AboutDialog(QWidget* parent_)
 {
   m_ui->setupUi(this);
 
-  QString html("<html><head/><body><p>" \
-               "<span style=\" font-size:%1pt; font-weight:600;\">%2</span>" \
+  QString html("<html><head/><body><p>"
+               "<span style=\" font-size:%1pt; font-weight:600;\">%2</span>"
                "</p></body></html>");
 
   m_ui->version->setText(html.arg("20").arg(AvogadroApp_VERSION));

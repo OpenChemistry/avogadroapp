@@ -17,8 +17,8 @@
 #ifndef AVOGADRO_MENUBUILDER_H
 #define AVOGADRO_MENUBUILDER_H
 
-#include <QtCore/QObject>
 #include <QtCore/QMap>
+#include <QtCore/QObject>
 
 class QAction;
 class QMenu;
@@ -52,20 +52,21 @@ public:
    * @param action The action that will be added at the path.
    * @param priority The priority of the entry, higher will be at the top.
    */
-  void addAction(const QStringList &path, QAction *action, int priority = -1);
+  void addAction(const QStringList& path, QAction* action, int priority = -1);
 
   /**
-   * @brief Populate the supplied menu bar with the items added to builder. Ordering
+   * @brief Populate the supplied menu bar with the items added to builder.
+   * Ordering
    * is attempted, ensuring File is first, Help is last and ordering by priority
    * and then alphanumerically.
    * @param menu The menu to be populated.
    */
-  void buildMenuBar(QMenuBar *menuBar);
+  void buildMenuBar(QMenuBar* menuBar);
 
   /**
    * @brief Populate a menu with the appropriate sub-entries.
    */
-  void buildMenu(QMenu *menu, const QString &path);
+  void buildMenu(QMenu* menu, const QString& path);
 
   /**
    * @brief Print the contents of the MenuBuilder, intended for debug.
@@ -74,16 +75,16 @@ public:
 
 private:
   /** A map of string to action lists. */
-  QMap<QString, QList<QAction *> > m_menuActions;
+  QMap<QString, QList<QAction*>> m_menuActions;
   /** Mapping QString from m_menuActions to QStringLists. */
   QMap<QString, QStringList> m_menuPaths;
   /** Store entry priority orders mapped to the QActions. */
-  QMap<QAction *, int> m_priorities;
+  QMap<QAction*, int> m_priorities;
   /** Top level menus mapped to text. */
-  QMap<QString, QMenu *> m_topLevelMenus;
+  QMap<QString, QMenu*> m_topLevelMenus;
 
   /** Get the priority of a submenu (takes the highest priority). */
-  int priorityGroup(const QString &path);
+  int priorityGroup(const QString& path);
 };
 
 } // End namespace Avogadro.
