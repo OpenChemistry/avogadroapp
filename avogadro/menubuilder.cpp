@@ -27,16 +27,15 @@ namespace {
  * priorities, where the strings should be sorted primarily on the priority and
  * secondarily on the string.
  */
-struct PriorityText {
-  PriorityText(const QString &string, int pri) : text(string), priority(pri)
-  {
-  }
+struct PriorityText
+{
+  PriorityText(const QString& string, int pri) : text(string), priority(pri) {}
 
   QString text;
   int priority;
 };
 
-bool lessThan(const PriorityText &left, const PriorityText &right)
+bool lessThan(const PriorityText& left, const PriorityText& right)
 {
   if (left.priority == right.priority) // Alphanumeric less than.
     return left.text < right.text;
@@ -47,17 +46,15 @@ bool lessThan(const PriorityText &left, const PriorityText &right)
 /** Round @a x up to the next multiple of 100. */
 int floor100(int x)
 {
-  return x >= 0 ? (x / 100) * 100
-                : ((x - 99) / 100) * 100;
+  return x >= 0 ? (x / 100) * 100 : ((x - 99) / 100) * 100;
 }
-
 }
 
 MenuBuilder::MenuBuilder()
 {
 }
 
-void MenuBuilder::addAction(const QStringList &pathList, QAction *action,
+void MenuBuilder::addAction(const QStringList& pathList, QAction* action,
                             int priority)
 {
   QString path(pathList.join("|"));
@@ -67,9 +64,8 @@ void MenuBuilder::addAction(const QStringList &pathList, QAction *action,
     action->setIcon(QIcon());
 #endif
     m_menuActions[path].append(action);
-  }
-  else {
-    QList<QAction *> list;
+  } else {
+    QList<QAction*> list;
     list << action;
     m_menuActions[path] = list;
     m_menuPaths[QString(path).replace("&", "")] = pathList;
@@ -83,9 +79,10 @@ void MenuBuilder::addAction(const QStringList &pathList, QAction *action,
   m_priorities[action] = priority;
 }
 
-void MenuBuilder::buildMenuBar(QMenuBar *menuBar)
+void MenuBuilder::buildMenuBar(QMenuBar* menuBar)
 {
-  // Get expected top level entries to the menu, inducing expected order on them.
+  // Get expected top level entries to the menu, inducing expected order on
+  // them.
   QStringList orderedFirst, orderedEnd;
   orderedFirst << tr("&File") << tr("&Edit") << tr("&View") << tr("&Build");
   orderedFirst << tr("&Select"); // all in the mainwindow.ui
@@ -94,7 +91,7 @@ void MenuBuilder::buildMenuBar(QMenuBar *menuBar)
   orderedEnd << tr("Se&ttings") << tr("&Window") << tr("&Help");
 
   // grab the existing menus
-  foreach (QMenu *menu,  menuBar->findChildren<QMenu*>()) {
+  foreach (QMenu* menu, menuBar->findChildren<QMenu*>()) {
     QString title = menu->title();
 
     if (!orderedFirst.contains(title) && !orderedEnd.contains(title))
@@ -114,16 +111,16 @@ void MenuBuilder::buildMenuBar(QMenuBar *menuBar)
     // Make sure to check against the list of already-built menus
     QString topLevel = list[0];
     topLevel.replace("&", "");
-    if (!topLevelStrings.contains(topLevel)
-        && !m_topLevelMenus.contains(topLevel))
+    if (!topLevelStrings.contains(topLevel) &&
+        !m_topLevelMenus.contains(topLevel))
       topLevelStrings[topLevel] = list[0];
   }
 
   foreach (QString text, orderedFirst) {
     QString plainText = text;
     plainText.replace("&", "");
-    if (topLevelStrings.contains(plainText)
-      && !m_topLevelMenus.contains(plainText)) {
+    if (topLevelStrings.contains(plainText) &&
+        !m_topLevelMenus.contains(plainText)) {
       m_topLevelMenus[plainText] = menuBar->addMenu(text);
       topLevelStrings.remove(plainText);
     }
@@ -146,30 +143,30 @@ void MenuBuilder::buildMenuBar(QMenuBar *menuBar)
   }
 
   // Now to iterate through the top level entries.
-  foreach (const QString &path, m_topLevelMenus.keys())
+  foreach (const QString& path, m_topLevelMenus.keys())
     buildMenu(m_topLevelMenus[path], path);
 }
 
-void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
+void MenuBuilder::buildMenu(QMenu* menu, const QString& path)
 {
-  QList<QAction *> items;
+  QList<QAction*> items;
   QList<PriorityText> actionText;
-  QMap<QString, QAction *> actions;
+  QMap<QString, QAction*> actions;
   QList<QString> submenuPaths;
   QMap<QString, QString> submenuMap;
   // Find our concrete entries, and submenus.
-  foreach (const QString &key, m_menuActions.keys()) {
+  foreach (const QString& key, m_menuActions.keys()) {
     if (QString(key).replace("&", "") == path)
       items.append(m_menuActions[key]);
     else if (QString(key).replace("&", "").contains(path))
       submenuPaths.append(QString(key).replace("&", ""));
   }
   // Build up the list of entries that can be sorted.
-  foreach (QAction *action, items) {
+  foreach (QAction* action, items) {
     actionText.append(PriorityText(action->text(), m_priorities[action]));
     actions[action->text()] = action;
   }
-  foreach (const QString &subPath, submenuPaths) {
+  foreach (const QString& subPath, submenuPaths) {
     int group(priorityGroup(subPath));
     int level(m_menuPaths[path].size());
     if (m_menuPaths[subPath].size() > level) {
@@ -179,13 +176,13 @@ void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
     }
   }
 
-//  qSort(actionText.begin(), actionText.end(), lessThan);
+  //  qSort(actionText.begin(), actionText.end(), lessThan);
 
   // When an action's priority is below this value, insert a separator.
   // Separators are inserted as needed at multiples of 100.
-  int sepLimit = floor100(actionText.isEmpty() ? 0
-                                               : actionText.first().priority);
-  foreach (const PriorityText &text, actionText) {
+  int sepLimit =
+    floor100(actionText.isEmpty() ? 0 : actionText.first().priority);
+  foreach (const PriorityText& text, actionText) {
     if (text.priority < sepLimit) {
       menu->addSeparator();
       sepLimit = floor100(text.priority);
@@ -194,7 +191,7 @@ void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
     if (actions[text.text]) {
       // check to see if it's in the menu already
       bool replacedItem = false;
-      foreach(QAction *action, menu->actions()) {
+      foreach (QAction* action, menu->actions()) {
         if (action->text() == text.text) {
           // insert the new action and then remove the old one
           menu->insertAction(action, actions[text.text]);
@@ -205,15 +202,14 @@ void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
       }
       if (!replacedItem)
         menu->addAction(actions[text.text]);
-    }
-    else {
+    } else {
       // check if a sub-menu already exists
       bool replacedSubmenu = false;
-      foreach (QAction *action, menu->actions()) {
+      foreach (QAction* action, menu->actions()) {
         if (action->text() == text.text) {
           // build the new submenu, insert,
           // then remove the placeholder
-          QMenu *subMenu = new QMenu(text.text, menu);
+          QMenu* subMenu = new QMenu(text.text, menu);
           buildMenu(subMenu, submenuMap[text.text]);
           menu->insertMenu(action, subMenu);
           menu->removeAction(action);
@@ -230,23 +226,24 @@ void MenuBuilder::buildMenu(QMenu *menu, const QString &path)
 void MenuBuilder::print()
 {
   qDebug() << "We have" << m_menuActions.values().size();
-  QMapIterator<QString, QList<QAction *> > i(m_menuActions);
+  QMapIterator<QString, QList<QAction*>> i(m_menuActions);
   while (i.hasNext()) {
     i.next();
     qDebug() << "Menu:" << i.key();
-    foreach (QAction * action, i.value())
-      qDebug() << "  action ->" << action->text() << "=" << m_priorities[action];
+    foreach (QAction* action, i.value())
+      qDebug() << "  action ->" << action->text() << "="
+               << m_priorities[action];
   }
 }
 
-int MenuBuilder::priorityGroup(const QString &path)
+int MenuBuilder::priorityGroup(const QString& path)
 {
-  QList<QAction *> items;
+  QList<QAction*> items;
   int result(-1);
-  foreach (const QString &key, m_menuActions.keys())
+  foreach (const QString& key, m_menuActions.keys())
     if (QString(key).replace("&", "").contains(path))
       items.append(m_menuActions[key]);
-  foreach (QAction *action, items)
+  foreach (QAction* action, items)
     if (m_priorities[action] > result)
       result = m_priorities[action];
   return result;

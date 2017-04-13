@@ -14,9 +14,9 @@
 
 ******************************************************************************/
 
+#include <QtOpenGL/QGLFormat>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMessageBox>
-#include <QtOpenGL/QGLFormat>
 
 #include "mainwindow.h"
 
@@ -25,10 +25,10 @@ void removeMacSpecificMenuItems();
 #endif
 
 #ifdef Avogadro_ENABLE_RPC
-# include "rpclistener.h"
+#include "rpclistener.h"
 #endif
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
 #ifdef Q_OS_MAC
   // call some Objective-C++
@@ -79,29 +79,25 @@ int main(int argc, char *argv[])
       qWarning("Avogadro called with --test-file but testing is disabled.");
       return EXIT_FAILURE;
 #endif
-    }
-    else if (*it == "--test-no-exit") {
+    } else if (*it == "--test-no-exit") {
 #ifdef QTTESTING
       testExit = false;
 #else
       qWarning("Avogadro called with --test-no-exit but testing is disabled.");
       return EXIT_FAILURE;
 #endif
-    }
-    else if (*it == "--disable-settings") {
+    } else if (*it == "--disable-settings") {
       disableSettings = true;
-    }
-    else if (it->startsWith("-")) {
+    } else if (it->startsWith("-")) {
       qWarning("Unknown command line option '%s'", qPrintable(*it));
       return EXIT_FAILURE;
-    }
-    else { // Assume it is a file name.
+    } else { // Assume it is a file name.
       fileNames << *it;
     }
   }
 
-  Avogadro::MainWindow *window = new Avogadro::MainWindow(fileNames,
-                                                          disableSettings);
+  Avogadro::MainWindow* window =
+    new Avogadro::MainWindow(fileNames, disableSettings);
 #ifdef QTTESTING
   window->playTest(testFile, testExit);
 #endif

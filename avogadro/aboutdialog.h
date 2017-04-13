@@ -33,7 +33,7 @@ public:
   ~AboutDialog();
 
 private:
-  Ui::AboutDialog *m_ui;
+  Ui::AboutDialog* m_ui;
 };
 
 } // End Avogadro namespace

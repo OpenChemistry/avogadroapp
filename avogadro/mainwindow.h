@@ -17,8 +17,8 @@
 #ifndef AVOGADRO_MAINWINDOW_H
 #define AVOGADRO_MAINWINDOW_H
 
-#include <QtWidgets/QMainWindow>
 #include <QtCore/QStringList>
+#include <QtWidgets/QMainWindow>
 
 #ifdef QTTESTING
 class pqTestUtility;
@@ -67,13 +67,13 @@ class RWMolecule;
 
 class MainWindow : public QMainWindow
 {
-Q_OBJECT
+  Q_OBJECT
 public:
-  MainWindow(const QStringList &fileNames, bool disableSettings = false);
+  MainWindow(const QStringList& fileNames, bool disableSettings = false);
   ~MainWindow();
 
 public slots:
-  void setMolecule(Avogadro::QtGui::Molecule *molecule);
+  void setMolecule(Avogadro::QtGui::Molecule* molecule);
 
   /**
    * Update internal state to reflect that the molecule has been modified.
@@ -91,11 +91,11 @@ public slots:
   void updateWindowTitle();
 
 #ifdef QTTESTING
-  void playTest(const QString &fileName, bool exit = true);
+  void playTest(const QString& fileName, bool exit = true);
 #endif
 
 public:
-  QtGui::Molecule * molecule() { return m_molecule; }
+  QtGui::Molecule* molecule() { return m_molecule; }
 
   /**
    * Write out all application settings, normally done as part of the
@@ -113,10 +113,10 @@ signals:
   /**
    * Emitted when the active molecule in the application has changed.
    */
-  void moleculeChanged(QtGui::Molecule *molecue);
+  void moleculeChanged(QtGui::Molecule* molecue);
 
 protected:
-  void closeEvent(QCloseEvent *event);
+  void closeEvent(QCloseEvent* event);
 
 protected slots:
   /**
@@ -146,7 +146,7 @@ protected slots:
    * Use the FileFormat @a reader to load @a fileName. This method
    * takes ownership of @a reader and will delete it before returning.
    */
-  bool openFile(const QString &fileName, Io::FileFormat *reader);
+  bool openFile(const QString& fileName, Io::FileFormat* reader);
 
   /**
    * Open file in the recent files list.
@@ -199,7 +199,7 @@ protected slots:
    * false, the return value indicates whether or not the file was written
    * successfully.
    */
-  bool saveFileAs(const QString &fileName, Io::FileFormat *writer,
+  bool saveFileAs(const QString& fileName, Io::FileFormat* writer,
                   bool async = true);
 
   /**
@@ -288,17 +288,17 @@ private slots:
   /**
    * @brief Change the active molecule
    */
-  void moleculeActivated(const QModelIndex &index);
+  void moleculeActivated(const QModelIndex& index);
 
   /**
    * @brief Change the configuration dialog to reflect active scene item.
    */
-  void sceneItemActivated(const QModelIndex &index);
+  void sceneItemActivated(const QModelIndex& index);
 
   /**
    * @brief Change the active view widget, initialize plugins if needed.
    */
-  void viewActivated(QWidget *widget);
+  void viewActivated(QWidget* widget);
 
   void exportGraphics();
 
@@ -309,52 +309,52 @@ private slots:
   void setProjectionPerspective();
 
 private:
-  QtGui::Molecule *m_molecule;
-  QtGui::RWMolecule *m_rwMolecule;
-  QtGui::MoleculeModel *m_moleculeModel;
+  QtGui::Molecule* m_molecule;
+  QtGui::RWMolecule* m_rwMolecule;
+  QtGui::MoleculeModel* m_moleculeModel;
   bool m_queuedFilesStarted;
   QStringList m_queuedFiles;
 
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 
-  MenuBuilder *m_menuBuilder;
+  MenuBuilder* m_menuBuilder;
 
   // These variables take care of background file reading.
-  QThread *m_fileReadThread;
-  QThread *m_fileWriteThread;
-  BackgroundFileFormat *m_threadedReader;
-  BackgroundFileFormat *m_threadedWriter;
-  QProgressDialog *m_progressDialog;
-  QtGui::Molecule *m_fileReadMolecule;
+  QThread* m_fileReadThread;
+  QThread* m_fileWriteThread;
+  BackgroundFileFormat* m_threadedReader;
+  BackgroundFileFormat* m_threadedWriter;
+  QProgressDialog* m_progressDialog;
+  QtGui::Molecule* m_fileReadMolecule;
 
-  QToolBar *m_fileToolBar;
-  QToolBar *m_toolToolBar;
+  QToolBar* m_fileToolBar;
+  QToolBar* m_toolToolBar;
 
   bool m_moleculeDirty;
 
-  QtGui::MultiViewWidget *m_multiViewWidget;
-  QTreeView *m_sceneTreeView;
-  QTreeView *m_moleculeTreeView;
-  QDockWidget *m_toolDock;
-  QDockWidget *m_viewDock;
-  QList<QtGui::ToolPlugin *> m_tools;
-  QList<QtGui::ExtensionPlugin *> m_extensions;
+  QtGui::MultiViewWidget* m_multiViewWidget;
+  QTreeView* m_sceneTreeView;
+  QTreeView* m_moleculeTreeView;
+  QDockWidget* m_toolDock;
+  QDockWidget* m_viewDock;
+  QList<QtGui::ToolPlugin*> m_tools;
+  QList<QtGui::ExtensionPlugin*> m_extensions;
 
-  QAction *m_undo;
-  QAction *m_redo;
-  QAction *m_viewPerspective;
-  QAction *m_viewOrthographic;
+  QAction* m_undo;
+  QAction* m_redo;
+  QAction* m_viewPerspective;
+  QAction* m_viewOrthographic;
 
-  ViewFactory *m_viewFactory;
+  ViewFactory* m_viewFactory;
 
 #ifdef QTTESTING
-  pqTestUtility *m_testUtility;
+  pqTestUtility* m_testUtility;
   QString m_testFile;
   bool m_testExit;
 #endif
 
-  Ui::MainWindow *m_ui; // used for the default menu bar
+  Ui::MainWindow* m_ui; // used for the default menu bar
 
   /**
    * Set up the main window widgets, connect signals and slots, etc.
@@ -372,7 +372,7 @@ private:
   /**
    * Add the menu entries for the extension passed in.
    */
-  void buildMenu(QtGui::ExtensionPlugin *extension);
+  void buildMenu(QtGui::ExtensionPlugin* extension);
 
   /**
    * Initialize the tool plugins.
@@ -385,20 +385,19 @@ private:
    * that aren't really extensions but full filenames, e.g. HISTORY files from
    * DL-POLY. These are returned unmodified.
    */
-  static QString extensionToWildCard(const QString &extension);
+  static QString extensionToWildCard(const QString& extension);
 
   /**
    * Convenience function to generate a filter string for the supplied formats.
    */
-  QString generateFilterString(const std::vector<const Io::FileFormat *> &formats,
-                               bool addAllEntry = true);
+  QString generateFilterString(
+    const std::vector<const Io::FileFormat*>& formats, bool addAllEntry = true);
 
   /**
    * Prompt to save the current molecule if is has been modified. Returns false
    * if the molecule is not saved, or the user cancels.
    */
   bool saveFileIfNeeded();
-
 };
 
 } // End Avogadro namespace

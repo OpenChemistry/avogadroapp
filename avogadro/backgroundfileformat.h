@@ -41,14 +41,14 @@ public:
   /**
    * This class takes ownership of @a format and will delete it when destructed.
    */
-  explicit BackgroundFileFormat(Io::FileFormat *format, QObject *aparent = 0);
+  explicit BackgroundFileFormat(Io::FileFormat* format, QObject* aparent = 0);
   ~BackgroundFileFormat();
 
   /**
    * The molecule instance to read/write.
    * @{
    */
-  void setMolecule(Core::Molecule *mol) { m_molecule = mol; }
+  void setMolecule(Core::Molecule* mol) { m_molecule = mol; }
   Core::Molecule* molecule() const { return m_molecule; }
   /**@}*/
 
@@ -56,14 +56,14 @@ public:
    * The name of the file to read/write.
    * @{
    */
-  void setFileName(const QString &filename) { m_fileName = filename; }
+  void setFileName(const QString& filename) { m_fileName = filename; }
   QString fileName() const { return m_fileName; }
   /**@}*/
 
   /**
    * The Io::FileFormat to use.
    */
-  Io::FileFormat *fileFormat() const { return m_format; }
+  Io::FileFormat* fileFormat() const { return m_format; }
 
   /**
    * @return True if the operation was successful.
@@ -95,8 +95,8 @@ public slots:
   void write();
 
 private:
-  Io::FileFormat *m_format;
-  Core::Molecule *m_molecule;
+  Io::FileFormat* m_format;
+  Core::Molecule* m_molecule;
   QString m_fileName;
   QString m_error;
   bool m_success;

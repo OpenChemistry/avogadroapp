@@ -17,8 +17,8 @@
 #ifndef AVOGADRO_RPCLISTENER_H
 #define AVOGADRO_RPCLISTENER_H
 
-#include <QtCore/QObject>
 #include <QtCore/QJsonObject>
+#include <QtCore/QObject>
 
 #include <molequeue/servercore/connectionlistener.h>
 
@@ -46,7 +46,7 @@ class RpcListener : public QObject
   Q_OBJECT
 
 public:
-  explicit RpcListener(QObject *parent = 0);
+  explicit RpcListener(QObject* parent = 0);
   ~RpcListener();
 
   void start();
@@ -55,18 +55,18 @@ signals:
   /**
    * Calls the MainWidow::setMolecule() method with @p molecule.
    */
-  void callSetMolecule(Avogadro::QtGui::Molecule *molecule);
+  void callSetMolecule(Avogadro::QtGui::Molecule* molecule);
 
 private slots:
-  void connectionError(MoleQueue::ConnectionListener::Error, const QString &);
-  void receivePingResponse(const QJsonObject &response = QJsonObject());
-  void messageReceived(const MoleQueue::Message &message);
+  void connectionError(MoleQueue::ConnectionListener::Error, const QString&);
+  void receivePingResponse(const QJsonObject& response = QJsonObject());
+  void messageReceived(const MoleQueue::Message& message);
 
 private:
-  MoleQueue::JsonRpc *m_rpc;
-  MoleQueue::ConnectionListener *m_connectionListener;
-  MainWindow *m_window;
-  MoleQueue::JsonRpcClient *m_pingClient;
+  MoleQueue::JsonRpc* m_rpc;
+  MoleQueue::ConnectionListener* m_connectionListener;
+  MainWindow* m_window;
+  MoleQueue::JsonRpcClient* m_pingClient;
 };
 
 } // End Avogadro namespace
