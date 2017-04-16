@@ -1261,7 +1261,7 @@ void MainWindow::setBackgroundColor()
       cColor[3] = static_cast<unsigned char>(color.alpha());
       scene->setBackgroundColor(cColor);
       if (glWidget)
-        glWidget->updateGL();
+        glWidget->update();
     }
   }
 }
@@ -1275,7 +1275,7 @@ void MainWindow::setProjectionPerspective()
   if (renderer) {
     renderer->camera().setProjectionType(Rendering::Perspective);
     if (glWidget)
-      glWidget->updateGL();
+      glWidget->update();
   }
 }
 
@@ -1288,7 +1288,7 @@ void MainWindow::setProjectionOrthographic()
   if (renderer) {
     renderer->camera().setProjectionType(Rendering::Orthographic);
     if (glWidget)
-      glWidget->updateGL();
+      glWidget->update();
   }
 }
 
