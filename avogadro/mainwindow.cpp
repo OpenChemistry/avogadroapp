@@ -69,7 +69,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTreeView>
 
-#include <QtOpenGL/QGLFramebufferObject>
+#include <QtGui/QOpenGLFramebufferObject>
 
 #ifdef QTTESTING
 #include <QXmlStreamReader>
@@ -846,8 +846,8 @@ void MainWindow::viewActivated(QWidget* widget)
 
 void MainWindow::exportGraphics()
 {
-  QGLWidget* glWidget =
-    qobject_cast<QGLWidget*>(m_multiViewWidget->activeWidget());
+  QOpenGLWidget* glWidget =
+    qobject_cast<QOpenGLWidget*>(m_multiViewWidget->activeWidget());
   QStringList filters;
 // Omit "common image formats" on Mac
 #ifdef Q_OS_MAC
@@ -887,12 +887,8 @@ void MainWindow::exportGraphics()
   QImage exportImage;
   glWidget->raise();
   glWidget->repaint();
-  if (QGLFramebufferObject::hasOpenGLFramebufferObjects()) {
-    // by using renderPixmap, we can scale the export size arbitrarily
-    unsigned int scale = 2;
-    QPixmap pixmap = glWidget->renderPixmap(glWidget->width() * scale,
-                                            glWidget->height() * scale);
-    exportImage = pixmap.toImage();
+  if (QOpenGLFramebufferObject::hasOpenGLFramebufferObjects()) {
+    exportImage = glWidget->grabFramebuffer();
   } else {
     QPixmap pixmap = QPixmap::grabWindow(glWidget->winId());
     exportImage = pixmap.toImage();
