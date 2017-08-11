@@ -14,7 +14,9 @@
 
 ******************************************************************************/
 
-#include <QtOpenGL/QGLFormat>
+#include <QtGui/QOffscreenSurface>
+#include <QtGui/QOpenGLContext>
+#include <QtGui/QSurfaceFormat>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMessageBox>
 
@@ -48,7 +50,17 @@ int main(int argc, char* argv[])
 
   QApplication app(argc, argv);
 
-  if (!QGLFormat::hasOpenGL()) {
+  // Check for valid OpenGL support.
+  auto offscreen = new QOffscreenSurface;
+  offscreen->create();
+  auto context = new QOpenGLContext;
+  context->create();
+  context->makeCurrent(offscreen);
+  bool contextIsValid = context->isValid();
+  delete context;
+  delete offscreen;
+
+  if (!contextIsValid) {
     QMessageBox::information(0, "Avogadro",
                              "This system does not support OpenGL!");
     return 1;
@@ -58,10 +70,10 @@ int main(int argc, char* argv[])
   app.setAttribute(Qt::AA_UseHighDpiPixmaps);
 
   // Set up the default format for our GL contexts.
-  QGLFormat defaultFormat = QGLFormat::defaultFormat();
-  defaultFormat.setSampleBuffers(true);
-  defaultFormat.setAlpha(true);
-  QGLFormat::setDefaultFormat(defaultFormat);
+  QSurfaceFormat defaultFormat = QSurfaceFormat::defaultFormat();
+  defaultFormat.setSamples(4);
+  //  defaultFormat.setAlphaBufferSize(8);
+  QSurfaceFormat::setDefaultFormat(defaultFormat);
 
   QStringList fileNames;
   bool disableSettings = false;
