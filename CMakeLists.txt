@@ -67,7 +67,7 @@ install(
   FILES
     README.md
     CONTRIBUTING.md
-    COPYING
+    LICENSE
   DESTINATION "${INSTALL_DOC_DIR}/avogadro2")
 
 include(AvogadroCPack)
