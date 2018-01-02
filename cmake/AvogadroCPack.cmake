@@ -9,14 +9,14 @@ set(CPACK_PACKAGE_DESCRIPTION
   "An advanced molecule editor and visualization application.")
 
 if(APPLE)
-  configure_file("${AvogadroApp_SOURCE_DIR}/COPYING"
+  configure_file("${AvogadroApp_SOURCE_DIR}/LICENSE"
     "${AvogadroApp_BINARY_DIR}/COPYING.txt" @ONLY)
   set(CPACK_RESOURCE_FILE_LICENSE "${AvogadroApp_BINARY_DIR}/COPYING.txt")
   set(CPACK_PACKAGE_ICON
     "${AvogadroApp_SOURCE_DIR}/avogadro/icons/avogadro.icns")
   set(CPACK_BUNDLE_ICON "${CPACK_PACKAGE_ICON}")
 else()
-  set(CPACK_RESOURCE_FILE_LICENSE "${AvogadroApp_SOURCE_DIR}/COPYING")
+  set(CPACK_RESOURCE_FILE_LICENSE "${AvogadroApp_SOURCE_DIR}/LICENSE")
 endif()
 
 set(CPACK_PACKAGE_EXECUTABLES "avogadro2" "Avogadro2")
@@ -63,7 +63,7 @@ if(INSTALL_BUNDLE_FILES)
     install(FILES ${AvogadroApp_SOURCE_DIR}/cmake/COPYING.openbabel
       DESTINATION ${INSTALL_DOC_DIR}/openbabel)
     file(READ "${AvogadroApp_SOURCE_DIR}/cmake/COPYING.openbabel" ob_license)
-    file(READ "${AvogadroApp_SOURCE_DIR}/COPYING" avo_license)
+    file(READ "${AvogadroApp_SOURCE_DIR}/LICENSE" avo_license)
     file(WRITE "${AvogadroApp_BINARY_DIR}/COPYING.txt"
       "${avo_license}\n\nOpen Babel components licensed under GPLv2\n\n"
       "${ob_license}")
