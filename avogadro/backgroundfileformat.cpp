@@ -46,7 +46,8 @@ void BackgroundFileFormat::read()
     m_error = tr("No file name set in BackgroundFileFormat!");
 
   if (m_error.isEmpty()) {
-    m_success = m_format->readFile(m_fileName.toStdString(), *m_molecule);
+    m_success = m_format->readFile(m_fileName.toLocal8Bit().data(),
+                                   *m_molecule);
 
     if (!m_success)
       m_error = QString::fromStdString(m_format->error());
@@ -70,7 +71,8 @@ void BackgroundFileFormat::write()
     m_error = tr("No file name set in BackgroundFileFormat!");
 
   if (m_error.isEmpty()) {
-    m_success = m_format->writeFile(m_fileName.toStdString(), *m_molecule);
+    m_success = m_format->writeFile(m_fileName.toLocal8Bit().data(),
+                                    *m_molecule);
 
     if (!m_success)
       m_error = QString::fromStdString(m_format->error());
