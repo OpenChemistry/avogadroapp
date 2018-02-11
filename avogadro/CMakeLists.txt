@@ -6,7 +6,7 @@ include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
 
 option(USE_VTK "Build with VTK support" OFF)
 if(USE_VTK)
-  find_package(VTK COMPONENTS vtkGUISupportQt vtkRenderingOpenGL REQUIRED)
+  find_package(VTK COMPONENTS vtkGUISupportQt vtkRenderingOpenGL2 REQUIRED)
   include(${VTK_USE_FILE})
   add_definitions(-DAVO_USE_VTK)
 endif()
