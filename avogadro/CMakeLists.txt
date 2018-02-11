@@ -16,7 +16,7 @@ if(MSVC)
 endif()
 
 # Find the Qt components we need.
-find_package(Qt5 COMPONENTS Widgets Network REQUIRED)
+find_package(Qt5 COMPONENTS Widgets Network OpenGL REQUIRED)
 
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
 
