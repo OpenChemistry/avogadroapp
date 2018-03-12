@@ -543,6 +543,9 @@ void MainWindow::openFile()
 
 void MainWindow::importFile()
 {
+  if (!saveFileIfNeeded())
+    return;
+
   QSettings settings;
   QString dir = settings.value("MainWindow/lastOpenDir").toString();
 
@@ -924,6 +927,9 @@ void MainWindow::reassignCustomElements()
 
 void MainWindow::openRecentFile()
 {
+  if (!saveFileIfNeeded())
+    return;
+
   QAction* action = qobject_cast<QAction*>(sender());
   if (action) {
     QString fileName = action->data().toString();
