@@ -16,7 +16,7 @@ if(MSVC)
 endif()
 
 # Find the Qt components we need.
-find_package(Qt5 COMPONENTS Widgets Network REQUIRED)
+find_package(Qt5 REQUIRED COMPONENTS Concurrent Widgets Network CONFIG)
 
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
 
@@ -88,7 +88,7 @@ endif()
 
 add_executable(avogadro WIN32 MACOSX_BUNDLE
   ${avogadro_srcs} ${ui_srcs} ${rcc_srcs})
-qt5_use_modules(avogadro Widgets Network Concurrent)
+target_link_libraries(avogadro Qt5::Widgets Qt5::Network Qt5::Concurrent)
 if(WIN32)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD")
   target_link_libraries(avogadro Qt5::WinMain)
