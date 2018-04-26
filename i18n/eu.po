@@ -1,0 +1,1310 @@
+# Basque translation for avogadro
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the avogadro package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: avogadro\n"
+"Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2018-04-26 13:24-0400\n"
+"PO-Revision-Date: 2016-06-10 06:18+0000\n"
+"Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
+"Language-Team: Basque <eu@li.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
+"X-Generator: Launchpad (build 18609)\n"
+
+#: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
+msgid "No molecule set in BackgroundFileFormat!"
+msgstr ""
+
+#: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
+msgid "No Io::FileFormat set in BackgroundFileFormat!"
+msgstr ""
+
+#: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
+msgid "No file name set in BackgroundFileFormat!"
+msgstr ""
+
+#: mainwindow.cpp:275
+msgid "Ready..."
+msgstr ""
+
+#: mainwindow.cpp:300
+#, fuzzy
+msgid "Tool"
+msgstr "Tresnak"
+
+#: mainwindow.cpp:304
+msgid "Display Types"
+msgstr "Bistaratze Motak"
+
+#: mainwindow.cpp:313
+msgid "View Configuration"
+msgstr ""
+
+#: mainwindow.cpp:319
+#, fuzzy
+msgid "Molecules"
+msgstr "Molekula"
+
+#: mainwindow.cpp:467
+#, fuzzy
+msgid "Untitled"
+msgstr "Izengabea"
+
+#: mainwindow.cpp:472
+#, fuzzy, qt-format
+msgid "%1%2 - Avogadro %3"
+msgstr "Avogadro"
+
+#: mainwindow.cpp:514 mainwindow.cpp:1028
+msgid "Chemical Markup Language"
+msgstr ""
+
+#: mainwindow.cpp:515 mainwindow.cpp:1029
+msgid "Chemical JSON"
+msgstr ""
+
+#: mainwindow.cpp:521
+msgid "Open chemical file"
+msgstr ""
+
+#: mainwindow.cpp:539 mainwindow.cpp:560 mainwindow.cpp:936 mainwindow.cpp:1714
+#, fuzzy
+msgid "Cannot open file"
+msgstr "Ezin da %1 fitxategia gorde."
+
+#: mainwindow.cpp:540 mainwindow.cpp:561 mainwindow.cpp:937
+#, fuzzy, qt-format
+msgid "Can't open supplied file %1"
+msgstr "Ezin da %1 fitxategia gorde."
+
+#: mainwindow.cpp:550
+#, fuzzy
+msgid "Open Molecule"
+msgstr "Molekula"
+
+#: mainwindow.cpp:593
+#, fuzzy
+msgid "Reading File"
+msgstr "Ireki Fitxategia"
+
+#: mainwindow.cpp:595
+#, qt-format
+msgid ""
+"Opening file '%1'\n"
+"with '%2'"
+msgstr ""
+
+#: mainwindow.cpp:624
+#, qt-format
+msgid "Molecule loaded (%1 atoms, %2 bonds)"
+msgstr ""
+
+#: mainwindow.cpp:629 mainwindow.cpp:663
+#, fuzzy
+msgid "File error"
+msgstr "Fitxategia: "
+
+#: mainwindow.cpp:630
+#, qt-format
+msgid ""
+"Error while reading file '%1':\n"
+"%2"
+msgstr ""
+
+#: mainwindow.cpp:656
+#, qt-format
+msgid "File written: %1"
+msgstr ""
+
+#: mainwindow.cpp:664
+#, qt-format
+msgid ""
+"Error while writing file '%1':\n"
+"%2"
+msgstr ""
+
+#: mainwindow.cpp:705
+msgid "Error: Failed to initialize OpenGL context"
+msgstr ""
+
+#: mainwindow.cpp:706
+#, qt-format
+msgid ""
+"OpenGL 2.0 or greater required, exiting.\n"
+"\n"
+"%1"
+msgstr ""
+
+#: mainwindow.cpp:707
+msgid "Unknown error"
+msgstr ""
+
+#: mainwindow.cpp:784 mainwindow.cpp:785
+msgid "Navigate tool"
+msgstr ""
+
+#: mainwindow.cpp:857
+msgid "Common image formats"
+msgstr "Ohiko irudi formatuak"
+
+#: mainwindow.cpp:859
+msgid "All files"
+msgstr "Fitxategi guztiak"
+
+#: mainwindow.cpp:859
+msgid "BMP"
+msgstr "BMP"
+
+#: mainwindow.cpp:860
+msgid "PNG"
+msgstr "PNG"
+
+#: mainwindow.cpp:860
+msgid "JPEG"
+msgstr "JPEG"
+
+#: mainwindow.cpp:869
+msgid "Export Bitmap Graphics"
+msgstr "Esportatu Bit-mapa Grafikoak"
+
+#. i18n: file: mainwindow.ui:14
+#. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
+#: mainwindow.cpp:908 mainwindow.cpp:1002 mainwindow.cpp:1628:33
+msgid "Avogadro"
+msgstr "Avogadro"
+
+#: mainwindow.cpp:909
+#, qt-format
+msgid "Cannot save file %1."
+msgstr "Ezin da %1 fitxategia gorde."
+
+#: mainwindow.cpp:932 mainwindow.cpp:1710
+msgid "Select file reader"
+msgstr ""
+
+#: mainwindow.cpp:1003
+msgid ""
+"This file was imported from a non-standard format which may not be able to "
+"write all of the information in the molecule.\n"
+"\n"
+"Would you like to export to the current format, or save in a standard format?"
+msgstr ""
+
+#: mainwindow.cpp:1010
+msgid "Export"
+msgstr "Esportatu"
+
+#: mainwindow.cpp:1035
+msgid "Save chemical file"
+msgstr ""
+
+#: mainwindow.cpp:1063
+#, fuzzy
+msgid "Export Molecule"
+msgstr "Inportatu Molekula Fitxategia"
+
+#: mainwindow.cpp:1115
+msgid "Writing File"
+msgstr ""
+
+#: mainwindow.cpp:1117
+#, qt-format
+msgid ""
+"Writing file '%1'\n"
+"with '%2'"
+msgstr ""
+
+#: mainwindow.cpp:1225
+#, fuzzy, qt-format
+msgid "&Undo %1"
+msgstr "&Desegin"
+
+#. i18n: file: mainwindow.ui:211
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1228 mainwindow.cpp:1451:126
+msgid "&Undo"
+msgstr "&Desegin"
+
+#: mainwindow.cpp:1233
+#, fuzzy, qt-format
+msgid "&Redo %1"
+msgstr "&Berregin"
+
+#. i18n: file: mainwindow.ui:223
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1236 mainwindow.cpp:1456:132
+msgid "&Redo"
+msgstr "&Berregin"
+
+#: mainwindow.cpp:1333
+#, fuzzy
+msgid "&Testing"
+msgstr "Ezarpenak"
+
+#: mainwindow.cpp:1335
+#, fuzzy
+msgid "Record test..."
+msgstr "Grabatu Proba..."
+
+#: mainwindow.cpp:1338
+#, fuzzy
+msgid "Play test..."
+msgstr "Erreproduzitu Proba..."
+
+#. i18n: file: mainwindow.ui:121
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:129
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1354:75 rc.cpp:81
+msgid "&New"
+msgstr "&Berria"
+
+#. i18n: file: mainwindow.ui:82
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1363:51
+#, fuzzy
+msgid "&Open..."
+msgstr "&Ireki"
+
+#. i18n: file: mainwindow.ui:147
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:155
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1379:93 rc.cpp:99
+msgid "&Save"
+msgstr "&Gorde"
+
+#. i18n: file: mainwindow.ui:160
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1388:102
+msgid "Save &As..."
+msgstr "Gorde &Honela..."
+
+#. i18n: file: mainwindow.ui:504
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1407:264
+#, fuzzy
+msgid "&Export"
+msgstr "Esportatu"
+
+#: mainwindow.cpp:1408
+#, fuzzy
+msgid "&Molecule..."
+msgstr "Molekula"
+
+#. i18n: file: mainwindow.ui:173
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1416:111
+msgid "&Graphics..."
+msgstr "&Grafikoak..."
+
+#. i18n: file: mainwindow.ui:95
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:106
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1424:60 rc.cpp:66
+msgid "&Quit"
+msgstr "&Irten"
+
+#: mainwindow.cpp:1444
+msgid "No recent files"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:59
+#. i18n: ectx: property (title), widget (QMenu, menuEdit)
+#: mainwindow.cpp:1450 menubuilder.cpp:87:45
+msgid "&Edit"
+msgstr "&Editatu"
+
+#. i18n: file: mainwindow.ui:54
+#. i18n: ectx: property (title), widget (QMenu, menuView)
+#: mainwindow.cpp:1470 menubuilder.cpp:87:42
+msgid "&View"
+msgstr "&Ikusi"
+
+#: mainwindow.cpp:1471
+#, fuzzy
+msgid "Set background color..."
+msgstr "Ezarri &Atzeko Planoaren Kolorea..."
+
+#: mainwindow.cpp:1475
+msgid "Projection"
+msgstr "Proiekzioa"
+
+#. i18n: file: mainwindow.ui:463
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1476:240
+msgid "Perspective"
+msgstr "Ikuspegia"
+
+#. i18n: file: mainwindow.ui:471
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1483:243
+msgid "Orthographic"
+msgstr "Otrografikoa"
+
+#: mainwindow.cpp:1497
+#, fuzzy
+msgid "&Extensions"
+msgstr "Hedapenak"
+
+#: mainwindow.cpp:1504 menubuilder.cpp:91
+msgid "&Help"
+msgstr "&Laguntza"
+
+#: mainwindow.cpp:1617
+#, qt-format
+msgid "All supported formats (%1);;All files (*);;"
+msgstr ""
+
+#: mainwindow.cpp:1629
+#, fuzzy
+msgid ""
+"Do you want to save the changes you made in the document?\n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr "Dokumentuan egindako aldaketak gorde nahi dituzu?"
+
+#: mainwindow.cpp:1694
+#, qt-format
+msgid "Error while loading FileFormat with id '%1'."
+msgstr ""
+
+#: mainwindow.cpp:1715
+#, qt-format
+msgid "Avogadro timed out and doesn't know how to open '%1'."
+msgstr ""
+
+#: mainwindow.cpp:1725
+#, fuzzy
+msgid "Cannot open files"
+msgstr "Ezin da %1 fitxategia gorde."
+
+#: mainwindow.cpp:1726
+#, qt-format
+msgid "Avogadro timed out and cannot open '%1'."
+msgstr ""
+
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: menubuilder.cpp:87:36
+msgid "&File"
+msgstr "&Fitxategia"
+
+#. i18n: file: mainwindow.ui:49
+#. i18n: ectx: property (title), widget (QMenu, menuBuild)
+#: menubuilder.cpp:87:39
+msgid "&Build"
+msgstr "&Eraiki"
+
+#. i18n: file: mainwindow.ui:71
+#. i18n: ectx: property (title), widget (QMenu, menuSelect)
+#: menubuilder.cpp:88:48
+msgid "&Select"
+msgstr "&Hautatu"
+
+#: menubuilder.cpp:91
+msgid "Se&ttings"
+msgstr "Ez&arpenak"
+
+#: menubuilder.cpp:91
+#, fuzzy
+msgid "&Window"
+msgstr "Leihoa"
+
+#: rpclistener.cpp:123
+msgid "Error starting RPC server:"
+msgstr ""
+
+#: rpclistener.cpp:125
+msgid ""
+"An error occurred while starting Avogadro's RPC listener. This may be happen "
+"for a\n"
+"number of reasons:\n"
+"\tA previous instance of Avogadro may have crashed.\n"
+"\tA running Avogadro instance was too busy to respond.\n"
+"\n"
+"If no other Avogadro instance is running on this machine, it is safe to "
+"replace the dead\n"
+"server. Otherwise, this instance of avogadro may be started without RPC "
+"capabilities\n"
+"(this will prevent RPC enabled applications from communicating with "
+"Avogadro)."
+msgstr ""
+
+#: rpclistener.cpp:135
+msgid "Replace the dead server with a new instance."
+msgstr ""
+
+#: rpclistener.cpp:136
+msgid "Start without RPC capabilities."
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:62
+#. i18n: ectx: property (text), widget (QLabel, versionLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
+"\">Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:75
+#. i18n: ectx: property (text), widget (QLabel, version)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:117
+#. i18n: ectx: property (text), widget (QLabel, libs)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">AvogadroLibs Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:124
+#. i18n: ectx: property (text), widget (QLabel, libsVersion)
+#. i18n: file: aboutdialog.ui:171
+#. i18n: ectx: property (text), widget (QLabel, qtVersion)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:164
+#. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
+"Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:224
+#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
+"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
+"\">BSD-3-Clause</span></a></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:261
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+msgid ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"span></a></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:290
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:323
+#. i18n: ectx: property (text), widget (QPushButton, OK)
+msgid "OK"
+msgstr "Onartu"
+
+#. i18n: file: mainwindow.ui:85
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+O"
+msgstr "Ktrl+O"
+
+#. i18n: file: mainwindow.ui:90
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Open"
+msgstr "&Ireki"
+
+#. i18n: file: mainwindow.ui:98
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Q"
+msgstr "Ktrl+Q"
+
+#. i18n: file: mainwindow.ui:111
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Recent"
+msgstr "Oraintsukoa"
+
+#. i18n: file: mainwindow.ui:116
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Clear Recent"
+msgstr "&Garbitu Oraintsukoa"
+
+#. i18n: file: mainwindow.ui:124
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+N"
+msgstr "Ktrl+N"
+
+#. i18n: file: mainwindow.ui:134
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:142
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Close"
+msgstr "&Itxi"
+
+#. i18n: file: mainwindow.ui:137
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+W"
+msgstr "Ktrl+W"
+
+#. i18n: file: mainwindow.ui:150
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+S"
+msgstr "Ktrl+S"
+
+#. i18n: file: mainwindow.ui:163
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+S"
+msgstr "Ktrl+Shift+S"
+
+#. i18n: file: mainwindow.ui:168
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Revert To Saved"
+msgstr "Leheneratu Gordetakora"
+
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Full Screen Mode"
+msgstr "&Pantaila Osoko Modua"
+
+#. i18n: file: mainwindow.ui:185
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Esc"
+msgstr "Esc"
+
+#. i18n: file: mainwindow.ui:194
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Set &Background Color..."
+msgstr "Ezarri &Atzeko Planoaren Kolorea..."
+
+#. i18n: file: mainwindow.ui:199
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&About"
+msgstr "&Honi Buruz"
+
+#. i18n: file: mainwindow.ui:214
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Z"
+msgstr "Ktrl+Z"
+
+#. i18n: file: mainwindow.ui:226
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+Z"
+msgstr "Ktrl+Shift+Z"
+
+#. i18n: file: mainwindow.ui:235
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "New View"
+msgstr "Ikuspegi Berria"
+
+#. i18n: file: mainwindow.ui:247
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Close View"
+msgstr "Itxi Ikuspegia"
+
+#. i18n: file: mainwindow.ui:256
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Center"
+msgstr "Zentratu"
+
+#. i18n: file: mainwindow.ui:265
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Align View To Axes"
+msgstr "Lerrokatu Ikuspegia Ardatzetara"
+
+#. i18n: file: mainwindow.ui:270
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Paste"
+msgstr "Itsatsi"
+
+#. i18n: file: mainwindow.ui:273
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+V"
+msgstr "Ktrl+V"
+
+#. i18n: file: mainwindow.ui:278
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Copy"
+msgstr "&Kopiatu"
+
+#. i18n: file: mainwindow.ui:281
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+C"
+msgstr "Ktrl+C"
+
+#. i18n: file: mainwindow.ui:286
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Cut"
+msgstr "Ebaki"
+
+#. i18n: file: mainwindow.ui:289
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+X"
+msgstr "Ktrl+X"
+
+#. i18n: file: mainwindow.ui:294
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Clear"
+msgstr "Garbitu"
+
+#. i18n: file: mainwindow.ui:299
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Select All"
+msgstr "Hautatu Guztia"
+
+#. i18n: file: mainwindow.ui:302
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+A"
+msgstr "Ktrl+A"
+
+#. i18n: file: mainwindow.ui:307
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Select None"
+msgstr "Bat ere ez hautatu"
+
+#. i18n: file: mainwindow.ui:310
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+A"
+msgstr "Ktrl+Shift+A"
+
+#. i18n: file: mainwindow.ui:319
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Configure Avogadro..."
+msgstr "Konfiguratu Avogadro..."
+
+#. i18n: file: mainwindow.ui:330
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Tutorials"
+msgstr "Tutorialak"
+
+#. i18n: file: mainwindow.ui:339
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Duplicate View"
+msgstr "Bikoiztu Ikuspegia"
+
+#. i18n: file: mainwindow.ui:347
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Display Axes"
+msgstr "Erakutsi Ardatzak"
+
+#. i18n: file: mainwindow.ui:355
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Debug Information"
+msgstr "Arazketa Informazioa"
+
+#. i18n: file: mainwindow.ui:363
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Avogadro Help"
+msgstr "Avogadroren Laguntza"
+
+#. i18n: file: mainwindow.ui:368
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Release Notes"
+msgstr "Bertsio Oharrak"
+
+#. i18n: file: mainwindow.ui:373
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Report a Bug"
+msgstr "Eman errore baten berri"
+
+#. i18n: file: mainwindow.ui:378
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "FAQ"
+msgstr "Maiz Egindako Galderak"
+
+#. i18n: file: mainwindow.ui:383
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Avogadro Website"
+msgstr "Avogadro-ren Webgunea"
+
+#. i18n: file: mainwindow.ui:392
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Plugin Manager..."
+msgstr "Plugin Kudeatzailea..."
+
+#. i18n: file: mainwindow.ui:401
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Project Tree Editor..."
+msgstr "Proiektuaren Zuhaitza Editatu..."
+
+#. i18n: file: mainwindow.ui:410
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Detach View"
+msgstr "Banatu Ikuspegia"
+
+#. i18n: file: mainwindow.ui:415
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Molecule File..."
+msgstr "Molekula Fitxategia..."
+
+#. i18n: file: mainwindow.ui:426
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Use Quick Render"
+msgstr "Erabili Errendatze Azkarra"
+
+#. i18n: file: mainwindow.ui:431
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Vector Graphics..."
+msgstr "&Grafiko Bektorialak..."
+
+#. i18n: file: mainwindow.ui:439
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Display Unit Cell Axes"
+msgstr "Erakutsi Gelaxka-Unitatearen Ardatzak"
+
+#. i18n: file: mainwindow.ui:447
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "All Molecules in File..."
+msgstr "Fitxategiko Molekula Guztiak..."
+
+#. i18n: file: mainwindow.ui:452
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Reset Display Types"
+msgstr "Berrezarri Bistaratze Motak"
+
+#. i18n: file: mainwindow.ui:476
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "SMILES"
+msgstr "Emotikonoak"
+
+#. i18n: file: mainwindow.ui:481
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "InChI"
+msgstr "InChI"
+
+#. i18n: file: mainwindow.ui:484
+#. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
+msgid "IUPAC InChI identifier"
+msgstr "IUPAC-eko InChi identifikatzailea"
+
+#. i18n: file: mainwindow.ui:489
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Discussion Forum"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:494
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
+msgid "Open Recent"
+msgstr "Ireki &Oraintsukoa"
+
+#. i18n: file: mainwindow.ui:499
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
+msgid "&Import"
+msgstr "Inportatu"
+
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+",Launchpad Contributions:,Ander González,Xabier Isla Rodriguez, ,Launchpad "
+"Contributions:,Ander González,Avogadro Team,Xabier Isla Rodriguez, ,"
+"Launchpad Contributions:,Ander González,Avogadro Team,Xabier Isla "
+"Rodriguez, ,Launchpad Contributions:,Ander González,Avogadro Team,Xabier "
+"Isla Rodriguez, ,Launchpad Contributions:,Ander González,Asier Iturralde "
+"Sarasola,Avogadro Team,Xabier Isla Rodriguez, ,Launchpad Contributions:,"
+"Ander González,Asier Iturralde Sarasola,Avogadro Team,Xabier Isla "
+"Rodriguez, ,Launchpad Contributions:,Ander González,Asier Iturralde Sarasola,"
+"Avogadro Team,Julen Larrucea,Xabier Isla Rodriguez"
+
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+",,,,,,,avogadro-devel@lists.sourceforge.net,,,,,avogadro-devel@lists."
+"sourceforge.net,,,,,avogadro-devel@lists.sourceforge.net,,,,,,avogadro-"
+"devel@lists.sourceforge.net,,,,,,avogadro-devel@lists.sourceforge.net,,,,,,"
+"avogadro-devel@lists.sourceforge.net,julenl@gmail.com,"
+
+#~ msgctxt "%1 is the Git revision number."
+#~ msgid "(Git revision: %1)"
+#~ msgstr "(Git berrikusketa: %1)"
+
+#~ msgid ""
+#~ "<h3>%1</h3><br/><br/>Application Version: %2<br/><br/>Library Version: "
+#~ "%3<br/><br/>Open Babel Version: %4"
+#~ msgstr ""
+#~ "<h3>%1</h3><br/><br/>Aplikazioaren Bertsioa: %2<br/><br/>Liburutegiaren "
+#~ "Bertsioa: %3<br/><br/>Open Babel-en Bertsioa: %4"
+
+#~ msgid ""
+#~ "<br/><br/>Qt Version: %1<br/><br/>For more information check the <a href="
+#~ "\"http://avogadro.cc/\">Avogadro homepage</a>.<br/><br/>The program is "
+#~ "provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF "
+#~ "DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.<br/>"
+#~ msgstr ""
+#~ "<br/><br/>Qt Bertsioa: %1<br/><br/>Informazio gehiago <a href=\"http://"
+#~ "avogadro.cc/\">Avogadro-ren webgunean</a>.<br/><br/>Programa hau DAGOEN "
+#~ "BEZALA eta INONGO GARANTIARIK GABE eskanitzen da, ERABILPEN JAKINETARAKO "
+#~ "DISEINU, SALGARRITASUN ETA EGOKITASUN GARANTIAK BARNE.<br/>"
+
+#~ msgid "Cut Molecule"
+#~ msgstr "Moztu Molekula"
+
+#~ msgid "Cut Atoms"
+#~ msgstr "Moztu Atomoak"
+
+#~ msgid "Clear Molecule"
+#~ msgstr "Ezabatu Molekula"
+
+#~ msgid "Clear Atoms"
+#~ msgstr "Ezabatu Atomoak"
+
+#~ msgid "Messages"
+#~ msgstr "Mezuak"
+
+#~ msgid "&Minimize"
+#~ msgstr "&Ikonotu"
+
+#~ msgid "Ctrl+M"
+#~ msgstr "Ktrl+M"
+
+#~ msgid "&Zoom"
+#~ msgstr "&Zooma"
+
+#~ msgid "Bring All to Front"
+#~ msgstr "Ekarri Guztia Aurrera"
+
+#~ msgid "&Tool Settings..."
+#~ msgstr "&Tresnen Ezarpenak..."
+
+#~ msgctxt "Tool Settings shortcut"
+#~ msgid "Ctrl+T"
+#~ msgstr "Ktrl+T"
+
+#~ msgid "&Display Settings..."
+#~ msgstr "&Bistaratze Ezarpenak..."
+
+#~ msgctxt "Display Settings shortcut"
+#~ msgid "Ctrl+D"
+#~ msgstr "Ktrl+D"
+
+#~ msgid "Common molecule formats"
+#~ msgstr "Ohiko molekula formatuak"
+
+#~ msgid "CML"
+#~ msgstr "CML"
+
+#~ msgid "Computational Chemistry Output"
+#~ msgstr "Kimika Konputazional Irteera"
+
+#~ msgid "Crystallographic Interchange CIF"
+#~ msgstr "Truke Kristalografiko CIF"
+
+#~ msgid "GAMESS-US Output"
+#~ msgstr "GAMESS-US Irteera"
+
+#~ msgid "Gaussian 98/03 Output"
+#~ msgstr "Gaussian 98/03 Irteera"
+
+#~ msgid "Gaussian Formatted Checkpoint"
+#~ msgstr "Gaussian-eko Formatudun Checkpoint fitxategia"
+
+#~ msgid "HyperChem"
+#~ msgstr "HyperChem"
+
+#~ msgid "MDL Mol"
+#~ msgstr "MDL Mol"
+
+#~ msgid "NWChem Output"
+#~ msgstr "NWChem Irteera"
+
+#~ msgid "PDB"
+#~ msgstr "PDB"
+
+#~ msgid "Sybyl Mol2"
+#~ msgstr "Sybyl Mol2"
+
+#~ msgid "XYZ"
+#~ msgstr "XYZ"
+
+#~ msgctxt "%1 is a filename"
+#~ msgid "Loading %1..."
+#~ msgstr "%1 kargatzen..."
+
+#~ msgid "Loading %1..."
+#~ msgstr "%1 kargatzen..."
+
+#~ msgid "Reading molecular file failed, file %1."
+#~ msgstr "Huts egin du fitxategi molekularra irakurtzean, %1 fitxategia."
+
+#~ msgid "Reading multi-molecule file. This may take a while..."
+#~ msgstr "Molekula anitzeko fitxategia irakurtzen. Honek luze jo dezake..."
+
+#~ msgid "This file does not contain 3D coordinates."
+#~ msgstr "Fitxategi honek ez dauka 3D koordenaturik."
+
+#~ msgid "Do you want Avogadro to build a rough geometry?"
+#~ msgstr "Avogadro-k gutxi gorabeherako geometria bat eraikitzea nahi duzu?"
+
+#~ msgid ""
+#~ "This file does not contain 3D coordinates.\n"
+#~ "You may not be able to edit or view properly."
+#~ msgstr ""
+#~ "Fitxategi honek ez dauka 3D koordenaturik.\n"
+#~ "Agian ezingo duzu behar bezala editatu edo ikusi."
+
+#~ msgid "Select Molecule to View"
+#~ msgstr "Hautatu Molekula Ikusteko"
+
+#~ msgid "Molecule Title"
+#~ msgstr "Molekularen Izenburua"
+
+#~ msgid "Atoms: "
+#~ msgstr "Atomoak: "
+
+#~ msgid " Bonds: "
+#~ msgstr " Loturak: "
+
+#~ msgid "File Loaded..."
+#~ msgstr "Fitxategia Kargatuta..."
+
+#~ msgid "Your changes will be lost if you don't save them."
+#~ msgstr "Zure aldaketak galdu egingo dira ez badituzu gordetzen."
+
+#~ msgctxt "Save"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ktrl+S"
+
+#~ msgctxt "Discard"
+#~ msgid "Ctrl+D"
+#~ msgstr "Ktrl+D"
+
+#~ msgid "Save..."
+#~ msgstr "Gorde..."
+
+#~ msgid "Save"
+#~ msgstr "Gorde"
+
+#~ msgid "GAMESS Input"
+#~ msgstr "GAMESS Sarrera"
+
+#~ msgid "Gaussian Cartesian Input"
+#~ msgstr "Gaussian-erako Kartesiar Sarrera"
+
+#~ msgid "Gaussian Z-matrix Input"
+#~ msgstr "Gaussian-erako Z-Matrize Sarrera"
+
+#~ msgid "MDL SDfile"
+#~ msgstr "MDL SDfile"
+
+#~ msgid "NWChem Input"
+#~ msgstr "NWChem Sarrera"
+
+#~ msgid "Save Molecule As"
+#~ msgstr "Gorde Molekula Honela"
+
+#~ msgid "Untitled %1"
+#~ msgstr "Izengabea %1"
+
+#~ msgid "Unable to paste molecule."
+#~ msgstr "Ezin da molekula itsatsi."
+
+#~ msgid "Paste failed (format unavailable)."
+#~ msgstr "Itsastean huts egin du (formatu erabilezina)."
+
+#~ msgid "Copy failed (format unavailable)."
+#~ msgstr "Kopiaketa errorea (formatua ez dago eskuragarri)."
+
+#~ msgid "Copy failed (mdl unavailable)."
+#~ msgstr "Kopiatzean huts egin du (mdl erabilezina)."
+
+#~ msgid "View %1"
+#~ msgstr "%1 Ikuspegia"
+
+#~ msgctxt "View number (from 1 on)"
+#~ msgid "View %1"
+#~ msgstr "%1 Ikuspegia"
+
+#~ msgid "Avogadro: Detached View"
+#~ msgstr "Avogadro: Ikuspegi Banatua"
+
+#~ msgid "Normal Size"
+#~ msgstr "Tamaina Normala"
+
+#~ msgid "Full Screen"
+#~ msgstr "Pantaila Osoa"
+
+#~ msgid "Ctrl+Backspace"
+#~ msgstr "Ctrl+Atzera"
+
+#~ msgctxt "[*] indicates that this is a modified view...."
+#~ msgid "[*]Avogadro"
+#~ msgstr "[*]Avogadro"
+
+#~ msgctxt "Window title: %1 is file name, %2 is Avogadro"
+#~ msgid "%1[*] - %2"
+#~ msgstr "%1[*] - %2"
+
+#~ msgid "Add"
+#~ msgstr "Gehitu"
+
+#~ msgid "Duplicate"
+#~ msgstr "Bikoiztu"
+
+#~ msgid "Remove"
+#~ msgstr "Ezabatu"
+
+#~ msgid "No tools or engines loaded."
+#~ msgstr "Ez dago tresna edo motorrik kargatuta."
+
+#~ msgid "No engines loaded."
+#~ msgstr "Ez dago motorrik kargatuta."
+
+#~ msgid "No tools loaded."
+#~ msgstr "Ez dago tresnarik kargatuta."
+
+#~ msgid ""
+#~ " It is unlikely this application will function correctly. Please correct "
+#~ "this error."
+#~ msgstr ""
+#~ " Aplikazioak behar bezala funtzionatzeko aukera gutxi daude. Mesedez, "
+#~ "zuzendu akats hau."
+
+#~ msgid "Objects"
+#~ msgstr "Objektuak"
+
+#~ msgid "Colors"
+#~ msgstr "Koloreak"
+
+#~ msgid " copy"
+#~ msgstr " kopiatu"
+
+#~ msgid "Name: "
+#~ msgstr "Izena: "
+
+#~ msgid "Identifier: "
+#~ msgstr "Identifikatzailea: "
+
+#~ msgid "Description:\n"
+#~ msgstr "Deskribapena:\n"
+
+#~ msgid "Atoms"
+#~ msgstr "Atomoak"
+
+#~ msgid "Bonds"
+#~ msgstr "Loturak"
+
+#~ msgid "Residues"
+#~ msgstr "Hondarrak"
+
+#~ msgid "bond %1"
+#~ msgstr "%1 lotura"
+
+#~ msgid "Label"
+#~ msgstr "Etiketa"
+
+#~ msgid "User Selections"
+#~ msgstr "Erabiltzailearen Hautapenak"
+
+#~ msgid "Error"
+#~ msgstr "Errorea"
+
+#~ msgid "only labels can have sub items"
+#~ msgstr "soilik etiketek izan ditzakete azpi-elementuak"
+
+#~ msgid "Item"
+#~ msgstr "Elementua"
+
+#~ msgid "Index"
+#~ msgstr "Indizea"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Low"
+#~ msgstr "Baxua"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Medium"
+#~ msgstr "Ertaina"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "High"
+#~ msgstr "Altua"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Undefined"
+#~ msgstr "Zehaztugabea"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "None"
+#~ msgstr "Bat ere ez"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Some"
+#~ msgstr "Pixka bat"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Mid"
+#~ msgstr "Ertaina"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Lots"
+#~ msgstr "Asko"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Undefined"
+#~ msgstr "Zehaztugabea"
+
+#~ msgid "Network Update Check Failed"
+#~ msgstr "Internetetik Eguneratzeko Egiaztapenak Huts Egin Du"
+
+#~ msgid "Network timeout or other error."
+#~ msgstr "Sarea denboraz kanpo edo beste errore bat."
+
+#~ msgctxt "Indicates an updated Avogadro version is available"
+#~ msgid "Updated Version of Avogadro Available"
+#~ msgstr "Avogadro-ren Bertsio Eguneratua Eskuragarri"
+
+#~ msgid "Add Display Type"
+#~ msgstr "Gehitu Bistaratze Mota"
+
+#~ msgid "Type:"
+#~ msgstr "Mota:"
+
+#~ msgid "Name:"
+#~ msgstr "Izena:"
+
+#~ msgid "Description:"
+#~ msgstr "Deskribapena:"
+
+#~ msgid "Form"
+#~ msgstr "Forma"
+
+#~ msgid "Color by:"
+#~ msgstr "Kolorea honen arabera:"
+
+#~ msgid "Add Selected Primitives"
+#~ msgstr "Gehitu Hautatutako Primitiboak"
+
+#~ msgid "Remove Selected Primitives"
+#~ msgstr "Ezabatu Hautatutako Primitiboak"
+
+#~ msgid "Add All Primitives"
+#~ msgstr "Gehitu Primitibo Guztiak"
+
+#~ msgid "Display Only Selected Primitives"
+#~ msgstr "Erakutsi Soilik Hautatutako Primitiboak"
+
+#~ msgid "Assign to Selection"
+#~ msgstr "Hautatutakoari Esleitu"
+
+#~ msgid "Filename:"
+#~ msgstr "Fitxategi-izena:"
+
+#~ msgid "Select..."
+#~ msgstr "Hautatu..."
+
+#~ msgid "Format:"
+#~ msgstr "Formatua:"
+
+#~ msgid "Automatically detect from extension"
+#~ msgstr "Detektatu automatikoki luzapen honetatik"
+
+#~ msgid "Perceive bonding"
+#~ msgstr "Hauteman loturak"
+
+#~ msgid "Perceive bond orders"
+#~ msgstr "Hauteman lotura ordenak"
+
+#~ msgid "Coordinates are in Ångstroms"
+#~ msgstr "Koordenatuak Ångstrom-etan daude"
+
+#~ msgid "Toolbars"
+#~ msgstr "Tresna-barrak"
+
+#~ msgid "Copy As"
+#~ msgstr "Kopiatu honela"
+
+#~ msgid "E&xtensions"
+#~ msgstr "H&edapenak"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Tresna-Barra Nagusia"
+
+#~ msgid "Project Tree"
+#~ msgstr "Proiektuaren Zuhaitza"
+
+#~ msgid "&Paste"
+#~ msgstr "&Itsatsi"
+
+#~ msgid "Plugins"
+#~ msgstr "Pluginak"
+
+#~ msgid "Details"
+#~ msgstr "Xehetasunak"
+
+#~ msgid "Tree Items"
+#~ msgstr "Zuhaitz-Elementuak"
+
+#~ msgid "Type"
+#~ msgstr "Mota"
+
+#~ msgid "New Item"
+#~ msgstr "Elementu Berria"
+
+#~ msgid "&New Item"
+#~ msgstr "&Elementu Berria"
+
+#~ msgid "New Subitem"
+#~ msgstr "Azpi-Elementu Berria"
+
+#~ msgid "New &Subitem"
+#~ msgstr "Azpi-&Elementu Berria"
+
+#~ msgid "Delete Item"
+#~ msgstr "Ezabatu Elementua"
+
+#~ msgid "&Delete Item"
+#~ msgstr "&Ezabatu Elementua"
+
+#~ msgid "Move Item Left (before Parent Item)"
+#~ msgstr "Mugitu Elementua Ezkerrera (Guraso-Elementuaren Aurrean)"
+
+#~ msgid "L"
+#~ msgstr "L"
+
+#~ msgid "Move Item Right (as a First Subitem of the Next Sibling Item)"
+#~ msgstr ""
+#~ "Mugitu Elementua Eskuinera (Hurrengo Senide-Elementuaren Lehenengo Azpi-"
+#~ "Elementu bat bezala)"
+
+#~ msgid "R"
+#~ msgstr "R"
+
+#~ msgid "Move Item Up"
+#~ msgstr "Mugitu Elementua Gora"
+
+#~ msgid "U"
+#~ msgstr "U"
+
+#~ msgid "Move Item Down"
+#~ msgstr "Mugitu Elementua Behera"
+
+#~ msgid "D"
+#~ msgstr "D"
+
+#~ msgid "Alias"
+#~ msgstr "Ezizena"
+
+#~ msgid "Settings..."
+#~ msgstr "Ezarpenak..."
+
+#~ msgid "General"
+#~ msgstr "Orokorra"
+
+#~ msgid "Quality:"
+#~ msgstr "Kalitatea:"
+
+#~ msgid "Set the global rendering quality."
+#~ msgstr "Ezarri errendatze-kalitate orokorra"
+
+#~ msgid "Fog:"
+#~ msgstr "Lainoa:"
