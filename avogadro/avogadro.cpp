@@ -80,8 +80,10 @@ int main(int argc, char* argv[])
         QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
     qDebug() << " translation success";
     app.installTranslator(&qtTranslator);
-  } else // check other paths
+  } else {
+    // Check other paths.
     tryLoadingQtTranslations = true;
+  }
 
   QTranslator qtBaseTranslator(0);
   qDebug() << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
