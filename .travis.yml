@@ -6,14 +6,14 @@ language: python
 python:
     - "2.7"
 
-dist: precise
+dist: trusty
 addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-    - llvm-toolchain-precise-3.8
+    - llvm-toolchain-trusty-6.0
     packages:
-    - clang-format-3.8
+    - clang-format-6.0
 script:
   - cd $TRAVIS_BUILD_DIR
   - ./scripts/travis/run_clang_format_diff.sh master $TRAVIS_COMMIT
