@@ -1,0 +1,1315 @@
+# Korean translation for avogadro
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the avogadro package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: avogadro\n"
+"Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2018-04-26 13:24-0400\n"
+"PO-Revision-Date: 2016-06-10 06:22+0000\n"
+"Last-Translator: seokhyun an <an6207@gmail.com>\n"
+"Language-Team: Korean <ko@li.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
+"X-Generator: Launchpad (build 18609)\n"
+
+#: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
+msgid "No molecule set in BackgroundFileFormat!"
+msgstr ""
+
+#: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
+msgid "No Io::FileFormat set in BackgroundFileFormat!"
+msgstr ""
+
+#: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
+msgid "No file name set in BackgroundFileFormat!"
+msgstr ""
+
+#: mainwindow.cpp:275
+msgid "Ready..."
+msgstr ""
+
+#: mainwindow.cpp:300
+#, fuzzy
+msgid "Tool"
+msgstr "도구"
+
+#: mainwindow.cpp:304
+msgid "Display Types"
+msgstr "표시 형식"
+
+#: mainwindow.cpp:313
+msgid "View Configuration"
+msgstr ""
+
+#: mainwindow.cpp:319
+#, fuzzy
+msgid "Molecules"
+msgstr "분자"
+
+#: mainwindow.cpp:467
+#, fuzzy
+msgid "Untitled"
+msgstr "제목없음"
+
+#: mainwindow.cpp:472
+#, fuzzy, qt-format
+msgid "%1%2 - Avogadro %3"
+msgstr "Avogadro"
+
+#: mainwindow.cpp:514 mainwindow.cpp:1028
+msgid "Chemical Markup Language"
+msgstr ""
+
+#: mainwindow.cpp:515 mainwindow.cpp:1029
+msgid "Chemical JSON"
+msgstr ""
+
+#: mainwindow.cpp:521
+msgid "Open chemical file"
+msgstr ""
+
+#: mainwindow.cpp:539 mainwindow.cpp:560 mainwindow.cpp:936 mainwindow.cpp:1714
+#, fuzzy
+msgid "Cannot open file"
+msgstr "%1 파일을 저장할 수 없습니다"
+
+#: mainwindow.cpp:540 mainwindow.cpp:561 mainwindow.cpp:937
+#, fuzzy, qt-format
+msgid "Can't open supplied file %1"
+msgstr "%1 파일을 저장할 수 없습니다"
+
+#: mainwindow.cpp:550
+#, fuzzy
+msgid "Open Molecule"
+msgstr "분자"
+
+#: mainwindow.cpp:593
+#, fuzzy
+msgid "Reading File"
+msgstr "파일 열기"
+
+#: mainwindow.cpp:595
+#, qt-format
+msgid ""
+"Opening file '%1'\n"
+"with '%2'"
+msgstr ""
+
+#: mainwindow.cpp:624
+#, qt-format
+msgid "Molecule loaded (%1 atoms, %2 bonds)"
+msgstr ""
+
+#: mainwindow.cpp:629 mainwindow.cpp:663
+#, fuzzy
+msgid "File error"
+msgstr "파일: "
+
+#: mainwindow.cpp:630
+#, qt-format
+msgid ""
+"Error while reading file '%1':\n"
+"%2"
+msgstr ""
+
+#: mainwindow.cpp:656
+#, qt-format
+msgid "File written: %1"
+msgstr ""
+
+#: mainwindow.cpp:664
+#, qt-format
+msgid ""
+"Error while writing file '%1':\n"
+"%2"
+msgstr ""
+
+#: mainwindow.cpp:705
+msgid "Error: Failed to initialize OpenGL context"
+msgstr ""
+
+#: mainwindow.cpp:706
+#, qt-format
+msgid ""
+"OpenGL 2.0 or greater required, exiting.\n"
+"\n"
+"%1"
+msgstr ""
+
+#: mainwindow.cpp:707
+msgid "Unknown error"
+msgstr ""
+
+#: mainwindow.cpp:784 mainwindow.cpp:785
+msgid "Navigate tool"
+msgstr ""
+
+#: mainwindow.cpp:857
+msgid "Common image formats"
+msgstr "일반적인 이미지 포맷"
+
+#: mainwindow.cpp:859
+msgid "All files"
+msgstr "모든 파일들"
+
+#: mainwindow.cpp:859
+msgid "BMP"
+msgstr "BMP"
+
+#: mainwindow.cpp:860
+msgid "PNG"
+msgstr "PNG"
+
+#: mainwindow.cpp:860
+msgid "JPEG"
+msgstr "JPEG"
+
+#: mainwindow.cpp:869
+msgid "Export Bitmap Graphics"
+msgstr "비트맵 그래픽으로 내보내기"
+
+#. i18n: file: mainwindow.ui:14
+#. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
+#: mainwindow.cpp:908 mainwindow.cpp:1002 mainwindow.cpp:1628:33
+msgid "Avogadro"
+msgstr "Avogadro"
+
+#: mainwindow.cpp:909
+#, qt-format
+msgid "Cannot save file %1."
+msgstr "%1 파일을 저장할 수 없습니다"
+
+#: mainwindow.cpp:932 mainwindow.cpp:1710
+msgid "Select file reader"
+msgstr ""
+
+#: mainwindow.cpp:1003
+msgid ""
+"This file was imported from a non-standard format which may not be able to "
+"write all of the information in the molecule.\n"
+"\n"
+"Would you like to export to the current format, or save in a standard format?"
+msgstr ""
+
+#: mainwindow.cpp:1010
+msgid "Export"
+msgstr "내보내기"
+
+#: mainwindow.cpp:1035
+msgid "Save chemical file"
+msgstr ""
+
+#: mainwindow.cpp:1063
+#, fuzzy
+msgid "Export Molecule"
+msgstr "분자모형 파일 불러오기"
+
+#: mainwindow.cpp:1115
+msgid "Writing File"
+msgstr ""
+
+#: mainwindow.cpp:1117
+#, qt-format
+msgid ""
+"Writing file '%1'\n"
+"with '%2'"
+msgstr ""
+
+#: mainwindow.cpp:1225
+#, fuzzy, qt-format
+msgid "&Undo %1"
+msgstr "실행 취소(&U)"
+
+#. i18n: file: mainwindow.ui:211
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1228 mainwindow.cpp:1451:126
+msgid "&Undo"
+msgstr "실행 취소(&U)"
+
+#: mainwindow.cpp:1233
+#, fuzzy, qt-format
+msgid "&Redo %1"
+msgstr "다시 실행(&R)"
+
+#. i18n: file: mainwindow.ui:223
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1236 mainwindow.cpp:1456:132
+msgid "&Redo"
+msgstr "다시 실행(&R)"
+
+#: mainwindow.cpp:1333
+#, fuzzy
+msgid "&Testing"
+msgstr "설정"
+
+#: mainwindow.cpp:1335
+#, fuzzy
+msgid "Record test..."
+msgstr "테스트 녹화"
+
+#: mainwindow.cpp:1338
+#, fuzzy
+msgid "Play test..."
+msgstr "테스트 실행"
+
+#. i18n: file: mainwindow.ui:121
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:129
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1354:75 rc.cpp:81
+msgid "&New"
+msgstr "새로 만들기(&N)"
+
+#. i18n: file: mainwindow.ui:82
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1363:51
+#, fuzzy
+msgid "&Open..."
+msgstr "열기(&O)"
+
+#. i18n: file: mainwindow.ui:147
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:155
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1379:93 rc.cpp:99
+msgid "&Save"
+msgstr "저장(&S)"
+
+#. i18n: file: mainwindow.ui:160
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1388:102
+msgid "Save &As..."
+msgstr "다른 이름으로 저장(&A)..."
+
+#. i18n: file: mainwindow.ui:504
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1407:264
+#, fuzzy
+msgid "&Export"
+msgstr "내보내기"
+
+#: mainwindow.cpp:1408
+#, fuzzy
+msgid "&Molecule..."
+msgstr "분자"
+
+#. i18n: file: mainwindow.ui:173
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1416:111
+msgid "&Graphics..."
+msgstr "그래픽...(&G)"
+
+#. i18n: file: mainwindow.ui:95
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:106
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1424:60 rc.cpp:66
+msgid "&Quit"
+msgstr "끝내기(&Q)"
+
+#: mainwindow.cpp:1444
+msgid "No recent files"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:59
+#. i18n: ectx: property (title), widget (QMenu, menuEdit)
+#: mainwindow.cpp:1450 menubuilder.cpp:87:45
+msgid "&Edit"
+msgstr "편집(&E)"
+
+#. i18n: file: mainwindow.ui:54
+#. i18n: ectx: property (title), widget (QMenu, menuView)
+#: mainwindow.cpp:1470 menubuilder.cpp:87:42
+msgid "&View"
+msgstr "보기(&V)"
+
+#: mainwindow.cpp:1471
+#, fuzzy
+msgid "Set background color..."
+msgstr "바탕색 설정(&B)..."
+
+#: mainwindow.cpp:1475
+msgid "Projection"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:463
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1476:240
+msgid "Perspective"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:471
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1483:243
+msgid "Orthographic"
+msgstr ""
+
+#: mainwindow.cpp:1497
+#, fuzzy
+msgid "&Extensions"
+msgstr "확장 기능"
+
+#: mainwindow.cpp:1504 menubuilder.cpp:91
+msgid "&Help"
+msgstr "도움말(&H)"
+
+#: mainwindow.cpp:1617
+#, qt-format
+msgid "All supported formats (%1);;All files (*);;"
+msgstr ""
+
+#: mainwindow.cpp:1629
+#, fuzzy
+msgid ""
+"Do you want to save the changes you made in the document?\n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr "문서의 변경된 사항을 저장하시겠습니까?"
+
+#: mainwindow.cpp:1694
+#, qt-format
+msgid "Error while loading FileFormat with id '%1'."
+msgstr ""
+
+#: mainwindow.cpp:1715
+#, qt-format
+msgid "Avogadro timed out and doesn't know how to open '%1'."
+msgstr ""
+
+#: mainwindow.cpp:1725
+#, fuzzy
+msgid "Cannot open files"
+msgstr "%1 파일을 저장할 수 없습니다"
+
+#: mainwindow.cpp:1726
+#, qt-format
+msgid "Avogadro timed out and cannot open '%1'."
+msgstr ""
+
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: menubuilder.cpp:87:36
+msgid "&File"
+msgstr "&파일"
+
+#. i18n: file: mainwindow.ui:49
+#. i18n: ectx: property (title), widget (QMenu, menuBuild)
+#: menubuilder.cpp:87:39
+msgid "&Build"
+msgstr "빌드(&B)"
+
+#. i18n: file: mainwindow.ui:71
+#. i18n: ectx: property (title), widget (QMenu, menuSelect)
+#: menubuilder.cpp:88:48
+msgid "&Select"
+msgstr "선택(&S)"
+
+#: menubuilder.cpp:91
+msgid "Se&ttings"
+msgstr "설정(&S)"
+
+#: menubuilder.cpp:91
+#, fuzzy
+msgid "&Window"
+msgstr "창"
+
+#: rpclistener.cpp:123
+msgid "Error starting RPC server:"
+msgstr ""
+
+#: rpclistener.cpp:125
+msgid ""
+"An error occurred while starting Avogadro's RPC listener. This may be happen "
+"for a\n"
+"number of reasons:\n"
+"\tA previous instance of Avogadro may have crashed.\n"
+"\tA running Avogadro instance was too busy to respond.\n"
+"\n"
+"If no other Avogadro instance is running on this machine, it is safe to "
+"replace the dead\n"
+"server. Otherwise, this instance of avogadro may be started without RPC "
+"capabilities\n"
+"(this will prevent RPC enabled applications from communicating with "
+"Avogadro)."
+msgstr ""
+
+#: rpclistener.cpp:135
+msgid "Replace the dead server with a new instance."
+msgstr ""
+
+#: rpclistener.cpp:136
+msgid "Start without RPC capabilities."
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:62
+#. i18n: ectx: property (text), widget (QLabel, versionLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
+"\">Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:75
+#. i18n: ectx: property (text), widget (QLabel, version)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:117
+#. i18n: ectx: property (text), widget (QLabel, libs)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">AvogadroLibs Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:124
+#. i18n: ectx: property (text), widget (QLabel, libsVersion)
+#. i18n: file: aboutdialog.ui:171
+#. i18n: ectx: property (text), widget (QLabel, qtVersion)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:164
+#. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
+"Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:224
+#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
+"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
+"\">BSD-3-Clause</span></a></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:261
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+msgid ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"span></a></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:290
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:323
+#. i18n: ectx: property (text), widget (QPushButton, OK)
+msgid "OK"
+msgstr "확인"
+
+#. i18n: file: mainwindow.ui:85
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+O"
+msgstr "Ctrl+O"
+
+#. i18n: file: mainwindow.ui:90
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Open"
+msgstr "열기(&O)"
+
+#. i18n: file: mainwindow.ui:98
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Q"
+msgstr "Ctrl+Q"
+
+#. i18n: file: mainwindow.ui:111
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Recent"
+msgstr "최근 목록"
+
+#. i18n: file: mainwindow.ui:116
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Clear Recent"
+msgstr "최근 목록 지우기(&C)"
+
+#. i18n: file: mainwindow.ui:124
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+N"
+msgstr "Ctrl+N"
+
+#. i18n: file: mainwindow.ui:134
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:142
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Close"
+msgstr "닫기(&C)"
+
+#. i18n: file: mainwindow.ui:137
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+W"
+msgstr "Ctrl+W"
+
+#. i18n: file: mainwindow.ui:150
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+S"
+msgstr "Ctrl+S"
+
+#. i18n: file: mainwindow.ui:163
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+S"
+msgstr "Ctrl+Shift+S"
+
+#. i18n: file: mainwindow.ui:168
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Revert To Saved"
+msgstr "저장된 상태로 복귀"
+
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Full Screen Mode"
+msgstr "전체 화면(&F)"
+
+#. i18n: file: mainwindow.ui:185
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Esc"
+msgstr "Esc"
+
+#. i18n: file: mainwindow.ui:194
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Set &Background Color..."
+msgstr "바탕색 설정(&B)..."
+
+#. i18n: file: mainwindow.ui:199
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&About"
+msgstr "정보(&A)"
+
+#. i18n: file: mainwindow.ui:214
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Z"
+msgstr "Ctrl+Z"
+
+#. i18n: file: mainwindow.ui:226
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+Z"
+msgstr "Ctrl+Shift+Z"
+
+#. i18n: file: mainwindow.ui:235
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "New View"
+msgstr "새로 보기"
+
+#. i18n: file: mainwindow.ui:247
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Close View"
+msgstr "보기 닫기"
+
+#. i18n: file: mainwindow.ui:256
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Center"
+msgstr "중앙"
+
+#. i18n: file: mainwindow.ui:265
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Align View To Axes"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:270
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Paste"
+msgstr "붙여넣기"
+
+#. i18n: file: mainwindow.ui:273
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+V"
+msgstr "Ctrl+V"
+
+#. i18n: file: mainwindow.ui:278
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Copy"
+msgstr "복사"
+
+#. i18n: file: mainwindow.ui:281
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+C"
+msgstr "복사(Ctrl+C)"
+
+#. i18n: file: mainwindow.ui:286
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Cut"
+msgstr "잘라내기"
+
+#. i18n: file: mainwindow.ui:289
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+X"
+msgstr "Ctrl+X"
+
+#. i18n: file: mainwindow.ui:294
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Clear"
+msgstr "지우기"
+
+#. i18n: file: mainwindow.ui:299
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Select All"
+msgstr "모두 선택"
+
+#. i18n: file: mainwindow.ui:302
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+A"
+msgstr "Ctrl+A"
+
+#. i18n: file: mainwindow.ui:307
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Select None"
+msgstr "선택 안 함"
+
+#. i18n: file: mainwindow.ui:310
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+A"
+msgstr "Ctrl+Shift+A"
+
+#. i18n: file: mainwindow.ui:319
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Configure Avogadro..."
+msgstr "Avogadro 설정..."
+
+#. i18n: file: mainwindow.ui:330
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Tutorials"
+msgstr "지침서"
+
+#. i18n: file: mainwindow.ui:339
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Duplicate View"
+msgstr "복사본 보기"
+
+#. i18n: file: mainwindow.ui:347
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Display Axes"
+msgstr "축 표시"
+
+#. i18n: file: mainwindow.ui:355
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Debug Information"
+msgstr "디버그 정보"
+
+#. i18n: file: mainwindow.ui:363
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Avogadro Help"
+msgstr "Avogadro 도움말"
+
+#. i18n: file: mainwindow.ui:368
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Release Notes"
+msgstr "릴리즈 노트"
+
+#. i18n: file: mainwindow.ui:373
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Report a Bug"
+msgstr "버그 보고"
+
+#. i18n: file: mainwindow.ui:378
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "FAQ"
+msgstr "자주 묻는 질문"
+
+#. i18n: file: mainwindow.ui:383
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Avogadro Website"
+msgstr "Avogadro 웹사이트"
+
+#. i18n: file: mainwindow.ui:392
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Plugin Manager..."
+msgstr "플러그인 관리자..."
+
+#. i18n: file: mainwindow.ui:401
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Project Tree Editor..."
+msgstr "프로젝트 트리 편집기..."
+
+#. i18n: file: mainwindow.ui:410
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Detach View"
+msgstr "분리해서 보기"
+
+#. i18n: file: mainwindow.ui:415
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Molecule File..."
+msgstr "분자모형 파일..."
+
+#. i18n: file: mainwindow.ui:426
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Use Quick Render"
+msgstr "빠른 렌더링 사용"
+
+#. i18n: file: mainwindow.ui:431
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Vector Graphics..."
+msgstr "벡터 그래픽..."
+
+#. i18n: file: mainwindow.ui:439
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Display Unit Cell Axes"
+msgstr "단위 세포 축 표시"
+
+#. i18n: file: mainwindow.ui:447
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "All Molecules in File..."
+msgstr "파일에 있는 모든 분자..."
+
+#. i18n: file: mainwindow.ui:452
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Reset Display Types"
+msgstr "표시 형식 재설정"
+
+#. i18n: file: mainwindow.ui:476
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "SMILES"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:481
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "InChI"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:484
+#. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
+msgid "IUPAC InChI identifier"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:489
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Discussion Forum"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:494
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
+msgid "Open Recent"
+msgstr "최근에 열어본 파일(&R)"
+
+#. i18n: file: mainwindow.ui:499
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
+msgid "&Import"
+msgstr "불러오기"
+
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+",Launchpad Contributions:,Geoff Hutchison, ,Launchpad Contributions:,"
+"Avogadro Team,Geoff Hutchison, ,Launchpad Contributions:,Geoff Hutchison,Kim "
+"Hanjo,Sang-hyeon Lee, ,Launchpad Contributions:,Avogadro Team,Geoff "
+"Hutchison,Kim Hanjo,Sang-hyeon Lee, ,Launchpad Contributions:,Avogadro Team,"
+"Geoff Hutchison,Kim Hanjo,Sang-hyeon Lee, ,Launchpad Contributions:,Avogadro "
+"Team,Bundo,Geoff Hutchison,Kim Hanjo,Sang-hyeon Lee,dlonie, ,Launchpad "
+"Contributions:,Avogadro Team,Bundo,Geoff Hutchison,Kim Hanjo,Sang-hyeon Lee,"
+"dlonie, ,Launchpad Contributions:,Avogadro Team,Bundo,Geoff Hutchison,Kim "
+"Hanjo,Sang-hyeon Lee,dlonie, ,Launchpad Contributions:,Avogadro Team,Bundo,"
+"Geoff Hutchison,Kim Hanjo,Sang-hyeon Lee,dlonie, ,Launchpad Contributions:,"
+"Avogadro Team,Bundo,Geoff Hutchison,Kim Hanjo,Sang-hyeon Lee,dlonie, ,"
+"Launchpad Contributions:,Avogadro Team,Bundo,Geoff Hutchison,Kim Hanjo,Sang-"
+"hyeon Lee,dlonie, ,Launchpad Contributions:,Avogadro Team,Bundo,Kim Hanjo,"
+"Para,Sang-hyeon Lee,dlonie, ,Launchpad Contributions:,Avogadro Team,Bundo,"
+"Kim Hanjo,Para,Sang-hyeon Lee,dlonie,seokhyun an, ,Launchpad Contributions:,"
+"Avogadro Team,Bundo,Kim Hanjo,Para,Sang-hyeon Lee,dlonie,park gong gu,"
+"seokhyun an"
+
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+",,,,,avogadro-devel@lists.sourceforge.net,,,,,lordmiss@lordmiss.com,,,,"
+"avogadro-devel@lists.sourceforge.net,,lordmiss@lordmiss.com,,,,avogadro-"
+"devel@lists.sourceforge.net,,lordmiss@lordmiss.com,,,,avogadro-devel@lists."
+"sourceforge.net,bundo@bundo.biz,,lordmiss@lordmiss.com,,loniedavid@gmail."
+"com,,,avogadro-devel@lists.sourceforge.net,bundo@bundo.biz,,"
+"lordmiss@lordmiss.com,,loniedavid@gmail.com,,,avogadro-devel@lists."
+"sourceforge.net,bundo@bundo.biz,,lordmiss@lordmiss.com,,loniedavid@gmail."
+"com,,,avogadro-devel@lists.sourceforge.net,bundo@bundo.biz,,"
+"lordmiss@lordmiss.com,,loniedavid@gmail.com,,,avogadro-devel@lists."
+"sourceforge.net,bundo@bundo.biz,,lordmiss@lordmiss.com,,loniedavid@gmail."
+"com,,,avogadro-devel@lists.sourceforge.net,bundo@bundo.biz,,"
+"lordmiss@lordmiss.com,,loniedavid@gmail.com,,,avogadro-devel@lists."
+"sourceforge.net,bundo@bundo.biz,lordmiss@lordmiss.com,,,loniedavid@gmail."
+"com,,,avogadro-devel@lists.sourceforge.net,bundo@bundo.biz,lordmiss@lordmiss."
+"com,,,loniedavid@gmail.com,an6207@gmail.com,,,avogadro-devel@lists."
+"sourceforge.net,bundo@bundo.biz,lordmiss@lordmiss.com,,,loniedavid@gmail."
+"com,,an6207@gmail.com"
+
+#~ msgctxt "%1 is the Git revision number."
+#~ msgid "(Git revision: %1)"
+#~ msgstr "(Git 리비전: %1)"
+
+#~ msgid ""
+#~ "<h3>%1</h3><br/><br/>Application Version: %2<br/><br/>Library Version: "
+#~ "%3<br/><br/>Open Babel Version: %4"
+#~ msgstr ""
+#~ "<h3>%1</h3><br/><br/>프로그램 버전: %2<br/><br/>라이브러리 버전: %3<br/"
+#~ "><br/>오픈 바벨 버전: %4"
+
+#~ msgid "Cut Molecule"
+#~ msgstr "분자 잘라내기"
+
+#~ msgid "Cut Atoms"
+#~ msgstr "원자 절단하기"
+
+#~ msgid "Clear Molecule"
+#~ msgstr "분자 제거"
+
+#~ msgid "Clear Atoms"
+#~ msgstr "원자 제거"
+
+#~ msgid "Messages"
+#~ msgstr "메시지"
+
+#~ msgid "&Minimize"
+#~ msgstr "최소화(&M)"
+
+#~ msgid "Ctrl+M"
+#~ msgstr "Ctrl+M"
+
+#~ msgid "&Zoom"
+#~ msgstr "확대/축소(&Z)"
+
+#~ msgid "Bring All to Front"
+#~ msgstr "모두 앞으로 보내기"
+
+#~ msgid "&Tool Settings..."
+#~ msgstr "&도구 설정"
+
+#~ msgctxt "Tool Settings shortcut"
+#~ msgid "Ctrl+T"
+#~ msgstr "Ctrl+T"
+
+#~ msgid "&Display Settings..."
+#~ msgstr "&디스플레이 설정"
+
+#~ msgctxt "Display Settings shortcut"
+#~ msgid "Ctrl+D"
+#~ msgstr "Ctrl+D"
+
+#~ msgid "Common molecule formats"
+#~ msgstr "표준 분자 형식"
+
+#~ msgid "CML"
+#~ msgstr "CML"
+
+#~ msgid "Computational Chemistry Output"
+#~ msgstr "계산 화학 결과"
+
+#~ msgid "Crystallographic Interchange CIF"
+#~ msgstr "Crystallographic Interchange CIF"
+
+#~ msgid "GAMESS-US Output"
+#~ msgstr "GAMESS-US 출력"
+
+#~ msgid "Gaussian 98/03 Output"
+#~ msgstr "Gaussian 98/03 출력"
+
+#~ msgid "Gaussian Formatted Checkpoint"
+#~ msgstr "가우스 서식있는 체크포인트"
+
+#~ msgid "HyperChem"
+#~ msgstr "HyperChem"
+
+#~ msgid "MDL Mol"
+#~ msgstr "MDL Mol"
+
+#~ msgid "NWChem Output"
+#~ msgstr "NWChem 출력"
+
+#~ msgid "PDB"
+#~ msgstr "PDB"
+
+#~ msgid "Sybyl Mol2"
+#~ msgstr "Sybyl Mol2"
+
+#~ msgid "XYZ"
+#~ msgstr "XYZ"
+
+#~ msgctxt "%1 is a filename"
+#~ msgid "Loading %1..."
+#~ msgstr "%1 불러오는 중"
+
+#~ msgid "Loading %1..."
+#~ msgstr "%1 불러오는 중"
+
+#~ msgid "Reading molecular file failed, file %1."
+#~ msgstr "%1 분자모형 파일을 읽는 데 실패함"
+
+#~ msgid "Reading multi-molecule file. This may take a while..."
+#~ msgstr ""
+#~ "Multi-분자 파일을 읽고 있습니다. 이 작업은 시간이 좀 걸릴 수 있습니다..."
+
+#~ msgid "This file does not contain 3D coordinates."
+#~ msgstr "이 파일은 3차원 좌표가 포함되어 있지 않습니다."
+
+#~ msgid "Do you want Avogadro to build a rough geometry?"
+#~ msgstr "Avogadro에서 대강의 구조를 만들까요?"
+
+#~ msgid ""
+#~ "This file does not contain 3D coordinates.\n"
+#~ "You may not be able to edit or view properly."
+#~ msgstr ""
+#~ "이 파일에는 3D 좌표 정보가 없습니다.\n"
+#~ "편집 또는 수정이 제대로 이루어지지 않을 수 있습니다."
+
+#~ msgid "Select Molecule to View"
+#~ msgstr "보고자 하는 분자 선택"
+
+#~ msgid "Molecule Title"
+#~ msgstr "분자 명칭"
+
+#~ msgid "Atoms: "
+#~ msgstr "원자: "
+
+#~ msgid " Bonds: "
+#~ msgstr " 결합: "
+
+#~ msgid "File Loaded..."
+#~ msgstr "파일 불러옴..."
+
+#~ msgid "Your changes will be lost if you don't save them."
+#~ msgstr "저장하지 않으면 변경 사항을 잃어버리게 됩니다."
+
+#~ msgctxt "Save"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgctxt "Discard"
+#~ msgid "Ctrl+D"
+#~ msgstr "Ctrl+D"
+
+#~ msgid "Save..."
+#~ msgstr "저장..."
+
+#~ msgid "Save"
+#~ msgstr "저장"
+
+#~ msgid "GAMESS Input"
+#~ msgstr "GAMESS 입력"
+
+#~ msgid "Gaussian Cartesian Input"
+#~ msgstr "Gaussian Cartesian 입력"
+
+#~ msgid "Gaussian Z-matrix Input"
+#~ msgstr "가우스 Z-matrix 입력"
+
+#~ msgid "MDL SDfile"
+#~ msgstr "MDL SDfile"
+
+#~ msgid "NWChem Input"
+#~ msgstr "NWChem 입력"
+
+#~ msgid "Save Molecule As"
+#~ msgstr "다른 이름으로 분자 저장"
+
+#~ msgid "Untitled %1"
+#~ msgstr "제목없음 %1"
+
+#~ msgid "Unable to paste molecule."
+#~ msgstr "분자를 붙여넣을 수 없습니다"
+
+#~ msgid "Paste failed (format unavailable)."
+#~ msgstr "붙여넣기 실패 (사용불가능한 포맷)"
+
+#~ msgid "Copy failed (mdl unavailable)."
+#~ msgstr "복사 실패 (mdl 사용불가능)"
+
+#~ msgid "View %1"
+#~ msgstr "%1 보기"
+
+#~ msgctxt "View number (from 1 on)"
+#~ msgid "View %1"
+#~ msgstr "%1 보기"
+
+#~ msgid "Avogadro: Detached View"
+#~ msgstr "Avogadro: 분리된 보기"
+
+#~ msgid "Normal Size"
+#~ msgstr "보통 크기"
+
+#~ msgid "Full Screen"
+#~ msgstr "전체 화면"
+
+#~ msgid "Ctrl+Backspace"
+#~ msgstr "Ctrl+Backspace"
+
+#~ msgctxt "[*] indicates that this is a modified view...."
+#~ msgid "[*]Avogadro"
+#~ msgstr "[*]Avogadro"
+
+#~ msgctxt "Window title: %1 is file name, %2 is Avogadro"
+#~ msgid "%1[*] - %2"
+#~ msgstr "%1[*] - %2"
+
+#~ msgid "Add"
+#~ msgstr "추가"
+
+#~ msgid "Duplicate"
+#~ msgstr "복사"
+
+#~ msgid "Remove"
+#~ msgstr "삭제"
+
+#~ msgid "No tools or engines loaded."
+#~ msgstr "도구나 엔진을 불러올 수 없습니다:"
+
+#~ msgid "No engines loaded."
+#~ msgstr "엔진을 불러오지 못했습니다"
+
+#~ msgid "No tools loaded."
+#~ msgstr "도구를 불러오지 못했습니다"
+
+#~ msgid ""
+#~ " It is unlikely this application will function correctly. Please correct "
+#~ "this error."
+#~ msgstr ""
+#~ " 응용프로그램이 올바르게 작동하지 않는 것 같습니다. 오류를 수정하십시오."
+
+#~ msgid "Objects"
+#~ msgstr "개체"
+
+#~ msgid "Colors"
+#~ msgstr "색상"
+
+#~ msgid " copy"
+#~ msgstr " 복사"
+
+#~ msgid "Name: "
+#~ msgstr "이름: "
+
+#~ msgid "Identifier: "
+#~ msgstr "ID: "
+
+#~ msgid "Description:\n"
+#~ msgstr "설명:\n"
+
+#~ msgid "Atoms"
+#~ msgstr "원자"
+
+#~ msgid "Bonds"
+#~ msgstr "결합"
+
+#~ msgid "Residues"
+#~ msgstr "잔류물"
+
+#~ msgid "bond %1"
+#~ msgstr "결합 %1"
+
+#~ msgid "Label"
+#~ msgstr "라벨"
+
+#~ msgid "User Selections"
+#~ msgstr "사용자 선택"
+
+#~ msgid "Error"
+#~ msgstr "오류"
+
+#~ msgid "only labels can have sub items"
+#~ msgstr "오직 라벨만 하위 항목을 가질 수 있습니다"
+
+#~ msgid "Item"
+#~ msgstr "항목"
+
+#~ msgid "Index"
+#~ msgstr "색인"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Low"
+#~ msgstr "낮음"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Medium"
+#~ msgstr "중간"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "High"
+#~ msgstr "높음"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Undefined"
+#~ msgstr "정의되지 않음"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "None"
+#~ msgstr "없음"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Some"
+#~ msgstr "적음"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Mid"
+#~ msgstr "중간"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Lots"
+#~ msgstr "많음"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Undefined"
+#~ msgstr "정의되지 않음"
+
+#~ msgid "Network Update Check Failed"
+#~ msgstr "네트워크 업데이트 확인 실패"
+
+#~ msgid "Network timeout or other error."
+#~ msgstr "네트워크 시간초과 혹은 다른 오류발생"
+
+#~ msgctxt "Indicates an updated Avogadro version is available"
+#~ msgid "Updated Version of Avogadro Available"
+#~ msgstr "Avogrdro 업데이트 버전을 사용할 수 있습니다"
+
+#~ msgid "Add Display Type"
+#~ msgstr "표시 형식 추가하기"
+
+#~ msgid "Type:"
+#~ msgstr "형식:"
+
+#~ msgid "Name:"
+#~ msgstr "이름:"
+
+#~ msgid "Description:"
+#~ msgstr "설명:"
+
+#~ msgid "Form"
+#~ msgstr "양식"
+
+#~ msgid "Color by:"
+#~ msgstr "색상:"
+
+#~ msgid "Add Selected Primitives"
+#~ msgstr "선택된 기본요소를 추가"
+
+#~ msgid "Remove Selected Primitives"
+#~ msgstr "선택된 기본요소를 제거"
+
+#~ msgid "Add All Primitives"
+#~ msgstr "모든 기본요소 추가"
+
+#~ msgid "Display Only Selected Primitives"
+#~ msgstr "선택된 기본요소만 표시"
+
+#~ msgid "Assign to Selection"
+#~ msgstr "선택요소에 할당"
+
+#~ msgid "Filename:"
+#~ msgstr "파일 이름:"
+
+#~ msgid "Select..."
+#~ msgstr "선택..."
+
+#~ msgid "Format:"
+#~ msgstr "형식:"
+
+#~ msgid "Automatically detect from extension"
+#~ msgstr "확장자로부터 자동적으로 탐색"
+
+#~ msgid "Perceive bonding"
+#~ msgstr "결합 확인"
+
+#~ msgid "Perceive bond orders"
+#~ msgstr "결합 차수 확인"
+
+#~ msgid "Coordinates are in Ångstroms"
+#~ msgstr "좌표는 Angstrom에 있음"
+
+#~ msgid "Toolbars"
+#~ msgstr "도구 모음"
+
+#~ msgid "Copy As"
+#~ msgstr "다음으로 복사"
+
+#~ msgid "E&xtensions"
+#~ msgstr "확장기능"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "주 도구 모음"
+
+#~ msgid "Project Tree"
+#~ msgstr "프로젝트 트리"
+
+#~ msgid "&Paste"
+#~ msgstr "붙이기(&P)"
+
+#~ msgid "Plugins"
+#~ msgstr "플러그인"
+
+#~ msgid "Details"
+#~ msgstr "자세히"
+
+#~ msgid "Tree Items"
+#~ msgstr "트리 항목"
+
+#~ msgid "Type"
+#~ msgstr "형식"
+
+#~ msgid "New Item"
+#~ msgstr "새로운 항목"
+
+#~ msgid "&New Item"
+#~ msgstr "새 항목(&N)"
+
+#~ msgid "New Subitem"
+#~ msgstr "새 하위항목"
+
+#~ msgid "New &Subitem"
+#~ msgstr "새로운 하위 항목(&S)"
+
+#~ msgid "Delete Item"
+#~ msgstr "항목 삭제"
+
+#~ msgid "&Delete Item"
+#~ msgstr "항목 삭제(&D)"
+
+#~ msgid "Move Item Left (before Parent Item)"
+#~ msgstr "항목을 왼쪽으로 이동 (근원 항목 이전)"
+
+#~ msgid "L"
+#~ msgstr "L"
+
+#~ msgid "Move Item Right (as a First Subitem of the Next Sibling Item)"
+#~ msgstr "오른쪽으로 항목 이동 (다음의 유사항목의 첫번째 하위항목으로써)"
+
+#~ msgid "R"
+#~ msgstr "R"
+
+#~ msgid "Move Item Up"
+#~ msgstr "위로 올리기"
+
+#~ msgid "U"
+#~ msgstr "U"
+
+#~ msgid "Move Item Down"
+#~ msgstr "아래로 내리기"
+
+#~ msgid "D"
+#~ msgstr "D"
+
+#~ msgid "Alias"
+#~ msgstr "별명"
+
+#~ msgid "Settings..."
+#~ msgstr "설정..."
+
+#~ msgid "General"
+#~ msgstr "일반 사항"
+
+#~ msgid "Quality:"
+#~ msgstr "품질:"
+
+#~ msgid "Set the global rendering quality."
+#~ msgstr "구형 렌더링 품질 설정하기"
+
+#~ msgid "Fog:"
+#~ msgstr "안개:"

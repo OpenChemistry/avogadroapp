@@ -1,0 +1,1339 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2018-04-26 13:24-0400\n"
+"PO-Revision-Date: 2016-06-10 06:19+0000\n"
+"Last-Translator: Geoff Hutchison <Unknown>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
+"X-Generator: Launchpad (build 18609)\n"
+
+#: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
+msgid "No molecule set in BackgroundFileFormat!"
+msgstr ""
+
+#: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
+msgid "No Io::FileFormat set in BackgroundFileFormat!"
+msgstr ""
+
+#: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
+msgid "No file name set in BackgroundFileFormat!"
+msgstr ""
+
+#: mainwindow.cpp:275
+msgid "Ready..."
+msgstr ""
+
+#: mainwindow.cpp:300
+#, fuzzy
+msgid "Tool"
+msgstr "Outils"
+
+#: mainwindow.cpp:304
+msgid "Display Types"
+msgstr "Types d'affichage"
+
+#: mainwindow.cpp:313
+msgid "View Configuration"
+msgstr ""
+
+#: mainwindow.cpp:319
+#, fuzzy
+msgid "Molecules"
+msgstr "Molécule"
+
+#: mainwindow.cpp:467
+#, fuzzy
+msgid "Untitled"
+msgstr "sans_titre"
+
+#: mainwindow.cpp:472
+#, fuzzy, qt-format
+msgid "%1%2 - Avogadro %3"
+msgstr "Avogadro"
+
+#: mainwindow.cpp:514 mainwindow.cpp:1028
+msgid "Chemical Markup Language"
+msgstr ""
+
+#: mainwindow.cpp:515 mainwindow.cpp:1029
+msgid "Chemical JSON"
+msgstr ""
+
+#: mainwindow.cpp:521
+msgid "Open chemical file"
+msgstr ""
+
+#: mainwindow.cpp:539 mainwindow.cpp:560 mainwindow.cpp:936 mainwindow.cpp:1714
+#, fuzzy
+msgid "Cannot open file"
+msgstr "Impossible d'enregistrer le fichier %1."
+
+#: mainwindow.cpp:540 mainwindow.cpp:561 mainwindow.cpp:937
+#, fuzzy, qt-format
+msgid "Can't open supplied file %1"
+msgstr "Impossible d'enregistrer le fichier %1."
+
+#: mainwindow.cpp:550
+#, fuzzy
+msgid "Open Molecule"
+msgstr "Molécule"
+
+#: mainwindow.cpp:593
+#, fuzzy
+msgid "Reading File"
+msgstr "Ouvrir un fichier"
+
+#: mainwindow.cpp:595
+#, qt-format
+msgid ""
+"Opening file '%1'\n"
+"with '%2'"
+msgstr ""
+
+#: mainwindow.cpp:624
+#, qt-format
+msgid "Molecule loaded (%1 atoms, %2 bonds)"
+msgstr ""
+
+#: mainwindow.cpp:629 mainwindow.cpp:663
+#, fuzzy
+msgid "File error"
+msgstr "Fichier : "
+
+#: mainwindow.cpp:630
+#, qt-format
+msgid ""
+"Error while reading file '%1':\n"
+"%2"
+msgstr ""
+
+#: mainwindow.cpp:656
+#, qt-format
+msgid "File written: %1"
+msgstr ""
+
+#: mainwindow.cpp:664
+#, qt-format
+msgid ""
+"Error while writing file '%1':\n"
+"%2"
+msgstr ""
+
+#: mainwindow.cpp:705
+msgid "Error: Failed to initialize OpenGL context"
+msgstr ""
+
+#: mainwindow.cpp:706
+#, qt-format
+msgid ""
+"OpenGL 2.0 or greater required, exiting.\n"
+"\n"
+"%1"
+msgstr ""
+
+#: mainwindow.cpp:707
+msgid "Unknown error"
+msgstr ""
+
+#: mainwindow.cpp:784 mainwindow.cpp:785
+msgid "Navigate tool"
+msgstr ""
+
+#: mainwindow.cpp:857
+msgid "Common image formats"
+msgstr "Formats usuels d'images"
+
+#: mainwindow.cpp:859
+msgid "All files"
+msgstr "Tous les fichiers"
+
+#: mainwindow.cpp:859
+msgid "BMP"
+msgstr "BMP"
+
+#: mainwindow.cpp:860
+msgid "PNG"
+msgstr "PNG"
+
+#: mainwindow.cpp:860
+msgid "JPEG"
+msgstr "JPEG"
+
+#: mainwindow.cpp:869
+msgid "Export Bitmap Graphics"
+msgstr "Exporter image bitmap"
+
+#. i18n: file: mainwindow.ui:14
+#. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
+#: mainwindow.cpp:908 mainwindow.cpp:1002 mainwindow.cpp:1628:33
+msgid "Avogadro"
+msgstr "Avogadro"
+
+#: mainwindow.cpp:909
+#, qt-format
+msgid "Cannot save file %1."
+msgstr "Impossible d'enregistrer le fichier %1."
+
+#: mainwindow.cpp:932 mainwindow.cpp:1710
+msgid "Select file reader"
+msgstr ""
+
+#: mainwindow.cpp:1003
+msgid ""
+"This file was imported from a non-standard format which may not be able to "
+"write all of the information in the molecule.\n"
+"\n"
+"Would you like to export to the current format, or save in a standard format?"
+msgstr ""
+
+#: mainwindow.cpp:1010
+msgid "Export"
+msgstr "Exporter"
+
+#: mainwindow.cpp:1035
+msgid "Save chemical file"
+msgstr ""
+
+#: mainwindow.cpp:1063
+#, fuzzy
+msgid "Export Molecule"
+msgstr "Importer un fichier de molécule"
+
+#: mainwindow.cpp:1115
+msgid "Writing File"
+msgstr ""
+
+#: mainwindow.cpp:1117
+#, qt-format
+msgid ""
+"Writing file '%1'\n"
+"with '%2'"
+msgstr ""
+
+#: mainwindow.cpp:1225
+#, fuzzy, qt-format
+msgid "&Undo %1"
+msgstr "&Annuler"
+
+#. i18n: file: mainwindow.ui:211
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1228 mainwindow.cpp:1451:126
+msgid "&Undo"
+msgstr "&Annuler"
+
+#: mainwindow.cpp:1233
+#, fuzzy, qt-format
+msgid "&Redo %1"
+msgstr "&Rétablir"
+
+#. i18n: file: mainwindow.ui:223
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1236 mainwindow.cpp:1456:132
+msgid "&Redo"
+msgstr "&Rétablir"
+
+#: mainwindow.cpp:1333
+#, fuzzy
+msgid "&Testing"
+msgstr "Paramètres"
+
+#: mainwindow.cpp:1335
+#, fuzzy
+msgid "Record test..."
+msgstr "Enregistrer un test..."
+
+#: mainwindow.cpp:1338
+#, fuzzy
+msgid "Play test..."
+msgstr "Visualiser un test..."
+
+#. i18n: file: mainwindow.ui:121
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:129
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1354:75 rc.cpp:81
+msgid "&New"
+msgstr "&Nouveau"
+
+#. i18n: file: mainwindow.ui:82
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1363:51
+#, fuzzy
+msgid "&Open..."
+msgstr "&Ouvrir"
+
+#. i18n: file: mainwindow.ui:147
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:155
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1379:93 rc.cpp:99
+msgid "&Save"
+msgstr "&Enregistrer"
+
+#. i18n: file: mainwindow.ui:160
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1388:102
+msgid "Save &As..."
+msgstr "Enregistrer &sous..."
+
+#. i18n: file: mainwindow.ui:504
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1407:264
+#, fuzzy
+msgid "&Export"
+msgstr "Exporter"
+
+#: mainwindow.cpp:1408
+#, fuzzy
+msgid "&Molecule..."
+msgstr "Molécule"
+
+#. i18n: file: mainwindow.ui:173
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1416:111
+msgid "&Graphics..."
+msgstr "&Graphiques..."
+
+#. i18n: file: mainwindow.ui:95
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:106
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1424:60 rc.cpp:66
+msgid "&Quit"
+msgstr "&Quitter"
+
+#: mainwindow.cpp:1444
+msgid "No recent files"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:59
+#. i18n: ectx: property (title), widget (QMenu, menuEdit)
+#: mainwindow.cpp:1450 menubuilder.cpp:87:45
+msgid "&Edit"
+msgstr "&Éditer"
+
+#. i18n: file: mainwindow.ui:54
+#. i18n: ectx: property (title), widget (QMenu, menuView)
+#: mainwindow.cpp:1470 menubuilder.cpp:87:42
+msgid "&View"
+msgstr "&Vue"
+
+#: mainwindow.cpp:1471
+#, fuzzy
+msgid "Set background color..."
+msgstr "&Couleur d'arrière-plan..."
+
+#: mainwindow.cpp:1475
+msgid "Projection"
+msgstr "Projection"
+
+#. i18n: file: mainwindow.ui:463
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1476:240
+msgid "Perspective"
+msgstr "Perspective"
+
+#. i18n: file: mainwindow.ui:471
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1483:243
+msgid "Orthographic"
+msgstr "Orthographique"
+
+#: mainwindow.cpp:1497
+#, fuzzy
+msgid "&Extensions"
+msgstr "Extensions"
+
+#: mainwindow.cpp:1504 menubuilder.cpp:91
+msgid "&Help"
+msgstr "&Aide"
+
+#: mainwindow.cpp:1617
+#, qt-format
+msgid "All supported formats (%1);;All files (*);;"
+msgstr ""
+
+#: mainwindow.cpp:1629
+#, fuzzy
+msgid ""
+"Do you want to save the changes you made in the document?\n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr "Voulez-vous enregistrer les modifications apportées au document ?"
+
+#: mainwindow.cpp:1694
+#, qt-format
+msgid "Error while loading FileFormat with id '%1'."
+msgstr ""
+
+#: mainwindow.cpp:1715
+#, qt-format
+msgid "Avogadro timed out and doesn't know how to open '%1'."
+msgstr ""
+
+#: mainwindow.cpp:1725
+#, fuzzy
+msgid "Cannot open files"
+msgstr "Impossible d'enregistrer le fichier %1."
+
+#: mainwindow.cpp:1726
+#, qt-format
+msgid "Avogadro timed out and cannot open '%1'."
+msgstr ""
+
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: menubuilder.cpp:87:36
+msgid "&File"
+msgstr "&Fichier"
+
+#. i18n: file: mainwindow.ui:49
+#. i18n: ectx: property (title), widget (QMenu, menuBuild)
+#: menubuilder.cpp:87:39
+msgid "&Build"
+msgstr "&Construction"
+
+#. i18n: file: mainwindow.ui:71
+#. i18n: ectx: property (title), widget (QMenu, menuSelect)
+#: menubuilder.cpp:88:48
+msgid "&Select"
+msgstr "&Sélectionner"
+
+#: menubuilder.cpp:91
+msgid "Se&ttings"
+msgstr "Pa&ramètres"
+
+#: menubuilder.cpp:91
+#, fuzzy
+msgid "&Window"
+msgstr "Fenêtre"
+
+#: rpclistener.cpp:123
+msgid "Error starting RPC server:"
+msgstr ""
+
+#: rpclistener.cpp:125
+msgid ""
+"An error occurred while starting Avogadro's RPC listener. This may be happen "
+"for a\n"
+"number of reasons:\n"
+"\tA previous instance of Avogadro may have crashed.\n"
+"\tA running Avogadro instance was too busy to respond.\n"
+"\n"
+"If no other Avogadro instance is running on this machine, it is safe to "
+"replace the dead\n"
+"server. Otherwise, this instance of avogadro may be started without RPC "
+"capabilities\n"
+"(this will prevent RPC enabled applications from communicating with "
+"Avogadro)."
+msgstr ""
+
+#: rpclistener.cpp:135
+msgid "Replace the dead server with a new instance."
+msgstr ""
+
+#: rpclistener.cpp:136
+msgid "Start without RPC capabilities."
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:62
+#. i18n: ectx: property (text), widget (QLabel, versionLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
+"\">Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:75
+#. i18n: ectx: property (text), widget (QLabel, version)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:117
+#. i18n: ectx: property (text), widget (QLabel, libs)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">AvogadroLibs Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:124
+#. i18n: ectx: property (text), widget (QLabel, libsVersion)
+#. i18n: file: aboutdialog.ui:171
+#. i18n: ectx: property (text), widget (QLabel, qtVersion)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:164
+#. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
+"Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:224
+#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
+"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
+"\">BSD-3-Clause</span></a></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:261
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+msgid ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"span></a></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:290
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:323
+#. i18n: ectx: property (text), widget (QPushButton, OK)
+msgid "OK"
+msgstr "Valider"
+
+#. i18n: file: mainwindow.ui:85
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+O"
+msgstr "Ctrl+O"
+
+#. i18n: file: mainwindow.ui:90
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Open"
+msgstr "&Ouvrir"
+
+#. i18n: file: mainwindow.ui:98
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Q"
+msgstr "Ctrl+Q"
+
+#. i18n: file: mainwindow.ui:111
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Recent"
+msgstr "Récemment ouvert"
+
+#. i18n: file: mainwindow.ui:116
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Clear Recent"
+msgstr "&Effacer la liste des fichiers récents"
+
+#. i18n: file: mainwindow.ui:124
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+N"
+msgstr "Ctrl+N"
+
+#. i18n: file: mainwindow.ui:134
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:142
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Close"
+msgstr "&Fermer"
+
+#. i18n: file: mainwindow.ui:137
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+W"
+msgstr "Ctrl+W"
+
+#. i18n: file: mainwindow.ui:150
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+S"
+msgstr "Ctrl+S"
+
+#. i18n: file: mainwindow.ui:163
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+S"
+msgstr "Ctrl+Shift+S"
+
+#. i18n: file: mainwindow.ui:168
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Revert To Saved"
+msgstr "Revenir à la version enregistrée"
+
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Full Screen Mode"
+msgstr "&Plein écran"
+
+#. i18n: file: mainwindow.ui:185
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Esc"
+msgstr "Échap"
+
+#. i18n: file: mainwindow.ui:194
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Set &Background Color..."
+msgstr "&Couleur d'arrière-plan..."
+
+#. i18n: file: mainwindow.ui:199
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&About"
+msgstr "&À propos"
+
+#. i18n: file: mainwindow.ui:214
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Z"
+msgstr "Ctrl+Z"
+
+#. i18n: file: mainwindow.ui:226
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+Z"
+msgstr "Ctrl+Shift+Z"
+
+#. i18n: file: mainwindow.ui:235
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "New View"
+msgstr "Nouvelle vue"
+
+#. i18n: file: mainwindow.ui:247
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Close View"
+msgstr "Fermer la vue"
+
+#. i18n: file: mainwindow.ui:256
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Center"
+msgstr "Centrer"
+
+#. i18n: file: mainwindow.ui:265
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Align View To Axes"
+msgstr "Aligner la vue selon les axes"
+
+#. i18n: file: mainwindow.ui:270
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Paste"
+msgstr "Coller"
+
+#. i18n: file: mainwindow.ui:273
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+V"
+msgstr "Ctrl+V"
+
+#. i18n: file: mainwindow.ui:278
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Copy"
+msgstr "Copier"
+
+#. i18n: file: mainwindow.ui:281
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+C"
+msgstr "Ctrl+C"
+
+#. i18n: file: mainwindow.ui:286
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Cut"
+msgstr "Couper"
+
+#. i18n: file: mainwindow.ui:289
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+X"
+msgstr "Ctrl+X"
+
+#. i18n: file: mainwindow.ui:294
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Clear"
+msgstr "Effacer"
+
+#. i18n: file: mainwindow.ui:299
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Select All"
+msgstr "Tout sélectionner"
+
+#. i18n: file: mainwindow.ui:302
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+A"
+msgstr "Ctrl+A"
+
+#. i18n: file: mainwindow.ui:307
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Select None"
+msgstr "Ne rien sélectionner"
+
+#. i18n: file: mainwindow.ui:310
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+A"
+msgstr "Ctrl+Shift+A"
+
+#. i18n: file: mainwindow.ui:319
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Configure Avogadro..."
+msgstr "Configurer Avogadro..."
+
+#. i18n: file: mainwindow.ui:330
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Tutorials"
+msgstr "Tutoriels"
+
+#. i18n: file: mainwindow.ui:339
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Duplicate View"
+msgstr "Dupliquer la vue"
+
+#. i18n: file: mainwindow.ui:347
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Display Axes"
+msgstr "Afficher les axes"
+
+#. i18n: file: mainwindow.ui:355
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Debug Information"
+msgstr "Informations de débogage"
+
+#. i18n: file: mainwindow.ui:363
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Avogadro Help"
+msgstr "Aide d'Avogadro"
+
+#. i18n: file: mainwindow.ui:368
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Release Notes"
+msgstr "Notes sur cette version"
+
+#. i18n: file: mainwindow.ui:373
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Report a Bug"
+msgstr "Signaler un bogue"
+
+#. i18n: file: mainwindow.ui:378
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "FAQ"
+msgstr "Questions fréquentes"
+
+#. i18n: file: mainwindow.ui:383
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Avogadro Website"
+msgstr "Site web d'Avogadro"
+
+#. i18n: file: mainwindow.ui:392
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Plugin Manager..."
+msgstr "Gestionnaire de greffons..."
+
+#. i18n: file: mainwindow.ui:401
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Project Tree Editor..."
+msgstr "Éditeur d'arborescence de projet..."
+
+#. i18n: file: mainwindow.ui:410
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Detach View"
+msgstr "Détacher une vue"
+
+#. i18n: file: mainwindow.ui:415
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Molecule File..."
+msgstr "Fichier de molécule..."
+
+#. i18n: file: mainwindow.ui:426
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Use Quick Render"
+msgstr "Utiliser un rendu rapide"
+
+#. i18n: file: mainwindow.ui:431
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Vector Graphics..."
+msgstr "&Graphiques vectoriels..."
+
+#. i18n: file: mainwindow.ui:439
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Display Unit Cell Axes"
+msgstr "Afficher les axes de la maille conventionnelle"
+
+#. i18n: file: mainwindow.ui:447
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "All Molecules in File..."
+msgstr "Toutes les molécules du fichier..."
+
+#. i18n: file: mainwindow.ui:452
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Reset Display Types"
+msgstr "Réinitialiser les types d'affichage"
+
+#. i18n: file: mainwindow.ui:476
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "SMILES"
+msgstr "SMILES"
+
+#. i18n: file: mainwindow.ui:481
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "InChI"
+msgstr "InChi"
+
+#. i18n: file: mainwindow.ui:484
+#. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
+msgid "IUPAC InChI identifier"
+msgstr "Identifiant InChi IUPAC"
+
+#. i18n: file: mainwindow.ui:489
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Discussion Forum"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:494
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
+msgid "Open Recent"
+msgstr "&Récemment ouvert"
+
+#. i18n: file: mainwindow.ui:499
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
+msgid "&Import"
+msgstr "Importer"
+
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+",Launchpad Contributions:,Geoff Hutchison,Laurent Peuch,Louis Ricard,Maijin,"
+"Nizar Kerkeni, ,Launchpad Contributions:,Benoit Jacob,Geoff Hutchison,"
+"Laurent Peuch,Louis Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,Launchpad "
+"Contributions:,Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis Ricard,"
+"Maijin,Mathieu Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,Benoit Jacob,"
+"Geoff Hutchison,Laurent Peuch,Louis Ricard,Maijin,Mathieu Pasquet, ,"
+"Launchpad Contributions:,Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis "
+"Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,"
+"Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis Ricard,Maijin,Mathieu "
+"Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,Benoit Jacob,Geoff "
+"Hutchison,Laurent Peuch,Louis Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,"
+"Launchpad Contributions:,Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis "
+"Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,"
+"Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis Ricard,Maijin,Mathieu "
+"Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,Benoit Jacob,Geoff "
+"Hutchison,Laurent Peuch,Louis Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,"
+"Launchpad Contributions:,Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis "
+"Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,"
+"Benoit Jacob,Geoff Hutchison,Louis Ricard,Nizar Kerkeni,Pierre Slamich, ,"
+"Launchpad Contributions:,Benoit Jacob,Geoff Hutchison,Jean-Marc,Louis Ricard,"
+"Nizar Kerkeni,Pierre Slamich, ,Launchpad Contributions:,Benoit Jacob,Geoff "
+"Hutchison,Jean-Marc,Louis Ricard,Nizar Kerkeni,Pierre Slamich"
+
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+"benoitjacob@users.sourceforge.net,louis.ricard@polytechnique.fr,,,,"
+"psycojoker@gmail.com,louis.ricard@polytechnique.edu,,nizar.kerkeni@gmail."
+"com,,,jacob.benoit.1@gmail.com,,psycojoker@gmail.com,louis."
+"ricard@polytechnique.edu,,,nizar.kerkeni@gmail.com,,,jacob.benoit.1@gmail."
+"com,,psycojoker@gmail.com,louis.ricard@polytechnique.edu,,,nizar."
+"kerkeni@gmail.com,,,jacob.benoit.1@gmail.com,,psycojoker@gmail.com,louis."
+"ricard@polytechnique.edu,,,,,jacob.benoit.1@gmail.com,,psycojoker@gmail.com,"
+"louis.ricard@polytechnique.edu,,,nizarus@nizarus.org,,,jacob.benoit.1@gmail."
+"com,,psycojoker@gmail.com,louis.ricard@polytechnique.edu,,,nizarus@nizarus."
+"org,,,jacob.benoit.1@gmail.com,,psycojoker@gmail.com,louis."
+"ricard@polytechnique.edu,,,nizarus@nizarus.org,,,jacob.benoit.1@gmail.com,,"
+"psycojoker@gmail.com,louis.ricard@polytechnique.edu,,,nizarus@nizarus.org,,,"
+"jacob.benoit.1@gmail.com,,psycojoker@gmail.com,louis.ricard@polytechnique."
+"edu,,,nizarus@nizarus.org,,,jacob.benoit.1@gmail.com,,psycojoker@gmail.com,"
+"louis.ricard@polytechnique.edu,,,nizarus@nizarus.org,,,jacob.benoit.1@gmail."
+"com,,psycojoker@gmail.com,louis.ricard@polytechnique.edu,,,nizarus@nizarus."
+"org,,,jacob.benoit.1@gmail.com,,louis.ricard@polytechnique.edu,"
+"nizarus@nizarus.tn,pierre.slamich@gmail.com,,,jacob.benoit.1@gmail.com,,,"
+"louis.ricard@polytechnique.edu,nizarus@nizarus.tn,pierre.slamich@gmail.com,,,"
+"jacob.benoit.1@gmail.com,,,louis.ricard@polytechnique.edu,nizarus@nizarus.tn,"
+"pierre.slamich@gmail.com"
+
+#~ msgctxt "%1 is the Git revision number."
+#~ msgid "(Git revision: %1)"
+#~ msgstr "(Révision Git : %1)"
+
+#~ msgid ""
+#~ "<h3>%1</h3><br/><br/>Application Version: %2<br/><br/>Library Version: "
+#~ "%3<br/><br/>Open Babel Version: %4"
+#~ msgstr ""
+#~ "<h3>%1</h3><br/><br/>Version de l'application : %2<br/><br/>Version de la "
+#~ "librairie : %3<br/><br/>Version d'Open Babel : %4"
+
+#~ msgid ""
+#~ "<br/><br/>Qt Version: %1<br/><br/>For more information check the <a href="
+#~ "\"http://avogadro.cc/\">Avogadro homepage</a>.<br/><br/>The program is "
+#~ "provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF "
+#~ "DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.<br/>"
+#~ msgstr ""
+#~ "<br/><br/>Version de QT : %1<br/><br/>Pour plus d'information, visitez le "
+#~ "<a href=\"http://avogadro.cc/\">site d'Avogadro</a>.<br/><br/>Le "
+#~ "programme est fourni EN L'ÉTAT, sans AUCUNE SORTE DE GARANTIE, NI "
+#~ "EXPLICITE,  NI IMPLICITE, Y COMPRIS LES GARANTIES DE CONCEPTION, DE "
+#~ "COMMERCIALISATION OU D'ADAPTATION DANS UN BUT PARTICULIER.<br/>"
+
+#~ msgid "Cut Molecule"
+#~ msgstr "Couper la molécule"
+
+#~ msgid "Cut Atoms"
+#~ msgstr "Couper les atomes"
+
+#~ msgid "Clear Molecule"
+#~ msgstr "Effacer la molécule"
+
+#~ msgid "Clear Atoms"
+#~ msgstr "Effacer les atomes"
+
+#~ msgid "Messages"
+#~ msgstr "Messages"
+
+#~ msgid "&Minimize"
+#~ msgstr "&Minimiser"
+
+#~ msgid "Ctrl+M"
+#~ msgstr "Ctrl+M"
+
+#~ msgid "&Zoom"
+#~ msgstr "&Zoom"
+
+#~ msgid "Bring All to Front"
+#~ msgstr "Tout ramener au premier plan"
+
+#~ msgid "&Tool Settings..."
+#~ msgstr "&Paramètres des outils..."
+
+#~ msgctxt "Tool Settings shortcut"
+#~ msgid "Ctrl+T"
+#~ msgstr "Ctrl+T"
+
+#~ msgid "&Display Settings..."
+#~ msgstr "&Paramètres d'affichage..."
+
+#~ msgctxt "Display Settings shortcut"
+#~ msgid "Ctrl+D"
+#~ msgstr "Ctrl+D"
+
+#~ msgid "Common molecule formats"
+#~ msgstr "Formats usuels"
+
+#~ msgid "CML"
+#~ msgstr "CML"
+
+#~ msgid "Computational Chemistry Output"
+#~ msgstr "Sortie de logiciel de calcul de chimie"
+
+#~ msgid "Crystallographic Interchange CIF"
+#~ msgstr "Échange cristallographique CIF"
+
+#~ msgid "GAMESS-US Output"
+#~ msgstr "Sortie GAMESS-US"
+
+#~ msgid "Gaussian 98/03 Output"
+#~ msgstr "Sortie Gaussian 98-03"
+
+#~ msgid "Gaussian Formatted Checkpoint"
+#~ msgstr "Checkpoint formaté Gaussian"
+
+#~ msgid "HyperChem"
+#~ msgstr "HyperChem"
+
+#~ msgid "MDL Mol"
+#~ msgstr "MDL Mol"
+
+#~ msgid "NWChem Output"
+#~ msgstr "Sortie NWChem"
+
+#~ msgid "PDB"
+#~ msgstr "PDB"
+
+#~ msgid "Sybyl Mol2"
+#~ msgstr "Sybyl Mol2"
+
+#~ msgid "XYZ"
+#~ msgstr "XYZ"
+
+#~ msgctxt "%1 is a filename"
+#~ msgid "Loading %1..."
+#~ msgstr "Lecture de %1..."
+
+# %1 is a filename
+#~ msgid "Loading %1..."
+#~ msgstr "Chargement de %1..."
+
+#~ msgid "Reading molecular file failed, file %1."
+#~ msgstr "La lecture du fichier moléculaire a échoué, fichier %1."
+
+#~ msgid "Reading multi-molecule file. This may take a while..."
+#~ msgstr ""
+#~ "Lecture d'un fichier de multi-molécules. L'opération pourra prendre un "
+#~ "peu de temps..."
+
+#~ msgid "This file does not contain 3D coordinates."
+#~ msgstr "Ce fichier ne contient pas de coordonnées 3D"
+
+#~ msgid "Do you want Avogadro to build a rough geometry?"
+#~ msgstr "Souhaitez-vous qu'Avogadro construise une géométrie grossière ?"
+
+#~ msgid ""
+#~ "This file does not contain 3D coordinates.\n"
+#~ "You may not be able to edit or view properly."
+#~ msgstr ""
+#~ "Ce fichier ne contient pas de coordonnées 3D.\n"
+#~ "Vous ne pourrez peu être pas l'éditer ou le visualiser correctement."
+
+#~ msgid "Select Molecule to View"
+#~ msgstr "Sélectionnez la molécule à visualiser"
+
+#~ msgid "Molecule Title"
+#~ msgstr "Titre de la molécule"
+
+#~ msgid "Atoms: "
+#~ msgstr "Atomes : "
+
+#~ msgid " Bonds: "
+#~ msgstr " Liaisons : "
+
+#~ msgid "File Loaded..."
+#~ msgstr "Fichier chargé..."
+
+#~ msgid "Your changes will be lost if you don't save them."
+#~ msgstr "Vos modifications seront perdues si vous ne les enregistrez pas."
+
+#~ msgctxt "Save"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgctxt "Discard"
+#~ msgid "Ctrl+D"
+#~ msgstr "Ctrl+D"
+
+#~ msgid "Save..."
+#~ msgstr "Enregistrer..."
+
+#~ msgid "Save"
+#~ msgstr "Enregistrer"
+
+#~ msgid "GAMESS Input"
+#~ msgstr "Entrée GAMESS"
+
+#~ msgid "Gaussian Cartesian Input"
+#~ msgstr "Coordonnées cartésiennes Gaussian"
+
+#~ msgid "Gaussian Z-matrix Input"
+#~ msgstr "Matrice Z Gaussian"
+
+#~ msgid "MDL SDfile"
+#~ msgstr "MDL SDfile"
+
+#~ msgid "NWChem Input"
+#~ msgstr "Entrée NWChem"
+
+#~ msgid "Save Molecule As"
+#~ msgstr "Enregistrer la molécule sous"
+
+#~ msgid "Untitled %1"
+#~ msgstr "Sans titre %1"
+
+#~ msgid "Unable to paste molecule."
+#~ msgstr "Impossible de coller la molécule."
+
+#~ msgid "Paste failed (format unavailable)."
+#~ msgstr "Le collage a échoué (format non disponible)."
+
+#~ msgid "Copy failed (format unavailable)."
+#~ msgstr "Échec de la copie (format non disponible)"
+
+#~ msgid "Copy failed (mdl unavailable)."
+#~ msgstr "La copie a échoué (mdl non disponible)."
+
+#~ msgid "View %1"
+#~ msgstr "Vue %1"
+
+#~ msgctxt "View number (from 1 on)"
+#~ msgid "View %1"
+#~ msgstr "Vue %1"
+
+#~ msgid "Avogadro: Detached View"
+#~ msgstr "Avogadro : nouvelle vue"
+
+#~ msgid "Normal Size"
+#~ msgstr "Taille normale"
+
+#~ msgid "Full Screen"
+#~ msgstr "Plein écran"
+
+#~ msgid "Ctrl+Backspace"
+#~ msgstr "Ctrl+Backspace"
+
+#~ msgctxt "[*] indicates that this is a modified view...."
+#~ msgid "[*]Avogadro"
+#~ msgstr "[*]Avogadro"
+
+#~ msgctxt "Window title: %1 is file name, %2 is Avogadro"
+#~ msgid "%1[*] - %2"
+#~ msgstr "%1[*] - %2"
+
+#~ msgid "Add"
+#~ msgstr "Ajouter"
+
+#~ msgid "Duplicate"
+#~ msgstr "Dupliquer"
+
+#~ msgid "Remove"
+#~ msgstr "Enlever"
+
+#~ msgid "No tools or engines loaded."
+#~ msgstr "Aucun outil ou moteur n'est chargé."
+
+#~ msgid "No engines loaded."
+#~ msgstr "Aucun moteur n'est chargé."
+
+#~ msgid "No tools loaded."
+#~ msgstr "Aucun outil n'est chargé."
+
+#~ msgid ""
+#~ " It is unlikely this application will function correctly. Please correct "
+#~ "this error."
+#~ msgstr ""
+#~ " Il est peu probable que cette application fonctionne correctement. "
+#~ "Veuillez corriger cette erreur."
+
+#~ msgid "Objects"
+#~ msgstr "Objets"
+
+#~ msgid "Colors"
+#~ msgstr "Couleurs"
+
+#~ msgid " copy"
+#~ msgstr " copier"
+
+#~ msgid "Name: "
+#~ msgstr "Nom : "
+
+#~ msgid "Identifier: "
+#~ msgstr "Identifiant : "
+
+#~ msgid "Description:\n"
+#~ msgstr "Description :\n"
+
+#~ msgid "Atoms"
+#~ msgstr "Atomes"
+
+#~ msgid "Bonds"
+#~ msgstr "Liaisons"
+
+#~ msgid "Residues"
+#~ msgstr "Résidus"
+
+#~ msgid "bond %1"
+#~ msgstr "liaison %1"
+
+#~ msgid "Label"
+#~ msgstr "Étiquette"
+
+#~ msgid "User Selections"
+#~ msgstr "Sélections utilisateur"
+
+#~ msgid "Error"
+#~ msgstr "Erreur"
+
+#~ msgid "only labels can have sub items"
+#~ msgstr "seuls les étiquettes peuvent avoir un sous-élément"
+
+#~ msgid "Item"
+#~ msgstr "Élément"
+
+#~ msgid "Index"
+#~ msgstr "Indice"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Low"
+#~ msgstr "Basse"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Medium"
+#~ msgstr "Moyenne"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "High"
+#~ msgstr "Élevée"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Undefined"
+#~ msgstr "Indéterminée"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "None"
+#~ msgstr "Aucune"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Some"
+#~ msgstr "Légère"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Mid"
+#~ msgstr "Moyenne"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Lots"
+#~ msgstr "Beaucoup"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Undefined"
+#~ msgstr "Indéterminé"
+
+#~ msgid "Network Update Check Failed"
+#~ msgstr "La mise à jour réseau a échoué"
+
+#~ msgid "Network timeout or other error."
+#~ msgstr "Délai d'attente réseau expiré, ou autre erreur"
+
+#~ msgctxt "Indicates an updated Avogadro version is available"
+#~ msgid "Updated Version of Avogadro Available"
+#~ msgstr "Une mise à jour d'Avogadro est disponible"
+
+#~ msgid "Add Display Type"
+#~ msgstr "Ajouter type d'affichage"
+
+#~ msgid "Type:"
+#~ msgstr "Type :"
+
+#~ msgid "Name:"
+#~ msgstr "Nom :"
+
+#~ msgid "Description:"
+#~ msgstr "Description :"
+
+#~ msgid "Form"
+#~ msgstr "Formulaire"
+
+#~ msgid "Color by:"
+#~ msgstr "Colorer selon :"
+
+#~ msgid "Add Selected Primitives"
+#~ msgstr "Ajouter les primitives sélectionnées"
+
+#~ msgid "Remove Selected Primitives"
+#~ msgstr "Retirer les primitives sélectionnées"
+
+#~ msgid "Add All Primitives"
+#~ msgstr "Ajouter toutes les primitives"
+
+#~ msgid "Display Only Selected Primitives"
+#~ msgstr "Afficher seulement les primitives sélectionnées"
+
+#~ msgid "Assign to Selection"
+#~ msgstr "Assigner à la sélection"
+
+#~ msgid "Filename:"
+#~ msgstr "Nom du fichier :"
+
+#~ msgid "Select..."
+#~ msgstr "Sélectionner..."
+
+#~ msgid "Format:"
+#~ msgstr "Format :"
+
+#~ msgid "Automatically detect from extension"
+#~ msgstr "Détecter automatiquement à partir de l'extension"
+
+#~ msgid "Perceive bonding"
+#~ msgstr "Interpréter le mode de liaison"
+
+#~ msgid "Perceive bond orders"
+#~ msgstr "Interpréter les ordres de liaison"
+
+#~ msgid "Coordinates are in Ångstroms"
+#~ msgstr "Les coordonnées sont en ångströms"
+
+#~ msgid "Toolbars"
+#~ msgstr "Barres d'outils"
+
+#~ msgid "Copy As"
+#~ msgstr "Copier comme"
+
+#~ msgid "E&xtensions"
+#~ msgstr "E&xtensions"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Barre d'outils principale"
+
+#~ msgid "Project Tree"
+#~ msgstr "Arborescence du projet"
+
+#~ msgid "&Paste"
+#~ msgstr "&Coller"
+
+#~ msgid "Plugins"
+#~ msgstr "Greffons"
+
+#~ msgid "Details"
+#~ msgstr "Détails"
+
+#~ msgid "Tree Items"
+#~ msgstr "Éléments de l'arborescence"
+
+#~ msgid "Type"
+#~ msgstr "Type"
+
+#~ msgid "New Item"
+#~ msgstr "Nouvel élément"
+
+#~ msgid "&New Item"
+#~ msgstr "&Nouvel élément"
+
+#~ msgid "New Subitem"
+#~ msgstr "Nouveau sous-élément"
+
+#~ msgid "New &Subitem"
+#~ msgstr "Nouveau &sous-élément"
+
+#~ msgid "Delete Item"
+#~ msgstr "Supprimer l'élément"
+
+#~ msgid "&Delete Item"
+#~ msgstr "&Supprimer l'élément"
+
+#~ msgid "Move Item Left (before Parent Item)"
+#~ msgstr "Déplacer l'élément à gauche (avant l'élément parent)"
+
+#~ msgid "L"
+#~ msgstr "G"
+
+#~ msgid "Move Item Right (as a First Subitem of the Next Sibling Item)"
+#~ msgstr ""
+#~ "Déplacer l'élément à droite (comme premier sous-élément du prochain "
+#~ "élément fils)"
+
+#~ msgid "R"
+#~ msgstr "D"
+
+#~ msgid "Move Item Up"
+#~ msgstr "Remonter l'élément"
+
+#~ msgid "U"
+#~ msgstr "U"
+
+#~ msgid "Move Item Down"
+#~ msgstr "Descendre l'élément"
+
+#~ msgid "D"
+#~ msgstr "B"
+
+#~ msgid "Alias"
+#~ msgstr "Alias"
+
+#~ msgid "Settings..."
+#~ msgstr "Paramètres..."
+
+#~ msgid "General"
+#~ msgstr "Général"
+
+#~ msgid "Quality:"
+#~ msgstr "Qualité :"
+
+#~ msgid "Set the global rendering quality."
+#~ msgstr "Fixer la qualité globale du rendu."
+
+#~ msgid "Fog:"
+#~ msgstr "Brume :"

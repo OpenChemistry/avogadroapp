@@ -1,0 +1,1321 @@
+# Greek translation for avogadro
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the avogadro package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: avogadro\n"
+"Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2018-04-26 13:24-0400\n"
+"PO-Revision-Date: 2016-06-10 06:16+0000\n"
+"Last-Translator: Geoff Hutchison <Unknown>\n"
+"Language-Team: Greek <el@li.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
+"X-Generator: Launchpad (build 18609)\n"
+
+#: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
+msgid "No molecule set in BackgroundFileFormat!"
+msgstr ""
+
+#: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
+msgid "No Io::FileFormat set in BackgroundFileFormat!"
+msgstr ""
+
+#: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
+msgid "No file name set in BackgroundFileFormat!"
+msgstr ""
+
+#: mainwindow.cpp:275
+msgid "Ready..."
+msgstr ""
+
+#: mainwindow.cpp:300
+#, fuzzy
+msgid "Tool"
+msgstr "Εργαλεία"
+
+#: mainwindow.cpp:304
+msgid "Display Types"
+msgstr "Τύποι Προβολής"
+
+#: mainwindow.cpp:313
+msgid "View Configuration"
+msgstr ""
+
+#: mainwindow.cpp:319
+#, fuzzy
+msgid "Molecules"
+msgstr "Μόριο"
+
+#: mainwindow.cpp:467
+#, fuzzy
+msgid "Untitled"
+msgstr "χωρίς τίτλο"
+
+#: mainwindow.cpp:472
+#, fuzzy, qt-format
+msgid "%1%2 - Avogadro %3"
+msgstr "Avogadro"
+
+#: mainwindow.cpp:514 mainwindow.cpp:1028
+msgid "Chemical Markup Language"
+msgstr ""
+
+#: mainwindow.cpp:515 mainwindow.cpp:1029
+msgid "Chemical JSON"
+msgstr ""
+
+#: mainwindow.cpp:521
+msgid "Open chemical file"
+msgstr ""
+
+#: mainwindow.cpp:539 mainwindow.cpp:560 mainwindow.cpp:936 mainwindow.cpp:1714
+#, fuzzy
+msgid "Cannot open file"
+msgstr "Μη δυνατή αποθήκευση του αρχείου %1"
+
+#: mainwindow.cpp:540 mainwindow.cpp:561 mainwindow.cpp:937
+#, fuzzy, qt-format
+msgid "Can't open supplied file %1"
+msgstr "Μη δυνατή αποθήκευση του αρχείου %1"
+
+#: mainwindow.cpp:550
+#, fuzzy
+msgid "Open Molecule"
+msgstr "Μόριο"
+
+#: mainwindow.cpp:593
+#, fuzzy
+msgid "Reading File"
+msgstr "Άνοιγμα αρχείου"
+
+#: mainwindow.cpp:595
+#, qt-format
+msgid ""
+"Opening file '%1'\n"
+"with '%2'"
+msgstr ""
+
+#: mainwindow.cpp:624
+#, qt-format
+msgid "Molecule loaded (%1 atoms, %2 bonds)"
+msgstr ""
+
+#: mainwindow.cpp:629 mainwindow.cpp:663
+#, fuzzy
+msgid "File error"
+msgstr "Αρχείο: "
+
+#: mainwindow.cpp:630
+#, qt-format
+msgid ""
+"Error while reading file '%1':\n"
+"%2"
+msgstr ""
+
+#: mainwindow.cpp:656
+#, qt-format
+msgid "File written: %1"
+msgstr ""
+
+#: mainwindow.cpp:664
+#, qt-format
+msgid ""
+"Error while writing file '%1':\n"
+"%2"
+msgstr ""
+
+#: mainwindow.cpp:705
+msgid "Error: Failed to initialize OpenGL context"
+msgstr ""
+
+#: mainwindow.cpp:706
+#, qt-format
+msgid ""
+"OpenGL 2.0 or greater required, exiting.\n"
+"\n"
+"%1"
+msgstr ""
+
+#: mainwindow.cpp:707
+msgid "Unknown error"
+msgstr ""
+
+#: mainwindow.cpp:784 mainwindow.cpp:785
+msgid "Navigate tool"
+msgstr ""
+
+#: mainwindow.cpp:857
+msgid "Common image formats"
+msgstr "Κοινοί τύποι εικόνων"
+
+#: mainwindow.cpp:859
+msgid "All files"
+msgstr "Όλα τα αρχεία"
+
+#: mainwindow.cpp:859
+msgid "BMP"
+msgstr "BMP"
+
+#: mainwindow.cpp:860
+msgid "PNG"
+msgstr "PNG"
+
+#: mainwindow.cpp:860
+msgid "JPEG"
+msgstr "JPEG"
+
+#: mainwindow.cpp:869
+msgid "Export Bitmap Graphics"
+msgstr "Εξαγωγή Γραφικών Bitmap"
+
+#. i18n: file: mainwindow.ui:14
+#. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
+#: mainwindow.cpp:908 mainwindow.cpp:1002 mainwindow.cpp:1628:33
+msgid "Avogadro"
+msgstr "Avogadro"
+
+#: mainwindow.cpp:909
+#, qt-format
+msgid "Cannot save file %1."
+msgstr "Μη δυνατή αποθήκευση του αρχείου %1"
+
+#: mainwindow.cpp:932 mainwindow.cpp:1710
+msgid "Select file reader"
+msgstr ""
+
+#: mainwindow.cpp:1003
+msgid ""
+"This file was imported from a non-standard format which may not be able to "
+"write all of the information in the molecule.\n"
+"\n"
+"Would you like to export to the current format, or save in a standard format?"
+msgstr ""
+
+#: mainwindow.cpp:1010
+msgid "Export"
+msgstr "Εξαγωγή"
+
+#: mainwindow.cpp:1035
+msgid "Save chemical file"
+msgstr ""
+
+#: mainwindow.cpp:1063
+#, fuzzy
+msgid "Export Molecule"
+msgstr "Εισαγωγή αρχείου μορίων"
+
+#: mainwindow.cpp:1115
+msgid "Writing File"
+msgstr ""
+
+#: mainwindow.cpp:1117
+#, qt-format
+msgid ""
+"Writing file '%1'\n"
+"with '%2'"
+msgstr ""
+
+#: mainwindow.cpp:1225
+#, fuzzy, qt-format
+msgid "&Undo %1"
+msgstr "Α&ναίρεση"
+
+#. i18n: file: mainwindow.ui:211
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1228 mainwindow.cpp:1451:126
+msgid "&Undo"
+msgstr "Α&ναίρεση"
+
+#: mainwindow.cpp:1233
+#, fuzzy, qt-format
+msgid "&Redo %1"
+msgstr "Επανα&φορά"
+
+#. i18n: file: mainwindow.ui:223
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1236 mainwindow.cpp:1456:132
+msgid "&Redo"
+msgstr "Επανα&φορά"
+
+#: mainwindow.cpp:1333
+#, fuzzy
+msgid "&Testing"
+msgstr "Ρυθμίσεις"
+
+#: mainwindow.cpp:1335
+#, fuzzy
+msgid "Record test..."
+msgstr "Δοκιμή Εγγραφής..."
+
+#: mainwindow.cpp:1338
+#, fuzzy
+msgid "Play test..."
+msgstr "Δοκιμή Αναπαραγωγής..."
+
+#. i18n: file: mainwindow.ui:121
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:129
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1354:75 rc.cpp:81
+msgid "&New"
+msgstr "&Νέο"
+
+#. i18n: file: mainwindow.ui:82
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1363:51
+#, fuzzy
+msgid "&Open..."
+msgstr "&Άνοιγμα"
+
+#. i18n: file: mainwindow.ui:147
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:155
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1379:93 rc.cpp:99
+msgid "&Save"
+msgstr "&Αποθήκευση"
+
+#. i18n: file: mainwindow.ui:160
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1388:102
+msgid "Save &As..."
+msgstr "Αποθήκευση &ως..."
+
+#. i18n: file: mainwindow.ui:504
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1407:264
+#, fuzzy
+msgid "&Export"
+msgstr "Εξαγωγή"
+
+#: mainwindow.cpp:1408
+#, fuzzy
+msgid "&Molecule..."
+msgstr "Μόριο"
+
+#. i18n: file: mainwindow.ui:173
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1416:111
+msgid "&Graphics..."
+msgstr "&Γραφικά..."
+
+#. i18n: file: mainwindow.ui:95
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:106
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1424:60 rc.cpp:66
+msgid "&Quit"
+msgstr "Έ&ξοδος"
+
+#: mainwindow.cpp:1444
+msgid "No recent files"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:59
+#. i18n: ectx: property (title), widget (QMenu, menuEdit)
+#: mainwindow.cpp:1450 menubuilder.cpp:87:45
+msgid "&Edit"
+msgstr "&Επεξεργασία"
+
+#. i18n: file: mainwindow.ui:54
+#. i18n: ectx: property (title), widget (QMenu, menuView)
+#: mainwindow.cpp:1470 menubuilder.cpp:87:42
+msgid "&View"
+msgstr "Π&ροβολή"
+
+#: mainwindow.cpp:1471
+#, fuzzy
+msgid "Set background color..."
+msgstr "Ορισμός χρώματος &φόντου..."
+
+#: mainwindow.cpp:1475
+msgid "Projection"
+msgstr "Προβολή"
+
+#. i18n: file: mainwindow.ui:463
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1476:240
+msgid "Perspective"
+msgstr "Προοπτική"
+
+#. i18n: file: mainwindow.ui:471
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1483:243
+msgid "Orthographic"
+msgstr "Ορθογραφικές"
+
+#: mainwindow.cpp:1497
+#, fuzzy
+msgid "&Extensions"
+msgstr "Επεκτάσεις"
+
+#: mainwindow.cpp:1504 menubuilder.cpp:91
+msgid "&Help"
+msgstr "&Βοήθεια"
+
+#: mainwindow.cpp:1617
+#, qt-format
+msgid "All supported formats (%1);;All files (*);;"
+msgstr ""
+
+#: mainwindow.cpp:1629
+#, fuzzy
+msgid ""
+"Do you want to save the changes you made in the document?\n"
+"\n"
+"Your changes will be lost if you don't save them."
+msgstr "Επιθυμείτε να αποθηκευτούν οι αλλαγές που κάνατε στο αρχείο?"
+
+#: mainwindow.cpp:1694
+#, qt-format
+msgid "Error while loading FileFormat with id '%1'."
+msgstr ""
+
+#: mainwindow.cpp:1715
+#, qt-format
+msgid "Avogadro timed out and doesn't know how to open '%1'."
+msgstr ""
+
+#: mainwindow.cpp:1725
+#, fuzzy
+msgid "Cannot open files"
+msgstr "Μη δυνατή αποθήκευση του αρχείου %1"
+
+#: mainwindow.cpp:1726
+#, qt-format
+msgid "Avogadro timed out and cannot open '%1'."
+msgstr ""
+
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: menubuilder.cpp:87:36
+msgid "&File"
+msgstr "&Αρχείο"
+
+#. i18n: file: mainwindow.ui:49
+#. i18n: ectx: property (title), widget (QMenu, menuBuild)
+#: menubuilder.cpp:87:39
+msgid "&Build"
+msgstr "&Κατασκευή"
+
+#. i18n: file: mainwindow.ui:71
+#. i18n: ectx: property (title), widget (QMenu, menuSelect)
+#: menubuilder.cpp:88:48
+msgid "&Select"
+msgstr "&Επιλογή"
+
+#: menubuilder.cpp:91
+msgid "Se&ttings"
+msgstr "Ρυθ&μίσεις"
+
+#: menubuilder.cpp:91
+#, fuzzy
+msgid "&Window"
+msgstr "Παράθυρο"
+
+#: rpclistener.cpp:123
+msgid "Error starting RPC server:"
+msgstr ""
+
+#: rpclistener.cpp:125
+msgid ""
+"An error occurred while starting Avogadro's RPC listener. This may be happen "
+"for a\n"
+"number of reasons:\n"
+"\tA previous instance of Avogadro may have crashed.\n"
+"\tA running Avogadro instance was too busy to respond.\n"
+"\n"
+"If no other Avogadro instance is running on this machine, it is safe to "
+"replace the dead\n"
+"server. Otherwise, this instance of avogadro may be started without RPC "
+"capabilities\n"
+"(this will prevent RPC enabled applications from communicating with "
+"Avogadro)."
+msgstr ""
+
+#: rpclistener.cpp:135
+msgid "Replace the dead server with a new instance."
+msgstr ""
+
+#: rpclistener.cpp:136
+msgid "Start without RPC capabilities."
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:62
+#. i18n: ectx: property (text), widget (QLabel, versionLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
+"\">Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:75
+#. i18n: ectx: property (text), widget (QLabel, version)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:117
+#. i18n: ectx: property (text), widget (QLabel, libs)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">AvogadroLibs Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:124
+#. i18n: ectx: property (text), widget (QLabel, libsVersion)
+#. i18n: file: aboutdialog.ui:171
+#. i18n: ectx: property (text), widget (QLabel, qtVersion)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:164
+#. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
+"Version:</span></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:224
+#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
+"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
+"\">BSD-3-Clause</span></a></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:261
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+msgid ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"span></a></p></body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:290
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"body></html>"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:323
+#. i18n: ectx: property (text), widget (QPushButton, OK)
+msgid "OK"
+msgstr "Εντάξει"
+
+#. i18n: file: mainwindow.ui:85
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+O"
+msgstr "Ctrl+O"
+
+#. i18n: file: mainwindow.ui:90
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Open"
+msgstr "&Άνοιγμα"
+
+#. i18n: file: mainwindow.ui:98
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Q"
+msgstr "Ctrl+Q"
+
+#. i18n: file: mainwindow.ui:111
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Recent"
+msgstr "Πρόσφατο"
+
+#. i18n: file: mainwindow.ui:116
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Clear Recent"
+msgstr "&Καθαρισμός Προσφάτων"
+
+#. i18n: file: mainwindow.ui:124
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+N"
+msgstr "Ctrl+N"
+
+#. i18n: file: mainwindow.ui:134
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:142
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Close"
+msgstr "&Κλείσιμο"
+
+#. i18n: file: mainwindow.ui:137
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+W"
+msgstr "Ctrl+W"
+
+#. i18n: file: mainwindow.ui:150
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+S"
+msgstr "Ctrl+S"
+
+#. i18n: file: mainwindow.ui:163
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+S"
+msgstr "Ctrl+Shift+S"
+
+#. i18n: file: mainwindow.ui:168
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Revert To Saved"
+msgstr "Επαναφορά στο αποθηκευμένο"
+
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Full Screen Mode"
+msgstr "&Λειτουργία πλήρους οθόνης"
+
+#. i18n: file: mainwindow.ui:185
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Esc"
+msgstr "Esc"
+
+#. i18n: file: mainwindow.ui:194
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Set &Background Color..."
+msgstr "Ορισμός χρώματος &φόντου..."
+
+#. i18n: file: mainwindow.ui:199
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&About"
+msgstr "&Σχετικά"
+
+#. i18n: file: mainwindow.ui:214
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Z"
+msgstr "Ctrl+Z"
+
+#. i18n: file: mainwindow.ui:226
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+Z"
+msgstr "Ctrl+Shift+Z"
+
+#. i18n: file: mainwindow.ui:235
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "New View"
+msgstr "Νέα Όψη"
+
+#. i18n: file: mainwindow.ui:247
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Close View"
+msgstr "Κλείσιμο προβολής"
+
+#. i18n: file: mainwindow.ui:256
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Center"
+msgstr "Κέντρο"
+
+#. i18n: file: mainwindow.ui:265
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Align View To Axes"
+msgstr "Ευθυγράμμιση Προβολής με τους Άξονες"
+
+#. i18n: file: mainwindow.ui:270
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Paste"
+msgstr "Επικόλληση"
+
+#. i18n: file: mainwindow.ui:273
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+V"
+msgstr "Ctrl+V"
+
+#. i18n: file: mainwindow.ui:278
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Copy"
+msgstr "Αντιγραφή"
+
+#. i18n: file: mainwindow.ui:281
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+C"
+msgstr "Ctrl+C"
+
+#. i18n: file: mainwindow.ui:286
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Cut"
+msgstr "Αποκοπή"
+
+#. i18n: file: mainwindow.ui:289
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+X"
+msgstr "Ctrl+X"
+
+#. i18n: file: mainwindow.ui:294
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Clear"
+msgstr "Καθαρισμός"
+
+#. i18n: file: mainwindow.ui:299
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Select All"
+msgstr "Επιλογή όλων"
+
+#. i18n: file: mainwindow.ui:302
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+A"
+msgstr "Ctrl+A"
+
+#. i18n: file: mainwindow.ui:307
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Select None"
+msgstr "Επιλογή κανενός"
+
+#. i18n: file: mainwindow.ui:310
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgid "Ctrl+Shift+A"
+msgstr "Ctrl+Shift+A"
+
+#. i18n: file: mainwindow.ui:319
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Configure Avogadro..."
+msgstr "Ρύθμιση Avogadro.."
+
+#. i18n: file: mainwindow.ui:330
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Tutorials"
+msgstr "Οδηγοί"
+
+#. i18n: file: mainwindow.ui:339
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Duplicate View"
+msgstr "Διπλασιασμός προβολής"
+
+#. i18n: file: mainwindow.ui:347
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Display Axes"
+msgstr "Εμφάνιση αξόνων"
+
+#. i18n: file: mainwindow.ui:355
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Debug Information"
+msgstr "Πληροφορίες αποσφαλμάτωσης"
+
+#. i18n: file: mainwindow.ui:363
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Avogadro Help"
+msgstr "Βοήθεια Avogadro"
+
+#. i18n: file: mainwindow.ui:368
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Release Notes"
+msgstr "Σημειώσεις έκδοσης"
+
+#. i18n: file: mainwindow.ui:373
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Report a Bug"
+msgstr "Αναφορά σφάλματος"
+
+#. i18n: file: mainwindow.ui:378
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "FAQ"
+msgstr "Συχνές ερωτήσεις"
+
+#. i18n: file: mainwindow.ui:383
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Avogadro Website"
+msgstr "Ιστοσελίδα Avogadro"
+
+#. i18n: file: mainwindow.ui:392
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Plugin Manager..."
+msgstr "Διαχείριση Επιπρόσθετων..."
+
+#. i18n: file: mainwindow.ui:401
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Project Tree Editor..."
+msgstr "Επεξεργαστής δένδρου προβολής..."
+
+#. i18n: file: mainwindow.ui:410
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Detach View"
+msgstr "Απόσπαση προβολής"
+
+#. i18n: file: mainwindow.ui:415
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Molecule File..."
+msgstr "Αρχείο μορίων"
+
+#. i18n: file: mainwindow.ui:426
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Use Quick Render"
+msgstr "Χρήση γρήγορης απόδοσης"
+
+#. i18n: file: mainwindow.ui:431
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Vector Graphics..."
+msgstr "&Διανυσματικά Γραφικά"
+
+#. i18n: file: mainwindow.ui:439
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Display Unit Cell Axes"
+msgstr "Εμφάνιση αξόνων κυψελίδων μονάδας"
+
+#. i18n: file: mainwindow.ui:447
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "All Molecules in File..."
+msgstr "Όλα τα μόρια σε αρχείο..."
+
+#. i18n: file: mainwindow.ui:452
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Reset Display Types"
+msgstr "Επαναφορά τύπος εμφάνισης"
+
+#. i18n: file: mainwindow.ui:476
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "SMILES"
+msgstr "SMILES"
+
+#. i18n: file: mainwindow.ui:481
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "InChI"
+msgstr "InChI"
+
+#. i18n: file: mainwindow.ui:484
+#. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
+msgid "IUPAC InChI identifier"
+msgstr "Αναγνωριστικό IUPAC InChI"
+
+#. i18n: file: mainwindow.ui:489
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Discussion Forum"
+msgstr ""
+
+#. i18n: file: mainwindow.ui:494
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
+msgid "Open Recent"
+msgstr "Άνοιγμα πρόσ&φατου"
+
+#. i18n: file: mainwindow.ui:499
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
+msgid "&Import"
+msgstr "Εισαγωγή"
+
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+",Launchpad Contributions:,Anastasios Bourazanis,Eleftherios Kosmas, ,"
+"Launchpad Contributions:,Anastasios Bourazanis,Eleftherios Kosmas,farkoius, ,"
+"Launchpad Contributions:,Anastasios Bourazanis,Eleftherios Kosmas,farkoius, ,"
+"Launchpad Contributions:,Anastasios Bourazanis,Eleftherios Kosmas,farkoius, ,"
+"Launchpad Contributions:,Anastasios Bourazanis,Eleftherios Kosmas,farkoius, ,"
+"Launchpad Contributions:,Anastasios Bourazanis,Eleftherios Kosmas,farkoius, ,"
+"Launchpad Contributions:,Anastasios Bourazanis,Eleftherios Kosmas,Kostas "
+"Sorokin,farkoius, ,Launchpad Contributions:,Anastasios Bourazanis,"
+"Eleftherios Kosmas,Kostas Sorokin,farkoius, ,Launchpad Contributions:,"
+"Anastasios Bourazanis,Basilis Thomopoulos,Dimitris Spingos,Eleftherios "
+"Kosmas,farkoius,stimpak,tzem, ,Launchpad Contributions:,Anastasios "
+"Bourazanis,Basilis Thomopoulos,Dimitris Spingos,Eleftherios Kosmas,Geoff "
+"Hutchison,farkoius,stimpak,tzem, ,Launchpad Contributions:,Anastasios "
+"Bourazanis,Basilis Thomopoulos,Dimitris Spingos,Eleftherios Kosmas,Geoff "
+"Hutchison,farkoius,stimpak,tzem"
+
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
+",,a.brzns@gmail.com,elkosmas@gmail.com,,,a.brzns@gmail.com,elkosmas@gmail."
+"com,,,,a.brzns@gmail.com,elkosmas@gmail.com,,,,a.brzns@gmail.com,"
+"elkosmas@gmail.com,,,,a.brzns@gmail.com,elkosmas@gmail.com,,,,a.brzns@gmail."
+"com,elkosmas@gmail.com,,,,a.brzns@gmail.com,elkosmas@gmail.com,,,,,a."
+"brzns@gmail.com,elkosmas@gmail.com,,,,,a.brzns@gmail.com,kolxoz83@gmail.com,,"
+"elkosmas@gmail.com,,,athmakrigiannis@gmail.com,,,a.brzns@gmail.com,"
+"kolxoz83@gmail.com,,elkosmas@gmail.com,,,,athmakrigiannis@gmail.com,,,a."
+"brzns@gmail.com,kolxoz83@gmail.com,,elkosmas@gmail.com,,,,"
+"athmakrigiannis@gmail.com"
+
+#~ msgctxt "%1 is the Git revision number."
+#~ msgid "(Git revision: %1)"
+#~ msgstr "(Αναθεώρηση Git: %1)"
+
+#~ msgid ""
+#~ "<h3>%1</h3><br/><br/>Application Version: %2<br/><br/>Library Version: "
+#~ "%3<br/><br/>Open Babel Version: %4"
+#~ msgstr ""
+#~ "<h3>%1</h3><br/><br/>Έκδοση εφαρμογής: %2<br/><br/>Έκδοση βιβλιοθήκης: "
+#~ "%3<br/><br/>Έκδοση Open Babel: %4"
+
+#~ msgid ""
+#~ "<br/><br/>Qt Version: %1<br/><br/>For more information check the <a href="
+#~ "\"http://avogadro.cc/\">Avogadro homepage</a>.<br/><br/>The program is "
+#~ "provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF "
+#~ "DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.<br/>"
+#~ msgstr ""
+#~ "<br/><br/>Qt Version: %1<br/><br/>Για περισσότερες πληροφορίες κοιτάξτε "
+#~ "στην <a href=\"http://avogadro.cc/\">αρχική σελίδα του Avogadro</a>.<br/"
+#~ "><br/>Το πρόγραμμα παρέχεται ΟΠΩΣ ΕΙΝΑΙ χωρίς ΚΑΜΙΑ ΕΓΓΥΗΣΗΟΠΟΙΟΥΔΗΠΟΤΕ "
+#~ "ΕΙΔΟΥΣ, ΣΥΜΠΕΡΙΛΑΜΒΑΝΟΜΕΝΗΣ ΤΗΣ ΕΓΓΥΗΣΗΣ ΣΧΕΔΙΑΣΗΣ, ΕΜΠΟΡΕΥΣΙΜΟΤΗΤΑΣ ΚΑΙ "
+#~ "ΚΑΤΑΛΛΗΛΟΤΗΤΑΣ ΓΙΑ ΣΥΓΚΕΓΚΡΙΜΕΝΟ ΣΚΟΠΟ.<br/>"
+
+#~ msgid "Cut Molecule"
+#~ msgstr "Αποκοπή μορίου"
+
+#~ msgid "Cut Atoms"
+#~ msgstr "Αποκοπή ατόμων"
+
+#~ msgid "Clear Molecule"
+#~ msgstr "Διαγραφή μορίου"
+
+#~ msgid "Clear Atoms"
+#~ msgstr "Διαγραφή ατόμων"
+
+#~ msgid "Messages"
+#~ msgstr "Μηνύματα"
+
+#~ msgid "&Minimize"
+#~ msgstr "&Ελαχιστοποίηση"
+
+#~ msgid "Ctrl+M"
+#~ msgstr "Ctrl+M"
+
+#~ msgid "&Zoom"
+#~ msgstr "&Μεγέθυνση"
+
+#~ msgid "Bring All to Front"
+#~ msgstr "Μεταφορά Όλων Εμπρός"
+
+#~ msgid "&Tool Settings..."
+#~ msgstr "&Ρυθμίσεις Εργαλείων"
+
+#~ msgctxt "Tool Settings shortcut"
+#~ msgid "Ctrl+T"
+#~ msgstr "Ctrl+T"
+
+#~ msgid "&Display Settings..."
+#~ msgstr "&Ρυθμίσεις Οθόνης..."
+
+#~ msgctxt "Display Settings shortcut"
+#~ msgid "Ctrl+D"
+#~ msgstr "Ctrl+D"
+
+#~ msgid "Common molecule formats"
+#~ msgstr "Κοινές μορφές μορίων"
+
+#~ msgid "CML"
+#~ msgstr "CML"
+
+#~ msgid "Computational Chemistry Output"
+#~ msgstr "Αποτελέσματα Υπολογιστικής Χημείας"
+
+#~ msgid "Crystallographic Interchange CIF"
+#~ msgstr "Κρυσταλλογραφική διεπαφή CIF"
+
+#~ msgid "GAMESS-US Output"
+#~ msgstr "Αποτελέσματα GAMESS-US"
+
+#~ msgid "Gaussian 98/03 Output"
+#~ msgstr "Αποτελέσματα Gaussian  98/03"
+
+#~ msgid "Gaussian Formatted Checkpoint"
+#~ msgstr "Μορφοποιημένο σημείο ελέγχου Γκάους"
+
+#~ msgid "HyperChem"
+#~ msgstr "HyperChem"
+
+#~ msgid "MDL Mol"
+#~ msgstr "MDL Mol"
+
+#~ msgid "NWChem Output"
+#~ msgstr "Έξοδοε NWChem"
+
+#~ msgid "PDB"
+#~ msgstr "PDB"
+
+#~ msgid "Sybyl Mol2"
+#~ msgstr "Sybyl Mol2"
+
+#~ msgid "XYZ"
+#~ msgstr "XYZ"
+
+#~ msgctxt "%1 is a filename"
+#~ msgid "Loading %1..."
+#~ msgstr "Φόρτωση %1"
+
+#~ msgid "Loading %1..."
+#~ msgstr "Φόρτωση %1"
+
+#~ msgid "Reading molecular file failed, file %1."
+#~ msgstr "Η ανάγνωση του αρχείου μορίων απέτυχε, αρχείο %1"
+
+#~ msgid "Reading multi-molecule file. This may take a while..."
+#~ msgstr "Ανάγνωση σύνθετου αρχείου.Πιθανόν να διαρκέσει..."
+
+#~ msgid "This file does not contain 3D coordinates."
+#~ msgstr "Το αρχείο δεν περιέχει συντεταγμένες 3D"
+
+#~ msgid "Do you want Avogadro to build a rough geometry?"
+#~ msgstr "Θα θέλατε το Avogadro να σχεδιάσει πρόχειρα την γεωμετρία;"
+
+#~ msgid ""
+#~ "This file does not contain 3D coordinates.\n"
+#~ "You may not be able to edit or view properly."
+#~ msgstr ""
+#~ "Το αρχείο δεν περιέχει 3D συντεταγμένες.\n"
+#~ "Ίσως να μην είναι δυνατή η επεξεργασία ή/και η σωστή απεικόνιση του."
+
+#~ msgid "Select Molecule to View"
+#~ msgstr "Επιλέξτε Μόριο προς απεικόνιση"
+
+#~ msgid "Molecule Title"
+#~ msgstr "Τίτλος μορίου"
+
+#~ msgid "Atoms: "
+#~ msgstr "Άτομα: "
+
+#~ msgid " Bonds: "
+#~ msgstr " Δεσμοί: "
+
+#~ msgid "File Loaded..."
+#~ msgstr "Το αρχείο Φορτώθηκε..."
+
+#~ msgid "Your changes will be lost if you don't save them."
+#~ msgstr "Οι αλλαγές θα χαθούν οριστικά αν δεν τις αποθηκεύσετε."
+
+#~ msgctxt "Save"
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+S"
+
+#~ msgctxt "Discard"
+#~ msgid "Ctrl+D"
+#~ msgstr "Ctrl+D"
+
+#~ msgid "Save..."
+#~ msgstr "Αποθήκευση..."
+
+#~ msgid "Save"
+#~ msgstr "Αποθήκευση"
+
+#~ msgid "GAMESS Input"
+#~ msgstr "Είσοδος GAMESS"
+
+#~ msgid "Gaussian Cartesian Input"
+#~ msgstr "Είσοδος Gaussian Cartesian"
+
+#~ msgid "Gaussian Z-matrix Input"
+#~ msgstr "Είσοδος Gaussian Z-matrix"
+
+#~ msgid "MDL SDfile"
+#~ msgstr "Αρχείο MDL SD"
+
+#~ msgid "NWChem Input"
+#~ msgstr "Είσοδος NWChem"
+
+#~ msgid "Save Molecule As"
+#~ msgstr "Αποθήκευση μορίου ως"
+
+#~ msgid "Untitled %1"
+#~ msgstr "Ανώνυμο %1"
+
+#~ msgid "Unable to paste molecule."
+#~ msgstr "Αδύνατη η επικόλληση του μορίου"
+
+#~ msgid "Paste failed (format unavailable)."
+#~ msgstr "Απέτυχε η επικόλληση (άγνωστος τύπος αρχείου)"
+
+#~ msgid "Copy failed (format unavailable)."
+#~ msgstr "Αποτυχία αντιγραφής (μη διαθέσιμη μορφή)"
+
+#~ msgid "Copy failed (mdl unavailable)."
+#~ msgstr "Απέτυχε η αντιγραφή (μη διαθέσιμο MDL)."
+
+#~ msgid "View %1"
+#~ msgstr "Προβολή %1Προβολή %1"
+
+#~ msgctxt "View number (from 1 on)"
+#~ msgid "View %1"
+#~ msgstr "Προβολή %1"
+
+#~ msgid "Avogadro: Detached View"
+#~ msgstr "Avogadro: Αποσπασμένη προβολή"
+
+#~ msgid "Normal Size"
+#~ msgstr "Κανονικό μέγεθος"
+
+#~ msgid "Full Screen"
+#~ msgstr "Λειτουργία πλήρους οθόνης"
+
+#~ msgid "Ctrl+Backspace"
+#~ msgstr "Ctrl+Backspace"
+
+#~ msgctxt "[*] indicates that this is a modified view...."
+#~ msgid "[*]Avogadro"
+#~ msgstr "[*]Avogadro"
+
+#~ msgctxt "Window title: %1 is file name, %2 is Avogadro"
+#~ msgid "%1[*] - %2"
+#~ msgstr "%1[*] - %2"
+
+#~ msgid "Add"
+#~ msgstr "Προσθήκη"
+
+#~ msgid "Duplicate"
+#~ msgstr "Αντιγραφή"
+
+#~ msgid "Remove"
+#~ msgstr "Αφαίρεση"
+
+#~ msgid "No tools or engines loaded."
+#~ msgstr "Δεν φορτώθηκε κανένα εργαλείο ή μηχανή."
+
+#~ msgid "No engines loaded."
+#~ msgstr "Δεν φορτώθηκε καμία μηχανή"
+
+#~ msgid "No tools loaded."
+#~ msgstr "Δεν φορτώθηκε κανένα εργαλείο"
+
+#~ msgid ""
+#~ " It is unlikely this application will function correctly. Please correct "
+#~ "this error."
+#~ msgstr ""
+#~ " Η εφαρμογή μάλλον δε θα λειτουργήσει σωστά.Παρακαλώ διορθώστε το σφάλμα."
+
+#~ msgid "Objects"
+#~ msgstr "Αντικείμενα"
+
+#~ msgid "Colors"
+#~ msgstr "Χρώματα"
+
+#~ msgid " copy"
+#~ msgstr " αντιγραφή"
+
+#~ msgid "Name: "
+#~ msgstr "Όνομα: "
+
+#~ msgid "Identifier: "
+#~ msgstr "Αναγνωριστικό: "
+
+#~ msgid "Description:\n"
+#~ msgstr "Περιγραφή:\n"
+
+#~ msgid "Atoms"
+#~ msgstr "Άτομα"
+
+#~ msgid "Bonds"
+#~ msgstr "Δεσμοί"
+
+#~ msgid "Residues"
+#~ msgstr "Υπόλοιπα"
+
+#~ msgid "bond %1"
+#~ msgstr "δεσμός %1"
+
+#~ msgid "Label"
+#~ msgstr "Ετικέτα"
+
+#~ msgid "User Selections"
+#~ msgstr "Επιλογές Χρήστη"
+
+#~ msgid "Error"
+#~ msgstr "Σφάλμα"
+
+#~ msgid "only labels can have sub items"
+#~ msgstr "μόνο οι ετικέτες μπορούν να έχουν υποαντικείμενα"
+
+#~ msgid "Item"
+#~ msgstr "Αντικείμενo"
+
+#~ msgid "Index"
+#~ msgstr "Ευρετήριο"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Low"
+#~ msgstr "Χαμηλό"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Medium"
+#~ msgstr "Μέτριο"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "High"
+#~ msgstr "Υψηλό"
+
+#~ msgctxt "Display quality setting"
+#~ msgid "Undefined"
+#~ msgstr "Μη ορισμένο"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "None"
+#~ msgstr "Χωρίς"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Some"
+#~ msgstr "Λίγο"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Mid"
+#~ msgstr "Μέτριο"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Lots"
+#~ msgstr "Πολύ"
+
+#~ msgctxt "Level of fog in the scene"
+#~ msgid "Undefined"
+#~ msgstr "Μη ορισμένο"
+
+#~ msgid "Network Update Check Failed"
+#~ msgstr "Έλεγχος Ενημέρωσης δικτύου απέτυχε"
+
+#~ msgid "Network timeout or other error."
+#~ msgstr "Αποσύνδεση δικτύου η αλλο σφάλμα"
+
+#~ msgctxt "Indicates an updated Avogadro version is available"
+#~ msgid "Updated Version of Avogadro Available"
+#~ msgstr "Διαθέσιμη ενημερωμένη έκδοση του Avogadro"
+
+#~ msgid "Add Display Type"
+#~ msgstr "Προσθήκη Τύπου Εμφάνισης"
+
+#~ msgid "Type:"
+#~ msgstr "Τύπος:"
+
+#~ msgid "Name:"
+#~ msgstr "Όνομα:"
+
+#~ msgid "Description:"
+#~ msgstr "Περιγραφή:"
+
+#~ msgid "Form"
+#~ msgstr "Φόρμα"
+
+#~ msgid "Color by:"
+#~ msgstr "Χρώμα ανά:"
+
+#~ msgid "Add Selected Primitives"
+#~ msgstr "Προσθήκη επιλεγμένων πρωτευόντων"
+
+#~ msgid "Remove Selected Primitives"
+#~ msgstr "Αφαίρεση επιλεγμένων πρωτευόντων"
+
+#~ msgid "Add All Primitives"
+#~ msgstr "Προσθήκη όλων των πρωτευόντων"
+
+#~ msgid "Display Only Selected Primitives"
+#~ msgstr "Εμφάνιση μόνο των επιλεγμένων πρωτευόντων"
+
+#~ msgid "Assign to Selection"
+#~ msgstr "Ανάθεση σε Επιλογή"
+
+#~ msgid "Filename:"
+#~ msgstr "Όνομα αρχείου:"
+
+#~ msgid "Select..."
+#~ msgstr "Επιλογή..."
+
+#~ msgid "Format:"
+#~ msgstr "Μορφή:"
+
+#~ msgid "Automatically detect from extension"
+#~ msgstr "Αυτόματη αναγνώριση με βάση την κατάληξη"
+
+#~ msgid "Perceive bonding"
+#~ msgstr "Διατήρηση δεσμού"
+
+#~ msgid "Perceive bond orders"
+#~ msgstr "Κατανόηση τάξης δεσμών"
+
+#~ msgid "Coordinates are in Ångstroms"
+#~ msgstr "Οι Συντεταγμένες είναι σε Ångstroms"
+
+#~ msgid "Toolbars"
+#~ msgstr "Γραμμές εργαλείων"
+
+#~ msgid "Copy As"
+#~ msgstr "Αντιγραφή ως"
+
+#~ msgid "E&xtensions"
+#~ msgstr "Ε&πεκτάσεις"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Κύρια γραμμή εργαλείων"
+
+#~ msgid "Project Tree"
+#~ msgstr "Δέντρο Έργου"
+
+#~ msgid "&Paste"
+#~ msgstr "Επι&κόλληση"
+
+#~ msgid "Plugins"
+#~ msgstr "Πρόσθετα"
+
+#~ msgid "Details"
+#~ msgstr "Λεπτομέρειες"
+
+#~ msgid "Tree Items"
+#~ msgstr "Αντικείμενα Δέντρου"
+
+#~ msgid "Type"
+#~ msgstr "Τύπος"
+
+#~ msgid "New Item"
+#~ msgstr "Νέο αντικείμενο"
+
+#~ msgid "&New Item"
+#~ msgstr "&Νέο αντικείμενο"
+
+#~ msgid "New Subitem"
+#~ msgstr "Νέο Υποαντικείμενο"
+
+#~ msgid "New &Subitem"
+#~ msgstr "Νέο &υπο-αντικείμνο"
+
+#~ msgid "Delete Item"
+#~ msgstr "Διαγραφή αντικειμένου"
+
+#~ msgid "&Delete Item"
+#~ msgstr "&Διαγραφή αντικειμένου"
+
+#~ msgid "Move Item Left (before Parent Item)"
+#~ msgstr "Μετακίνηση αντικειμένου αριστερά (πριν το γονικό αντικείμενο)"
+
+#~ msgid "L"
+#~ msgstr "L"
+
+#~ msgid "Move Item Right (as a First Subitem of the Next Sibling Item)"
+#~ msgstr ""
+#~ "Μετακίνηση αντικειμένου δεξιά (ως ένα πρώτο υποαντικείμενο του επόμενου "
+#~ "αδελφού αντικειμένου)"
+
+#~ msgid "R"
+#~ msgstr "R"
+
+#~ msgid "Move Item Up"
+#~ msgstr "Μετακίνηση πάνω"
+
+#~ msgid "U"
+#~ msgstr "U"
+
+#~ msgid "Move Item Down"
+#~ msgstr "Μετακίνηση κάτω"
+
+#~ msgid "D"
+#~ msgstr "D"
+
+#~ msgid "Alias"
+#~ msgstr "Αντιστοιχία"
+
+#~ msgid "Settings..."
+#~ msgstr "Ρυθμίσεις..."
+
+#~ msgid "General"
+#~ msgstr "Γενικά"
+
+#~ msgid "Quality:"
+#~ msgstr "Ποιότητα:"
+
+#~ msgid "Set the global rendering quality."
+#~ msgstr "Ορισμός της γενικής ποιότητας απόδοσης."
+
+#~ msgid "Fog:"
+#~ msgstr "Ομίχλη"
