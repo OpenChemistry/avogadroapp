@@ -567,10 +567,20 @@ void MainWindow::importFile()
 
 bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
 {
-  if (fileName.isEmpty() || reader == nullptr) {
+  if (fileName.isEmpty()) {
     delete reader;
     return false;
   }
+
+  if (reader == nullptr) {
+    const Io::FileFormat *format = QtGui::FileFormatDialog::findFileFormat(
+      this, tr("Select file reader"), fileName, FileFormat::File | FileFormat::Read,
+      "Avogadro:");
+    if (format)
+      reader = format->newInstance();
+  }
+  if (!reader)
+    return false;
 
   QString ident = QString::fromStdString(reader->identifier());
 

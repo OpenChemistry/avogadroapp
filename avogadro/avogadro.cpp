@@ -21,6 +21,7 @@
 #include <QtWidgets/QMessageBox>
 
 #include "mainwindow.h"
+#include "application.h"
 
 #ifdef Q_OS_MAC
 void removeMacSpecificMenuItems();
@@ -48,7 +49,7 @@ int main(int argc, char* argv[])
   QApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
 #endif
 
-  QApplication app(argc, argv);
+  Avogadro::Application app(argc, argv);
 
   // Check for valid OpenGL support.
   auto offscreen = new QOffscreenSurface;

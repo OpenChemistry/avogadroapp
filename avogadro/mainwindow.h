@@ -90,6 +90,12 @@ public slots:
    */
   void updateWindowTitle();
 
+  /**
+   * Use the FileFormat @a reader to load @a fileName. This method
+   * takes ownership of @a reader and will delete it before returning.
+   */
+  bool openFile(const QString& fileName, Io::FileFormat* reader = nullptr);
+
 #ifdef QTTESTING
   void playTest(const QString& fileName, bool exit = true);
 #endif
@@ -141,12 +147,6 @@ protected slots:
    * Import a file, using the full selection of formats capable of reading.
    */
   void importFile();
-
-  /**
-   * Use the FileFormat @a reader to load @a fileName. This method
-   * takes ownership of @a reader and will delete it before returning.
-   */
-  bool openFile(const QString& fileName, Io::FileFormat* reader);
 
   /**
    * Open file in the recent files list.
