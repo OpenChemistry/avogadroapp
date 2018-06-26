@@ -62,13 +62,12 @@ bool Application::loadFile(const QString& fileName)
   }
 
   // if not, need to make this spawn a new instance
-  if (!window)
-  {
+  if (!window) {
     qDebug() << " don't have a window! ";
     return false;
   }
 
-  if (!const_cast<MainWindow*>(window)->openFile(fileName) ) {
+  if (!const_cast<MainWindow*>(window)->openFile(fileName)) {
     qDebug() << " failed to open through MainWindow";
     return false;
   }
