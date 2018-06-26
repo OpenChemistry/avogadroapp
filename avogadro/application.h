@@ -22,19 +22,19 @@
 
 namespace Avogadro {
 
-  class Application : public QApplication
-  {
-    Q_OBJECT
+class Application : public QApplication
+{
+  Q_OBJECT
 
-    public:
-      Application(int &argc, char **argv);
-      bool loadFile(const QString &fileName);
+public:
+  Application(int& argc, char** argv);
+  bool loadFile(const QString& fileName);
 
-  protected:
-      bool event(QEvent *event);
+protected:
+  bool event(QEvent* event);
 
-  private:
-  };
+private:
+};
 
 } // end namespace Avogadro
 #endif

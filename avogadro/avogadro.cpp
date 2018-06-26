@@ -20,8 +20,8 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMessageBox>
 
-#include "mainwindow.h"
 #include "application.h"
+#include "mainwindow.h"
 
 #ifdef Q_OS_MAC
 void removeMacSpecificMenuItems();
