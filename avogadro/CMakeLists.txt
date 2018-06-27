@@ -77,6 +77,12 @@ if(APPLE)
 
   set_source_files_properties(icons/avogadro.icns PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources)
+  set_source_files_properties(icons/doc.icns PROPERTIES
+    MACOSX_PACKAGE_LOCATION Resources)
+  set_source_files_properties(icons/cjson.icns PROPERTIES
+    MACOSX_PACKAGE_LOCATION Resources)
+  set_source_files_properties(icons/cml.icns PROPERTIES
+    MACOSX_PACKAGE_LOCATION Resources)
 
 elseif(UNIX)
   install(FILES "icons/avogadro2.desktop" DESTINATION "${INSTALL_XDG_APPS_DIR}")
