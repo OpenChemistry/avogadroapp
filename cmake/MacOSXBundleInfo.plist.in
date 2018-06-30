@@ -48,7 +48,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeExtensions</key>
 				<array>
 					<string>*</string>
@@ -67,7 +67,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>SHELX file</string>
 				<key>LSTypeIsPackage</key>
@@ -81,7 +81,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>XYZ molecule file</string>
 				<key>LSTypeIsPackage</key>
@@ -96,7 +96,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>MDL Molfile</string>
 				<key>LSTypeIsPackage</key>
@@ -111,7 +111,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>MDL SD file</string>
 				<key>LSTypeIsPackage</key>
@@ -125,7 +125,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeMIMETypes</key>
 				<array>
 					<string>chemical/x-cdx</string>
@@ -148,7 +148,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>Protein Databank file</string>
 				<key>LSTypeIsPackage</key>
@@ -163,7 +163,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>Sybyl Mol2 file</string>
 				<key>LSTypeIsPackage</key>
@@ -177,7 +177,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>HyperChem file</string>
 				<key>LSTypeIsPackage</key>
@@ -191,7 +191,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>Accelrys/MSI Cerius II file</string>
 				<key>LSTypeIsPackage</key>
@@ -200,6 +200,7 @@
 			<dict>
 				<key>CFBundleTypeExtensions</key>
 				<array>
+				  <string>g16</string>
 					<string>g09</string>
 					<string>g03</string>
 					<string>g98</string>
@@ -207,7 +208,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>Gaussian output</string>
 				<key>LSTypeIsPackage</key>
@@ -222,7 +223,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>Gaussian Cube</string>
 				<key>LSTypeIsPackage</key>
@@ -236,7 +237,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>Gaussian formatted checkpoint</string>
 				<key>LSTypeIsPackage</key>
@@ -251,7 +252,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>Gaussian input</string>
 				<key>LSTypeIsPackage</key>
@@ -266,7 +267,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>GAMESS output</string>
 				<key>LSTypeIsPackage</key>
@@ -280,7 +281,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>Ghemical project</string>
 				<key>LSTypeIsPackage</key>
@@ -294,9 +295,23 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>cml.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>Chemical Markup Language file</string>
+				<key>LSTypeIsPackage</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>CFBundleTypeExtensions</key>
+				<array>
+					<string>cjson</string>
+				</array>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleTypeIconFile</key>
+				<string>cjson.icns</string>
+				<key>CFBundleTypeName</key>
+				<string>Chemical JSON file</string>
 				<key>LSTypeIsPackage</key>
 				<false/>
 			</dict>
@@ -308,7 +323,7 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>CFBundleTypeName</key>
 				<string>Crystallographic Information file</string>
 				<key>LSTypeIsPackage</key>
@@ -554,7 +569,7 @@
 				<key>UTTypeDescription</key>
 				<string>CS ChemDraw XML Drawing</string>
 				<key>UTTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>UTTypeIdentifier</key>
 				<string>com.cambridgesoft.cdxml</string>
 				<key>UTTypeTagSpecification</key>
@@ -575,7 +590,7 @@
 				<key>UTTypeDescription</key>
 				<string>CS ChemDraw Drawing</string>
 				<key>UTTypeIconFile</key>
-				<string>AvogadroDocument.icns</string>
+				<string>doc.icns</string>
 				<key>UTTypeIdentifier</key>
 				<string>com.cambridgesoft.cdx</string>
 				<key>UTTypeTagSpecification</key>
