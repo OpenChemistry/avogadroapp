@@ -25,6 +25,7 @@
 #include <QtCore/QProcess>
 #include <QtCore/QTranslator>
 
+#include "application.h"
 #include "mainwindow.h"
 
 #ifdef Q_OS_MAC
@@ -53,7 +54,7 @@ int main(int argc, char* argv[])
   QApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
 #endif
 
-  QApplication app(argc, argv);
+  Avogadro::Application app(argc, argv);
 
   // Before we do much else, load translations
   // This ensures help messages and debugging info will be translated
