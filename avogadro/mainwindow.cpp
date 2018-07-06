@@ -386,11 +386,11 @@ void MainWindow::setupInterface()
 
 void MainWindow::closeEvent(QCloseEvent* e)
 {
+  writeSettings();
   if (!saveFileIfNeeded()) {
     e->ignore();
     return;
   }
-  writeSettings();
   QMainWindow::closeEvent(e);
 }
 
@@ -1381,7 +1381,7 @@ void MainWindow::buildMenu()
   path << "&File";
   // New
   QAction* action = new QAction(tr("&New"), this);
-  action->setShortcut(QKeySequence("Ctrl+N"));
+  action->setShortcut(QKeySequence::New);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-new"));
 #endif
@@ -1390,7 +1390,7 @@ void MainWindow::buildMenu()
   connect(action, SIGNAL(triggered()), SLOT(newMolecule()));
   // Open
   action = new QAction(tr("&Open..."), this);
-  action->setShortcut(QKeySequence("Ctrl+O"));
+  action->setShortcut(QKeySequence::Open);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-open"));
 #endif
@@ -1399,6 +1399,33 @@ void MainWindow::buildMenu()
   connect(action, SIGNAL(triggered()), SLOT(importFile()));
 
   // open recent 995 - 985
+  // Populate the recent file actions list.
+  path << "Open Recent";
+  // TODO: Check if files exist and if we actually have 10 items
+  for (int i = 0; i < 10; ++i) {
+    action = new QAction(QString::number(i), this);
+    m_actionRecentFiles.push_back(action);
+#ifndef Q_OS_MAC
+    action->setIcon(QIcon::fromTheme("document-open-recent"));
+#endif
+    action->setVisible(false);
+    m_menuBuilder->addAction(path, action, 995 - i);
+    connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
+  }
+  m_actionRecentFiles[0]->setText(tr("No recent files"));
+  m_actionRecentFiles[0]->setVisible(true);
+  m_actionRecentFiles[0]->setEnabled(false);
+
+  // close
+  // Open
+  action = new QAction(tr("&Close"), this);
+  action->setShortcut(QKeySequence::Close);
+#ifndef Q_OS_MAC
+  action->setIcon(QIcon::fromTheme("document-close"));
+#endif
+  m_menuBuilder->addAction(path, action, 981);
+  m_fileToolBar->addAction(action);
+  connect(action, SIGNAL(triggered()), SLOT(close()));
 
   // Separator (after open recent)
   action = new QAction("", this);
@@ -1406,7 +1433,7 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(path, action, 980);
   // Save
   action = new QAction(tr("&Save"), this);
-  action->setShortcut(QKeySequence("Ctrl+S"));
+  action->setShortcut(QKeySequence::Save);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-save"));
 #endif
@@ -1415,22 +1442,14 @@ void MainWindow::buildMenu()
   connect(action, SIGNAL(triggered()), SLOT(saveFile()));
   // Save As
   action = new QAction(tr("Save &As..."), this);
-  action->setShortcut(QKeySequence("Ctrl+Shift+S"));
+  action->setShortcut(QKeySequence::SaveAs);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-save-as"));
 #endif
   m_menuBuilder->addAction(path, action, 960);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
-  // Import
-  /*action = new QAction(tr("&Import"), this);
-  action->setShortcut(QKeySequence("Ctrl+Shift+O"));
-#ifndef Q_OS_MAC
-  action->setIcon(QIcon::fromTheme("document-import"));
-#endif
-  m_menuBuilder->addAction(path, action, 950);
-  m_fileToolBar->addAction(action);
-  connect(action, SIGNAL(triggered()), SLOT(importFile()));*/
+
   // Export
   QStringList exportPath = path;
   exportPath << tr("&Export");
@@ -1451,28 +1470,12 @@ void MainWindow::buildMenu()
 
   // Quit
   action = new QAction(tr("&Quit"), this);
-  action->setShortcut(QKeySequence("Ctrl+Q"));
+  action->setShortcut(QKeySequence::Quit);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("application-exit"));
 #endif
   m_menuBuilder->addAction(path, action, -200);
   connect(action, SIGNAL(triggered()), this, SLOT(close()));
-
-  // Populate the recent file actions list.
-  path << "Open Recent";
-  for (int i = 0; i < 10; ++i) {
-    action = new QAction(QString::number(i), this);
-    m_actionRecentFiles.push_back(action);
-#ifndef Q_OS_MAC
-    action->setIcon(QIcon::fromTheme("document-open-recent"));
-#endif
-    action->setVisible(false);
-    m_menuBuilder->addAction(path, action, 995 - i);
-    connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
-  }
-  m_actionRecentFiles[0]->setText(tr("No recent files"));
-  m_actionRecentFiles[0]->setVisible(true);
-  m_actionRecentFiles[0]->setEnabled(false);
 
   // Undo/redo
   QStringList editPath;
@@ -1481,12 +1484,12 @@ void MainWindow::buildMenu()
 #ifndef Q_OS_MAC
   m_undo->setIcon(QIcon::fromTheme("edit-undo"));
 #endif
-  m_undo->setShortcut(QKeySequence("Ctrl+Z"));
+  m_undo->setShortcut(QKeySequence::Undo);
   m_redo = new QAction(tr("&Redo"), this);
 #ifndef Q_OS_MAC
   m_redo->setIcon(QIcon::fromTheme("edit-redo"));
 #endif
-  m_redo->setShortcut(QKeySequence("Ctrl+Shift+Z"));
+  m_redo->setShortcut(QKeySequence::Redo);
   m_undo->setEnabled(false);
   m_redo->setEnabled(false);
   connect(m_undo, SIGNAL(triggered()), SLOT(undoEdit()));
@@ -1653,12 +1656,31 @@ QString MainWindow::generateFilterString(
 bool MainWindow::saveFileIfNeeded()
 {
   if (m_moleculeDirty) {
-    int response = QMessageBox::warning(
-      this, tr("Avogadro"),
-      tr("Do you want to save the changes you made in the document?\n\n"
-         "Your changes will be lost if you don't save them."),
-      QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel,
-      QMessageBox::Save);
+    // We're using the property interface to QMessageBox, rather than
+    // the static functions. This is more work, but gives us some nice
+    // fine-grain control. This helps both on Windows and Mac
+    // look more "native."
+    QPointer<QMessageBox> msgBox = new QMessageBox(QMessageBox::Warning,
+                       tr( "Avogadro" ),
+                       tr( "Do you want to save the changes you made in the document?" ),
+                       QMessageBox::Save | QMessageBox::Discard
+                       | QMessageBox::Cancel,
+                       this);
+
+    // On Mac, this will make a sheet relative to the window
+    // Unfortunately, it also closes the window when the box disappears!
+    // msgBox->setWindowModality(Qt::WindowModal);
+    // second line of text
+    msgBox->setInformativeText(tr("Your changes will be lost if you don't save them." ));
+    msgBox->setDefaultButton(QMessageBox::Save);
+
+    // OK, now add shortcuts for save and discard
+    msgBox->button(QMessageBox::Save)->setShortcut(QKeySequence(tr("Ctrl+S", "Save")));
+    msgBox->button(QMessageBox::Discard)->setShortcut(QKeySequence(tr("Ctrl+D", "Discard")));
+    //    msgBox->setButtonText(QMessageBox::Save,
+    //                          isDefaultFileName(d->fileName) ? tr("Save...") : tr("Save"));
+
+    int response = msgBox->exec();
 
     switch (static_cast<QMessageBox::StandardButton>(response)) {
       case QMessageBox::Save:
