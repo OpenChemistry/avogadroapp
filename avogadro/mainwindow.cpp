@@ -253,14 +253,14 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
     ExtensionPlugin* extension = factory->createInstance();
     if (extension) {
       extension->setParent(this);
-      connect(this, SIGNAL(moleculeChanged(QtGui::Molecule*)), extension,
-              SLOT(setMolecule(QtGui::Molecule*)));
-      connect(extension, SIGNAL(moleculeReady(int)), SLOT(moleculeReady(int)));
-      connect(extension, SIGNAL(fileFormatsReady()), SLOT(fileFormatsReady()));
-      connect(extension, SIGNAL(requestActiveTool(QString)),
-              SLOT(setActiveTool(QString)));
-      connect(extension, SIGNAL(requestActiveDisplayTypes(QStringList)),
-              SLOT(setActiveDisplayTypes(QStringList)));
+      connect(this, &MainWindow::moleculeChanged, extension,
+              &QtGui::ExtensionPlugin::setMolecule);
+      connect(extension, &QtGui::ExtensionPlugin::moleculeReady, this, &MainWindow::moleculeReady);
+      connect(extension, &QtGui::ExtensionPlugin::fileFormatsReady, this, &MainWindow::fileFormatsReady);
+      connect(extension, &QtGui::ExtensionPlugin::requestActiveTool,
+              this, &MainWindow::setActiveTool);
+      connect(extension, &QtGui::ExtensionPlugin::requestActiveDisplayTypes,
+              this, &MainWindow::setActiveDisplayTypes);
       buildMenu(extension);
       m_extensions.append(extension);
     }
@@ -277,14 +277,14 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   if (!fileNames.isEmpty()) {
     m_queuedFiles = fileNames;
     // Give the plugins 5 seconds before timing out queued files.
-    QTimer::singleShot(5000, this, SLOT(clearQueuedFiles()));
+    QTimer::singleShot(5000, this, &MainWindow::clearQueuedFiles);
   } else {
     newMolecule();
   }
 
 #ifdef Avogadro_ENABLE_RPC
   // Wait a few seconds to attempt registering with MoleQueue.
-  QTimer::singleShot(3000, this, SLOT(registerMoleQueue()));
+  QTimer::singleShot(3000, this, &MainWindow::registerMoleQueue);
 #endif // Avogadro_ENABLE_RPC
 
   statusBar()->showMessage(tr("Ready..."), 2000);
@@ -356,10 +356,10 @@ void MainWindow::setupInterface()
   m_sceneTreeView->setAlternatingRowColors(true);
   m_sceneTreeView->header()->stretchLastSection();
   m_sceneTreeView->header()->setVisible(false);
-  connect(m_sceneTreeView, SIGNAL(activated(QModelIndex)),
-          SLOT(sceneItemActivated(QModelIndex)));
-  connect(m_sceneTreeView, SIGNAL(clicked(QModelIndex)),
-          SLOT(sceneItemActivated(QModelIndex)));
+  connect(m_sceneTreeView, &QAbstractItemView::activated,
+          this, &MainWindow::sceneItemActivated);
+  connect(m_sceneTreeView, &QAbstractItemView::clicked,
+          this, &MainWindow::sceneItemActivated);
 
   // Create the molecule model
   m_moleculeModel = new QtGui::MoleculeModel(this);
@@ -371,17 +371,17 @@ void MainWindow::setupInterface()
   m_moleculeTreeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
   m_moleculeTreeView->header()->setSectionResizeMode(1, QHeaderView::Fixed);
   m_moleculeTreeView->header()->resizeSection(1, 30);
-  connect(m_moleculeTreeView, SIGNAL(activated(QModelIndex)),
-          SLOT(moleculeActivated(QModelIndex)));
-  connect(m_moleculeTreeView, SIGNAL(clicked(QModelIndex)),
-          SLOT(moleculeActivated(QModelIndex)));
+  connect(m_moleculeTreeView, &QAbstractItemView::activated,
+          this, &MainWindow::moleculeActivated);
+  connect(m_moleculeTreeView, &QAbstractItemView::clicked,
+          this, &MainWindow::moleculeActivated);
 
   viewActivated(glWidget);
   buildTools();
   // Connect to the invalid context signal, check whether GL is initialized.
   // connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
-  connect(m_multiViewWidget, SIGNAL(activeWidgetChanged(QWidget*)),
-          SLOT(viewActivated(QWidget*)));
+  connect(m_multiViewWidget, &QtGui::MultiViewWidget::activeWidgetChanged,
+          this, &MainWindow::viewActivated);
 }
 
 void MainWindow::closeEvent(QCloseEvent* e)
@@ -437,7 +437,7 @@ void MainWindow::setMolecule(Molecule* mol)
     QString targetToolName =
       m_molecule->atomCount() > 0 ? "Navigator" : "Editor";
     setActiveTool(targetToolName);
-    connect(m_molecule, SIGNAL(changed(uint)), SLOT(markMoleculeDirty()));
+    connect(m_molecule, &QtGui::Molecule::changed, this, &MainWindow::markMoleculeDirty);
   }
 
   emit moleculeChanged(m_molecule);
@@ -623,10 +623,10 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
     tr("Opening file '%1'\nwith '%2'").arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
   m_progressDialog->setCancelButton(nullptr);
-  connect(m_fileReadThread, SIGNAL(started()), m_threadedReader, SLOT(read()));
-  connect(m_threadedReader, SIGNAL(finished()), m_fileReadThread, SLOT(quit()));
-  connect(m_threadedReader, SIGNAL(finished()),
-          SLOT(backgroundReaderFinished()));
+  connect(m_fileReadThread, &QThread::started, m_threadedReader, &BackgroundFileFormat::read);
+  connect(m_threadedReader, &BackgroundFileFormat::finished, m_fileReadThread, &QThread::quit);
+  connect(m_threadedReader, &BackgroundFileFormat::finished,
+          this, &MainWindow::backgroundReaderFinished);
 
   // Start the file operation
   m_fileReadThread->start();
@@ -734,7 +734,7 @@ void MainWindow::rendererInvalid()
   // Process events, and then set a single shot timer. This is needed to ensure
   // the RPC server also exits cleanly.
   QApplication::processEvents();
-  QTimer::singleShot(500, this, SLOT(close()));
+  QTimer::singleShot(500, this, &QWidget::close);
 }
 
 void MainWindow::moleculeActivated(const QModelIndex& idx)
@@ -1146,22 +1146,22 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
     tr("Writing file '%1'\nwith '%2'").arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
   m_progressDialog->setCancelButton(nullptr);
-  connect(m_fileWriteThread, SIGNAL(started()), m_threadedWriter,
-          SLOT(write()));
-  connect(m_threadedWriter, SIGNAL(finished()), m_fileWriteThread,
-          SLOT(quit()));
+  connect(m_fileWriteThread, &QThread::started, m_threadedWriter,
+          &BackgroundFileFormat::write);
+  connect(m_threadedWriter, &BackgroundFileFormat::finished, m_fileWriteThread,
+          &QThread::quit);
 
   // Start the file operation
   m_progressDialog->show();
   if (async) {
-    connect(m_threadedWriter, SIGNAL(finished()),
-            SLOT(backgroundWriterFinished()));
+    connect(m_threadedWriter, &BackgroundFileFormat::finished,
+            this, &MainWindow::backgroundWriterFinished);
     m_fileWriteThread->start();
     return true;
   } else {
     QTimer::singleShot(0, m_fileWriteThread, SLOT(start()));
     QEventLoop loop;
-    connect(m_fileWriteThread, SIGNAL(finished()), &loop, SLOT(quit()));
+    connect(m_fileWriteThread, &QThread::finished, &loop, &QEventLoop::quit);
     loop.exec();
     return backgroundWriterFinished();
   }
@@ -1387,7 +1387,7 @@ void MainWindow::buildMenu()
 #endif
   m_menuBuilder->addAction(path, action, 999);
   m_fileToolBar->addAction(action);
-  connect(action, SIGNAL(triggered()), SLOT(newMolecule()));
+  connect(action, &QAction::triggered, this, &MainWindow::newMolecule);
   // Open
   action = new QAction(tr("&Open..."), this);
   action->setShortcut(QKeySequence::Open);
@@ -1396,7 +1396,7 @@ void MainWindow::buildMenu()
 #endif
   m_menuBuilder->addAction(path, action, 998);
   m_fileToolBar->addAction(action);
-  connect(action, SIGNAL(triggered()), SLOT(importFile()));
+  connect(action, &QAction::triggered, this, &MainWindow::importFile);
 
   // open recent 995 - 985
   // Populate the recent file actions list.
@@ -1410,7 +1410,7 @@ void MainWindow::buildMenu()
 #endif
     action->setVisible(false);
     m_menuBuilder->addAction(path, action, 995 - i);
-    connect(action, SIGNAL(triggered()), SLOT(openRecentFile()));
+    connect(action, &QAction::triggered, this, &MainWindow::openRecentFile);
   }
   m_actionRecentFiles[0]->setText(tr("No recent files"));
   m_actionRecentFiles[0]->setVisible(true);
@@ -1425,7 +1425,7 @@ void MainWindow::buildMenu()
 #endif
   m_menuBuilder->addAction(path, action, 981);
   m_fileToolBar->addAction(action);
-  connect(action, SIGNAL(triggered()), SLOT(close()));
+  connect(action, &QAction::triggered, this, &QWidget::close);
 
   // Separator (after open recent)
   action = new QAction("", this);
@@ -1439,7 +1439,7 @@ void MainWindow::buildMenu()
 #endif
   m_menuBuilder->addAction(path, action, 965);
   m_fileToolBar->addAction(action);
-  connect(action, SIGNAL(triggered()), SLOT(saveFile()));
+  connect(action, &QAction::triggered, this, &MainWindow::saveFile);
   // Save As
   action = new QAction(tr("Save &As..."), this);
   action->setShortcut(QKeySequence::SaveAs);
@@ -1459,14 +1459,14 @@ void MainWindow::buildMenu()
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
-  connect(action, SIGNAL(triggered()), SLOT(exportFile()));
+  connect(action, &QAction::triggered, this, &MainWindow::exportFile);
   // Export graphics
   action = new QAction(tr("&Graphics..."), this);
   m_menuBuilder->addAction(exportPath, action, 10);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
-  connect(action, SIGNAL(triggered()), SLOT(exportGraphics()));
+  connect(action, &QAction::triggered, this, &MainWindow::exportGraphics);
 
   // Quit
   action = new QAction(tr("&Quit"), this);
@@ -1475,7 +1475,7 @@ void MainWindow::buildMenu()
   action->setIcon(QIcon::fromTheme("application-exit"));
 #endif
   m_menuBuilder->addAction(path, action, -200);
-  connect(action, SIGNAL(triggered()), this, SLOT(close()));
+  connect(action, &QAction::triggered, this, &QWidget::close);
 
   // Undo/redo
   QStringList editPath;
@@ -1492,8 +1492,8 @@ void MainWindow::buildMenu()
   m_redo->setShortcut(QKeySequence::Redo);
   m_undo->setEnabled(false);
   m_redo->setEnabled(false);
-  connect(m_undo, SIGNAL(triggered()), SLOT(undoEdit()));
-  connect(m_redo, SIGNAL(triggered()), SLOT(redoEdit()));
+  connect(m_undo, &QAction::triggered, this, &MainWindow::undoEdit);
+  connect(m_redo, &QAction::triggered, this, &MainWindow::redoEdit);
   m_menuBuilder->addAction(editPath, m_undo, 1);
   m_menuBuilder->addAction(editPath, m_redo, 0);
 
@@ -1502,27 +1502,27 @@ void MainWindow::buildMenu()
   viewPath << tr("&View");
   action = new QAction(tr("Set background color..."), this);
   m_menuBuilder->addAction(viewPath, action, 100);
-  connect(action, SIGNAL(triggered()), SLOT(setBackgroundColor()));
+  connect(action, &QAction::triggered, this, &MainWindow::setBackgroundColor);
 
   viewPath << tr("Projection");
   m_viewPerspective = new QAction(tr("Perspective"), this);
   m_viewPerspective->setCheckable(true);
   m_viewPerspective->setChecked(true);
   m_menuBuilder->addAction(viewPath, m_viewPerspective, 10);
-  connect(m_viewPerspective, SIGNAL(triggered()),
-          SLOT(setProjectionPerspective()));
+  connect(m_viewPerspective, &QAction::triggered,
+          this, &MainWindow::setProjectionPerspective);
 
   m_viewOrthographic = new QAction(tr("Orthographic"), this);
   m_viewOrthographic->setCheckable(true);
   m_viewOrthographic->setChecked(false);
   m_menuBuilder->addAction(viewPath, m_viewOrthographic, 10);
-  connect(m_viewOrthographic, SIGNAL(triggered()),
-          SLOT(setProjectionOrthographic()));
+  connect(m_viewOrthographic, &QAction::triggered,
+          this, &MainWindow::setProjectionOrthographic);
 
-  connect(m_viewPerspective, SIGNAL(triggered()), m_viewOrthographic,
-          SLOT(toggle()));
-  connect(m_viewOrthographic, SIGNAL(triggered()), m_viewPerspective,
-          SLOT(toggle()));
+  connect(m_viewPerspective, &QAction::triggered, m_viewOrthographic,
+          &QAction::toggle);
+  connect(m_viewOrthographic, &QAction::triggered, m_viewPerspective,
+          &QAction::toggle);
 
   // Periodic table.
   QStringList extensionsPath;
@@ -1530,7 +1530,7 @@ void MainWindow::buildMenu()
   action = new QAction("&Periodic Table", this);
   m_menuBuilder->addAction(extensionsPath, action, 0);
   QtGui::PeriodicTableView* periodicTable = new QtGui::PeriodicTableView(this);
-  connect(action, SIGNAL(triggered()), periodicTable, SLOT(show()));
+  connect(action, &QAction::triggered, periodicTable, &QWidget::show);
 
   QStringList helpPath;
   helpPath << tr("&Help");
@@ -1539,7 +1539,7 @@ void MainWindow::buildMenu()
   about->setIcon(QIcon::fromTheme("help-about"));
 #endif
   m_menuBuilder->addAction(helpPath, about, 20);
-  connect(about, SIGNAL(triggered()), SLOT(showAboutDialog()));
+  connect(about, &QAction::triggered, this, &MainWindow::showAboutDialog);
 
   // Now actually add all menu entries.
   m_menuBuilder->buildMenuBar(menuBar());
@@ -1586,7 +1586,7 @@ void MainWindow::buildTools()
     action->setData(toolPlugin->objectName());
     qDebug() << toolPlugin->objectName() << "added";
     toolActions->addAction(action);
-    connect(action, SIGNAL(triggered()), SLOT(toolActivated()));
+    connect(action, &QAction::triggered, this, &MainWindow::toolActivated);
     ++index;
   }
 
