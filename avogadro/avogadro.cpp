@@ -20,6 +20,11 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMessageBox>
 
+#include <QtCore/QDebug>
+#include <QtCore/QLibraryInfo>
+#include <QtCore/QProcess>
+#include <QtCore/QTranslator>
+
 #include "application.h"
 #include "mainwindow.h"
 
@@ -51,6 +56,67 @@ int main(int argc, char* argv[])
 
   Avogadro::Application app(argc, argv);
 
+  // Before we do much else, load translations
+  // This ensures help messages and debugging info will be translated
+  QStringList translationPaths;
+  // check environment variable and local paths
+  foreach (const QString& variable, QProcess::systemEnvironment()) {
+    QStringList split1 = variable.split('=');
+    if (split1[0] == "AVOGADRO_TRANSLATIONS") {
+      foreach (const QString& path, split1[1].split(':'))
+        translationPaths << path;
+    }
+  }
+
+  translationPaths << QCoreApplication::applicationDirPath() +
+                        "/../share/avogadro/i18n/";
+
+  // Load Qt translations first
+  qDebug() << "Locale: " << QLocale::system().name();
+
+  bool tryLoadingQtTranslations = false;
+  QTranslator qtTranslator(0);
+  if (qtTranslator.load(
+        QLocale::system(), "qt", "_",
+        QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    qDebug() << " translation success";
+    app.installTranslator(&qtTranslator);
+  } else {
+    // Check other paths.
+    tryLoadingQtTranslations = true;
+  }
+
+  QTranslator qtBaseTranslator(0);
+  qDebug() << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+  if (qtTranslator.load(
+        QLocale::system(), "qtbase", "_",
+        QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+    qDebug() << " translation success";
+    app.installTranslator(&qtTranslator);
+  }
+
+  // TODO: need to separate avogadrolibs from app
+  QTranslator avoTranslator(0);
+  foreach (const QString& translationPath, translationPaths) {
+    // We can't find the normal Qt translations (maybe we're in a "bundle"?)
+    if (tryLoadingQtTranslations) {
+      if (qtTranslator.load(QLocale::system(), "qt", "_", translationPath)) {
+        app.installTranslator(&qtTranslator);
+        tryLoadingQtTranslations = false; // already loaded
+      }
+      if (qtBaseTranslator.load(QLocale::system(), "qtbase", "_",
+                                translationPath)) {
+        app.installTranslator(&qtBaseTranslator);
+      }
+    }
+
+    if (avoTranslator.load(QLocale::system(), "avogadrolibs", "_",
+                           translationPath)) {
+      app.installTranslator(&avoTranslator);
+      qDebug() << "Translation successfully loaded.";
+    }
+  }
+
   // Check for valid OpenGL support.
   auto offscreen = new QOffscreenSurface;
   offscreen->create();
@@ -62,8 +128,10 @@ int main(int argc, char* argv[])
   delete offscreen;
 
   if (!contextIsValid) {
-    QMessageBox::information(0, "Avogadro",
-                             "This system does not support OpenGL!");
+    QMessageBox::information(
+      0, QCoreApplication::translate("main.cpp", "Avogadro"),
+      QCoreApplication::translate("main.cpp",
+                                  "This system does not support OpenGL."));
     return 1;
   }
 
