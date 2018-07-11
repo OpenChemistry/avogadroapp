@@ -46,13 +46,13 @@ RpcListener::RpcListener(QObject* parent_)
 
   connect(
     m_connectionListener,
-    SIGNAL(connectionError(MoleQueue::ConnectionListener::Error, QString)),
-    SLOT(connectionError(MoleQueue::ConnectionListener::Error, QString)));
+    &MoleQueue::ConnectionListener::connectionError,
+    this, &RpcListener::connectionError);
 
   m_rpc->addConnectionListener(m_connectionListener);
 
-  connect(m_rpc, SIGNAL(messageReceived(const MoleQueue::Message&)), this,
-          SLOT(messageReceived(const MoleQueue::Message&)));
+  connect(m_rpc, &MoleQueue::JsonRpc::messageReceived, this,
+          &RpcListener::messageReceived);
 
   // Find the main window.
   m_window = 0;
@@ -61,8 +61,8 @@ RpcListener::RpcListener(QObject* parent_)
       break;
 
   if (m_window) {
-    connect(this, SIGNAL(callSetMolecule(Avogadro::QtGui::Molecule*)), m_window,
-            SLOT(setMolecule(Avogadro::QtGui::Molecule*)));
+    connect(this, &RpcListener::callSetMolecule, m_window,
+            &MainWindow::setMolecule);
   }
 }
 
@@ -91,8 +91,8 @@ void RpcListener::connectionError(MoleQueue::ConnectionListener::Error error,
     if (result) {
       QJsonObject request(m_pingClient->emptyRequest());
       request["method"] = QLatin1String("internalPing");
-      connect(m_pingClient, SIGNAL(resultReceived(QJsonObject)),
-              SLOT(receivePingResponse(QJsonObject)));
+      connect(m_pingClient, &MoleQueue::JsonRpcClient::resultReceived,
+              this, &RpcListener::receivePingResponse);
       result = m_pingClient->sendRequest(request);
     }
 
