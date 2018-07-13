@@ -1398,26 +1398,6 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::importFile);
 
-  // open recent 995 - 985
-  // Populate the recent file actions list.
-  path << "Open Recent";
-  // TODO: Check if files exist and if we actually have 10 items
-  for (int i = 0; i < 10; ++i) {
-    action = new QAction(QString::number(i), this);
-    m_actionRecentFiles.push_back(action);
-#ifndef Q_OS_MAC
-    action->setIcon(QIcon::fromTheme("document-open-recent"));
-#endif
-    action->setVisible(false);
-    m_menuBuilder->addAction(path, action, 995 - i);
-    connect(action, &QAction::triggered, this, &MainWindow::openRecentFile);
-  }
-  m_actionRecentFiles[0]->setText(tr("No recent files"));
-  m_actionRecentFiles[0]->setVisible(true);
-  m_actionRecentFiles[0]->setEnabled(false);
-
-  // close
-  // Open
   action = new QAction(tr("&Close"), this);
   action->setShortcut(QKeySequence::Close);
 #ifndef Q_OS_MAC
@@ -1476,6 +1456,24 @@ void MainWindow::buildMenu()
 #endif
   m_menuBuilder->addAction(path, action, -200);
   connect(action, &QAction::triggered, this, &QWidget::close);
+
+  // open recent 995 - 985
+  // Populate the recent file actions list.
+  path << "Open Recent";
+  // TODO: Check if files exist and if we actually have 10 items
+  for (int i = 0; i < 10; ++i) {
+    action = new QAction(QString::number(i), this);
+    m_actionRecentFiles.push_back(action);
+#ifndef Q_OS_MAC
+    action->setIcon(QIcon::fromTheme("document-open-recent"));
+#endif
+    action->setVisible(false);
+    m_menuBuilder->addAction(path, action, 995 - i);
+    connect(action, &QAction::triggered, this, &MainWindow::openRecentFile);
+  }
+  m_actionRecentFiles[0]->setText(tr("No recent files"));
+  m_actionRecentFiles[0]->setVisible(true);
+  m_actionRecentFiles[0]->setEnabled(false);
 
   // Undo/redo
   QStringList editPath;
