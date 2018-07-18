@@ -33,7 +33,7 @@ if(APPLE)
   set(INSTALL_BUNDLE_FILES ON)
 else()
   option(INSTALL_BUNDLE_FILES "Add install rules to bundle files" OFF)
-endif
+endif()
 if(INSTALL_BUNDLE_FILES)
   # First the AvogadroLibs files that are not detected.
   find_package(AvogadroLibs REQUIRED NO_MODULE)
