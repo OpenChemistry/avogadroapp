@@ -29,9 +29,10 @@ set(CPACK_PROJECT_CONFIG_FILE
 
 # Should we add extra install rules to make a self-contained bundle, this is
 # usually only required when attempting to create self-contained installers.
-option(INSTALL_BUNDLE_FILES "Add install rules to bundle files" OFF)
 if(APPLE)
   set(INSTALL_BUNDLE_FILES ON)
+else()
+  option(INSTALL_BUNDLE_FILES "Add install rules to bundle files" OFF)
 endif
 if(INSTALL_BUNDLE_FILES)
   # First the AvogadroLibs files that are not detected.
