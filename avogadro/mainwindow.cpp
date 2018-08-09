@@ -38,6 +38,7 @@
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
 #include <avogadro/qtgui/toolplugin.h>
+#include <avogadro/qtopengl/activeobjects.h>
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/qtplugins/pluginmanager.h>
 #include <avogadro/rendering/glrenderer.h>
@@ -200,6 +201,7 @@ using QtGui::ScenePluginFactory;
 using QtGui::ScenePluginModel;
 using QtGui::ToolPlugin;
 using QtGui::ToolPluginFactory;
+using QtOpenGL::ActiveObjects;
 using QtOpenGL::GLWidget;
 using QtPlugins::PluginManager;
 using std::string;
@@ -310,6 +312,7 @@ void MainWindow::setupInterface()
   setCentralWidget(m_multiViewWidget);
   GLWidget* glWidget = new GLWidget(this);
   m_multiViewWidget->addWidget(glWidget);
+  ActiveObjects::instance().setActiveGLWidget(glWidget);
 
   // Our tool dock.
   m_toolDock = new QDockWidget(tr("Tool"), this);
