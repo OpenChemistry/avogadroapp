@@ -1674,6 +1674,9 @@ bool MainWindow::saveFileIfNeeded()
     // second line of text
     msgBox->setInformativeText(tr("Your changes will be lost if you don't save them." ));
     msgBox->setDefaultButton(QMessageBox::Save);
+#ifdef Q_OS_MAC
+    msgBox->setWindowModality(Qt::WindowModal);
+#endif
 
     // OK, now add shortcuts for save and discard
     msgBox->button(QMessageBox::Save)->setShortcut(QKeySequence(tr("Ctrl+S", "Save")));
