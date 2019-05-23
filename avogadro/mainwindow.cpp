@@ -447,6 +447,7 @@ void MainWindow::setMolecule(Molecule* mol)
   markMoleculeClean();
   updateWindowTitle();
   m_moleculeModel->setActiveMolecule(m_molecule);
+  ActiveObjects::instance().setActiveMolecule(m_molecule);
 
   if (oldMolecule)
     oldMolecule->disconnect(this);
@@ -817,6 +818,7 @@ bool populateTools(T* glWidget)
 
 void MainWindow::viewActivated(QWidget* widget)
 {
+  ActiveObjects::instance().setActiveWidget(widget);
   if (GLWidget* glWidget = qobject_cast<GLWidget*>(widget)) {
     bool firstRun = populatePluginModel(glWidget->sceneModel());
     m_sceneTreeView->setModel(&glWidget->sceneModel());
@@ -850,6 +852,7 @@ void MainWindow::viewActivated(QWidget* widget)
       emit moleculeChanged(m_molecule);
       m_moleculeModel->setActiveMolecule(m_molecule);
     }
+    ActiveObjects::instance().setActiveGLWidget(glWidget);
   }
 #ifdef AVO_USE_VTK
   else if (vtkGLWidget* vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
