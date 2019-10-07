@@ -1059,9 +1059,9 @@ bool MainWindow::saveFile(bool async)
 
 bool MainWindow::saveFileAs(bool async)
 {
-  QString filter(QString("%1 (*.cml);;%2 (*.cjson)")
-                   .arg(tr("Chemical Markup Language"))
-                   .arg(tr("Chemical JSON")));
+  QString filter(QString("%1 (*.cjson);;%2 (*.cml)")
+                   .arg(tr("Chemical JSON"))
+                   .arg(tr("Chemical Markup Language")));
 
   QSettings settings;
   QString dir = settings.value("MainWindow/lastSaveDir").toString();
@@ -1079,10 +1079,10 @@ bool MainWindow::saveFileAs(bool async)
   // Create one of our writers to save the file:
   QString extension = info.suffix().toLower();
   FileFormat* writer = nullptr;
-  if (extension == "cml" || extension.isEmpty())
-    writer = new Io::CmlFormat;
-  else if (extension == "cjson")
+  if (extension == "cjson" || extension.isEmpty())
     writer = new Io::CjsonFormat;
+  else if (extension == "cml")
+    writer = new Io::CmlFormat;
   if (extension.isEmpty())
     fileName += ".cml";
 
