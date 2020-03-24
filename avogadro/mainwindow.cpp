@@ -436,7 +436,7 @@ void MainWindow::setMolecule(Molecule* mol)
 
   // If the molecule is empty, make the editor active. Otherwise, use the
   // navigator tool.
-  if (m_molecule) {
+  if (!m_molecule) {
     QString targetToolName =
       m_molecule->atomCount() > 0 ? "Navigator" : "Editor";
     setActiveTool(targetToolName);
