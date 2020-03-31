@@ -827,6 +827,7 @@ void MainWindow::viewActivated(QWidget* widget)
     foreach (ExtensionPlugin* extension, m_extensions) {
       extension->setScene(&glWidget->renderer().scene());
       extension->setCamera(&glWidget->renderer().camera());
+      extension->setActiveWidget(glWidget);
     }
 
     if (firstRun) {
