@@ -1,0 +1,91 @@
+app-id: org.OpenChemistry.avogadro
+runtime: org.kde.Platform
+runtime-version: '5.14'
+sdk: org.kde.Sdk
+command: avogadro
+finish-args: 
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+modules:
+- name: eigen
+  buildsystem: cmake
+  builddir: true
+  sources:
+    - type: archive
+      url: https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.gz
+      sha256: d56fbad95abf993f8af608484729e3d87ef611dd85b3380a8bad1d5cbc373a57
+- name: spglib
+  buildsystem: cmake
+  builddir: true
+  sources:
+    - type: archive
+      url: https://github.com/atztogo/spglib/archive/v1.10.4.tar.gz
+      sha256: 6a15a324a821ad9d3e615e120d9c5e704e284d8eb1f076aa21741a23fbcf08df
+    - type: patch
+      path: spglib.patch
+- name: mmtf
+  buildsystem: cmake
+  builddir: true
+  sources:
+    - type: archive
+      url: https://github.com/rcsb/mmtf-cpp/archive/v1.0.0.tar.gz
+      sha256: 881f69c4bb56605fa63fd5ca50842facc4947f686cbf678ad04930674d714f40
+- name: glew
+  no-autogen: true
+  make-args:
+    - GLEW_PREFIX=/app
+    - GLEW_DEST=/app
+    - LIBDIR=/app/lib
+  make-install-args:
+    - GLEW_PREFIX=/app
+    - GLEW_DEST=/app
+    - LIBDIR=/app/lib
+  sources:
+    - type: archive
+      url: https://downloads.sourceforge.net/project/glew/glew/2.1.0/glew-2.1.0.tgz
+      sha256: 04de91e7e6763039bc11940095cd9c7f880baba82196a7765f727ac05a993c95
+  cleanup:
+    - /include
+    - /lib/pkgconfig
+    - /lib/*.a
+- name: libglvnd
+  buildsystem: autotools
+  builddir: true
+  sources:
+    - type: archive
+      url: https://gitlab.freedesktop.org/glvnd/libglvnd/-/archive/v1.3.1/libglvnd-v1.3.1.tar.gz
+      sha256: b26c931ff79feced0d1ac69332797a08427308fa85541282ee9995680c880b24
+- name: libmsym
+  buildsystem: cmake
+  builddir: true
+  sources:
+    - type: archive      
+      url: https://github.com/mcodev31/libmsym/archive/v0.2.3-paper.tar.gz
+      sha256: 3741ebe163cf40696570d6b62e4834ca587d43dcac9de713994cc5e2960fb8fd
+- name: molequeue
+  buildsystem: cmake
+  builddir: true
+  sources:
+    - type: archive
+      url: https://github.com/OpenChemistry/molequeue/archive/0.9.0.tar.gz
+      sha256: 7dd234742c8d73be95281fedf4ed9d09648ecc351afb5f098cd32f48c3df3bd5
+- name: avogadrolib
+  buildsystem: cmake
+  build-options:
+    - build 
+    - config 1.93.0 
+  sources: 
+    - type: archive
+      url: https://github.com/OpenChemistry/avogadrolibs/archive/1.93.0.tar.gz
+      sha256: 01fea1f3b21c69091c60739616f86123db92f445e4c9ca53f1dec09624aceab4
+- name: avogadroapp
+  buildsystem: cmake
+  build-options:
+    - build 
+    - config 1.93.0 
+  sources: 
+    - type: archive
+      url: https://github.com/OpenChemistry/avogadroapp/archive/1.93.0.tar.gz
+      sha256: 8cf913058aff58fe588531618a680d82401fbfe3f21e4783a44979f4a2dd5586
