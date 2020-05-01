@@ -1,0 +1,23 @@
+--- spglib-1.10.4/CMakeLists.txt	2018-08-01 05:51:47.000000000 +0200
++++ spglib-1.10.4/CMakeLists_patch.txt	2020-04-27 22:32:14.441701633 +0200
+@@ -50,17 +50,17 @@
+ add_library(symspg SHARED ${SOURCES})
+ set_property(TARGET symspg PROPERTY VERSION ${serial})
+ set_property(TARGET symspg PROPERTY SOVERSION ${soserial})
+-install(TARGETS symspg LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
++install(TARGETS symspg LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/spglib)
+ 
+ # Static link library
+ add_library(symspg_static STATIC ${SOURCES})
+ set_property(TARGET symspg_static PROPERTY VERSION ${serial})
+ set_property(TARGET symspg_static PROPERTY SOVERSION ${soserial})
+ set_property(TARGET symspg_static PROPERTY OUTPUT_NAME symspg)
+-install(TARGETS symspg_static ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
++install(TARGETS symspg_static ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/spglib)
+ 
+ # Header file
+-install(FILES ${PROJECT_SOURCE_DIR}/src/spglib.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
++install(FILES ${PROJECT_SOURCE_DIR}/src/spglib.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/spglib)
+ 
+ # make check
+ enable_testing()
