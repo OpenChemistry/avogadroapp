@@ -867,12 +867,10 @@ msgstr ""
 "jacob.benoit.1@gmail.com,,,louis.ricard@polytechnique.edu,nizarus@nizarus.tn,"
 "pierre.slamich@gmail.com"
 
-#, qt-format
 #~ msgctxt "%1 is the Git revision number."
 #~ msgid "(Git revision: %1)"
 #~ msgstr "(Révision Git : %1)"
 
-#, qt-format
 #~ msgid ""
 #~ "<h3>%1</h3><br/><br/>Application Version: %2<br/><br/>Library Version: "
 #~ "%3<br/><br/>Open Babel Version: %4"
@@ -880,7 +878,6 @@ msgstr ""
 #~ "<h3>%1</h3><br/><br/>Version de l'application : %2<br/><br/>Version de la "
 #~ "librairie : %3<br/><br/>Version d'Open Babel : %4"
 
-#, qt-format
 #~ msgid ""
 #~ "<br/><br/>Qt Version: %1<br/><br/>For more information check the <a href="
 #~ "\"http://avogadro.cc/\">Avogadro homepage</a>.<br/><br/>The program is "
@@ -973,17 +970,14 @@ msgstr ""
 #~ msgid "XYZ"
 #~ msgstr "XYZ"
 
-#, qt-format
 #~ msgctxt "%1 is a filename"
 #~ msgid "Loading %1..."
 #~ msgstr "Lecture de %1..."
 
 # %1 is a filename
-#, qt-format
 #~ msgid "Loading %1..."
 #~ msgstr "Chargement de %1..."
 
-#, qt-format
 #~ msgid "Reading molecular file failed, file %1."
 #~ msgstr "La lecture du fichier moléculaire a échoué, fichier %1."
 
@@ -1044,7 +1038,6 @@ msgstr ""
 #~ msgid "Save Molecule As"
 #~ msgstr "Enregistrer la molécule sous"
 
-#, qt-format
 #~ msgid "Untitled %1"
 #~ msgstr "Sans titre %1"
 
@@ -1060,11 +1053,9 @@ msgstr ""
 #~ msgid "Copy failed (mdl unavailable)."
 #~ msgstr "La copie a échoué (mdl non disponible)."
 
-#, qt-format
 #~ msgid "View %1"
 #~ msgstr "Vue %1"
 
-#, qt-format
 #~ msgctxt "View number (from 1 on)"
 #~ msgid "View %1"
 #~ msgstr "Vue %1"
@@ -1085,7 +1076,6 @@ msgstr ""
 #~ msgid "[*]Avogadro"
 #~ msgstr "[*]Avogadro"
 
-#, qt-format
 #~ msgctxt "Window title: %1 is file name, %2 is Avogadro"
 #~ msgid "%1[*] - %2"
 #~ msgstr "%1[*] - %2"
@@ -1145,7 +1135,6 @@ msgstr ""
 #~ msgid "Residues"
 #~ msgstr "Résidus"
 
-#, qt-format
 #~ msgid "bond %1"
 #~ msgstr "liaison %1"
 
@@ -1401,18 +1390,15 @@ msgstr ""
 #~ msgid "Open trajectory file"
 #~ msgstr "Ouvrir fichier de trajectoire"
 
-#, qt-format
 #~ msgid "%1/%2"
 #~ msgstr "%1/%2"
 
 #~ msgid "Animation..."
 #~ msgstr "Animation..."
 
-#, qt-format
 #~ msgid "Cannot read file format of file %1."
 #~ msgstr "Impossible de lire le format du fichier %1."
 
-#, qt-format
 #~ msgid "Read trajectory file %1 failed."
 #~ msgstr "La lecture du fichier de trajectoire %1 a échoué."
 
@@ -1473,7 +1459,6 @@ msgstr ""
 #~ msgid "AutoOpt: Could not setup force field...."
 #~ msgstr "Auto-optimisation: impossible de configurer le champ de force...."
 
-#, qt-format
 #~ msgid "AutoOpt: E = %1 %2 (dE = %3)"
 #~ msgstr "AutoOpt: E = %1 %2 (dE = %3)"
 
@@ -1548,7 +1533,6 @@ msgstr ""
 #~ msgid "Bond Centric Manipulate"
 #~ msgstr "Manipulation des liaisons"
 
-#, qt-format
 #~ msgid "Angle: %1 %2"
 #~ msgstr "Angle: %1 %2"
 
@@ -1573,15 +1557,12 @@ msgstr ""
 #~ msgid "Measure"
 #~ msgstr "Mesure"
 
-#, qt-format
 #~ msgid "Distance (1->2): %1 %2"
 #~ msgstr "Distance (1->2): %1 %2"
 
-#, qt-format
 #~ msgid "Distance (2->3): %1 %2"
 #~ msgstr "Distance (2->3): %1 %2"
 
-#, qt-format
 #~ msgid "Distance (3->4): %1 %2"
 #~ msgstr "Distance (3->4): %1 %2"
 
@@ -1590,11 +1571,9 @@ msgstr ""
 #~ msgid "*4"
 #~ msgstr "*4"
 
-#, qt-format
 #~ msgid "Number of atoms: %1"
 #~ msgstr "Nombre d'atomes: %1"
 
-#, qt-format
 #~ msgid "Number of rotatable bonds: %1"
 #~ msgstr "Nombre de liaisons pouvant subir une rotation: %1"
 
@@ -2036,7 +2015,6 @@ msgstr ""
 #~ msgid "Cannot set up the force field for this molecule."
 #~ msgstr "Echec de la configuration du champ de force pour cette molécule."
 
-#, qt-format
 #~ msgid "Energy = %1 %2"
 #~ msgstr "Energie = %1 %2"
 
@@ -2136,7 +2114,6 @@ msgstr ""
 #~ msgid "Avogadro files (*.*)"
 #~ msgstr "Fichiers avogadro (*.*)"
 
-#, qt-format
 #~ msgid ""
 #~ "Cannot write to the file %1:\n"
 #~ "%2."
@@ -2147,7 +2124,6 @@ msgstr ""
 #~ msgid "Saving file."
 #~ msgstr "Enregistrement du fichier."
 
-#, qt-format
 #~ msgid "Cannot write to the file %1."
 #~ msgstr "Impossible d'écrire le fichier %1."
 
@@ -2158,7 +2134,6 @@ msgstr ""
 #~ "Ce document a été modifié.\n"
 #~ "Voulez-vous enregistrer vos changements?"
 
-#, qt-format
 #~ msgid ""
 #~ "Cannot read file %1:\n"
 #~ "%2."
@@ -2170,7 +2145,6 @@ msgstr ""
 #~ msgid "[*]Avogadro"
 #~ msgstr "[*]Avogadro"
 
-#, qt-format
 #~ msgid "%1[*] - %2"
 #~ msgstr "%1[*] - %2"
 
@@ -2205,7 +2179,6 @@ msgstr ""
 #~ "Bouton droit: Cliquer et glisser-déposer pour effectuer une rotation sur "
 #~ "les atomes sélectionnés."
 
-#, qt-format
 #~ msgid "Atom %1"
 #~ msgstr "Atome %1"
 
@@ -2279,25 +2252,21 @@ msgstr ""
 #~ msgid "Rotatable"
 #~ msgstr "Tournable"
 
-#, qt-format
 #~ msgid "Bond %1"
 #~ msgstr "Liaison %1"
 
 #~ msgid "Vertex"
 #~ msgstr "Sommet"
 
-#, qt-format
 #~ msgid "Angle %1"
 #~ msgstr "Angle %1"
 
-#, qt-format
 #~ msgid "Torsion %1"
 #~ msgstr "Torsion %1"
 
 #~ msgid "Energy"
 #~ msgstr "Energie"
 
-#, qt-format
 #~ msgid "Conformer %1"
 #~ msgstr "Conformère %1"
 
@@ -3528,7 +3497,6 @@ msgstr ""
 #~ msgid "Set Aspect Ratio"
 #~ msgstr "Choisir le rapport largeur/hauteur"
 
-#, qt-format
 #~ msgid ""
 #~ "The current Avogadro scene is %1x%2 pixels large, and therefore has "
 #~ "aspect ratio %3.\n"
@@ -3644,7 +3612,6 @@ msgstr ""
 #~ msgid "Spin Orbit"
 #~ msgstr "Spin-orbite"
 
-#, qt-format
 #~ msgid "Dihedral Angle: %1 %2"
 #~ msgstr "Angle dièdre: %1 %2"
 
@@ -3838,7 +3805,6 @@ msgstr ""
 #~ msgid "Electrostatic Potential (ESP)"
 #~ msgstr "Potentiel électrostatique (PES)"
 
-#, qt-format
 #~ msgid "Cannot write to file format of file %1."
 #~ msgstr "Impossible d'écrire dans le format de fichier %1."
 
@@ -3890,7 +3856,6 @@ msgstr ""
 #~ msgid "could not set format to XYZ"
 #~ msgstr "impossible d'utiliser le format XYZ"
 
-#, qt-format
 #~ msgid ""
 #~ "Trajectory file %1 disagrees on the number of atoms in the present "
 #~ "molecule"
@@ -3913,7 +3878,6 @@ msgstr ""
 #~ msgid "Any files (*.*)"
 #~ msgstr "Tous les fichiers (*.*)"
 
-#, qt-format
 #~ msgid "Read mol file %1 failed."
 #~ msgstr "Erreur de lecture du fichier %1"
 
@@ -3944,7 +3908,6 @@ msgstr ""
 #~ msgid "movie files (*.avi)"
 #~ msgstr "fichiers de film (*.avi)"
 
-#, qt-format
 #~ msgid "Wrote file %1."
 #~ msgstr "Le fichier %1 a été écrit."
 
@@ -4346,7 +4309,6 @@ msgstr ""
 #~ msgid "Enable the tabbed tool layout."
 #~ msgstr "Activer l'outil d'affichage d'onglets"
 
-#, qt-format
 #~ msgid "Would write file to %1."
 #~ msgstr "Enregistrerait le fichier sous %1."
 
@@ -4406,7 +4368,6 @@ msgstr ""
 #~ "Votre molécule doit contenir au moins deux atomes pour pouvoir ajouter "
 #~ "une contrainte de liaison"
 
-#, qt-format
 #~ msgid "Two molecules have different number atoms %1 %2"
 #~ msgstr "Les deux molécules n'ont pas le même nombre d'atomes: %1 contre %2"
 
@@ -4439,7 +4400,6 @@ msgstr ""
 #~ msgid "Backspace"
 #~ msgstr "Retour"
 
-#, qt-format
 #~ msgid ""
 #~ "<h3>%1</h3><br/><br/>Application Version: %2<br/><br/>Library Version: "
 #~ "%3<br/><br/>Open Babel Version: %4<br/><br/>Qt Version: %5<br/><br/>For "
@@ -4456,7 +4416,6 @@ msgstr ""
 #~ "IMPLICITE, Y COMPRIS LES GARANTIES DE COMMERCIALISATION OU D'ADAPTATION "
 #~ "DANS UN BUT PARTICULIER.<br/>"
 
-#, qt-format
 #~ msgctxt "main.cpp"
 #~ msgid ""
 #~ "Usage: %1 [options] [files]\n"
@@ -4503,7 +4462,6 @@ msgstr ""
 #~ msgid "OpenGL capabilities found: "
 #~ msgstr "Gestion du support OpenGL trouvé : "
 
-#, qt-format
 #~ msgctxt "main.cpp"
 #~ msgid ""
 #~ "Avogadro: \t%1 (Hash %2)\n"
