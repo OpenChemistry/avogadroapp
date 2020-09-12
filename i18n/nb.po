@@ -2,21 +2,23 @@
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
-#
+# Allan Nordhøy <epost@anotheragency.no>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2016-06-10 06:23+0000\n"
-"Last-Translator: Simen Heggestøyl <simenheg@gmail.com>\n"
-"Language-Team: Norwegian Bokmal <nb@li.org>\n"
+"PO-Revision-Date: 2020-09-14 17:36+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
+"avogadro/avogadroapp/nb_NO/>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
@@ -31,8 +33,9 @@ msgid "No file name set in BackgroundFileFormat!"
 msgstr ""
 
 #: mainwindow.cpp:292
+#, fuzzy
 msgid "Ready..."
-msgstr ""
+msgstr "Klar …"
 
 #: mainwindow.cpp:318
 #, fuzzy
@@ -45,7 +48,7 @@ msgstr "Visningstyper"
 
 #: mainwindow.cpp:331
 msgid "View Configuration"
-msgstr ""
+msgstr "Vis oppsett"
 
 #: mainwindow.cpp:337
 #, fuzzy
@@ -152,11 +155,11 @@ msgstr ""
 
 #: mainwindow.cpp:814 mainwindow.cpp:815
 msgid "Navigate tool"
-msgstr ""
+msgstr "Navigasjonsverktøy"
 
 #: mainwindow.cpp:889
 msgid "Common image formats"
-msgstr ""
+msgstr "Vanlige bildeformater"
 
 #: mainwindow.cpp:891
 msgid "All files"
@@ -175,8 +178,9 @@ msgid "JPEG"
 msgstr "JPEG"
 
 #: mainwindow.cpp:901
+#, fuzzy
 msgid "Export Bitmap Graphics"
-msgstr ""
+msgstr "Eksporter bitmap-grafikk"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -235,13 +239,13 @@ msgstr "&Angre"
 #: mainwindow.cpp:1268
 #, qt-format
 msgid "&Redo %1"
-msgstr ""
+msgstr "&Gjenta %1"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1271 mainwindow.cpp:1492:132
 msgid "&Redo"
-msgstr ""
+msgstr "&Gjenta"
 
 #: mainwindow.cpp:1368
 #, fuzzy
@@ -277,7 +281,7 @@ msgstr "&Åpne"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1407:84 rc.cpp:90
 msgid "&Close"
-msgstr ""
+msgstr "&Lukk"
 
 #. i18n: file: mainwindow.ui:147
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -285,13 +289,14 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1421:93 rc.cpp:99
 msgid "&Save"
-msgstr ""
+msgstr "&Lagre"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1430:102
+#, fuzzy
 msgid "Save &As..."
-msgstr ""
+msgstr "Lagre &som …"
 
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -308,8 +313,9 @@ msgstr "Molekyl"
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1450:111
+#, fuzzy
 msgid "&Graphics..."
-msgstr ""
+msgstr "&Grafikk …"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -321,7 +327,7 @@ msgstr "&Avslutt"
 
 #: mainwindow.cpp:1480
 msgid "No recent files"
-msgstr ""
+msgstr "Ingen nylige flis"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
@@ -333,11 +339,12 @@ msgstr "&Rediger"
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:1506 menubuilder.cpp:87:42
 msgid "&View"
-msgstr ""
+msgstr "&Vis"
 
 #: mainwindow.cpp:1507
+#, fuzzy
 msgid "Set background color..."
-msgstr ""
+msgstr "Sett bakgrunnsfarge …"
 
 #: mainwindow.cpp:1511
 msgid "Projection"
@@ -583,7 +590,7 @@ msgstr "Gå tilbake til Lagret"
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Full Screen Mode"
-msgstr ""
+msgstr "&Fullskjermsmodus"
 
 #. i18n: file: mainwindow.ui:185
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -798,7 +805,7 @@ msgstr ""
 #. i18n: file: mainwindow.ui:489
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Diskusjonsforum"
 
 #. i18n: file: mainwindow.ui:494
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
