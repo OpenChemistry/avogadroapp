@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Oğuz Ersen <oguzersen@protonmail.com>, 2020.
+# Talking Panda <memredogan3626@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
 "PO-Revision-Date: 2020-09-26 17:40+0000\n"
-"Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
+"Last-Translator: Talking Panda <memredogan3626@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
 "Language: tr\n"
@@ -327,7 +328,7 @@ msgstr ""
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:1486 menubuilder.cpp:87:45
 msgid "&Edit"
-msgstr "Dü&zenle"
+msgstr "&Düzenle"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -677,6 +678,7 @@ msgstr "Ctrl+A"
 
 #. i18n: file: mainwindow.ui:307
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
 msgid "Select None"
 msgstr "Hiçbirini Seçme"
 
