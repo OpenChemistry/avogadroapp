@@ -87,6 +87,13 @@
 #include <avogadro/vtk/vtkglwidget.h>
 #endif
 
+#ifdef Q_OS_MAC
+#include "qcocoamessagebox.h"
+#define MESSAGEBOX QCocoaMessageBox
+#else
+#define MESSAGEBOX QMessageBox
+#endif
+
 namespace Avogadro {
 
 #ifdef QTTESTING
@@ -555,7 +562,7 @@ void MainWindow::openFile()
     reader = new Io::CjsonFormat;
 
   if (!openFile(fileName, reader)) {
-    QMessageBox::information(this, tr("Cannot open file"),
+    MESSAGEBOX::information(this, tr("Cannot open file"),
                              tr("Can't open supplied file %1").arg(fileName));
   }
 }
@@ -578,7 +585,7 @@ void MainWindow::importFile()
   settings.setValue("MainWindow/lastOpenDir", dir);
 
   if (!openFile(reply.second, reply.first->newInstance())) {
-    QMessageBox::information(
+    MESSAGEBOX::information(
       this, tr("Cannot open file"),
       tr("Can't open supplied file %1").arg(reply.second));
   }
@@ -658,7 +665,7 @@ void MainWindow::backgroundReaderFinished()
                                .arg(m_molecule->bondCount()),
                              5000);
   } else {
-    QMessageBox::critical(this, tr("File error"),
+    MESSAGEBOX::critical(this, tr("File error"),
                           tr("Error while reading file '%1':\n%2")
                             .arg(fileName)
                             .arg(m_threadedReader->error()));
@@ -692,7 +699,7 @@ bool MainWindow::backgroundWriterFinished()
       updateWindowTitle();
       success = true;
     } else {
-      QMessageBox::critical(this, tr("File error"),
+      MESSAGEBOX::critical(this, tr("File error"),
                             tr("Error while writing file '%1':\n%2")
                               .arg(fileName)
                               .arg(m_threadedWriter->error()));
@@ -732,7 +739,7 @@ void MainWindow::viewConfigActivated() {}
 void MainWindow::rendererInvalid()
 {
   GLWidget* widget = qobject_cast<GLWidget*>(sender());
-  QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
+  MESSAGEBOX::warning(this, tr("Error: Failed to initialize OpenGL context"),
                        tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
                          .arg(widget ? widget->error() : tr("Unknown error")));
   // Process events, and then set a single shot timer. This is needed to ensure
@@ -937,7 +944,7 @@ void MainWindow::exportGraphics()
   }
 
   if (!exportImage.save(fileName)) {
-    QMessageBox::warning(this, tr("Avogadro"),
+    MESSAGEBOX::warning(this, tr("Avogadro"),
                          tr("Cannot save file %1.").arg(fileName));
   }
 
@@ -968,7 +975,7 @@ void MainWindow::openRecentFile()
                                        FileFormat::File | FileFormat::Read);
 
     if (!openFile(fileName, format ? format->newInstance() : nullptr)) {
-      QMessageBox::information(this, tr("Cannot open file"),
+      MESSAGEBOX::information(this, tr("Cannot open file"),
                                tr("Can't open supplied file %1").arg(fileName));
     }
   }
@@ -1032,7 +1039,7 @@ bool MainWindow::saveFile(bool async)
        .empty();
   if (writable) {
     // Warn the user that the format may lose data.
-    QMessageBox box(this);
+    MESSAGEBOX box(this);
     box.setModal(true);
     box.setWindowTitle(tr("Avogadro"));
     box.setText(tr("This file was imported from a non-standard format which "
@@ -1664,7 +1671,7 @@ bool MainWindow::saveFileIfNeeded()
     // the static functions. This is more work, but gives us some nice
     // fine-grain control. This helps both on Windows and Mac
     // look more "native."
-    QPointer<QMessageBox> msgBox = new QMessageBox(QMessageBox::Warning,
+    QPointer<MESSAGEBOX> msgBox = new MESSAGEBOX(QMessageBox::Warning,
                        tr( "Avogadro" ),
                        tr( "Do you want to save the changes you made in the document?" ),
                        QMessageBox::Save | QMessageBox::Discard
@@ -1769,7 +1776,7 @@ void MainWindow::readQueuedFiles()
       "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : nullptr)) {
-      QMessageBox::warning(this, tr("Cannot open file"),
+      MESSAGEBOX::warning(this, tr("Cannot open file"),
                            tr("Avogadro timed out and doesn't know how to open"
                               " '%1'.")
                              .arg(file));
@@ -1780,7 +1787,7 @@ void MainWindow::readQueuedFiles()
 void MainWindow::clearQueuedFiles()
 {
   if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
-    QMessageBox::warning(this, tr("Cannot open files"),
+    MESSAGEBOX::warning(this, tr("Cannot open files"),
                          tr("Avogadro timed out and cannot open"
                             " '%1'.")
                            .arg(m_queuedFiles.join("\n")));
