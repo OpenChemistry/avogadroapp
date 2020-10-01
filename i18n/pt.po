@@ -2,21 +2,23 @@
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
-#
+# ssantos <ssantos@web.de>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2016-06-10 06:24+0000\n"
-"Last-Translator: Mykas0 <Mykas0@gmail.com>\n"
-"Language-Team: Portuguese <pt@li.org>\n"
+"PO-Revision-Date: 2020-10-02 14:40+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
@@ -75,14 +77,13 @@ msgid "Open chemical file"
 msgstr ""
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Não foi possível salvar o arquivo %1."
+msgstr "Não foi possível abrir o ficheiro"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Não foi possível salvar o arquivo %1."
+msgstr "Não foi possível abrir o ficheiro %1"
 
 #: mainwindow.cpp:572
 #, fuzzy
@@ -187,7 +188,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:941
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Não foi possível salvar o arquivo %1."
+msgstr "Não foi possível gravar o ficheiro %1."
 
 #: mainwindow.cpp:1038
 msgid ""
@@ -402,9 +403,8 @@ msgid "Avogadro timed out and doesn't know how to open '%1'."
 msgstr ""
 
 #: mainwindow.cpp:1783
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Não foi possível salvar o arquivo %1."
+msgstr "Não foi possível abrir os ficheiros"
 
 #: mainwindow.cpp:1784
 #, qt-format
