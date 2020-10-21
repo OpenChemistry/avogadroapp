@@ -2,40 +2,41 @@
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
-#
+# Gustavo Sousa Jr <grsousajunior@gmail.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2016-06-10 06:24+0000\n"
-"Last-Translator: Geoff Hutchison <Unknown>\n"
-"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"PO-Revision-Date: 2020-10-22 13:26+0000\n"
+"Last-Translator: Gustavo Sousa Jr <grsousajunior@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
+"avogadro/avogadroapp/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.1\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Nenhuma molécula definida em BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
 msgid "No Io::FileFormat set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Nenhum Io::FileFormat definido em BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Nenhum nome de arquivo definido em BackgroundFileFormat!"
 
 #: mainwindow.cpp:292
 msgid "Ready..."
-msgstr ""
+msgstr "Pronto..."
 
 #: mainwindow.cpp:318
-#, fuzzy
 msgid "Tool"
 msgstr "Ferramentas"
 
@@ -45,58 +46,53 @@ msgstr "Mostrar tipos"
 
 #: mainwindow.cpp:331
 msgid "View Configuration"
-msgstr ""
+msgstr "Ver Configurações"
 
 #: mainwindow.cpp:337
-#, fuzzy
 msgid "Molecules"
-msgstr "Molécula"
+msgstr "Moléculas"
 
 #: mainwindow.cpp:486
-#, fuzzy
 msgid "Untitled"
-msgstr "sem título"
+msgstr "Sem título"
 
 #: mainwindow.cpp:491
-#, fuzzy, qt-format
+#, qt-format
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Linguagem de Marcação Química"
 
 #: mainwindow.cpp:534 mainwindow.cpp:1063
 msgid "Chemical JSON"
-msgstr ""
+msgstr "JSON Químico"
 
 #: mainwindow.cpp:540
 msgid "Open chemical file"
-msgstr ""
+msgstr "Abrir arquivo químico"
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Não foi possível salvar o arquivo %1."
+msgstr "Não foi possível abrir o arquivo"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Não foi possível salvar o arquivo %1."
+msgstr "Não foi possível abrir o arquivo %1"
 
 #: mainwindow.cpp:572
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molécula"
+msgstr "Abrir Molécula"
 
 #: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
 msgid "Select file reader"
-msgstr ""
+msgstr "Selecione o leitor de arquivo"
 
 #: mainwindow.cpp:625
-#, fuzzy
 msgid "Reading File"
-msgstr "Abrir Arquivo"
+msgstr "Arquivo de leitura"
 
 #: mainwindow.cpp:627
 #, qt-format
@@ -104,16 +100,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Abrindo o arquivo '%1'\n"
+"com '%2'"
 
 #: mainwindow.cpp:656
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molécula carregada (%1 átomos, %2 ligações)"
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
-#, fuzzy
 msgid "File error"
-msgstr "Arquivo: "
+msgstr "Erro no arquivo"
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -121,11 +118,13 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Erro durante a leitura do arquivo '%1':\n"
+"%2"
 
 #: mainwindow.cpp:688
 #, qt-format
 msgid "File written: %1"
-msgstr ""
+msgstr "Arquivo salvo: %1"
 
 #: mainwindow.cpp:696
 #, qt-format
@@ -133,10 +132,12 @@ msgid ""
 "Error while writing file '%1':\n"
 "%2"
 msgstr ""
+"Erro durante a escrita do arquivo '%1':\n"
+"%2"
 
 #: mainwindow.cpp:735
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Erro: Falha ao inicializar o contexto OpenGL"
 
 #: mainwindow.cpp:736
 #, qt-format
@@ -145,14 +146,17 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"É necessário OpenGL 2.0 ou superior. Fechando.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:737
 msgid "Unknown error"
-msgstr ""
+msgstr "Erro desconhecido"
 
 #: mainwindow.cpp:814 mainwindow.cpp:815
 msgid "Navigate tool"
-msgstr ""
+msgstr "Ferramenta de navegação"
 
 #: mainwindow.cpp:889
 msgid "Common image formats"
@@ -196,6 +200,10 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Este arquivo foi importado a partir de um formato não-padrão que pode não "
+"ser capz de escrever toda a informações na molécula.\n"
+"\n"
+"Você gostaria de exportar para o formato atual, ou salvar no formato padrão?"
 
 #: mainwindow.cpp:1045
 msgid "Export"
@@ -203,16 +211,15 @@ msgstr "Exportar"
 
 #: mainwindow.cpp:1070
 msgid "Save chemical file"
-msgstr ""
+msgstr "Salvar arquivo químico"
 
 #: mainwindow.cpp:1098
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Importar Arquivo de Molécula"
+msgstr "Exportar Molécula"
 
 #: mainwindow.cpp:1150
 msgid "Writing File"
-msgstr ""
+msgstr "Escrevendo o Arquivo"
 
 #: mainwindow.cpp:1152
 #, qt-format
@@ -220,11 +227,13 @@ msgid ""
 "Writing file '%1'\n"
 "with '%2'"
 msgstr ""
+"Escrevendo o arquivo '%1'\n"
+"com '%2'"
 
 #: mainwindow.cpp:1260
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Desfazer"
+msgstr "&Desfazer %1"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -233,9 +242,9 @@ msgid "&Undo"
 msgstr "&Desfazer"
 
 #: mainwindow.cpp:1268
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Refazer"
+msgstr "&Refazer %1"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -244,19 +253,16 @@ msgid "&Redo"
 msgstr "&Refazer"
 
 #: mainwindow.cpp:1368
-#, fuzzy
 msgid "&Testing"
-msgstr "Configurações."
+msgstr "&Testes"
 
 #: mainwindow.cpp:1370
-#, fuzzy
 msgid "Record test..."
-msgstr "Gravar Teste..."
+msgstr "Salvar Teste..."
 
 #: mainwindow.cpp:1373
-#, fuzzy
 msgid "Play test..."
-msgstr "Rodar Teste..."
+msgstr "Executar Teste..."
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -269,9 +275,8 @@ msgstr "&Novo"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1398:51
-#, fuzzy
 msgid "&Open..."
-msgstr "&Abrir"
+msgstr "&Abrir..."
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -298,14 +303,12 @@ msgstr "Salvar &Como..."
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1441:264
-#, fuzzy
 msgid "&Export"
-msgstr "Exportar"
+msgstr "&Exportar"
 
 #: mainwindow.cpp:1442
-#, fuzzy
 msgid "&Molecule..."
-msgstr "Molécula"
+msgstr "&Molécula..."
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -323,7 +326,7 @@ msgstr "&Sair"
 
 #: mainwindow.cpp:1480
 msgid "No recent files"
-msgstr ""
+msgstr "Nenhum arquivo recente"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
@@ -338,7 +341,6 @@ msgid "&View"
 msgstr "&Exibir"
 
 #: mainwindow.cpp:1507
-#, fuzzy
 msgid "Set background color..."
 msgstr "Definir Cor do &Plano de Fundo..."
 
@@ -359,9 +361,8 @@ msgid "Orthographic"
 msgstr "Ortográfica"
 
 #: mainwindow.cpp:1533
-#, fuzzy
 msgid "&Extensions"
-msgstr "Extensões"
+msgstr "&Extensões"
 
 #: mainwindow.cpp:1540 menubuilder.cpp:91
 msgid "&Help"
@@ -370,10 +371,9 @@ msgstr "&Ajuda"
 #: mainwindow.cpp:1653
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "Todos os formatos suportados (%1);;Todos os arquivos (*);;"
 
 #: mainwindow.cpp:1669
-#, fuzzy
 msgid "Do you want to save the changes you made in the document?"
 msgstr "Deseja salvar as alterações feitas no documento?"
 
@@ -394,22 +394,21 @@ msgstr "Ctrl+D"
 #: mainwindow.cpp:1752
 #, qt-format
 msgid "Error while loading FileFormat with id '%1'."
-msgstr ""
+msgstr "Erro durante o carregamento FileFormat com id '%1'."
 
 #: mainwindow.cpp:1773
 #, qt-format
 msgid "Avogadro timed out and doesn't know how to open '%1'."
-msgstr ""
+msgstr "O Avogadro tentou, mas não sabe como abrir '%1'."
 
 #: mainwindow.cpp:1783
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Não foi possível salvar o arquivo %1."
+msgstr "Não foi possível abrir os arquivos %1"
 
 #: mainwindow.cpp:1784
 #, qt-format
 msgid "Avogadro timed out and cannot open '%1'."
-msgstr ""
+msgstr "O Avogadro tentou mas não pôde abrir '%1'."
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -434,13 +433,12 @@ msgid "Se&ttings"
 msgstr "Con&figurar"
 
 #: menubuilder.cpp:91
-#, fuzzy
 msgid "&Window"
-msgstr "janela"
+msgstr "&Janela"
 
 #: rpclistener.cpp:123
 msgid "Error starting RPC server:"
-msgstr ""
+msgstr "Erro ao inicial o servidor RPC:"
 
 #: rpclistener.cpp:125
 msgid ""
@@ -457,14 +455,27 @@ msgid ""
 "(this will prevent RPC enabled applications from communicating with "
 "Avogadro)."
 msgstr ""
+"Um erro ocorreu ao iniciar a comunicação com o RPC do Avogadro. Isso pode "
+"ocorrer por\n"
+"várias razões:\n"
+"\tUma instância anterior do Avogadro pode ter falhado.\n"
+"\tUma instância em execução do Avogadro pode estar trabalhando em outra "
+"tarefa.\n"
+"\n"
+"Se nenhuma instância do Avogadro estiver em execução, é seguro substituir o "
+"servidor\n"
+"em falha. Caso contrário, essa instância do Avogadro pode iniciar sem as "
+"funcionalidades do RPC\n"
+"(isso impedirá que as aplicações habilitadas para RPC se comuniquem com o "
+"Avogadro)."
 
 #: rpclistener.cpp:135
 msgid "Replace the dead server with a new instance."
-msgstr ""
+msgstr "Substituir o servido em falha com uma nova instância."
 
 #: rpclistener.cpp:136
 msgid "Start without RPC capabilities."
-msgstr ""
+msgstr "Iniciar sem as funcionalidades do RPC."
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -472,6 +483,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
+">Versão:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -479,6 +492,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -486,6 +501,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Versão do AvogadroLibs:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -495,6 +512,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -502,6 +521,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Versão do Qt:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -511,6 +532,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD-3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Licença: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:261
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -519,6 +544,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
+" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:290
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -527,6 +555,9 @@ msgid ""
 "decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -581,7 +612,7 @@ msgstr "Ctrl+Shift+S"
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Revert To Saved"
-msgstr "Reverter para Arquivo Salvo"
+msgstr "Reverter para o Arquivo Salvo"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -616,12 +647,12 @@ msgstr "Ctrl+Shift+Z"
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "New View"
-msgstr "Nova Janela"
+msgstr "Nova Visualização"
 
 #. i18n: file: mainwindow.ui:247
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Close View"
-msgstr "Fechar Janela"
+msgstr "Fechar Visualização"
 
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -631,7 +662,7 @@ msgstr "Centralizar"
 #. i18n: file: mainwindow.ui:265
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
-msgstr "Alinhar Visão aos Eixos"
+msgstr "Alinhar Visualização aos Eixos"
 
 #. i18n: file: mainwindow.ui:270
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -681,7 +712,7 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:307
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Selecionar Nenhum"
+msgstr "Limpar Seleção"
 
 #. i18n: file: mainwindow.ui:310
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -691,7 +722,7 @@ msgstr "Ctrl+Shift+A"
 #. i18n: file: mainwindow.ui:319
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Configure Avogadro..."
-msgstr "Configurar Avogadro..."
+msgstr "Configurar o Avogadro..."
 
 #. i18n: file: mainwindow.ui:330
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -701,7 +732,7 @@ msgstr "Tutoriais"
 #. i18n: file: mainwindow.ui:339
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Duplicate View"
-msgstr "Duplicar Janela"
+msgstr "Duplicar Visualização"
 
 #. i18n: file: mainwindow.ui:347
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -711,12 +742,12 @@ msgstr "Exibir Eixos"
 #. i18n: file: mainwindow.ui:355
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Debug Information"
-msgstr "Informações de Debug"
+msgstr "Informações de Depuração"
 
 #. i18n: file: mainwindow.ui:363
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
-msgstr "Ajuda Avogadro"
+msgstr "Ajuda do Avogadro"
 
 #. i18n: file: mainwindow.ui:368
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -726,17 +757,17 @@ msgstr "Notas da versão"
 #. i18n: file: mainwindow.ui:373
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
-msgstr "Reporte um Bug"
+msgstr "Relatar um problema"
 
 #. i18n: file: mainwindow.ui:378
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "FAQ"
-msgstr "FAQ"
+msgstr "Perguntas frequentes"
 
 #. i18n: file: mainwindow.ui:383
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
-msgstr "Avogadro Website"
+msgstr "Website do Avogadro"
 
 #. i18n: file: mainwindow.ui:392
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -751,7 +782,7 @@ msgstr "Editor da Árvore do Projeto..."
 #. i18n: file: mainwindow.ui:410
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Detach View"
-msgstr "Ver Separado"
+msgstr "Destacar Visualização"
 
 #. i18n: file: mainwindow.ui:415
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -781,7 +812,7 @@ msgstr "Todas as Moléculas no Arquivo..."
 #. i18n: file: mainwindow.ui:452
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Reset Display Types"
-msgstr "Resetar tipos na tela"
+msgstr "Redefinir os Tipos de Exibição"
 
 #. i18n: file: mainwindow.ui:476
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -801,109 +832,25 @@ msgstr "Identificador InChI IUPAC"
 #. i18n: file: mainwindow.ui:489
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Fórum de Discussão"
 
 #. i18n: file: mainwindow.ui:494
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Open Recent"
 msgstr "Abrir &Recente"
 
 #. i18n: file: mainwindow.ui:499
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
-msgstr "Importar"
+msgstr "&Importar"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
-",Launchpad Contributions:,Alexandre R Soares,André Gondim,Ciniro Nametala,"
-"Enrico Nicoletto,Geoff Hutchison,Leandro Boscariol,Myres Hopkins,Petrus "
-"Henrique Gonçalves Freire,Rafael Porto Rodrigues,Rosiney Gomes Pereira, ,"
-"Launchpad Contributions:,Alexandre R Soares,André Gondim,Ciniro Nametala,"
-"Enrico Nicoletto,Geoff Hutchison,Leandro Boscariol,Myres Hopkins,Petrus "
-"Henrique Gonçalves Freire,Rafael Porto Rodrigues,Rosiney Gomes Pereira, ,"
-"Launchpad Contributions:,Alexandre R Soares,André Gondim,Avogadro Team,"
-"Ciniro Nametala,Enrico Nicoletto,Geoff Hutchison,Leandro Boscariol,Myres "
-"Hopkins,Petrus Henrique Gonçalves Freire,Rafael Porto Rodrigues,Rosiney "
-"Gomes Pereira, ,Launchpad Contributions:,Alexandre R Soares,André Gondim,"
-"Ciniro Nametala,Enrico Nicoletto,Felipe Vieira Borges,Leandro Boscariol,"
-"Myres Hopkins,Petrus Henrique Gonçalves Freire,Rosiney Gomes Pereira, ,"
-"Launchpad Contributions:,Alexandre R Soares,André Gondim,Avogadro Team,"
-"Charles Junior Rech,Ciniro Nametala,Daniel Eric Maier,Emanuel Lima,Enrico "
-"Nicoletto,Felipe Vieira Borges,Geoff Hutchison,Leandro Boscariol,Myres "
-"Hopkins,Petrus Henrique Gonçalves Freire,Rafael Porto Rodrigues,Rosiney "
-"Gomes Pereira, ,Launchpad Contributions:,Alexandre R Soares,André Gondim,"
-"Avogadro Team,Charles Junior Rech,Ciniro Nametala,Daniel Eric Maier,Emanuel "
-"Lima,Enrico Nicoletto,Felipe Vieira Borges,Geoff Hutchison,Leandro Boscariol,"
-"Myres Hopkins,Petrus Henrique Gonçalves Freire,Rafael Porto Rodrigues,"
-"Rosiney Gomes Pereira, ,Launchpad Contributions:,Alexandre R Soares,André "
-"Gondim,Avogadro Team,Charles Junior Rech,Ciniro Nametala,Daniel Eric Maier,"
-"Emanuel Lima,Enrico Nicoletto,Felipe Vieira Borges,Geoff Hutchison,Leandro "
-"Boscariol,Myres Hopkins,Petrus Henrique Gonçalves Freire,Rafael Porto "
-"Rodrigues,Rosiney Gomes Pereira, ,Launchpad Contributions:,Alexandre R "
-"Soares,André Gondim,Avogadro Team,Charles Junior Rech,Ciniro Nametala,Daniel "
-"Eric Maier,Emanuel Lima,Enrico Nicoletto,Felipe Vieira Borges,Geoff "
-"Hutchison,Leandro Boscariol,Myres Hopkins,Petrus Henrique Gonçalves Freire,"
-"Rafael Porto Rodrigues,Rosiney Gomes Pereira, ,Launchpad Contributions:,"
-"Alexandre R Soares,André Gondim,Avogadro Team,Charles Junior Rech,Ciniro "
-"Nametala,Daniel Eric Maier,Emanuel Lima,Enrico Nicoletto,Eugênio F,Felipe "
-"Vieira Borges,Geoff Hutchison,Leandro Boscariol,Myres Hopkins,Petrus "
-"Henrique Gonçalves Freire,Rafael Porto Rodrigues,Rosiney Gomes Pereira, ,"
-"Launchpad Contributions:,Alexandre R Soares,André Gondim,Avogadro Team,"
-"Charles Junior Rech,Ciniro Nametala,Daniel Eric Maier,Emanuel Lima,Enrico "
-"Nicoletto,Eugênio F,Felipe Vieira Borges,Geoff Hutchison,Leandro Boscariol,"
-"Myres Hopkins,Petrus Henrique Gonçalves Freire,Rafael Porto Rodrigues,"
-"Rosiney Gomes Pereira, ,Launchpad Contributions:,Alexandre R Soares,André "
-"Gondim,Avogadro Team,Charles Junior Rech,Ciniro Nametala,Daniel Maier,"
-"Emanuel Lima,Enrico Nicoletto,Eugênio F,Felipe Vieira Borges,Geoff Hutchison,"
-"Leandro Boscariol,Mateus Azis,Myres Hopkins,Petrus Henrique Gonçalves Freire,"
-"Rafael Porto Rodrigues,Rosiney Gomes Pereira, ,Launchpad Contributions:,"
-"Alexandre R Soares,André Gondim,Avogadro Team,Breno Gomes Cardoso,Charles "
-"Junior Rech,Ciniro Nametala,Daniel Maier,Emanuel Lima,Eugênio F,Felipe "
-"Vieira Borges,Geoff Hutchison,Hriostat,Leandro Boscariol,Mateus Azis,Petrus "
-"Henrique Gonçalves Freire,Rosiney Gomes Pereira,Tomas Abril,jose alexandre,"
-"sie fm, ,Launchpad Contributions:,Alexandre R Soares,André Gondim,Avogadro "
-"Team,Breno Gomes Cardoso,Charles Junior Rech,Ciniro Nametala,Daniel Maier,"
-"Emanuel Lima,Eugênio F,Felipe Vieira Borges,Geoff Hutchison,Hriostat,Leandro "
-"Boscariol,Mateus Azis,Petrus Henrique Gonçalves Freire,Rosiney Gomes Pereira,"
-"Tomas Abril,jose alexandre,sie fm, ,Launchpad Contributions:,Alexandre R "
-"Soares,André Gondim,Avogadro Team,Breno Gomes Cardoso,Charles Junior Rech,"
-"Ciniro Nametala,Daniel Maier,Emanuel Lima,Eugênio F,Felipe Vieira Borges,"
-"Geoff Hutchison,Hriostat,Leandro Boscariol,Mateus Azis,Petrus Henrique "
-"Gonçalves Freire,Rosiney Gomes Pereira,Tomas Abril,jose alexandre,sie fm"
+msgstr "Seus nomes"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
-",,,andregondim@ubuntu.com,ciniro@gmail.com,liverig@gmail.com,,,,,"
-"rafporto@gmail.com,rosiney.gp@gmail.com,,,,andregondim@ubuntu.com,"
-"ciniro@gmail.com,liverig@gmail.com,,,,,rafporto@gmail.com,rosiney.gp@gmail."
-"com,,,,andregondim@ubuntu.com,avogadro-devel@lists.sourceforge.net,"
-"ciniro@gmail.com,liverig@gmail.com,,,,,rafporto@gmail.com,rosiney.gp@gmail."
-"com,,,,andregondim@ubuntu.com,ciniro@gmail.com,liverig@gmail.com,,,,,rosiney."
-"gp@gmail.com,,,,andregondim@ubuntu.com,avogadro-devel@lists.sourceforge.net,"
-"charlespito@gmail.com,ciniro@gmail.com,,,liverig@gmail.com,,,,,,"
-"rafporto@gmail.com,rosiney.gp@gmail.com,,,,andregondim@ubuntu.com,avogadro-"
-"devel@lists.sourceforge.net,charlespito@gmail.com,ciniro@gmail.com,,,"
-"liverig@gmail.com,,,,,,rafporto@gmail.com,rosiney.gp@gmail.com,,,,"
-"andregondim@ubuntu.com,avogadro-devel@lists.sourceforge.net,,ciniro@gmail."
-"com,,,liverig@gmail.com,,,,,,rafporto@gmail.com,rosiney.gp@gmail.com,,,,"
-"andregondim@ubuntu.com,avogadro-devel@lists.sourceforge.net,,ciniro@gmail."
-"com,,,liverig@gmail.com,,,,,,rafporto@gmail.com,rosiney.gp@gmail.com,,,,"
-"andregondim@ubuntu.com,avogadro-devel@lists.sourceforge.net,,ciniro@gmail."
-"com,,,liverig@gmail.com,,,,,,,rafporto@gmail.com,rosiney.gp@gmail.com,,,,"
-"andregondim@ubuntu.com,avogadro-devel@lists.sourceforge.net,,ciniro@gmail."
-"com,,,liverig@gmail.com,,,,,,,rafporto@gmail.com,rosiney.gp@gmail.com,,,,"
-"andregondim@ubuntu.com,avogadro-devel@lists.sourceforge.net,,ciniro@gmail."
-"com,,,liverig@gmail.com,,,,,,,,rafporto@gmail.com,rosiney.gp@gmail.com,,,,,"
-"avogadro-devel@lists.sourceforge.net,bgcardoso@outlook.com,,ciniro@gmail."
-"com,,,,,,,,,,rosiney.gp@gmail.com,,xande_24@live.com,siefm889@gmail.com,,,,,"
-"avogadro-devel@lists.sourceforge.net,bgcardoso@outlook.com,,ciniro@gmail."
-"com,,,,,,,,,,rosiney.gp@gmail.com,,xande_24@live.com,siefm889@gmail.com,,,,,"
-"avogadro-devel@lists.sourceforge.net,bgcardoso@outlook.com,,ciniro@gmail."
-"com,,,,,,,,,,rosiney.gp@gmail.com,,xande_24@live.com,siefm889@gmail.com"
+msgstr "Seus e-mails"
 
 #~ msgctxt "%1 is the Git revision number."
 #~ msgid "(Git revision: %1)"
