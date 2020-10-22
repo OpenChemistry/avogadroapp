@@ -2,21 +2,23 @@
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
-#
+# J. Lavoie <j.lavoie@net-c.ca>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2016-06-10 06:22+0000\n"
-"Last-Translator: Vito Fasano <vito.fasano@gmail.com>\n"
-"Language-Team: Italian <it@li.org>\n"
+"PO-Revision-Date: 2020-10-19 18:29+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
@@ -771,17 +773,17 @@ msgstr "&Grafiche vettoriali"
 #. i18n: file: mainwindow.ui:439
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Display Unit Cell Axes"
-msgstr "Visualizza gli Assi della Cella Unità"
+msgstr "Visualizza gli assi della cella unità"
 
 #. i18n: file: mainwindow.ui:447
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "All Molecules in File..."
-msgstr "Tutte le molecole nel file...."
+msgstr "Tutte le molecole nel file…"
 
 #. i18n: file: mainwindow.ui:452
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Reset Display Types"
-msgstr "Reset dei tipi di display"
+msgstr "Ripristina tipi di visualizzazione"
 
 #. i18n: file: mainwindow.ui:476
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -801,7 +803,7 @@ msgstr "Identificatore InChl IUPAC"
 #. i18n: file: mainwindow.ui:489
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Forum di discussione"
 
 #. i18n: file: mainwindow.ui:494
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

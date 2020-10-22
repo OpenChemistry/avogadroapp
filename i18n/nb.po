@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2020-09-14 17:36+0000\n"
+"PO-Revision-Date: 2020-10-14 05:26+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/nb_NO/>\n"
@@ -61,9 +61,9 @@ msgid "Untitled"
 msgstr "uten navn"
 
 #: mainwindow.cpp:491
-#, fuzzy, qt-format
+#, qt-format
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
@@ -114,9 +114,8 @@ msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
-#, fuzzy
 msgid "File error"
-msgstr "Fil: "
+msgstr "Filfeil"
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -226,9 +225,9 @@ msgid ""
 msgstr ""
 
 #: mainwindow.cpp:1260
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Angre"
+msgstr "&Angre %1"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
