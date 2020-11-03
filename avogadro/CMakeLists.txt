@@ -64,7 +64,8 @@ endif()
 # Handle Mac OS X specific icons etc.
 if(APPLE)
   # add some Objective-C++ code
-  list(APPEND avogadro_srcs mac.mm)
+  list(APPEND avogadro_srcs mac.mm ../thirdparty/qcocoacontrols/qcocoamessagebox.mm)
+  include_directories(SYSTEM "${AvogadroApp_SOURCE_DIR}/thirdparty/qcocoacontrols")
   set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -framework Cocoa")
 
   list(APPEND avogadro_srcs icons/avogadro.icns)

@@ -87,6 +87,13 @@
 #include <avogadro/vtk/vtkglwidget.h>
 #endif
 
+#ifdef Q_OS_MAC
+#include "qcocoamessagebox.h"
+#define MESSAGEBOX QCocoaMessageBox
+#else
+#define MESSAGEBOX QMessageBox
+#endif
+
 namespace Avogadro {
 
 #ifdef QTTESTING
@@ -257,10 +264,12 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
       extension->setParent(this);
       connect(this, &MainWindow::moleculeChanged, extension,
               &QtGui::ExtensionPlugin::setMolecule);
-      connect(extension, &QtGui::ExtensionPlugin::moleculeReady, this, &MainWindow::moleculeReady);
-      connect(extension, &QtGui::ExtensionPlugin::fileFormatsReady, this, &MainWindow::fileFormatsReady);
-      connect(extension, &QtGui::ExtensionPlugin::requestActiveTool,
-              this, &MainWindow::setActiveTool);
+      connect(extension, &QtGui::ExtensionPlugin::moleculeReady, this,
+              &MainWindow::moleculeReady);
+      connect(extension, &QtGui::ExtensionPlugin::fileFormatsReady, this,
+              &MainWindow::fileFormatsReady);
+      connect(extension, &QtGui::ExtensionPlugin::requestActiveTool, this,
+              &MainWindow::setActiveTool);
       connect(extension, &QtGui::ExtensionPlugin::requestActiveDisplayTypes,
               this, &MainWindow::setActiveDisplayTypes);
       buildMenu(extension);
@@ -359,10 +368,10 @@ void MainWindow::setupInterface()
   m_sceneTreeView->setAlternatingRowColors(true);
   m_sceneTreeView->header()->stretchLastSection();
   m_sceneTreeView->header()->setVisible(false);
-  connect(m_sceneTreeView, &QAbstractItemView::activated,
-          this, &MainWindow::sceneItemActivated);
-  connect(m_sceneTreeView, &QAbstractItemView::clicked,
-          this, &MainWindow::sceneItemActivated);
+  connect(m_sceneTreeView, &QAbstractItemView::activated, this,
+          &MainWindow::sceneItemActivated);
+  connect(m_sceneTreeView, &QAbstractItemView::clicked, this,
+          &MainWindow::sceneItemActivated);
 
   // Create the molecule model
   m_moleculeModel = new QtGui::MoleculeModel(this);
@@ -374,17 +383,17 @@ void MainWindow::setupInterface()
   m_moleculeTreeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
   m_moleculeTreeView->header()->setSectionResizeMode(1, QHeaderView::Fixed);
   m_moleculeTreeView->header()->resizeSection(1, 30);
-  connect(m_moleculeTreeView, &QAbstractItemView::activated,
-          this, &MainWindow::moleculeActivated);
-  connect(m_moleculeTreeView, &QAbstractItemView::clicked,
-          this, &MainWindow::moleculeActivated);
+  connect(m_moleculeTreeView, &QAbstractItemView::activated, this,
+          &MainWindow::moleculeActivated);
+  connect(m_moleculeTreeView, &QAbstractItemView::clicked, this,
+          &MainWindow::moleculeActivated);
 
   viewActivated(glWidget);
   buildTools();
   // Connect to the invalid context signal, check whether GL is initialized.
   // connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
-  connect(m_multiViewWidget, &QtGui::MultiViewWidget::activeWidgetChanged,
-          this, &MainWindow::viewActivated);
+  connect(m_multiViewWidget, &QtGui::MultiViewWidget::activeWidgetChanged, this,
+          &MainWindow::viewActivated);
 }
 
 void MainWindow::closeEvent(QCloseEvent* e)
@@ -440,7 +449,8 @@ void MainWindow::setMolecule(Molecule* mol)
     QString targetToolName =
       m_molecule->atomCount() > 0 ? "Navigator" : "Editor";
     setActiveTool(targetToolName);
-    connect(m_molecule, &QtGui::Molecule::changed, this, &MainWindow::markMoleculeDirty);
+    connect(m_molecule, &QtGui::Molecule::changed, this,
+            &MainWindow::markMoleculeDirty);
   }
 
   emit moleculeChanged(m_molecule);
@@ -555,8 +565,8 @@ void MainWindow::openFile()
     reader = new Io::CjsonFormat;
 
   if (!openFile(fileName, reader)) {
-    QMessageBox::information(this, tr("Cannot open file"),
-                             tr("Can't open supplied file %1").arg(fileName));
+    MESSAGEBOX::information(this, tr("Cannot open file"),
+                            tr("Can't open supplied file %1").arg(fileName));
   }
 }
 
@@ -578,7 +588,7 @@ void MainWindow::importFile()
   settings.setValue("MainWindow/lastOpenDir", dir);
 
   if (!openFile(reply.second, reply.first->newInstance())) {
-    QMessageBox::information(
+    MESSAGEBOX::information(
       this, tr("Cannot open file"),
       tr("Can't open supplied file %1").arg(reply.second));
   }
@@ -627,10 +637,12 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
     tr("Opening file '%1'\nwith '%2'").arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
   m_progressDialog->setCancelButton(nullptr);
-  connect(m_fileReadThread, &QThread::started, m_threadedReader, &BackgroundFileFormat::read);
-  connect(m_threadedReader, &BackgroundFileFormat::finished, m_fileReadThread, &QThread::quit);
-  connect(m_threadedReader, &BackgroundFileFormat::finished,
-          this, &MainWindow::backgroundReaderFinished);
+  connect(m_fileReadThread, &QThread::started, m_threadedReader,
+          &BackgroundFileFormat::read);
+  connect(m_threadedReader, &BackgroundFileFormat::finished, m_fileReadThread,
+          &QThread::quit);
+  connect(m_threadedReader, &BackgroundFileFormat::finished, this,
+          &MainWindow::backgroundReaderFinished);
 
   // Start the file operation
   m_fileReadThread->start();
@@ -658,10 +670,10 @@ void MainWindow::backgroundReaderFinished()
                                .arg(m_molecule->bondCount()),
                              5000);
   } else {
-    QMessageBox::critical(this, tr("File error"),
-                          tr("Error while reading file '%1':\n%2")
-                            .arg(fileName)
-                            .arg(m_threadedReader->error()));
+    MESSAGEBOX::critical(this, tr("File error"),
+                         tr("Error while reading file '%1':\n%2")
+                           .arg(fileName)
+                           .arg(m_threadedReader->error()));
     delete m_fileReadMolecule;
   }
   m_fileReadThread->deleteLater();
@@ -692,10 +704,10 @@ bool MainWindow::backgroundWriterFinished()
       updateWindowTitle();
       success = true;
     } else {
-      QMessageBox::critical(this, tr("File error"),
-                            tr("Error while writing file '%1':\n%2")
-                              .arg(fileName)
-                              .arg(m_threadedWriter->error()));
+      MESSAGEBOX::critical(this, tr("File error"),
+                           tr("Error while writing file '%1':\n%2")
+                             .arg(fileName)
+                             .arg(m_threadedWriter->error()));
     }
   }
   m_fileWriteThread->deleteLater();
@@ -732,9 +744,9 @@ void MainWindow::viewConfigActivated() {}
 void MainWindow::rendererInvalid()
 {
   GLWidget* widget = qobject_cast<GLWidget*>(sender());
-  QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
-                       tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
-                         .arg(widget ? widget->error() : tr("Unknown error")));
+  MESSAGEBOX::warning(this, tr("Error: Failed to initialize OpenGL context"),
+                      tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
+                        .arg(widget ? widget->error() : tr("Unknown error")));
   // Process events, and then set a single shot timer. This is needed to ensure
   // the RPC server also exits cleanly.
   QApplication::processEvents();
@@ -938,8 +950,8 @@ void MainWindow::exportGraphics()
   }
 
   if (!exportImage.save(fileName)) {
-    QMessageBox::warning(this, tr("Avogadro"),
-                         tr("Cannot save file %1.").arg(fileName));
+    MESSAGEBOX::warning(this, tr("Avogadro"),
+                        tr("Cannot save file %1.").arg(fileName));
   }
 
   // set the GL widget back to the right background color (i.e., not 100%
@@ -969,8 +981,8 @@ void MainWindow::openRecentFile()
                                        FileFormat::File | FileFormat::Read);
 
     if (!openFile(fileName, format ? format->newInstance() : nullptr)) {
-      QMessageBox::information(this, tr("Cannot open file"),
-                               tr("Can't open supplied file %1").arg(fileName));
+      MESSAGEBOX::information(this, tr("Cannot open file"),
+                              tr("Can't open supplied file %1").arg(fileName));
     }
   }
 }
@@ -1033,7 +1045,7 @@ bool MainWindow::saveFile(bool async)
        .empty();
   if (writable) {
     // Warn the user that the format may lose data.
-    QMessageBox box(this);
+    MESSAGEBOX box(this);
     box.setModal(true);
     box.setWindowTitle(tr("Avogadro"));
     box.setText(tr("This file was imported from a non-standard format which "
@@ -1161,8 +1173,8 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
   // Start the file operation
   m_progressDialog->show();
   if (async) {
-    connect(m_threadedWriter, &BackgroundFileFormat::finished,
-            this, &MainWindow::backgroundWriterFinished);
+    connect(m_threadedWriter, &BackgroundFileFormat::finished, this,
+            &MainWindow::backgroundWriterFinished);
     m_fileWriteThread->start();
     return true;
   } else {
@@ -1514,15 +1526,15 @@ void MainWindow::buildMenu()
   m_viewPerspective->setCheckable(true);
   m_viewPerspective->setChecked(true);
   m_menuBuilder->addAction(viewPath, m_viewPerspective, 10);
-  connect(m_viewPerspective, &QAction::triggered,
-          this, &MainWindow::setProjectionPerspective);
+  connect(m_viewPerspective, &QAction::triggered, this,
+          &MainWindow::setProjectionPerspective);
 
   m_viewOrthographic = new QAction(tr("Orthographic"), this);
   m_viewOrthographic->setCheckable(true);
   m_viewOrthographic->setChecked(false);
   m_menuBuilder->addAction(viewPath, m_viewOrthographic, 10);
-  connect(m_viewOrthographic, &QAction::triggered,
-          this, &MainWindow::setProjectionOrthographic);
+  connect(m_viewOrthographic, &QAction::triggered, this,
+          &MainWindow::setProjectionOrthographic);
 
   connect(m_viewPerspective, &QAction::triggered, m_viewOrthographic,
           &QAction::toggle);
@@ -1665,28 +1677,30 @@ bool MainWindow::saveFileIfNeeded()
     // the static functions. This is more work, but gives us some nice
     // fine-grain control. This helps both on Windows and Mac
     // look more "native."
-    QPointer<QMessageBox> msgBox = new QMessageBox(QMessageBox::Warning,
-                       tr( "Avogadro" ),
-                       tr( "Do you want to save the changes you made in the document?" ),
-                       QMessageBox::Save | QMessageBox::Discard
-                       | QMessageBox::Cancel,
-                       this);
+    QPointer<MESSAGEBOX> msgBox = new MESSAGEBOX(
+      QMessageBox::Warning, tr("Avogadro"),
+      tr("Do you want to save the changes you made in the document?"),
+      QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel, this);
 
     // On Mac, this will make a sheet relative to the window
     // Unfortunately, it also closes the window when the box disappears!
     // msgBox->setWindowModality(Qt::WindowModal);
     // second line of text
-    msgBox->setInformativeText(tr("Your changes will be lost if you don't save them." ));
+    msgBox->setInformativeText(
+      tr("Your changes will be lost if you don't save them."));
     msgBox->setDefaultButton(QMessageBox::Save);
 #ifdef Q_OS_MAC
     msgBox->setWindowModality(Qt::WindowModal);
 #endif
 
     // OK, now add shortcuts for save and discard
-    msgBox->button(QMessageBox::Save)->setShortcut(QKeySequence(tr("Ctrl+S", "Save")));
-    msgBox->button(QMessageBox::Discard)->setShortcut(QKeySequence(tr("Ctrl+D", "Discard")));
+    msgBox->button(QMessageBox::Save)
+      ->setShortcut(QKeySequence(tr("Ctrl+S", "Save")));
+    msgBox->button(QMessageBox::Discard)
+      ->setShortcut(QKeySequence(tr("Ctrl+D", "Discard")));
     //    msgBox->setButtonText(QMessageBox::Save,
-    //                          isDefaultFileName(d->fileName) ? tr("Save...") : tr("Save"));
+    //                          isDefaultFileName(d->fileName) ? tr("Save...") :
+    //                          tr("Save"));
 
     int response = msgBox->exec();
 
@@ -1770,10 +1784,10 @@ void MainWindow::readQueuedFiles()
       "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : nullptr)) {
-      QMessageBox::warning(this, tr("Cannot open file"),
-                           tr("Avogadro timed out and doesn't know how to open"
-                              " '%1'.")
-                             .arg(file));
+      MESSAGEBOX::warning(this, tr("Cannot open file"),
+                          tr("Avogadro timed out and doesn't know how to open"
+                             " '%1'.")
+                            .arg(file));
     }
   }
 }
@@ -1781,10 +1795,10 @@ void MainWindow::readQueuedFiles()
 void MainWindow::clearQueuedFiles()
 {
   if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
-    QMessageBox::warning(this, tr("Cannot open files"),
-                         tr("Avogadro timed out and cannot open"
-                            " '%1'.")
-                           .arg(m_queuedFiles.join("\n")));
+    MESSAGEBOX::warning(this, tr("Cannot open files"),
+                        tr("Avogadro timed out and cannot open"
+                           " '%1'.")
+                          .arg(m_queuedFiles.join("\n")));
     m_queuedFiles.clear();
   }
 }
