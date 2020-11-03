@@ -1,16 +1,7 @@
 - name: Flatpak Builder
-  # You may pin to the exact commit or the version.
-  # uses: bilelmoussaoui/flatpak-github-actions@fcc75a490e0a97ff4785b706adfc4fc10e732f4e
   uses: bilelmoussaoui/flatpak-github-actions@v2
   with:
-    # The relative path of the manifest file.
-    manifest-path: 
-    # The bundle name, by default it's app.flatpak
-    bundle: # optional, default is app.flatpak
-    # The repository used to fetch the runtime when the user downloads the Flatpak bundle.
-
-    runtime-repo: # optional, default is https://flathub.org/repo/flathub.flatpakrepo
-    # Toggles the run-tests config option on the defined flatpak-module. Possible values: true, enabled, yes, y. Or something else to disable them.
-
-    run-tests: # optional, default is false
-    # The flatpak branch
+    manifest-path: ../../
+    bundle: app.flatpak
+    runtime-repo: https://flathub.org/repo/flathub.flatpakrepo
+    run-tests: false
