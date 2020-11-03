@@ -12,7 +12,7 @@ jobs:
       - name: Flatpak Builder
         uses: bilelmoussaoui/flatpak-github-actions@v2
         with:
-          manifest-path: ../../org.OpenChemistry.avogadro.yml
+          manifest-path: org.OpenChemistry.avogadro.yml
           bundle: app.flatpak
           runtime-repo: https://flathub.org/repo/flathub.flatpakrepo
           run-tests: false
