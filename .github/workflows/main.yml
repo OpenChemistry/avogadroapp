@@ -1,19 +1,18 @@
-name: CI
 on:
   push:
-    branches: [ add_flatpak_infrastructure ]
+    branches: [add_flatpak_infrastructure]
   pull_request:
-    branches: [ add_flatpak_infrastructure ]
+name: CI
 jobs:
-  build:
+  flatpak-builder:
+    name: "Flatpak Builder"
     runs-on: ubuntu-latest
+    container:
+      image: docker.io/bilelmoussaoui/flatpak-github-actions
+      options: --privileged
     steps:
-      - uses: actions/checkout@v2
-      - name: Flatpak Builder
-        uses: bilelmoussaoui/flatpak-github-actions@v2
-        with:
-          manifest-path: org.OpenChemistry.avogadro.yml
-          bundle: app.flatpak
-          runtime-repo: https://flathub.org/repo/flathub.flatpakrepo
-          run-tests: false
-          branch: add_flatpak_infrastructure
+    - uses: actions/checkout@v2
+    - uses: bilelmoussaoui/flatpak-github-actions@v2
+      with:
+        bundle: "app.flatpak"
+        manifest-path: "org.OpenChemistry.avogadro.yml"
