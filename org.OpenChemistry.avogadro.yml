@@ -60,8 +60,8 @@ modules:
     - type: archive
       url: https://github.com/atztogo/spglib/archive/v1.10.4.tar.gz
       sha256: 6a15a324a821ad9d3e615e120d9c5e704e284d8eb1f076aa21741a23fbcf08df
-#    - type: patch
-#      path: spglib.patch
+    - type: patch
+      path: spglib.patch
 - name: mmtf
   buildsystem: cmake
   builddir: true
