@@ -84,4 +84,4 @@ modules:
     - build 
   sources: 
     - type: git
-      url: https://github.com/jakobjakobson13/avogadroapp.git
+      url: https://github.com/OpenChemistry/avogadroapp.git
