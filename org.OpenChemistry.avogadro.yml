@@ -115,7 +115,7 @@ modules:
   sources: 
     - type: git
       url: https://github.com/OpenChemistry/avogadrolibs.git
-  name: avogadroapp
+- name: avogadroapp
   buildsystem: cmake
   build-options:
     - build 
