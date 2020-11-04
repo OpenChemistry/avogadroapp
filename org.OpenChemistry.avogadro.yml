@@ -112,17 +112,13 @@ modules:
   buildsystem: cmake
   build-options:
     - build 
-    - config 1.93.0 
   sources: 
-    - type: archive
-      url: https://github.com/OpenChemistry/avogadrolibs/archive/1.93.0.tar.gz
-      sha256: 01fea1f3b21c69091c60739616f86123db92f445e4c9ca53f1dec09624aceab4
-- name: avogadroapp
+    - type: git
+      url: https://github.com/OpenChemistry/avogadrolibs.git
+  name: avogadroapp
   buildsystem: cmake
   build-options:
     - build 
-    - config 1.93.0 
   sources: 
-    - type: archive
-      url: https://github.com/OpenChemistry/avogadroapp/archive/1.93.0.tar.gz
-      sha256: 8cf913058aff58fe588531618a680d82401fbfe3f21e4783a44979f4a2dd5586
+    - type: git
+      url: https://github.com/jakobjakobson13/avogadroapp.git
