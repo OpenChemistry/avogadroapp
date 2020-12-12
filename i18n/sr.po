@@ -1,42 +1,44 @@
 # Serbian translation for avogadro
 # Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the avogadro package.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012—2016.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012—2016, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2016-06-10 06:25+0000\n"
+"PO-Revision-Date: 2020-12-13 08:29+0000\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
-"Language-Team: Serbian <gnom@prevod.org>\n"
+"Language-Team: Serbian <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/sr/>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.4-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Није постављен молекул у „Формату_датотеке_позадине“!"
 
 #: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
 msgid "No Io::FileFormat set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Није постављен „Io::Формат_датотеке“ у „Формату_датотеке_позадине“!"
 
 #: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Није постављен назив датотеке у „Формату_датотеке_позадине“!"
 
 #: mainwindow.cpp:292
 msgid "Ready..."
-msgstr ""
+msgstr "Спреман..."
 
 #: mainwindow.cpp:318
-#, fuzzy
 msgid "Tool"
-msgstr "Алатке"
+msgstr "Алатка"
 
 #: mainwindow.cpp:322
 msgid "Display Types"
@@ -44,56 +46,51 @@ msgstr "Врсте приказа"
 
 #: mainwindow.cpp:331
 msgid "View Configuration"
-msgstr ""
+msgstr "Подешавање приказа"
 
 #: mainwindow.cpp:337
-#, fuzzy
 msgid "Molecules"
-msgstr "Молекул"
+msgstr "Молекули"
 
 #: mainwindow.cpp:486
-#, fuzzy
 msgid "Untitled"
-msgstr "неименовано"
+msgstr "Без наслова"
 
 #: mainwindow.cpp:491
-#, fuzzy, qt-format
+#, qt-format
 msgid "%1%2 - Avogadro %3"
-msgstr "Авогадро"
+msgstr "%1%2 – Авогадро %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Обележивачки језик хемије"
 
 #: mainwindow.cpp:534 mainwindow.cpp:1063
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Хемијски ЈСОН"
 
 #: mainwindow.cpp:540
 msgid "Open chemical file"
-msgstr ""
+msgstr "Отворите датотеку хемије"
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Не могу да сачувам датотеку %1."
+msgstr "Не могу да отворим датотеку"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Не могу да сачувам датотеку %1."
+msgstr "Не могу да отворим достављену датотеку „%1“"
 
 #: mainwindow.cpp:572
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Молекул"
+msgstr "Отвори молекул"
 
 #: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
 msgid "Select file reader"
-msgstr ""
+msgstr "Изабери читача датотеке"
 
 #: mainwindow.cpp:625
-#, fuzzy
 msgid "Reading File"
 msgstr "Отвори датотеку"
 
@@ -103,16 +100,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Отварам датотеку „%1“\n"
+"са „%2“"
 
 #: mainwindow.cpp:656
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Молекул је учитан (%1 атома, %2 везе)"
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
-#, fuzzy
 msgid "File error"
-msgstr "Датотека: "
+msgstr "Грешка датотеке"
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -120,11 +118,13 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Грешка приликом читања датотеке „%1“:\n"
+"%2"
 
 #: mainwindow.cpp:688
 #, qt-format
 msgid "File written: %1"
-msgstr ""
+msgstr "Записана датотека: %1"
 
 #: mainwindow.cpp:696
 #, qt-format
@@ -132,10 +132,12 @@ msgid ""
 "Error while writing file '%1':\n"
 "%2"
 msgstr ""
+"Грешка приликом писања датотеке „%1“:\n"
+"%2"
 
 #: mainwindow.cpp:735
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Грешка: Нисам успео да покренем ОпенГЛ контекст"
 
 #: mainwindow.cpp:736
 #, qt-format
@@ -144,18 +146,21 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"ОпенГЛ 2.0 или већи је потребан, излазим.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:737
 msgid "Unknown error"
-msgstr ""
+msgstr "Непозната грешка"
 
 #: mainwindow.cpp:814 mainwindow.cpp:815
 msgid "Navigate tool"
-msgstr ""
+msgstr "Управљање алата"
 
 #: mainwindow.cpp:889
 msgid "Common image formats"
-msgstr "Општи запис слике"
+msgstr "Општи формати слике"
 
 #: mainwindow.cpp:891
 msgid "All files"
@@ -186,7 +191,7 @@ msgstr "Авогадро"
 #: mainwindow.cpp:941
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Не могу да сачувам датотеку %1."
+msgstr "Не могу да сачувам датотеку „%1“."
 
 #: mainwindow.cpp:1038
 msgid ""
@@ -195,6 +200,10 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Ова датотека је увезена из нестандардног формата који можда неће моћи да "
+"пише све информације у молекул.\n"
+"\n"
+"Да ли желите да извезете текући формат или да сачувате у стандардном формату?"
 
 #: mainwindow.cpp:1045
 msgid "Export"
@@ -202,16 +211,15 @@ msgstr "Извези"
 
 #: mainwindow.cpp:1070
 msgid "Save chemical file"
-msgstr ""
+msgstr "Сачувајте датотеку хемије"
 
 #: mainwindow.cpp:1098
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Увези датотеку молекула"
+msgstr "Извези молекул"
 
 #: mainwindow.cpp:1150
 msgid "Writing File"
-msgstr ""
+msgstr "Записујем датотеку"
 
 #: mainwindow.cpp:1152
 #, qt-format
@@ -219,11 +227,13 @@ msgid ""
 "Writing file '%1'\n"
 "with '%2'"
 msgstr ""
+"Пишем датотеку „%1“\n"
+"са „%2“"
 
 #: mainwindow.cpp:1260
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Опозови"
+msgstr "&Опозови %1"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -232,9 +242,9 @@ msgid "&Undo"
 msgstr "&Опозови"
 
 #: mainwindow.cpp:1268
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Понови"
+msgstr "&Понови „%1“"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -243,19 +253,16 @@ msgid "&Redo"
 msgstr "&Понови"
 
 #: mainwindow.cpp:1368
-#, fuzzy
 msgid "&Testing"
-msgstr "Подешавања"
+msgstr "&Тестирање"
 
 #: mainwindow.cpp:1370
-#, fuzzy
 msgid "Record test..."
 msgstr "Забележи тест..."
 
 #: mainwindow.cpp:1373
-#, fuzzy
 msgid "Play test..."
-msgstr "Репродукуј тест..."
+msgstr "Пусти тест..."
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -268,9 +275,8 @@ msgstr "&Ново"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1398:51
-#, fuzzy
 msgid "&Open..."
-msgstr "&Отвори"
+msgstr "&Отвори..."
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -297,14 +303,12 @@ msgstr "Сачувај &као..."
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1441:264
-#, fuzzy
 msgid "&Export"
-msgstr "Извези"
+msgstr "&Извези"
 
 #: mainwindow.cpp:1442
-#, fuzzy
 msgid "&Molecule..."
-msgstr "Молекул"
+msgstr "&Молекул..."
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -322,24 +326,23 @@ msgstr "&Изађи"
 
 #: mainwindow.cpp:1480
 msgid "No recent files"
-msgstr ""
+msgstr "Нема скорашњих датотека"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:1486 menubuilder.cpp:87:45
 msgid "&Edit"
-msgstr "&Уређивање"
+msgstr "&Уреди"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:1506 menubuilder.cpp:87:42
 msgid "&View"
-msgstr "&Приказ"
+msgstr "&Преглед"
 
 #: mainwindow.cpp:1507
-#, fuzzy
 msgid "Set background color..."
-msgstr "Постави боју &позадине..."
+msgstr "Постави боју позадине..."
 
 #: mainwindow.cpp:1511
 msgid "Projection"
@@ -358,9 +361,8 @@ msgid "Orthographic"
 msgstr "Правописни"
 
 #: mainwindow.cpp:1533
-#, fuzzy
 msgid "&Extensions"
-msgstr "Проширења"
+msgstr "&Проширења"
 
 #: mainwindow.cpp:1540 menubuilder.cpp:91
 msgid "&Help"
@@ -369,10 +371,9 @@ msgstr "По&моћ"
 #: mainwindow.cpp:1653
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "Сви подржани формати (%1);;Све датотеке (*);;"
 
 #: mainwindow.cpp:1669
-#, fuzzy
 msgid "Do you want to save the changes you made in the document?"
 msgstr "Да ли желите да сачувате измене које сте направили у документу?"
 
@@ -383,32 +384,31 @@ msgstr "Ваше измене ће бити изгубљене ако их не 
 #: mainwindow.cpp:1685
 msgctxt "Save"
 msgid "Ctrl+S"
-msgstr "Ктрл+С"
+msgstr "Ктрл+S"
 
 #: mainwindow.cpp:1686
 msgctxt "Discard"
 msgid "Ctrl+D"
-msgstr "Ктрл+Д"
+msgstr "Ктрл+D"
 
 #: mainwindow.cpp:1752
 #, qt-format
 msgid "Error while loading FileFormat with id '%1'."
-msgstr ""
+msgstr "Грешка приликом учитавања формата датотеке са иб-ом „%1“."
 
 #: mainwindow.cpp:1773
 #, qt-format
 msgid "Avogadro timed out and doesn't know how to open '%1'."
-msgstr ""
+msgstr "Авогадру је истекло време и не зна како да отвори „%1“."
 
 #: mainwindow.cpp:1783
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Не могу да сачувам датотеку %1."
+msgstr "Не могу да отворим датотеке"
 
 #: mainwindow.cpp:1784
 #, qt-format
 msgid "Avogadro timed out and cannot open '%1'."
-msgstr ""
+msgstr "Авогадру је истекло време и не може да отвори „%1“."
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -433,13 +433,12 @@ msgid "Se&ttings"
 msgstr "&Подешавања"
 
 #: menubuilder.cpp:91
-#, fuzzy
 msgid "&Window"
-msgstr "Прозор"
+msgstr "&Прозор"
 
 #: rpclistener.cpp:123
 msgid "Error starting RPC server:"
-msgstr ""
+msgstr "Грешка покретања РПЦ сервера:"
 
 #: rpclistener.cpp:125
 msgid ""
@@ -456,14 +455,25 @@ msgid ""
 "(this will prevent RPC enabled applications from communicating with "
 "Avogadro)."
 msgstr ""
+"Дошло је до грешке при покретању Авогадровог РПЦ ослушкивача. Ово се можда "
+"догодило\n"
+"из бројних разлога:\n"
+"\tПретходни примерак Авогадроа се можда урушио.\n"
+"\tПримерак радног Авогадроа је био превише заузет да би одговорио.\n"
+"\n"
+"Ако други примерак Авогадроа није покренут на овом рачунару, безбедно се "
+"може заменити\n"
+"усмрћен сервер. У супротном, овај примерак авогадроа се може покренути без "
+"РПЦ могућности\n"
+"(то ће спречити РПЦ-ом укључене програме да комуницирају са Авогадроом)."
 
 #: rpclistener.cpp:135
 msgid "Replace the dead server with a new instance."
-msgstr ""
+msgstr "Замените нерадан сервер новим примерком."
 
 #: rpclistener.cpp:136
 msgid "Start without RPC capabilities."
-msgstr ""
+msgstr "Покрени без РПЦ могућности."
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -471,6 +481,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
+">Издање:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -478,6 +490,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -485,6 +499,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">„AvogadroLibs“ издање:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -494,6 +510,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">0,1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -501,6 +519,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Кут "
+"издање:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -510,6 +530,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD-3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Лиценца: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:261
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -518,6 +542,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
+" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:290
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -526,6 +553,9 @@ msgid ""
 "decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -545,7 +575,7 @@ msgstr "&Отвори"
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Q"
-msgstr "Ктрл+Ку"
+msgstr "Ктрл+Q"
 
 #. i18n: file: mainwindow.ui:111
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -560,22 +590,22 @@ msgstr "&Очисти скорашње"
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+N"
-msgstr "Ктрл+Н"
+msgstr "Ктрл+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+W"
-msgstr "Ктрл+ДублВе"
+msgstr "Ктрл+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+S"
-msgstr "Ктрл+С"
+msgstr "Ктрл+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+S"
-msgstr "Ктрл+Помак+С"
+msgstr "Ктрл+Промени+S"
 
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -605,22 +635,22 @@ msgstr "&О програму"
 #. i18n: file: mainwindow.ui:214
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Z"
-msgstr "Ктрл+З"
+msgstr "Ктрл+Z"
 
 #. i18n: file: mainwindow.ui:226
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+Z"
-msgstr "Ктрл+Помак+З"
+msgstr "Ктрл+Промени+Z"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "New View"
-msgstr "Нови приказ"
+msgstr "Нови преглед"
 
 #. i18n: file: mainwindow.ui:247
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Close View"
-msgstr "Затвори приказ"
+msgstr "Затвори преглед"
 
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -650,7 +680,7 @@ msgstr "Умножи"
 #. i18n: file: mainwindow.ui:281
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+C"
-msgstr "Ктрл+Ц"
+msgstr "Ктрл+С"
 
 #. i18n: file: mainwindow.ui:286
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -685,12 +715,12 @@ msgstr "Поништи избор"
 #. i18n: file: mainwindow.ui:310
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+A"
-msgstr "Ктрл+Помак+А"
+msgstr "Ктрл+Промени+А"
 
 #. i18n: file: mainwindow.ui:319
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Configure Avogadro..."
-msgstr "Подеси Авогардо..."
+msgstr "Подеси Авогадро..."
 
 #. i18n: file: mainwindow.ui:330
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -710,7 +740,7 @@ msgstr "Осе приказа"
 #. i18n: file: mainwindow.ui:355
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Debug Information"
-msgstr "Подаци о уклањању грешака"
+msgstr "Подаци прочишћавања"
 
 #. i18n: file: mainwindow.ui:363
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -795,41 +825,32 @@ msgstr "МенХеО"
 #. i18n: file: mainwindow.ui:484
 #. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
 msgid "IUPAC InChI identifier"
-msgstr "МУЧПХ МенХеО"
+msgstr "МУЧПХ МенХеО одредник"
 
 #. i18n: file: mainwindow.ui:489
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Форум расправе"
 
 #. i18n: file: mainwindow.ui:494
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Open Recent"
-msgstr "Отвори &скорашње"
+msgstr "Отвори скорашње"
 
 #. i18n: file: mainwindow.ui:499
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
-msgstr "Увези"
+msgstr "&Увези"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-",Launchpad Contributions:,Мирослав Николић, ,Launchpad Contributions:,Danilo "
-"Nusic,Nikola Petković,Иван Старчевић,Мирослав Николић, ,Launchpad "
-"Contributions:,Danilo Nusic,Nikola Petković,Иван Старчевић,Мирослав "
-"Николић, ,Launchpad Contributions:,Danilo Nusic,Nikola Petković,Иван "
+",Доприносиоци на „Launchpad“-у:,Danilo Nusic,Nikola Petković,Иван "
 "Старчевић,Мирослав Николић"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
-",,miroslavnikolic@rocketmail.com,,,,,ivanstar61@gmail.com,"
-"miroslavnikolic@rocketmail.com,,,,,ivanstar61@gmail.com,"
-"miroslavnikolic@rocketmail.com,,,,,ivanstar61@gmail.com,"
-"miroslavnikolic@rocketmail.com"
+msgstr ",,miroslavnikolic@rocketmail.com,,,,ivanstar61@gmail.com,,"
 
 #~ msgctxt "%1 is the Git revision number."
 #~ msgid "(Git revision: %1)"
