@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # Andika Tulus Pangestu <andhikatuluspangestu@gmail.com>, 2020.
+# Ferdinand Tampubolon <dnandz@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2020-11-11 06:28+0000\n"
-"Last-Translator: Andika Tulus Pangestu <andhikatuluspangestu@gmail.com>\n"
+"PO-Revision-Date: 2021-01-08 17:32+0000\n"
+"Last-Translator: Ferdinand Tampubolon <dnandz@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
 "Language: id\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
@@ -34,12 +35,11 @@ msgstr ""
 
 #: mainwindow.cpp:292
 msgid "Ready..."
-msgstr ""
+msgstr "Siap..."
 
 #: mainwindow.cpp:318
-#, fuzzy
 msgid "Tool"
-msgstr "Alat Bantuan"
+msgstr "Alat"
 
 #: mainwindow.cpp:322
 msgid "Display Types"
@@ -47,7 +47,7 @@ msgstr "Tipe Tampilan"
 
 #: mainwindow.cpp:331
 msgid "View Configuration"
-msgstr ""
+msgstr "Lihat Setingan"
 
 #: mainwindow.cpp:337
 #, fuzzy
@@ -88,16 +88,16 @@ msgstr "Tidak dapat membuka berkas %1."
 #: mainwindow.cpp:572
 #, fuzzy
 msgid "Open Molecule"
-msgstr "Molekul"
+msgstr "Buka Molekul"
 
 #: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
 msgid "Select file reader"
-msgstr ""
+msgstr "Pilih file yang akan dibaca"
 
 #: mainwindow.cpp:625
 #, fuzzy
 msgid "Reading File"
-msgstr "Buka Berkas"
+msgstr "Lagi membaca file"
 
 #: mainwindow.cpp:627
 #, qt-format
@@ -105,16 +105,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Membuka file '%1'\n"
+"dengan '%2'"
 
 #: mainwindow.cpp:656
-#, qt-format
+#, fuzzy, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molekul dimuat (%1 atoms, %2 bonds)"
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
-#, fuzzy
 msgid "File error"
-msgstr "Berkas: "
+msgstr "File rusak:"
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -122,11 +123,13 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Rusak saat membaca file '%1':\n"
+"%2"
 
 #: mainwindow.cpp:688
 #, qt-format
 msgid "File written: %1"
-msgstr ""
+msgstr "Menulis file: %1"
 
 #: mainwindow.cpp:696
 #, qt-format
@@ -134,10 +137,12 @@ msgid ""
 "Error while writing file '%1':\n"
 "%2"
 msgstr ""
+"Rusak ketika menulis file '%1':\n"
+"%2"
 
 #: mainwindow.cpp:735
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Rusak: Gagal untuk mengindentifikasi konteks OpenGL"
 
 #: mainwindow.cpp:736
 #, qt-format
@@ -146,18 +151,21 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 2.0 atau lebih tinggi dibutuhkan, keluar.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:737
 msgid "Unknown error"
-msgstr ""
+msgstr "Rusak tidak diketahui"
 
 #: mainwindow.cpp:814 mainwindow.cpp:815
 msgid "Navigate tool"
-msgstr ""
+msgstr "Alat Navigasi"
 
 #: mainwindow.cpp:889
 msgid "Common image formats"
-msgstr "Format gambar yang umum"
+msgstr "Format gambar yang pada umumnya"
 
 #: mainwindow.cpp:891
 msgid "All files"
@@ -177,7 +185,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:901
 msgid "Export Bitmap Graphics"
-msgstr "Expor Grafiks Bitmap"
+msgstr "Ekspor gambar Bitmap"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -197,23 +205,26 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"File ini sudah dimasukkan dari format tidak standar yang mana mungkin tidak "
+"akan di tulis semua dari informasi dalam molekul\n"
+"\n"
+"Maukah kamu untuk ekspor format saat ini, atau simpan dalam format standar?"
 
 #: mainwindow.cpp:1045
 msgid "Export"
-msgstr "Expor"
+msgstr "Ekspor"
 
 #: mainwindow.cpp:1070
 msgid "Save chemical file"
-msgstr ""
+msgstr "Simpan file kimia"
 
 #: mainwindow.cpp:1098
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Impor Berkas Molekul"
+msgstr "Ekspor Molekul"
 
 #: mainwindow.cpp:1150
 msgid "Writing File"
-msgstr ""
+msgstr "Menulis File"
 
 #: mainwindow.cpp:1152
 #, qt-format
@@ -221,22 +232,24 @@ msgid ""
 "Writing file '%1'\n"
 "with '%2'"
 msgstr ""
+"Menulis File '%1'\n"
+"dengan '%2'"
 
 #: mainwindow.cpp:1260
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Batalkan"
+msgstr "&Ulang %1"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1263 mainwindow.cpp:1487:126
 msgid "&Undo"
-msgstr "&Batalkan"
+msgstr "&Ulang"
 
 #: mainwindow.cpp:1268
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Kembalikan"
+msgstr "&Kembalikan %1"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -245,19 +258,16 @@ msgid "&Redo"
 msgstr "&Kembalikan"
 
 #: mainwindow.cpp:1368
-#, fuzzy
 msgid "&Testing"
-msgstr "Setelan"
+msgstr "&Mencoba"
 
 #: mainwindow.cpp:1370
-#, fuzzy
 msgid "Record test..."
-msgstr "Rekam Test..."
+msgstr "Rekam Percobaan..."
 
 #: mainwindow.cpp:1373
-#, fuzzy
 msgid "Play test..."
-msgstr "Mainkan Test..."
+msgstr "Mainkan Percobaan..."
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -270,9 +280,8 @@ msgstr "&Baru"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1398:51
-#, fuzzy
 msgid "&Open..."
-msgstr "&Buka"
+msgstr "&Buka..."
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -288,25 +297,23 @@ msgstr "&Tutup"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1421:93 rc.cpp:99
 msgid "&Save"
-msgstr "Si&mpan"
+msgstr "&Simpan"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1430:102
 msgid "Save &As..."
-msgstr "Simpan Seba&gai..."
+msgstr "Simpan sebagai..."
 
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1441:264
-#, fuzzy
 msgid "&Export"
-msgstr "Expor"
+msgstr "&Ekspor"
 
 #: mainwindow.cpp:1442
-#, fuzzy
 msgid "&Molecule..."
-msgstr "Molekul"
+msgstr "&Molekul..."
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -324,28 +331,27 @@ msgstr "&Keluar"
 
 #: mainwindow.cpp:1480
 msgid "No recent files"
-msgstr ""
+msgstr "Tidak ada File barusan"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:1486 menubuilder.cpp:87:45
 msgid "&Edit"
-msgstr "&Suntingan"
+msgstr "&Dirubah"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:1506 menubuilder.cpp:87:42
 msgid "&View"
-msgstr "&Tampilan"
+msgstr "&Tampilkan"
 
 #: mainwindow.cpp:1507
-#, fuzzy
 msgid "Set background color..."
-msgstr "Atur Warna &Latar..."
+msgstr "Atur Warna Latar belakang ..."
 
 #: mainwindow.cpp:1511
 msgid "Projection"
-msgstr ""
+msgstr "Proyeksi"
 
 #. i18n: file: mainwindow.ui:463
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -428,20 +434,19 @@ msgstr "Mem&bangun"
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
 #: menubuilder.cpp:88:48
 msgid "&Select"
-msgstr "&Pemiihan"
+msgstr "&Pilih"
 
 #: menubuilder.cpp:91
 msgid "Se&ttings"
-msgstr "Se&telan"
+msgstr "Pengaturan"
 
 #: menubuilder.cpp:91
-#, fuzzy
 msgid "&Window"
-msgstr "Jendela"
+msgstr "&Jendela"
 
 #: rpclistener.cpp:123
 msgid "Error starting RPC server:"
-msgstr ""
+msgstr "Rusak saat memulai RPC server:"
 
 #: rpclistener.cpp:125
 msgid ""
@@ -458,14 +463,24 @@ msgid ""
 "(this will prevent RPC enabled applications from communicating with "
 "Avogadro)."
 msgstr ""
+"Terjadi kesalahan saat memulai pemroses daftar RPC Avogadro. Ini mungkin "
+"terjadi untuk a\n"
+"Point dari kesalahan\n"
+"Hal yang sebelumnya pada Avogadro mungkin macet.\n"
+"Hal yang diproses Avogadro  terlalu lama untuk direspon\n"
+"\n"
+"Jika tidak ada lagi hal lain Avogadro yang berjalan di mesin,itu bagus untuk "
+"menggantikan yang server\n"
+"yang mati.Sebaliknya, hal pada avogadro mungkin dimulai tanpa kemampuan RPC\n"
+"(ini akan mencegah Aplikasi RPC aktif dari komunikasi dengan Avogadro)."
 
 #: rpclistener.cpp:135
 msgid "Replace the dead server with a new instance."
-msgstr ""
+msgstr "Ganti Server yang sudah mati dengan hal yang baru"
 
 #: rpclistener.cpp:136
 msgid "Start without RPC capabilities."
-msgstr ""
+msgstr "Dimulai tanpa kemampuan RPC"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -473,13 +488,18 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
+">Versi:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
+#, fuzzy
 msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -487,15 +507,20 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">AvogadroLibs Versi:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
 #. i18n: file: aboutdialog.ui:171
 #. i18n: ectx: property (text), widget (QLabel, qtVersion)
+#, fuzzy
 msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -512,6 +537,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD-3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Lisensi: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:261
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -520,6 +549,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
+" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:290
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -528,11 +560,14 @@ msgid ""
 "decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
-msgstr "Oke"
+msgstr "Ok"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -557,7 +592,7 @@ msgstr "Terkini"
 #. i18n: file: mainwindow.ui:116
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Clear Recent"
-msgstr "Hapus Terkini"
+msgstr "&Hapus Terkini"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -592,12 +627,12 @@ msgstr "Tampilan &Layar Penuh"
 #. i18n: file: mainwindow.ui:185
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Esc"
-msgstr "Esc"
+msgstr "Keluar"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color..."
-msgstr "Atur Warna &Latar..."
+msgstr "Atur Warna &Latarbelakang..."
 
 #. i18n: file: mainwindow.ui:199
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -632,7 +667,7 @@ msgstr "Tengah"
 #. i18n: file: mainwindow.ui:265
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
-msgstr "Ratakan Tampilan ke Sumbu"
+msgstr "Sejajarkan tampilan ke sumbu"
 
 #. i18n: file: mainwindow.ui:270
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -682,7 +717,7 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:307
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Tidak Ada Pilihan"
+msgstr "Tidak Ada yang dipilih"
 
 #. i18n: file: mainwindow.ui:310
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -692,7 +727,7 @@ msgstr "Ctrl+Shift+A"
 #. i18n: file: mainwindow.ui:319
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Configure Avogadro..."
-msgstr "Konfigur Avogadro..."
+msgstr "Konfigurasi Avogadro..."
 
 #. i18n: file: mainwindow.ui:330
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -712,7 +747,7 @@ msgstr "Tampilkan Sumbu"
 #. i18n: file: mainwindow.ui:355
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Debug Information"
-msgstr "Informasi Awakutu"
+msgstr "Informasi Progarm Cacat"
 
 #. i18n: file: mainwindow.ui:363
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -727,7 +762,7 @@ msgstr "Nota Rilis"
 #. i18n: file: mainwindow.ui:373
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
-msgstr "Laporkan Kutu"
+msgstr "Laporkan Kesalahan Program"
 
 #. i18n: file: mainwindow.ui:378
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -737,7 +772,7 @@ msgstr "Tanya dan Jawab"
 #. i18n: file: mainwindow.ui:383
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
-msgstr "Halaman Web Avogadro"
+msgstr "Web Avogadro"
 
 #. i18n: file: mainwindow.ui:392
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
