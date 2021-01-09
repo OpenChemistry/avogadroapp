@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-01-08 17:32+0000\n"
+"PO-Revision-Date: 2021-01-10 13:32+0000\n"
 "Last-Translator: Ferdinand Tampubolon <dnandz@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
@@ -27,11 +27,11 @@ msgstr "Tidak ada molekul yang diatur dalam Format File Latar Belakang!"
 
 #: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
 msgid "No Io::FileFormat set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Tidak ada Io::FileFormat Di set dalam file format Latarbelakang!"
 
 #: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Tidak ada nama file di setel dalam file format latarbelakang!"
 
 #: mainwindow.cpp:292
 msgid "Ready..."
@@ -50,31 +50,29 @@ msgid "View Configuration"
 msgstr "Lihat Setingan"
 
 #: mainwindow.cpp:337
-#, fuzzy
 msgid "Molecules"
 msgstr "Molekul"
 
 #: mainwindow.cpp:486
-#, fuzzy
 msgid "Untitled"
-msgstr "tanpa nama"
+msgstr "Tanpa judul"
 
 #: mainwindow.cpp:491
-#, fuzzy, qt-format
+#, qt-format
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Bahasa Kimia Markup"
 
 #: mainwindow.cpp:534 mainwindow.cpp:1063
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Kimia JSON"
 
 #: mainwindow.cpp:540
 msgid "Open chemical file"
-msgstr ""
+msgstr "Buka File Kimia"
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
 msgid "Cannot open file"
@@ -86,7 +84,6 @@ msgid "Can't open supplied file %1"
 msgstr "Tidak dapat membuka berkas %1."
 
 #: mainwindow.cpp:572
-#, fuzzy
 msgid "Open Molecule"
 msgstr "Buka Molekul"
 
@@ -95,7 +92,6 @@ msgid "Select file reader"
 msgstr "Pilih file yang akan dibaca"
 
 #: mainwindow.cpp:625
-#, fuzzy
 msgid "Reading File"
 msgstr "Lagi membaca file"
 
@@ -109,7 +105,7 @@ msgstr ""
 "dengan '%2'"
 
 #: mainwindow.cpp:656
-#, fuzzy, qt-format
+#, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Molekul dimuat (%1 atoms, %2 bonds)"
 
@@ -357,18 +353,17 @@ msgstr "Proyeksi"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1512:240
 msgid "Perspective"
-msgstr ""
+msgstr "Perspektif"
 
 #. i18n: file: mainwindow.ui:471
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1519:243
 msgid "Orthographic"
-msgstr ""
+msgstr "Ortografi"
 
 #: mainwindow.cpp:1533
-#, fuzzy
 msgid "&Extensions"
-msgstr "Ekstensi"
+msgstr "&Ekstensi"
 
 #: mainwindow.cpp:1540 menubuilder.cpp:91
 msgid "&Help"
@@ -377,10 +372,9 @@ msgstr "&Bantuan"
 #: mainwindow.cpp:1653
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "Semua Format yang di dukung (%1);;Semua File (*);;"
 
 #: mainwindow.cpp:1669
-#, fuzzy
 msgid "Do you want to save the changes you made in the document?"
 msgstr "Apakah anda akan menyimpan perubahan yang ada di dokumen?"
 
@@ -401,22 +395,21 @@ msgstr "Ctrl+D"
 #: mainwindow.cpp:1752
 #, qt-format
 msgid "Error while loading FileFormat with id '%1'."
-msgstr ""
+msgstr "Kesalahan saat memuat FileFormat dengan id '%1'."
 
 #: mainwindow.cpp:1773
 #, qt-format
 msgid "Avogadro timed out and doesn't know how to open '%1'."
-msgstr ""
+msgstr "Avogadro kehabisan waktu dan tidak tahu bagaimana membuka '%1'."
 
 #: mainwindow.cpp:1783
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Tidak bisa menyimpan berkas %1."
+msgstr "Tidak bisa membuka file"
 
 #: mainwindow.cpp:1784
 #, qt-format
 msgid "Avogadro timed out and cannot open '%1'."
-msgstr ""
+msgstr "Avogadro kehabisan waktu dan tidak dapat membuka '%1'."
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -493,7 +486,6 @@ msgstr ""
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
-#, fuzzy
 msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
@@ -514,7 +506,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
 #. i18n: file: aboutdialog.ui:171
 #. i18n: ectx: property (text), widget (QLabel, qtVersion)
-#, fuzzy
 msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
@@ -528,6 +519,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Versi Qt:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -822,34 +815,32 @@ msgstr "Balik Semula Tipe Tampilan"
 #. i18n: file: mainwindow.ui:476
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "SMILES"
-msgstr ""
+msgstr "Senyum"
 
 #. i18n: file: mainwindow.ui:481
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "InChI"
-msgstr ""
+msgstr "InChI"
 
 #. i18n: file: mainwindow.ui:484
 #. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
 msgid "IUPAC InChI identifier"
-msgstr ""
+msgstr "Pengenal IUPAC InChI"
 
 #. i18n: file: mainwindow.ui:489
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Forum Diskusi"
 
 #. i18n: file: mainwindow.ui:494
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Open Recent"
-msgstr "Buka te&rkini"
+msgstr "Buka Terkini"
 
 #. i18n: file: mainwindow.ui:499
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
-msgstr "Impor"
+msgstr "&Impor"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
