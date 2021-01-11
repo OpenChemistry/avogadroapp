@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2020-10-14 05:26+0000\n"
+"PO-Revision-Date: 2020-11-15 07:28+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/nb_NO/>\n"
@@ -17,20 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3-dev\n"
+"X-Generator: Weblate 4.4-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
+#, fuzzy
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Ingen molekyl satt i BackGroundFileFormat!"
 
 #: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
 msgid "No Io::FileFormat set in BackgroundFileFormat!"
 msgstr ""
 
 #: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
+#, fuzzy
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Inget filnavn satt i BackGroundFileFormat!"
 
 #: mainwindow.cpp:292
 #, fuzzy
@@ -56,9 +58,8 @@ msgid "Molecules"
 msgstr "Molekyl"
 
 #: mainwindow.cpp:486
-#, fuzzy
 msgid "Untitled"
-msgstr "uten navn"
+msgstr "Uten tittel"
 
 #: mainwindow.cpp:491
 #, qt-format
