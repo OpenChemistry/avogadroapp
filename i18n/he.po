@@ -2,21 +2,24 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# Evgeny Chernyavsky <yavgech@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2016-06-10 06:20+0000\n"
-"Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
-"Language-Team: Hebrew <he@li.org>\n"
+"PO-Revision-Date: 2021-01-17 18:32+0000\n"
+"Last-Translator: Evgeny Chernyavsky <yavgech@gmail.com>\n"
+"Language-Team: Hebrew <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
+"X-Generator: Weblate 4.5-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
@@ -32,12 +35,11 @@ msgstr ""
 
 #: mainwindow.cpp:292
 msgid "Ready..."
-msgstr ""
+msgstr "מוכן..."
 
 #: mainwindow.cpp:318
-#, fuzzy
 msgid "Tool"
-msgstr "כלים"
+msgstr "כלי"
 
 #: mainwindow.cpp:322
 msgid "Display Types"
@@ -45,7 +47,7 @@ msgstr "סוגי תצוגה"
 
 #: mainwindow.cpp:331
 msgid "View Configuration"
-msgstr ""
+msgstr "צפה בהגדרות"
 
 #: mainwindow.cpp:337
 #, fuzzy
@@ -75,14 +77,13 @@ msgid "Open chemical file"
 msgstr ""
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
-#, fuzzy
 msgid "Cannot open file"
-msgstr "לא ניתן לשמור את הקובץ %1"
+msgstr "לא ניתן לפתוח את הקובץ"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "לא ניתן לשמור את הקובץ %1"
+msgstr "לא ניתן לפתוח את הקובץ %1"
 
 #: mainwindow.cpp:572
 #, fuzzy
@@ -91,12 +92,11 @@ msgstr "מולקולה"
 
 #: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
 msgid "Select file reader"
-msgstr ""
+msgstr "בחר בקורא קבצים"
 
 #: mainwindow.cpp:625
-#, fuzzy
 msgid "Reading File"
-msgstr "פתח קובץ"
+msgstr "קורא קובץ"
 
 #: mainwindow.cpp:627
 #, qt-format
@@ -111,9 +111,8 @@ msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
-#, fuzzy
 msgid "File error"
-msgstr "קובץ: "
+msgstr "שגיאת קובץ"
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -132,7 +131,7 @@ msgstr ""
 msgid ""
 "Error while writing file '%1':\n"
 "%2"
-msgstr ""
+msgstr "שגיאה בעת כתיב  לקובץ"
 
 #: mainwindow.cpp:735
 msgid "Error: Failed to initialize OpenGL context"
