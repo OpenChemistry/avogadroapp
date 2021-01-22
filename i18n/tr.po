@@ -5,13 +5,14 @@
 # Oğuz Ersen <oguzersen@protonmail.com>, 2020.
 # Talking Panda <memredogan3626@gmail.com>, 2020.
 # Suleyman Poyraz <zaryob.dev@gmail.com>, 2020.
+# Yunus AK <akyunus@live.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2020-10-12 20:26+0000\n"
-"Last-Translator: Suleyman Poyraz <zaryob.dev@gmail.com>\n"
+"PO-Revision-Date: 2021-01-23 06:32+0000\n"
+"Last-Translator: Yunus AK <akyunus@live.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
 "Language: tr\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3-dev\n"
+"X-Generator: Weblate 4.5-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
@@ -182,7 +183,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:901
 msgid "Export Bitmap Graphics"
-msgstr "Bitmap Olarak Dışa Aktar"
+msgstr "Dışa Aktar Bitmap"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
