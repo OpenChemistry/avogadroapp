@@ -4,13 +4,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # Andika Tulus Pangestu <andhikatuluspangestu@gmail.com>, 2020.
 # Ferdinand Tampubolon <dnandz@gmail.com>, 2021.
+# Reza Almanda <rezaalmanda27@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-01-10 13:32+0000\n"
-"Last-Translator: Ferdinand Tampubolon <dnandz@gmail.com>\n"
+"PO-Revision-Date: 2021-02-09 04:50+0000\n"
+"Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
 "Language: id\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.5-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
@@ -860,13 +861,7 @@ msgstr ""
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
-",,,,,,,,,,,avogadro-devel@lists.sourceforge.net,,,,,avogadro-devel@lists."
-"sourceforge.net,,,,,avogadro-devel@lists.sourceforge.net,,,,,avogadro-"
-"devel@lists.sourceforge.net,,,,,avogadro-devel@lists.sourceforge.net,,,,,"
-"avogadro-devel@lists.sourceforge.net,,,,,avogadro-devel@lists.sourceforge."
-"net,,,,,,avogadro-devel@lists.sourceforge.net,,,,,,,avogadro-devel@lists."
-"sourceforge.net,,,"
+msgstr "Email anda"
 
 #~ msgctxt "%1 is the Git revision number."
 #~ msgid "(Git revision: %1)"
