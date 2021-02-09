@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-02-09 04:50+0000\n"
+"PO-Revision-Date: 2021-02-10 20:50+0000\n"
 "Last-Translator: Liu Tao <lyuutau@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hans/>\n"
@@ -67,7 +67,7 @@ msgstr "化学标记语言"
 
 #: mainwindow.cpp:534 mainwindow.cpp:1063
 msgid "Chemical JSON"
-msgstr "化学JSON"
+msgstr "化学 JSON"
 
 #: mainwindow.cpp:540
 msgid "Open chemical file"
@@ -75,7 +75,7 @@ msgstr "打开化学文件"
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
 msgid "Cannot open file"
-msgstr "不能打开文件"
+msgstr "无法打开文件"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
 #, qt-format
@@ -106,7 +106,7 @@ msgstr ""
 #: mainwindow.cpp:656
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "分子已加载 （%1 个原子， %2 个键）"
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
 msgid "File error"
@@ -124,7 +124,7 @@ msgstr ""
 #: mainwindow.cpp:688
 #, qt-format
 msgid "File written: %1"
-msgstr ""
+msgstr "文件写入： %1"
 
 #: mainwindow.cpp:696
 #, qt-format
@@ -230,9 +230,9 @@ msgstr ""
 "使用“ %2”"
 
 #: mainwindow.cpp:1260
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "撤销(&U)"
+msgstr "撤销(&U) %1"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -241,9 +241,9 @@ msgid "&Undo"
 msgstr "撤销(&U)"
 
 #: mainwindow.cpp:1268
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "重做(&R)"
+msgstr "重做(&R) %1"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -252,9 +252,8 @@ msgid "&Redo"
 msgstr "重做(&R)"
 
 #: mainwindow.cpp:1368
-#, fuzzy
 msgid "&Testing"
-msgstr "设置"
+msgstr "测试(&T)"
 
 #: mainwindow.cpp:1370
 msgid "Record test..."
@@ -275,9 +274,8 @@ msgstr "新建(&N)"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1398:51
-#, fuzzy
 msgid "&Open..."
-msgstr "打开(&O)"
+msgstr "打开...(&O)"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -304,14 +302,12 @@ msgstr "另存为(&A)..."
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1441:264
-#, fuzzy
 msgid "&Export"
-msgstr "导出"
+msgstr "导出(&E)"
 
 #: mainwindow.cpp:1442
-#, fuzzy
 msgid "&Molecule..."
-msgstr "分子"
+msgstr "分子...(&M)"
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -344,9 +340,8 @@ msgid "&View"
 msgstr "视图(&V)"
 
 #: mainwindow.cpp:1507
-#, fuzzy
 msgid "Set background color..."
-msgstr "设定背景颜色(&B)..."
+msgstr "设置背景颜色..."
 
 #: mainwindow.cpp:1511
 msgid "Projection"
@@ -365,9 +360,8 @@ msgid "Orthographic"
 msgstr "正交"
 
 #: mainwindow.cpp:1533
-#, fuzzy
 msgid "&Extensions"
-msgstr "扩展"
+msgstr "扩展(&E)"
 
 #: mainwindow.cpp:1540 menubuilder.cpp:91
 msgid "&Help"
@@ -438,9 +432,8 @@ msgid "Se&ttings"
 msgstr "设置(&T)"
 
 #: menubuilder.cpp:91
-#, fuzzy
 msgid "&Window"
-msgstr "窗口"
+msgstr "窗口(&W)"
 
 #: rpclistener.cpp:123
 msgid "Error starting RPC server:"
