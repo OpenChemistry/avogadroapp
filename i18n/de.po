@@ -1,12 +1,13 @@
 # translation of _avogadro-de.po to
 # Alex <alexandersimm2@googlemail.com>, 2021.
+# Thomas Koller <tknonym@protonmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-02-13 01:19+0000\n"
-"Last-Translator: Alex <alexandersimm2@googlemail.com>\n"
+"PO-Revision-Date: 2021-02-27 23:50+0000\n"
+"Last-Translator: Thomas Koller <tknonym@protonmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -14,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.5\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
@@ -31,7 +32,7 @@ msgstr ""
 
 #: mainwindow.cpp:292
 msgid "Ready..."
-msgstr ""
+msgstr "Bereit..."
 
 #: mainwindow.cpp:318
 #, fuzzy
@@ -57,9 +58,9 @@ msgid "Untitled"
 msgstr "Unbenannt"
 
 #: mainwindow.cpp:491
-#, fuzzy, qt-format
+#, qt-format
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
@@ -74,9 +75,8 @@ msgid "Open chemical file"
 msgstr ""
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Datei %1 konnte nicht gespeichert werden."
+msgstr "Datei konnte nicht geöffnet werden"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
 #, fuzzy, qt-format
