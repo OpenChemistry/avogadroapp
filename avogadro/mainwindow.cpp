@@ -358,10 +358,12 @@ void MainWindow::setupInterface()
   QIcon icon(":/icons/avogadro.png");
   setWindowIcon(icon);
 
-  m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 #ifndef Q_OS_MAC
+  m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  m_fileToolBar->setWindowTitle(tr("File"));
   addToolBar(m_fileToolBar);
 #endif
+  m_toolToolBar->setWindowTitle(tr("Tools"));
   addToolBar(m_toolToolBar);
 
   // Create the scene plugin model
