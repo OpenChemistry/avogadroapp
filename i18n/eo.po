@@ -7,87 +7,90 @@ msgstr ""
 "Project-Id-Version: Avogadro 1.93.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-03-11 23:02+0000\n"
+"Last-Translator: phlostically <phlostically@mailinator.com>\n"
+"Language-Team: Esperanto <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/eo/>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.5.2-dev\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Neniu molekulo agordita en BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
 msgid "No Io::FileFormat set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Neniu Io::FileFormat agordita en BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Neniu dosiernomo agordita en BackgroundFileFormat!"
 
 #: mainwindow.cpp:292
 msgid "Ready..."
-msgstr ""
+msgstr "Preta…"
 
 #: mainwindow.cpp:318
 msgid "Tool"
-msgstr ""
+msgstr "Ilo"
 
 #: mainwindow.cpp:322
 msgid "Display Types"
-msgstr ""
+msgstr "Montraj Tipoj"
 
 #: mainwindow.cpp:331
 msgid "View Configuration"
-msgstr ""
+msgstr "Vidi Agordon"
 
 #: mainwindow.cpp:337
 msgid "Molecules"
-msgstr ""
+msgstr "Molekuloj"
 
 #: mainwindow.cpp:486
 msgid "Untitled"
-msgstr ""
+msgstr "Sentitola"
 
 #: mainwindow.cpp:491
 #, qt-format
 msgid "%1%2 - Avogadro %3"
-msgstr ""
+msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Kemia Marklingvo"
 
 #: mainwindow.cpp:534 mainwindow.cpp:1063
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Kemia JSON"
 
 #: mainwindow.cpp:540
 msgid "Open chemical file"
-msgstr ""
+msgstr "Malfermi kemian dosieron"
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
 msgid "Cannot open file"
-msgstr ""
+msgstr "Ne povas malfermi dosieron"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr ""
+msgstr "Ne povas malfermi provizitan dosieron %1"
 
 #: mainwindow.cpp:572
 msgid "Open Molecule"
-msgstr ""
+msgstr "Malfermi Molekulon"
 
 #: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
 msgid "Select file reader"
-msgstr ""
+msgstr "Elekti dosierlegilon"
 
 #: mainwindow.cpp:625
 msgid "Reading File"
-msgstr ""
+msgstr "Legante Dosieron"
 
 #: mainwindow.cpp:627
 #, qt-format
@@ -95,15 +98,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Malfermante dosieron '%1'\n"
+"per '%2'"
 
 #: mainwindow.cpp:656
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molekulo ŝargita (%1 atomoj, %2 ligoj)"
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
 msgid "File error"
-msgstr ""
+msgstr "Eraro pri dosiero"
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -111,11 +116,13 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Eraro dum legado de dosiero '%1':\n"
+"%2"
 
 #: mainwindow.cpp:688
 #, qt-format
 msgid "File written: %1"
-msgstr ""
+msgstr "Dosiero skribita: %1"
 
 #: mainwindow.cpp:696
 #, qt-format
@@ -123,10 +130,12 @@ msgid ""
 "Error while writing file '%1':\n"
 "%2"
 msgstr ""
+"Eraro dum skribado sur dosieron '%1':\n"
+"%2"
 
 #: mainwindow.cpp:735
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Eraro: Malsukcesis pravalorizi OpenGL-kuntekston"
 
 #: mainwindow.cpp:736
 #, qt-format
@@ -135,49 +144,52 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"Postuliĝas OpenGL 2.0 aŭ pli nova; tial ĉesante.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:737
 msgid "Unknown error"
-msgstr ""
+msgstr "Nekonata eraro"
 
 #: mainwindow.cpp:814 mainwindow.cpp:815
 msgid "Navigate tool"
-msgstr ""
+msgstr "Naviga ilo"
 
 #: mainwindow.cpp:889
 msgid "Common image formats"
-msgstr ""
+msgstr "Oftaj bildaj dosierformoj"
 
 #: mainwindow.cpp:891
 msgid "All files"
-msgstr ""
+msgstr "Ĉiuj dosieroj"
 
 #: mainwindow.cpp:891
 msgid "BMP"
-msgstr ""
+msgstr "BMP"
 
 #: mainwindow.cpp:892
 msgid "PNG"
-msgstr ""
+msgstr "PNG"
 
 #: mainwindow.cpp:892
 msgid "JPEG"
-msgstr ""
+msgstr "JPEG"
 
 #: mainwindow.cpp:901
 msgid "Export Bitmap Graphics"
-msgstr ""
+msgstr "Eksporti Rastruman Grafikaĵon"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
 #: mainwindow.cpp:940 mainwindow.cpp:1037 mainwindow.cpp:1668 :33
 msgid "Avogadro"
-msgstr ""
+msgstr "Avogadro"
 
 #: mainwindow.cpp:941
 #, qt-format
 msgid "Cannot save file %1."
-msgstr ""
+msgstr "Ne povas konservi dosieron %1."
 
 #: mainwindow.cpp:1038
 msgid ""
@@ -186,22 +198,27 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Ĉi tiu dosiero estis importita el nenorma dosierformo, kiu eble ne povas "
+"priskribi ĉiujn informojn pri la molekulo.\n"
+"\n"
+"Ĉu vi volas eksporti al tiu nenorma dosierformo, aŭ konservi en norma "
+"dosierformo?"
 
 #: mainwindow.cpp:1045
 msgid "Export"
-msgstr ""
+msgstr "Eksporti"
 
 #: mainwindow.cpp:1070
 msgid "Save chemical file"
-msgstr ""
+msgstr "Konservi kemian dosieron"
 
 #: mainwindow.cpp:1098
 msgid "Export Molecule"
-msgstr ""
+msgstr "Eksporti Molekulon"
 
 #: mainwindow.cpp:1150
 msgid "Writing File"
-msgstr ""
+msgstr "Skribante sur Dosieron"
 
 #: mainwindow.cpp:1152
 #, qt-format
@@ -209,40 +226,42 @@ msgid ""
 "Writing file '%1'\n"
 "with '%2'"
 msgstr ""
+"Skribante sur dosieron '%1'\n"
+"per '%2'"
 
 #: mainwindow.cpp:1260
 #, qt-format
 msgid "&Undo %1"
-msgstr ""
+msgstr "Malfari %1 (&U)"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1263 mainwindow.cpp:1487 :126
 msgid "&Undo"
-msgstr ""
+msgstr "Malfari (&U)"
 
 #: mainwindow.cpp:1268
 #, qt-format
 msgid "&Redo %1"
-msgstr ""
+msgstr "&Refari %1"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1271 mainwindow.cpp:1492 :132
 msgid "&Redo"
-msgstr ""
+msgstr "&Refari"
 
 #: mainwindow.cpp:1368
 msgid "&Testing"
-msgstr ""
+msgstr "&Testado"
 
 #: mainwindow.cpp:1370
 msgid "Record test..."
-msgstr ""
+msgstr "Registri teston…"
 
 #: mainwindow.cpp:1373
 msgid "Play test..."
-msgstr ""
+msgstr "Ludi teston…"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -250,13 +269,13 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1389 :75 rc.cpp:81
 msgid "&New"
-msgstr ""
+msgstr "&Nova"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1398 :51
 msgid "&Open..."
-msgstr ""
+msgstr "Malfermi… (&O)"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -264,7 +283,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1407 :84 rc.cpp:90
 msgid "&Close"
-msgstr ""
+msgstr "Fermi (&C)"
 
 #. i18n: file: mainwindow.ui:147
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -272,29 +291,29 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1421 :93 rc.cpp:99
 msgid "&Save"
-msgstr ""
+msgstr "Kon&servi"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1430 :102
 msgid "Save &As..."
-msgstr ""
+msgstr "Konservi kiel… (&A)"
 
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1441 :264
 msgid "&Export"
-msgstr ""
+msgstr "&Eksporti"
 
 #: mainwindow.cpp:1442
 msgid "&Molecule..."
-msgstr ""
+msgstr "&Molekulo…"
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1450 :111
 msgid "&Graphics..."
-msgstr ""
+msgstr "&Grafiko…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -302,123 +321,123 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1458 :60 rc.cpp:66
 msgid "&Quit"
-msgstr ""
+msgstr "Forlasi (&Q)"
 
 #: mainwindow.cpp:1480
 msgid "No recent files"
-msgstr ""
+msgstr "Neniu ĵusaj dosieroj"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:1486 menubuilder.cpp:87 :45
 msgid "&Edit"
-msgstr ""
+msgstr "R&edakti"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:1506 menubuilder.cpp:87 :42
 msgid "&View"
-msgstr ""
+msgstr "&Vidi"
 
 #: mainwindow.cpp:1507
 msgid "Set background color..."
-msgstr ""
+msgstr "Agordi fonkoloron…"
 
 #: mainwindow.cpp:1511
 msgid "Projection"
-msgstr ""
+msgstr "Projekcio"
 
 #. i18n: file: mainwindow.ui:463
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1512 :240
 msgid "Perspective"
-msgstr ""
+msgstr "Perspektiva"
 
 #. i18n: file: mainwindow.ui:471
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1519 :243
 msgid "Orthographic"
-msgstr ""
+msgstr "Orta"
 
 #: mainwindow.cpp:1533
 msgid "&Extensions"
-msgstr ""
+msgstr "&Etendaĵoj"
 
 #: mainwindow.cpp:1540 menubuilder.cpp:91
 msgid "&Help"
-msgstr ""
+msgstr "&Helpo"
 
 #: mainwindow.cpp:1653
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "Ĉiuj subtenataj dosierformoj (%1);;Ĉiuj dosieroj (*);;"
 
 #: mainwindow.cpp:1669
 msgid "Do you want to save the changes you made in the document?"
-msgstr ""
+msgstr "Ĉu vi volas konservi la ŝanĝojn, kiujn vi faris en la dokumento?"
 
 #: mainwindow.cpp:1678
 msgid "Your changes will be lost if you don't save them."
-msgstr ""
+msgstr "Viaj ŝanĝoj perdiĝos, se vi ne konservos ilin."
 
 #: mainwindow.cpp:1685
 msgctxt "Save"
 msgid "Ctrl+S"
-msgstr ""
+msgstr "Stir+S"
 
 #: mainwindow.cpp:1686
 msgctxt "Discard"
 msgid "Ctrl+D"
-msgstr ""
+msgstr "Stir+D"
 
 #: mainwindow.cpp:1752
 #, qt-format
 msgid "Error while loading FileFormat with id '%1'."
-msgstr ""
+msgstr "Eraro dum ŝargado de FileFormat de identigilo '%1'."
 
 #: mainwindow.cpp:1773
 #, qt-format
 msgid "Avogadro timed out and doesn't know how to open '%1'."
-msgstr ""
+msgstr "Avogadro elĉerpis templimon kaj ne scias kiel malfermi '%1'."
 
 #: mainwindow.cpp:1783
 msgid "Cannot open files"
-msgstr ""
+msgstr "Ne povis malfermi dosierojn"
 
 #: mainwindow.cpp:1784
 #, qt-format
 msgid "Avogadro timed out and cannot open '%1'."
-msgstr ""
+msgstr "Avogadro elĉerpis templimon kaj ne povas malfermi '%1'."
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
 #: menubuilder.cpp:87 :36
 msgid "&File"
-msgstr ""
+msgstr "Dosiero (&F)"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:87 :39
 msgid "&Build"
-msgstr ""
+msgstr "Konstrui (&B)"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
 #: menubuilder.cpp:88 :48
 msgid "&Select"
-msgstr ""
+msgstr "Elekti (&S)"
 
 #: menubuilder.cpp:91
 msgid "Se&ttings"
-msgstr ""
+msgstr "Agordoj (&T)"
 
 #: menubuilder.cpp:91
 msgid "&Window"
-msgstr ""
+msgstr "Fenestro (&W)"
 
 #: rpclistener.cpp:123
 msgid "Error starting RPC server:"
-msgstr ""
+msgstr "Eraro pri startigo de servilo de fora procedura alvoko:"
 
 #: rpclistener.cpp:125
 msgid ""
@@ -435,14 +454,26 @@ msgid ""
 "(this will prevent RPC enabled applications from communicating with "
 "Avogadro)."
 msgstr ""
+"Okazis eraro dum lanĉo de la aŭskultilo de fora procedura alvoko de Avogadro."
+"\n"
+"Ĉi tio povas okazi pro pluraj kialoj:\n"
+"\tAvogadro eble kolapsis.\n"
+"\tRuliĝanta Avogadro estis tro okupata por respondi.\n"
+"\n"
+"Se neniu alia Avogadro-procezo ruliĝas en ĉi tiu maŝino, estas sekure "
+"anstataŭigi la mortintan\n"
+"servilon. Alie, ĉi tiu Avogadro-procezo estas lanĉebla sen kapabloj de fora "
+"procedura alvoko\n"
+"(tio malebligos komunikadon inter aplikaĵoj de fora procedura alvoko kaj "
+"Avogadro)."
 
 #: rpclistener.cpp:135
 msgid "Replace the dead server with a new instance."
-msgstr ""
+msgstr "Anstataŭigu la mortintan servilon per novaĵo."
 
 #: rpclistener.cpp:136
 msgid "Start without RPC capabilities."
-msgstr ""
+msgstr "Startigi sen kapabloj de fora procedura alvoko."
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -450,6 +481,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
+">Versio:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -457,6 +490,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\"font-size:10pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -464,6 +499,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Versio de AvogadroLibs:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -473,6 +510,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -480,6 +519,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Versio de Qt:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -489,6 +530,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD-3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Permesilo: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:261
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -497,6 +542,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
+" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:290
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -505,296 +553,299 @@ msgid ""
 "decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
-msgstr ""
+msgstr "Bone"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+O"
-msgstr ""
+msgstr "Stir+O"
 
 #. i18n: file: mainwindow.ui:90
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Open"
-msgstr ""
+msgstr "Malfermi (&O)"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Q"
-msgstr ""
+msgstr "Stir+Q"
 
 #. i18n: file: mainwindow.ui:111
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Recent"
-msgstr ""
+msgstr "Ĵusaj"
 
 #. i18n: file: mainwindow.ui:116
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Clear Recent"
-msgstr ""
+msgstr "Forviŝi Ĵusaĵojn (&C)"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+N"
-msgstr ""
+msgstr "Stir+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+W"
-msgstr ""
+msgstr "Stir+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+S"
-msgstr ""
+msgstr "Stir+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+S"
-msgstr ""
+msgstr "Stir+Maj+S"
 
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Revert To Saved"
-msgstr ""
+msgstr "Restaŭri Konservitaĵon"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Full Screen Mode"
-msgstr ""
+msgstr "Plenekrana Reĝimo (&F)"
 
 #. i18n: file: mainwindow.ui:185
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Esc"
-msgstr ""
+msgstr "Esk"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color..."
-msgstr ""
+msgstr "Agordi Fonan Koloron… (&B)"
 
 #. i18n: file: mainwindow.ui:199
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&About"
-msgstr ""
+msgstr "Pri (&A)"
 
 #. i18n: file: mainwindow.ui:214
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Z"
-msgstr ""
+msgstr "Stir+Z"
 
 #. i18n: file: mainwindow.ui:226
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+Z"
-msgstr ""
+msgstr "Stir+Maj+Z"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "New View"
-msgstr ""
+msgstr "Nova Vido"
 
 #. i18n: file: mainwindow.ui:247
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Close View"
-msgstr ""
+msgstr "Malfermi Vidon"
 
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr ""
+msgstr "Centrigi"
 
 #. i18n: file: mainwindow.ui:265
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
-msgstr ""
+msgstr "Rektigi Vidon laŭ Aksoj"
 
 #. i18n: file: mainwindow.ui:270
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Paste"
-msgstr ""
+msgstr "Alglui"
 
 #. i18n: file: mainwindow.ui:273
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+V"
-msgstr ""
+msgstr "Stir+V"
 
 #. i18n: file: mainwindow.ui:278
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Copy"
-msgstr ""
+msgstr "Kopii"
 
 #. i18n: file: mainwindow.ui:281
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+C"
-msgstr ""
+msgstr "Stir+C"
 
 #. i18n: file: mainwindow.ui:286
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Cut"
-msgstr ""
+msgstr "Eltondi"
 
 #. i18n: file: mainwindow.ui:289
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+X"
-msgstr ""
+msgstr "Stir+X"
 
 #. i18n: file: mainwindow.ui:294
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
-msgstr ""
+msgstr "Forviŝi"
 
 #. i18n: file: mainwindow.ui:299
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr ""
+msgstr "Elekti Ĉion"
 
 #. i18n: file: mainwindow.ui:302
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+A"
-msgstr ""
+msgstr "Stir+A"
 
 #. i18n: file: mainwindow.ui:307
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr ""
+msgstr "Elekti Nenion"
 
 #. i18n: file: mainwindow.ui:310
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+A"
-msgstr ""
+msgstr "Stir+Maj+A"
 
 #. i18n: file: mainwindow.ui:319
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Configure Avogadro..."
-msgstr ""
+msgstr "Agordi Avogadron…"
 
 #. i18n: file: mainwindow.ui:330
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Tutorials"
-msgstr ""
+msgstr "Lerniloj"
 
 #. i18n: file: mainwindow.ui:339
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Duplicate View"
-msgstr ""
+msgstr "Duplikatigi Vidon"
 
 #. i18n: file: mainwindow.ui:347
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Display Axes"
-msgstr ""
+msgstr "Montri Aksojn"
 
 #. i18n: file: mainwindow.ui:355
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Debug Information"
-msgstr ""
+msgstr "Informoj por Sencimigo"
 
 #. i18n: file: mainwindow.ui:363
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
-msgstr ""
+msgstr "Helpo pri Avogadro"
 
 #. i18n: file: mainwindow.ui:368
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Release Notes"
-msgstr ""
+msgstr "Notoj pri Versio"
 
 #. i18n: file: mainwindow.ui:373
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
-msgstr ""
+msgstr "Raporti cimon"
 
 #. i18n: file: mainwindow.ui:378
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "FAQ"
-msgstr ""
+msgstr "Oftaj Demandoj"
 
 #. i18n: file: mainwindow.ui:383
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
-msgstr ""
+msgstr "Retejo de Avogadro"
 
 #. i18n: file: mainwindow.ui:392
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Plugin Manager..."
-msgstr ""
+msgstr "Administrilo de Kromprogramoj…"
 
 #. i18n: file: mainwindow.ui:401
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Project Tree Editor..."
-msgstr ""
+msgstr "Redaktilo de Projekta Arbo…"
 
 #. i18n: file: mainwindow.ui:410
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Detach View"
-msgstr ""
+msgstr "Dekroĉi Vidon"
 
 #. i18n: file: mainwindow.ui:415
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Molecule File..."
-msgstr ""
+msgstr "Molekula Dosiero…"
 
 #. i18n: file: mainwindow.ui:426
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Use Quick Render"
-msgstr ""
+msgstr "Uzi Rapidan Bildigon"
 
 #. i18n: file: mainwindow.ui:431
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Vector Graphics..."
-msgstr ""
+msgstr "&Vektora Grafiko…"
 
 #. i18n: file: mainwindow.ui:439
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Display Unit Cell Axes"
-msgstr ""
+msgstr "Montri Aksojn de Unita Ĉelo"
 
 #. i18n: file: mainwindow.ui:447
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "All Molecules in File..."
-msgstr ""
+msgstr "Ĉiuj Molekuloj en Dosiero…"
 
 #. i18n: file: mainwindow.ui:452
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Reset Display Types"
-msgstr ""
+msgstr "Restarigi Montrajn Tipojn"
 
 #. i18n: file: mainwindow.ui:476
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "SMILES"
-msgstr ""
+msgstr "SMILES"
 
 #. i18n: file: mainwindow.ui:481
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "InChI"
-msgstr ""
+msgstr "InChI"
 
 #. i18n: file: mainwindow.ui:484
 #. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
 msgid "IUPAC InChI identifier"
-msgstr ""
+msgstr "InChI-identigilo laŭ IUPAK"
 
 #. i18n: file: mainwindow.ui:489
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Diskutejo"
 
 #. i18n: file: mainwindow.ui:494
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Open Recent"
-msgstr ""
+msgstr "Malfermi Ĵusan"
 
 #. i18n: file: mainwindow.ui:499
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Import"
-msgstr ""
+msgstr "&Importi"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "phlostically"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "phlostically@example.com"
