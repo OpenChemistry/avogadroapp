@@ -1,13 +1,14 @@
 # translation of _avogadro-de.po to
 # Alex <alexandersimm2@googlemail.com>, 2021.
 # Thomas Koller <tknonym@protonmail.com>, 2021.
+# Jörg S. <joerg.schwerdtfeger@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-02-27 23:50+0000\n"
-"Last-Translator: Thomas Koller <tknonym@protonmail.com>\n"
+"PO-Revision-Date: 2021-03-17 16:18+0000\n"
+"Last-Translator: Jörg S. <joerg.schwerdtfeger@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -15,12 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5\n"
+"X-Generator: Weblate 4.5.2-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Kein Molekül für das Hintergrunddateiformat definiert!"
 
 #: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
 msgid "No Io::FileFormat set in BackgroundFileFormat!"
@@ -45,7 +46,7 @@ msgstr "Darstellungsarten"
 
 #: mainwindow.cpp:331
 msgid "View Configuration"
-msgstr ""
+msgstr "Konfiguration anzeigen"
 
 #: mainwindow.cpp:337
 #, fuzzy
@@ -64,15 +65,15 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Chemische Markup-Sprache"
 
 #: mainwindow.cpp:534 mainwindow.cpp:1063
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Chemische JSON"
 
 #: mainwindow.cpp:540
 msgid "Open chemical file"
-msgstr ""
+msgstr "Chemiedatei öffnen"
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
 msgid "Cannot open file"
@@ -84,18 +85,16 @@ msgid "Can't open supplied file %1"
 msgstr "Datei %1 konnte nicht gespeichert werden."
 
 #: mainwindow.cpp:572
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molekül"
+msgstr "Molekül öffnen"
 
 #: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
 msgid "Select file reader"
-msgstr ""
+msgstr "Wählen Sie den Dateireader"
 
 #: mainwindow.cpp:625
-#, fuzzy
 msgid "Reading File"
-msgstr "Datei öffnen"
+msgstr "Datei lesen"
 
 #: mainwindow.cpp:627
 #, qt-format
@@ -112,9 +111,8 @@ msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Moleküle geladen (%1 Atome, %2 Bindungen)"
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
-#, fuzzy
 msgid "File error"
-msgstr "Datei: "
+msgstr "Dateifehler"
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -204,6 +202,11 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Diese Datei wurde aus einem nicht standardmäßigen Format importiert, das "
+"möglicherweise nicht alle Informationen in das Molekül schreiben kann.\n"
+"\n"
+"Möchten Sie in das aktuelle Format exportieren oder in einem Standardformat "
+"speichern?"
 
 #: mainwindow.cpp:1045
 msgid "Export"
@@ -211,16 +214,15 @@ msgstr "Exportieren"
 
 #: mainwindow.cpp:1070
 msgid "Save chemical file"
-msgstr ""
+msgstr "Chemiedatei speichern"
 
 #: mainwindow.cpp:1098
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Moleküldatei importieren"
+msgstr "Molekül exportieren"
 
 #: mainwindow.cpp:1150
 msgid "Writing File"
-msgstr ""
+msgstr "Datei schreiben"
 
 #: mainwindow.cpp:1152
 #, qt-format
@@ -228,11 +230,13 @@ msgid ""
 "Writing file '%1'\n"
 "with '%2'"
 msgstr ""
+"Datei '%1' schreiben\n"
+"mit '%2'"
 
 #: mainwindow.cpp:1260
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Rückgängig"
+msgstr "&Rückgängig machen %1"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -241,9 +245,9 @@ msgid "&Undo"
 msgstr "&Rückgängig"
 
 #: mainwindow.cpp:1268
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Wiederholen"
+msgstr "&Wiederholen %1"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -252,19 +256,16 @@ msgid "&Redo"
 msgstr "&Wiederholen"
 
 #: mainwindow.cpp:1368
-#, fuzzy
 msgid "&Testing"
-msgstr "Einstellungen"
+msgstr "&Testen"
 
 #: mainwindow.cpp:1370
-#, fuzzy
 msgid "Record test..."
-msgstr "Test aufzeichnen …"
+msgstr "Rekordtest ..."
 
 #: mainwindow.cpp:1373
-#, fuzzy
 msgid "Play test..."
-msgstr "Test wiedergeben …"
+msgstr "Test spielen ..."
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -277,9 +278,8 @@ msgstr "&Neu"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1398:51
-#, fuzzy
 msgid "&Open..."
-msgstr "&Öffnen"
+msgstr "Ö&ffnen..."
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -306,14 +306,12 @@ msgstr "Sichern als"
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1441:264
-#, fuzzy
 msgid "&Export"
-msgstr "Exportieren"
+msgstr "E&xportieren"
 
 #: mainwindow.cpp:1442
-#, fuzzy
 msgid "&Molecule..."
-msgstr "Molekül"
+msgstr "&Molekül..."
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -331,7 +329,7 @@ msgstr "&Beenden"
 
 #: mainwindow.cpp:1480
 msgid "No recent files"
-msgstr ""
+msgstr "Keine zuletzt geöffneten Dateien"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
@@ -346,9 +344,8 @@ msgid "&View"
 msgstr "&Ansicht"
 
 #: mainwindow.cpp:1507
-#, fuzzy
 msgid "Set background color..."
-msgstr "&Hintergrundfarbe auswählen..."
+msgstr "Hintergrundfarbe einstellen ..."
 
 #: mainwindow.cpp:1511
 msgid "Projection"
@@ -367,7 +364,6 @@ msgid "Orthographic"
 msgstr "Orthografisch"
 
 #: mainwindow.cpp:1533
-#, fuzzy
 msgid "&Extensions"
 msgstr "Erweiterungen"
 
@@ -378,14 +374,11 @@ msgstr "&Hilfe"
 #: mainwindow.cpp:1653
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "Alle unterstützten Formate (%1);;Alle Dateien (*);;"
 
 #: mainwindow.cpp:1669
-#, fuzzy
 msgid "Do you want to save the changes you made in the document?"
-msgstr ""
-"Wollen Sie die Änderungen speichern, die Sie in dem Dokument vorgenommen "
-"haben?"
+msgstr "Möchten Sie die im Dokument vorgenommenen Änderungen speichern?"
 
 #: mainwindow.cpp:1678
 msgid "Your changes will be lost if you don't save them."
@@ -404,22 +397,22 @@ msgstr "Strg+D"
 #: mainwindow.cpp:1752
 #, qt-format
 msgid "Error while loading FileFormat with id '%1'."
-msgstr ""
+msgstr "Fehler beim Laden des Dateiformats mit der ID '%1'."
 
 #: mainwindow.cpp:1773
 #, qt-format
 msgid "Avogadro timed out and doesn't know how to open '%1'."
 msgstr ""
+"Avogadro hat eine Zeitüberschreitung und weiß nicht, wie man '%1' öffnet."
 
 #: mainwindow.cpp:1783
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Datei %1 konnte nicht gespeichert werden."
+msgstr "Dateien können nicht geöffnet werden"
 
 #: mainwindow.cpp:1784
 #, qt-format
 msgid "Avogadro timed out and cannot open '%1'."
-msgstr ""
+msgstr "Avogadro hat eine Zeitüberschreitung und kann '%1' nicht öffnen."
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -444,13 +437,12 @@ msgid "Se&ttings"
 msgstr "&Einstellungen"
 
 #: menubuilder.cpp:91
-#, fuzzy
 msgid "&Window"
-msgstr "Fenster"
+msgstr "&Fenster"
 
 #: rpclistener.cpp:123
 msgid "Error starting RPC server:"
-msgstr ""
+msgstr "Fehler beim Starten des RPC-Servers:"
 
 #: rpclistener.cpp:125
 msgid ""
@@ -467,14 +459,27 @@ msgid ""
 "(this will prevent RPC enabled applications from communicating with "
 "Avogadro)."
 msgstr ""
+"Beim Starten des RPC-Listeners von Avogadro ist ein Fehler aufgetreten. Dies "
+"kann\n"
+"aus einer Reihe von Gründen passieren:\n"
+"Eine frühere Instanz von Avogadro ist möglicherweise abgestürzt.\n"
+"Eine laufende Avogadro-Instanz war zu beschäftigt, um zu antworten.\n"
+"\n"
+"Wenn auf diesem Computer keine andere Avogadro-Instanz ausgeführt wird, "
+"können die\n"
+"nicht mehr reagierenden Serverprozesse sicher ersetzt werden. Andernfalls "
+"kann diese Instanz\n"
+"von Avogadro ohne RPC-Funktionen gestartet werden.\n"
+"(Dadurch wird verhindert, dass RPC-fähige Anwendungen mit Avogadro "
+"kommunizieren.)"
 
 #: rpclistener.cpp:135
 msgid "Replace the dead server with a new instance."
-msgstr ""
+msgstr "Ersetzen Sie den abgestürzten Server durch eine neue Instanz."
 
 #: rpclistener.cpp:136
 msgid "Start without RPC capabilities."
-msgstr ""
+msgstr "Ohne RPC-Unterstützung starten."
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -482,6 +487,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
+">Version:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -489,6 +496,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -496,6 +505,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600"
+";\">AvogadroLibs-Version:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -505,6 +516,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -512,6 +525,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt-"
+"Version:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -521,6 +536,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD-3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Lizenz: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:261
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -529,6 +548,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
+" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:290
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -537,6 +559,9 @@ msgid ""
 "decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -766,7 +791,7 @@ msgstr "Löse Ansicht"
 #. i18n: file: mainwindow.ui:415
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Molecule File..."
-msgstr "Molekül-Datei"
+msgstr "Molekül-Datei..."
 
 #. i18n: file: mainwindow.ui:426
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -776,7 +801,7 @@ msgstr "Benutze schnelles Rendern"
 #. i18n: file: mainwindow.ui:431
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Vector Graphics..."
-msgstr "&Vektorgrafiken"
+msgstr "&Vektorgrafiken..."
 
 #. i18n: file: mainwindow.ui:439
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -815,13 +840,11 @@ msgstr "Diskussionsforum"
 
 #. i18n: file: mainwindow.ui:494
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Open Recent"
-msgstr "&Zuletzt geöffnet"
+msgstr "Zuletzt geöffnet"
 
 #. i18n: file: mainwindow.ui:499
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
 msgstr "Importieren"
 
