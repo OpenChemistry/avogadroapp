@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # J. Lavoie <j.lavoie@net-c.ca>, 2020.
+# Alessandro Mandelli <mandelli.alessandro@ngi.it>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2020-10-19 18:29+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2021-03-24 20:29+0000\n"
+"Last-Translator: Alessandro Mandelli <mandelli.alessandro@ngi.it>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/it/>\n"
 "Language: it\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.1-dev\n"
+"X-Generator: Weblate 4.5.2-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
@@ -60,9 +61,9 @@ msgid "Untitled"
 msgstr "senza nome"
 
 #: mainwindow.cpp:491
-#, fuzzy, qt-format
+#, qt-format
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1 %2 - Avogadro %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
@@ -77,14 +78,13 @@ msgid "Open chemical file"
 msgstr ""
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Impossibile salvare il file %1."
+msgstr "Impossibile aprire il file"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Impossibile salvare il file %1."
+msgstr "Impossibile aprire il file fornito %1"
 
 #: mainwindow.cpp:572
 #, fuzzy
@@ -113,9 +113,8 @@ msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
-#, fuzzy
 msgid "File error"
-msgstr "File: "
+msgstr "Errore file"
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -224,9 +223,9 @@ msgid ""
 msgstr ""
 
 #: mainwindow.cpp:1260
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Annulla"
+msgstr "& Annulla %1"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -235,9 +234,9 @@ msgid "&Undo"
 msgstr "&Annulla"
 
 #: mainwindow.cpp:1268
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Ripeti"
+msgstr "& Ripeti %1"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -271,9 +270,8 @@ msgstr "&Nuovo"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1398:51
-#, fuzzy
 msgid "&Open..."
-msgstr "&Apri"
+msgstr "&Apri..."
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -305,9 +303,8 @@ msgid "&Export"
 msgstr "Esporta"
 
 #: mainwindow.cpp:1442
-#, fuzzy
 msgid "&Molecule..."
-msgstr "Molecola"
+msgstr "&Molecola..."
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -381,7 +378,7 @@ msgstr "Si desidera salvare le modifiche effettuate nel documento?"
 
 #: mainwindow.cpp:1678
 msgid "Your changes will be lost if you don't save them."
-msgstr "Le modifiche saranno perse se non verranno salvate"
+msgstr "Le modifiche saranno perse se non verranno salvate."
 
 #: mainwindow.cpp:1685
 msgctxt "Save"
@@ -404,9 +401,8 @@ msgid "Avogadro timed out and doesn't know how to open '%1'."
 msgstr ""
 
 #: mainwindow.cpp:1783
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Impossibile salvare il file %1."
+msgstr "Impossibile aprire i file"
 
 #: mainwindow.cpp:1784
 #, qt-format
@@ -593,7 +589,7 @@ msgstr "&Tutto Schermo"
 #. i18n: file: mainwindow.ui:185
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Esc"
-msgstr "Esc"
+msgstr "Esci"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -743,12 +739,12 @@ msgstr "Sito Web di Avogadro"
 #. i18n: file: mainwindow.ui:392
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Plugin Manager..."
-msgstr "Gestore dei plugin"
+msgstr "Gestore dei plugin..."
 
 #. i18n: file: mainwindow.ui:401
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Project Tree Editor..."
-msgstr "Editor dell'albero del progetto"
+msgstr "Editor dell'albero del progetto..."
 
 #. i18n: file: mainwindow.ui:410
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -768,7 +764,7 @@ msgstr "Utilizza la resa veloce"
 #. i18n: file: mainwindow.ui:431
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Vector Graphics..."
-msgstr "&Grafiche vettoriali"
+msgstr "&Grafiche vettoriali..."
 
 #. i18n: file: mainwindow.ui:439
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
