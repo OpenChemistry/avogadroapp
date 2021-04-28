@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # J. Lavoie <j.lavoie@net-c.ca>, 2020.
+# Alessandro Mandelli <mandelli.alessandro@ngi.it>, 2021.
+# Will Owy <willowy@tutanota.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2020-10-19 18:29+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2021-04-11 19:26+0000\n"
+"Last-Translator: Will Owy <willowy@tutanota.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/it/>\n"
 "Language: it\n"
@@ -17,29 +19,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.1-dev\n"
+"X-Generator: Weblate 4.6-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Nessuna molecola definita in BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
 msgid "No Io::FileFormat set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Nessun Io::FileFormat impostato in BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Nessun nome file impostato in BackgroundFileFormat!"
 
 #: mainwindow.cpp:292
 msgid "Ready..."
-msgstr ""
+msgstr "Pronto..."
 
 #: mainwindow.cpp:318
-#, fuzzy
 msgid "Tool"
-msgstr "Strumenti"
+msgstr "Strumento"
 
 #: mainwindow.cpp:322
 msgid "Display Types"
@@ -47,53 +48,49 @@ msgstr "Mostra Tipi"
 
 #: mainwindow.cpp:331
 msgid "View Configuration"
-msgstr ""
+msgstr "Visualizza configurazione"
 
 #: mainwindow.cpp:337
-#, fuzzy
 msgid "Molecules"
-msgstr "Molecola"
+msgstr "Molecole"
 
 #: mainwindow.cpp:486
-#, fuzzy
 msgid "Untitled"
-msgstr "senza nome"
+msgstr "Senza Titolo"
 
 #: mainwindow.cpp:491
-#, fuzzy, qt-format
+#, qt-format
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1 %2 - Avogadro %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Linguaggio di markup chimico (CML)"
 
 #: mainwindow.cpp:534 mainwindow.cpp:1063
 msgid "Chemical JSON"
-msgstr ""
+msgstr "JSON chimico"
 
 #: mainwindow.cpp:540
 msgid "Open chemical file"
-msgstr ""
+msgstr "Apri il file chimico"
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Impossibile salvare il file %1."
+msgstr "Impossibile aprire il file"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Impossibile salvare il file %1."
+msgstr "Impossibile aprire il file fornito %1"
 
 #: mainwindow.cpp:572
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molecola"
+msgstr "Apri Molecola"
 
 #: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
 msgid "Select file reader"
-msgstr ""
+msgstr "Seleziona il lettore di file"
 
 #: mainwindow.cpp:625
 #, fuzzy
@@ -106,16 +103,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Apertura del file \"%1\"\n"
+"con \"%2\""
 
 #: mainwindow.cpp:656
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molecola caricata (%1 atomi, %2 legami)"
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
-#, fuzzy
 msgid "File error"
-msgstr "File: "
+msgstr "Errore file"
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -123,6 +121,8 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Errore durante la lettura del file \"%1\":\n"
+"%2"
 
 #: mainwindow.cpp:688
 #, qt-format
@@ -135,10 +135,12 @@ msgid ""
 "Error while writing file '%1':\n"
 "%2"
 msgstr ""
+"Errore durante la scrittura del file \"%1\":\n"
+"%2"
 
 #: mainwindow.cpp:735
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Errore: impossibile inizializzare il contesto OpenGL"
 
 #: mainwindow.cpp:736
 #, qt-format
@@ -147,14 +149,17 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"Richiede OpenGL 2.0 o versione successiva, chiusura.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:737
 msgid "Unknown error"
-msgstr ""
+msgstr "Errore sconosciuto"
 
 #: mainwindow.cpp:814 mainwindow.cpp:815
 msgid "Navigate tool"
-msgstr ""
+msgstr "Strumento di navigazione"
 
 #: mainwindow.cpp:889
 msgid "Common image formats"
@@ -198,6 +203,10 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Questo file è stato importato da un formato non standard che potrebbe non "
+"essere in grado di contenere tutte le informazioni nella molecola.\n"
+"\n"
+"Si desidera esportare nel formato corrente o salvare in un formato standard?"
 
 #: mainwindow.cpp:1045
 msgid "Export"
@@ -205,12 +214,11 @@ msgstr "Esporta"
 
 #: mainwindow.cpp:1070
 msgid "Save chemical file"
-msgstr ""
+msgstr "Salva il file chimico"
 
 #: mainwindow.cpp:1098
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Importa un file molecola"
+msgstr "Esporta Molecola"
 
 #: mainwindow.cpp:1150
 msgid "Writing File"
@@ -222,11 +230,13 @@ msgid ""
 "Writing file '%1'\n"
 "with '%2'"
 msgstr ""
+"Scrittura del file \"%1\"\n"
+"con \"%2\""
 
 #: mainwindow.cpp:1260
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Annulla"
+msgstr "& Annulla %1"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -235,9 +245,9 @@ msgid "&Undo"
 msgstr "&Annulla"
 
 #: mainwindow.cpp:1268
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Ripeti"
+msgstr "& Ripeti %1"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -246,19 +256,16 @@ msgid "&Redo"
 msgstr "&Ripeti"
 
 #: mainwindow.cpp:1368
-#, fuzzy
 msgid "&Testing"
-msgstr "impostazioni"
+msgstr "&Test"
 
 #: mainwindow.cpp:1370
-#, fuzzy
 msgid "Record test..."
-msgstr "Registra Test..."
+msgstr "Registra test ..."
 
 #: mainwindow.cpp:1373
-#, fuzzy
 msgid "Play test..."
-msgstr "Avvia Test..."
+msgstr "Riproduci test ..."
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -271,9 +278,8 @@ msgstr "&Nuovo"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1398:51
-#, fuzzy
 msgid "&Open..."
-msgstr "&Apri"
+msgstr "&Apri..."
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -300,14 +306,12 @@ msgstr "Salva &Come..."
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1441:264
-#, fuzzy
 msgid "&Export"
-msgstr "Esporta"
+msgstr "&Esporta"
 
 #: mainwindow.cpp:1442
-#, fuzzy
 msgid "&Molecule..."
-msgstr "Molecola"
+msgstr "&Molecola..."
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -325,7 +329,7 @@ msgstr "&Esci"
 
 #: mainwindow.cpp:1480
 msgid "No recent files"
-msgstr ""
+msgstr "Nessun file recente"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
@@ -340,9 +344,8 @@ msgid "&View"
 msgstr "&Visualizza"
 
 #: mainwindow.cpp:1507
-#, fuzzy
 msgid "Set background color..."
-msgstr "Imposta Colore di &Background..."
+msgstr "Imposta il colore di sfondo..."
 
 #: mainwindow.cpp:1511
 msgid "Projection"
@@ -361,9 +364,8 @@ msgid "Orthographic"
 msgstr "Ortografico"
 
 #: mainwindow.cpp:1533
-#, fuzzy
 msgid "&Extensions"
-msgstr "Estensioni"
+msgstr "&Estensioni"
 
 #: mainwindow.cpp:1540 menubuilder.cpp:91
 msgid "&Help"
@@ -372,16 +374,15 @@ msgstr "&Aiuto"
 #: mainwindow.cpp:1653
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "Tutti i formati supportati (%1) ;; Tutti i file (*) ;;"
 
 #: mainwindow.cpp:1669
-#, fuzzy
 msgid "Do you want to save the changes you made in the document?"
 msgstr "Si desidera salvare le modifiche effettuate nel documento?"
 
 #: mainwindow.cpp:1678
 msgid "Your changes will be lost if you don't save them."
-msgstr "Le modifiche saranno perse se non verranno salvate"
+msgstr "Le modifiche saranno perse se non verranno salvate."
 
 #: mainwindow.cpp:1685
 msgctxt "Save"
@@ -396,7 +397,7 @@ msgstr "Ctrl+D"
 #: mainwindow.cpp:1752
 #, qt-format
 msgid "Error while loading FileFormat with id '%1'."
-msgstr ""
+msgstr "Errore durante il caricamento di FileFormat con ID \"%1\"."
 
 #: mainwindow.cpp:1773
 #, qt-format
@@ -404,9 +405,8 @@ msgid "Avogadro timed out and doesn't know how to open '%1'."
 msgstr ""
 
 #: mainwindow.cpp:1783
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Impossibile salvare il file %1."
+msgstr "Impossibile aprire i file"
 
 #: mainwindow.cpp:1784
 #, qt-format
@@ -436,13 +436,12 @@ msgid "Se&ttings"
 msgstr "Impostazioni"
 
 #: menubuilder.cpp:91
-#, fuzzy
 msgid "&Window"
-msgstr "Finestra"
+msgstr "&Finestra"
 
 #: rpclistener.cpp:123
 msgid "Error starting RPC server:"
-msgstr ""
+msgstr "Errore durante l'avvio del server RPC:"
 
 #: rpclistener.cpp:125
 msgid ""
@@ -459,14 +458,26 @@ msgid ""
 "(this will prevent RPC enabled applications from communicating with "
 "Avogadro)."
 msgstr ""
+"Si è verificato un errore durante l'avvio del listener RPC di Avogadro. "
+"Questo può accadere per\n"
+"vari motivi:\n"
+"Una precedente istanza di Avogadro potrebbe essersi bloccata.\n"
+"Un'istanza di Avogadro in esecuzione era troppo occupata per rispondere.\n"
+"\n"
+"Se nessun'altra istanza di Avogadro è in esecuzione su questa macchina, è "
+"possibile sostituire quella inattiva\n"
+"server. In alternativa, questa istanza di Avogadro potrebbe essere avviata "
+"senza funzionalità RPC\n"
+"(questo impedirà alle applicazioni abilitate per RPC di comunicare con "
+"Avogadro)."
 
 #: rpclistener.cpp:135
 msgid "Replace the dead server with a new instance."
-msgstr ""
+msgstr "Sostituisci il server inattivo con una nuova istanza."
 
 #: rpclistener.cpp:136
 msgid "Start without RPC capabilities."
-msgstr ""
+msgstr "Avvia senza funzionalità RPC."
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -474,6 +485,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html> <head/> <body> <p> <span style=\" font-size:20pt; font-weight:600;\"> "
+"Versione: </span> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -481,6 +494,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -488,6 +503,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Versione di AvogadroLibs:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -497,6 +514,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -504,6 +523,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Versione Qt:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -513,6 +534,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD-3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Licenza: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:261
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -521,6 +546,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
+" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:290
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -529,6 +557,9 @@ msgid ""
 "decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -593,7 +624,7 @@ msgstr "&Tutto Schermo"
 #. i18n: file: mainwindow.ui:185
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Esc"
-msgstr "Esc"
+msgstr "Esci"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -743,12 +774,12 @@ msgstr "Sito Web di Avogadro"
 #. i18n: file: mainwindow.ui:392
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Plugin Manager..."
-msgstr "Gestore dei plugin"
+msgstr "Gestore dei plugin..."
 
 #. i18n: file: mainwindow.ui:401
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Project Tree Editor..."
-msgstr "Editor dell'albero del progetto"
+msgstr "Editor dell'albero del progetto..."
 
 #. i18n: file: mainwindow.ui:410
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -768,7 +799,7 @@ msgstr "Utilizza la resa veloce"
 #. i18n: file: mainwindow.ui:431
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Vector Graphics..."
-msgstr "&Grafiche vettoriali"
+msgstr "&Grafiche vettoriali..."
 
 #. i18n: file: mainwindow.ui:439
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -807,15 +838,13 @@ msgstr "Forum di discussione"
 
 #. i18n: file: mainwindow.ui:494
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Open Recent"
-msgstr "Apri &Recenti"
+msgstr "Apri file recente"
 
 #. i18n: file: mainwindow.ui:499
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
-msgstr "Importa"
+msgstr "&Importa"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"

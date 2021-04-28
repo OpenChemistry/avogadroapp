@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 # Azuwan <azuwan.io@aol.com>, 2021.
+# Kazuki278 <muadz.hakim.7@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-02-03 20:41+0000\n"
-"Last-Translator: Azuwan <azuwan.io@aol.com>\n"
+"PO-Revision-Date: 2021-04-04 15:26+0000\n"
+"Last-Translator: Kazuki278 <muadz.hakim.7@gmail.com>\n"
 "Language-Team: Malay <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ms/>\n"
 "Language: ms\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.6-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
@@ -35,12 +36,11 @@ msgstr ""
 
 #: mainwindow.cpp:292
 msgid "Ready..."
-msgstr ""
+msgstr "Bersedia..."
 
 #: mainwindow.cpp:318
-#, fuzzy
 msgid "Tool"
-msgstr "Alatan"
+msgstr "Alat"
 
 #: mainwindow.cpp:322
 msgid "Display Types"
@@ -48,7 +48,7 @@ msgstr "Jenis Paparan"
 
 #: mainwindow.cpp:331
 msgid "View Configuration"
-msgstr ""
+msgstr "Lihat Konfigurasi"
 
 #: mainwindow.cpp:337
 #, fuzzy
@@ -56,50 +56,46 @@ msgid "Molecules"
 msgstr "Molekul"
 
 #: mainwindow.cpp:486
-#, fuzzy
 msgid "Untitled"
-msgstr "tiada tajuk"
+msgstr "Tiada tajuk"
 
 #: mainwindow.cpp:491
-#, fuzzy, qt-format
+#, qt-format
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1 %2 - Avogadro %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Bahasa Penanda Kimia"
 
 #: mainwindow.cpp:534 mainwindow.cpp:1063
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Kimia JSON"
 
 #: mainwindow.cpp:540
 msgid "Open chemical file"
-msgstr ""
+msgstr "Buka fail kimia"
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Tidak dapat simpan fail %1"
+msgstr "Tidak dapat membuka fail"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Tidak dapat simpan fail %1"
+msgstr "Tidak dapat membuka fail yang dibekalkan %1"
 
 #: mainwindow.cpp:572
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molekul"
+msgstr "Buka Molekul"
 
 #: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
 msgid "Select file reader"
-msgstr ""
+msgstr "Pilih pembaca fail"
 
 #: mainwindow.cpp:625
-#, fuzzy
 msgid "Reading File"
-msgstr "Buka Fail"
+msgstr "Fail Membaca"
 
 #: mainwindow.cpp:627
 #, qt-format
@@ -107,16 +103,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Membuka fail '%1'\n"
+"dengan '%2'"
 
 #: mainwindow.cpp:656
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molekul dimuat (%1 atom, %2 ikatan)"
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
-#, fuzzy
 msgid "File error"
-msgstr "Fail: "
+msgstr "Fail ralat"
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -124,6 +121,8 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Ralat semasa membaca fail '%1':\n"
+"%2"
 
 #: mainwindow.cpp:688
 #, qt-format
