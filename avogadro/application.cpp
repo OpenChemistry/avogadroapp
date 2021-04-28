@@ -31,7 +31,9 @@ namespace Avogadro {
 
 Application::Application(int& argc, char** argv)
   : QApplication(argc, argv)
-{}
+{
+  setAttribute(Qt::AA_EnableHighDpiScaling);
+}
 
 // Handle open events (e.g., Mac OS X open files)
 bool Application::event(QEvent* event)
