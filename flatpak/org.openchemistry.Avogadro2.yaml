@@ -14,7 +14,11 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
   # Allow Avogadro to communicate with Molequeue.
-  #- --share=network
+  - --share=network
+  - --talk-name=org.freedesktop.DBus
+  - --talk-name=org.freedesktop.DBus.Proprieties
+  - --system-talk-name=org.freedesktop.DBus
+  - --system-talk-name=org.freedesktop.DBus.Proprieties
 cleanup:
   - /include
   - /lib/cmake
@@ -204,6 +208,7 @@ modules:
     - -DVTK_MODULE_ENABLE_VTK_GUISupportQt=YES
     - -DModule_vtkGUISupportQtOpenGL:BOOL=ON
     - -DVTK_BUILD_COMPILE_TOOLS_ONLY:BOOL=ON
+    #- -DVTK_MODULE_ENABLE_VTK_RenderingContextOpenGL2=YES
     sources:
       - type: archive
         url: https://www.vtk.org/files/release/9.0/VTK-9.0.1.tar.gz
