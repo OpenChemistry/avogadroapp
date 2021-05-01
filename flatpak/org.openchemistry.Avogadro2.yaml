@@ -207,8 +207,8 @@ modules:
     - -DVTK_GROUP_ENABLE_Qt=YES
     - -DVTK_MODULE_ENABLE_VTK_GUISupportQt=YES
     - -DModule_vtkGUISupportQtOpenGL:BOOL=ON
-    - -DVTK_BUILD_COMPILE_TOOLS_ONLY:BOOL=OFF
-    - -DVTK_MODULE_ENABLE_VTK_RenderingContextOpenGL2=YES
+    - -DVTK_BUILD_COMPILE_TOOLS_ONLY:BOOL=ON
+    #- -DVTK_MODULE_ENABLE_VTK_RenderingContextOpenGL2=YES
     sources:
       - type: archive
         url: https://www.vtk.org/files/release/9.0/VTK-9.0.1.tar.gz
