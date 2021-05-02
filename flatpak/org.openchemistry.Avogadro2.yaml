@@ -268,8 +268,6 @@ modules:
     sources:
       - type: git
         url: https://github.com/OpenChemistry/avogadrolibs
-        tag: '1.93.1'
-        commit: 4f1b21de000046c04a39829063c6416fbd70922b
         # Patch from upstream
       - type: patch
         path: fix_find_spglib.patch
@@ -293,7 +291,5 @@ modules:
     sources:
       - type: git
         url: https://github.com/OpenChemistry/avogadroapp
-        tag: '1.93.0'
-        commit: 59c4dbd09821440df02b71fb963c4bae8e0fb6d0
       - type: file
         path: org.openchemistry.Avogadro2.metainfo.xml
