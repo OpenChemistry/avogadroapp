@@ -52,8 +52,6 @@ bool Application::loadFile(const QString& fileName)
     return false;
   }
 
-  qDebug() << " trying to open " << fileName;
-
   // check to see if we already have an open window
   // (we'll let MainWindow handle the real work)
   const MainWindow* window = NULL;

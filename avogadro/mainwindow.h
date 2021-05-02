@@ -124,6 +124,10 @@ signals:
 protected:
   void closeEvent(QCloseEvent* event);
 
+  // Handle drag and drop -- accept files dragged on the window
+  void dragEnterEvent(QDragEnterEvent *event);
+  void dropEvent(QDropEvent *event);
+
 protected slots:
   /**
    * Slot provided for extensions to indicate a molecule is ready to be read in.
