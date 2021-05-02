@@ -26,6 +26,7 @@
     <url type="homepage">https://www.openchemistry.org/projects/avogadro2/</url>
     <url type="help">https://discuss.avogadro.cc/</url>
     <url type="bugtracker">https://github.com/OpenChemistry/avogadroapp/issues</url>
+    <developer_name>Kitware</developer_name>
     <screenshots>
         <screenshot type="default">
             <image>https://www.openchemistry.org/wp-content/uploads/2014/05/avogadro2-first-renders-i2x4-gro.png</image>
