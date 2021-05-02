@@ -1,0 +1,16 @@
+on:
+  push:
+    branches: [master]
+name: CI
+jobs:
+  flatpak:
+    name: "Flatpak"
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:kde-5.15
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v2
+    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v3
+      with:
+          manifest-path: flatpak/org.openchemistry.Avogadro2.yaml
