@@ -46,6 +46,7 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QFileInfo>
+#include <QtCore/QMimeData>
 #include <QtCore/QSettings>
 #include <QtCore/QString>
 #include <QtCore/QThread>
@@ -314,6 +315,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupInterface()
 {
+  setAcceptDrops(true);
+
   // We take care of setting up the main interface here, along with any custom
   // pieces that might be added for saved settings etc.
   m_multiViewWidget = new QtGui::MultiViewWidget(this);
@@ -407,6 +410,27 @@ void MainWindow::closeEvent(QCloseEvent* e)
   }
   QMainWindow::closeEvent(e);
 }
+
+  void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+  {
+    if (event->mimeData()->hasUrls())
+      event->acceptProposedAction();
+    else
+      event->ignore();
+  }
+
+  void MainWindow::dropEvent(QDropEvent *event)
+  {
+    if (event->mimeData()->hasUrls()) {
+      // TODO: check for ZIP, TAR, PY scripts (plugins)
+      foreach(const QUrl& url, event->mimeData()->urls() ) {
+        openFile(url.toLocalFile());
+      }
+      event->acceptProposedAction();
+    }
+    else
+      event->ignore();
+  }
 
 void MainWindow::moleculeReady(int)
 {
