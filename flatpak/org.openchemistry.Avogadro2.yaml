@@ -27,8 +27,41 @@ cleanup:
   - "*.a"
 
 modules:
-  - shared-modules/glew/glew.json
-  - shared-modules/glu/glu-9.json
+  - name: glew
+    no-autogen: true
+    make-args:
+      - GLEW_PREFIX=${FLATPAK_DEST}
+      - GLEW_DEST=${FLATPAK_DEST}
+      - LIBDIR=${FLATPAK_DEST}/lib
+      - CFLAGS.EXTRA:=${CFLAGS} -fPIC
+      - LDFLAGS.EXTRA=${LDFLAGS}
+    make-install-args:
+      - GLEW_PREFIX=${FLATPAK_DEST}
+      - GLEW_DEST=${FLATPAK_DEST}
+      - LIBDIR=${FLATPAK_DEST}/lib
+      - CFLAGS.EXTRA:=${CFLAGS} -fPIC
+      - LDFLAGS.EXTRA=${LDFLAGS}
+    sources:
+    - type: archive
+      url: https://downloads.sourceforge.net/project/glew/glew/2.2.0/glew-2.2.0.tgz
+      sha256: d4fc82893cfb00109578d0a1a2337fb8ca335b3ceccf97b97e5cc7f08e4353e1
+    cleanup:
+      - "/include"
+      - "/lib/pkgconfig"
+      - "/lib/*.a"
+      
+  - name: glu
+    config-opts:
+      - --disable-static
+    sources:
+      - type: archive
+        url: https://mesa.freedesktop.org/archive/glu/glu-9.0.1.tar.xz
+        sha256: fb5a4c2dd6ba6d1c21ab7c05129b0769544e1d68e1e3b0ffecb18e73c93055bc
+    cleanup:
+      - "/include"
+      - "/lib/*.a"
+      - "/lib/*.la"
+      - "/lib/pkgconfig"
 
   - name: python3-numpy
     buildsystem: simple
