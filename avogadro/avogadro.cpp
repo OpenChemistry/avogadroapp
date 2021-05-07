@@ -49,9 +49,12 @@ int main(int argc, char* argv[])
   QCoreApplication::setOrganizationDomain("openchemistry.org");
   QCoreApplication::setApplicationName("Avogadro");
 
+  QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+  QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
 #ifdef Q_OS_WIN
   // We need to ensure desktop OpenGL is loaded for our rendering.
-  QApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
+  QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
 #endif
 
   Avogadro::Application app(argc, argv);
