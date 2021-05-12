@@ -142,10 +142,10 @@ int main(int argc, char* argv[])
   app.setAttribute(Qt::AA_UseHighDpiPixmaps);
 
   // Set up the default format for our GL contexts.
-  //  QSurfaceFormat defaultFormat = QSurfaceFormat::defaultFormat();
-  //  defaultFormat.setSamples(4);
-  //  defaultFormat.setAlphaBufferSize(8);
-  //  QSurfaceFormat::setDefaultFormat(defaultFormat);
+  QSurfaceFormat defaultFormat = QSurfaceFormat::defaultFormat();
+  defaultFormat.setSamples(4);
+  defaultFormat.setAlphaBufferSize(8);
+  QSurfaceFormat::setDefaultFormat(defaultFormat);
 
   QStringList fileNames;
   bool disableSettings = false;
