@@ -315,14 +315,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::setupInterface()
 {
-  setAcceptDrops(true);
-
   // We take care of setting up the main interface here, along with any custom
   // pieces that might be added for saved settings etc.
+  setAcceptDrops(true); // allow drag-and-drop of files
+  QSettings settings;
+
   m_multiViewWidget = new QtGui::MultiViewWidget(this);
   m_multiViewWidget->setFactory(m_viewFactory);
   setCentralWidget(m_multiViewWidget);
   GLWidget* glWidget = new GLWidget(this);
+
+  // set the background color
+  QColor color = settings.value("backgroundColor", QColor(0,0,0,1.0)).value<QColor>();
+  Vector4ub cColor;
+  cColor[0] = static_cast<unsigned char>(color.red());
+  cColor[1] = static_cast<unsigned char>(color.green());
+  cColor[2] = static_cast<unsigned char>(color.blue());
+  cColor[3] = static_cast<unsigned char>(color.alpha());
+
+  Avogadro::Rendering::Scene *scene = &glWidget->renderer().scene();
+  scene->setBackgroundColor(cColor);
+
   m_multiViewWidget->addWidget(glWidget);
   ActiveObjects::instance().setActiveGLWidget(glWidget);
 
@@ -1333,6 +1346,9 @@ void MainWindow::setBackgroundColor()
       scene->setBackgroundColor(cColor);
       if (glWidget)
         glWidget->update();
+
+      QSettings settings;
+      settings.setValue("backgroundColor", color);
     }
   }
 }
