@@ -38,6 +38,15 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
     get_property(location TARGET ${plugin} PROPERTY LOCATION)
     list(APPEND plugins ${location})
   endforeach()
+  # make sure to include the core image formats
+  # likely only be required on Mac / Windows since Qt package on Unix provides
+  if((APPLE OR WIN32)
+    # JPG BMP, WebP, GIF plus default of PNG, etc.
+    foreach(qt_plugin Qt5::QJpegPlugin Qt5::QWbmpPlugin Qt5::QWebpPlugin Qt5::QGifPlugin)
+      get_property(location TARGET ${qt_plugin} PROPERTY LOCATION_RELEASE)
+      list(APPEND plugins ${location})
+    endforeach()
+  endif()
 
   # Find and fixup the Open Babel plugins (if installed)
   find_program(OBABEL_EXE obabel)
