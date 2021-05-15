@@ -1,10 +1,13 @@
 #!/usr/bin/python
 
+from __future__ import print_function
+
 import sys
 import json
 import time
 import socket
 import struct
+import tempfile
 
 class Connection:
   def __init__(self, name = "avogadro"):
@@ -13,7 +16,7 @@ class Connection:
                               socket.SOCK_STREAM)
 
     # connect
-    self.sock.connect("/tmp/" + name)
+    self.sock.connect(tempfile.gettempdir() + '/' + name)
 
   def send_json(self, obj):
     self.send_message(json.dumps(obj))
@@ -21,7 +24,7 @@ class Connection:
   def send_message(self, msg):
     sz = len(msg)
     hdr = struct.pack('>I', sz)
-    pkt = hdr + msg
+    pkt = hdr + msg.encode('ascii')
     self.sock.send(pkt)
 
   def recv_message(self, size = 1024):
@@ -35,7 +38,7 @@ class Connection:
     try:
       return json.loads(msg)
     except Exception as e:
-      print 'error: ' + str(e)
+      print('error: ' + str(e))
       return {}
 
   def close(self):
@@ -69,9 +72,9 @@ if __name__ == '__main__':
     )
 
   else:
-    print 'unknown method: ' + method
-    sys.exit(-1)
+    print('unknown method: ' + method)
     conn.close()
+    sys.exit(-1)
 
-  print 'reply: ' + str(conn.recv_message())
+  print('reply: ' + str(conn.recv_message()))
   conn.close()
