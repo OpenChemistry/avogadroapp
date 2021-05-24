@@ -15,12 +15,12 @@
             and goals of the Avogadro project:
         </p>
         <ul>
-            <li>- Open source distributed under the liberal 3-clause BSD license</li>
-            <li>- Cross platform with nightly builds on Linux, Mac OS X and Windows</li>
-            <li>- Intuitive interface designed to be useful to whole community</li>
-            <li>- Fast and efficient embracing the latest technologies</li>
-            <li>- Extensible, making extensive use of a plugin architecture</li>
-            <li>- Flexible supporting a range of chemical data formats and packages</li>
+            <li>Open source distributed under the liberal 3-clause BSD license</li>
+            <li>Cross platform with nightly builds on Linux, Mac OS X and Windows</li>
+            <li>Intuitive interface designed to be useful to whole community</li>
+            <li>Fast and efficient embracing the latest technologies</li>
+            <li>Extensible, making extensive use of a plugin architecture</li>
+            <li>Flexible supporting a range of chemical data formats and packages</li>
         </ul>
     </description>
     <url type="homepage">https://www.openchemistry.org/projects/avogadro2/</url>
