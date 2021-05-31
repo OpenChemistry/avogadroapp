@@ -40,6 +40,9 @@ if(INSTALL_BUNDLE_FILES)
   install(DIRECTORY "${AvogadroLibs_LIBRARY_DIR}/avogadro2"
     DESTINATION ${INSTALL_LIBRARY_DIR})
 
+  install(DIRECTORY "${AvogadroLibs_DATA_DIR}/avogadro2"
+    DESTINATION ${INSTALL_DATA_DIR})
+
   find_program(OBABEL_EXE obabel)
   if(OBABEL_EXE)
     install(FILES ${OBABEL_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
