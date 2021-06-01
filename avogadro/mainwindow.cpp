@@ -45,9 +45,11 @@
 #include <avogadro/rendering/scene.h>
 
 #include <QtCore/QDebug>
+#include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QMimeData>
 #include <QtCore/QSettings>
+#include <QtCore/QStandardPaths>
 #include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
@@ -437,7 +439,16 @@ void MainWindow::closeEvent(QCloseEvent* e)
     if (event->mimeData()->hasUrls()) {
       // TODO: check for ZIP, TAR, PY scripts (plugins)
       foreach(const QUrl& url, event->mimeData()->urls() ) {
-        openFile(url.toLocalFile());
+        if (url.isLocalFile()) {
+          QString fileName = url.toLocalFile();
+          QFileInfo info(fileName);
+          QString extension = info.completeSuffix(); // e.g. .tar.gz or .pdb.gz
+
+          if (extension == "py")
+            addScript(fileName);
+          else
+            openFile(fileName);
+        }
       }
       event->acceptProposedAction();
     }
@@ -631,6 +642,57 @@ void MainWindow::importFile()
       this, tr("Cannot open file"),
       tr("Can't open supplied file %1").arg(reply.second));
   }
+}
+
+bool MainWindow::addScript(const QString& filePath)
+{
+  if (filePath.isEmpty()) {
+    return false;
+  }
+
+  // Ask the user what type of script this is
+  // TODO: add some sort of warning?
+  QStringList types;
+  types << tr("Commands") << tr("Input Generators") << tr("File Formats");
+
+  bool ok;
+  QString item = QInputDialog::getItem(this, tr("Install Plugin Script"),
+                                      tr("Script Type:"), types, 0, false, &ok);
+
+  if (!ok || item.isEmpty())
+    return false;
+
+  QString typePath;
+
+  int index = types.indexOf(item);
+  // don't translate these
+  switch(index){
+    case 0: // commands
+      typePath = "commands";
+      break;
+    case 1:
+      typePath = "inputGenerators";
+      break;
+    case 2:
+      typePath = "formatScripts";
+      break;
+    default:
+      typePath = "other";
+  }
+
+  QStringList stdPaths =
+    QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
+  
+  QFileInfo info(filePath);
+
+  QString destinationPath(stdPaths[0] + '/' + typePath + '/' + info.fileName());
+  qDebug() << " copying " << filePath << " to " << destinationPath;
+  QFile::remove(destinationPath); // silently fail if there's nothing to remove
+  QFile::copy(filePath, destinationPath);
+
+  // TODO: Ask that type of plugin script to reload?
+
+  return true;
 }
 
 bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
