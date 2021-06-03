@@ -46,8 +46,6 @@ modules:
       - type: archive
         url: https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.bz2
         sha256: 0fa5cafe78f66d2b501b43016858070d52ba47bd9b1016b0165a7b8e04675677
-    cleanup: 
-      - "*"
 
   - name: hdf5
     buildsystem: cmake-ninja
@@ -141,7 +139,7 @@ modules:
     ensure-writable:
       - /lib/python3.8/site-packages/easy-install.pth
     build-commands:
-      - cmake -DCMAKE_INSTALL_INCLUDEDIR:PATH=${FLATPAK_DEST} -DCMAKE_INSTALL_LIBDIR:PATH=${FLATPAK_DEST} .
+      - cmake -DCMAKE_INSTALL_INCLUDEDIR:PATH=${FLATPAK_DEST}/include -DCMAKE_INSTALL_LIBDIR:PATH=${FLATPAK_DEST}/lib .
       - cmake --build .
       - cmake --install .
       - cd python && python3 setup.py build
@@ -181,41 +179,45 @@ modules:
       #- type: git
         #url: https://github.com/OpenChemistry/protocall
 
-  - name: VTK
-    buildsystem: cmake
-    builddir: true
-    config-opts:
-    - -DBUILD_SHARED_LIBS=ON
-    - -DOpenGL_GL_PREFERENCE=GLVND
-    - -DBUILD_TESTING:BOOL=OFF
-    - -DVTK_Group_Rendering:BOOL=OFF
-    - -DVTK_Group_StandAlone:BOOL=OFF
-    - -DModule_vtkDomainsChemistry:BOOL=ON
-    - -DModule_vtkViewsContext2D:BOOL=ON
-    - -DModule_vtkChartsCore:BOOL=ON
-    - -DModule_vtkRenderingVolumeOpenGL2:BOOL=ON
-    - -DModule_vtkGUISupportQt:BOOL=ON
-    - -DModule_vtkRenderingQt:BOOL=ON
-    - -DModule_vtkViewsInfovis:BOOL=OFF
-    - -DModule_vtkRenderingFreeTypeOpenGL2:BOOL=ON
-    - -DVTK_USE_SYSTEM_ZLIB:BOOL=ON
-    - -DVTK_USE_SYSTEM_EIGEN:BOOL=ON
-    - -DVTK_BUILD_QT_DESIGNER_PLUGIN:BOOL=OFF
-    - -DVTK_QT_VERSION:STRING=5
-    - -DCMAKE_BUILD_TYPE=Release
-    - -DVTK_PYTHON_VERSION:STRING=3
-    - -DVTK_GROUP_ENABLE_Qt=YES
-    - -DVTK_MODULE_ENABLE_VTK_GUISupportQt=YES
-    - -DModule_vtkGUISupportQtOpenGL:BOOL=ON
-    - -DVTK_BUILD_COMPILE_TOOLS_ONLY:BOOL=ON
-    #- -DVTK_MODULE_ENABLE_VTK_RenderingContextOpenGL2=YES
-    sources:
-      - type: archive
-        url: https://www.vtk.org/files/release/9.0/VTK-9.0.1.tar.gz
-        sha256: 1b39a5e191c282861e7af4101eaa8585969a2de05f5646c9199a161213a622c7
+    # Avogadrolibs does not build with VTK 9.0.1
+    # https://github.com/OpenChemistry/avogadrolibs/issues/516
+  #- name: VTK
+    #buildsystem: cmake
+    #builddir: true
+    #config-opts:
+    #- -DBUILD_SHARED_LIBS=ON
+    #- -DOpenGL_GL_PREFERENCE=GLVND
+    #- -DBUILD_TESTING:BOOL=OFF
+    #- -DVTK_Group_Rendering:BOOL=OFF
+    #- -DVTK_Group_StandAlone:BOOL=OFF
+    #- -DModule_vtkDomainsChemistry:BOOL=ON
+    #- -DModule_vtkViewsContext2D:BOOL=ON
+    #- -DModule_vtkChartsCore:BOOL=ON
+    #- -DModule_vtkRenderingVolumeOpenGL2:BOOL=ON
+    #- -DModule_vtkGUISupportQt:BOOL=ON
+    #- -DModule_vtkRenderingQt:BOOL=ON
+    #- -DModule_vtkViewsInfovis:BOOL=OFF
+    #- -DModule_vtkRenderingFreeTypeOpenGL2:BOOL=ON
+    #- -DVTK_USE_SYSTEM_ZLIB:BOOL=ON
+    #- -DVTK_USE_SYSTEM_EIGEN:BOOL=ON
+    #- -DVTK_BUILD_QT_DESIGNER_PLUGIN:BOOL=OFF
+    #- -DVTK_QT_VERSION:STRING=5
+    #- -DCMAKE_BUILD_TYPE=Release
+    #- -DVTK_PYTHON_VERSION:STRING=3
+    #- -DVTK_GROUP_ENABLE_Qt=YES
+    #- -DVTK_MODULE_ENABLE_VTK_GUISupportQt=YES
+    #- -DModule_vtkGUISupportQtOpenGL:BOOL=ON
+    #- -DVTK_BUILD_COMPILE_TOOLS_ONLY:BOOL=ON
+    ##- -DVTK_MODULE_ENABLE_VTK_RenderingContextOpenGL2=YES
+    #sources:
+      #- type: archive
+        #url: https://www.vtk.org/files/release/9.0/VTK-9.0.1.tar.gz
+        #sha256: 1b39a5e191c282861e7af4101eaa8585969a2de05f5646c9199a161213a622c7
 
   - name: avogadrolibs
     buildsystem: cmake
+    builddir: true
+    subdir: avogadrolibs
     config-opts:
       - -DCMAKE_BUILD_TYPE:STRING=Release
       - -DENABLE_TRANSLATIONS:BOOL=ON
@@ -235,11 +237,19 @@ modules:
     sources:
       - type: git
         url: https://github.com/OpenChemistry/avogadrolibs
-        tag: '1.93.1'
-        commit: 4f1b21de000046c04a39829063c6416fbd70922b
-        # Patch from upstream
-      - type: patch
-        path: fix_find_spglib.patch
+        tag: '1.94.0'
+        commit: 51edf2b873a0a2b0dc85f6f18d67b59980cc8b0d
+        dest: avogadrolibs
+      - type: archive
+        url: https://github.com/OpenChemistry/molecules/archive/refs/heads/master.zip
+        sha256: a1275e8139c2021127514abdccfb13e20b1cca0791d14459e9f50065ca566f02
+        dest: molecules
+        dest-filename: molecules.zip
+      - type: archive
+        url: https://github.com/OpenChemistry/crystals/archive/refs/heads/master.zip
+        sha256: 090e6334192ebe3e39463f903614c13fa665cb9c24c6f2f1307c69710225b83e
+        dest: crystals
+        dest-filename: crystals.zip
 
   - name: Avogadro2
     buildsystem: cmake
@@ -254,13 +264,13 @@ modules:
       - install -Dm644 avogadro/icons/avogadro2_256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
       - install -Dm644 avogadro/icons/avogadro2_512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       - desktop-file-edit --set-icon=${FLATPAK_ID} ${FLATPAK_DEST}/share/applications/avogadro2.desktop
-      # Remove Education category fix Avogadro2 not appreating in menu entry, no clue why.
+      # Remove Education category fix Avogadro2 not appearing in menu entry, no clue why.
       - desktop-file-edit --remove-category=Education ${FLATPAK_DEST}/share/applications/avogadro2.desktop
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
     sources:
       - type: git
         url: https://github.com/OpenChemistry/avogadroapp
-        tag: '1.93.0'
-        commit: 59c4dbd09821440df02b71fb963c4bae8e0fb6d0
+        tag: '1.94.0'
+        commit: 320fa12fc73025339afec8783dad1d6bb78204ad
       - type: file
         path: org.openchemistry.Avogadro2.metainfo.xml
