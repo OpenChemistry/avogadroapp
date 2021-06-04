@@ -23,7 +23,7 @@
             <li>Flexible supporting a range of chemical data formats and packages</li>
         </ul>
     </description>
-    <url type="homepage">https://www.openchemistry.org/projects/avogadro2/</url>
+    <url type="homepage">https://two.avogadro.cc/</url>
     <url type="help">https://discuss.avogadro.cc/</url>
     <url type="bugtracker">https://github.com/OpenChemistry/avogadroapp/issues</url>
     <developer_name>Open Chemistry team</developer_name>
@@ -55,7 +55,7 @@
     </screenshots>
     <content_rating type="oars-1.1"/>
     <releases>
-        <release version="1.93.0" date="2020-02-05">
+        <release version="1.94.0" date="2021-06-03">
         </release>    
     </releases>
 </component> 
