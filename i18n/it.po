@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
 "PO-Revision-Date: 2021-06-08 15:55+0000\n"
-"Last-Translator: Giacomo <gradaellig@gmail.com>\n"
+"Last-Translator: Will Owy <willowy@tutanota.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/it/>\n"
 "Language: it\n"
@@ -127,7 +127,7 @@ msgstr ""
 #: mainwindow.cpp:688
 #, qt-format
 msgid "File written: %1"
-msgstr ""
+msgstr "Scrittura file: %1"
 
 #: mainwindow.cpp:696
 #, qt-format
@@ -222,7 +222,7 @@ msgstr "Esporta Molecola"
 
 #: mainwindow.cpp:1150
 msgid "Writing File"
-msgstr ""
+msgstr "Scrittura file in corso"
 
 #: mainwindow.cpp:1152
 #, qt-format
