@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-06-08 15:55+0000\n"
+"PO-Revision-Date: 2021-06-08 15:56+0000\n"
 "Last-Translator: Will Owy <willowy@tutanota.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/it/>\n"
@@ -403,6 +403,7 @@ msgstr "Errore durante il caricamento di FileFormat con ID \"%1\"."
 #, qt-format
 msgid "Avogadro timed out and doesn't know how to open '%1'."
 msgstr ""
+"La richiesta ha superato il tempo limite e Avogadro non sa come aprire '%1'."
 
 #: mainwindow.cpp:1783
 msgid "Cannot open files"
@@ -412,6 +413,8 @@ msgstr "Impossibile aprire i file"
 #, qt-format
 msgid "Avogadro timed out and cannot open '%1'."
 msgstr ""
+"La richiesta ha superato il tempo limite e Avogadro non è in grado di aprire "
+"'%1'."
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
