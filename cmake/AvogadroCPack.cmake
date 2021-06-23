@@ -45,7 +45,8 @@ if(INSTALL_BUNDLE_FILES)
 
   find_program(OBABEL_EXE obabel)
   if(OBABEL_EXE)
-    install(FILES ${OBABEL_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
+    find_program(OBMM_EXE obmm)
+    install(FILES ${OBABEL_EXE} ${OBMM_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
       PERMISSIONS
         OWNER_READ OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE
@@ -62,6 +63,8 @@ if(INSTALL_BUNDLE_FILES)
       install(DIRECTORY "${BABEL_DIR}/data"
         DESTINATION ${INSTALL_RUNTIME_DIR})
     elseif(APPLE)
+      file(GLOB LIBINCHI ${BABEL_DIR}/../lib/libinchi.*)
+      install(FILES ${LIBINCHI} DESTINATION ${INSTALL_LIBRARY_DIR}/../Frameworks/)
       install(DIRECTORY "${BABEL_DIR}/../lib/openbabel"
         DESTINATION ${INSTALL_LIBRARY_DIR})
       install(DIRECTORY "${BABEL_DIR}/../share/openbabel"
