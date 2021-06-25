@@ -29,7 +29,7 @@ set(CPACK_PROJECT_CONFIG_FILE
 
 # Should we add extra install rules to make a self-contained bundle, this is
 # usually only required when attempting to create self-contained installers.
-if(APPLE)
+if(APPLE OR WIN32)
   set(INSTALL_BUNDLE_FILES ON)
 else()
   option(INSTALL_BUNDLE_FILES "Add install rules to bundle files" OFF)
