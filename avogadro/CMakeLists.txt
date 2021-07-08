@@ -1,3 +1,5 @@
+include(ExternalProject)
+
 find_package(AvogadroLibs REQUIRED NO_MODULE)
 include_directories(${AvogadroLibs_INCLUDE_DIRS})
 list(APPEND CMAKE_MODULE_PATH ${AvogadroLibs_CMAKE_DIR})
@@ -36,6 +38,37 @@ qt5_wrap_ui(ui_srcs
 )
 
 qt5_add_resources(rcc_srcs avogadro.qrc)
+
+# download and install QM translation files
+# Look in parallel directory for the i18n repository
+set(_i18n "${AvogadroApp_SOURCE_DIR}/../avogadro-i18n")
+if(NOT EXISTS "${_i18n}")
+# download molecules...
+ExternalProject_Add(i18n
+    GIT_REPOSITORY https://github.com/openchemistry/avogadro-i18n
+    SOURCE_DIR "${AvogadroApp_SOURCE_DIR}/../avogadro-i18n"
+    CONFIGURE_COMMAND ""
+    BUILD_COMMAND ""
+    INSTALL_COMMAND ""
+)
+endif()
+
+install(DIRECTORY "${AvogadroApp_SOURCE_DIR}/../avogadro-i18n/avogadroapp/" 
+  "${AvogadroApp_SOURCE_DIR}/../avogadro-i18n/avogadrolibs/"
+  DESTINATION "${INSTALL_DATA_DIR}/avogadro2/i18n"
+  FILES_MATCHING PATTERN "*.qm"
+)
+
+if(INSTALL_BUNDLE_FILES)
+# copy the qt translation files
+get_filename_component(_qttranslationdir "${Qt5_DIR}/../../../translations" ABSOLUTE)
+message(STATUS "Trying to install Qt translations ${_qttranslationdir}")
+install(DIRECTORY "${_qttranslationdir}/"
+DESTINATION "${INSTALL_DATA_DIR}/avogadro2/i18n"
+FILES_MATCHING PATTERN "qt_*.qm" PATTERN "qtbase*.qm"
+# technically, this also copies qt_help.* but that's not a big deal
+)
+endif()
 
 if(Avogadro_ENABLE_RPC)
   list(APPEND avogadro_srcs rpclistener.cpp)
