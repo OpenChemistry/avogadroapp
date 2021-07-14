@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Takaki Iekura <tacostea@gmail.com>, 2021.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-01-17 18:32+0000\n"
-"Last-Translator: Takaki Iekura <tacostea@gmail.com>\n"
+"PO-Revision-Date: 2021-07-15 17:32+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
 "Language: ja\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.7.2-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
@@ -37,7 +38,6 @@ msgid "Ready..."
 msgstr ""
 
 #: mainwindow.cpp:318
-#, fuzzy
 msgid "Tool"
 msgstr "ツール"
 
@@ -47,20 +47,18 @@ msgstr "表示タイプ"
 
 #: mainwindow.cpp:331
 msgid "View Configuration"
-msgstr ""
+msgstr "設定の表示"
 
 #: mainwindow.cpp:337
-#, fuzzy
 msgid "Molecules"
 msgstr "分子"
 
 #: mainwindow.cpp:486
-#, fuzzy
 msgid "Untitled"
 msgstr "無題"
 
 #: mainwindow.cpp:491
-#, fuzzy, qt-format
+#, qt-format
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Avogadro %3"
 
@@ -77,9 +75,8 @@ msgid "Open chemical file"
 msgstr ""
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
-#, fuzzy
 msgid "Cannot open file"
-msgstr "ファイル %1 を保存できません"
+msgstr "ファイルを開けません"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
 #, fuzzy, qt-format
@@ -93,12 +90,12 @@ msgstr "分子"
 
 #: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
 msgid "Select file reader"
-msgstr ""
+msgstr "ファイルリーダを選択"
 
 #: mainwindow.cpp:625
 #, fuzzy
 msgid "Reading File"
-msgstr "ファイルを開く"
+msgstr "ファイルの読み取り中"
 
 #: mainwindow.cpp:627
 #, qt-format
@@ -113,9 +110,8 @@ msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
-#, fuzzy
 msgid "File error"
-msgstr "ファイル : "
+msgstr ""
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -123,6 +119,8 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"ファイル '%1'の読み取り中にエラーが発生しました：\n"
+"%2"
 
 #: mainwindow.cpp:688
 #, qt-format
@@ -135,10 +133,12 @@ msgid ""
 "Error while writing file '%1':\n"
 "%2"
 msgstr ""
+"ファイル '%1'の書き込み中にエラーが発生しました：\n"
+"%2"
 
 #: mainwindow.cpp:735
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "エラー：OpenGLコンテキストの初期化に失敗しました"
 
 #: mainwindow.cpp:736
 #, qt-format
@@ -150,7 +150,7 @@ msgstr ""
 
 #: mainwindow.cpp:737
 msgid "Unknown error"
-msgstr ""
+msgstr "不明なエラー"
 
 #: mainwindow.cpp:814 mainwindow.cpp:815
 msgid "Navigate tool"
@@ -208,13 +208,12 @@ msgid "Save chemical file"
 msgstr ""
 
 #: mainwindow.cpp:1098
-#, fuzzy
 msgid "Export Molecule"
-msgstr "分子ファイルのインポート"
+msgstr "分子のエクスポート"
 
 #: mainwindow.cpp:1150
 msgid "Writing File"
-msgstr ""
+msgstr "ファイル中を書き込み中"
 
 #: mainwindow.cpp:1152
 #, qt-format
@@ -224,9 +223,9 @@ msgid ""
 msgstr ""
 
 #: mainwindow.cpp:1260
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "元に戻す(&U)"
+msgstr "%1を元に戻す(&U)"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -235,9 +234,9 @@ msgid "&Undo"
 msgstr "元に戻す(&U)"
 
 #: mainwindow.cpp:1268
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "やり直す(&R)"
+msgstr "%1をやり直す(&R)"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -248,7 +247,7 @@ msgstr "やり直す(&R)"
 #: mainwindow.cpp:1368
 #, fuzzy
 msgid "&Testing"
-msgstr "設定"
+msgstr "テスト(&T)"
 
 #: mainwindow.cpp:1370
 #, fuzzy
@@ -271,7 +270,6 @@ msgstr "新規作成(&N)"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1398:51
-#, fuzzy
 msgid "&Open..."
 msgstr "開く(&O)"
 
@@ -300,14 +298,12 @@ msgstr "名前を付けて保存(&A) ..."
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1441:264
-#, fuzzy
 msgid "&Export"
-msgstr "エクスポート"
+msgstr "エクスポート(&E)"
 
 #: mainwindow.cpp:1442
-#, fuzzy
 msgid "&Molecule..."
-msgstr "分子"
+msgstr "分子(&M)"
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -340,9 +336,8 @@ msgid "&View"
 msgstr "ビュー(&V)"
 
 #: mainwindow.cpp:1507
-#, fuzzy
 msgid "Set background color..."
-msgstr "背景色を設定(&B) ..."
+msgstr "背景色を設定..."
 
 #: mainwindow.cpp:1511
 msgid "Projection"
@@ -363,7 +358,7 @@ msgstr "正投影法"
 #: mainwindow.cpp:1533
 #, fuzzy
 msgid "&Extensions"
-msgstr "エクステンション"
+msgstr "エクステンション(&E)"
 
 #: mainwindow.cpp:1540 menubuilder.cpp:91
 msgid "&Help"
@@ -372,10 +367,9 @@ msgstr "ヘルプ(&H)"
 #: mainwindow.cpp:1653
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "サポートされているすべての形式（%1）;;すべてのファイル（*）;;"
 
 #: mainwindow.cpp:1669
-#, fuzzy
 msgid "Do you want to save the changes you made in the document?"
 msgstr "ドキュメントの変更内容を保存しますか？"
 
@@ -404,9 +398,8 @@ msgid "Avogadro timed out and doesn't know how to open '%1'."
 msgstr ""
 
 #: mainwindow.cpp:1783
-#, fuzzy
 msgid "Cannot open files"
-msgstr "ファイル %1 を保存できません"
+msgstr "ファイルを開くことができません"
 
 #: mainwindow.cpp:1784
 #, qt-format
@@ -436,9 +429,8 @@ msgid "Se&ttings"
 msgstr "設定(&t)"
 
 #: menubuilder.cpp:91
-#, fuzzy
 msgid "&Window"
-msgstr "ウィンドウ"
+msgstr "ウィンドウ(&W)"
 
 #: rpclistener.cpp:123
 msgid "Error starting RPC server:"
@@ -474,6 +466,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
+">バージョン:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -481,6 +475,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -488,6 +484,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">AvogadroLibs バージョン:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -497,6 +495,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -504,6 +504,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
+"バージョン:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -521,6 +523,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
+" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:290
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -529,6 +534,9 @@ msgid ""
 "decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -638,7 +646,7 @@ msgstr "ビューを軸にそろえる"
 #. i18n: file: mainwindow.ui:270
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Paste"
-msgstr "貼り付け(P)"
+msgstr "貼り付け"
 
 #. i18n: file: mainwindow.ui:273
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -658,7 +666,7 @@ msgstr "Ctrl+C"
 #. i18n: file: mainwindow.ui:286
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Cut"
-msgstr "切り取り"
+msgstr "カット"
 
 #. i18n: file: mainwindow.ui:289
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -693,7 +701,7 @@ msgstr "Ctrl+Shift+A"
 #. i18n: file: mainwindow.ui:319
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Configure Avogadro..."
-msgstr "Avogadro の設定 ..."
+msgstr "Avogadro の設定..."
 
 #. i18n: file: mainwindow.ui:330
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -803,19 +811,17 @@ msgstr "IUPAC 国際化学識別子(InChI)"
 #. i18n: file: mainwindow.ui:489
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "ディスカッションフォーラム"
 
 #. i18n: file: mainwindow.ui:494
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Open Recent"
-msgstr "最近のファイルを開く(&R)"
+msgstr "最近開いたファイル"
 
 #. i18n: file: mainwindow.ui:499
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
-msgstr "インポート"
+msgstr "インポート(&I)"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
