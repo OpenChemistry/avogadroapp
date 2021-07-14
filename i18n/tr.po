@@ -6,13 +6,14 @@
 # Talking Panda <memredogan3626@gmail.com>, 2020.
 # Suleyman Poyraz <zaryob.dev@gmail.com>, 2020.
 # Yunus AK <akyunus@live.com>, 2021.
+# Acun <acun1993@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-01-23 06:32+0000\n"
-"Last-Translator: Yunus AK <akyunus@live.com>\n"
+"PO-Revision-Date: 2021-06-06 17:31+0000\n"
+"Last-Translator: Acun <acun1993@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
 "Language: tr\n"
@@ -20,12 +21,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr "BackgroundFileFormat'ta molekül ayarlanmadı!"
+msgstr "BackgroundFileFormat'da molekül ayarlanmadı!"
 
 #: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
 msgid "No Io::FileFormat set in BackgroundFileFormat!"
@@ -33,7 +34,7 @@ msgstr "Arka Plan Dosya Biçiminde Io::FileFormat ayarlanmadı!"
 
 #: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
 msgid "No file name set in BackgroundFileFormat!"
-msgstr "BackgroundFileFormat'ta dosya adı ayarlanmadı!"
+msgstr "BackgroundFileFormat'da dosya adı ayarlanmadı!"
 
 #: mainwindow.cpp:292
 msgid "Ready..."

@@ -327,8 +327,8 @@ void MainWindow::setupInterface()
   setCentralWidget(m_multiViewWidget);
   GLWidget* glWidget = new GLWidget(this);
 
-  // set the background color
-  QColor color = settings.value("backgroundColor", QColor(0,0,0,1.0)).value<QColor>();
+  // set the background color (alpha channel default should be opaque)
+  QColor color = settings.value("backgroundColor", QColor(0,0,0,255)).value<QColor>();
   Vector4ub cColor;
   cColor[0] = static_cast<unsigned char>(color.red());
   cColor[1] = static_cast<unsigned char>(color.green());

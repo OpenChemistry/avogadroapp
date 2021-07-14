@@ -5,12 +5,13 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2020.
 # Alessandro Mandelli <mandelli.alessandro@ngi.it>, 2021.
 # Will Owy <willowy@tutanota.com>, 2021.
+# Giacomo <gradaellig@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-04-11 19:26+0000\n"
+"PO-Revision-Date: 2021-06-08 15:56+0000\n"
 "Last-Translator: Will Owy <willowy@tutanota.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/it/>\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.6-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
@@ -65,7 +66,7 @@ msgstr "%1 %2 - Avogadro %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
-msgstr "Linguaggio di markup chimico (CML)"
+msgstr "Linguaggio di markup chimico"
 
 #: mainwindow.cpp:534 mainwindow.cpp:1063
 msgid "Chemical JSON"
@@ -93,9 +94,8 @@ msgid "Select file reader"
 msgstr "Seleziona il lettore di file"
 
 #: mainwindow.cpp:625
-#, fuzzy
 msgid "Reading File"
-msgstr "Apri File"
+msgstr "Lettura file"
 
 #: mainwindow.cpp:627
 #, qt-format
@@ -127,7 +127,7 @@ msgstr ""
 #: mainwindow.cpp:688
 #, qt-format
 msgid "File written: %1"
-msgstr ""
+msgstr "Scrittura file: %1"
 
 #: mainwindow.cpp:696
 #, qt-format
@@ -183,7 +183,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:901
 msgid "Export Bitmap Graphics"
-msgstr "Export Bitmap Graphics"
+msgstr "Esporta la grafica vettoriale"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -222,7 +222,7 @@ msgstr "Esporta Molecola"
 
 #: mainwindow.cpp:1150
 msgid "Writing File"
-msgstr ""
+msgstr "Scrittura file in corso"
 
 #: mainwindow.cpp:1152
 #, qt-format
@@ -403,6 +403,7 @@ msgstr "Errore durante il caricamento di FileFormat con ID \"%1\"."
 #, qt-format
 msgid "Avogadro timed out and doesn't know how to open '%1'."
 msgstr ""
+"La richiesta ha superato il tempo limite e Avogadro non sa come aprire '%1'."
 
 #: mainwindow.cpp:1783
 msgid "Cannot open files"
@@ -412,6 +413,8 @@ msgstr "Impossibile aprire i file"
 #, qt-format
 msgid "Avogadro timed out and cannot open '%1'."
 msgstr ""
+"La richiesta ha superato il tempo limite e Avogadro non è in grado di aprire "
+"'%1'."
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -659,7 +662,7 @@ msgstr "Chiudi Visuale"
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "Al centro"
+msgstr "Centra"
 
 #. i18n: file: mainwindow.ui:265
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -906,46 +909,46 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 ",,Thomas.Bellotti@liceotosi.org,,,lucab83@infinito.it,,,michel_gatti@yahoo."
-"it,aegnor_isilra@hotmail.com,hattory@ubuntu.com,,primes2h@gmail.com,,,,,,"
-"Thomas.Bellotti@liceotosi.org,,,lucab83@infinito.it,,,michel_gatti@yahoo.it,"
-"aegnor_isilra@hotmail.com,hattory@ubuntu.com,,primes2h@gmail.com,,,,,,Thomas."
-"Bellotti@liceotosi.org,,,lucab83@infinito.it,,,michel_gatti@yahoo.it,"
-"aegnor_isilra@hotmail.com,hattory@ubuntu.com,,primes2h@gmail.com,,,,,,"
-"gino@alkatron.it,,,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail.com,,,,,"
-"Thomas.Bellotti@liceotosi.org,gino@alkatron.it,,,,lucab83@infinito.it,,,"
-"michel_gatti@yahoo.it,aegnor_isilra@hotmail.com,hattory@ubuntu.com,,,,,,"
-"Thomas.Bellotti@liceotosi.org,alkatron@alkatron.it,,,,,,lucab83@infinito."
+"it,aegnor_isilra@hotmail.com,hattory@ubuntu.com,,primes2h@gmail."
+"com,,,,,,Thomas.Bellotti@liceotosi.org,,,lucab83@infinito."
 "it,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail.com,hattory@ubuntu."
-"com,,,,,,,,,Thomas.Bellotti@liceotosi.org,alkatron@alkatron.it,,avogadro-"
-"devel@lists.sourceforge.net,,,,,lucab83@infinito.it,,,michel_gatti@yahoo.it,"
-"aegnor_isilra@hotmail.com,hattory@ubuntu.com,,,,,,,,,,Thomas."
-"Bellotti@liceotosi.org,alkatron@alkatron.it,,avogadro-devel@lists."
-"sourceforge.net,,,,,lucab83@infinito.it,,,michel_gatti@yahoo.it,"
-"aegnor_isilra@hotmail.com,hattory@ubuntu.com,,,,,,,,,,Thomas."
-"Bellotti@liceotosi.org,alkatron@alkatron.it,,avogadro-devel@lists."
-"sourceforge.net,,,,,,lucab83@infinito.it,,,,michel_gatti@yahoo.it,"
-"aegnor_isilra@hotmail.com,hattory@ubuntu.com,,,,,,,,,Thomas."
-"Bellotti@liceotosi.org,alkatron@alkatron.it,,avogadro-devel@lists."
-"sourceforge.net,kbonasia@gmail.com,,,,,lucab83@infinito.it,,,,,"
-"michel_gatti@yahoo.it,aegnor_isilra@hotmail.com,hattory@ubuntu.com,,,,,,,,,"
-"Thomas.Bellotti@liceotosi.org,alkatron@alkatron.it,,avogadro-devel@lists."
-"sourceforge.net,kbonasia@gmail.com,,,,,lucab83@infinito.it,,,,,"
-"michel_gatti@yahoo.it,aegnor_isilra@hotmail.com,hattory@ubuntu.com,,,"
-"primes2h@ubuntu.com,,,,vito.fasano@gmail.com,,,,Thomas.Bellotti@liceotosi."
-"org,alkatron@alkatron.it,,avogadro-devel@lists.sourceforge.net,"
-"davide-98@live.com,giampaolo.bozzali@gmail.com,,,,,,,michel_gatti@yahoo.it,"
-"aegnor_isilra@hotmail.com,hattory@ubuntu.com,,primes2h@ubuntu.com,"
-"mcarlo.95@gmail.com,vito.fasano@gmail.com,,,lexluxsox@hotmail.it,,,Thomas."
-"Bellotti@liceotosi.org,alberto.zanoni@tiscali.it,alkatron@alkatron.it,,"
-"avogadro-devel@lists.sourceforge.net,davide-98@live.com,giampaolo."
-"bozzali@gmail.com,,,,,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail.com,"
-"hattory@ubuntu.com,,primes2h@ubuntu.com,mcarlo.95@gmail.com,vito."
-"fasano@gmail.com,,,lexluxsox@hotmail.it,,,Thomas.Bellotti@liceotosi.org,"
-"alberto.zanoni@tiscali.it,alkatron@alkatron.it,,avogadro-devel@lists."
-"sourceforge.net,davide-98@live.com,giampaolo.bozzali@gmail.com,,,,,,,"
-"michel_gatti@yahoo.it,aegnor_isilra@hotmail.com,hattory@ubuntu.com,,"
-"primes2h@ubuntu.com,vito.fasano@gmail.com,mcarlo.95@gmail.com,,,"
-"lexluxsox@hotmail.it"
+"com,,primes2h@gmail.com,,,,,,Thomas.Bellotti@liceotosi.org,,,lucab83@infinito"
+".it,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail.com,hattory@ubuntu."
+"com,,primes2h@gmail.com,,,,,,gino@alkatron.it,,,,,michel_gatti@yahoo."
+"it,aegnor_isilra@hotmail.com,,,,,Thomas.Bellotti@liceotosi.org,gino@alkatron."
+"it,,,,lucab83@infinito.it,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail."
+"com,hattory@ubuntu.com,,,,,,Thomas.Bellotti@liceotosi.org,alkatron@alkatron."
+"it,,,,,,lucab83@infinito.it,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail."
+"com,hattory@ubuntu.com,,,,,,,,,Thomas.Bellotti@liceotosi."
+"org,alkatron@alkatron.it,,avogadro-devel@lists.sourceforge."
+"net,,,,,lucab83@infinito.it,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail."
+"com,hattory@ubuntu.com,,,,,,,,,,Thomas.Bellotti@liceotosi."
+"org,alkatron@alkatron.it,,avogadro-devel@lists.sourceforge."
+"net,,,,,lucab83@infinito.it,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail."
+"com,hattory@ubuntu.com,,,,,,,,,,Thomas.Bellotti@liceotosi."
+"org,alkatron@alkatron.it,,avogadro-devel@lists.sourceforge."
+"net,,,,,,lucab83@infinito.it,,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail."
+"com,hattory@ubuntu.com,,,,,,,,,Thomas.Bellotti@liceotosi."
+"org,alkatron@alkatron.it,,avogadro-devel@lists.sourceforge.net,kbonasia@gmail"
+".com,,,,,lucab83@infinito.it,,,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail."
+"com,hattory@ubuntu.com,,,,,,,,,Thomas.Bellotti@liceotosi."
+"org,alkatron@alkatron.it,,avogadro-devel@lists.sourceforge.net,kbonasia@gmail"
+".com,,,,,lucab83@infinito.it,,,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail."
+"com,hattory@ubuntu.com,,,primes2h@ubuntu.com,,,,vito.fasano@gmail."
+"com,,,,Thomas.Bellotti@liceotosi.org,alkatron@alkatron.it,,avogadro-"
+"devel@lists.sourceforge.net,davide-98@live.com,giampaolo.bozzali@gmail."
+"com,,,,,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail.com,hattory@ubuntu."
+"com,,primes2h@ubuntu.com,mcarlo.95@gmail.com,vito.fasano@gmail."
+"com,,,lexluxsox@hotmail.it,,,Thomas.Bellotti@liceotosi.org,alberto."
+"zanoni@tiscali.it,alkatron@alkatron.it,,avogadro-devel@lists.sourceforge."
+"net,davide-98@live.com,giampaolo.bozzali@gmail.com,,,,,,,michel_gatti@yahoo."
+"it,aegnor_isilra@hotmail.com,hattory@ubuntu.com,,primes2h@ubuntu.com,mcarlo."
+"95@gmail.com,vito.fasano@gmail.com,,,lexluxsox@hotmail.it,,,Thomas."
+"Bellotti@liceotosi.org,alberto.zanoni@tiscali.it,alkatron@alkatron.it"
+",,avogadro-devel@lists.sourceforge.net,davide-98@live.com,giampaolo."
+"bozzali@gmail.com,,,,,,,michel_gatti@yahoo.it,aegnor_isilra@hotmail."
+"com,hattory@ubuntu.com,,primes2h@ubuntu.com,vito.fasano@gmail.com,mcarlo."
+"95@gmail.com,,,lexluxsox@hotmail.it"
 
 #~ msgctxt "%1 is the Git revision number."
 #~ msgid "(Git revision: %1)"
