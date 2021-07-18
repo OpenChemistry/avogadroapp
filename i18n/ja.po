@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-07-15 17:32+0000\n"
+"PO-Revision-Date: 2021-07-19 18:34+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -93,9 +93,8 @@ msgid "Select file reader"
 msgstr "ファイルリーダを選択"
 
 #: mainwindow.cpp:625
-#, fuzzy
 msgid "Reading File"
-msgstr "ファイルの読み取り中"
+msgstr "ファイルの読み込み中"
 
 #: mainwindow.cpp:627
 #, qt-format
@@ -299,7 +298,7 @@ msgstr "名前を付けて保存(&A) ..."
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1441:264
 msgid "&Export"
-msgstr "エクスポート(&E)"
+msgstr "エクスポート (&E)"
 
 #: mainwindow.cpp:1442
 msgid "&Molecule..."
@@ -327,13 +326,13 @@ msgstr ""
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:1486 menubuilder.cpp:87:45
 msgid "&Edit"
-msgstr "編集(&E)"
+msgstr "編集 (&E)"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:1506 menubuilder.cpp:87:42
 msgid "&View"
-msgstr "ビュー(&V)"
+msgstr "表示 (&V)"
 
 #: mainwindow.cpp:1507
 msgid "Set background color..."
@@ -356,9 +355,8 @@ msgid "Orthographic"
 msgstr "正投影法"
 
 #: mainwindow.cpp:1533
-#, fuzzy
 msgid "&Extensions"
-msgstr "エクステンション(&E)"
+msgstr "エクステンション (&E)"
 
 #: mainwindow.cpp:1540 menubuilder.cpp:91
 msgid "&Help"
@@ -410,19 +408,19 @@ msgstr ""
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
 #: menubuilder.cpp:87:36
 msgid "&File"
-msgstr "ファイル(&F)"
+msgstr "ファイル (&F)"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:87:39
 msgid "&Build"
-msgstr "ビルド(&B)"
+msgstr "ビルド (&B)"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
 #: menubuilder.cpp:88:48
 msgid "&Select"
-msgstr "選択(&S)"
+msgstr "選択 (&S)"
 
 #: menubuilder.cpp:91
 msgid "Se&ttings"
@@ -821,7 +819,7 @@ msgstr "最近開いたファイル"
 #. i18n: file: mainwindow.ui:499
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Import"
-msgstr "インポート(&I)"
+msgstr "インポート (&I)"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
