@@ -570,6 +570,7 @@ void MainWindow::writeSettings()
   settings.beginGroup("MainWindow");
   settings.setValue("size", size());
   settings.setValue("pos", pos());
+  settings.setValue("perspective", m_viewPerspective->isChecked());
   settings.endGroup();
   settings.setValue("recentFiles", m_recentFiles);
 }
@@ -1625,17 +1626,21 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(viewPath, action, 100);
   connect(action, &QAction::triggered, this, &MainWindow::setBackgroundColor);
 
+  // set default projection
+  QSettings settings;
+  bool perspective = settings.value("MainWindow/perspective", true).toBool();
+
   viewPath << tr("Projection");
   m_viewPerspective = new QAction(tr("Perspective"), this);
   m_viewPerspective->setCheckable(true);
-  m_viewPerspective->setChecked(true);
+  m_viewPerspective->setChecked(perspective);
   m_menuBuilder->addAction(viewPath, m_viewPerspective, 10);
   connect(m_viewPerspective, &QAction::triggered, this,
           &MainWindow::setProjectionPerspective);
 
   m_viewOrthographic = new QAction(tr("Orthographic"), this);
   m_viewOrthographic->setCheckable(true);
-  m_viewOrthographic->setChecked(false);
+  m_viewOrthographic->setChecked(!perspective);
   m_menuBuilder->addAction(viewPath, m_viewOrthographic, 10);
   connect(m_viewOrthographic, &QAction::triggered, this,
           &MainWindow::setProjectionOrthographic);
@@ -1644,6 +1649,11 @@ void MainWindow::buildMenu()
           &QAction::toggle);
   connect(m_viewOrthographic, &QAction::triggered, m_viewPerspective,
           &QAction::toggle);
+
+  if (perspective)
+    setProjectionPerspective();
+  else
+    setProjectionOrthographic();
 
   // Periodic table.
   QStringList extensionsPath;
