@@ -1,9 +1,0 @@
----
-# This configuration requires clang-format 3.8 or higher.
-BasedOnStyle: Mozilla
-AlwaysBreakAfterReturnType: None
-AlwaysBreakAfterDefinitionReturnType: None
-BinPackArguments: true
-BinPackParameters: true
-BreakConstructorInitializersBeforeComma: false
-...
