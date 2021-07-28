@@ -328,14 +328,15 @@ void MainWindow::setupInterface()
   GLWidget* glWidget = new GLWidget(this);
 
   // set the background color (alpha channel default should be opaque)
-  QColor color = settings.value("backgroundColor", QColor(0,0,0,255)).value<QColor>();
+  QColor color =
+    settings.value("backgroundColor", QColor(0, 0, 0, 255)).value<QColor>();
   Vector4ub cColor;
   cColor[0] = static_cast<unsigned char>(color.red());
   cColor[1] = static_cast<unsigned char>(color.green());
   cColor[2] = static_cast<unsigned char>(color.blue());
   cColor[3] = static_cast<unsigned char>(color.alpha());
 
-  Avogadro::Rendering::Scene *scene = &glWidget->renderer().scene();
+  Avogadro::Rendering::Scene* scene = &glWidget->renderer().scene();
   scene->setBackgroundColor(cColor);
 
   m_multiViewWidget->addWidget(glWidget);
@@ -426,35 +427,34 @@ void MainWindow::closeEvent(QCloseEvent* e)
   QMainWindow::closeEvent(e);
 }
 
-  void MainWindow::dragEnterEvent(QDragEnterEvent *event)
-  {
-    if (event->mimeData()->hasUrls())
-      event->acceptProposedAction();
-    else
-      event->ignore();
-  }
+void MainWindow::dragEnterEvent(QDragEnterEvent* event)
+{
+  if (event->mimeData()->hasUrls())
+    event->acceptProposedAction();
+  else
+    event->ignore();
+}
 
-  void MainWindow::dropEvent(QDropEvent *event)
-  {
-    if (event->mimeData()->hasUrls()) {
-      // TODO: check for ZIP, TAR, PY scripts (plugins)
-      foreach(const QUrl& url, event->mimeData()->urls() ) {
-        if (url.isLocalFile()) {
-          QString fileName = url.toLocalFile();
-          QFileInfo info(fileName);
-          QString extension = info.completeSuffix(); // e.g. .tar.gz or .pdb.gz
+void MainWindow::dropEvent(QDropEvent* event)
+{
+  if (event->mimeData()->hasUrls()) {
+    // TODO: check for ZIP, TAR, PY scripts (plugins)
+    foreach (const QUrl& url, event->mimeData()->urls()) {
+      if (url.isLocalFile()) {
+        QString fileName = url.toLocalFile();
+        QFileInfo info(fileName);
+        QString extension = info.completeSuffix(); // e.g. .tar.gz or .pdb.gz
 
-          if (extension == "py")
-            addScript(fileName);
-          else
-            openFile(fileName);
-        }
+        if (extension == "py")
+          addScript(fileName);
+        else
+          openFile(fileName);
       }
-      event->acceptProposedAction();
     }
-    else
-      event->ignore();
-  }
+    event->acceptProposedAction();
+  } else
+    event->ignore();
+}
 
 void MainWindow::moleculeReady(int)
 {
@@ -573,6 +573,17 @@ void MainWindow::writeSettings()
   settings.setValue("perspective", m_viewPerspective->isChecked());
   settings.endGroup();
   settings.setValue("recentFiles", m_recentFiles);
+
+  // save the enabled scene / render plugins
+  if (GLWidget* glWidget =
+        qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())) {
+
+    const ScenePluginModel* sceneModel = &glWidget->sceneModel();
+    for (auto plugin : sceneModel->scenePlugins()) {
+      QString settingsKey("MainWindow/" + plugin->objectName());
+      settings.setValue(settingsKey, plugin->isEnabled());
+    }
+  }
 }
 
 void MainWindow::readSettings()
@@ -657,8 +668,9 @@ bool MainWindow::addScript(const QString& filePath)
   types << tr("Commands") << tr("Input Generators") << tr("File Formats");
 
   bool ok;
-  QString item = QInputDialog::getItem(this, tr("Install Plugin Script"),
-                                      tr("Script Type:"), types, 0, false, &ok);
+  QString item =
+    QInputDialog::getItem(this, tr("Install Plugin Script"), tr("Script Type:"),
+                          types, 0, false, &ok);
 
   if (!ok || item.isEmpty())
     return false;
@@ -667,7 +679,7 @@ bool MainWindow::addScript(const QString& filePath)
 
   int index = types.indexOf(item);
   // don't translate these
-  switch(index){
+  switch (index) {
     case 0: // commands
       typePath = "commands";
       break;
@@ -683,7 +695,7 @@ bool MainWindow::addScript(const QString& filePath)
 
   QStringList stdPaths =
     QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
-  
+
   QFileInfo info(filePath);
 
   QString destinationPath(stdPaths[0] + '/' + typePath + '/' + info.fileName());
@@ -893,6 +905,8 @@ bool populatePluginModel(ScenePluginModel& model, bool editOnly = false)
 {
   if (!model.scenePlugins().empty())
     return false;
+
+  QSettings settings;
   PluginManager* plugin = PluginManager::instance();
   QList<ScenePluginFactory*> scenePluginFactories =
     plugin->pluginFactories<ScenePluginFactory>();
@@ -908,6 +922,10 @@ bool populatePluginModel(ScenePluginModel& model, bool editOnly = false)
     } else if (scenePlugin) {
       model.addItem(scenePlugin);
     }
+
+    QString settingsKey("MainWindow/" + scenePlugin->objectName());
+    bool enabled = settings.value(settingsKey, scenePlugin->isEnabled()).toBool();
+    scenePlugin->setEnabled(enabled);
   }
   return true;
 }
