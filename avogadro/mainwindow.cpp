@@ -14,10 +14,11 @@
 
 ******************************************************************************/
 
+#include "mainwindow.h"
+
 #include "aboutdialog.h"
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
-#include "mainwindow.h"
 #include "menubuilder.h"
 #include "ui_mainwindow.h"
 #include "viewfactory.h"
@@ -97,8 +98,6 @@
 #else
 #define MESSAGEBOX QMessageBox
 #endif
-
-#include <iostream>
 
 namespace Avogadro {
 
