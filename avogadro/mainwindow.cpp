@@ -14,10 +14,10 @@
 
 ******************************************************************************/
 
-#include "mainwindow.h"
 #include "aboutdialog.h"
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
+#include "mainwindow.h"
 #include "menubuilder.h"
 #include "ui_mainwindow.h"
 #include "viewfactory.h"
@@ -30,6 +30,7 @@
 #include <avogadro/qtgui/customelementdialog.h>
 #include <avogadro/qtgui/extensionplugin.h>
 #include <avogadro/qtgui/fileformatdialog.h>
+#include <avogadro/qtgui/layermodel.h>
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/qtgui/moleculemodel.h>
 #include <avogadro/qtgui/multiviewwidget.h>
@@ -96,6 +97,8 @@
 #else
 #define MESSAGEBOX QMessageBox
 #endif
+
+#include <iostream>
 
 namespace Avogadro {
 
@@ -224,6 +227,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   : m_molecule(nullptr)
   , m_rwMolecule(nullptr)
   , m_moleculeModel(nullptr)
+  , m_layerModel(nullptr)
   , m_queuedFilesStarted(false)
   , m_menuBuilder(new MenuBuilder)
   , m_fileReadThread(nullptr)
@@ -347,19 +351,21 @@ void MainWindow::setupInterface()
   addDockWidget(Qt::LeftDockWidgetArea, m_toolDock);
 
   // Our scene/view dock.
-  QDockWidget* sceneDock = new QDockWidget(tr("Display Types"), this);
-  m_sceneTreeView = new QTreeView(sceneDock);
+  m_sceneDock = new QDockWidget(tr("Display Types"), this);
+  m_sceneDock->setFeatures(m_sceneDock->features() &
+                           ~QDockWidget::AllDockWidgetFeatures);
+
+  m_sceneTreeView = new QTreeView(m_sceneDock);
   m_sceneTreeView->setIndentation(0);
   m_sceneTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_sceneTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
-  sceneDock->setWidget(m_sceneTreeView);
-  addDockWidget(Qt::LeftDockWidgetArea, sceneDock);
-
+  m_sceneDock->setWidget(m_sceneTreeView);
+  addDockWidget(Qt::LeftDockWidgetArea, m_sceneDock);
   // Our view dock.
   m_viewDock = new QDockWidget(tr("View Configuration"), this);
   addDockWidget(Qt::LeftDockWidgetArea, m_viewDock);
-  // put display types on top of view config
-  tabifyDockWidget(m_viewDock, sceneDock);
+  m_viewDock->setFeatures(m_viewDock->features() &
+                          ~QDockWidget::AllDockWidgetFeatures);
 
   // Our molecule dock.
   QDockWidget* moleculeDock = new QDockWidget(tr("Molecules"), this);
@@ -369,6 +375,17 @@ void MainWindow::setupInterface()
   m_moleculeTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
   moleculeDock->setWidget(m_moleculeTreeView);
   addDockWidget(Qt::LeftDockWidgetArea, moleculeDock);
+
+  // Our molecule dock.
+  QDockWidget* layerDock = new QDockWidget(tr("Layers"), this);
+  m_layerTreeView = new QTreeView(layerDock);
+  m_layerTreeView->setIndentation(0);
+  m_layerTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
+  m_layerTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
+  layerDock->setWidget(m_layerTreeView);
+  addDockWidget(Qt::LeftDockWidgetArea, layerDock);
+
+  tabifyDockWidget(moleculeDock, layerDock);
 
   // Switch to our fallback icons if there are no platform-specific icons.
   if (!QIcon::hasThemeIcon("document-new"))
@@ -408,6 +425,24 @@ void MainWindow::setupInterface()
           &MainWindow::moleculeActivated);
   connect(m_moleculeTreeView, &QAbstractItemView::clicked, this,
           &MainWindow::moleculeActivated);
+
+  m_layerModel = new QtGui::LayerModel(this);
+  m_layerTreeView->setModel(m_layerModel);
+  m_layerTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
+  m_layerTreeView->setAlternatingRowColors(true);
+  m_layerTreeView->header()->setStretchLastSection(false);
+  m_layerTreeView->header()->setVisible(false);
+  m_layerTreeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+  for (int i = 1; i < m_layerModel->QTTY_COLUMNS; ++i) {
+    m_layerTreeView->header()->setSectionResizeMode(i, QHeaderView::Fixed);
+    m_layerTreeView->header()->resizeSection(i, 25);
+  }
+  connect(m_layerTreeView, &QAbstractItemView::activated, this,
+          &MainWindow::layerActivated);
+  connect(m_layerTreeView, &QAbstractItemView::clicked, this,
+          &MainWindow::layerActivated);
+  connect(m_sceneTreeView, &QAbstractItemView::clicked, m_layerModel,
+          &QtGui::LayerModel::updateRows);
 
   viewActivated(glWidget);
   buildTools();
@@ -485,10 +520,12 @@ void MainWindow::setMolecule(Molecule* mol)
     return;
 
   // Set the new molecule, ensure both molecules are in the model.
-  if (m_molecule && !m_moleculeModel->molecules().contains(m_molecule))
+  if (m_molecule && !m_moleculeModel->molecules().contains(m_molecule)) {
     m_moleculeModel->addItem(m_molecule);
-  if (!m_moleculeModel->molecules().contains(mol))
+  }
+  if (!m_moleculeModel->molecules().contains(mol)) {
     m_moleculeModel->addItem(mol);
+  }
 
   Molecule* oldMolecule(m_molecule);
   m_molecule = mol;
@@ -507,6 +544,7 @@ void MainWindow::setMolecule(Molecule* mol)
   markMoleculeClean();
   updateWindowTitle();
   m_moleculeModel->setActiveMolecule(m_molecule);
+  m_layerModel->addMolecule(m_molecule);
   ActiveObjects::instance().setActiveMolecule(m_molecule);
 
   if (oldMolecule)
@@ -867,6 +905,55 @@ void MainWindow::rendererInvalid()
   QTimer::singleShot(500, this, &QWidget::close);
 }
 
+void MainWindow::layerActivated(const QModelIndex& idx)
+{
+  m_layerModel->updateRows();
+  if (idx.row() == m_layerModel->items() - 1) {
+    m_layerModel->addLayer(m_molecule->undoMolecule());
+  } else {
+    bool updateGL = false;
+    if (idx.column() == 0) {
+      m_layerModel->setActiveLayer(idx.row(), m_molecule->undoMolecule());
+    } else if (idx.column() == m_layerModel->QTTY_COLUMNS - 1) {
+      if (m_layerModel->layerCount() > 1) {
+        m_layerModel->removeItem(idx.row(), m_molecule->undoMolecule());
+        updateGL = true;
+      }
+    } else if (idx.column() == m_layerModel->QTTY_COLUMNS - 3) {
+      m_layerModel->flipLocked(idx.row());
+    } else if (idx.column() == m_layerModel->QTTY_COLUMNS - 4) {
+      m_layerModel->flipVisible(idx.row());
+      updateGL = true;
+    } else if (idx.column() == m_layerModel->QTTY_COLUMNS - 5) {
+      m_layerModel->setActiveLayer(idx.row(), m_molecule->undoMolecule());
+      if (m_sceneDock->isHidden()) {
+        m_sceneDock->show();
+        m_viewDock->show();
+        resizeDocks({ m_sceneDock, m_viewDock }, { 250, 50 }, Qt::Vertical);
+      } else {
+        m_sceneDock->hide();
+        m_viewDock->hide();
+      }
+    }
+
+    if (updateGL) {
+      QWidget* w = m_multiViewWidget->activeWidget();
+      if (GLWidget* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
+        glWidget->updateScene();
+      }
+#ifdef AVO_USE_VTK
+      else if (vtkGLWidget* vtkWidget = qobject_cast<vtkGLWidget*>(w)) {
+        vtkWidget->updateScene();
+      }
+#endif
+    }
+  }
+  // force m_sceneTreeView update (update doesn't update the checkbox)
+  m_sceneTreeView->setFocus();
+  // reset focus to m_layerTreeView
+  m_layerTreeView->setFocus();
+}
+
 void MainWindow::moleculeActivated(const QModelIndex& idx)
 {
   QObject* obj = static_cast<QObject*>(idx.internalPointer());
@@ -913,8 +1000,7 @@ bool populatePluginModel(ScenePluginModel& model, bool editOnly = false)
   foreach (ScenePluginFactory* factory, scenePluginFactories) {
     ScenePlugin* scenePlugin = factory->createInstance();
     if (editOnly && scenePlugin) {
-      if (scenePlugin->objectName() == "BallStick" ||
-          scenePlugin->objectName() == "OverlayAxes") {
+      if (scenePlugin->objectName() == "BallStick") {
         model.addItem(scenePlugin);
       } else {
         delete scenePlugin;
@@ -924,7 +1010,8 @@ bool populatePluginModel(ScenePluginModel& model, bool editOnly = false)
     }
 
     QString settingsKey("MainWindow/" + scenePlugin->objectName());
-    bool enabled = settings.value(settingsKey, scenePlugin->isEnabled()).toBool();
+    bool enabled =
+      settings.value(settingsKey, scenePlugin->isEnabled()).toBool();
     scenePlugin->setEnabled(enabled);
   }
   return true;
@@ -967,6 +1054,7 @@ void MainWindow::viewActivated(QWidget* widget)
       glWidget->updateScene();
     } else {
       m_moleculeModel->setActiveMolecule(glWidget->molecule());
+      m_layerModel->addMolecule(m_molecule);
       // Figure out the active tool - reflect this in the toolbar.
       ToolPlugin* tool = glWidget->activeTool();
       if (tool) {
@@ -984,6 +1072,7 @@ void MainWindow::viewActivated(QWidget* widget)
       m_molecule = glWidget->molecule();
       emit moleculeChanged(m_molecule);
       m_moleculeModel->setActiveMolecule(m_molecule);
+      m_layerModel->addMolecule(m_molecule);
     }
     ActiveObjects::instance().setActiveGLWidget(glWidget);
   }
@@ -997,12 +1086,14 @@ void MainWindow::viewActivated(QWidget* widget)
       vtkWidget->updateScene();
     } else {
       m_moleculeModel->setActiveMolecule(vtkWidget->molecule());
+      m_layerModel->addMolecule(m_molecule);
     }
     if (m_molecule != vtkWidget->molecule() && vtkWidget->molecule()) {
       m_rwMolecule = nullptr;
       m_molecule = vtkWidget->molecule();
       emit moleculeChanged(m_molecule);
       m_moleculeModel->setActiveMolecule(m_molecule);
+      m_layerModel->addMolecule(m_molecule);
     }
   }
 #endif
@@ -1369,6 +1460,7 @@ void MainWindow::undoEdit()
   if (m_molecule) {
     m_molecule->undoMolecule()->undoStack().undo();
     m_molecule->emitChanged(Molecule::Atoms | Molecule::Added);
+    m_layerModel->updateRows();
     activeMoleculeEdited();
   }
 }
@@ -1378,6 +1470,7 @@ void MainWindow::redoEdit()
   if (m_molecule) {
     m_molecule->undoMolecule()->undoStack().redo();
     m_molecule->emitChanged(Molecule::Atoms | Molecule::Added);
+    m_layerModel->updateRows();
     activeMoleculeEdited();
   }
 }

@@ -55,6 +55,7 @@ class Molecule;
 class MoleculeModel;
 class MultiViewWidget;
 class RWMolecule;
+class LayerModel;
 }
 
 /**
@@ -130,8 +131,8 @@ protected:
   void closeEvent(QCloseEvent* event);
 
   // Handle drag and drop -- accept files dragged on the window
-  void dragEnterEvent(QDragEnterEvent *event);
-  void dropEvent(QDropEvent *event);
+  void dragEnterEvent(QDragEnterEvent* event);
+  void dropEvent(QDropEvent* event);
 
 protected slots:
   /**
@@ -300,6 +301,11 @@ private slots:
   void moleculeActivated(const QModelIndex& index);
 
   /**
+   * @brief Change the active layer
+   */
+  void layerActivated(const QModelIndex& index);
+
+  /**
    * @brief Change the configuration dialog to reflect active scene item.
    */
   void sceneItemActivated(const QModelIndex& index);
@@ -321,6 +327,7 @@ private:
   QtGui::Molecule* m_molecule;
   QtGui::RWMolecule* m_rwMolecule;
   QtGui::MoleculeModel* m_moleculeModel;
+  QtGui::LayerModel* m_layerModel;
   bool m_queuedFilesStarted;
   QStringList m_queuedFiles;
 
@@ -344,9 +351,11 @@ private:
 
   QtGui::MultiViewWidget* m_multiViewWidget;
   QTreeView* m_sceneTreeView;
+  QTreeView* m_layerTreeView;
   QTreeView* m_moleculeTreeView;
   QDockWidget* m_toolDock;
   QDockWidget* m_viewDock;
+  QDockWidget* m_sceneDock;
   QList<QtGui::ToolPlugin*> m_tools;
   QList<QtGui::ExtensionPlugin*> m_extensions;
 
