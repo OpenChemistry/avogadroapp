@@ -227,6 +227,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   , m_rwMolecule(nullptr)
   , m_moleculeModel(nullptr)
   , m_layerModel(nullptr)
+  , m_activeScenePlugin(nullptr)
   , m_queuedFilesStarted(false)
   , m_menuBuilder(new MenuBuilder)
   , m_fileReadThread(nullptr)
@@ -432,7 +433,7 @@ void MainWindow::setupInterface()
   m_layerTreeView->header()->setStretchLastSection(false);
   m_layerTreeView->header()->setVisible(false);
   m_layerTreeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
-  for (int i = 1; i < m_layerModel->QTTY_COLUMNS; ++i) {
+  for (int i = 1; i < m_layerModel->columnCount(QModelIndex()); ++i) {
     m_layerTreeView->header()->setSectionResizeMode(i, QHeaderView::Fixed);
     m_layerTreeView->header()->resizeSection(i, 25);
   }
@@ -911,19 +912,19 @@ void MainWindow::layerActivated(const QModelIndex& idx)
     m_layerModel->addLayer(m_molecule->undoMolecule());
   } else {
     bool updateGL = false;
-    if (idx.column() == 0) {
+    if (idx.column() == QtGui::LayerModel::ColumnType::Name) {
       m_layerModel->setActiveLayer(idx.row(), m_molecule->undoMolecule());
-    } else if (idx.column() == m_layerModel->QTTY_COLUMNS - 1) {
+    } else if (idx.column() == QtGui::LayerModel::ColumnType::Remove) {
       if (m_layerModel->layerCount() > 1) {
         m_layerModel->removeItem(idx.row(), m_molecule->undoMolecule());
         updateGL = true;
       }
-    } else if (idx.column() == m_layerModel->QTTY_COLUMNS - 3) {
+    } else if (idx.column() == QtGui::LayerModel::ColumnType::Lock) {
       m_layerModel->flipLocked(idx.row());
-    } else if (idx.column() == m_layerModel->QTTY_COLUMNS - 4) {
+    } else if (idx.column() == QtGui::LayerModel::ColumnType::Visible) {
       m_layerModel->flipVisible(idx.row());
       updateGL = true;
-    } else if (idx.column() == m_layerModel->QTTY_COLUMNS - 5) {
+    } else if (idx.column() == QtGui::LayerModel::ColumnType::Menu) {
       m_layerModel->setActiveLayer(idx.row(), m_molecule->undoMolecule());
       if (m_sceneDock->isHidden()) {
         m_sceneDock->show();
@@ -949,6 +950,9 @@ void MainWindow::layerActivated(const QModelIndex& idx)
   }
   // force m_sceneTreeView update (update doesn't update the checkbox)
   m_sceneTreeView->setFocus();
+  if (m_activeScenePlugin != nullptr) {
+    m_viewDock->setWidget(m_activeScenePlugin->setupWidget());
+  }
   // reset focus to m_layerTreeView
   m_layerTreeView->setFocus();
 }
@@ -983,8 +987,10 @@ void MainWindow::sceneItemActivated(const QModelIndex& idx)
   if (!idx.isValid())
     return;
   QObject* obj = static_cast<QObject*>(idx.internalPointer());
-  if (ScenePlugin* scene = qobject_cast<ScenePlugin*>(obj))
+  if (ScenePlugin* scene = qobject_cast<ScenePlugin*>(obj)) {
     m_viewDock->setWidget(scene->setupWidget());
+    m_activeScenePlugin = scene;
+  }
 }
 
 bool populatePluginModel(ScenePluginModel& model, bool editOnly = false)
