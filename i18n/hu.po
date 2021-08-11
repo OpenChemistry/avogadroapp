@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # SoftwareByRedline <krajczar.david41@gmail.com>, 2021.
+# ovari <ovari123@zoho.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-04-08 12:26+0000\n"
-"Last-Translator: SoftwareByRedline <krajczar.david41@gmail.com>\n"
+"PO-Revision-Date: 2021-08-12 08:34+0000\n"
+"Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hu/>\n"
 "Language: hu\n"
@@ -17,29 +18,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.6-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "A BackgroundFileFormat-ban nincs megadva molekula!"
 
 #: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
 msgid "No Io::FileFormat set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Nincs Io :: FileFormat beállítva a BackgroundFileFormat-ban!"
 
 #: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Nincs beállítva fájlnév a BackgroundFileFormat alkalmazásban!"
 
 #: mainwindow.cpp:292
 msgid "Ready..."
-msgstr ""
+msgstr "Kész…"
 
 #: mainwindow.cpp:318
-#, fuzzy
 msgid "Tool"
-msgstr "Eszközök"
+msgstr "Eszköz"
 
 #: mainwindow.cpp:322
 msgid "Display Types"
@@ -47,7 +47,7 @@ msgstr "Megjelenítési típusok"
 
 #: mainwindow.cpp:331
 msgid "View Configuration"
-msgstr ""
+msgstr "Nézetbeállítás"
 
 #: mainwindow.cpp:337
 msgid "Molecules"
@@ -58,39 +58,38 @@ msgid "Untitled"
 msgstr "Névtelen"
 
 #: mainwindow.cpp:491
-#, fuzzy, qt-format
+#, qt-format
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1 %2 - Avogadro %3"
 
 #: mainwindow.cpp:533 mainwindow.cpp:1064
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Kémiai jelölőnyelv"
 
 #: mainwindow.cpp:534 mainwindow.cpp:1063
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Kémiai JSON"
 
 #: mainwindow.cpp:540
 msgid "Open chemical file"
-msgstr ""
+msgstr "Kémiaifájl megnyitása"
 
 #: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
 msgid "Cannot open file"
 msgstr "A fájl nem nyitható meg"
 
 #: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Nem lehet menteni a fájlt: %1."
+msgstr "A(z) %1 fájlt nem lehet megnyitni."
 
 #: mainwindow.cpp:572
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molekula"
+msgstr "Molekula megnyitása"
 
 #: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
 msgid "Select file reader"
-msgstr ""
+msgstr "Fájlolvasó kiválasztása"
 
 #: mainwindow.cpp:625
 msgid "Reading File"
@@ -102,16 +101,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Fájl megnyitása: %1\n"
+"a következővel: %2"
 
 #: mainwindow.cpp:656
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molekula betöltve (%1 atom, %2 kötés)"
 
 #: mainwindow.cpp:661 mainwindow.cpp:695
-#, fuzzy
 msgid "File error"
-msgstr "Fájl: "
+msgstr "Fájlhiba"
 
 #: mainwindow.cpp:662
 #, qt-format
@@ -247,14 +247,12 @@ msgid "&Testing"
 msgstr "Beállítások"
 
 #: mainwindow.cpp:1370
-#, fuzzy
 msgid "Record test..."
-msgstr "Felvétel teszt"
+msgstr "Teszt felvétele…"
 
 #: mainwindow.cpp:1373
-#, fuzzy
 msgid "Play test..."
-msgstr "Lejátszás teszt"
+msgstr "Teszt lejátszása…"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -267,9 +265,8 @@ msgstr "&Új"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1398:51
-#, fuzzy
 msgid "&Open..."
-msgstr "&Megnyitás"
+msgstr "Meg&nyitás…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -301,9 +298,8 @@ msgid "&Export"
 msgstr "Exportálás"
 
 #: mainwindow.cpp:1442
-#, fuzzy
 msgid "&Molecule..."
-msgstr "Molekula"
+msgstr "&Molekula…"
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -400,9 +396,8 @@ msgid "Avogadro timed out and doesn't know how to open '%1'."
 msgstr ""
 
 #: mainwindow.cpp:1783
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Nem lehet menteni a fájlt: %1."
+msgstr "Nem lehet megnyitni a fájlokat"
 
 #: mainwindow.cpp:1784
 #, qt-format
@@ -689,7 +684,7 @@ msgstr "Ctrl+Shift+A"
 #. i18n: file: mainwindow.ui:319
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Configure Avogadro..."
-msgstr "Avogadro konfigurálása"
+msgstr "Avogadro beállítása…"
 
 #. i18n: file: mainwindow.ui:330
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
