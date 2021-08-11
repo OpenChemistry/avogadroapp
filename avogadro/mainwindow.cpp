@@ -1042,11 +1042,6 @@ bool populatePluginModel(ScenePluginModel& model, bool editOnly = false)
     } else if (scenePlugin) {
       model.addItem(scenePlugin);
     }
-
-    QString settingsKey("MainWindow/" + scenePlugin->objectName());
-    bool enabled =
-      settings.value(settingsKey, scenePlugin->isEnabled()).toBool();
-    scenePlugin->setEnabled(enabled);
   }
   return true;
 }
