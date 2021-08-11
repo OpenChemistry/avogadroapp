@@ -207,6 +207,7 @@ using QtGui::ExtensionPlugin;
 using QtGui::ExtensionPluginFactory;
 using QtGui::FileFormatDialog;
 using QtGui::Molecule;
+using QtGui::MultiViewWidget;
 using QtGui::RWMolecule;
 using QtGui::ScenePlugin;
 using QtGui::ScenePluginFactory;
@@ -514,6 +515,21 @@ void setWidgetMolecule(T* glWidget, M* mol)
   glWidget->resetCamera();
 }
 
+void setDefaultViews(MultiViewWidget* viewWidget)
+{
+  QSettings settings;
+  // save the enabled scene / render plugins
+  if (GLWidget* glWidget =
+        qobject_cast<GLWidget*>(viewWidget->activeWidget())) {
+
+    const ScenePluginModel* sceneModel = &glWidget->sceneModel();
+    for (auto plugin : sceneModel->scenePlugins()) {
+      QString settingsKey("MainWindow/" + plugin->objectName());
+      bool enabled = settings.value(settingsKey, plugin->isEnabled()).toBool();
+      plugin->setEnabled(enabled);
+    }
+  }
+}
 void MainWindow::setMolecule(Molecule* mol)
 {
   if (!mol)
@@ -545,6 +561,13 @@ void MainWindow::setMolecule(Molecule* mol)
   updateWindowTitle();
   m_moleculeModel->setActiveMolecule(m_molecule);
   m_layerModel->addMolecule(m_molecule);
+  // only set the default values if there is nothing setup
+  // 1 layer (layerCount) and 1º layer + add items
+  if (m_layerModel->layerCount() == 1 && m_layerModel->items() == 2) {
+    setDefaultViews(m_multiViewWidget);
+    refreshDisplayTypes();
+  }
+
   ActiveObjects::instance().setActiveMolecule(m_molecule);
 
   if (oldMolecule)
@@ -569,6 +592,18 @@ void MainWindow::markMoleculeDirty()
     m_moleculeDirty = true;
     updateWindowTitle();
   }
+}
+
+void MainWindow::refreshDisplayTypes()
+{
+  m_layerModel->updateRows();
+  // force m_sceneTreeView update (update doesn't update the checkbox)
+  m_sceneTreeView->setFocus();
+  if (m_activeScenePlugin != nullptr) {
+    m_viewDock->setWidget(m_activeScenePlugin->setupWidget());
+  }
+  // reset focus to m_layerTreeView
+  m_layerTreeView->setFocus();
 }
 
 void MainWindow::markMoleculeClean()
@@ -948,13 +983,7 @@ void MainWindow::layerActivated(const QModelIndex& idx)
 #endif
     }
   }
-  // force m_sceneTreeView update (update doesn't update the checkbox)
-  m_sceneTreeView->setFocus();
-  if (m_activeScenePlugin != nullptr) {
-    m_viewDock->setWidget(m_activeScenePlugin->setupWidget());
-  }
-  // reset focus to m_layerTreeView
-  m_layerTreeView->setFocus();
+  refreshDisplayTypes();
 }
 
 void MainWindow::moleculeActivated(const QModelIndex& idx)
@@ -1065,10 +1094,7 @@ void MainWindow::viewActivated(QWidget* widget)
       if (tool) {
         QString name = tool->objectName();
         foreach (QAction* action, m_toolToolBar->actions()) {
-          if (action->data().toString() == name)
-            action->setChecked(true);
-          else
-            action->setChecked(false);
+          action->setChecked(action->data().toString() == name);
         }
       }
     }

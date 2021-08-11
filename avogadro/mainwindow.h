@@ -227,6 +227,7 @@ protected slots:
   void undoEdit();
   void redoEdit();
   void activeMoleculeEdited();
+  void refreshDisplayTypes();
 
 #ifdef QTTESTING
 protected slots:
