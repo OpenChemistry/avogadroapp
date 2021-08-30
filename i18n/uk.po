@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # Yuri Chornoivan <yurchor@gmail.com>, 2010, 2011.
 # Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
+# Tymofii Lytvynenko <till.svit@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2021-04-22 10:31+0000\n"
-"Last-Translator: Tymofij Lytvynenko <till.svit@gmail.com>\n"
+"PO-Revision-Date: 2021-08-18 00:39+0000\n"
+"Last-Translator: Tymofii Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/uk/>\n"
 "Language: uk\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
@@ -777,7 +778,7 @@ msgstr "Керування додатками…"
 #. i18n: file: mainwindow.ui:401
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Project Tree Editor..."
-msgstr "Редактор ієрархії проекту…"
+msgstr "Редактор ієрархії проєкту…"
 
 #. i18n: file: mainwindow.ui:410
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

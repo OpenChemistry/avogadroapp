@@ -2,13 +2,14 @@
 # Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the avogadro package.
 # Мирослав Николић <miroslavnikolic@rocketmail.com>, 2012—2016, 2020.
+# Nikola Matić <nikolamatic225@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2020-12-13 08:29+0000\n"
-"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
+"PO-Revision-Date: 2021-08-20 01:04+0000\n"
+"Last-Translator: Nikola Matić <nikolamatic225@gmail.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sr/>\n"
 "Language: sr\n"
@@ -17,20 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr "Није постављен молекул у „Формату_датотеке_позадине“!"
+msgstr "Nijedan molekul nije postavljen u BackgroundFileFormat -u!"
 
 #: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
 msgid "No Io::FileFormat set in BackgroundFileFormat!"
-msgstr "Није постављен „Io::Формат_датотеке“ у „Формату_датотеке_позадине“!"
+msgstr "Nije postavljen „Io::FileFormat“ u „BackgroundFileFormat“-u!"
 
 #: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
 msgid "No file name set in BackgroundFileFormat!"
-msgstr "Није постављен назив датотеке у „Формату_датотеке_позадине“!"
+msgstr "U BackgroundFileFormat -u nije postavljeno ime datoteke!"
 
 #: mainwindow.cpp:292
 msgid "Ready..."
@@ -54,7 +55,7 @@ msgstr "Молекули"
 
 #: mainwindow.cpp:486
 msgid "Untitled"
-msgstr "Без наслова"
+msgstr "Bez naslova"
 
 #: mainwindow.cpp:491
 #, qt-format
@@ -156,7 +157,7 @@ msgstr "Непозната грешка"
 
 #: mainwindow.cpp:814 mainwindow.cpp:815
 msgid "Navigate tool"
-msgstr "Управљање алата"
+msgstr "Alatka za navigaciju"
 
 #: mainwindow.cpp:889
 msgid "Common image formats"
@@ -180,18 +181,18 @@ msgstr "ЈПЕГ"
 
 #: mainwindow.cpp:901
 msgid "Export Bitmap Graphics"
-msgstr "Извези Битмап графику"
+msgstr "Izvezi Bitmap Grafiku"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
 #: mainwindow.cpp:940 mainwindow.cpp:1037 mainwindow.cpp:1668:33
 msgid "Avogadro"
-msgstr "Авогадро"
+msgstr "Avogadro"
 
 #: mainwindow.cpp:941
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Не могу да сачувам датотеку „%1“."
+msgstr "Ne mogu da sačuvam datoteku „%1“."
 
 #: mainwindow.cpp:1038
 msgid ""
@@ -304,7 +305,7 @@ msgstr "Сачувај &као..."
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1441:264
 msgid "&Export"
-msgstr "&Извези"
+msgstr "&Izvezi"
 
 #: mainwindow.cpp:1442
 msgid "&Molecule..."
@@ -332,13 +333,13 @@ msgstr "Нема скорашњих датотека"
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:1486 menubuilder.cpp:87:45
 msgid "&Edit"
-msgstr "&Уреди"
+msgstr "&Uredi"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:1506 menubuilder.cpp:87:42
 msgid "&View"
-msgstr "&Преглед"
+msgstr "&Pregled"
 
 #: mainwindow.cpp:1507
 msgid "Set background color..."
@@ -362,7 +363,7 @@ msgstr "Правописни"
 
 #: mainwindow.cpp:1533
 msgid "&Extensions"
-msgstr "&Проширења"
+msgstr "&Proširenja"
 
 #: mainwindow.cpp:1540 menubuilder.cpp:91
 msgid "&Help"
@@ -414,19 +415,19 @@ msgstr "Авогадру је истекло време и не може да о
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
 #: menubuilder.cpp:87:36
 msgid "&File"
-msgstr "&Датотека"
+msgstr "&Datoteka"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:87:39
 msgid "&Build"
-msgstr "&Изгради"
+msgstr "&Izgradi"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
 #: menubuilder.cpp:88:48
 msgid "&Select"
-msgstr "&Изабери"
+msgstr "&Izaberi"
 
 #: menubuilder.cpp:91
 msgid "Se&ttings"
@@ -560,7 +561,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
-msgstr "У реду"
+msgstr "U redu"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -655,7 +656,7 @@ msgstr "Затвори преглед"
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "Средина"
+msgstr "Centar"
 
 #. i18n: file: mainwindow.ui:265
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -665,7 +666,7 @@ msgstr "Поравнај преглед на осе"
 #. i18n: file: mainwindow.ui:270
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Paste"
-msgstr "Убаци"
+msgstr "Nalepi"
 
 #. i18n: file: mainwindow.ui:273
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -675,17 +676,17 @@ msgstr "Ктрл+В"
 #. i18n: file: mainwindow.ui:278
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Copy"
-msgstr "Умножи"
+msgstr "Kopiraj"
 
 #. i18n: file: mainwindow.ui:281
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+C"
-msgstr "Ктрл+С"
+msgstr "Ctrl+C"
 
 #. i18n: file: mainwindow.ui:286
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Cut"
-msgstr "Исеци"
+msgstr "Iseci"
 
 #. i18n: file: mainwindow.ui:289
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -695,12 +696,12 @@ msgstr "Ктрл+Х"
 #. i18n: file: mainwindow.ui:294
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
-msgstr "Очисти"
+msgstr "Očisti"
 
 #. i18n: file: mainwindow.ui:299
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "Изабери све"
+msgstr "Izaberi Sve"
 
 #. i18n: file: mainwindow.ui:302
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -710,7 +711,7 @@ msgstr "Ктрл+А"
 #. i18n: file: mainwindow.ui:307
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Поништи избор"
+msgstr "Poništi Izbor"
 
 #. i18n: file: mainwindow.ui:310
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -815,12 +816,12 @@ msgstr "Поврати врсте приказа"
 #. i18n: file: mainwindow.ui:476
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "SMILES"
-msgstr "СМАЈЛИЋИ"
+msgstr "SMILES"
 
 #. i18n: file: mainwindow.ui:481
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "InChI"
-msgstr "МенХеО"
+msgstr "InChI"
 
 #. i18n: file: mainwindow.ui:484
 #. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
@@ -840,17 +841,19 @@ msgstr "Отвори скорашње"
 #. i18n: file: mainwindow.ui:499
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Import"
-msgstr "&Увези"
+msgstr "&Uvezi"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-",Доприносиоци на „Launchpad“-у:,Danilo Nusic,Nikola Petković,Иван Старчевић,"
-"Мирослав Николић"
+"Doprinosioci nа „Launchpad“-u:Danilo Nušić,Nikola Petković,Ivan "
+"Starčević,Miroslav Nikolić,Nikola M"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ",,miroslavnikolic@rocketmail.com,,,,ivanstar61@gmail.com,,"
+msgstr ""
+"\"miroslavnikolic@rocketmail.com\",\"ivanstar61@gmail.com\",\"nikolamatic225"
+"@gmail.com\""
 
 #~ msgctxt "%1 is the Git revision number."
 #~ msgid "(Git revision: %1)"
