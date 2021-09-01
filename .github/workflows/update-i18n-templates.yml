@@ -1,0 +1,35 @@
+name: update-i18n-templates
+
+on:
+  workflow_dispatch:
+    
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # run weekly, every Sunday at 01:23
+    - cron:  '23 1 * * 0'
+
+jobs:
+  update-i18n:
+    name: Update translation templates
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install packages
+      run: |
+        sudo apt-get -qq update
+        sudo apt-get -qq install gettext
+
+    - name: Run extract-messages
+      run: |
+        sh scripts/extract-messages.sh
+
+    - name: Create pull request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: "Automated translation updates"
+        signoff: true
+        title: "Automated translation updates"
+        branch: update-i18n-templates
+        delete-branch: true
+        labels: i18n
