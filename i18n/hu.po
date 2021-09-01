@@ -8,8 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-08-31 15:38-0400\n"
-"PO-Revision-Date: 2021-08-12 08:34+0000\n"
+"PO-Revision-Date: 2021-09-01 03:58+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hu/>\n"
@@ -18,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
@@ -78,7 +77,7 @@ msgstr "%1 %2 - Avogadro %3"
 
 #: mainwindow.cpp:678 mainwindow.cpp:1314
 msgid "Chemical Markup Language"
-msgstr "Kémiai jelölőnyelv"
+msgstr "Kémiai-kódnyelv"
 
 #: mainwindow.cpp:679 mainwindow.cpp:1313
 msgid "Chemical JSON"
@@ -155,11 +154,13 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Hiba történt a(z) „%1” fájl olvasásakor:\n"
+"%2"
 
 #: mainwindow.cpp:887
 #, qt-format
 msgid "File written: %1"
-msgstr ""
+msgstr "Fájl mentve ide: %1"
 
 #: mainwindow.cpp:895
 #, qt-format
@@ -167,6 +168,8 @@ msgid ""
 "Error while writing file '%1':\n"
 "%2"
 msgstr ""
+"Hiba történt a(z) „%1” fájl mentésekor:\n"
+"%2"
 
 #: mainwindow.cpp:934
 msgid "Error: Failed to initialize OpenGL context"
@@ -179,14 +182,17 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 2.0 vagy újabb szükséges, kilépés.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:936
 msgid "Unknown error"
-msgstr ""
+msgstr "Ismeretlen hiba"
 
 #: mainwindow.cpp:1062 mainwindow.cpp:1063
 msgid "Navigate tool"
-msgstr ""
+msgstr "Navigációs eszköz"
 
 #: mainwindow.cpp:1139
 msgid "Common image formats"
@@ -230,6 +236,11 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Ezt a fájlt nem szabványos formátumból importálták, amely nem biztos, hogy "
+"minden információt képes beírni a molekulába.\n"
+"\n"
+"Szeretne az aktuális formátumba exportálni, vagy szabványos formátumba "
+"menteni?"
 
 #: mainwindow.cpp:1295
 msgid "Export"
@@ -237,7 +248,7 @@ msgstr "Exportálás"
 
 #: mainwindow.cpp:1320
 msgid "Save chemical file"
-msgstr ""
+msgstr "Kémiai-fájl mentése"
 
 #: mainwindow.cpp:1348
 #, fuzzy
@@ -269,7 +280,7 @@ msgstr "&Visszavonás"
 #: mainwindow.cpp:1520
 #, fuzzy, qt-format
 msgid "&Redo %1"
-msgstr "&Újra"
+msgstr "&Újra %1"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -280,7 +291,7 @@ msgstr "&Újra"
 #: mainwindow.cpp:1623
 #, fuzzy
 msgid "&Testing"
-msgstr "Beállítások"
+msgstr "&Vizsgálás"
 
 #: mainwindow.cpp:1625
 msgid "Record test..."
@@ -331,7 +342,7 @@ msgstr "Mentés &másként…"
 #: mainwindow.cpp:1696:264
 #, fuzzy
 msgid "&Export"
-msgstr "Exportálás"
+msgstr "&Exportálás"
 
 #: mainwindow.cpp:1697
 msgid "&Molecule..."
@@ -353,7 +364,7 @@ msgstr "&Kilépés"
 
 #: mainwindow.cpp:1735
 msgid "No recent files"
-msgstr ""
+msgstr "Nincsenek legutóbbi fájlok"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
