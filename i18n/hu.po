@@ -62,7 +62,7 @@ msgstr "Rétegek"
 msgid "File"
 msgstr "Fájl"
 
-#: mainwindow.cpp:403
+#: mainwindow.cpp:392
 msgid "Tools"
 msgstr "Eszközök"
 
@@ -111,7 +111,7 @@ msgstr "Parancsok"
 msgid "Input Generators"
 msgstr "Bemeneti generátorok"
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:730
 msgid "File Formats"
 msgstr "Fájlformátumok"
 
@@ -260,7 +260,7 @@ msgstr "Exportálás"
 msgid "Save chemical file"
 msgstr "Kémiai-fájl mentése"
 
-#: mainwindow.cpp:1348
+#: mainwindow.cpp:1337
 msgid "Export Molecule"
 msgstr "Molekula exportálása"
 
@@ -278,7 +278,7 @@ msgstr ""
 "Fájl mentése: %1\n"
 "formátummal: %2"
 
-#: mainwindow.cpp:1512
+#: mainwindow.cpp:1501
 #, qt-format
 msgid "&Undo %1"
 msgstr "&Visszavonás: %1"
@@ -289,7 +289,7 @@ msgstr "&Visszavonás: %1"
 msgid "&Undo"
 msgstr "&Visszavonás"
 
-#: mainwindow.cpp:1520
+#: mainwindow.cpp:1509
 #, qt-format
 msgid "&Redo %1"
 msgstr "Ú&jra: %1"
@@ -355,7 +355,7 @@ msgstr "Mentés &másként…"
 
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1696:264
+#: mainwindow.cpp:1685:264
 msgid "&Export"
 msgstr "&Exportálás"
 
@@ -416,7 +416,7 @@ msgstr "Távlat"
 msgid "Orthographic"
 msgstr "Ortografikus"
 
-#: mainwindow.cpp:1797
+#: mainwindow.cpp:1786
 msgid "&Extensions"
 msgstr "&Kiterjesztések"
 
@@ -491,7 +491,7 @@ msgstr "&Kijelölés"
 msgid "Se&ttings"
 msgstr "&Beállítások"
 
-#: menubuilder.cpp:91
+#: menubuilder.cpp:80
 msgid "&Window"
 msgstr "&Ablak"
 
@@ -501,8 +501,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
-">Verzió:</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
+"\">Verzió:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -510,8 +510,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0."
-"1</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -519,8 +519,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">AvogadroLibs verziója:</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">AvogadroLibs verziója:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -530,8 +530,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0."
-"1</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -550,10 +550,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD-3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">Licenc:</span><a href=\"http://opensource.org/licenses/BSD-3-Clause\"><span "
-"style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\">3-"
-"záradék BSD</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">Licenc:</span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
+"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
+"\">3-záradék BSD</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:261
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -562,9 +562,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
-" text-decoration: underline; color:#0000ff;\">www.openchemistry."
-"org</span></a></p></body></html>"
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:290
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -574,8 +574,8 @@ msgid ""
 "body></html>"
 msgstr ""
 "<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
-"decoration: underline; color:#0000ff;\">www.kitware."
-"com</span></a></p></body></html>"
+"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"body></html>"
 
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -792,12 +792,14 @@ msgstr "Avogadro honlapja"
 #. i18n: file: mainwindow.ui:392
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
-msgid "Plugin Manager..."
+msgid "Plugin Manager…"
 msgstr "Beépülő modul kezelő…"
 
 #. i18n: file: mainwindow.ui:401
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Project Tree Editor..."
+#, fuzzy
+#| msgid "Project Tree Editor..."
+msgid "Project Tree Editor…"
 msgstr "Projektfa szerkesztő…"
 
 #. i18n: file: mainwindow.ui:410
