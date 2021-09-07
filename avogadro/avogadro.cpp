@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
   }
 
   translationPaths << QCoreApplication::applicationDirPath() +
-                        "/../share/avogadro/i18n/";
+                        "/../share/avogadro2/i18n/";
   translationPaths << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
 
   QTranslator qtTranslator;

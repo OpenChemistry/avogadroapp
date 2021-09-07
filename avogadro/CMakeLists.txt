@@ -101,6 +101,29 @@ if(APPLE)
   include_directories(SYSTEM "${AvogadroApp_SOURCE_DIR}/thirdparty/qcocoacontrols")
   set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -framework Cocoa")
 
+  # for all the translations, create a .lproj directory
+  # Migrated from Avo 1.x - contributed by Geoff Hutchison
+  # We're assuming that there will never be an libavogadro translation
+  #  without a corresponding avogadro one.
+  # (Fairly safe assumption)
+
+  # This regex gives us translations with just two characters
+  #  (e.g., avogadro_fr.ts)
+  FILE(GLOB avogadro_QM "${INSTALL_DATA_DIR}/avogadro2/i18n/*.qm")
+  string(REGEX MATCHALL "-[a-z]+\\.qm" langresult "${avogadro_QM}")
+  string(REGEX REPLACE "-([^.]+)\\.qm" "\\1" languages "${langresult}")
+  # This one gives us languages for country codes (e.g., avogadro_zh_CN.ts)
+  string(REGEX MATCHALL "-[a-z]+_[A-Z]+\\.qm" langresult "${avogadro_QM}")
+  string(REGEX REPLACE "-([^_]+_[^.]+)\\.qm" "\\1" fulllangs "${langresult}")
+  set (LANGUAGES "${languages};${fulllangs};en;en_US")
+
+  foreach(lang ${LANGUAGES})
+    set( MAC_LANG_DIR "${CMAKE_INSTALL_PREFIX}/Resources/${lang}.lproj" )
+    install(CODE "EXECUTE_PROCESS(COMMAND
+      mkdir ${MAC_LANG_DIR}
+      ERROR_QUIET)")
+  endforeach()
+
   list(APPEND avogadro_srcs icons/avogadro.icns)
   list(APPEND avogadro_srcs icons/doc.icns)
   list(APPEND avogadro_srcs icons/cml.icns)
