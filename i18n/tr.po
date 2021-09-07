@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-06 20:25-0400\n"
-"PO-Revision-Date: 2021-09-04 01:34+0000\n"
+"PO-Revision-Date: 2021-09-08 11:10+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -29,18 +29,16 @@ msgid "No molecule set in BackgroundFileFormat!"
 msgstr "BackgroundFileFormat'da molekül ayarlanmadı!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
-#, fuzzy
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "BackgroundFileFormat'da dosya adı ayarlanmadı!"
+msgstr "BackgroundFileFormat'ta dosya biçimi ayarlanmadı!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "BackgroundFileFormat'da dosya adı ayarlanmadı!"
 
 #: mainwindow.cpp:298
-#, fuzzy
 msgid "Ready…"
-msgstr "Hazır..."
+msgstr "Hazır…"
 
 #: mainwindow.cpp:340
 msgid "Tool"
@@ -63,7 +61,6 @@ msgid "Layers"
 msgstr "Katmanlar"
 
 #: mainwindow.cpp:389
-#, fuzzy
 msgid "File"
 msgstr "Dosya"
 
@@ -76,7 +73,7 @@ msgid "Untitled"
 msgstr "İsimsiz"
 
 #: mainwindow.cpp:613
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
@@ -164,24 +161,23 @@ msgstr ""
 "%2"
 
 #: mainwindow.cpp:876
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Dosya kaydedilemiyor %1."
+msgstr "%1 dosyası kaydedildi"
 
 #: mainwindow.cpp:883
-#, fuzzy
 msgid "Error saving file"
-msgstr "RPC sunucusu başlatılırken hata oluştu:"
+msgstr "Dosya kaydedilirken hata oluştu"
 
 #: mainwindow.cpp:884
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
-"'%1' dosyası okunurken hata:\n"
+"'%1' kaydedilirken hata oluştu:\n"
 "%2"
 
 #: mainwindow.cpp:923
@@ -269,17 +265,17 @@ msgstr "Molekül Dosyasını İçe Aktar"
 
 #: mainwindow.cpp:1389
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Dosya Kaydetme Devam Ediyor…"
 
 #: mainwindow.cpp:1391
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"'%1' dosyası\n"
-"'%2' ile açılıyor"
+"“%1” dosyası kaydediliyor\n"
+"“%2” ile"
 
 #: mainwindow.cpp:1501
 #, qt-format
@@ -308,14 +304,12 @@ msgid "&Testing"
 msgstr "&Test et"
 
 #: mainwindow.cpp:1614
-#, fuzzy
 msgid "Record test…"
-msgstr "Test kaydı..."
+msgstr "Testi kaydet…"
 
 #: mainwindow.cpp:1617
-#, fuzzy
 msgid "Play test…"
-msgstr "Testi oynat..."
+msgstr "Testi oynat…"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -328,9 +322,8 @@ msgstr "Ye&ni"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1642:51
-#, fuzzy
 msgid "&Open…"
-msgstr "&Aç"
+msgstr "&Aç…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -351,9 +344,8 @@ msgstr "&Kaydet"
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1674:102
-#, fuzzy
 msgid "Save &As…"
-msgstr "&Farklı Kaydet..."
+msgstr "&Farklı Kaydet…"
 
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -362,16 +354,14 @@ msgid "&Export"
 msgstr "&Dışa Aktar"
 
 #: mainwindow.cpp:1686
-#, fuzzy
 msgid "&Molecule…"
-msgstr "Molekül"
+msgstr "&Molekül…"
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1694:111
-#, fuzzy
 msgid "&Graphics…"
-msgstr "&Grafikler..."
+msgstr "&Grafikler…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -398,9 +388,8 @@ msgid "&View"
 msgstr "&Göster"
 
 #: mainwindow.cpp:1751
-#, fuzzy
 msgid "Set background color…"
-msgstr "Arkaplan Rengini Ayarla..."
+msgstr "Arka plan rengini ayarla…"
 
 #: mainwindow.cpp:1759
 msgid "Projection"
@@ -432,9 +421,8 @@ msgid "All supported formats (%1);;All files (*);;"
 msgstr "Desteklenen tüm biçimler (%1) ;; Tüm dosyalar (*) ;;"
 
 #: mainwindow.cpp:1922
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
-msgstr "Dosyada yaptığınız değişiklikleri kaydetmek istiyor musunuz ?"
+msgstr "Değişiklikleri belgeye kaydetmek istiyor musunuz?"
 
 #: mainwindow.cpp:1930
 msgid "Your changes will be lost if you don't save them."
@@ -451,19 +439,18 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2004
-#, fuzzy, qt-format
+#, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "'%1' kimliğine sahip FileFormat yüklenirken hata oluştu."
+msgstr "“%1” dosya biçimi yüklenirken hata oluştu."
 
 #: mainwindow.cpp:2020
-#, fuzzy
 msgid "Select file format"
-msgstr "Dosya okuyucuyu seç"
+msgstr "Dosya biçimi seç"
 
 #: mainwindow.cpp:2025 mainwindow.cpp:2036
-#, fuzzy, qt-format
+#, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "Avogadro zaman aşımına uğradı ve '%1'i açamıyor."
+msgstr "Avogadro “%1”i açamıyor."
 
 #: mainwindow.cpp:2035
 msgid "Cannot open files"
@@ -644,9 +631,8 @@ msgstr "Çık"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
-msgstr "Arka&plan Rengini Ayarla..."
+msgstr "&Arka Plan Rengini Ayarla…"
 
 #. i18n: file: mainwindow.ui:199
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -740,9 +726,8 @@ msgstr "Ctrl+Shift+A"
 
 #. i18n: file: mainwindow.ui:319
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Configure Avogadro…"
-msgstr "Avagadro'yu Yapılandır..."
+msgstr "Avogadro'yu Yapılandır…"
 
 #. i18n: file: mainwindow.ui:330
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -791,15 +776,13 @@ msgstr "Avogadro Web Sitesi"
 
 #. i18n: file: mainwindow.ui:392
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Plugin Manager…"
-msgstr "Eklenti Yöneticisi..."
+msgstr "Eklenti Yöneticisi…"
 
 #. i18n: file: mainwindow.ui:401
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Project Tree Editor…"
-msgstr "Proje Ağacı Düzenleyicisi..."
+msgstr "Proje Ağacı Düzenleyicisi…"
 
 #. i18n: file: mainwindow.ui:410
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -808,9 +791,8 @@ msgstr "Görünümü Ayır"
 
 #. i18n: file: mainwindow.ui:415
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Molecule File…"
-msgstr "Molekül Dosyası..."
+msgstr "Molekül Dosyası…"
 
 #. i18n: file: mainwindow.ui:426
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -819,9 +801,8 @@ msgstr "Hızlı Yorumlamayı Kullan"
 
 #. i18n: file: mainwindow.ui:431
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Vector Graphics…"
-msgstr "&Vektör Grafikleri..."
+msgstr "&Vektör Grafikleri…"
 
 #. i18n: file: mainwindow.ui:439
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -830,9 +811,8 @@ msgstr "Birim Hücre Eksenlerini Göster"
 
 #. i18n: file: mainwindow.ui:447
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "All Molecules in File…"
-msgstr "Dosyadaki Bütün Moleküller..."
+msgstr "Dosyadaki Tüm Moleküller…"
 
 #. i18n: file: mainwindow.ui:452
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
