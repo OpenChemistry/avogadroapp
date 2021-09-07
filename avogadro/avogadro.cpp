@@ -11,7 +11,9 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QLibraryInfo>
+#include <QtCore/QLocale>
 #include <QtCore/QProcess>
+#include <QtCore/QStandardPaths>
 #include <QtCore/QTranslator>
 
 #include "application.h"
@@ -24,6 +26,8 @@ void removeMacSpecificMenuItems();
 #ifdef Avogadro_ENABLE_RPC
 #include "rpclistener.h"
 #endif
+
+#define DEBUG false
 
 int main(int argc, char* argv[])
 {
@@ -50,7 +54,8 @@ int main(int argc, char* argv[])
 
   // Before we do much else, load translations
   // This ensures help messages and debugging info will be translated
-  qDebug() << "Locale: " << QLocale::system().name();
+  QLocale currentLocale;
+  qDebug() << "Locale: " << currentLocale.name();
 
   QStringList translationPaths;
   // check environment variable and local paths
@@ -62,39 +67,55 @@ int main(int argc, char* argv[])
     }
   }
 
+  translationPaths << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
   translationPaths << QCoreApplication::applicationDirPath() +
                         "/../share/avogadro2/i18n/";
-  translationPaths << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+  // add the possible plugin download paths
+  QStringList stdPaths =
+    QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
+  foreach (const QString& dirStr, stdPaths) {
+    QString path = dirStr + "/i18n/avogadro-i18n/avogadroapp";
+    translationPaths << path; // we'll check if these exist below
+    path = dirStr + "/i18n/avogadro-i18n/avogadrolibs";
+    translationPaths << path;
+  }
 
-  QTranslator qtTranslator;
-  QTranslator qtBaseTranslator;
-  QTranslator avoTranslator;
-  QTranslator avoLibsTranslator;  
+  // Make sure to use pointers:
+  //
+  QTranslator* qtTranslator = new QTranslator;
+  QTranslator* qtBaseTranslator = new QTranslator;
+  QTranslator* avoTranslator = new QTranslator;
+  QTranslator* avoLibsTranslator = new QTranslator;
   bool tryLoadingQtTranslations = true;
 
   foreach (const QString& translationPath, translationPaths) {
     // We can't find the normal Qt translations (maybe we're in a "bundle"?)
     if (tryLoadingQtTranslations) {
-      if (qtTranslator.load(QLocale::system(), "qt", "_", translationPath)) {
-        app.installTranslator(&qtTranslator);
-        tryLoadingQtTranslations = false; // already loaded
+      if (qtTranslator->load(currentLocale, "qt", "_", translationPath)) {
+        if (app.installTranslator(qtTranslator))
+          qDebug() << "qt Translation successfully loaded.";
       }
-      if (qtBaseTranslator.load(QLocale::system(), "qtbase", "_",
-                                translationPath)) {
-        app.installTranslator(&qtBaseTranslator);
+      if (qtBaseTranslator->load(currentLocale, "qtbase", "_",
+                                 translationPath)) {
+        if (app.installTranslator(qtBaseTranslator))
+          qDebug() << "qtbase Translation successfully loaded.";
       }
     }
-    if (avoTranslator.load(QLocale::system(), "avogadroapp", "_",
-                           translationPath)) {
-      app.installTranslator(&avoTranslator);
-      qDebug() << "Translation successfully loaded.";
-    }    
-    if (avoLibsTranslator.load(QLocale::system(), "avogadrolibs", "_",
-                           translationPath)) {
-      app.installTranslator(&avoLibsTranslator);
-      qDebug() << "Translation successfully loaded.";
+    if (avoTranslator->load(currentLocale, "avogadroapp", "-",
+                            translationPath)) {
+      if (app.installTranslator(avoTranslator))
+        qDebug() << "AvogadroApp Translation " << currentLocale.name()
+                 << " loaded " << translationPath;
+    }
+    if (avoLibsTranslator->load(currentLocale, "avogadrolibs", "-",
+                                translationPath)) {
+      if (app.installTranslator(avoLibsTranslator))
+        qDebug() << "AvogadroLibs Translation " << currentLocale.name()
+                 << " loaded " << translationPath;
     }
   }
+
+  qDebug() << "Translated quit: " << app.translate("MainWindow", "&Quit");
 
   // Check for valid OpenGL support.
   auto offscreen = new QOffscreenSurface;
@@ -113,9 +134,6 @@ int main(int argc, char* argv[])
                                   "This system does not support OpenGL."));
     return 1;
   }
-
-  // Use high-resolution (e.g., 2x) icons if available
-  app.setAttribute(Qt::AA_UseHighDpiPixmaps);
 
   // Set up the default format for our GL contexts.
   QSurfaceFormat defaultFormat = QSurfaceFormat::defaultFormat();
