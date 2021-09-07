@@ -1,17 +1,6 @@
 /******************************************************************************
-
   This source file is part of the Avogadro project.
-
-  Copyright 2012-2013 Kitware, Inc.
-
-  This source code is released under the New BSD License, (the "License").
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-
+  This source code is released under the 3-Clause BSD License, (see "LICENSE").
 ******************************************************************************/
 
 #include "rpclistener.h"
@@ -120,31 +109,9 @@ void RpcListener::receivePingResponse(const QJsonObject& response)
   if (pingSuccessful) {
     qDebug() << "Other server is alive. Not starting new instance.";
   } else {
-    QString title(tr("Error starting RPC server:"));
-    QString label(
-      tr("An error occurred while starting Avogadro's RPC listener. "
-         "This may be happen for a\nnumber of reasons:\n\t"
-         "A previous instance of Avogadro may have crashed.\n\t"
-         "A running Avogadro instance was too busy to respond.\n\n"
-         "If no other Avogadro instance is running on this machine, it "
-         "is safe to replace the dead\nserver. "
-         "Otherwise, this instance of avogadro may be started without "
-         "RPC capabilities\n(this will prevent RPC enabled applications "
-         "from communicating with Avogadro)."));
-    QStringList items;
-    items << tr("Replace the dead server with a new instance.");
-    items << tr("Start without RPC capabilities.");
-    bool ok(false);
-    QString item(
-      QInputDialog::getItem(nullptr, title, label, items, 0, false, &ok));
-
-    if (ok && item == items.first()) {
       qDebug() << "Starting new server.";
       m_connectionListener->stop(true);
       m_connectionListener->start();
-    } else {
-      qDebug() << "Starting without RPC capabilities.";
-    }
   }
 }
 

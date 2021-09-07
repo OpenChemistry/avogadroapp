@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.93.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-08-31 15:38-0400\n"
+"POT-Creation-Date: 2021-09-06 20:25-0400\n"
 "PO-Revision-Date: 2021-03-11 23:02+0000\n"
 "Last-Translator: phlostically <phlostically@mailinator.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/avogadro/"
@@ -18,117 +18,121 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.5.2-dev\n"
 
-#: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
+#: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
 msgstr "Neniu molekulo agordita en BackgroundFileFormat!"
 
-#: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
-msgid "No Io::FileFormat set in BackgroundFileFormat!"
-msgstr "Neniu Io::FileFormat agordita en BackgroundFileFormat!"
+#: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
+#, fuzzy
+msgid "No file format set in BackgroundFileFormat!"
+msgstr "Neniu dosiernomo agordita en BackgroundFileFormat!"
 
-#: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
+#: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "Neniu dosiernomo agordita en BackgroundFileFormat!"
 
-#: mainwindow.cpp:309
-msgid "Ready..."
+#: mainwindow.cpp:298
+#, fuzzy
+msgid "Ready…"
 msgstr "Preta…"
 
-#: mainwindow.cpp:351
+#: mainwindow.cpp:340
 msgid "Tool"
 msgstr "Ilo"
 
-#: mainwindow.cpp:355
+#: mainwindow.cpp:344
 msgid "Display Types"
 msgstr "Montraj Tipoj"
 
-#: mainwindow.cpp:366
+#: mainwindow.cpp:355
 msgid "View Configuration"
 msgstr "Vidi Agordon"
 
-#: mainwindow.cpp:372
+#: mainwindow.cpp:361
 msgid "Molecules"
 msgstr "Molekuloj"
 
-#: mainwindow.cpp:381
+#: mainwindow.cpp:370
 msgid "Layers"
 msgstr ""
 
-#: mainwindow.cpp:400
+#: mainwindow.cpp:389
 #, fuzzy
 msgid "File"
 msgstr "Dosiero (&F)"
 
-#: mainwindow.cpp:403
+#: mainwindow.cpp:392
 #, fuzzy
 msgid "Tools"
 msgstr "Ilo"
 
-#: mainwindow.cpp:619
+#: mainwindow.cpp:608
 msgid "Untitled"
 msgstr "Sentitola"
 
-#: mainwindow.cpp:624
-#, qt-format
+#: mainwindow.cpp:613
+#, fuzzy, qt-format
+msgctxt ""
+"window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Avogadro %3"
 
-#: mainwindow.cpp:678 mainwindow.cpp:1314
+#: mainwindow.cpp:667 mainwindow.cpp:1303
 msgid "Chemical Markup Language"
 msgstr "Kemia Marklingvo"
 
-#: mainwindow.cpp:679 mainwindow.cpp:1313
+#: mainwindow.cpp:668 mainwindow.cpp:1302
 msgid "Chemical JSON"
 msgstr "Kemia JSON"
 
-#: mainwindow.cpp:685
+#: mainwindow.cpp:674
 msgid "Open chemical file"
 msgstr "Malfermi kemian dosieron"
 
-#: mainwindow.cpp:703 mainwindow.cpp:727 mainwindow.cpp:1221
-#: mainwindow.cpp:2038
+#: mainwindow.cpp:692 mainwindow.cpp:716 mainwindow.cpp:1210
+#: mainwindow.cpp:2024
 msgid "Cannot open file"
 msgstr "Ne povas malfermi dosieron"
 
-#: mainwindow.cpp:704 mainwindow.cpp:728 mainwindow.cpp:1222
+#: mainwindow.cpp:693 mainwindow.cpp:717 mainwindow.cpp:1211
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "Ne povas malfermi provizitan dosieron %1"
 
-#: mainwindow.cpp:717
+#: mainwindow.cpp:706
 msgid "Open Molecule"
 msgstr "Malfermi Molekulon"
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:730
 msgid "Commands"
 msgstr ""
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:730
 msgid "Input Generators"
 msgstr ""
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:730
 #, fuzzy
 msgid "File Formats"
 msgstr "Eraro pri dosiero"
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:734
 msgid "Install Plugin Script"
 msgstr ""
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:734
 msgid "Script Type:"
 msgstr ""
 
-#: mainwindow.cpp:793 mainwindow.cpp:1217 mainwindow.cpp:2034
+#: mainwindow.cpp:782 mainwindow.cpp:1206
 msgid "Select file reader"
 msgstr "Elekti dosierlegilon"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:811
 msgid "Reading File"
 msgstr "Legante Dosieron"
 
-#: mainwindow.cpp:824
+#: mainwindow.cpp:813
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -137,16 +141,16 @@ msgstr ""
 "Malfermante dosieron '%1'\n"
 "per '%2'"
 
-#: mainwindow.cpp:855
+#: mainwindow.cpp:844
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Molekulo ŝargita (%1 atomoj, %2 ligoj)"
 
-#: mainwindow.cpp:860 mainwindow.cpp:894
+#: mainwindow.cpp:849
 msgid "File error"
 msgstr "Eraro pri dosiero"
 
-#: mainwindow.cpp:861
+#: mainwindow.cpp:850
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -155,25 +159,32 @@ msgstr ""
 "Eraro dum legado de dosiero '%1':\n"
 "%2"
 
-#: mainwindow.cpp:887
-#, qt-format
-msgid "File written: %1"
-msgstr "Dosiero skribita: %1"
+#: mainwindow.cpp:876
+#, fuzzy, qt-format
+msgctxt "%1 = filename"
+msgid "Saved file %1"
+msgstr "Ne povas konservi dosieron %1."
 
-#: mainwindow.cpp:895
-#, qt-format
+#: mainwindow.cpp:883
+#, fuzzy
+msgid "Error saving file"
+msgstr "Eraro pri startigo de servilo de fora procedura alvoko:"
+
+#: mainwindow.cpp:884
+#, fuzzy, qt-format
+msgctxt "%1 = file name, %2 = error message"
 msgid ""
-"Error while writing file '%1':\n"
+"Error while saving '%1':\n"
 "%2"
 msgstr ""
-"Eraro dum skribado sur dosieron '%1':\n"
+"Eraro dum legado de dosiero '%1':\n"
 "%2"
 
-#: mainwindow.cpp:934
+#: mainwindow.cpp:923
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Eraro: Malsukcesis pravalorizi OpenGL-kuntekston"
 
-#: mainwindow.cpp:935
+#: mainwindow.cpp:924
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -184,50 +195,50 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:936
+#: mainwindow.cpp:925
 msgid "Unknown error"
 msgstr "Nekonata eraro"
 
-#: mainwindow.cpp:1062 mainwindow.cpp:1063
+#: mainwindow.cpp:1051 mainwindow.cpp:1052
 msgid "Navigate tool"
 msgstr "Naviga ilo"
 
-#: mainwindow.cpp:1139
+#: mainwindow.cpp:1128
 msgid "Common image formats"
 msgstr "Oftaj bildaj dosierformoj"
 
-#: mainwindow.cpp:1141
+#: mainwindow.cpp:1130
 msgid "All files"
 msgstr "Ĉiuj dosieroj"
 
-#: mainwindow.cpp:1141
+#: mainwindow.cpp:1130
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1142
+#: mainwindow.cpp:1131
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1142
+#: mainwindow.cpp:1131
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1151
+#: mainwindow.cpp:1140
 msgid "Export Bitmap Graphics"
 msgstr "Eksporti Rastruman Grafikaĵon"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1190 mainwindow.cpp:1287 mainwindow.cpp:1932:33
+#: mainwindow.cpp:1179 mainwindow.cpp:1276 mainwindow.cpp:1921:33
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1191
+#: mainwindow.cpp:1180
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Ne povas konservi dosieron %1."
 
-#: mainwindow.cpp:1288
+#: mainwindow.cpp:1277
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -240,84 +251,88 @@ msgstr ""
 "Ĉu vi volas eksporti al tiu nenorma dosierformo, aŭ konservi en norma "
 "dosierformo?"
 
-#: mainwindow.cpp:1295
+#: mainwindow.cpp:1284
 msgid "Export"
 msgstr "Eksporti"
 
-#: mainwindow.cpp:1320
+#: mainwindow.cpp:1309
 msgid "Save chemical file"
 msgstr "Konservi kemian dosieron"
 
-#: mainwindow.cpp:1348
+#: mainwindow.cpp:1337
 msgid "Export Molecule"
 msgstr "Eksporti Molekulon"
 
-#: mainwindow.cpp:1400
-msgid "Writing File"
-msgstr "Skribante sur Dosieron"
-
-#: mainwindow.cpp:1402
-#, qt-format
-msgid ""
-"Writing file '%1'\n"
-"with '%2'"
+#: mainwindow.cpp:1389
+msgid "Saving File in Progress…"
 msgstr ""
-"Skribante sur dosieron '%1'\n"
+
+#: mainwindow.cpp:1391
+#, fuzzy, qt-format
+msgctxt "%1 = file name, %2 = format"
+msgid ""
+"Saving file “%1”\n"
+"with “%2”"
+msgstr ""
+"Malfermante dosieron '%1'\n"
 "per '%2'"
 
-#: mainwindow.cpp:1512
+#: mainwindow.cpp:1501
 #, qt-format
 msgid "&Undo %1"
 msgstr "Malfari %1 (&U)"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1515 mainwindow.cpp:1742:126
+#: mainwindow.cpp:1504 mainwindow.cpp:1731:126
 msgid "&Undo"
 msgstr "Malfari (&U)"
 
-#: mainwindow.cpp:1520
+#: mainwindow.cpp:1509
 #, qt-format
 msgid "&Redo %1"
 msgstr "&Refari %1"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1523 mainwindow.cpp:1747:132
+#: mainwindow.cpp:1512 mainwindow.cpp:1736:132
 msgid "&Redo"
 msgstr "&Refari"
 
-#: mainwindow.cpp:1623
+#: mainwindow.cpp:1612
 msgid "&Testing"
 msgstr "&Testado"
 
-#: mainwindow.cpp:1625
-msgid "Record test..."
+#: mainwindow.cpp:1614
+#, fuzzy
+msgid "Record test…"
 msgstr "Registri teston…"
 
-#: mainwindow.cpp:1628
-msgid "Play test..."
+#: mainwindow.cpp:1617
+#, fuzzy
+msgid "Play test…"
 msgstr "Ludi teston…"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1644:75 rc.cpp:81
+#: mainwindow.cpp:1633:75 rc.cpp:81
 msgid "&New"
 msgstr "&Nova"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1653:51
-msgid "&Open..."
-msgstr "Malfermi… (&O)"
+#: mainwindow.cpp:1642:51
+#, fuzzy
+msgid "&Open…"
+msgstr "Malfermi (&O)"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1662:84 rc.cpp:90
+#: mainwindow.cpp:1651:84 rc.cpp:90
 msgid "&Close"
 msgstr "Fermi (&C)"
 
@@ -325,191 +340,156 @@ msgstr "Fermi (&C)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1676:93 rc.cpp:99
+#: mainwindow.cpp:1665:93 rc.cpp:99
 msgid "&Save"
 msgstr "Kon&servi"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1685:102
-msgid "Save &As..."
+#: mainwindow.cpp:1674:102
+#, fuzzy
+msgid "Save &As…"
 msgstr "Konservi kiel… (&A)"
 
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1696:264
+#: mainwindow.cpp:1685:264
 msgid "&Export"
 msgstr "&Eksporti"
 
-#: mainwindow.cpp:1697
-msgid "&Molecule..."
-msgstr "&Molekulo…"
+#: mainwindow.cpp:1686
+#, fuzzy
+msgid "&Molecule…"
+msgstr "Molekuloj"
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1705:111
-msgid "&Graphics..."
+#: mainwindow.cpp:1694:111
+#, fuzzy
+msgid "&Graphics…"
 msgstr "&Grafiko…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1713:60 rc.cpp:66
+#: mainwindow.cpp:1702:60 rc.cpp:66
 msgid "&Quit"
 msgstr "Forlasi (&Q)"
 
-#: mainwindow.cpp:1735
+#: mainwindow.cpp:1724
 msgid "No recent files"
 msgstr "Neniu ĵusaj dosieroj"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1741 menubuilder.cpp:87:45
+#: mainwindow.cpp:1730 menubuilder.cpp:76:45
 msgid "&Edit"
 msgstr "R&edakti"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1761 menubuilder.cpp:87:42
+#: mainwindow.cpp:1750 menubuilder.cpp:76:42
 msgid "&View"
 msgstr "&Vidi"
 
-#: mainwindow.cpp:1762
-msgid "Set background color..."
+#: mainwindow.cpp:1751
+#, fuzzy
+msgid "Set background color…"
 msgstr "Agordi fonkoloron…"
 
-#: mainwindow.cpp:1770
+#: mainwindow.cpp:1759
 msgid "Projection"
 msgstr "Projekcio"
 
 #. i18n: file: mainwindow.ui:463
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1771:240
+#: mainwindow.cpp:1760:240
 msgid "Perspective"
 msgstr "Perspektiva"
 
 #. i18n: file: mainwindow.ui:471
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1778:243
+#: mainwindow.cpp:1767:243
 msgid "Orthographic"
 msgstr "Orta"
 
-#: mainwindow.cpp:1797
+#: mainwindow.cpp:1786
 msgid "&Extensions"
 msgstr "&Etendaĵoj"
 
-#: mainwindow.cpp:1804 menubuilder.cpp:91
+#: mainwindow.cpp:1793 menubuilder.cpp:80
 msgid "&Help"
 msgstr "&Helpo"
 
-#: mainwindow.cpp:1917
+#: mainwindow.cpp:1906
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Ĉiuj subtenataj dosierformoj (%1);;Ĉiuj dosieroj (*);;"
 
-#: mainwindow.cpp:1933
-msgid "Do you want to save the changes you made in the document?"
+#: mainwindow.cpp:1922
+#, fuzzy
+msgid "Do you want to save the changes to the document?"
 msgstr "Ĉu vi volas konservi la ŝanĝojn, kiujn vi faris en la dokumento?"
 
-#: mainwindow.cpp:1941
+#: mainwindow.cpp:1930
 msgid "Your changes will be lost if you don't save them."
 msgstr "Viaj ŝanĝoj perdiĝos, se vi ne konservos ilin."
 
-#: mainwindow.cpp:1949
+#: mainwindow.cpp:1938
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Stir+S"
 
-#: mainwindow.cpp:1951
+#: mainwindow.cpp:1940
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Stir+D"
 
-#: mainwindow.cpp:2018
-#, qt-format
-msgid "Error while loading FileFormat with id '%1'."
+#: mainwindow.cpp:2004
+#, fuzzy, qt-format
+msgid "Error while loading the “%1” file format."
 msgstr "Eraro dum ŝargado de FileFormat de identigilo '%1'."
 
-#: mainwindow.cpp:2039
-#, qt-format
-msgid "Avogadro timed out and doesn't know how to open '%1'."
-msgstr "Avogadro elĉerpis templimon kaj ne scias kiel malfermi '%1'."
+#: mainwindow.cpp:2020
+#, fuzzy
+msgid "Select file format"
+msgstr "Elekti dosierlegilon"
 
-#: mainwindow.cpp:2049
+#: mainwindow.cpp:2025 mainwindow.cpp:2036
+#, fuzzy, qt-format
+msgid "Avogadro cannot open “%1”."
+msgstr "Avogadro elĉerpis templimon kaj ne povas malfermi '%1'."
+
+#: mainwindow.cpp:2035
 msgid "Cannot open files"
 msgstr "Ne povis malfermi dosierojn"
 
-#: mainwindow.cpp:2050
-#, qt-format
-msgid "Avogadro timed out and cannot open '%1'."
-msgstr "Avogadro elĉerpis templimon kaj ne povas malfermi '%1'."
-
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:87:36
+#: menubuilder.cpp:76:36
 msgid "&File"
 msgstr "Dosiero (&F)"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
-#: menubuilder.cpp:87:39
+#: menubuilder.cpp:76:39
 msgid "&Build"
 msgstr "Konstrui (&B)"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
-#: menubuilder.cpp:88:48
+#: menubuilder.cpp:77:48
 msgid "&Select"
 msgstr "Elekti (&S)"
 
-#: menubuilder.cpp:91
+#: menubuilder.cpp:80
 msgid "Se&ttings"
 msgstr "Agordoj (&T)"
 
-#: menubuilder.cpp:91
+#: menubuilder.cpp:80
 msgid "&Window"
 msgstr "Fenestro (&W)"
-
-#: rpclistener.cpp:123
-msgid "Error starting RPC server:"
-msgstr "Eraro pri startigo de servilo de fora procedura alvoko:"
-
-#: rpclistener.cpp:125
-msgid ""
-"An error occurred while starting Avogadro's RPC listener. This may be happen "
-"for a\n"
-"number of reasons:\n"
-"\tA previous instance of Avogadro may have crashed.\n"
-"\tA running Avogadro instance was too busy to respond.\n"
-"\n"
-"If no other Avogadro instance is running on this machine, it is safe to "
-"replace the dead\n"
-"server. Otherwise, this instance of avogadro may be started without RPC "
-"capabilities\n"
-"(this will prevent RPC enabled applications from communicating with "
-"Avogadro)."
-msgstr ""
-"Okazis eraro dum lanĉo de la aŭskultilo de fora procedura alvoko de "
-"Avogadro.\n"
-"Ĉi tio povas okazi pro pluraj kialoj:\n"
-"\tAvogadro eble kolapsis.\n"
-"\tRuliĝanta Avogadro estis tro okupata por respondi.\n"
-"\n"
-"Se neniu alia Avogadro-procezo ruliĝas en ĉi tiu maŝino, estas sekure "
-"anstataŭigi la mortintan\n"
-"servilon. Alie, ĉi tiu Avogadro-procezo estas lanĉebla sen kapabloj de fora "
-"procedura alvoko\n"
-"(tio malebligos komunikadon inter aplikaĵoj de fora procedura alvoko kaj "
-"Avogadro)."
-
-#: rpclistener.cpp:135
-msgid "Replace the dead server with a new instance."
-msgstr "Anstataŭigu la mortintan servilon per novaĵo."
-
-#: rpclistener.cpp:136
-msgid "Start without RPC capabilities."
-msgstr "Startigi sen kapabloj de fora procedura alvoko."
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -660,7 +640,8 @@ msgstr "Esk"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Set &Background Color..."
+#, fuzzy
+msgid "Set &Background Color…"
 msgstr "Agordi Fonan Koloron… (&B)"
 
 #. i18n: file: mainwindow.ui:199
@@ -755,7 +736,8 @@ msgstr "Stir+Maj+A"
 
 #. i18n: file: mainwindow.ui:319
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Configure Avogadro..."
+#, fuzzy
+msgid "Configure Avogadro…"
 msgstr "Agordi Avogadron…"
 
 #. i18n: file: mainwindow.ui:330
@@ -805,12 +787,14 @@ msgstr "Retejo de Avogadro"
 
 #. i18n: file: mainwindow.ui:392
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Plugin Manager..."
+#, fuzzy
+msgid "Plugin Manager…"
 msgstr "Administrilo de Kromprogramoj…"
 
 #. i18n: file: mainwindow.ui:401
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Project Tree Editor..."
+#, fuzzy
+msgid "Project Tree Editor…"
 msgstr "Redaktilo de Projekta Arbo…"
 
 #. i18n: file: mainwindow.ui:410
@@ -820,7 +804,8 @@ msgstr "Dekroĉi Vidon"
 
 #. i18n: file: mainwindow.ui:415
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Molecule File..."
+#, fuzzy
+msgid "Molecule File…"
 msgstr "Molekula Dosiero…"
 
 #. i18n: file: mainwindow.ui:426
@@ -830,7 +815,8 @@ msgstr "Uzi Rapidan Bildigon"
 
 #. i18n: file: mainwindow.ui:431
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&Vector Graphics..."
+#, fuzzy
+msgid "&Vector Graphics…"
 msgstr "&Vektora Grafiko…"
 
 #. i18n: file: mainwindow.ui:439
@@ -840,7 +826,8 @@ msgstr "Montri Aksojn de Unita Ĉelo"
 
 #. i18n: file: mainwindow.ui:447
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "All Molecules in File..."
+#, fuzzy
+msgid "All Molecules in File…"
 msgstr "Ĉiuj Molekuloj en Dosiero…"
 
 #. i18n: file: mainwindow.ui:452
@@ -885,3 +872,68 @@ msgstr "phlostically"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "phlostically@example.com"
+
+#~ msgid "No Io::FileFormat set in BackgroundFileFormat!"
+#~ msgstr "Neniu Io::FileFormat agordita en BackgroundFileFormat!"
+
+#~ msgid "File written: %1"
+#~ msgstr "Dosiero skribita: %1"
+
+#~ msgid ""
+#~ "Error while writing file '%1':\n"
+#~ "%2"
+#~ msgstr ""
+#~ "Eraro dum skribado sur dosieron '%1':\n"
+#~ "%2"
+
+#~ msgid "Writing File"
+#~ msgstr "Skribante sur Dosieron"
+
+#~ msgid ""
+#~ "Writing file '%1'\n"
+#~ "with '%2'"
+#~ msgstr ""
+#~ "Skribante sur dosieron '%1'\n"
+#~ "per '%2'"
+
+#~ msgid "&Open..."
+#~ msgstr "Malfermi… (&O)"
+
+#~ msgid "&Molecule..."
+#~ msgstr "&Molekulo…"
+
+#~ msgid "Avogadro timed out and doesn't know how to open '%1'."
+#~ msgstr "Avogadro elĉerpis templimon kaj ne scias kiel malfermi '%1'."
+
+#~ msgid ""
+#~ "An error occurred while starting Avogadro's RPC listener. This may be "
+#~ "happen for a\n"
+#~ "number of reasons:\n"
+#~ "\tA previous instance of Avogadro may have crashed.\n"
+#~ "\tA running Avogadro instance was too busy to respond.\n"
+#~ "\n"
+#~ "If no other Avogadro instance is running on this machine, it is safe to "
+#~ "replace the dead\n"
+#~ "server. Otherwise, this instance of avogadro may be started without RPC "
+#~ "capabilities\n"
+#~ "(this will prevent RPC enabled applications from communicating with "
+#~ "Avogadro)."
+#~ msgstr ""
+#~ "Okazis eraro dum lanĉo de la aŭskultilo de fora procedura alvoko de "
+#~ "Avogadro.\n"
+#~ "Ĉi tio povas okazi pro pluraj kialoj:\n"
+#~ "\tAvogadro eble kolapsis.\n"
+#~ "\tRuliĝanta Avogadro estis tro okupata por respondi.\n"
+#~ "\n"
+#~ "Se neniu alia Avogadro-procezo ruliĝas en ĉi tiu maŝino, estas sekure "
+#~ "anstataŭigi la mortintan\n"
+#~ "servilon. Alie, ĉi tiu Avogadro-procezo estas lanĉebla sen kapabloj de "
+#~ "fora procedura alvoko\n"
+#~ "(tio malebligos komunikadon inter aplikaĵoj de fora procedura alvoko kaj "
+#~ "Avogadro)."
+
+#~ msgid "Replace the dead server with a new instance."
+#~ msgstr "Anstataŭigu la mortintan servilon per novaĵo."
+
+#~ msgid "Start without RPC capabilities."
+#~ msgstr "Startigi sen kapabloj de fora procedura alvoko."

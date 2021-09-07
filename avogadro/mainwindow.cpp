@@ -1,17 +1,6 @@
 /******************************************************************************
-
   This source file is part of the Avogadro project.
-
-  Copyright 2012-2014 Kitware, Inc.
-
-  This source code is released under the New BSD License, (the "License").
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-
+  This source code is released under the 3-Clause BSD License, (see "LICENSE").
 ******************************************************************************/
 
 #include "mainwindow.h"
@@ -265,7 +254,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 
   QList<ExtensionPluginFactory*> extensions =
     plugin->pluginFactories<ExtensionPluginFactory>();
-  qDebug() << "Extension plugins dynamically found..." << extensions.size();
+  qDebug() << "Extension plugins dynamically found…" << extensions.size();
   foreach (ExtensionPluginFactory* factory, extensions) {
     ExtensionPlugin* extension = factory->createInstance();
     if (extension) {
@@ -306,7 +295,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   QTimer::singleShot(3000, this, &MainWindow::registerMoleQueue);
 #endif // Avogadro_ENABLE_RPC
 
-  statusBar()->showMessage(tr("Ready..."), 2000);
+  statusBar()->showMessage(tr("Ready…"), 2000);
 
   updateWindowTitle();
 }
@@ -621,9 +610,9 @@ void MainWindow::updateWindowTitle()
   if (m_molecule && m_molecule->hasData("fileName"))
     fileName = QString::fromStdString(m_molecule->data("fileName").toString());
 
-  setWindowTitle(tr("%1%2 - Avogadro %3")
+  setWindowTitle(tr("%1%2 - Avogadro %3", "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version")
                    .arg(QFileInfo(fileName).fileName())
-                   .arg(m_moleculeDirty ? "*" : "")
+                   .arg(m_moleculeDirty ? "•" : "")
                    .arg(AvogadroApp_VERSION));
 }
 
@@ -884,15 +873,15 @@ bool MainWindow::backgroundWriterFinished()
   bool success = false;
   if (!m_progressDialog->wasCanceled()) {
     if (m_threadedWriter->success()) {
-      statusBar()->showMessage(tr("File written: %1").arg(fileName));
+      statusBar()->showMessage(tr("Saved file %1", "%1 = filename").arg(fileName));
       m_threadedWriter->molecule()->setData("fileName",
                                             fileName.toLocal8Bit().data());
       markMoleculeClean();
       updateWindowTitle();
       success = true;
     } else {
-      MESSAGEBOX::critical(this, tr("File error"),
-                           tr("Error while writing file '%1':\n%2")
+      MESSAGEBOX::critical(this, tr("Error saving file"),
+                           tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
                              .arg(fileName)
                              .arg(m_threadedWriter->error()));
     }
@@ -1397,9 +1386,9 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
   m_progressDialog->setRange(0, 0);
   m_progressDialog->setValue(0);
   m_progressDialog->setMinimumDuration(750);
-  m_progressDialog->setWindowTitle(tr("Writing File"));
+  m_progressDialog->setWindowTitle(tr("Saving File in Progress…"));
   m_progressDialog->setLabelText(
-    tr("Writing file '%1'\nwith '%2'").arg(fileName).arg(ident));
+    tr("Saving file “%1”\nwith “%2”", "%1 = file name, %2 = format").arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
   m_progressDialog->setCancelButton(nullptr);
   connect(m_fileWriteThread, &QThread::started, m_threadedWriter,
@@ -1622,10 +1611,10 @@ void MainWindow::buildMenu()
   QStringList testingPath;
   testingPath << tr("&Testing");
   QAction* actionRecord = new QAction(this);
-  actionRecord->setText(tr("Record test..."));
+  actionRecord->setText(tr("Record test…"));
   m_menuBuilder->addAction(testingPath, actionRecord, 10);
   QAction* actionPlay = new QAction(this);
-  actionPlay->setText(tr("Play test..."));
+  actionPlay->setText(tr("Play test…"));
   m_menuBuilder->addAction(testingPath, actionPlay, 5);
 
   connect(actionRecord, SIGNAL(triggered()), SLOT(record()));
@@ -1650,7 +1639,7 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::newMolecule);
   // Open
-  action = new QAction(tr("&Open..."), this);
+  action = new QAction(tr("&Open…"), this);
   action->setShortcut(QKeySequence::Open);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-open"));
@@ -1682,7 +1671,7 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::saveFile);
   // Save As
-  action = new QAction(tr("Save &As..."), this);
+  action = new QAction(tr("Save &As…"), this);
   action->setShortcut(QKeySequence::SaveAs);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-save-as"));
@@ -1694,7 +1683,7 @@ void MainWindow::buildMenu()
   // Export
   QStringList exportPath = path;
   exportPath << tr("&Export");
-  action = new QAction(tr("&Molecule..."), this);
+  action = new QAction(tr("&Molecule…"), this);
   m_menuBuilder->addAction(exportPath, action, 10);
   m_fileToolBar->addAction(action);
 #ifndef Q_OS_MAC
@@ -1702,7 +1691,7 @@ void MainWindow::buildMenu()
 #endif
   connect(action, &QAction::triggered, this, &MainWindow::exportFile);
   // Export graphics
-  action = new QAction(tr("&Graphics..."), this);
+  action = new QAction(tr("&Graphics…"), this);
   m_menuBuilder->addAction(exportPath, action, 10);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
@@ -1759,7 +1748,7 @@ void MainWindow::buildMenu()
   // View menu
   QStringList viewPath;
   viewPath << tr("&View");
-  action = new QAction(tr("Set background color..."), this);
+  action = new QAction(tr("Set background color…"), this);
   m_menuBuilder->addAction(viewPath, action, 100);
   connect(action, &QAction::triggered, this, &MainWindow::setBackgroundColor);
 
@@ -1930,7 +1919,7 @@ bool MainWindow::saveFileIfNeeded()
     // look more "native."
     QPointer<MESSAGEBOX> msgBox = new MESSAGEBOX(
       QMessageBox::Warning, tr("Avogadro"),
-      tr("Do you want to save the changes you made in the document?"),
+      tr("Do you want to save the changes to the document?"),
       QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel, this);
 
     // On Mac, this will make a sheet relative to the window
@@ -1949,9 +1938,6 @@ bool MainWindow::saveFileIfNeeded()
       ->setShortcut(QKeySequence(tr("Ctrl+S", "Save")));
     msgBox->button(QMessageBox::Discard)
       ->setShortcut(QKeySequence(tr("Ctrl+D", "Discard")));
-    //    msgBox->setButtonText(QMessageBox::Save,
-    //                          isDefaultFileName(d->fileName) ? tr("Save...") :
-    //                          tr("Save"));
 
     int response = msgBox->exec();
 
@@ -2015,7 +2001,7 @@ void MainWindow::fileFormatsReady()
     return;
   foreach (FileFormat* format, extension->fileFormats()) {
     if (!FileFormatManager::registerFormat(format)) {
-      qWarning() << tr("Error while loading FileFormat with id '%1'.")
+      qWarning() << tr("Error while loading the “%1” file format.")
                       .arg(QString::fromStdString(format->identifier()));
       // Need to delete the format if the manager didn't take ownership:
       delete format;
@@ -2031,13 +2017,13 @@ void MainWindow::readQueuedFiles()
     QString file = m_queuedFiles.first();
     m_queuedFiles.removeFirst();
     const FileFormat* format = QtGui::FileFormatDialog::findFileFormat(
-      this, tr("Select file reader"), file, FileFormat::File | FileFormat::Read,
+      this, tr("Select file format"), file, FileFormat::File | FileFormat::Read,
       "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : nullptr)) {
       MESSAGEBOX::warning(this, tr("Cannot open file"),
-                          tr("Avogadro timed out and doesn't know how to open"
-                             " '%1'.")
+                          tr("Avogadro cannot open"
+                             " “%1”.")
                             .arg(file));
     }
   }
@@ -2047,8 +2033,8 @@ void MainWindow::clearQueuedFiles()
 {
   if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
     MESSAGEBOX::warning(this, tr("Cannot open files"),
-                        tr("Avogadro timed out and cannot open"
-                           " '%1'.")
+                        tr("Avogadro cannot open"
+                          " “%1”.")
                           .arg(m_queuedFiles.join("\n")));
     m_queuedFiles.clear();
   }

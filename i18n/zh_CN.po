@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-08-31 15:38-0400\n"
+"POT-Creation-Date: 2021-09-06 20:25-0400\n"
 "PO-Revision-Date: 2021-04-03 11:26+0000\n"
 "Last-Translator: Liu Tao <lyuutau@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -20,117 +20,121 @@ msgstr ""
 "X-Generator: Weblate 4.6-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
-#: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
+#: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
 msgstr "BackgroundFileFormat 中没有设置分子！"
 
-#: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
-msgid "No Io::FileFormat set in BackgroundFileFormat!"
-msgstr "没有在 BackgroundFileFormat 中设置 Io :: FileFormat！"
+#: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
+#, fuzzy
+msgid "No file format set in BackgroundFileFormat!"
+msgstr "没有在 BackgroundFileFormat 中设置文件名！"
 
-#: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
+#: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "没有在 BackgroundFileFormat 中设置文件名！"
 
-#: mainwindow.cpp:309
-msgid "Ready..."
+#: mainwindow.cpp:298
+#, fuzzy
+msgid "Ready…"
 msgstr "就绪..."
 
-#: mainwindow.cpp:351
+#: mainwindow.cpp:340
 msgid "Tool"
 msgstr "工具"
 
-#: mainwindow.cpp:355
+#: mainwindow.cpp:344
 msgid "Display Types"
 msgstr "显示类型"
 
-#: mainwindow.cpp:366
+#: mainwindow.cpp:355
 msgid "View Configuration"
 msgstr "查看配置"
 
-#: mainwindow.cpp:372
+#: mainwindow.cpp:361
 msgid "Molecules"
 msgstr "分子"
 
-#: mainwindow.cpp:381
+#: mainwindow.cpp:370
 msgid "Layers"
 msgstr ""
 
-#: mainwindow.cpp:400
+#: mainwindow.cpp:389
 #, fuzzy
 msgid "File"
 msgstr "文件(&F)"
 
-#: mainwindow.cpp:403
+#: mainwindow.cpp:392
 #, fuzzy
 msgid "Tools"
 msgstr "工具"
 
-#: mainwindow.cpp:619
+#: mainwindow.cpp:608
 msgid "Untitled"
 msgstr "无标题"
 
-#: mainwindow.cpp:624
-#, qt-format
+#: mainwindow.cpp:613
+#, fuzzy, qt-format
+msgctxt ""
+"window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Avogadro %3"
 
-#: mainwindow.cpp:678 mainwindow.cpp:1314
+#: mainwindow.cpp:667 mainwindow.cpp:1303
 msgid "Chemical Markup Language"
 msgstr "化学标记语言"
 
-#: mainwindow.cpp:679 mainwindow.cpp:1313
+#: mainwindow.cpp:668 mainwindow.cpp:1302
 msgid "Chemical JSON"
 msgstr "化学 JSON"
 
-#: mainwindow.cpp:685
+#: mainwindow.cpp:674
 msgid "Open chemical file"
 msgstr "打开化学文件"
 
-#: mainwindow.cpp:703 mainwindow.cpp:727 mainwindow.cpp:1221
-#: mainwindow.cpp:2038
+#: mainwindow.cpp:692 mainwindow.cpp:716 mainwindow.cpp:1210
+#: mainwindow.cpp:2024
 msgid "Cannot open file"
 msgstr "无法打开文件"
 
-#: mainwindow.cpp:704 mainwindow.cpp:728 mainwindow.cpp:1222
+#: mainwindow.cpp:693 mainwindow.cpp:717 mainwindow.cpp:1211
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "无法打开提供的文件 %1"
 
-#: mainwindow.cpp:717
+#: mainwindow.cpp:706
 msgid "Open Molecule"
 msgstr "打开分子"
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:730
 msgid "Commands"
 msgstr ""
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:730
 msgid "Input Generators"
 msgstr ""
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:730
 #, fuzzy
 msgid "File Formats"
 msgstr "文件错误"
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:734
 msgid "Install Plugin Script"
 msgstr ""
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:734
 msgid "Script Type:"
 msgstr ""
 
-#: mainwindow.cpp:793 mainwindow.cpp:1217 mainwindow.cpp:2034
+#: mainwindow.cpp:782 mainwindow.cpp:1206
 msgid "Select file reader"
 msgstr "选择文件阅读器"
 
-#: mainwindow.cpp:822
+#: mainwindow.cpp:811
 msgid "Reading File"
 msgstr "读取文件"
 
-#: mainwindow.cpp:824
+#: mainwindow.cpp:813
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -139,16 +143,16 @@ msgstr ""
 "打开文件“ %1”\n"
 "使用“ %2”"
 
-#: mainwindow.cpp:855
+#: mainwindow.cpp:844
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "分子已加载 （%1 个原子， %2 个键）"
 
-#: mainwindow.cpp:860 mainwindow.cpp:894
+#: mainwindow.cpp:849
 msgid "File error"
 msgstr "文件错误"
 
-#: mainwindow.cpp:861
+#: mainwindow.cpp:850
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -157,25 +161,32 @@ msgstr ""
 "读取文件“ %1”时出错：\n"
 "%2"
 
-#: mainwindow.cpp:887
-#, qt-format
-msgid "File written: %1"
-msgstr "文件写入： %1"
+#: mainwindow.cpp:876
+#, fuzzy, qt-format
+msgctxt "%1 = filename"
+msgid "Saved file %1"
+msgstr "无法保存文件 %1。"
 
-#: mainwindow.cpp:895
-#, qt-format
+#: mainwindow.cpp:883
+#, fuzzy
+msgid "Error saving file"
+msgstr "启动 RPC 服务器时出错："
+
+#: mainwindow.cpp:884
+#, fuzzy, qt-format
+msgctxt "%1 = file name, %2 = error message"
 msgid ""
-"Error while writing file '%1':\n"
+"Error while saving '%1':\n"
 "%2"
 msgstr ""
-"写入文件“ %1”时出错：\n"
+"读取文件“ %1”时出错：\n"
 "%2"
 
-#: mainwindow.cpp:934
+#: mainwindow.cpp:923
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "错误：初始化 OpenGL 上下文失败"
 
-#: mainwindow.cpp:935
+#: mainwindow.cpp:924
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -186,50 +197,50 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:936
+#: mainwindow.cpp:925
 msgid "Unknown error"
 msgstr "未知错误"
 
-#: mainwindow.cpp:1062 mainwindow.cpp:1063
+#: mainwindow.cpp:1051 mainwindow.cpp:1052
 msgid "Navigate tool"
 msgstr "导航工具"
 
-#: mainwindow.cpp:1139
+#: mainwindow.cpp:1128
 msgid "Common image formats"
 msgstr "常见的图像格式"
 
-#: mainwindow.cpp:1141
+#: mainwindow.cpp:1130
 msgid "All files"
 msgstr "所有文件"
 
-#: mainwindow.cpp:1141
+#: mainwindow.cpp:1130
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1142
+#: mainwindow.cpp:1131
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1142
+#: mainwindow.cpp:1131
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1151
+#: mainwindow.cpp:1140
 msgid "Export Bitmap Graphics"
 msgstr "导出位图图形"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1190 mainwindow.cpp:1287 mainwindow.cpp:1932:33
+#: mainwindow.cpp:1179 mainwindow.cpp:1276 mainwindow.cpp:1921:33
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1191
+#: mainwindow.cpp:1180
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "无法保存文件 %1。"
 
-#: mainwindow.cpp:1288
+#: mainwindow.cpp:1277
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -240,84 +251,88 @@ msgstr ""
 "\n"
 "你要导出为当前格式，还是以标准格式保存？"
 
-#: mainwindow.cpp:1295
+#: mainwindow.cpp:1284
 msgid "Export"
 msgstr "导出"
 
-#: mainwindow.cpp:1320
+#: mainwindow.cpp:1309
 msgid "Save chemical file"
 msgstr "保存化学文件"
 
-#: mainwindow.cpp:1348
+#: mainwindow.cpp:1337
 msgid "Export Molecule"
 msgstr "导出分子"
 
-#: mainwindow.cpp:1400
-msgid "Writing File"
-msgstr "写入文件"
-
-#: mainwindow.cpp:1402
-#, qt-format
-msgid ""
-"Writing file '%1'\n"
-"with '%2'"
+#: mainwindow.cpp:1389
+msgid "Saving File in Progress…"
 msgstr ""
-"写入文件“ %1”\n"
+
+#: mainwindow.cpp:1391
+#, fuzzy, qt-format
+msgctxt "%1 = file name, %2 = format"
+msgid ""
+"Saving file “%1”\n"
+"with “%2”"
+msgstr ""
+"打开文件“ %1”\n"
 "使用“ %2”"
 
-#: mainwindow.cpp:1512
+#: mainwindow.cpp:1501
 #, qt-format
 msgid "&Undo %1"
 msgstr "撤销(&U) %1"
 
 #. i18n: file: mainwindow.ui:211
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1515 mainwindow.cpp:1742:126
+#: mainwindow.cpp:1504 mainwindow.cpp:1731:126
 msgid "&Undo"
 msgstr "撤销(&U)"
 
-#: mainwindow.cpp:1520
+#: mainwindow.cpp:1509
 #, qt-format
 msgid "&Redo %1"
 msgstr "重做(&R) %1"
 
 #. i18n: file: mainwindow.ui:223
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1523 mainwindow.cpp:1747:132
+#: mainwindow.cpp:1512 mainwindow.cpp:1736:132
 msgid "&Redo"
 msgstr "重做(&R)"
 
-#: mainwindow.cpp:1623
+#: mainwindow.cpp:1612
 msgid "&Testing"
 msgstr "测试(&T)"
 
-#: mainwindow.cpp:1625
-msgid "Record test..."
+#: mainwindow.cpp:1614
+#, fuzzy
+msgid "Record test…"
 msgstr "录制测试..."
 
-#: mainwindow.cpp:1628
-msgid "Play test..."
+#: mainwindow.cpp:1617
+#, fuzzy
+msgid "Play test…"
 msgstr "播放测试..."
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1644:75 rc.cpp:81
+#: mainwindow.cpp:1633:75 rc.cpp:81
 msgid "&New"
 msgstr "新建(&N)"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1653:51
-msgid "&Open..."
-msgstr "打开(&O)..."
+#: mainwindow.cpp:1642:51
+#, fuzzy
+msgid "&Open…"
+msgstr "打开(&O)"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1662:84 rc.cpp:90
+#: mainwindow.cpp:1651:84 rc.cpp:90
 msgid "&Close"
 msgstr "关闭(&C)"
 
@@ -325,187 +340,156 @@ msgstr "关闭(&C)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1676:93 rc.cpp:99
+#: mainwindow.cpp:1665:93 rc.cpp:99
 msgid "&Save"
 msgstr "保存(&S)"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1685:102
-msgid "Save &As..."
+#: mainwindow.cpp:1674:102
+#, fuzzy
+msgid "Save &As…"
 msgstr "另存为(&A)..."
 
 #. i18n: file: mainwindow.ui:504
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1696:264
+#: mainwindow.cpp:1685:264
 msgid "&Export"
 msgstr "导出(&E)"
 
-#: mainwindow.cpp:1697
-msgid "&Molecule..."
-msgstr "分子(&M)..."
+#: mainwindow.cpp:1686
+#, fuzzy
+msgid "&Molecule…"
+msgstr "分子"
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1705:111
-msgid "&Graphics..."
+#: mainwindow.cpp:1694:111
+#, fuzzy
+msgid "&Graphics…"
 msgstr "图像(&G)..."
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1713:60 rc.cpp:66
+#: mainwindow.cpp:1702:60 rc.cpp:66
 msgid "&Quit"
 msgstr "退出(&Q)"
 
-#: mainwindow.cpp:1735
+#: mainwindow.cpp:1724
 msgid "No recent files"
 msgstr "无最近文件"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1741 menubuilder.cpp:87:45
+#: mainwindow.cpp:1730 menubuilder.cpp:76:45
 msgid "&Edit"
 msgstr "编辑(&E)"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1761 menubuilder.cpp:87:42
+#: mainwindow.cpp:1750 menubuilder.cpp:76:42
 msgid "&View"
 msgstr "视图(&V)"
 
-#: mainwindow.cpp:1762
-msgid "Set background color..."
+#: mainwindow.cpp:1751
+#, fuzzy
+msgid "Set background color…"
 msgstr "设置背景颜色..."
 
-#: mainwindow.cpp:1770
+#: mainwindow.cpp:1759
 msgid "Projection"
 msgstr "投影方法"
 
 #. i18n: file: mainwindow.ui:463
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1771:240
+#: mainwindow.cpp:1760:240
 msgid "Perspective"
 msgstr "透视"
 
 #. i18n: file: mainwindow.ui:471
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1778:243
+#: mainwindow.cpp:1767:243
 msgid "Orthographic"
 msgstr "正交"
 
-#: mainwindow.cpp:1797
+#: mainwindow.cpp:1786
 msgid "&Extensions"
 msgstr "扩展(&E)"
 
-#: mainwindow.cpp:1804 menubuilder.cpp:91
+#: mainwindow.cpp:1793 menubuilder.cpp:80
 msgid "&Help"
 msgstr "帮助(&H)"
 
-#: mainwindow.cpp:1917
+#: mainwindow.cpp:1906
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "所有受支持的格式（%1）;;所有文件（*）;;"
 
-#: mainwindow.cpp:1933
-msgid "Do you want to save the changes you made in the document?"
+#: mainwindow.cpp:1922
+#, fuzzy
+msgid "Do you want to save the changes to the document?"
 msgstr "你要保存在文档中所做的更改吗？"
 
-#: mainwindow.cpp:1941
+#: mainwindow.cpp:1930
 msgid "Your changes will be lost if you don't save them."
 msgstr "如果不保存，您的更改将丢失。"
 
-#: mainwindow.cpp:1949
+#: mainwindow.cpp:1938
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:1951
+#: mainwindow.cpp:1940
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2018
-#, qt-format
-msgid "Error while loading FileFormat with id '%1'."
+#: mainwindow.cpp:2004
+#, fuzzy, qt-format
+msgid "Error while loading the “%1” file format."
 msgstr "加载 ID 为 %1 的 FileFormat 时出错。"
 
-#: mainwindow.cpp:2039
-#, qt-format
-msgid "Avogadro timed out and doesn't know how to open '%1'."
-msgstr "Avogadro 超时，并且不知道如何打开“ %1”。"
+#: mainwindow.cpp:2020
+#, fuzzy
+msgid "Select file format"
+msgstr "选择文件阅读器"
 
-#: mainwindow.cpp:2049
+#: mainwindow.cpp:2025 mainwindow.cpp:2036
+#, fuzzy, qt-format
+msgid "Avogadro cannot open “%1”."
+msgstr "Avogadro 超时，无法打开“ %1”。"
+
+#: mainwindow.cpp:2035
 msgid "Cannot open files"
 msgstr "无法打开文件"
 
-#: mainwindow.cpp:2050
-#, qt-format
-msgid "Avogadro timed out and cannot open '%1'."
-msgstr "Avogadro 超时，无法打开“ %1”。"
-
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:87:36
+#: menubuilder.cpp:76:36
 msgid "&File"
 msgstr "文件(&F)"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
-#: menubuilder.cpp:87:39
+#: menubuilder.cpp:76:39
 msgid "&Build"
 msgstr "构建(&B)"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
-#: menubuilder.cpp:88:48
+#: menubuilder.cpp:77:48
 msgid "&Select"
 msgstr "选择(&S)"
 
-#: menubuilder.cpp:91
+#: menubuilder.cpp:80
 msgid "Se&ttings"
 msgstr "设置(&T)"
 
-#: menubuilder.cpp:91
+#: menubuilder.cpp:80
 msgid "&Window"
 msgstr "窗口(&W)"
-
-#: rpclistener.cpp:123
-msgid "Error starting RPC server:"
-msgstr "启动 RPC 服务器时出错："
-
-#: rpclistener.cpp:125
-msgid ""
-"An error occurred while starting Avogadro's RPC listener. This may be happen "
-"for a\n"
-"number of reasons:\n"
-"\tA previous instance of Avogadro may have crashed.\n"
-"\tA running Avogadro instance was too busy to respond.\n"
-"\n"
-"If no other Avogadro instance is running on this machine, it is safe to "
-"replace the dead\n"
-"server. Otherwise, this instance of avogadro may be started without RPC "
-"capabilities\n"
-"(this will prevent RPC enabled applications from communicating with "
-"Avogadro)."
-msgstr ""
-"启动Avogadro的RPC侦听器时发生错误。这可能发生在\n"
-"原因数量：\n"
-"Avogadro的先前实例可能已崩溃。\n"
-"正在运行的Avogadro实例太忙而无法响应。\n"
-"\n"
-"如果此计算机上没有其他Avogadro实例在运行，则可以安全地替换死节点\n"
-"服务器。否则，此avogadro实例可能没有RPC功能就启动\n"
-"（这将阻止启用RPC的应用程序与Avogadro通信）。"
-
-#: rpclistener.cpp:135
-msgid "Replace the dead server with a new instance."
-msgstr "用新实例替换失效的服务器。"
-
-#: rpclistener.cpp:136
-msgid "Start without RPC capabilities."
-msgstr "开始时没有 RPC 功能。"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -656,7 +640,8 @@ msgstr "Esc"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Set &Background Color..."
+#, fuzzy
+msgid "Set &Background Color…"
 msgstr "设定背景颜色(&B)..."
 
 #. i18n: file: mainwindow.ui:199
@@ -751,7 +736,8 @@ msgstr "Ctrl+Shift+A"
 
 #. i18n: file: mainwindow.ui:319
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Configure Avogadro..."
+#, fuzzy
+msgid "Configure Avogadro…"
 msgstr "配置阿伏伽德罗..."
 
 #. i18n: file: mainwindow.ui:330
@@ -801,12 +787,14 @@ msgstr "阿伏伽德罗网站"
 
 #. i18n: file: mainwindow.ui:392
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Plugin Manager..."
+#, fuzzy
+msgid "Plugin Manager…"
 msgstr "插件管理器..."
 
 #. i18n: file: mainwindow.ui:401
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Project Tree Editor..."
+#, fuzzy
+msgid "Project Tree Editor…"
 msgstr "项目树编辑器..."
 
 #. i18n: file: mainwindow.ui:410
@@ -816,7 +804,8 @@ msgstr "拆分视图"
 
 #. i18n: file: mainwindow.ui:415
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Molecule File..."
+#, fuzzy
+msgid "Molecule File…"
 msgstr "分子文件..."
 
 #. i18n: file: mainwindow.ui:426
@@ -826,7 +815,8 @@ msgstr "使用快速渲染器"
 
 #. i18n: file: mainwindow.ui:431
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&Vector Graphics..."
+#, fuzzy
+msgid "&Vector Graphics…"
 msgstr "矢量图形(&V)..."
 
 #. i18n: file: mainwindow.ui:439
@@ -836,7 +826,8 @@ msgstr "显示单位晶胞轴"
 
 #. i18n: file: mainwindow.ui:447
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "All Molecules in File..."
+#, fuzzy
+msgid "All Molecules in File…"
 msgstr "文件中的所有分子..."
 
 #. i18n: file: mainwindow.ui:452
@@ -933,6 +924,67 @@ msgstr ""
 "devel@lists.sourceforge.net,chensiqiong@126.com,frankensteinyang@gmail.com,,,"
 "chaofeng111@gmail.com,,,,allen19920930@gmail.com,skyxxzc@gmail.com,"
 "cuiweicui1985@gmail.com,,yjjart@gmail.com,sihanzheng@gmail.com"
+
+#~ msgid "No Io::FileFormat set in BackgroundFileFormat!"
+#~ msgstr "没有在 BackgroundFileFormat 中设置 Io :: FileFormat！"
+
+#~ msgid "File written: %1"
+#~ msgstr "文件写入： %1"
+
+#~ msgid ""
+#~ "Error while writing file '%1':\n"
+#~ "%2"
+#~ msgstr ""
+#~ "写入文件“ %1”时出错：\n"
+#~ "%2"
+
+#~ msgid "Writing File"
+#~ msgstr "写入文件"
+
+#~ msgid ""
+#~ "Writing file '%1'\n"
+#~ "with '%2'"
+#~ msgstr ""
+#~ "写入文件“ %1”\n"
+#~ "使用“ %2”"
+
+#~ msgid "&Open..."
+#~ msgstr "打开(&O)..."
+
+#~ msgid "&Molecule..."
+#~ msgstr "分子(&M)..."
+
+#~ msgid "Avogadro timed out and doesn't know how to open '%1'."
+#~ msgstr "Avogadro 超时，并且不知道如何打开“ %1”。"
+
+#~ msgid ""
+#~ "An error occurred while starting Avogadro's RPC listener. This may be "
+#~ "happen for a\n"
+#~ "number of reasons:\n"
+#~ "\tA previous instance of Avogadro may have crashed.\n"
+#~ "\tA running Avogadro instance was too busy to respond.\n"
+#~ "\n"
+#~ "If no other Avogadro instance is running on this machine, it is safe to "
+#~ "replace the dead\n"
+#~ "server. Otherwise, this instance of avogadro may be started without RPC "
+#~ "capabilities\n"
+#~ "(this will prevent RPC enabled applications from communicating with "
+#~ "Avogadro)."
+#~ msgstr ""
+#~ "启动Avogadro的RPC侦听器时发生错误。这可能发生在\n"
+#~ "原因数量：\n"
+#~ "Avogadro的先前实例可能已崩溃。\n"
+#~ "正在运行的Avogadro实例太忙而无法响应。\n"
+#~ "\n"
+#~ "如果此计算机上没有其他Avogadro实例在运行，则可以安全地替换死节点\n"
+#~ "服务器。否则，此avogadro实例可能没有RPC功能就启动\n"
+#~ "（这将阻止启用RPC的应用程序与Avogadro通信）。"
+
+#~ msgid "Replace the dead server with a new instance."
+#~ msgstr "用新实例替换失效的服务器。"
+
+#~ msgid "Start without RPC capabilities."
+#~ msgstr "开始时没有 RPC 功能。"
 
 #~ msgctxt "%1 is the Git revision number."
 #~ msgid "(Git revision: %1)"
