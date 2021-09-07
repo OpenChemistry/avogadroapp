@@ -79,7 +79,7 @@
   </widget>
   <action name="actionOpen">
    <property name="text">
-    <string>&amp;Open...</string>
+    <string>&amp;Open…</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -157,7 +157,7 @@
   </action>
   <action name="actionSaveAs">
    <property name="text">
-    <string>Save &amp;As...</string>
+    <string>Save &amp;As…</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
@@ -170,7 +170,7 @@
   </action>
   <action name="actionExportGraphics">
    <property name="text">
-    <string>&amp;Graphics...</string>
+    <string>&amp;Graphics…</string>
    </property>
   </action>
   <action name="actionFullScreen">
@@ -191,7 +191,7 @@
      <normaloff>:/icons/fill-color.png</normaloff>:/icons/fill-color.png</iconset>
    </property>
    <property name="text">
-    <string>Set &amp;Background Color...</string>
+    <string>Set &amp;Background Color…</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -316,7 +316,7 @@
      <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
    </property>
    <property name="text">
-    <string>Configure Avogadro...</string>
+    <string>Configure Avogadro…</string>
    </property>
    <property name="menuRole">
     <enum>QAction::PreferencesRole</enum>
@@ -389,7 +389,7 @@
      <normaloff>:/icons/preferences-plugin.png</normaloff>:/icons/preferences-plugin.png</iconset>
    </property>
    <property name="text">
-    <string>Plugin Manager...</string>
+    <string>Plugin Manager…</string>
    </property>
   </action>
   <action name="projectTreeEditorAction">
@@ -398,7 +398,7 @@
      <normaloff>:/icons/view-list-tree.png</normaloff>:/icons/view-list-tree.png</iconset>
    </property>
    <property name="text">
-    <string>Project Tree Editor...</string>
+    <string>Project Tree Editor…</string>
    </property>
   </action>
   <action name="actionDetachView">
@@ -412,7 +412,7 @@
   </action>
   <action name="actionImport_File">
    <property name="text">
-    <string>Molecule File...</string>
+    <string>Molecule File…</string>
    </property>
   </action>
   <action name="actionQuickRender">
@@ -428,7 +428,7 @@
   </action>
   <action name="actionExportGL2PS">
    <property name="text">
-    <string>&amp;Vector Graphics...</string>
+    <string>&amp;Vector Graphics…</string>
    </property>
   </action>
   <action name="actionDisplayUnitCellAxes">
@@ -444,7 +444,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>All Molecules in File...</string>
+    <string>All Molecules in File…</string>
    </property>
   </action>
   <action name="actionResetDisplayTypes">
