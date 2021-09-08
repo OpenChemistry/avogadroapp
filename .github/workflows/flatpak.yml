@@ -28,5 +28,5 @@ jobs:
       if: matrix.config.artifact != 0
       uses: actions/upload-artifact@v2
       with:
-        path: *.flatpak
+        path: "*.flatpak"
         name: Avogadro2.flatpak
