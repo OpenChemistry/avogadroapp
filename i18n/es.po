@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # M3CG <cgmario1999@gmail.com>, 2021.
+# Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu.ar>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-08 13:39-0400\n"
-"PO-Revision-Date: 2021-09-07 00:40+0000\n"
-"Last-Translator: M3CG <cgmario1999@gmail.com>\n"
+"PO-Revision-Date: 2021-09-09 13:08+0000\n"
+"Last-Translator: Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu."
+"ar>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -33,7 +35,6 @@ msgid "No file name set in BackgroundFileFormat!"
 msgstr ""
 
 #: mainwindow.cpp:298
-#, fuzzy
 msgid "Ready…"
 msgstr "Listo…"
 
@@ -62,7 +63,6 @@ msgid "File"
 msgstr "Archivo"
 
 #: mainwindow.cpp:392
-#, fuzzy
 msgid "Tools"
 msgstr "Herramientas"
 
@@ -71,11 +71,11 @@ msgid "Untitled"
 msgstr "Sin título"
 
 #: mainwindow.cpp:613
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1 %2 - Avogadro %3"
 
 #: mainwindow.cpp:667 mainwindow.cpp:1303
 msgid "Chemical Markup Language"
@@ -114,11 +114,11 @@ msgstr "Orden:"
 
 #: mainwindow.cpp:730
 msgid "Input Generators"
-msgstr ""
+msgstr "Generadores de entradas"
 
 #: mainwindow.cpp:730
 msgid "File Formats"
-msgstr ""
+msgstr "Formatos de archivo"
 
 #: mainwindow.cpp:734
 msgid "Install Plugin Script"
@@ -129,14 +129,12 @@ msgid "Script Type:"
 msgstr ""
 
 #: mainwindow.cpp:782 mainwindow.cpp:1206
-#, fuzzy
 msgid "Select file reader"
-msgstr "Seleccionar por residuo"
+msgstr "Seleccionar lector de archivos"
 
 #: mainwindow.cpp:811
-#, fuzzy
 msgid "Reading File"
-msgstr "Abrir archivo"
+msgstr "Leyendo archivo"
 
 #: mainwindow.cpp:813
 #, qt-format
@@ -144,42 +142,46 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Abriendo archivo '%1'\n"
+"con '%2'"
 
 #: mainwindow.cpp:844
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molécula cargada (%1 átomos, %2 enlaces)"
 
 #: mainwindow.cpp:849
-#, fuzzy
 msgid "File error"
-msgstr "Error de OpenGL"
+msgstr "Error de archivo"
 
 #: mainwindow.cpp:850
-#, fuzzy, qt-format
+#, qt-format
 msgid ""
 "Error while reading file '%1':\n"
 "%2"
-msgstr "Hubo un problema leyendo el archivo de trayectoria %1"
+msgstr ""
+"Error al leer el archivo '%1':\n"
+"%2"
 
 #: mainwindow.cpp:876
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "No se puede guardar el archivo %1."
+msgstr "Archivo guardado %1"
 
 #: mainwindow.cpp:883
-#, fuzzy
 msgid "Error saving file"
-msgstr "Guardando archivo."
+msgstr "Error al guardar archivo"
 
 #: mainwindow.cpp:884
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
-msgstr "Hubo un problema leyendo el archivo de trayectoria %1"
+msgstr ""
+"Error al guardar \"%1\":\n"
+"%2"
 
 #: mainwindow.cpp:923
 msgid "Error: Failed to initialize OpenGL context"
@@ -192,6 +194,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"Se requiere OpenGL 2.0 o superior, saliendo.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:925
 #, fuzzy
@@ -245,24 +250,26 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Este archivo se importó desde un formato no estándar que puede no ser capaz "
+"de escribir toda la información en la molécula.\n"
+"\n"
+"¿Le gustaría exportar al formato actual o guardar en un formato estándar?"
 
 #: mainwindow.cpp:1284
 msgid "Export"
 msgstr "Exportar"
 
 #: mainwindow.cpp:1309
-#, fuzzy
 msgid "Save chemical file"
-msgstr "Abrir formato de archivo químico"
+msgstr "Guardar archivo de formato químico"
 
 #: mainwindow.cpp:1337
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Importar archivo de moléculas"
+msgstr "Exportar molécula"
 
 #: mainwindow.cpp:1389
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Guardado de archivo en progreso…"
 
 #: mainwindow.cpp:1391
 #, qt-format
@@ -271,11 +278,13 @@ msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
+"Guardando archivo \"%1\"\n"
+"con \"%2\""
 
 #: mainwindow.cpp:1501
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Deshacer"
+msgstr "&Deshacer %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -284,9 +293,9 @@ msgid "&Undo"
 msgstr "&Deshacer"
 
 #: mainwindow.cpp:1509
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Rehacer"
+msgstr "&Rehacer %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -300,9 +309,8 @@ msgid "&Testing"
 msgstr "Configuración"
 
 #: mainwindow.cpp:1614
-#, fuzzy
 msgid "Record test…"
-msgstr "Guardar prueba..."
+msgstr "Guardar prueba…"
 
 #: mainwindow.cpp:1617
 #, fuzzy
