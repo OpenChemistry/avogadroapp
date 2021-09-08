@@ -1,0 +1,37 @@
+on: [push, pull_request]
+#  push:
+#    branches: [master]
+name: Build Flatpak
+jobs:
+  flatpak:
+    name: "Flatpak"
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:kde-5.15
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v2
+
+    # update the manifest to use HEAD rather than a git tag
+    - name: Update manifest
+      run: |
+        pwd
+        ls
+        python3 scripts/flatpak-update.py
+      shell: bash
+      working-directory: ${{ runner.workspace }}/flatpak
+
+    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+      with:
+          manifest-path: flatpak/org.openchemistry.Avogadro2.yaml
+
+    - name: Setup tmate session
+      if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3
+
+    - name: Upload
+      if: matrix.config.artifact != 0
+      uses: actions/upload-artifact@v2
+      with:
+        path: ${{ runner.workspace }}/*.flatpak
+        name: Avogadro2.flatpak
