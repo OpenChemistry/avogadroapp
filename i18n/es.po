@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-06 20:25-0400\n"
+"POT-Creation-Date: 2021-09-08 13:39-0400\n"
 "PO-Revision-Date: 2021-09-07 00:40+0000\n"
 "Last-Translator: M3CG <cgmario1999@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
@@ -277,9 +277,9 @@ msgstr ""
 msgid "&Undo %1"
 msgstr "&Deshacer"
 
-#. i18n: file: mainwindow.ui:211
+#. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1504 mainwindow.cpp:1731:126
+#: mainwindow.cpp:1504 mainwindow.cpp:1731:117
 msgid "&Undo"
 msgstr "&Deshacer"
 
@@ -288,9 +288,9 @@ msgstr "&Deshacer"
 msgid "&Redo %1"
 msgstr "&Rehacer"
 
-#. i18n: file: mainwindow.ui:223
+#. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1512 mainwindow.cpp:1736:132
+#: mainwindow.cpp:1512 mainwindow.cpp:1736:123
 msgid "&Redo"
 msgstr "&Rehacer"
 
@@ -347,9 +347,9 @@ msgstr "&Guardar"
 msgid "Save &As…"
 msgstr "Guardar &como..."
 
-#. i18n: file: mainwindow.ui:504
+#. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1685:264
+#: mainwindow.cpp:1685:195
 #, fuzzy
 msgid "&Export"
 msgstr "Exportar"
@@ -359,9 +359,7 @@ msgstr "Exportar"
 msgid "&Molecule…"
 msgstr "Molécula"
 
-#. i18n: file: mainwindow.ui:173
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1694:111
+#: mainwindow.cpp:1694
 #, fuzzy
 msgid "&Graphics…"
 msgstr "&Gráficos..."
@@ -399,15 +397,11 @@ msgstr "Esta&blecer el color del fondo..."
 msgid "Projection"
 msgstr "Proyección"
 
-#. i18n: file: mainwindow.ui:463
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1760:240
+#: mainwindow.cpp:1760
 msgid "Perspective"
 msgstr "Perspectiva"
 
-#. i18n: file: mainwindow.ui:471
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1767:243
+#: mainwindow.cpp:1767
 msgid "Orthographic"
 msgstr "Ortográfica"
 
@@ -607,240 +601,134 @@ msgstr "Ctrl+Mayús+S"
 msgid "Revert To Saved"
 msgstr "Revertir al archivo guardado"
 
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&Full Screen Mode"
-msgstr "&Modo de pantalla completa"
-
-#. i18n: file: mainwindow.ui:185
-#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-msgid "Esc"
-msgstr "Escape"
-
-#. i18n: file: mainwindow.ui:194
+#. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
 msgstr "Esta&blecer el color del fondo..."
 
-#. i18n: file: mainwindow.ui:199
+#. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&About"
 msgstr "&Acerca de"
 
-#. i18n: file: mainwindow.ui:214
+#. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
-#. i18n: file: mainwindow.ui:226
+#. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Mays.+Z"
 
-#. i18n: file: mainwindow.ui:235
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "New View"
-msgstr "Nueva vista"
-
-#. i18n: file: mainwindow.ui:247
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Close View"
-msgstr "Cerrar vista"
-
-#. i18n: file: mainwindow.ui:256
+#. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
 msgstr "Centrar"
 
-#. i18n: file: mainwindow.ui:265
+#. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
 msgstr "Alinear Vista a los Ejes"
 
-#. i18n: file: mainwindow.ui:270
+#. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Paste"
 msgstr "pegar"
 
-#. i18n: file: mainwindow.ui:273
+#. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
 
-#. i18n: file: mainwindow.ui:278
+#. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Copy"
 msgstr "Copiar"
 
-#. i18n: file: mainwindow.ui:281
+#. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
 
-#. i18n: file: mainwindow.ui:286
+#. i18n: file: mainwindow.ui:248
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Cut"
 msgstr "Cortar"
 
-#. i18n: file: mainwindow.ui:289
+#. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
 
-#. i18n: file: mainwindow.ui:294
+#. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
 msgstr "Borrar"
 
-#. i18n: file: mainwindow.ui:299
+#. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
 msgstr "Seleccionar todo"
 
-#. i18n: file: mainwindow.ui:302
+#. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
-#. i18n: file: mainwindow.ui:307
+#. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
 msgstr "Seleccionar Nada"
 
-#. i18n: file: mainwindow.ui:310
+#. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
-#. i18n: file: mainwindow.ui:319
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Configure Avogadro…"
-msgstr "Configurar Avogadro..."
-
-#. i18n: file: mainwindow.ui:330
+#. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Tutorials"
 msgstr "Tutoriales"
 
-#. i18n: file: mainwindow.ui:339
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Duplicate View"
-msgstr "Duplicar la vista"
-
-#. i18n: file: mainwindow.ui:347
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Display Axes"
-msgstr "Mostrar los ejes"
-
-#. i18n: file: mainwindow.ui:355
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Debug Information"
-msgstr "Información de depuración"
-
-#. i18n: file: mainwindow.ui:363
+#. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
 msgstr "Ayuda de Avogadro"
 
-#. i18n: file: mainwindow.ui:368
+#. i18n: file: mainwindow.ui:293
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Release Notes"
 msgstr "Notas de la versión"
 
-#. i18n: file: mainwindow.ui:373
+#. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
 msgstr "Reportar un error"
 
-#. i18n: file: mainwindow.ui:378
+#. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "FAQ"
 msgstr "Preguntas frecuentes"
 
-#. i18n: file: mainwindow.ui:383
+#. i18n: file: mainwindow.ui:308
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
 msgstr "Página Web de Avogadro"
 
-#. i18n: file: mainwindow.ui:392
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Plugin Manager…"
-msgstr "Administrador de complementos"
-
-#. i18n: file: mainwindow.ui:401
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Project Tree Editor…"
-msgstr "Editor del árbol del proyecto..."
-
-#. i18n: file: mainwindow.ui:410
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Detach View"
-msgstr "Separar la vista"
-
-#. i18n: file: mainwindow.ui:415
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Molecule File…"
-msgstr "Archivo de molécula..."
-
-#. i18n: file: mainwindow.ui:426
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Use Quick Render"
-msgstr "Usar dibujo rápido"
-
-#. i18n: file: mainwindow.ui:431
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "&Vector Graphics…"
-msgstr "Gráficos &vectoriales..."
-
-#. i18n: file: mainwindow.ui:439
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Display Unit Cell Axes"
-msgstr "Mostrar ejes de la celda unidad"
-
-#. i18n: file: mainwindow.ui:447
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "All Molecules in File…"
-msgstr "Todas las moléculas en el archivo..."
-
-#. i18n: file: mainwindow.ui:452
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Reset Display Types"
-msgstr "Resetar tipos de pantalla"
-
-#. i18n: file: mainwindow.ui:476
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "SMILES"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:481
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "InChI"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:484
-#. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
-msgid "IUPAC InChI identifier"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:489
+#. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:494
+#. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Open Recent"
 msgstr "Abrir &reciente"
 
-#. i18n: file: mainwindow.ui:499
+#. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "&Import"
@@ -980,6 +868,63 @@ msgstr ""
 "debianmaster@gmail.com,,,jonay.santana@gmail.com,,martinezlucio.com@gmail."
 "com,tres.14159@gmail.com,,pczoido@gmail.com,paco@byasl.com,,ra."
 "hermosillac@gmail.com,rvnovaes@gmail.com,,victorhera@gmail.com,"
+
+#~ msgid "&Full Screen Mode"
+#~ msgstr "&Modo de pantalla completa"
+
+#~ msgid "Esc"
+#~ msgstr "Escape"
+
+#~ msgid "New View"
+#~ msgstr "Nueva vista"
+
+#~ msgid "Close View"
+#~ msgstr "Cerrar vista"
+
+#, fuzzy
+#~ msgid "Configure Avogadro…"
+#~ msgstr "Configurar Avogadro..."
+
+#~ msgid "Duplicate View"
+#~ msgstr "Duplicar la vista"
+
+#~ msgid "Display Axes"
+#~ msgstr "Mostrar los ejes"
+
+#~ msgid "Debug Information"
+#~ msgstr "Información de depuración"
+
+#, fuzzy
+#~ msgid "Plugin Manager…"
+#~ msgstr "Administrador de complementos"
+
+#, fuzzy
+#~ msgid "Project Tree Editor…"
+#~ msgstr "Editor del árbol del proyecto..."
+
+#~ msgid "Detach View"
+#~ msgstr "Separar la vista"
+
+#, fuzzy
+#~ msgid "Molecule File…"
+#~ msgstr "Archivo de molécula..."
+
+#~ msgid "Use Quick Render"
+#~ msgstr "Usar dibujo rápido"
+
+#, fuzzy
+#~ msgid "&Vector Graphics…"
+#~ msgstr "Gráficos &vectoriales..."
+
+#~ msgid "Display Unit Cell Axes"
+#~ msgstr "Mostrar ejes de la celda unidad"
+
+#, fuzzy
+#~ msgid "All Molecules in File…"
+#~ msgstr "Todas las moléculas en el archivo..."
+
+#~ msgid "Reset Display Types"
+#~ msgstr "Resetar tipos de pantalla"
 
 #, fuzzy
 #~ msgid "&Open..."
