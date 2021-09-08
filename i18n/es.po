@@ -37,7 +37,7 @@ msgstr ""
 msgid "Ready…"
 msgstr "Listo…"
 
-#: mainwindow.cpp:351
+#: mainwindow.cpp:340
 msgid "Tool"
 msgstr "Herramienta"
 
@@ -66,7 +66,7 @@ msgstr "Archivo"
 msgid "Tools"
 msgstr "Herramientas"
 
-#: mainwindow.cpp:619
+#: mainwindow.cpp:608
 msgid "Untitled"
 msgstr "Sin título"
 
@@ -117,7 +117,6 @@ msgid "Input Generators"
 msgstr ""
 
 #: mainwindow.cpp:730
-#, fuzzy
 msgid "File Formats"
 msgstr ""
 
@@ -126,7 +125,6 @@ msgid "Install Plugin Script"
 msgstr ""
 
 #: mainwindow.cpp:734
-#, fuzzy
 msgid "Script Type:"
 msgstr ""
 

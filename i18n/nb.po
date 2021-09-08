@@ -2,13 +2,13 @@
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
-# Allan Nordhøy <epost@anotheragency.no>, 2020.
+# Allan Nordhøy <epost@anotheragency.no>, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-06 20:25-0400\n"
-"PO-Revision-Date: 2020-11-15 07:28+0000\n"
+"PO-Revision-Date: 2021-09-08 11:10+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/nb_NO/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.8.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -56,11 +56,11 @@ msgstr "Vis oppsett"
 #: mainwindow.cpp:361
 #, fuzzy
 msgid "Molecules"
-msgstr "Molekyl"
+msgstr "Molekyler"
 
 #: mainwindow.cpp:370
 msgid "Layers"
-msgstr ""
+msgstr "Lag"
 
 #: mainwindow.cpp:389
 #, fuzzy
@@ -85,15 +85,15 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:667 mainwindow.cpp:1303
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Kjemisk oppmerkingsspråk"
 
 #: mainwindow.cpp:668 mainwindow.cpp:1302
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Kjemi-JSON"
 
 #: mainwindow.cpp:674
 msgid "Open chemical file"
-msgstr ""
+msgstr "Åpne kjemifil"
 
 #: mainwindow.cpp:692 mainwindow.cpp:716 mainwindow.cpp:1210
 #: mainwindow.cpp:2024
@@ -113,11 +113,11 @@ msgstr "Molekyl"
 
 #: mainwindow.cpp:730
 msgid "Commands"
-msgstr ""
+msgstr "Kommandoer"
 
 #: mainwindow.cpp:730
 msgid "Input Generators"
-msgstr ""
+msgstr "Inndata-generatorer"
 
 #: mainwindow.cpp:730
 #, fuzzy
@@ -126,15 +126,15 @@ msgstr "Filfeil"
 
 #: mainwindow.cpp:734
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Installer programtilleggsskript"
 
 #: mainwindow.cpp:734
 msgid "Script Type:"
-msgstr ""
+msgstr "Skripttype:"
 
 #: mainwindow.cpp:782 mainwindow.cpp:1206
 msgid "Select file reader"
-msgstr ""
+msgstr "Velg filleser"
 
 #: mainwindow.cpp:811
 #, fuzzy
@@ -147,11 +147,13 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Åpner fil «%1»\n"
+"med «%2»"
 
 #: mainwindow.cpp:844
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molekyl innlastet (%1 atomer, %2 bindinger)"
 
 #: mainwindow.cpp:849
 msgid "File error"
@@ -163,6 +165,8 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Klarte ikke å lese filen «%1»:\n"
+"%2"
 
 #: mainwindow.cpp:876
 #, fuzzy, qt-format
@@ -172,7 +176,7 @@ msgstr "Kan ikke lagre fil %1."
 
 #: mainwindow.cpp:883
 msgid "Error saving file"
-msgstr ""
+msgstr "Klarte ikke å lagre fil"
 
 #: mainwindow.cpp:884
 #, qt-format
@@ -181,10 +185,12 @@ msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"Klarte ikke å lagre «%1»\n"
+"%2"
 
 #: mainwindow.cpp:923
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Feil: Klarte ikke å igangsette OpenGL-kontekst"
 
 #: mainwindow.cpp:924
 #, qt-format
@@ -193,10 +199,13 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 2.0 eller senere kreves. Avslutter.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:925
 msgid "Unknown error"
-msgstr ""
+msgstr "Ukjent feil"
 
 #: mainwindow.cpp:1051 mainwindow.cpp:1052
 msgid "Navigate tool"
@@ -245,6 +254,10 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Filen ble importert fra et ikke-standardisert format, som kanskje ikke kunne "
+"skrive all infoen i molekylet.\n"
+"\n"
+"Ønsker du å eksportere til nåværende format, eller lagre i et standardformat?"
 
 #: mainwindow.cpp:1284
 msgid "Export"
@@ -252,7 +265,7 @@ msgstr "Eksporter"
 
 #: mainwindow.cpp:1309
 msgid "Save chemical file"
-msgstr ""
+msgstr "Lagre kjemifil"
 
 #: mainwindow.cpp:1337
 #, fuzzy
@@ -260,8 +273,9 @@ msgid "Export Molecule"
 msgstr "Importer molekylfil"
 
 #: mainwindow.cpp:1389
+#, fuzzy
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Lagrer fil …"
 
 #: mainwindow.cpp:1391
 #, qt-format
@@ -270,6 +284,8 @@ msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
+"Lagrer fil «%1»\n"
+"med «%2»"
 
 #: mainwindow.cpp:1501
 #, qt-format
@@ -300,11 +316,11 @@ msgstr "Innstillinger"
 
 #: mainwindow.cpp:1614
 msgid "Record test…"
-msgstr ""
+msgstr "Opptakstest …"
 
 #: mainwindow.cpp:1617
 msgid "Play test…"
-msgstr ""
+msgstr "Avspillingstest …"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -317,9 +333,8 @@ msgstr "&Ny"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1642:51
-#, fuzzy
 msgid "&Open…"
-msgstr "&Åpne"
+msgstr "&Åpne …"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -352,14 +367,12 @@ msgid "&Export"
 msgstr "Eksporter"
 
 #: mainwindow.cpp:1686
-#, fuzzy
 msgid "&Molecule…"
-msgstr "Molekyl"
+msgstr "&Molekyl …"
 
 #. i18n: file: mainwindow.ui:173
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1694:111
-#, fuzzy
 msgid "&Graphics…"
 msgstr "&Grafikk …"
 
@@ -373,7 +386,7 @@ msgstr "&Avslutt"
 
 #: mainwindow.cpp:1724
 msgid "No recent files"
-msgstr "Ingen nylige flis"
+msgstr "Ingen nylige filer"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
@@ -393,25 +406,25 @@ msgid "Set background color…"
 msgstr "Sett bakgrunnsfarge …"
 
 #: mainwindow.cpp:1759
+#, fuzzy
 msgid "Projection"
-msgstr ""
+msgstr "Projeksjon"
 
 #. i18n: file: mainwindow.ui:463
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1760:240
 msgid "Perspective"
-msgstr ""
+msgstr "Perspektiv"
 
 #. i18n: file: mainwindow.ui:471
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1767:243
 msgid "Orthographic"
-msgstr ""
+msgstr "Ortografisk"
 
 #: mainwindow.cpp:1786
-#, fuzzy
 msgid "&Extensions"
-msgstr "Utvidelser"
+msgstr "&Utvidelser"
 
 #: mainwindow.cpp:1793 menubuilder.cpp:80
 msgid "&Help"
@@ -420,7 +433,7 @@ msgstr "&Hjelp"
 #: mainwindow.cpp:1906
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "Alle støttede formater (%1);;Alle filer (*);;"
 
 #: mainwindow.cpp:1922
 #, fuzzy
@@ -444,22 +457,20 @@ msgstr "Ctrl + D"
 #: mainwindow.cpp:2004
 #, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr ""
+msgstr "Kunne ikke laste inn «%1»-filformatet."
 
 #: mainwindow.cpp:2020
-#, fuzzy
 msgid "Select file format"
-msgstr "Filfeil"
+msgstr "Velg filformat"
 
 #: mainwindow.cpp:2025 mainwindow.cpp:2036
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr ""
+msgstr "Avogadro kan ikke åpne «%1»."
 
 #: mainwindow.cpp:2035
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Kan ikke lagre fil %1."
+msgstr "Kan ikke åpne filer"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -481,7 +492,7 @@ msgstr "&Velg"
 
 #: menubuilder.cpp:80
 msgid "Se&ttings"
-msgstr ""
+msgstr "Inn&stillinger"
 
 #: menubuilder.cpp:80
 #, fuzzy
@@ -494,6 +505,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
+">Versjon</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -501,6 +514,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -508,6 +523,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600"
+";\">AvogadroLibs-versjon:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -517,6 +534,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -524,6 +543,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt-"
+"versjon:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -533,14 +554,22 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD-3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Lisens: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:261
 #. i18n: ectx: property (text), widget (QLabel, label_2)
+#, fuzzy
 msgid ""
 "<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
+" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:290
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -549,6 +578,9 @@ msgid ""
 "decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -654,7 +686,7 @@ msgstr "Sentrer"
 #. i18n: file: mainwindow.ui:265
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
-msgstr ""
+msgstr "Juster visning til akser"
 
 #. i18n: file: mainwindow.ui:270
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -713,9 +745,8 @@ msgstr "Ctrl + Shift + A"
 
 #. i18n: file: mainwindow.ui:319
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Configure Avogadro…"
-msgstr "Configurer Avogadro..."
+msgstr "Sett opp Avogadro …"
 
 #. i18n: file: mainwindow.ui:330
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -760,71 +791,70 @@ msgstr "OSS"
 #. i18n: file: mainwindow.ui:383
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
-msgstr "Avogadro Nettside"
+msgstr "Avogadro-nettsiden"
 
 #. i18n: file: mainwindow.ui:392
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Plugin Manager…"
-msgstr ""
+msgstr "Programtilleggshåndterer …"
 
 #. i18n: file: mainwindow.ui:401
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Project Tree Editor…"
-msgstr "Prosjekttre"
+msgstr "Prosjekttre-redigerer …"
 
 #. i18n: file: mainwindow.ui:410
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Detach View"
-msgstr "Løsne Visning"
+msgstr "Løsne visning"
 
 #. i18n: file: mainwindow.ui:415
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Molecule File…"
-msgstr "Molekylfil..."
+msgstr "Molekylfil …"
 
 #. i18n: file: mainwindow.ui:426
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Use Quick Render"
-msgstr ""
+msgstr "Bruk hurtigopptegner"
 
 #. i18n: file: mainwindow.ui:431
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Vector Graphics…"
-msgstr "&Vektorgrafikk..."
+msgstr "&Vektorgrafikk …"
 
 #. i18n: file: mainwindow.ui:439
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Display Unit Cell Axes"
-msgstr ""
+msgstr "Vis enhetscelleakser"
 
 #. i18n: file: mainwindow.ui:447
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "All Molecules in File…"
-msgstr "Alle Molekyler i Fil..."
+msgstr "Alle molekyler i fil …"
 
 #. i18n: file: mainwindow.ui:452
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Reset Display Types"
-msgstr ""
+msgstr "Tilbakestill visningstyper"
 
 #. i18n: file: mainwindow.ui:476
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
 msgid "SMILES"
-msgstr ""
+msgstr "SMILES"
 
 #. i18n: file: mainwindow.ui:481
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "InChI"
-msgstr ""
+msgstr "InChi"
 
 #. i18n: file: mainwindow.ui:484
 #. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
 msgid "IUPAC InChI identifier"
-msgstr ""
+msgstr "IUPAC InChI-identifikator"
 
 #. i18n: file: mainwindow.ui:489
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -833,53 +863,25 @@ msgstr "Diskusjonsforum"
 
 #. i18n: file: mainwindow.ui:494
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Open Recent"
-msgstr "Nylig"
+msgstr "Åpne nylige"
 
 #. i18n: file: mainwindow.ui:499
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
-msgstr "Importer"
+msgstr "&Importer"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-",Launchpad Contributions:,Anders Oftedal,Kenneth Langdalen, ,Launchpad "
-"Contributions:,Anders Oftedal,Avogadro Team,Kenneth Langdalen, ,Launchpad "
-"Contributions:,Anders Oftedal,Kenneth Langdalen, ,Launchpad Contributions:,"
-"Anders Oftedal,Avogadro Team,Kenneth Langdalen,Simen Heggestøyl, ,Launchpad "
-"Contributions:,Anders Oftedal,Avogadro Team,Kenneth Langdalen,Simen "
-"Heggestøyl, ,Launchpad Contributions:,Anders Oftedal,Avogadro Team,Kenneth "
-"Langdalen,Simen Heggestøyl, ,Launchpad Contributions:,Anders Oftedal,"
-"Avogadro Team,Kenneth Langdalen,Simen Heggestøyl, ,Launchpad Contributions:,"
-"Anders Oftedal,Avogadro Team,Kenneth Langdalen,Simen Heggestøyl,Tor "
-"Syversen, ,Launchpad Contributions:,Anders Oftedal,Avogadro Team,Kenneth "
-"Langdalen,Simen Heggestøyl,Tor Syversen, ,Launchpad Contributions:,Anders "
-"Oftedal,Avogadro Team,Kenneth Langdalen,Simen Heggestøyl,Tor Syversen, ,"
-"Launchpad Contributions:,Anders Oftedal,Avogadro Team,Kenneth Langdalen,"
-"Simen Heggestøyl, ,Launchpad Contributions:,Anders Oftedal,Avogadro Team,"
-"Kenneth Langdalen,Simen Heggestøyl, ,Launchpad Contributions:,Anders Oftedal,"
-"Avogadro Team,Kenneth Langdalen,Simen Heggestøyl"
+"Oversettelse ved Allan Nordhøy\n"
+"Anders Oftedal, Kenneth Langdalen, Simen Heggestøyl, og Tor Syversen"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-",,anders.oftedal@gmail.com,,,,anders.oftedal@gmail.com,avogadro-devel@lists."
-"sourceforge.net,,,,anders.oftedal@gmail.com,,,,anders.oftedal@gmail.com,"
-"avogadro-devel@lists.sourceforge.net,,simen@simenh.com,,,anders."
-"oftedal@gmail.com,avogadro-devel@lists.sourceforge.net,,simen@simenh.com,,,"
-"anders.oftedal@gmail.com,avogadro-devel@lists.sourceforge.net,,simen@simenh."
-"com,,,anders.oftedal@gmail.com,avogadro-devel@lists.sourceforge.net,,"
-"simenheg@gmail.com,,,anders.oftedal@gmail.com,avogadro-devel@lists."
-"sourceforge.net,,simenheg@gmail.com,sol-moe@online.no,,,anders.oftedal@gmail."
-"com,avogadro-devel@lists.sourceforge.net,,simenheg@gmail.com,sol-moe@online."
-"no,,,anders.oftedal@gmail.com,avogadro-devel@lists.sourceforge.net,,"
-"simenheg@gmail.com,sol-moe@online.no,,,anders.oftedal@gmail.com,avogadro-"
-"devel@lists.sourceforge.net,,simenheg@gmail.com,,,anders.oftedal@gmail.com,"
-"avogadro-devel@lists.sourceforge.net,,simenheg@gmail.com,,,anders."
-"oftedal@gmail.com,avogadro-devel@lists.sourceforge.net,,simenheg@gmail.com"
+"epost@anotheragency.no, anders.oftedal@gmail.com, simen@simenh.com, simenheg@"
+"gmail.com, sol-moe@online.no"
 
 #, fuzzy
 #~ msgid "&Open..."
