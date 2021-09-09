@@ -1848,6 +1848,8 @@ void MainWindow::buildTools()
   }
 
   m_toolToolBar->addActions(toolActions->actions());
+  m_toolToolBar->setAttribute(Qt::WA_AlwaysShowToolTips);
+  setAttribute(Qt::WA_AlwaysShowToolTips);
 }
 
 QString MainWindow::extensionToWildCard(const QString& extension)
