@@ -252,13 +252,6 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
 
-  // Now set up the interface.
-  setupInterface();
-
-  // Build up the standard menus, incorporate dynamic menus.
-  buildMenu();
-  updateRecentFiles();
-
   QList<ExtensionPluginFactory*> extensions =
     plugin->pluginFactories<ExtensionPluginFactory>();
   qDebug() << "Extension plugins dynamically found…" << extensions.size();
@@ -281,8 +274,12 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
     }
   }
 
-  // Now actually add all menu entries.
-  m_menuBuilder->buildMenuBar(menuBar());
+  // Now set up the interface.
+  setupInterface();
+
+  // Build up the standard menus, incorporate dynamic menus.
+  buildMenu();
+  updateRecentFiles();
 
   // Try to open the file(s) passed in.
   if (!fileNames.isEmpty()) {
@@ -1687,7 +1684,7 @@ void MainWindow::buildMenu()
   QStringList exportPath = path;
   exportPath << tr("&Export");
   action = new QAction(tr("&Molecule…"), this);
-  m_menuBuilder->addAction(exportPath, action, 8010);
+  m_menuBuilder->addAction(exportPath, action, 10);
   m_fileToolBar->addAction(action);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
@@ -1695,7 +1692,7 @@ void MainWindow::buildMenu()
   connect(action, &QAction::triggered, this, &MainWindow::exportFile);
   // Export graphics
   action = new QAction(tr("&Graphics…"), this);
-  m_menuBuilder->addAction(exportPath, action, 8000);
+  m_menuBuilder->addAction(exportPath, action, 10);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
@@ -1787,7 +1784,7 @@ void MainWindow::buildMenu()
   // Periodic table.
   QStringList extensionsPath;
   extensionsPath << tr("&Extensions");
-  action = new QAction("&Periodic Table…", this);
+  action = new QAction("&Periodic Table", this);
   m_menuBuilder->addAction(extensionsPath, action, 0);
   QtGui::PeriodicTableView* periodicTable = new QtGui::PeriodicTableView(this);
   connect(action, &QAction::triggered, periodicTable, &QWidget::show);
@@ -1800,6 +1797,9 @@ void MainWindow::buildMenu()
 #endif
   m_menuBuilder->addAction(helpPath, about, 20);
   connect(about, &QAction::triggered, this, &MainWindow::showAboutDialog);
+
+  // Now actually add all menu entries.
+  m_menuBuilder->buildMenuBar(menuBar());
 }
 
 void MainWindow::buildMenu(QtGui::ExtensionPlugin* extension)
