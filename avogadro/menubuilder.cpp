@@ -152,6 +152,9 @@ void MenuBuilder::buildMenu(QMenu* menu, const QString& path)
   }
   // Build up the list of entries that can be sorted.
   foreach (QAction* action, items) {
+    // Make sure all "..." are replaced by "…"
+    action->setText( action->text().replace("...", "…"));
+
     actionText.append(PriorityText(action->text(), m_priorities[action]));
     actions[action->text()] = action;
   }
@@ -178,7 +181,7 @@ void MenuBuilder::buildMenu(QMenu* menu, const QString& path)
     }
 
     if (actions[text.text]) {
-      // check to see if it's in the menu already
+      // check to see if it's in the menu already (e.g., some default items in the UI file)
       bool replacedItem = false;
       foreach (QAction* action, menu->actions()) {
         if (action->text() == text.text) {
