@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-08 13:39-0400\n"
-"PO-Revision-Date: 2021-09-11 02:49+0000\n"
+"PO-Revision-Date: 2021-09-11 02:59+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
@@ -83,9 +83,8 @@ msgid "Chemical Markup Language"
 msgstr "Lenguaje de marcado químico"
 
 #: mainwindow.cpp:668 mainwindow.cpp:1302
-#, fuzzy
 msgid "Chemical JSON"
-msgstr "JSON Químico"
+msgstr "JSON químico"
 
 #: mainwindow.cpp:674
 #, fuzzy
@@ -94,7 +93,6 @@ msgstr "Abrir formato de archivo químico"
 
 #: mainwindow.cpp:692 mainwindow.cpp:716 mainwindow.cpp:1210
 #: mainwindow.cpp:2024
-#, fuzzy
 msgid "Cannot open file"
 msgstr "No se puede abrir el archivo"
 
@@ -143,8 +141,8 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
-"Abriendo archivo '%1'\n"
-"con '%2'"
+"Abriendo archivo «%1»\n"
+"con «%2»"
 
 #: mainwindow.cpp:844
 #, qt-format
@@ -161,7 +159,7 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
-"Error al leer el archivo '%1':\n"
+"Error al leer el archivo «%1»:\n"
 "%2"
 
 #: mainwindow.cpp:876
@@ -186,7 +184,7 @@ msgstr ""
 
 #: mainwindow.cpp:923
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Error: no se pudo inicializar el contexto OpenGL"
 
 #: mainwindow.cpp:924
 #, qt-format
@@ -279,8 +277,8 @@ msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"Guardando archivo \"%1\"\n"
-"con \"%2\""
+"Guardando archivo «%1»\n"
+"con «%2»"
 
 #: mainwindow.cpp:1501
 #, qt-format
@@ -383,7 +381,7 @@ msgstr "&Salir"
 
 #: mainwindow.cpp:1724
 msgid "No recent files"
-msgstr ""
+msgstr "No hay archivos recientes"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
@@ -425,7 +423,7 @@ msgstr "&Ayuda"
 #: mainwindow.cpp:1906
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "Todos los formatos admitidos (%1);;Todos los archivos (*);;"
 
 #: mainwindow.cpp:1922
 #, fuzzy
@@ -449,7 +447,7 @@ msgstr "Ctrl+D"
 #: mainwindow.cpp:2004
 #, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr ""
+msgstr "Error al cargar el formato de archivo «%1»."
 
 #: mainwindow.cpp:2020
 #, fuzzy
@@ -459,7 +457,7 @@ msgstr "Seleccionar por residuo"
 #: mainwindow.cpp:2025 mainwindow.cpp:2036
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr ""
+msgstr "Avogadro no puede abrir «%1»."
 
 #: mainwindow.cpp:2035
 #, fuzzy
@@ -499,6 +497,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
+">Versión:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -506,6 +506,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
+">0,1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -513,6 +515,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Versión de AvogadroLibs:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -522,6 +526,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">0,1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -529,6 +535,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Versión Qt:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -538,6 +546,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD-3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Licencia: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:261
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -546,6 +558,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
+" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:290
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -554,6 +569,9 @@ msgid ""
 "decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
+"decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -724,24 +742,22 @@ msgstr "Preguntas frecuentes"
 #. i18n: file: mainwindow.ui:308
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
-msgstr "Página Web de Avogadro"
+msgstr "Sitio web de Avogadro"
 
 #. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Foro de discusión"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Open Recent"
-msgstr "Abrir &reciente"
+msgstr "Abrir reciente"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
-msgstr "Importar"
+msgstr "&Importar"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
