@@ -165,7 +165,7 @@ void MenuBuilder::buildMenu(QMenu* menu, const QString& path)
     }
   }
 
-  //  qSort(actionText.begin(), actionText.end(), lessThan);
+  qSort(actionText.begin(), actionText.end(), lessThan);
 
   // When an action's priority is below this value, insert a separator.
   // Separators are inserted as needed at multiples of 100.

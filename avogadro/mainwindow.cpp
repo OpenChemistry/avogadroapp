@@ -1684,7 +1684,7 @@ void MainWindow::buildMenu()
   QStringList exportPath = path;
   exportPath << tr("&Export");
   action = new QAction(tr("&Molecule…"), this);
-  m_menuBuilder->addAction(exportPath, action, 10);
+  m_menuBuilder->addAction(exportPath, action, 110);
   m_fileToolBar->addAction(action);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
@@ -1692,7 +1692,7 @@ void MainWindow::buildMenu()
   connect(action, &QAction::triggered, this, &MainWindow::exportFile);
   // Export graphics
   action = new QAction(tr("&Graphics…"), this);
-  m_menuBuilder->addAction(exportPath, action, 10);
+  m_menuBuilder->addAction(exportPath, action, 100);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
@@ -1748,7 +1748,7 @@ void MainWindow::buildMenu()
   // View menu
   QStringList viewPath;
   viewPath << tr("&View");
-  action = new QAction(tr("Set background color…"), this);
+  action = new QAction(tr("Set Background Color…"), this);
   m_menuBuilder->addAction(viewPath, action, 100);
   connect(action, &QAction::triggered, this, &MainWindow::setBackgroundColor);
 
@@ -1784,7 +1784,7 @@ void MainWindow::buildMenu()
   // Periodic table.
   QStringList extensionsPath;
   extensionsPath << tr("&Extensions");
-  action = new QAction("&Periodic Table", this);
+  action = new QAction("&Periodic Table…", this);
   m_menuBuilder->addAction(extensionsPath, action, 0);
   QtGui::PeriodicTableView* periodicTable = new QtGui::PeriodicTableView(this);
   connect(action, &QAction::triggered, periodicTable, &QWidget::show);
