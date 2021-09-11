@@ -11,7 +11,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-08 13:39-0400\n"
 "PO-Revision-Date: 2021-09-11 18:30+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Last-Translator: Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu."
+"ar>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -101,9 +102,8 @@ msgid "Can't open supplied file %1"
 msgstr "No se puede abrir el archivo %1"
 
 #: mainwindow.cpp:706
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molécula Abierta"
+msgstr "Abir Molécula"
 
 #: mainwindow.cpp:730
 msgid "Commands"
@@ -307,9 +307,8 @@ msgid "Record test…"
 msgstr "Guardar prueba…"
 
 #: mainwindow.cpp:1617
-#, fuzzy
 msgid "Play test…"
-msgstr "Reproducir prueba..."
+msgstr "Reproducir prueba…"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
