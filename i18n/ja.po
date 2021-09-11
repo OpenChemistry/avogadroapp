@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-08 13:39-0400\n"
-"PO-Revision-Date: 2021-07-19 18:34+0000\n"
+"PO-Revision-Date: 2021-09-12 21:32+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7.2-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -58,12 +58,10 @@ msgid "Layers"
 msgstr ""
 
 #: mainwindow.cpp:389
-#, fuzzy
 msgid "File"
-msgstr "ファイル (&F)"
+msgstr "ファイル"
 
 #: mainwindow.cpp:392
-#, fuzzy
 msgid "Tools"
 msgstr "ツール"
 
@@ -72,7 +70,7 @@ msgid "Untitled"
 msgstr "無題"
 
 #: mainwindow.cpp:613
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
@@ -101,26 +99,24 @@ msgid "Can't open supplied file %1"
 msgstr "ファイル %1 を保存できません"
 
 #: mainwindow.cpp:706
-#, fuzzy
 msgid "Open Molecule"
-msgstr "分子"
+msgstr "分子を開く"
 
 #: mainwindow.cpp:730
 msgid "Commands"
-msgstr ""
+msgstr "コマンド"
 
 #: mainwindow.cpp:730
 msgid "Input Generators"
 msgstr ""
 
 #: mainwindow.cpp:730
-#, fuzzy
 msgid "File Formats"
-msgstr "形式 :"
+msgstr "ファイル形式"
 
 #: mainwindow.cpp:734
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "プラグインスクリプトをインストールする"
 
 #: mainwindow.cpp:734
 msgid "Script Type:"
@@ -148,7 +144,7 @@ msgstr ""
 
 #: mainwindow.cpp:849
 msgid "File error"
-msgstr ""
+msgstr "ファイルエラー"
 
 #: mainwindow.cpp:850
 #, qt-format
@@ -244,6 +240,9 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"このファイルは非標準な形式からインポートされ、分子のすべての情報を書き込むことができない可能性があります。\n"
+"\n"
+"現在の形式にエクスポートしますか、それとも標準形式で保存しますか？"
 
 #: mainwindow.cpp:1284
 msgid "Export"
@@ -251,7 +250,7 @@ msgstr "エクスポート"
 
 #: mainwindow.cpp:1309
 msgid "Save chemical file"
-msgstr ""
+msgstr "化学ファイルを保存する"
 
 #: mainwindow.cpp:1337
 msgid "Export Molecule"
@@ -317,9 +316,8 @@ msgstr "新規作成(&N)"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1642:51
-#, fuzzy
 msgid "&Open…"
-msgstr "開く(&O)"
+msgstr "開く(&O)…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -340,9 +338,8 @@ msgstr "保存(&S)"
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1674:102
-#, fuzzy
 msgid "Save &As…"
-msgstr "名前を付けて保存(&A) ..."
+msgstr "名前を付けて保存(&A) …"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -370,7 +367,7 @@ msgstr "終了(&Q)"
 
 #: mainwindow.cpp:1724
 msgid "No recent files"
-msgstr ""
+msgstr "最近のファイルはありません"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
@@ -385,9 +382,8 @@ msgid "&View"
 msgstr "表示 (&V)"
 
 #: mainwindow.cpp:1751
-#, fuzzy
 msgid "Set background color…"
-msgstr "背景色を設定..."
+msgstr "背景色を設定…"
 
 #: mainwindow.cpp:1759
 msgid "Projection"
@@ -439,14 +435,13 @@ msgid "Error while loading the “%1” file format."
 msgstr ""
 
 #: mainwindow.cpp:2020
-#, fuzzy
 msgid "Select file format"
-msgstr "ファイルリーダを選択"
+msgstr "ファイル形式を選択"
 
 #: mainwindow.cpp:2025 mainwindow.cpp:2036
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr ""
+msgstr "Avogadroは「%1」を開くことができません。"
 
 #: mainwindow.cpp:2035
 msgid "Cannot open files"
