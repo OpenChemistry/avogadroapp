@@ -10,9 +10,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-08 13:39-0400\n"
-"PO-Revision-Date: 2021-09-11 02:59+0000\n"
-"Last-Translator: Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu."
-"ar>\n"
+"PO-Revision-Date: 2021-09-11 18:30+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -88,9 +87,8 @@ msgid "Chemical JSON"
 msgstr "JSON químico"
 
 #: mainwindow.cpp:674
-#, fuzzy
 msgid "Open chemical file"
-msgstr "Abrir formato de archivo químico"
+msgstr "Abrir el archivo químico"
 
 #: mainwindow.cpp:692 mainwindow.cpp:716 mainwindow.cpp:1210
 #: mainwindow.cpp:2024
@@ -100,7 +98,7 @@ msgstr "No se puede abrir el archivo"
 #: mainwindow.cpp:693 mainwindow.cpp:717 mainwindow.cpp:1211
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr "No se puede abrir el archivo %1."
+msgstr "No se puede abrir el archivo %1"
 
 #: mainwindow.cpp:706
 #, fuzzy
@@ -108,9 +106,8 @@ msgid "Open Molecule"
 msgstr "Molécula Abierta"
 
 #: mainwindow.cpp:730
-#, fuzzy
 msgid "Commands"
-msgstr "Orden:"
+msgstr "Comandos"
 
 #: mainwindow.cpp:730
 msgid "Input Generators"
@@ -134,7 +131,7 @@ msgstr "Seleccionar lector de archivos"
 
 #: mainwindow.cpp:811
 msgid "Reading File"
-msgstr "Leyendo archivo"
+msgstr "Leyendo el archivo"
 
 #: mainwindow.cpp:813
 #, qt-format
@@ -199,14 +196,12 @@ msgstr ""
 "%1"
 
 #: mainwindow.cpp:925
-#, fuzzy
 msgid "Unknown error"
-msgstr "Desconocido"
+msgstr "Error desconocido"
 
 #: mainwindow.cpp:1051 mainwindow.cpp:1052
-#, fuzzy
 msgid "Navigate tool"
-msgstr "Navegar"
+msgstr "Navegar herramienta"
 
 #: mainwindow.cpp:1128
 msgid "Common image formats"
@@ -261,7 +256,7 @@ msgstr "Exportar"
 
 #: mainwindow.cpp:1309
 msgid "Save chemical file"
-msgstr "Guardar archivo de formato químico"
+msgstr "Guardar archivo químico"
 
 #: mainwindow.cpp:1337
 msgid "Export Molecule"
@@ -269,7 +264,7 @@ msgstr "Exportar molécula"
 
 #: mainwindow.cpp:1389
 msgid "Saving File in Progress…"
-msgstr "Guardado de archivo en progreso…"
+msgstr "Guardando archivo en curso…"
 
 #: mainwindow.cpp:1391
 #, qt-format
@@ -304,9 +299,8 @@ msgid "&Redo"
 msgstr "&Rehacer"
 
 #: mainwindow.cpp:1612
-#, fuzzy
 msgid "&Testing"
-msgstr "Configuración"
+msgstr "&Pruebas"
 
 #: mainwindow.cpp:1614
 msgid "Record test…"
@@ -328,9 +322,8 @@ msgstr "&Nuevo"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1642:51
-#, fuzzy
 msgid "&Open…"
-msgstr "&Abrir"
+msgstr "&Abrir…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -351,26 +344,22 @@ msgstr "&Guardar"
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1674:102
-#, fuzzy
 msgid "Save &As…"
-msgstr "Guardar &como..."
+msgstr "Guardar como…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1685:195
-#, fuzzy
 msgid "&Export"
-msgstr "Exportar"
+msgstr "&Exportar"
 
 #: mainwindow.cpp:1686
-#, fuzzy
 msgid "&Molecule…"
-msgstr "Molécula"
+msgstr "&Molécula…"
 
 #: mainwindow.cpp:1694
-#, fuzzy
 msgid "&Graphics…"
-msgstr "&Gráficos..."
+msgstr "&Gráficos…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -397,9 +386,8 @@ msgid "&View"
 msgstr "&Ver"
 
 #: mainwindow.cpp:1751
-#, fuzzy
 msgid "Set background color…"
-msgstr "Esta&blecer el color del fondo..."
+msgstr "Establecer el color de fondo…"
 
 #: mainwindow.cpp:1759
 msgid "Projection"
@@ -427,9 +415,8 @@ msgid "All supported formats (%1);;All files (*);;"
 msgstr "Todos los formatos admitidos (%1);;Todos los archivos (*);;"
 
 #: mainwindow.cpp:1922
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
-msgstr "¿Quiere guardar los cambios realizados en el documento?"
+msgstr "¿Quieres guardar los cambios en el documento?"
 
 #: mainwindow.cpp:1930
 msgid "Your changes will be lost if you don't save them."
@@ -451,9 +438,8 @@ msgid "Error while loading the “%1” file format."
 msgstr "Error al cargar el formato de archivo «%1»."
 
 #: mainwindow.cpp:2020
-#, fuzzy
 msgid "Select file format"
-msgstr "Seleccionar por residuo"
+msgstr "Selecciona un formato"
 
 #: mainwindow.cpp:2025 mainwindow.cpp:2036
 #, qt-format
@@ -461,9 +447,8 @@ msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro no puede abrir «%1»."
 
 #: mainwindow.cpp:2035
-#, fuzzy
 msgid "Cannot open files"
-msgstr "No se puede guardar el archivo %1."
+msgstr "No se pueden abrir archivos"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -488,9 +473,8 @@ msgid "Se&ttings"
 msgstr "Pre&ferencias"
 
 #: menubuilder.cpp:80
-#, fuzzy
 msgid "&Window"
-msgstr "Ventana"
+msgstr "&Ventana"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -631,9 +615,8 @@ msgstr "Revertir al archivo guardado"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
-msgstr "Esta&blecer el color del fondo..."
+msgstr "Establecer el &Color de fondo…"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
