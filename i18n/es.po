@@ -4,14 +4,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # M3CG <cgmario1999@gmail.com>, 2021.
 # Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu.ar>, 2021.
+# J. Lavoie <j.lavoie@net-c.ca>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-08 13:39-0400\n"
 "PO-Revision-Date: 2021-09-11 02:49+0000\n"
-"Last-Translator: Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu."
-"ar>\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -24,15 +24,16 @@ msgstr ""
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "¡Ninguna molécula establecida en BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
 msgstr ""
+"¡No se ha establecido ningún formato de archivo en BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "¡Ningún nombre de archivo establecido en BackgroundFileFormat!"
 
 #: mainwindow.cpp:298
 msgid "Ready…"
@@ -122,7 +123,7 @@ msgstr "Formatos de archivo"
 
 #: mainwindow.cpp:734
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Instalar la secuencia de comandos del complemento"
 
 #: mainwindow.cpp:734
 msgid "Script Type:"
