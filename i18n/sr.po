@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-06 20:25-0400\n"
+"POT-Creation-Date: 2021-09-12 02:08+0000\n"
 "PO-Revision-Date: 2021-08-20 01:04+0000\n"
 "Last-Translator: Nikola Matić <nikolamatic225@gmail.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/avogadro/"
@@ -284,9 +284,9 @@ msgstr ""
 msgid "&Undo %1"
 msgstr "&Опозови %1"
 
-#. i18n: file: mainwindow.ui:211
+#. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1504 mainwindow.cpp:1731:126
+#: mainwindow.cpp:1504 mainwindow.cpp:1731:117
 msgid "&Undo"
 msgstr "&Опозови"
 
@@ -295,9 +295,9 @@ msgstr "&Опозови"
 msgid "&Redo %1"
 msgstr "&Понови „%1“"
 
-#. i18n: file: mainwindow.ui:223
+#. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1512 mainwindow.cpp:1736:132
+#: mainwindow.cpp:1512 mainwindow.cpp:1736:123
 msgid "&Redo"
 msgstr "&Понови"
 
@@ -353,9 +353,9 @@ msgstr "&Сачувај"
 msgid "Save &As…"
 msgstr "Сачувај &као..."
 
-#. i18n: file: mainwindow.ui:504
+#. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1685:264
+#: mainwindow.cpp:1685:195
 msgid "&Export"
 msgstr "&Izvezi"
 
@@ -364,9 +364,7 @@ msgstr "&Izvezi"
 msgid "&Molecule…"
 msgstr "Молекули"
 
-#. i18n: file: mainwindow.ui:173
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1694:111
+#: mainwindow.cpp:1694
 #, fuzzy
 msgid "&Graphics…"
 msgstr "&Графици..."
@@ -397,22 +395,18 @@ msgstr "&Pregled"
 
 #: mainwindow.cpp:1751
 #, fuzzy
-msgid "Set background color…"
-msgstr "Постави боју позадине..."
+msgid "Set Background Color…"
+msgstr "Постави боју &позадине..."
 
 #: mainwindow.cpp:1759
 msgid "Projection"
 msgstr "Пројекција"
 
-#. i18n: file: mainwindow.ui:463
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1760:240
+#: mainwindow.cpp:1760
 msgid "Perspective"
 msgstr "Перспектива"
 
-#. i18n: file: mainwindow.ui:471
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1767:243
+#: mainwindow.cpp:1767
 msgid "Orthographic"
 msgstr "Правописни"
 
@@ -630,239 +624,133 @@ msgstr "Ктрл+Промени+S"
 msgid "Revert To Saved"
 msgstr "Врати на сачувано"
 
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&Full Screen Mode"
-msgstr "&Преко целог екрана"
-
-#. i18n: file: mainwindow.ui:185
-#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-msgid "Esc"
-msgstr "Есц"
-
-#. i18n: file: mainwindow.ui:194
+#. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
 msgstr "Постави боју &позадине..."
 
-#. i18n: file: mainwindow.ui:199
+#. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&About"
 msgstr "&О програму"
 
-#. i18n: file: mainwindow.ui:214
+#. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Z"
 msgstr "Ктрл+Z"
 
-#. i18n: file: mainwindow.ui:226
+#. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+Z"
 msgstr "Ктрл+Промени+Z"
 
-#. i18n: file: mainwindow.ui:235
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "New View"
-msgstr "Нови преглед"
-
-#. i18n: file: mainwindow.ui:247
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Close View"
-msgstr "Затвори преглед"
-
-#. i18n: file: mainwindow.ui:256
+#. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
 msgstr "Centar"
 
-#. i18n: file: mainwindow.ui:265
+#. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
 msgstr "Поравнај преглед на осе"
 
-#. i18n: file: mainwindow.ui:270
+#. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Paste"
 msgstr "Nalepi"
 
-#. i18n: file: mainwindow.ui:273
+#. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+V"
 msgstr "Ктрл+В"
 
-#. i18n: file: mainwindow.ui:278
+#. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Copy"
 msgstr "Kopiraj"
 
-#. i18n: file: mainwindow.ui:281
+#. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
 
-#. i18n: file: mainwindow.ui:286
+#. i18n: file: mainwindow.ui:248
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Cut"
 msgstr "Iseci"
 
-#. i18n: file: mainwindow.ui:289
+#. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+X"
 msgstr "Ктрл+Х"
 
-#. i18n: file: mainwindow.ui:294
+#. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
 msgstr "Očisti"
 
-#. i18n: file: mainwindow.ui:299
+#. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
 msgstr "Izaberi Sve"
 
-#. i18n: file: mainwindow.ui:302
+#. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+A"
 msgstr "Ктрл+А"
 
-#. i18n: file: mainwindow.ui:307
+#. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
 msgstr "Poništi Izbor"
 
-#. i18n: file: mainwindow.ui:310
+#. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+A"
 msgstr "Ктрл+Промени+А"
 
-#. i18n: file: mainwindow.ui:319
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Configure Avogadro…"
-msgstr "Подеси Авогадро..."
-
-#. i18n: file: mainwindow.ui:330
+#. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Tutorials"
 msgstr "Упутства"
 
-#. i18n: file: mainwindow.ui:339
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Duplicate View"
-msgstr "Удвостручи приказ"
-
-#. i18n: file: mainwindow.ui:347
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Display Axes"
-msgstr "Осе приказа"
-
-#. i18n: file: mainwindow.ui:355
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Debug Information"
-msgstr "Подаци прочишћавања"
-
-#. i18n: file: mainwindow.ui:363
+#. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
 msgstr "Авогадрова помоћ"
 
-#. i18n: file: mainwindow.ui:368
+#. i18n: file: mainwindow.ui:293
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Release Notes"
 msgstr "Белешке о издању"
 
-#. i18n: file: mainwindow.ui:373
+#. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
 msgstr "Пријави грешку"
 
-#. i18n: file: mainwindow.ui:378
+#. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "FAQ"
 msgstr "ЧПП"
 
-#. i18n: file: mainwindow.ui:383
+#. i18n: file: mainwindow.ui:308
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
 msgstr "Авогадров веб сајт"
 
-#. i18n: file: mainwindow.ui:392
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Plugin Manager…"
-msgstr "Управник прикључака..."
-
-#. i18n: file: mainwindow.ui:401
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Project Tree Editor…"
-msgstr "Уређивач стабла пројекта..."
-
-#. i18n: file: mainwindow.ui:410
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Detach View"
-msgstr "Откачи преглед"
-
-#. i18n: file: mainwindow.ui:415
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Molecule File…"
-msgstr "Датотека молекула..."
-
-#. i18n: file: mainwindow.ui:426
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Use Quick Render"
-msgstr "Користи брзо исцртавање"
-
-#. i18n: file: mainwindow.ui:431
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "&Vector Graphics…"
-msgstr "&Векторска графика..."
-
-#. i18n: file: mainwindow.ui:439
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Display Unit Cell Axes"
-msgstr "Прикажи осе поља јединице"
-
-#. i18n: file: mainwindow.ui:447
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "All Molecules in File…"
-msgstr "Све молекуле у датотеци..."
-
-#. i18n: file: mainwindow.ui:452
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Reset Display Types"
-msgstr "Поврати врсте приказа"
-
-#. i18n: file: mainwindow.ui:476
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "SMILES"
-msgstr "SMILES"
-
-#. i18n: file: mainwindow.ui:481
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "InChI"
-msgstr "InChI"
-
-#. i18n: file: mainwindow.ui:484
-#. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
-msgid "IUPAC InChI identifier"
-msgstr "МУЧПХ МенХеО одредник"
-
-#. i18n: file: mainwindow.ui:489
+#. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr "Форум расправе"
 
-#. i18n: file: mainwindow.ui:494
+#. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Open Recent"
 msgstr "Отвори скорашње"
 
-#. i18n: file: mainwindow.ui:499
+#. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Import"
 msgstr "&Uvezi"
@@ -878,6 +766,76 @@ msgid "Your emails"
 msgstr ""
 "\"miroslavnikolic@rocketmail.com\",\"ivanstar61@gmail.com\","
 "\"nikolamatic225@gmail.com\""
+
+#, fuzzy
+#~ msgid "Set background color…"
+#~ msgstr "Постави боју позадине..."
+
+#~ msgid "&Full Screen Mode"
+#~ msgstr "&Преко целог екрана"
+
+#~ msgid "Esc"
+#~ msgstr "Есц"
+
+#~ msgid "New View"
+#~ msgstr "Нови преглед"
+
+#~ msgid "Close View"
+#~ msgstr "Затвори преглед"
+
+#, fuzzy
+#~ msgid "Configure Avogadro…"
+#~ msgstr "Подеси Авогадро..."
+
+#~ msgid "Duplicate View"
+#~ msgstr "Удвостручи приказ"
+
+#~ msgid "Display Axes"
+#~ msgstr "Осе приказа"
+
+#~ msgid "Debug Information"
+#~ msgstr "Подаци прочишћавања"
+
+#, fuzzy
+#~ msgid "Plugin Manager…"
+#~ msgstr "Управник прикључака..."
+
+#, fuzzy
+#~ msgid "Project Tree Editor…"
+#~ msgstr "Уређивач стабла пројекта..."
+
+#~ msgid "Detach View"
+#~ msgstr "Откачи преглед"
+
+#, fuzzy
+#~ msgid "Molecule File…"
+#~ msgstr "Датотека молекула..."
+
+#~ msgid "Use Quick Render"
+#~ msgstr "Користи брзо исцртавање"
+
+#, fuzzy
+#~ msgid "&Vector Graphics…"
+#~ msgstr "&Векторска графика..."
+
+#~ msgid "Display Unit Cell Axes"
+#~ msgstr "Прикажи осе поља јединице"
+
+#, fuzzy
+#~ msgid "All Molecules in File…"
+#~ msgstr "Све молекуле у датотеци..."
+
+#~ msgid "Reset Display Types"
+#~ msgstr "Поврати врсте приказа"
+
+#~ msgid "SMILES"
+#~ msgstr "SMILES"
+
+#~ msgid "InChI"
+#~ msgstr "InChI"
+
+#~ msgid "IUPAC InChI identifier"
+#~ msgstr "МУЧПХ МенХеО одредник"
 
 #~ msgid "No Io::FileFormat set in BackgroundFileFormat!"
 #~ msgstr "Nije postavljen „Io::FileFormat“ u „BackgroundFileFormat“-u!"
