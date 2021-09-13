@@ -29,6 +29,7 @@ set(avogadro_srcs
   backgroundfileformat.cpp
   mainwindow.cpp
   menubuilder.cpp
+  tooltipfilter.cpp
   viewfactory.cpp
 )
 
