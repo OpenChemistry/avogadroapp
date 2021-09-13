@@ -5,8 +5,8 @@
 
 #include "tooltipfilter.h"
 
-#include <QtCore/QEnterEvent>
 #include <QtCore/QEvent>
+#include <QtGui/QEnterEvent>
 #include <QtWidgets/QToolTip>
 #include <QtWidgets/QWidget>
 
