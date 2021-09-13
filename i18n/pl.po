@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-08 13:39-0400\n"
+"POT-Creation-Date: 2021-09-13 17:10-0400\n"
 "PO-Revision-Date: 2021-09-07 00:40+0000\n"
 "Last-Translator: Urszula <urszula127@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/avogadro/"
@@ -399,7 +399,7 @@ msgstr "&Widok"
 
 #: mainwindow.cpp:1751
 #, fuzzy
-msgid "Set background color…"
+msgid "Set Background Color…"
 msgstr "Ustaw &kolor tła..."
 
 #: mainwindow.cpp:1759
@@ -814,6 +814,10 @@ msgstr ""
 "gosimek@gmail.com,,,,nysander@quanteam.pl,romano473@gmail.com,,,,"
 "fblost@gmail.com,avogadro-devel@lists.sourceforge.net,gosimek@gmail.com,,,,"
 "nysander@quanteam.pl,romano473@gmail.com,"
+
+#, fuzzy
+#~ msgid "Set background color…"
+#~ msgstr "Ustaw &kolor tła..."
 
 #~ msgid "&Full Screen Mode"
 #~ msgstr "&Tryb pełnoekranowy"

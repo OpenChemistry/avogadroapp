@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-08 13:39-0400\n"
+"POT-Creation-Date: 2021-09-13 17:10-0400\n"
 "PO-Revision-Date: 2016-06-10 06:25+0000\n"
 "Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -384,7 +384,7 @@ msgstr "&Pohľad"
 
 #: mainwindow.cpp:1751
 #, fuzzy
-msgid "Set background color…"
+msgid "Set Background Color…"
 msgstr "Nastaviť farbu &pozadia..."
 
 #: mainwindow.cpp:1759
@@ -753,6 +753,10 @@ msgstr ""
 "net,,,,,avogadro-devel@lists.sourceforge.net,,,,,avogadro-devel@lists."
 "sourceforge.net,,,,,avogadro-devel@lists.sourceforge.net,,,,,avogadro-"
 "devel@lists.sourceforge.net,,"
+
+#, fuzzy
+#~ msgid "Set background color…"
+#~ msgstr "Nastaviť farbu &pozadia..."
 
 #~ msgid "&Full Screen Mode"
 #~ msgstr "&Celoobrazovkový režim"

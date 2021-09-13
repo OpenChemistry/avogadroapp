@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-08 13:39-0400\n"
+"POT-Creation-Date: 2021-09-13 17:10-0400\n"
 "PO-Revision-Date: 2021-09-08 11:10+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
@@ -389,8 +389,10 @@ msgid "&View"
 msgstr "&Nézet"
 
 #: mainwindow.cpp:1751
-msgid "Set background color…"
-msgstr "Háttérszín beállítása…"
+#, fuzzy
+#| msgid "Set &Background Color…"
+msgid "Set Background Color…"
+msgstr "&Háttérszín beállítása…"
 
 #: mainwindow.cpp:1759
 msgid "Projection"
@@ -755,6 +757,9 @@ msgstr "Nevek"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "E-mail-címek"
+
+#~ msgid "Set background color…"
+#~ msgstr "Háttérszín beállítása…"
 
 #~ msgid "&Full Screen Mode"
 #~ msgstr "&Teljes képernyős üzemmód"

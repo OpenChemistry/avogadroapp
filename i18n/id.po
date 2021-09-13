@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-08 13:39-0400\n"
+"POT-Creation-Date: 2021-09-13 17:10-0400\n"
 "PO-Revision-Date: 2021-02-09 04:50+0000\n"
 "Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
@@ -396,8 +396,8 @@ msgstr "&Tampilkan"
 
 #: mainwindow.cpp:1751
 #, fuzzy
-msgid "Set background color…"
-msgstr "Atur Warna Latar belakang ..."
+msgid "Set Background Color…"
+msgstr "Atur Warna &Latarbelakang..."
 
 #: mainwindow.cpp:1759
 msgid "Projection"
@@ -775,6 +775,10 @@ msgstr ""
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Email anda"
+
+#, fuzzy
+#~ msgid "Set background color…"
+#~ msgstr "Atur Warna Latar belakang ..."
 
 #~ msgid "&Full Screen Mode"
 #~ msgstr "Tampilan &Layar Penuh"

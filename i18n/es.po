@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-08 13:39-0400\n"
+"POT-Creation-Date: 2021-09-13 17:10-0400\n"
 "PO-Revision-Date: 2021-09-11 18:30+0000\n"
 "Last-Translator: Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu."
 "ar>\n"
@@ -385,8 +385,10 @@ msgid "&View"
 msgstr "&Ver"
 
 #: mainwindow.cpp:1751
-msgid "Set background color…"
-msgstr "Establecer el color de fondo…"
+#, fuzzy
+#| msgid "Set &Background Color…"
+msgid "Set Background Color…"
+msgstr "Establecer el &Color de fondo…"
 
 #: mainwindow.cpp:1759
 msgid "Projection"
@@ -481,8 +483,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
-">Versión:</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
+"\">Versión:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -490,8 +492,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
-">0,1</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0,1</"
+"span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -499,8 +501,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">Versión de AvogadroLibs:</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">Versión de AvogadroLibs:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -510,8 +512,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">0,1</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0,1</"
+"span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -519,8 +521,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">Versión Qt:</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">Versión Qt:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -530,10 +532,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD-3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">Licencia: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause\""
-"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
-">BSD-3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">Licencia: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
+"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
+"\">BSD-3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:261
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -542,9 +544,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
-" text-decoration: underline; color:#0000ff;\">www.openchemistry."
-"org</span></a></p></body></html>"
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:290
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -554,8 +556,8 @@ msgid ""
 "body></html>"
 msgstr ""
 "<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
-"decoration: underline; color:#0000ff;\">www.kitware."
-"com</span></a></p></body></html>"
+"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"body></html>"
 
 #. i18n: file: aboutdialog.ui:323
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -876,6 +878,9 @@ msgstr ""
 "debianmaster@gmail.com,,,jonay.santana@gmail.com,,martinezlucio.com@gmail."
 "com,tres.14159@gmail.com,,pczoido@gmail.com,paco@byasl.com,,ra."
 "hermosillac@gmail.com,rvnovaes@gmail.com,,victorhera@gmail.com,"
+
+#~ msgid "Set background color…"
+#~ msgstr "Establecer el color de fondo…"
 
 #~ msgid "&Full Screen Mode"
 #~ msgstr "&Modo de pantalla completa"

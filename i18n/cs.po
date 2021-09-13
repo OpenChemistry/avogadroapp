@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-08 13:39-0400\n"
+"POT-Creation-Date: 2021-09-13 17:10-0400\n"
 "PO-Revision-Date: 2016-06-10 06:14+0000\n"
 "Last-Translator: Konki <pavel.konkol@seznam.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -386,7 +386,7 @@ msgstr "&Pohled"
 
 #: mainwindow.cpp:1751
 #, fuzzy
-msgid "Set background color…"
+msgid "Set Background Color…"
 msgstr "Nastavit barvu &pozadí..."
 
 #: mainwindow.cpp:1759
@@ -777,6 +777,10 @@ msgstr ""
 "trefny@gmail.com,,pavelfric@seznam.cz,,,avogadro-devel@lists.sourceforge.net,"
 "jirka.emmer@quick.cz,pavel.konkol@seznam.cz,kuvaly@seznam.cz,,venca."
 "rehak@seznam.cz,vojtech.trefny@gmail.com,,pavelfric@seznam.cz"
+
+#, fuzzy
+#~ msgid "Set background color…"
+#~ msgstr "Nastavit barvu &pozadí..."
 
 #~ msgid "&Full Screen Mode"
 #~ msgstr "&Celoobrazovkový režim"
