@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-08 13:39-0400\n"
-"PO-Revision-Date: 2021-09-11 18:30+0000\n"
+"POT-Creation-Date: 2021-09-13 17:10-0400\n"
+"PO-Revision-Date: 2021-09-14 00:04+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -382,7 +382,7 @@ msgid "&View"
 msgstr "&Ansicht"
 
 #: mainwindow.cpp:1751
-msgid "Set background color…"
+msgid "Set Background Color…"
 msgstr "Hintergrundfarbe einstellen …"
 
 #: mainwindow.cpp:1759
@@ -507,8 +507,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">0,1</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0,1</"
+"span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -794,6 +794,9 @@ msgstr ""
 "de,,,,coolx67@gmx.at,,,,,,,,simon@ochsenreither.de,,,aleixosk@gmail.com,,"
 "avogadro-devel@lists.sourceforge.net,,,,,,,,,armin_mohring@web.de,,,,"
 "coolx67@gmx.at,,,,tobannert@gmail.com,,,,simon@ochsenreither.de"
+
+#~ msgid "Set background color…"
+#~ msgstr "Hintergrundfarbe einstellen …"
 
 #~ msgid "&Full Screen Mode"
 #~ msgstr "&Vollbildansicht"

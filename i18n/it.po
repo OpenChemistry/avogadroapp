@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-08 13:39-0400\n"
-"PO-Revision-Date: 2021-09-11 18:30+0000\n"
+"POT-Creation-Date: 2021-09-13 17:10-0400\n"
+"PO-Revision-Date: 2021-09-14 00:04+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/it/>\n"
@@ -384,8 +384,8 @@ msgid "&View"
 msgstr "&Visualizza"
 
 #: mainwindow.cpp:1751
-msgid "Set background color…"
-msgstr "Imposta il colore di sfondo…"
+msgid "Set Background Color…"
+msgstr "Imposta colore di sfondo…"
 
 #: mainwindow.cpp:1759
 msgid "Projection"
@@ -489,8 +489,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
-">0,1</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0,1</"
+"span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -509,8 +509,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">0,1</span></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0,1</"
+"span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -841,6 +841,9 @@ msgstr ""
 "michel_gatti@yahoo.it,aegnor_isilra@hotmail.com,hattory@ubuntu.com,,"
 "primes2h@ubuntu.com,vito.fasano@gmail.com,mcarlo.95@gmail.com,,,"
 "lexluxsox@hotmail.it"
+
+#~ msgid "Set background color…"
+#~ msgstr "Imposta il colore di sfondo…"
 
 #~ msgid "&Full Screen Mode"
 #~ msgstr "&Tutto Schermo"

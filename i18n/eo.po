@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.93.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-08 13:39-0400\n"
+"POT-Creation-Date: 2021-09-13 17:10-0400\n"
 "PO-Revision-Date: 2021-03-11 23:02+0000\n"
 "Last-Translator: phlostically <phlostically@mailinator.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/avogadro/"
@@ -393,8 +393,8 @@ msgstr "&Vidi"
 
 #: mainwindow.cpp:1751
 #, fuzzy
-msgid "Set background color…"
-msgstr "Agordi fonkoloron…"
+msgid "Set Background Color…"
+msgstr "Agordi Fonan Koloron… (&B)"
 
 #: mainwindow.cpp:1759
 msgid "Projection"
@@ -760,6 +760,10 @@ msgstr "phlostically"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "phlostically@example.com"
+
+#, fuzzy
+#~ msgid "Set background color…"
+#~ msgstr "Agordi fonkoloron…"
 
 #~ msgid "&Full Screen Mode"
 #~ msgstr "Plenekrana Reĝimo (&F)"
