@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-06 20:25-0400\n"
+"POT-Creation-Date: 2021-09-13 17:10-0400\n"
 "PO-Revision-Date: 2021-04-03 11:26+0000\n"
 "Last-Translator: Liu Tao <lyuutau@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
@@ -282,9 +282,9 @@ msgstr ""
 msgid "&Undo %1"
 msgstr "撤销(&U) %1"
 
-#. i18n: file: mainwindow.ui:211
+#. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1504 mainwindow.cpp:1731:126
+#: mainwindow.cpp:1504 mainwindow.cpp:1731:117
 msgid "&Undo"
 msgstr "撤销(&U)"
 
@@ -293,9 +293,9 @@ msgstr "撤销(&U)"
 msgid "&Redo %1"
 msgstr "重做(&R) %1"
 
-#. i18n: file: mainwindow.ui:223
+#. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1512 mainwindow.cpp:1736:132
+#: mainwindow.cpp:1512 mainwindow.cpp:1736:123
 msgid "&Redo"
 msgstr "重做(&R)"
 
@@ -351,9 +351,9 @@ msgstr "保存(&S)"
 msgid "Save &As…"
 msgstr "另存为(&A)..."
 
-#. i18n: file: mainwindow.ui:504
+#. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1685:264
+#: mainwindow.cpp:1685:195
 msgid "&Export"
 msgstr "导出(&E)"
 
@@ -362,9 +362,7 @@ msgstr "导出(&E)"
 msgid "&Molecule…"
 msgstr "分子"
 
-#. i18n: file: mainwindow.ui:173
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1694:111
+#: mainwindow.cpp:1694
 #, fuzzy
 msgid "&Graphics…"
 msgstr "图像(&G)..."
@@ -395,22 +393,18 @@ msgstr "视图(&V)"
 
 #: mainwindow.cpp:1751
 #, fuzzy
-msgid "Set background color…"
-msgstr "设置背景颜色..."
+msgid "Set Background Color…"
+msgstr "设定背景颜色(&B)..."
 
 #: mainwindow.cpp:1759
 msgid "Projection"
 msgstr "投影方法"
 
-#. i18n: file: mainwindow.ui:463
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1760:240
+#: mainwindow.cpp:1760
 msgid "Perspective"
 msgstr "透视"
 
-#. i18n: file: mainwindow.ui:471
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1767:243
+#: mainwindow.cpp:1767
 msgid "Orthographic"
 msgstr "正交"
 
@@ -628,239 +622,133 @@ msgstr "Ctrl+Shift+S"
 msgid "Revert To Saved"
 msgstr "恢复到已保存"
 
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&Full Screen Mode"
-msgstr "全屏模式(&F)"
-
-#. i18n: file: mainwindow.ui:185
-#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-msgid "Esc"
-msgstr "Esc"
-
-#. i18n: file: mainwindow.ui:194
+#. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
 msgstr "设定背景颜色(&B)..."
 
-#. i18n: file: mainwindow.ui:199
+#. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&About"
 msgstr "关于(&A)"
 
-#. i18n: file: mainwindow.ui:214
+#. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
-#. i18n: file: mainwindow.ui:226
+#. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
 
-#. i18n: file: mainwindow.ui:235
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "New View"
-msgstr "新建视图"
-
-#. i18n: file: mainwindow.ui:247
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Close View"
-msgstr "关闭视图"
-
-#. i18n: file: mainwindow.ui:256
+#. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
 msgstr "居中"
 
-#. i18n: file: mainwindow.ui:265
+#. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
 msgstr "将视角与坐标轴对齐"
 
-#. i18n: file: mainwindow.ui:270
+#. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Paste"
 msgstr "粘贴"
 
-#. i18n: file: mainwindow.ui:273
+#. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
 
-#. i18n: file: mainwindow.ui:278
+#. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Copy"
 msgstr "复制"
 
-#. i18n: file: mainwindow.ui:281
+#. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
 
-#. i18n: file: mainwindow.ui:286
+#. i18n: file: mainwindow.ui:248
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Cut"
 msgstr "剪切"
 
-#. i18n: file: mainwindow.ui:289
+#. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
 
-#. i18n: file: mainwindow.ui:294
+#. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
 msgstr "清除"
 
-#. i18n: file: mainwindow.ui:299
+#. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
 msgstr "全选"
 
-#. i18n: file: mainwindow.ui:302
+#. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
-#. i18n: file: mainwindow.ui:307
+#. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
 msgstr "全不选"
 
-#. i18n: file: mainwindow.ui:310
+#. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
-#. i18n: file: mainwindow.ui:319
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Configure Avogadro…"
-msgstr "配置阿伏伽德罗..."
-
-#. i18n: file: mainwindow.ui:330
+#. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Tutorials"
 msgstr "教程"
 
-#. i18n: file: mainwindow.ui:339
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Duplicate View"
-msgstr "复制视图"
-
-#. i18n: file: mainwindow.ui:347
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Display Axes"
-msgstr "显示坐标轴"
-
-#. i18n: file: mainwindow.ui:355
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Debug Information"
-msgstr "调试信息"
-
-#. i18n: file: mainwindow.ui:363
+#. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
 msgstr "阿伏伽德罗帮助"
 
-#. i18n: file: mainwindow.ui:368
+#. i18n: file: mainwindow.ui:293
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Release Notes"
 msgstr "发行注记"
 
-#. i18n: file: mainwindow.ui:373
+#. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
 msgstr "报告缺陷"
 
-#. i18n: file: mainwindow.ui:378
+#. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "FAQ"
 msgstr "常见问题"
 
-#. i18n: file: mainwindow.ui:383
+#. i18n: file: mainwindow.ui:308
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
 msgstr "阿伏伽德罗网站"
 
-#. i18n: file: mainwindow.ui:392
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Plugin Manager…"
-msgstr "插件管理器..."
-
-#. i18n: file: mainwindow.ui:401
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Project Tree Editor…"
-msgstr "项目树编辑器..."
-
-#. i18n: file: mainwindow.ui:410
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Detach View"
-msgstr "拆分视图"
-
-#. i18n: file: mainwindow.ui:415
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Molecule File…"
-msgstr "分子文件..."
-
-#. i18n: file: mainwindow.ui:426
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Use Quick Render"
-msgstr "使用快速渲染器"
-
-#. i18n: file: mainwindow.ui:431
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "&Vector Graphics…"
-msgstr "矢量图形(&V)..."
-
-#. i18n: file: mainwindow.ui:439
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Display Unit Cell Axes"
-msgstr "显示单位晶胞轴"
-
-#. i18n: file: mainwindow.ui:447
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "All Molecules in File…"
-msgstr "文件中的所有分子..."
-
-#. i18n: file: mainwindow.ui:452
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Reset Display Types"
-msgstr "重设显示模式"
-
-#. i18n: file: mainwindow.ui:476
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "SMILES"
-msgstr "SMILES"
-
-#. i18n: file: mainwindow.ui:481
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "InChI"
-msgstr "国际化合物标识"
-
-#. i18n: file: mainwindow.ui:484
-#. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
-msgid "IUPAC InChI identifier"
-msgstr "IUPAC InChI 标识符"
-
-#. i18n: file: mainwindow.ui:489
+#. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr "讨论区"
 
-#. i18n: file: mainwindow.ui:494
+#. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Open Recent"
 msgstr "打开最近文件"
 
-#. i18n: file: mainwindow.ui:499
+#. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Import"
 msgstr "导入(&I)"
@@ -924,6 +812,76 @@ msgstr ""
 "devel@lists.sourceforge.net,chensiqiong@126.com,frankensteinyang@gmail.com,,,"
 "chaofeng111@gmail.com,,,,allen19920930@gmail.com,skyxxzc@gmail.com,"
 "cuiweicui1985@gmail.com,,yjjart@gmail.com,sihanzheng@gmail.com"
+
+#, fuzzy
+#~ msgid "Set background color…"
+#~ msgstr "设置背景颜色..."
+
+#~ msgid "&Full Screen Mode"
+#~ msgstr "全屏模式(&F)"
+
+#~ msgid "Esc"
+#~ msgstr "Esc"
+
+#~ msgid "New View"
+#~ msgstr "新建视图"
+
+#~ msgid "Close View"
+#~ msgstr "关闭视图"
+
+#, fuzzy
+#~ msgid "Configure Avogadro…"
+#~ msgstr "配置阿伏伽德罗..."
+
+#~ msgid "Duplicate View"
+#~ msgstr "复制视图"
+
+#~ msgid "Display Axes"
+#~ msgstr "显示坐标轴"
+
+#~ msgid "Debug Information"
+#~ msgstr "调试信息"
+
+#, fuzzy
+#~ msgid "Plugin Manager…"
+#~ msgstr "插件管理器..."
+
+#, fuzzy
+#~ msgid "Project Tree Editor…"
+#~ msgstr "项目树编辑器..."
+
+#~ msgid "Detach View"
+#~ msgstr "拆分视图"
+
+#, fuzzy
+#~ msgid "Molecule File…"
+#~ msgstr "分子文件..."
+
+#~ msgid "Use Quick Render"
+#~ msgstr "使用快速渲染器"
+
+#, fuzzy
+#~ msgid "&Vector Graphics…"
+#~ msgstr "矢量图形(&V)..."
+
+#~ msgid "Display Unit Cell Axes"
+#~ msgstr "显示单位晶胞轴"
+
+#, fuzzy
+#~ msgid "All Molecules in File…"
+#~ msgstr "文件中的所有分子..."
+
+#~ msgid "Reset Display Types"
+#~ msgstr "重设显示模式"
+
+#~ msgid "SMILES"
+#~ msgstr "SMILES"
+
+#~ msgid "InChI"
+#~ msgstr "国际化合物标识"
+
+#~ msgid "IUPAC InChI identifier"
+#~ msgstr "IUPAC InChI 标识符"
 
 #~ msgid "No Io::FileFormat set in BackgroundFileFormat!"
 #~ msgstr "没有在 BackgroundFileFormat 中设置 Io :: FileFormat！"
