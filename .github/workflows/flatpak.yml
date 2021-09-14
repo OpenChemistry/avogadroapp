@@ -16,6 +16,8 @@ jobs:
     - name: Update manifest
       run: |
         cd flatpak
+        sed -i "s/shared-modules\/glew\///" org.openchemistry.Avogadro2.yaml
+        sed -i "s/shared-modules\/glu\///" org.openchemistry.Avogadro2.yaml
         python3 -m ensurepip --upgrade
         python3 -m pip install pyyaml
         python3 ../scripts/flatpak-update.py

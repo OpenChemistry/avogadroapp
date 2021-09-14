@@ -14,7 +14,6 @@ with open("org.openchemistry.Avogadro2.yaml") as stream:
 
         if module["name"] == "avogadrolibs":
             for sources in module["sources"]:
-                print(sources)
                 if type(sources) is not dict:
                     continue
                 if sources["url"] == "https://github.com/OpenChemistry/avogadrolibs":
@@ -22,7 +21,6 @@ with open("org.openchemistry.Avogadro2.yaml") as stream:
                     sources.pop("commit", None)
         elif module["name"] == "Avogadro2":
             for sources in module["sources"]:
-                print(sources)
                 if type(sources) is not dict or "url" not in sources:
                     continue
                 if sources["url"] == "https://github.com/OpenChemistry/avogadroapp":
