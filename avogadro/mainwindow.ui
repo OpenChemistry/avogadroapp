@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>576</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -82,7 +82,7 @@
     <string>&amp;Open…</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+O</string>
+    <string comment="File | Open">Ctrl+O</string>
    </property>
   </action>
   <action name="actionOpenTool">
@@ -95,7 +95,7 @@
     <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Q</string>
+    <string comment="File | Quit">Ctrl+Q</string>
    </property>
    <property name="menuRole">
     <enum>QAction::QuitRole</enum>
@@ -121,7 +121,7 @@
     <string>&amp;New</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+N</string>
+    <string comment="File | New">Ctrl+N</string>
    </property>
   </action>
   <action name="actionNewTool">
@@ -134,7 +134,7 @@
     <string>&amp;Close</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+W</string>
+    <string comment="File | Close">Ctrl+W</string>
    </property>
   </action>
   <action name="actionCloseTool">
@@ -147,7 +147,7 @@
     <string>&amp;Save</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string comment="File | Save">Ctrl+S</string>
    </property>
   </action>
   <action name="actionSaveTool">
@@ -160,7 +160,7 @@
     <string>Save &amp;As…</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+S</string>
+    <string comment="File | Save As">Ctrl+Shift+S</string>
    </property>
   </action>
   <action name="actionRevert">
@@ -194,7 +194,7 @@
     <string>&amp;Undo</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Z</string>
+    <string comment="Undo">Ctrl+Z</string>
    </property>
   </action>
   <action name="actionRedo">
@@ -206,7 +206,7 @@
     <string>&amp;Redo</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+Z</string>
+    <string comment="Redo">Ctrl+Shift+Z</string>
    </property>
   </action>
   <action name="actionCenter">
@@ -232,7 +232,7 @@
     <string>Paste</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+V</string>
+    <string comment="Paste">Ctrl+V</string>
    </property>
   </action>
   <action name="actionCopy">
@@ -240,7 +240,7 @@
     <string>Copy</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+C</string>
+    <string comment="Copy">Ctrl+C</string>
    </property>
   </action>
   <action name="actionCut">
@@ -248,7 +248,7 @@
     <string>Cut</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+X</string>
+    <string comment="Cut">Ctrl+X</string>
    </property>
   </action>
   <action name="actionClear">
@@ -261,7 +261,7 @@
     <string>Select All</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+A</string>
+    <string comment="Select All">Ctrl+A</string>
    </property>
   </action>
   <action name="actionSelect_None">
@@ -269,7 +269,7 @@
     <string>Select None</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+A</string>
+    <string comment="Select None">Ctrl+Shift+A</string>
    </property>
   </action>
   <action name="actionTutorials">
