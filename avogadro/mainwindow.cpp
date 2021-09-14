@@ -9,6 +9,7 @@
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
 #include "menubuilder.h"
+#include "tooltipfilter.h"
 #include "ui_mainwindow.h"
 #include "viewfactory.h"
 
@@ -64,6 +65,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTreeView>
 
+#include <QToolButton>
 #include <QtGui/QOpenGLFramebufferObject>
 
 #ifdef QTTESTING
@@ -388,6 +390,8 @@ void MainWindow::setupInterface()
   m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   m_fileToolBar->setWindowTitle(tr("File"));
   addToolBar(m_fileToolBar);
+#else
+  m_fileToolBar->hide();
 #endif
   m_toolToolBar->setWindowTitle(tr("Tools"));
   addToolBar(m_toolToolBar);
@@ -610,7 +614,9 @@ void MainWindow::updateWindowTitle()
   if (m_molecule && m_molecule->hasData("fileName"))
     fileName = QString::fromStdString(m_molecule->data("fileName").toString());
 
-  setWindowTitle(tr("%1%2 - Avogadro %3", "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version")
+  setWindowTitle(tr("%1%2 - Avogadro %3",
+                    "window title: %1 = file name, %2 = • for "
+                    "modified file, %3 = Avogadro version")
                    .arg(QFileInfo(fileName).fileName())
                    .arg(m_moleculeDirty ? "•" : "")
                    .arg(AvogadroApp_VERSION));
@@ -873,17 +879,19 @@ bool MainWindow::backgroundWriterFinished()
   bool success = false;
   if (!m_progressDialog->wasCanceled()) {
     if (m_threadedWriter->success()) {
-      statusBar()->showMessage(tr("Saved file %1", "%1 = filename").arg(fileName));
+      statusBar()->showMessage(
+        tr("Saved file %1", "%1 = filename").arg(fileName));
       m_threadedWriter->molecule()->setData("fileName",
                                             fileName.toLocal8Bit().data());
       markMoleculeClean();
       updateWindowTitle();
       success = true;
     } else {
-      MESSAGEBOX::critical(this, tr("Error saving file"),
-                           tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
-                             .arg(fileName)
-                             .arg(m_threadedWriter->error()));
+      MESSAGEBOX::critical(
+        this, tr("Error saving file"),
+        tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
+          .arg(fileName)
+          .arg(m_threadedWriter->error()));
     }
   }
   m_fileWriteThread->deleteLater();
@@ -1388,7 +1396,9 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
   m_progressDialog->setMinimumDuration(750);
   m_progressDialog->setWindowTitle(tr("Saving File in Progress…"));
   m_progressDialog->setLabelText(
-    tr("Saving file “%1”\nwith “%2”", "%1 = file name, %2 = format").arg(fileName).arg(ident));
+    tr("Saving file “%1”\nwith “%2”", "%1 = file name, %2 = format")
+      .arg(fileName)
+      .arg(ident));
   /// @todo Add API to abort file ops
   m_progressDialog->setCancelButton(nullptr);
   connect(m_fileWriteThread, &QThread::started, m_threadedWriter,
@@ -1823,6 +1833,7 @@ void MainWindow::buildTools()
     plugin->pluginFactories<ToolPluginFactory>();
   foreach (ToolPluginFactory* factory, toolPluginFactories) {
     ToolPlugin* tool = factory->createInstance();
+    tool->setParent(this);
     if (tool)
       m_tools << tool;
   }
@@ -1830,24 +1841,27 @@ void MainWindow::buildTools()
   // sort them based on priority
   std::sort(m_tools.begin(), m_tools.end(), ToolSort);
 
-  QActionGroup* toolActions = new QActionGroup(this);
   int index = 1;
   foreach (ToolPlugin* toolPlugin, m_tools) {
     // Add action to toolbar.
     toolPlugin->setParent(this);
     QAction* action = toolPlugin->activateAction();
-    action->setParent(toolPlugin);
+    action->setParent(m_toolToolBar);
     action->setCheckable(true);
     if (index < 10)
       action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index)));
     action->setData(toolPlugin->objectName());
-    qDebug() << toolPlugin->objectName() << "added";
-    toolActions->addAction(action);
+    m_toolToolBar->addAction(action);
+
     connect(action, &QAction::triggered, this, &MainWindow::toolActivated);
     ++index;
   }
 
-  m_toolToolBar->addActions(toolActions->actions());
+  // add the fake tooltip method
+  ToolTipFilter* filter = new ToolTipFilter(this);
+  foreach (QToolButton* button, m_toolToolBar->findChildren<QToolButton*>()) {
+    button->installEventFilter(filter);
+  }
 }
 
 QString MainWindow::extensionToWildCard(const QString& extension)
@@ -2034,7 +2048,7 @@ void MainWindow::clearQueuedFiles()
   if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
     MESSAGEBOX::warning(this, tr("Cannot open files"),
                         tr("Avogadro cannot open"
-                          " “%1”.")
+                           " “%1”.")
                           .arg(m_queuedFiles.join("\n")));
     m_queuedFiles.clear();
   }
