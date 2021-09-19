@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-13 17:10-0400\n"
-"PO-Revision-Date: 2021-09-08 11:10+0000\n"
+"PO-Revision-Date: 2021-09-15 07:35+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/nb_NO/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8.1-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -97,19 +97,17 @@ msgstr "Åpne kjemifil"
 
 #: mainwindow.cpp:692 mainwindow.cpp:716 mainwindow.cpp:1210
 #: mainwindow.cpp:2024
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Kan ikke lagre fil %1."
+msgstr "Kan ikke åpne fil"
 
 #: mainwindow.cpp:693 mainwindow.cpp:717 mainwindow.cpp:1211
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Kan ikke lagre fil %1."
+msgstr "Kan ikke åpne angitt fil %1"
 
 #: mainwindow.cpp:706
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molekyl"
+msgstr "Åpne molekyl"
 
 #: mainwindow.cpp:730
 msgid "Commands"
@@ -120,9 +118,8 @@ msgid "Input Generators"
 msgstr "Inndata-generatorer"
 
 #: mainwindow.cpp:730
-#, fuzzy
 msgid "File Formats"
-msgstr "Filfeil"
+msgstr "Filformater"
 
 #: mainwindow.cpp:734
 msgid "Install Plugin Script"
@@ -139,7 +136,7 @@ msgstr "Velg filleser"
 #: mainwindow.cpp:811
 #, fuzzy
 msgid "Reading File"
-msgstr "Åpne Fil"
+msgstr "Leser fil"
 
 #: mainwindow.cpp:813
 #, qt-format
@@ -172,7 +169,7 @@ msgstr ""
 #, fuzzy, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Kan ikke lagre fil %1."
+msgstr "Lagret fil %1."
 
 #: mainwindow.cpp:883
 msgid "Error saving file"
@@ -268,9 +265,8 @@ msgid "Save chemical file"
 msgstr "Lagre kjemifil"
 
 #: mainwindow.cpp:1337
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Importer molekylfil"
+msgstr "Eksporter molekyl"
 
 #: mainwindow.cpp:1389
 #, fuzzy
@@ -310,9 +306,8 @@ msgid "&Redo"
 msgstr "&Gjenta"
 
 #: mainwindow.cpp:1612
-#, fuzzy
 msgid "&Testing"
-msgstr "Innstillinger"
+msgstr "&Testing"
 
 #: mainwindow.cpp:1614
 msgid "Record test…"
@@ -362,9 +357,8 @@ msgstr "Lagre &som …"
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1685:195
-#, fuzzy
 msgid "&Export"
-msgstr "Eksporter"
+msgstr "&Eksporter"
 
 #: mainwindow.cpp:1686
 msgid "&Molecule…"
@@ -489,9 +483,8 @@ msgid "Se&ttings"
 msgstr "Inn&stillinger"
 
 #: menubuilder.cpp:80
-#, fuzzy
 msgid "&Window"
-msgstr "Vindu"
+msgstr "&Vindu"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
