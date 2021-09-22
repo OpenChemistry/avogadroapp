@@ -2,21 +2,23 @@
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
-#
+# J. Lavoie <j.lavoie@net-c.ca>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-19 02:08+0000\n"
-"PO-Revision-Date: 2016-06-10 06:16+0000\n"
-"Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
-"Language-Team: English (Canada) <en_CA@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-09-23 13:36+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"Language-Team: English (Canada) <https://hosted.weblate.org/projects/"
+"avogadro/avogadroapp/en_CA/>\n"
+"Language: en_CA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -265,6 +267,8 @@ msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
+"Saving file “%1”\n"
+"with “%2”"
 
 #: mainwindow.cpp:1511
 #, fuzzy, qt-format
@@ -435,7 +439,7 @@ msgstr "Ctrl+D"
 #: mainwindow.cpp:2018
 #, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr ""
+msgstr "Error while loading the “%1” file format."
 
 #: mainwindow.cpp:2034
 #, fuzzy
@@ -445,7 +449,7 @@ msgstr "File: "
 #: mainwindow.cpp:2039 mainwindow.cpp:2050
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr ""
+msgstr "Avogadro cannot open “%1”."
 
 #: mainwindow.cpp:2049
 #, fuzzy
