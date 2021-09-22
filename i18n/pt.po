@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # ssantos <ssantos@web.de>, 2020, 2021.
+# J. Lavoie <j.lavoie@net-c.ca>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-19 02:08+0000\n"
-"PO-Revision-Date: 2021-05-03 07:31+0000\n"
-"Last-Translator: ssantos <ssantos@web.de>\n"
+"PO-Revision-Date: 2021-09-23 13:36+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/pt/>\n"
 "Language: pt\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -269,14 +270,14 @@ msgid "Saving File in Progress…"
 msgstr ""
 
 #: mainwindow.cpp:1399
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"Abrindo o ficheiro '%1'\n"
-"com '%2'"
+"Salvando ficheiro «%1»\n"
+"com «%2»"
 
 #: mainwindow.cpp:1511
 #, qt-format
@@ -442,9 +443,9 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2018
-#, fuzzy, qt-format
+#, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "Erro durante o carregamento FileFormat com id '%1'."
+msgstr "Erro ao carregar o formato de ficheiro «%1»."
 
 #: mainwindow.cpp:2034
 #, fuzzy
@@ -452,9 +453,9 @@ msgid "Select file format"
 msgstr "Selecione o leitor de ficheiro"
 
 #: mainwindow.cpp:2039 mainwindow.cpp:2050
-#, fuzzy, qt-format
+#, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "O Avogadro tentou mas não pôde abrir '%1'."
+msgstr "Avogadro não pode abrir «%1»."
 
 #: mainwindow.cpp:2049
 msgid "Cannot open files"
