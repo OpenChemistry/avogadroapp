@@ -5,13 +5,14 @@
 # Andika Tulus Pangestu <andhikatuluspangestu@gmail.com>, 2020.
 # Ferdinand Tampubolon <dnandz@gmail.com>, 2021.
 # Reza Almanda <rezaalmanda27@gmail.com>, 2021.
+# J. Lavoie <j.lavoie@net-c.ca>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-19 02:08+0000\n"
-"PO-Revision-Date: 2021-02-09 04:50+0000\n"
-"Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
+"PO-Revision-Date: 2021-09-23 13:36+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
 "Language: id\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -271,14 +272,14 @@ msgid "Saving File in Progress…"
 msgstr ""
 
 #: mainwindow.cpp:1399
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"Membuka file '%1'\n"
-"dengan '%2'"
+"Menyimpan file “%1”\n"
+"dengan “%2”"
 
 #: mainwindow.cpp:1511
 #, qt-format
@@ -444,9 +445,9 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2018
-#, fuzzy, qt-format
+#, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "Kesalahan saat memuat FileFormat dengan id '%1'."
+msgstr "Kesalahan saat memuat format file “%1”."
 
 #: mainwindow.cpp:2034
 #, fuzzy
@@ -454,9 +455,9 @@ msgid "Select file format"
 msgstr "Pilih file yang akan dibaca"
 
 #: mainwindow.cpp:2039 mainwindow.cpp:2050
-#, fuzzy, qt-format
+#, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "Avogadro kehabisan waktu dan tidak dapat membuka '%1'."
+msgstr "Avogadro tidak dapat membuka “%1”."
 
 #: mainwindow.cpp:2049
 msgid "Cannot open files"
