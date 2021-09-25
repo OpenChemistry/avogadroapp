@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Avogadro 1.93.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-19 02:08+0000\n"
-"PO-Revision-Date: 2021-03-11 23:02+0000\n"
+"PO-Revision-Date: 2021-09-26 12:57+0000\n"
 "Last-Translator: phlostically <phlostically@mailinator.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/eo/>\n"
@@ -16,23 +16,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.2-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
 msgstr "Neniu molekulo agordita en BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
-#, fuzzy
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "Neniu dosiernomo agordita en BackgroundFileFormat!"
+msgstr "Neniu dosierformo agordita en BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "Neniu dosiernomo agordita en BackgroundFileFormat!"
 
 #: mainwindow.cpp:300
-#, fuzzy
 msgid "Ready…"
 msgstr "Preta…"
 
@@ -54,24 +52,22 @@ msgstr "Molekuloj"
 
 #: mainwindow.cpp:372
 msgid "Layers"
-msgstr ""
+msgstr "Tavoloj"
 
 #: mainwindow.cpp:391
-#, fuzzy
 msgid "File"
-msgstr "Dosiero (&F)"
+msgstr "Dosiero"
 
 #: mainwindow.cpp:396
-#, fuzzy
 msgid "Tools"
-msgstr "Ilo"
+msgstr "Iloj"
 
 #: mainwindow.cpp:612
 msgid "Untitled"
 msgstr "Sentitola"
 
 #: mainwindow.cpp:617
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
@@ -105,24 +101,23 @@ msgstr "Malfermi Molekulon"
 
 #: mainwindow.cpp:736
 msgid "Commands"
-msgstr ""
+msgstr "Komandoj"
 
 #: mainwindow.cpp:736
 msgid "Input Generators"
-msgstr ""
+msgstr "Enigaĵfariloj"
 
 #: mainwindow.cpp:736
-#, fuzzy
 msgid "File Formats"
-msgstr "Eraro pri dosiero"
+msgstr "Dosierformoj"
 
 #: mainwindow.cpp:740
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Instali kromprograman programeton"
 
 #: mainwindow.cpp:740
 msgid "Script Type:"
-msgstr ""
+msgstr "Speco de programeto:"
 
 #: mainwindow.cpp:788 mainwindow.cpp:1214
 msgid "Select file reader"
@@ -160,24 +155,23 @@ msgstr ""
 "%2"
 
 #: mainwindow.cpp:883
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Ne povas konservi dosieron %1."
+msgstr "Konservis dosieron %1."
 
 #: mainwindow.cpp:891
-#, fuzzy
 msgid "Error saving file"
-msgstr "Eraro pri startigo de servilo de fora procedura alvoko:"
+msgstr "Eraro pri konservado de dosiero"
 
 #: mainwindow.cpp:892
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
-"Eraro dum legado de dosiero '%1':\n"
+"Eraro dum konservado de «%1»:\n"
 "%2"
 
 #: mainwindow.cpp:931
@@ -265,17 +259,17 @@ msgstr "Eksporti Molekulon"
 
 #: mainwindow.cpp:1397
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Konservante dosieron…"
 
 #: mainwindow.cpp:1399
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"Malfermante dosieron '%1'\n"
-"per '%2'"
+"Konservante dosieron «%1»\n"
+"per «%2»"
 
 #: mainwindow.cpp:1511
 #, qt-format
@@ -304,12 +298,10 @@ msgid "&Testing"
 msgstr "&Testado"
 
 #: mainwindow.cpp:1624
-#, fuzzy
 msgid "Record test…"
 msgstr "Registri teston…"
 
 #: mainwindow.cpp:1627
-#, fuzzy
 msgid "Play test…"
 msgstr "Ludi teston…"
 
@@ -324,9 +316,8 @@ msgstr "&Nova"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1652:51
-#, fuzzy
 msgid "&Open…"
-msgstr "Malfermi (&O)"
+msgstr "Malfermi (&O)…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -347,9 +338,8 @@ msgstr "Kon&servi"
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1684:102
-#, fuzzy
 msgid "Save &As…"
-msgstr "Konservi kiel… (&A)"
+msgstr "Konservi kiel… (&A)…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -358,12 +348,10 @@ msgid "&Export"
 msgstr "&Eksporti"
 
 #: mainwindow.cpp:1696
-#, fuzzy
 msgid "&Molecule…"
-msgstr "Molekuloj"
+msgstr "&Molekulo…"
 
 #: mainwindow.cpp:1704
-#, fuzzy
 msgid "&Graphics…"
 msgstr "&Grafiko…"
 
@@ -392,7 +380,6 @@ msgid "&View"
 msgstr "&Vidi"
 
 #: mainwindow.cpp:1761
-#, fuzzy
 msgid "Set Background Color…"
 msgstr "Agordi Fonan Koloron… (&B)"
 
@@ -422,9 +409,8 @@ msgid "All supported formats (%1);;All files (*);;"
 msgstr "Ĉiuj subtenataj dosierformoj (%1);;Ĉiuj dosieroj (*);;"
 
 #: mainwindow.cpp:1936
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
-msgstr "Ĉu vi volas konservi la ŝanĝojn, kiujn vi faris en la dokumento?"
+msgstr "Ĉu vi volas konservi la ŝanĝojn en la dokumento?"
 
 #: mainwindow.cpp:1944
 msgid "Your changes will be lost if you don't save them."
@@ -441,19 +427,18 @@ msgid "Ctrl+D"
 msgstr "Stir+D"
 
 #: mainwindow.cpp:2018
-#, fuzzy, qt-format
+#, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "Eraro dum ŝargado de FileFormat de identigilo '%1'."
+msgstr "Eraro dum ŝargado de la dosierformo «%1»."
 
 #: mainwindow.cpp:2034
-#, fuzzy
 msgid "Select file format"
-msgstr "Elekti dosierlegilon"
+msgstr "Elekti dosierformon"
 
 #: mainwindow.cpp:2039 mainwindow.cpp:2050
-#, fuzzy, qt-format
+#, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "Avogadro elĉerpis templimon kaj ne povas malfermi '%1'."
+msgstr "Avogadro ne povas malfermi «%1»."
 
 #: mainwindow.cpp:2049
 msgid "Cannot open files"
@@ -534,54 +519,38 @@ msgstr ""
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-#| "\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
-#| "\"><span style=\" font-size:10pt; text-decoration: underline; color:"
-#| "#0000ff;\">BSD-3-Clause</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause"
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">Permesilo: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
-"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
-"\">BSD-3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Permesilo: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:264
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span "
-#| "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
-#| "org</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
-"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
-"span></a></p></body></html>"
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:293
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" "
-#| "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></"
-#| "p></body></html>"
 msgid ""
 "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
 "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
-"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
-"body></html>"
+"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:320
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -658,7 +627,6 @@ msgstr "Restaŭri Konservitaĵon"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
 msgstr "Agordi Fonan Koloron… (&B)"
 
