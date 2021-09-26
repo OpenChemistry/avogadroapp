@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-19 02:08+0000\n"
-"PO-Revision-Date: 2021-09-23 13:36+0000\n"
+"PO-Revision-Date: 2021-09-26 12:57+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: English (Canada) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_CA/>\n"
@@ -22,121 +22,112 @@ msgstr ""
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "No molecule set in BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "No file format set in BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "No file name set in BackgroundFileFormat!"
 
 #: mainwindow.cpp:300
 msgid "Ready…"
-msgstr ""
+msgstr "Ready…"
 
 #: mainwindow.cpp:342
-#, fuzzy
 msgid "Tool"
-msgstr "Tools"
+msgstr "Tool"
 
 #: mainwindow.cpp:346
 msgid "Display Types"
-msgstr "Display Types"
+msgstr "Display types"
 
 #: mainwindow.cpp:357
 msgid "View Configuration"
-msgstr ""
+msgstr "View Configuration"
 
 #: mainwindow.cpp:363
-#, fuzzy
 msgid "Molecules"
-msgstr "Molecule"
+msgstr "Molecules"
 
 #: mainwindow.cpp:372
 msgid "Layers"
-msgstr ""
+msgstr "Layers"
 
 #: mainwindow.cpp:391
-#, fuzzy
 msgid "File"
-msgstr "&File"
+msgstr "File"
 
 #: mainwindow.cpp:396
-#, fuzzy
 msgid "Tools"
 msgstr "Tools"
 
 #: mainwindow.cpp:612
-#, fuzzy
 msgid "Untitled"
-msgstr "untitled"
+msgstr "Untitled"
 
 #: mainwindow.cpp:617
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:673 mainwindow.cpp:1311
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Chemical Markup Language"
 
 #: mainwindow.cpp:674 mainwindow.cpp:1310
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Chemical JSON"
 
 #: mainwindow.cpp:680
 msgid "Open chemical file"
-msgstr ""
+msgstr "Open chemical file"
 
 #: mainwindow.cpp:698 mainwindow.cpp:722 mainwindow.cpp:1218
 #: mainwindow.cpp:2038
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Cannot save file %1."
+msgstr "Cannot open file"
 
 #: mainwindow.cpp:699 mainwindow.cpp:723 mainwindow.cpp:1219
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Cannot save file %1."
+msgstr "Can’t open supplied file %1"
 
 #: mainwindow.cpp:712
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molecule"
+msgstr "Open Molecule"
 
 #: mainwindow.cpp:736
 msgid "Commands"
-msgstr ""
+msgstr "Commands"
 
 #: mainwindow.cpp:736
 msgid "Input Generators"
-msgstr ""
+msgstr "Input Generators"
 
 #: mainwindow.cpp:736
-#, fuzzy
 msgid "File Formats"
-msgstr "File: "
+msgstr "File formats"
 
 #: mainwindow.cpp:740
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Install plug-in script"
 
 #: mainwindow.cpp:740
 msgid "Script Type:"
-msgstr ""
+msgstr "Script type:"
 
 #: mainwindow.cpp:788 mainwindow.cpp:1214
 msgid "Select file reader"
-msgstr ""
+msgstr "Select file reader"
 
 #: mainwindow.cpp:817
-#, fuzzy
 msgid "Reading File"
-msgstr "Open File"
+msgstr "Reading file"
 
 #: mainwindow.cpp:819
 #, qt-format
@@ -144,16 +135,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Opening file ‘%1’\n"
+"with ‘%2’"
 
 #: mainwindow.cpp:850
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molecule loaded (%1 atoms, %2 bonds)"
 
 #: mainwindow.cpp:855
-#, fuzzy
 msgid "File error"
-msgstr "File: "
+msgstr "File error"
 
 #: mainwindow.cpp:856
 #, qt-format
@@ -161,16 +153,18 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Error while reading file ‘%1’:\n"
+"%2"
 
 #: mainwindow.cpp:883
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Cannot save file %1."
+msgstr "Saved file %1"
 
 #: mainwindow.cpp:891
 msgid "Error saving file"
-msgstr ""
+msgstr "Error saving file"
 
 #: mainwindow.cpp:892
 #, qt-format
@@ -179,10 +173,12 @@ msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"Error while saving ‘%1’:\n"
+"%2"
 
 #: mainwindow.cpp:931
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Error: Failed to initialise OpenGL context"
 
 #: mainwindow.cpp:932
 #, qt-format
@@ -191,14 +187,17 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 2.0 or greater required, exiting.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:933
 msgid "Unknown error"
-msgstr ""
+msgstr "Unknown error"
 
 #: mainwindow.cpp:1059 mainwindow.cpp:1060
 msgid "Navigate tool"
-msgstr ""
+msgstr "Navigate tool"
 
 #: mainwindow.cpp:1136
 msgid "Common image formats"
@@ -242,6 +241,10 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"This file was imported from a non-standard format which may not be able to "
+"write all of the information in the molecule.\n"
+"\n"
+"Would you like to export to the current format, or save in a standard format?"
 
 #: mainwindow.cpp:1292
 msgid "Export"
@@ -249,16 +252,15 @@ msgstr "Export"
 
 #: mainwindow.cpp:1317
 msgid "Save chemical file"
-msgstr ""
+msgstr "Save chemical file"
 
 #: mainwindow.cpp:1345
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Import Molecule File"
+msgstr "Export Molecule"
 
 #: mainwindow.cpp:1397
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Saving file in progress…"
 
 #: mainwindow.cpp:1399
 #, qt-format
@@ -271,9 +273,9 @@ msgstr ""
 "with “%2”"
 
 #: mainwindow.cpp:1511
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Undo"
+msgstr "&Undo %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -282,9 +284,9 @@ msgid "&Undo"
 msgstr "&Undo"
 
 #: mainwindow.cpp:1519
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Redo"
+msgstr "&Redo %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -293,19 +295,16 @@ msgid "&Redo"
 msgstr "&Redo"
 
 #: mainwindow.cpp:1622
-#, fuzzy
 msgid "&Testing"
-msgstr "Settings"
+msgstr "&Testing"
 
 #: mainwindow.cpp:1624
-#, fuzzy
 msgid "Record test…"
-msgstr "Record Test..."
+msgstr "Record test…"
 
 #: mainwindow.cpp:1627
-#, fuzzy
 msgid "Play test…"
-msgstr "Play Test..."
+msgstr "Play test…"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -318,9 +317,8 @@ msgstr "&New"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1652:51
-#, fuzzy
 msgid "&Open…"
-msgstr "&Open"
+msgstr "&Open…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -341,26 +339,22 @@ msgstr "&Save"
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1684:102
-#, fuzzy
 msgid "Save &As…"
-msgstr "Save &As..."
+msgstr "Save &as…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1695:195
-#, fuzzy
 msgid "&Export"
-msgstr "Export"
+msgstr "&Export"
 
 #: mainwindow.cpp:1696
-#, fuzzy
 msgid "&Molecule…"
-msgstr "Molecule"
+msgstr "&Molecule…"
 
 #: mainwindow.cpp:1704
-#, fuzzy
 msgid "&Graphics…"
-msgstr "&Graphics..."
+msgstr "&Graphics…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -372,7 +366,7 @@ msgstr "&Quit"
 
 #: mainwindow.cpp:1734
 msgid "No recent files"
-msgstr ""
+msgstr "No recent files"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
@@ -387,26 +381,24 @@ msgid "&View"
 msgstr "&View"
 
 #: mainwindow.cpp:1761
-#, fuzzy
 msgid "Set Background Color…"
-msgstr "Set &Background Colour..."
+msgstr "Set Background colour…"
 
 #: mainwindow.cpp:1769
 msgid "Projection"
-msgstr ""
+msgstr "Projection"
 
 #: mainwindow.cpp:1770
 msgid "Perspective"
-msgstr ""
+msgstr "Perspective"
 
 #: mainwindow.cpp:1777
 msgid "Orthographic"
-msgstr ""
+msgstr "Orthographic"
 
 #: mainwindow.cpp:1796
-#, fuzzy
 msgid "&Extensions"
-msgstr "Extensions"
+msgstr "&Extensions"
 
 #: mainwindow.cpp:1803 menubuilder.cpp:80
 msgid "&Help"
@@ -415,12 +407,11 @@ msgstr "&Help"
 #: mainwindow.cpp:1920
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "All supported formats (%1);;All files (*);;"
 
 #: mainwindow.cpp:1936
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
-msgstr "Do you want to save the changes you made in the document?"
+msgstr "Do you want to save the changes to the document?"
 
 #: mainwindow.cpp:1944
 msgid "Your changes will be lost if you don't save them."
@@ -442,9 +433,8 @@ msgid "Error while loading the “%1” file format."
 msgstr "Error while loading the “%1” file format."
 
 #: mainwindow.cpp:2034
-#, fuzzy
 msgid "Select file format"
-msgstr "File: "
+msgstr "Select file format"
 
 #: mainwindow.cpp:2039 mainwindow.cpp:2050
 #, qt-format
@@ -452,9 +442,8 @@ msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro cannot open “%1”."
 
 #: mainwindow.cpp:2049
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Cannot save file %1."
+msgstr "Cannot open files"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -479,9 +468,8 @@ msgid "Se&ttings"
 msgstr "Se&ttings"
 
 #: menubuilder.cpp:80
-#, fuzzy
 msgid "&Window"
-msgstr "Window"
+msgstr "&Window"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -489,6 +477,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
+">Version:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -496,6 +486,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -503,6 +495,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">AvogadroLibs Version:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -512,6 +506,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0."
+"1</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -519,6 +515,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
+"Version:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -528,6 +526,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Licence: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:264
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -536,6 +538,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:293
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -544,6 +549,9 @@ msgid ""
 "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:320
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -552,8 +560,6 @@ msgstr "OK"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
@@ -565,8 +571,6 @@ msgstr "&Open"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -583,32 +587,24 @@ msgstr "&Clear Recent"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+N"
 msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+W"
 msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Shift+S"
@@ -620,9 +616,8 @@ msgstr "Revert To Saved"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
-msgstr "Set &Background Colour..."
+msgstr "Set &Background colour…"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -631,16 +626,12 @@ msgstr "&About"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Z"
 msgctxt "Undo"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+Z"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
@@ -662,8 +653,6 @@ msgstr "Paste"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+V"
 msgctxt "Paste"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
@@ -675,8 +664,6 @@ msgstr "Copy"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+C"
 msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
@@ -688,8 +675,6 @@ msgstr "Cut"
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+X"
 msgctxt "Cut"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
@@ -706,8 +691,6 @@ msgstr "Select All"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
@@ -719,8 +702,6 @@ msgstr "Select None"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
@@ -743,7 +724,7 @@ msgstr "Release Notes"
 #. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
-msgstr "Report a Bug"
+msgstr "Report a bug"
 
 #. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -758,47 +739,49 @@ msgstr "Avogadro Website"
 #. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Discussion Forum"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Open Recent"
-msgstr "Open &Recent"
+msgstr "Open recent"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
-msgstr "Import"
+msgstr "&Import"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-",Launchpad Contributions:,Itai Molenaar, ,Launchpad Contributions:,Itai "
-"Molenaar, ,Launchpad Contributions:,Itai Molenaar, ,Launchpad Contributions:,"
-"Itai Molenaar, ,Launchpad Contributions:,Itai Molenaar, ,Launchpad "
-"Contributions:,Itai Molenaar,Luke Hollins, ,Launchpad Contributions:,"
-"Avogadro Team,Itai Molenaar,Ken Sharp,Luke Hollins, ,Launchpad "
-"Contributions:,Avogadro Team,Itai Molenaar,Ken Sharp,Luke Hollins, ,"
-"Launchpad Contributions:,Avogadro Team,Itai Molenaar,Ken Sharp,Luke "
-"Hollins, ,Launchpad Contributions:,Avogadro Team,Itai Molenaar,Ken Sharp,"
-"Luke Hollins,Roman Stingler, ,Launchpad Contributions:,Avogadro Team,Itai "
-"Molenaar,Ken Sharp,Luke Hollins,Roman Stingler, ,Launchpad Contributions:,"
-"Avogadro Team,Itai Molenaar,Ken Sharp,Luke Hollins,Roman Stingler, ,"
-"Launchpad Contributions:,Avogadro Team,Itai Molenaar,Ken Sharp,Luke Hollins,"
-"Roman Stingler"
+",Launchpad Contributions:,Brian Burns,Gabriel Ruiz,Jen Ockwell,Marcus D. "
+"Hanwell,kuede, ,Launchpad Contributions:,Brian Burns,Gabriel Ruiz,Geoff "
+"Hutchison,Jen Ockwell,Marcus D. Hanwell,kuede, ,Launchpad Contributions:"
+",Avogadro Team,Boyo,Brian Burns,Gabriel Ruiz,Geoff Hutchison,Jen "
+"Ockwell,Marcus D. Hanwell,kuede, ,Launchpad Contributions:,Avogadro "
+"Team,Boyo,Brian Burns,Gabriel Ruiz,Geoff Hutchison,Jen Ockwell,Marcus D. "
+"Hanwell,kuede,melvinor, ,Launchpad Contributions:,Avogadro Team,Boyo,Brian "
+"Burns,Gabriel Ruiz,Geoff Hutchison,Jen Ockwell,Ken Sharp,Marcus D. "
+"Hanwell,kuede,melvinor, ,Launchpad Contributions:,Avogadro Team,Boyo,Brian "
+"Burns,Gabriel Ruiz,Geoff Hutchison,Jen Ockwell,Ken Sharp,Marcus D. "
+"Hanwell,kuede,melvinor, ,Launchpad Contributions:,Avogadro Team,Boyo,Brian "
+"Burns,Gabriel Ruiz,Geoff Hutchison,Jen Ockwell,Ken Sharp,Marcus D. "
+"Hanwell,kuede,melvinor, ,Launchpad Contributions:,Avogadro Team,Boyo,Brian "
+"Burns,Gabriel Ruiz,Geoff Hutchison,Jen Ockwell,Ken Sharp,Marcus D. "
+"Hanwell,kuede,melvinor, ,Launchpad Contributions:,Alfredo Hernández,Andi "
+"Chandler,Avogadro Team,Brian Burns,Gabriel Ruiz,Geoff Hutchison,Jen "
+"Ockwell,Ken Sharp,Marcus D. Hanwell,kuede, ,Launchpad Contributions:,Alfredo "
+"Hernández,Andi Chandler,Avogadro Team,Brian Burns,Gabriel Ruiz,Geoff "
+"Hutchison,Jen Ockwell,Ken Sharp,Marcus D. Hanwell,kuede, ,Launchpad "
+"Contributions:,Alfredo Hernández,Andi Chandler,Avogadro Team,Brian "
+"Burns,Gabriel Ruiz,Geoff Hutchison,Jen Ockwell,Ken Sharp,Marcus D. "
+"Hanwell,kuede"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-",,imolenaar28@gmail.com,,,imolenaar28@gmail.com,,,imolenaar28@gmail.com,,,"
-"imolenaar28@gmail.com,,,imolenaar28@gmail.com,,,imolenaar28@gmail.com,,,,"
-"avogadro-devel@lists.sourceforge.net,imolenaar28@gmail.com,,,,,avogadro-"
-"devel@lists.sourceforge.net,,,,,,avogadro-devel@lists.sourceforge.net,,,,,,"
-"avogadro-devel@lists.sourceforge.net,,,,,,,avogadro-devel@lists.sourceforge."
-"net,,,,coolx67@gmx.at,,,avogadro-devel@lists.sourceforge.net,,,,coolx67@gmx."
-"at,,,avogadro-devel@lists.sourceforge.net,,,,coolx67@gmx.at"
+",,bburns@aundae.com,debianmaster@gmail.com,jenfraggleubuntu@googlemail."
+"com,,,,,bburns@aundae.com"
 
 #, fuzzy
 #~ msgid "Set background color…"
