@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-19 02:08+0000\n"
-"PO-Revision-Date: 2021-10-31 20:35+0000\n"
+"PO-Revision-Date: 2021-11-07 22:52+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hr/>\n"
@@ -23,15 +23,15 @@ msgstr ""
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "U BackgroundFileFormat nije postavljena molekula!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "U BackgroundFileFormat nije postavljen format datoteke!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "U BackgroundFileFormat nije postavljeno nijedno ime datoteke!"
 
 #: mainwindow.cpp:300
 msgid "Ready…"
@@ -78,7 +78,7 @@ msgstr "%1%2 – Avogadro %3"
 
 #: mainwindow.cpp:673 mainwindow.cpp:1311
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Kemijski označni jezik"
 
 #: mainwindow.cpp:674 mainwindow.cpp:1310
 msgid "Chemical JSON"
@@ -96,7 +96,7 @@ msgstr "Datoteka se ne može otvoriti"
 #: mainwindow.cpp:699 mainwindow.cpp:723 mainwindow.cpp:1219
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Nije moguće otvoriti dostavljenu datoteku %1"
+msgstr "Nije moguće otvoriti isporučenu datoteku %1"
 
 #: mainwindow.cpp:712
 msgid "Open Molecule"
@@ -108,7 +108,7 @@ msgstr "Naredbe"
 
 #: mainwindow.cpp:736
 msgid "Input Generators"
-msgstr ""
+msgstr "Generatori unosa"
 
 #: mainwindow.cpp:736
 msgid "File Formats"
@@ -116,20 +116,19 @@ msgstr "Datotečni formati"
 
 #: mainwindow.cpp:740
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Instaliraj skriptu dodatka"
 
 #: mainwindow.cpp:740
 msgid "Script Type:"
-msgstr ""
+msgstr "Vrsta skripte:"
 
 #: mainwindow.cpp:788 mainwindow.cpp:1214
 msgid "Select file reader"
 msgstr "Odaberi čitač datoteka"
 
 #: mainwindow.cpp:817
-#, fuzzy
 msgid "Reading File"
-msgstr "Otvori datoteku"
+msgstr "Datoteka za čitanje"
 
 #: mainwindow.cpp:819
 #, qt-format
@@ -143,7 +142,7 @@ msgstr ""
 #: mainwindow.cpp:850
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molekula opterećena (%1 atoma, %2 veza)"
 
 #: mainwindow.cpp:855
 msgid "File error"
@@ -189,6 +188,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"Potreban je OpenGL 2.0 ili noviji, izlaz.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:933
 msgid "Unknown error"
@@ -240,6 +242,10 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Ova je datoteka uvezena iz nestandardnog formata koji možda neće moći "
+"upisati sve podatke u molekulu.\n"
+"\n"
+"Želiš li izvesti u trenutačni format ili spremiti u standardni format?"
 
 #: mainwindow.cpp:1292
 msgid "Export"
@@ -510,8 +516,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
-"verzija:</span></p></body></html>"
+"<html> <head/> <body> <p> <span style=\" font-size:10pt; font-weight:600;\"> "
+"Qt verzija: </span> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -522,9 +528,9 @@ msgid ""
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">Licenca: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+">Licenca: </span><a href=\"https://opensource.org/licenses/BSD-3 klauzula\""
 "><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
-">BSD 3-klauzula</span></a></p></body></html>"
+">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:264
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -748,15 +754,7 @@ msgstr "&Uvezi"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
-",Launchpad Contributions:,moliver, ,Launchpad Contributions:,Avogadro Team,"
-"moliver, ,Launchpad Contributions:,Avogadro Team,moliver, ,Launchpad "
-"Contributions:,Avogadro Team,moliver, ,Launchpad Contributions:,Avogadro "
-"Team,moliver, ,Launchpad Contributions:,Avogadro Team,moliver, ,Launchpad "
-"Contributions:,Avogadro Team,moliver, ,Launchpad Contributions:,Avogadro "
-"Team,Oliver Mucafir,moliver, ,Launchpad Contributions:,Avogadro Team,Geoff "
-"Hutchison,Oliver Mucafir,gogo,moliver, ,Launchpad Contributions:,Avogadro "
-"Team,Geoff Hutchison,Oliver Mucafir,gogo,moliver"
+msgstr "Oliver Mucafir, Geoff Hutchison, gogo, Milo Ivir"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
