@@ -516,10 +516,27 @@ void setDefaultViews(MultiViewWidget* viewWidget)
         qobject_cast<GLWidget*>(viewWidget->activeWidget())) {
 
     const ScenePluginModel* sceneModel = &glWidget->sceneModel();
+    bool anyPluginTrue = false;
+    // load plugins normally, if all non-ignore are false.
+    // restore the default behavior
     for (auto plugin : sceneModel->scenePlugins()) {
       QString settingsKey("MainWindow/" + plugin->objectName());
       bool enabled = settings.value(settingsKey, plugin->isEnabled()).toBool();
+      if (plugin->defaultBehavior() != ScenePlugin::DefaultBehavior::Ignore &&
+          enabled) {
+        anyPluginTrue = true;
+      }
       plugin->setEnabled(enabled);
+    }
+    if (!anyPluginTrue) {
+      for (auto plugin : sceneModel->scenePlugins()) {
+        QString settingsKey("MainWindow/" + plugin->objectName());
+        auto behavior = plugin->defaultBehavior();
+        if (behavior != ScenePlugin::DefaultBehavior::Ignore) {
+          plugin->setEnabled(behavior == ScenePlugin::DefaultBehavior::True);
+          settings.setValue(settingsKey, plugin->isEnabled());
+        }
+      }
     }
   }
 }
