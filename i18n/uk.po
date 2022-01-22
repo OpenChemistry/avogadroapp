@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-19 02:08+0000\n"
-"PO-Revision-Date: 2021-08-18 00:39+0000\n"
+"PO-Revision-Date: 2021-11-13 17:53+0000\n"
 "Last-Translator: Tymofii Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/uk/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.9.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -27,22 +27,20 @@ msgid "No molecule set in BackgroundFileFormat!"
 msgstr "У BackgroundFileFormat немає молекули!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
-#, fuzzy
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "Назви файлу не встановлено у BackgroundFileFormat!"
+msgstr "У BackgroundFileFormat не встановлено формат файлу!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "Назви файлу не встановлено у BackgroundFileFormat!"
 
 #: mainwindow.cpp:300
-#, fuzzy
 msgid "Ready…"
-msgstr "Готові..."
+msgstr "Готово…"
 
 #: mainwindow.cpp:342
 msgid "Tool"
-msgstr "Знаряддя"
+msgstr "Засіб"
 
 #: mainwindow.cpp:346
 msgid "Display Types"
@@ -58,28 +56,26 @@ msgstr "Молекули"
 
 #: mainwindow.cpp:372
 msgid "Layers"
-msgstr ""
+msgstr "Шари"
 
 #: mainwindow.cpp:391
-#, fuzzy
 msgid "File"
-msgstr "&Файл"
+msgstr "Файл"
 
 #: mainwindow.cpp:396
-#, fuzzy
 msgid "Tools"
-msgstr "Знаряддя"
+msgstr "Засоби"
 
 #: mainwindow.cpp:612
 msgid "Untitled"
 msgstr "Без назви"
 
 #: mainwindow.cpp:617
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "%1%2 - Avogadro %3"
+msgstr "%1%2 - Авоґадро %3"
 
 #: mainwindow.cpp:673 mainwindow.cpp:1311
 msgid "Chemical Markup Language"
@@ -101,32 +97,31 @@ msgstr "Не вдається відкрити файл"
 #: mainwindow.cpp:699 mainwindow.cpp:723 mainwindow.cpp:1219
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Не вдається зберегти файл %1."
+msgstr "Не вдається відкрити наданий файл %1"
 
 #: mainwindow.cpp:712
 msgid "Open Molecule"
-msgstr "Відкрити молекулу"
+msgstr "Відкрита молекула"
 
 #: mainwindow.cpp:736
 msgid "Commands"
-msgstr ""
+msgstr "Команди"
 
 #: mainwindow.cpp:736
 msgid "Input Generators"
-msgstr ""
+msgstr "Генератори вхідних даних"
 
 #: mainwindow.cpp:736
-#, fuzzy
 msgid "File Formats"
-msgstr "Помилка файлу"
+msgstr "Формат файлу:"
 
 #: mainwindow.cpp:740
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Установити скрипт плагіна"
 
 #: mainwindow.cpp:740
 msgid "Script Type:"
-msgstr ""
+msgstr "Тип скрипта:"
 
 #: mainwindow.cpp:788 mainwindow.cpp:1214
 msgid "Select file reader"
@@ -402,7 +397,7 @@ msgstr "Встановити колір &тла..."
 
 #: mainwindow.cpp:1769
 msgid "Projection"
-msgstr "Проекція"
+msgstr "Проєкція"
 
 #: mainwindow.cpp:1770
 msgid "Perspective"

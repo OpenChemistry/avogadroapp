@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2021-09-19 02:08+0000\n"
-"PO-Revision-Date: 2021-09-23 13:36+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2021-12-22 05:53+0000\n"
+"Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
 "Language: id\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.10\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -28,18 +28,16 @@ msgid "No molecule set in BackgroundFileFormat!"
 msgstr "Tidak ada molekul yang diatur dalam Format File Latar Belakang!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
-#, fuzzy
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "Tidak ada nama file di setel dalam file format latarbelakang!"
+msgstr "Tidak ada format file yang diatur di BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "Tidak ada nama file di setel dalam file format latarbelakang!"
 
 #: mainwindow.cpp:300
-#, fuzzy
 msgid "Ready…"
-msgstr "Siap..."
+msgstr "Siap…"
 
 #: mainwindow.cpp:342
 msgid "Tool"
@@ -51,7 +49,7 @@ msgstr "Tipe Tampilan"
 
 #: mainwindow.cpp:357
 msgid "View Configuration"
-msgstr "Lihat Setingan"
+msgstr "Lihat Konfigurasi"
 
 #: mainwindow.cpp:363
 msgid "Molecules"
@@ -59,15 +57,13 @@ msgstr "Molekul"
 
 #: mainwindow.cpp:372
 msgid "Layers"
-msgstr ""
+msgstr "Layer"
 
 #: mainwindow.cpp:391
-#, fuzzy
 msgid "File"
-msgstr "&Berkas"
+msgstr "Berkas"
 
 #: mainwindow.cpp:396
-#, fuzzy
 msgid "Tools"
 msgstr "Alat"
 
@@ -76,7 +72,7 @@ msgid "Untitled"
 msgstr "Tanpa judul"
 
 #: mainwindow.cpp:617
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
@@ -117,9 +113,8 @@ msgid "Input Generators"
 msgstr ""
 
 #: mainwindow.cpp:736
-#, fuzzy
 msgid "File Formats"
-msgstr "File rusak:"
+msgstr "Format file"
 
 #: mainwindow.cpp:740
 msgid "Install Plugin Script"
@@ -153,7 +148,7 @@ msgstr "Molekul dimuat (%1 atoms, %2 bonds)"
 
 #: mainwindow.cpp:855
 msgid "File error"
-msgstr "File rusak:"
+msgstr "File error"
 
 #: mainwindow.cpp:856
 #, qt-format
@@ -165,24 +160,23 @@ msgstr ""
 "%2"
 
 #: mainwindow.cpp:883
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Tidak bisa menyimpan berkas %1."
+msgstr "File tersimpan %1"
 
 #: mainwindow.cpp:891
-#, fuzzy
 msgid "Error saving file"
-msgstr "Rusak saat memulai RPC server:"
+msgstr "Error saat menyimpan file"
 
 #: mainwindow.cpp:892
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
-"Rusak saat membaca file '%1':\n"
+"Error saat menyimpan '%1':\n"
 "%2"
 
 #: mainwindow.cpp:931
@@ -308,14 +302,12 @@ msgid "&Testing"
 msgstr "&Mencoba"
 
 #: mainwindow.cpp:1624
-#, fuzzy
 msgid "Record test…"
-msgstr "Rekam Percobaan..."
+msgstr "Rekam Percobaan…"
 
 #: mainwindow.cpp:1627
-#, fuzzy
 msgid "Play test…"
-msgstr "Mainkan Percobaan..."
+msgstr "Mainkan tes…"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -328,9 +320,8 @@ msgstr "&Baru"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1652:51
-#, fuzzy
 msgid "&Open…"
-msgstr "&Buka"
+msgstr "&Buka…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -351,9 +342,8 @@ msgstr "&Simpan"
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1684:102
-#, fuzzy
 msgid "Save &As…"
-msgstr "Simpan sebagai..."
+msgstr "Simpan &sebagai…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -362,14 +352,12 @@ msgid "&Export"
 msgstr "&Ekspor"
 
 #: mainwindow.cpp:1696
-#, fuzzy
 msgid "&Molecule…"
-msgstr "Molekul"
+msgstr "&Molekul…"
 
 #: mainwindow.cpp:1704
-#, fuzzy
 msgid "&Graphics…"
-msgstr "&Grafiks..."
+msgstr "&Grafik…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -396,9 +384,8 @@ msgid "&View"
 msgstr "&Tampilkan"
 
 #: mainwindow.cpp:1761
-#, fuzzy
 msgid "Set Background Color…"
-msgstr "Atur Warna &Latarbelakang..."
+msgstr "Atur Warna &Latar belakang…"
 
 #: mainwindow.cpp:1769
 msgid "Projection"
@@ -426,9 +413,8 @@ msgid "All supported formats (%1);;All files (*);;"
 msgstr "Semua Format yang di dukung (%1);;Semua File (*);;"
 
 #: mainwindow.cpp:1936
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
-msgstr "Apakah anda akan menyimpan perubahan yang ada di dokumen?"
+msgstr "Apakah Anda ingin menyimpan perubahan ke dokumen?"
 
 #: mainwindow.cpp:1944
 msgid "Your changes will be lost if you don't save them."
@@ -450,9 +436,8 @@ msgid "Error while loading the “%1” file format."
 msgstr "Kesalahan saat memuat format file “%1”."
 
 #: mainwindow.cpp:2034
-#, fuzzy
 msgid "Select file format"
-msgstr "Pilih file yang akan dibaca"
+msgstr "Pilih format file"
 
 #: mainwindow.cpp:2039 mainwindow.cpp:2050
 #, qt-format
@@ -538,54 +523,38 @@ msgstr ""
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-#| "\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
-#| "\"><span style=\" font-size:10pt; text-decoration: underline; color:"
-#| "#0000ff;\">BSD-3-Clause</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause"
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">Lisensi: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
-"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
-"\">BSD-3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Lisensi: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:264
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span "
-#| "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
-#| "org</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
-"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
-"span></a></p></body></html>"
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
+" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:293
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" "
-#| "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></"
-#| "p></body></html>"
 msgid ""
 "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
 "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
-"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
-"body></html>"
+"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:320
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -594,8 +563,6 @@ msgstr "Ok"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
@@ -607,8 +574,6 @@ msgstr "&Buka"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -625,32 +590,24 @@ msgstr "&Hapus Terkini"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+N"
 msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+W"
 msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Shift+S"
@@ -662,9 +619,8 @@ msgstr "Balik ke yang disimpan"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
-msgstr "Atur Warna &Latarbelakang..."
+msgstr "Setel &Warna Latar…"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -673,16 +629,12 @@ msgstr "&Tentang"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Z"
 msgctxt "Undo"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+Z"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
@@ -704,8 +656,6 @@ msgstr "Tempelkan"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+V"
 msgctxt "Paste"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
@@ -717,8 +667,6 @@ msgstr "Salin"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+C"
 msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
@@ -730,8 +678,6 @@ msgstr "Potong"
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+X"
 msgctxt "Cut"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
@@ -748,8 +694,6 @@ msgstr "Pilih Semua"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
@@ -761,8 +705,6 @@ msgstr "Tidak Ada yang dipilih"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
@@ -815,18 +757,19 @@ msgstr "&Impor"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-",Launchpad Contributions:,Waluyo Adi Siswanto, ,Launchpad Contributions:, ,"
-"Launchpad Contributions:,Geoff Hutchison,Waluyo Adi Siswanto, ,Launchpad "
-"Contributions:,Avogadro Team,Geoff Hutchison,Waluyo Adi Siswanto, ,Launchpad "
-"Contributions:,Avogadro Team,Geoff Hutchison,Waluyo Adi Siswanto, ,Launchpad "
-"Contributions:,Avogadro Team,Geoff Hutchison,Waluyo Adi Siswanto, ,Launchpad "
-"Contributions:,Avogadro Team,Geoff Hutchison,Waluyo Adi Siswanto, ,Launchpad "
-"Contributions:,Avogadro Team,Geoff Hutchison,Waluyo Adi Siswanto, ,Launchpad "
-"Contributions:,Avogadro Team,Geoff Hutchison,Waluyo Adi Siswanto, ,Launchpad "
-"Contributions:,Avogadro Team,Geoff Hutchison,Muhammad Radifar,Waluyo Adi "
+",Launchpad Contributions:,Waluyo Adi Siswanto, ,Launchpad Contributions:"
+",Geoff Hutchison,Waluyo Adi Siswanto, ,Launchpad Contributions:,Geoff "
+"Hutchison,Waluyo Adi Siswanto, ,Launchpad Contributions:,Avogadro Team,Geoff "
+"Hutchison,Waluyo Adi Siswanto, ,Launchpad Contributions:,Avogadro Team,Geoff "
+"Hutchison,Waluyo Adi Siswanto, ,Launchpad Contributions:,Avogadro Team,Geoff "
+"Hutchison,Waluyo Adi Siswanto, ,Launchpad Contributions:,Avogadro Team,Geoff "
+"Hutchison,Waluyo Adi Siswanto, ,Launchpad Contributions:,Avogadro Team,Geoff "
+"Hutchison,Waluyo Adi Siswanto, ,Launchpad Contributions:,Avogadro Team,Geoff "
+"Hutchison,Waluyo Adi Siswanto, ,Launchpad Contributions:,Avogadro Team,Geoff "
+"Hutchison,Muhammad Radifar,Waluyo Adi Siswanto, ,Launchpad Contributions:"
+",Avogadro Team,Geoff Hutchison,Muhammad Radifar,Samsul Ma'arif,Waluyo Adi "
 "Siswanto, ,Launchpad Contributions:,Avogadro Team,Geoff Hutchison,Muhammad "
-"Radifar,Waluyo Adi Siswanto, ,Launchpad Contributions:,Aang Suhendar,"
-"Avogadro Team,Geoff Hutchison,Muhammad Radifar,Waluyo Adi Siswanto"
+"Radifar,Samsul Ma'arif,Waluyo Adi Siswanto"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
