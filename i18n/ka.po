@@ -1,0 +1,758 @@
+# Translations for the Avogadro molecular builder.
+# Copyright (C) 2006-2021 The Avogadro Project
+# This file is distributed under the same license as the Avogadro package.
+# Temuri Doghonadze <temuri@delta-net.ge>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: Avogadro 1.95.1\n"
+"Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2021-09-19 02:08+0000\n"
+"PO-Revision-Date: 2022-01-30 04:52+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri@delta-net.ge>\n"
+"Language-Team: Georgian <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/ka/>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.11-dev\n"
+
+#: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
+msgid "No molecule set in BackgroundFileFormat!"
+msgstr "BackgroundFileFormat-ში მოლეკულა დაყენებული არაა!"
+
+#: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
+msgid "No file format set in BackgroundFileFormat!"
+msgstr "BackgroundFileFormat-ში ფაილის ფორმატი მითითებული არაა!"
+
+#: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
+msgid "No file name set in BackgroundFileFormat!"
+msgstr "BackgroundFileFormat-ში ფაილის სახელი მითითებული არაა!"
+
+#: mainwindow.cpp:300
+msgid "Ready…"
+msgstr "მზადაა…"
+
+#: mainwindow.cpp:342
+msgid "Tool"
+msgstr "ხელსაწყო"
+
+#: mainwindow.cpp:346
+msgid "Display Types"
+msgstr "ჩვენების ტიპები"
+
+#: mainwindow.cpp:357
+msgid "View Configuration"
+msgstr "კონფიგურაციის ნახვა"
+
+#: mainwindow.cpp:363
+msgid "Molecules"
+msgstr "მოლეკულები"
+
+#: mainwindow.cpp:372
+msgid "Layers"
+msgstr "ფენები"
+
+#: mainwindow.cpp:391
+msgid "File"
+msgstr "ფაილი"
+
+#: mainwindow.cpp:396
+msgid "Tools"
+msgstr "ხელსაწყოები"
+
+#: mainwindow.cpp:612
+msgid "Untitled"
+msgstr "უსახელო"
+
+#: mainwindow.cpp:617
+#, qt-format
+msgctxt ""
+"window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
+msgid "%1%2 - Avogadro %3"
+msgstr "%1%2 - Avogadro %3"
+
+#: mainwindow.cpp:673 mainwindow.cpp:1311
+msgid "Chemical Markup Language"
+msgstr "Chemical Markup Language - ენა"
+
+#: mainwindow.cpp:674 mainwindow.cpp:1310
+msgid "Chemical JSON"
+msgstr "ქიმიური JSON"
+
+#: mainwindow.cpp:680
+msgid "Open chemical file"
+msgstr "ნაერთის ფაილის გახსნა"
+
+#: mainwindow.cpp:698 mainwindow.cpp:722 mainwindow.cpp:1218
+#: mainwindow.cpp:2038
+msgid "Cannot open file"
+msgstr "ფაილის გახსნის შეცდომა"
+
+#: mainwindow.cpp:699 mainwindow.cpp:723 mainwindow.cpp:1219
+#, qt-format
+msgid "Can't open supplied file %1"
+msgstr "მითითებული ფაილის %1 გახსნის შეცდომა"
+
+#: mainwindow.cpp:712
+msgid "Open Molecule"
+msgstr "მოლეკულის გახსნა"
+
+#: mainwindow.cpp:736
+msgid "Commands"
+msgstr "ბრძანებები"
+
+#: mainwindow.cpp:736
+msgid "Input Generators"
+msgstr "შემოტანის გენერატორები"
+
+#: mainwindow.cpp:736
+msgid "File Formats"
+msgstr "ფაილის ფორმატები"
+
+#: mainwindow.cpp:740
+msgid "Install Plugin Script"
+msgstr "დამატების სკრიპტის დაყენება"
+
+#: mainwindow.cpp:740
+msgid "Script Type:"
+msgstr "სკრიპტის ტიპი:"
+
+#: mainwindow.cpp:788 mainwindow.cpp:1214
+msgid "Select file reader"
+msgstr "აირჩიეთ ფაილის წამკითხველი"
+
+#: mainwindow.cpp:817
+msgid "Reading File"
+msgstr "ფაილის კითხვა"
+
+#: mainwindow.cpp:819
+#, qt-format
+msgid ""
+"Opening file '%1'\n"
+"with '%2'"
+msgstr ""
+"ფაილის %1 გახსნა:\n"
+"%2-ით"
+
+#: mainwindow.cpp:850
+#, qt-format
+msgid "Molecule loaded (%1 atoms, %2 bonds)"
+msgstr "მოლეკულა ჩაიტვირთა (%1 ატომი, %2 ბმა)"
+
+#: mainwindow.cpp:855
+msgid "File error"
+msgstr "ფაილის შეცდომა"
+
+#: mainwindow.cpp:856
+#, qt-format
+msgid ""
+"Error while reading file '%1':\n"
+"%2"
+msgstr ""
+"ფაილის %1 კითხვის შეცდომა:\n"
+"%2"
+
+#: mainwindow.cpp:883
+#, qt-format
+msgctxt "%1 = filename"
+msgid "Saved file %1"
+msgstr "ფაილი %1 ჩაწერილია"
+
+#: mainwindow.cpp:891
+msgid "Error saving file"
+msgstr "ფაილის ჩაწერის შეცდომა"
+
+#: mainwindow.cpp:892
+#, qt-format
+msgctxt "%1 = file name, %2 = error message"
+msgid ""
+"Error while saving '%1':\n"
+"%2"
+msgstr ""
+"%1-ის ჩაწერის შეცდომა:\n"
+"%2"
+
+#: mainwindow.cpp:931
+msgid "Error: Failed to initialize OpenGL context"
+msgstr "შეცდომა: OpenGL-ის ინიციალიზაციის პრობლემა"
+
+#: mainwindow.cpp:932
+#, qt-format
+msgid ""
+"OpenGL 2.0 or greater required, exiting.\n"
+"\n"
+"%1"
+msgstr ""
+"საჭიროა OpenGL 2.0 ან უფრო ახალი. გამოსვლა.\n"
+"\n"
+"%1"
+
+#: mainwindow.cpp:933
+msgid "Unknown error"
+msgstr "უცნობი შეცდომა"
+
+#: mainwindow.cpp:1059 mainwindow.cpp:1060
+msgid "Navigate tool"
+msgstr "ნავიგაციის ხელსაწყო"
+
+#: mainwindow.cpp:1136
+msgid "Common image formats"
+msgstr "გამოსახულების გავრცელებული ფორმატები"
+
+#: mainwindow.cpp:1138
+msgid "All files"
+msgstr "ყველა ფაილი"
+
+#: mainwindow.cpp:1138
+msgid "BMP"
+msgstr "BMP"
+
+#: mainwindow.cpp:1139
+msgid "PNG"
+msgstr "PNG"
+
+#: mainwindow.cpp:1139
+msgid "JPEG"
+msgstr "JPEG"
+
+#: mainwindow.cpp:1148
+msgid "Export Bitmap Graphics"
+msgstr "Bitmap გრაფიკის ექსპორტი"
+
+#. i18n: file: mainwindow.ui:14
+#. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
+#: mainwindow.cpp:1187 mainwindow.cpp:1284 mainwindow.cpp:1935 :33
+msgid "Avogadro"
+msgstr "Avogadro"
+
+#: mainwindow.cpp:1188
+#, qt-format
+msgid "Cannot save file %1."
+msgstr "ფაილის შენახვის შეცდომა: %1 ."
+
+#: mainwindow.cpp:1285
+msgid ""
+"This file was imported from a non-standard format which may not be able to "
+"write all of the information in the molecule.\n"
+"\n"
+"Would you like to export to the current format, or save in a standard format?"
+msgstr ""
+"ეს ფაილი შემოტანილია არასტანდარტული ფორმატით, რომელსაც შეიძლება არ აქვს "
+"მხარდაჭერა მოლეკულის შესახებ სრული ინფორმაციის ჩასაწერად.\n"
+"\n"
+"გნებავთ ამავე ფორმატში გატანა თუ შევინახო სტანდარტულ ფორმატში?"
+
+#: mainwindow.cpp:1292
+msgid "Export"
+msgstr "გატანა"
+
+#: mainwindow.cpp:1317
+msgid "Save chemical file"
+msgstr "ნაერთის ფაილის შენახვა"
+
+#: mainwindow.cpp:1345
+msgid "Export Molecule"
+msgstr "მოლეკულის გატანა"
+
+#: mainwindow.cpp:1397
+msgid "Saving File in Progress…"
+msgstr "ფაილის შენახვა…"
+
+#: mainwindow.cpp:1399
+#, qt-format
+msgctxt "%1 = file name, %2 = format"
+msgid ""
+"Saving file “%1”\n"
+"with “%2”"
+msgstr ""
+"ფაილის %1 ჩაწერა:\n"
+"%2-ით"
+
+#: mainwindow.cpp:1511
+#, qt-format
+msgid "&Undo %1"
+msgstr "&გაუქმება %1"
+
+#. i18n: file: mainwindow.ui:194
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1514 mainwindow.cpp:1741 :117
+msgid "&Undo"
+msgstr "&დაბრუნება"
+
+#: mainwindow.cpp:1519
+#, qt-format
+msgid "&Redo %1"
+msgstr "&თავიდან %1"
+
+#. i18n: file: mainwindow.ui:206
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1522 mainwindow.cpp:1746 :123
+msgid "&Redo"
+msgstr "&თავიდან"
+
+#: mainwindow.cpp:1622
+msgid "&Testing"
+msgstr "&გამოცდა"
+
+#: mainwindow.cpp:1624
+msgid "Record test…"
+msgstr "ჩაწერის გამოცდა…"
+
+#: mainwindow.cpp:1627
+msgid "Play test…"
+msgstr "ტესტის დაკვრა…"
+
+#. i18n: file: mainwindow.ui:121
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:129
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1643 :75 rc.cpp:81
+msgid "&New"
+msgstr "&ახალი"
+
+#. i18n: file: mainwindow.ui:82
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1652 :51
+msgid "&Open…"
+msgstr "&გახსნა…"
+
+#. i18n: file: mainwindow.ui:134
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:142
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1661 :84 rc.cpp:90
+msgid "&Close"
+msgstr "&დახურვა"
+
+#. i18n: file: mainwindow.ui:147
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:155
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1675 :93 rc.cpp:99
+msgid "&Save"
+msgstr "&შენახვა"
+
+#. i18n: file: mainwindow.ui:160
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1684 :102
+msgid "Save &As…"
+msgstr "შენახვა &როგორც…"
+
+#. i18n: file: mainwindow.ui:328
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1695 :195
+msgid "&Export"
+msgstr "&გატანა"
+
+#: mainwindow.cpp:1696
+msgid "&Molecule…"
+msgstr "&მოლეკულა…"
+
+#: mainwindow.cpp:1704
+msgid "&Graphics…"
+msgstr "&გრაფიკა…"
+
+#. i18n: file: mainwindow.ui:95
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#. i18n: file: mainwindow.ui:106
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1712 :60 rc.cpp:66
+msgid "&Quit"
+msgstr "&გასვლა"
+
+#: mainwindow.cpp:1734
+msgid "No recent files"
+msgstr "უახლესი ფაილების გარეშე"
+
+#. i18n: file: mainwindow.ui:59
+#. i18n: ectx: property (title), widget (QMenu, menuEdit)
+#: mainwindow.cpp:1740 menubuilder.cpp:76 :45
+msgid "&Edit"
+msgstr "&ჩასწორება"
+
+#. i18n: file: mainwindow.ui:54
+#. i18n: ectx: property (title), widget (QMenu, menuView)
+#: mainwindow.cpp:1760 menubuilder.cpp:76 :42
+msgid "&View"
+msgstr "&ხედი"
+
+#: mainwindow.cpp:1761
+msgid "Set Background Color…"
+msgstr "ფონს ფერის დაყენება…"
+
+#: mainwindow.cpp:1769
+msgid "Projection"
+msgstr "&პროექცია"
+
+#: mainwindow.cpp:1770
+msgid "Perspective"
+msgstr "პერსპექტივა"
+
+#: mainwindow.cpp:1777
+msgid "Orthographic"
+msgstr "ორთოგრაფიული"
+
+#: mainwindow.cpp:1796
+msgid "&Extensions"
+msgstr "&გაფართოებები"
+
+#: mainwindow.cpp:1803 menubuilder.cpp:80
+msgid "&Help"
+msgstr "&დახმარება"
+
+#: mainwindow.cpp:1920
+#, qt-format
+msgid "All supported formats (%1);;All files (*);;"
+msgstr "ყველა მხარდაჭერილი ფორმატი (%1);;ყველა ფაილი (*);;"
+
+#: mainwindow.cpp:1936
+msgid "Do you want to save the changes to the document?"
+msgstr "გნებავთ დოკუმენტის ცვლილებების შენახვა?"
+
+#: mainwindow.cpp:1944
+msgid "Your changes will be lost if you don't save them."
+msgstr "თქვენი ცვლილებები დაიკარგება, თუ არ შეინახავთ."
+
+#: mainwindow.cpp:1952
+msgctxt "Save"
+msgid "Ctrl+S"
+msgstr "Ctrl+S"
+
+#: mainwindow.cpp:1954
+msgctxt "Discard"
+msgid "Ctrl+D"
+msgstr "Ctrl+D"
+
+#: mainwindow.cpp:2018
+#, qt-format
+msgid "Error while loading the “%1” file format."
+msgstr "შეცდომა ფაილის ტიპ %1-ის კითხვისას."
+
+#: mainwindow.cpp:2034
+msgid "Select file format"
+msgstr "აირჩიეთ ფაილის ფორმატი"
+
+#: mainwindow.cpp:2039 mainwindow.cpp:2050
+#, qt-format
+msgid "Avogadro cannot open “%1”."
+msgstr "Avogadro-მა ვერ გახსნა %1."
+
+#: mainwindow.cpp:2049
+msgid "Cannot open files"
+msgstr "ფაილის გახსნის შეცდომა"
+
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: menubuilder.cpp:76 :36
+msgid "&File"
+msgstr "&ფაილი"
+
+#. i18n: file: mainwindow.ui:49
+#. i18n: ectx: property (title), widget (QMenu, menuBuild)
+#: menubuilder.cpp:76 :39
+msgid "&Build"
+msgstr "&აშენება"
+
+#. i18n: file: mainwindow.ui:71
+#. i18n: ectx: property (title), widget (QMenu, menuSelect)
+#: menubuilder.cpp:77 :48
+msgid "&Select"
+msgstr "&მონიშვნა"
+
+#: menubuilder.cpp:80
+msgid "Se&ttings"
+msgstr "&მორგება"
+
+#: menubuilder.cpp:80
+msgid "&Window"
+msgstr "&ფანჯარა"
+
+#. i18n: file: aboutdialog.ui:62
+#. i18n: ectx: property (text), widget (QLabel, versionLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
+"\">Version:</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\""
+">ვერსია:</span></p></body></html>"
+
+#. i18n: file: aboutdialog.ui:75
+#. i18n: ectx: property (text), widget (QLabel, version)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0."
+"1</span></p></body></html>"
+
+#. i18n: file: aboutdialog.ui:117
+#. i18n: ectx: property (text), widget (QLabel, libs)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">AvogadroLibs Version:</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">AvogadroLibs-ის ვერსია:</span></p></body></html>"
+
+#. i18n: file: aboutdialog.ui:124
+#. i18n: ectx: property (text), widget (QLabel, libsVersion)
+#. i18n: file: aboutdialog.ui:171
+#. i18n: ectx: property (text), widget (QLabel, qtVersion)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0."
+"1</span></p></body></html>"
+
+#. i18n: file: aboutdialog.ui:164
+#. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
+"Version:</span></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt-"
+"ის ვერსია:</span></p></body></html>"
+
+#. i18n: file: aboutdialog.ui:224
+#. i18n: ectx: property (text), widget (QLabel, licenseLabel)
+msgid ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause"
+"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
+"\">BSD 3-Clause</span></a></p></body></html>"
+msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">ლიცენზია: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD 3-Clause</span></a></p></body></html>"
+
+#. i18n: file: aboutdialog.ui:264
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+msgid ""
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"span></a></p></body></html>"
+msgstr ""
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
+
+#. i18n: file: aboutdialog.ui:293
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid ""
+"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"body></html>"
+msgstr ""
+"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
+
+#. i18n: file: aboutdialog.ui:320
+#. i18n: ectx: property (text), widget (QPushButton, OK)
+msgid "OK"
+msgstr "დიახ"
+
+#. i18n: file: mainwindow.ui:85
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "File | Open"
+msgid "Ctrl+O"
+msgstr "Ctrl+O"
+
+#. i18n: file: mainwindow.ui:90
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Open"
+msgstr "&გახსნა"
+
+#. i18n: file: mainwindow.ui:98
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "File | Quit"
+msgid "Ctrl+Q"
+msgstr "Ctrl+Q"
+
+#. i18n: file: mainwindow.ui:111
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Recent"
+msgstr "უახლესი"
+
+#. i18n: file: mainwindow.ui:116
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Clear Recent"
+msgstr "&ბოლოების გასუფთავება"
+
+#. i18n: file: mainwindow.ui:124
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "File | New"
+msgid "Ctrl+N"
+msgstr "Ctrl+N"
+
+#. i18n: file: mainwindow.ui:137
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "File | Close"
+msgid "Ctrl+W"
+msgstr "Ctrl+W"
+
+#. i18n: file: mainwindow.ui:150
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "File | Save"
+msgid "Ctrl+S"
+msgstr "Ctrl+S"
+
+#. i18n: file: mainwindow.ui:163
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "File | Save As"
+msgid "Ctrl+Shift+S"
+msgstr "Ctrl+Shift+S"
+
+#. i18n: file: mainwindow.ui:168
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Revert To Saved"
+msgstr "შენახულზე დაბრუნდება"
+
+#. i18n: file: mainwindow.ui:177
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Set &Background Color…"
+msgstr "ფო&ნის ფერის დაყენება…"
+
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&About"
+msgstr "&შესახებ"
+
+#. i18n: file: mainwindow.ui:197
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "Undo"
+msgid "Ctrl+Z"
+msgstr "Ctrl+Z"
+
+#. i18n: file: mainwindow.ui:209
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "Redo"
+msgid "Ctrl+Shift+Z"
+msgstr "Ctrl+Shift+Z"
+
+#. i18n: file: mainwindow.ui:218
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Center"
+msgstr "ცენტრი"
+
+#. i18n: file: mainwindow.ui:227
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Align View To Axes"
+msgstr "ხედის ღერძე სწორება"
+
+#. i18n: file: mainwindow.ui:232
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Paste"
+msgstr "ჩასმა"
+
+#. i18n: file: mainwindow.ui:235
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "Paste"
+msgid "Ctrl+V"
+msgstr "Ctrl+V"
+
+#. i18n: file: mainwindow.ui:240
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Copy"
+msgstr "კოპირება"
+
+#. i18n: file: mainwindow.ui:243
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "Copy"
+msgid "Ctrl+C"
+msgstr "Ctrl+C"
+
+#. i18n: file: mainwindow.ui:248
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Cut"
+msgstr "ამოჭრა"
+
+#. i18n: file: mainwindow.ui:251
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "Cut"
+msgid "Ctrl+X"
+msgstr "Ctrl+X"
+
+#. i18n: file: mainwindow.ui:256
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Clear"
+msgstr "გასუფთავება"
+
+#. i18n: file: mainwindow.ui:261
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Select All"
+msgstr "ყველაფრის მონიშვნა"
+
+#. i18n: file: mainwindow.ui:264
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "Select All"
+msgid "Ctrl+A"
+msgstr "Ctrl+A"
+
+#. i18n: file: mainwindow.ui:269
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Select None"
+msgstr "მონიშვნის მოხსნა"
+
+#. i18n: file: mainwindow.ui:272
+#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+msgctxt "Select None"
+msgid "Ctrl+Shift+A"
+msgstr "Ctrl+Shift+A"
+
+#. i18n: file: mainwindow.ui:280
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Tutorials"
+msgstr "სახელმძღვანელოები"
+
+#. i18n: file: mainwindow.ui:288
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Avogadro Help"
+msgstr "Avogadro-ის დახმარება"
+
+#. i18n: file: mainwindow.ui:293
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Release Notes"
+msgstr "გამოცემის შენიშვნები"
+
+#. i18n: file: mainwindow.ui:298
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Report a Bug"
+msgstr "შეცდომის პატაკი"
+
+#. i18n: file: mainwindow.ui:303
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "FAQ"
+msgstr "ხ.დ.კ."
+
+#. i18n: file: mainwindow.ui:308
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Avogadro Website"
+msgstr "Avogadro-ის ვებგვერდი"
+
+#. i18n: file: mainwindow.ui:313
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Discussion Forum"
+msgstr "ფორუმი"
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "Open Recent"
+msgstr "ბოლო ფალის გახსნა"
+
+#. i18n: file: mainwindow.ui:323
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+msgid "&Import"
+msgstr "&შემოტანა"
+
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Temuri Doghonadze"
+
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "temuri.doghonadze@gmail.com"
