@@ -1279,6 +1279,11 @@ bool MainWindow::saveFile(bool async)
   QString extension =
     QFileInfo(QString::fromStdString(fileName)).suffix().toLower();
 
+  if (extension.isEmpty()) {
+    fileName += ".cjson";
+    extension = QLatin1String("cjson");
+  }
+
   // Was the original format standard, or imported?
   if (extension == QLatin1String("cml")) {
     return saveFileAs(QString::fromStdString(fileName), new Io::CmlFormat,
@@ -1348,7 +1353,7 @@ bool MainWindow::saveFileAs(bool async)
   else if (extension == "cml")
     writer = new Io::CmlFormat;
   if (extension.isEmpty())
-    fileName += ".cml";
+    fileName += ".cjson";
 
   return saveFileAs(fileName, writer, async);
 }
