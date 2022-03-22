@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-19 02:08+0000\n"
+"POT-Creation-Date: 2022-03-20 02:22+0000\n"
 "PO-Revision-Date: 2021-09-12 21:32+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
@@ -65,88 +65,88 @@ msgstr "ファイル"
 msgid "Tools"
 msgstr "ツール"
 
-#: mainwindow.cpp:612
+#: mainwindow.cpp:629
 msgid "Untitled"
 msgstr "無題"
 
-#: mainwindow.cpp:617
+#: mainwindow.cpp:634
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Avogadro %3"
 
-#: mainwindow.cpp:673 mainwindow.cpp:1311
+#: mainwindow.cpp:690 mainwindow.cpp:1328
 msgid "Chemical Markup Language"
 msgstr ""
 
-#: mainwindow.cpp:674 mainwindow.cpp:1310
+#: mainwindow.cpp:691 mainwindow.cpp:1327
 msgid "Chemical JSON"
 msgstr ""
 
-#: mainwindow.cpp:680
+#: mainwindow.cpp:697
 msgid "Open chemical file"
 msgstr ""
 
-#: mainwindow.cpp:698 mainwindow.cpp:722 mainwindow.cpp:1218
-#: mainwindow.cpp:2038
+#: mainwindow.cpp:715 mainwindow.cpp:739 mainwindow.cpp:1235
+#: mainwindow.cpp:2055
 msgid "Cannot open file"
 msgstr "ファイルを開けません"
 
-#: mainwindow.cpp:699 mainwindow.cpp:723 mainwindow.cpp:1219
+#: mainwindow.cpp:716 mainwindow.cpp:740 mainwindow.cpp:1236
 #, fuzzy, qt-format
 msgid "Can't open supplied file %1"
 msgstr "ファイル %1 を保存できません"
 
-#: mainwindow.cpp:712
+#: mainwindow.cpp:729
 msgid "Open Molecule"
 msgstr "分子を開く"
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:753
 msgid "Commands"
 msgstr "コマンド"
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:753
 msgid "Input Generators"
 msgstr ""
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:753
 msgid "File Formats"
 msgstr "ファイル形式"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:757
 msgid "Install Plugin Script"
 msgstr "プラグインスクリプトをインストールする"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:757
 msgid "Script Type:"
 msgstr ""
 
-#: mainwindow.cpp:788 mainwindow.cpp:1214
+#: mainwindow.cpp:805 mainwindow.cpp:1231
 msgid "Select file reader"
 msgstr "ファイルリーダを選択"
 
-#: mainwindow.cpp:817
+#: mainwindow.cpp:834
 msgid "Reading File"
 msgstr "ファイルの読み込み中"
 
-#: mainwindow.cpp:819
+#: mainwindow.cpp:836
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
 
-#: mainwindow.cpp:850
+#: mainwindow.cpp:867
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
-#: mainwindow.cpp:855
+#: mainwindow.cpp:872
 msgid "File error"
 msgstr "ファイルエラー"
 
-#: mainwindow.cpp:856
+#: mainwindow.cpp:873
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -155,20 +155,20 @@ msgstr ""
 "ファイル '%1'の読み取り中にエラーが発生しました：\n"
 "%2"
 
-#: mainwindow.cpp:883
+#: mainwindow.cpp:900
 #, fuzzy, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "ファイル %1 を保存できません"
 
-#: mainwindow.cpp:891
+#: mainwindow.cpp:908
 #, fuzzy
 msgid "Error saving file"
 msgstr ""
 "ファイル '%1'の読み取り中にエラーが発生しました：\n"
 "%2"
 
-#: mainwindow.cpp:892
+#: mainwindow.cpp:909
 #, fuzzy, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -178,11 +178,11 @@ msgstr ""
 "ファイル '%1'の読み取り中にエラーが発生しました：\n"
 "%2"
 
-#: mainwindow.cpp:931
+#: mainwindow.cpp:948
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "エラー：OpenGLコンテキストの初期化に失敗しました"
 
-#: mainwindow.cpp:932
+#: mainwindow.cpp:949
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -190,50 +190,50 @@ msgid ""
 "%1"
 msgstr ""
 
-#: mainwindow.cpp:933
+#: mainwindow.cpp:950
 msgid "Unknown error"
 msgstr "不明なエラー"
 
-#: mainwindow.cpp:1059 mainwindow.cpp:1060
+#: mainwindow.cpp:1076 mainwindow.cpp:1077
 msgid "Navigate tool"
 msgstr ""
 
-#: mainwindow.cpp:1136
+#: mainwindow.cpp:1153
 msgid "Common image formats"
 msgstr "一般的な画像形式"
 
-#: mainwindow.cpp:1138
+#: mainwindow.cpp:1155
 msgid "All files"
 msgstr "全てのファイル"
 
-#: mainwindow.cpp:1138
+#: mainwindow.cpp:1155
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1139
+#: mainwindow.cpp:1156
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1139
+#: mainwindow.cpp:1156
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1148
+#: mainwindow.cpp:1165
 msgid "Export Bitmap Graphics"
 msgstr "ビットマップ画像のエクスポート"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1187 mainwindow.cpp:1284 mainwindow.cpp:1935:33
+#: mainwindow.cpp:1204 mainwindow.cpp:1301 mainwindow.cpp:1952:33
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1188
+#: mainwindow.cpp:1205
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "ファイル %1 を保存できません"
 
-#: mainwindow.cpp:1285
+#: mainwindow.cpp:1302
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -245,23 +245,23 @@ msgstr ""
 "\n"
 "現在の形式にエクスポートしますか、それとも標準形式で保存しますか？"
 
-#: mainwindow.cpp:1292
+#: mainwindow.cpp:1309
 msgid "Export"
 msgstr "エクスポート"
 
-#: mainwindow.cpp:1317
+#: mainwindow.cpp:1334
 msgid "Save chemical file"
 msgstr "化学ファイルを保存する"
 
-#: mainwindow.cpp:1345
+#: mainwindow.cpp:1362
 msgid "Export Molecule"
 msgstr "分子のエクスポート"
 
-#: mainwindow.cpp:1397
+#: mainwindow.cpp:1414
 msgid "Saving File in Progress…"
 msgstr ""
 
-#: mainwindow.cpp:1399
+#: mainwindow.cpp:1416
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -269,39 +269,39 @@ msgid ""
 "with “%2”"
 msgstr ""
 
-#: mainwindow.cpp:1511
+#: mainwindow.cpp:1528
 #, qt-format
 msgid "&Undo %1"
 msgstr "%1を元に戻す(&U)"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1514 mainwindow.cpp:1741:117
+#: mainwindow.cpp:1531 mainwindow.cpp:1758:117
 msgid "&Undo"
 msgstr "元に戻す(&U)"
 
-#: mainwindow.cpp:1519
+#: mainwindow.cpp:1536
 #, qt-format
 msgid "&Redo %1"
 msgstr "%1をやり直す(&R)"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1522 mainwindow.cpp:1746:123
+#: mainwindow.cpp:1539 mainwindow.cpp:1763:123
 msgid "&Redo"
 msgstr "やり直す(&R)"
 
-#: mainwindow.cpp:1622
+#: mainwindow.cpp:1639
 #, fuzzy
 msgid "&Testing"
 msgstr "テスト(&T)"
 
-#: mainwindow.cpp:1624
+#: mainwindow.cpp:1641
 #, fuzzy
 msgid "Record test…"
 msgstr "レコード テスト..."
 
-#: mainwindow.cpp:1627
+#: mainwindow.cpp:1644
 #, fuzzy
 msgid "Play test…"
 msgstr "プレイ テスト..."
@@ -310,13 +310,13 @@ msgstr "プレイ テスト..."
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1643:75 rc.cpp:81
+#: mainwindow.cpp:1660:75 rc.cpp:81
 msgid "&New"
 msgstr "新規作成(&N)"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1652:51
+#: mainwindow.cpp:1669:51
 msgid "&Open…"
 msgstr "開く(&O)…"
 
@@ -324,7 +324,7 @@ msgstr "開く(&O)…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1661:84 rc.cpp:90
+#: mainwindow.cpp:1678:84 rc.cpp:90
 msgid "&Close"
 msgstr "閉じる(&C)"
 
@@ -332,28 +332,28 @@ msgstr "閉じる(&C)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1675:93 rc.cpp:99
+#: mainwindow.cpp:1692:93 rc.cpp:99
 msgid "&Save"
 msgstr "保存(&S)"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1684:102
+#: mainwindow.cpp:1701:102
 msgid "Save &As…"
 msgstr "名前を付けて保存(&A) …"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1695:195
+#: mainwindow.cpp:1712:195
 msgid "&Export"
 msgstr "エクスポート (&E)"
 
-#: mainwindow.cpp:1696
+#: mainwindow.cpp:1713
 #, fuzzy
 msgid "&Molecule…"
 msgstr "分子"
 
-#: mainwindow.cpp:1704
+#: mainwindow.cpp:1721
 #, fuzzy
 msgid "&Graphics…"
 msgstr "グラフィックス(&G) ..."
@@ -362,90 +362,90 @@ msgstr "グラフィックス(&G) ..."
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1712:60 rc.cpp:66
+#: mainwindow.cpp:1729:60 rc.cpp:66
 msgid "&Quit"
 msgstr "終了(&Q)"
 
-#: mainwindow.cpp:1734
+#: mainwindow.cpp:1751
 msgid "No recent files"
 msgstr "最近のファイルはありません"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1740 menubuilder.cpp:76:45
+#: mainwindow.cpp:1757 menubuilder.cpp:76:45
 msgid "&Edit"
 msgstr "編集 (&E)"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1760 menubuilder.cpp:76:42
+#: mainwindow.cpp:1777 menubuilder.cpp:76:42
 msgid "&View"
 msgstr "表示 (&V)"
 
-#: mainwindow.cpp:1761
+#: mainwindow.cpp:1778
 #, fuzzy
 msgid "Set Background Color…"
 msgstr "背景色を設定(&B) ..."
 
-#: mainwindow.cpp:1769
+#: mainwindow.cpp:1786
 msgid "Projection"
 msgstr "投影法"
 
-#: mainwindow.cpp:1770
+#: mainwindow.cpp:1787
 msgid "Perspective"
 msgstr "透視投影法"
 
-#: mainwindow.cpp:1777
+#: mainwindow.cpp:1794
 msgid "Orthographic"
 msgstr "正投影法"
 
-#: mainwindow.cpp:1796
+#: mainwindow.cpp:1813
 msgid "&Extensions"
 msgstr "エクステンション (&E)"
 
-#: mainwindow.cpp:1803 menubuilder.cpp:80
+#: mainwindow.cpp:1820 menubuilder.cpp:80
 msgid "&Help"
 msgstr "ヘルプ(&H)"
 
-#: mainwindow.cpp:1920
+#: mainwindow.cpp:1937
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "サポートされているすべての形式（%1）;;すべてのファイル（*）;;"
 
-#: mainwindow.cpp:1936
+#: mainwindow.cpp:1953
 #, fuzzy
 msgid "Do you want to save the changes to the document?"
 msgstr "ドキュメントの変更内容を保存しますか？"
 
-#: mainwindow.cpp:1944
+#: mainwindow.cpp:1961
 msgid "Your changes will be lost if you don't save them."
 msgstr "保存しないと変更した部分は失われます。"
 
-#: mainwindow.cpp:1952
+#: mainwindow.cpp:1969
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:1954
+#: mainwindow.cpp:1971
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2018
+#: mainwindow.cpp:2035
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr ""
 
-#: mainwindow.cpp:2034
+#: mainwindow.cpp:2051
 msgid "Select file format"
 msgstr "ファイル形式を選択"
 
-#: mainwindow.cpp:2039 mainwindow.cpp:2050
+#: mainwindow.cpp:2056 mainwindow.cpp:2067
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Avogadroは「%1」を開くことができません。"
 
-#: mainwindow.cpp:2049
+#: mainwindow.cpp:2066
 msgid "Cannot open files"
 msgstr "ファイルを開くことができません"
 
