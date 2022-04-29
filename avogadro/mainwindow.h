@@ -305,7 +305,11 @@ private slots:
    */
   void viewActivated(QWidget* widget);
 
+  QImage renderToImage(const QSize& size);
+
   void exportGraphics();
+
+  void copyGraphics();
 
   void setBackgroundColor();
 
@@ -352,6 +356,7 @@ private:
 
   QAction* m_undo;
   QAction* m_redo;
+  QAction* m_copyImage;
   QAction* m_viewPerspective;
   QAction* m_viewOrthographic;
 

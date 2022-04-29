@@ -45,6 +45,7 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
+#include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QKeySequence>
 #include <QtWidgets/QActionGroup>
@@ -233,6 +234,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   , m_moleculeDirty(false)
   , m_undo(nullptr)
   , m_redo(nullptr)
+  , m_copyImage(nullptr)
   , m_viewFactory(new ViewFactory)
   , m_ui(new Ui::MainWindow)
 {
@@ -1141,10 +1143,54 @@ void MainWindow::viewActivated(QWidget* widget)
   activeMoleculeEdited();
 }
 
-void MainWindow::exportGraphics()
+QImage MainWindow::renderToImage(const QSize& size)
 {
+  QImage exportImage(size, QImage::Format_ARGB32);
+
   QOpenGLWidget* glWidget =
     qobject_cast<QOpenGLWidget*>(m_multiViewWidget->activeWidget());
+
+  // render it (with alpha channel)
+  Rendering::Scene* scene(nullptr);
+  GLWidget* viewWidget(nullptr);
+  if ((viewWidget =
+         qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+    scene = &viewWidget->renderer().scene();
+  }
+  Vector4ub cColor = scene->backgroundColor();
+  unsigned char alpha = cColor[3];
+  cColor[3] = 0; // 100% transparent for export
+  scene->setBackgroundColor(cColor);
+
+  glWidget->raise();
+  glWidget->repaint();
+  if (QOpenGLFramebufferObject::hasOpenGLFramebufferObjects()) {
+    exportImage = glWidget->grabFramebuffer();
+  } else {
+    QPixmap pixmap = QPixmap::grabWindow(glWidget->winId());
+    exportImage = pixmap.toImage();
+  }
+
+  // set the GL widget back to the right background color (i.e., not 100%
+  // transparent)
+  cColor[3] = alpha; // previous color
+  scene->setBackgroundColor(cColor);
+  glWidget->repaint();
+
+  // Now we embed molecular information into the file, if possible
+  if (m_molecule && m_molecule->atomCount() < 1000) {
+    string tmpCml;
+    bool ok =
+      FileFormatManager::instance().writeString(*m_molecule, tmpCml, "cml");
+    if (ok)
+      exportImage.setText("CML", tmpCml.c_str());
+  }
+
+  return exportImage;
+}
+
+void MainWindow::exportGraphics()
+{
   QStringList filters;
 // Omit "common image formats" on Mac
 #ifdef Q_OS_MAC
@@ -1169,47 +1215,19 @@ void MainWindow::exportGraphics()
   if (QFileInfo(fileName).suffix().isEmpty())
     fileName += ".png";
 
-  // render it (with alpha channel)
-  Rendering::Scene* scene(nullptr);
-  GLWidget* viewWidget(nullptr);
-  if ((viewWidget =
-         qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scene = &viewWidget->renderer().scene();
-  }
-  Vector4ub cColor = scene->backgroundColor();
-  unsigned char alpha = cColor[3];
-  cColor[3] = 0; // 100% transparent for export
-  scene->setBackgroundColor(cColor);
-
-  QImage exportImage;
-  glWidget->raise();
-  glWidget->repaint();
-  if (QOpenGLFramebufferObject::hasOpenGLFramebufferObjects()) {
-    exportImage = glWidget->grabFramebuffer();
-  } else {
-    QPixmap pixmap = QPixmap::grabWindow(glWidget->winId());
-    exportImage = pixmap.toImage();
-  }
-
-  // Now we embed molecular information into the file, if possible
-  if (m_molecule && m_molecule->atomCount() < 1000) {
-    string tmpCml;
-    bool ok =
-      FileFormatManager::instance().writeString(*m_molecule, tmpCml, "cml");
-    if (ok)
-      exportImage.setText("CML", tmpCml.c_str());
-  }
+  const QSize size = m_multiViewWidget->activeWidget()->size();
+  QImage exportImage = renderToImage(size);
 
   if (!exportImage.save(fileName)) {
     MESSAGEBOX::warning(this, tr("Avogadro"),
                         tr("Cannot save file %1.").arg(fileName));
   }
+}
 
-  // set the GL widget back to the right background color (i.e., not 100%
-  // transparent)
-  cColor[3] = alpha; // previous color
-  scene->setBackgroundColor(cColor);
-  glWidget->repaint();
+void MainWindow::copyGraphics()
+{
+  QImage exportImage = renderToImage(m_multiViewWidget->activeWidget()->size());
+  QApplication::clipboard()->setImage(exportImage);
 }
 
 void MainWindow::reassignCustomElements()
@@ -1770,12 +1788,21 @@ void MainWindow::buildMenu()
   m_redo->setIcon(QIcon::fromTheme("edit-redo"));
 #endif
   m_redo->setShortcut(QKeySequence::Redo);
+
+  m_copyImage = new QAction(tr("&Copy Graphics"), this);
+#ifndef Q_OS_MAC
+  m_copyImage->setIcon(QIcon::fromTheme("edit-copy"));
+#endif
+  m_copyImage->setShortcut(tr("Ctrl+Alt+C"));
+
   m_undo->setEnabled(false);
   m_redo->setEnabled(false);
   connect(m_undo, &QAction::triggered, this, &MainWindow::undoEdit);
   connect(m_redo, &QAction::triggered, this, &MainWindow::redoEdit);
+  connect(m_copyImage, &QAction::triggered, this, &MainWindow::copyGraphics);
   m_menuBuilder->addAction(editPath, m_undo, 1);
   m_menuBuilder->addAction(editPath, m_redo, 0);
+  m_menuBuilder->addAction(editPath, m_copyImage, -10);
 
   // View menu
   QStringList viewPath;
