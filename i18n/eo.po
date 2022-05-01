@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.93.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-03-20 02:22+0000\n"
+"POT-Creation-Date: 2022-05-01 03:21+0000\n"
 "PO-Revision-Date: 2021-09-26 12:57+0000\n"
 "Last-Translator: phlostically <phlostically@mailinator.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/avogadro/"
@@ -30,104 +30,104 @@ msgstr "Neniu dosierformo agordita en BackgroundFileFormat!"
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "Neniu dosiernomo agordita en BackgroundFileFormat!"
 
-#: mainwindow.cpp:300
+#: mainwindow.cpp:302
 msgid "Ready…"
 msgstr "Preta…"
 
-#: mainwindow.cpp:342
+#: mainwindow.cpp:344
 msgid "Tool"
 msgstr "Ilo"
 
-#: mainwindow.cpp:346
+#: mainwindow.cpp:348
 msgid "Display Types"
 msgstr "Montraj Tipoj"
 
-#: mainwindow.cpp:357
+#: mainwindow.cpp:359
 msgid "View Configuration"
 msgstr "Vidi Agordon"
 
-#: mainwindow.cpp:363
+#: mainwindow.cpp:365
 msgid "Molecules"
 msgstr "Molekuloj"
 
-#: mainwindow.cpp:372
+#: mainwindow.cpp:374
 msgid "Layers"
 msgstr "Tavoloj"
 
-#: mainwindow.cpp:391
+#: mainwindow.cpp:393
 msgid "File"
 msgstr "Dosiero"
 
-#: mainwindow.cpp:396
+#: mainwindow.cpp:398
 msgid "Tools"
 msgstr "Iloj"
 
-#: mainwindow.cpp:629
+#: mainwindow.cpp:631
 msgid "Untitled"
 msgstr "Sentitola"
 
-#: mainwindow.cpp:634
+#: mainwindow.cpp:636
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Avogadro %3"
 
-#: mainwindow.cpp:690 mainwindow.cpp:1328
+#: mainwindow.cpp:692 mainwindow.cpp:1351
 msgid "Chemical Markup Language"
 msgstr "Kemia Marklingvo"
 
-#: mainwindow.cpp:691 mainwindow.cpp:1327
+#: mainwindow.cpp:693 mainwindow.cpp:1350
 msgid "Chemical JSON"
 msgstr "Kemia JSON"
 
-#: mainwindow.cpp:697
+#: mainwindow.cpp:699
 msgid "Open chemical file"
 msgstr "Malfermi kemian dosieron"
 
-#: mainwindow.cpp:715 mainwindow.cpp:739 mainwindow.cpp:1235
-#: mainwindow.cpp:2055
+#: mainwindow.cpp:717 mainwindow.cpp:741 mainwindow.cpp:1253
+#: mainwindow.cpp:2087
 msgid "Cannot open file"
 msgstr "Ne povas malfermi dosieron"
 
-#: mainwindow.cpp:716 mainwindow.cpp:740 mainwindow.cpp:1236
+#: mainwindow.cpp:718 mainwindow.cpp:742 mainwindow.cpp:1254
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "Ne povas malfermi provizitan dosieron %1"
 
-#: mainwindow.cpp:729
+#: mainwindow.cpp:731
 msgid "Open Molecule"
 msgstr "Malfermi Molekulon"
 
-#: mainwindow.cpp:753
+#: mainwindow.cpp:755
 msgid "Commands"
 msgstr "Komandoj"
 
-#: mainwindow.cpp:753
+#: mainwindow.cpp:755
 msgid "Input Generators"
 msgstr "Enigaĵfariloj"
 
-#: mainwindow.cpp:753
+#: mainwindow.cpp:755
 msgid "File Formats"
 msgstr "Dosierformoj"
 
-#: mainwindow.cpp:757
+#: mainwindow.cpp:759
 msgid "Install Plugin Script"
 msgstr "Instali kromprograman programeton"
 
-#: mainwindow.cpp:757
+#: mainwindow.cpp:759
 msgid "Script Type:"
 msgstr "Speco de programeto:"
 
-#: mainwindow.cpp:805 mainwindow.cpp:1231
+#: mainwindow.cpp:807 mainwindow.cpp:1249
 msgid "Select file reader"
 msgstr "Elekti dosierlegilon"
 
-#: mainwindow.cpp:834
+#: mainwindow.cpp:836
 msgid "Reading File"
 msgstr "Legante Dosieron"
 
-#: mainwindow.cpp:836
+#: mainwindow.cpp:838
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -136,16 +136,16 @@ msgstr ""
 "Malfermante dosieron '%1'\n"
 "per '%2'"
 
-#: mainwindow.cpp:867
+#: mainwindow.cpp:869
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Molekulo ŝargita (%1 atomoj, %2 ligoj)"
 
-#: mainwindow.cpp:872
+#: mainwindow.cpp:874
 msgid "File error"
 msgstr "Eraro pri dosiero"
 
-#: mainwindow.cpp:873
+#: mainwindow.cpp:875
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -154,17 +154,17 @@ msgstr ""
 "Eraro dum legado de dosiero '%1':\n"
 "%2"
 
-#: mainwindow.cpp:900
+#: mainwindow.cpp:902
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "Konservis dosieron %1."
 
-#: mainwindow.cpp:908
+#: mainwindow.cpp:910
 msgid "Error saving file"
 msgstr "Eraro pri konservado de dosiero"
 
-#: mainwindow.cpp:909
+#: mainwindow.cpp:911
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -174,11 +174,11 @@ msgstr ""
 "Eraro dum konservado de «%1»:\n"
 "%2"
 
-#: mainwindow.cpp:948
+#: mainwindow.cpp:950
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Eraro: Malsukcesis pravalorizi OpenGL-kuntekston"
 
-#: mainwindow.cpp:949
+#: mainwindow.cpp:951
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -189,50 +189,50 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:950
+#: mainwindow.cpp:952
 msgid "Unknown error"
 msgstr "Nekonata eraro"
 
-#: mainwindow.cpp:1076 mainwindow.cpp:1077
+#: mainwindow.cpp:1078 mainwindow.cpp:1079
 msgid "Navigate tool"
 msgstr "Naviga ilo"
 
-#: mainwindow.cpp:1153
+#: mainwindow.cpp:1199
 msgid "Common image formats"
 msgstr "Oftaj bildaj dosierformoj"
 
-#: mainwindow.cpp:1155
+#: mainwindow.cpp:1201
 msgid "All files"
 msgstr "Ĉiuj dosieroj"
 
-#: mainwindow.cpp:1155
+#: mainwindow.cpp:1201
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1156
+#: mainwindow.cpp:1202
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1156
+#: mainwindow.cpp:1202
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1165
+#: mainwindow.cpp:1211
 msgid "Export Bitmap Graphics"
 msgstr "Eksporti Rastruman Grafikaĵon"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1204 mainwindow.cpp:1301 mainwindow.cpp:1952:33
+#: mainwindow.cpp:1222 mainwindow.cpp:1324 mainwindow.cpp:1984:33
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1205
+#: mainwindow.cpp:1223
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Ne povas konservi dosieron %1."
 
-#: mainwindow.cpp:1302
+#: mainwindow.cpp:1325
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -245,23 +245,23 @@ msgstr ""
 "Ĉu vi volas eksporti al tiu nenorma dosierformo, aŭ konservi en norma "
 "dosierformo?"
 
-#: mainwindow.cpp:1309
+#: mainwindow.cpp:1332
 msgid "Export"
 msgstr "Eksporti"
 
-#: mainwindow.cpp:1334
+#: mainwindow.cpp:1357
 msgid "Save chemical file"
 msgstr "Konservi kemian dosieron"
 
-#: mainwindow.cpp:1362
+#: mainwindow.cpp:1385
 msgid "Export Molecule"
 msgstr "Eksporti Molekulon"
 
-#: mainwindow.cpp:1414
+#: mainwindow.cpp:1437
 msgid "Saving File in Progress…"
 msgstr "Konservante dosieron…"
 
-#: mainwindow.cpp:1416
+#: mainwindow.cpp:1439
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -271,37 +271,37 @@ msgstr ""
 "Konservante dosieron «%1»\n"
 "per «%2»"
 
-#: mainwindow.cpp:1528
+#: mainwindow.cpp:1551
 #, qt-format
 msgid "&Undo %1"
 msgstr "Malfari %1 (&U)"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1531 mainwindow.cpp:1758:117
+#: mainwindow.cpp:1554 mainwindow.cpp:1781:117
 msgid "&Undo"
 msgstr "Malfari (&U)"
 
-#: mainwindow.cpp:1536
+#: mainwindow.cpp:1559
 #, qt-format
 msgid "&Redo %1"
 msgstr "&Refari %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1539 mainwindow.cpp:1763:123
+#: mainwindow.cpp:1562 mainwindow.cpp:1786:123
 msgid "&Redo"
 msgstr "&Refari"
 
-#: mainwindow.cpp:1639
+#: mainwindow.cpp:1662
 msgid "&Testing"
 msgstr "&Testado"
 
-#: mainwindow.cpp:1641
+#: mainwindow.cpp:1664
 msgid "Record test…"
 msgstr "Registri teston…"
 
-#: mainwindow.cpp:1644
+#: mainwindow.cpp:1667
 msgid "Play test…"
 msgstr "Ludi teston…"
 
@@ -309,13 +309,13 @@ msgstr "Ludi teston…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1660:75 rc.cpp:81
+#: mainwindow.cpp:1683:75 rc.cpp:81
 msgid "&New"
 msgstr "&Nova"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1669:51
+#: mainwindow.cpp:1692:51
 msgid "&Open…"
 msgstr "Malfermi (&O)…"
 
@@ -323,7 +323,7 @@ msgstr "Malfermi (&O)…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1678:84 rc.cpp:90
+#: mainwindow.cpp:1701:84 rc.cpp:90
 msgid "&Close"
 msgstr "Fermi (&C)"
 
@@ -331,27 +331,27 @@ msgstr "Fermi (&C)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1692:93 rc.cpp:99
+#: mainwindow.cpp:1715:93 rc.cpp:99
 msgid "&Save"
 msgstr "Kon&servi"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1701:102
+#: mainwindow.cpp:1724:102
 msgid "Save &As…"
 msgstr "Konservi kiel… (&A)…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1712:195
+#: mainwindow.cpp:1735:195
 msgid "&Export"
 msgstr "&Eksporti"
 
-#: mainwindow.cpp:1713
+#: mainwindow.cpp:1736
 msgid "&Molecule…"
 msgstr "&Molekulo…"
 
-#: mainwindow.cpp:1721
+#: mainwindow.cpp:1744
 msgid "&Graphics…"
 msgstr "&Grafiko…"
 
@@ -359,88 +359,100 @@ msgstr "&Grafiko…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1729:60 rc.cpp:66
+#: mainwindow.cpp:1752:60 rc.cpp:66
 msgid "&Quit"
 msgstr "Forlasi (&Q)"
 
-#: mainwindow.cpp:1751
+#: mainwindow.cpp:1774
 msgid "No recent files"
 msgstr "Neniu ĵusaj dosieroj"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1757 menubuilder.cpp:76:45
+#: mainwindow.cpp:1780 menubuilder.cpp:76:45
 msgid "&Edit"
 msgstr "R&edakti"
 
+#: mainwindow.cpp:1792
+#, fuzzy
+#| msgid "&Graphics…"
+msgid "&Copy Graphics"
+msgstr "&Grafiko…"
+
+#: mainwindow.cpp:1796
+#, fuzzy
+#| msgid "Ctrl+A"
+msgid "Ctrl+Alt+C"
+msgstr "Stir+A"
+
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1777 menubuilder.cpp:76:42
+#: mainwindow.cpp:1809 menubuilder.cpp:76:42
 msgid "&View"
 msgstr "&Vidi"
 
-#: mainwindow.cpp:1778
+#: mainwindow.cpp:1810
 msgid "Set Background Color…"
 msgstr "Agordi Fonan Koloron… (&B)"
 
-#: mainwindow.cpp:1786
+#: mainwindow.cpp:1818
 msgid "Projection"
 msgstr "Projekcio"
 
-#: mainwindow.cpp:1787
+#: mainwindow.cpp:1819
 msgid "Perspective"
 msgstr "Perspektiva"
 
-#: mainwindow.cpp:1794
+#: mainwindow.cpp:1826
 msgid "Orthographic"
 msgstr "Orta"
 
-#: mainwindow.cpp:1813
+#: mainwindow.cpp:1845
 msgid "&Extensions"
 msgstr "&Etendaĵoj"
 
-#: mainwindow.cpp:1820 menubuilder.cpp:80
+#: mainwindow.cpp:1852 menubuilder.cpp:80
 msgid "&Help"
 msgstr "&Helpo"
 
-#: mainwindow.cpp:1937
+#: mainwindow.cpp:1969
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Ĉiuj subtenataj dosierformoj (%1);;Ĉiuj dosieroj (*);;"
 
-#: mainwindow.cpp:1953
+#: mainwindow.cpp:1985
 msgid "Do you want to save the changes to the document?"
 msgstr "Ĉu vi volas konservi la ŝanĝojn en la dokumento?"
 
-#: mainwindow.cpp:1961
+#: mainwindow.cpp:1993
 msgid "Your changes will be lost if you don't save them."
 msgstr "Viaj ŝanĝoj perdiĝos, se vi ne konservos ilin."
 
-#: mainwindow.cpp:1969
+#: mainwindow.cpp:2001
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Stir+S"
 
-#: mainwindow.cpp:1971
+#: mainwindow.cpp:2003
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Stir+D"
 
-#: mainwindow.cpp:2035
+#: mainwindow.cpp:2067
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Eraro dum ŝargado de la dosierformo «%1»."
 
-#: mainwindow.cpp:2051
+#: mainwindow.cpp:2083
 msgid "Select file format"
 msgstr "Elekti dosierformon"
 
-#: mainwindow.cpp:2056 mainwindow.cpp:2067
+#: mainwindow.cpp:2088 mainwindow.cpp:2099
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro ne povas malfermi «%1»."
 
-#: mainwindow.cpp:2066
+#: mainwindow.cpp:2098
 msgid "Cannot open files"
 msgstr "Ne povis malfermi dosierojn"
 
