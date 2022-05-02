@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # SoftwareByRedline <krajczar.david41@gmail.com>, 2021.
-# ovari <ovari123@zoho.com>, 2021.
+# ovari <ovari123@zoho.com>, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-05-01 03:21+0000\n"
-"PO-Revision-Date: 2021-09-20 08:38+0000\n"
+"PO-Revision-Date: 2022-05-03 10:10+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hu/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.12.1\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -383,17 +383,12 @@ msgid "&Edit"
 msgstr "S&zerkesztés"
 
 #: mainwindow.cpp:1792
-#, fuzzy
-#| msgid "&Graphics…"
 msgid "&Copy Graphics"
-msgstr "&Grafika…"
+msgstr "Grafika &másolása"
 
 #: mainwindow.cpp:1796
-#, fuzzy
-#| msgctxt "Select All"
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
