@@ -2,42 +2,43 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# Julen Larrucea <code@larrucea.eu>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-05-01 03:21+0000\n"
-"PO-Revision-Date: 2016-06-10 06:18+0000\n"
-"Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
-"Language-Team: Basque <eu@li.org>\n"
+"PO-Revision-Date: 2022-05-10 14:18+0000\n"
+"Last-Translator: Julen Larrucea <code@larrucea.eu>\n"
+"Language-Team: Basque <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/eu/>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.12.1\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Ez da molekularik ezarri BackgroundFileFormat-an!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Ez da formaturik ezarri BackgroundFileFormat-en!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Ez da fitxategi izenik zehaztu BackgroundFileFormat-en!"
 
 #: mainwindow.cpp:302
 msgid "Ready…"
-msgstr ""
+msgstr "Prest…"
 
 #: mainwindow.cpp:344
-#, fuzzy
 msgid "Tool"
-msgstr "Tresnak"
+msgstr "Tresna"
 
 #: mainwindow.cpp:348
 msgid "Display Types"
@@ -45,16 +46,15 @@ msgstr "Bistaratze Motak"
 
 #: mainwindow.cpp:359
 msgid "View Configuration"
-msgstr ""
+msgstr "Konfigurazioa erakutsi"
 
 #: mainwindow.cpp:365
-#, fuzzy
 msgid "Molecules"
-msgstr "Molekula"
+msgstr "Molekulak"
 
 #: mainwindow.cpp:374
 msgid "Layers"
-msgstr ""
+msgstr "Geruzak"
 
 #: mainwindow.cpp:393
 #, fuzzy
@@ -76,7 +76,7 @@ msgstr "Izengabea"
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:692 mainwindow.cpp:1351
 msgid "Chemical Markup Language"
@@ -84,57 +84,53 @@ msgstr ""
 
 #: mainwindow.cpp:693 mainwindow.cpp:1350
 msgid "Chemical JSON"
-msgstr ""
+msgstr "JSON Kimikoa"
 
 #: mainwindow.cpp:699
 msgid "Open chemical file"
-msgstr ""
+msgstr "Fitxategi kimikoa ireki"
 
 #: mainwindow.cpp:717 mainwindow.cpp:741 mainwindow.cpp:1253
 #: mainwindow.cpp:2087
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Ezin da %1 fitxategia gorde."
+msgstr "Ezin da %1 fitxategia ireki."
 
 #: mainwindow.cpp:718 mainwindow.cpp:742 mainwindow.cpp:1254
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Ezin da %1 fitxategia gorde."
+msgstr "Ezin da emandako %1 fitxategia ireki."
 
 #: mainwindow.cpp:731
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molekula"
+msgstr "Molekula Ireki"
 
 #: mainwindow.cpp:755
 msgid "Commands"
-msgstr ""
+msgstr "Aginduak"
 
 #: mainwindow.cpp:755
 msgid "Input Generators"
 msgstr ""
 
 #: mainwindow.cpp:755
-#, fuzzy
 msgid "File Formats"
-msgstr "Fitxategia: "
+msgstr "Fitxategi formatuak"
 
 #: mainwindow.cpp:759
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Plugin Script-a Instalatu"
 
 #: mainwindow.cpp:759
 msgid "Script Type:"
-msgstr ""
+msgstr "Script Mota:"
 
 #: mainwindow.cpp:807 mainwindow.cpp:1249
 msgid "Select file reader"
-msgstr ""
+msgstr "Fitxategi irakurtzailea aukeratu"
 
 #: mainwindow.cpp:836
-#, fuzzy
 msgid "Reading File"
-msgstr "Ireki Fitxategia"
+msgstr "Fitxategia Irakurtzen"
 
 #: mainwindow.cpp:838
 #, qt-format
@@ -142,6 +138,8 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"'%1' fitxategia\n"
+"'%2'-rekin irekitzen"
 
 #: mainwindow.cpp:869
 #, qt-format
@@ -149,9 +147,8 @@ msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
 #: mainwindow.cpp:874
-#, fuzzy
 msgid "File error"
-msgstr "Fitxategia: "
+msgstr "Fitxategi akatsa"
 
 #: mainwindow.cpp:875
 #, qt-format
@@ -159,16 +156,18 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"'%1' fitxategia irakurtzean errore bat egon da:\n"
+"%2"
 
 #: mainwindow.cpp:902
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Ezin da %1 fitxategia gorde."
+msgstr "%1 fitxategia gorde da."
 
 #: mainwindow.cpp:910
 msgid "Error saving file"
-msgstr ""
+msgstr "Errorea fitxategia gordetzerakoan"
 
 #: mainwindow.cpp:911
 #, qt-format
@@ -177,10 +176,12 @@ msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"Errorea \"%1\" gordetzean:\n"
+"%2"
 
 #: mainwindow.cpp:950
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Errorea: huts egin du OpenGL testuingurua hasieratzean"
 
 #: mainwindow.cpp:951
 #, qt-format
@@ -189,14 +190,17 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 2.0 edo handiagoa behar da, irtetetzen.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:952
 msgid "Unknown error"
-msgstr ""
+msgstr "Errore ezezaguna"
 
 #: mainwindow.cpp:1078 mainwindow.cpp:1079
 msgid "Navigate tool"
-msgstr ""
+msgstr "Nabigatzeko tresna"
 
 #: mainwindow.cpp:1199
 msgid "Common image formats"
@@ -247,16 +251,15 @@ msgstr "Esportatu"
 
 #: mainwindow.cpp:1357
 msgid "Save chemical file"
-msgstr ""
+msgstr "Fitxategi kimikoa gorde"
 
 #: mainwindow.cpp:1385
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Inportatu Molekula Fitxategia"
+msgstr "Esportatu Molekula"
 
 #: mainwindow.cpp:1437
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Fitxategia gordetzen ari da…"
 
 #: mainwindow.cpp:1439
 #, qt-format
