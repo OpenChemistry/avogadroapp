@@ -1,10 +1,30 @@
 set(APP_BUNDLE_PATH "${CPACK_TEMPORARY_INSTALL_DIRECTORY}/Avogadro2.app")
 
 if (DEFINED ENV{CODESIGN_IDENTITY})
+    # sign the Open Babel SO files
+    file(GLOB OB_PLUGINS ${APP_BUNDLE_PATH}/Contents/lib/openbabel/*.so)
+
+    foreach(ob_plugin ${OB_PLUGINS})
+        set(OB_ARGS
+            codesign
+            --force
+            --timestamp
+            --sign "$ENV{CODESIGN_IDENTITY}"
+            ${ob_plugin}
+        )
+        execute_process(COMMAND ${OB_ARGS} RESULT_VARIABLE EXIT_CODE)
+        if(NOT EXIT_CODE EQUAL 0)
+            message(FATAL_ERROR
+            \"Running ${OB_ARGS} failed with exit code \${EXIT_CODE}.\")
+        endif()
+    endforeach()
+
     set(COMMAND_ARGS
         codesign
         --force
         --deep
+        --timestamp
+        --options runtime
         --sign "$ENV{CODESIGN_IDENTITY}"
         ${APP_BUNDLE_PATH}
     )
