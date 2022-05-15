@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-05-15 02:59+0000\n"
-"PO-Revision-Date: 2022-05-10 14:18+0000\n"
+"PO-Revision-Date: 2022-05-16 02:31+0000\n"
 "Last-Translator: Julen Larrucea <code@larrucea.eu>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/eu/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12.1\n"
+"X-Generator: Weblate 4.13-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -268,11 +268,13 @@ msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
+"\"%1\" fitxategia gordetzen\n"
+"\"%2\"-rekin"
 
 #: mainwindow.cpp:1551
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Desegin"
+msgstr "%1 &Desegin"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -281,9 +283,9 @@ msgid "&Undo"
 msgstr "&Desegin"
 
 #: mainwindow.cpp:1559
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Berregin"
+msgstr "%1 &Berregin"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -292,19 +294,16 @@ msgid "&Redo"
 msgstr "&Berregin"
 
 #: mainwindow.cpp:1662
-#, fuzzy
 msgid "&Testing"
-msgstr "Ezarpenak"
+msgstr "&Probak"
 
 #: mainwindow.cpp:1664
-#, fuzzy
 msgid "Record test…"
-msgstr "Grabatu Proba..."
+msgstr "Grabatu proba…"
 
 #: mainwindow.cpp:1667
-#, fuzzy
 msgid "Play test…"
-msgstr "Erreproduzitu Proba..."
+msgstr "Erreproduzitu proba…"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -317,9 +316,8 @@ msgstr "&Berria"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1692:51
-#, fuzzy
 msgid "&Open…"
-msgstr "&Ireki"
+msgstr "&Ireki…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
