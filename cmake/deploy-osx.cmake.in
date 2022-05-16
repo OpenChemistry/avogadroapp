@@ -25,6 +25,7 @@ if (DEFINED ENV{CODESIGN_IDENTITY})
         --deep
         --timestamp
         --options runtime
+        --entitlements "@CMAKE_SOURCE_DIR@/cmake/Entitlements.plist"
         --sign "$ENV{CODESIGN_IDENTITY}"
         ${APP_BUNDLE_PATH}
     )
