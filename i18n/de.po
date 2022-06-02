@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-19 02:08+0000\n"
+"POT-Creation-Date: 2022-05-15 02:59+0000\n"
 "PO-Revision-Date: 2021-09-23 13:36+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
@@ -33,104 +33,104 @@ msgstr "Kein Dateiformat in BackgroundFileFormat eingestellt!"
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "In BackgroundFileFormat wurde kein Dateiname festgelegt!"
 
-#: mainwindow.cpp:300
+#: mainwindow.cpp:302
 msgid "Ready…"
 msgstr "Bereit …"
 
-#: mainwindow.cpp:342
+#: mainwindow.cpp:344
 msgid "Tool"
 msgstr "Werkzeug"
 
-#: mainwindow.cpp:346
+#: mainwindow.cpp:348
 msgid "Display Types"
 msgstr "Darstellungsarten"
 
-#: mainwindow.cpp:357
+#: mainwindow.cpp:359
 msgid "View Configuration"
 msgstr "Konfiguration anzeigen"
 
-#: mainwindow.cpp:363
+#: mainwindow.cpp:365
 msgid "Molecules"
 msgstr "Moleküle"
 
-#: mainwindow.cpp:372
+#: mainwindow.cpp:374
 msgid "Layers"
 msgstr "Ebenen"
 
-#: mainwindow.cpp:391
+#: mainwindow.cpp:393
 msgid "File"
 msgstr "Datei"
 
-#: mainwindow.cpp:396
+#: mainwindow.cpp:398
 msgid "Tools"
 msgstr "Werkzeuge"
 
-#: mainwindow.cpp:612
+#: mainwindow.cpp:631
 msgid "Untitled"
 msgstr "Unbenannt"
 
-#: mainwindow.cpp:617
+#: mainwindow.cpp:636
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Avogadro %3"
 
-#: mainwindow.cpp:673 mainwindow.cpp:1311
+#: mainwindow.cpp:692 mainwindow.cpp:1351
 msgid "Chemical Markup Language"
 msgstr "Chemische Markup-Sprache"
 
-#: mainwindow.cpp:674 mainwindow.cpp:1310
+#: mainwindow.cpp:693 mainwindow.cpp:1350
 msgid "Chemical JSON"
 msgstr "Chemische JSON"
 
-#: mainwindow.cpp:680
+#: mainwindow.cpp:699
 msgid "Open chemical file"
 msgstr "Chemiedatei öffnen"
 
-#: mainwindow.cpp:698 mainwindow.cpp:722 mainwindow.cpp:1218
-#: mainwindow.cpp:2038
+#: mainwindow.cpp:717 mainwindow.cpp:741 mainwindow.cpp:1253
+#: mainwindow.cpp:2087
 msgid "Cannot open file"
 msgstr "Datei kann nicht geöffnet werden"
 
-#: mainwindow.cpp:699 mainwindow.cpp:723 mainwindow.cpp:1219
+#: mainwindow.cpp:718 mainwindow.cpp:742 mainwindow.cpp:1254
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "Gelieferte Datei kann nicht geöffnet werden %1"
 
-#: mainwindow.cpp:712
+#: mainwindow.cpp:731
 msgid "Open Molecule"
 msgstr "Molekül öffnen"
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:755
 msgid "Commands"
 msgstr "Befehle"
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:755
 msgid "Input Generators"
 msgstr "Eingangsgeneratoren"
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:755
 msgid "File Formats"
 msgstr "Dateiformate"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:759
 msgid "Install Plugin Script"
 msgstr "Plugin-Skript installieren"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:759
 msgid "Script Type:"
 msgstr "Skripttyp:"
 
-#: mainwindow.cpp:788 mainwindow.cpp:1214
+#: mainwindow.cpp:807 mainwindow.cpp:1249
 msgid "Select file reader"
 msgstr "Wählen Sie den Dateireader"
 
-#: mainwindow.cpp:817
+#: mainwindow.cpp:836
 msgid "Reading File"
 msgstr "Datei lesen"
 
-#: mainwindow.cpp:819
+#: mainwindow.cpp:838
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -139,16 +139,16 @@ msgstr ""
 "Datei „%1“ öffnen\n"
 "mit „%2“"
 
-#: mainwindow.cpp:850
+#: mainwindow.cpp:869
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Moleküle geladen (%1 Atome, %2 Bindungen)"
 
-#: mainwindow.cpp:855
+#: mainwindow.cpp:874
 msgid "File error"
 msgstr "Dateifehler"
 
-#: mainwindow.cpp:856
+#: mainwindow.cpp:875
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -157,17 +157,17 @@ msgstr ""
 "Fehler beim Lesen der Datei '%1':\n"
 "%2"
 
-#: mainwindow.cpp:883
+#: mainwindow.cpp:902
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "Gespeicherte Datei %1"
 
-#: mainwindow.cpp:891
+#: mainwindow.cpp:910
 msgid "Error saving file"
 msgstr "Fehler beim Speichern der Datei"
 
-#: mainwindow.cpp:892
+#: mainwindow.cpp:911
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -177,11 +177,11 @@ msgstr ""
 "Fehler beim Speichern von „%1“:\n"
 "%2"
 
-#: mainwindow.cpp:931
+#: mainwindow.cpp:950
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Fehler: OpenGL-Kontext konnte nicht initialisiert werden"
 
-#: mainwindow.cpp:932
+#: mainwindow.cpp:951
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -192,50 +192,50 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:933
+#: mainwindow.cpp:952
 msgid "Unknown error"
 msgstr "Unbekannter Fehler"
 
-#: mainwindow.cpp:1059 mainwindow.cpp:1060
+#: mainwindow.cpp:1078 mainwindow.cpp:1079
 msgid "Navigate tool"
 msgstr "Navigationswerkzeug"
 
-#: mainwindow.cpp:1136
+#: mainwindow.cpp:1199
 msgid "Common image formats"
 msgstr "übliche Dateiformate für Bilder"
 
-#: mainwindow.cpp:1138
+#: mainwindow.cpp:1201
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: mainwindow.cpp:1138
+#: mainwindow.cpp:1201
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1139
+#: mainwindow.cpp:1202
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1139
+#: mainwindow.cpp:1202
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1148
+#: mainwindow.cpp:1211
 msgid "Export Bitmap Graphics"
 msgstr "Bitmap exportieren"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1187 mainwindow.cpp:1284 mainwindow.cpp:1935:33
+#: mainwindow.cpp:1222 mainwindow.cpp:1324 mainwindow.cpp:1984:33
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1188
+#: mainwindow.cpp:1223
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Datei %1 konnte nicht gespeichert werden."
 
-#: mainwindow.cpp:1285
+#: mainwindow.cpp:1325
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -248,23 +248,23 @@ msgstr ""
 "Möchten Sie in das aktuelle Format exportieren oder in einem Standardformat "
 "speichern?"
 
-#: mainwindow.cpp:1292
+#: mainwindow.cpp:1332
 msgid "Export"
 msgstr "Exportieren"
 
-#: mainwindow.cpp:1317
+#: mainwindow.cpp:1357
 msgid "Save chemical file"
 msgstr "Chemiedatei speichern"
 
-#: mainwindow.cpp:1345
+#: mainwindow.cpp:1385
 msgid "Export Molecule"
 msgstr "Molekül exportieren"
 
-#: mainwindow.cpp:1397
+#: mainwindow.cpp:1437
 msgid "Saving File in Progress…"
 msgstr "Datei wird gespeichert …"
 
-#: mainwindow.cpp:1399
+#: mainwindow.cpp:1439
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -274,37 +274,37 @@ msgstr ""
 "Speichern der Datei „%1“\n"
 "mit „%2“"
 
-#: mainwindow.cpp:1511
+#: mainwindow.cpp:1551
 #, qt-format
 msgid "&Undo %1"
 msgstr "&Rückgängig machen %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1514 mainwindow.cpp:1741:117
+#: mainwindow.cpp:1554 mainwindow.cpp:1781:117
 msgid "&Undo"
 msgstr "&Rückgängig"
 
-#: mainwindow.cpp:1519
+#: mainwindow.cpp:1559
 #, qt-format
 msgid "&Redo %1"
 msgstr "&Wiederholen %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1522 mainwindow.cpp:1746:123
+#: mainwindow.cpp:1562 mainwindow.cpp:1786:123
 msgid "&Redo"
 msgstr "&Wiederholen"
 
-#: mainwindow.cpp:1622
+#: mainwindow.cpp:1662
 msgid "&Testing"
 msgstr "&Testen"
 
-#: mainwindow.cpp:1624
+#: mainwindow.cpp:1664
 msgid "Record test…"
 msgstr "Rekordtest …"
 
-#: mainwindow.cpp:1627
+#: mainwindow.cpp:1667
 msgid "Play test…"
 msgstr "Spieltest …"
 
@@ -312,13 +312,13 @@ msgstr "Spieltest …"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1643:75 rc.cpp:81
+#: mainwindow.cpp:1683:75 rc.cpp:81
 msgid "&New"
 msgstr "&Neu"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1652:51
+#: mainwindow.cpp:1692:51
 msgid "&Open…"
 msgstr "&Öffnen …"
 
@@ -326,7 +326,7 @@ msgstr "&Öffnen …"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1661:84 rc.cpp:90
+#: mainwindow.cpp:1701:84 rc.cpp:90
 msgid "&Close"
 msgstr "&Schließen"
 
@@ -334,27 +334,27 @@ msgstr "&Schließen"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1675:93 rc.cpp:99
+#: mainwindow.cpp:1715:93 rc.cpp:99
 msgid "&Save"
 msgstr "&Sichern"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1684:102
+#: mainwindow.cpp:1724:102
 msgid "Save &As…"
 msgstr "Speichern &als …"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1695:195
+#: mainwindow.cpp:1735:195
 msgid "&Export"
 msgstr "E&xportieren"
 
-#: mainwindow.cpp:1696
+#: mainwindow.cpp:1736
 msgid "&Molecule…"
 msgstr "&Molekül …"
 
-#: mainwindow.cpp:1704
+#: mainwindow.cpp:1744
 msgid "&Graphics…"
 msgstr "&Grafik …"
 
@@ -362,88 +362,101 @@ msgstr "&Grafik …"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1712:60 rc.cpp:66
+#: mainwindow.cpp:1752:60 rc.cpp:66
 msgid "&Quit"
 msgstr "&Beenden"
 
-#: mainwindow.cpp:1734
+#: mainwindow.cpp:1774
 msgid "No recent files"
 msgstr "Keine zuletzt geöffneten Dateien"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1740 menubuilder.cpp:76:45
+#: mainwindow.cpp:1780 menubuilder.cpp:76:45
 msgid "&Edit"
 msgstr "&Bearbeiten"
 
+#: mainwindow.cpp:1792
+#, fuzzy
+#| msgid "&Graphics…"
+msgid "&Copy Graphics"
+msgstr "&Grafik …"
+
+#: mainwindow.cpp:1796
+#, fuzzy
+#| msgctxt "Select All"
+#| msgid "Ctrl+A"
+msgid "Ctrl+Alt+C"
+msgstr "Strg+A"
+
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1760 menubuilder.cpp:76:42
+#: mainwindow.cpp:1809 menubuilder.cpp:76:42
 msgid "&View"
 msgstr "&Ansicht"
 
-#: mainwindow.cpp:1761
+#: mainwindow.cpp:1810
 msgid "Set Background Color…"
 msgstr "Hintergrundfarbe einstellen …"
 
-#: mainwindow.cpp:1769
+#: mainwindow.cpp:1818
 msgid "Projection"
 msgstr "Projektion"
 
-#: mainwindow.cpp:1770
+#: mainwindow.cpp:1819
 msgid "Perspective"
 msgstr "Perspektive"
 
-#: mainwindow.cpp:1777
+#: mainwindow.cpp:1826
 msgid "Orthographic"
 msgstr "Orthografisch"
 
-#: mainwindow.cpp:1796
+#: mainwindow.cpp:1845
 msgid "&Extensions"
 msgstr "Erweiterungen"
 
-#: mainwindow.cpp:1803 menubuilder.cpp:80
+#: mainwindow.cpp:1852 menubuilder.cpp:80
 msgid "&Help"
 msgstr "&Hilfe"
 
-#: mainwindow.cpp:1920
+#: mainwindow.cpp:1969
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Alle unterstützten Formate (%1);;Alle Dateien (*);;"
 
-#: mainwindow.cpp:1936
+#: mainwindow.cpp:1985
 msgid "Do you want to save the changes to the document?"
 msgstr "Wollen Sie die Änderungen am Dokument speichern?"
 
-#: mainwindow.cpp:1944
+#: mainwindow.cpp:1993
 msgid "Your changes will be lost if you don't save them."
 msgstr "Ihre Änderungen gehen verloren, wenn Sie sie nicht speichern."
 
-#: mainwindow.cpp:1952
+#: mainwindow.cpp:2001
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Strg+S"
 
-#: mainwindow.cpp:1954
+#: mainwindow.cpp:2003
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Strg+D"
 
-#: mainwindow.cpp:2018
+#: mainwindow.cpp:2067
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Fehler beim Laden des Dateiformats „%1“."
 
-#: mainwindow.cpp:2034
+#: mainwindow.cpp:2083
 msgid "Select file format"
 msgstr "Dateiformat auswählen"
 
-#: mainwindow.cpp:2039 mainwindow.cpp:2050
+#: mainwindow.cpp:2088 mainwindow.cpp:2099
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro kann „%1“ nicht öffnen."
 
-#: mainwindow.cpp:2049
+#: mainwindow.cpp:2098
 msgid "Cannot open files"
 msgstr "Dateien können nicht geöffnet werden"
 
@@ -528,10 +541,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">Lizenz: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
-"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
-">BSD 3-Klausel</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">Lizenz: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause"
+"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
+"\">BSD 3-Klausel</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:264
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -541,8 +554,8 @@ msgid ""
 "span></a></p></body></html>"
 msgstr ""
 "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
-"\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
-"org</span></a></p></body></html>"
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:293
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -552,8 +565,8 @@ msgid ""
 "body></html>"
 msgstr ""
 "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
-"text-decoration: underline; color:#0000ff;\">www.kitware."
-"com</span></a></p></body></html>"
+"text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"body></html>"
 
 #. i18n: file: aboutdialog.ui:320
 #. i18n: ectx: property (text), widget (QPushButton, OK)
