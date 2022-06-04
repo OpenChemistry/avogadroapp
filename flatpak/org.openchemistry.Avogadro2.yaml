@@ -1,13 +1,14 @@
 app-id: org.openchemistry.Avogadro2
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
-runtime-version: '5.15'
+runtime-version: 5.15-21.08
 command: avogadro2
 rename-desktop-file: avogadro2.desktop
 finish-args:
   - --share=ipc
-  - --socket=wayland
-  - --socket=fallback-x11
+  # Broke in Wayland
+  #- --socket=wayland
+  - --socket=x11
   - --device=dri
   - --filesystem=home
   # Molequeue enjoy its life in the menu tray.
@@ -23,8 +24,8 @@ cleanup:
   - /include
   - /lib/cmake
   - /share/doc
-  - "*.la"
-  - "*.a"
+  - '*.la'
+  - '*.a'
 
 modules:
   - shared-modules/glew/glew.json
@@ -33,19 +34,30 @@ modules:
   - name: python3-numpy
     buildsystem: simple
     build-commands:
-      - python3 setup.py install --prefix=${FLATPAK_DEST} --root=/ --optimize=1
+      - python3 -mpip install . --no-index --find-links=file://${PWD} --prefix=${FLATPAK_DEST}
+        --no-build-isolation
     sources:
       - type: archive
-        url: https://github.com/numpy/numpy/releases/download/v1.20.2/numpy-1.20.2.tar.gz
-        sha256: c049f410c78e76ffb0af830a8afbdf8baac09897b4152b97b1a3b8345ee338ff
+        url: https://github.com/numpy/numpy/releases/download/v1.22.3/numpy-1.22.3.tar.gz
+        sha256: a906c0b4301a3d62ccf66d058fe779a65c1c34f6719ef2058f96e1856f48bca5
+        x-checker-data:
+          type: pypi
+          name: numpy
 
   - name: Eigen3
     buildsystem: cmake-ninja
     builddir: true
     sources:
       - type: archive
-        url: https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.bz2
-        sha256: 0fa5cafe78f66d2b501b43016858070d52ba47bd9b1016b0165a7b8e04675677
+        url: https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.bz2
+        sha256: b4c198460eba6f28d34894e3a5710998818515104d6e74e5cc331ce31e46e626
+        x-checker-data:
+          type: anitya
+          project-id: 13751
+          stable-only: true
+          url-template: https://gitlab.com/libeigen/eigen/-/archive/$version/eigen-$version.tar.bz2
+    cleanup:
+      - '*'
 
   - name: hdf5
     buildsystem: cmake-ninja
@@ -54,10 +66,17 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING:BOOL=OFF
       - -DHDF5_BUILD_EXAMPLES:BOOL=OFF
+    cleanup:
+      - /share/hdf5_examples
     sources:
       - type: archive
-        url: https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.5/src/hdf5-1.10.5.tar.bz2
-        sha256: 68d6ea8843d2a106ec6a7828564c1689c7a85714a35d8efafa2fee20ca366f44
+        url: https://github.com/HDFGroup/hdf5/archive/refs/tags/hdf5-1_13_1.tar.gz
+        sha256: 92552458f35c7e58128ce1bfc2831abf901cc142ea0fdd2b056311e4452db7bf
+        x-checker-data:
+          type: anitya
+          project-id: 1303
+          stable-only: true
+          url-template: https://github.com/HDFGroup/hdf5/archive/refs/tags/hdf5-$version.tar.gz
 
   - name: libmsym
     buildsystem: cmake
@@ -69,19 +88,31 @@ modules:
       - type: archive
         url: https://github.com/mcodev31/libmsym/archive/refs/tags/v0.2.3-paper.tar.gz
         sha256: 3741ebe163cf40696570d6b62e4834ca587d43dcac9de713994cc5e2960fb8fd
+        x-checker-data:
+          type: anitya
+          project-id: 221475
+          stable-only: true
+          url-template: https://github.com/mcodev31/libmsym/archive/refs/tags/v$version.tar.gz
 
-  - name: pybind11    
+  - name: pybind11
     buildsystem: simple
     build-commands:
       - python3 setup.py build
-      - cmake -DPYBIND11_INSTALL=ON -DPYBIND11_TEST=OFF -DCMAKE_INSTALL_INCLUDEDIR:PATH=${FLATPAK_DEST}/include -DCMAKE_INSTALL_LIBDIR:PATH=${FLATPAK_DEST}/lib -DCMAKE_INSTALL_DATAROOTDIR:PATH=${FLATPAK_DEST}/share .
+      - cmake -DPYBIND11_INSTALL=ON -DPYBIND11_TEST=OFF -DCMAKE_INSTALL_INCLUDEDIR:PATH=${FLATPAK_DEST}/include
+        -DCMAKE_INSTALL_LIBDIR:PATH=${FLATPAK_DEST}/lib -DCMAKE_INSTALL_DATAROOTDIR:PATH=${FLATPAK_DEST}/share
+        .
       - python3 setup.py install --prefix=${FLATPAK_DEST}
       - cmake --build .
       - cmake --install .
     sources:
       - type: archive
-        url: https://github.com/pybind/pybind11/archive/v2.6.2.tar.gz
-        sha256: 8ff2fff22df038f5cd02cea8af56622bc67f5b64534f1b83b9f133b8366acff2
+        url: https://github.com/pybind/pybind11/archive/v2.9.2.tar.gz
+        sha256: 6bd528c4dbe2276635dc787b6b1f2e5316cf6b49ee3e150264e455a0d68d19c1
+        x-checker-data:
+          type: anitya
+          project-id: 13384
+          stable-only: true
+          url-template: https://github.com/pybind/pybind11/archive/v$version.tar.gz
 
   - name: mmtf-cpp
     buildsystem: cmake
@@ -93,6 +124,11 @@ modules:
       - type: archive
         url: https://github.com/rcsb/mmtf-cpp/archive/refs/tags/v1.0.0.tar.gz
         sha256: 881f69c4bb56605fa63fd5ca50842facc4947f686cbf678ad04930674d714f40
+        x-checker-data:
+          type: anitya
+          project-id: 221487
+          stable-only: true
+          url-template: https://github.com/rcsb/mmtf-cpp/archive/refs/tags/v$version.tar.gz
 
   - name: msgpack
     buildsystem: cmake
@@ -107,6 +143,11 @@ modules:
       - type: archive
         url: https://github.com/msgpack/msgpack-c/releases/download/cpp-3.3.0/msgpack-3.3.0.tar.gz
         sha256: 6e114d12a5ddb8cb11f669f83f32246e484a8addd0ce93f274996f1941c1f07b
+        x-checker-data:
+          type: anitya
+          project-id: 12278
+          stable-only: true
+          url-template: https://github.com/msgpack/msgpack-c/releases/download/cpp-$version/msgpack-$version.tar.gz
 
   - name: OpenBabel
     buildsystem: cmake
@@ -123,6 +164,11 @@ modules:
       - type: archive
         url: https://github.com/openbabel/openbabel/releases/download/openbabel-3-1-1/openbabel-3.1.1-source.tar.bz2
         sha256: a6ec8381d59ea32a4b241c8b1fbd799acb52be94ab64cdbd72506fb4e2270e68
+        x-checker-data:
+          type: anitya
+          project-id: 2539
+          stable-only: true
+          url-template: https://github.com/openbabel/openbabel/releases/download/openbabel-3-1-1/openbabel-$version-source.tar.bz2
 
   - name: zeromq
     buildsystem: cmake-ninja
@@ -133,27 +179,38 @@ modules:
       - type: archive
         url: https://github.com/zeromq/libzmq/releases/download/v4.3.4/zeromq-4.3.4.tar.gz
         sha256: c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5
+        x-checker-data:
+          type: anitya
+          project-id: 16245
+          stable-only: true
+          url-template: https://github.com/zeromq/libzmq/releases/download/v$version/zeromq-$version.tar.gz
 
   - name: spglib
     buildsystem: simple
     ensure-writable:
-      - /lib/python3.8/site-packages/easy-install.pth
+      - /lib/python3/site-packages/easy-install.pth
     build-commands:
-      - cmake -DCMAKE_INSTALL_INCLUDEDIR:PATH=${FLATPAK_DEST}/include -DCMAKE_INSTALL_LIBDIR:PATH=${FLATPAK_DEST}/lib .
+      - cmake -DCMAKE_INSTALL_PREFIX=${FLATPAK_DEST} -DCMAKE_INSTALL_INCLUDEDIR:PATH=${FLATPAK_DEST}/include -DCMAKE_INSTALL_LIBDIR:PATH=${FLATPAK_DEST}/lib
+        .
       - cmake --build .
       - cmake --install .
-      - cd python && python3 setup.py build
-      - cd python && python3 setup.py install --skip-build --force --prefix=${FLATPAK_DEST}
+      - cd python && python3 -mpip install . --no-index --find-links=file://${PWD} --prefix=${FLATPAK_DEST} --no-build-isolation
     sources:
       - type: archive
-        url: https://github.com/spglib/spglib/archive/refs/tags/v1.16.1.tar.gz
-        sha256: e90682239e4ef63b492fa4e44f7dbcde2e2fe2e688579d96b01f2730dfdf5b2e
+        url: https://github.com/spglib/spglib/archive/refs/tags/v1.16.5.tar.gz
+        sha256: 1bbde03b6b78da756c07f458bd90d84f3c253841b9b0632db5b72c5961e87aef
+        x-checker-data:
+          type: anitya
+          project-id: 14891
+          stable-only: true
+          url-template: https://github.com/spglib/spglib/archive/refs/tags/v$version.tar.gz
 
   - name: MoleQueue
     buildsystem: simple
     build-commands:
       - install -Dm0644 molequeue/app/icons/molequeue.png /app/share/icons/hicolor/32x32/apps/${FLATPAK_ID}.Molequeue.png
-      - cmake -DENABLE_TESTING:BOOL=OFF -DBUILD_DOCUMENTATION:BOOL=OFF -DCMAKE_INSTALL_PREFIX:PATH=/app -Wno-dev .
+      - cmake -DENABLE_TESTING:BOOL=OFF -DBUILD_DOCUMENTATION:BOOL=OFF -DCMAKE_INSTALL_PREFIX:PATH=/app
+        -Wno-dev .
       - cmake --build .
       - cmake --install .
       - install -Dm0644 ${FLATPAK_ID}.Molequeue.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.Molequeue.desktop
@@ -162,6 +219,11 @@ modules:
       - type: archive
         url: https://github.com/OpenChemistry/molequeue/releases/download/0.9.0/molequeue-0.9.0.tar.bz2
         sha256: 2825fa9645fca707796ad32967c307bec76dab4f6c305befeebeac8c7f7f2ef0
+        x-checker-data:
+          type: anitya
+          project-id: 13839
+          stable-only: true
+          url-template: https://github.com/OpenChemistry/molequeue/releases/download/$version/molequeue-$version.tar.bz2
       - type: file
         path: org.openchemistry.Avogadro2.Molequeue.desktop
 
@@ -173,7 +235,7 @@ modules:
         #url: https://github.com/protocolbuffers/protobuf/releases/download/v3.15.6/protobuf-cpp-3.15.6.tar.gz
         #sha256: bbdfb7455431d7d58666e8a2996d14b236718ff238eecde10646581e4c87f168
 
-  #- name: protocall-OpenChemistry 
+  #- name: protocall-OpenChemistry
     #buildsystem: cmake
     #sources:
       #- type: git
@@ -237,9 +299,12 @@ modules:
     sources:
       - type: git
         url: https://github.com/OpenChemistry/avogadrolibs
-        tag: '1.94.0'
-        commit: 51edf2b873a0a2b0dc85f6f18d67b59980cc8b0d
+        tag: 1.96.0
+        commit: 53b1f66e5a1b5f45ec9e016576cb97bfbd5e4dd1
         dest: avogadrolibs
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
       - type: archive
         url: https://github.com/OpenChemistry/molecules/archive/refs/heads/master.zip
         sha256: a1275e8139c2021127514abdccfb13e20b1cca0791d14459e9f50065ca566f02
@@ -247,11 +312,12 @@ modules:
         dest-filename: molecules.zip
       - type: archive
         url: https://github.com/OpenChemistry/crystals/archive/refs/heads/master.zip
-        sha256: 090e6334192ebe3e39463f903614c13fa665cb9c24c6f2f1307c69710225b83e
+        sha256: 0365aa346ccc9f77a849cd10964ebcace96621f847216546e49c386f071119e7
         dest: crystals
         dest-filename: crystals.zip
 
   - name: Avogadro2
+    subdir: Avogadro2
     buildsystem: cmake
     config-opts:
       - -DENABLE_RPATH:BOOL=ON
@@ -268,9 +334,19 @@ modules:
       - desktop-file-edit --remove-category=Education ${FLATPAK_DEST}/share/applications/avogadro2.desktop
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
     sources:
-      - type: git
-        url: https://github.com/OpenChemistry/avogadroapp
-        tag: '1.94.0'
-        commit: 320fa12fc73025339afec8783dad1d6bb78204ad
+      - type: archive
+        url: https://github.com/OpenChemistry/avogadroapp/archive/refs/tags/1.96.0.tar.gz
+        sha256: dc5317804747a1a97f8e7534fb1663a2a6dc808799a06322a3ceb959ef3dcdff
+        dest: Avogadro2
+        x-checker-data:
+          type: anitya
+          project-id:
+          stable-only: true
+          url-template: https://github.com/OpenChemistry/avogadroapp/archive/refs/tags/$version.tar.gz
+      - type: archive
+        url: https://github.com/OpenChemistry/avogadro-i18n/archive/refs/heads/master.zip
+        dest: avogadro-i18n
+        sha256: 99120f87a7ce951b9a13c76018a0a61bc19bf8e6ff09a7da5b50cd5f562b9b95
       - type: file
         path: org.openchemistry.Avogadro2.metainfo.xml
+        dest: Avogadro2
