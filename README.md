@@ -33,7 +33,7 @@ features, and can be found [here][Avogadro1]. We will be porting more features
 to the Avogadro 2 code base, and making regular releases to get feedback from
 the community.
 
-We are actively working to finish Avogadro 2.0 in 2021.
+We are actively working to finish Avogadro 2.0 in 2022.
 
 Installing
 ----------
