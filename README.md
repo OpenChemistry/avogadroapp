@@ -13,7 +13,7 @@ architecture.
 Core features and goals of the Avogadro project include:
 
 * Open source distributed under the liberal 3-clause BSD license
-* Cross platform with builds on Linux, Mac OS X and Windows
+* Cross platform with builds on GNU/Linux, macOS and Windows
 * Intuitive interface designed to be useful to whole community
 * Fast and efficient embracing the latest technologies
 * Extensible, making extensive use of a plugin architecture
@@ -39,9 +39,9 @@ Installing
 ----------
 
 We provide nightly binaries built by GitHub actions for:
-* [MacOS](https://nightly.link/OpenChemistry/avogadrolibs/workflows/build_cmake/master/macOS.dmg.zip)
-* [Windows 64-bit](https://nightly.link/OpenChemistry/avogadrolibs/workflows/build_cmake/master/Win64.exe.zip)
+* [macOS](https://nightly.link/OpenChemistry/avogadrolibs/workflows/build_cmake/master/macOS.dmg.zip)
 * [Ubuntu LTS](https://nightly.link/OpenChemistry/avogadrolibs/workflows/build_cmake/master/Ubuntu2004.tar.gz.zip)
+* [Windows 64-bit](https://nightly.link/OpenChemistry/avogadrolibs/workflows/build_cmake/master/Win64.exe.zip)
 
 If you would like to build from source we recommend that you
 follow our [building Open Chemistry][Build] guide that will take care of
