@@ -86,36 +86,42 @@ int main(int argc, char* argv[])
   QTranslator* qtBaseTranslator = new QTranslator;
   QTranslator* avoTranslator = new QTranslator;
   QTranslator* avoLibsTranslator = new QTranslator;
-  bool tryLoadingQtTranslations = true;
+  bool qtLoaded = false;
+  bool avoLoaded = false;
+  bool libsLoaded = false;
 
   foreach (const QString& translationPath, translationPaths) {
-    // We can't find the normal Qt translations (maybe we're in a "bundle"?)
-    if (tryLoadingQtTranslations) {
-      if (qtTranslator->load(currentLocale, "qt", "_", translationPath)) {
-        if (app.installTranslator(qtTranslator))
-          qDebug() << "qt Translation successfully loaded.";
-      }
-      if (qtBaseTranslator->load(currentLocale, "qtbase", "_",
-                                 translationPath)) {
-        if (app.installTranslator(qtBaseTranslator))
-          qDebug() << "qtbase Translation successfully loaded.";
+    if (!qtLoaded &&
+        qtTranslator->load(currentLocale, "qt", "_", translationPath)) {
+      if (app.installTranslator(qtTranslator)) {
+        qDebug() << "qt Translation successfully loaded.";
+        qtLoaded = true;
       }
     }
-    if (avoTranslator->load(currentLocale, "avogadroapp", "-",
-                            translationPath)) {
-      if (app.installTranslator(avoTranslator))
+    if (!qtLoaded &&
+        qtBaseTranslator->load(currentLocale, "qtbase", "_", translationPath)) {
+      if (app.installTranslator(qtBaseTranslator)) {
+        qDebug() << "qtbase Translation successfully loaded.";
+        qtLoaded = true;
+      }
+    }
+    if (!avoLoaded && avoTranslator->load(currentLocale, "avogadroapp", "-",
+                                          translationPath)) {
+      if (app.installTranslator(avoTranslator)) {
         qDebug() << "AvogadroApp Translation " << currentLocale.name()
                  << " loaded " << translationPath;
+        avoLoaded = true;
+      }
     }
-    if (avoLibsTranslator->load(currentLocale, "avogadrolibs", "-",
-                                translationPath)) {
-      if (app.installTranslator(avoLibsTranslator))
+    if (!libsLoaded && avoLibsTranslator->load(currentLocale, "avogadrolibs",
+                                               "-", translationPath)) {
+      if (app.installTranslator(avoLibsTranslator)) {
         qDebug() << "AvogadroLibs Translation " << currentLocale.name()
                  << " loaded " << translationPath;
+        libsLoaded = true;
+      }
     }
-  }
-
-  qDebug() << "Translated quit: " << app.translate("MainWindow", "&Quit");
+  } // done looking for translations
 
   // Check for valid OpenGL support.
   auto offscreen = new QOffscreenSurface;
@@ -138,7 +144,7 @@ int main(int argc, char* argv[])
   // Set up the default format for our GL contexts.
   QSurfaceFormat defaultFormat = QSurfaceFormat::defaultFormat();
   defaultFormat.setSamples(4);
-#if defined(Q_OS_MAC) || defined(Q_OS_WIN) 
+#if defined(Q_OS_MAC) || defined(Q_OS_WIN)
   defaultFormat.setAlphaBufferSize(8);
 #endif
   QSurfaceFormat::setDefaultFormat(defaultFormat);
