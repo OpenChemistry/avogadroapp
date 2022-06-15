@@ -2,13 +2,14 @@
 # Copyright (C) 2006-2021 The Avogadro Project
 # This file is distributed under the same license as the Avogadro package.
 # Temuri Doghonadze <temuri@delta-net.ge>, 2022.
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.95.1\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-05-15 02:59+0000\n"
-"PO-Revision-Date: 2022-01-30 04:52+0000\n"
-"Last-Translator: Temuri Doghonadze <temuri@delta-net.ge>\n"
+"PO-Revision-Date: 2022-06-13 16:19+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ka/>\n"
 "Language: ka\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -24,7 +25,7 @@ msgstr "BackgroundFileFormat-ში მოლეკულა დაყენე�
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "BackgroundFileFormat-ში ფაილის ფორმატი მითითებული არაა!"
+msgstr "BackgroundFileFormat-ში ფაილის ფორმატი დაყენებული არ არის!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
@@ -75,7 +76,7 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:692 mainwindow.cpp:1351
 msgid "Chemical Markup Language"
-msgstr "Chemical Markup Language - ენა"
+msgstr "ქიმიური ფორმულების აღწერის ენა"
 
 #: mainwindow.cpp:693 mainwindow.cpp:1350
 msgid "Chemical JSON"
@@ -93,7 +94,7 @@ msgstr "ფაილის გახსნის შეცდომა"
 #: mainwindow.cpp:718 mainwindow.cpp:742 mainwindow.cpp:1254
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr "მითითებული ფაილის %1 გახსნის შეცდომა"
+msgstr "მითითებული ფაილის გახსნის შეცდომა: %1"
 
 #: mainwindow.cpp:731
 msgid "Open Molecule"
@@ -105,7 +106,7 @@ msgstr "ბრძანებები"
 
 #: mainwindow.cpp:755
 msgid "Input Generators"
-msgstr "შემოტანის გენერატორები"
+msgstr "შეყვანის გენერატორები"
 
 #: mainwindow.cpp:755
 msgid "File Formats"
@@ -176,7 +177,7 @@ msgstr ""
 
 #: mainwindow.cpp:950
 msgid "Error: Failed to initialize OpenGL context"
-msgstr "შეცდომა: OpenGL-ის ინიციალიზაციის პრობლემა"
+msgstr "შეცდომა: OpenGL-ის კონტექსტის ინიციალიზაცია ვერ მოხერხდა"
 
 #: mainwindow.cpp:951
 #, qt-format
@@ -258,7 +259,7 @@ msgstr "მოლეკულის გატანა"
 
 #: mainwindow.cpp:1437
 msgid "Saving File in Progress…"
-msgstr "ფაილის შენახვა…"
+msgstr "მიმდინარეობს ფაილის შენახვა…"
 
 #: mainwindow.cpp:1439
 #, qt-format
@@ -373,17 +374,12 @@ msgid "&Edit"
 msgstr "&ჩასწორება"
 
 #: mainwindow.cpp:1792
-#, fuzzy
-#| msgid "&Graphics…"
 msgid "&Copy Graphics"
-msgstr "&გრაფიკა…"
+msgstr "&გრაფიკის კოპირება"
 
 #: mainwindow.cpp:1796
-#, fuzzy
-#| msgctxt "Select All"
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -393,11 +389,11 @@ msgstr "&ხედი"
 
 #: mainwindow.cpp:1810
 msgid "Set Background Color…"
-msgstr "ფონს ფერის დაყენება…"
+msgstr "ფონის ფერის დაყენება…"
 
 #: mainwindow.cpp:1818
 msgid "Projection"
-msgstr "&პროექცია"
+msgstr "პროექცია"
 
 #: mainwindow.cpp:1819
 msgid "Perspective"
@@ -441,7 +437,7 @@ msgstr "Ctrl+D"
 #: mainwindow.cpp:2067
 #, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "შეცდომა ფაილის ტიპ %1-ის კითხვისას."
+msgstr "შეცდომა ფაილის ტიპი %1-ის კითხვისას."
 
 #: mainwindow.cpp:2083
 msgid "Select file format"
@@ -450,7 +446,7 @@ msgstr "აირჩიეთ ფაილის ფორმატი"
 #: mainwindow.cpp:2088 mainwindow.cpp:2099
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "Avogadro-მა ვერ გახსნა %1."
+msgstr "ავოგადროს არ შეუძლია გახსნას \"%1\"."
 
 #: mainwindow.cpp:2098
 msgid "Cannot open files"
@@ -466,7 +462,7 @@ msgstr "&ფაილი"
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:76:39
 msgid "&Build"
-msgstr "&აშენება"
+msgstr "&აგება"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
@@ -623,12 +619,12 @@ msgstr "Ctrl+Shift+S"
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Revert To Saved"
-msgstr "შენახულზე დაბრუნდება"
+msgstr "შენახულზე დაბრუნება"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color…"
-msgstr "ფო&ნის ფერის დაყენება…"
+msgstr "&ფონის ფერის დაყენება…"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -655,7 +651,7 @@ msgstr "ცენტრი"
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
-msgstr "ხედის ღერძე სწორება"
+msgstr "ხედის გასწორება ღერძებზე"
 
 #. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -698,7 +694,7 @@ msgstr "გასუფთავება"
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "ყველაფრის მონიშვნა"
+msgstr "ყველას მონიშვნა"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -720,7 +716,7 @@ msgstr "Ctrl+Shift+A"
 #. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Tutorials"
-msgstr "სახელმძღვანელოები"
+msgstr "გაკვეთილები"
 
 #. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -735,7 +731,7 @@ msgstr "გამოცემის შენიშვნები"
 #. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
-msgstr "შეცდომის პატაკი"
+msgstr "შეცდომის ანგარიში"
 
 #. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -768,4 +764,4 @@ msgstr "Temuri Doghonadze"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "temuri.doghonadze@gmail.com"
+msgstr "Temuri.doghonadze@gmail.com"
