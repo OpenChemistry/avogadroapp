@@ -1850,7 +1850,7 @@ void MainWindow::buildMenu()
 
   QStringList helpPath;
   helpPath << tr("&Help");
-  QAction* about = new QAction("&About", this);
+  QAction* about = new QAction(tr("&About"), this);
 #ifndef Q_OS_MAC
   about->setIcon(QIcon::fromTheme("help-about"));
 #endif
