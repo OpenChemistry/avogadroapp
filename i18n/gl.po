@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.1.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-05-15 02:59+0000\n"
+"POT-Creation-Date: 2022-06-16 19:03+0000\n"
 "PO-Revision-Date: 2016-06-10 06:19+0000\n"
 "Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -419,6 +419,12 @@ msgstr "Extensións"
 msgid "&Help"
 msgstr "&Axuda"
 
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1853:114
+msgid "&About"
+msgstr "&Sobre"
+
 #: mainwindow.cpp:1969
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
@@ -489,6 +495,16 @@ msgstr "&Configuración"
 #, fuzzy
 msgid "&Window"
 msgstr "Xanela"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+#, fuzzy
+#| msgid "New View"
+msgid "3D View"
+msgstr "Nova vista"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+msgid "VTK"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -630,11 +646,6 @@ msgstr "Volver ao gardado"
 #, fuzzy
 msgid "Set &Background Color…"
 msgstr "Esta&belecer a cor do fondo..."
-
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "&Sobre"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -805,9 +816,6 @@ msgstr ""
 
 #~ msgid "Esc"
 #~ msgstr "Esc"
-
-#~ msgid "New View"
-#~ msgstr "Nova vista"
 
 #~ msgid "Close View"
 #~ msgstr "Pechar a vista"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-05-15 02:59+0000\n"
+"POT-Creation-Date: 2022-06-16 19:03+0000\n"
 "PO-Revision-Date: 2021-08-20 01:04+0000\n"
 "Last-Translator: Nikola Matić <nikolamatic225@gmail.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/avogadro/"
@@ -429,6 +429,12 @@ msgstr "&Proširenja"
 msgid "&Help"
 msgstr "По&моћ"
 
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1853:114
+msgid "&About"
+msgstr "&О програму"
+
 #: mainwindow.cpp:1969
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
@@ -497,6 +503,16 @@ msgstr "&Подешавања"
 #: menubuilder.cpp:80
 msgid "&Window"
 msgstr "&Прозор"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+#, fuzzy
+#| msgid "New View"
+msgid "3D View"
+msgstr "Нови преглед"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+msgid "VTK"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -675,11 +691,6 @@ msgstr "Врати на сачувано"
 msgid "Set &Background Color…"
 msgstr "Постави боју &позадине..."
 
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "&О програму"
-
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 #, fuzzy
@@ -842,9 +853,6 @@ msgstr ""
 
 #~ msgid "Esc"
 #~ msgstr "Есц"
-
-#~ msgid "New View"
-#~ msgstr "Нови преглед"
 
 #~ msgid "Close View"
 #~ msgstr "Затвори преглед"

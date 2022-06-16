@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-05-15 02:59+0000\n"
+"POT-Creation-Date: 2022-06-16 19:03+0000\n"
 "PO-Revision-Date: 2016-06-10 06:26+0000\n"
 "Last-Translator: nrao <nagamalli.s@gmail.com>\n"
 "Language-Team: Telugu <te@li.org>\n"
@@ -416,6 +416,12 @@ msgstr "పొడిగింతలు"
 msgid "&Help"
 msgstr "&సహాయం"
 
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1853:114
+msgid "&About"
+msgstr "(&A) గురించి"
+
 #: mainwindow.cpp:1969
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
@@ -486,6 +492,16 @@ msgstr "సన్నివేశాలు"
 #, fuzzy
 msgid "&Window"
 msgstr "కిటికీ"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+#, fuzzy
+#| msgid "New View"
+msgid "3D View"
+msgstr "కొత్త దృశ్యం"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+msgid "VTK"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -626,11 +642,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color…"
 msgstr ""
-
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "(&A) గురించి"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -785,9 +796,6 @@ msgstr ",,nagamalli.s@gmail.com,,,nagamalli.s@gmail.com"
 
 #~ msgid "Esc"
 #~ msgstr "Esc"
-
-#~ msgid "New View"
-#~ msgstr "కొత్త దృశ్యం"
 
 #~ msgid "Close View"
 #~ msgstr "దృశ్యమును  మూసివేయుము"

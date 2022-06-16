@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-05-15 02:59+0000\n"
+"POT-Creation-Date: 2022-06-16 19:03+0000\n"
 "PO-Revision-Date: 2021-09-15 07:35+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -430,6 +430,12 @@ msgstr "&Utvidelser"
 msgid "&Help"
 msgstr "&Hjelp"
 
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1853:114
+msgid "&About"
+msgstr "&Om"
+
 #: mainwindow.cpp:1969
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
@@ -497,6 +503,16 @@ msgstr "Inn&stillinger"
 #: menubuilder.cpp:80
 msgid "&Window"
 msgstr "&Vindu"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+#, fuzzy
+#| msgid "New View"
+msgid "3D View"
+msgstr "Ny Visning"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+msgid "VTK"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -671,11 +687,6 @@ msgstr "Gå tilbake til Lagret"
 msgid "Set &Background Color…"
 msgstr "Sett bakgrunnsfarge …"
 
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "&Om"
-
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 #, fuzzy
@@ -838,9 +849,6 @@ msgstr ""
 
 #~ msgid "Esc"
 #~ msgstr "Esc"
-
-#~ msgid "New View"
-#~ msgstr "Ny Visning"
 
 #~ msgid "Close View"
 #~ msgstr "Lukk Visning"

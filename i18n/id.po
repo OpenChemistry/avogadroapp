@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-05-15 02:59+0000\n"
+"POT-Creation-Date: 2022-06-16 19:03+0000\n"
 "PO-Revision-Date: 2021-12-22 05:53+0000\n"
 "Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
@@ -420,6 +420,12 @@ msgstr "&Ekstensi"
 msgid "&Help"
 msgstr "&Bantuan"
 
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1853:114
+msgid "&About"
+msgstr "&Tentang"
+
 #: mainwindow.cpp:1969
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
@@ -486,6 +492,16 @@ msgstr "Pengaturan"
 #: menubuilder.cpp:80
 msgid "&Window"
 msgstr "&Jendela"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+#, fuzzy
+#| msgid "New View"
+msgid "3D View"
+msgstr "Tampilan Baru"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+msgid "VTK"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -634,11 +650,6 @@ msgstr "Balik ke yang disimpan"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color…"
 msgstr "Setel &Warna Latar…"
-
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "&Tentang"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -797,9 +808,6 @@ msgstr "Email anda"
 
 #~ msgid "Esc"
 #~ msgstr "Keluar"
-
-#~ msgid "New View"
-#~ msgstr "Tampilan Baru"
 
 #~ msgid "Close View"
 #~ msgstr "Tutup Tampilan"

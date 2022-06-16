@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-05-15 02:59+0000\n"
+"POT-Creation-Date: 2022-06-16 19:03+0000\n"
 "PO-Revision-Date: 2016-06-10 06:25+0000\n"
 "Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
 "Language-Team: Albanian <sq@li.org>\n"
@@ -415,6 +415,12 @@ msgstr "Shtojcat"
 msgid "&Help"
 msgstr "&Ndihmë"
 
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1853:114
+msgid "&About"
+msgstr "&Rreth"
+
 #: mainwindow.cpp:1969
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
@@ -485,6 +491,16 @@ msgstr "Pa&rametrat"
 #, fuzzy
 msgid "&Window"
 msgstr "Dritare"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+#, fuzzy
+#| msgid "New View"
+msgid "3D View"
+msgstr "Pamje e Re"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+msgid "VTK"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -625,11 +641,6 @@ msgstr "Riktheje Tek të Ruajturat"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color…"
 msgstr ""
-
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "&Rreth"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -791,9 +802,6 @@ msgstr ""
 
 #~ msgid "Esc"
 #~ msgstr "Esc"
-
-#~ msgid "New View"
-#~ msgstr "Pamje e Re"
 
 #~ msgid "Close View"
 #~ msgstr "Pamje nga Afër"

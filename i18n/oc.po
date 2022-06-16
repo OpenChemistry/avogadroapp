@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-05-15 02:59+0000\n"
+"POT-Creation-Date: 2022-06-16 19:03+0000\n"
 "PO-Revision-Date: 2016-06-10 06:24+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -417,6 +417,12 @@ msgstr "Extensions"
 msgid "&Help"
 msgstr "&Ajuda"
 
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1853:114
+msgid "&About"
+msgstr "&A prepaus de"
+
 #: mainwindow.cpp:1969
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
@@ -488,6 +494,16 @@ msgstr "Pa&ramètres"
 #, fuzzy
 msgid "&Window"
 msgstr "Fenèstra"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+#, fuzzy
+#| msgid "New View"
+msgid "3D View"
+msgstr "Vista novèla"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+msgid "VTK"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -629,11 +645,6 @@ msgstr "Tornar a la version enregistrada"
 #, fuzzy
 msgid "Set &Background Color…"
 msgstr "Definir la color d&e rèire plan..."
-
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "&A prepaus de"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -811,9 +822,6 @@ msgstr ""
 
 #~ msgid "Esc"
 #~ msgstr "Escap"
-
-#~ msgid "New View"
-#~ msgstr "Vista novèla"
 
 #~ msgid "Close View"
 #~ msgstr "Tampar la vista"
