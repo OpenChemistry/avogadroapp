@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-16 19:03+0000\n"
-"PO-Revision-Date: 2022-05-03 10:10+0000\n"
+"PO-Revision-Date: 2022-06-19 13:21+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12.1\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -492,14 +492,12 @@ msgid "&Window"
 msgstr "&Pencere"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Yeni Görünüm"
+msgstr "3D Görünüm"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
