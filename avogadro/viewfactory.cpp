@@ -23,19 +23,19 @@ ViewFactory::~ViewFactory()
 QStringList ViewFactory::views() const
 {
   QStringList views;
-  views << "3D View";
+  views << tr("3D View");
 #ifdef AVO_USE_VTK
-  views << "VTK";
+  views << tr("VTK");
 #endif
   return views;
 }
 
 QWidget* ViewFactory::createView(const QString& view)
 {
-  if (view == "3D View")
+  if (view == tr("3D View"))
     return new QtOpenGL::GLWidget;
 #ifdef AVO_USE_VTK
-  else if (view == "VTK")
+  else if (view == tr("VTK"))
     return new VTK::vtkGLWidget;
 #endif
   return nullptr;

@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
   Avogadro::Application app(argc, argv);
 
   // Before we do much else, load translations
-  // This ensures help messages and debugging info will be translated
+  // This ensures help messages and debugging info can be translated
   QLocale currentLocale;
   qDebug() << "Locale: " << currentLocale.name();
 
@@ -89,6 +89,7 @@ int main(int argc, char* argv[])
   bool qtLoaded = false;
   bool avoLoaded = false;
   bool libsLoaded = false;
+  QString successfulPath;
 
   foreach (const QString& translationPath, translationPaths) {
     if (!qtLoaded &&
@@ -111,6 +112,7 @@ int main(int argc, char* argv[])
         qDebug() << "AvogadroApp Translation " << currentLocale.name()
                  << " loaded " << translationPath;
         avoLoaded = true;
+        successfulPath = translationPath;
       }
     }
     if (!libsLoaded && avoLibsTranslator->load(currentLocale, "avogadrolibs",
@@ -122,6 +124,10 @@ int main(int argc, char* argv[])
       }
     }
   } // done looking for translations
+
+  // we'll also go through to get the localized names for the language dialog
+  QTranslator* langTranslator = new QTranslator;
+  QCoreApplication::translate("main.cpp", "English(US)", "Translate as your language");
 
   // Check for valid OpenGL support.
   auto offscreen = new QOffscreenSurface;
