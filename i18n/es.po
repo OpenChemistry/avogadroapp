@@ -5,13 +5,14 @@
 # M3CG <cgmario1999@gmail.com>, 2021.
 # Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu.ar>, 2021.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
+# Geoff Hutchison <geoff.hutchison@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-05-15 02:59+0000\n"
-"PO-Revision-Date: 2021-09-14 00:04+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"POT-Creation-Date: 2022-06-16 19:03+0000\n"
+"PO-Revision-Date: 2022-06-19 13:21+0000\n"
+"Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -378,10 +379,8 @@ msgid "&Edit"
 msgstr "&Editar"
 
 #: mainwindow.cpp:1792
-#, fuzzy
-#| msgid "&Graphics…"
 msgid "&Copy Graphics"
-msgstr "&Gráficos…"
+msgstr "&Copiar gráficos"
 
 #: mainwindow.cpp:1796
 #, fuzzy
@@ -418,6 +417,12 @@ msgstr "&Complementos"
 #: mainwindow.cpp:1852 menubuilder.cpp:80
 msgid "&Help"
 msgstr "&Ayuda"
+
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1853:114
+msgid "&About"
+msgstr "&Acerca de"
 
 #: mainwindow.cpp:1969
 #, qt-format
@@ -485,6 +490,17 @@ msgstr "Pre&ferencias"
 #: menubuilder.cpp:80
 msgid "&Window"
 msgstr "&Ventana"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+#, fuzzy
+#| msgid "New View"
+msgid "3D View"
+msgstr "Nueva vista"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+#, fuzzy
+msgid "VTK"
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -661,11 +677,6 @@ msgstr "Revertir al archivo guardado"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color…"
 msgstr "Establecer el &Color de fondo…"
-
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "&Acerca de"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -951,9 +962,6 @@ msgstr ""
 
 #~ msgid "Esc"
 #~ msgstr "Escape"
-
-#~ msgid "New View"
-#~ msgstr "Nueva vista"
 
 #~ msgid "Close View"
 #~ msgstr "Cerrar vista"

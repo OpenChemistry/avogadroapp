@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-05-15 02:59+0000\n"
-"PO-Revision-Date: 2022-05-03 10:10+0000\n"
+"POT-Creation-Date: 2022-06-16 19:03+0000\n"
+"PO-Revision-Date: 2022-06-19 13:21+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12.1\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -418,6 +418,12 @@ msgstr "&Eklentiler"
 msgid "&Help"
 msgstr "&Yardım"
 
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1853:114
+msgid "&About"
+msgstr "&Hakkında"
+
 #: mainwindow.cpp:1969
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
@@ -484,6 +490,14 @@ msgstr "A&yarlar"
 #: menubuilder.cpp:80
 msgid "&Window"
 msgstr "&Pencere"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+msgid "3D View"
+msgstr "3D Görünüm"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+msgid "VTK"
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -632,11 +646,6 @@ msgstr "Kaydedilene Geri Döndür"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color…"
 msgstr "&Arka Plan Rengini Ayarla…"
-
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "&Hakkında"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -829,9 +838,6 @@ msgstr ""
 
 #~ msgid "Esc"
 #~ msgstr "Çık"
-
-#~ msgid "New View"
-#~ msgstr "Yeni Görünüm"
 
 #~ msgid "Close View"
 #~ msgstr "Görünümü Kapat"

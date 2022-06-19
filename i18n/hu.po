@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-05-15 02:59+0000\n"
-"PO-Revision-Date: 2022-05-03 10:10+0000\n"
+"POT-Creation-Date: 2022-06-16 19:03+0000\n"
+"PO-Revision-Date: 2022-06-19 13:21+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hu/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.12.1\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -414,11 +414,17 @@ msgstr "Ortografikus"
 
 #: mainwindow.cpp:1845
 msgid "&Extensions"
-msgstr "&Kiterjesztések"
+msgstr "Ki&terjesztések"
 
 #: mainwindow.cpp:1852 menubuilder.cpp:80
 msgid "&Help"
 msgstr "&Súgó"
+
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1853:114
+msgid "&About"
+msgstr "&Névjegy"
 
 #: mainwindow.cpp:1969
 #, qt-format
@@ -473,13 +479,13 @@ msgstr "&Fájl"
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:76:39
 msgid "&Build"
-msgstr "&Felépítés"
+msgstr "Fe&lépítés"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
 #: menubuilder.cpp:77:48
 msgid "&Select"
-msgstr "&Kijelölés"
+msgstr "Ki&jelölés"
 
 #: menubuilder.cpp:80
 msgid "Se&ttings"
@@ -488,6 +494,14 @@ msgstr "&Beállítások"
 #: menubuilder.cpp:80
 msgid "&Window"
 msgstr "&Ablak"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+msgid "3D View"
+msgstr "Térhatású nézet"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+msgid "VTK"
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -637,11 +651,6 @@ msgstr "Visszaállítás a mentettre"
 msgid "Set &Background Color…"
 msgstr "&Háttérszín beállítása…"
 
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "&Névjegy"
-
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "Undo"
@@ -785,9 +794,6 @@ msgstr "E-mail-címek"
 
 #~ msgid "Esc"
 #~ msgstr "Kilépő billentyű"
-
-#~ msgid "New View"
-#~ msgstr "Új nézet"
 
 #~ msgid "Close View"
 #~ msgstr "Nézet bezárása"
