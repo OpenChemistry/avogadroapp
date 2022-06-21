@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-16 19:03+0000\n"
-"PO-Revision-Date: 2022-05-16 02:31+0000\n"
+"PO-Revision-Date: 2022-06-22 19:17+0000\n"
 "Last-Translator: Julen Larrucea <code@larrucea.eu>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/eu/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -345,9 +345,8 @@ msgstr "Gorde &Honela..."
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1735:195
-#, fuzzy
 msgid "&Export"
-msgstr "Esportatu"
+msgstr "&Esportatu"
 
 #: mainwindow.cpp:1736
 #, fuzzy
