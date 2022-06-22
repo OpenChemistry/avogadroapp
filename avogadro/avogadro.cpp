@@ -10,9 +10,11 @@
 #include <QtWidgets/QMessageBox>
 
 #include <QtCore/QDebug>
+#include <QtCore/QDir>
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QLocale>
 #include <QtCore/QProcess>
+#include <QtCore/QSettings>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QTranslator>
 
@@ -52,10 +54,16 @@ int main(int argc, char* argv[])
 
   Avogadro::Application app(argc, argv);
 
+  QSettings settings;
+  QString language = settings.value("language", "System").toString();
+
   // Before we do much else, load translations
   // This ensures help messages and debugging info can be translated
   QLocale currentLocale;
-  qDebug() << "Locale: " << currentLocale.name();
+  if (language != "System") {
+    currentLocale = QLocale(language);
+  }
+  qDebug() << "Using locale: " << currentLocale.name();
 
   QStringList translationPaths;
   // check environment variable and local paths
@@ -126,8 +134,32 @@ int main(int argc, char* argv[])
   } // done looking for translations
 
   // we'll also go through to get the localized names for the language dialog
-  QTranslator* langTranslator = new QTranslator;
-  QCoreApplication::translate("main.cpp", "English(US)", "Translate as your language");
+  // we iterate through the files in the successfulPath
+  QDir dir(successfulPath);
+  QStringList files = dir.entryList(QStringList() << "avogadroapp*.qm", QDir::Files);
+  QStringList languages, codes;
+
+  languages << QCoreApplication::translate("main.cpp","System Language");
+  codes << "";
+  foreach (const QString& file, files) {
+    // remove "avogadroapp-" and the ".qm"
+    QString localeCode = file.left(file.indexOf('.')).remove("avogadroapp-");
+    QLocale locale(localeCode);
+    QString language = locale.nativeLanguageName();
+    if (language.isEmpty() && localeCode == "oc")
+      language = "Occitan";
+    
+    // capitalize the first letter
+    language = language.left(1).toUpper()+language.mid(1);
+
+    if (languages.contains(language)) {
+      language += " (" + locale.nativeCountryName() + ")";
+    }
+
+    languages << language;
+    codes << localeCode;
+  }
+  qDebug() << "Languages: " << languages;
 
   // Check for valid OpenGL support.
   auto offscreen = new QOffscreenSurface;
@@ -190,6 +222,7 @@ int main(int argc, char* argv[])
 
   Avogadro::MainWindow* window =
     new Avogadro::MainWindow(fileNames, disableSettings);
+  window->setTranslationList(languages, codes);
 #ifdef QTTESTING
   window->playTest(testFile, testExit);
 #endif
