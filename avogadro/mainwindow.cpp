@@ -1896,6 +1896,7 @@ void MainWindow::showLanguageDialog()
 {
   bool ok;
   int currentIndex = 0;
+  m_translationList[0] = tr("System Language");
 
   QSettings settings;
   QString currentLanguage = settings.value("locale", "System").toString();
