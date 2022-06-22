@@ -10,9 +10,11 @@
 #include <QtWidgets/QMessageBox>
 
 #include <QtCore/QDebug>
+#include <QtCore/QDir>
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QLocale>
 #include <QtCore/QProcess>
+#include <QtCore/QSettings>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QTranslator>
 
@@ -52,10 +54,16 @@ int main(int argc, char* argv[])
 
   Avogadro::Application app(argc, argv);
 
+  QSettings settings;
+  QString language = settings.value("language", "System").toString();
+
   // Before we do much else, load translations
   // This ensures help messages and debugging info can be translated
   QLocale currentLocale;
-  qDebug() << "Locale: " << currentLocale.name();
+  if (language != "System") {
+    currentLocale = QLocale(language);
+  }
+  qDebug() << "Using locale: " << currentLocale.name();
 
   QStringList translationPaths;
   // check environment variable and local paths
@@ -125,9 +133,42 @@ int main(int argc, char* argv[])
     }
   } // done looking for translations
 
-  // we'll also go through to get the localized names for the language dialog
-  QTranslator* langTranslator = new QTranslator;
-  QCoreApplication::translate("main.cpp", "English(US)", "Translate as your language");
+  // Go through the possible translations / locale codes
+  // to get the localized names for the language dialog
+  if (successfulPath.isEmpty()) {
+    // the default for most systems 
+    // (e.g., /usr/bin/avogadro2 -> /usr/share/avogadro2/i18n/)
+    // or /Applications/Avogadro2.app/Contents/share/avogadro2/i18n/
+    // .. etc.
+    successfulPath =
+      QCoreApplication::applicationDirPath() + "/../share/avogadro2/i18n/";
+  }
+
+  QDir dir(successfulPath);
+  QStringList files =
+    dir.entryList(QStringList() << "avogadroapp*.qm", QDir::Files);
+  QStringList languages, codes;
+
+  languages << QCoreApplication::translate("main.cpp", "System Language");
+  codes << ""; // default is the system language
+  // check what files exist
+  foreach (const QString& file, files) {
+    // remove "avogadroapp-" and the ".qm"
+    QString localeCode = file.left(file.indexOf('.')).remove("avogadroapp-");
+    QLocale locale(localeCode);
+    QString languageName = locale.nativeLanguageName();
+    if (languageName.isEmpty() && localeCode == "oc")
+      languageName = "Occitan";
+    // potentially other exceptions here
+
+    // cases like Brazilian Portuguese show up as duplicates
+    if (languages.contains(languageName)) {
+      languageName += " (" + locale.nativeCountryName() + ")";
+    }
+
+    languages << languageName;
+    codes << localeCode;
+  }
 
   // Check for valid OpenGL support.
   auto offscreen = new QOffscreenSurface;
@@ -190,6 +231,7 @@ int main(int argc, char* argv[])
 
   Avogadro::MainWindow* window =
     new Avogadro::MainWindow(fileNames, disableSettings);
+  window->setTranslationList(languages, codes);
 #ifdef QTTESTING
   window->playTest(testFile, testExit);
 #endif

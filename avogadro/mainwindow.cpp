@@ -673,6 +673,20 @@ void MainWindow::writeSettings()
   }
 }
 
+void MainWindow::setLocale(const QString& locale)
+{
+  QSettings settings;
+  if (locale.isEmpty()) {
+    settings.remove("locale"); // system is the default
+  } else {
+    settings.setValue("locale", locale);
+  }
+
+  MESSAGEBOX::information(this, tr("Restart needed"),
+                          tr("Please restart Avogadro to use the new "
+                             "language."));
+}
+
 void MainWindow::readSettings()
 {
   QSettings settings;
@@ -1843,7 +1857,12 @@ void MainWindow::buildMenu()
   // Periodic table.
   QStringList extensionsPath;
   extensionsPath << tr("&Extensions");
-  action = new QAction("&Periodic Table…", this);
+
+  action = new QAction(tr("Set Language…"), this);
+  m_menuBuilder->addAction(extensionsPath, action, 100);
+  connect(action, &QAction::triggered, this, &MainWindow::showLanguageDialog);
+
+  action = new QAction(tr("&Periodic Table…"), this);
   m_menuBuilder->addAction(extensionsPath, action, 0);
   QtGui::PeriodicTableView* periodicTable = new QtGui::PeriodicTableView(this);
   connect(action, &QAction::triggered, periodicTable, &QWidget::show);
@@ -1871,6 +1890,28 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin* extension)
 bool ToolSort(const ToolPlugin* a, const ToolPlugin* b)
 {
   return a->priority() < b->priority();
+}
+
+void MainWindow::showLanguageDialog()
+{
+  bool ok;
+  int currentIndex = 0;
+
+  QSettings settings;
+  QString currentLanguage = settings.value("locale", "System").toString();
+  if (currentLanguage != "System")
+    currentIndex = m_localeCodes.indexOf(currentLanguage);
+
+  QString item =
+    QInputDialog::getItem(this, tr("Set Language"), tr("Localization:"),
+                          m_translationList, currentIndex, false, &ok);
+
+  if (ok && !item.isEmpty()) {
+    auto index = m_translationList.indexOf(item);
+    if (index != -1) {
+      setLocale(m_localeCodes[index]);
+    }
+  }
 }
 
 void MainWindow::buildTools()
