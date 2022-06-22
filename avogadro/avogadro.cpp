@@ -133,14 +133,25 @@ int main(int argc, char* argv[])
     }
   } // done looking for translations
 
-  // we'll also go through to get the localized names for the language dialog
-  // we iterate through the files in the successfulPath
+  // Go through the possible translations / locale codes
+  // to get the localized names for the language dialog
+  if (successfulPath.isEmpty()) {
+    // the default for most systems 
+    // (e.g., /usr/bin/avogadro2 -> /usr/share/avogadro2/i18n/)
+    // or /Applications/Avogadro2.app/Contents/share/avogadro2/i18n/
+    // .. etc.
+    successfulPath =
+      QCoreApplication::applicationDirPath() + "/../share/avogadro2/i18n/";
+  }
+
   QDir dir(successfulPath);
-  QStringList files = dir.entryList(QStringList() << "avogadroapp*.qm", QDir::Files);
+  QStringList files =
+    dir.entryList(QStringList() << "avogadroapp*.qm", QDir::Files);
   QStringList languages, codes;
 
-  languages << QCoreApplication::translate("main.cpp","System Language");
-  codes << "";
+  languages << QCoreApplication::translate("main.cpp", "System Language");
+  codes << ""; // default is the system language
+  // check what files exist
   foreach (const QString& file, files) {
     // remove "avogadroapp-" and the ".qm"
     QString localeCode = file.left(file.indexOf('.')).remove("avogadroapp-");
@@ -148,7 +159,9 @@ int main(int argc, char* argv[])
     QString languageName = locale.nativeLanguageName();
     if (languageName.isEmpty() && localeCode == "oc")
       languageName = "Occitan";
-    
+    // potentially other exceptions here
+
+    // cases like Brazilian Portuguese show up as duplicates
     if (languages.contains(languageName)) {
       languageName += " (" + locale.nativeCountryName() + ")";
     }
@@ -156,7 +169,6 @@ int main(int argc, char* argv[])
     languages << languageName;
     codes << localeCode;
   }
-  qDebug() << "Languages: " << languages;
 
   // Check for valid OpenGL support.
   auto offscreen = new QOffscreenSurface;
