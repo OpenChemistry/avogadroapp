@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-22 22:16+0000\n"
-"PO-Revision-Date: 2022-06-19 13:21+0000\n"
+"PO-Revision-Date: 2022-06-24 05:14+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hu/>\n"
@@ -84,11 +84,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:685
 msgid "Restart needed"
-msgstr ""
+msgstr "Újraindítás szükséges"
 
 #: mainwindow.cpp:686
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Kérjük, indítsa újra az Avogadrót az új nyelv használatához."
 
 #: mainwindow.cpp:706 mainwindow.cpp:1365
 msgid "Chemical Markup Language"
@@ -426,11 +426,11 @@ msgstr "Ki&terjesztések"
 
 #: mainwindow.cpp:1861
 msgid "Set Language…"
-msgstr ""
+msgstr "Nyelv…"
 
 #: mainwindow.cpp:1865
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Periódusos táblázat…"
 
 #: mainwindow.cpp:1871 menubuilder.cpp:80
 msgid "&Help"
@@ -444,15 +444,15 @@ msgstr "&Névjegy"
 
 #: mainwindow.cpp:1899
 msgid "System Language"
-msgstr ""
+msgstr "Rendszer nyelve"
 
 #: mainwindow.cpp:1907
 msgid "Set Language"
-msgstr ""
+msgstr "Nyelv"
 
 #: mainwindow.cpp:1907
 msgid "Localization:"
-msgstr ""
+msgstr "Felhasználói felület nyelve:"
 
 #: mainwindow.cpp:2011
 #, qt-format
