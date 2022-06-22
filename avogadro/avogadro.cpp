@@ -149,9 +149,6 @@ int main(int argc, char* argv[])
     if (language.isEmpty() && localeCode == "oc")
       language = "Occitan";
     
-    // capitalize the first letter
-    language = language.left(1).toUpper()+language.mid(1);
-
     if (languages.contains(language)) {
       language += " (" + locale.nativeCountryName() + ")";
     }
