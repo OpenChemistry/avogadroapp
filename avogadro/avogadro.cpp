@@ -145,15 +145,15 @@ int main(int argc, char* argv[])
     // remove "avogadroapp-" and the ".qm"
     QString localeCode = file.left(file.indexOf('.')).remove("avogadroapp-");
     QLocale locale(localeCode);
-    QString language = locale.nativeLanguageName();
-    if (language.isEmpty() && localeCode == "oc")
-      language = "Occitan";
+    QString languageName = locale.nativeLanguageName();
+    if (languageName.isEmpty() && localeCode == "oc")
+      languageName = "Occitan";
     
-    if (languages.contains(language)) {
-      language += " (" + locale.nativeCountryName() + ")";
+    if (languages.contains(languageName)) {
+      languageName += " (" + locale.nativeCountryName() + ")";
     }
 
-    languages << language;
+    languages << languageName;
     codes << localeCode;
   }
   qDebug() << "Languages: " << languages;
