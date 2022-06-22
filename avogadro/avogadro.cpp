@@ -149,7 +149,7 @@ int main(int argc, char* argv[])
     dir.entryList(QStringList() << "avogadroapp*.qm", QDir::Files);
   QStringList languages, codes;
 
-  languages << QCoreApplication::translate("main.cpp", "System Language");
+  languages << "System"; // we handle this in the dialog
   codes << ""; // default is the system language
   // check what files exist
   foreach (const QString& file, files) {
