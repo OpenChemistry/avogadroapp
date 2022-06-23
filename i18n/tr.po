@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-22 22:16+0000\n"
-"PO-Revision-Date: 2022-06-19 13:21+0000\n"
+"PO-Revision-Date: 2022-06-24 05:14+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -82,11 +82,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:685
 msgid "Restart needed"
-msgstr ""
+msgstr "Yeniden başlatma gerekli"
 
 #: mainwindow.cpp:686
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Yeni dili kullanmak için lütfen Avogadro'yu yeniden başlatın."
 
 #: mainwindow.cpp:706 mainwindow.cpp:1365
 msgid "Chemical Markup Language"
@@ -424,11 +424,11 @@ msgstr "&Eklentiler"
 
 #: mainwindow.cpp:1861
 msgid "Set Language…"
-msgstr ""
+msgstr "Dili Ayarla…"
 
 #: mainwindow.cpp:1865
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Periyodik Tablo…"
 
 #: mainwindow.cpp:1871 menubuilder.cpp:80
 msgid "&Help"
@@ -442,15 +442,15 @@ msgstr "&Hakkında"
 
 #: mainwindow.cpp:1899
 msgid "System Language"
-msgstr ""
+msgstr "Sistem Dili"
 
 #: mainwindow.cpp:1907
 msgid "Set Language"
-msgstr ""
+msgstr "Dili Ayarla"
 
 #: mainwindow.cpp:1907
 msgid "Localization:"
-msgstr ""
+msgstr "Yerelleştirme:"
 
 #: mainwindow.cpp:2011
 #, qt-format
