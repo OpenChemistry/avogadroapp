@@ -1904,7 +1904,7 @@ void MainWindow::showLanguageDialog()
     currentIndex = m_localeCodes.indexOf(currentLanguage);
 
   QString item =
-    QInputDialog::getItem(this, tr("Set Language"), tr("Localization:"),
+    QInputDialog::getItem(this, tr("Set User Interface Language"), tr("Language:"),
                           m_translationList, currentIndex, false, &ok);
 
   if (ok && !item.isEmpty()) {
