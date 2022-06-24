@@ -246,6 +246,14 @@ private slots:
 
   void showLanguageDialog();
 
+  void openForum();
+
+  void openWebsite();
+
+  void openBugReport();
+
+  void openFeatureRequest();
+
   /**
    * @brief Register file formats from extensions when ready.
    */
