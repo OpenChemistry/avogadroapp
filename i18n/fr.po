@@ -3,13 +3,14 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # translator <kvb@tuta.io>, 2022.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2022.
+# Translator <kvb@tuta.io>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-22 22:16+0000\n"
-"PO-Revision-Date: 2022-06-19 13:21+0000\n"
-"Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
+"PO-Revision-Date: 2022-06-25 17:23+0000\n"
+"Last-Translator: Translator <kvb@tuta.io>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
 "Language: fr\n"
@@ -77,11 +78,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:685
 msgid "Restart needed"
-msgstr ""
+msgstr "Redémarrage nécessaire"
 
 #: mainwindow.cpp:686
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Veuillez redémarrer Avogadro pour utiliser la nouvelle langue."
 
 #: mainwindow.cpp:706 mainwindow.cpp:1365
 msgid "Chemical Markup Language"
@@ -419,11 +420,11 @@ msgstr "&Extensions"
 
 #: mainwindow.cpp:1861
 msgid "Set Language…"
-msgstr ""
+msgstr "Règler la Langue…"
 
 #: mainwindow.cpp:1865
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Tableau périodique…"
 
 #: mainwindow.cpp:1871 menubuilder.cpp:80
 msgid "&Help"
@@ -437,17 +438,15 @@ msgstr "&À propos"
 
 #: mainwindow.cpp:1899
 msgid "System Language"
-msgstr ""
+msgstr "Langue système"
 
 #: mainwindow.cpp:1907
 msgid "Set Language"
-msgstr ""
+msgstr "Règler la Langue"
 
 #: mainwindow.cpp:1907
-#, fuzzy
-#| msgid "Localization Method:"
 msgid "Localization:"
-msgstr "Méthode localisée:"
+msgstr "Localisation :"
 
 #: mainwindow.cpp:2011
 #, qt-format
