@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-25 17:24+0000\n"
-"PO-Revision-Date: 2022-06-24 05:14+0000\n"
+"PO-Revision-Date: 2022-06-27 04:19+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -423,10 +423,8 @@ msgid "&Extensions"
 msgstr "&Eklentiler"
 
 #: mainwindow.cpp:1862
-#, fuzzy
-#| msgid "Set Language…"
 msgid "User Interface Language…"
-msgstr "Dili Ayarla…"
+msgstr "Kullanıcı Arayüzü Dili…"
 
 #: mainwindow.cpp:1866
 msgid "&Periodic Table…"
@@ -443,42 +441,32 @@ msgid "&About"
 msgstr "&Hakkında"
 
 #: mainwindow.cpp:1880
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Tartışma Forumu"
+msgstr "&Tartışma Forumu"
 
 #: mainwindow.cpp:1884
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadro Web Sitesi"
+msgstr "&Avogadro Web Sitesi"
 
 #: mainwindow.cpp:1888
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Hata Bildir"
+msgstr "Hata &Bildir"
 
 #: mainwindow.cpp:1892
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "Özellik &Öner"
 
 #: mainwindow.cpp:1916
 msgid "System Language"
 msgstr "Sistem Dili"
 
 #: mainwindow.cpp:1923
-#, fuzzy
-#| msgid "Set Language"
 msgid "Language"
-msgstr "Dili Ayarla"
+msgstr "Dil"
 
 #: mainwindow.cpp:1924
-#, fuzzy
-#| msgid "System Language"
 msgid "User Interface Language:"
-msgstr "Sistem Dili"
+msgstr "Kullanıcı Arayüzü Dili:"
 
 #: mainwindow.cpp:2028
 #, qt-format
