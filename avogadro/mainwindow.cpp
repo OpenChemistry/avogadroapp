@@ -47,6 +47,7 @@
 #include <QtCore/QTimer>
 #include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
+#include <QtGui/QDesktopServices>
 #include <QtGui/QKeySequence>
 #include <QtWidgets/QActionGroup>
 #include <QtWidgets/QApplication>
@@ -1858,7 +1859,7 @@ void MainWindow::buildMenu()
   QStringList extensionsPath;
   extensionsPath << tr("&Extensions");
 
-  action = new QAction(tr("Set Language…"), this);
+  action = new QAction(tr("User Interface Language…"), this);
   m_menuBuilder->addAction(extensionsPath, action, 100);
   connect(action, &QAction::triggered, this, &MainWindow::showLanguageDialog);
 
@@ -1873,8 +1874,24 @@ void MainWindow::buildMenu()
 #ifndef Q_OS_MAC
   about->setIcon(QIcon::fromTheme("help-about"));
 #endif
-  m_menuBuilder->addAction(helpPath, about, 20);
+  m_menuBuilder->addAction(helpPath, about, 500);
   connect(about, &QAction::triggered, this, &MainWindow::showAboutDialog);
+
+  QAction* forum = new QAction(tr("&Discussion Forum"), this);
+  m_menuBuilder->addAction(helpPath, forum, 200);
+  connect(forum, &QAction::triggered, this, &MainWindow::openForum);
+
+  QAction* website = new QAction(tr("&Avogadro Website"), this);
+  m_menuBuilder->addAction(helpPath, website, 40);
+  connect(website, &QAction::triggered, this, &MainWindow::openWebsite);
+
+  QAction* bug = new QAction(tr("&Report a Bug"), this);
+  m_menuBuilder->addAction(helpPath, bug, 20);
+  connect(bug, &QAction::triggered, this, &MainWindow::openBugReport);
+
+  QAction* feature = new QAction(tr("&Suggest a Feature"), this);
+  m_menuBuilder->addAction(helpPath, feature, 10);
+  connect(feature, &QAction::triggered, this, &MainWindow::openFeatureRequest);
 
   // Now actually add all menu entries.
   m_menuBuilder->buildMenuBar(menuBar());
@@ -1903,9 +1920,9 @@ void MainWindow::showLanguageDialog()
   if (currentLanguage != "System")
     currentIndex = m_localeCodes.indexOf(currentLanguage);
 
-  QString item =
-    QInputDialog::getItem(this, tr("Set Language"), tr("Localization:"),
-                          m_translationList, currentIndex, false, &ok);
+  QString item = QInputDialog::getItem(this, tr("Language"),
+                                       tr("User Interface Language:"), m_translationList,
+                                       currentIndex, false, &ok);
 
   if (ok && !item.isEmpty()) {
     auto index = m_translationList.indexOf(item);
@@ -2097,6 +2114,30 @@ void MainWindow::showAboutDialog()
 {
   AboutDialog about(this);
   about.exec();
+}
+
+void MainWindow::openForum()
+{
+  QDesktopServices::openUrl(QUrl("https://discuss.avogadro.cc/"));
+}
+
+void MainWindow::openWebsite()
+{
+  QDesktopServices::openUrl(QUrl("https://two.avogadro.cc/"));
+}
+
+void MainWindow::openBugReport()
+{
+  QDesktopServices::openUrl(
+    QUrl("https://github.com/OpenChemistry/avogadrolibs/issues/"
+         "new?template=bug_report.md"));
+}
+
+void MainWindow::openFeatureRequest()
+{
+  QDesktopServices::openUrl(
+    QUrl("https://github.com/OpenChemistry/avogadrolibs/issues/"
+         "new?template=feature_request.md"));
 }
 
 void MainWindow::fileFormatsReady()
