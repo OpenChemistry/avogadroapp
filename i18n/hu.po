@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-25 17:24+0000\n"
-"PO-Revision-Date: 2022-06-24 05:14+0000\n"
+"PO-Revision-Date: 2022-06-27 04:19+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hu/>\n"
@@ -425,10 +425,8 @@ msgid "&Extensions"
 msgstr "Ki&terjesztések"
 
 #: mainwindow.cpp:1862
-#, fuzzy
-#| msgid "Set Language…"
 msgid "User Interface Language…"
-msgstr "Nyelv…"
+msgstr "Felhasználói felület nyelve…"
 
 #: mainwindow.cpp:1866
 msgid "&Periodic Table…"
@@ -445,42 +443,32 @@ msgid "&About"
 msgstr "&Névjegy"
 
 #: mainwindow.cpp:1880
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Vitafórum"
+msgstr "&Fórum"
 
 #: mainwindow.cpp:1884
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadro honlapja"
+msgstr "&Avogadro webhely meglátogatása"
 
 #: mainwindow.cpp:1888
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Hiba jelentése"
+msgstr "&Hiba bejelentése"
 
 #: mainwindow.cpp:1892
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Javaslat új funkcióra"
 
 #: mainwindow.cpp:1916
 msgid "System Language"
 msgstr "Rendszer nyelve"
 
 #: mainwindow.cpp:1923
-#, fuzzy
-#| msgid "Set Language"
 msgid "Language"
 msgstr "Nyelv"
 
 #: mainwindow.cpp:1924
-#, fuzzy
-#| msgid "System Language"
 msgid "User Interface Language:"
-msgstr "Rendszer nyelve"
+msgstr "Felhasználói felület nyelve:"
 
 #: mainwindow.cpp:2028
 #, qt-format
