@@ -28,7 +28,7 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
   if(USE_VTK)
     # The VTK dlls are not in the CMAKE_PREFIX_PATH when built against
     # a "build tree" of VTK:
-    get_property(loc TARGET vtkChartsCore PROPERTY LOCATION_RELEASE)
+    get_property(loc TARGET VTK::ChartsCore PROPERTY LOCATION_RELEASE)
     get_filename_component(vtk_dlls_dir "${loc}" PATH)
     set(dirs ${dirs} "${vtk_dlls_dir}")
   endif()
