@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-06-16 19:03+0000\n"
+"POT-Creation-Date: 2022-06-25 17:24+0000\n"
 "PO-Revision-Date: 2021-11-13 17:53+0000\n"
 "Last-Translator: Tymofii Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/avogadro/"
@@ -34,104 +34,112 @@ msgstr "У BackgroundFileFormat не встановлено формат фай�
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "Назви файлу не встановлено у BackgroundFileFormat!"
 
-#: mainwindow.cpp:302
+#: mainwindow.cpp:303
 msgid "Ready…"
 msgstr "Готово…"
 
-#: mainwindow.cpp:344
+#: mainwindow.cpp:345
 msgid "Tool"
 msgstr "Засіб"
 
-#: mainwindow.cpp:348
+#: mainwindow.cpp:349
 msgid "Display Types"
 msgstr "Типи показу"
 
-#: mainwindow.cpp:359
+#: mainwindow.cpp:360
 msgid "View Configuration"
 msgstr "Переглянути конфігурацію"
 
-#: mainwindow.cpp:365
+#: mainwindow.cpp:366
 msgid "Molecules"
 msgstr "Молекули"
 
-#: mainwindow.cpp:374
+#: mainwindow.cpp:375
 msgid "Layers"
 msgstr "Шари"
 
-#: mainwindow.cpp:393
+#: mainwindow.cpp:394
 msgid "File"
 msgstr "Файл"
 
-#: mainwindow.cpp:398
+#: mainwindow.cpp:399
 msgid "Tools"
 msgstr "Засоби"
 
-#: mainwindow.cpp:631
+#: mainwindow.cpp:632
 msgid "Untitled"
 msgstr "Без назви"
 
-#: mainwindow.cpp:636
+#: mainwindow.cpp:637
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Авоґадро %3"
 
-#: mainwindow.cpp:692 mainwindow.cpp:1351
+#: mainwindow.cpp:686
+msgid "Restart needed"
+msgstr ""
+
+#: mainwindow.cpp:687
+msgid "Please restart Avogadro to use the new language."
+msgstr ""
+
+#: mainwindow.cpp:707 mainwindow.cpp:1366
 msgid "Chemical Markup Language"
 msgstr "Мова хімічної розмітки"
 
-#: mainwindow.cpp:693 mainwindow.cpp:1350
+#: mainwindow.cpp:708 mainwindow.cpp:1365
 msgid "Chemical JSON"
 msgstr "Хімічний JSON"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:714
 msgid "Open chemical file"
 msgstr "Відкрити хімічний файл"
 
-#: mainwindow.cpp:717 mainwindow.cpp:741 mainwindow.cpp:1253
-#: mainwindow.cpp:2087
+#: mainwindow.cpp:732 mainwindow.cpp:756 mainwindow.cpp:1268
+#: mainwindow.cpp:2170
 msgid "Cannot open file"
 msgstr "Не вдається відкрити файл"
 
-#: mainwindow.cpp:718 mainwindow.cpp:742 mainwindow.cpp:1254
+#: mainwindow.cpp:733 mainwindow.cpp:757 mainwindow.cpp:1269
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "Не вдається відкрити наданий файл %1"
 
-#: mainwindow.cpp:731
+#: mainwindow.cpp:746
 msgid "Open Molecule"
 msgstr "Відкрита молекула"
 
-#: mainwindow.cpp:755
+#: mainwindow.cpp:770
 msgid "Commands"
 msgstr "Команди"
 
-#: mainwindow.cpp:755
+#: mainwindow.cpp:770
 msgid "Input Generators"
 msgstr "Генератори вхідних даних"
 
-#: mainwindow.cpp:755
+#: mainwindow.cpp:770
 msgid "File Formats"
 msgstr "Формат файлу:"
 
-#: mainwindow.cpp:759
+#: mainwindow.cpp:774
 msgid "Install Plugin Script"
 msgstr "Установити скрипт плагіна"
 
-#: mainwindow.cpp:759
+#: mainwindow.cpp:774
 msgid "Script Type:"
 msgstr "Тип скрипта:"
 
-#: mainwindow.cpp:807 mainwindow.cpp:1249
+#: mainwindow.cpp:822 mainwindow.cpp:1264
 msgid "Select file reader"
 msgstr "Оберіть читач файлу"
 
-#: mainwindow.cpp:836
+#: mainwindow.cpp:851
 msgid "Reading File"
 msgstr "Читання файлу"
 
-#: mainwindow.cpp:838
+#: mainwindow.cpp:853
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -140,16 +148,16 @@ msgstr ""
 "Відкриття файлу '%1'\n"
 "з '%2'"
 
-#: mainwindow.cpp:869
+#: mainwindow.cpp:884
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Молекула завантажила (%1 атомів, %2 зв'язків)"
 
-#: mainwindow.cpp:874
+#: mainwindow.cpp:889
 msgid "File error"
 msgstr "Помилка файлу"
 
-#: mainwindow.cpp:875
+#: mainwindow.cpp:890
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -158,18 +166,18 @@ msgstr ""
 "Помилка під час читання файлу '%1':\n"
 "%2"
 
-#: mainwindow.cpp:902
+#: mainwindow.cpp:917
 #, fuzzy, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "Не вдалося зберегти файл %1."
 
-#: mainwindow.cpp:910
+#: mainwindow.cpp:925
 #, fuzzy
 msgid "Error saving file"
 msgstr "Помилка запуску сервера RPC:"
 
-#: mainwindow.cpp:911
+#: mainwindow.cpp:926
 #, fuzzy, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -179,11 +187,11 @@ msgstr ""
 "Помилка під час читання файлу '%1':\n"
 "%2"
 
-#: mainwindow.cpp:950
+#: mainwindow.cpp:965
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Помилка: Не вдалося ініціалізувати контекст OpenGL"
 
-#: mainwindow.cpp:951
+#: mainwindow.cpp:966
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -194,50 +202,50 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:952
+#: mainwindow.cpp:967
 msgid "Unknown error"
 msgstr "Невідома помилка"
 
-#: mainwindow.cpp:1078 mainwindow.cpp:1079
+#: mainwindow.cpp:1093 mainwindow.cpp:1094
 msgid "Navigate tool"
 msgstr "Знаряддя навігації"
 
-#: mainwindow.cpp:1199
+#: mainwindow.cpp:1214
 msgid "Common image formats"
 msgstr "Поширені формати зображень"
 
-#: mainwindow.cpp:1201
+#: mainwindow.cpp:1216
 msgid "All files"
 msgstr "Усі файли"
 
-#: mainwindow.cpp:1201
+#: mainwindow.cpp:1216
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1202
+#: mainwindow.cpp:1217
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1202
+#: mainwindow.cpp:1217
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1211
+#: mainwindow.cpp:1226
 msgid "Export Bitmap Graphics"
 msgstr "Експорт до растрового зображення"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1222 mainwindow.cpp:1324 mainwindow.cpp:1984:33
+#: mainwindow.cpp:1237 mainwindow.cpp:1339 mainwindow.cpp:2043:33
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1223
+#: mainwindow.cpp:1238
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Не вдалося зберегти файл %1."
 
-#: mainwindow.cpp:1325
+#: mainwindow.cpp:1340
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -250,23 +258,23 @@ msgstr ""
 "Ви хочете експортувати до поточного формату або зберегти в усталеному "
 "форматі?"
 
-#: mainwindow.cpp:1332
+#: mainwindow.cpp:1347
 msgid "Export"
 msgstr "Експортувати"
 
-#: mainwindow.cpp:1357
+#: mainwindow.cpp:1372
 msgid "Save chemical file"
 msgstr "Зберегти хімічний файл"
 
-#: mainwindow.cpp:1385
+#: mainwindow.cpp:1400
 msgid "Export Molecule"
 msgstr "Експорт молекули"
 
-#: mainwindow.cpp:1437
+#: mainwindow.cpp:1452
 msgid "Saving File in Progress…"
 msgstr ""
 
-#: mainwindow.cpp:1439
+#: mainwindow.cpp:1454
 #, fuzzy, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -276,38 +284,38 @@ msgstr ""
 "Відкриття файлу '%1'\n"
 "з '%2'"
 
-#: mainwindow.cpp:1551
+#: mainwindow.cpp:1566
 #, qt-format
 msgid "&Undo %1"
 msgstr "&Повернути %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1554 mainwindow.cpp:1781:117
+#: mainwindow.cpp:1569 mainwindow.cpp:1796:117
 msgid "&Undo"
 msgstr "&Вернути"
 
-#: mainwindow.cpp:1559
+#: mainwindow.cpp:1574
 #, qt-format
 msgid "&Redo %1"
 msgstr "&Повторити %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1562 mainwindow.cpp:1786:123
+#: mainwindow.cpp:1577 mainwindow.cpp:1801:123
 msgid "&Redo"
 msgstr "&Повторити"
 
-#: mainwindow.cpp:1662
+#: mainwindow.cpp:1677
 msgid "&Testing"
 msgstr "&Тестування"
 
-#: mainwindow.cpp:1664
+#: mainwindow.cpp:1679
 #, fuzzy
 msgid "Record test…"
 msgstr "Записати тест…"
 
-#: mainwindow.cpp:1667
+#: mainwindow.cpp:1682
 #, fuzzy
 msgid "Play test…"
 msgstr "Відтворити тест…"
@@ -316,13 +324,13 @@ msgstr "Відтворити тест…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1683:75 rc.cpp:81
+#: mainwindow.cpp:1698:75 rc.cpp:81
 msgid "&New"
 msgstr "&Створити"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1692:51
+#: mainwindow.cpp:1707:51
 #, fuzzy
 msgid "&Open…"
 msgstr "Відкрити"
@@ -331,7 +339,7 @@ msgstr "Відкрити"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1701:84 rc.cpp:90
+#: mainwindow.cpp:1716:84 rc.cpp:90
 msgid "&Close"
 msgstr "За&крити"
 
@@ -339,29 +347,29 @@ msgstr "За&крити"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1715:93 rc.cpp:99
+#: mainwindow.cpp:1730:93 rc.cpp:99
 msgid "&Save"
 msgstr "&Зберегти"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1724:102
+#: mainwindow.cpp:1739:102
 #, fuzzy
 msgid "Save &As…"
 msgstr "З&берегти як..."
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1735:195
+#: mainwindow.cpp:1750:195
 msgid "&Export"
 msgstr "&Експорт"
 
-#: mainwindow.cpp:1736
+#: mainwindow.cpp:1751
 #, fuzzy
 msgid "&Molecule…"
 msgstr "Молекули"
 
-#: mainwindow.cpp:1744
+#: mainwindow.cpp:1759
 #, fuzzy
 msgid "&Graphics…"
 msgstr "&Графіка…"
@@ -370,26 +378,26 @@ msgstr "&Графіка…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1752:60 rc.cpp:66
+#: mainwindow.cpp:1767:60 rc.cpp:66
 msgid "&Quit"
 msgstr "Ви&йти"
 
-#: mainwindow.cpp:1774
+#: mainwindow.cpp:1789
 msgid "No recent files"
 msgstr "Немає останніх файлів"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1780 menubuilder.cpp:76:45
+#: mainwindow.cpp:1795 menubuilder.cpp:76:45
 msgid "&Edit"
 msgstr "З&міни"
 
-#: mainwindow.cpp:1792
+#: mainwindow.cpp:1807
 #, fuzzy
 msgid "&Copy Graphics"
 msgstr "&Графіка…"
 
-#: mainwindow.cpp:1796
+#: mainwindow.cpp:1811
 #, fuzzy
 #| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
@@ -397,81 +405,123 @@ msgstr "Ctrl+A"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1809 menubuilder.cpp:76:42
+#: mainwindow.cpp:1824 menubuilder.cpp:76:42
 msgid "&View"
 msgstr "П&ерегляд"
 
-#: mainwindow.cpp:1810
+#: mainwindow.cpp:1825
 #, fuzzy
 msgid "Set Background Color…"
 msgstr "Встановити колір &тла..."
 
-#: mainwindow.cpp:1818
+#: mainwindow.cpp:1833
 msgid "Projection"
 msgstr "Проєкція"
 
-#: mainwindow.cpp:1819
+#: mainwindow.cpp:1834
 msgid "Perspective"
 msgstr "Перспектива"
 
-#: mainwindow.cpp:1826
+#: mainwindow.cpp:1841
 msgid "Orthographic"
 msgstr "Ортографічна"
 
-#: mainwindow.cpp:1845
+#: mainwindow.cpp:1860
 msgid "&Extensions"
 msgstr "&Розширення"
 
-#: mainwindow.cpp:1852 menubuilder.cpp:80
+#: mainwindow.cpp:1862
+msgid "User Interface Language…"
+msgstr ""
+
+#: mainwindow.cpp:1866
+msgid "&Periodic Table…"
+msgstr ""
+
+#: mainwindow.cpp:1872 menubuilder.cpp:80
 msgid "&Help"
 msgstr "Довідка"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1853:114
+#: mainwindow.cpp:1873:114
 msgid "&About"
 msgstr "&Про програму"
 
-#: mainwindow.cpp:1969
+#: mainwindow.cpp:1880
+#, fuzzy
+#| msgid "Discussion Forum"
+msgid "&Discussion Forum"
+msgstr "Дискусійний форум"
+
+#: mainwindow.cpp:1884
+#, fuzzy
+#| msgid "Avogadro Website"
+msgid "&Avogadro Website"
+msgstr "Веб-сайт Avogadro"
+
+#: mainwindow.cpp:1888
+#, fuzzy
+#| msgid "Report a Bug"
+msgid "&Report a Bug"
+msgstr "Доповісти про помилку"
+
+#: mainwindow.cpp:1892
+msgid "&Suggest a Feature"
+msgstr ""
+
+#: mainwindow.cpp:1916
+msgid "System Language"
+msgstr ""
+
+#: mainwindow.cpp:1923
+msgid "Language"
+msgstr ""
+
+#: mainwindow.cpp:1924
+msgid "User Interface Language:"
+msgstr ""
+
+#: mainwindow.cpp:2028
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Усі підтримувані формати (%1);;Усі файли (*);;"
 
-#: mainwindow.cpp:1985
+#: mainwindow.cpp:2044
 #, fuzzy
 msgid "Do you want to save the changes to the document?"
 msgstr "Бажаєте зберегти внесені Вами у документ зміни?"
 
-#: mainwindow.cpp:1993
+#: mainwindow.cpp:2052
 msgid "Your changes will be lost if you don't save them."
 msgstr "Внесені вами зміни буде втрачено, якщо ви не збережете їх."
 
-#: mainwindow.cpp:2001
+#: mainwindow.cpp:2060
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:2003
+#: mainwindow.cpp:2062
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2067
+#: mainwindow.cpp:2150
 #, fuzzy, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Помилка під час завантаження FileFormat з ідентифікатором '%1'."
 
-#: mainwindow.cpp:2083
+#: mainwindow.cpp:2166
 #, fuzzy
 msgid "Select file format"
 msgstr "Оберіть читач файлу"
 
-#: mainwindow.cpp:2088 mainwindow.cpp:2099
+#: mainwindow.cpp:2171 mainwindow.cpp:2182
 #, fuzzy, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Час очікування Avogadro закінчився і не може відкрити \"%1\"."
 
-#: mainwindow.cpp:2098
+#: mainwindow.cpp:2181
 msgid "Cannot open files"
 msgstr "Не вдається відкрити файли"
 
