@@ -6,13 +6,14 @@
 # Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu.ar>, 2021.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2022.
+# Andrés Henao <andreshenao31@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-25 17:24+0000\n"
-"PO-Revision-Date: 2022-06-19 13:21+0000\n"
-"Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
+"PO-Revision-Date: 2022-06-29 08:21+0000\n"
+"Last-Translator: Andrés Henao <andreshenao31@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -81,11 +82,11 @@ msgstr "%1 %2 - Avogadro %3"
 
 #: mainwindow.cpp:686
 msgid "Restart needed"
-msgstr ""
+msgstr "Reinicio necesario"
 
 #: mainwindow.cpp:687
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Por favor, reinicie Avogadro para usar el nuevo idioma."
 
 #: mainwindow.cpp:707 mainwindow.cpp:1366
 msgid "Chemical Markup Language"
@@ -391,10 +392,8 @@ msgid "&Copy Graphics"
 msgstr "&Copiar gráficos"
 
 #: mainwindow.cpp:1811
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -424,11 +423,11 @@ msgstr "&Complementos"
 
 #: mainwindow.cpp:1862
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Interfaz de idioma de usuario…"
 
 #: mainwindow.cpp:1866
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Tabla Periódica…"
 
 #: mainwindow.cpp:1872 menubuilder.cpp:80
 msgid "&Help"
@@ -441,38 +440,32 @@ msgid "&About"
 msgstr "&Acerca de"
 
 #: mainwindow.cpp:1880
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Foro de discusión"
+msgstr "&Foro de discusión"
 
 #: mainwindow.cpp:1884
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Sitio web de Avogadro"
+msgstr "&Sitio web de Avogadro"
 
 #: mainwindow.cpp:1888
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Reportar un error"
+msgstr "&Reportar un error"
 
 #: mainwindow.cpp:1892
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Sugerir una Propiedad"
 
 #: mainwindow.cpp:1916
 msgid "System Language"
-msgstr ""
+msgstr "Idioma del Sistema"
 
 #: mainwindow.cpp:1923
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #: mainwindow.cpp:1924
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Idioma de la Interfaz del Usuario:"
 
 #: mainwindow.cpp:2028
 #, qt-format
@@ -542,10 +535,8 @@ msgid "&Window"
 msgstr "&Ventana"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Nueva vista"
+msgstr "Vista 3D"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 #, fuzzy
@@ -757,7 +748,7 @@ msgstr "Alinear Vista a los Ejes"
 #. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Paste"
-msgstr "pegar"
+msgstr "Pegar"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -787,8 +778,6 @@ msgstr "Cortar"
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+X"
 msgctxt "Cut"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
@@ -805,8 +794,6 @@ msgstr "Seleccionar todo"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
