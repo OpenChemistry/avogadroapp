@@ -4,13 +4,14 @@
 # Jörg S. <joerg.schwerdtfeger@gmail.com>, 2021.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2021.
+# Andrés Henao <andreshenao31@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-25 17:24+0000\n"
-"PO-Revision-Date: 2021-09-23 13:36+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2022-06-29 08:21+0000\n"
+"Last-Translator: Andrés Henao <andreshenao31@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -78,11 +79,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:686
 msgid "Restart needed"
-msgstr ""
+msgstr "Neustart benötigt"
 
 #: mainwindow.cpp:687
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Bitte starten Sie Avogadro neu, um die neue Sprache zu verwenden."
 
 #: mainwindow.cpp:707 mainwindow.cpp:1366
 msgid "Chemical Markup Language"
@@ -385,10 +386,8 @@ msgid "&Edit"
 msgstr "&Bearbeiten"
 
 #: mainwindow.cpp:1807
-#, fuzzy
-#| msgid "&Graphics…"
 msgid "&Copy Graphics"
-msgstr "&Grafik …"
+msgstr "&Kopieren Grafik …"
 
 #: mainwindow.cpp:1811
 #, fuzzy
@@ -425,11 +424,11 @@ msgstr "Erweiterungen"
 
 #: mainwindow.cpp:1862
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Benutzeroberfläche Sprache…"
 
 #: mainwindow.cpp:1866
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Periodensystem…"
 
 #: mainwindow.cpp:1872 menubuilder.cpp:80
 msgid "&Help"
@@ -442,38 +441,32 @@ msgid "&About"
 msgstr "&Über"
 
 #: mainwindow.cpp:1880
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Diskussionsforum"
+msgstr "&Diskussionsforum"
 
 #: mainwindow.cpp:1884
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadro-Website"
+msgstr "&Avogadro-Website"
 
 #: mainwindow.cpp:1888
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Fehler melden"
+msgstr "&Fehler melden"
 
 #: mainwindow.cpp:1892
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Feature vorschlagen"
 
 #: mainwindow.cpp:1916
 msgid "System Language"
-msgstr ""
+msgstr "Systemsprache"
 
 #: mainwindow.cpp:1923
 msgid "Language"
-msgstr ""
+msgstr "Sprache"
 
 #: mainwindow.cpp:1924
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Sprache der Benutzeroberfläche:"
 
 #: mainwindow.cpp:2028
 #, qt-format
@@ -543,14 +536,12 @@ msgid "&Window"
 msgstr "&Fenster"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Neue Ansicht"
+msgstr "3D Ansicht"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
