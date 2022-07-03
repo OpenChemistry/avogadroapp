@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-25 17:24+0000\n"
-"PO-Revision-Date: 2022-06-25 17:23+0000\n"
+"PO-Revision-Date: 2022-07-04 18:21+0000\n"
 "Last-Translator: Translator <kvb@tuta.io>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -419,10 +419,8 @@ msgid "&Extensions"
 msgstr "&Extensions"
 
 #: mainwindow.cpp:1862
-#, fuzzy
-#| msgid "Set Language…"
 msgid "User Interface Language…"
-msgstr "Règler la Langue…"
+msgstr "Langue de l'interface utilisateur…"
 
 #: mainwindow.cpp:1866
 msgid "&Periodic Table…"
@@ -439,42 +437,32 @@ msgid "&About"
 msgstr "&À propos"
 
 #: mainwindow.cpp:1880
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Forum de discussion"
+msgstr "&Forum de discussion"
 
 #: mainwindow.cpp:1884
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Site web d’Avogadro"
+msgstr "&Site web d’Avogadro"
 
 #: mainwindow.cpp:1888
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Signaler un bogue"
+msgstr "&Signaler une erreur"
 
 #: mainwindow.cpp:1892
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Suggérer une fonctionnalité"
 
 #: mainwindow.cpp:1916
 msgid "System Language"
 msgstr "Langue système"
 
 #: mainwindow.cpp:1923
-#, fuzzy
-#| msgid "Set Language"
 msgid "Language"
-msgstr "Règler la Langue"
+msgstr "Langue"
 
 #: mainwindow.cpp:1924
-#, fuzzy
-#| msgid "System Language"
 msgid "User Interface Language:"
-msgstr "Langue système"
+msgstr "Langue de l'interface utilisateur :"
 
 #: mainwindow.cpp:2028
 #, qt-format
