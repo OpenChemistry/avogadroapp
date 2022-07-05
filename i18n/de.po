@@ -5,13 +5,14 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2021.
 # Andrés Henao <andreshenao31@gmail.com>, 2022.
+# matterhorn103 <milner94@live.co.uk>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-25 17:24+0000\n"
-"PO-Revision-Date: 2022-06-29 08:21+0000\n"
-"Last-Translator: Andrés Henao <andreshenao31@gmail.com>\n"
+"PO-Revision-Date: 2022-07-04 18:21+0000\n"
+"Last-Translator: matterhorn103 <milner94@live.co.uk>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -383,18 +384,15 @@ msgstr "Keine zuletzt geöffneten Dateien"
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:1795 menubuilder.cpp:76:45
 msgid "&Edit"
-msgstr "&Bearbeiten"
+msgstr "&Ändern"
 
 #: mainwindow.cpp:1807
 msgid "&Copy Graphics"
-msgstr "&Kopieren Grafik …"
+msgstr "Grafiken &kopieren"
 
 #: mainwindow.cpp:1811
-#, fuzzy
-#| msgctxt "Select All"
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Strg+A"
+msgstr "Strg+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -420,7 +418,7 @@ msgstr "Orthografisch"
 
 #: mainwindow.cpp:1860
 msgid "&Extensions"
-msgstr "Erweiterungen"
+msgstr "&Erweiterungen"
 
 #: mainwindow.cpp:1862
 msgid "User Interface Language…"
@@ -537,7 +535,7 @@ msgstr "&Fenster"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
 msgid "3D View"
-msgstr "3D Ansicht"
+msgstr "3D-Ansicht"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
@@ -706,7 +704,7 @@ msgstr "Strg+Umschalt+Z"
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "Zentrieren"
+msgstr "Mitte"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -754,7 +752,7 @@ msgstr "Löschen"
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "Alles Auswählen"
+msgstr "Alle auswählen"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -765,7 +763,7 @@ msgstr "Strg+A"
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Auswahl aufheben"
+msgstr "Keine auswählen"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
