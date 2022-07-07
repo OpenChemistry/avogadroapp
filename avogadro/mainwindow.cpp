@@ -767,7 +767,8 @@ bool MainWindow::addScript(const QString& filePath)
   // Ask the user what type of script this is
   // TODO: add some sort of warning?
   QStringList types;
-  types << tr("Commands") << tr("Input Generators") << tr("File Formats");
+  types << tr("Commands") << tr("Input Generators") << tr("File Formats")
+        << tr("Charges", "atomic electrostatics");
 
   bool ok;
   QString item =
@@ -790,6 +791,9 @@ bool MainWindow::addScript(const QString& filePath)
       break;
     case 2:
       typePath = "formatScripts";
+      break;
+    case 4:
+      typePath = "charges";
       break;
     default:
       typePath = "other";
@@ -1920,9 +1924,9 @@ void MainWindow::showLanguageDialog()
   if (currentLanguage != "System")
     currentIndex = m_localeCodes.indexOf(currentLanguage);
 
-  QString item = QInputDialog::getItem(this, tr("Language"),
-                                       tr("User Interface Language:"), m_translationList,
-                                       currentIndex, false, &ok);
+  QString item =
+    QInputDialog::getItem(this, tr("Language"), tr("User Interface Language:"),
+                          m_translationList, currentIndex, false, &ok);
 
   if (ok && !item.isEmpty()) {
     auto index = m_translationList.indexOf(item);
