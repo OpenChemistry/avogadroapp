@@ -9,8 +9,8 @@ project(AvogadroApp)
 
 set(CMAKE_MODULE_PATH ${AvogadroApp_SOURCE_DIR}/cmake)
 
-# Request C++11 standard, using new CMake variables.
-set(CMAKE_CXX_STANDARD 11)
+# Request C++17 standard, using new CMake variables.
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS False)
 # Set symbol visibility defaults for all targets.
