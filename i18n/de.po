@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-06-25 17:24+0000\n"
-"PO-Revision-Date: 2022-07-04 18:21+0000\n"
+"PO-Revision-Date: 2022-07-05 23:50+0000\n"
 "Last-Translator: matterhorn103 <milner94@live.co.uk>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -232,7 +232,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1226
 msgid "Export Bitmap Graphics"
-msgstr "Bitmap exportieren"
+msgstr "Bitmap-Grafik exportieren"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -243,7 +243,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:1238
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Datei %1 konnte nicht gespeichert werden."
+msgstr "Datei %1 kann nicht gespeichert werden."
 
 #: mainwindow.cpp:1340
 msgid ""
