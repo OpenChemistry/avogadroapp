@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-06-25 17:24+0000\n"
+"POT-Creation-Date: 2022-07-10 03:35+0000\n"
 "PO-Revision-Date: 2021-08-20 01:04+0000\n"
 "Last-Translator: Nikola Matić <nikolamatic225@gmail.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/avogadro/"
@@ -88,11 +88,11 @@ msgstr ""
 msgid "Please restart Avogadro to use the new language."
 msgstr ""
 
-#: mainwindow.cpp:707 mainwindow.cpp:1366
+#: mainwindow.cpp:707 mainwindow.cpp:1370
 msgid "Chemical Markup Language"
 msgstr "Обележивачки језик хемије"
 
-#: mainwindow.cpp:708 mainwindow.cpp:1365
+#: mainwindow.cpp:708 mainwindow.cpp:1369
 msgid "Chemical JSON"
 msgstr "Хемијски ЈСОН"
 
@@ -100,12 +100,12 @@ msgstr "Хемијски ЈСОН"
 msgid "Open chemical file"
 msgstr "Отворите датотеку хемије"
 
-#: mainwindow.cpp:732 mainwindow.cpp:756 mainwindow.cpp:1268
-#: mainwindow.cpp:2170
+#: mainwindow.cpp:732 mainwindow.cpp:756 mainwindow.cpp:1272
+#: mainwindow.cpp:2174
 msgid "Cannot open file"
 msgstr "Не могу да отворим датотеку"
 
-#: mainwindow.cpp:733 mainwindow.cpp:757 mainwindow.cpp:1269
+#: mainwindow.cpp:733 mainwindow.cpp:757 mainwindow.cpp:1273
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "Не могу да отворим достављену датотеку „%1“"
@@ -127,23 +127,28 @@ msgstr ""
 msgid "File Formats"
 msgstr "Грешка датотеке"
 
-#: mainwindow.cpp:774
+#: mainwindow.cpp:771
+msgctxt "atomic electrostatics"
+msgid "Charges"
+msgstr ""
+
+#: mainwindow.cpp:775
 msgid "Install Plugin Script"
 msgstr ""
 
-#: mainwindow.cpp:774
+#: mainwindow.cpp:775
 msgid "Script Type:"
 msgstr ""
 
-#: mainwindow.cpp:822 mainwindow.cpp:1264
+#: mainwindow.cpp:826 mainwindow.cpp:1268
 msgid "Select file reader"
 msgstr "Изабери читача датотеке"
 
-#: mainwindow.cpp:851
+#: mainwindow.cpp:855
 msgid "Reading File"
 msgstr "Отвори датотеку"
 
-#: mainwindow.cpp:853
+#: mainwindow.cpp:857
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -152,16 +157,16 @@ msgstr ""
 "Отварам датотеку „%1“\n"
 "са „%2“"
 
-#: mainwindow.cpp:884
+#: mainwindow.cpp:888
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Молекул је учитан (%1 атома, %2 везе)"
 
-#: mainwindow.cpp:889
+#: mainwindow.cpp:893
 msgid "File error"
 msgstr "Грешка датотеке"
 
-#: mainwindow.cpp:890
+#: mainwindow.cpp:894
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -170,18 +175,18 @@ msgstr ""
 "Грешка приликом читања датотеке „%1“:\n"
 "%2"
 
-#: mainwindow.cpp:917
+#: mainwindow.cpp:921
 #, fuzzy, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "Ne mogu da sačuvam datoteku „%1“."
 
-#: mainwindow.cpp:925
+#: mainwindow.cpp:929
 #, fuzzy
 msgid "Error saving file"
 msgstr "Грешка покретања РПЦ сервера:"
 
-#: mainwindow.cpp:926
+#: mainwindow.cpp:930
 #, fuzzy, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -191,11 +196,11 @@ msgstr ""
 "Грешка приликом читања датотеке „%1“:\n"
 "%2"
 
-#: mainwindow.cpp:965
+#: mainwindow.cpp:969
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Грешка: Нисам успео да покренем ОпенГЛ контекст"
 
-#: mainwindow.cpp:966
+#: mainwindow.cpp:970
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -206,50 +211,50 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:967
+#: mainwindow.cpp:971
 msgid "Unknown error"
 msgstr "Непозната грешка"
 
-#: mainwindow.cpp:1093 mainwindow.cpp:1094
+#: mainwindow.cpp:1097 mainwindow.cpp:1098
 msgid "Navigate tool"
 msgstr "Alatka za navigaciju"
 
-#: mainwindow.cpp:1214
+#: mainwindow.cpp:1218
 msgid "Common image formats"
 msgstr "Општи формати слике"
 
-#: mainwindow.cpp:1216
+#: mainwindow.cpp:1220
 msgid "All files"
 msgstr "Све датотеке"
 
-#: mainwindow.cpp:1216
+#: mainwindow.cpp:1220
 msgid "BMP"
 msgstr "БМП"
 
-#: mainwindow.cpp:1217
+#: mainwindow.cpp:1221
 msgid "PNG"
 msgstr "ПНГ"
 
-#: mainwindow.cpp:1217
+#: mainwindow.cpp:1221
 msgid "JPEG"
 msgstr "ЈПЕГ"
 
-#: mainwindow.cpp:1226
+#: mainwindow.cpp:1230
 msgid "Export Bitmap Graphics"
 msgstr "Izvezi Bitmap Grafiku"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1237 mainwindow.cpp:1339 mainwindow.cpp:2043:33
+#: mainwindow.cpp:1241 mainwindow.cpp:1343 mainwindow.cpp:2047:33
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1238
+#: mainwindow.cpp:1242
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Ne mogu da sačuvam datoteku „%1“."
 
-#: mainwindow.cpp:1340
+#: mainwindow.cpp:1344
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -261,23 +266,23 @@ msgstr ""
 "\n"
 "Да ли желите да извезете текући формат или да сачувате у стандардном формату?"
 
-#: mainwindow.cpp:1347
+#: mainwindow.cpp:1351
 msgid "Export"
 msgstr "Извези"
 
-#: mainwindow.cpp:1372
+#: mainwindow.cpp:1376
 msgid "Save chemical file"
 msgstr "Сачувајте датотеку хемије"
 
-#: mainwindow.cpp:1400
+#: mainwindow.cpp:1404
 msgid "Export Molecule"
 msgstr "Извези молекул"
 
-#: mainwindow.cpp:1452
+#: mainwindow.cpp:1456
 msgid "Saving File in Progress…"
 msgstr ""
 
-#: mainwindow.cpp:1454
+#: mainwindow.cpp:1458
 #, fuzzy, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -287,38 +292,38 @@ msgstr ""
 "Отварам датотеку „%1“\n"
 "са „%2“"
 
-#: mainwindow.cpp:1566
+#: mainwindow.cpp:1570
 #, qt-format
 msgid "&Undo %1"
 msgstr "&Опозови %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1569 mainwindow.cpp:1796:117
+#: mainwindow.cpp:1573 mainwindow.cpp:1800:117
 msgid "&Undo"
 msgstr "&Опозови"
 
-#: mainwindow.cpp:1574
+#: mainwindow.cpp:1578
 #, qt-format
 msgid "&Redo %1"
 msgstr "&Понови „%1“"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1577 mainwindow.cpp:1801:123
+#: mainwindow.cpp:1581 mainwindow.cpp:1805:123
 msgid "&Redo"
 msgstr "&Понови"
 
-#: mainwindow.cpp:1677
+#: mainwindow.cpp:1681
 msgid "&Testing"
 msgstr "&Тестирање"
 
-#: mainwindow.cpp:1679
+#: mainwindow.cpp:1683
 #, fuzzy
 msgid "Record test…"
 msgstr "Забележи тест..."
 
-#: mainwindow.cpp:1682
+#: mainwindow.cpp:1686
 #, fuzzy
 msgid "Play test…"
 msgstr "Пусти тест..."
@@ -327,13 +332,13 @@ msgstr "Пусти тест..."
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1698:75 rc.cpp:81
+#: mainwindow.cpp:1702:75 rc.cpp:81
 msgid "&New"
 msgstr "&Ново"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1707:51
+#: mainwindow.cpp:1711:51
 #, fuzzy
 msgid "&Open…"
 msgstr "&Отвори"
@@ -342,7 +347,7 @@ msgstr "&Отвори"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1716:84 rc.cpp:90
+#: mainwindow.cpp:1720:84 rc.cpp:90
 msgid "&Close"
 msgstr "&Затвори"
 
@@ -350,29 +355,29 @@ msgstr "&Затвори"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1730:93 rc.cpp:99
+#: mainwindow.cpp:1734:93 rc.cpp:99
 msgid "&Save"
 msgstr "&Сачувај"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1739:102
+#: mainwindow.cpp:1743:102
 #, fuzzy
 msgid "Save &As…"
 msgstr "Сачувај &као..."
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1750:195
+#: mainwindow.cpp:1754:195
 msgid "&Export"
 msgstr "&Izvezi"
 
-#: mainwindow.cpp:1751
+#: mainwindow.cpp:1755
 #, fuzzy
 msgid "&Molecule…"
 msgstr "Молекули"
 
-#: mainwindow.cpp:1759
+#: mainwindow.cpp:1763
 #, fuzzy
 msgid "&Graphics…"
 msgstr "&Графици..."
@@ -381,26 +386,26 @@ msgstr "&Графици..."
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1767:60 rc.cpp:66
+#: mainwindow.cpp:1771:60 rc.cpp:66
 msgid "&Quit"
 msgstr "&Изађи"
 
-#: mainwindow.cpp:1789
+#: mainwindow.cpp:1793
 msgid "No recent files"
 msgstr "Нема скорашњих датотека"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1795 menubuilder.cpp:76:45
+#: mainwindow.cpp:1799 menubuilder.cpp:76:45
 msgid "&Edit"
 msgstr "&Uredi"
 
-#: mainwindow.cpp:1807
+#: mainwindow.cpp:1811
 #, fuzzy
 msgid "&Copy Graphics"
 msgstr "&Графици..."
 
-#: mainwindow.cpp:1811
+#: mainwindow.cpp:1815
 #, fuzzy
 #| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
@@ -408,123 +413,123 @@ msgstr "Ктрл+А"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1824 menubuilder.cpp:76:42
+#: mainwindow.cpp:1828 menubuilder.cpp:76:42
 msgid "&View"
 msgstr "&Pregled"
 
-#: mainwindow.cpp:1825
+#: mainwindow.cpp:1829
 #, fuzzy
 msgid "Set Background Color…"
 msgstr "Постави боју &позадине..."
 
-#: mainwindow.cpp:1833
+#: mainwindow.cpp:1837
 msgid "Projection"
 msgstr "Пројекција"
 
-#: mainwindow.cpp:1834
+#: mainwindow.cpp:1838
 msgid "Perspective"
 msgstr "Перспектива"
 
-#: mainwindow.cpp:1841
+#: mainwindow.cpp:1845
 msgid "Orthographic"
 msgstr "Правописни"
 
-#: mainwindow.cpp:1860
+#: mainwindow.cpp:1864
 msgid "&Extensions"
 msgstr "&Proširenja"
 
-#: mainwindow.cpp:1862
+#: mainwindow.cpp:1866
 msgid "User Interface Language…"
 msgstr ""
 
-#: mainwindow.cpp:1866
+#: mainwindow.cpp:1870
 msgid "&Periodic Table…"
 msgstr ""
 
-#: mainwindow.cpp:1872 menubuilder.cpp:80
+#: mainwindow.cpp:1876 menubuilder.cpp:80
 msgid "&Help"
 msgstr "По&моћ"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1873:114
+#: mainwindow.cpp:1877:114
 msgid "&About"
 msgstr "&О програму"
 
-#: mainwindow.cpp:1880
+#: mainwindow.cpp:1884
 #, fuzzy
 #| msgid "Discussion Forum"
 msgid "&Discussion Forum"
 msgstr "Форум расправе"
 
-#: mainwindow.cpp:1884
+#: mainwindow.cpp:1888
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
 msgstr "Авогадров веб сајт"
 
-#: mainwindow.cpp:1888
+#: mainwindow.cpp:1892
 #, fuzzy
 #| msgid "Report a Bug"
 msgid "&Report a Bug"
 msgstr "Пријави грешку"
 
-#: mainwindow.cpp:1892
+#: mainwindow.cpp:1896
 msgid "&Suggest a Feature"
 msgstr ""
 
-#: mainwindow.cpp:1916
+#: mainwindow.cpp:1920
 msgid "System Language"
 msgstr ""
 
-#: mainwindow.cpp:1923
+#: mainwindow.cpp:1928
 msgid "Language"
 msgstr ""
 
-#: mainwindow.cpp:1924
+#: mainwindow.cpp:1928
 msgid "User Interface Language:"
 msgstr ""
 
-#: mainwindow.cpp:2028
+#: mainwindow.cpp:2032
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Сви подржани формати (%1);;Све датотеке (*);;"
 
-#: mainwindow.cpp:2044
+#: mainwindow.cpp:2048
 #, fuzzy
 msgid "Do you want to save the changes to the document?"
 msgstr "Да ли желите да сачувате измене које сте направили у документу?"
 
-#: mainwindow.cpp:2052
+#: mainwindow.cpp:2056
 msgid "Your changes will be lost if you don't save them."
 msgstr "Ваше измене ће бити изгубљене ако их не сачувате."
 
-#: mainwindow.cpp:2060
+#: mainwindow.cpp:2064
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ктрл+S"
 
-#: mainwindow.cpp:2062
+#: mainwindow.cpp:2066
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ктрл+D"
 
-#: mainwindow.cpp:2150
+#: mainwindow.cpp:2154
 #, fuzzy, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Грешка приликом учитавања формата датотеке са иб-ом „%1“."
 
-#: mainwindow.cpp:2166
+#: mainwindow.cpp:2170
 #, fuzzy
 msgid "Select file format"
 msgstr "Изабери читача датотеке"
 
-#: mainwindow.cpp:2171 mainwindow.cpp:2182
+#: mainwindow.cpp:2175 mainwindow.cpp:2186
 #, fuzzy, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Авогадру је истекло време и не може да отвори „%1“."
 
-#: mainwindow.cpp:2181
+#: mainwindow.cpp:2185
 msgid "Cannot open files"
 msgstr "Не могу да отворим датотеке"
 
