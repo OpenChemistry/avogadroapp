@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-07-10 03:35+0000\n"
-"PO-Revision-Date: 2022-07-04 18:21+0000\n"
+"PO-Revision-Date: 2022-07-15 06:14+0000\n"
 "Last-Translator: Translator <kvb@tuta.io>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.13.1-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -123,11 +123,9 @@ msgid "File Formats"
 msgstr "Formats de fichier"
 
 #: mainwindow.cpp:771
-#, fuzzy
-#| msgid "Charge:"
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr "Charge:"
+msgstr "Charges"
 
 #: mainwindow.cpp:775
 msgid "Install Plugin Script"
