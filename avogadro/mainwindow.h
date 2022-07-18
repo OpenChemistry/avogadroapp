@@ -18,7 +18,6 @@ class QThread;
 class QTreeView;
 
 namespace Ui {
-class MainWindow;
 class AboutDialog;
 }
 
@@ -395,8 +394,6 @@ private:
   QString m_testFile;
   bool m_testExit;
 #endif
-
-  Ui::MainWindow* m_ui; // used for the default menu bar
 
   /**
    * Set up the main window widgets, connect signals and slots, etc.
