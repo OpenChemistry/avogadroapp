@@ -83,6 +83,12 @@ jobs:
         repository: openchemistry/avogadrolibs
         path: avogadrolibs
 
+    - name: Checkout i18n
+      uses: actions/checkout@v2
+      with:
+        repository: openchemistry/avogadro-i18n
+        path: avogadro-i18n
+
     - name: Cache Qt
       id: cache-qt
       uses: actions/cache@v1
