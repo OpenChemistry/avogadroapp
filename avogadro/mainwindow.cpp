@@ -10,7 +10,6 @@
 #include "backgroundfileformat.h"
 #include "menubuilder.h"
 #include "tooltipfilter.h"
-#include "ui_mainwindow.h"
 #include "viewfactory.h"
 
 #include <avogadro/core/elements.h>
@@ -237,10 +236,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   , m_redo(nullptr)
   , m_copyImage(nullptr)
   , m_viewFactory(new ViewFactory)
-  , m_ui(new Ui::MainWindow)
 {
-  m_ui->setupUi(this);
-
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
     QSettings settings;
@@ -311,7 +307,6 @@ MainWindow::~MainWindow()
   delete m_molecule;
   delete m_menuBuilder;
   delete m_viewFactory;
-  delete m_ui;
 }
 
 void MainWindow::setupInterface()
