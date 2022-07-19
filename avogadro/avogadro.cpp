@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
   Avogadro::Application app(argc, argv);
 
   QSettings settings;
-  QString language = settings.value("language", "System").toString();
+  QString language = settings.value("locale", "System").toString();
 
   // Before we do much else, load translations
   // This ensures help messages and debugging info can be translated
