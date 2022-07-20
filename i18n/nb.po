@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-07-20 02:51+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
 "PO-Revision-Date: 2021-09-15 07:35+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -64,11 +64,13 @@ msgstr "Lag"
 
 #: mainwindow.cpp:389
 #, fuzzy
+msgctxt "File toolbar"
 msgid "File"
 msgstr "&Fil"
 
 #: mainwindow.cpp:394
 #, fuzzy
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Verktøy"
 
@@ -330,6 +332,12 @@ msgstr "Opptakstest …"
 msgid "Play test…"
 msgstr "Avspillingstest …"
 
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr "&Fil"
+
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
@@ -388,6 +396,12 @@ msgstr "&Grafikk …"
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr "&Avslutt"
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+msgid "Open Recent"
+msgstr "Åpne nylige"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
@@ -532,12 +546,6 @@ msgstr "Avogadro kan ikke åpne «%1»."
 #: mainwindow.cpp:2180
 msgid "Cannot open files"
 msgstr "Kan ikke åpne filer"
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr "&Fil"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -872,11 +880,6 @@ msgstr "Avogadro-nettsiden"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr "Diskusjonsforum"
-
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Open Recent"
-msgstr "Åpne nylige"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

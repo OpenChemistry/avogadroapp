@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-07-20 02:51+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
 "PO-Revision-Date: 2021-09-26 12:57+0000\n"
 "Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: English (Australia) <https://hosted.weblate.org/projects/"
@@ -57,10 +57,16 @@ msgid "Layers"
 msgstr "Layers"
 
 #: mainwindow.cpp:389
+#, fuzzy
+#| msgid "File"
+msgctxt "File toolbar"
 msgid "File"
 msgstr "File"
 
 #: mainwindow.cpp:394
+#, fuzzy
+#| msgid "Tools"
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Tools"
 
@@ -319,6 +325,12 @@ msgstr "Record test…"
 msgid "Play test…"
 msgstr "Play test…"
 
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr "&File"
+
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
@@ -376,6 +388,12 @@ msgstr "&Graphics…"
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr "&Quit"
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+msgid "Open Recent"
+msgstr "Open recent"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
@@ -518,12 +536,6 @@ msgstr "Avogadro cannot open ‘%1’."
 #: mainwindow.cpp:2180
 msgid "Cannot open files"
 msgstr "Cannot open files"
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr "&File"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -819,11 +831,6 @@ msgstr "Avogadro Website"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr "Discussion Forum"
-
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Open Recent"
-msgstr "Open recent"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

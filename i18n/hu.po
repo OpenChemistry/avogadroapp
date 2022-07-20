@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-07-20 02:51+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
 "PO-Revision-Date: 2022-07-12 10:16+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
@@ -64,10 +64,16 @@ msgid "Layers"
 msgstr "Rétegek"
 
 #: mainwindow.cpp:389
+#, fuzzy
+#| msgid "File"
+msgctxt "File toolbar"
 msgid "File"
 msgstr "Fájl"
 
 #: mainwindow.cpp:394
+#, fuzzy
+#| msgid "Tools"
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Eszközök"
 
@@ -327,6 +333,12 @@ msgstr "Vizsgafelvétel…"
 msgid "Play test…"
 msgstr "Vizsga lejátszása…"
 
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr "&Fájl"
+
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
@@ -384,6 +396,12 @@ msgstr "&Grafika…"
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr "&Kilépés"
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+msgid "Open Recent"
+msgstr "Legutóbbi megnyitása"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
@@ -517,12 +535,6 @@ msgstr ""
 #: mainwindow.cpp:2180
 msgid "Cannot open files"
 msgstr "Nem lehet megnyitni a fájlokat"
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr "&Fájl"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -816,11 +828,6 @@ msgstr "Avogadro honlapja"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr "Vitafórum"
-
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Open Recent"
-msgstr "Legutóbbi megnyitása"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

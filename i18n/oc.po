@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-07-20 02:51+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
 "PO-Revision-Date: 2016-06-10 06:24+0000\n"
 "Last-Translator: Cédric VALMARY (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -58,11 +58,13 @@ msgstr ""
 
 #: mainwindow.cpp:389
 #, fuzzy
+msgctxt "File toolbar"
 msgid "File"
 msgstr "&Fichièr"
 
 #: mainwindow.cpp:394
 #, fuzzy
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Aisinas"
 
@@ -314,6 +316,12 @@ msgstr ""
 msgid "Play test…"
 msgstr ""
 
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr "&Fichièr"
+
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
@@ -376,6 +384,13 @@ msgstr "&Grafics..."
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr "&Quitar"
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+#, fuzzy
+msgid "Open Recent"
+msgstr "Dobèrt(s) &recentament"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
@@ -520,12 +535,6 @@ msgstr ""
 #, fuzzy
 msgid "Cannot open files"
 msgstr "Impossible d'enregistrar lo fichièr %1."
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr "&Fichièr"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -829,12 +838,6 @@ msgstr "Site Web d'Avogadro"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr ""
-
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Open Recent"
-msgstr "Dobèrt(s) &recentament"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

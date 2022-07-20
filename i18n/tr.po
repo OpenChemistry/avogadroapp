@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-07-20 02:51+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
 "PO-Revision-Date: 2022-07-15 06:14+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
@@ -62,10 +62,16 @@ msgid "Layers"
 msgstr "Katmanlar"
 
 #: mainwindow.cpp:389
+#, fuzzy
+#| msgid "File"
+msgctxt "File toolbar"
 msgid "File"
 msgstr "Dosya"
 
 #: mainwindow.cpp:394
+#, fuzzy
+#| msgid "Tools"
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Araçlar"
 
@@ -325,6 +331,12 @@ msgstr "Testi kaydet…"
 msgid "Play test…"
 msgstr "Testi oynat…"
 
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr "&Dosya"
+
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
@@ -382,6 +394,12 @@ msgstr "&Grafikler…"
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr "&Çıkış"
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+msgid "Open Recent"
+msgstr "En Son Dosyayı Aç"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
@@ -513,12 +531,6 @@ msgstr "Avogadro “%1”i açamıyor."
 #: mainwindow.cpp:2180
 msgid "Cannot open files"
 msgstr "Dosyalar açılamıyor"
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr "&Dosya"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -812,11 +824,6 @@ msgstr "Avogadro Web Sitesi"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr "Tartışma Forumu"
-
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Open Recent"
-msgstr "En Son Dosyayı Aç"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

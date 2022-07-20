@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-07-20 02:51+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
 "PO-Revision-Date: 2021-10-14 18:32+0000\n"
 "Last-Translator: ejatjon amar <3395087980@qq.com>\n"
 "Language-Team: Uyghur <https://hosted.weblate.org/projects/avogadro/"
@@ -57,11 +57,15 @@ msgid "Layers"
 msgstr "قەۋەت"
 
 #: mainwindow.cpp:389
+#, fuzzy
+#| msgid "File"
+msgctxt "File toolbar"
 msgid "File"
 msgstr "ھۆججەت"
 
 #: mainwindow.cpp:394
 #, fuzzy
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "قوراللار"
 
@@ -311,6 +315,12 @@ msgstr ""
 msgid "Play test…"
 msgstr ""
 
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr "ھۆججەت(&F)"
+
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
@@ -372,6 +382,13 @@ msgstr ""
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr "چېكىن(&Q)"
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+#, fuzzy
+msgid "Open Recent"
+msgstr "يېقىنقىنى ئاچ(&R)"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
@@ -511,12 +528,6 @@ msgstr ""
 #: mainwindow.cpp:2180
 msgid "Cannot open files"
 msgstr ""
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr "ھۆججەت(&F)"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -820,12 +831,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr ""
-
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Open Recent"
-msgstr "يېقىنقىنى ئاچ(&R)"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-07-20 02:51+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
 "PO-Revision-Date: 2021-02-09 04:50+0000\n"
 "Last-Translator: Irina Puscas <irinapuscas82@gmail.com>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
@@ -60,10 +60,12 @@ msgid "Layers"
 msgstr ""
 
 #: mainwindow.cpp:389
+msgctxt "File toolbar"
 msgid "File"
 msgstr ""
 
 #: mainwindow.cpp:394
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr ""
 
@@ -317,6 +319,12 @@ msgstr "Înregistrare test..."
 msgid "Play test…"
 msgstr "Vizualizare test"
 
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr ""
+
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
@@ -375,6 +383,13 @@ msgstr ""
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr ""
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+#, fuzzy
+msgid "Open Recent"
+msgstr "Deschide Fișier"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
@@ -515,12 +530,6 @@ msgstr ""
 #, fuzzy
 msgid "Cannot open files"
 msgstr "Nu se poate salva fișierul %1."
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr ""
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -825,12 +834,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr ""
-
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Open Recent"
-msgstr "Deschide Fișier"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

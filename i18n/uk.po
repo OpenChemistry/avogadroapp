@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-07-20 02:51+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
 "PO-Revision-Date: 2021-11-13 17:53+0000\n"
 "Last-Translator: Tymofii Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/avogadro/"
@@ -59,10 +59,16 @@ msgid "Layers"
 msgstr "Шари"
 
 #: mainwindow.cpp:389
+#, fuzzy
+#| msgid "File"
+msgctxt "File toolbar"
 msgid "File"
 msgstr "Файл"
 
 #: mainwindow.cpp:394
+#, fuzzy
+#| msgid "Tools"
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Засоби"
 
@@ -325,6 +331,12 @@ msgstr "Записати тест…"
 msgid "Play test…"
 msgstr "Відтворити тест…"
 
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr "&Файл"
+
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
@@ -386,6 +398,12 @@ msgstr "&Графіка…"
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr "Ви&йти"
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+msgid "Open Recent"
+msgstr "Відкрити недавні"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
@@ -529,12 +547,6 @@ msgstr "Час очікування Avogadro закінчився і не мож
 #: mainwindow.cpp:2180
 msgid "Cannot open files"
 msgstr "Не вдається відкрити файли"
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr "&Файл"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -873,11 +885,6 @@ msgstr "Веб-сайт Avogadro"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr "Дискусійний форум"
-
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Open Recent"
-msgstr "Відкрити недавні"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

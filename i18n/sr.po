@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-07-20 02:51+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
 "PO-Revision-Date: 2021-08-20 01:04+0000\n"
 "Last-Translator: Nikola Matić <nikolamatic225@gmail.com>\n"
 "Language-Team: Serbian <https://hosted.weblate.org/projects/avogadro/"
@@ -61,11 +61,13 @@ msgstr ""
 
 #: mainwindow.cpp:389
 #, fuzzy
+msgctxt "File toolbar"
 msgid "File"
 msgstr "&Datoteka"
 
 #: mainwindow.cpp:394
 #, fuzzy
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Алатка"
 
@@ -328,6 +330,12 @@ msgstr "Забележи тест..."
 msgid "Play test…"
 msgstr "Пусти тест..."
 
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr "&Datoteka"
+
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
@@ -389,6 +397,12 @@ msgstr "&Графици..."
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr "&Изађи"
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+msgid "Open Recent"
+msgstr "Отвори скорашње"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
@@ -532,12 +546,6 @@ msgstr "Авогадру је истекло време и не може да о
 #: mainwindow.cpp:2180
 msgid "Cannot open files"
 msgstr "Не могу да отворим датотеке"
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr "&Datoteka"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -876,11 +884,6 @@ msgstr "Авогадров веб сајт"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr "Форум расправе"
-
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Open Recent"
-msgstr "Отвори скорашње"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

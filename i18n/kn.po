@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-07-20 02:51+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
 "PO-Revision-Date: 2016-06-10 06:22+0000\n"
 "Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
 "Language-Team: Kannada <kn@li.org>\n"
@@ -55,10 +55,12 @@ msgid "Layers"
 msgstr ""
 
 #: mainwindow.cpp:389
+msgctxt "File toolbar"
 msgid "File"
 msgstr ""
 
 #: mainwindow.cpp:394
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr ""
 
@@ -306,6 +308,12 @@ msgstr ""
 msgid "Play test…"
 msgstr ""
 
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr ""
+
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
@@ -364,6 +372,13 @@ msgstr ""
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr ""
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+#, fuzzy
+msgid "Open Recent"
+msgstr "ಕಡತವನ್ನು ತೆರೆ"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
@@ -499,12 +514,6 @@ msgstr ""
 
 #: mainwindow.cpp:2180
 msgid "Cannot open files"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:49
@@ -793,12 +802,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr ""
-
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Open Recent"
-msgstr "ಕಡತವನ್ನು ತೆರೆ"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

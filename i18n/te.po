@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-07-20 02:51+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
 "PO-Revision-Date: 2016-06-10 06:26+0000\n"
 "Last-Translator: nrao <nagamalli.s@gmail.com>\n"
 "Language-Team: Telugu <te@li.org>\n"
@@ -58,11 +58,13 @@ msgstr ""
 
 #: mainwindow.cpp:389
 #, fuzzy
+msgctxt "File toolbar"
 msgid "File"
 msgstr "&ఫైల్"
 
 #: mainwindow.cpp:394
 #, fuzzy
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "పనిముట్లు"
 
@@ -316,6 +318,12 @@ msgstr "పరిక్ష నమోదు"
 msgid "Play test…"
 msgstr "పరిక్ష ప్రదర్శించు"
 
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr "&ఫైల్"
+
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
@@ -377,6 +385,13 @@ msgstr ""
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr "(&Q) విరమించు"
+
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+#, fuzzy
+msgid "Open Recent"
+msgstr "(&R) ఇటీవలివి తెరువండి"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
@@ -518,12 +533,6 @@ msgstr ""
 #, fuzzy
 msgid "Cannot open files"
 msgstr "జబితా సేవ్ చేయలేను %1."
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr "&ఫైల్"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -826,12 +835,6 @@ msgstr "అవగాడ్రో వెబ్సైట్"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr ""
-
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Open Recent"
-msgstr "(&R) ఇటీవలివి తెరువండి"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
