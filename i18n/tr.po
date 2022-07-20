@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-07-20 04:26+0000\n"
-"PO-Revision-Date: 2022-07-15 06:14+0000\n"
+"PO-Revision-Date: 2022-07-20 15:19+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -62,15 +62,11 @@ msgid "Layers"
 msgstr "Katmanlar"
 
 #: mainwindow.cpp:389
-#, fuzzy
-#| msgid "File"
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Dosya"
 
 #: mainwindow.cpp:394
-#, fuzzy
-#| msgid "Tools"
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Araçlar"
