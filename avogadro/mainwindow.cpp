@@ -386,12 +386,12 @@ void MainWindow::setupInterface()
 
 #ifndef Q_OS_MAC
   m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-  m_fileToolBar->setWindowTitle(tr("File"));
+  m_fileToolBar->setWindowTitle(tr("File", "File toolbar"));
   addToolBar(m_fileToolBar);
 #else
   m_fileToolBar->hide();
 #endif
-  m_toolToolBar->setWindowTitle(tr("Tools"));
+  m_toolToolBar->setWindowTitle(tr("Tools", "Tools toolbar"));
   addToolBar(m_toolToolBar);
 
   // Create the scene plugin model
@@ -1692,7 +1692,7 @@ void MainWindow::buildMenu()
 #endif
 
   QStringList path;
-  path << "&File";
+  path << tr("&File");
   // New
   QAction* action = new QAction(tr("&New"), this);
   action->setShortcut(QKeySequence::New);
@@ -1773,7 +1773,7 @@ void MainWindow::buildMenu()
 
   // open recent 995 - 985
   // Populate the recent file actions list.
-  path << "Open Recent";
+  path << tr("Open Recent");
   // TODO: Check if files exist and if we actually have 10 items
   for (int i = 0; i < 10; ++i) {
     action = new QAction(QString::number(i), this);
