@@ -38,8 +38,8 @@ modules:
         --no-build-isolation
     sources:
       - type: archive
-        url: https://github.com/numpy/numpy/releases/download/v1.22.3/numpy-1.22.3.tar.gz
-        sha256: a906c0b4301a3d62ccf66d058fe779a65c1c34f6719ef2058f96e1856f48bca5
+        url: https://files.pythonhosted.org/packages/13/b1/0c22aa7ca1deda4915cdec9562f839546bb252eecf6ad596eaec0592bd35/numpy-1.23.1.tar.gz
+        sha256: d748ef349bfef2e1194b59da37ed5a29c19ea8d7e6342019921ba2ba4fd8b624
         x-checker-data:
           type: pypi
           name: numpy
@@ -106,8 +106,8 @@ modules:
       - cmake --install .
     sources:
       - type: archive
-        url: https://github.com/pybind/pybind11/archive/v2.9.2.tar.gz
-        sha256: 6bd528c4dbe2276635dc787b6b1f2e5316cf6b49ee3e150264e455a0d68d19c1
+        url: https://github.com/pybind/pybind11/archive/v2.10.0.tar.gz
+        sha256: eacf582fa8f696227988d08cfc46121770823839fe9e301a20fbce67e7cd70ec
         x-checker-data:
           type: anitya
           project-id: 13384
@@ -190,11 +190,12 @@ modules:
     ensure-writable:
       - /lib/python3/site-packages/easy-install.pth
     build-commands:
-      - cmake -DCMAKE_INSTALL_PREFIX=${FLATPAK_DEST} -DCMAKE_INSTALL_INCLUDEDIR:PATH=${FLATPAK_DEST}/include -DCMAKE_INSTALL_LIBDIR:PATH=${FLATPAK_DEST}/lib
-        .
+      - cmake -DCMAKE_INSTALL_PREFIX=${FLATPAK_DEST} -DCMAKE_INSTALL_INCLUDEDIR:PATH=${FLATPAK_DEST}/include
+        -DCMAKE_INSTALL_LIBDIR:PATH=${FLATPAK_DEST}/lib .
       - cmake --build .
       - cmake --install .
-      - cd python && python3 -mpip install . --no-index --find-links=file://${PWD} --prefix=${FLATPAK_DEST} --no-build-isolation
+      - cd python && python3 -mpip install . --no-index --find-links=file://${PWD}
+        --prefix=${FLATPAK_DEST} --no-build-isolation
     sources:
       - type: archive
         url: https://github.com/spglib/spglib/archive/refs/tags/v1.16.5.tar.gz
@@ -243,44 +244,51 @@ modules:
 
     # Avogadrolibs does not build with VTK 9.0.1
     # https://github.com/OpenChemistry/avogadrolibs/issues/516
-  #- name: VTK
-    #buildsystem: cmake
+  - name: VTK
+    buildsystem: cmake-ninja
+    builddir: true
+    build-options:
+      cflags: -O2 -D_FORTIFY_SOURCE=2 -fstack-protector-strong -funwind-tables -fasynchronous-unwind-tables
+        -fstack-clash-protection -flto -fno-fat-lto-objects
+      cxxflags: -O2 -D_FORTIFY_SOURCE=2 -fstack-protector-strong -funwind-tables -fasynchronous-unwind-tables
+        -fstack-clash-protection -flto -fno-fat-lto-objects
+    config-opts:
+    - -DBUILD_SHARED_LIBS=ON
+    - -DOpenGL_GL_PREFERENCE=GLVND
+    - -DBUILD_TESTING:BOOL=OFF
+    - -DVTK_GROUP_ENABLE_Qt:BOOL=YES
+    - -DVTK_BUILD_COMPILE_TOOLS_ONLY:BOOL=OFF
+    sources:
+      - type: archive
+        url: https://www.vtk.org/files/release/9.2/VTK-9.2.0.rc1.tar.gz
+        sha256: 3d219ae624d0ce6d72bb9bdbf5895d0eaa875ff3115a61d3c300b257ea7c0f7e
+
+  #- name: genXrd
+    #buildsystem: cmake-ninja
     #builddir: true
+    ##build-options:
+      ##cflags: -O2 -D_FORTIFY_SOURCE=2 -fstack-protector-strong -funwind-tables -fasynchronous-unwind-tables
+        ##-fstack-clash-protection -flto -fno-fat-lto-objects
+      ##cxxflags: -O2 -D_FORTIFY_SOURCE=2 -fstack-protector-strong -funwind-tables -fasynchronous-unwind-tables
+        ##-fstack-clash-protection -flto -fno-fat-lto-objects
     #config-opts:
-    #- -DBUILD_SHARED_LIBS=ON
-    #- -DOpenGL_GL_PREFERENCE=GLVND
-    #- -DBUILD_TESTING:BOOL=OFF
-    #- -DVTK_Group_Rendering:BOOL=OFF
-    #- -DVTK_Group_StandAlone:BOOL=OFF
-    #- -DModule_vtkDomainsChemistry:BOOL=ON
-    #- -DModule_vtkViewsContext2D:BOOL=ON
-    #- -DModule_vtkChartsCore:BOOL=ON
-    #- -DModule_vtkRenderingVolumeOpenGL2:BOOL=ON
-    #- -DModule_vtkGUISupportQt:BOOL=ON
-    #- -DModule_vtkRenderingQt:BOOL=ON
-    #- -DModule_vtkViewsInfovis:BOOL=OFF
-    #- -DModule_vtkRenderingFreeTypeOpenGL2:BOOL=ON
-    #- -DVTK_USE_SYSTEM_ZLIB:BOOL=ON
-    #- -DVTK_USE_SYSTEM_EIGEN:BOOL=ON
-    #- -DVTK_BUILD_QT_DESIGNER_PLUGIN:BOOL=OFF
-    #- -DVTK_QT_VERSION:STRING=5
-    #- -DCMAKE_BUILD_TYPE=Release
-    #- -DVTK_PYTHON_VERSION:STRING=3
-    #- -DVTK_GROUP_ENABLE_Qt=YES
-    #- -DVTK_MODULE_ENABLE_VTK_GUISupportQt=YES
-    #- -DModule_vtkGUISupportQtOpenGL:BOOL=ON
-    #- -DVTK_BUILD_COMPILE_TOOLS_ONLY:BOOL=ON
-    ##- -DVTK_MODULE_ENABLE_VTK_RenderingContextOpenGL2=YES
+    ##- -DBUILD_SHARED_LIBS=ON
+    ##- -DOpenGL_GL_PREFERENCE=GLVND
+    ##- -DBUILD_TESTING:BOOL=OFF
+    ##- -DVTK_GROUP_ENABLE_Qt:BOOL=YES
+    ##- -DVTK_BUILD_COMPILE_TOOLS_ONLY:BOOL=OFF
     #sources:
       #- type: archive
-        #url: https://www.vtk.org/files/release/9.0/VTK-9.0.1.tar.gz
-        #sha256: 1b39a5e191c282861e7af4101eaa8585969a2de05f5646c9199a161213a622c7
+        #url: https://github.com/psavery/genXrdPattern/archive/refs/tags/1.1-linux.tar.gz
+        #sha256: 9bc01dbf637d6520d8e2f5743bb1b46f8319432af5ce2d2a484a36615c1586d3
 
   - name: avogadrolibs
     buildsystem: cmake
     builddir: true
     subdir: avogadrolibs
     config-opts:
+      - -DOpenGL_GL_PREFERENCE=GLVND
+      - -DUSE_SYSTEM_GENXRDPATTERN:BOOL=ON
       - -DCMAKE_BUILD_TYPE:STRING=Release
       - -DENABLE_TRANSLATIONS:BOOL=ON
       - -DUSE_HDF5:BOOL=ON
@@ -291,7 +299,7 @@ modules:
       - -DUSE_MMTF:BOOL=ON
       - -DUSE_MOLEQUEUE:BOOL=ON
       - -DUSE_PROTOCALL:BOOL=OFF
-      - -DUSE_VTK:BOOL=OFF
+      - -DUSE_VTK:BOOL=ON
       - -DBUILD_GPL_PLUGINS:BOOL=ON
       - -DBUILD_STATIC_PLUGINS:BOOL=ON
       - -Dlibmsym_DIR:PATH=${FLATPAK_DEST}/lib/cmake/libmsym
@@ -299,8 +307,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/OpenChemistry/avogadrolibs
-        tag: 1.96.0
-        commit: 53b1f66e5a1b5f45ec9e016576cb97bfbd5e4dd1
+        tag: 1.97.0
+        commit: 82938e4f5ce188a1e53300d263167bebe717f5b2
         dest: avogadrolibs
         x-checker-data:
           type: git
@@ -315,6 +323,12 @@ modules:
         sha256: 0365aa346ccc9f77a849cd10964ebcace96621f847216546e49c386f071119e7
         dest: crystals
         dest-filename: crystals.zip
+      #- type: file
+        #url: https://github.com/psavery/genXrdPattern/releases/download/1.0-static/linux64-genXrdPattern
+        #sha256: 5e0b8f2b463952fd16a92d70b972e4f88af8f6c00e51126a5bd6e2ab243e2ba7
+        #dest: avogadrolibs/${FLATPAK_BUILDER_BUILDDIR}/bin
+        #dest-filename: genXrdPattern
+
 
   - name: Avogadro2
     subdir: Avogadro2
@@ -335,8 +349,8 @@ modules:
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
     sources:
       - type: archive
-        url: https://github.com/OpenChemistry/avogadroapp/archive/refs/tags/1.96.0.tar.gz
-        sha256: dc5317804747a1a97f8e7534fb1663a2a6dc808799a06322a3ceb959ef3dcdff
+        url: https://github.com/OpenChemistry/avogadroapp/archive/refs/tags/1.97.0.tar.gz
+        sha256: c4e1a0d54e43c2ae8bbd6b872e46b2f983f45c5aaa981731c681d5325faaec63
         dest: Avogadro2
         x-checker-data:
           type: anitya
@@ -346,7 +360,7 @@ modules:
       - type: archive
         url: https://github.com/OpenChemistry/avogadro-i18n/archive/refs/heads/master.zip
         dest: avogadro-i18n
-        sha256: 99120f87a7ce951b9a13c76018a0a61bc19bf8e6ff09a7da5b50cd5f562b9b95
+        sha256: cb32911c83d47f6d93d7f6d9193d634b60ce114d283f2be018a064d86ff2479a
       - type: file
         path: org.openchemistry.Avogadro2.metainfo.xml
         dest: Avogadro2
