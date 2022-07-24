@@ -151,10 +151,22 @@ int main(int argc, char* argv[])
 
   languages << "System"; // we handle this in the dialog
   codes << ""; // default is the system language
+
+  bool addedUS = false;
+
   // check what files exist
   foreach (const QString& file, files) {
     // remove "avogadroapp-" and the ".qm"
     QString localeCode = file.left(file.indexOf('.')).remove("avogadroapp-");
+
+    if (localeCode.startsWith("en") && !addedUS) {
+      // add US English (default)
+      addedUS = true;
+      QLocale us("en_US");
+      languages << us.nativeLanguageName();
+      codes << "en_US";
+    }
+
     QLocale locale(localeCode);
     QString languageName = locale.nativeLanguageName();
     if (languageName.isEmpty() && localeCode == "oc")
