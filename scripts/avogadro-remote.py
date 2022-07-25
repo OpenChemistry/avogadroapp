@@ -4,10 +4,10 @@ from __future__ import print_function
 
 import sys
 import json
-import time
 import socket
 import struct
 import tempfile
+
 
 class Connection:
     '''Process a JSON-RPC request'''
@@ -93,4 +93,3 @@ if __name__ == "__main__":
 
     print("reply: " + str(conn.receive_message()))
     conn.close()
-    sys.exit(0)
