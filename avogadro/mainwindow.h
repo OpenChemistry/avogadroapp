@@ -245,6 +245,8 @@ private slots:
 
   void showLanguageDialog();
 
+  void openURL(const QString& url);
+
   void openForum();
 
   void openWebsite();
