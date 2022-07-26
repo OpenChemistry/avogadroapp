@@ -39,6 +39,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QMimeData>
+#include <QtCore/QProcess>
 #include <QtCore/QSettings>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QString>
@@ -2115,28 +2116,36 @@ void MainWindow::showAboutDialog()
   about.exec();
 }
 
+void MainWindow::openURL(const QString& url)
+{
+#if defined(Q_OS_MAC) || defined(Q_OS_WIN)
+  QDesktopServices::openUrl(url);
+#else
+  // AppImage can't use QDesktopServices::openUrl, so we use QProcess:
+  QProcess::execute(QString("xdg-open %1").arg(url));
+#endif
+}
+
 void MainWindow::openForum()
 {
-  QDesktopServices::openUrl(QUrl("https://discuss.avogadro.cc/"));
+  openURL("https://discuss.avogadro.cc/");
 }
 
 void MainWindow::openWebsite()
 {
-  QDesktopServices::openUrl(QUrl("https://two.avogadro.cc/"));
+  openURL("https://two.avogadro.cc/");
 }
 
 void MainWindow::openBugReport()
 {
-  QDesktopServices::openUrl(
-    QUrl("https://github.com/OpenChemistry/avogadrolibs/issues/"
-         "new?template=bug_report.md"));
+  openURL("https://github.com/OpenChemistry/avogadrolibs/issues/"
+          "new?template=bug_report.md");
 }
 
 void MainWindow::openFeatureRequest()
 {
-  QDesktopServices::openUrl(
-    QUrl("https://github.com/OpenChemistry/avogadrolibs/issues/"
-         "new?template=feature_request.md"));
+  openURL("https://github.com/OpenChemistry/avogadrolibs/issues/"
+          "new?template=feature_request.md");
 }
 
 void MainWindow::fileFormatsReady()
