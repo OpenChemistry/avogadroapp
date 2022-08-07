@@ -1330,8 +1330,10 @@ bool MainWindow::saveFileAs(bool async)
   QSettings settings;
   QString dir = settings.value("MainWindow/lastSaveDir").toString();
 
-  QString fileName =
-    QFileDialog::getSaveFileName(this, tr("Save chemical file"), dir, filter);
+  QFileDialog saveDialog(this, tr("Save chemical file"), dir, filter);
+  saveDialog.setAcceptMode(QFileDialog::AcceptSave);
+  saveDialog.exec();
+  QString fileName = saveDialog.selectedFiles().first();
 
   if (fileName.isEmpty()) // user cancel
     return false;
@@ -1340,15 +1342,24 @@ bool MainWindow::saveFileAs(bool async)
   dir = info.absoluteDir().absolutePath();
   settings.setValue("MainWindow/lastSaveDir", dir);
 
-  // Create one of our writers to save the file:
+  // Use manually entered extension if present
   QString extension = info.suffix().toLower();
+  // Otherwise, get extension from selected filter
+  if (extension.isEmpty()) {
+    QString filter = saveDialog.selectedNameFilter();
+    if (filter.contains("(*.cjson)", Qt::CaseSensitive))
+      extension = "cjson";
+    else if (filter.contains("(*.cml)", Qt::CaseSensitive))
+      extension = "cml";
+    fileName += "." + extension;
+  }
+
+  // Create one of our writers to save the file:
   FileFormat* writer = nullptr;
   if (extension == "cjson" || extension.isEmpty())
     writer = new Io::CjsonFormat;
   else if (extension == "cml")
     writer = new Io::CmlFormat;
-  if (extension.isEmpty())
-    fileName += ".cml";
 
   return saveFileAs(fileName, writer, async);
 }
