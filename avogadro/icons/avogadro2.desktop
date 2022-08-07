@@ -2,6 +2,7 @@
 Version=1.0
 Name=Avogadro2
 Comment=Advanced molecular editor
+Comment[hu]=Fejlett molekuláris szerkesztő
 Exec=avogadro2 %f
 Icon=avogadro2
 Terminal=false

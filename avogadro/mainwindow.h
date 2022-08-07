@@ -18,7 +18,6 @@ class QThread;
 class QTreeView;
 
 namespace Ui {
-class MainWindow;
 class AboutDialog;
 }
 
@@ -110,6 +109,15 @@ public:
    */
   void readSettings();
 
+  /**
+   * Set the list of possible translations
+   */
+  void setTranslationList(const QStringList& list, const QStringList& codes)
+  {
+    m_translationList = list;
+    m_localeCodes = codes;
+  }
+
 signals:
   /**
    * Emitted when the active molecule in the application has changed.
@@ -124,6 +132,12 @@ protected:
   void dropEvent(QDropEvent* event);
 
 protected slots:
+
+  /**
+   * Set the preferred locale
+   */
+  void setLocale(const QString& locale);
+
   /**
    * Slot provided for extensions to indicate a molecule is ready to be read in.
    * This slot will then pass a molecule to the extension for the data to be
@@ -229,6 +243,18 @@ protected slots:
 private slots:
   void showAboutDialog();
 
+  void showLanguageDialog();
+
+  void openURL(const QString& url);
+
+  void openForum();
+
+  void openWebsite();
+
+  void openBugReport();
+
+  void openFeatureRequest();
+
   /**
    * @brief Register file formats from extensions when ready.
    */
@@ -305,7 +331,11 @@ private slots:
    */
   void viewActivated(QWidget* widget);
 
+  QImage renderToImage(const QSize& size);
+
   void exportGraphics();
+
+  void copyGraphics();
 
   void setBackgroundColor();
 
@@ -324,6 +354,9 @@ private:
 
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
+
+  QStringList m_translationList;
+  QStringList m_localeCodes;
 
   MenuBuilder* m_menuBuilder;
 
@@ -352,6 +385,7 @@ private:
 
   QAction* m_undo;
   QAction* m_redo;
+  QAction* m_copyImage;
   QAction* m_viewPerspective;
   QAction* m_viewOrthographic;
 
@@ -362,8 +396,6 @@ private:
   QString m_testFile;
   bool m_testExit;
 #endif
-
-  Ui::MainWindow* m_ui; // used for the default menu bar
 
   /**
    * Set up the main window widgets, connect signals and slots, etc.

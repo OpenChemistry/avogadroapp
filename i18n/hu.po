@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # SoftwareByRedline <krajczar.david41@gmail.com>, 2021.
-# ovari <ovari123@zoho.com>, 2021.
+# ovari <ovari123@zoho.com>, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-19 02:08+0000\n"
-"PO-Revision-Date: 2021-09-20 08:38+0000\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
+"PO-Revision-Date: 2022-07-21 22:19+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hu/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -39,104 +39,119 @@ msgstr ""
 "Nincs fájlnév beállítva a „BackgroundFileFormat” (HáttérFájlformátum) "
 "fájlban!"
 
-#: mainwindow.cpp:300
+#: mainwindow.cpp:299
 msgid "Ready…"
 msgstr "Kész…"
 
-#: mainwindow.cpp:342
+#: mainwindow.cpp:340
 msgid "Tool"
 msgstr "Eszköz"
 
-#: mainwindow.cpp:346
+#: mainwindow.cpp:344
 msgid "Display Types"
 msgstr "Megjelenítési típusok"
 
-#: mainwindow.cpp:357
+#: mainwindow.cpp:355
 msgid "View Configuration"
 msgstr "Nézetbeállítás"
 
-#: mainwindow.cpp:363
+#: mainwindow.cpp:361
 msgid "Molecules"
 msgstr "Molekulák"
 
-#: mainwindow.cpp:372
+#: mainwindow.cpp:370
 msgid "Layers"
 msgstr "Rétegek"
 
-#: mainwindow.cpp:391
+#: mainwindow.cpp:389
+msgctxt "File toolbar"
 msgid "File"
 msgstr "Fájl"
 
-#: mainwindow.cpp:396
+#: mainwindow.cpp:394
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Eszközök"
 
-#: mainwindow.cpp:612
+#: mainwindow.cpp:627
 msgid "Untitled"
 msgstr "Névtelen"
 
-#: mainwindow.cpp:617
+#: mainwindow.cpp:632
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Avogadro %3"
 
-#: mainwindow.cpp:673 mainwindow.cpp:1311
+#: mainwindow.cpp:681
+msgid "Restart needed"
+msgstr "Újraindítás szükséges"
+
+#: mainwindow.cpp:682
+msgid "Please restart Avogadro to use the new language."
+msgstr "Kérjük, indítsa újra az Avogadrót az új nyelv használatához."
+
+#: mainwindow.cpp:702 mainwindow.cpp:1365
 msgid "Chemical Markup Language"
 msgstr "Kémiai-kódnyelv"
 
-#: mainwindow.cpp:674 mainwindow.cpp:1310
+#: mainwindow.cpp:703 mainwindow.cpp:1364
 msgid "Chemical JSON"
 msgstr "Kémiai-JSON"
 
-#: mainwindow.cpp:680
+#: mainwindow.cpp:709
 msgid "Open chemical file"
 msgstr "Kémiaifájl megnyitása"
 
-#: mainwindow.cpp:698 mainwindow.cpp:722 mainwindow.cpp:1218
-#: mainwindow.cpp:2038
+#: mainwindow.cpp:727 mainwindow.cpp:751 mainwindow.cpp:1267
+#: mainwindow.cpp:2169
 msgid "Cannot open file"
 msgstr "A fájl nem nyitható meg"
 
-#: mainwindow.cpp:699 mainwindow.cpp:723 mainwindow.cpp:1219
+#: mainwindow.cpp:728 mainwindow.cpp:752 mainwindow.cpp:1268
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "A(z) %1 fájlt nem lehet megnyitni"
 
-#: mainwindow.cpp:712
+#: mainwindow.cpp:741
 msgid "Open Molecule"
 msgstr "Molekula megnyitása"
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:765
 msgid "Commands"
 msgstr "Parancsok"
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:765
 msgid "Input Generators"
 msgstr "Bemeneti generátorok"
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:765
 msgid "File Formats"
 msgstr "Fájlformátumok"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:766
+msgctxt "atomic electrostatics"
+msgid "Charges"
+msgstr "Töltések"
+
+#: mainwindow.cpp:770
 msgid "Install Plugin Script"
 msgstr "Beépülő modul parancsfájl telepítése"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:770
 msgid "Script Type:"
 msgstr "Parancsfájl típusa:"
 
-#: mainwindow.cpp:788 mainwindow.cpp:1214
+#: mainwindow.cpp:821 mainwindow.cpp:1263
 msgid "Select file reader"
 msgstr "Fájlolvasó kiválasztása"
 
-#: mainwindow.cpp:817
+#: mainwindow.cpp:850
 msgid "Reading File"
 msgstr "Fájl olvasása"
 
-#: mainwindow.cpp:819
+#: mainwindow.cpp:852
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -145,16 +160,16 @@ msgstr ""
 "Fájl megnyitása: %1\n"
 "a következővel: %2"
 
-#: mainwindow.cpp:850
+#: mainwindow.cpp:883
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Molekula betöltve (%1 atom, %2 kötés)"
 
-#: mainwindow.cpp:855
+#: mainwindow.cpp:888
 msgid "File error"
 msgstr "Fájlhiba"
 
-#: mainwindow.cpp:856
+#: mainwindow.cpp:889
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -163,17 +178,17 @@ msgstr ""
 "Hiba történt a(z) „%1” fájl olvasásakor:\n"
 "%2"
 
-#: mainwindow.cpp:883
+#: mainwindow.cpp:916
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "A(z) %1 fájl mentve"
 
-#: mainwindow.cpp:891
+#: mainwindow.cpp:924
 msgid "Error saving file"
 msgstr "Hiba történt a fájl mentésekor"
 
-#: mainwindow.cpp:892
+#: mainwindow.cpp:925
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -183,11 +198,11 @@ msgstr ""
 "Hiba történt a(z) „%1” fájl mentésekor:\n"
 "%2"
 
-#: mainwindow.cpp:931
+#: mainwindow.cpp:964
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Hiba történt: Nem sikerült inicializálni az OpenGL-összefüggése"
 
-#: mainwindow.cpp:932
+#: mainwindow.cpp:965
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -198,50 +213,50 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:933
+#: mainwindow.cpp:966
 msgid "Unknown error"
 msgstr "Ismeretlen hiba"
 
-#: mainwindow.cpp:1059 mainwindow.cpp:1060
+#: mainwindow.cpp:1092 mainwindow.cpp:1093
 msgid "Navigate tool"
 msgstr "Navigációs eszköz"
 
-#: mainwindow.cpp:1136
+#: mainwindow.cpp:1213
 msgid "Common image formats"
 msgstr "Gyakori képformátumok"
 
-#: mainwindow.cpp:1138
+#: mainwindow.cpp:1215
 msgid "All files"
 msgstr "Minden fájl"
 
-#: mainwindow.cpp:1138
+#: mainwindow.cpp:1215
 msgid "BMP"
 msgstr "BMP-fájl"
 
-#: mainwindow.cpp:1139
+#: mainwindow.cpp:1216
 msgid "PNG"
 msgstr "PNG-fájl"
 
-#: mainwindow.cpp:1139
+#: mainwindow.cpp:1216
 msgid "JPEG"
 msgstr "JPEG-fájl"
 
-#: mainwindow.cpp:1148
+#: mainwindow.cpp:1225
 msgid "Export Bitmap Graphics"
 msgstr "Bittérképes grafika exportálása"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1187 mainwindow.cpp:1284 mainwindow.cpp:1935:33
+#: mainwindow.cpp:1236 mainwindow.cpp:1338 mainwindow.cpp:2042:33
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1188
+#: mainwindow.cpp:1237
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "%1 fájl mentése nem sikerult."
 
-#: mainwindow.cpp:1285
+#: mainwindow.cpp:1339
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -254,23 +269,23 @@ msgstr ""
 "Szeretne az aktuális formátumba exportálni, vagy szabványos formátumba "
 "menteni?"
 
-#: mainwindow.cpp:1292
+#: mainwindow.cpp:1346
 msgid "Export"
 msgstr "Exportálás"
 
-#: mainwindow.cpp:1317
+#: mainwindow.cpp:1371
 msgid "Save chemical file"
 msgstr "Kémiai-fájl mentése"
 
-#: mainwindow.cpp:1345
+#: mainwindow.cpp:1399
 msgid "Export Molecule"
 msgstr "Molekula exportálása"
 
-#: mainwindow.cpp:1397
+#: mainwindow.cpp:1451
 msgid "Saving File in Progress…"
 msgstr "Fájl mentése folyamatban…"
 
-#: mainwindow.cpp:1399
+#: mainwindow.cpp:1453
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -280,51 +295,57 @@ msgstr ""
 "Fájl mentése: %1\n"
 "formátummal: %2"
 
-#: mainwindow.cpp:1511
+#: mainwindow.cpp:1565
 #, qt-format
 msgid "&Undo %1"
 msgstr "&Visszavonás: %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1514 mainwindow.cpp:1741:117
+#: mainwindow.cpp:1568 mainwindow.cpp:1795:117
 msgid "&Undo"
 msgstr "&Visszavonás"
 
-#: mainwindow.cpp:1519
+#: mainwindow.cpp:1573
 #, qt-format
 msgid "&Redo %1"
 msgstr "Ú&jra: %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1522 mainwindow.cpp:1746:123
+#: mainwindow.cpp:1576 mainwindow.cpp:1800:123
 msgid "&Redo"
 msgstr "Ú&jra"
 
-#: mainwindow.cpp:1622
+#: mainwindow.cpp:1676
 msgid "&Testing"
 msgstr "&Vizsgálás"
 
-#: mainwindow.cpp:1624
+#: mainwindow.cpp:1678
 msgid "Record test…"
 msgstr "Vizsgafelvétel…"
 
-#: mainwindow.cpp:1627
+#: mainwindow.cpp:1681
 msgid "Play test…"
 msgstr "Vizsga lejátszása…"
+
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr "&Fájl"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1643:75 rc.cpp:81
+#: mainwindow.cpp:1697:75 rc.cpp:81
 msgid "&New"
 msgstr "&Új"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1652:51
+#: mainwindow.cpp:1706:51
 msgid "&Open…"
 msgstr "&Megnyitás…"
 
@@ -332,7 +353,7 @@ msgstr "&Megnyitás…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1661:84 rc.cpp:90
+#: mainwindow.cpp:1715:84 rc.cpp:90
 msgid "&Close"
 msgstr "&Bezárás"
 
@@ -340,27 +361,27 @@ msgstr "&Bezárás"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1675:93 rc.cpp:99
+#: mainwindow.cpp:1729:93 rc.cpp:99
 msgid "&Save"
 msgstr "&Mentés"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1684:102
+#: mainwindow.cpp:1738:102
 msgid "Save &As…"
 msgstr "Me&ntés másként…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1695:195
+#: mainwindow.cpp:1749:195
 msgid "&Export"
 msgstr "&Exportálás"
 
-#: mainwindow.cpp:1696
+#: mainwindow.cpp:1750
 msgid "&Molecule…"
 msgstr "&Molekula…"
 
-#: mainwindow.cpp:1704
+#: mainwindow.cpp:1758
 msgid "&Graphics…"
 msgstr "&Grafika…"
 
@@ -368,110 +389,160 @@ msgstr "&Grafika…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1712:60 rc.cpp:66
+#: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr "&Kilépés"
 
-#: mainwindow.cpp:1734
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+msgid "Open Recent"
+msgstr "Legutóbbi megnyitása"
+
+#: mainwindow.cpp:1788
 msgid "No recent files"
 msgstr "Nincsenek legutóbbi fájlok"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1740 menubuilder.cpp:76:45
+#: mainwindow.cpp:1794 menubuilder.cpp:76:45
 msgid "&Edit"
 msgstr "S&zerkesztés"
 
+#: mainwindow.cpp:1806
+msgid "&Copy Graphics"
+msgstr "Grafika &másolása"
+
+#: mainwindow.cpp:1810
+msgid "Ctrl+Alt+C"
+msgstr "Ctrl+Alt+C"
+
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1760 menubuilder.cpp:76:42
+#: mainwindow.cpp:1823 menubuilder.cpp:76:42
 msgid "&View"
 msgstr "&Nézet"
 
-#: mainwindow.cpp:1761
+#: mainwindow.cpp:1824
 msgid "Set Background Color…"
 msgstr "Háttérszín beállítása…"
 
-#: mainwindow.cpp:1769
+#: mainwindow.cpp:1832
 msgid "Projection"
 msgstr "Vetület"
 
-#: mainwindow.cpp:1770
+#: mainwindow.cpp:1833
 msgid "Perspective"
 msgstr "Távlat"
 
-#: mainwindow.cpp:1777
+#: mainwindow.cpp:1840
 msgid "Orthographic"
 msgstr "Ortografikus"
 
-#: mainwindow.cpp:1796
+#: mainwindow.cpp:1859
 msgid "&Extensions"
-msgstr "&Kiterjesztések"
+msgstr "Ki&terjesztések"
 
-#: mainwindow.cpp:1803 menubuilder.cpp:80
+#: mainwindow.cpp:1861
+msgid "User Interface Language…"
+msgstr "Felhasználói felület nyelve…"
+
+#: mainwindow.cpp:1865
+msgid "&Periodic Table…"
+msgstr "&Periódusos táblázat…"
+
+#: mainwindow.cpp:1871 menubuilder.cpp:80
 msgid "&Help"
 msgstr "&Súgó"
 
-#: mainwindow.cpp:1920
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1872:114
+msgid "&About"
+msgstr "&Névjegy"
+
+#: mainwindow.cpp:1879
+msgid "&Discussion Forum"
+msgstr "&Fórum"
+
+#: mainwindow.cpp:1883
+msgid "&Avogadro Website"
+msgstr "&Avogadro webhely meglátogatása"
+
+#: mainwindow.cpp:1887
+msgid "&Report a Bug"
+msgstr "&Hiba bejelentése"
+
+#: mainwindow.cpp:1891
+msgid "&Suggest a Feature"
+msgstr "&Javaslat új funkcióra"
+
+#: mainwindow.cpp:1915
+msgid "System Language"
+msgstr "Rendszer nyelve"
+
+#: mainwindow.cpp:1923
+msgid "Language"
+msgstr "Nyelv"
+
+#: mainwindow.cpp:1923
+msgid "User Interface Language:"
+msgstr "Felhasználói felület nyelve:"
+
+#: mainwindow.cpp:2027
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Minden támogatott formátum (%1);;Minden fájl (*);;"
 
-#: mainwindow.cpp:1936
+#: mainwindow.cpp:2043
 msgid "Do you want to save the changes to the document?"
 msgstr "Szeretné menteni a dokumentum módosításait?"
 
-#: mainwindow.cpp:1944
+#: mainwindow.cpp:2051
 msgid "Your changes will be lost if you don't save them."
 msgstr "A módosításai elvesznek, ha nem menti azokat."
 
-#: mainwindow.cpp:1952
+#: mainwindow.cpp:2059
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:1954
+#: mainwindow.cpp:2061
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2018
+#: mainwindow.cpp:2149
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Hiba történt a(z) „%1” fájlformátum betöltésekor."
 
-#: mainwindow.cpp:2034
+#: mainwindow.cpp:2165
 msgid "Select file format"
 msgstr "Fájlformátum kijelölése"
 
-#: mainwindow.cpp:2039 mainwindow.cpp:2050
+#: mainwindow.cpp:2170 mainwindow.cpp:2181
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr ""
 "Időtúllépés történt és Avogadro nem tudja, hogyan kell megnyitni a(z) „%1” "
 "fájlt."
 
-#: mainwindow.cpp:2049
+#: mainwindow.cpp:2180
 msgid "Cannot open files"
 msgstr "Nem lehet megnyitni a fájlokat"
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr "&Fájl"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:76:39
 msgid "&Build"
-msgstr "&Felépítés"
+msgstr "Fe&lépítés"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
 #: menubuilder.cpp:77:48
 msgid "&Select"
-msgstr "&Kijelölés"
+msgstr "Ki&jelölés"
 
 #: menubuilder.cpp:80
 msgid "Se&ttings"
@@ -480,6 +551,14 @@ msgstr "&Beállítások"
 #: menubuilder.cpp:80
 msgid "&Window"
 msgstr "&Ablak"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+msgid "3D View"
+msgstr "Térhatású nézet"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+msgid "VTK"
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -496,8 +575,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\"font-size:20pt; font-weight:600;\">0."
-"1</span></p></body></html>"
+"<html><head/><body><p><span style=\"font-size:20pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -536,10 +615,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\"font-size:10pt; font-weight:600;\""
-">Licenc: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
-"><span style=\"font-size:10pt; text-decoration: underline; color:#0000ff;\""
-">3-záradék BSD</span></a></p></body></html>"
+"<html><head/><body><p><span style=\"font-size:10pt; font-weight:600;"
+"\">Licenc: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause"
+"\"><span style=\"font-size:10pt; text-decoration: underline; color:#0000ff;"
+"\">3-záradék BSD</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:264
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -548,9 +627,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style"
-"=\"text-decoration: underline; color:#0000ff;\">www.openchemistry."
-"org</span></a></p></body></html>"
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\"text-decoration: underline; color:#0000ff;\">www.openchemistry.org</span></"
+"a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:293
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -560,8 +639,8 @@ msgid ""
 "body></html>"
 msgstr ""
 "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\"text-"
-"decoration: underline; color:#0000ff;\">www.kitware."
-"com</span></a></p></body></html>"
+"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"body></html>"
 
 #. i18n: file: aboutdialog.ui:320
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -628,11 +707,6 @@ msgstr "Visszaállítás a mentettre"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color…"
 msgstr "&Háttérszín beállítása…"
-
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "&Névjegy"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -751,11 +825,6 @@ msgstr "Avogadro honlapja"
 msgid "Discussion Forum"
 msgstr "Vitafórum"
 
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Open Recent"
-msgstr "Legutóbbi megnyitása"
-
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Import"
@@ -769,6 +838,9 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "E-mail-címek"
 
+#~ msgid "Localization:"
+#~ msgstr "Felhasználói felület nyelve:"
+
 #~ msgid "Set background color…"
 #~ msgstr "Háttérszín beállítása…"
 
@@ -777,9 +849,6 @@ msgstr "E-mail-címek"
 
 #~ msgid "Esc"
 #~ msgstr "Kilépő billentyű"
-
-#~ msgid "New View"
-#~ msgstr "Új nézet"
 
 #~ msgid "Close View"
 #~ msgstr "Nézet bezárása"

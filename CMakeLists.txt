@@ -9,8 +9,8 @@ project(AvogadroApp)
 
 set(CMAKE_MODULE_PATH ${AvogadroApp_SOURCE_DIR}/cmake)
 
-# Request C++11 standard, using new CMake variables.
-set(CMAKE_CXX_STANDARD 11)
+# Request C++17 standard, using new CMake variables.
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS False)
 # Set symbol visibility defaults for all targets.
@@ -25,8 +25,8 @@ include(DetermineVersion)
 
 # Set up our version.
 set(AvogadroApp_VERSION_MAJOR   "1")
-set(AvogadroApp_VERSION_MINOR   "95")
-set(AvogadroApp_VERSION_PATCH   "1")
+set(AvogadroApp_VERSION_MINOR   "97")
+set(AvogadroApp_VERSION_PATCH   "0")
 set(AvogadroApp_VERSION
   "${AvogadroApp_VERSION_MAJOR}.${AvogadroApp_VERSION_MINOR}.${AvogadroApp_VERSION_PATCH}")
 find_package(Git)
