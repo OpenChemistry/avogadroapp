@@ -6,13 +6,14 @@
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2021.
 # Andrés Henao <andreshenao31@gmail.com>, 2022.
 # matterhorn103 <milner94@live.co.uk>, 2022.
+# Robert Adam <dev@robert-adam.de>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-07-20 04:26+0000\n"
-"PO-Revision-Date: 2022-07-05 23:50+0000\n"
-"Last-Translator: matterhorn103 <milner94@live.co.uk>\n"
+"PO-Revision-Date: 2022-07-30 09:19+0000\n"
+"Last-Translator: Robert Adam <dev@robert-adam.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13.1-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -60,15 +61,11 @@ msgid "Layers"
 msgstr "Ebenen"
 
 #: mainwindow.cpp:389
-#, fuzzy
-#| msgid "File"
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Datei"
 
 #: mainwindow.cpp:394
-#, fuzzy
-#| msgid "Tools"
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Werkzeuge"
@@ -133,7 +130,7 @@ msgstr "Dateiformate"
 #: mainwindow.cpp:766
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Ladungen"
 
 #: mainwindow.cpp:770
 msgid "Install Plugin Script"
