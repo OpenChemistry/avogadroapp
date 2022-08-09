@@ -2,325 +2,354 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# Tsuki <danghoangtuan526@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2021-09-19 02:08+0000\n"
-"PO-Revision-Date: 2016-06-10 06:26+0000\n"
-"Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
-"Language-Team: Vietnamese <vi@li.org>\n"
+"POT-Creation-Date: 2022-07-20 04:26+0000\n"
+"PO-Revision-Date: 2022-03-14 06:58+0000\n"
+"Last-Translator: Tsuki <danghoangtuan526@gmail.com>\n"
+"Language-Team: Vietnamese <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.12-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Không có phần tử nào được cài đặt trong BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Không có định dạng tệp nào được đặt trong BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Không có tên tệp nào được đặt trong BackgroundFileFormat!"
 
-#: mainwindow.cpp:300
+#: mainwindow.cpp:299
 msgid "Ready…"
-msgstr ""
+msgstr "Sẵn sàng…"
 
-#: mainwindow.cpp:342
+#: mainwindow.cpp:340
 #, fuzzy
 msgid "Tool"
 msgstr "Công cụ"
 
-#: mainwindow.cpp:346
+#: mainwindow.cpp:344
 msgid "Display Types"
 msgstr "Kiểu hiển thị"
 
-#: mainwindow.cpp:357
+#: mainwindow.cpp:355
 msgid "View Configuration"
-msgstr ""
+msgstr "Xem cấu hình"
 
-#: mainwindow.cpp:363
-#, fuzzy
+#: mainwindow.cpp:361
 msgid "Molecules"
 msgstr "Phân tử"
 
-#: mainwindow.cpp:372
+#: mainwindow.cpp:370
 msgid "Layers"
-msgstr ""
+msgstr "Lớp"
 
-#: mainwindow.cpp:391
+#: mainwindow.cpp:389
 #, fuzzy
+#| msgid "File"
+msgctxt "File toolbar"
 msgid "File"
-msgstr "&Tập tin"
+msgstr "Tập tin"
 
-#: mainwindow.cpp:396
+#: mainwindow.cpp:394
 #, fuzzy
+msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Công cụ"
 
-#: mainwindow.cpp:612
-#, fuzzy
+#: mainwindow.cpp:627
 msgid "Untitled"
-msgstr "không đề"
+msgstr "Chưa đặt tên"
 
-#: mainwindow.cpp:617
-#, fuzzy, qt-format
+#: mainwindow.cpp:632
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1 %2 - Avogadro %3"
 
-#: mainwindow.cpp:673 mainwindow.cpp:1311
+#: mainwindow.cpp:681
+msgid "Restart needed"
+msgstr ""
+
+#: mainwindow.cpp:682
+msgid "Please restart Avogadro to use the new language."
+msgstr ""
+
+#: mainwindow.cpp:702 mainwindow.cpp:1365
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Ngôn ngữ đánh dấu hóa học"
 
-#: mainwindow.cpp:674 mainwindow.cpp:1310
+#: mainwindow.cpp:703 mainwindow.cpp:1364
 msgid "Chemical JSON"
-msgstr ""
+msgstr "JSON hóa học"
 
-#: mainwindow.cpp:680
+#: mainwindow.cpp:709
 msgid "Open chemical file"
-msgstr ""
+msgstr "Mở tệp hóa chất"
 
-#: mainwindow.cpp:698 mainwindow.cpp:722 mainwindow.cpp:1218
-#: mainwindow.cpp:2038
-#, fuzzy
+#: mainwindow.cpp:727 mainwindow.cpp:751 mainwindow.cpp:1267
+#: mainwindow.cpp:2169
 msgid "Cannot open file"
-msgstr "Không thể lưu tập tin %1."
+msgstr "Không thể mở tệp"
 
-#: mainwindow.cpp:699 mainwindow.cpp:723 mainwindow.cpp:1219
-#, fuzzy, qt-format
+#: mainwindow.cpp:728 mainwindow.cpp:752 mainwindow.cpp:1268
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Không thể lưu tập tin %1."
+msgstr "Không thể mở tệp được cung cấp %1"
 
-#: mainwindow.cpp:712
-#, fuzzy
+#: mainwindow.cpp:741
 msgid "Open Molecule"
-msgstr "Phân tử"
+msgstr "Mở phân tử"
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:765
 msgid "Commands"
-msgstr ""
+msgstr "Lệnh"
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:765
 msgid "Input Generators"
-msgstr ""
+msgstr "Máy phát điện đầu vào"
 
-#: mainwindow.cpp:736
-#, fuzzy
+#: mainwindow.cpp:765
 msgid "File Formats"
-msgstr "Tập tin: "
+msgstr "Định dạng tệp"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:766
+msgctxt "atomic electrostatics"
+msgid "Charges"
+msgstr ""
+
+#: mainwindow.cpp:770
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Cài đặt tập lệnh plugin"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:770
 msgid "Script Type:"
-msgstr ""
+msgstr "Loại tập lệnh:"
 
-#: mainwindow.cpp:788 mainwindow.cpp:1214
+#: mainwindow.cpp:821 mainwindow.cpp:1263
 msgid "Select file reader"
-msgstr ""
+msgstr "Chọn trình đọc tệp"
 
-#: mainwindow.cpp:817
-#, fuzzy
+#: mainwindow.cpp:850
 msgid "Reading File"
-msgstr "Mở tập tin"
+msgstr "Đọc tệp"
 
-#: mainwindow.cpp:819
+#: mainwindow.cpp:852
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Đang mở tệp '%1'\n"
+"với '%2'"
 
-#: mainwindow.cpp:850
+#: mainwindow.cpp:883
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Phân tử được nạp (%1 nguyên tử, %2 liên kết)"
 
-#: mainwindow.cpp:855
-#, fuzzy
+#: mainwindow.cpp:888
 msgid "File error"
-msgstr "Tập tin: "
+msgstr "Lỗi tập tin"
 
-#: mainwindow.cpp:856
+#: mainwindow.cpp:889
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Lỗi khi đọc tệp '%1':\n"
+"%2"
 
-#: mainwindow.cpp:883
-#, fuzzy, qt-format
+#: mainwindow.cpp:916
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Không thể lưu tập tin %1."
+msgstr "Đã lưu tệp %1"
 
-#: mainwindow.cpp:891
+#: mainwindow.cpp:924
 msgid "Error saving file"
-msgstr ""
+msgstr "Lỗi khi lưu tệp"
 
-#: mainwindow.cpp:892
+#: mainwindow.cpp:925
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"Lỗi khi lưu '%1':\n"
+"%2"
 
-#: mainwindow.cpp:931
+#: mainwindow.cpp:964
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Lỗi: Không thể khởi chạy ngữ cảnh OpenGL"
 
-#: mainwindow.cpp:932
+#: mainwindow.cpp:965
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
 "\n"
 "%1"
 msgstr ""
+"Yêu cầu OpenGL 2.0 trở lên, đang thoát.\n"
+"\n"
+"%1"
 
-#: mainwindow.cpp:933
+#: mainwindow.cpp:966
 msgid "Unknown error"
-msgstr ""
+msgstr "Lỗi không xác định"
 
-#: mainwindow.cpp:1059 mainwindow.cpp:1060
+#: mainwindow.cpp:1092 mainwindow.cpp:1093
 msgid "Navigate tool"
-msgstr ""
+msgstr "Công cụ điều hướng"
 
-#: mainwindow.cpp:1136
+#: mainwindow.cpp:1213
 msgid "Common image formats"
 msgstr "Các dạng hình ảnh chung"
 
-#: mainwindow.cpp:1138
+#: mainwindow.cpp:1215
 msgid "All files"
 msgstr "Tất cả các tập tin"
 
-#: mainwindow.cpp:1138
+#: mainwindow.cpp:1215
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1139
+#: mainwindow.cpp:1216
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1139
+#: mainwindow.cpp:1216
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1148
+#: mainwindow.cpp:1225
 msgid "Export Bitmap Graphics"
 msgstr "Xuất đồ họa điểm ảnh"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1187 mainwindow.cpp:1284 mainwindow.cpp:1935:33
+#: mainwindow.cpp:1236 mainwindow.cpp:1338 mainwindow.cpp:2042:33
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1188
+#: mainwindow.cpp:1237
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Không thể lưu tập tin %1."
 
-#: mainwindow.cpp:1285
+#: mainwindow.cpp:1339
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Tệp này được nhập từ một định dạng không chuẩn có thể không viết được tất cả "
+"thông tin trong phân tử.\n"
+"\n"
+"Bạn muốn xuất sang định dạng hiện tại hay lưu ở định dạng chuẩn?"
 
-#: mainwindow.cpp:1292
+#: mainwindow.cpp:1346
 msgid "Export"
 msgstr "Xuất ra"
 
-#: mainwindow.cpp:1317
+#: mainwindow.cpp:1371
 msgid "Save chemical file"
-msgstr ""
-
-#: mainwindow.cpp:1345
-#, fuzzy
-msgid "Export Molecule"
-msgstr "Nhập từ tập tin phân tử"
-
-#: mainwindow.cpp:1397
-msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Lưu tệp hóa chất"
 
 #: mainwindow.cpp:1399
+msgid "Export Molecule"
+msgstr "Xuất phân tử"
+
+#: mainwindow.cpp:1451
+msgid "Saving File in Progress…"
+msgstr "Đang lưu tệp…"
+
+#: mainwindow.cpp:1453
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
+"Đang lưu tệp “%1”\n"
+"với “%2”"
 
-#: mainwindow.cpp:1511
-#, fuzzy, qt-format
+#: mainwindow.cpp:1565
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Hoàn lại"
+msgstr "& Hoàn tác %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1514 mainwindow.cpp:1741:117
+#: mainwindow.cpp:1568 mainwindow.cpp:1795:117
 msgid "&Undo"
 msgstr "&Hoàn lại"
 
-#: mainwindow.cpp:1519
-#, fuzzy, qt-format
+#: mainwindow.cpp:1573
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Làm lại"
+msgstr "& Làm lại %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1522 mainwindow.cpp:1746:123
+#: mainwindow.cpp:1576 mainwindow.cpp:1800:123
 msgid "&Redo"
 msgstr "&Làm lại"
 
-#: mainwindow.cpp:1622
-#, fuzzy
+#: mainwindow.cpp:1676
 msgid "&Testing"
-msgstr "Cài đặt"
+msgstr "& Thử nghiệm"
 
-#: mainwindow.cpp:1624
+#: mainwindow.cpp:1678
 msgid "Record test…"
-msgstr ""
+msgstr "Ghi lại bài kiểm tra…"
 
-#: mainwindow.cpp:1627
+#: mainwindow.cpp:1681
 msgid "Play test…"
-msgstr ""
+msgstr "Bắt đầu bài kiểm tra…"
+
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1695 menubuilder.cpp:76:36
+msgid "&File"
+msgstr "&Tập tin"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1643:75 rc.cpp:81
+#: mainwindow.cpp:1697:75 rc.cpp:81
 msgid "&New"
 msgstr "Tạo &Mới"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1652:51
-#, fuzzy
+#: mainwindow.cpp:1706:51
 msgid "&Open…"
-msgstr "&Mở"
+msgstr "&Mở…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1661:84 rc.cpp:90
+#: mainwindow.cpp:1715:84 rc.cpp:90
 msgid "&Close"
 msgstr "Đón&g"
 
@@ -328,133 +357,184 @@ msgstr "Đón&g"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1675:93 rc.cpp:99
+#: mainwindow.cpp:1729:93 rc.cpp:99
 msgid "&Save"
 msgstr "&Lưu"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1684:102
-#, fuzzy
+#: mainwindow.cpp:1738:102
 msgid "Save &As…"
-msgstr "Lưu &với tên..."
+msgstr "Lưu thành…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1695:195
-#, fuzzy
+#: mainwindow.cpp:1749:195
 msgid "&Export"
-msgstr "Xuất ra"
+msgstr "&Xuất ra"
 
-#: mainwindow.cpp:1696
-#, fuzzy
+#: mainwindow.cpp:1750
 msgid "&Molecule…"
-msgstr "Phân tử"
+msgstr "& Phân tử…"
 
-#: mainwindow.cpp:1704
-#, fuzzy
+#: mainwindow.cpp:1758
 msgid "&Graphics…"
-msgstr "Đồ &họa..."
+msgstr "& Đồ họa…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1712:60 rc.cpp:66
+#: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
 msgstr "&Thoát"
 
-#: mainwindow.cpp:1734
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1776:189
+#, fuzzy
+msgid "Open Recent"
+msgstr "Mở tập tin &gần đây"
+
+#: mainwindow.cpp:1788
 msgid "No recent files"
-msgstr ""
+msgstr "Không có tệp nào gần đây"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1740 menubuilder.cpp:76:45
+#: mainwindow.cpp:1794 menubuilder.cpp:76:45
 msgid "&Edit"
 msgstr "&Sửa"
 
+#: mainwindow.cpp:1806
+#, fuzzy
+#| msgid "&Graphics…"
+msgid "&Copy Graphics"
+msgstr "& Đồ họa…"
+
+#: mainwindow.cpp:1810
+#, fuzzy
+#| msgctxt "Select All"
+#| msgid "Ctrl+A"
+msgid "Ctrl+Alt+C"
+msgstr "Ctrl+A"
+
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1760 menubuilder.cpp:76:42
+#: mainwindow.cpp:1823 menubuilder.cpp:76:42
 msgid "&View"
 msgstr "&Xem"
 
-#: mainwindow.cpp:1761
-#, fuzzy
+#: mainwindow.cpp:1824
 msgid "Set Background Color…"
-msgstr "Đặt màu &nền..."
+msgstr "Đặt màu nền…"
 
-#: mainwindow.cpp:1769
+#: mainwindow.cpp:1832
 msgid "Projection"
-msgstr ""
+msgstr "Phép chiếu"
 
-#: mainwindow.cpp:1770
+#: mainwindow.cpp:1833
 msgid "Perspective"
-msgstr ""
+msgstr "Phối cảnh"
 
-#: mainwindow.cpp:1777
+#: mainwindow.cpp:1840
 msgid "Orthographic"
+msgstr "Phép chiếu trực giao"
+
+#: mainwindow.cpp:1859
+msgid "&Extensions"
+msgstr "Tiện ích mở rộng"
+
+#: mainwindow.cpp:1861
+msgid "User Interface Language…"
 msgstr ""
 
-#: mainwindow.cpp:1796
-#, fuzzy
-msgid "&Extensions"
-msgstr "Phần mở rộng"
+#: mainwindow.cpp:1865
+msgid "&Periodic Table…"
+msgstr ""
 
-#: mainwindow.cpp:1803 menubuilder.cpp:80
+#: mainwindow.cpp:1871 menubuilder.cpp:80
 msgid "&Help"
 msgstr "&Trợ giúp"
 
-#: mainwindow.cpp:1920
-#, qt-format
-msgid "All supported formats (%1);;All files (*);;"
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:1872:114
+msgid "&About"
+msgstr "&Giới thiệu chương trình"
+
+#: mainwindow.cpp:1879
+msgid "&Discussion Forum"
 msgstr ""
 
-#: mainwindow.cpp:1936
+#: mainwindow.cpp:1883
 #, fuzzy
-msgid "Do you want to save the changes to the document?"
-msgstr "Bạn có muốn lưu lại những sửa đổi trong tài liệu hiện thời không?"
+#| msgid "Avogadro Website"
+msgid "&Avogadro Website"
+msgstr "Avogadro trên mạng"
 
-#: mainwindow.cpp:1944
+#: mainwindow.cpp:1887
+#, fuzzy
+#| msgid "Report a Bug"
+msgid "&Report a Bug"
+msgstr "Thông báo lỗi"
+
+#: mainwindow.cpp:1891
+msgid "&Suggest a Feature"
+msgstr ""
+
+#: mainwindow.cpp:1915
+msgid "System Language"
+msgstr ""
+
+#: mainwindow.cpp:1923
+msgid "Language"
+msgstr ""
+
+#: mainwindow.cpp:1923
+msgid "User Interface Language:"
+msgstr ""
+
+#: mainwindow.cpp:2027
+#, qt-format
+msgid "All supported formats (%1);;All files (*);;"
+msgstr "Tất cả các định dạng được hỗ trợ (%1) ;; Tất cả các tệp (*) ;;"
+
+#: mainwindow.cpp:2043
+msgid "Do you want to save the changes to the document?"
+msgstr "Bạn có muốn lưu các thay đổi vào tài liệu không?"
+
+#: mainwindow.cpp:2051
 msgid "Your changes will be lost if you don't save them."
 msgstr "Các thay đổi của bạn sẽ bị mất nếu bạn không lưu lại."
 
-#: mainwindow.cpp:1952
+#: mainwindow.cpp:2059
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:1954
+#: mainwindow.cpp:2061
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2018
+#: mainwindow.cpp:2149
 #, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr ""
+msgstr "Lỗi khi tải định dạng tệp “%1”."
 
-#: mainwindow.cpp:2034
-#, fuzzy
+#: mainwindow.cpp:2165
 msgid "Select file format"
-msgstr "Tập tin: "
+msgstr "Chọn định dạng tệp"
 
-#: mainwindow.cpp:2039 mainwindow.cpp:2050
+#: mainwindow.cpp:2170 mainwindow.cpp:2181
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr ""
+msgstr "Avogadro không thể mở “%1”."
 
-#: mainwindow.cpp:2049
-#, fuzzy
+#: mainwindow.cpp:2180
 msgid "Cannot open files"
-msgstr "Không thể lưu tập tin %1."
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:76:36
-msgid "&File"
-msgstr "&Tập tin"
+msgstr "Không thể mở tệp"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -473,9 +553,18 @@ msgid "Se&ttings"
 msgstr "&Cài đặt"
 
 #: menubuilder.cpp:80
-#, fuzzy
 msgid "&Window"
-msgstr "Cửa sổ"
+msgstr "& Cửa sổ"
+
+#: viewfactory.cpp:26 viewfactory.cpp:35
+#, fuzzy
+#| msgid "New View"
+msgid "3D View"
+msgstr "Cửa sổ xem mới"
+
+#: viewfactory.cpp:28 viewfactory.cpp:38
+msgid "VTK"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -483,6 +572,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html> <head/> <body> <p> <span style=\" font-size:20pt; font-weight:600;\"> "
+"Phiên bản: </span> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -490,6 +581,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html> <head/> <body> <p> <span style=\" font-size:20pt; font-weight:600;\"> "
+"0,1 </span> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -497,6 +590,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html> <head/> <body> <p> <span style=\" font-size:10pt; font-weight:600;\"> "
+"Phiên bản AvogadroLibs: </span> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -506,6 +601,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html> <head/> <body> <p> <span style=\" font-size:20pt; font-weight:600;\"> "
+"0,1 </span> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -513,6 +610,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html> <head/> <body> <p> <span style=\" font-size:10pt; font-weight:600;\"> "
+"Phiên bản Qt: </span> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -522,6 +621,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html> <head/> <body> <p> <span style=\" font-size:10pt; font-weight:600;\"> "
+"Giấy phép: </span> <a href=\"https://opensource.org/licenses/BSD-3-Clause\"> "
+"<span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\"> "
+"BSD 3-khoản </span> </a> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:264
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -530,6 +633,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html> <head/> <body> <p> <a href=\"https://www.openchemistry.org\"> <span "
+"style=\" text-decoration: underline; color:#0000ff;\"> www.openchemistry.org "
+"</span> </a> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:293
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -538,6 +644,9 @@ msgid ""
 "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html> <head/> <body> <p> <a href=\"https://www.kitware.com\"> <span style="
+"\" text-decoration: underline; color:#0000ff;\"> www.kitware.com </span> </"
+"a> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:320
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -546,8 +655,6 @@ msgstr "OK"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
@@ -559,8 +666,6 @@ msgstr "&Mở"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -577,32 +682,24 @@ msgstr "&Xóa các file được mở gần đây"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+N"
 msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+W"
 msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Shift+S"
@@ -614,27 +711,17 @@ msgstr "Lấy lại bản được lưu từ trước"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
-msgstr "Đặt màu &nền..."
-
-#. i18n: file: mainwindow.ui:182
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "&Giới thiệu chương trình"
+msgstr "Đặt &màu nền…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Z"
 msgctxt "Undo"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+Z"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
@@ -647,7 +734,7 @@ msgstr "Canh giữa"
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
-msgstr ""
+msgstr "Căn chỉnh chế độ xem theo trục"
 
 #. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -656,8 +743,6 @@ msgstr "Dán"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+V"
 msgctxt "Paste"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
@@ -682,8 +767,6 @@ msgstr "Cắt"
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+X"
 msgctxt "Cut"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
@@ -700,8 +783,6 @@ msgstr "Chọn tất cả"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
@@ -754,12 +835,6 @@ msgstr "Avogadro trên mạng"
 msgid "Discussion Forum"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:318
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Open Recent"
-msgstr "Mở tập tin &gần đây"
-
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
@@ -791,9 +866,6 @@ msgstr ""
 
 #~ msgid "Esc"
 #~ msgstr "Esc"
-
-#~ msgid "New View"
-#~ msgstr "Cửa sổ xem mới"
 
 #~ msgid "Close View"
 #~ msgstr "Đóng cửa sổ xem"

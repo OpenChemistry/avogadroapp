@@ -10,7 +10,6 @@
 #include "backgroundfileformat.h"
 #include "menubuilder.h"
 #include "tooltipfilter.h"
-#include "ui_mainwindow.h"
 #include "viewfactory.h"
 
 #include <avogadro/core/elements.h>
@@ -40,12 +39,15 @@
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QMimeData>
+#include <QtCore/QProcess>
 #include <QtCore/QSettings>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
+#include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
+#include <QtGui/QDesktopServices>
 #include <QtGui/QKeySequence>
 #include <QtWidgets/QActionGroup>
 #include <QtWidgets/QApplication>
@@ -233,11 +235,9 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   , m_moleculeDirty(false)
   , m_undo(nullptr)
   , m_redo(nullptr)
+  , m_copyImage(nullptr)
   , m_viewFactory(new ViewFactory)
-  , m_ui(new Ui::MainWindow)
 {
-  m_ui->setupUi(this);
-
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
     QSettings settings;
@@ -308,7 +308,6 @@ MainWindow::~MainWindow()
   delete m_molecule;
   delete m_menuBuilder;
   delete m_viewFactory;
-  delete m_ui;
 }
 
 void MainWindow::setupInterface()
@@ -388,12 +387,12 @@ void MainWindow::setupInterface()
 
 #ifndef Q_OS_MAC
   m_fileToolBar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-  m_fileToolBar->setWindowTitle(tr("File"));
+  m_fileToolBar->setWindowTitle(tr("File", "File toolbar"));
   addToolBar(m_fileToolBar);
 #else
   m_fileToolBar->hide();
 #endif
-  m_toolToolBar->setWindowTitle(tr("Tools"));
+  m_toolToolBar->setWindowTitle(tr("Tools", "Tools toolbar"));
   addToolBar(m_toolToolBar);
 
   // Create the scene plugin model
@@ -671,6 +670,20 @@ void MainWindow::writeSettings()
   }
 }
 
+void MainWindow::setLocale(const QString& locale)
+{
+  QSettings settings;
+  if (locale.isEmpty()) {
+    settings.remove("locale"); // system is the default
+  } else {
+    settings.setValue("locale", locale);
+  }
+
+  MESSAGEBOX::information(this, tr("Restart needed"),
+                          tr("Please restart Avogadro to use the new "
+                             "language."));
+}
+
 void MainWindow::readSettings()
 {
   QSettings settings;
@@ -750,7 +763,8 @@ bool MainWindow::addScript(const QString& filePath)
   // Ask the user what type of script this is
   // TODO: add some sort of warning?
   QStringList types;
-  types << tr("Commands") << tr("Input Generators") << tr("File Formats");
+  types << tr("Commands") << tr("Input Generators") << tr("File Formats")
+        << tr("Charges", "atomic electrostatics");
 
   bool ok;
   QString item =
@@ -773,6 +787,9 @@ bool MainWindow::addScript(const QString& filePath)
       break;
     case 2:
       typePath = "formatScripts";
+      break;
+    case 4:
+      typePath = "charges";
       break;
     default:
       typePath = "other";
@@ -1141,10 +1158,54 @@ void MainWindow::viewActivated(QWidget* widget)
   activeMoleculeEdited();
 }
 
-void MainWindow::exportGraphics()
+QImage MainWindow::renderToImage(const QSize& size)
 {
+  QImage exportImage(size, QImage::Format_ARGB32);
+
   QOpenGLWidget* glWidget =
     qobject_cast<QOpenGLWidget*>(m_multiViewWidget->activeWidget());
+
+  // render it (with alpha channel)
+  Rendering::Scene* scene(nullptr);
+  GLWidget* viewWidget(nullptr);
+  if ((viewWidget =
+         qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+    scene = &viewWidget->renderer().scene();
+  }
+  Vector4ub cColor = scene->backgroundColor();
+  unsigned char alpha = cColor[3];
+  cColor[3] = 0; // 100% transparent for export
+  scene->setBackgroundColor(cColor);
+
+  glWidget->raise();
+  glWidget->repaint();
+  if (QOpenGLFramebufferObject::hasOpenGLFramebufferObjects()) {
+    exportImage = glWidget->grabFramebuffer();
+  } else {
+    QPixmap pixmap = QPixmap::grabWindow(glWidget->winId());
+    exportImage = pixmap.toImage();
+  }
+
+  // set the GL widget back to the right background color (i.e., not 100%
+  // transparent)
+  cColor[3] = alpha; // previous color
+  scene->setBackgroundColor(cColor);
+  glWidget->repaint();
+
+  // Now we embed molecular information into the file, if possible
+  if (m_molecule && m_molecule->atomCount() < 1000) {
+    string tmpCml;
+    bool ok =
+      FileFormatManager::instance().writeString(*m_molecule, tmpCml, "cml");
+    if (ok)
+      exportImage.setText("CML", tmpCml.c_str());
+  }
+
+  return exportImage;
+}
+
+void MainWindow::exportGraphics()
+{
   QStringList filters;
 // Omit "common image formats" on Mac
 #ifdef Q_OS_MAC
@@ -1169,47 +1230,19 @@ void MainWindow::exportGraphics()
   if (QFileInfo(fileName).suffix().isEmpty())
     fileName += ".png";
 
-  // render it (with alpha channel)
-  Rendering::Scene* scene(nullptr);
-  GLWidget* viewWidget(nullptr);
-  if ((viewWidget =
-         qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scene = &viewWidget->renderer().scene();
-  }
-  Vector4ub cColor = scene->backgroundColor();
-  unsigned char alpha = cColor[3];
-  cColor[3] = 0; // 100% transparent for export
-  scene->setBackgroundColor(cColor);
-
-  QImage exportImage;
-  glWidget->raise();
-  glWidget->repaint();
-  if (QOpenGLFramebufferObject::hasOpenGLFramebufferObjects()) {
-    exportImage = glWidget->grabFramebuffer();
-  } else {
-    QPixmap pixmap = QPixmap::grabWindow(glWidget->winId());
-    exportImage = pixmap.toImage();
-  }
-
-  // Now we embed molecular information into the file, if possible
-  if (m_molecule && m_molecule->atomCount() < 1000) {
-    string tmpCml;
-    bool ok =
-      FileFormatManager::instance().writeString(*m_molecule, tmpCml, "cml");
-    if (ok)
-      exportImage.setText("CML", tmpCml.c_str());
-  }
+  const QSize size = m_multiViewWidget->activeWidget()->size();
+  QImage exportImage = renderToImage(size);
 
   if (!exportImage.save(fileName)) {
     MESSAGEBOX::warning(this, tr("Avogadro"),
                         tr("Cannot save file %1.").arg(fileName));
   }
+}
 
-  // set the GL widget back to the right background color (i.e., not 100%
-  // transparent)
-  cColor[3] = alpha; // previous color
-  scene->setBackgroundColor(cColor);
-  glWidget->repaint();
+void MainWindow::copyGraphics()
+{
+  QImage exportImage = renderToImage(m_multiViewWidget->activeWidget()->size());
+  QApplication::clipboard()->setImage(exportImage);
 }
 
 void MainWindow::reassignCustomElements()
@@ -1278,6 +1311,11 @@ bool MainWindow::saveFile(bool async)
   string fileName = mol->data("fileName").toString();
   QString extension =
     QFileInfo(QString::fromStdString(fileName)).suffix().toLower();
+
+  if (extension.isEmpty()) {
+    fileName += ".cjson";
+    extension = QLatin1String("cjson");
+  }
 
   // Was the original format standard, or imported?
   if (extension == QLatin1String("cml")) {
@@ -1667,7 +1705,7 @@ void MainWindow::buildMenu()
 #endif
 
   QStringList path;
-  path << "&File";
+  path << tr("&File");
   // New
   QAction* action = new QAction(tr("&New"), this);
   action->setShortcut(QKeySequence::New);
@@ -1748,7 +1786,7 @@ void MainWindow::buildMenu()
 
   // open recent 995 - 985
   // Populate the recent file actions list.
-  path << "Open Recent";
+  path << tr("Open Recent");
   // TODO: Check if files exist and if we actually have 10 items
   for (int i = 0; i < 10; ++i) {
     action = new QAction(QString::number(i), this);
@@ -1777,12 +1815,21 @@ void MainWindow::buildMenu()
   m_redo->setIcon(QIcon::fromTheme("edit-redo"));
 #endif
   m_redo->setShortcut(QKeySequence::Redo);
+
+  m_copyImage = new QAction(tr("&Copy Graphics"), this);
+#ifndef Q_OS_MAC
+  m_copyImage->setIcon(QIcon::fromTheme("edit-copy"));
+#endif
+  m_copyImage->setShortcut(tr("Ctrl+Alt+C"));
+
   m_undo->setEnabled(false);
   m_redo->setEnabled(false);
   connect(m_undo, &QAction::triggered, this, &MainWindow::undoEdit);
   connect(m_redo, &QAction::triggered, this, &MainWindow::redoEdit);
+  connect(m_copyImage, &QAction::triggered, this, &MainWindow::copyGraphics);
   m_menuBuilder->addAction(editPath, m_undo, 1);
   m_menuBuilder->addAction(editPath, m_redo, 0);
+  m_menuBuilder->addAction(editPath, m_copyImage, -10);
 
   // View menu
   QStringList viewPath;
@@ -1823,19 +1870,40 @@ void MainWindow::buildMenu()
   // Periodic table.
   QStringList extensionsPath;
   extensionsPath << tr("&Extensions");
-  action = new QAction("&Periodic Table…", this);
+
+  action = new QAction(tr("User Interface Language…"), this);
+  m_menuBuilder->addAction(extensionsPath, action, 100);
+  connect(action, &QAction::triggered, this, &MainWindow::showLanguageDialog);
+
+  action = new QAction(tr("&Periodic Table…"), this);
   m_menuBuilder->addAction(extensionsPath, action, 0);
   QtGui::PeriodicTableView* periodicTable = new QtGui::PeriodicTableView(this);
   connect(action, &QAction::triggered, periodicTable, &QWidget::show);
 
   QStringList helpPath;
   helpPath << tr("&Help");
-  QAction* about = new QAction("&About", this);
+  QAction* about = new QAction(tr("&About"), this);
 #ifndef Q_OS_MAC
   about->setIcon(QIcon::fromTheme("help-about"));
 #endif
-  m_menuBuilder->addAction(helpPath, about, 20);
+  m_menuBuilder->addAction(helpPath, about, 500);
   connect(about, &QAction::triggered, this, &MainWindow::showAboutDialog);
+
+  QAction* forum = new QAction(tr("&Discussion Forum"), this);
+  m_menuBuilder->addAction(helpPath, forum, 200);
+  connect(forum, &QAction::triggered, this, &MainWindow::openForum);
+
+  QAction* website = new QAction(tr("&Avogadro Website"), this);
+  m_menuBuilder->addAction(helpPath, website, 40);
+  connect(website, &QAction::triggered, this, &MainWindow::openWebsite);
+
+  QAction* bug = new QAction(tr("&Report a Bug"), this);
+  m_menuBuilder->addAction(helpPath, bug, 20);
+  connect(bug, &QAction::triggered, this, &MainWindow::openBugReport);
+
+  QAction* feature = new QAction(tr("&Suggest a Feature"), this);
+  m_menuBuilder->addAction(helpPath, feature, 10);
+  connect(feature, &QAction::triggered, this, &MainWindow::openFeatureRequest);
 
   // Now actually add all menu entries.
   m_menuBuilder->buildMenuBar(menuBar());
@@ -1851,6 +1919,29 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin* extension)
 bool ToolSort(const ToolPlugin* a, const ToolPlugin* b)
 {
   return a->priority() < b->priority();
+}
+
+void MainWindow::showLanguageDialog()
+{
+  bool ok;
+  int currentIndex = 0;
+  m_translationList[0] = tr("System Language");
+
+  QSettings settings;
+  QString currentLanguage = settings.value("locale", "System").toString();
+  if (currentLanguage != "System")
+    currentIndex = m_localeCodes.indexOf(currentLanguage);
+
+  QString item =
+    QInputDialog::getItem(this, tr("Language"), tr("User Interface Language:"),
+                          m_translationList, currentIndex, false, &ok);
+
+  if (ok && !item.isEmpty()) {
+    auto index = m_translationList.indexOf(item);
+    if (index != -1) {
+      setLocale(m_localeCodes[index]);
+    }
+  }
 }
 
 void MainWindow::buildTools()
@@ -2035,6 +2126,38 @@ void MainWindow::showAboutDialog()
 {
   AboutDialog about(this);
   about.exec();
+}
+
+void MainWindow::openURL(const QString& url)
+{
+#if defined(Q_OS_MAC) || defined(Q_OS_WIN)
+  QDesktopServices::openUrl(url);
+#else
+  // AppImage can't use QDesktopServices::openUrl, so we use QProcess:
+  QProcess::execute(QString("xdg-open %1").arg(url));
+#endif
+}
+
+void MainWindow::openForum()
+{
+  openURL("https://discuss.avogadro.cc/");
+}
+
+void MainWindow::openWebsite()
+{
+  openURL("https://two.avogadro.cc/");
+}
+
+void MainWindow::openBugReport()
+{
+  openURL("https://github.com/OpenChemistry/avogadrolibs/issues/"
+          "new?template=bug_report.md");
+}
+
+void MainWindow::openFeatureRequest()
+{
+  openURL("https://github.com/OpenChemistry/avogadrolibs/issues/"
+          "new?template=feature_request.md");
 }
 
 void MainWindow::fileFormatsReady()

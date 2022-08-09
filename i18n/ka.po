@@ -1,84 +1,84 @@
-# Arabic translation for avogadro
-# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
-# This file is distributed under the same license as the avogadro package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
-#
+# Translations for the Avogadro molecular builder.
+# Copyright (C) 2006-2021 The Avogadro Project
+# This file is distributed under the same license as the Avogadro package.
+# Temuri Doghonadze <temuri@delta-net.ge>, 2022.
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: avogadro\n"
+"Project-Id-Version: Avogadro 1.95.1\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-07-20 04:26+0000\n"
-"PO-Revision-Date: 2016-06-10 06:13+0000\n"
-"Last-Translator: Geoff Hutchison <Unknown>\n"
-"Language-Team: Arabic <ar@li.org>\n"
-"Language: ar\n"
+"PO-Revision-Date: 2022-06-13 16:19+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/ka/>\n"
+"Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat-ში მოლეკულა დაყენებული არაა!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat-ში ფაილის ფორმატი დაყენებული არ არის!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat-ში ფაილის სახელი მითითებული არაა!"
 
 #: mainwindow.cpp:299
 msgid "Ready…"
-msgstr ""
+msgstr "მზადაა…"
 
 #: mainwindow.cpp:340
-#, fuzzy
 msgid "Tool"
-msgstr "أدوات"
+msgstr "ხელსაწყო"
 
 #: mainwindow.cpp:344
 msgid "Display Types"
-msgstr "نوع العرض"
+msgstr "ჩვენების ტიპები"
 
 #: mainwindow.cpp:355
 msgid "View Configuration"
-msgstr ""
+msgstr "კონფიგურაციის ნახვა"
 
 #: mainwindow.cpp:361
-#, fuzzy
 msgid "Molecules"
-msgstr "جزيئ"
+msgstr "მოლეკულები"
 
 #: mainwindow.cpp:370
 msgid "Layers"
-msgstr ""
+msgstr "ფენები"
 
 #: mainwindow.cpp:389
 #, fuzzy
+#| msgid "File"
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&ملف"
+msgstr "ფაილი"
 
 #: mainwindow.cpp:394
 #, fuzzy
+#| msgid "Tools"
 msgctxt "Tools toolbar"
 msgid "Tools"
-msgstr "أدوات"
+msgstr "ხელსაწყოები"
 
 #: mainwindow.cpp:627
-#, fuzzy
 msgid "Untitled"
-msgstr "بلا عنوان"
+msgstr "უსახელო"
 
 #: mainwindow.cpp:632
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "أفوجادرو"
+msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:681
 msgid "Restart needed"
@@ -90,44 +90,41 @@ msgstr ""
 
 #: mainwindow.cpp:702 mainwindow.cpp:1365
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "ქიმიური ფორმულების აღწერის ენა"
 
 #: mainwindow.cpp:703 mainwindow.cpp:1364
 msgid "Chemical JSON"
-msgstr ""
+msgstr "ქიმიური JSON"
 
 #: mainwindow.cpp:709
 msgid "Open chemical file"
-msgstr ""
+msgstr "ნაერთის ფაილის გახსნა"
 
 #: mainwindow.cpp:727 mainwindow.cpp:751 mainwindow.cpp:1267
 #: mainwindow.cpp:2169
-#, fuzzy
 msgid "Cannot open file"
-msgstr "لا يمكن حفظ الملف %1."
+msgstr "ფაილის გახსნის შეცდომა"
 
 #: mainwindow.cpp:728 mainwindow.cpp:752 mainwindow.cpp:1268
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "لا يمكن حفظ الملف %1."
+msgstr "მითითებული ფაილის გახსნის შეცდომა: %1"
 
 #: mainwindow.cpp:741
-#, fuzzy
 msgid "Open Molecule"
-msgstr "جزيئ"
+msgstr "მოლეკულის გახსნა"
 
 #: mainwindow.cpp:765
 msgid "Commands"
-msgstr ""
+msgstr "ბრძანებები"
 
 #: mainwindow.cpp:765
 msgid "Input Generators"
-msgstr ""
+msgstr "შეყვანის გენერატორები"
 
 #: mainwindow.cpp:765
-#, fuzzy
 msgid "File Formats"
-msgstr "الملف: "
+msgstr "ფაილის ფორმატები"
 
 #: mainwindow.cpp:766
 msgctxt "atomic electrostatics"
@@ -136,20 +133,19 @@ msgstr ""
 
 #: mainwindow.cpp:770
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "დამატების სკრიპტის დაყენება"
 
 #: mainwindow.cpp:770
 msgid "Script Type:"
-msgstr ""
+msgstr "სკრიპტის ტიპი:"
 
 #: mainwindow.cpp:821 mainwindow.cpp:1263
 msgid "Select file reader"
-msgstr ""
+msgstr "აირჩიეთ ფაილის წამკითხველი"
 
 #: mainwindow.cpp:850
-#, fuzzy
 msgid "Reading File"
-msgstr "افتح ملف"
+msgstr "ფაილის კითხვა"
 
 #: mainwindow.cpp:852
 #, qt-format
@@ -157,16 +153,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"ფაილის %1 გახსნა:\n"
+"%2-ით"
 
 #: mainwindow.cpp:883
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "მოლეკულა ჩაიტვირთა (%1 ატომი, %2 ბმა)"
 
 #: mainwindow.cpp:888
-#, fuzzy
 msgid "File error"
-msgstr "الملف: "
+msgstr "ფაილის შეცდომა"
 
 #: mainwindow.cpp:889
 #, qt-format
@@ -174,16 +171,18 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"ფაილის %1 კითხვის შეცდომა:\n"
+"%2"
 
 #: mainwindow.cpp:916
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "لا يمكن حفظ الملف %1."
+msgstr "ფაილი %1 ჩაწერილია"
 
 #: mainwindow.cpp:924
 msgid "Error saving file"
-msgstr ""
+msgstr "ფაილის ჩაწერის შეცდომა"
 
 #: mainwindow.cpp:925
 #, qt-format
@@ -192,10 +191,12 @@ msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"%1-ის ჩაწერის შეცდომა:\n"
+"%2"
 
 #: mainwindow.cpp:964
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "შეცდომა: OpenGL-ის კონტექსტის ინიციალიზაცია ვერ მოხერხდა"
 
 #: mainwindow.cpp:965
 #, qt-format
@@ -204,22 +205,25 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"საჭიროა OpenGL 2.0 ან უფრო ახალი. გამოსვლა.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:966
 msgid "Unknown error"
-msgstr ""
+msgstr "უცნობი შეცდომა"
 
 #: mainwindow.cpp:1092 mainwindow.cpp:1093
 msgid "Navigate tool"
-msgstr ""
+msgstr "ნავიგაციის ხელსაწყო"
 
 #: mainwindow.cpp:1213
 msgid "Common image formats"
-msgstr "تنسيق الصورة العام"
+msgstr "გამოსახულების გავრცელებული ფორმატები"
 
 #: mainwindow.cpp:1215
 msgid "All files"
-msgstr "كافة الملفات"
+msgstr "ყველა ფაილი"
 
 #: mainwindow.cpp:1215
 msgid "BMP"
@@ -235,18 +239,18 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1225
 msgid "Export Bitmap Graphics"
-msgstr "تصدير الصورة بصيغة bmp"
+msgstr "Bitmap გრაფიკის ექსპორტი"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
 #: mainwindow.cpp:1236 mainwindow.cpp:1338 mainwindow.cpp:2042:33
 msgid "Avogadro"
-msgstr "أفوجادرو"
+msgstr "Avogadro"
 
 #: mainwindow.cpp:1237
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "لا يمكن حفظ الملف %1."
+msgstr "ფაილის შენახვის შეცდომა: %1 ."
 
 #: mainwindow.cpp:1339
 msgid ""
@@ -255,23 +259,26 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"ეს ფაილი შემოტანილია არასტანდარტული ფორმატით, რომელსაც შეიძლება არ აქვს "
+"მხარდაჭერა მოლეკულის შესახებ სრული ინფორმაციის ჩასაწერად.\n"
+"\n"
+"გნებავთ ამავე ფორმატში გატანა თუ შევინახო სტანდარტულ ფორმატში?"
 
 #: mainwindow.cpp:1346
 msgid "Export"
-msgstr "صدِّر"
+msgstr "გატანა"
 
 #: mainwindow.cpp:1371
 msgid "Save chemical file"
-msgstr ""
+msgstr "ნაერთის ფაილის შენახვა"
 
 #: mainwindow.cpp:1399
-#, fuzzy
 msgid "Export Molecule"
-msgstr "قص جزيئا"
+msgstr "მოლეკულის გატანა"
 
 #: mainwindow.cpp:1451
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "მიმდინარეობს ფაილის შენახვა…"
 
 #: mainwindow.cpp:1453
 #, qt-format
@@ -280,49 +287,48 @@ msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
+"ფაილის %1 ჩაწერა:\n"
+"%2-ით"
 
 #: mainwindow.cpp:1565
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&تراجع"
+msgstr "&გაუქმება %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1568 mainwindow.cpp:1795:117
 msgid "&Undo"
-msgstr "&تراجع"
+msgstr "&დაბრუნება"
 
 #: mainwindow.cpp:1573
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&كرّر"
+msgstr "&თავიდან %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1576 mainwindow.cpp:1800:123
 msgid "&Redo"
-msgstr "&كرّر"
+msgstr "&თავიდან"
 
 #: mainwindow.cpp:1676
-#, fuzzy
 msgid "&Testing"
-msgstr "إعدادات"
+msgstr "&გამოცდა"
 
 #: mainwindow.cpp:1678
-#, fuzzy
 msgid "Record test…"
-msgstr "تسجيل اختبار..."
+msgstr "ჩაწერის გამოცდა…"
 
 #: mainwindow.cpp:1681
-#, fuzzy
 msgid "Play test…"
-msgstr "تشغيل اختبار..."
+msgstr "ტესტის დაკვრა…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
 #: mainwindow.cpp:1695 menubuilder.cpp:76:36
 msgid "&File"
-msgstr "&ملف"
+msgstr "&ფაილი"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -330,14 +336,13 @@ msgstr "&ملف"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1697:75 rc.cpp:81
 msgid "&New"
-msgstr "&جديد"
+msgstr "&ახალი"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1706:51
-#, fuzzy
 msgid "&Open…"
-msgstr "&افتح"
+msgstr "&გახსნა…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -345,7 +350,7 @@ msgstr "&افتح"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1715:84 rc.cpp:90
 msgid "&Close"
-msgstr "&أغلق"
+msgstr "&დახურვა"
 
 #. i18n: file: mainwindow.ui:147
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -353,31 +358,27 @@ msgstr "&أغلق"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1729:93 rc.cpp:99
 msgid "&Save"
-msgstr "&حفظ"
+msgstr "&შენახვა"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1738:102
-#, fuzzy
 msgid "Save &As…"
-msgstr "احفظ &كــ ..."
+msgstr "შენახვა &როგორც…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1749:195
-#, fuzzy
 msgid "&Export"
-msgstr "صدِّر"
+msgstr "&გატანა"
 
 #: mainwindow.cpp:1750
-#, fuzzy
 msgid "&Molecule…"
-msgstr "جزيئ"
+msgstr "&მოლეკულა…"
 
 #: mainwindow.cpp:1758
-#, fuzzy
 msgid "&Graphics…"
-msgstr "&الرسومات..."
+msgstr "&გრაფიკა…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -385,63 +386,57 @@ msgstr "&الرسومات..."
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1766:60 rc.cpp:66
 msgid "&Quit"
-msgstr "إ&نهاء"
+msgstr "&გასვლა"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1776:189
-#, fuzzy
 msgid "Open Recent"
-msgstr "فتح &الاحدث"
+msgstr "ბოლო ფალის გახსნა"
 
 #: mainwindow.cpp:1788
 msgid "No recent files"
-msgstr ""
+msgstr "უახლესი ფაილების გარეშე"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:1794 menubuilder.cpp:76:45
 msgid "&Edit"
-msgstr "&تحرير"
+msgstr "&ჩასწორება"
 
 #: mainwindow.cpp:1806
-#, fuzzy
 msgid "&Copy Graphics"
-msgstr "&الرسومات..."
+msgstr "&გრაფიკის კოპირება"
 
 #: mainwindow.cpp:1810
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:1823 menubuilder.cpp:76:42
 msgid "&View"
-msgstr "&اعرض"
+msgstr "&ხედი"
 
 #: mainwindow.cpp:1824
-#, fuzzy
 msgid "Set Background Color…"
-msgstr "اضبط  &لون الخلفية..."
+msgstr "ფონის ფერის დაყენება…"
 
 #: mainwindow.cpp:1832
 msgid "Projection"
-msgstr ""
+msgstr "პროექცია"
 
 #: mainwindow.cpp:1833
 msgid "Perspective"
-msgstr ""
+msgstr "პერსპექტივა"
 
 #: mainwindow.cpp:1840
 msgid "Orthographic"
-msgstr ""
+msgstr "ორთოგრაფიული"
 
 #: mainwindow.cpp:1859
-#, fuzzy
 msgid "&Extensions"
-msgstr "الإمتدادات"
+msgstr "&გაფართოებები"
 
 #: mainwindow.cpp:1861
 msgid "User Interface Language…"
@@ -453,29 +448,31 @@ msgstr ""
 
 #: mainwindow.cpp:1871 menubuilder.cpp:80
 msgid "&Help"
-msgstr "&مساعدة"
+msgstr "&დახმარება"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1872:114
 msgid "&About"
-msgstr "&عن"
+msgstr "&შესახებ"
 
 #: mainwindow.cpp:1879
+#, fuzzy
+#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr ""
+msgstr "ფორუმი"
 
 #: mainwindow.cpp:1883
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "أفوجادرو على الويب"
+msgstr "Avogadro-ის ვებგვერდი"
 
 #: mainwindow.cpp:1887
 #, fuzzy
 #| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "أبلغ عن علّة"
+msgstr "შეცდომის ანგარიში"
 
 #: mainwindow.cpp:1891
 msgid "&Suggest a Feature"
@@ -496,16 +493,15 @@ msgstr ""
 #: mainwindow.cpp:2027
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "ყველა მხარდაჭერილი ფორმატი (%1);;ყველა ფაილი (*);;"
 
 #: mainwindow.cpp:2043
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
-msgstr "هل تريد الإحتفاظ بالتغييرات التي قمت بها على المستند؟"
+msgstr "გნებავთ დოკუმენტის ცვლილებების შენახვა?"
 
 #: mainwindow.cpp:2051
 msgid "Your changes will be lost if you don't save them."
-msgstr "ستضيع تغييراتك ان لم تحفظها."
+msgstr "თქვენი ცვლილებები დაიკარგება, თუ არ შეინახავთ."
 
 #: mainwindow.cpp:2059
 msgctxt "Save"
@@ -520,49 +516,46 @@ msgstr "Ctrl+D"
 #: mainwindow.cpp:2149
 #, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr ""
+msgstr "შეცდომა ფაილის ტიპი %1-ის კითხვისას."
 
 #: mainwindow.cpp:2165
-#, fuzzy
 msgid "Select file format"
-msgstr "الملف: "
+msgstr "აირჩიეთ ფაილის ფორმატი"
 
 #: mainwindow.cpp:2170 mainwindow.cpp:2181
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr ""
+msgstr "ავოგადროს არ შეუძლია გახსნას \"%1\"."
 
 #: mainwindow.cpp:2180
-#, fuzzy
 msgid "Cannot open files"
-msgstr "لا يمكن حفظ الملف %1."
+msgstr "ფაილის გახსნის შეცდომა"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:76:39
 msgid "&Build"
-msgstr "&بناء"
+msgstr "&აგება"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
 #: menubuilder.cpp:77:48
 msgid "&Select"
-msgstr "ا&ختر"
+msgstr "&მონიშვნა"
 
 #: menubuilder.cpp:80
 msgid "Se&ttings"
-msgstr "إعدادات&"
+msgstr "&მორგება"
 
 #: menubuilder.cpp:80
-#, fuzzy
 msgid "&Window"
-msgstr "نافذة"
+msgstr "&ფანჯარა"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
 #, fuzzy
-#| msgid "New View"
+#| msgid "&View"
 msgid "3D View"
-msgstr "عرض جديد"
+msgstr "&ხედი"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
@@ -574,6 +567,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
 "\">Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
+"\">ვერსია:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -581,6 +576,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libs)
@@ -588,6 +585,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">AvogadroLibs Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">AvogadroLibs-ის ვერსია:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
@@ -597,6 +596,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
 "span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
+"span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -604,6 +605,8 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
 "Version:</span></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt-"
+"ის ვერსია:</span></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -613,6 +616,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">ლიცენზია: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause"
+"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
+"\">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:264
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -621,6 +628,9 @@ msgid ""
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:293
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -629,16 +639,17 @@ msgid ""
 "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"body></html>"
 
 #. i18n: file: aboutdialog.ui:320
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
-msgstr "موافق"
+msgstr "დიახ"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
@@ -646,12 +657,10 @@ msgstr "Ctrl+O"
 #. i18n: file: mainwindow.ui:90
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Open"
-msgstr "&افتح"
+msgstr "&გახსნა"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -659,41 +668,33 @@ msgstr "Ctrl+Q"
 #. i18n: file: mainwindow.ui:111
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Recent"
-msgstr "الأحدث"
+msgstr "უახლესი"
 
 #. i18n: file: mainwindow.ui:116
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Clear Recent"
-msgstr ""
+msgstr "&ბოლოების გასუფთავება"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+N"
 msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+W"
 msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Shift+S"
@@ -701,26 +702,21 @@ msgstr "Ctrl+Shift+S"
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Revert To Saved"
-msgstr ""
+msgstr "შენახულზე დაბრუნება"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
-msgstr "اضبط  &لون الخلفية..."
+msgstr "&ფონის ფერის დაყენება…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Z"
 msgctxt "Undo"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+Z"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
@@ -728,22 +724,20 @@ msgstr "Ctrl+Shift+Z"
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "مركز"
+msgstr "ცენტრი"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
-msgstr ""
+msgstr "ხედის გასწორება ღერძებზე"
 
 #. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Paste"
-msgstr "ألصق"
+msgstr "ჩასმა"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+V"
 msgctxt "Paste"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
@@ -751,12 +745,10 @@ msgstr "Ctrl+V"
 #. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Copy"
-msgstr "انسخ"
+msgstr "კოპირება"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+C"
 msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
@@ -764,12 +756,10 @@ msgstr "Ctrl+C"
 #. i18n: file: mainwindow.ui:248
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Cut"
-msgstr "إقطع"
+msgstr "ამოჭრა"
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+X"
 msgctxt "Cut"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
@@ -777,17 +767,15 @@ msgstr "Ctrl+X"
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
-msgstr "محو"
+msgstr "გასუფთავება"
 
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "اختر الكل"
+msgstr "ყველას მონიშვნა"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
@@ -795,12 +783,10 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "إزالة التحديد"
+msgstr "მონიშვნის მოხსნა"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
@@ -808,495 +794,47 @@ msgstr "Ctrl+Shift+A"
 #. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Tutorials"
-msgstr "دروس"
+msgstr "გაკვეთილები"
 
 #. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
-msgstr "تعليمات أفوجادرو"
+msgstr "Avogadro-ის დახმარება"
 
 #. i18n: file: mainwindow.ui:293
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Release Notes"
-msgstr "ملاحظات الإصدار"
+msgstr "გამოცემის შენიშვნები"
 
 #. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
-msgstr "أبلغ عن علّة"
+msgstr "შეცდომის ანგარიში"
 
 #. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "FAQ"
-msgstr "الأسئلة الشائعة"
+msgstr "ხ.დ.კ."
 
 #. i18n: file: mainwindow.ui:308
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
-msgstr "أفوجادرو على الويب"
+msgstr "Avogadro-ის ვებგვერდი"
 
 #. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "ფორუმი"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
-msgstr "استيراد"
+msgstr "&შემოტანა"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
-",Launchpad Contributions:,AtomCell,عبد الله شلي (Abdellah Chelli), ,"
-"Launchpad Contributions:,AtomCell,TheLight,عبد الله شلي (Abdellah Chelli), ,"
-"Launchpad Contributions:,AtomCell,TheLight,عبد الله شلي (Abdellah Chelli), ,"
-"Launchpad Contributions:,AtomCell,عبد الله شلي (Abdellah Chelli), ,Launchpad "
-"Contributions:,AtomCell,Nizar Kerkeni,Propeng,TheLight,عبدالله شلي (Abdellah "
-"Chelli), ,Launchpad Contributions:,AtomCell,Avogadro Team,Nizar Kerkeni,"
-"Propeng,TheLight,عبدالله شلي (Abdellah Chelli), ,Launchpad Contributions:,"
-"AtomCell,Avogadro Team,Nizar Kerkeni,Propeng,TheLight,عبدالله شلي (Abdellah "
-"Chelli), ,Launchpad Contributions:,Ahmed El-Mahdawy,AtomCell,Avogadro Team,"
-"Nizar Kerkeni,TheLight,عبدالله شلي (Abdellah Chelli), ,Launchpad "
-"Contributions:,Ahmed El-Mahdawy,AtomCell,Avogadro Team,Nizar Kerkeni,"
-"TheLight,عبدالله شلي (Abdellah Chelli),منصور اليوسف, ,Launchpad "
-"Contributions:,Ahmed El-Mahdawy,Ahmed Mohammed,AtomCell,Avogadro Team,Nizar "
-"Kerkeni,TheLight,عبدالله شلي (Abdellah Chelli),منصور اليوسف, ,Launchpad "
-"Contributions:,Ahmed El-Mahdawy,Ahmed Mohammed,AtomCell,Avogadro Team,Nizar "
-"Kerkeni,TheLight,عبدالله شلي (Abdellah Chelli),منصور اليوسف, ,Launchpad "
-"Contributions:,Ahmed El-Mahdawy,Ahmed Mohammed,AtomCell,Avogadro Team,Nizar "
-"Kerkeni,Sneetsher,TheLight,ayoooub أيوب,منصور اليوسف, ,Launchpad "
-"Contributions:,Ahmed El-Mahdawy,Ahmed Mohammed,AtomCell,Avogadro Team,Geoff "
-"Hutchison,Nizar Kerkeni,Sneetsher,TheLight,ayoooub أيوب,منصور اليوسف, ,"
-"Launchpad Contributions:,Ahmed El-Mahdawy,Ahmed Mohammed,AtomCell,Avogadro "
-"Team,Geoff Hutchison,Nizar Kerkeni,Sneetsher,TheLight,ayoooub أيوب,منصور "
-"اليوسف"
+msgstr "Temuri Doghonadze"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
-",,shelhatem@gmail.com,sneetsher@gmail.com,,,shelhatem@gmail.com,houd."
-"ox@gmail.com,sneetsher@gmail.com,,,shelhatem@gmail.com,houd.ox@gmail.com,"
-"sneetsher@gmail.com,,,shelhatem@gmail.com,sneetsher@gmail.com,,,"
-"shelhatem@gmail.com,nizarus@nizarus.org,,houd.ox@gmail.com,,,,"
-"shelhatem@gmail.com,avogadro-devel@lists.sourceforge.net,nizarus@nizarus."
-"org,,houd.ox@gmail.com,,,,shelhatem@gmail.com,avogadro-devel@lists."
-"sourceforge.net,nizarus@nizarus.org,,,,,,,shelhatem@gmail.com,avogadro-"
-"devel@lists.sourceforge.net,nizarus@nizarus.org,,,,,,shelhatem@gmail.com,"
-"avogadro-devel@lists.sourceforge.net,nizarus@nizarus.org,,,,,,,,"
-"shelhatem@gmail.com,avogadro-devel@lists.sourceforge.net,nizarus@nizarus."
-"org,,,,,,,,shelhatem@gmail.com,avogadro-devel@lists.sourceforge.net,"
-"nizarus@nizarus.org,,,,,,,,shelhatem@gmail.com,avogadro-devel@lists."
-"sourceforge.net,nizarus@nizarus.tn,,,,,,,,,shelhatem@gmail.com,avogadro-"
-"devel@lists.sourceforge.net,,nizarus@nizarus.tn,,,,,,,,,shelhatem@gmail.com,"
-"avogadro-devel@lists.sourceforge.net,,nizarus@nizarus.tn,,,,"
-
-#, fuzzy
-#~ msgid "Set background color…"
-#~ msgstr "اضبط  &لون الخلفية..."
-
-#~ msgid "&Full Screen Mode"
-#~ msgstr "&ملء الشاشة"
-
-#~ msgid "Esc"
-#~ msgstr "Esc"
-
-#~ msgid "Close View"
-#~ msgstr "أغلق العرض"
-
-#, fuzzy
-#~ msgid "Configure Avogadro…"
-#~ msgstr "تكوين أفوجادرو..."
-
-#~ msgid "Debug Information"
-#~ msgstr "معلومات تصحيح الأخطاء"
-
-#, fuzzy
-#~ msgid "Plugin Manager…"
-#~ msgstr "مدير الاضافات..."
-
-#, fuzzy
-#~ msgid "Project Tree Editor…"
-#~ msgstr "محرر شجرة المشروع..."
-
-#, fuzzy
-#~ msgid "Molecule File…"
-#~ msgstr "ملف الجزيء..."
-
-#, fuzzy
-#~ msgid "&Vector Graphics…"
-#~ msgstr "&الرسومات المتجهة..."
-
-#, fuzzy
-#~ msgid "All Molecules in File…"
-#~ msgstr "ملف الجزيء..."
-
-#, fuzzy
-#~ msgid "&Open..."
-#~ msgstr "&افتح"
-
-#, fuzzy
-#~ msgid "&Molecule..."
-#~ msgstr "جزيئ"
-
-#~ msgid "Cut Atoms"
-#~ msgstr "قص ذرات"
-
-#~ msgid "Clear Molecule"
-#~ msgstr "إمسح جزيئا"
-
-#~ msgid "Clear Atoms"
-#~ msgstr "إمسح ذرات"
-
-#~ msgid "Messages"
-#~ msgstr "رسائل"
-
-#~ msgid "&Minimize"
-#~ msgstr "تصغير"
-
-#~ msgid "Ctrl+M"
-#~ msgstr "Ctrl+M"
-
-#~ msgid "&Zoom"
-#~ msgstr "قرب"
-
-#~ msgid "Bring All to Front"
-#~ msgstr "أحضر الكل إلى الأمام"
-
-#~ msgid "&Tool Settings..."
-#~ msgstr "إعدادات الأداة..."
-
-#~ msgctxt "Tool Settings shortcut"
-#~ msgid "Ctrl+T"
-#~ msgstr "Ctrl+T"
-
-#~ msgid "&Display Settings..."
-#~ msgstr "إعدادات العرض..."
-
-#~ msgctxt "Display Settings shortcut"
-#~ msgid "Ctrl+D"
-#~ msgstr "Ctrl+D"
-
-#~ msgid "Common molecule formats"
-#~ msgstr "تنسيقات مشتركة للجزيئ"
-
-#~ msgid "CML"
-#~ msgstr "CML"
-
-#~ msgid "Computational Chemistry Output"
-#~ msgstr "خرج كيمياء حسابية"
-
-#~ msgid "Crystallographic Interchange CIF"
-#~ msgstr "تنسيق تبادل بلوري CIF"
-
-#~ msgid "GAMESS-US Output"
-#~ msgstr "خرج GAMESS-US"
-
-#~ msgid "Gaussian 98/03 Output"
-#~ msgstr "خرج Gaussian 98/03"
-
-#~ msgid "MDL Mol"
-#~ msgstr "MDL Mol"
-
-#~ msgid "NWChem Output"
-#~ msgstr "خرج NWChem"
-
-#~ msgid "PDB"
-#~ msgstr "PDB"
-
-#~ msgid "Sybyl Mol2"
-#~ msgstr "Sybyl Mol2"
-
-#~ msgid "XYZ"
-#~ msgstr "XYZ"
-
-#~ msgctxt "%1 is a filename"
-#~ msgid "Loading %1..."
-#~ msgstr "تحميل %1..."
-
-#~ msgid "Loading %1..."
-#~ msgstr "تحميل %1..."
-
-#~ msgid "This file does not contain 3D coordinates."
-#~ msgstr "هذا الملف لا يحتوي على إحداثيات 3D."
-
-#~ msgid ""
-#~ "This file does not contain 3D coordinates.\n"
-#~ "You may not be able to edit or view properly."
-#~ msgstr ""
-#~ "الملف لا يحوي محاور ثلاثية الابعاد.\n"
-#~ "لا تستطيع تحرير أو عرض الملف."
-
-#~ msgid "Select Molecule to View"
-#~ msgstr "حدد جزيء لمعاينته"
-
-#~ msgid "Molecule Title"
-#~ msgstr "عنوان الجزيء"
-
-#~ msgid "Atoms: "
-#~ msgstr "الذرات: "
-
-#~ msgid " Bonds: "
-#~ msgstr " الروابط: "
-
-#~ msgid "File Loaded..."
-#~ msgstr "الملف حمِّل..."
-
-#~ msgid "Save..."
-#~ msgstr "إحفظ..."
-
-#~ msgid "Save"
-#~ msgstr "إحفظ"
-
-#~ msgid "GAMESS Input"
-#~ msgstr "دخل GAMESS"
-
-#~ msgid "Gaussian Z-matrix Input"
-#~ msgstr "مدخل مصفوفة جاوس"
-
-#~ msgid "MDL SDfile"
-#~ msgstr "ملف MDL SD"
-
-#~ msgid "NWChem Input"
-#~ msgstr "دخل NWChem"
-
-#~ msgid "Save Molecule As"
-#~ msgstr "حفظ الجزيء باسم.."
-
-#~ msgid "Untitled %1"
-#~ msgstr "غير معنون %1"
-
-#~ msgid "Unable to paste molecule."
-#~ msgstr "تعذر لصق الجزيء"
-
-#~ msgid "Paste failed (format unavailable)."
-#~ msgstr "فشلت عملية اللصق، (التنسيق غير متوفر)"
-
-#~ msgid "Copy failed (mdl unavailable)."
-#~ msgstr "فشلت عملية النسخ (mdl غير متوفرة)"
-
-#~ msgid "View %1"
-#~ msgstr "عرض %1"
-
-#~ msgctxt "View number (from 1 on)"
-#~ msgid "View %1"
-#~ msgstr "عرض %1"
-
-#~ msgid "Normal Size"
-#~ msgstr "الحجم العادي"
-
-#~ msgid "Full Screen"
-#~ msgstr "ملئ الشاشة"
-
-#~ msgid "Ctrl+Backspace"
-#~ msgstr "Ctrl+Backspace"
-
-#~ msgctxt "[*] indicates that this is a modified view...."
-#~ msgid "[*]Avogadro"
-#~ msgstr "[*]أفوجادرو"
-
-#~ msgctxt "Window title: %1 is file name, %2 is Avogadro"
-#~ msgid "%1[*] - %2"
-#~ msgstr "%1[*] - %2"
-
-#~ msgid "Add"
-#~ msgstr "أضِف"
-
-#~ msgid "Duplicate"
-#~ msgstr "نسخة مطابقة"
-
-#~ msgid "Remove"
-#~ msgstr "أزل"
-
-#~ msgid "No tools or engines loaded."
-#~ msgstr "لم تحمل أي أدوات أو محركات"
-
-#~ msgid "No engines loaded."
-#~ msgstr "لم تحمل أي محركات.."
-
-#~ msgid "No tools loaded."
-#~ msgstr "لم تحمل أي أدوات.."
-
-#~ msgid "Objects"
-#~ msgstr "أجسام"
-
-#~ msgid "Colors"
-#~ msgstr "ألوان"
-
-#~ msgid " copy"
-#~ msgstr " إنسخ"
-
-#~ msgid "Name: "
-#~ msgstr "الاسم: "
-
-#~ msgid "Identifier: "
-#~ msgstr "المعرِّف: "
-
-#~ msgid "Description:\n"
-#~ msgstr "الوصف:\n"
-
-#~ msgid "Atoms"
-#~ msgstr "ذرات"
-
-#~ msgid "Bonds"
-#~ msgstr "روابط"
-
-#~ msgid "Residues"
-#~ msgstr "رواسب"
-
-#~ msgid "bond %1"
-#~ msgstr "رباط %1"
-
-#~ msgid "Label"
-#~ msgstr "تسمية"
-
-#~ msgid "User Selections"
-#~ msgstr "اختيارات المستخدم"
-
-#~ msgid "Error"
-#~ msgstr "خطأ"
-
-#~ msgid "Item"
-#~ msgstr "عنصر"
-
-#~ msgid "Index"
-#~ msgstr "فهرس"
-
-#~ msgctxt "Display quality setting"
-#~ msgid "Low"
-#~ msgstr "منخفض"
-
-#~ msgctxt "Display quality setting"
-#~ msgid "Medium"
-#~ msgstr "متوسط"
-
-#~ msgctxt "Display quality setting"
-#~ msgid "High"
-#~ msgstr "عالي"
-
-#~ msgctxt "Display quality setting"
-#~ msgid "Undefined"
-#~ msgstr "غيرُ مُعرَّف"
-
-#~ msgctxt "Level of fog in the scene"
-#~ msgid "None"
-#~ msgstr "لاشيء"
-
-#~ msgctxt "Level of fog in the scene"
-#~ msgid "Some"
-#~ msgstr "بعض"
-
-#~ msgctxt "Level of fog in the scene"
-#~ msgid "Mid"
-#~ msgstr "وسط"
-
-#~ msgctxt "Level of fog in the scene"
-#~ msgid "Lots"
-#~ msgstr "كثير"
-
-#~ msgctxt "Level of fog in the scene"
-#~ msgid "Undefined"
-#~ msgstr "غيرُ مُعرَّف"
-
-#~ msgid "Network timeout or other error."
-#~ msgstr "تأخر استجابة الشبكة أو خطأ آخر."
-
-#~ msgid "Add Display Type"
-#~ msgstr "إضافة نوع العرض"
-
-#~ msgid "Type:"
-#~ msgstr "النوع:"
-
-#~ msgid "Name:"
-#~ msgstr "الاسم:"
-
-#~ msgid "Description:"
-#~ msgstr "الوصف"
-
-#~ msgid "Form"
-#~ msgstr "شكل"
-
-#~ msgid "Color by:"
-#~ msgstr "حسب اللون:"
-
-#~ msgid "Filename:"
-#~ msgstr "أسم الملف:"
-
-#~ msgid "Select..."
-#~ msgstr "اختر..."
-
-#~ msgid "Format:"
-#~ msgstr "التنسيق:"
-
-#~ msgid "Coordinates are in Ångstroms"
-#~ msgstr "الاحداثيات ممثلة بالانجريستروم"
-
-#~ msgid "Toolbars"
-#~ msgstr "أشرطة الأدوات"
-
-#~ msgid "E&xtensions"
-#~ msgstr "ام&تدادات"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "شريط الأدوات الرئيسي"
-
-#~ msgid "Project Tree"
-#~ msgstr "شجرة المشروع"
-
-#~ msgid "&Paste"
-#~ msgstr "&لصق"
-
-#~ msgid "Plugins"
-#~ msgstr "الإضافات"
-
-#~ msgid "Details"
-#~ msgstr "التفاصيل"
-
-#~ msgid "Type"
-#~ msgstr "نوع"
-
-#~ msgid "New Item"
-#~ msgstr "عنصر جديد"
-
-#~ msgid "&New Item"
-#~ msgstr "&عنصر جديد"
-
-#~ msgid "New Subitem"
-#~ msgstr "عنصر فرعي جديد"
-
-#~ msgid "Delete Item"
-#~ msgstr "حذف العنصر"
-
-#~ msgid "&Delete Item"
-#~ msgstr "&حذف العنصر"
-
-#~ msgid "L"
-#~ msgstr "L"
-
-#~ msgid "R"
-#~ msgstr "R"
-
-#~ msgid "Move Item Up"
-#~ msgstr "نقل العنصر للأعلى"
-
-#~ msgid "Move Item Down"
-#~ msgstr "نقل العنصر أسفل"
-
-#~ msgid "D"
-#~ msgstr "D"
-
-#~ msgid "Alias"
-#~ msgstr "الاسم المستعار"
-
-#~ msgid "Settings..."
-#~ msgstr "إعدادات..."
-
-#~ msgid "General"
-#~ msgstr "عام"
-
-#~ msgid "Quality:"
-#~ msgstr "الجودة:"
-
-#~ msgid "Fog:"
-#~ msgstr "ضباب:"
+msgstr "Temuri.doghonadze@gmail.com"

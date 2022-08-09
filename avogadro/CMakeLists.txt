@@ -8,8 +8,7 @@ include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR})
 
 option(USE_VTK "Build with VTK support" OFF)
 if(USE_VTK)
-  find_package(VTK COMPONENTS vtkGUISupportQt vtkRenderingOpenGL2 REQUIRED)
-  include(${VTK_USE_FILE})
+  find_package(VTK COMPONENTS GUISupportQt RenderingOpenGL2 REQUIRED)
   add_definitions(-DAVO_USE_VTK)
 endif()
 
@@ -60,7 +59,7 @@ install(DIRECTORY "${AvogadroApp_SOURCE_DIR}/../avogadro-i18n/avogadroapp/"
   FILES_MATCHING PATTERN "*.qm"
 )
 
-if(INSTALL_BUNDLE_FILES)
+if(APPLE OR WIN32 OR INSTALL_BUNDLE_FILES)
 # copy the qt translation files
 get_filename_component(_qttranslationdir "${Qt5_DIR}/../../../translations" ABSOLUTE)
 message(STATUS "Trying to install Qt translations ${_qttranslationdir}")
@@ -148,6 +147,7 @@ if(APPLE)
 
 elseif(UNIX)
   install(FILES "icons/avogadro2.desktop" DESTINATION "${INSTALL_XDG_APPS_DIR}")
+  install(FILES "icons/avogadro2.appdata.xml" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/metainfo")
   install(FILES "icons/avogadro.png" DESTINATION "${INSTALL_XDG_ICON_DIR}"
     RENAME "avogadro2.png")
 elseif(WIN32)

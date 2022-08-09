@@ -4,7 +4,7 @@ set(CPACK_PACKAGE_VERSION_MINOR ${AvogadroApp_VERSION_MINOR})
 set(CPACK_PACKAGE_VERSION_PATCH ${AvogadroApp_VERSION_PATCH})
 set(CPACK_PACKAGE_VERSION ${AvogadroApp_VERSION})
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "Avogadro2")
-set(CPACK_PACKAGE_VENDOR "http://openchemistry.org/")
+set(CPACK_PACKAGE_VENDOR "https://avogadro.cc/")
 set(CPACK_PACKAGE_DESCRIPTION
   "An advanced molecule editor and visualization application.")
 
@@ -15,6 +15,13 @@ if(APPLE)
   set(CPACK_PACKAGE_ICON
     "${AvogadroApp_SOURCE_DIR}/avogadro/icons/avogadro.icns")
   set(CPACK_BUNDLE_ICON "${CPACK_PACKAGE_ICON}")
+
+  if(${CMAKE_VERSION} VERSION_GREATER "3.19.0") 
+    # add the codesign options to the packageq
+    configure_file("${CMAKE_CURRENT_LIST_DIR}/deploy-osx.cmake.in" "${AvogadroApp_BINARY_DIR}/deploy-osx.cmake" @ONLY)
+    set(CPACK_PRE_BUILD_SCRIPTS "${AvogadroApp_BINARY_DIR}/deploy-osx.cmake")
+  endif()
+
 else()
   set(CPACK_RESOURCE_FILE_LICENSE "${AvogadroApp_SOURCE_DIR}/LICENSE")
 endif()
