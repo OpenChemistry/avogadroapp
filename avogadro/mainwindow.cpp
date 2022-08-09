@@ -1347,10 +1347,11 @@ bool MainWindow::saveFileAs(bool async)
   // Otherwise, get extension from selected filter
   if (extension.isEmpty()) {
     QString filter = saveDialog.selectedNameFilter();
-    if (filter.contains("(*.cjson)", Qt::CaseSensitive))
-      extension = "cjson";
-    else if (filter.contains("(*.cml)", Qt::CaseSensitive))
+    if (filter.contains("(*.cml)", Qt::CaseSensitive))
       extension = "cml";
+    else
+      extension = "cjson";
+
     fileName += "." + extension;
   }
 
