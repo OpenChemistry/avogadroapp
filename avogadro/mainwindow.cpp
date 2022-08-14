@@ -1827,9 +1827,9 @@ void MainWindow::buildMenu()
   connect(m_undo, &QAction::triggered, this, &MainWindow::undoEdit);
   connect(m_redo, &QAction::triggered, this, &MainWindow::redoEdit);
   connect(m_copyImage, &QAction::triggered, this, &MainWindow::copyGraphics);
-  m_menuBuilder->addAction(editPath, m_undo, 1);
-  m_menuBuilder->addAction(editPath, m_redo, 0);
-  m_menuBuilder->addAction(editPath, m_copyImage, -10);
+  m_menuBuilder->addAction(editPath, m_undo, 999);
+  m_menuBuilder->addAction(editPath, m_redo, 990);
+  m_menuBuilder->addAction(editPath, m_copyImage, 530);
 
   // View menu
   QStringList viewPath;
