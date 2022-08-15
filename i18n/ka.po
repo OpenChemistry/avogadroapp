@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Avogadro 1.95.1\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-08-14 03:16+0000\n"
-"PO-Revision-Date: 2022-06-13 16:19+0000\n"
+"PO-Revision-Date: 2022-08-16 11:17+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ka/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -56,15 +56,11 @@ msgid "Layers"
 msgstr "ფენები"
 
 #: mainwindow.cpp:390
-#, fuzzy
-#| msgid "File"
 msgctxt "File toolbar"
 msgid "File"
 msgstr "ფაილი"
 
 #: mainwindow.cpp:395
-#, fuzzy
-#| msgid "Tools"
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "ხელსაწყოები"
@@ -82,11 +78,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:682
 msgid "Restart needed"
-msgstr ""
+msgstr "საჭიროა გადატვირთვა"
 
 #: mainwindow.cpp:683
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "ახალი ენის გამოსაყენებლად გადატვირთეთ Avogadro."
 
 #: mainwindow.cpp:703 mainwindow.cpp:1366
 msgid "Chemical Markup Language"
@@ -129,7 +125,7 @@ msgstr "ფაილის ფორმატები"
 #: mainwindow.cpp:767
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "მუხტები"
 
 #: mainwindow.cpp:771
 msgid "Install Plugin Script"
@@ -440,11 +436,11 @@ msgstr "&გაფართოებები"
 
 #: mainwindow.cpp:1874
 msgid "User Interface Language…"
-msgstr ""
+msgstr "მომხმარებლის ინტერფეისის ენა…"
 
 #: mainwindow.cpp:1878
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&პერიოდულობის ცხრილი…"
 
 #: mainwindow.cpp:1884 menubuilder.cpp:80
 msgid "&Help"
@@ -457,38 +453,32 @@ msgid "&About"
 msgstr "&შესახებ"
 
 #: mainwindow.cpp:1892
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "ფორუმი"
+msgstr "&ფორუმი"
 
 #: mainwindow.cpp:1896
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadro-ის ვებგვერდი"
+msgstr "&Avogadro-ის ვებგვერდი"
 
 #: mainwindow.cpp:1900
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "შეცდომის ანგარიში"
+msgstr "&შეცდომის ანგარიში"
 
 #: mainwindow.cpp:1904
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&ფუნქციის შეთავაზება"
 
 #: mainwindow.cpp:1928
 msgid "System Language"
-msgstr ""
+msgstr "სისტემის ენა"
 
 #: mainwindow.cpp:1936
 msgid "Language"
-msgstr ""
+msgstr "ენა"
 
 #: mainwindow.cpp:1936
 msgid "User Interface Language:"
-msgstr ""
+msgstr "მომხმარებლის ინტერფეისის ენა:"
 
 #: mainwindow.cpp:2040
 #, qt-format
@@ -552,14 +542,12 @@ msgid "&Window"
 msgstr "&ფანჯარა"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "&View"
 msgid "3D View"
-msgstr "&ხედი"
+msgstr "&3D ხედი"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
