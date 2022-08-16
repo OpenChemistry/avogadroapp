@@ -50,6 +50,14 @@ if(INSTALL_BUNDLE_FILES)
   install(DIRECTORY "${AvogadroLibs_DATA_DIR}/avogadro2"
     DESTINATION ${INSTALL_DATA_DIR})
 
+  # look for genXrd
+  find_program(GENXRD_EXE genXrdPattern)
+  install(FILES ${GENXRD_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
+    PERMISSIONS
+      OWNER_READ OWNER_EXECUTE
+      GROUP_READ GROUP_EXECUTE
+      WORLD_READ WORLD_EXECUTE)
+
   find_program(OBABEL_EXE obabel)
   if(OBABEL_EXE)
     find_program(OBMM_EXE obmm)
