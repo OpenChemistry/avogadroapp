@@ -35,6 +35,8 @@
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
+#include <QSurfaceFormat>
+
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
@@ -246,6 +248,9 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   }
   // The default settings will be used if everything was cleared.
   readSettings();
+
+  auto defaultFormat = QSurfaceFormat::defaultFormat();
+  qDebug() << " samples: " << defaultFormat.samples();
 
   // Now load the plugins.
   PluginManager* plugin = PluginManager::instance();

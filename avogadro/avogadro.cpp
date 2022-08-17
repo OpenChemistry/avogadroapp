@@ -52,6 +52,14 @@ int main(int argc, char* argv[])
   QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
 #endif
 
+  // Set up the default format for our GL contexts.
+  QSurfaceFormat defaultFormat = QSurfaceFormat::defaultFormat();
+  defaultFormat.setSamples(4);
+#if defined(Q_OS_MAC) || defined(Q_OS_WIN)
+  defaultFormat.setAlphaBufferSize(8);
+#endif
+  QSurfaceFormat::setDefaultFormat(defaultFormat);
+
   Avogadro::Application app(argc, argv);
 
   QSettings settings;
@@ -199,14 +207,6 @@ int main(int argc, char* argv[])
                                   "This system does not support OpenGL."));
     return 1;
   }
-
-  // Set up the default format for our GL contexts.
-  QSurfaceFormat defaultFormat = QSurfaceFormat::defaultFormat();
-  defaultFormat.setSamples(4);
-#if defined(Q_OS_MAC) || defined(Q_OS_WIN)
-  defaultFormat.setAlphaBufferSize(8);
-#endif
-  QSurfaceFormat::setDefaultFormat(defaultFormat);
 
   QStringList fileNames;
   bool disableSettings = false;
