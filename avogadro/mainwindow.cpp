@@ -38,6 +38,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
+#include <QtCore/QJsonDocument>
+#include <QtCore/QJsonObject>
 #include <QtCore/QMimeData>
 #include <QtCore/QProcess>
 #include <QtCore/QSettings>
@@ -45,30 +47,33 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
+
 #include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeySequence>
+#include <QtGui/QOpenGLFramebufferObject>
+
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+
 #include <QtWidgets/QActionGroup>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QColorDialog>
+#include <QtWidgets/QDockWidget>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QInputDialog>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QMessageBox>
-#include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
-
-#include <QtWidgets/QColorDialog>
-#include <QtWidgets/QDockWidget>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QProgressDialog>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QToolBar>
+#include <QtWidgets/QToolButton>
 #include <QtWidgets/QTreeView>
-
-#include <QToolButton>
-#include <QtGui/QOpenGLFramebufferObject>
 
 #ifdef QTTESTING
 #include <QXmlStreamReader>
@@ -246,6 +251,9 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   }
   // The default settings will be used if everything was cleared.
   readSettings();
+
+  // check for version update
+  checkUpdate();
 
   // Now load the plugins.
   PluginManager* plugin = PluginManager::instance();
@@ -2136,6 +2144,89 @@ void MainWindow::openURL(const QString& url)
   // AppImage can't use QDesktopServices::openUrl, so we use QProcess:
   QProcess::execute(QString("xdg-open %1").arg(url));
 #endif
+}
+
+void MainWindow::checkUpdate()
+{
+  if (m_network == nullptr) {
+    m_network = new QNetworkAccessManager(this);
+    connect(m_network, SIGNAL(finished(QNetworkReply*)), this,
+            SLOT(finishUpdateRequest(QNetworkReply*)));
+  }
+
+  m_network->get(
+    QNetworkRequest(QUrl("https://api.github.com/repos/openchemistry/"
+                         "avogadrolibs/releases/latest")));
+}
+
+void MainWindow::finishUpdateRequest(QNetworkReply* reply)
+{
+  if (!reply->isReadable()) {
+    MESSAGEBOX::warning(this, tr("Network Download Failed"),
+                        tr("Network timeout or other error."));
+    reply->deleteLater();
+    return;
+  }
+
+  auto replyData = reply->readAll();
+
+  QJsonDocument releaseJson = QJsonDocument::fromJson(replyData);
+  auto releaseObject = releaseJson.object();
+  auto latestRelease = releaseObject["tag_name"].toString();
+
+  QSettings settings;
+  QString lastVersion =
+    settings.value("currentVersion", AvogadroApp_VERSION).toString();
+  // could be something like 1.97.0-36-gcd224f0
+
+  // qDebug() << " update comparing " << lastVersion << " to " << latestRelease;
+  QStringList releaseComponents = latestRelease.split('.');
+  QStringList currentComponents = lastVersion.split('.');
+  if (releaseComponents.size() != 3 || currentComponents.size() != 3)
+    // something is very wrong
+    return;
+
+  if (currentComponents[0] > releaseComponents[0] ||
+      (currentComponents[0] == releaseComponents[0] &&
+       currentComponents[1] > releaseComponents[1]))
+    // no update needed
+    return;
+
+  if (currentComponents[0] == releaseComponents[0] && 
+    currentComponents[1] == releaseComponents[1] &&
+    currentComponents[2] >= releaseComponents[2]) {
+      // this will work for like "0-36-whatever" > "0" but not "1"
+    return;
+  }
+
+  // ask the user about fetching the latest release
+  // download, skip, release notes, cancel
+  // skip = save latestRelease in settings
+  QString currentVersion = tr("Your version: %1").arg(AvogadroApp_VERSION);
+  QString newVersion = tr("New version: %1").arg(latestRelease);
+  QString text = tr("An update is available, do you want to download it now?\n");
+  text += currentVersion + '\n' + newVersion;
+  auto result = MESSAGEBOX::information(
+    this, tr("Version Update"), text,
+    QMessageBox::Ok | QMessageBox::Ignore | QMessageBox::Cancel);
+
+  if (result == QMessageBox::Cancel)
+    return;
+  
+  if (result == QMessageBox::Ignore) {
+    settings.setValue("currentVersion", latestRelease);
+    return;
+  }
+  
+  // get an update
+#if defined(Q_OS_MAC)
+  QString url = QString("https://github.com/OpenChemistry/avogadrolibs/releases/download/%1/Avogadro2-%2-Darwin.dmg").arg(latestRelease).arg(latestRelease);
+#elif defined(Q_OS_WIN)
+  QString url = QString("https://github.com/OpenChemistry/avogadrolibs/releases/download/%1/Avogadro2-%2-win64.exe").arg(latestRelease).arg(latestRelease);
+#else
+  QString url("https://github.com/OpenChemistry/avogadrolibs/releases/latest");
+#endif
+  openURL(url);
 }
 
 void MainWindow::openForum()

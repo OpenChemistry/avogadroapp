@@ -16,6 +16,8 @@ class pqTestUtility;
 class QProgressDialog;
 class QThread;
 class QTreeView;
+class QNetworkAccessManager;
+class QNetworkReply;
 
 namespace Ui {
 class AboutDialog;
@@ -255,6 +257,10 @@ private slots:
 
   void openFeatureRequest();
 
+  void checkUpdate();
+
+  void finishUpdateRequest(QNetworkReply*);
+
   /**
    * @brief Register file formats from extensions when ready.
    */
@@ -390,6 +396,8 @@ private:
   QAction* m_viewOrthographic;
 
   ViewFactory* m_viewFactory;
+
+  QNetworkAccessManager* m_network = nullptr;
 
 #ifdef QTTESTING
   pqTestUtility* m_testUtility;
