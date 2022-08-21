@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-08-21 03:21+0000\n"
-"PO-Revision-Date: 2022-07-24 16:16+0000\n"
+"PO-Revision-Date: 2022-08-23 02:30+0000\n"
 "Last-Translator: Translator <kvb@tuta.io>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -92,7 +92,7 @@ msgstr "Langage de balisage chimique"
 
 #: mainwindow.cpp:712 mainwindow.cpp:1373
 msgid "Chemical JSON"
-msgstr "Chemical JSON"
+msgstr "Produit chimique JSON"
 
 #: mainwindow.cpp:718
 msgid "Open chemical file"
@@ -507,36 +507,31 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2165
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "La mise à jour réseau a échoué"
+msgstr "Le téléchargement depuis le réseau a échoué"
 
 #: mainwindow.cpp:2166
 msgid "Network timeout or other error."
-msgstr "Délai d'attente réseau expiré, ou autre erreur"
+msgstr "Délai d'attente réseau expiré, ou autre erreur."
 
 #: mainwindow.cpp:2205
-#, fuzzy, qt-format
-#| msgid "Torsion %1"
+#, qt-format
 msgid "Your version: %1"
-msgstr "Torsion %1"
+msgstr "Votre version : %1"
 
 #: mainwindow.cpp:2206
-#, fuzzy, qt-format
-#| msgid "Torsion %1"
+#, qt-format
 msgid "New version: %1"
-msgstr "Torsion %1"
+msgstr "Nouvelle version : %1"
 
 #: mainwindow.cpp:2207
 msgid "An update is available, do you want to download it now?\n"
 msgstr ""
+"Une mise à jour est disponible, voulez-vous la télécharger maintenant ?\n"
 
 #: mainwindow.cpp:2210
-#, fuzzy
-#| msgid "Transition State"
 msgid "Version Update"
-msgstr "Etat de transition"
+msgstr "Mise à jour de la version"
 
 #: mainwindow.cpp:2261
 #, qt-format
@@ -857,53 +852,17 @@ msgstr "&Importer"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-",Launchpad Contributions:,Geoff Hutchison,Laurent Peuch,Louis Ricard,Maijin,"
-"Nizar Kerkeni, ,Launchpad Contributions:,Benoit Jacob,Geoff Hutchison,"
-"Laurent Peuch,Louis Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,Launchpad "
-"Contributions:,Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis Ricard,"
-"Maijin,Mathieu Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,Benoit Jacob,"
-"Geoff Hutchison,Laurent Peuch,Louis Ricard,Maijin,Mathieu Pasquet, ,"
-"Launchpad Contributions:,Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis "
-"Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,"
-"Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis Ricard,Maijin,Mathieu "
-"Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,Benoit Jacob,Geoff "
-"Hutchison,Laurent Peuch,Louis Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,"
-"Launchpad Contributions:,Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis "
-"Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,"
-"Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis Ricard,Maijin,Mathieu "
-"Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,Benoit Jacob,Geoff "
-"Hutchison,Laurent Peuch,Louis Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,"
-"Launchpad Contributions:,Benoit Jacob,Geoff Hutchison,Laurent Peuch,Louis "
-"Ricard,Maijin,Mathieu Pasquet,Nizar Kerkeni, ,Launchpad Contributions:,"
-"Benoit Jacob,Geoff Hutchison,Louis Ricard,Nizar Kerkeni,Pierre Slamich, ,"
-"Launchpad Contributions:,Benoit Jacob,Geoff Hutchison,Jean-Marc,Louis Ricard,"
-"Nizar Kerkeni,Pierre Slamich, ,Launchpad Contributions:,Benoit Jacob,Geoff "
-"Hutchison,Jean-Marc,Louis Ricard,Nizar Kerkeni,Pierre Slamich"
+"Contributions du Launchpad : Geoffrey Hutchison, Laurent Peuch, Louis "
+"Ricard, Maijin, Nizar Kerkeni, Benoit Jacob, Mathieu Pasquet, Pierre "
+"Slamich, Jean-Marc, etc et les traducteurs via Weblate"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-"benoitjacob@users.sourceforge.net,louis.ricard@polytechnique.fr,,,,"
-"psycojoker@gmail.com,louis.ricard@polytechnique.edu,,nizar.kerkeni@gmail."
-"com,,,jacob.benoit.1@gmail.com,,psycojoker@gmail.com,louis."
-"ricard@polytechnique.edu,,,nizar.kerkeni@gmail.com,,,jacob.benoit.1@gmail."
-"com,,psycojoker@gmail.com,louis.ricard@polytechnique.edu,,,nizar."
-"kerkeni@gmail.com,,,jacob.benoit.1@gmail.com,,psycojoker@gmail.com,louis."
-"ricard@polytechnique.edu,,,,,jacob.benoit.1@gmail.com,,psycojoker@gmail.com,"
-"louis.ricard@polytechnique.edu,,,nizarus@nizarus.org,,,jacob.benoit.1@gmail."
-"com,,psycojoker@gmail.com,louis.ricard@polytechnique.edu,,,nizarus@nizarus."
-"org,,,jacob.benoit.1@gmail.com,,psycojoker@gmail.com,louis."
-"ricard@polytechnique.edu,,,nizarus@nizarus.org,,,jacob.benoit.1@gmail.com,,"
-"psycojoker@gmail.com,louis.ricard@polytechnique.edu,,,nizarus@nizarus.org,,,"
-"jacob.benoit.1@gmail.com,,psycojoker@gmail.com,louis.ricard@polytechnique."
-"edu,,,nizarus@nizarus.org,,,jacob.benoit.1@gmail.com,,psycojoker@gmail.com,"
-"louis.ricard@polytechnique.edu,,,nizarus@nizarus.org,,,jacob.benoit.1@gmail."
-"com,,psycojoker@gmail.com,louis.ricard@polytechnique.edu,,,nizarus@nizarus."
-"org,,,jacob.benoit.1@gmail.com,,louis.ricard@polytechnique.edu,"
-"nizarus@nizarus.tn,pierre.slamich@gmail.com,,,jacob.benoit.1@gmail.com,,,"
-"louis.ricard@polytechnique.edu,nizarus@nizarus.tn,pierre.slamich@gmail.com,,,"
-"jacob.benoit.1@gmail.com,,,louis.ricard@polytechnique.edu,nizarus@nizarus.tn,"
-"pierre.slamich@gmail.com"
+"benoitjacob@users.sourceforge.net, louis.ricard@polytechnique.fr, psycojoker@"
+"gmail.com, louis.ricard@polytechnique.edu nizar.kerkeni@gmail.com, jacob."
+"benoit.1@gmail.com, nizarus@nizarus.org, nizarus@nizarus.tn, pierre.slamich@"
+"gmail.com, etc"
 
 #~ msgid "Localization:"
 #~ msgstr "Localisation :"
