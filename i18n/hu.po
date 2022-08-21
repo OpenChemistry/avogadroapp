@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-08-21 03:21+0000\n"
-"PO-Revision-Date: 2022-07-21 22:19+0000\n"
+"PO-Revision-Date: 2022-08-23 02:30+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hu/>\n"
@@ -513,34 +513,30 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2165
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Hálózati frissítés nem sikerült"
+msgstr "Hálózati letöltés nem sikerült"
 
 #: mainwindow.cpp:2166
 msgid "Network timeout or other error."
-msgstr "Hálózait időtúllépés vagy más probléma"
+msgstr "Hálózati időtúllépés vagy más hiba."
 
 #: mainwindow.cpp:2205
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Telepített verzió: %1"
 
 #: mainwindow.cpp:2206
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Git reverzió: %1)"
+msgstr "Új verzió: %1"
 
 #: mainwindow.cpp:2207
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "Frissítés elérhető, szeretné letölteni most?\n"
 
 #: mainwindow.cpp:2210
 msgid "Version Update"
-msgstr ""
+msgstr "Verziófrissítés"
 
 #: mainwindow.cpp:2261
 #, qt-format
