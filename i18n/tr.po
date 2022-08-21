@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-08-21 03:21+0000\n"
-"PO-Revision-Date: 2022-07-20 15:19+0000\n"
+"PO-Revision-Date: 2022-08-23 02:30+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -511,10 +511,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2165
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Ağ Güncelleme Kontrolü Başarısız"
+msgstr "Ağdan İndirme Başarısız"
 
 #: mainwindow.cpp:2166
 msgid "Network timeout or other error."
@@ -523,22 +521,20 @@ msgstr "Ağ zaman aşımı veya başka bir hata."
 #: mainwindow.cpp:2205
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Sürümünüz: %1"
 
 #: mainwindow.cpp:2206
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "Git gözden geçirme: %1"
+msgstr "Yeni sürüm: %1"
 
 #: mainwindow.cpp:2207
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "Bir güncelleme var, şimdi indirmek istiyor musunuz?\n"
 
 #: mainwindow.cpp:2210
 msgid "Version Update"
-msgstr ""
+msgstr "Sürüm Güncellemesi"
 
 #: mainwindow.cpp:2261
 #, qt-format
