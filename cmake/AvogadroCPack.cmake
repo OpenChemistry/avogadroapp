@@ -52,11 +52,13 @@ if(INSTALL_BUNDLE_FILES)
 
   # look for genXrd
   find_program(GENXRD_EXE genXrdPattern)
+  if (GENXRD_EXE)
   install(FILES ${GENXRD_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
     PERMISSIONS
       OWNER_READ OWNER_EXECUTE
       GROUP_READ GROUP_EXECUTE
       WORLD_READ WORLD_EXECUTE)
+  endif()
 
   find_program(OBABEL_EXE obabel)
   if(OBABEL_EXE)
