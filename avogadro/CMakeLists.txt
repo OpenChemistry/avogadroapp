@@ -28,6 +28,7 @@ set(avogadro_srcs
   backgroundfileformat.cpp
   mainwindow.cpp
   menubuilder.cpp
+  renderingdialog.cpp
   tooltipfilter.cpp
   viewfactory.cpp
 )
@@ -35,6 +36,7 @@ set(avogadro_srcs
 qt5_wrap_ui(ui_srcs
   aboutdialog.ui
   mainwindow.ui
+  renderingdialog.ui
 )
 
 qt5_add_resources(rcc_srcs avogadro.qrc)

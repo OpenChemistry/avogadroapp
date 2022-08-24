@@ -9,6 +9,7 @@
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
 #include "menubuilder.h"
+#include "renderingdialog.h"
 #include "tooltipfilter.h"
 #include "viewfactory.h"
 
@@ -1627,6 +1628,18 @@ void MainWindow::setBackgroundColor()
   }
 }
 
+void MainWindow::setRenderingSettings()
+{
+  Rendering::SolidPipeline *pipeline(nullptr);
+  GLWidget *glWidget(nullptr);
+  if ((glWidget = qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget())))
+    pipeline = &glWidget->renderer().solidPipeline();
+  if (pipeline) {
+    RenderingDialog dialog(this, *pipeline);
+    dialog.exec();
+  }
+}
+
 void MainWindow::setProjectionPerspective()
 {
   Rendering::GLRenderer* renderer(nullptr);
@@ -1845,6 +1858,10 @@ void MainWindow::buildMenu()
   action = new QAction(tr("Set Background Color…"), this);
   m_menuBuilder->addAction(viewPath, action, 100);
   connect(action, &QAction::triggered, this, &MainWindow::setBackgroundColor);
+
+  action = new QAction(tr("Rendering…"), this);
+  m_menuBuilder->addAction(viewPath, action, 100);
+  connect(action, &QAction::triggered, this, &MainWindow::setRenderingSettings);
 
   // set default projection
   QSettings settings;
