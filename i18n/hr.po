@@ -2,13 +2,13 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-# Milo Ivir <mail@milotype.de>, 2021.
+# Milo Ivir <mail@milotype.de>, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-08-21 03:21+0000\n"
-"PO-Revision-Date: 2021-11-07 22:52+0000\n"
+"PO-Revision-Date: 2022-08-26 17:16+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hr/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -58,15 +58,11 @@ msgid "Layers"
 msgstr "Slojevi"
 
 #: mainwindow.cpp:398
-#, fuzzy
-#| msgid "File"
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Datoteka"
 
 #: mainwindow.cpp:403
-#, fuzzy
-#| msgid "Tools"
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Alati"
@@ -84,11 +80,11 @@ msgstr "%1%2 – Avogadro %3"
 
 #: mainwindow.cpp:690
 msgid "Restart needed"
-msgstr ""
+msgstr "Potrebno je ponovno pokretanje"
 
 #: mainwindow.cpp:691
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Ponovo pokreni Avogadro za korištenje novog jezika."
 
 #: mainwindow.cpp:711 mainwindow.cpp:1374
 msgid "Chemical Markup Language"
@@ -131,7 +127,7 @@ msgstr "Datotečni formati"
 #: mainwindow.cpp:775
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Punjena"
 
 #: mainwindow.cpp:779
 msgid "Install Plugin Script"
@@ -241,7 +237,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1234
 msgid "Export Bitmap Graphics"
-msgstr "Izvezi Bitmap grafiku"
+msgstr "Izvezi bitmap slike"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -380,7 +376,7 @@ msgstr "&Molekula …"
 
 #: mainwindow.cpp:1779
 msgid "&Graphics…"
-msgstr "&Grafike …"
+msgstr "&Slike …"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -407,17 +403,12 @@ msgid "&Edit"
 msgstr "Ur&edi"
 
 #: mainwindow.cpp:1827
-#, fuzzy
-#| msgid "&Graphics…"
 msgid "&Copy Graphics"
-msgstr "&Grafike …"
+msgstr "&Kopiraj slike"
 
 #: mainwindow.cpp:1831
-#, fuzzy
-#| msgctxt "Select All"
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -439,7 +430,7 @@ msgstr "Perspektiva"
 
 #: mainwindow.cpp:1861
 msgid "Orthographic"
-msgstr "Ortografski"
+msgstr "Pravopis"
 
 #: mainwindow.cpp:1880
 msgid "&Extensions"
@@ -447,11 +438,11 @@ msgstr "&Proširenja"
 
 #: mainwindow.cpp:1882
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Jezik korisničkog sučelja …"
 
 #: mainwindow.cpp:1886
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "Periodni &sustav elemenata …"
 
 #: mainwindow.cpp:1892 menubuilder.cpp:80
 msgid "&Help"
@@ -461,41 +452,35 @@ msgstr "&Pomoć"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1893:114
 msgid "&About"
-msgstr "O programu"
+msgstr "&Informacije"
 
 #: mainwindow.cpp:1900
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Forum za raspravu"
+msgstr "&Forum za raspravu"
 
 #: mainwindow.cpp:1904
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadrova web stranica"
+msgstr "&Avogadro web-stranica"
 
 #: mainwindow.cpp:1908
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Prijavite grešku"
+msgstr "P&rijavi grešku"
 
 #: mainwindow.cpp:1912
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "Predloži &značajku"
 
 #: mainwindow.cpp:1936
 msgid "System Language"
-msgstr ""
+msgstr "Jezik sustava"
 
 #: mainwindow.cpp:1944
 msgid "Language"
-msgstr ""
+msgstr "Jezik"
 
 #: mainwindow.cpp:1944
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Jezik korisničkog sučelja:"
 
 #: mainwindow.cpp:2048
 #, qt-format
@@ -508,7 +493,7 @@ msgstr "Želiš li spremiti promjene u dokumentu?"
 
 #: mainwindow.cpp:2072
 msgid "Your changes will be lost if you don't save them."
-msgstr "Vaše promjene će biti izgubljene ako ih ne spremite."
+msgstr "Izgubit ćeš promjene ako ih ne spremiš."
 
 #: mainwindow.cpp:2080
 msgctxt "Save"
@@ -521,10 +506,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2165
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Provjera mrežnog ažuriranja nije uspjela"
+msgstr "Mrežno preuzimanje nije uspjelo"
 
 #: mainwindow.cpp:2166
 msgid "Network timeout or other error."
@@ -533,22 +516,20 @@ msgstr "Mrežni timeout ili neka druga greška.."
 #: mainwindow.cpp:2205
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Tvoja verzija: %1"
 
 #: mainwindow.cpp:2206
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Git revizija: %1)"
+msgstr "Nova verzija: %1"
 
 #: mainwindow.cpp:2207
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "Dostupna je nova verzija. Želiš li je sada preuzeti?\n"
 
 #: mainwindow.cpp:2210
 msgid "Version Update"
-msgstr ""
+msgstr "Aktualiziranje verzije"
 
 #: mainwindow.cpp:2261
 #, qt-format
@@ -589,14 +570,12 @@ msgid "&Window"
 msgstr "&Prozor"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Novi prikaz"
+msgstr "3D prikaz"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
