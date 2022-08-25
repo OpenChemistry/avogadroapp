@@ -345,6 +345,8 @@ private slots:
 
   void setBackgroundColor();
 
+  void setRenderingSettings();
+
   void setProjectionOrthographic();
 
   void setProjectionPerspective();

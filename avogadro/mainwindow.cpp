@@ -9,6 +9,7 @@
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
 #include "menubuilder.h"
+#include "renderingdialog.h"
 #include "tooltipfilter.h"
 #include "viewfactory.h"
 
@@ -344,6 +345,14 @@ void MainWindow::setupInterface()
 
   m_multiViewWidget->addWidget(glWidget);
   ActiveObjects::instance().setActiveGLWidget(glWidget);
+
+  // set solid pipeline parameters
+  Rendering::SolidPipeline *pipeline = &glWidget->renderer().solidPipeline();
+  if (pipeline) {
+    pipeline->setAoEnabled(settings.value("MainWindow/ao_enabled", true).toBool());
+    pipeline->setAoStrength(settings.value("MainWindow/ao_strength", 1.0f).toFloat());
+    pipeline->setEdEnabled(settings.value("MainWindow/ed_enabled", true).toBool());
+  }
 
   // Our tool dock.
   m_toolDock = new QDockWidget(tr("Tool"), this);
@@ -1627,6 +1636,22 @@ void MainWindow::setBackgroundColor()
   }
 }
 
+void MainWindow::setRenderingSettings()
+{
+  Rendering::SolidPipeline *pipeline(nullptr);
+  GLWidget *glWidget(nullptr);
+  if ((glWidget = qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget())))
+    pipeline = &glWidget->renderer().solidPipeline();
+  if (pipeline) {
+    RenderingDialog dialog(this, *pipeline);
+    dialog.exec();
+    QSettings settings;
+    settings.setValue("MainWindow/ao_enabled", pipeline->getAoEnabled());
+    settings.setValue("MainWindow/ao_strength", pipeline->getAoStrength());
+    settings.setValue("MainWindow/ed_enabled", pipeline->getEdEnabled());
+  }
+}
+
 void MainWindow::setProjectionPerspective()
 {
   Rendering::GLRenderer* renderer(nullptr);
@@ -1845,6 +1870,10 @@ void MainWindow::buildMenu()
   action = new QAction(tr("Set Background Color…"), this);
   m_menuBuilder->addAction(viewPath, action, 100);
   connect(action, &QAction::triggered, this, &MainWindow::setBackgroundColor);
+
+  action = new QAction(tr("Rendering…"), this);
+  m_menuBuilder->addAction(viewPath, action, 100);
+  connect(action, &QAction::triggered, this, &MainWindow::setRenderingSettings);
 
   // set default projection
   QSettings settings;
