@@ -346,6 +346,14 @@ void MainWindow::setupInterface()
   m_multiViewWidget->addWidget(glWidget);
   ActiveObjects::instance().setActiveGLWidget(glWidget);
 
+  // set solid pipeline parameters
+  Rendering::SolidPipeline *pipeline = &glWidget->renderer().solidPipeline();
+  if (pipeline) {
+    pipeline->setAoEnabled(settings.value("MainWindow/ao_enabled", true).toBool());
+    pipeline->setAoStrength(settings.value("MainWindow/ao_strength", 1.0f).toFloat());
+    pipeline->setEdEnabled(settings.value("MainWindow/ed_enabled", true).toBool());
+  }
+
   // Our tool dock.
   m_toolDock = new QDockWidget(tr("Tool"), this);
   addDockWidget(Qt::LeftDockWidgetArea, m_toolDock);
@@ -1637,6 +1645,10 @@ void MainWindow::setRenderingSettings()
   if (pipeline) {
     RenderingDialog dialog(this, *pipeline);
     dialog.exec();
+    QSettings settings;
+    settings.setValue("MainWindow/ao_enabled", pipeline->getAoEnabled());
+    settings.setValue("MainWindow/ao_strength", pipeline->getAoStrength());
+    settings.setValue("MainWindow/ed_enabled", pipeline->getEdEnabled());
   }
 }
 
