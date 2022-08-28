@@ -14,6 +14,8 @@ endif()
 
 if(MSVC)
   add_definitions("-D_CRT_SECURE_NO_WARNINGS")
+else()
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
 endif()
 
 # Find the Qt components we need.
