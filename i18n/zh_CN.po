@@ -5,13 +5,14 @@
 # Liu Tao <lyuutau@outlook.com>, 2021.
 # 刘韬 <lyuutau@outlook.com>, 2021.
 # joe <ourmicroid@outlook.com>, 2022.
+# Hugel <qihu@nfschina.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-08-21 03:21+0000\n"
-"PO-Revision-Date: 2022-07-15 06:14+0000\n"
-"Last-Translator: joe <ourmicroid@outlook.com>\n"
+"PO-Revision-Date: 2022-08-24 06:20+0000\n"
+"Last-Translator: Hugel <qihu@nfschina.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -85,11 +86,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:690
 msgid "Restart needed"
-msgstr ""
+msgstr "需要重新启动"
 
 #: mainwindow.cpp:691
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "使用新的语言需要重新启动Avogadro。"
 
 #: mainwindow.cpp:711 mainwindow.cpp:1374
 msgid "Chemical Markup Language"
@@ -447,7 +448,7 @@ msgstr "扩展(&E)"
 
 #: mainwindow.cpp:1882
 msgid "User Interface Language…"
-msgstr ""
+msgstr "用户界面语言…"
 
 #: mainwindow.cpp:1886
 msgid "&Periodic Table…"
@@ -487,7 +488,7 @@ msgstr ""
 
 #: mainwindow.cpp:1936
 msgid "System Language"
-msgstr ""
+msgstr "系统语言"
 
 #: mainwindow.cpp:1944
 msgid "Language"
@@ -495,7 +496,7 @@ msgstr "语言"
 
 #: mainwindow.cpp:1944
 msgid "User Interface Language:"
-msgstr ""
+msgstr "用户界面语言："
 
 #: mainwindow.cpp:2048
 #, qt-format
@@ -533,7 +534,7 @@ msgstr "网络超时或发生其它错误."
 #: mainwindow.cpp:2205
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "你的版本： %1"
 
 #: mainwindow.cpp:2206
 #, fuzzy, qt-format
@@ -544,11 +545,11 @@ msgstr "(Git 修订版本：%1)"
 
 #: mainwindow.cpp:2207
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "有更新，你现在想要下载吗?\n"
 
 #: mainwindow.cpp:2210
 msgid "Version Update"
-msgstr ""
+msgstr "版本更新"
 
 #: mainwindow.cpp:2261
 #, fuzzy, qt-format
