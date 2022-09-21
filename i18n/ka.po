@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Avogadro 1.95.1\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-08-28 13:07+0000\n"
-"PO-Revision-Date: 2022-08-16 11:17+0000\n"
+"PO-Revision-Date: 2022-09-22 04:21+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ka/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -420,7 +420,7 @@ msgstr "ფონის ფერის დაყენება…"
 
 #: mainwindow.cpp:1874
 msgid "Rendering…"
-msgstr ""
+msgstr "რენდერი…"
 
 #: mainwindow.cpp:1882
 msgid "Projection"
@@ -509,29 +509,29 @@ msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2194
 msgid "Network Download Failed"
-msgstr ""
+msgstr "ქსელიდან გადმოწერის შეცდომა"
 
 #: mainwindow.cpp:2195
 msgid "Network timeout or other error."
-msgstr ""
+msgstr "ქსელის დრო ამოიწურა ან სხვა შეცდომა."
 
 #: mainwindow.cpp:2234
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "თქვენი ვერსია: %1"
 
 #: mainwindow.cpp:2235
 #, qt-format
 msgid "New version: %1"
-msgstr ""
+msgstr "ახალი ვერსია: %1"
 
 #: mainwindow.cpp:2236
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "ხელმისაწვდომია განახლება. გნებავთ, ახლავე გადმოწეროთ?\n"
 
 #: mainwindow.cpp:2239
 msgid "Version Update"
-msgstr ""
+msgstr "ვერსიის განახლება"
 
 #: mainwindow.cpp:2290
 #, qt-format
@@ -852,38 +852,34 @@ msgstr "&შემოტანა"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "ატმოსფერული ოკლუზია:"
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "ჩართვა"
 
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "ჩრდილის სიძლიერე:"
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid "Edge Detection:"
-msgstr ""
+msgstr "კიდეების ამოცნობა:"
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
-#, fuzzy
-#| msgid "&Save"
 msgid "Save"
-msgstr "&შენახვა"
+msgstr "შენახვა"
 
 #. i18n: file: renderingdialog.ui:158
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "&დახურვა"
+msgstr "დახურვა"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
