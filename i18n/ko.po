@@ -2,40 +2,41 @@
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
-#
+# Hoseok Seo <ddinghoya@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-08-28 13:07+0000\n"
-"PO-Revision-Date: 2016-06-10 06:22+0000\n"
-"Last-Translator: seokhyun an <an6207@gmail.com>\n"
-"Language-Team: Korean <ko@li.org>\n"
+"PO-Revision-Date: 2022-09-24 03:28+0000\n"
+"Last-Translator: Hoseok Seo <ddinghoya@gmail.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.14.1\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat에 분자가 설정되지 않았습니다!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat에 설정된 파일 형식이 없습니다!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat에 설정된 파일 이름이 없습니다!"
 
 #: mainwindow.cpp:309
 msgid "Ready…"
-msgstr ""
+msgstr "준비 중…"
 
 #: mainwindow.cpp:358
-#, fuzzy
 msgid "Tool"
 msgstr "도구"
 
@@ -45,16 +46,15 @@ msgstr "표시 형식"
 
 #: mainwindow.cpp:373
 msgid "View Configuration"
-msgstr ""
+msgstr "보기 구성"
 
 #: mainwindow.cpp:379
-#, fuzzy
 msgid "Molecules"
 msgstr "분자"
 
 #: mainwindow.cpp:388
 msgid "Layers"
-msgstr ""
+msgstr "레이어"
 
 #: mainwindow.cpp:407
 #, fuzzy
@@ -63,58 +63,54 @@ msgid "File"
 msgstr "&파일"
 
 #: mainwindow.cpp:412
-#, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "도구"
 
 #: mainwindow.cpp:645
-#, fuzzy
 msgid "Untitled"
-msgstr "제목없음"
+msgstr "제목 없음"
 
 #: mainwindow.cpp:650
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1%2 - 아보가드로 %3"
 
 #: mainwindow.cpp:699
 msgid "Restart needed"
-msgstr ""
+msgstr "재시작 필요"
 
 #: mainwindow.cpp:700
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "새로운 언어를 사용하려면 아보가드로를 다시 시작하세요."
 
 #: mainwindow.cpp:720 mainwindow.cpp:1383
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "화학적 마크업 언어"
 
 #: mainwindow.cpp:721 mainwindow.cpp:1382
 msgid "Chemical JSON"
-msgstr ""
+msgstr "화학 JSON"
 
 #: mainwindow.cpp:727
 msgid "Open chemical file"
-msgstr ""
+msgstr "화학 파일 열기"
 
 #: mainwindow.cpp:745 mainwindow.cpp:769 mainwindow.cpp:1285
 #: mainwindow.cpp:2310
-#, fuzzy
 msgid "Cannot open file"
-msgstr "%1 파일을 저장할 수 없습니다"
+msgstr "파일을 열 수 없음"
 
 #: mainwindow.cpp:746 mainwindow.cpp:770 mainwindow.cpp:1286
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "%1 파일을 저장할 수 없습니다"
+msgstr "제공된 %1 파일을 열 수 없음"
 
 #: mainwindow.cpp:759
-#, fuzzy
 msgid "Open Molecule"
-msgstr "분자"
+msgstr "분자 열기"
 
 #: mainwindow.cpp:783
 msgid "Commands"
