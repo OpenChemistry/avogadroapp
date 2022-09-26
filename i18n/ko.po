@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-08-28 13:07+0000\n"
-"PO-Revision-Date: 2022-09-25 10:17+0000\n"
+"PO-Revision-Date: 2022-09-27 17:16+0000\n"
 "Last-Translator: Hoseok Seo <ddinghoya@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ko/>\n"
@@ -236,7 +236,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1243
 msgid "Export Bitmap Graphics"
-msgstr "비트맵 그래픽으로 내보내기"
+msgstr "비트맵 그래픽 내보내기"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -801,7 +801,7 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "선택 안 함"
+msgstr "없음 선택"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
