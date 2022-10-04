@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-08-28 13:07+0000\n"
-"PO-Revision-Date: 2022-07-23 00:43+0000\n"
+"PO-Revision-Date: 2022-10-05 17:43+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.14.1\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -118,7 +118,7 @@ msgstr "コマンド"
 
 #: mainwindow.cpp:783
 msgid "Input Generators"
-msgstr ""
+msgstr "インプットジェネレータ"
 
 #: mainwindow.cpp:783
 msgid "File Formats"
@@ -313,12 +313,12 @@ msgstr "テスト(&T)"
 #: mainwindow.cpp:1724
 #, fuzzy
 msgid "Record test…"
-msgstr "レコード テスト..."
+msgstr "テストを記録…"
 
 #: mainwindow.cpp:1727
 #, fuzzy
 msgid "Play test…"
-msgstr "プレイ テスト..."
+msgstr "テストを再生…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -404,7 +404,7 @@ msgstr "編集 (&E)"
 #: mainwindow.cpp:1852
 #, fuzzy
 msgid "&Copy Graphics"
-msgstr "グラフィックスをコピー(&G)"
+msgstr "グラフィックスをコピー(&C)"
 
 #: mainwindow.cpp:1856
 msgid "Ctrl+Alt+C"
@@ -515,23 +515,21 @@ msgstr "Ctrl+D"
 #, fuzzy
 #| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "ネットワーク更新チェックに失敗しました"
+msgstr "ネットワークダウンロードに失敗しました"
 
 #: mainwindow.cpp:2195
 msgid "Network timeout or other error."
 msgstr "ネットワーク・タイムアウトまたはその他のエラー"
 
 #: mainwindow.cpp:2234
-#, qt-format
+#, fuzzy, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "お使いのバージョン: %1"
 
 #: mainwindow.cpp:2235
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Gitのリビジョン番号: %1)"
+msgstr "新しいバージョン: %1"
 
 #: mainwindow.cpp:2236
 msgid "An update is available, do you want to download it now?\n"
@@ -539,7 +537,7 @@ msgstr ""
 
 #: mainwindow.cpp:2239
 msgid "Version Update"
-msgstr ""
+msgstr "バージョンアップデート"
 
 #: mainwindow.cpp:2290
 #, qt-format
@@ -876,10 +874,8 @@ msgstr ""
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid "User Selections"
 msgid "Edge Detection:"
-msgstr "ユーザ選択"
+msgstr ""
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
@@ -888,10 +884,8 @@ msgstr "保存"
 
 #. i18n: file: renderingdialog.ui:158
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "閉じる(&C)"
+msgstr "閉じる"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
