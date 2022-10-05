@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2022-08-28 13:07+0000\n"
+"POT-Creation-Date: 2022-10-02 03:55+0000\n"
 "PO-Revision-Date: 2021-01-17 18:32+0000\n"
 "Last-Translator: Evgeny Chernyavsky <yavgech@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/avogadro/"
@@ -38,154 +38,154 @@ msgstr ""
 msgid "Ready…"
 msgstr "מוכן..."
 
-#: mainwindow.cpp:358
+#: mainwindow.cpp:361
 msgid "Tool"
 msgstr "כלי"
 
-#: mainwindow.cpp:362
+#: mainwindow.cpp:365
 msgid "Display Types"
 msgstr "סוגי תצוגה"
 
-#: mainwindow.cpp:373
+#: mainwindow.cpp:376
 msgid "View Configuration"
 msgstr "צפה בהגדרות"
 
-#: mainwindow.cpp:379
+#: mainwindow.cpp:382
 #, fuzzy
 msgid "Molecules"
 msgstr "מולקולה"
 
-#: mainwindow.cpp:388
+#: mainwindow.cpp:391
 msgid "Layers"
 msgstr ""
 
-#: mainwindow.cpp:407
+#: mainwindow.cpp:410
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
 msgstr "&קובץ"
 
-#: mainwindow.cpp:412
+#: mainwindow.cpp:415
 #, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "כלי"
 
-#: mainwindow.cpp:645
+#: mainwindow.cpp:648
 #, fuzzy
 msgid "Untitled"
 msgstr "ללא שם"
 
-#: mainwindow.cpp:650
+#: mainwindow.cpp:653
 #, fuzzy, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "אבוגדרו"
 
-#: mainwindow.cpp:699
+#: mainwindow.cpp:702
 msgid "Restart needed"
 msgstr ""
 
-#: mainwindow.cpp:700
+#: mainwindow.cpp:703
 msgid "Please restart Avogadro to use the new language."
 msgstr ""
 
-#: mainwindow.cpp:720 mainwindow.cpp:1383
+#: mainwindow.cpp:723 mainwindow.cpp:1386
 msgid "Chemical Markup Language"
 msgstr ""
 
-#: mainwindow.cpp:721 mainwindow.cpp:1382
+#: mainwindow.cpp:724 mainwindow.cpp:1385
 msgid "Chemical JSON"
 msgstr ""
 
-#: mainwindow.cpp:727
+#: mainwindow.cpp:730
 msgid "Open chemical file"
 msgstr ""
 
-#: mainwindow.cpp:745 mainwindow.cpp:769 mainwindow.cpp:1285
-#: mainwindow.cpp:2310
+#: mainwindow.cpp:748 mainwindow.cpp:772 mainwindow.cpp:1288
+#: mainwindow.cpp:2321
 msgid "Cannot open file"
 msgstr "לא ניתן לפתוח את הקובץ"
 
-#: mainwindow.cpp:746 mainwindow.cpp:770 mainwindow.cpp:1286
+#: mainwindow.cpp:749 mainwindow.cpp:773 mainwindow.cpp:1289
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "לא ניתן לפתוח את הקובץ %1"
 
-#: mainwindow.cpp:759
+#: mainwindow.cpp:762
 #, fuzzy
 msgid "Open Molecule"
 msgstr "מולקולה"
 
-#: mainwindow.cpp:783
+#: mainwindow.cpp:786
 msgid "Commands"
 msgstr ""
 
-#: mainwindow.cpp:783
+#: mainwindow.cpp:786
 msgid "Input Generators"
 msgstr ""
 
-#: mainwindow.cpp:783
+#: mainwindow.cpp:786
 #, fuzzy
 msgid "File Formats"
 msgstr "שגיאת קובץ"
 
-#: mainwindow.cpp:784
+#: mainwindow.cpp:787
 msgctxt "atomic electrostatics"
 msgid "Charges"
 msgstr ""
 
-#: mainwindow.cpp:788
+#: mainwindow.cpp:791
 msgid "Install Plugin Script"
 msgstr ""
 
-#: mainwindow.cpp:788
+#: mainwindow.cpp:791
 msgid "Script Type:"
 msgstr ""
 
-#: mainwindow.cpp:839 mainwindow.cpp:1281
+#: mainwindow.cpp:842 mainwindow.cpp:1284
 msgid "Select file reader"
 msgstr "בחר בקורא קבצים"
 
-#: mainwindow.cpp:868
+#: mainwindow.cpp:871
 msgid "Reading File"
 msgstr "קורא קובץ"
 
-#: mainwindow.cpp:870
+#: mainwindow.cpp:873
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
 
-#: mainwindow.cpp:901
+#: mainwindow.cpp:904
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
-#: mainwindow.cpp:906
+#: mainwindow.cpp:909
 msgid "File error"
 msgstr "שגיאת קובץ"
 
-#: mainwindow.cpp:907
+#: mainwindow.cpp:910
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
 
-#: mainwindow.cpp:934
+#: mainwindow.cpp:937
 #, fuzzy, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "לא ניתן לשמור את הקובץ %1"
 
-#: mainwindow.cpp:942
+#: mainwindow.cpp:945
 msgid "Error saving file"
 msgstr ""
 
-#: mainwindow.cpp:943
+#: mainwindow.cpp:946
 #, fuzzy, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -193,11 +193,11 @@ msgid ""
 "%2"
 msgstr "שגיאה בעת כתיב  לקובץ"
 
-#: mainwindow.cpp:982
+#: mainwindow.cpp:985
 msgid "Error: Failed to initialize OpenGL context"
 msgstr ""
 
-#: mainwindow.cpp:983
+#: mainwindow.cpp:986
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -205,50 +205,50 @@ msgid ""
 "%1"
 msgstr ""
 
-#: mainwindow.cpp:984
+#: mainwindow.cpp:987
 msgid "Unknown error"
 msgstr ""
 
-#: mainwindow.cpp:1110 mainwindow.cpp:1111
+#: mainwindow.cpp:1113 mainwindow.cpp:1114
 msgid "Navigate tool"
 msgstr ""
 
-#: mainwindow.cpp:1231
+#: mainwindow.cpp:1234
 msgid "Common image formats"
 msgstr "סוגי קבצי תמונות נפוצים"
 
-#: mainwindow.cpp:1233
+#: mainwindow.cpp:1236
 msgid "All files"
 msgstr "כל הקבצים"
 
-#: mainwindow.cpp:1233
+#: mainwindow.cpp:1236
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1234
+#: mainwindow.cpp:1237
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1234
+#: mainwindow.cpp:1237
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1243
+#: mainwindow.cpp:1246
 msgid "Export Bitmap Graphics"
 msgstr "יצא גרפיקת מפת סיביות"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1254 mainwindow.cpp:1356 mainwindow.cpp:2092:33
+#: mainwindow.cpp:1257 mainwindow.cpp:1359 mainwindow.cpp:2096:33
 msgid "Avogadro"
 msgstr "אבוגדרו"
 
-#: mainwindow.cpp:1255
+#: mainwindow.cpp:1258
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "לא ניתן לשמור את הקובץ %1"
 
-#: mainwindow.cpp:1357
+#: mainwindow.cpp:1360
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -256,24 +256,24 @@ msgid ""
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
 
-#: mainwindow.cpp:1364
+#: mainwindow.cpp:1367
 msgid "Export"
 msgstr "יצוא"
 
-#: mainwindow.cpp:1388
+#: mainwindow.cpp:1391
 msgid "Save chemical file"
 msgstr ""
 
-#: mainwindow.cpp:1429
+#: mainwindow.cpp:1432
 #, fuzzy
 msgid "Export Molecule"
 msgstr "קובץ מולקולה חשוב"
 
-#: mainwindow.cpp:1481
+#: mainwindow.cpp:1484
 msgid "Saving File in Progress…"
 msgstr ""
 
-#: mainwindow.cpp:1483
+#: mainwindow.cpp:1486
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -281,44 +281,44 @@ msgid ""
 "with “%2”"
 msgstr ""
 
-#: mainwindow.cpp:1595
+#: mainwindow.cpp:1599
 #, fuzzy, qt-format
 msgid "&Undo %1"
 msgstr "&בטל"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1598 mainwindow.cpp:1841:117
+#: mainwindow.cpp:1602 mainwindow.cpp:1845:117
 msgid "&Undo"
 msgstr "&בטל"
 
-#: mainwindow.cpp:1603
+#: mainwindow.cpp:1607
 #, fuzzy, qt-format
 msgid "&Redo %1"
 msgstr "&בצע שוב"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1606 mainwindow.cpp:1846:123
+#: mainwindow.cpp:1610 mainwindow.cpp:1850:123
 msgid "&Redo"
 msgstr "&בצע שוב"
 
-#: mainwindow.cpp:1722
+#: mainwindow.cpp:1726
 #, fuzzy
 msgid "&Testing"
 msgstr "הגדרות"
 
-#: mainwindow.cpp:1724
+#: mainwindow.cpp:1728
 msgid "Record test…"
 msgstr ""
 
-#: mainwindow.cpp:1727
+#: mainwindow.cpp:1731
 msgid "Play test…"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:1741 menubuilder.cpp:76:36
+#: mainwindow.cpp:1745 menubuilder.cpp:76:36
 msgid "&File"
 msgstr "&קובץ"
 
@@ -326,13 +326,13 @@ msgstr "&קובץ"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1743:75 rc.cpp:81
+#: mainwindow.cpp:1747:75 rc.cpp:81
 msgid "&New"
 msgstr "&חדש"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1752:51
+#: mainwindow.cpp:1756:51
 #, fuzzy
 msgid "&Open…"
 msgstr "&פתח"
@@ -341,7 +341,7 @@ msgstr "&פתח"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1761:84 rc.cpp:90
+#: mainwindow.cpp:1765:84 rc.cpp:90
 msgid "&Close"
 msgstr "&סגור"
 
@@ -349,30 +349,30 @@ msgstr "&סגור"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1775:93 rc.cpp:99
+#: mainwindow.cpp:1779:93 rc.cpp:99
 msgid "&Save"
 msgstr "&שמירה"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1784:102
+#: mainwindow.cpp:1788:102
 #, fuzzy
 msgid "Save &As…"
 msgstr "שמירה &בשם..."
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1795:195
+#: mainwindow.cpp:1799:195
 #, fuzzy
 msgid "&Export"
 msgstr "יצוא"
 
-#: mainwindow.cpp:1796
+#: mainwindow.cpp:1800
 #, fuzzy
 msgid "&Molecule…"
 msgstr "מולקולה"
 
-#: mainwindow.cpp:1804
+#: mainwindow.cpp:1808
 #, fuzzy
 msgid "&Graphics…"
 msgstr "&גרפיקה..."
@@ -381,33 +381,33 @@ msgstr "&גרפיקה..."
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1812:60 rc.cpp:66
+#: mainwindow.cpp:1816:60 rc.cpp:66
 msgid "&Quit"
 msgstr "&יציאה"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1822:189
+#: mainwindow.cpp:1826:189
 #, fuzzy
 msgid "Open Recent"
 msgstr "פתח &אחרונים"
 
-#: mainwindow.cpp:1834
+#: mainwindow.cpp:1838
 msgid "No recent files"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1840 menubuilder.cpp:76:45
+#: mainwindow.cpp:1844 menubuilder.cpp:76:45
 msgid "&Edit"
 msgstr "&עריכה"
 
-#: mainwindow.cpp:1852
+#: mainwindow.cpp:1856
 #, fuzzy
 msgid "&Copy Graphics"
 msgstr "&גרפיקה..."
 
-#: mainwindow.cpp:1856
+#: mainwindow.cpp:1860
 #, fuzzy
 #| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
@@ -415,156 +415,156 @@ msgstr "Ctrl+A"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1869 menubuilder.cpp:76:42
+#: mainwindow.cpp:1873 menubuilder.cpp:76:42
 msgid "&View"
 msgstr "&תצוגה"
 
-#: mainwindow.cpp:1870
+#: mainwindow.cpp:1874
 #, fuzzy
 msgid "Set Background Color…"
 msgstr "קבע &צבע רקע..."
 
-#: mainwindow.cpp:1874
+#: mainwindow.cpp:1878
 msgid "Rendering…"
 msgstr ""
 
-#: mainwindow.cpp:1882
+#: mainwindow.cpp:1886
 msgid "Projection"
 msgstr ""
 
-#: mainwindow.cpp:1883
+#: mainwindow.cpp:1887
 msgid "Perspective"
 msgstr ""
 
-#: mainwindow.cpp:1890
+#: mainwindow.cpp:1894
 msgid "Orthographic"
 msgstr ""
 
-#: mainwindow.cpp:1909
+#: mainwindow.cpp:1913
 #, fuzzy
 msgid "&Extensions"
 msgstr "הרחבות"
 
-#: mainwindow.cpp:1911
+#: mainwindow.cpp:1915
 msgid "User Interface Language…"
 msgstr ""
 
-#: mainwindow.cpp:1915
+#: mainwindow.cpp:1919
 msgid "&Periodic Table…"
 msgstr ""
 
-#: mainwindow.cpp:1921 menubuilder.cpp:80
+#: mainwindow.cpp:1925 menubuilder.cpp:80
 msgid "&Help"
 msgstr "&עזרה"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1922:114
+#: mainwindow.cpp:1926:114
 msgid "&About"
 msgstr "&אודות"
 
-#: mainwindow.cpp:1929
+#: mainwindow.cpp:1933
 msgid "&Discussion Forum"
 msgstr ""
 
-#: mainwindow.cpp:1933
+#: mainwindow.cpp:1937
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
 msgstr "דף הבית של אבוגדרו"
 
-#: mainwindow.cpp:1937
+#: mainwindow.cpp:1941
 #, fuzzy
 #| msgid "Report a Bug"
 msgid "&Report a Bug"
 msgstr "דווח על תקלה"
 
-#: mainwindow.cpp:1941
+#: mainwindow.cpp:1945
 msgid "&Suggest a Feature"
 msgstr ""
 
-#: mainwindow.cpp:1965
+#: mainwindow.cpp:1969
 msgid "System Language"
 msgstr ""
 
-#: mainwindow.cpp:1973
+#: mainwindow.cpp:1977
 msgid "Language"
 msgstr ""
 
-#: mainwindow.cpp:1973
+#: mainwindow.cpp:1977
 msgid "User Interface Language:"
 msgstr ""
 
-#: mainwindow.cpp:2077
+#: mainwindow.cpp:2081
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr ""
 
-#: mainwindow.cpp:2093
+#: mainwindow.cpp:2097
 #, fuzzy
 msgid "Do you want to save the changes to the document?"
 msgstr "האם ברצונך לשמור את השינויים שביצעת במסמך?"
 
-#: mainwindow.cpp:2101
+#: mainwindow.cpp:2105
 msgid "Your changes will be lost if you don't save them."
 msgstr "השינויים שערכת יאבדו אם לא תשמור אותם."
 
-#: mainwindow.cpp:2109
+#: mainwindow.cpp:2113
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:2111
+#: mainwindow.cpp:2115
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2194
+#: mainwindow.cpp:2198
 #, fuzzy
 #| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
 msgstr "בדיקת עדכונים נכשלה"
 
-#: mainwindow.cpp:2195
+#: mainwindow.cpp:2199
 msgid "Network timeout or other error."
 msgstr "שגיאת רשת - סוף זמן או אחרת."
 
-#: mainwindow.cpp:2234
+#: mainwindow.cpp:2238
 #, qt-format
 msgid "Your version: %1"
 msgstr ""
 
-#: mainwindow.cpp:2235
+#: mainwindow.cpp:2239
 #, fuzzy, qt-format
 #| msgctxt "%1 is the Git revision number."
 #| msgid "(Git revision: %1)"
 msgid "New version: %1"
 msgstr "גרסת גיט: %1"
 
-#: mainwindow.cpp:2236
+#: mainwindow.cpp:2241
 msgid "An update is available, do you want to download it now?\n"
 msgstr ""
 
-#: mainwindow.cpp:2239
+#: mainwindow.cpp:2243
 msgid "Version Update"
 msgstr ""
 
-#: mainwindow.cpp:2290
+#: mainwindow.cpp:2301
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr ""
 
-#: mainwindow.cpp:2306
+#: mainwindow.cpp:2317
 #, fuzzy
 msgid "Select file format"
 msgstr "בחר בקורא קבצים"
 
-#: mainwindow.cpp:2311 mainwindow.cpp:2322
+#: mainwindow.cpp:2322 mainwindow.cpp:2333
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr ""
 
-#: mainwindow.cpp:2321
+#: mainwindow.cpp:2332
 #, fuzzy
 msgid "Cannot open files"
 msgstr "לא ניתן לשמור את הקובץ %1"
