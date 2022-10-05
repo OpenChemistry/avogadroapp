@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-10-05 17:43+0000\n"
+"PO-Revision-Date: 2022-10-06 20:21+0000\n"
 "Last-Translator: Koen Roggemans <koen@roggemans.net>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/nl/>\n"
@@ -122,7 +122,7 @@ msgstr "Ingangsgeneratoren"
 
 #: mainwindow.cpp:786
 msgid "File Formats"
-msgstr "Bestandformaten:"
+msgstr "Bestandsformaten"
 
 #: mainwindow.cpp:787
 msgctxt "atomic electrostatics"
@@ -217,7 +217,7 @@ msgstr "Navigatie-tool"
 
 #: mainwindow.cpp:1234
 msgid "Common image formats"
-msgstr "Veelvoorkomende afbeeldingsformaten."
+msgstr "Veelvoorkomende afbeeldingsformaten"
 
 #: mainwindow.cpp:1236
 msgid "All files"
@@ -363,7 +363,7 @@ msgstr "&Opslaan"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1788:102
 msgid "Save &As…"
-msgstr "Opslaan &Als…"
+msgstr "Opslaan &als…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -469,7 +469,7 @@ msgstr "&Avogadro Website"
 
 #: mainwindow.cpp:1941
 msgid "&Report a Bug"
-msgstr "Een &Bug Rapporteren"
+msgstr "&Rapporteer een bug"
 
 #: mainwindow.cpp:1945
 msgid "&Suggest a Feature"
@@ -728,7 +728,7 @@ msgstr "Terugkeren naar bewaard bestand"
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color…"
-msgstr "Stel achtergrondkleur in…"
+msgstr "&Achtergrondkleur instellen…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
