@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # M3CG <cgmario1999@gmail.com>, 2021.
-# Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu.ar>, 2021.
+# Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu.ar>, 2021, 2022.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2022.
 # Andrés Henao <andreshenao31@gmail.com>, 2022.
@@ -14,7 +14,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
 "PO-Revision-Date: 2022-10-20 20:07+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"Last-Translator: Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu."
+"ar>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -93,7 +94,7 @@ msgstr "Reinicie Avogadro para usar el nuevo idioma."
 
 #: mainwindow.cpp:723 mainwindow.cpp:1386
 msgid "Chemical Markup Language"
-msgstr "Lenguaje de marcado químico"
+msgstr "Lenguaje de marcado químico (CML)"
 
 #: mainwindow.cpp:724 mainwindow.cpp:1385
 msgid "Chemical JSON"
