@@ -3,17 +3,19 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # M3CG <cgmario1999@gmail.com>, 2021.
-# Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu.ar>, 2021.
+# Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu.ar>, 2021, 2022.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2022.
 # Andrés Henao <andreshenao31@gmail.com>, 2022.
+# gallegonovato <fran-carro@hotmail.es>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-06-29 08:21+0000\n"
-"Last-Translator: Andrés Henao <andreshenao31@gmail.com>\n"
+"PO-Revision-Date: 2022-10-20 20:07+0000\n"
+"Last-Translator: Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu."
+"ar>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -21,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.13.1-dev\n"
+"X-Generator: Weblate 4.14.2-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -62,15 +64,11 @@ msgid "Layers"
 msgstr "Capas"
 
 #: mainwindow.cpp:410
-#, fuzzy
-#| msgid "File"
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Archivo"
 
 #: mainwindow.cpp:415
-#, fuzzy
-#| msgid "Tools"
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Herramientas"
@@ -92,11 +90,11 @@ msgstr "Reinicio necesario"
 
 #: mainwindow.cpp:703
 msgid "Please restart Avogadro to use the new language."
-msgstr "Por favor, reinicie Avogadro para usar el nuevo idioma."
+msgstr "Reinicie Avogadro para usar el nuevo idioma."
 
 #: mainwindow.cpp:723 mainwindow.cpp:1386
 msgid "Chemical Markup Language"
-msgstr "Lenguaje de marcado químico"
+msgstr "Lenguaje de marcado químico (CML)"
 
 #: mainwindow.cpp:724 mainwindow.cpp:1385
 msgid "Chemical JSON"
@@ -133,11 +131,9 @@ msgid "File Formats"
 msgstr "Formatos de archivo"
 
 #: mainwindow.cpp:787
-#, fuzzy
-#| msgid "Charge:"
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr "Carga:"
+msgstr "Cargos"
 
 #: mainwindow.cpp:791
 msgid "Install Plugin Script"
@@ -431,10 +427,8 @@ msgid "Set Background Color…"
 msgstr "Establecer el Color de fondo…"
 
 #: mainwindow.cpp:1878
-#, fuzzy
-#| msgid "Rendering:"
 msgid "Rendering…"
-msgstr "Trazado:"
+msgstr "Representación…"
 
 #: mainwindow.cpp:1886
 msgid "Projection"
@@ -454,7 +448,7 @@ msgstr "&Complementos"
 
 #: mainwindow.cpp:1915
 msgid "User Interface Language…"
-msgstr "Interfaz de idioma de usuario…"
+msgstr "Idioma de la interfaz de usuario…"
 
 #: mainwindow.cpp:1919
 msgid "&Periodic Table…"
@@ -472,7 +466,7 @@ msgstr "&Acerca de"
 
 #: mainwindow.cpp:1933
 msgid "&Discussion Forum"
-msgstr "&Foro de discusión"
+msgstr "&Foro de Discusión"
 
 #: mainwindow.cpp:1937
 msgid "&Avogadro Website"
@@ -522,36 +516,30 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2198
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Falló la comprobación de actualización de red"
+msgstr "Descarga de red fallida"
 
 #: mainwindow.cpp:2199
 msgid "Network timeout or other error."
 msgstr "Venció el tiempo de red u otro error."
 
 #: mainwindow.cpp:2238
-#, fuzzy, qt-format
-#| msgid "Torsion %1"
+#, qt-format
 msgid "Your version: %1"
-msgstr "Torsión %1"
+msgstr "Su versión: %1"
 
 #: mainwindow.cpp:2239
-#, fuzzy, qt-format
-#| msgid "Torsion %1"
+#, qt-format
 msgid "New version: %1"
-msgstr "Torsión %1"
+msgstr "Nueva versión: %1"
 
 #: mainwindow.cpp:2241
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "Hay una actualización disponible, ¿quieres descargarla ahora?\n"
 
 #: mainwindow.cpp:2243
-#, fuzzy
-#| msgid "Transition State"
 msgid "Version Update"
-msgstr "Estado de transición"
+msgstr "Actualización de la versión"
 
 #: mainwindow.cpp:2301
 #, qt-format
@@ -596,7 +584,6 @@ msgid "3D View"
 msgstr "Vista 3D"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
-#, fuzzy
 msgid "VTK"
 msgstr "VTK"
 
@@ -649,54 +636,38 @@ msgstr ""
 
 #. i18n: file: aboutdialog.ui:224
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-#| "\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
-#| "\"><span style=\" font-size:10pt; text-decoration: underline; color:"
-#| "#0000ff;\">BSD-3-Clause</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause"
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">Licencia: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
-"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
-"\">BSD-3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Licencia: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:264
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span "
-#| "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
-#| "org</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
-"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
-"span></a></p></body></html>"
+"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style=\""
+" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:293
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" "
-#| "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></"
-#| "p></body></html>"
 msgid ""
 "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
 "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
-"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
-"body></html>"
+"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">www.kitware ."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:320
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -705,8 +676,6 @@ msgstr "OK"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
@@ -718,8 +687,6 @@ msgstr "&Abrir"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -736,32 +703,24 @@ msgstr "&Limpiar recientes"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+N"
 msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+W"
 msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Mayús+S"
@@ -778,16 +737,12 @@ msgstr "Establecer el &Color de fondo…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Z"
 msgctxt "Undo"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+Z"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Mays.+Z"
@@ -809,8 +764,6 @@ msgstr "Pegar"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+V"
 msgctxt "Paste"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
@@ -822,8 +775,6 @@ msgstr "Copiar"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+C"
 msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
@@ -862,8 +813,6 @@ msgstr "Seleccionar Nada"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
@@ -911,26 +860,24 @@ msgstr "&Importar"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Oclusión ambiental:"
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Habilitar"
 
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Fuerza de la sombra:"
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid "Ignore Selection"
 msgid "Edge Detection:"
-msgstr "Ignorar Selección"
+msgstr "Detección de bordes:"
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
