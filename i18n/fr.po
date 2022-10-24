@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-08-30 04:10+0000\n"
+"PO-Revision-Date: 2022-10-24 08:41+0000\n"
 "Last-Translator: Translator <kvb@tuta.io>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.14.1-dev\n"
+"X-Generator: Weblate 4.14.2-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr "Aucune molécule définie dans le format du fichier d’arrière-plan !"
+msgstr "Aucune molécule définie dans « BackgroundFileFormat » !"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "Aucun format de fichier défini dans BackgroundFileFormat !"
+msgstr "Aucun format de fichier défini dans « BackgroundFileFormat » !"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr "Aucun nom de fichier défini dans le format du fichier d’arrière-plan !"
+msgstr "Aucun nom de fichier défini dans « BackgroundFileFormat » !"
 
 #: mainwindow.cpp:309
 msgid "Ready…"
