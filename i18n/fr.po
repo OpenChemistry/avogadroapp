@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-10-24 08:41+0000\n"
+"PO-Revision-Date: 2022-10-25 10:09+0000\n"
 "Last-Translator: Translator <kvb@tuta.io>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -76,7 +76,7 @@ msgstr "Sans titre"
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "%1%2 - Avogadro %3"
+msgstr "%1%2 — Avogadro %3"
 
 #: mainwindow.cpp:702
 msgid "Restart needed"
@@ -363,7 +363,7 @@ msgstr "&Enregistrer"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1788:102
 msgid "Save &As…"
-msgstr "Enregistrer sous…"
+msgstr "Enregistrer &sous…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
