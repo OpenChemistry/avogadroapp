@@ -6,13 +6,14 @@
 # 刘韬 <lyuutau@outlook.com>, 2021.
 # joe <ourmicroid@outlook.com>, 2022.
 # Hugel <qihu@nfschina.com>, 2022.
+# alchemistcai <alchemistcai@163.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-08-24 06:20+0000\n"
-"Last-Translator: Hugel <qihu@nfschina.com>\n"
+"PO-Revision-Date: 2022-10-28 15:05+0000\n"
+"Last-Translator: alchemistcai <alchemistcai@163.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.14.2-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -57,18 +58,14 @@ msgstr "分子"
 
 #: mainwindow.cpp:391
 msgid "Layers"
-msgstr ""
+msgstr "图层"
 
 #: mainwindow.cpp:410
-#, fuzzy
-#| msgid "File"
 msgctxt "File toolbar"
 msgid "File"
 msgstr "文件"
 
 #: mainwindow.cpp:415
-#, fuzzy
-#| msgid "Tools"
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "工具"
@@ -408,17 +405,12 @@ msgid "&Edit"
 msgstr "编辑(&E)"
 
 #: mainwindow.cpp:1856
-#, fuzzy
-#| msgid "&Graphics…"
 msgid "&Copy Graphics"
-msgstr "图形(&G)…"
+msgstr "复制图形(&C)"
 
 #: mainwindow.cpp:1860
-#, fuzzy
-#| msgctxt "Select All"
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -432,7 +424,7 @@ msgstr "设置背景颜色…"
 
 #: mainwindow.cpp:1878
 msgid "Rendering…"
-msgstr ""
+msgstr "正在渲染…"
 
 #: mainwindow.cpp:1886
 msgid "Projection"
@@ -526,10 +518,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2198
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "网络更新检查失败"
+msgstr "网络下载失败"
 
 #: mainwindow.cpp:2199
 msgid "Network timeout or other error."
@@ -541,11 +531,9 @@ msgid "Your version: %1"
 msgstr "你的版本： %1"
 
 #: mainwindow.cpp:2239
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Git 修订版本：%1)"
+msgstr "新版本：%1"
 
 #: mainwindow.cpp:2241
 msgid "An update is available, do you want to download it now?\n"
@@ -558,7 +546,7 @@ msgstr "版本更新"
 #: mainwindow.cpp:2301
 #, fuzzy, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "加载 ID 为 %1 的 FileFormat 时出错。"
+msgstr "加载 %1  文件格式时出错。"
 
 #: mainwindow.cpp:2317
 msgid "Select file format"
@@ -594,10 +582,8 @@ msgid "&Window"
 msgstr "窗口(&W)"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "新建视图"
+msgstr "3D 视图"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
