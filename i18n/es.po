@@ -13,9 +13,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-10-20 20:07+0000\n"
-"Last-Translator: Leandro Martinez Heredia <lmartinezheredia@quimica.unlp.edu."
-"ar>\n"
+"PO-Revision-Date: 2022-10-31 20:08+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -474,15 +473,15 @@ msgstr "&Sitio web de Avogadro"
 
 #: mainwindow.cpp:1941
 msgid "&Report a Bug"
-msgstr "&Reportar un error"
+msgstr "&Informar de un error"
 
 #: mainwindow.cpp:1945
 msgid "&Suggest a Feature"
-msgstr "&Sugerir una Propiedad"
+msgstr "&Sugerir una característica"
 
 #: mainwindow.cpp:1969
 msgid "System Language"
-msgstr "Idioma del Sistema"
+msgstr "Lenguaje del sistema"
 
 #: mainwindow.cpp:1977
 msgid "Language"
@@ -490,7 +489,7 @@ msgstr "Idioma"
 
 #: mainwindow.cpp:1977
 msgid "User Interface Language:"
-msgstr "Idioma de la Interfaz del Usuario:"
+msgstr "Idioma de la interfaz de usuario:"
 
 #: mainwindow.cpp:2081
 #, qt-format
