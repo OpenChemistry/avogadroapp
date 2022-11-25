@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-10-14 10:56+0000\n"
+"PO-Revision-Date: 2022-11-27 00:48+0000\n"
 "Last-Translator: Gustavo Sousa Jr <grsousajunior@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/pt_BR/>\n"
@@ -526,11 +526,9 @@ msgid "Your version: %1"
 msgstr "Sua versão: %1"
 
 #: mainwindow.cpp:2239
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Revisão Git: %1)"
+msgstr "Nova versão: %1"
 
 #: mainwindow.cpp:2241
 msgid "An update is available, do you want to download it now?\n"
@@ -538,7 +536,7 @@ msgstr "Uma atualização está disponível. Você quer baixá-la agora?\n"
 
 #: mainwindow.cpp:2243
 msgid "Version Update"
-msgstr ""
+msgstr "Atualização de versão"
 
 #: mainwindow.cpp:2301
 #, qt-format
@@ -859,19 +857,19 @@ msgstr "&Importar"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Oclusão Ambiente:"
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Habilitar"
 
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Intensidade da Sombra:"
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -887,10 +885,8 @@ msgstr "Salvar"
 
 #. i18n: file: renderingdialog.ui:158
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "&Fechar"
+msgstr "Fe&char"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
