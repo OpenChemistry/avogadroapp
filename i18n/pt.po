@@ -4,13 +4,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # ssantos <ssantos@web.de>, 2020, 2021.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
+# Gustavo Sousa Jr <grsousajunior@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2021-09-23 13:36+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2022-11-27 00:48+0000\n"
+"Last-Translator: Gustavo Sousa Jr <grsousajunior@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/pt/>\n"
 "Language: pt\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.15-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -26,18 +27,16 @@ msgid "No molecule set in BackgroundFileFormat!"
 msgstr "Nenhuma molécula definida em BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
-#, fuzzy
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "Nenhum nome de ficheiro definido em BackgroundFileFormat!"
+msgstr "Nenhum formato de arquivo definido em BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "Nenhum nome de ficheiro definido em BackgroundFileFormat!"
 
 #: mainwindow.cpp:309
-#, fuzzy
 msgid "Ready…"
-msgstr "Pronto..."
+msgstr "Pronto…"
 
 #: mainwindow.cpp:361
 msgid "Tool"
@@ -57,16 +56,14 @@ msgstr "Moléculas"
 
 #: mainwindow.cpp:391
 msgid "Layers"
-msgstr ""
+msgstr "Camadas"
 
 #: mainwindow.cpp:410
-#, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Ficheiro"
+msgstr "Arquivo"
 
 #: mainwindow.cpp:415
-#, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Ferramentas"
@@ -76,7 +73,7 @@ msgid "Untitled"
 msgstr "Sem título"
 
 #: mainwindow.cpp:653
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
@@ -84,11 +81,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:702
 msgid "Restart needed"
-msgstr ""
+msgstr "Reinicialização necessária"
 
 #: mainwindow.cpp:703
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Reinicie o Avogadro para usar o novo idioma."
 
 #: mainwindow.cpp:723 mainwindow.cpp:1386
 msgid "Chemical Markup Language"
@@ -118,29 +115,28 @@ msgstr "Abrir Molécula"
 
 #: mainwindow.cpp:786
 msgid "Commands"
-msgstr ""
+msgstr "Comandos"
 
 #: mainwindow.cpp:786
 msgid "Input Generators"
-msgstr ""
+msgstr "Geradores de entrada"
 
 #: mainwindow.cpp:786
-#, fuzzy
 msgid "File Formats"
-msgstr "Erro no ficheiro"
+msgstr "Formatos de Arquivo"
 
 #: mainwindow.cpp:787
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Cargas"
 
 #: mainwindow.cpp:791
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Instalar Script de Plugin"
 
 #: mainwindow.cpp:791
 msgid "Script Type:"
-msgstr ""
+msgstr "Tipo de script:"
 
 #: mainwindow.cpp:842 mainwindow.cpp:1284
 msgid "Select file reader"
@@ -184,18 +180,17 @@ msgid "Saved file %1"
 msgstr "Não foi possível gravar o ficheiro %1."
 
 #: mainwindow.cpp:945
-#, fuzzy
 msgid "Error saving file"
-msgstr "Erro ao inicial o servidor RPC:"
+msgstr "Erro ao salvar arquivo"
 
 #: mainwindow.cpp:946
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
-"Erro durante a leitura do ficheiro '%1':\n"
+"Erro ao salvar '%1':\n"
 "%2"
 
 #: mainwindow.cpp:985
@@ -282,7 +277,7 @@ msgstr "Exportar Molécula"
 
 #: mainwindow.cpp:1484
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Salvando arquivo…"
 
 #: mainwindow.cpp:1486
 #, qt-format
@@ -321,14 +316,12 @@ msgid "&Testing"
 msgstr "&Testes"
 
 #: mainwindow.cpp:1728
-#, fuzzy
 msgid "Record test…"
-msgstr "Salvar Teste..."
+msgstr "Salvar teste…"
 
 #: mainwindow.cpp:1731
-#, fuzzy
 msgid "Play test…"
-msgstr "Executar Teste..."
+msgstr "Executar teste…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -347,9 +340,8 @@ msgstr "&Novo"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1756:51
-#, fuzzy
 msgid "&Open…"
-msgstr "&Abrir"
+msgstr "&Abrir…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -370,9 +362,8 @@ msgstr "&Guardar"
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1788:102
-#, fuzzy
 msgid "Save &As…"
-msgstr "Guard&ar Como..."
+msgstr "Salvar &Como…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -381,14 +372,12 @@ msgid "&Export"
 msgstr "&Exportar"
 
 #: mainwindow.cpp:1800
-#, fuzzy
 msgid "&Molecule…"
-msgstr "Moléculas"
+msgstr "&Moléculas…"
 
 #: mainwindow.cpp:1808
-#, fuzzy
 msgid "&Graphics…"
-msgstr "&Gráficos..."
+msgstr "&Gráficos…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -415,15 +404,12 @@ msgid "&Edit"
 msgstr "&Editar"
 
 #: mainwindow.cpp:1856
-#, fuzzy
 msgid "&Copy Graphics"
-msgstr "&Gráficos..."
+msgstr "&Copiar Gráficos"
 
 #: mainwindow.cpp:1860
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -432,9 +418,8 @@ msgid "&View"
 msgstr "&Ver"
 
 #: mainwindow.cpp:1874
-#, fuzzy
 msgid "Set Background Color…"
-msgstr "Mudar a Cor de &Fundo..."
+msgstr "Mudar a Cor de &Fundo…"
 
 #: mainwindow.cpp:1878
 msgid "Rendering…"
@@ -458,11 +443,11 @@ msgstr "&Extensões"
 
 #: mainwindow.cpp:1915
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Idioma da interface do usuário…"
 
 #: mainwindow.cpp:1919
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "Tabela &Periódica…"
 
 #: mainwindow.cpp:1925 menubuilder.cpp:80
 msgid "&Help"
@@ -475,38 +460,32 @@ msgid "&About"
 msgstr "&Sobre"
 
 #: mainwindow.cpp:1933
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Fórum de Discussão"
+msgstr "Fórum de &Discussão"
 
 #: mainwindow.cpp:1937
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Site do Avogadro"
+msgstr "Site do &Avogadro"
 
 #: mainwindow.cpp:1941
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Reportar um Erro"
+msgstr "&Reportar um Erro"
 
 #: mainwindow.cpp:1945
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Sugerir uma funcionalidade"
 
 #: mainwindow.cpp:1969
 msgid "System Language"
-msgstr ""
+msgstr "Idioma do Sistema"
 
 #: mainwindow.cpp:1977
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #: mainwindow.cpp:1977
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Idioma da interface do usuário:"
 
 #: mainwindow.cpp:2081
 #, qt-format
@@ -514,9 +493,8 @@ msgid "All supported formats (%1);;All files (*);;"
 msgstr "Todos os formatos suportados (%1);;Todos os ficheiros (*);;"
 
 #: mainwindow.cpp:2097
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
-msgstr "Deseja gravar as alterações feitas no documento?"
+msgstr "Deseja salvar as alterações feitas ao documento?"
 
 #: mainwindow.cpp:2105
 msgid "Your changes will be lost if you don't save them."
