@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 # Tsuki <danghoangtuan526@gmail.com>, 2022.
+# Minh P <phandinhminh@protonmail.ch>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-03-14 06:58+0000\n"
-"Last-Translator: Tsuki <danghoangtuan526@gmail.com>\n"
+"PO-Revision-Date: 2022-11-27 00:48+0000\n"
+"Last-Translator: Minh P <phandinhminh@protonmail.ch>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/vi/>\n"
 "Language: vi\n"
@@ -17,12 +18,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.15-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr "Không có phần tử nào được cài đặt trong BackgroundFileFormat!"
+msgstr "Không có phân tử nào được cài đặt trong BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
@@ -37,7 +38,6 @@ msgid "Ready…"
 msgstr "Sẵn sàng…"
 
 #: mainwindow.cpp:361
-#, fuzzy
 msgid "Tool"
 msgstr "Công cụ"
 
@@ -58,14 +58,11 @@ msgid "Layers"
 msgstr "Lớp"
 
 #: mainwindow.cpp:410
-#, fuzzy
-#| msgid "File"
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Tập tin"
 
 #: mainwindow.cpp:415
-#, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Công cụ"
@@ -83,11 +80,11 @@ msgstr "%1 %2 - Avogadro %3"
 
 #: mainwindow.cpp:702
 msgid "Restart needed"
-msgstr ""
+msgstr "Cần khởi động lại"
 
 #: mainwindow.cpp:703
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Vui lòng khởi động lại Avogadro để sử dụng ngôn ngữ mới."
 
 #: mainwindow.cpp:723 mainwindow.cpp:1386
 msgid "Chemical Markup Language"
@@ -130,7 +127,7 @@ msgstr "Định dạng tệp"
 #: mainwindow.cpp:787
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Các điện tích"
 
 #: mainwindow.cpp:791
 msgid "Install Plugin Script"
@@ -275,7 +272,7 @@ msgstr "Lưu tệp hóa chất"
 
 #: mainwindow.cpp:1432
 msgid "Export Molecule"
-msgstr "Xuất phân tử"
+msgstr "Xuất phân tử ra"
 
 #: mainwindow.cpp:1484
 msgid "Saving File in Progress…"
@@ -392,9 +389,8 @@ msgstr "&Thoát"
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1826:189
-#, fuzzy
 msgid "Open Recent"
-msgstr "Mở tập tin &gần đây"
+msgstr "Mở gần đây"
 
 #: mainwindow.cpp:1838
 msgid "No recent files"
@@ -407,17 +403,12 @@ msgid "&Edit"
 msgstr "&Sửa"
 
 #: mainwindow.cpp:1856
-#, fuzzy
-#| msgid "&Graphics…"
 msgid "&Copy Graphics"
-msgstr "& Đồ họa…"
+msgstr "&Sao chép Đồ họa"
 
 #: mainwindow.cpp:1860
-#, fuzzy
-#| msgctxt "Select All"
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -431,7 +422,7 @@ msgstr "Đặt màu nền…"
 
 #: mainwindow.cpp:1878
 msgid "Rendering…"
-msgstr ""
+msgstr "Đang render…"
 
 #: mainwindow.cpp:1886
 msgid "Projection"
@@ -451,11 +442,11 @@ msgstr "Tiện ích mở rộng"
 
 #: mainwindow.cpp:1915
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Ngôn ngữ giao diện người dùng…"
 
 #: mainwindow.cpp:1919
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Bảng tuần hoàn nguyên tố…"
 
 #: mainwindow.cpp:1925 menubuilder.cpp:80
 msgid "&Help"
@@ -469,35 +460,31 @@ msgstr "&Giới thiệu chương trình"
 
 #: mainwindow.cpp:1933
 msgid "&Discussion Forum"
-msgstr ""
+msgstr "&Diễn đàn thảo luận"
 
 #: mainwindow.cpp:1937
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadro trên mạng"
+msgstr "&Trang web Avogadro"
 
 #: mainwindow.cpp:1941
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Thông báo lỗi"
+msgstr "&Báo cáo một lỗi"
 
 #: mainwindow.cpp:1945
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Gợi ý một tính năng"
 
 #: mainwindow.cpp:1969
 msgid "System Language"
-msgstr ""
+msgstr "Ngôn ngữ hệ thống"
 
 #: mainwindow.cpp:1977
 msgid "Language"
-msgstr ""
+msgstr "Ngôn ngữ"
 
 #: mainwindow.cpp:1977
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Ngôn ngữ giao diện người dùng:"
 
 #: mainwindow.cpp:2081
 #, qt-format
@@ -523,10 +510,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2198
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Việc kiểm tra cập nhật qua mạng bị thất bại"
+msgstr "Việc tải qua mạng đã thất bại"
 
 #: mainwindow.cpp:2199
 msgid "Network timeout or other error."
@@ -535,22 +520,20 @@ msgstr "Hết hạn giờ nhập mạng hoặc một lỗi khác."
 #: mainwindow.cpp:2238
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Phiên bản của bạn: %1"
 
 #: mainwindow.cpp:2239
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Lần sửa đổi Git: %1)"
+msgstr "Phiên bản mới: %1"
 
 #: mainwindow.cpp:2241
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "Đã có bản cập nhật, bạn có muốn tải xuống ngay không?\n"
 
 #: mainwindow.cpp:2243
 msgid "Version Update"
-msgstr ""
+msgstr "Cập nhật phiên bản"
 
 #: mainwindow.cpp:2301
 #, qt-format
@@ -591,14 +574,12 @@ msgid "&Window"
 msgstr "& Cửa sổ"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Cửa sổ xem mới"
+msgstr "Chế độ xem 3D"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -788,8 +769,6 @@ msgstr "Sao chép"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+C"
 msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
@@ -828,8 +807,6 @@ msgstr "Không chọn gì"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
@@ -867,37 +844,34 @@ msgstr "Avogadro trên mạng"
 #. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Diễn đàn thảo luận"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
-msgstr "Nhập"
+msgstr "&Nhập"
 
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Môi trường xung quanh tắc nghẽn:"
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Bật"
 
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Mức độ bóng:"
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid "User Selections"
 msgid "Edge Detection:"
-msgstr "Các lựa chọn của người dùng"
+msgstr "Phát hiện cạnh:"
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
@@ -906,10 +880,8 @@ msgstr "Lưu"
 
 #. i18n: file: renderingdialog.ui:158
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "Đón&g"
+msgstr "Đóng"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
