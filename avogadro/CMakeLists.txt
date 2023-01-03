@@ -94,6 +94,16 @@ if(ENABLE_TESTING)
   add_definitions(-DQTTESTING)
 endif()
 
+if(USE_TDX)
+  find_package(TDxWare_SDK 4.0 REQUIRED COMPONENTS 3DxWare::Navlib 3DxWare::headers)
+  list(APPEND avogadro_srcs tdxcontroller.cpp)
+  include_directories($<TARGET_PROPERTY:3DxWare::headers,INTERFACE_INCLUDE_DIRECTORIES>)
+  if(WIN32)
+    install(FILES "icons/3dx_pivot.png" DESTINATION "${CMAKE_INSTALL_BINDIR}/img")
+    install(DIRECTORY "icons/Qt" DESTINATION "${CMAKE_INSTALL_BINDIR}/img")
+  endif()   
+endif()
+
 # Need to add current binary dir to include path for UI file headers
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
@@ -187,6 +197,10 @@ if(ENABLE_TESTING)
 endif()
 if(QT_VERSION EQUAL 6)
   target_link_libraries(avogadro Qt6::Core5Compat)
+endif()
+if(USE_TDX)
+  target_compile_definitions(avogadro PUBLIC TDX_INTEGRATION)
+  target_link_libraries(avogadro $<TARGET_PROPERTY:3DxWare::Navlib,INTERFACE_LINK_LIBRARIES>) 
 endif()
 install(TARGETS avogadro
   RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
