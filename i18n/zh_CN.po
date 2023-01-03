@@ -6,7 +6,7 @@
 # 刘韬 <lyuutau@outlook.com>, 2021.
 # joe <ourmicroid@outlook.com>, 2022.
 # Hugel <qihu@nfschina.com>, 2022.
-# alchemistcai <alchemistcai@163.com>, 2022.
+# alchemistcai <alchemistcai@163.com>, 2022, 2023.
 # 黄子腾 <still_down@outlook.com>, 2023.
 msgid ""
 msgstr ""
@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
 "PO-Revision-Date: 2023-01-03 22:17+0000\n"
-"Last-Translator: 黄子腾 <still_down@outlook.com>\n"
+"Last-Translator: alchemistcai <alchemistcai@163.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -131,7 +131,7 @@ msgstr "文件格式"
 #: mainwindow.cpp:787
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "电荷"
 
 #: mainwindow.cpp:791
 msgid "Install Plugin Script"
@@ -462,10 +462,8 @@ msgid "&About"
 msgstr "关于(&A)"
 
 #: mainwindow.cpp:1933
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "讨论区"
+msgstr "讨论区(&D)"
 
 #: mainwindow.cpp:1937
 #, fuzzy
