@@ -13,6 +13,10 @@
 #include "tooltipfilter.h"
 #include "viewfactory.h"
 
+#ifdef TDX_INTEGRATION
+#include "tdxcontroller.h"
+#endif
+
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cjsonformat.h>
 #include <avogadro/io/cmlformat.h>
@@ -309,10 +313,31 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   statusBar()->showMessage(tr("Ready…"), 2000);
 
   updateWindowTitle();
+
+#ifdef TDX_INTEGRATION
+  GLWidget* glWidget =
+    qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+
+  m_TDxController = std::make_shared<TDxController>(glWidget, &m_molecule);
+  m_TDxController->enableController();
+
+  QMap<QString, QList<QAction*>> actionsMap = m_menuBuilder->getMenuActions();
+  QList<QAction*> toolActions;
+
+  for (auto tool : m_tools)
+    toolActions.push_back(tool->activateAction());
+
+  actionsMap.insert("Tools", toolActions);
+
+  m_TDxController->exportCommands(actionsMap);
+#endif
 }
 
 MainWindow::~MainWindow()
 {
+#ifdef TDX_INTEGRATION
+  m_TDxController->disableController();
+#endif
   writeSettings();
   delete m_molecule;
   delete m_menuBuilder;
@@ -347,14 +372,11 @@ void MainWindow::setupInterface()
   ActiveObjects::instance().setActiveGLWidget(glWidget);
 
   // set solid pipeline parameters
-  Rendering::SolidPipeline* pipeline = &glWidget->renderer().solidPipeline();
+  Rendering::SolidPipeline *pipeline = &glWidget->renderer().solidPipeline();
   if (pipeline) {
-    pipeline->setAoEnabled(
-      settings.value("MainWindow/ao_enabled", true).toBool());
-    pipeline->setAoStrength(
-      settings.value("MainWindow/ao_strength", 1.0f).toFloat());
-    pipeline->setEdEnabled(
-      settings.value("MainWindow/ed_enabled", true).toBool());
+    pipeline->setAoEnabled(settings.value("MainWindow/ao_enabled", true).toBool());
+    pipeline->setAoStrength(settings.value("MainWindow/ao_strength", 1.0f).toFloat());
+    pipeline->setEdEnabled(settings.value("MainWindow/ed_enabled", true).toBool());
   }
 
   // Our tool dock.
@@ -1553,13 +1575,12 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
   }
 #endif
 
-  //  foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
-  //    scene->setEnabled(false);
+  foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
+    scene->setEnabled(false);
   foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
     foreach (const QString& name, displayTypes)
       if (scene->objectName() == name)
         scene->setEnabled(true);
-
   if (glWidget)
     glWidget->updateScene();
 #ifdef AVO_USE_VTK
@@ -1642,9 +1663,9 @@ void MainWindow::setBackgroundColor()
 
 void MainWindow::setRenderingSettings()
 {
-  Rendering::SolidPipeline* pipeline(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
+  Rendering::SolidPipeline *pipeline(nullptr);
+  GLWidget *glWidget(nullptr);
+  if ((glWidget = qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget())))
     pipeline = &glWidget->renderer().solidPipeline();
   if (pipeline) {
     RenderingDialog dialog(this, *pipeline);
@@ -1793,7 +1814,7 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(path, action, 960);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
-
+  
   // Export
   QStringList exportPath = path;
   exportPath << tr("&Export");
@@ -2237,12 +2258,11 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
   // skip = save latestRelease in settings
   QString currentVersion = tr("Your version: %1").arg(AvogadroApp_VERSION);
   QString newVersion = tr("New version: %1").arg(latestRelease);
-  QString text =
-    tr("An update is available, do you want to download it now?\n");
+  QString text = tr("An update is available, do you want to download it now?\n");
   text += currentVersion + '\n' + newVersion;
-  auto result = MESSAGEBOX::information(this, tr("Version Update"), text,
-                                        QMessageBox::Ok | QMessageBox::Ignore |
-                                          QMessageBox::Cancel);
+  auto result = MESSAGEBOX::information(
+    this, tr("Version Update"), text,
+    QMessageBox::Ok | QMessageBox::Ignore | QMessageBox::Cancel);
 
   if (result == QMessageBox::Cancel)
     return;
@@ -2254,15 +2274,9 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
 
   // get an update
 #if defined(Q_OS_MAC)
-  QString url = QString("https://github.com/OpenChemistry/avogadrolibs/"
-                        "releases/download/%1/Avogadro2-%2-Darwin.dmg")
-                  .arg(latestRelease)
-                  .arg(latestRelease);
+  QString url = QString("https://github.com/OpenChemistry/avogadrolibs/releases/download/%1/Avogadro2-%2-Darwin.dmg").arg(latestRelease).arg(latestRelease);
 #elif defined(Q_OS_WIN)
-  QString url = QString("https://github.com/OpenChemistry/avogadrolibs/"
-                        "releases/download/%1/Avogadro2-%2-win64.exe")
-                  .arg(latestRelease)
-                  .arg(latestRelease);
+  QString url = QString("https://github.com/OpenChemistry/avogadrolibs/releases/download/%1/Avogadro2-%2-win64.exe").arg(latestRelease).arg(latestRelease);
 #else
   QString url("https://github.com/OpenChemistry/avogadrolibs/releases/latest");
 #endif

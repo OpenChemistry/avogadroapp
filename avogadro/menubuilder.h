@@ -62,6 +62,12 @@ public:
    */
   void print();
 
+  #ifdef TDX_INTEGRATION
+  const QMap<QString, QList<QAction*>> &getMenuActions() const { return m_menuActions; };
+
+  const QMap<QString, QStringList> &getMenuPaths() const { return m_menuPaths; };
+  #endif
+
 private:
   /** A map of string to action lists. */
   QMap<QString, QList<QAction*>> m_menuActions;
