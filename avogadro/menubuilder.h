@@ -62,7 +62,7 @@ public:
    */
   void print();
 
-  #ifdef TDX_INTEGRATION
+  #ifdef _3DCONNEXION
   const QMap<QString, QList<QAction*>> &getMenuActions() const { return m_menuActions; };
 
   const QMap<QString, QStringList> &getMenuPaths() const { return m_menuPaths; };
