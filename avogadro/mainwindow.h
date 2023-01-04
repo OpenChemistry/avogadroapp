@@ -48,7 +48,7 @@ class RWMolecule;
 class LayerModel;
 }
 
-#ifdef TDX_INTEGRATION
+#ifdef _3DCONNEXION
 class TDxController;
 #endif
 /**
@@ -407,7 +407,7 @@ private:
   ViewFactory* m_viewFactory;
 
   QNetworkAccessManager* m_network = nullptr;
-#ifdef TDX_INTEGRATION
+#ifdef _3DCONNEXION
   std::shared_ptr<TDxController> m_TDxController;
 #endif
 

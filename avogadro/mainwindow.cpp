@@ -13,7 +13,7 @@
 #include "tooltipfilter.h"
 #include "viewfactory.h"
 
-#ifdef TDX_INTEGRATION
+#ifdef _3DCONNEXION
 #include "tdxcontroller.h"
 #endif
 
@@ -317,7 +317,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 
   updateWindowTitle();
 
-#ifdef TDX_INTEGRATION
+#ifdef _3DCONNEXION
   GLWidget* glWidget =
     qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
 
@@ -338,7 +338,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 
 MainWindow::~MainWindow()
 {
-#ifdef TDX_INTEGRATION
+#ifdef _3DCONNEXION
   m_TDxController->disableController();
 #endif
   writeSettings();

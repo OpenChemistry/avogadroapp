@@ -37,7 +37,7 @@ AboutDialog::AboutDialog(QWidget* parent_)
     html.arg("10").arg(QSslSocket::sslLibraryVersionString()));
 
 #ifdef TDX_INTEGRATION
-  m_ui->tdxLabel->setText(QString::fromLocal8Bit("3D input device development tools and related technology are provided under license from 3Dconnexion. Â© 3Dconnexion 1992 - 2022. All rights reserved."));
+  m_ui->tdxLabel->setText(QString::fromLocal8Bit("3D input device development tools and related technology are provided under license from 3Dconnexion. © 3Dconnexion 1992 - 2022. All rights reserved."));
   m_ui->tdxLabel->setWordWrap(true);
 #else
   m_ui->tdxLabel->hide();

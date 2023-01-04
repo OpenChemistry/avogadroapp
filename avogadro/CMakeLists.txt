@@ -94,7 +94,7 @@ if(ENABLE_TESTING)
   add_definitions(-DQTTESTING)
 endif()
 
-if(USE_TDX)
+if(USE_3DCONNEXION)
   find_package(TDxWare_SDK 4.0 REQUIRED COMPONENTS 3DxWare::Navlib 3DxWare::headers)
   list(APPEND avogadro_srcs tdxcontroller.cpp)
   include_directories($<TARGET_PROPERTY:3DxWare::headers,INTERFACE_INCLUDE_DIRECTORIES>)
