@@ -287,8 +287,11 @@ TDx::SpaceMouse::CCategory Avogadro::TDxController::getCategory(
 	  }
 	}
 
-    result.push_back(TDx::SpaceMouse::CCommand(nextPathCode + std::to_string(i),
-											   formattedName));
+    result.push_back(TDx::SpaceMouse::CCommand(
+          nextPathCode + std::to_string(i),
+		  formattedName,
+          pNode->m_actions[i]->toolTip().toStdString()));
+
 #ifdef WIN32
     formattedName.append(".png");
     std::string path("img/Qt/");
