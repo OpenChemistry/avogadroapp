@@ -6,13 +6,14 @@
 # 刘韬 <lyuutau@outlook.com>, 2021.
 # joe <ourmicroid@outlook.com>, 2022.
 # Hugel <qihu@nfschina.com>, 2022.
-# alchemistcai <alchemistcai@163.com>, 2022.
+# alchemistcai <alchemistcai@163.com>, 2022, 2023.
+# 黄子腾 <still_down@outlook.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-10-28 15:05+0000\n"
+"PO-Revision-Date: 2023-01-03 22:17+0000\n"
 "Last-Translator: alchemistcai <alchemistcai@163.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hans/>\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14.2-dev\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -130,7 +131,7 @@ msgstr "文件格式"
 #: mainwindow.cpp:787
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "电荷"
 
 #: mainwindow.cpp:791
 msgid "Install Plugin Script"
@@ -281,14 +282,14 @@ msgid "Saving File in Progress…"
 msgstr "正在保存文件…"
 
 #: mainwindow.cpp:1486
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"打开文件“ %1”\n"
-"使用“ %2”"
+"以“ %2”扩展名\n"
+"保存文件“ %1”"
 
 #: mainwindow.cpp:1599
 #, qt-format
@@ -448,7 +449,7 @@ msgstr "用户界面语言…"
 
 #: mainwindow.cpp:1919
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "元素周期表(&P)…"
 
 #: mainwindow.cpp:1925 menubuilder.cpp:80
 msgid "&Help"
@@ -461,10 +462,8 @@ msgid "&About"
 msgstr "关于(&A)"
 
 #: mainwindow.cpp:1933
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "讨论区"
+msgstr "讨论区(&D)"
 
 #: mainwindow.cpp:1937
 #, fuzzy
