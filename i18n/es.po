@@ -8,13 +8,14 @@
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2022.
 # Andrés Henao <andreshenao31@gmail.com>, 2022.
 # gallegonovato <fran-carro@hotmail.es>, 2022.
+# Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-10-31 20:08+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2023-01-11 10:11+0000\n"
+"Last-Translator: Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.2-dev\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -225,6 +226,7 @@ msgid "Common image formats"
 msgstr "Formatos comunes de imagen"
 
 #: mainwindow.cpp:1236
+#, fuzzy
 msgid "All files"
 msgstr "Todos los archivos"
 
