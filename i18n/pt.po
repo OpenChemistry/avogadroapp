@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2023-01-10 16:51+0000\n"
+"PO-Revision-Date: 2023-01-14 08:47+0000\n"
 "Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/pt/>\n"
@@ -28,7 +28,7 @@ msgstr "Nenhuma molécula definida em BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "Nenhum formato de arquivo definido em BackgroundFileFormat!"
+msgstr "Nenhum formato de ficheiro definido em BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
@@ -61,7 +61,7 @@ msgstr "Camadas"
 #: mainwindow.cpp:410
 msgctxt "File toolbar"
 msgid "File"
-msgstr "Arquivo"
+msgstr "Ficheiro"
 
 #: mainwindow.cpp:415
 msgctxt "Tools toolbar"
@@ -123,7 +123,7 @@ msgstr "Geradores de entrada"
 
 #: mainwindow.cpp:786
 msgid "File Formats"
-msgstr "Formatos de Arquivo"
+msgstr "Formatos de Ficheiro"
 
 #: mainwindow.cpp:787
 msgctxt "atomic electrostatics"
@@ -181,7 +181,7 @@ msgstr "Ficheiro %1 salvo"
 
 #: mainwindow.cpp:945
 msgid "Error saving file"
-msgstr "Erro ao salvar arquivo"
+msgstr "Erro ao salvar ficheiro"
 
 #: mainwindow.cpp:946
 #, qt-format
@@ -277,7 +277,7 @@ msgstr "Exportar Molécula"
 
 #: mainwindow.cpp:1484
 msgid "Saving File in Progress…"
-msgstr "Salvando arquivo…"
+msgstr "A salvar ficheiro…"
 
 #: mainwindow.cpp:1486
 #, qt-format
