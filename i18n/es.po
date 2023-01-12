@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2023-01-11 10:11+0000\n"
+"PO-Revision-Date: 2023-01-14 08:47+0000\n"
 "Last-Translator: Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
@@ -28,7 +28,7 @@ msgstr ""
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr "¡Ninguna molécula establecida en BackgroundFileFormat!"
+msgstr "¡No hay molécula establecida en «BackgroundFileFormat»!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
@@ -37,7 +37,7 @@ msgstr ""
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr "¡Ningún nombre de archivo establecido en BackgroundFileFormat!"
+msgstr "¡No hay nombre de archivo establecido en «BackgroundFileFormat»!"
 
 #: mainwindow.cpp:309
 msgid "Ready…"
@@ -219,7 +219,7 @@ msgstr "Error desconocido"
 
 #: mainwindow.cpp:1113 mainwindow.cpp:1114
 msgid "Navigate tool"
-msgstr "Navegar herramienta"
+msgstr "Herramienta de navegación"
 
 #: mainwindow.cpp:1234
 msgid "Common image formats"
@@ -244,7 +244,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1246
 msgid "Export Bitmap Graphics"
-msgstr "Exportar a imagen de mapa de bits"
+msgstr "Exportar Gráficos en Mapa de Bits"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -445,7 +445,7 @@ msgstr "Ortográfica"
 
 #: mainwindow.cpp:1913
 msgid "&Extensions"
-msgstr "&Complementos"
+msgstr "&Extensiones"
 
 #: mainwindow.cpp:1915
 msgid "User Interface Language…"
@@ -518,7 +518,7 @@ msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2198
 msgid "Network Download Failed"
-msgstr "Descarga de red fallida"
+msgstr "Descarga de Red Fallida"
 
 #: mainwindow.cpp:2199
 msgid "Network timeout or other error."
@@ -673,7 +673,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:320
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
-msgstr "OK"
+msgstr "Aceptar"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -794,12 +794,12 @@ msgstr "Ctrl+X"
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
-msgstr "Borrar"
+msgstr "Limpiar"
 
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "Seleccionar todo"
+msgstr "Seleccionar Todo"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -810,7 +810,7 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Seleccionar Nada"
+msgstr "No Seleccionar Nada"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
