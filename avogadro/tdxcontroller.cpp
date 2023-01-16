@@ -10,10 +10,9 @@
 #include <avogadro/qtopengl/glwidget.h>
 
 #include <QtWidgets/QAction>
+#include <QtCore/QCoreApplication>
 
 #include <filesystem>
-
-
 
 Avogadro::TDxController::TDxController(
   Avogadro::QtOpenGL::GLWidget* const pGLWidget, QtGui::Molecule** ppMolecule)
@@ -25,12 +24,9 @@ Avogadro::TDxController::TDxController(
       std::shared_ptr<Avogadro::Rendering::GLRenderer>(&pGLWidget->renderer()))
   , m_eyePosition({ 0.0, 0.0, 0.0 })
   , m_lookDirection({ 0.0, 0.0, 0.0 })
-  , m_pivotImage("img\\3dx_pivot.png")
   , m_hitTestRadius(0.0)
 {
-  pGLRenderer->m_iconData = reinterpret_cast<void*>(m_pivotImage.bits());
-  pGLRenderer->m_iconWidth = m_pivotImage.width();
-  pGLRenderer->m_iconHeight = m_pivotImage.height();
+  
 
   if (rayCount > 0) {
     m_rayOrigins[0].x = 0.0;
@@ -46,7 +42,19 @@ Avogadro::TDxController::TDxController(
     m_rayOrigins[i].x = x;
     m_rayOrigins[i].y = y;
   }
-
+    
+#ifdef WIN32
+  m_pivotImage = QImage("img\\3dx_pivot.png");
+#else
+  QString pivotImagePath = QCoreApplication::applicationDirPath();
+  pivotImagePath.append("/../Resources/3dx_pivot.png");
+  m_pivotImage = QImage(pivotImagePath);
+#endif
+    
+pGLRenderer->m_iconData = reinterpret_cast<void*>(m_pivotImage.bits());
+pGLRenderer->m_iconWidth = m_pivotImage.width();
+pGLRenderer->m_iconHeight = m_pivotImage.height();
+    
 }
 
 void Avogadro::TDxController::enableController()
