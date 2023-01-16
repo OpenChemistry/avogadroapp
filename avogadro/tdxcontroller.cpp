@@ -279,36 +279,33 @@ TDx::SpaceMouse::CCategory Avogadro::TDxController::getCategory(
   }
 
   for (uint32_t i = 0u; i < pNode->m_actions.size(); i++) {
-    std::string actionName = pNode->m_actions[i]->text().toStdString();
-
-    if (actionName.empty())
+    std::string actionName = pNode->m_actions[i]->text().toUtf8();
+    
+	if (actionName.empty())
       continue;
+	
+	std::string formattedName;
 
-    std::string formattedName;
-
-    for (auto& ch : actionName) {
-      if ((ch > 47 && ch < 58) || 
-		  (ch > 64 && ch < 91) ||
-          (ch > 96 && ch < 123) || 
-		  (ch == 32)) {
+	for (auto& ch : actionName)
+      if (ch != 38)
         formattedName.push_back(ch);
-	  }
-	}
 
-    result.push_back(TDx::SpaceMouse::CCommand(
-          nextPathCode + std::to_string(i),
-		  formattedName,
-          pNode->m_actions[i]->toolTip().toStdString()));
+	formattedName.push_back(0);
 
+	std::string commandId(nextPathCode + std::to_string(i));
+
+    result.push_back(TDx::SpaceMouse::CCommand(commandId,
+											   formattedName));
 #ifdef WIN32
-    formattedName.append(".png");
+    std::string iconFileName(commandId);
+    iconFileName.append(".png");
     std::string path("img/Qt/");
-    path.append(formattedName);
+    path.append(iconFileName);
 
     TDx::CImage icon =
       TDx::CImage::FromFile(std::filesystem::absolute(path).generic_u8string(),
                             0, 
-							(nextPathCode + std::to_string(i)).c_str());
+							commandId.c_str());
 
     m_utilityIcons.push_back(icon);
 #endif
