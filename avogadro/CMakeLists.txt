@@ -96,12 +96,15 @@ endif()
 
 if(USE_3DCONNEXION)
   find_package(TDxWare_SDK 4.0 REQUIRED COMPONENTS 3DxWare::Navlib 3DxWare::headers)
-  list(APPEND avogadro_srcs tdxcontroller.cpp)
   include_directories($<TARGET_PROPERTY:3DxWare::headers,INTERFACE_INCLUDE_DIRECTORIES>)
-  if(WIN32)
+  list(APPEND avogadro_srcs tdxcontroller.cpp)
+  if(APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdeclspec")
+    list(APPEND avogadro_srcs navlib_load.cpp navlib_stub.c)
+  elseif(WIN32)
     install(FILES "icons/3dx_pivot.png" DESTINATION "${CMAKE_INSTALL_BINDIR}/img")
     install(DIRECTORY "icons/Qt" DESTINATION "${CMAKE_INSTALL_BINDIR}/img")
-  endif()   
+  endif()
 endif()
 
 # Need to add current binary dir to include path for UI file headers
@@ -163,6 +166,12 @@ if(APPLE)
   set_source_files_properties(icons/cml.icns PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources)
 
+  if(USE_3DCONNEXION)
+    list(APPEND avogadro_srcs icons/3dx_pivot.png)
+    set_source_files_properties(icons/3dx_pivot.png PROPERTIES
+    MACOSX_PACKAGE_LOCATION Resources)
+  endif()
+
 elseif(UNIX)
   install(FILES "icons/avogadro2.desktop" DESTINATION "${INSTALL_XDG_APPS_DIR}")
   install(FILES "icons/avogadro2.appdata.xml" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/metainfo")
@@ -198,10 +207,13 @@ endif()
 if(QT_VERSION EQUAL 6)
   target_link_libraries(avogadro Qt6::Core5Compat)
 endif()
-if(USE_TDX)
-  target_compile_definitions(avogadro PUBLIC TDX_INTEGRATION)
-  target_link_libraries(avogadro $<TARGET_PROPERTY:3DxWare::Navlib,INTERFACE_LINK_LIBRARIES>) 
-endif()
+if(USE_3DCONNEXION)
+  target_compile_definitions(avogadro PUBLIC _3DCONNEXION)
+  if(WIN32)
+    target_link_libraries(avogadro $<TARGET_PROPERTY:3DxWare::Navlib,INTERFACE_LINK_LIBRARIES>)
+  elseif(APPLE)
+    target_compile_definitions(avogadro PUBLIC __APPLE__)
+  endif()
 install(TARGETS avogadro
   RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
   BUNDLE DESTINATION .
