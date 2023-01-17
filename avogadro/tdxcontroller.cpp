@@ -279,23 +279,15 @@ TDx::SpaceMouse::CCategory Avogadro::TDxController::getCategory(
   }
 
   for (uint32_t i = 0u; i < pNode->m_actions.size(); i++) {
-    std::string actionName = pNode->m_actions[i]->text().toUtf8();
+    std::string actionName = pNode->m_actions[i]->text().remove('&').toStdString();
     
 	if (actionName.empty())
       continue;
-	
-	std::string formattedName;
-
-	for (auto& ch : actionName)
-      if (ch != 38)
-        formattedName.push_back(ch);
-
-	formattedName.push_back(0);
 
 	std::string commandId(nextPathCode + std::to_string(i));
 
     result.push_back(TDx::SpaceMouse::CCommand(commandId,
-											   formattedName));
+											   actionName));
 #ifdef WIN32
     std::string iconFileName(commandId);
     iconFileName.append(".png");
