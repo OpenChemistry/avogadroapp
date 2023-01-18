@@ -279,17 +279,23 @@ TDx::SpaceMouse::CCategory Avogadro::TDxController::getCategory(
   }
 
   for (uint32_t i = 0u; i < pNode->m_actions.size(); i++) {
-    std::string actionName = pNode->m_actions[i]->text().remove('&').toStdString();
+    std::string actionName(pNode->m_actions[i]->text().remove('&').toStdString());
     
 	if (actionName.empty())
       continue;
 
 	std::string commandId(nextPathCode + std::to_string(i));
 
-    result.push_back(TDx::SpaceMouse::CCommand(commandId,
-											   actionName));
+    result.push_back(TDx::SpaceMouse::CCommand(
+		commandId,
+		actionName,
+		pNode->m_actions[i]->toolTip().toStdString()));
+
 #ifdef WIN32
-    std::string iconFileName(commandId);
+
+    std::string iconFileName(
+      std::to_string(pNode->m_actions[i]->icon().cacheKey()));
+
     iconFileName.append(".png");
     std::string path("img/Qt/");
     path.append(iconFileName);
