@@ -1226,6 +1226,7 @@ QImage MainWindow::renderToImage(const QSize& size)
 
 void MainWindow::exportGraphics()
 {
+  // ask the user for a filename
   QStringList filters;
 // Omit "common image formats" on Mac
 #ifdef Q_OS_MAC
@@ -1245,6 +1246,11 @@ void MainWindow::exportGraphics()
   QString fileName = QFileDialog::getSaveFileName(
     this, tr("Export Bitmap Graphics"), "", "PNG (*.png)");
 
+  exportGraphics(fileName);
+}
+
+void MainWindow::exportGraphics(QString fileName)
+{
   if (fileName.isEmpty())
     return;
   if (QFileInfo(fileName).suffix().isEmpty())
@@ -1810,7 +1816,7 @@ void MainWindow::buildMenu()
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
-  connect(action, &QAction::triggered, this, &MainWindow::exportGraphics);
+  connect(action, &QAction::triggered, this, static_cast<void(MainWindow::*)()>(&MainWindow::exportGraphics));
 
   // Quit
   action = new QAction(tr("&Quit"), this);
