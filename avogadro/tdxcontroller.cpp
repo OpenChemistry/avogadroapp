@@ -422,8 +422,9 @@ long Avogadro::TDxController::GetHitLookAt(navlib::point_t &position) const
     position.x = origin.x() + distance * m_lookDirection.x;
     position.y = origin.y() + distance * m_lookDirection.y;
     position.z = origin.z() + distance * m_lookDirection.z;
-  }
-  return 0;
+    return 0;
+  } else
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 }
 
 // Setters 
