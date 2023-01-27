@@ -59,16 +59,18 @@ pGLRenderer->m_iconHeight = m_pivotImage.height();
 
 void Avogadro::TDxController::enableController()
 {
-  Profile = "Avogadro2";
+  TDx::SpaceMouse::Navigation3D::CNavigation3D::Profile = "Avogadro2";
 
   std::error_code errorCode;
 
-  EnableNavigation(true, errorCode);
+  TDx::SpaceMouse::Navigation3D::CNavigation3D::EnableNavigation(true,
+                                                                 errorCode);
 
   if (errorCode)
     return;
 
-  FrameTiming = TimingSource::SpaceMouse;
+  TDx::SpaceMouse::Navigation3D::CNavigation3D::FrameTiming =
+    TimingSource::SpaceMouse;
 
   return;
 }
@@ -90,18 +92,19 @@ void Avogadro::TDxController::exportCommands(
     pathCode.clear();
   }
 
-  AddCommandSet(commandSet);
-  ActiveCommands = commandSet.Id;
+  TDx::SpaceMouse::Navigation3D::CNavigation3D::AddCommandSet(commandSet);
+  TDx::SpaceMouse::Navigation3D::CNavigation3D::ActiveCommands = commandSet.Id;
 
 #ifdef WIN32
-  AddImages(m_utilityIcons);
+  TDx::SpaceMouse::Navigation3D::CNavigation3D::AddImages(m_utilityIcons);
 #endif
 }
 
 void Avogadro::TDxController::disableController()
 {
   std::error_code errorCode;
-  EnableNavigation(false, errorCode);
+  TDx::SpaceMouse::Navigation3D::CNavigation3D::EnableNavigation(false,
+                                                                 errorCode);
   return;
 }
 
@@ -229,12 +232,12 @@ long Avogadro::TDxController::GetPointerPosition(
 
 long Avogadro::TDxController::GetViewExtents(navlib::box_t &extents) const
 {
-  extents.min_x = pGLRenderer->m_orthographicFrustum[0];
-  extents.min_y = pGLRenderer->m_orthographicFrustum[2];
-  extents.min_z = -pGLRenderer->m_orthographicFrustum[5];
-  extents.max_x = pGLRenderer->m_orthographicFrustum[1];
-  extents.max_y = pGLRenderer->m_orthographicFrustum[3];
-  extents.max_z = -pGLRenderer->m_orthographicFrustum[4];
+  extents.min.x = pGLRenderer->m_orthographicFrustum[0];
+  extents.min.y = pGLRenderer->m_orthographicFrustum[2];
+  extents.min.z = -pGLRenderer->m_orthographicFrustum[5];
+  extents.max.x = pGLRenderer->m_orthographicFrustum[1];
+  extents.max.y = pGLRenderer->m_orthographicFrustum[3];
+  extents.max.z = -pGLRenderer->m_orthographicFrustum[4];
   return 0;
 }
 
@@ -315,12 +318,12 @@ long Avogadro::TDxController::GetModelExtents(navlib::box_t &extents) const
 {
   std::vector<bool> flags;
 
-  pGLRenderer->scene().getBoundingBox(extents.min_x, 
-									  extents.min_y,
-                                      extents.min_z,
-									  extents.max_x,
-                                      extents.max_y,
-									  extents.max_z, 
+  pGLRenderer->scene().getBoundingBox(extents.min.x, 
+									  extents.min.y,
+                                      extents.min.z,
+									  extents.max.x,
+                                      extents.max.y,
+									  extents.max.z, 
 									  flags);
 
   return 0;
@@ -333,12 +336,12 @@ long Avogadro::TDxController::GetSelectionExtents(navlib::box_t &extents) const
   for (uint32_t i = 0u; i < (*m_ppMolecule)->atomCount(); i++)
     flags[i] = (*m_ppMolecule)->atomSelected(i);
 
-  pGLRenderer->scene().getBoundingBox(extents.min_x,
-									  extents.min_y,
-                                      extents.min_z, 
-									  extents.max_x,
-                                      extents.max_y,
-									  extents.max_z,
+  pGLRenderer->scene().getBoundingBox(extents.min.x,
+									  extents.min.y,
+                                      extents.min.z, 
+									  extents.max.x,
+                                      extents.max.y,
+									  extents.max.z,
 									  flags);
 
   return 0;
@@ -443,12 +446,12 @@ long Avogadro::TDxController::SetCameraMatrix(const navlib::matrix_t &matrix)
 
 long Avogadro::TDxController::SetViewExtents(const navlib::box_t &extents)
 {
-  pGLRenderer->m_orthographicFrustum[0] = extents.min_x;
-  pGLRenderer->m_orthographicFrustum[1] = extents.max_x;
-  pGLRenderer->m_orthographicFrustum[2] = extents.min_y;
-  pGLRenderer->m_orthographicFrustum[3] = extents.max_y;
-  pGLRenderer->m_orthographicFrustum[4] = -extents.max_z;
-  pGLRenderer->m_orthographicFrustum[5] = -extents.min_z;
+  pGLRenderer->m_orthographicFrustum[0] = extents.min.x;
+  pGLRenderer->m_orthographicFrustum[1] = extents.max.x;
+  pGLRenderer->m_orthographicFrustum[2] = extents.min.y;
+  pGLRenderer->m_orthographicFrustum[3] = extents.max.y;
+  pGLRenderer->m_orthographicFrustum[4] = -extents.max.z;
+  pGLRenderer->m_orthographicFrustum[5] = -extents.min.z;
 
   return 0;
 }

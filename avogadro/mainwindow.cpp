@@ -330,7 +330,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   for (auto tool : m_tools)
     toolActions.push_back(tool->activateAction());
 
-  actionsMap.insert("Tools", toolActions);
+  actionsMap.insert("Toolbox", toolActions);
 
   m_TDxController->exportCommands(actionsMap);
 #endif
