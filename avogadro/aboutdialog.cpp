@@ -24,7 +24,7 @@ AboutDialog::AboutDialog(QWidget* parent_)
   m_ui->libsVersion->setText(html.arg("10").arg(version()));
   m_ui->qtVersion->setText(html.arg("10").arg(qVersion()));
 #ifdef _3DCONNEXION
-  m_ui->tdxLabel->setText(QString::fromLocal8Bit("3D input device development tools and related technology are provided under license from 3Dconnexion.\n3Dconnexion 1992 - 2022. All rights reserved."));
+  m_ui->tdxLabel->setText(QString("3D input device development tools and related technology are provided under license from 3Dconnexion.\n Copyright (C) 3Dconnexion 2023. All rights reserved."));
   m_ui->tdxLabel->setWordWrap(true);
 #else
   m_ui->tdxLabel->hide();
