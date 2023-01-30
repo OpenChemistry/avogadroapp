@@ -59,18 +59,16 @@ pGLRenderer->m_iconHeight = m_pivotImage.height();
 
 void Avogadro::TDxController::enableController()
 {
-  TDx::SpaceMouse::Navigation3D::CNavigation3D::Profile = "Avogadro2";
+  PutProfileHint("Avogadro2");
 
   std::error_code errorCode;
 
-  TDx::SpaceMouse::Navigation3D::CNavigation3D::EnableNavigation(true,
-                                                                 errorCode);
+  EnableNavigation(true, errorCode);
 
   if (errorCode)
     return;
 
-  TDx::SpaceMouse::Navigation3D::CNavigation3D::FrameTiming =
-    TimingSource::SpaceMouse;
+  PutFrameTimingSource(TimingSource::SpaceMouse);
 
   return;
 }
@@ -92,19 +90,18 @@ void Avogadro::TDxController::exportCommands(
     pathCode.clear();
   }
 
-  TDx::SpaceMouse::Navigation3D::CNavigation3D::AddCommandSet(commandSet);
-  TDx::SpaceMouse::Navigation3D::CNavigation3D::ActiveCommands = commandSet.Id;
+  AddCommandSet(commandSet);
+  PutActiveCommands("Default");
 
 #ifdef WIN32
-  TDx::SpaceMouse::Navigation3D::CNavigation3D::AddImages(m_utilityIcons);
+  AddImages(m_utilityIcons);
 #endif
 }
 
 void Avogadro::TDxController::disableController()
 {
   std::error_code errorCode;
-  TDx::SpaceMouse::Navigation3D::CNavigation3D::EnableNavigation(false,
-                                                                 errorCode);
+  EnableNavigation(false, errorCode);
   return;
 }
 
