@@ -7,13 +7,13 @@
 # Suleyman Poyraz <zaryob.dev@gmail.com>, 2020.
 # Yunus AK <akyunus@live.com>, 2021.
 # Acun <acun1993@gmail.com>, 2021.
-# Oğuz Ersen <oguz@ersen.moe>, 2022.
+# Oğuz Ersen <oguz@ersen.moe>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-08-23 02:30+0000\n"
+"PO-Revision-Date: 2023-02-27 19:38+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.16-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -427,7 +427,7 @@ msgstr "Arka Plan Rengini Ayarla…"
 
 #: mainwindow.cpp:1878
 msgid "Rendering…"
-msgstr ""
+msgstr "Oluşturuluyor…"
 
 #: mainwindow.cpp:1886
 msgid "Projection"
@@ -859,26 +859,24 @@ msgstr "&İçe Aktar"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Çevresel perdeleme:"
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Etkinleştir"
 
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Gölge Gücü:"
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid "User Selections"
 msgid "Edge Detection:"
-msgstr "Kullanıcı Seçimleri"
+msgstr "Kenar algılama:"
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
@@ -887,10 +885,8 @@ msgstr "Kaydet"
 
 #. i18n: file: renderingdialog.ui:158
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "&Kapat"
+msgstr "Kapat"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
