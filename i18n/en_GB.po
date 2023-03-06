@@ -1,13 +1,14 @@
 # Marcus D. Hanwell <mdh55@pitt.edu>, 2008.
 # Marcus D. Hanwell <marcus@cryos.org>, 2009.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
+# Andi Chandler <andi@gowling.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2021-09-23 13:36+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2023-03-07 22:40+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_GB/>\n"
 "Language: en_GB\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.16.2-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -55,15 +56,11 @@ msgid "Layers"
 msgstr "Layers"
 
 #: mainwindow.cpp:410
-#, fuzzy
-#| msgid "File"
 msgctxt "File toolbar"
 msgid "File"
 msgstr "File"
 
 #: mainwindow.cpp:415
-#, fuzzy
-#| msgid "Tools"
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Tools"
@@ -81,11 +78,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:702
 msgid "Restart needed"
-msgstr ""
+msgstr "Restart needed"
 
 #: mainwindow.cpp:703
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Please restart Avogadro to use the new language."
 
 #: mainwindow.cpp:723 mainwindow.cpp:1386
 msgid "Chemical Markup Language"
@@ -128,7 +125,7 @@ msgstr "File formats"
 #: mainwindow.cpp:787
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Charges"
 
 #: mainwindow.cpp:791
 msgid "Install Plugin Script"
@@ -404,17 +401,12 @@ msgid "&Edit"
 msgstr "&Edit"
 
 #: mainwindow.cpp:1856
-#, fuzzy
-#| msgid "&Graphics…"
 msgid "&Copy Graphics"
-msgstr "&Graphics…"
+msgstr "&Copy Graphics"
 
 #: mainwindow.cpp:1860
-#, fuzzy
-#| msgctxt "Select All"
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -428,7 +420,7 @@ msgstr "Set Background colour…"
 
 #: mainwindow.cpp:1878
 msgid "Rendering…"
-msgstr ""
+msgstr "Rendering…"
 
 #: mainwindow.cpp:1886
 msgid "Projection"
@@ -448,11 +440,11 @@ msgstr "&Extensions"
 
 #: mainwindow.cpp:1915
 msgid "User Interface Language…"
-msgstr ""
+msgstr "User Interface Language…"
 
 #: mainwindow.cpp:1919
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Periodic Table…"
 
 #: mainwindow.cpp:1925 menubuilder.cpp:80
 msgid "&Help"
@@ -465,38 +457,32 @@ msgid "&About"
 msgstr "&About"
 
 #: mainwindow.cpp:1933
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Discussion Forum"
+msgstr "&Discussion Forum"
 
 #: mainwindow.cpp:1937
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadro Website"
+msgstr "&Avogadro Website"
 
 #: mainwindow.cpp:1941
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Report a bug"
+msgstr "&Report a Bug"
 
 #: mainwindow.cpp:1945
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Suggest a Feature"
 
 #: mainwindow.cpp:1969
 msgid "System Language"
-msgstr ""
+msgstr "System Language"
 
 #: mainwindow.cpp:1977
 msgid "Language"
-msgstr ""
+msgstr "Language"
 
 #: mainwindow.cpp:1977
 msgid "User Interface Language:"
-msgstr ""
+msgstr "User Interface Language:"
 
 #: mainwindow.cpp:2081
 #, qt-format
@@ -522,10 +508,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2198
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Network Update Check Failed"
+msgstr "Network Download Failed"
 
 #: mainwindow.cpp:2199
 msgid "Network timeout or other error."
@@ -534,22 +518,20 @@ msgstr "Network timeout or other error."
 #: mainwindow.cpp:2238
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Your version: %1"
 
 #: mainwindow.cpp:2239
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Git revision: %1)"
+msgstr "New version: %1"
 
 #: mainwindow.cpp:2241
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "An update is available, do you want to download it now?\n"
 
 #: mainwindow.cpp:2243
 msgid "Version Update"
-msgstr ""
+msgstr "Version Update"
 
 #: mainwindow.cpp:2301
 #, qt-format
@@ -590,14 +572,12 @@ msgid "&Window"
 msgstr "&Window"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "New View"
+msgstr "3D View"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -872,26 +852,24 @@ msgstr "&Import"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Ambient Occlusion:"
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Enable"
 
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Shadow Strength:"
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid "User Selections"
 msgid "Edge Detection:"
-msgstr "User Selections"
+msgstr "Edge Detection:"
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
@@ -900,10 +878,8 @@ msgstr "Save"
 
 #. i18n: file: renderingdialog.ui:158
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "&Close"
+msgstr "Close"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
