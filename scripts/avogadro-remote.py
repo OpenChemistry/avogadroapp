@@ -82,6 +82,15 @@ if __name__ == "__main__":
                 "params": {"fileName": str(sys.argv[2])},
             }
         )
+    elif method == "saveGraphic":
+        conn.send_json(
+            {
+                "jsonrpc": "2.0",
+                "id": 0,
+                "method": "saveGraphic",
+                "params": {"fileName": str(sys.argv[2])},
+            }
+        )
 
     elif method == "kill":
         conn.send_json({"jsonrpc": "2.0", "id": 0, "method": "kill"})

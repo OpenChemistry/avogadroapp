@@ -87,6 +87,8 @@ public slots:
    */
   bool openFile(const QString& fileName, Io::FileFormat* reader = nullptr);
 
+  void exportGraphics(QString fileName);
+
   /**
    * Move @a fileName as a plugin script (i.e. put it in the correct dir)
    */
