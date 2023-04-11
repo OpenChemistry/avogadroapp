@@ -4,6 +4,7 @@
 ******************************************************************************/
 
 #include "mainwindow.h"
+#include "autosave.h"
 
 #include "aboutdialog.h"
 #include "avogadroappconfig.h"
@@ -97,8 +98,65 @@
 #else
 #define MESSAGEBOX QMessageBox
 #endif
-
 namespace Avogadro {
+  MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+{
+
+    /* TODO: Edit this with your data. This is required for creating the autosave directory */
+    QCoreApplication::setOrganizationName("OpenChemistry");
+    QCoreApplication::setOrganizationDomain("https://avogadro.cc/");
+    QCoreApplication::setApplicationName("Avogadro");
+    QCoreApplication::setApplicationVersion("1.97.0");
+
+    /* This function shall be called everytime your app is started */
+    autosaveCheck();
+}
+
+void MainWindow::autosaveCheck()
+{
+    autosave = new Autosave(this);
+    connect(autosave->timer, SIGNAL(timeout()), this, SLOT(saveDataToAutosave()));
+
+    if(autosave->fileExists())
+    {
+        autosave->fileRecovery();
+    }
+    else
+    {
+        /* Do nothing */
+    }
+}
+
+void MainWindow::FileOpenedOrCreated(QString filename)
+{
+    initAutosave(filename);
+}
+
+
+void MainWindow::saveDataToAutosave()
+{
+    qDebug("Autosave file write successful");
+}
+
+void MainWindow::initAutosave(QString filename)
+{
+    autosave->clearDirectory();
+    autosave->setProjectName(filename);
+    autosave->createFile();
+    autosave->timerStart();
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    autosave->clearDirectory();
+    event->accept();
+}
+
+MainWindow::~MainWindow()
+{
+
+}
 
 #ifdef QTTESTING
 class XMLEventObserver : public pqEventObserver
