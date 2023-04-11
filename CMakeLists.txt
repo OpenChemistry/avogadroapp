@@ -46,6 +46,12 @@ endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
+set(QT_VERSION "5" CACHE STRING "What major version of Qt")
+set(QT_VERSIONS_SUPPORTED 5 6)
+set_property(CACHE QT_VERSION PROPERTY STRINGS 5 6)
+if(NOT QT_VERSION IN_LIST QT_VERSIONS_SUPPORTED)
+  message(FATAL_ERROR "Qt version must be one of ${QT_VERSIONS_SUPPORTED}")
+endif()
 option(ENABLE_TESTING "Enable testing and building the tests." OFF)
 
 if(ENABLE_TESTING)

@@ -8,6 +8,8 @@
 #include <QtCore/QDebug>
 #include <QtWidgets/QMenuBar>
 
+#include <algorithm>
+
 namespace Avogadro {
 
 namespace {
@@ -165,7 +167,7 @@ void MenuBuilder::buildMenu(QMenu* menu, const QString& path)
     }
   }
 
-  qSort(actionText.begin(), actionText.end(), lessThan);
+  std::sort(actionText.begin(), actionText.end(), lessThan);
 
   // When an action's priority is below this value, insert a separator.
   // Separators are inserted as needed at multiples of 100.

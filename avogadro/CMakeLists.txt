@@ -19,7 +19,11 @@ else()
 endif()
 
 # Find the Qt components we need.
-find_package(Qt5 REQUIRED COMPONENTS Concurrent Widgets Network CONFIG)
+if(QT_VERSION EQUAL 6)
+  find_package(Qt6 COMPONENTS Concurrent Widgets Network Core5Compat REQUIRED)
+else()
+  find_package(Qt5 COMPONENTS Concurrent Widgets Network REQUIRED)
+endif()
 
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
 
@@ -35,13 +39,13 @@ set(avogadro_srcs
   viewfactory.cpp
 )
 
-qt5_wrap_ui(ui_srcs
+qt_wrap_ui(ui_srcs
   aboutdialog.ui
   mainwindow.ui
   renderingdialog.ui
 )
 
-qt5_add_resources(rcc_srcs avogadro.qrc)
+qt_add_resources(rcc_srcs avogadro.qrc)
 
 # download and install QM translation files
 # Look in parallel directory for the i18n repository
@@ -160,10 +164,10 @@ endif()
 
 add_executable(avogadro WIN32 MACOSX_BUNDLE
   ${avogadro_srcs} ${ui_srcs} ${rcc_srcs})
-target_link_libraries(avogadro Qt5::Widgets Qt5::Network Qt5::Concurrent)
+target_link_libraries(avogadro Qt::Widgets Qt::Network Qt::Concurrent)
 if(WIN32)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD")
-  target_link_libraries(avogadro Qt5::WinMain)
+  target_link_libraries(avogadro Qt::WinMain)
 endif()
 set_target_properties(avogadro PROPERTIES AUTOMOC TRUE)
 target_link_libraries(avogadro AvogadroQtOpenGL AvogadroQtGui AvogadroQtPlugins)
@@ -180,6 +184,9 @@ else()
 endif()
 if(ENABLE_TESTING)
   target_link_libraries(avogadro QtTesting)
+endif()
+if(QT_VERSION EQUAL 6)
+  target_link_libraries(avogadro Qt6::Core5Compat)
 endif()
 install(TARGETS avogadro
   RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
