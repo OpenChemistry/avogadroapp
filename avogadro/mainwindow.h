@@ -5,6 +5,8 @@
 
 #ifndef AVOGADRO_MAINWINDOW_H
 #define AVOGADRO_MAINWINDOW_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QtCore/QStringList>
 #include <QtWidgets/QMainWindow>
@@ -18,6 +20,7 @@ class QThread;
 class QTreeView;
 class QNetworkAccessManager;
 class QNetworkReply;
+class Autosave;
 
 namespace Ui {
 class AboutDialog;
@@ -55,6 +58,34 @@ class LayerModel;
  * The MainWindow class for the Avogadro application. Takes care of initializing
  * the application and overall layout.
  */
+
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+
+public:
+    MainWindow(QWidget *parent = 0);
+
+    ~MainWindow();
+
+    void initAutosave(QString filename);
+
+    void autosaveCheck();
+
+    void FileOpenedOrCreated(QString filename);
+
+private:
+
+    Autosave *autosave;
+
+    void closeEvent(QCloseEvent *event) override;
+
+
+private slots:
+
+    void saveDataToAutosave(void);
+
+};
 
 class MainWindow : public QMainWindow
 {
