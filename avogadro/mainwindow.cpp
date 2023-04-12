@@ -53,12 +53,12 @@
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeySequence>
-#include <QtGui/QOpenGLFramebufferObject>
+#include <QOpenGLFramebufferObject>
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
-#include <QtWidgets/QActionGroup>
+#include <QActionGroup>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QColorDialog>
 #include <QtWidgets/QDockWidget>
@@ -75,6 +75,8 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QTreeView>
+
+#include <QScreen>
 
 #ifdef QTTESTING
 #include <QXmlStreamReader>
@@ -363,8 +365,6 @@ void MainWindow::setupInterface()
 
   // Our scene/view dock.
   m_sceneDock = new QDockWidget(tr("Display Types"), this);
-  m_sceneDock->setFeatures(m_sceneDock->features() &
-                           ~QDockWidget::AllDockWidgetFeatures);
 
   m_sceneTreeView = new QTreeView(m_sceneDock);
   m_sceneTreeView->setIndentation(0);
@@ -375,8 +375,6 @@ void MainWindow::setupInterface()
   // Our view dock.
   m_viewDock = new QDockWidget(tr("View Configuration"), this);
   addDockWidget(Qt::LeftDockWidgetArea, m_viewDock);
-  m_viewDock->setFeatures(m_viewDock->features() &
-                          ~QDockWidget::AllDockWidgetFeatures);
 
   // Our molecule dock.
   QDockWidget* moleculeDock = new QDockWidget(tr("Molecules"), this);
@@ -1202,7 +1200,8 @@ QImage MainWindow::renderToImage(const QSize& size)
   if (QOpenGLFramebufferObject::hasOpenGLFramebufferObjects()) {
     exportImage = glWidget->grabFramebuffer();
   } else {
-    QPixmap pixmap = QPixmap::grabWindow(glWidget->winId());
+    auto* screen = QGuiApplication::primaryScreen();
+    auto pixmap = screen->grabWindow(glWidget->winId());
     exportImage = pixmap.toImage();
   }
 
@@ -2057,7 +2056,7 @@ QString MainWindow::generateFilterString(
   QString result;
 
   // Create a map that groups the file extensions by name:
-  QMap<QString, QString> formatMap;
+  QMultiMap<QString, QString> formatMap;
   for (vector<const FileFormat*>::const_iterator it = formats.begin(),
                                                  itEnd = formats.end();
        it != itEnd; ++it) {
