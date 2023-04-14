@@ -5,6 +5,11 @@ if(POLICY CMP0020)
 #  cmake_policy(SET CMP0020 NEW)
 endif()
 
+# Set CMP0080 to OLD for now for BundleUtilities, this needs porting to NEW.
+if(POLICY CMP0080)
+  cmake_policy(SET CMP0080 OLD)
+endif()
+
 project(AvogadroApp)
 
 set(CMAKE_MODULE_PATH ${AvogadroApp_SOURCE_DIR}/cmake)
