@@ -242,13 +242,12 @@ int main(int argc, char* argv[])
     }
   }
 
-  Avogadro::MainWindow* window =
-    new Avogadro::MainWindow(fileNames, disableSettings);
-  window->setTranslationList(languages, codes);
+  Avogadro::MainWindow window(fileNames, disableSettings);
+  window.setTranslationList(languages, codes);
 #ifdef QTTESTING
-  window->playTest(testFile, testExit);
+  window.playTest(testFile, testExit);
 #endif
-  window->show();
+  window.show();
 
 #ifdef Avogadro_ENABLE_RPC
   // create rpc listener

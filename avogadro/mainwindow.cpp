@@ -269,7 +269,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
     plugin->pluginFactories<ExtensionPluginFactory>();
   qDebug() << "Extension plugins dynamically found…" << extensions.size();
   foreach (ExtensionPluginFactory* factory, extensions) {
-    ExtensionPlugin* extension = factory->createInstance();
+    ExtensionPlugin* extension = factory->createInstance(QCoreApplication::instance());
     if (extension) {
       extension->setParent(this);
       connect(this, &MainWindow::moleculeChanged, extension,
@@ -1071,7 +1071,7 @@ void MainWindow::sceneItemActivated(const QModelIndex& idx)
   }
 }
 
-bool populatePluginModel(ScenePluginModel& model, bool editOnly = false)
+bool populatePluginModel(ScenePluginModel& model, QObject *p, bool editOnly = false)
 {
   if (!model.scenePlugins().empty())
     return false;
@@ -1081,7 +1081,7 @@ bool populatePluginModel(ScenePluginModel& model, bool editOnly = false)
   QList<ScenePluginFactory*> scenePluginFactories =
     plugin->pluginFactories<ScenePluginFactory>();
   foreach (ScenePluginFactory* factory, scenePluginFactories) {
-    ScenePlugin* scenePlugin = factory->createInstance();
+    ScenePlugin* scenePlugin = factory->createInstance(p);
     if (editOnly && scenePlugin) {
       if (scenePlugin->objectName() == "BallStick") {
         model.addItem(scenePlugin);
@@ -1104,7 +1104,7 @@ bool populateTools(T* glWidget)
   QList<ToolPluginFactory*> toolPluginFactories =
     plugin->pluginFactories<ToolPluginFactory>();
   foreach (ToolPluginFactory* factory, toolPluginFactories) {
-    ToolPlugin* tool = factory->createInstance();
+    ToolPlugin* tool = factory->createInstance(QCoreApplication::instance());
     if (tool)
       glWidget->addTool(tool);
   }
@@ -1117,7 +1117,7 @@ void MainWindow::viewActivated(QWidget* widget)
 {
   ActiveObjects::instance().setActiveWidget(widget);
   if (GLWidget* glWidget = qobject_cast<GLWidget*>(widget)) {
-    bool firstRun = populatePluginModel(glWidget->sceneModel());
+    bool firstRun = populatePluginModel(glWidget->sceneModel(), this);
     m_sceneTreeView->setModel(&glWidget->sceneModel());
     populateTools(glWidget);
 
@@ -1153,7 +1153,7 @@ void MainWindow::viewActivated(QWidget* widget)
   }
 #ifdef AVO_USE_VTK
   else if (vtkGLWidget* vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
-    bool firstRun = populatePluginModel(vtkWidget->sceneModel());
+    bool firstRun = populatePluginModel(vtkWidget->sceneModel(), this);
     m_sceneTreeView->setModel(&vtkWidget->sceneModel());
 
     if (firstRun) {
@@ -1998,7 +1998,7 @@ void MainWindow::buildTools()
   QList<ToolPluginFactory*> toolPluginFactories =
     plugin->pluginFactories<ToolPluginFactory>();
   foreach (ToolPluginFactory* factory, toolPluginFactories) {
-    ToolPlugin* tool = factory->createInstance();
+    ToolPlugin* tool = factory->createInstance(QCoreApplication::instance());
     tool->setParent(this);
     if (tool)
       m_tools << tool;
