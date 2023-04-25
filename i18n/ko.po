@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Hoseok Seo <ddinghoya@gmail.com>, 2022.
+# simmon <simmon@nplob.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
-"PO-Revision-Date: 2022-09-27 17:16+0000\n"
-"Last-Translator: Hoseok Seo <ddinghoya@gmail.com>\n"
+"PO-Revision-Date: 2023-04-26 08:49+0000\n"
+"Last-Translator: simmon <simmon@nplob.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ko/>\n"
 "Language: ko\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.18-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
@@ -34,7 +35,7 @@ msgstr "BackgroundFileFormat에 설정된 파일 이름이 없습니다!"
 
 #: mainwindow.cpp:309
 msgid "Ready…"
-msgstr "준비 중…"
+msgstr "준비가 된…"
 
 #: mainwindow.cpp:361
 msgid "Tool"
@@ -105,7 +106,7 @@ msgstr "파일을 열 수 없음"
 #: mainwindow.cpp:749 mainwindow.cpp:773 mainwindow.cpp:1289
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr "제공된 %1 파일을 열 수 없음"
+msgstr "제공된 파일 %1을 열 수 없음"
 
 #: mainwindow.cpp:762
 msgid "Open Molecule"
@@ -150,7 +151,7 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
-"'%1' 파일을 여는 중 \n"
+"파일 '%1'을 여는 중\n"
 "'%2' 포함"
 
 #: mainwindow.cpp:904
@@ -168,14 +169,14 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
-"'%1' 파일을 읽는 중 오류:\n"
+"파일 '%1'을 읽는 중 오류:\n"
 "%2"
 
 #: mainwindow.cpp:937
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "저장된 %1 파일"
+msgstr "파일 %1이 저장됨"
 
 #: mainwindow.cpp:945
 msgid "Error saving file"
@@ -202,8 +203,8 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
-"OpenGL 2.0 이상이 필요합니다. 종료합니다. \n"
-" \n"
+"OpenGL 2.0 이상이 필요합니다. 종료합니다.\n"
+"\n"
 "%1"
 
 #: mainwindow.cpp:987
@@ -256,8 +257,8 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
-"이 파일은 분자의 모든 정보를 기록할 수 없는 비표준 형식에서 가져왔습니다. \n"
-" \n"
+"이 파일은 분자의 모든 정보를 기록할 수 없는 비표준 형식에서 가져왔습니다.\n"
+"\n"
 "현재 형식으로 내보내시겠습니까, 아니면 표준 형식으로 저장하겠습니까?"
 
 #: mainwindow.cpp:1367
@@ -283,7 +284,7 @@ msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"\"%1\" 파일 저장 중 \n"
+"파일 \"%1\"를 저장 중\n"
 "\"%2\" 포함"
 
 #: mainwindow.cpp:1599
@@ -310,15 +311,15 @@ msgstr "다시 실행(&R)"
 
 #: mainwindow.cpp:1726
 msgid "&Testing"
-msgstr "테스트(&T)"
+msgstr "시험 중(&T)"
 
 #: mainwindow.cpp:1728
 msgid "Record test…"
-msgstr "테스트 녹화…"
+msgstr "기록 시험…"
 
 #: mainwindow.cpp:1731
 msgid "Play test…"
-msgstr "테스트 실행…"
+msgstr "시험 실행…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -388,7 +389,7 @@ msgstr "끝내기(&Q)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1826:189
 msgid "Open Recent"
-msgstr "최근에 열어본 파일"
+msgstr "최근 항목 열기"
 
 #: mainwindow.cpp:1838
 msgid "No recent files"
@@ -466,7 +467,7 @@ msgstr "아보가드로 웹사이트"
 
 #: mainwindow.cpp:1941
 msgid "&Report a Bug"
-msgstr "버그 보고(&R)"
+msgstr "결점 보고(&R)"
 
 #: mainwindow.cpp:1945
 msgid "&Suggest a Feature"
@@ -487,7 +488,7 @@ msgstr "사용자 인터페이스 언어:"
 #: mainwindow.cpp:2081
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr "지원되는 모든 형식 (%1);; 모든 파일 (*);;"
+msgstr "지원되는 모든 형식 (%1);;모든 파일 (*);;"
 
 #: mainwindow.cpp:2097
 msgid "Do you want to save the changes to the document?"
@@ -509,7 +510,7 @@ msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2198
 msgid "Network Download Failed"
-msgstr "네트워크 다운로드 실패"
+msgstr "네트워크 내려받기 실패"
 
 #: mainwindow.cpp:2199
 msgid "Network timeout or other error."
@@ -527,7 +528,7 @@ msgstr "새로운 버전: %1"
 
 #: mainwindow.cpp:2241
 msgid "An update is available, do you want to download it now?\n"
-msgstr "업데이트가 있습니다. 지금 다운로드하겠습니까?\n"
+msgstr "최신화를 사용 할 수 있습니다, 지금 내려받기 할까요?\n"
 
 #: mainwindow.cpp:2243
 msgid "Version Update"
@@ -545,7 +546,7 @@ msgstr "파일 형식 선택"
 #: mainwindow.cpp:2322 mainwindow.cpp:2333
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "아보가드로는 \"%1\"을(를) 열 수 없습니다."
+msgstr "아보가드로는 \"%1\"를 열 수 없습니다."
 
 #: mainwindow.cpp:2332
 msgid "Cannot open files"
@@ -634,10 +635,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">라이"
-"센스: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\"><span "
-"style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\">BSD 3 "
-"절</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">저작권: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:264
 #. i18n: ectx: property (text), widget (QLabel, label_2)
