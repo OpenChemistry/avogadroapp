@@ -4,13 +4,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Hoseok Seo <ddinghoya@gmail.com>, 2022.
 # simmon <simmon@nplob.com>, 2023.
+# 이남규 <athiv123@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2022-10-02 03:55+0000\n"
 "PO-Revision-Date: 2023-04-26 08:49+0000\n"
-"Last-Translator: simmon <simmon@nplob.com>\n"
+"Last-Translator: 이남규 <athiv123@gmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ko/>\n"
 "Language: ko\n"
@@ -47,7 +48,7 @@ msgstr "표시 형식"
 
 #: mainwindow.cpp:376
 msgid "View Configuration"
-msgstr "보기 구성"
+msgstr "구성 보기"
 
 #: mainwindow.cpp:382
 msgid "Molecules"
