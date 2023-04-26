@@ -7,12 +7,15 @@
 #include "avogadroappconfig.h"
 #include "ui_aboutdialog.h"
 
+#include <QSslSocket>
+
 #include <avogadro/core/version.h>
 
 namespace Avogadro {
 
 AboutDialog::AboutDialog(QWidget* parent_)
-  : QDialog(parent_), m_ui(new Ui::AboutDialog)
+  : QDialog(parent_)
+  , m_ui(new Ui::AboutDialog)
 {
   m_ui->setupUi(this);
 
@@ -23,6 +26,8 @@ AboutDialog::AboutDialog(QWidget* parent_)
   m_ui->version->setText(html.arg("20").arg(AvogadroApp_VERSION));
   m_ui->libsVersion->setText(html.arg("10").arg(version()));
   m_ui->qtVersion->setText(html.arg("10").arg(qVersion()));
+  m_ui->sslVersion->setText(
+    html.arg("10").arg(QSslSocket::sslLibraryVersionString()));
 
   // Add support for a 2x replacement (mainly Mac OS X retina at this point).
   if (window()->devicePixelRatio() == 2) {
