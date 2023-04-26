@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2023-04-26 17:47+0000\n"
+"POT-Creation-Date: 2023-04-26 20:52+0000\n"
 "PO-Revision-Date: 2022-11-27 00:48+0000\n"
 "Last-Translator: Minh P <phandinhminh@protonmail.ch>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/avogadro/"
@@ -20,6 +20,34 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.15-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
+
+#. i18n: file: aboutdialog.ui:62
+#. i18n: ectx: property (text), widget (QLabel, versionLabel)
+#: aboutdialog.cpp:27:3
+#, fuzzy
+#| msgid "Version Update"
+msgid "Version:"
+msgstr "Cập nhật phiên bản"
+
+#. i18n: file: aboutdialog.ui:117
+#. i18n: ectx: property (text), widget (QLabel, libsLabel)
+#: aboutdialog.cpp:28:9
+msgid "Avogadro Library Version:"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:164
+#. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
+#: aboutdialog.cpp:29:15
+#, fuzzy
+#| msgid "New version: %1"
+msgid "Qt Version:"
+msgstr "Phiên bản mới: %1"
+
+#. i18n: file: aboutdialog.ui:181
+#. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
+#: aboutdialog.cpp:30:21
+msgid "SSL Version:"
+msgstr ""
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -581,67 +609,16 @@ msgstr "Chế độ xem 3D"
 msgid "VTK"
 msgstr "VTK"
 
-#. i18n: file: aboutdialog.ui:62
-#. i18n: ectx: property (text), widget (QLabel, versionLabel)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
-"\">Version:</span></p></body></html>"
-msgstr ""
-"<html> <head/> <body> <p> <span style=\" font-size:20pt; font-weight:600;\"> "
-"Phiên bản: </span> </p> </body> </html>"
-
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
-"span></p></body></html>"
-msgstr ""
-"<html> <head/> <body> <p> <span style=\" font-size:20pt; font-weight:600;\"> "
-"0,1 </span> </p> </body> </html>"
-
-#. i18n: file: aboutdialog.ui:117
-#. i18n: ectx: property (text), widget (QLabel, libs)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">AvogadroLibs Version:</span></p></body></html>"
-msgstr ""
-"<html> <head/> <body> <p> <span style=\" font-size:10pt; font-weight:600;\"> "
-"Phiên bản AvogadroLibs: </span> </p> </body> </html>"
-
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
 #. i18n: file: aboutdialog.ui:171
 #. i18n: ectx: property (text), widget (QLabel, qtVersion)
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
-"span></p></body></html>"
+msgid "0.1"
 msgstr ""
-"<html> <head/> <body> <p> <span style=\" font-size:20pt; font-weight:600;\"> "
-"0,1 </span> </p> </body> </html>"
-
-#. i18n: file: aboutdialog.ui:164
-#. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
-"Version:</span></p></body></html>"
-msgstr ""
-"<html> <head/> <body> <p> <span style=\" font-size:10pt; font-weight:600;\"> "
-"Phiên bản Qt: </span> </p> </body> </html>"
-
-#. i18n: file: aboutdialog.ui:181
-#. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-#| "\">Qt Version:</span></p></body></html>"
-msgid ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">SSL "
-"Version:</span></p></body></html>"
-msgstr ""
-"<html> <head/> <body> <p> <span style=\" font-size:10pt; font-weight:600;\"> "
-"Phiên bản Qt: </span> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -913,6 +890,52 @@ msgstr ""
 ",,,,,avogadro-devel@lists.sourceforge.net,,,,avogadro-devel@lists."
 "sourceforge.net,,,,avogadro-devel@lists.sourceforge.net,,,,avogadro-"
 "devel@lists.sourceforge.net,,,,avogadro-devel@lists.sourceforge.net,"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
+#~ "\">Version:</span></p></body></html>"
+#~ msgstr ""
+#~ "<html> <head/> <body> <p> <span style=\" font-size:20pt; font-weight:600;"
+#~ "\"> Phiên bản: </span> </p> </body> </html>"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
+#~ "\">0.1</span></p></body></html>"
+#~ msgstr ""
+#~ "<html> <head/> <body> <p> <span style=\" font-size:20pt; font-weight:600;"
+#~ "\"> 0,1 </span> </p> </body> </html>"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+#~ "\">AvogadroLibs Version:</span></p></body></html>"
+#~ msgstr ""
+#~ "<html> <head/> <body> <p> <span style=\" font-size:10pt; font-weight:600;"
+#~ "\"> Phiên bản AvogadroLibs: </span> </p> </body> </html>"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+#~ "\">0.1</span></p></body></html>"
+#~ msgstr ""
+#~ "<html> <head/> <body> <p> <span style=\" font-size:20pt; font-weight:600;"
+#~ "\"> 0,1 </span> </p> </body> </html>"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+#~ "\">Qt Version:</span></p></body></html>"
+#~ msgstr ""
+#~ "<html> <head/> <body> <p> <span style=\" font-size:10pt; font-weight:600;"
+#~ "\"> Phiên bản Qt: </span> </p> </body> </html>"
+
+#, fuzzy
+#~| msgid ""
+#~| "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+#~| "\">Qt Version:</span></p></body></html>"
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+#~ "\">SSL Version:</span></p></body></html>"
+#~ msgstr ""
+#~ "<html> <head/> <body> <p> <span style=\" font-size:10pt; font-weight:600;"
+#~ "\"> Phiên bản Qt: </span> </p> </body> </html>"
 
 #, fuzzy
 #~ msgid "Set background color…"
