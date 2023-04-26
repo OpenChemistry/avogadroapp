@@ -2,13 +2,13 @@
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
-# Allan Nordhøy <epost@anotheragency.no>, 2020, 2021.
+# Allan Nordhøy <epost@anotheragency.no>, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-04-26 20:52+0000\n"
-"PO-Revision-Date: 2021-09-15 07:35+0000\n"
+"PO-Revision-Date: 2023-04-26 22:57+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/nb_NO/>\n"
@@ -17,34 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.18-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgid "Description:"
 msgid "Version:"
-msgstr "Beskrivelse:"
+msgstr "Versjon:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:28:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Avogadro-biblioteksversjon:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
 msgid "Qt Version:"
-msgstr ""
+msgstr "Qt-versjon:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:30:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSL-versjon:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 #, fuzzy
@@ -113,11 +111,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:700
 msgid "Restart needed"
-msgstr ""
+msgstr "Omstart påkrevd"
 
 #: mainwindow.cpp:701
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Start Avogadro på ny for å ta i bruk det nye språket."
 
 #: mainwindow.cpp:721 mainwindow.cpp:1391
 msgid "Chemical Markup Language"
@@ -160,7 +158,7 @@ msgstr "Filformater"
 #: mainwindow.cpp:785
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Ladinger"
 
 #: mainwindow.cpp:789
 msgid "Install Plugin Script"
@@ -440,16 +438,12 @@ msgid "&Edit"
 msgstr "&Rediger"
 
 #: mainwindow.cpp:1861
-#, fuzzy
-#| msgid "&Graphics…"
 msgid "&Copy Graphics"
-msgstr "&Grafikk …"
+msgstr "&Kopier grafikk"
 
 #: mainwindow.cpp:1865
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl + A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -463,8 +457,9 @@ msgid "Set Background Color…"
 msgstr "Sett bakgrunnsfarge …"
 
 #: mainwindow.cpp:1883
+#, fuzzy
 msgid "Rendering…"
-msgstr ""
+msgstr "Tegner …"
 
 #: mainwindow.cpp:1891
 #, fuzzy
@@ -485,11 +480,11 @@ msgstr "&Utvidelser"
 
 #: mainwindow.cpp:1920
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Brukergrensesnittsspråk …"
 
 #: mainwindow.cpp:1924
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Den periodiske tabell …"
 
 #: mainwindow.cpp:1930 menubuilder.cpp:82
 msgid "&Help"
@@ -502,38 +497,32 @@ msgid "&About"
 msgstr "&Om"
 
 #: mainwindow.cpp:1938
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Diskusjonsforum"
+msgstr "&Diskusjonsforum"
 
 #: mainwindow.cpp:1942
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadro-nettsiden"
+msgstr "%Avogadro-nettsiden"
 
 #: mainwindow.cpp:1946
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Rapporter en feil"
+msgstr "%Rapporter en feil"
 
 #: mainwindow.cpp:1950
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "%Foreslå en funksjon"
 
 #: mainwindow.cpp:1974
 msgid "System Language"
-msgstr ""
+msgstr "Systemspråk"
 
 #: mainwindow.cpp:1982
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 #: mainwindow.cpp:1982
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Brukergrensesnittsspråk:"
 
 #: mainwindow.cpp:2086
 #, qt-format
@@ -561,29 +550,31 @@ msgstr "Ctrl + D"
 
 #: mainwindow.cpp:2203
 msgid "Network Download Failed"
-msgstr ""
+msgstr "Nettverksnedlasting mislyktes"
 
 #: mainwindow.cpp:2204
 msgid "Network timeout or other error."
-msgstr ""
+msgstr "Nettverkstidsavbrudd eller annen feil."
 
 #: mainwindow.cpp:2243
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Din versjon: %1"
 
 #: mainwindow.cpp:2244
 #, qt-format
 msgid "New version: %1"
-msgstr ""
+msgstr "Ny versjon: %1"
 
 #: mainwindow.cpp:2246
+#, fuzzy
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "Vil du laste ned den nye versjonen nå?\n"
 
 #: mainwindow.cpp:2248
+#, fuzzy
 msgid "Version Update"
-msgstr ""
+msgstr "Ny versjon"
 
 #: mainwindow.cpp:2306
 #, qt-format
@@ -624,14 +615,13 @@ msgid "&Window"
 msgstr "&Vindu"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Ny Visning"
+msgstr "3D-visning"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
+#, fuzzy
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -642,7 +632,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -658,22 +648,21 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">Lisens: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
-"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
-"\">BSD-3</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Lisens: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3-klausuler</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:278
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#, fuzzy
 msgid ""
 "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
 "\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
-"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
-"span></a></p></body></html>"
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:307
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -702,7 +691,7 @@ msgstr "OK"
 #| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
-msgstr "Ctrl + O"
+msgstr "Ctrl+O"
 
 #. i18n: file: mainwindow.ui:90
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -715,7 +704,7 @@ msgstr "&Åpne"
 #| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
-msgstr "Ctrl + Q"
+msgstr "Ctrl+Q"
 
 #. i18n: file: mainwindow.ui:111
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -733,7 +722,7 @@ msgstr "Nullstill Siste"
 #| msgid "Ctrl+N"
 msgctxt "File | New"
 msgid "Ctrl+N"
-msgstr "Ctrl + N"
+msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -741,7 +730,7 @@ msgstr "Ctrl + N"
 #| msgid "Ctrl+W"
 msgctxt "File | Close"
 msgid "Ctrl+W"
-msgstr "Ctrl + W"
+msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -749,7 +738,7 @@ msgstr "Ctrl + W"
 #| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
-msgstr "Ctrl + S"
+msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -757,7 +746,7 @@ msgstr "Ctrl + S"
 #| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
-msgstr "Ctrl + Shift + S"
+msgstr "Ctrl+Shift+S"
 
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -768,7 +757,7 @@ msgstr "Gå tilbake til Lagret"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
-msgstr "Sett bakgrunnsfarge …"
+msgstr "Sett &bakgrunnsfarge …"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -776,7 +765,7 @@ msgstr "Sett bakgrunnsfarge …"
 #| msgid "Ctrl+Z"
 msgctxt "Undo"
 msgid "Ctrl+Z"
-msgstr "Ctrl + Z"
+msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -784,7 +773,7 @@ msgstr "Ctrl + Z"
 #| msgid "Ctrl+Shift+Z"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
-msgstr "Ctrl + Shift + Z"
+msgstr "Ctrl+Shift+Z"
 
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -807,7 +796,7 @@ msgstr "Lim inn"
 #| msgid "Ctrl+V"
 msgctxt "Paste"
 msgid "Ctrl+V"
-msgstr "Ctrl + V"
+msgstr "Ctrl+V"
 
 #. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -820,7 +809,7 @@ msgstr "Kopier"
 #| msgid "Ctrl+C"
 msgctxt "Copy"
 msgid "Ctrl+C"
-msgstr "Ctrl + C"
+msgstr "Ctrl+C"
 
 #. i18n: file: mainwindow.ui:248
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -833,7 +822,7 @@ msgstr "Klipp ut"
 #| msgid "Ctrl+X"
 msgctxt "Cut"
 msgid "Ctrl+X"
-msgstr "Ctrl + X"
+msgstr "Ctrl+X"
 
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -851,7 +840,7 @@ msgstr "Velg alle"
 #| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
-msgstr "Ctrl + A"
+msgstr "Ctrl+A"
 
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -864,7 +853,7 @@ msgstr "Velg ingen"
 #| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
-msgstr "Ctrl + Shift + A"
+msgstr "Ctrl+Shift+A"
 
 #. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -908,25 +897,28 @@ msgstr "&Importer"
 
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
+#, fuzzy
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Ambient tilsløring:"
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
+#, fuzzy
 msgid "Enable"
-msgstr ""
+msgstr "Skru på"
 
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
+#, fuzzy
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Skyggestyrke:"
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid "Edge Detection:"
-msgstr ""
+msgstr "Kantoppdagelse:"
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
@@ -935,10 +927,8 @@ msgstr "Lagre"
 
 #. i18n: file: renderingdialog.ui:158
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "&Lukk"
+msgstr "Lukk"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
