@@ -23,6 +23,13 @@ AboutDialog::AboutDialog(QWidget* parent_)
                "<span style=\" font-size:%1pt; font-weight:600;\">%2</span>"
                "</p></body></html>");
 
+  // Add the labels
+  m_ui->versionLabel->setText(html.arg("20").arg(tr("Version:")));
+  m_ui->libsLabel->setText(html.arg("10").arg(tr("Avogadro Library Version:")));
+  m_ui->qtVersionLabel->setText(html.arg("10").arg(tr("Qt Version:")));
+  m_ui->sslVersionLabel->setText(html.arg("10").arg(tr("SSL Version:")));
+
+  // Add the version numbers
   m_ui->version->setText(html.arg("20").arg(AvogadroApp_VERSION));
   m_ui->libsVersion->setText(html.arg("10").arg(version()));
   m_ui->qtVersion->setText(html.arg("10").arg(qVersion()));
