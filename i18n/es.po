@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-04-26 20:52+0000\n"
-"PO-Revision-Date: 2023-04-26 22:57+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2023-04-30 15:50+0000\n"
+"Last-Translator: Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -710,7 +710,7 @@ msgstr "Ctrl+S"
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
-msgstr "Ctrl+Mayús+S"
+msgstr "Ctrl+Mayús.+S"
 
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
