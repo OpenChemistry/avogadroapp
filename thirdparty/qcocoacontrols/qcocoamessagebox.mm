@@ -104,8 +104,8 @@ int QCocoaMessageBox::exec()
     CocoaMessageBoxHandler* handler =
       [[CocoaMessageBoxHandler alloc] initWithLoop:&loop];
 
-    QWidget* parent = static_cast<QWidget*>(QObject::parent());
-    NSView* view = reinterpret_cast<NSView*>(parent->winId());
+    auto* parent = static_cast<QWidget*>(QObject::parent());
+    auto view = reinterpret_cast<NSView*>(parent->winId());
     NSWindow* wnd = [view window];
 
     [alert beginSheetModalForWindow:wnd

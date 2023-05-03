@@ -19,7 +19,7 @@ bool ToolTipFilter::eventFilter(QObject* object, QEvent* event)
   // Fire off a toolTip item for an enter event
   if (event->type() == QEvent::Enter) {
     QWidget* target = qobject_cast<QWidget*>(object);
-    QEnterEvent* ee = dynamic_cast<QEnterEvent*>(event);
+    auto* ee = dynamic_cast<QEnterEvent*>(event);
     if (target && ee) {
       QToolTip::showText(ee->globalPos(), target->toolTip(), target);
       return true;

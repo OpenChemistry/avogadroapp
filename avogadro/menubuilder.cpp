@@ -9,6 +9,7 @@
 #include <QtWidgets/QMenuBar>
 
 #include <algorithm>
+#include <utility>
 
 namespace Avogadro {
 
@@ -20,7 +21,7 @@ namespace {
  */
 struct PriorityText
 {
-  PriorityText(const QString& string, int pri) : text(string), priority(pri) {}
+  PriorityText(QString  string, int pri) : text(std::move(string)), priority(pri) {}
 
   QString text;
   int priority;
@@ -200,7 +201,7 @@ void MenuBuilder::buildMenu(QMenu* menu, const QString& path)
         if (action->text() == text.text) {
           // build the new submenu, insert,
           // then remove the placeholder
-          QMenu* subMenu = new QMenu(text.text, menu);
+          auto* subMenu = new QMenu(text.text, menu);
           buildMenu(subMenu, submenuMap[text.text]);
           menu->insertMenu(action, subMenu);
           menu->removeAction(action);
