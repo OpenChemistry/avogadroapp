@@ -91,10 +91,10 @@ int main(int argc, char* argv[])
 
   // Make sure to use pointers:
   //
-  QTranslator* qtTranslator = new QTranslator;
-  QTranslator* qtBaseTranslator = new QTranslator;
-  QTranslator* avoTranslator = new QTranslator;
-  QTranslator* avoLibsTranslator = new QTranslator;
+  auto* qtTranslator = new QTranslator;
+  auto* qtBaseTranslator = new QTranslator;
+  auto* avoTranslator = new QTranslator;
+  auto* avoLibsTranslator = new QTranslator;
   bool qtLoaded = false;
   bool avoLoaded = false;
   bool libsLoaded = false;
@@ -195,7 +195,7 @@ int main(int argc, char* argv[])
 
   if (!contextIsValid) {
     QMessageBox::information(
-      0, QCoreApplication::translate("main.cpp", "Avogadro"),
+      nullptr, QCoreApplication::translate("main.cpp", "Avogadro"),
       QCoreApplication::translate("main.cpp",
                                   "This system does not support OpenGL."));
     return 1;

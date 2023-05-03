@@ -43,7 +43,7 @@ RpcListener::RpcListener(QObject* parent_)
           &RpcListener::messageReceived);
 
   // Find the main window.
-  m_window = 0;
+  m_window = nullptr;
   foreach (QWidget* widget, QApplication::topLevelWidgets())
     if ((m_window = qobject_cast<MainWindow*>(widget)))
       break;
@@ -153,7 +153,7 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
   if (method == "openFile") {
     // Read the supplied file.
     string fileName = params["fileName"].toString().toStdString();
-    Molecule* molecule = new Molecule(this);
+    auto* molecule = new Molecule(this);
     bool success = FileFormatManager::instance().readFile(*molecule, fileName);
     if (success) {
       emit callSetMolecule(molecule);
@@ -190,7 +190,7 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
     string format = params["format"].toString().toStdString();
 
     // read molecule data
-    Molecule* molecule = new Molecule(this);
+    auto* molecule = new Molecule(this);
     bool success =
       FileFormatManager::instance().readString(*molecule, content, format);
     if (success) {

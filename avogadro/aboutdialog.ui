@@ -346,7 +346,7 @@
   <connection>
    <sender>OK</sender>
    <signal>clicked()</signal>
-   <receiver>aboutDialog</receiver>
+   <receiver>AboutDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">

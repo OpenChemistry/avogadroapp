@@ -331,10 +331,10 @@ void MainWindow::setupInterface()
   m_multiViewWidget = new QtGui::MultiViewWidget(this);
   m_multiViewWidget->setFactory(m_viewFactory);
   setCentralWidget(m_multiViewWidget);
-  GLWidget* glWidget = new GLWidget(this);
+  auto* glWidget = new GLWidget(this);
 
   // set the background color (alpha channel default should be opaque)
-  QColor color =
+  auto color =
     settings.value("backgroundColor", QColor(0, 0, 0, 255)).value<QColor>();
   Vector4ub cColor;
   cColor[0] = static_cast<unsigned char>(color.red());
@@ -377,7 +377,7 @@ void MainWindow::setupInterface()
   addDockWidget(Qt::LeftDockWidgetArea, m_viewDock);
 
   // Our molecule dock.
-  QDockWidget* moleculeDock = new QDockWidget(tr("Molecules"), this);
+  auto* moleculeDock = new QDockWidget(tr("Molecules"), this);
   m_moleculeTreeView = new QTreeView(moleculeDock);
   m_moleculeTreeView->setIndentation(0);
   m_moleculeTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -386,7 +386,7 @@ void MainWindow::setupInterface()
   addDockWidget(Qt::LeftDockWidgetArea, moleculeDock);
 
   // Our molecule dock.
-  QDockWidget* layerDock = new QDockWidget(tr("Layers"), this);
+  auto* layerDock = new QDockWidget(tr("Layers"), this);
   m_layerTreeView = new QTreeView(layerDock);
   m_layerTreeView->setIndentation(0);
   m_layerTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -504,9 +504,9 @@ void MainWindow::dropEvent(QDropEvent* event)
 
 void MainWindow::moleculeReady(int)
 {
-  ExtensionPlugin* extension = qobject_cast<ExtensionPlugin*>(sender());
+  auto* extension = qobject_cast<ExtensionPlugin*>(sender());
   if (extension) {
-    Molecule* mol = new Molecule(this);
+    auto* mol = new Molecule(this);
     if (extension->readMolecule(*mol))
       setMolecule(mol);
   }
@@ -529,7 +529,7 @@ void setDefaultViews(MultiViewWidget* viewWidget)
 {
   QSettings settings;
   // save the enabled scene / render plugins
-  if (GLWidget* glWidget =
+  if (auto* glWidget =
         qobject_cast<GLWidget*>(viewWidget->activeWidget())) {
 
     const ScenePluginModel* sceneModel = &glWidget->sceneModel();
@@ -602,11 +602,11 @@ void MainWindow::setMolecule(Molecule* mol)
 
   // Check if the molecule needs to update the current one.
   QWidget* w = m_multiViewWidget->activeWidget();
-  if (GLWidget* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
+  if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
     setWidgetMolecule(glWidget, mol);
   }
 #ifdef AVO_USE_VTK
-  else if (vtkGLWidget* vtkWidget = qobject_cast<vtkGLWidget*>(w)) {
+  else if (auto* vtkWidget = qobject_cast<vtkGLWidget*>(w)) {
     setWidgetMolecule(vtkWidget, mol);
   }
 #endif
@@ -677,7 +677,7 @@ void MainWindow::writeSettings()
   settings.setValue("recentFiles", m_recentFiles);
 
   // save the enabled scene / render plugins
-  if (GLWidget* glWidget =
+  if (auto* glWidget =
         qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())) {
 
     const ScenePluginModel* sceneModel = &glWidget->sceneModel();
@@ -957,8 +957,8 @@ bool MainWindow::backgroundWriterFinished()
 
 void MainWindow::toolActivated()
 {
-  if (QAction* action = qobject_cast<QAction*>(sender())) {
-    if (GLWidget* glWidget =
+  if (auto* action = qobject_cast<QAction*>(sender())) {
+    if (auto* glWidget =
           qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())) {
       glWidget->setActiveTool(action->data().toString());
       if (glWidget->activeTool()) {
@@ -979,7 +979,7 @@ void MainWindow::viewConfigActivated() {}
 
 void MainWindow::rendererInvalid()
 {
-  GLWidget* widget = qobject_cast<GLWidget*>(sender());
+  auto* widget = qobject_cast<GLWidget*>(sender());
   MESSAGEBOX::warning(this, tr("Error: Failed to initialize OpenGL context"),
                       tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
                         .arg(widget ? widget->error() : tr("Unknown error")));
@@ -1022,11 +1022,11 @@ void MainWindow::layerActivated(const QModelIndex& idx)
 
     if (updateGL) {
       QWidget* w = m_multiViewWidget->activeWidget();
-      if (GLWidget* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
+      if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
         glWidget->updateScene();
       }
 #ifdef AVO_USE_VTK
-      else if (vtkGLWidget* vtkWidget = qobject_cast<vtkGLWidget*>(w)) {
+      else if (auto* vtkWidget = qobject_cast<vtkGLWidget*>(w)) {
         vtkWidget->updateScene();
       }
 #endif
@@ -1037,8 +1037,8 @@ void MainWindow::layerActivated(const QModelIndex& idx)
 
 void MainWindow::moleculeActivated(const QModelIndex& idx)
 {
-  QObject* obj = static_cast<QObject*>(idx.internalPointer());
-  if (Molecule* mol = qobject_cast<Molecule*>(obj)) {
+  auto* obj = static_cast<QObject*>(idx.internalPointer());
+  if (auto* mol = qobject_cast<Molecule*>(obj)) {
     if (idx.column() == 0)
       setMolecule(mol);
 
@@ -1064,8 +1064,8 @@ void MainWindow::sceneItemActivated(const QModelIndex& idx)
 {
   if (!idx.isValid())
     return;
-  QObject* obj = static_cast<QObject*>(idx.internalPointer());
-  if (ScenePlugin* scene = qobject_cast<ScenePlugin*>(obj)) {
+  auto* obj = static_cast<QObject*>(idx.internalPointer());
+  if (auto* scene = qobject_cast<ScenePlugin*>(obj)) {
     m_viewDock->setWidget(scene->setupWidget());
     m_activeScenePlugin = scene;
   }
@@ -1116,7 +1116,7 @@ bool populateTools(T* glWidget)
 void MainWindow::viewActivated(QWidget* widget)
 {
   ActiveObjects::instance().setActiveWidget(widget);
-  if (GLWidget* glWidget = qobject_cast<GLWidget*>(widget)) {
+  if (auto* glWidget = qobject_cast<GLWidget*>(widget)) {
     bool firstRun = populatePluginModel(glWidget->sceneModel(), this);
     m_sceneTreeView->setModel(&glWidget->sceneModel());
     populateTools(glWidget);
@@ -1143,7 +1143,7 @@ void MainWindow::viewActivated(QWidget* widget)
       }
     }
     if (m_molecule != glWidget->molecule() && glWidget->molecule()) {
-      m_rwMolecule = 0;
+      m_rwMolecule = nullptr;
       m_molecule = glWidget->molecule();
       emit moleculeChanged(m_molecule);
       m_moleculeModel->setActiveMolecule(m_molecule);
@@ -1152,7 +1152,7 @@ void MainWindow::viewActivated(QWidget* widget)
     ActiveObjects::instance().setActiveGLWidget(glWidget);
   }
 #ifdef AVO_USE_VTK
-  else if (vtkGLWidget* vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
+  else if (auto* vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
     bool firstRun = populatePluginModel(vtkWidget->sceneModel(), this);
     m_sceneTreeView->setModel(&vtkWidget->sceneModel());
 
@@ -1180,7 +1180,7 @@ QImage MainWindow::renderToImage(const QSize& size)
 {
   QImage exportImage(size, QImage::Format_ARGB32);
 
-  QOpenGLWidget* glWidget =
+  auto* glWidget =
     qobject_cast<QOpenGLWidget*>(m_multiViewWidget->activeWidget());
 
   // render it (with alpha channel)
@@ -1281,7 +1281,7 @@ void MainWindow::openRecentFile()
   if (!saveFileIfNeeded())
     return;
 
-  QAction* action = qobject_cast<QAction*>(sender());
+  auto* action = qobject_cast<QAction*>(sender());
   if (action) {
     QString fileName = action->data().toString();
 
@@ -1322,9 +1322,9 @@ bool MainWindow::saveFile(bool async)
   if (!molObj)
     return false;
 
-  Molecule* mol = qobject_cast<Molecule*>(molObj);
+  auto* mol = qobject_cast<Molecule*>(molObj);
   if (!mol) {
-    RWMolecule* rwMol = qobject_cast<RWMolecule*>(molObj);
+    auto* rwMol = qobject_cast<RWMolecule*>(molObj);
     if (!rwMol)
       return false;
     return saveFileAs(async);
@@ -1470,7 +1470,7 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
     m_threadedWriter->deleteLater();
   m_threadedWriter = new BackgroundFileFormat(writer);
 
-  Molecule* mol = qobject_cast<Molecule*>(molObj);
+  auto* mol = qobject_cast<Molecule*>(molObj);
   if (!mol) {
     delete writer;
     return false;
@@ -1516,7 +1516,7 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
 
 void MainWindow::setActiveTool(QString toolName)
 {
-  if (GLWidget* glWidget =
+  if (auto* glWidget =
         qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())) {
     foreach (ToolPlugin* toolPlugin, glWidget->tools()) {
       if (toolPlugin->objectName() == toolName) {
@@ -1749,7 +1749,7 @@ void MainWindow::buildMenu()
   QStringList path;
   path << tr("&File");
   // New
-  QAction* action = new QAction(tr("&New"), this);
+  auto* action = new QAction(tr("&New"), this);
   action->setShortcut(QKeySequence::New);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-new"));
@@ -1923,31 +1923,31 @@ void MainWindow::buildMenu()
 
   action = new QAction(tr("&Periodic Table…"), this);
   m_menuBuilder->addAction(extensionsPath, action, 0);
-  QtGui::PeriodicTableView* periodicTable = new QtGui::PeriodicTableView(this);
+  auto* periodicTable = new QtGui::PeriodicTableView(this);
   connect(action, &QAction::triggered, periodicTable, &QWidget::show);
 
   QStringList helpPath;
   helpPath << tr("&Help");
-  QAction* about = new QAction(tr("&About"), this);
+  auto* about = new QAction(tr("&About"), this);
 #ifndef Q_OS_MAC
   about->setIcon(QIcon::fromTheme("help-about"));
 #endif
   m_menuBuilder->addAction(helpPath, about, 500);
   connect(about, &QAction::triggered, this, &MainWindow::showAboutDialog);
 
-  QAction* forum = new QAction(tr("&Discussion Forum"), this);
+  auto* forum = new QAction(tr("&Discussion Forum"), this);
   m_menuBuilder->addAction(helpPath, forum, 200);
   connect(forum, &QAction::triggered, this, &MainWindow::openForum);
 
-  QAction* website = new QAction(tr("&Avogadro Website"), this);
+  auto* website = new QAction(tr("&Avogadro Website"), this);
   m_menuBuilder->addAction(helpPath, website, 40);
   connect(website, &QAction::triggered, this, &MainWindow::openWebsite);
 
-  QAction* bug = new QAction(tr("&Report a Bug"), this);
+  auto* bug = new QAction(tr("&Report a Bug"), this);
   m_menuBuilder->addAction(helpPath, bug, 20);
   connect(bug, &QAction::triggered, this, &MainWindow::openBugReport);
 
-  QAction* feature = new QAction(tr("&Suggest a Feature"), this);
+  auto* feature = new QAction(tr("&Suggest a Feature"), this);
   m_menuBuilder->addAction(helpPath, feature, 10);
   connect(feature, &QAction::triggered, this, &MainWindow::openFeatureRequest);
 
@@ -2024,7 +2024,7 @@ void MainWindow::buildTools()
   }
 
   // add the fake tooltip method
-  ToolTipFilter* filter = new ToolTipFilter(this);
+  auto* filter = new ToolTipFilter(this);
   foreach (QToolButton* button, m_toolToolBar->findChildren<QToolButton*>()) {
     button->installEventFilter(filter);
   }
@@ -2057,12 +2057,10 @@ QString MainWindow::generateFilterString(
 
   // Create a map that groups the file extensions by name:
   QMultiMap<QString, QString> formatMap;
-  for (vector<const FileFormat*>::const_iterator it = formats.begin(),
-                                                 itEnd = formats.end();
-       it != itEnd; ++it) {
-    QString name(QString::fromStdString((*it)->name()));
-    vector<string> exts = (*it)->fileExtensions();
-    for (vector<string>::const_iterator eit = exts.begin(), eitEnd = exts.end();
+  for (auto format : formats) {
+    QString name(QString::fromStdString(format->name()));
+    vector<string> exts = format->fileExtensions();
+    for (auto eit = exts.begin(), eitEnd = exts.end();
          eit != eitEnd; ++eit) {
       QString ext(QString::fromStdString(*eit));
       if (!formatMap.values(name).contains(ext)) {
@@ -2153,7 +2151,7 @@ void MainWindow::registerMoleQueue()
 
   // Create patterns list
   QList<QRegExp> patterns;
-  for (StringList::const_iterator it = exts.begin(), itEnd = exts.end();
+  for (auto it = exts.begin(), itEnd = exts.end();
        it != itEnd; ++it) {
     patterns << QRegExp(extensionToWildCard(QString::fromStdString(*it)),
                         Qt::CaseInsensitive, QRegExp::Wildcard);
@@ -2298,7 +2296,7 @@ void MainWindow::openFeatureRequest()
 
 void MainWindow::fileFormatsReady()
 {
-  ExtensionPlugin* extension(qobject_cast<ExtensionPlugin*>(sender()));
+  auto* extension(qobject_cast<ExtensionPlugin*>(sender()));
   if (!extension)
     return;
   foreach (FileFormat* format, extension->fileFormats()) {

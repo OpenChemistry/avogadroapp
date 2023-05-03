@@ -40,7 +40,7 @@ bool Application::loadFile(const QString& fileName)
 
   // check to see if we already have an open window
   // (we'll let MainWindow handle the real work)
-  const MainWindow* window = NULL;
+  const MainWindow* window = nullptr;
   foreach (const QWidget* item, topLevelWidgets()) {
     window = qobject_cast<const MainWindow*>(item);
     if (window)
