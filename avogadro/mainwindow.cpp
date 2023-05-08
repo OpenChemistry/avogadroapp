@@ -247,6 +247,9 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   , m_redo(nullptr)
   , m_copyImage(nullptr)
   , m_viewFactory(new ViewFactory)
+#ifdef _3DCONNEXION
+  , m_TDxController(nullptr)
+#endif
 {
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
@@ -318,7 +321,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   GLWidget* glWidget =
     qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
 
-  m_TDxController = std::make_shared<TDxController>(glWidget, &m_molecule);
+  m_TDxController = new TDxController(this, glWidget, &m_molecule);
   m_TDxController->enableController();
 
   QMap<QString, QList<QAction*>> actionsMap = m_menuBuilder->getMenuActions();
@@ -1575,8 +1578,8 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
   }
 #endif
 
-  foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
-    scene->setEnabled(false);
+  //foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
+  //  scene->setEnabled(false);
   foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
     foreach (const QString& name, displayTypes)
       if (scene->objectName() == name)

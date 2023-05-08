@@ -7,7 +7,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QString>
 #include <QtCore/QList>
-
+#include "mainwindow.h"
 #include <array>
 
 constexpr uint32_t rayCount = 50;
@@ -34,10 +34,13 @@ class ToolPlugin;
 /**
  * This class is responsible for handling the TDx navigation in Avogadro2.
  */
-class TDxController : private TDx::SpaceMouse::Navigation3D::CNavigation3D
+class TDxController : private TDx::SpaceMouse::Navigation3D::CNavigation3D, private QObject
 {
+
+
 public:
-  TDxController(Avogadro::QtOpenGL::GLWidget *const pGLWidget,
+  TDxController(MainWindow* const mainWindow,
+                Avogadro::QtOpenGL::GLWidget* const pGLWidget,
                 QtGui::Molecule** ppMolecule);
   /**
    * Enables the TDx navigation.
@@ -68,9 +71,9 @@ private:
       : m_nodeName(nodeName) {}
   };
   std::shared_ptr<ActionTreeNode> m_pRootNode;
-  std::shared_ptr<QtOpenGL::GLWidget> m_pGLWidget;
-  std::shared_ptr<Rendering::GLRenderer> pGLRenderer;
-  std::shared_ptr<QtGui::Molecule*> m_ppMolecule;
+  QtOpenGL::GLWidget* m_pGLWidget;
+  Rendering::GLRenderer* m_pGLRenderer;
+  QtGui::Molecule** m_ppMolecule;
   navlib::point_t m_eyePosition;
   navlib::vector_t m_lookDirection;
   QImage m_pivotImage;
