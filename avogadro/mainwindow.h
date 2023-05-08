@@ -408,7 +408,7 @@ private:
 
   QNetworkAccessManager* m_network = nullptr;
 #ifdef _3DCONNEXION
-  std::shared_ptr<TDxController> m_TDxController;
+  TDxController* m_TDxController;
 #endif
 
 #ifdef QTTESTING

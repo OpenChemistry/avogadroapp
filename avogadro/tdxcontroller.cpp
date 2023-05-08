@@ -11,17 +11,21 @@
 
 #include <QtWidgets/QAction>
 #include <QtCore/QCoreApplication>
+#include <qbytearray.h>>
+#include <qbuffer.h>
 
 #include <filesystem>
 
 Avogadro::TDxController::TDxController(
-  Avogadro::QtOpenGL::GLWidget* const pGLWidget, QtGui::Molecule** ppMolecule)
+  MainWindow* const mainWindow,
+  Avogadro::QtOpenGL::GLWidget* const pGLWidget,
+  QtGui::Molecule** ppMolecule)
   : CNavigation3D(false, true)
+  , QObject(mainWindow)
   , m_pRootNode(std::make_shared<ActionTreeNode>("User Interface"))
-  , m_pGLWidget(std::shared_ptr<QtOpenGL::GLWidget>(pGLWidget))
-  , m_ppMolecule(std::shared_ptr<QtGui::Molecule*>(ppMolecule))
-  , pGLRenderer(
-      std::shared_ptr<Avogadro::Rendering::GLRenderer>(&pGLWidget->renderer()))
+  , m_pGLWidget(pGLWidget)
+  , m_ppMolecule(ppMolecule)
+  , m_pGLRenderer(&pGLWidget->renderer())
   , m_eyePosition({ 0.0, 0.0, 0.0 })
   , m_lookDirection({ 0.0, 0.0, 0.0 })
   , m_hitTestRadius(0.0)
@@ -43,18 +47,19 @@ Avogadro::TDxController::TDxController(
     m_rayOrigins[i].y = y;
   }
     
-#ifdef WIN32
-  m_pivotImage = QImage("img\\3dx_pivot.png");
-#else
   QString pivotImagePath = QCoreApplication::applicationDirPath();
+
+#ifdef WIN32
+  pivotImagePath.append("/img/3dx_pivot.png");
+#else
   pivotImagePath.append("/../Resources/3dx_pivot.png");
-  m_pivotImage = QImage(pivotImagePath);
 #endif
-    
-pGLRenderer->m_iconData = reinterpret_cast<void*>(m_pivotImage.bits());
-pGLRenderer->m_iconWidth = m_pivotImage.width();
-pGLRenderer->m_iconHeight = m_pivotImage.height();
-    
+
+  m_pivotImage = QImage(pivotImagePath);
+
+  m_pGLRenderer->m_iconData = reinterpret_cast<void*>(m_pivotImage.bits());
+  m_pGLRenderer->m_iconWidth = m_pivotImage.width();
+  m_pGLRenderer->m_iconHeight = m_pivotImage.height();
 }
 
 void Avogadro::TDxController::enableController()
@@ -186,7 +191,7 @@ QAction *Avogadro::TDxController::decodeAction(
 long Avogadro::TDxController::GetCameraMatrix(navlib::matrix_t &matrix) const
 {
   Eigen::Matrix4f _cameraMatrix =
-    pGLRenderer->camera().modelView().matrix().inverse();
+    m_pGLRenderer->camera().modelView().matrix().inverse();
 
   matrix.m00 = _cameraMatrix(0, 0);
   matrix.m10 = _cameraMatrix(1, 0);
@@ -217,7 +222,7 @@ long Avogadro::TDxController::GetPointerPosition(
   QPoint pointerPos = m_pGLWidget->cursor().pos();
   pointerPos = m_pGLWidget->mapFromGlobal(pointerPos);
 
-  Eigen::Vector3f worldPos = pGLRenderer->camera().unProject(
+  Eigen::Vector3f worldPos = m_pGLRenderer->camera().unProject(
     Eigen::Vector2f(pointerPos.x(), pointerPos.y()));
 
   position.x = worldPos.x();
@@ -229,12 +234,12 @@ long Avogadro::TDxController::GetPointerPosition(
 
 long Avogadro::TDxController::GetViewExtents(navlib::box_t &extents) const
 {
-  extents.min.x = pGLRenderer->m_orthographicFrustum[0];
-  extents.min.y = pGLRenderer->m_orthographicFrustum[2];
-  extents.min.z = -pGLRenderer->m_orthographicFrustum[5];
-  extents.max.x = pGLRenderer->m_orthographicFrustum[1];
-  extents.max.y = pGLRenderer->m_orthographicFrustum[3];
-  extents.max.z = -pGLRenderer->m_orthographicFrustum[4];
+  extents.min.x = m_pGLRenderer->m_orthographicFrustum[0];
+  extents.min.y = m_pGLRenderer->m_orthographicFrustum[2];
+  extents.min.z = -m_pGLRenderer->m_orthographicFrustum[5];
+  extents.max.x = m_pGLRenderer->m_orthographicFrustum[1];
+  extents.max.y = m_pGLRenderer->m_orthographicFrustum[3];
+  extents.max.z = -m_pGLRenderer->m_orthographicFrustum[4];
   return 0;
 }
 
@@ -245,19 +250,19 @@ long Avogadro::TDxController::GetViewFOV(double &fov) const
 
 long Avogadro::TDxController::GetViewFrustum(navlib::frustum_t &frustum) const
 {
-  frustum.left = pGLRenderer->m_perspectiveFrustum[0];
-  frustum.right = pGLRenderer->m_perspectiveFrustum[1];
-  frustum.bottom = pGLRenderer->m_perspectiveFrustum[2];
-  frustum.top = pGLRenderer->m_perspectiveFrustum[3];
-  frustum.nearVal = pGLRenderer->m_perspectiveFrustum[4];
-  frustum.farVal = pGLRenderer->m_perspectiveFrustum[5];
+  frustum.left = m_pGLRenderer->m_perspectiveFrustum[0];
+  frustum.right = m_pGLRenderer->m_perspectiveFrustum[1];
+  frustum.bottom = m_pGLRenderer->m_perspectiveFrustum[2];
+  frustum.top = m_pGLRenderer->m_perspectiveFrustum[3];
+  frustum.nearVal = m_pGLRenderer->m_perspectiveFrustum[4];
+  frustum.farVal = m_pGLRenderer->m_perspectiveFrustum[5];
   return 0;
 }
  
 long Avogadro::TDxController::GetIsViewPerspective(
   navlib::bool_t &perspective) const
 {
-  perspective = (pGLRenderer->camera().projectionType() ==
+  perspective = (m_pGLRenderer->camera().projectionType() ==
                  Avogadro::Rendering::Projection::Perspective);
   return 0;
 }
@@ -279,31 +284,26 @@ TDx::SpaceMouse::CCategory Avogadro::TDxController::getCategory(
   }
 
   for (uint32_t i = 0u; i < pNode->m_actions.size(); i++) {
-    std::string actionName(pNode->m_actions[i]->text().remove('&').toStdString());
     
-	if (actionName.empty())
+	if (pNode->m_actions[i]->iconText().isEmpty())
       continue;
 
 	std::string commandId(nextPathCode + std::to_string(i));
 
     result.push_back(TDx::SpaceMouse::CCommand(
-		commandId,
-		actionName,
+        commandId,
+		pNode->m_actions[i]->iconText().toStdString(),
 		pNode->m_actions[i]->toolTip().toStdString()));
-
+        
 #ifdef WIN32
 
-    std::string iconFileName(
-      std::to_string(pNode->m_actions[i]->icon().cacheKey()));
+	const QIcon iconImg = pNode->m_actions[i]->icon();
+    const QImage qimage = iconImg.pixmap(QSize(256, 256)).toImage();
+    QByteArray qbyteArray;
+    QBuffer qbuffer(&qbyteArray);
+    qimage.save(&qbuffer, "PNG");
 
-    iconFileName.append(".png");
-    std::string path("img/Qt/");
-    path.append(iconFileName);
-
-    TDx::CImage icon =
-      TDx::CImage::FromFile(std::filesystem::absolute(path).generic_u8string(),
-                            0, 
-							commandId.c_str());
+    TDx::CImage icon = TDx::CImage::FromData(qbyteArray.toStdString(), 0, commandId.c_str());
 
     m_utilityIcons.push_back(icon);
 #endif
@@ -315,7 +315,7 @@ long Avogadro::TDxController::GetModelExtents(navlib::box_t &extents) const
 {
   std::vector<bool> flags;
 
-  pGLRenderer->scene().getBoundingBox(extents.min.x, 
+  m_pGLRenderer->scene().getBoundingBox(extents.min.x, 
 									  extents.min.y,
                                       extents.min.z,
 									  extents.max.x,
@@ -333,7 +333,7 @@ long Avogadro::TDxController::GetSelectionExtents(navlib::box_t &extents) const
   for (uint32_t i = 0u; i < (*m_ppMolecule)->atomCount(); i++)
     flags[i] = (*m_ppMolecule)->atomSelected(i);
 
-  pGLRenderer->scene().getBoundingBox(extents.min.x,
+  m_pGLRenderer->scene().getBoundingBox(extents.min.x,
 									  extents.min.y,
                                       extents.min.z, 
 									  extents.max.x,
@@ -352,6 +352,10 @@ long Avogadro::TDxController::GetSelectionTransform(
 
 long Avogadro::TDxController::GetIsSelectionEmpty(navlib::bool_t &empty) const
 {
+  if (*m_ppMolecule == nullptr) {
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+  }
+
   for (uint32_t i = 0u; i < (*m_ppMolecule)->atomCount(); i++) {
     if ((*m_ppMolecule)->atomSelected(i)) {
       empty = false;
@@ -369,25 +373,26 @@ long Avogadro::TDxController::GetPivotPosition(navlib::point_t &position) const
 
 long Avogadro::TDxController::GetPivotVisible(navlib::bool_t &visible) const
 {
-  return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+  visible = m_pGLRenderer->m_drawIcon;
+  return 0;
 }
 
 long Avogadro::TDxController::GetHitLookAt(navlib::point_t &position) const
 {
   constexpr float divThreshold = 0.01f;
   const float rayLength =
-    2.0f * pGLRenderer->camera().distance(pGLRenderer->scene().center()) +
-    pGLRenderer->scene().radius();
+    2.0f * m_pGLRenderer->camera().distance(m_pGLRenderer->scene().center()) +
+    m_pGLRenderer->scene().radius();
   const Eigen::Matrix4f transform =
-    pGLRenderer->camera().modelView().matrix().inverse();
+    m_pGLRenderer->camera().modelView().matrix().inverse();
   Eigen::Vector4f origin = Eigen::Vector4f::Zero();
-  float distance = -1.0f;
+  float distance = std::numeric_limits<float>::max();
 
   if (m_hitTestRadius < divThreshold) {
     origin = transform * Eigen::Vector4f(0., 0., 0., 1.);
     origin /= origin.w();
 
-    distance = pGLRenderer->scene().getHitDistance(
+    distance = m_pGLRenderer->scene().getHitDistance(
       Eigen::Vector3f(origin.x(), origin.y(), origin.z()),
       Eigen::Vector3f(m_lookDirection.x, m_lookDirection.y, m_lookDirection.z),
       rayLength);
@@ -403,22 +408,21 @@ long Avogadro::TDxController::GetHitLookAt(navlib::point_t &position) const
       originBuffer = transform * Eigen::Vector4f(x, y, 0., 1.);
       originBuffer /= originBuffer.w();
 
-      float buffer = pGLRenderer->scene().getHitDistance(
+      float buffer = m_pGLRenderer->scene().getHitDistance(
         Eigen::Vector3f(originBuffer.x(), originBuffer.y(), originBuffer.z()),
         Eigen::Vector3f(m_lookDirection.x,
 						m_lookDirection.y,
                         m_lookDirection.z),
 		rayLength);
 
-      if (buffer > 0.0f) {
+      if (buffer > 0.0f && buffer < distance) {
         origin = originBuffer;
         distance = buffer;
-        break;
       }
     }
   }
 
-  if (distance > 0.0f) {
+  if (distance != std::numeric_limits<float>::max()) {
     position.x = origin.x() + distance * m_lookDirection.x;
     position.y = origin.y() + distance * m_lookDirection.y;
     position.z = origin.z() + distance * m_lookDirection.z;
@@ -436,19 +440,19 @@ long Avogadro::TDxController::SetCameraMatrix(const navlib::matrix_t &matrix)
     from - Avogadro::Vector3f(matrix.m02, matrix.m12, matrix.m22);
   Avogadro::Vector3f up(matrix.m01, matrix.m11, matrix.m21);
 
-  pGLRenderer->camera().lookAt(from, to, up);
+  m_pGLRenderer->camera().lookAt(from, to, up);
 
   return 0;
 }
 
 long Avogadro::TDxController::SetViewExtents(const navlib::box_t &extents)
 {
-  pGLRenderer->m_orthographicFrustum[0] = extents.min.x;
-  pGLRenderer->m_orthographicFrustum[1] = extents.max.x;
-  pGLRenderer->m_orthographicFrustum[2] = extents.min.y;
-  pGLRenderer->m_orthographicFrustum[3] = extents.max.y;
-  pGLRenderer->m_orthographicFrustum[4] = -extents.max.z;
-  pGLRenderer->m_orthographicFrustum[5] = -extents.min.z;
+  m_pGLRenderer->m_orthographicFrustum[0] = extents.min.x;
+  m_pGLRenderer->m_orthographicFrustum[1] = extents.max.x;
+  m_pGLRenderer->m_orthographicFrustum[2] = extents.min.y;
+  m_pGLRenderer->m_orthographicFrustum[3] = extents.max.y;
+  m_pGLRenderer->m_orthographicFrustum[4] = -extents.max.z;
+  m_pGLRenderer->m_orthographicFrustum[5] = -extents.min.z;
 
   return 0;
 }
@@ -477,15 +481,16 @@ long Avogadro::TDxController::IsUserPivot(navlib::bool_t &userPivot) const
 
 long Avogadro::TDxController::SetPivotPosition(const navlib::point_t &position)
 {
-  pGLRenderer->m_iconPosition.x() = position.x;
-  pGLRenderer->m_iconPosition.y() = position.y;
-  pGLRenderer->m_iconPosition.z() = position.z;
+  m_pGLRenderer->m_iconPosition.x() = position.x;
+  m_pGLRenderer->m_iconPosition.y() = position.y;
+  m_pGLRenderer->m_iconPosition.z() = position.z;
   return 0;
 }
 
 long Avogadro::TDxController::SetPivotVisible(bool visible)
 {
-  pGLRenderer->m_drawIcon = visible;
+  m_pGLRenderer->m_drawIcon = visible;
+  m_pGLWidget->requestUpdate();
   return 0;
 }
 

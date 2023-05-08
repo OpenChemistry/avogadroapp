@@ -103,7 +103,6 @@ if(USE_3DCONNEXION)
     list(APPEND avogadro_srcs navlib_load.cpp navlib_stub.c)
   elseif(WIN32)
     install(FILES "icons/3dx_pivot.png" DESTINATION "${CMAKE_INSTALL_BINDIR}/img")
-    install(DIRECTORY "icons/Qt" DESTINATION "${CMAKE_INSTALL_BINDIR}/img")
   endif()
 endif()
 
