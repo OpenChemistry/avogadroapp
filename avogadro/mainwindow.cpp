@@ -49,11 +49,11 @@
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
 
+#include <QOpenGLFramebufferObject>
 #include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeySequence>
-#include <QOpenGLFramebufferObject>
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -269,7 +269,8 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
     plugin->pluginFactories<ExtensionPluginFactory>();
   qDebug() << "Extension plugins dynamically found…" << extensions.size();
   foreach (ExtensionPluginFactory* factory, extensions) {
-    ExtensionPlugin* extension = factory->createInstance(QCoreApplication::instance());
+    ExtensionPlugin* extension =
+      factory->createInstance(QCoreApplication::instance());
     if (extension) {
       extension->setParent(this);
       connect(this, &MainWindow::moleculeChanged, extension,
@@ -533,8 +534,7 @@ void setDefaultViews(MultiViewWidget* viewWidget)
 {
   QSettings settings;
   // save the enabled scene / render plugins
-  if (auto* glWidget =
-        qobject_cast<GLWidget*>(viewWidget->activeWidget())) {
+  if (auto* glWidget = qobject_cast<GLWidget*>(viewWidget->activeWidget())) {
 
     const ScenePluginModel* sceneModel = &glWidget->sceneModel();
     bool anyPluginTrue = false;
@@ -1082,7 +1082,8 @@ void MainWindow::sceneItemActivated(const QModelIndex& idx)
   }
 }
 
-bool populatePluginModel(ScenePluginModel& model, QObject *p, bool editOnly = false)
+bool populatePluginModel(ScenePluginModel& model, QObject* p,
+                         bool editOnly = false)
 {
   if (!model.scenePlugins().empty())
     return false;
@@ -1826,7 +1827,8 @@ void MainWindow::buildMenu()
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
-  connect(action, &QAction::triggered, this, static_cast<void(MainWindow::*)()>(&MainWindow::exportGraphics));
+  connect(action, &QAction::triggered, this,
+          static_cast<void (MainWindow::*)()>(&MainWindow::exportGraphics));
 
   // Quit
   action = new QAction(tr("&Quit"), this);
@@ -2071,8 +2073,7 @@ QString MainWindow::generateFilterString(
   for (auto format : formats) {
     QString name(QString::fromStdString(format->name()));
     vector<string> exts = format->fileExtensions();
-    for (auto eit = exts.begin(), eitEnd = exts.end();
-         eit != eitEnd; ++eit) {
+    for (auto eit = exts.begin(), eitEnd = exts.end(); eit != eitEnd; ++eit) {
       QString ext(QString::fromStdString(*eit));
       if (!formatMap.values(name).contains(ext)) {
         formatMap.insertMulti(name, ext);
@@ -2162,8 +2163,7 @@ void MainWindow::registerMoleQueue()
 
   // Create patterns list
   QList<QRegExp> patterns;
-  for (auto it = exts.begin(), itEnd = exts.end();
-       it != itEnd; ++it) {
+  for (auto it = exts.begin(), itEnd = exts.end(); it != itEnd; ++it) {
     patterns << QRegExp(extensionToWildCard(QString::fromStdString(*it)),
                         Qt::CaseInsensitive, QRegExp::Wildcard);
   }
