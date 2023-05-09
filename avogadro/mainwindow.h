@@ -390,6 +390,8 @@ private:
   QDockWidget* m_toolDock;
   QDockWidget* m_viewDock;
   QDockWidget* m_sceneDock;
+  QDockWidget* m_layerDock;
+  QDockWidget* m_moleculeDock;
   QList<QtGui::ToolPlugin*> m_tools;
   QList<QtGui::ExtensionPlugin*> m_extensions;
 
