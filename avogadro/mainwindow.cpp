@@ -49,11 +49,11 @@
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
 
+#include <QOpenGLFramebufferObject>
 #include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeySequence>
-#include <QOpenGLFramebufferObject>
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -269,7 +269,8 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
     plugin->pluginFactories<ExtensionPluginFactory>();
   qDebug() << "Extension plugins dynamically found…" << extensions.size();
   foreach (ExtensionPluginFactory* factory, extensions) {
-    ExtensionPlugin* extension = factory->createInstance(QCoreApplication::instance());
+    ExtensionPlugin* extension =
+      factory->createInstance(QCoreApplication::instance());
     if (extension) {
       extension->setParent(this);
       connect(this, &MainWindow::moleculeChanged, extension,
@@ -365,36 +366,40 @@ void MainWindow::setupInterface()
 
   // Our scene/view dock.
   m_sceneDock = new QDockWidget(tr("Display Types"), this);
-
   m_sceneTreeView = new QTreeView(m_sceneDock);
   m_sceneTreeView->setIndentation(0);
   m_sceneTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_sceneTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
   m_sceneDock->setWidget(m_sceneTreeView);
   addDockWidget(Qt::LeftDockWidgetArea, m_sceneDock);
+
   // Our view dock.
   m_viewDock = new QDockWidget(tr("View Configuration"), this);
   addDockWidget(Qt::LeftDockWidgetArea, m_viewDock);
 
   // Our molecule dock.
-  auto* moleculeDock = new QDockWidget(tr("Molecules"), this);
-  m_moleculeTreeView = new QTreeView(moleculeDock);
+  m_moleculeDock = new QDockWidget(tr("Molecules"), this);
+  m_moleculeTreeView = new QTreeView(m_moleculeDock);
   m_moleculeTreeView->setIndentation(0);
   m_moleculeTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_moleculeTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
-  moleculeDock->setWidget(m_moleculeTreeView);
-  addDockWidget(Qt::LeftDockWidgetArea, moleculeDock);
+  m_moleculeDock->setWidget(m_moleculeTreeView);
+  addDockWidget(Qt::LeftDockWidgetArea, m_moleculeDock);
 
   // Our molecule dock.
-  auto* layerDock = new QDockWidget(tr("Layers"), this);
-  m_layerTreeView = new QTreeView(layerDock);
+  m_layerDock = new QDockWidget(tr("Layers"), this);
+  m_layerTreeView = new QTreeView(m_layerDock);
   m_layerTreeView->setIndentation(0);
   m_layerTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_layerTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
-  layerDock->setWidget(m_layerTreeView);
-  addDockWidget(Qt::LeftDockWidgetArea, layerDock);
+  m_layerDock->setWidget(m_layerTreeView);
+  addDockWidget(Qt::LeftDockWidgetArea, m_layerDock);
 
-  tabifyDockWidget(moleculeDock, layerDock);
+  // this doesn't seem necessary
+  //  m_layerDock->setVisible(settings.value("layerDock", true).toBool());
+
+  tabifyDockWidget(m_moleculeDock, m_layerDock);
+  m_moleculeDock->raise();
 
   // Switch to our fallback icons if there are no platform-specific icons.
   if (!QIcon::hasThemeIcon("document-new"))
@@ -529,8 +534,7 @@ void setDefaultViews(MultiViewWidget* viewWidget)
 {
   QSettings settings;
   // save the enabled scene / render plugins
-  if (auto* glWidget =
-        qobject_cast<GLWidget*>(viewWidget->activeWidget())) {
+  if (auto* glWidget = qobject_cast<GLWidget*>(viewWidget->activeWidget())) {
 
     const ScenePluginModel* sceneModel = &glWidget->sceneModel();
     bool anyPluginTrue = false;
@@ -675,6 +679,13 @@ void MainWindow::writeSettings()
   settings.setValue("perspective", m_viewPerspective->isChecked());
   settings.endGroup();
   settings.setValue("recentFiles", m_recentFiles);
+
+  // save which docks are visible
+  settings.setValue("viewDock", m_viewDock->isVisible());
+  settings.setValue("toolDock", m_toolDock->isVisible());
+  settings.setValue("sceneDock", m_sceneDock->isVisible());
+  settings.setValue("layerDock", m_layerDock->isVisible());
+  settings.setValue("moleculeDock", m_moleculeDock->isVisible());
 
   // save the enabled scene / render plugins
   if (auto* glWidget =
@@ -1071,7 +1082,8 @@ void MainWindow::sceneItemActivated(const QModelIndex& idx)
   }
 }
 
-bool populatePluginModel(ScenePluginModel& model, QObject *p, bool editOnly = false)
+bool populatePluginModel(ScenePluginModel& model, QObject* p,
+                         bool editOnly = false)
 {
   if (!model.scenePlugins().empty())
     return false;
@@ -1815,7 +1827,8 @@ void MainWindow::buildMenu()
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
-  connect(action, &QAction::triggered, this, static_cast<void(MainWindow::*)()>(&MainWindow::exportGraphics));
+  connect(action, &QAction::triggered, this,
+          static_cast<void (MainWindow::*)()>(&MainWindow::exportGraphics));
 
   // Quit
   action = new QAction(tr("&Quit"), this);
@@ -2060,8 +2073,7 @@ QString MainWindow::generateFilterString(
   for (auto format : formats) {
     QString name(QString::fromStdString(format->name()));
     vector<string> exts = format->fileExtensions();
-    for (auto eit = exts.begin(), eitEnd = exts.end();
-         eit != eitEnd; ++eit) {
+    for (auto eit = exts.begin(), eitEnd = exts.end(); eit != eitEnd; ++eit) {
       QString ext(QString::fromStdString(*eit));
       if (!formatMap.values(name).contains(ext)) {
         formatMap.insertMulti(name, ext);
@@ -2151,8 +2163,7 @@ void MainWindow::registerMoleQueue()
 
   // Create patterns list
   QList<QRegExp> patterns;
-  for (auto it = exts.begin(), itEnd = exts.end();
-       it != itEnd; ++it) {
+  for (auto it = exts.begin(), itEnd = exts.end(); it != itEnd; ++it) {
     patterns << QRegExp(extensionToWildCard(QString::fromStdString(*it)),
                         Qt::CaseInsensitive, QRegExp::Wildcard);
   }
