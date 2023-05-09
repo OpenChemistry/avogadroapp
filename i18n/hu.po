@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # SoftwareByRedline <krajczar.david41@gmail.com>, 2021.
-# ovari <ovari123@zoho.com>, 2021, 2022.
+# ovari <ovari123@zoho.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-04-26 20:52+0000\n"
-"PO-Revision-Date: 2022-09-25 10:17+0000\n"
+"PO-Revision-Date: 2023-05-08 04:48+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hu/>\n"
@@ -18,36 +18,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.18-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgid "Version Update"
 msgid "Version:"
-msgstr "Verziófrissítés"
+msgstr "Verzió:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:28:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Avogadro könyvtár verziója:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgid "New version: %1"
 msgid "Qt Version:"
-msgstr "Új verzió: %1"
+msgstr "Qt változat:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:30:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSL változat:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -627,7 +623,7 @@ msgstr "VTK"
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)

@@ -8,13 +8,14 @@
 # matterhorn103 <milner94@live.co.uk>, 2022.
 # Robert Adam <dev@robert-adam.de>, 2022.
 # "Jörg S." <joerg.schwerdtfeger@gmail.com>, 2023.
+# Norwid Behrnd <nbehrnd@yahoo.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-04-26 20:52+0000\n"
-"PO-Revision-Date: 2023-04-30 15:50+0000\n"
-"Last-Translator: \"Jörg S.\" <joerg.schwerdtfeger@gmail.com>\n"
+"PO-Revision-Date: 2023-05-06 15:48+0000\n"
+"Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -41,7 +42,7 @@ msgstr "Avogadro-Bibliotheksversion:"
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
 msgid "Qt Version:"
-msgstr "Qt Version:"
+msgstr "Qt-Version:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
