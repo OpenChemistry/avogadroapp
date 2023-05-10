@@ -17,7 +17,7 @@ if(APPLE)
   set(CPACK_BUNDLE_ICON "${CPACK_PACKAGE_ICON}")
 
   if(${CMAKE_VERSION} VERSION_GREATER "3.19.0") 
-    # add the codesign options to the packageq
+    # add the codesign options to the package
     configure_file("${CMAKE_CURRENT_LIST_DIR}/deploy-osx.cmake.in" "${AvogadroApp_BINARY_DIR}/deploy-osx.cmake" @ONLY)
     set(CPACK_PRE_BUILD_SCRIPTS "${AvogadroApp_BINARY_DIR}/deploy-osx.cmake")
   endif()
@@ -58,6 +58,16 @@ if(INSTALL_BUNDLE_FILES)
       OWNER_READ OWNER_WRITE OWNER_EXECUTE
       GROUP_READ GROUP_EXECUTE
       WORLD_READ WORLD_EXECUTE)
+  endif()
+
+  # look for yaehmop (eht_bind)
+  find_program(EHT_BIND_EXE eht_bind)
+  if(EHT_BIND_EXE)
+    install(FILES ${EHT_BIND_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
+      PERMISSIONS
+        OWNER_READ OWNER_WRITE OWNER_EXECUTE
+        GROUP_READ GROUP_EXECUTE
+        WORLD_READ WORLD_EXECUTE)
   endif()
 
   find_program(OBABEL_EXE obabel)
