@@ -213,6 +213,7 @@ if(USE_3DCONNEXION)
   elseif(APPLE)
     target_compile_definitions(avogadro PUBLIC __APPLE__)
   endif()
+endif()  
 install(TARGETS avogadro
   RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
   BUNDLE DESTINATION .

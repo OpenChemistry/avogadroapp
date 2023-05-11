@@ -1595,12 +1595,13 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
   }
 #endif
 
-  //foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
-  //  scene->setEnabled(false);
+  //  foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
+  //    scene->setEnabled(false);
   foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
     foreach (const QString& name, displayTypes)
       if (scene->objectName() == name)
         scene->setEnabled(true);
+
   if (glWidget)
     glWidget->updateScene();
 #ifdef AVO_USE_VTK
@@ -1683,9 +1684,9 @@ void MainWindow::setBackgroundColor()
 
 void MainWindow::setRenderingSettings()
 {
-  Rendering::SolidPipeline *pipeline(nullptr);
-  GLWidget *glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget *>(m_multiViewWidget->activeWidget())))
+  Rendering::SolidPipeline* pipeline(nullptr);
+  GLWidget* glWidget(nullptr);
+  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
     pipeline = &glWidget->renderer().solidPipeline();
   if (pipeline) {
     RenderingDialog dialog(this, *pipeline);
@@ -2291,9 +2292,15 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
 
   // get an update
 #if defined(Q_OS_MAC)
-  QString url = QString("https://github.com/OpenChemistry/avogadrolibs/releases/download/%1/Avogadro2-%2-Darwin.dmg").arg(latestRelease).arg(latestRelease);
+  QString url = QString("https://github.com/OpenChemistry/avogadrolibs/"
+                        "releases/download/%1/Avogadro2-%2-Darwin.dmg")
+                  .arg(latestRelease)
+                  .arg(latestRelease);
 #elif defined(Q_OS_WIN)
-  QString url = QString("https://github.com/OpenChemistry/avogadrolibs/releases/download/%1/Avogadro2-%2-win64.exe").arg(latestRelease).arg(latestRelease);
+  QString url = QString("https://github.com/OpenChemistry/avogadrolibs/"
+                        "releases/download/%1/Avogadro2-%2-win64.exe")
+                  .arg(latestRelease)
+                  .arg(latestRelease);
 #else
   QString url("https://github.com/OpenChemistry/avogadrolibs/releases/latest");
 #endif
