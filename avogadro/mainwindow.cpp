@@ -378,7 +378,7 @@ void MainWindow::setupInterface()
   ActiveObjects::instance().setActiveGLWidget(glWidget);
 
   // set solid pipeline parameters
-  Rendering::SolidPipeline *pipeline = &glWidget->renderer().solidPipeline();
+  Rendering::SolidPipeline* pipeline = &glWidget->renderer().solidPipeline();
   if (pipeline) {
     pipeline->setAoEnabled(
       settings.value("MainWindow/ao_enabled", true).toBool());
