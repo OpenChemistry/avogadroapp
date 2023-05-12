@@ -380,9 +380,12 @@ void MainWindow::setupInterface()
   // set solid pipeline parameters
   Rendering::SolidPipeline *pipeline = &glWidget->renderer().solidPipeline();
   if (pipeline) {
-    pipeline->setAoEnabled(settings.value("MainWindow/ao_enabled", true).toBool());
-    pipeline->setAoStrength(settings.value("MainWindow/ao_strength", 1.0f).toFloat());
-    pipeline->setEdEnabled(settings.value("MainWindow/ed_enabled", true).toBool());
+    pipeline->setAoEnabled(
+      settings.value("MainWindow/ao_enabled", true).toBool());
+    pipeline->setAoStrength(
+      settings.value("MainWindow/ao_strength", 1.0f).toFloat());
+    pipeline->setEdEnabled(
+      settings.value("MainWindow/ed_enabled", true).toBool());
   }
 
   // Our tool dock.
@@ -2276,11 +2279,12 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
   // skip = save latestRelease in settings
   QString currentVersion = tr("Your version: %1").arg(AvogadroApp_VERSION);
   QString newVersion = tr("New version: %1").arg(latestRelease);
-  QString text = tr("An update is available, do you want to download it now?\n");
+  QString text =
+    tr("An update is available, do you want to download it now?\n");
   text += currentVersion + '\n' + newVersion;
-  auto result = MESSAGEBOX::information(
-    this, tr("Version Update"), text,
-    QMessageBox::Ok | QMessageBox::Ignore | QMessageBox::Cancel);
+  auto result = MESSAGEBOX::information(this, tr("Version Update"), text,
+                                        QMessageBox::Ok | QMessageBox::Ignore |
+                                          QMessageBox::Cancel);
 
   if (result == QMessageBox::Cancel)
     return;
