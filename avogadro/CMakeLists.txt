@@ -109,6 +109,18 @@ if(TDxWare_SDK_FOUND)
   endif()
 endif()
 
+if(USE_3DCONNEXION)
+  find_package(TDxWare_SDK 4.0 REQUIRED COMPONENTS 3DxWare::Navlib 3DxWare::headers)
+  include_directories($<TARGET_PROPERTY:3DxWare::headers,INTERFACE_INCLUDE_DIRECTORIES>)
+  list(APPEND avogadro_srcs tdxcontroller.cpp)
+  if(APPLE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdeclspec")
+    list(APPEND avogadro_srcs navlib_load.cpp navlib_stub.c)
+  elseif(WIN32)
+    install(FILES "icons/3dx_pivot.png" DESTINATION "${CMAKE_INSTALL_BINDIR}/img")
+  endif()
+endif()
+
 # Need to add current binary dir to include path for UI file headers
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
