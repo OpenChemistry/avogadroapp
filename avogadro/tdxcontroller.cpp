@@ -30,8 +30,6 @@ Avogadro::TDxController::TDxController(
   , m_lookDirection({ 0.0, 0.0, 0.0 })
   , m_hitTestRadius(0.0)
 {
-  
-
   if (rayCount > 0) {
     m_rayOrigins[0].x = 0.0;
     m_rayOrigins[0].y = 0.0;
@@ -57,12 +55,11 @@ Avogadro::TDxController::TDxController(
 
   m_pivotImage = QImage(pivotImagePath);
 
-  if (!m_pivotImage.isNull() || m_pGLRenderer != nullptr) {
+  if (!m_pivotImage.isNull() && m_pGLRenderer != nullptr) {
     m_pGLRenderer->m_iconData = reinterpret_cast<void*>(m_pivotImage.bits());
     m_pGLRenderer->m_iconWidth = m_pivotImage.width();
     m_pGLRenderer->m_iconHeight = m_pivotImage.height();
   }
-
 }
 
 void Avogadro::TDxController::enableController()
@@ -71,9 +68,8 @@ void Avogadro::TDxController::enableController()
 
   EnableNavigation(true, errorCode);
 
-  if (errorCode) {
+  if (errorCode)
     return;
-  }
 
   PutFrameTimingSource(TimingSource::SpaceMouse);
 
@@ -83,9 +79,8 @@ void Avogadro::TDxController::enableController()
 void Avogadro::TDxController::exportCommands(
   const QMap<QString, QList<QAction*>> &actionsMap)
 {
-  if (errorCode) {
+  if (errorCode)
     return;
-  }
 
   TDx::SpaceMouse::CCommandSet commandSet("Default", "Main");
 
@@ -378,9 +373,8 @@ long Avogadro::TDxController::GetSelectionTransform(
 
 long Avogadro::TDxController::GetIsSelectionEmpty(navlib::bool_t &empty) const
 {
-  if (*m_ppMolecule == nullptr) {
+  if (*m_ppMolecule == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
-  }
 
   for (uint32_t i = 0u; i < (*m_ppMolecule)->atomCount(); i++) {
     if ((*m_ppMolecule)->atomSelected(i)) {
