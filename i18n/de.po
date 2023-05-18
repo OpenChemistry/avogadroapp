@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-04-26 20:52+0000\n"
-"PO-Revision-Date: 2023-05-06 15:48+0000\n"
+"PO-Revision-Date: 2023-05-21 03:59+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -438,7 +438,7 @@ msgstr "Grafiken &kopieren"
 
 #: mainwindow.cpp:1865
 msgid "Ctrl+Alt+C"
-msgstr "Strg+Alt+C"
+msgstr "Strg+Alt+N"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -452,7 +452,7 @@ msgstr "Hintergrundfarbe einstellen …"
 
 #: mainwindow.cpp:1883
 msgid "Rendering…"
-msgstr "Rendere …"
+msgstr "Wiedergabe …"
 
 #: mainwindow.cpp:1891
 msgid "Projection"
@@ -541,7 +541,7 @@ msgstr "Strg+D"
 
 #: mainwindow.cpp:2203
 msgid "Network Download Failed"
-msgstr "Download gescheitert"
+msgstr "Herunterladen über das Netzwerk fehlgeschlagen"
 
 #: mainwindow.cpp:2204
 msgid "Network timeout or other error."
@@ -848,7 +848,7 @@ msgstr "Importieren"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr "Umgebungsverdeckung:"
+msgstr "Umgebungsokklusion:"
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
