@@ -57,21 +57,23 @@ Avogadro::TDxController::TDxController(
 
   m_pivotImage = QImage(pivotImagePath);
 
-  m_pGLRenderer->m_iconData = reinterpret_cast<void*>(m_pivotImage.bits());
-  m_pGLRenderer->m_iconWidth = m_pivotImage.width();
-  m_pGLRenderer->m_iconHeight = m_pivotImage.height();
+  if (!m_pivotImage.isNull() || m_pGLRenderer != nullptr) {
+    m_pGLRenderer->m_iconData = reinterpret_cast<void*>(m_pivotImage.bits());
+    m_pGLRenderer->m_iconWidth = m_pivotImage.width();
+    m_pGLRenderer->m_iconHeight = m_pivotImage.height();
+  }
+
 }
 
 void Avogadro::TDxController::enableController()
 {
   PutProfileHint("Avogadro2");
 
-  std::error_code errorCode;
-
   EnableNavigation(true, errorCode);
 
-  if (errorCode)
+  if (errorCode) {
     return;
+  }
 
   PutFrameTimingSource(TimingSource::SpaceMouse);
 
@@ -81,6 +83,10 @@ void Avogadro::TDxController::enableController()
 void Avogadro::TDxController::exportCommands(
   const QMap<QString, QList<QAction*>> &actionsMap)
 {
+  if (errorCode) {
+    return;
+  }
+
   TDx::SpaceMouse::CCommandSet commandSet("Default", "Main");
 
   for (auto& key : actionsMap.keys())
@@ -105,7 +111,6 @@ void Avogadro::TDxController::exportCommands(
 
 void Avogadro::TDxController::disableController()
 {
-  std::error_code errorCode;
   EnableNavigation(false, errorCode);
   return;
 }
@@ -190,6 +195,9 @@ QAction *Avogadro::TDxController::decodeAction(
 
 long Avogadro::TDxController::GetCameraMatrix(navlib::matrix_t &matrix) const
 {
+  if (m_pGLRenderer == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   Eigen::Matrix4f _cameraMatrix =
     m_pGLRenderer->camera().modelView().matrix().inverse();
 
@@ -219,6 +227,9 @@ long Avogadro::TDxController::GetCameraMatrix(navlib::matrix_t &matrix) const
 long Avogadro::TDxController::GetPointerPosition(
   navlib::point_t &position) const
 {
+  if (m_pGLRenderer == nullptr || m_pGLWidget == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   QPoint pointerPos = m_pGLWidget->cursor().pos();
   pointerPos = m_pGLWidget->mapFromGlobal(pointerPos);
 
@@ -234,6 +245,9 @@ long Avogadro::TDxController::GetPointerPosition(
 
 long Avogadro::TDxController::GetViewExtents(navlib::box_t &extents) const
 {
+  if (m_pGLRenderer == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   extents.min.x = m_pGLRenderer->m_orthographicFrustum[0];
   extents.min.y = m_pGLRenderer->m_orthographicFrustum[2];
   extents.min.z = -m_pGLRenderer->m_orthographicFrustum[5];
@@ -250,6 +264,9 @@ long Avogadro::TDxController::GetViewFOV(double &fov) const
 
 long Avogadro::TDxController::GetViewFrustum(navlib::frustum_t &frustum) const
 {
+  if (m_pGLRenderer == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   frustum.left = m_pGLRenderer->m_perspectiveFrustum[0];
   frustum.right = m_pGLRenderer->m_perspectiveFrustum[1];
   frustum.bottom = m_pGLRenderer->m_perspectiveFrustum[2];
@@ -262,6 +279,9 @@ long Avogadro::TDxController::GetViewFrustum(navlib::frustum_t &frustum) const
 long Avogadro::TDxController::GetIsViewPerspective(
   navlib::bool_t &perspective) const
 {
+  if (m_pGLRenderer == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   perspective = (m_pGLRenderer->camera().projectionType() ==
                  Avogadro::Rendering::Projection::Perspective);
   return 0;
@@ -313,6 +333,9 @@ TDx::SpaceMouse::CCategory Avogadro::TDxController::getCategory(
 
 long Avogadro::TDxController::GetModelExtents(navlib::box_t &extents) const
 {
+  if (m_pGLRenderer == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   std::vector<bool> flags;
 
   m_pGLRenderer->scene().getBoundingBox(extents.min.x, 
@@ -328,6 +351,9 @@ long Avogadro::TDxController::GetModelExtents(navlib::box_t &extents) const
 
 long Avogadro::TDxController::GetSelectionExtents(navlib::box_t &extents) const
 {
+  if (m_pGLRenderer == nullptr || *m_ppMolecule == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   std::vector<bool> flags((*m_ppMolecule)->atomCount());
 
   for (uint32_t i = 0u; i < (*m_ppMolecule)->atomCount(); i++)
@@ -373,12 +399,18 @@ long Avogadro::TDxController::GetPivotPosition(navlib::point_t &position) const
 
 long Avogadro::TDxController::GetPivotVisible(navlib::bool_t &visible) const
 {
+  if (m_pGLRenderer == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   visible = m_pGLRenderer->m_drawIcon;
   return 0;
 }
 
 long Avogadro::TDxController::GetHitLookAt(navlib::point_t &position) const
 {
+  if (m_pGLRenderer == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   constexpr float divThreshold = 0.01f;
   const float rayLength =
     2.0f * m_pGLRenderer->camera().distance(m_pGLRenderer->scene().center()) +
@@ -435,6 +467,9 @@ long Avogadro::TDxController::GetHitLookAt(navlib::point_t &position) const
 
 long Avogadro::TDxController::SetCameraMatrix(const navlib::matrix_t &matrix)
 {
+  if (m_pGLRenderer == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   Avogadro::Vector3f from(matrix.m03, matrix.m13, matrix.m23);
   Avogadro::Vector3f to =
     from - Avogadro::Vector3f(matrix.m02, matrix.m12, matrix.m22);
@@ -447,6 +482,9 @@ long Avogadro::TDxController::SetCameraMatrix(const navlib::matrix_t &matrix)
 
 long Avogadro::TDxController::SetViewExtents(const navlib::box_t &extents)
 {
+  if (m_pGLRenderer == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   m_pGLRenderer->m_orthographicFrustum[0] = extents.min.x;
   m_pGLRenderer->m_orthographicFrustum[1] = extents.max.x;
   m_pGLRenderer->m_orthographicFrustum[2] = extents.min.y;
@@ -481,6 +519,9 @@ long Avogadro::TDxController::IsUserPivot(navlib::bool_t &userPivot) const
 
 long Avogadro::TDxController::SetPivotPosition(const navlib::point_t &position)
 {
+  if (m_pGLRenderer == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   m_pGLRenderer->m_iconPosition.x() = position.x;
   m_pGLRenderer->m_iconPosition.y() = position.y;
   m_pGLRenderer->m_iconPosition.z() = position.z;
@@ -489,6 +530,9 @@ long Avogadro::TDxController::SetPivotPosition(const navlib::point_t &position)
 
 long Avogadro::TDxController::SetPivotVisible(bool visible)
 {
+  if (m_pGLWidget == nullptr || m_pGLRenderer == nullptr) 
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   m_pGLRenderer->m_drawIcon = visible;
   m_pGLWidget->requestUpdate();
   return 0;
@@ -522,7 +566,7 @@ long Avogadro::TDxController::SetActiveCommand(std::string commandId)
   QAction* pDecodedAction = decodeAction(commandId, m_pRootNode);
 
   if (pDecodedAction == nullptr)
-    return navlib::make_result_code(navlib::navlib_errc::invalid_argument);
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 
   pDecodedAction->trigger();
 
@@ -531,6 +575,10 @@ long Avogadro::TDxController::SetActiveCommand(std::string commandId)
 
 long Avogadro::TDxController::SetTransaction(long value)
 {
+  if (m_pGLWidget == nullptr)
+    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
+
   m_pGLWidget->requestUpdate();
+
   return 0;
 }

@@ -23,7 +23,6 @@
  */
 
 #if _WIN32
-#include "targetver.h"
 
 // windows
 #include <Windows.h>

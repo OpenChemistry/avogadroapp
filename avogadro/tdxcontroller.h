@@ -82,6 +82,7 @@ private:
 #endif
   double m_hitTestRadius;
   std::array<navlib::point_t, rayCount> m_rayOrigins;
+  std::error_code errorCode;
 
   /**
    * Adds a actions list to the action tree.
