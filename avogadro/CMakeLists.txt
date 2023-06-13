@@ -94,21 +94,6 @@ if(ENABLE_TESTING)
   add_definitions(-DQTTESTING)
 endif()
 
-if(USE_3DCONNEXION)
-  find_package(TDxWare_SDK 4.0 COMPONENTS 3DxWare::Navlib 3DxWare::headers)
-endif()
-
-if(TDxWare_SDK_FOUND)
-  include_directories($<TARGET_PROPERTY:3DxWare::headers,INTERFACE_INCLUDE_DIRECTORIES>)
-  list(APPEND avogadro_srcs tdxcontroller.cpp)
-  if(APPLE)
-    list(APPEND avogadro_srcs navlib_load.cpp navlib_stub.c)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdeclspec")
-  elseif(WIN32)
-    install(FILES "icons/3dx_pivot.png" DESTINATION "${CMAKE_INSTALL_BINDIR}/img")
-  endif()
-endif()
-
 # Need to add current binary dir to include path for UI file headers
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
@@ -168,12 +153,6 @@ if(APPLE)
   set_source_files_properties(icons/cml.icns PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources)
 
-  if(TDxWare_SDK_FOUND)
-    list(APPEND avogadro_srcs icons/3dx_pivot.png)
-    set_source_files_properties(icons/3dx_pivot.png PROPERTIES
-    MACOSX_PACKAGE_LOCATION Resources)
-  endif()
-
 elseif(UNIX)
   install(FILES "icons/avogadro2.desktop" DESTINATION "${INSTALL_XDG_APPS_DIR}")
   install(FILES "icons/avogadro2.appdata.xml" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/metainfo")
@@ -181,6 +160,15 @@ elseif(UNIX)
     RENAME "avogadro2.png")
 elseif(WIN32)
   list(APPEND avogadro_srcs icons/avogadro.rc)
+endif()
+
+if(USE_3DCONNEXION AND (WIN32 OR APPLE))
+  list(APPEND avogadro_srcs icons/3dx_pivot.png)
+  list(APPEND avogadro_srcs tdxcontroller.cpp) 
+  list(APPEND avogadro_srcs "${AvogadroApp_SOURCE_DIR}/thirdparty/3DConnexion/src/navlib_load.cpp") 
+  list(APPEND avogadro_srcs "${AvogadroApp_SOURCE_DIR}/thirdparty/3DConnexion/src/navlib_stub.c") 
+  set_source_files_properties(icons/3dx_pivot.png PROPERTIES
+  MACOSX_PACKAGE_LOCATION Resources)
 endif()
 
 add_executable(avogadro WIN32 MACOSX_BUNDLE
@@ -209,14 +197,18 @@ endif()
 if(QT_VERSION EQUAL 6)
   target_link_libraries(avogadro Qt6::Core5Compat)
 endif()
-if(TDxWare_SDK_FOUND)
+
+if(USE_3DCONNEXION AND (WIN32 OR APPLE))
   target_compile_definitions(avogadro PUBLIC _3DCONNEXION)
-  if(WIN32)
-    target_link_libraries(avogadro $<TARGET_PROPERTY:3DxWare::Navlib,INTERFACE_LINK_LIBRARIES>)
-  elseif(APPLE)
-    target_compile_definitions(avogadro PUBLIC __APPLE__)
-  endif()
+  target_include_directories(avogadro PUBLIC "${AvogadroApp_SOURCE_DIR}/thirdparty/3DConnexion/inc")
+	if(APPLE)
+		target_compile_definitions(avogadro PUBLIC __APPLE__)
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdeclspec")
+	elseif(WIN32)
+		install(FILES "icons/3dx_pivot.png" DESTINATION "${CMAKE_INSTALL_BINDIR}/img")
+	endif()
 endif()  
+
 install(TARGETS avogadro
   RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
   BUNDLE DESTINATION .
