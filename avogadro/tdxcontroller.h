@@ -72,7 +72,7 @@ private:
     std::string m_nodeName;
     std::vector<std::shared_ptr<ActionTreeNode>> m_children;
     std::vector<QAction*> m_actions;
-    ActionTreeNode(const std::string &nodeName)
+    explicit ActionTreeNode(const std::string &nodeName)
       : m_nodeName(nodeName) {}
   };
   std::shared_ptr<ActionTreeNode> m_pRootNode;

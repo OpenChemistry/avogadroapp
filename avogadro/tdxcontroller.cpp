@@ -173,7 +173,7 @@ QAction *Avogadro::TDxController::decodeAction(
     }
   }
 
-  uint32_t index = std::stoi(indexString);
+  int32_t index = std::stoi(indexString);
 
   if (index < 0)
     return nullptr;
