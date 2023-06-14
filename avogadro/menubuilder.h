@@ -62,6 +62,13 @@ public:
    */
   void print();
 
+  #ifdef _3DCONNEXION
+  /**
+   * @brief Get the map of string to action lists.
+   */
+  const QMap<QString, QList<QAction*>> &getMenuActions() const { return m_menuActions; };
+  #endif
+
 private:
   /** A map of string to action lists. */
   QMap<QString, QList<QAction*>> m_menuActions;

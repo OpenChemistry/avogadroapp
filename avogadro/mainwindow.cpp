@@ -13,6 +13,10 @@
 #include "tooltipfilter.h"
 #include "viewfactory.h"
 
+#ifdef _3DCONNEXION
+#include "tdxcontroller.h"
+#endif
+
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cjsonformat.h>
 #include <avogadro/io/cmlformat.h>
@@ -245,6 +249,9 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   , m_redo(nullptr)
   , m_copyImage(nullptr)
   , m_viewFactory(new ViewFactory)
+#ifdef _3DCONNEXION
+  , m_TDxController(nullptr)
+#endif
 {
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
@@ -312,10 +319,31 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   statusBar()->showMessage(tr("Ready…"), 2000);
 
   updateWindowTitle();
+
+#ifdef _3DCONNEXION
+  GLWidget* glWidget =
+    qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+
+  m_TDxController = new TDxController(this, glWidget, &m_molecule);
+  m_TDxController->enableController();
+
+  QMap<QString, QList<QAction*>> actionsMap = m_menuBuilder->getMenuActions();
+  QList<QAction*> toolActions;
+
+  for (auto tool : m_tools)
+    toolActions.push_back(tool->activateAction());
+
+  actionsMap.insert("Toolbox", toolActions);
+
+  m_TDxController->exportCommands(actionsMap);
+#endif
 }
 
 MainWindow::~MainWindow()
 {
+#ifdef _3DCONNEXION
+  m_TDxController->disableController();
+#endif
   writeSettings();
   delete m_molecule;
   delete m_menuBuilder;
@@ -1810,7 +1838,7 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(path, action, 960);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
-
+  
   // Export
   QStringList exportPath = path;
   exportPath << tr("&Export");
