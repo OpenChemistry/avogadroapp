@@ -33,7 +33,7 @@ namespace QtOpenGL {
 class GLWidget;
 }
 
-namespace Io {
+namespace Io { 
 class FileFormat;
 }
 
@@ -48,6 +48,9 @@ class RWMolecule;
 class LayerModel;
 }
 
+#ifdef _3DCONNEXION
+class TDxController;
+#endif
 /**
  * @class MainWindow
  * @author Marcus D. Hanwell
@@ -404,6 +407,9 @@ private:
   ViewFactory* m_viewFactory;
 
   QNetworkAccessManager* m_network = nullptr;
+#ifdef _3DCONNEXION
+  TDxController* m_TDxController;
+#endif
 
 #ifdef QTTESTING
   pqTestUtility* m_testUtility;
