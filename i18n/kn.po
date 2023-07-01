@@ -2,21 +2,23 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# Ajith <donate.zrqx@proton.me>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-04-26 20:52+0000\n"
-"PO-Revision-Date: 2016-06-10 06:22+0000\n"
-"Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
-"Language-Team: Kannada <kn@li.org>\n"
+"PO-Revision-Date: 2023-07-02 10:49+0000\n"
+"Last-Translator: Ajith <donate.zrqx@proton.me>\n"
+"Language-Team: Kannada <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/kn/>\n"
 "Language: kn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.0-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -31,110 +33,106 @@ msgstr "(ಗಿಟ್ ರಿವಿಶನ್: %1)"
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:28:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "ಅವೋಗಾಡ್ರೋ ಲೈಬ್ರರಿ ಆವೃತ್ತಿ :"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
 msgid "Qt Version:"
-msgstr "(ಗಿಟ್ ರಿವಿಶನ್: %1)"
+msgstr "ಕ್ಯೂಟಿ ಆವೃತ್ತಿ:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:30:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSL ಆವೃತ್ತಿ:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat ನಲ್ಲಿ ಯಾವುದೇ ಅಣುವನ್ನು ಹೊಂದಿಸಲಾಗಿಲ್ಲ!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat ನಲ್ಲಿ ಯಾವುದೇ ಫೈಲ್ ಫಾರ್ಮ್ಯಾಟ್ ಹೊಂದಿಸಿಲ್ಲ!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat ನಲ್ಲಿ ಯಾವುದೇ ಫೈಲ್ ಹೆಸರನ್ನು ಹೊಂದಿಸಲಾಗಿಲ್ಲ!"
 
 #: mainwindow.cpp:311
 msgid "Ready…"
-msgstr ""
+msgstr "ಸಿದ್ಧ …"
 
 #: mainwindow.cpp:363
 msgid "Tool"
-msgstr ""
+msgstr "ಸಾಧನ"
 
 #: mainwindow.cpp:367
 msgid "Display Types"
-msgstr ""
+msgstr "ಪ್ರದರ್ಶನ ಪ್ರಕಾರಗಳು"
 
 #: mainwindow.cpp:376
 msgid "View Configuration"
-msgstr ""
+msgstr "ಸಂರಚನೆಯನ್ನು ವೀಕ್ಷಿಸಿ"
 
 #: mainwindow.cpp:380
 msgid "Molecules"
-msgstr ""
+msgstr "ಅಣುಗಳು"
 
 #: mainwindow.cpp:389
 msgid "Layers"
-msgstr ""
+msgstr "ಪದರಗಳು"
 
 #: mainwindow.cpp:408
 msgctxt "File toolbar"
 msgid "File"
-msgstr ""
+msgstr "ಫೈಲ್"
 
 #: mainwindow.cpp:413
 msgctxt "Tools toolbar"
 msgid "Tools"
-msgstr ""
+msgstr "ಪರಿಕರಗಳು"
 
 #: mainwindow.cpp:646
-#, fuzzy
 msgid "Untitled"
-msgstr "ಶೀರ್ಷಿಕೆ ಇರದ %1"
+msgstr "ತಲೆಬರಹವಿಲ್ಲದ"
 
 #: mainwindow.cpp:651
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "ಅವೊಗಡ್ರೊ"
+msgstr "%1 %2 - ಅವೊಗಡ್ರೊ %3"
 
 #: mainwindow.cpp:700
 msgid "Restart needed"
-msgstr ""
+msgstr "ಮರುಪ್ರಾರಂಭಿಸುವ ಅಗತ್ಯವಿದೆ"
 
 #: mainwindow.cpp:701
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "ಹೊಸ ಭಾಷೆಯನ್ನು ಬಳಸಲು ದಯವಿಟ್ಟು ಅವೊಗಾಡ್ರೋವನ್ನು ಮರುಪ್ರಾರಂಭಿಸಿ."
 
 #: mainwindow.cpp:721 mainwindow.cpp:1391
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "ರಾಸಾಯನಿಕ ಮಾರ್ಕಪ್ ಭಾಷೆ"
 
 #: mainwindow.cpp:722 mainwindow.cpp:1390
 msgid "Chemical JSON"
-msgstr ""
+msgstr "ರಾಸಾಯನಿಕ JSON"
 
 #: mainwindow.cpp:728
 msgid "Open chemical file"
-msgstr ""
+msgstr "ರಾಸಾಯನಿಕ ಫೈಲ್ ತೆರೆಯಿರಿ"
 
 #: mainwindow.cpp:746 mainwindow.cpp:770 mainwindow.cpp:1293
 #: mainwindow.cpp:2326
 msgid "Cannot open file"
-msgstr ""
+msgstr "ಫೈಲ್ ತೆರೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ"
 
 #: mainwindow.cpp:747 mainwindow.cpp:771 mainwindow.cpp:1294
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr ""
+msgstr "ಸರಬರಾಜು ಮಾಡಿದ ಫೈಲ್ ಅನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ %1"
 
 #: mainwindow.cpp:760
 #, fuzzy
@@ -143,7 +141,7 @@ msgstr "ಕಡತವನ್ನು ತೆರೆ"
 
 #: mainwindow.cpp:784
 msgid "Commands"
-msgstr ""
+msgstr "ಆಜ್ಞೆಗಳು"
 
 #: mainwindow.cpp:784
 msgid "Input Generators"
@@ -151,29 +149,28 @@ msgstr ""
 
 #: mainwindow.cpp:784
 msgid "File Formats"
-msgstr ""
+msgstr "ಫೈಲ್ ಸ್ವರೂಪಗಳು"
 
 #: mainwindow.cpp:785
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "ಶುಲ್ಕಗಳು"
 
 #: mainwindow.cpp:789
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "ಪ್ಲಗಿನ್ ಸ್ಕ್ರಿಪ್ಟ್ ಅನ್ನು ಸ್ಥಾಪಿಸಿ"
 
 #: mainwindow.cpp:789
 msgid "Script Type:"
-msgstr ""
+msgstr "ಸ್ಕ್ರಿಪ್ಟ್ ಪ್ರಕಾರ:"
 
 #: mainwindow.cpp:840 mainwindow.cpp:1289
 msgid "Select file reader"
-msgstr ""
+msgstr "ಫೈಲ್ ರೀಡರ್ ಆಯ್ಕೆಮಾಡಿ"
 
 #: mainwindow.cpp:869
-#, fuzzy
 msgid "Reading File"
-msgstr "ಕಡತವನ್ನು ತೆರೆ"
+msgstr "ಫೈಲ್ ಓದುವುದು"
 
 #: mainwindow.cpp:871
 #, qt-format
@@ -181,6 +178,8 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"ಫೈಲ್ ತೆರೆಯಲಾಗುತ್ತಿದೆ '%1'\n"
+"'%2' ನೊಂದಿಗೆ"
 
 #: mainwindow.cpp:902
 #, qt-format
@@ -189,7 +188,7 @@ msgstr ""
 
 #: mainwindow.cpp:907
 msgid "File error"
-msgstr ""
+msgstr "ಫೈಲ್ ದೋಷ"
 
 #: mainwindow.cpp:908
 #, qt-format
@@ -197,6 +196,8 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"'%1' ಫೈಲ್ ಓದುವಾಗ ದೋಷ:\n"
+"%2"
 
 #: mainwindow.cpp:935
 #, qt-format
