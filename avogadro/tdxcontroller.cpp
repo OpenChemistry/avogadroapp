@@ -423,10 +423,16 @@ long Avogadro::TDxController::GetHitLookAt(navlib::point_t &position) const
     origin = transform * Eigen::Vector4f(0., 0., 0., 1.);
     origin /= origin.w();
 
-    distance = m_pGLRenderer->scene().getHitDistance(
-      Eigen::Vector3f(origin.x(), origin.y(), origin.z()),
-      Eigen::Vector3f(m_lookDirection.x, m_lookDirection.y, m_lookDirection.z),
-      rayLength);
+	auto rayOrigin = Eigen::Vector3f(origin.x(), origin.y(), origin.z());
+	auto rayDirection = Eigen::Vector3f(m_lookDirection.x,
+		                                m_lookDirection.y,
+		                                m_lookDirection.z);
+
+	distance = m_pGLRenderer->hit(
+      rayOrigin,
+      rayOrigin + rayLength * rayDirection,
+      rayDirection);
+
   } else {
 
     Eigen::Vector4f originBuffer = Eigen::Vector4f::Zero();
@@ -439,12 +445,15 @@ long Avogadro::TDxController::GetHitLookAt(navlib::point_t &position) const
       originBuffer = transform * Eigen::Vector4f(x, y, 0., 1.);
       originBuffer /= originBuffer.w();
 
-      float buffer = m_pGLRenderer->scene().getHitDistance(
-        Eigen::Vector3f(originBuffer.x(), originBuffer.y(), originBuffer.z()),
-        Eigen::Vector3f(m_lookDirection.x,
-						m_lookDirection.y,
-                        m_lookDirection.z),
-		rayLength);
+	  auto rayOrigin = Eigen::Vector3f(originBuffer.x(), originBuffer.y(), originBuffer.z());
+      auto rayDirection = Eigen::Vector3f(m_lookDirection.x,
+                                          m_lookDirection.y,
+                                          m_lookDirection.z);
+
+      float buffer = m_pGLRenderer->hit(
+		  rayOrigin,
+		  rayOrigin + rayLength * rayDirection, 
+		  rayDirection);
 
       if (buffer > 0.0f && buffer < distance) {
         origin = originBuffer;
