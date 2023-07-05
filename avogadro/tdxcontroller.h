@@ -3,7 +3,10 @@
   This source code is released under the 3-Clause BSD License, (see "LICENSE").
 ******************************************************************************/
 
-#pragma once
+#ifdef _3DCONNEXION
+#ifndef AVOGADRO_TDXCONTROLLER_H 
+#define AVOGADRO_TDXCONTROLLER_H
+
 #include <SpaceMouse/CImage.hpp>
 #include <SpaceMouse/CNavigation3D.hpp>
 
@@ -153,5 +156,7 @@ private:
   virtual long SetActiveCommand(std::string commandId) override;
   virtual long SetTransaction(long value) override;
 };
-
 }
+
+#endif // ! AVOGADRO_TDXCONTROLLER_H
+#endif //  _3DCONNEXION

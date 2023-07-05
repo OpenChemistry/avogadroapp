@@ -12,10 +12,7 @@
 #include "renderingdialog.h"
 #include "tooltipfilter.h"
 #include "viewfactory.h"
-
-#ifdef _3DCONNEXION
 #include "tdxcontroller.h"
-#endif
 
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cjsonformat.h>
