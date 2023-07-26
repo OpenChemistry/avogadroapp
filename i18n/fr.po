@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-04-26 20:52+0000\n"
-"PO-Revision-Date: 2023-07-26 19:26+0000\n"
+"PO-Revision-Date: 2023-07-27 21:08+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -113,7 +113,7 @@ msgstr "Veuillez redémarrer Avogadro pour utiliser la nouvelle langue."
 
 #: mainwindow.cpp:721 mainwindow.cpp:1391
 msgid "Chemical Markup Language"
-msgstr "Langage de balisage chimique"
+msgstr "Langage de balisage chimique (CML)"
 
 #: mainwindow.cpp:722 mainwindow.cpp:1390
 msgid "Chemical JSON"
@@ -628,9 +628,8 @@ msgid ""
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">License: </span>\n"
-"<a href=\"https://opensource.org/licenses/BSD-3-Clause\">\n"
-"<span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">License: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
 ">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:278
@@ -652,8 +651,8 @@ msgid ""
 "body></html>"
 msgstr ""
 "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
-"text-decoration: underline; color:#0000ff;\">\n"
-"www.kitware.com</span></a></p></body></html>"
+"text-decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:334
 #. i18n: ectx: property (text), widget (QPushButton, OK)
