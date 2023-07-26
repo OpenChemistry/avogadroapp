@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-04-26 20:52+0000\n"
-"PO-Revision-Date: 2023-05-21 03:59+0000\n"
+"PO-Revision-Date: 2023-07-27 21:08+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -60,7 +60,7 @@ msgstr "Kein Dateiformat in BackgroundFileFormat eingestellt!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr "In BackgroundFileFormat wurde kein Dateiname festgelegt!"
+msgstr "Es wurde kein Dateiname im BackgroundFileFormat festgelegt!"
 
 #: mainwindow.cpp:311
 msgid "Ready…"
@@ -286,7 +286,7 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
-"Diese Datei wurde aus einem nicht standardmäßigen Format importiert, das "
+"Diese Datei wurde aus einem nicht Standardformat importiert, das "
 "möglicherweise nicht alle Informationen in das Molekül schreiben kann.\n"
 "\n"
 "Möchten Sie in das aktuelle Format exportieren oder in einem Standardformat "
@@ -346,11 +346,11 @@ msgstr "&Testen"
 
 #: mainwindow.cpp:1733
 msgid "Record test…"
-msgstr "Rekordtest …"
+msgstr "Aufnahme prüfen…"
 
 #: mainwindow.cpp:1736
 msgid "Play test…"
-msgstr "Spieltest …"
+msgstr "Aufnahme abspielen…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -398,7 +398,7 @@ msgstr "Speichern &als …"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1804:201
 msgid "&Export"
-msgstr "E&xportieren"
+msgstr "&Exportieren"
 
 #: mainwindow.cpp:1805
 msgid "&Molecule…"
@@ -472,7 +472,7 @@ msgstr "&Erweiterungen"
 
 #: mainwindow.cpp:1920
 msgid "User Interface Language…"
-msgstr "Benutzeroberfläche Sprache…"
+msgstr "Sprache der Benutzeroberfläche …"
 
 #: mainwindow.cpp:1924
 msgid "&Periodic Table…"
