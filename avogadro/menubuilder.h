@@ -65,7 +65,10 @@ public:
   /**
    * @brief Get the map of string to action lists.
    */
-  const QMap<QString, QList<QAction*>> &getMenuActions() const { return m_menuActions; };
+  const QMap<QString, QList<QAction*>>& getMenuActions() const
+  {
+    return m_menuActions;
+  };
 
 private:
   /** A map of string to action lists. */

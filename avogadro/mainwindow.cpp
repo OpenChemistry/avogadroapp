@@ -323,7 +323,8 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 
   m_TDxController = new TDxController(this, glWidget);
 
-  connect(this, &MainWindow::moleculeChanged, m_TDxController, &TDxController::updateMolecule);
+  connect(this, &MainWindow::moleculeChanged, m_TDxController,
+          &TDxController::updateMolecule);
 
   m_TDxController->enableController();
 
