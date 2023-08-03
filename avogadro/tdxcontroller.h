@@ -4,18 +4,17 @@
 ******************************************************************************/
 
 #ifdef _3DCONNEXION
-#ifndef AVOGADRO_TDXCONTROLLER_H 
+#ifndef AVOGADRO_TDXCONTROLLER_H
 #define AVOGADRO_TDXCONTROLLER_H
 
 #include <SpaceMouse/CImage.hpp>
 #include <SpaceMouse/CNavigation3D.hpp>
 
-#include <QtGui/QImage>
+#include "mainwindow.h"
 #include <QtCore/QList>
 #include <QtCore/QMap>
 #include <QtCore/QString>
-#include <QtCore/QList>
-#include "mainwindow.h"
+#include <QtGui/QImage>
 #include <array>
 
 constexpr uint32_t rayCount = 50;
@@ -38,18 +37,16 @@ class Molecule;
 class ToolPlugin;
 }
 
-
 /**
  * This class is responsible for handling the TDx navigation in Avogadro2.
  */
-class TDxController : private TDx::SpaceMouse::Navigation3D::CNavigation3D, private QObject
+class TDxController
+  : private TDx::SpaceMouse::Navigation3D::CNavigation3D
+  , public QObject
 {
-
-
 public:
   TDxController(MainWindow* const mainWindow,
-                Avogadro::QtOpenGL::GLWidget* const pGLWidget,
-                QtGui::Molecule** ppMolecule);
+                Avogadro::QtOpenGL::GLWidget* const pGLWidget);
   /**
    * Enables the TDx navigation.
    */
@@ -62,26 +59,30 @@ public:
 
   /**
    * Exports interface utilities to the TDx wizard.
-   * @param &actionsMap A map that contains pairs which constists of a string 
-   * and an action list. The string represents a path through UI menus and 
-   * submenus, to reach corresponding actions. Submenus names are expected 
+   * @param &actionsMap A map that contains pairs which constists of a string
+   * and an action list. The string represents a path through UI menus and
+   * submenus, to reach corresponding actions. Submenus names are expected
    * to be separated by '|' char.
    */
-  void exportCommands(const QMap<QString, QList<QAction*>> &actionsMap);
-  
+  void exportCommands(const QMap<QString, QList<QAction*>>& actionsMap);
+
+  void updateMolecule(QtGui::Molecule* const pMolecule);
+
 private:
   struct ActionTreeNode
   {
     std::string m_nodeName;
     std::vector<std::shared_ptr<ActionTreeNode>> m_children;
     std::vector<QAction*> m_actions;
-    explicit ActionTreeNode(const std::string &nodeName)
-      : m_nodeName(nodeName) {}
+    explicit ActionTreeNode(const std::string& nodeName)
+      : m_nodeName(nodeName)
+    {
+    }
   };
   std::shared_ptr<ActionTreeNode> m_pRootNode;
   QtOpenGL::GLWidget* m_pGLWidget;
   Rendering::GLRenderer* m_pGLRenderer;
-  QtGui::Molecule** m_ppMolecule;
+  QtGui::Molecule* m_pMolecule;
   navlib::point_t m_eyePosition;
   navlib::vector_t m_lookDirection;
   QImage m_pivotImage;
@@ -99,28 +100,27 @@ private:
    * @param &pNode traversal starting point
    * @param &actions action list to add to the tree node
    */
-  void addActions(const std::string &path,
-                  const std::shared_ptr<ActionTreeNode> &pNode,
-                  const QList<QAction*> &actions);
+  void addActions(const std::string& path,
+                  const std::shared_ptr<ActionTreeNode>& pNode,
+                  const QList<QAction*>& actions);
 
   /**
    * Returns CCategory hierarchy which reflects the actions tree.
    * Created CCommand's ID's are encoded paths to the actions in the tree.
    * @param &pNode root of the action tree
-  */
+   */
   TDx::SpaceMouse::CCategory getCategory(
-	const std::string &pathCode,
-    const std::shared_ptr<ActionTreeNode> &pNode);
+    const std::string& pathCode, const std::shared_ptr<ActionTreeNode>& pNode);
 
   /**
    * Recursively decodes a path from provided code and returns a QAction pointer
-   * that has been reached in the actions tree. If the code is invalid, then nullptr
-   * is returned.
+   * that has been reached in the actions tree. If the code is invalid, then
+   * nullptr is returned.
    * @param &pathCode encoded path to the action in the actions tree
    * @param &pNode node from which the decoding begins
-  */
-  QAction *decodeAction(const std::string &pathCode,
-                        const std::shared_ptr<ActionTreeNode> &pNode) const;
+   */
+  QAction* decodeAction(const std::string& pathCode,
+                        const std::shared_ptr<ActionTreeNode>& pNode) const;
 
   // Inherited via CNavigation3D
   // Getters
@@ -133,7 +133,8 @@ private:
   virtual long GetIsViewPerspective(navlib::bool_t& perspective) const override;
   virtual long GetModelExtents(navlib::box_t& extents) const override;
   virtual long GetSelectionExtents(navlib::box_t& extents) const override;
-  virtual long GetSelectionTransform(navlib::matrix_t& transform) const override;
+  virtual long GetSelectionTransform(
+    navlib::matrix_t& transform) const override;
   virtual long GetIsSelectionEmpty(navlib::bool_t& empty) const override;
   virtual long GetPivotPosition(navlib::point_t& position) const override;
   virtual long GetPivotVisible(navlib::bool_t& visible) const override;
