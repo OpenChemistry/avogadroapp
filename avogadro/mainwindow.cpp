@@ -321,7 +321,10 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   GLWidget* glWidget =
     qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
 
-  m_TDxController = new TDxController(this, glWidget, &m_molecule);
+  m_TDxController = new TDxController(this, glWidget);
+
+  connect(this, &MainWindow::moleculeChanged, m_TDxController, &TDxController::updateMolecule);
+
   m_TDxController->enableController();
 
   QMap<QString, QList<QAction*>> actionsMap = m_menuBuilder->getMenuActions();

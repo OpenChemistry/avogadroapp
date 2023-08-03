@@ -8,28 +8,26 @@
 #include <SpaceMouse/CCommand.hpp>
 #include <SpaceMouse/CCommandSet.hpp>
 
-#include <avogadro/rendering/glrenderer.h>
-#include <avogadro/rendering/camera.h>
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/qtgui/toolplugin.h>
 #include <avogadro/qtopengl/glwidget.h>
+#include <avogadro/rendering/camera.h>
+#include <avogadro/rendering/glrenderer.h>
 
-#include <QtWidgets/QAction>
 #include <QtCore/QCoreApplication>
-#include <qbytearray.h>>
+#include <QtWidgets/QAction>
 #include <qbuffer.h>
+#include <qbytearray.h>>
 
 #include <filesystem>
 
 Avogadro::TDxController::TDxController(
-  MainWindow* const mainWindow,
-  Avogadro::QtOpenGL::GLWidget* const pGLWidget,
-  QtGui::Molecule** ppMolecule)
+  MainWindow* const mainWindow, Avogadro::QtOpenGL::GLWidget* const pGLWidget)
   : CNavigation3D(false, true)
   , QObject(mainWindow)
   , m_pRootNode(std::make_shared<ActionTreeNode>("User Interface"))
   , m_pGLWidget(pGLWidget)
-  , m_ppMolecule(ppMolecule)
+  , m_pMolecule(mainWindow->molecule())
   , m_pGLRenderer(&pGLWidget->renderer())
   , m_eyePosition({ 0.0, 0.0, 0.0 })
   , m_lookDirection({ 0.0, 0.0, 0.0 })
@@ -49,7 +47,7 @@ Avogadro::TDxController::TDxController(
     m_rayOrigins[i].x = x;
     m_rayOrigins[i].y = y;
   }
-    
+
   QString pivotImagePath = QCoreApplication::applicationDirPath();
 
 #ifdef WIN32
@@ -82,7 +80,7 @@ void Avogadro::TDxController::enableController()
 }
 
 void Avogadro::TDxController::exportCommands(
-  const QMap<QString, QList<QAction*>> &actionsMap)
+  const QMap<QString, QList<QAction*>>& actionsMap)
 {
   if (errorCode)
     return;
@@ -97,7 +95,7 @@ void Avogadro::TDxController::exportCommands(
   for (uint32_t i = 0; i < m_pRootNode->m_children.size(); i++) {
     pathCode.append(std::to_string(i));
     pathCode.append(".");
-	commandSet.push_back(getCategory(pathCode, m_pRootNode->m_children[i]));
+    commandSet.push_back(getCategory(pathCode, m_pRootNode->m_children[i]));
     pathCode.clear();
   }
 
@@ -109,6 +107,19 @@ void Avogadro::TDxController::exportCommands(
 #endif
 }
 
+void Avogadro::TDxController::updateMolecule(QtGui::Molecule* const pMolecule)
+{
+  if (pMolecule == nullptr)
+    return;
+
+  m_pMolecule = pMolecule;
+
+  navlib::box_t modelExtents;
+
+  GetModelExtents(modelExtents);
+  Write(navlib::model_extents_k, modelExtents);
+}
+
 void Avogadro::TDxController::disableController()
 {
   EnableNavigation(false, errorCode);
@@ -116,14 +127,12 @@ void Avogadro::TDxController::disableController()
 }
 
 void Avogadro::TDxController::addActions(
-  const std::string &path,
-  const std::shared_ptr<ActionTreeNode> &pNode,
-  const QList<QAction*> &actions)
+  const std::string& path, const std::shared_ptr<ActionTreeNode>& pNode,
+  const QList<QAction*>& actions)
 {
 
   if (path.empty()) {
-    std::copy(actions.begin(),
-			  actions.end(),
+    std::copy(actions.begin(), actions.end(),
               std::back_inserter(pNode->m_actions));
     return;
   }
@@ -156,9 +165,9 @@ void Avogadro::TDxController::addActions(
   return;
 }
 
-QAction *Avogadro::TDxController::decodeAction(
-  const std::string &pathCode,
-  const std::shared_ptr<ActionTreeNode> &pNode) const
+QAction* Avogadro::TDxController::decodeAction(
+  const std::string& pathCode,
+  const std::shared_ptr<ActionTreeNode>& pNode) const
 {
   std::string indexString;
   std::string remainingPath;
@@ -166,8 +175,7 @@ QAction *Avogadro::TDxController::decodeAction(
   for (auto itr = pathCode.begin(); itr != pathCode.end(); itr++) {
     if (*itr != '.') {
       indexString.push_back(*itr);
-	}
-    else {
+    } else {
       std::copy(itr + 1, pathCode.end(), std::back_inserter(remainingPath));
       break;
     }
@@ -193,7 +201,7 @@ QAction *Avogadro::TDxController::decodeAction(
 // Inherited via CNavigation3D
 // Getters
 
-long Avogadro::TDxController::GetCameraMatrix(navlib::matrix_t &matrix) const
+long Avogadro::TDxController::GetCameraMatrix(navlib::matrix_t& matrix) const
 {
   if (m_pGLRenderer == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
@@ -225,7 +233,7 @@ long Avogadro::TDxController::GetCameraMatrix(navlib::matrix_t &matrix) const
 }
 
 long Avogadro::TDxController::GetPointerPosition(
-  navlib::point_t &position) const
+  navlib::point_t& position) const
 {
   if (m_pGLRenderer == nullptr || m_pGLWidget == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
@@ -243,7 +251,7 @@ long Avogadro::TDxController::GetPointerPosition(
   return 0;
 }
 
-long Avogadro::TDxController::GetViewExtents(navlib::box_t &extents) const
+long Avogadro::TDxController::GetViewExtents(navlib::box_t& extents) const
 {
   if (m_pGLRenderer == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
@@ -257,12 +265,12 @@ long Avogadro::TDxController::GetViewExtents(navlib::box_t &extents) const
   return 0;
 }
 
-long Avogadro::TDxController::GetViewFOV(double &fov) const
+long Avogadro::TDxController::GetViewFOV(double& fov) const
 {
   return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 }
 
-long Avogadro::TDxController::GetViewFrustum(navlib::frustum_t &frustum) const
+long Avogadro::TDxController::GetViewFrustum(navlib::frustum_t& frustum) const
 {
   if (m_pGLRenderer == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
@@ -275,9 +283,9 @@ long Avogadro::TDxController::GetViewFrustum(navlib::frustum_t &frustum) const
   frustum.farVal = m_pGLRenderer->m_perspectiveFrustum[5];
   return 0;
 }
- 
+
 long Avogadro::TDxController::GetIsViewPerspective(
-  navlib::bool_t &perspective) const
+  navlib::bool_t& perspective) const
 {
   if (m_pGLRenderer == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
@@ -287,10 +295,8 @@ long Avogadro::TDxController::GetIsViewPerspective(
   return 0;
 }
 
-
 TDx::SpaceMouse::CCategory Avogadro::TDxController::getCategory(
-  const std::string &pathCode,
-  const std::shared_ptr<ActionTreeNode> &pNode)
+  const std::string& pathCode, const std::shared_ptr<ActionTreeNode>& pNode)
 {
 
   TDx::SpaceMouse::CCategory result(pNode->m_nodeName, pNode->m_nodeName);
@@ -304,26 +310,26 @@ TDx::SpaceMouse::CCategory Avogadro::TDxController::getCategory(
   }
 
   for (uint32_t i = 0u; i < pNode->m_actions.size(); i++) {
-    
-	if (pNode->m_actions[i]->iconText().isEmpty())
+
+    if (pNode->m_actions[i]->iconText().isEmpty())
       continue;
 
-	std::string commandId(nextPathCode + std::to_string(i));
+    std::string commandId(nextPathCode + std::to_string(i));
 
     result.push_back(TDx::SpaceMouse::CCommand(
-        commandId,
-		pNode->m_actions[i]->iconText().toStdString(),
-		pNode->m_actions[i]->toolTip().toStdString()));
-        
+      commandId, pNode->m_actions[i]->iconText().toStdString(),
+      pNode->m_actions[i]->toolTip().toStdString()));
+
 #ifdef WIN32
 
-	const QIcon iconImg = pNode->m_actions[i]->icon();
+    const QIcon iconImg = pNode->m_actions[i]->icon();
     const QImage qimage = iconImg.pixmap(QSize(256, 256)).toImage();
     QByteArray qbyteArray;
     QBuffer qbuffer(&qbyteArray);
     qimage.save(&qbuffer, "PNG");
 
-    TDx::CImage icon = TDx::CImage::FromData(qbyteArray.toStdString(), 0, commandId.c_str());
+    TDx::CImage icon =
+      TDx::CImage::FromData(qbyteArray.toStdString(), 0, commandId.c_str());
 
     m_utilityIcons.push_back(icon);
 #endif
@@ -331,43 +337,25 @@ TDx::SpaceMouse::CCategory Avogadro::TDxController::getCategory(
   return result;
 }
 
-long Avogadro::TDxController::GetModelExtents(navlib::box_t &extents) const
+long Avogadro::TDxController::GetModelExtents(navlib::box_t& extents) const
 {
-  if (m_pGLRenderer == nullptr)
+  if (m_pMolecule == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 
-  std::vector<bool> flags;
+  Vector3 boxMin;
+  Vector3 boxMax;
 
-  m_pGLRenderer->scene().getBoundingBox(extents.min.x, 
-									  extents.min.y,
-                                      extents.min.z,
-									  extents.max.x,
-                                      extents.max.y,
-									  extents.max.z, 
-									  flags);
+  m_pMolecule->boundingBox(boxMin, boxMax);
+
+  std::copy_n(boxMin.data(), 3u, &extents.min.x);
+  std::copy_n(boxMax.data(), 3u, &extents.max.x);
 
   return 0;
 }
 
-long Avogadro::TDxController::GetSelectionExtents(navlib::box_t &extents) const
+long Avogadro::TDxController::GetSelectionExtents(navlib::box_t& extents) const
 {
-  if (m_pGLRenderer == nullptr || *m_ppMolecule == nullptr)
-    return navlib::make_result_code(navlib::navlib_errc::no_data_available);
-
-  std::vector<bool> flags((*m_ppMolecule)->atomCount());
-
-  for (uint32_t i = 0u; i < (*m_ppMolecule)->atomCount(); i++)
-    flags[i] = (*m_ppMolecule)->atomSelected(i);
-
-  m_pGLRenderer->scene().getBoundingBox(extents.min.x,
-									  extents.min.y,
-                                      extents.min.z, 
-									  extents.max.x,
-                                      extents.max.y,
-									  extents.max.z,
-									  flags);
-
-  return 0;
+  return GetModelExtents(extents);
 }
 
 long Avogadro::TDxController::GetSelectionTransform(
@@ -376,27 +364,22 @@ long Avogadro::TDxController::GetSelectionTransform(
   return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 }
 
-long Avogadro::TDxController::GetIsSelectionEmpty(navlib::bool_t &empty) const
+long Avogadro::TDxController::GetIsSelectionEmpty(navlib::bool_t& empty) const
 {
-  if (*m_ppMolecule == nullptr)
+  if (m_pMolecule == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 
-  for (uint32_t i = 0u; i < (*m_ppMolecule)->atomCount(); i++) {
-    if ((*m_ppMolecule)->atomSelected(i)) {
-      empty = false;
-      return 0;
-    }
-  }
-  empty = true;
-  return 0;
-} 
+  empty = m_pMolecule->isSelectionEmpty();
 
-long Avogadro::TDxController::GetPivotPosition(navlib::point_t &position) const
+  return 0;
+}
+
+long Avogadro::TDxController::GetPivotPosition(navlib::point_t& position) const
 {
   return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 }
 
-long Avogadro::TDxController::GetPivotVisible(navlib::bool_t &visible) const
+long Avogadro::TDxController::GetPivotVisible(navlib::bool_t& visible) const
 {
   if (m_pGLRenderer == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
@@ -405,7 +388,7 @@ long Avogadro::TDxController::GetPivotVisible(navlib::bool_t &visible) const
   return 0;
 }
 
-long Avogadro::TDxController::GetHitLookAt(navlib::point_t &position) const
+long Avogadro::TDxController::GetHitLookAt(navlib::point_t& position) const
 {
   if (m_pGLRenderer == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
@@ -423,15 +406,12 @@ long Avogadro::TDxController::GetHitLookAt(navlib::point_t &position) const
     origin = transform * Eigen::Vector4f(0., 0., 0., 1.);
     origin /= origin.w();
 
-	auto rayOrigin = Eigen::Vector3f(origin.x(), origin.y(), origin.z());
-	auto rayDirection = Eigen::Vector3f(m_lookDirection.x,
-		                                m_lookDirection.y,
-		                                m_lookDirection.z);
+    auto rayOrigin = Eigen::Vector3f(origin.x(), origin.y(), origin.z());
+    auto rayDirection =
+      Eigen::Vector3f(m_lookDirection.x, m_lookDirection.y, m_lookDirection.z);
 
-	distance = m_pGLRenderer->hit(
-      rayOrigin,
-      rayOrigin + rayLength * rayDirection,
-      rayDirection);
+    distance = m_pGLRenderer->hit(
+      rayOrigin, rayOrigin + rayLength * rayDirection, rayDirection);
 
   } else {
 
@@ -445,15 +425,13 @@ long Avogadro::TDxController::GetHitLookAt(navlib::point_t &position) const
       originBuffer = transform * Eigen::Vector4f(x, y, 0., 1.);
       originBuffer /= originBuffer.w();
 
-	  auto rayOrigin = Eigen::Vector3f(originBuffer.x(), originBuffer.y(), originBuffer.z());
-      auto rayDirection = Eigen::Vector3f(m_lookDirection.x,
-                                          m_lookDirection.y,
+      auto rayOrigin =
+        Eigen::Vector3f(originBuffer.x(), originBuffer.y(), originBuffer.z());
+      auto rayDirection = Eigen::Vector3f(m_lookDirection.x, m_lookDirection.y,
                                           m_lookDirection.z);
 
       float buffer = m_pGLRenderer->hit(
-		  rayOrigin,
-		  rayOrigin + rayLength * rayDirection, 
-		  rayDirection);
+        rayOrigin, rayOrigin + rayLength * rayDirection, rayDirection);
 
       if (buffer > 0.0f && buffer < distance) {
         origin = originBuffer;
@@ -471,9 +449,9 @@ long Avogadro::TDxController::GetHitLookAt(navlib::point_t &position) const
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 }
 
-// Setters 
+// Setters
 
-long Avogadro::TDxController::SetCameraMatrix(const navlib::matrix_t &matrix)
+long Avogadro::TDxController::SetCameraMatrix(const navlib::matrix_t& matrix)
 {
   if (m_pGLRenderer == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
@@ -488,7 +466,7 @@ long Avogadro::TDxController::SetCameraMatrix(const navlib::matrix_t &matrix)
   return 0;
 }
 
-long Avogadro::TDxController::SetViewExtents(const navlib::box_t &extents)
+long Avogadro::TDxController::SetViewExtents(const navlib::box_t& extents)
 {
   if (m_pGLRenderer == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
@@ -508,24 +486,24 @@ long Avogadro::TDxController::SetViewFOV(double fov)
   return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 }
 
-long Avogadro::TDxController::SetViewFrustum(const navlib::frustum_t &frustum)
+long Avogadro::TDxController::SetViewFrustum(const navlib::frustum_t& frustum)
 {
   return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 }
 
 long Avogadro::TDxController::SetSelectionTransform(
-  const navlib::matrix_t &matrix)
+  const navlib::matrix_t& matrix)
 {
   return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 }
 
-long Avogadro::TDxController::IsUserPivot(navlib::bool_t &userPivot) const
+long Avogadro::TDxController::IsUserPivot(navlib::bool_t& userPivot) const
 {
   userPivot = false;
   return 0;
 }
 
-long Avogadro::TDxController::SetPivotPosition(const navlib::point_t &position)
+long Avogadro::TDxController::SetPivotPosition(const navlib::point_t& position)
 {
   if (m_pGLRenderer == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
@@ -538,7 +516,7 @@ long Avogadro::TDxController::SetPivotPosition(const navlib::point_t &position)
 
 long Avogadro::TDxController::SetPivotVisible(bool visible)
 {
-  if (m_pGLWidget == nullptr || m_pGLRenderer == nullptr) 
+  if (m_pGLWidget == nullptr || m_pGLRenderer == nullptr)
     return navlib::make_result_code(navlib::navlib_errc::no_data_available);
 
   m_pGLRenderer->m_drawIcon = visible;
@@ -552,13 +530,13 @@ long Avogadro::TDxController::SetHitAperture(double aperture)
   return 0;
 }
 
-long Avogadro::TDxController::SetHitDirection(const navlib::vector_t &direction)
+long Avogadro::TDxController::SetHitDirection(const navlib::vector_t& direction)
 {
   m_lookDirection = direction;
   return 0;
 }
 
-long Avogadro::TDxController::SetHitLookFrom(const navlib::point_t &eye)
+long Avogadro::TDxController::SetHitLookFrom(const navlib::point_t& eye)
 {
   m_eyePosition = eye;
   return 0;
