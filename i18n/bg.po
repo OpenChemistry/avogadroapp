@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # Apostol Penkov <apostol.penkov@gmail.com>, 2020.
+# Salif Mehmed <mail@salif.eu>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-04-26 20:52+0000\n"
-"PO-Revision-Date: 2020-12-09 12:29+0000\n"
-"Last-Translator: Apostol Penkov <apostol.penkov@gmail.com>\n"
+"PO-Revision-Date: 2023-08-05 17:51+0000\n"
+"Last-Translator: Salif Mehmed <mail@salif.eu>\n"
 "Language-Team: Bulgarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/bg/>\n"
 "Language: bg\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -59,9 +60,8 @@ msgid "No file name set in BackgroundFileFormat!"
 msgstr ""
 
 #: mainwindow.cpp:311
-#, fuzzy
 msgid "Ready…"
-msgstr "Готово..."
+msgstr "Готов…"
 
 #: mainwindow.cpp:363
 msgid "Tool"
