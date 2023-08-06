@@ -4,13 +4,14 @@
 # translator <kvb@tuta.io>, 2022.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2022.
 # Translator <kvb@tuta.io>, 2022, 2023.
+# Norwid Behrnd <nbehrnd@yahoo.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-04-26 20:52+0000\n"
-"PO-Revision-Date: 2023-04-30 15:50+0000\n"
-"Last-Translator: Translator <kvb@tuta.io>\n"
+"PO-Revision-Date: 2023-07-27 21:08+0000\n"
+"Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
 "Language: fr\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.0-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -112,7 +113,7 @@ msgstr "Veuillez redémarrer Avogadro pour utiliser la nouvelle langue."
 
 #: mainwindow.cpp:721 mainwindow.cpp:1391
 msgid "Chemical Markup Language"
-msgstr "Langage de balisage chimique"
+msgstr "Langage de balisage chimique (CML)"
 
 #: mainwindow.cpp:722 mainwindow.cpp:1390
 msgid "Chemical JSON"
@@ -626,10 +627,10 @@ msgid ""
 "\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
 "\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">Licence : </span><a href=\"https://opensource.org/licenses/BSD-3-Clause"
-"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
-"\">BSD 3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">License: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:278
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -650,8 +651,8 @@ msgid ""
 "body></html>"
 msgstr ""
 "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
-"text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
-"body></html>"
+"text-decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:334
 #. i18n: ectx: property (text), widget (QPushButton, OK)
