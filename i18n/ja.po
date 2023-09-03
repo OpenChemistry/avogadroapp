@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Takaki Iekura <tacostea@gmail.com>, 2021.
-# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2021, 2022.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-04-26 20:52+0000\n"
-"PO-Revision-Date: 2022-10-05 17:43+0000\n"
+"PO-Revision-Date: 2023-09-03 15:00+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -540,8 +540,6 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2203
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
 msgstr "ネットワークダウンロードに失敗しました"
 
