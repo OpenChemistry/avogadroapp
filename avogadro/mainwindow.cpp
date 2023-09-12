@@ -283,6 +283,10 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
               &MainWindow::setActiveTool);
       connect(extension, &QtGui::ExtensionPlugin::requestActiveDisplayTypes,
               this, &MainWindow::setActiveDisplayTypes);
+      connect(extension, &QtGui::ExtensionPlugin::registerCommand, this,
+              &MainWindow::registerExtensionCommand);
+      extension->registerCommands();
+
       buildMenu(extension);
       m_extensions.append(extension);
     }
@@ -1457,6 +1461,38 @@ bool MainWindow::exportFile(bool async)
   return saveFileAs(reply.second, reply.first->newInstance(), async);
 }
 
+bool MainWindow::exportFile(const QString& fileName, bool async)
+{
+  if (fileName.isEmpty()) {
+    return false;
+  }
+
+  // Create one of our writers to save the file:
+  FileFormat* writer = nullptr;
+
+  std::vector<const FileFormat*> writers =
+    Io::FileFormatManager::instance().fileFormatsFromFileExtension(
+      QFileInfo(fileName).suffix().toStdString(),
+      FileFormat::File | FileFormat::Write);
+
+  if (!writers.empty()) {
+    writer = writers[0]->newInstance();
+    return saveFileAs(fileName, writer, async);
+  }
+
+  return false;
+}
+
+std::string MainWindow::exportString(const std::string& format)
+{
+  std::string output;
+  auto* mol = qobject_cast<Molecule*>(m_moleculeModel->activeMolecule());
+
+  Io::FileFormatManager::instance().writeString(*mol, output, format);
+
+  return output;
+}
+
 bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
                             bool async)
 {
@@ -1820,7 +1856,7 @@ void MainWindow::buildMenu()
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
-  connect(action, &QAction::triggered, this, &MainWindow::exportFile);
+  connect(action, SIGNAL(triggered()), this, SLOT(exportFile()));
   // Export graphics
   action = new QAction(tr("&Graphics…"), this);
   m_menuBuilder->addAction(exportPath, action, 100);
@@ -2033,6 +2069,10 @@ void MainWindow::buildTools()
     m_toolToolBar->addAction(action);
 
     connect(action, &QAction::triggered, this, &MainWindow::toolActivated);
+    connect(toolPlugin, &ToolPlugin::registerCommand, this,
+            &MainWindow::registerToolCommand);
+    toolPlugin->registerCommands();
+
     ++index;
   }
 
@@ -2349,6 +2389,49 @@ void MainWindow::clearQueuedFiles()
                           .arg(m_queuedFiles.join("\n")));
     m_queuedFiles.clear();
   }
+}
+
+void MainWindow::registerToolCommand(QString command, QString description)
+{
+  if (m_toolCommandMap.contains(command))
+    return;
+
+  m_commandDescriptionsMap.insert(command, description);
+
+  // get the calling plugin
+  auto* tool(qobject_cast<ToolPlugin*>(sender()));
+  if (!tool)
+    return;
+
+  m_toolCommandMap.insert(command, tool);
+}
+
+void MainWindow::registerExtensionCommand(QString command, QString description)
+{
+  if (m_extensionCommandMap.contains(command))
+    return;
+
+  m_commandDescriptionsMap.insert(command, description);
+
+  // get the calling plugin
+  auto* extension(qobject_cast<ExtensionPlugin*>(sender()));
+  if (!extension)
+    return;
+
+  m_extensionCommandMap.insert(command, extension);
+}
+
+bool MainWindow::handleCommand(const QString& command,
+                               const QVariantMap& options)
+{
+  if (m_toolCommandMap.contains(command)) {
+    auto* tool = m_toolCommandMap.value(command);
+    return tool->handleCommand(command, options);
+  } else if (m_extensionCommandMap.contains(command)) {
+    auto* extension = m_extensionCommandMap.value(command);
+    return extension->handleCommand(command, options);
+  }
+  return false;
 }
 
 } // End of Avogadro namespace
