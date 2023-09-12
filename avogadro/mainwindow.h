@@ -7,6 +7,7 @@
 #define AVOGADRO_MAINWINDOW_H
 
 #include <QtCore/QStringList>
+#include <QtCore/QVariantMap>
 #include <QtWidgets/QMainWindow>
 
 #ifdef QTTESTING
@@ -93,6 +94,25 @@ public slots:
   void exportGraphics(QString fileName);
 
   /**
+   * Export a file, using the full selection of formats capable of writing.
+   * The format will be guessed based on the filename extension.
+   * If @a async is true (default), the file is saved asynchronously.
+   * @return If @a async is true, this function returns true if a suitable
+   * writer was found (not if the write was successful). If @a async is
+   * false, the return value indicates whether or not the file was written
+   * successfully.
+   */
+  bool exportFile(const QString& fileName, bool async = true);
+
+  /**
+   * Export a file, using the full selection of formats capable of writing.
+   * Will use @a format to determine the file format to use.
+   * @return String-representation of the exported file, or an empty string if
+   * the export failed.
+   */
+  std::string exportString(const std::string& format);
+
+  /**
    * Move @a fileName as a plugin script (i.e. put it in the correct dir)
    */
   bool addScript(const QString& fileName);
@@ -124,6 +144,15 @@ public:
     m_translationList = list;
     m_localeCodes = codes;
   }
+
+  /**
+   * Handle script commands
+   * @param command The command to execute
+   * @param options The options to the command
+   *
+   * @return True if the command was handled, false otherwise
+   */
+  bool handleCommand(const QString& command, const QVariantMap& options);
 
 signals:
   /**
@@ -181,7 +210,7 @@ protected slots:
   /**
    * Save the current molecule to its current fileName. If it is not a standard
    * format, offer to export and warn about possible data loss.
-   * If @a async is true (default), the file is loaded asynchronously.
+   * If @a async is true (default), the file is saved asynchronously.
    * @return If @a async is true, this function returns true if a suitable
    * writer was found (not if the write was successful). If @a async is
    * false, the return value indicates whether or not the file was written
@@ -192,7 +221,7 @@ protected slots:
   /**
    * Prompt for a file location, and attempt to save the active molecule to the
    * specified location.
-   * If @a async is true (default), the file is loaded asynchronously.
+   * If @a async is true (default), the file is saved asynchronously.
    * @return If @a async is true, this function returns true if a suitable
    * writer was found (not if the write was successful). If @a async is
    * false, the return value indicates whether or not the file was written
@@ -202,7 +231,7 @@ protected slots:
 
   /**
    * Export a file, using the full selection of formats capable of writing.
-   * If @a async is true (default), the file is loaded asynchronously.
+   * If @a async is true (default), the file is saved asynchronously.
    * @return If @a async is true, this function returns true if a suitable
    * writer was found (not if the write was successful). If @a async is
    * false, the return value indicates whether or not the file was written
@@ -213,7 +242,7 @@ protected slots:
   /**
    * If specified, use the FileFormat @a writer to save the file. This method
    * takes ownership of @a writer and will delete it before returning.
-   * If @a async is true (default), the file is loaded asynchronously.
+   * If @a async is true (default), the file is saved asynchronously.
    * @return If @a async is true, this function returns true if the write begins
    * successfully (not if the writer completes). If @a async is
    * false, the return value indicates whether or not the file was written
@@ -265,6 +294,10 @@ private slots:
   void checkUpdate();
 
   void finishUpdateRequest(QNetworkReply*);
+
+  void registerToolCommand(QString command, QString description);
+
+  void registerExtensionCommand(QString command, QString description);
 
   /**
    * @brief Register file formats from extensions when ready.
@@ -397,6 +430,11 @@ private:
   QDockWidget* m_moleculeDock;
   QList<QtGui::ToolPlugin*> m_tools;
   QList<QtGui::ExtensionPlugin*> m_extensions;
+  // map from script commands to tools and extensions
+  QMap<QString, QtGui::ToolPlugin*> m_toolCommandMap;
+  QMap<QString, QtGui::ExtensionPlugin*> m_extensionCommandMap;
+  // used for help - provide description for a command
+  QMap<QString, QString> m_commandDescriptionsMap;
 
   QAction* m_undo;
   QAction* m_redo;

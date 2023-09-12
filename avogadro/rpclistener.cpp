@@ -184,6 +184,16 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
     MoleQueue::Message response = message.generateResponse();
     response.setResult(true);
     response.send();
+  } else if (method == "exportFile") {
+    // Save to the supplied file name
+    QString filename = params["fileName"].toString();
+
+    bool result = m_window->exportFile(filename);
+
+    // set response
+    MoleQueue::Message response = message.generateResponse();
+    response.setResult(result);
+    response.send();
   } else if (method == "loadMolecule") {
     // get molecule data and format
     string content = params["content"].toString().toStdString();
@@ -211,14 +221,25 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
           .arg(QString::fromStdString(FileFormatManager::instance().error())));
       errorMessage.send();
     }
-  } else { // invalid method
-    MoleQueue::Message errorMessage = message.generateErrorResponse();
-    errorMessage.setErrorCode(-32601);
-    errorMessage.setErrorMessage("Method not found");
-    QJsonObject errorDataObject;
-    errorDataObject.insert("request", message.toJsonObject());
-    errorMessage.setErrorData(errorDataObject);
-    errorMessage.send();
+  } else { // ask the main window to handle the message
+    QVariantMap options = params.toVariantMap();
+    bool success = m_window->handleCommand(method, options);
+
+    if (success) {
+      // send response
+      MoleQueue::Message response = message.generateResponse();
+      response.setResult(true);
+      response.send();
+    } else {
+      // send error response
+      MoleQueue::Message errorMessage = message.generateErrorResponse();
+      errorMessage.setErrorCode(-32601);
+      errorMessage.setErrorMessage("Method not found");
+      QJsonObject errorDataObject;
+      errorDataObject.insert("request", message.toJsonObject());
+      errorMessage.setErrorData(errorDataObject);
+      errorMessage.send();
+    }
   }
 }
 
