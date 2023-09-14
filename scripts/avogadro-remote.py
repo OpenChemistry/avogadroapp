@@ -80,7 +80,6 @@ class Connection:
                 "params": {"fileName": str(sys.argv[2])},
             }
         )
-        
     def close(self):
         '''Close the socket to the named pipe'''
         self.sock.close()
