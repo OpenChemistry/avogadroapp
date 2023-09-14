@@ -62,7 +62,7 @@ class Connection:
         except Exception as exception:
             print("error: " + str(exception))
             return {}
-    def openFile():
+    def openFile(self):
         conn.send_json(
             {
                 "jsonrpc": "2.0",
@@ -71,7 +71,7 @@ class Connection:
                 "params": {"fileName": str(sys.argv[2])},
             }
         )
-    def saveGraphic():
+    def saveGraphic(self):
         conn.send_json(
             {
                 "jsonrpc": "2.0",
