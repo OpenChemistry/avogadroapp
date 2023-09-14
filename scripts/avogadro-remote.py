@@ -62,7 +62,25 @@ class Connection:
         except Exception as exception:
             print("error: " + str(exception))
             return {}
-
+    def openFile():
+        conn.send_json(
+            {
+                "jsonrpc": "2.0",
+                "id": 0,
+                "method": "openFile",
+                "params": {"fileName": str(sys.argv[2])},
+            }
+        )
+    def saveGraphic():
+        conn.send_json(
+            {
+                "jsonrpc": "2.0",
+                "id": 0,
+                "method": "saveGraphic",
+                "params": {"fileName": str(sys.argv[2])},
+            }
+        )
+        
     def close(self):
         '''Close the socket to the named pipe'''
         self.sock.close()
@@ -74,23 +92,10 @@ if __name__ == "__main__":
     method = sys.argv[1]
 
     if method == "openFile":
-        conn.send_json(
-            {
-                "jsonrpc": "2.0",
-                "id": 0,
-                "method": "openFile",
-                "params": {"fileName": str(sys.argv[2])},
-            }
-        )
+        conn.openFile()
+        
     elif method == "saveGraphic":
-        conn.send_json(
-            {
-                "jsonrpc": "2.0",
-                "id": 0,
-                "method": "saveGraphic",
-                "params": {"fileName": str(sys.argv[2])},
-            }
-        )
+        conn.saveGraphic()
 
     elif method == "kill":
         conn.send_json({"jsonrpc": "2.0", "id": 0, "method": "kill"})
