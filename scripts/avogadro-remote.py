@@ -25,8 +25,8 @@ class Connection:
             self.sock.connect(tempfile.gettempdir() + "/" + name)
             # print the connection statement
             print("reply:" + str(receive_message()))
-        except sock.error, msg:
-            print("Couldnt connect with the socket-server: %s\n terminating program" % msg)
+        except Exception as exception:
+            print("error while connecting: " + str(exception))
             sys.exit(1)
 
     def send_json(self, obj):
