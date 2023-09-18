@@ -22,7 +22,13 @@ class Connection:
         self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 
         # connect
-        self.sock.connect(tempfile.gettempdir() + "/" + name)
+        try:
+            self.sock.connect(tempfile.gettempdir() + "/" + name)
+            # print the connection statement
+            print("reply: " + str(receive_message()))
+        except sock.error, msg:
+            print("Couldnt connect with the socket-server: %s\n terminating program" % msg)
+            sys.exit(1)
 
     def send_json(self, obj):
         """
@@ -63,7 +69,7 @@ class Connection:
             print("error: " + str(exception))
             return {}
     def open_file(self,file):
-        conn.send_json(
+        Connection.send_json(
             {
                 "jsonrpc": "2.0",
                 "id": 0,
@@ -72,7 +78,7 @@ class Connection:
             }
         )
     def save_graphic(self,file):
-        conn.send_json(
+        Connection.send_json(
             {
                 "jsonrpc": "2.0",
                 "id": 0,
@@ -81,7 +87,7 @@ class Connection:
             }
         )
     def kill(self):
-        conn.send_json(
+        Connection.send_json(
             {
              "jsonrpc": "2.0",
              "id": 0,
@@ -92,16 +98,3 @@ class Connection:
     def close(self):
         '''Close the socket to the named pipe'''
         self.sock.close()
-        
-if __name__ == "__main__":
-    
-    conn = Connection()
-    method = sys.argv[1]
-
-    else:
-        print("unknown method: " + method)
-        conn.close()
-        sys.exit(-1)
-
-    print("reply: " + str(conn.receive_message()))
-    conn.close()
