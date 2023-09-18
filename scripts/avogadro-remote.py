@@ -8,7 +8,6 @@ import socket
 import struct
 import tempfile
 
-
 class Connection:
     '''Process a JSON-RPC request'''
 
@@ -25,7 +24,7 @@ class Connection:
         try:
             self.sock.connect(tempfile.gettempdir() + "/" + name)
             # print the connection statement
-            print("reply: " + str(receive_message()))
+            print("reply:" + str(receive_message()))
         except sock.error, msg:
             print("Couldnt connect with the socket-server: %s\n terminating program" % msg)
             sys.exit(1)
@@ -68,8 +67,9 @@ class Connection:
         except Exception as exception:
             print("error: " + str(exception))
             return {}
+            
     def open_file(self,file):
-        Connection.send_json(
+        self.send_json(
             {
                 "jsonrpc": "2.0",
                 "id": 0,
@@ -78,7 +78,7 @@ class Connection:
             }
         )
     def save_graphic(self,file):
-        Connection.send_json(
+        self.send_json(
             {
                 "jsonrpc": "2.0",
                 "id": 0,
@@ -87,7 +87,7 @@ class Connection:
             }
         )
     def kill(self):
-        Connection.send_json(
+        self.send_json(
             {
              "jsonrpc": "2.0",
              "id": 0,
