@@ -24,7 +24,7 @@ class Connection:
         try:
             self.sock.connect(tempfile.gettempdir() + "/" + name)
             # print the connection statement
-            print("reply:" + str(receive_message()))
+            print("reply:" + str(self.receive_message()))
         except Exception as exception:
             print("error while connecting: " + str(exception))
             sys.exit(1)
