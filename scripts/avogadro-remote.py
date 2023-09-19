@@ -8,7 +8,6 @@ import socket
 import struct
 import tempfile
 
-
 class Connection:
     '''Process a JSON-RPC request'''
 
@@ -22,7 +21,13 @@ class Connection:
         self.sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 
         # connect
-        self.sock.connect(tempfile.gettempdir() + "/" + name)
+        try:
+            self.sock.connect(tempfile.gettempdir() + "/" + name)
+            # print the connection statement
+            print("reply:" + str(self.receive_message()))
+        except Exception as exception:
+            print("error while connecting: " + str(exception))
+            sys.exit(1)
 
     def send_json(self, obj):
         """
@@ -62,43 +67,34 @@ class Connection:
         except Exception as exception:
             print("error: " + str(exception))
             return {}
-
-    def close(self):
-        '''Close the socket to the named pipe'''
-        self.sock.close()
-
-
-if __name__ == "__main__":
-    conn = Connection()
-
-    method = sys.argv[1]
-
-    if method == "openFile":
-        conn.send_json(
+            
+    def open_file(self,file):
+        self.send_json(
             {
                 "jsonrpc": "2.0",
                 "id": 0,
                 "method": "openFile",
-                "params": {"fileName": str(sys.argv[2])},
+                "params": {"fileName": file},
             }
         )
-    elif method == "saveGraphic":
-        conn.send_json(
+    def save_graphic(self,file):
+        self.send_json(
             {
                 "jsonrpc": "2.0",
                 "id": 0,
                 "method": "saveGraphic",
-                "params": {"fileName": str(sys.argv[2])},
+                "params": {"fileName": file},
             }
         )
-
-    elif method == "kill":
-        conn.send_json({"jsonrpc": "2.0", "id": 0, "method": "kill"})
-
-    else:
-        print("unknown method: " + method)
-        conn.close()
-        sys.exit(-1)
-
-    print("reply: " + str(conn.receive_message()))
-    conn.close()
+    def kill(self):
+        self.send_json(
+            {
+             "jsonrpc": "2.0",
+             "id": 0,
+             "method": "kill"
+            }
+        )
+       
+    def close(self):
+        '''Close the socket to the named pipe'''
+        self.sock.close()
