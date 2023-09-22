@@ -66,9 +66,10 @@ class Connection:
             return json.loads(msg)
         except Exception as exception:
             print("error: " + str(exception))
-            return {}
-            
-    def open_file(self,file):
+            return {}            
+  
+    def open_file(self, file):
+        """Opens file"""
         self.send_json(
             {
                 "jsonrpc": "2.0",
@@ -77,7 +78,9 @@ class Connection:
                 "params": {"fileName": file},
             }
         )
-    def save_graphic(self,file):
+  
+    def save_graphic(self, file):
+        """Save Graphic"""
         self.send_json(
             {
                 "jsonrpc": "2.0",
@@ -86,15 +89,17 @@ class Connection:
                 "params": {"fileName": file},
             }
         )
+  
     def kill(self):
+        """To kill the current operation"""
         self.send_json(
             {
-             "jsonrpc": "2.0",
-             "id": 0,
-             "method": "kill"
+                "jsonrpc": "2.0",
+                "id": 0,
+                "method": "kill"
             }
-        )
-       
+        ) 
+  
     def close(self):
         '''Close the socket to the named pipe'''
         self.sock.close()
