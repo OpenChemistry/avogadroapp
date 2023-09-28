@@ -42,6 +42,7 @@ else()
   option(INSTALL_BUNDLE_FILES "Add install rules to bundle files" OFF)
 endif()
 if(INSTALL_BUNDLE_FILES)
+  include(BundleUtilities)
   # First the AvogadroLibs files that are not detected.
   find_package(AvogadroLibs REQUIRED NO_MODULE)
   install(DIRECTORY "${AvogadroLibs_LIBRARY_DIR}/avogadro2"
@@ -50,19 +51,24 @@ if(INSTALL_BUNDLE_FILES)
   install(DIRECTORY "${AvogadroLibs_DATA_DIR}/avogadro2"
     DESTINATION ${INSTALL_DATA_DIR})
 
+  # create a list of exe to run fixup_bundle on
+  set(BUNDLE_EXE_LIST "")
+
   # look for genXrd
   find_program(GENXRD_EXE genXrdPattern)
   if (GENXRD_EXE)
-  install(FILES ${GENXRD_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
-    PERMISSIONS
-      OWNER_READ OWNER_WRITE OWNER_EXECUTE
-      GROUP_READ GROUP_EXECUTE
-      WORLD_READ WORLD_EXECUTE)
+    list(APPEND BUNDLE_EXE_LIST ${GENXRD_EXE})
+    install(FILES ${GENXRD_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
+      PERMISSIONS
+        OWNER_READ OWNER_WRITE OWNER_EXECUTE
+        GROUP_READ GROUP_EXECUTE
+        WORLD_READ WORLD_EXECUTE)
   endif()
 
   # look for yaehmop (eht_bind)
   find_program(EHT_BIND_EXE eht_bind)
   if(EHT_BIND_EXE)
+    list(APPEND BUNDLE_EXE_LIST ${EHT_BIND_EXE})
     install(FILES ${EHT_BIND_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
       PERMISSIONS
         OWNER_READ OWNER_WRITE OWNER_EXECUTE
@@ -73,6 +79,7 @@ if(INSTALL_BUNDLE_FILES)
   find_program(OBABEL_EXE obabel)
   if(OBABEL_EXE)
     find_program(OBMM_EXE obmm)
+    list(APPEND BUNDLE_EXE_LIST ${OBABEL_EXE} ${OBMM_EXE})
     install(FILES ${OBABEL_EXE} ${OBMM_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
       PERMISSIONS
         OWNER_READ OWNER_WRITE OWNER_EXECUTE
@@ -105,6 +112,13 @@ if(INSTALL_BUNDLE_FILES)
       "${avo_license}\n\nOpen Babel components licensed under GPLv2\n\n"
       "${ob_license}")
     set(CPACK_RESOURCE_FILE_LICENSE "${AvogadroApp_BINARY_DIR}/COPYING.txt")
+  endif()
+
+  if(APPLE)
+  install(CODE [[
+  include(BundleUtilities)
+  fixup_bundle("${CMAKE_INSTALL_PREFIX}/Avogadro2.app" "" "")
+]] COMPONENT Runtime)
   endif()
 endif()
 
