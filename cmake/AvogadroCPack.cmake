@@ -113,13 +113,6 @@ if(INSTALL_BUNDLE_FILES)
       "${ob_license}")
     set(CPACK_RESOURCE_FILE_LICENSE "${AvogadroApp_BINARY_DIR}/COPYING.txt")
   endif()
-
-  if(APPLE)
-  install(CODE [[
-  include(BundleUtilities)
-  fixup_bundle("${CMAKE_INSTALL_PREFIX}/Avogadro2.app" "" "")
-]] COMPONENT Runtime)
-  endif()
 endif()
 
 include(CPack)
