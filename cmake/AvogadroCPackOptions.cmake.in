@@ -3,16 +3,27 @@
 # NSIS specific settings
 if(CPACK_GENERATOR MATCHES "NSIS")
   set(CPACK_NSIS_MUI_ICON "@CMAKE_SOURCE_DIR@/avogadro/icons\\\\avogadro.ico")
-  set(CPACK_NSIS_HELP_LINK "http:\\\\openchemistry.org")
-  set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\openchemistry.org")
+  set(CPACK_NSIS_HELP_LINK "https:\\\\two.avogadro.cc")
+  set(CPACK_NSIS_URL_INFO_ABOUT "https:\\\\two.avogadro.cc")
   set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\Avogadro2.exe")
   set(CPACK_NSIS_MENU_LINKS
-    "http://wiki.openchemistry.org/Avogadro2_@CPACK_PACKAGE_VERSION@"
-    "Release Notes"
-    "http://openchemistry.org/" "Open Chemistry Project")
+    "https://two.avogadro.cc/" "Avogadro Project")
   set(CPACK_NSIS_MODIFY_PATH ON)
-endif(CPACK_GENERATOR MATCHES "NSIS")
+endif()
+
+# Mac DMG specific settings
+if(CPACK_GENERATOR MATCHES "DragNDrop")
+  set(CPACK_DMG_FORMAT "UDBZ")
+  # check if the environment variable "SNAPSHOT_DATE" is set
+  if(DEFINED ENV{SNAPSHOT_DATE})
+    set(VERSION "$ENV{SNAPSHOT_DATE}")
+  else()
+    set(VERSION "${CPACK_PACKAGE_VERSION}")
+  endif()
+  # this also sets the volume name
+  set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${VERSION}")
+endif()
 
 if("${CPACK_GENERATOR}" STREQUAL "PackageMaker")
   set(CPACK_PACKAGE_DEFAULT_LOCATION "/Applications")
-endif("${CPACK_GENERATOR}" STREQUAL "PackageMaker")
+endif()

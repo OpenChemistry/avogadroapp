@@ -1,4 +1,5 @@
 set(APP_BUNDLE_PATH "${CPACK_TEMPORARY_INSTALL_DIRECTORY}/Avogadro2.app")
+set(APP_ZIP_PATH "${CPACK_TEMPORARY_INSTALL_DIRECTORY}/Avogadro2.zip")
 
 if (DEFINED ENV{CODESIGN_IDENTITY})
     # sign the Open Babel SO files
@@ -34,4 +35,18 @@ if (DEFINED ENV{CODESIGN_IDENTITY})
         message(FATAL_ERROR
             \"Running ${COMMAND_ARGS} failed with exit code \${EXIT_CODE}.\")
     endif()
+    set(COMMAND_ARGS
+        ditto
+        -c
+        -k
+        --keepParent 
+        ${APP_BUNDLE_PATH} 
+        ${APP_ZIP_PATH}
+    )
+    execute_process(COMMAND ${COMMAND_ARGS} RESULT_VARIABLE EXIT_CODE)
+    if(NOT EXIT_CODE EQUAL 0)
+        message(FATAL_ERROR
+            \"Running ${COMMAND_ARGS} failed with exit code \${EXIT_CODE}.\")
+    endif()
+
 endif()
