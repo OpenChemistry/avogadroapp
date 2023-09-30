@@ -24,81 +24,57 @@ class Connection:
         try:
             self.sock.connect(tempfile.gettempdir() + "/" + name)
             # print the connection statement
-            print("reply:" + str(self.receive_message()))
+            print("reply:" + str(self.__json("recv_msg",None)))
         except Exception as exception:
             print("error while connecting: " + str(exception))
             sys.exit(1)
 
-    def send_json(self, obj):
+    def __json(self, method, file):
         """
         Send a JSON-RPC request to the named pipe.
-
-        :param obj: The JSON-RPC request object.
-        """
-        self.send_message(json.dumps(obj))
-
-    def send_message(self, msg):
-        """
+        :param method: The JSON-RPC request method.
         Send a message to the named pipe
+        :param file: file corresponding to method.
 
-        :param msg: The message to send.
         """
-        size = len(msg)
-        header = struct.pack(">I", size)
-        packet = header + msg.encode("ascii")
-        self.sock.send(packet)
-
-    def receive_message(self, size=1024):
-        """
-        Receive a message from the named pipe.
-
-        :param size: The maximum size of the message to receive.
-        """
-        packet = self.sock.recv(size)
-
-        return packet[4:]
-
-    def recv_json(self):
-        '''Receive a JSON-RPC response'''
-        msg = self.recv_message()
-
-        try:
-            return json.loads(msg)
-        except Exception as exception:
-            print("error: " + str(exception))
-            return {}            
-  
+        if method == "recv_msg":
+        
+            size = 1024
+            packet = self.sock.recv(size)
+            return packet[4:]
+            # try:
+            #     return json.loads(msg_packet)
+            # except Exception as exception:
+            #     print("error: " + str(exception))
+            #     return {} 
+        else:     
+            msg = {
+                    "jsonrpc": "2.0",
+                    "id": 0,
+                    "method": method,
+                    "params": {"fileName": file},
+                }
+            json_msg = json.dumps(msg)
+            size = len(json_msg)
+            header = struct.pack(">I", size)
+            packet = header + json_msg.encode("ascii")
+            self.sock.send(packet)
+                 
     def open_file(self, file):
         """Opens file"""
-        self.send_json(
-            {
-                "jsonrpc": "2.0",
-                "id": 0,
-                "method": "openFile",
-                "params": {"fileName": file},
-            }
-        )
-  
+        # param: file is filename input by the user in string
+        method = "openFile"
+        self.__json(method,file)        
+
     def save_graphic(self, file):
         """Save Graphic"""
-        self.send_json(
-            {
-                "jsonrpc": "2.0",
-                "id": 0,
-                "method": "saveGraphic",
-                "params": {"fileName": file},
-            }
-        )
+        method = "saveGraphic"
+        self.__json(method,file)
   
     def kill(self):
         """To kill the current operation"""
-        self.send_json(
-            {
-                "jsonrpc": "2.0",
-                "id": 0,
-                "method": "kill"
-            }
-        ) 
+        method = "kill"
+        self.__json(method,None)
   
     def close(self):
         '''Close the socket to the named pipe'''
