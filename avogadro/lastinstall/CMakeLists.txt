@@ -72,4 +72,11 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
   include(InstallRequiredSystemLibraries)
   include(DeployQt5)
   install_qt5_executable(${exe} "${plugins}" "${ob_plugins}" "${dirs}" "")
+  if (INSTALL_BUNDLE_FILES)
+    # Fixup the bundle
+    install(CODE "
+      include(BundleUtilities)
+      fixup_bundle(\"${exe}/..\" \"${plugins}\" \"${dirs}\")
+      " COMPONENT Runtime)
+  endif()
 endif()
