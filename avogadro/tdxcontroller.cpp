@@ -14,10 +14,10 @@
 #include <avogadro/rendering/camera.h>
 #include <avogadro/rendering/glrenderer.h>
 
+#include <QtCore/QBuffer>
+#include <QtCore/QBytearray>
 #include <QtCore/QCoreApplication>
 #include <QtWidgets/QAction>
-#include <qbuffer.h>
-#include <qbytearray.h>>
 
 #include <filesystem>
 
