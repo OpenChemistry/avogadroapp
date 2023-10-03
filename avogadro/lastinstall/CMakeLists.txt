@@ -76,7 +76,8 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
     # Fixup the bundle
     install(CODE "
       include(BundleUtilities)
-      fixup_bundle(\"${exe}/..\" \"${plugins}\" \"${dirs}\")
+      get_property(bundle TARGET avogadro PROPERTY LOCATION_RELEASE)
+      fixup_bundle(\"${bundle}/..\" \"${plugins}\" \"${dirs}\")
       " COMPONENT Runtime)
   endif()
 endif()
