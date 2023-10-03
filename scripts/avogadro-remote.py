@@ -34,7 +34,7 @@ class Connection:
             size = 1024
             packet = self.sock.recv(size)
             print("reply:" + str(packet[4: ]))
-        else:     
+        else:
             msg = {
                     "jsonrpc": "2.0",
                     "id": 0,
@@ -45,13 +45,13 @@ class Connection:
             size = len(json_msg)
             header = struct.pack(">I", size)
             packet = header + json_msg.encode("ascii")
-            self.sock.send(packet)                
+            self.sock.send(packet)
     def open_file(self, file):
         """Opens file"""
         # param: file is filename input by the user in string
         method = "openFile"
-        self.__json(method,file)   
-        self.__json("recv_msg",None)     
+        self.__json(method,file)
+        self.__json("recv_msg",None)
     def save_graphic(self, file):
         """Save Graphic"""
         method = "saveGraphic"
@@ -61,7 +61,7 @@ class Connection:
         """To kill the current operation"""
         method = "kill"
         self.__json(method,None)
-        self.__json("recv_msg",None)  
+        self.__json("recv_msg",None)
     def close(self):
         '''Close the socket to the named pipe'''
         self.sock.close()
