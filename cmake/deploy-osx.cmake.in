@@ -2,7 +2,7 @@ set(APP_BUNDLE_PATH "${CPACK_TEMPORARY_INSTALL_DIRECTORY}/Avogadro2.app")
 set(APP_ZIP_PATH "${CPACK_TEMPORARY_INSTALL_DIRECTORY}/Avogadro2.zip")
 
 include(BundleUtilities)
-fixup_bundle("${CPACK_TEMPORARY_INSTALL_DIRECTORY}/Avogadro2.app" "" "")
+#fixup_bundle("${CPACK_TEMPORARY_INSTALL_DIRECTORY}/Avogadro2.app" "" "")
 
 if (DEFINED ENV{CODESIGN_IDENTITY})
     # sign the Open Babel SO files
