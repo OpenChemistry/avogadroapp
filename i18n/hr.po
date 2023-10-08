@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2023-09-10 01:59+0000\n"
+"POT-Creation-Date: 2023-10-08 02:02+0000\n"
 "PO-Revision-Date: 2023-07-30 14:07+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.0-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
@@ -57,119 +57,119 @@ msgstr "U BackgroundFileFormat nije postavljen format datoteke!"
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "U BackgroundFileFormat nije postavljeno nijedno ime datoteke!"
 
-#: mainwindow.cpp:316
+#: mainwindow.cpp:320
 msgid "Ready…"
 msgstr "Spremno …"
 
-#: mainwindow.cpp:393
+#: mainwindow.cpp:397
 msgid "Tool"
 msgstr "Alat"
 
-#: mainwindow.cpp:397
+#: mainwindow.cpp:401
 msgid "Display Types"
 msgstr "Tipovi prikaza"
 
-#: mainwindow.cpp:406
+#: mainwindow.cpp:410
 msgid "View Configuration"
 msgstr "Prikaz konfiguracije"
 
-#: mainwindow.cpp:410
+#: mainwindow.cpp:414
 msgid "Molecules"
 msgstr "Molekule"
 
-#: mainwindow.cpp:419
+#: mainwindow.cpp:423
 msgid "Layers"
 msgstr "Slojevi"
 
-#: mainwindow.cpp:442
+#: mainwindow.cpp:446
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Datoteka"
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:451
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Alati"
 
-#: mainwindow.cpp:679
+#: mainwindow.cpp:683
 msgid "Untitled"
 msgstr "Bez naslova"
 
-#: mainwindow.cpp:684
+#: mainwindow.cpp:688
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 – Avogadro %3"
 
-#: mainwindow.cpp:740
+#: mainwindow.cpp:744
 msgid "Restart needed"
 msgstr "Potrebno je ponovno pokretanje"
 
-#: mainwindow.cpp:741
+#: mainwindow.cpp:745
 msgid "Please restart Avogadro to use the new language."
 msgstr "Ponovo pokreni Avogadro za korištenje novog jezika."
 
-#: mainwindow.cpp:761 mainwindow.cpp:1432
+#: mainwindow.cpp:765 mainwindow.cpp:1436
 msgid "Chemical Markup Language"
 msgstr "Kemijski označni jezik"
 
-#: mainwindow.cpp:762 mainwindow.cpp:1431
+#: mainwindow.cpp:766 mainwindow.cpp:1435
 msgid "Chemical JSON"
 msgstr "Kemijski JSON"
 
-#: mainwindow.cpp:768
+#: mainwindow.cpp:772
 msgid "Open chemical file"
 msgstr "Otvori kemijsku datoteku"
 
-#: mainwindow.cpp:786 mainwindow.cpp:810 mainwindow.cpp:1334
-#: mainwindow.cpp:2364
+#: mainwindow.cpp:790 mainwindow.cpp:814 mainwindow.cpp:1338
+#: mainwindow.cpp:2404
 msgid "Cannot open file"
 msgstr "Datoteka se ne može otvoriti"
 
-#: mainwindow.cpp:787 mainwindow.cpp:811 mainwindow.cpp:1335
+#: mainwindow.cpp:791 mainwindow.cpp:815 mainwindow.cpp:1339
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "Nije moguće otvoriti isporučenu datoteku %1"
 
-#: mainwindow.cpp:800
+#: mainwindow.cpp:804
 msgid "Open Molecule"
 msgstr "Otvori molekulu"
 
-#: mainwindow.cpp:824
+#: mainwindow.cpp:828
 msgid "Commands"
 msgstr "Naredbe"
 
-#: mainwindow.cpp:824
+#: mainwindow.cpp:828
 msgid "Input Generators"
 msgstr "Generatori unosa"
 
-#: mainwindow.cpp:824
+#: mainwindow.cpp:828
 msgid "File Formats"
 msgstr "Datotečni formati"
 
-#: mainwindow.cpp:825
+#: mainwindow.cpp:829
 msgctxt "atomic electrostatics"
 msgid "Charges"
 msgstr "Punjena"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:833
 msgid "Install Plugin Script"
 msgstr "Instaliraj skriptu dodatka"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:833
 msgid "Script Type:"
 msgstr "Vrsta skripte:"
 
-#: mainwindow.cpp:880 mainwindow.cpp:1330
+#: mainwindow.cpp:884 mainwindow.cpp:1334
 msgid "Select file reader"
 msgstr "Odaberi čitač datoteka"
 
-#: mainwindow.cpp:909
+#: mainwindow.cpp:913
 msgid "Reading File"
 msgstr "Datoteka za čitanje"
 
-#: mainwindow.cpp:911
+#: mainwindow.cpp:915
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -178,16 +178,16 @@ msgstr ""
 "Otvaranje datoteke „%1”\n"
 "sa „%2”"
 
-#: mainwindow.cpp:942
+#: mainwindow.cpp:946
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Molekula opterećena (%1 atoma, %2 veza)"
 
-#: mainwindow.cpp:947
+#: mainwindow.cpp:951
 msgid "File error"
 msgstr "Greška datoteke"
 
-#: mainwindow.cpp:948
+#: mainwindow.cpp:952
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -196,17 +196,17 @@ msgstr ""
 "Greška tijekom čitanja datoteke „%1”:\n"
 "%2"
 
-#: mainwindow.cpp:975
+#: mainwindow.cpp:979
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "Spremljena datoteka %1"
 
-#: mainwindow.cpp:983
+#: mainwindow.cpp:987
 msgid "Error saving file"
 msgstr "Greška tijekom spremanja datoteke"
 
-#: mainwindow.cpp:984
+#: mainwindow.cpp:988
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -216,11 +216,11 @@ msgstr ""
 "Greška tijekom spremanja „%1”:\n"
 "%2"
 
-#: mainwindow.cpp:1023
+#: mainwindow.cpp:1027
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Greška: Neuspjelo inicijaliziranje OpenGL konteksta"
 
-#: mainwindow.cpp:1024
+#: mainwindow.cpp:1028
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -231,50 +231,50 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:1025
+#: mainwindow.cpp:1029
 msgid "Unknown error"
 msgstr "Nepoznata greška"
 
-#: mainwindow.cpp:1152 mainwindow.cpp:1153
+#: mainwindow.cpp:1156 mainwindow.cpp:1157
 msgid "Navigate tool"
 msgstr "Alat za kretanje"
 
-#: mainwindow.cpp:1275
+#: mainwindow.cpp:1279
 msgid "Common image formats"
 msgstr "Uobičajeni grafički formati"
 
-#: mainwindow.cpp:1277
+#: mainwindow.cpp:1281
 msgid "All files"
 msgstr "Sve datoteke"
 
-#: mainwindow.cpp:1277
+#: mainwindow.cpp:1281
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1278
+#: mainwindow.cpp:1282
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1278
+#: mainwindow.cpp:1282
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1287
+#: mainwindow.cpp:1291
 msgid "Export Bitmap Graphics"
 msgstr "Izvezi bitmap slike"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1303 mainwindow.cpp:1405 mainwindow.cpp:2140:39
+#: mainwindow.cpp:1307 mainwindow.cpp:1409 mainwindow.cpp:2180:39
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1304
+#: mainwindow.cpp:1308
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Nije moguće spremiti datoteku %1."
 
-#: mainwindow.cpp:1406
+#: mainwindow.cpp:1410
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -286,23 +286,23 @@ msgstr ""
 "\n"
 "Želiš li izvesti u trenutačni format ili spremiti u standardni format?"
 
-#: mainwindow.cpp:1413
+#: mainwindow.cpp:1417
 msgid "Export"
 msgstr "Izvezi"
 
-#: mainwindow.cpp:1437
+#: mainwindow.cpp:1441
 msgid "Save chemical file"
 msgstr "Spremi kemijsku datoteku"
 
-#: mainwindow.cpp:1478
+#: mainwindow.cpp:1482
 msgid "Export Molecule"
 msgstr "Izvoz molekule"
 
-#: mainwindow.cpp:1530
+#: mainwindow.cpp:1566
 msgid "Saving File in Progress…"
 msgstr "Spremanje datoteke u tijeku …"
 
-#: mainwindow.cpp:1532
+#: mainwindow.cpp:1568
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -312,43 +312,43 @@ msgstr ""
 "Spremanje datoteke „%1”\n"
 "sa „%2”"
 
-#: mainwindow.cpp:1645
+#: mainwindow.cpp:1681
 #, qt-format
 msgid "&Undo %1"
 msgstr "&Poništi %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1648 mainwindow.cpp:1892:123
+#: mainwindow.cpp:1684 mainwindow.cpp:1928:123
 msgid "&Undo"
 msgstr "Poništi"
 
-#: mainwindow.cpp:1653
+#: mainwindow.cpp:1689
 #, qt-format
 msgid "&Redo %1"
 msgstr "&Ponovi %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1656 mainwindow.cpp:1897:129
+#: mainwindow.cpp:1692 mainwindow.cpp:1933:129
 msgid "&Redo"
 msgstr "V&rati poništeno"
 
-#: mainwindow.cpp:1772
+#: mainwindow.cpp:1808
 msgid "&Testing"
 msgstr "&Testiranje"
 
-#: mainwindow.cpp:1774
+#: mainwindow.cpp:1810
 msgid "Record test…"
 msgstr "Snimi test …"
 
-#: mainwindow.cpp:1777
+#: mainwindow.cpp:1813
 msgid "Play test…"
 msgstr "Reproduciraj test …"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:1791 menubuilder.cpp:79:42
+#: mainwindow.cpp:1827 menubuilder.cpp:79:42
 msgid "&File"
 msgstr "&Datoteka"
 
@@ -356,13 +356,13 @@ msgstr "&Datoteka"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1793:81 rc.cpp:87
+#: mainwindow.cpp:1829:81 rc.cpp:87
 msgid "&New"
 msgstr "&Novo"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1802:57
+#: mainwindow.cpp:1838:57
 msgid "&Open…"
 msgstr "&Otvori …"
 
@@ -370,7 +370,7 @@ msgstr "&Otvori …"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1811:90 rc.cpp:96
+#: mainwindow.cpp:1847:90 rc.cpp:96
 msgid "&Close"
 msgstr "&Zatvori"
 
@@ -378,27 +378,27 @@ msgstr "&Zatvori"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1825:99 rc.cpp:105
+#: mainwindow.cpp:1861:99 rc.cpp:105
 msgid "&Save"
 msgstr "&Spremi"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1834:108
+#: mainwindow.cpp:1870:108
 msgid "Save &As…"
 msgstr "Spremi k&ao …"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1845:201
+#: mainwindow.cpp:1881:201
 msgid "&Export"
 msgstr "&Izvezi"
 
-#: mainwindow.cpp:1846
+#: mainwindow.cpp:1882
 msgid "&Molecule…"
 msgstr "&Molekula …"
 
-#: mainwindow.cpp:1854
+#: mainwindow.cpp:1890
 msgid "&Graphics…"
 msgstr "&Slike …"
 
@@ -406,174 +406,174 @@ msgstr "&Slike …"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1863:66 rc.cpp:72
+#: mainwindow.cpp:1899:66 rc.cpp:72
 msgid "&Quit"
 msgstr "&Izlaz"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1873:195
+#: mainwindow.cpp:1909:195
 msgid "Open Recent"
 msgstr "Otvori nedavne"
 
-#: mainwindow.cpp:1885
+#: mainwindow.cpp:1921
 msgid "No recent files"
 msgstr "Nema nedavnih datoteka"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1891 menubuilder.cpp:79:51
+#: mainwindow.cpp:1927 menubuilder.cpp:79:51
 msgid "&Edit"
 msgstr "Ur&edi"
 
-#: mainwindow.cpp:1903
+#: mainwindow.cpp:1939
 msgid "&Copy Graphics"
 msgstr "&Kopiraj slike"
 
-#: mainwindow.cpp:1907
+#: mainwindow.cpp:1943
 msgid "Ctrl+Alt+C"
 msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1920 menubuilder.cpp:79:48
+#: mainwindow.cpp:1956 menubuilder.cpp:79:48
 msgid "&View"
 msgstr "&Prikaz"
 
-#: mainwindow.cpp:1921
+#: mainwindow.cpp:1957
 msgid "Set Background Color…"
 msgstr "Postavi boju pozadine …"
 
-#: mainwindow.cpp:1925
+#: mainwindow.cpp:1961
 msgid "Rendering…"
 msgstr "Iscrtavanje …"
 
-#: mainwindow.cpp:1933
+#: mainwindow.cpp:1969
 msgid "Projection"
 msgstr "Projekcija"
 
-#: mainwindow.cpp:1934
+#: mainwindow.cpp:1970
 msgid "Perspective"
 msgstr "Perspektiva"
 
-#: mainwindow.cpp:1941
+#: mainwindow.cpp:1977
 msgid "Orthographic"
 msgstr "Pravopis"
 
-#: mainwindow.cpp:1960
+#: mainwindow.cpp:1996
 msgid "&Extensions"
 msgstr "&Proširenja"
 
-#: mainwindow.cpp:1962
+#: mainwindow.cpp:1998
 msgid "User Interface Language…"
 msgstr "Jezik korisničkog sučelja …"
 
-#: mainwindow.cpp:1966
+#: mainwindow.cpp:2002
 msgid "&Periodic Table…"
 msgstr "Periodni &sustav elemenata …"
 
-#: mainwindow.cpp:1972 menubuilder.cpp:83
+#: mainwindow.cpp:2008 menubuilder.cpp:83
 msgid "&Help"
 msgstr "&Pomoć"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1973:120
+#: mainwindow.cpp:2009:120
 msgid "&About"
 msgstr "&Informacije"
 
-#: mainwindow.cpp:1980
+#: mainwindow.cpp:2016
 msgid "&Discussion Forum"
 msgstr "&Forum za raspravu"
 
-#: mainwindow.cpp:1984
+#: mainwindow.cpp:2020
 msgid "&Avogadro Website"
 msgstr "&Avogadro web-stranica"
 
-#: mainwindow.cpp:1988
+#: mainwindow.cpp:2024
 msgid "&Report a Bug"
 msgstr "P&rijavi grešku"
 
-#: mainwindow.cpp:1992
+#: mainwindow.cpp:2028
 msgid "&Suggest a Feature"
 msgstr "Predloži &značajku"
 
-#: mainwindow.cpp:2016
+#: mainwindow.cpp:2052
 msgid "System Language"
 msgstr "Jezik sustava"
 
-#: mainwindow.cpp:2024
+#: mainwindow.cpp:2060
 msgid "Language"
 msgstr "Jezik"
 
-#: mainwindow.cpp:2024
+#: mainwindow.cpp:2060
 msgid "User Interface Language:"
 msgstr "Jezik korisničkog sučelja:"
 
-#: mainwindow.cpp:2125
+#: mainwindow.cpp:2165
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Svi podržani formati (%1);;Sve datoteke (*);;"
 
-#: mainwindow.cpp:2141
+#: mainwindow.cpp:2181
 msgid "Do you want to save the changes to the document?"
 msgstr "Želiš li spremiti promjene u dokumentu?"
 
-#: mainwindow.cpp:2149
+#: mainwindow.cpp:2189
 msgid "Your changes will be lost if you don't save them."
 msgstr "Izgubit ćeš promjene ako ih ne spremiš."
 
-#: mainwindow.cpp:2157
+#: mainwindow.cpp:2197
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:2159
+#: mainwindow.cpp:2199
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2241
+#: mainwindow.cpp:2281
 msgid "Network Download Failed"
 msgstr "Mrežno preuzimanje nije uspjelo"
 
-#: mainwindow.cpp:2242
+#: mainwindow.cpp:2282
 msgid "Network timeout or other error."
 msgstr "Mrežni timeout ili neka druga greška.."
 
-#: mainwindow.cpp:2281
+#: mainwindow.cpp:2321
 #, qt-format
 msgid "Your version: %1"
 msgstr "Tvoja verzija: %1"
 
-#: mainwindow.cpp:2282
+#: mainwindow.cpp:2322
 #, qt-format
 msgid "New version: %1"
 msgstr "Nova verzija: %1"
 
-#: mainwindow.cpp:2284
+#: mainwindow.cpp:2324
 msgid "An update is available, do you want to download it now?\n"
 msgstr "Dostupna je nova verzija. Želiš li je sada preuzeti?\n"
 
-#: mainwindow.cpp:2286
+#: mainwindow.cpp:2326
 msgid "Version Update"
 msgstr "Aktualiziranje verzije"
 
-#: mainwindow.cpp:2344
+#: mainwindow.cpp:2384
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Greška tijekom učitavanja datotečnog formata „%1”."
 
-#: mainwindow.cpp:2360
+#: mainwindow.cpp:2400
 msgid "Select file format"
 msgstr "Odaberi datotečni format"
 
-#: mainwindow.cpp:2365 mainwindow.cpp:2376
+#: mainwindow.cpp:2405 mainwindow.cpp:2416
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro ne može otvoriti „%1”."
 
-#: mainwindow.cpp:2375
+#: mainwindow.cpp:2415
 msgid "Cannot open files"
 msgstr "Nije moguće otvoriti datoteke"
 
@@ -620,24 +620,24 @@ msgstr "0.1"
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
 msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause"
-"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
-"\">BSD 3-Clause</span></a></p></body></html>"
+"\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-"
+"Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
+"#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">Licenca: </span><a href=\"https://opensource.org/licenses/BSD-3 klauzula"
-"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
-"\">BSD 3-Clause</span></a></p></body></html>"
+"\">Licenca: </span><a href=\"https://opensource.org/licenses/BSD-3 "
+"klauzula\"><span style=\" font-size:10pt; text-decoration: underline; color:"
+"#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:278
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid ""
-"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
-"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
+"style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
-"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
+"style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:307
@@ -1009,14 +1009,14 @@ msgstr ""
 #~ "%3<br/><br/>Verzija Open Babela: %4"
 
 #~ msgid ""
-#~ "<br/><br/>Qt Version: %1<br/><br/>For more information check the <a href="
-#~ "\"http://avogadro.cc/\">Avogadro homepage</a>.<br/><br/>The program is "
-#~ "provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF "
+#~ "<br/><br/>Qt Version: %1<br/><br/>For more information check the <a "
+#~ "href=\"http://avogadro.cc/\">Avogadro homepage</a>.<br/><br/>The program "
+#~ "is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF "
 #~ "DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.<br/>"
 #~ msgstr ""
-#~ "<br/><br/>Qt verzija: %1<br/><br/>za više informacija provjeri <a href="
-#~ "\"http://avogadro.cc/\">Avogadro web stranica</a>.<br/><br/>Program je "
-#~ "dan TAKAV KAKAV JE bez IKAKVOG JAMSTVA, UKLJUČUJUĆI JAMSTVO NA DIZAJN, "
+#~ "<br/><br/>Qt verzija: %1<br/><br/>za više informacija provjeri <a "
+#~ "href=\"http://avogadro.cc/\">Avogadro web stranica</a>.<br/><br/>Program "
+#~ "je dan TAKAV KAKAV JE bez IKAKVOG JAMSTVA, UKLJUČUJUĆI JAMSTVO NA DIZAJN, "
 #~ "UTRŽIVOST I PRIKLADNOST ZA ODREĐENU SVRHU.<br/>"
 
 #~ msgid "Cut Molecule"
