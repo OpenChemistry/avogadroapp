@@ -7,13 +7,14 @@
 # Will Owy <willowy@tutanota.com>, 2021.
 # Giacomo <gradaellig@gmail.com>, 2021.
 # Alex B <alessandrobrugnera16@protonmail.com>, 2022.
+# nicola zanna <zanna.nicola1@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-10-08 02:02+0000\n"
-"PO-Revision-Date: 2022-10-22 18:04+0000\n"
-"Last-Translator: Alex B <alessandrobrugnera16@protonmail.com>\n"
+"PO-Revision-Date: 2023-10-13 04:03+0000\n"
+"Last-Translator: nicola zanna <zanna.nicola1@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/it/>\n"
 "Language: it\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.2-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -36,21 +37,19 @@ msgstr "Aggiornamento Versione"
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:28:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Versione della libreria di Avogadro"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgid "New version: %1"
 msgid "Qt Version:"
-msgstr "(Nuova versione: %1)"
+msgstr "(Versione Qt: %1)"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:30:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "Versione SSL:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
