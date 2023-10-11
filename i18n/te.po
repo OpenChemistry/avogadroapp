@@ -2,21 +2,23 @@
 # Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-#
+# Balavamsi Krishna <balavamsikrishna38@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-10-08 02:02+0000\n"
-"PO-Revision-Date: 2016-06-10 06:26+0000\n"
-"Last-Translator: nrao <nagamalli.s@gmail.com>\n"
-"Language-Team: Telugu <te@li.org>\n"
+"PO-Revision-Date: 2023-10-13 04:03+0000\n"
+"Last-Translator: Balavamsi Krishna <balavamsikrishna38@gmail.com>\n"
+"Language-Team: Telugu <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/te/>\n"
 "Language: te\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -30,8 +32,9 @@ msgstr "(గిట్ సవరణ: %1)"
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:28:9
+#, fuzzy
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "అవగాడ్రో లైబ్రరీ వెర్షన్"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
@@ -40,21 +43,24 @@ msgstr ""
 #| msgctxt "%1 is the Git revision number."
 #| msgid "(Git revision: %1)"
 msgid "Qt Version:"
-msgstr "(గిట్ సవరణ: %1)"
+msgstr "Qt వెర్షన్:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:30:21
+#, fuzzy
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSL వెర్షన్"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
+#, fuzzy
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "బ్యాక్‌గ్రౌండ్‌ఫైల్ ఫార్మాట్‌లో అణువు ఏదీ సెట్ చేయబడలేదు!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
+#, fuzzy
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormatలో ఫైల్ ఫార్మాట్ సెట్ చేయబడదు!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
@@ -62,7 +68,7 @@ msgstr ""
 
 #: mainwindow.cpp:320
 msgid "Ready…"
-msgstr ""
+msgstr "సిద్ధంగా ఉంది…"
 
 #: mainwindow.cpp:397
 #, fuzzy
@@ -75,7 +81,7 @@ msgstr "చూపించు విధములు"
 
 #: mainwindow.cpp:410
 msgid "View Configuration"
-msgstr ""
+msgstr "కాన్ఫిగరేషన్‌ని వీక్షించండి"
 
 #: mainwindow.cpp:414
 #, fuzzy
@@ -84,7 +90,7 @@ msgstr "అణువు"
 
 #: mainwindow.cpp:423
 msgid "Layers"
-msgstr ""
+msgstr "పొరలు"
 
 #: mainwindow.cpp:446
 #, fuzzy
@@ -112,23 +118,24 @@ msgstr "అవొగడ్రో"
 
 #: mainwindow.cpp:744
 msgid "Restart needed"
-msgstr ""
+msgstr "పునఃప్రారంభం అవసరం"
 
 #: mainwindow.cpp:745
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "దయచేసి కొత్త భాషను ఉపయోగించడానికి Avogadroని పునఃప్రారంభించండి."
 
 #: mainwindow.cpp:765 mainwindow.cpp:1436
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "రసాయన మార్కప్ భాష"
 
 #: mainwindow.cpp:766 mainwindow.cpp:1435
+#, fuzzy
 msgid "Chemical JSON"
-msgstr ""
+msgstr "రసాయన JSON"
 
 #: mainwindow.cpp:772
 msgid "Open chemical file"
-msgstr ""
+msgstr "రసాయన ఫైల్‌ను తెరవండి"
 
 #: mainwindow.cpp:790 mainwindow.cpp:814 mainwindow.cpp:1338
 #: mainwindow.cpp:2404
@@ -148,33 +155,34 @@ msgstr "అణువు"
 
 #: mainwindow.cpp:828
 msgid "Commands"
-msgstr ""
+msgstr "ఆదేశాలు"
 
 #: mainwindow.cpp:828
 msgid "Input Generators"
-msgstr ""
+msgstr "ఇన్‌పుట్ జనరేటర్లు"
 
 #: mainwindow.cpp:828
 #, fuzzy
 msgid "File Formats"
-msgstr "దాఖలు: "
+msgstr "దాఖలు:"
 
 #: mainwindow.cpp:829
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "ఛార్జీలు"
 
 #: mainwindow.cpp:833
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "ప్లగిన్ స్క్రిప్ట్‌ను ఇన్‌స్టాల్ చేయండి"
 
 #: mainwindow.cpp:833
+#, fuzzy
 msgid "Script Type:"
-msgstr ""
+msgstr "స్క్రిప్ట్ రకం"
 
 #: mainwindow.cpp:884 mainwindow.cpp:1334
 msgid "Select file reader"
-msgstr ""
+msgstr "ఫైల్ రీడర్‌ని ఎంచుకోండి"
 
 #: mainwindow.cpp:913
 #, fuzzy
@@ -182,28 +190,32 @@ msgid "Reading File"
 msgstr "దస్త్రాన్ని తెరువు"
 
 #: mainwindow.cpp:915
-#, qt-format
+#, fuzzy, qt-format
 msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"'% 1' ఫైల్‌ను తెరుస్తోంది\n"
+"'% 2'తో"
 
 #: mainwindow.cpp:946
-#, qt-format
+#, fuzzy, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "మాలిక్యూల్ లోడ్ చేయబడింది (% 1 పరమాణువులు,% 2 బంధాలు)"
 
 #: mainwindow.cpp:951
 #, fuzzy
 msgid "File error"
-msgstr "దాఖలు: "
+msgstr "దాఖలు:"
 
 #: mainwindow.cpp:952
-#, qt-format
+#, fuzzy, qt-format
 msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"'% 1' ఫైల్‌ని చదివేటప్పుడు లోపం:\n"
+"% 2"
 
 #: mainwindow.cpp:979
 #, fuzzy, qt-format
@@ -213,27 +225,32 @@ msgstr "జబితా సేవ్ చేయలేను %1."
 
 #: mainwindow.cpp:987
 msgid "Error saving file"
-msgstr ""
+msgstr "ఫైల్‌ను సేవ్ చేయడంలో లోపం"
 
 #: mainwindow.cpp:988
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"'% 1'ని సేవ్ చేస్తున్నప్పుడు లోపం:\n"
+"% 2"
 
 #: mainwindow.cpp:1027
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "లోపం: OpenGL సందర్భాన్ని ప్రారంభించడంలో విఫలమైంది"
 
 #: mainwindow.cpp:1028
-#, qt-format
+#, fuzzy, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
 "\n"
 "%1"
 msgstr ""
+"OpenGL 2.0 లేదా అంతకంటే ఎక్కువ అవసరం, నిష్క్రమిస్తోంది.\n"
+"\n"
+"% 1"
 
 #: mainwindow.cpp:1029
 msgid "Unknown error"
@@ -279,12 +296,18 @@ msgid "Cannot save file %1."
 msgstr "జబితా సేవ్ చేయలేను %1."
 
 #: mainwindow.cpp:1410
+#, fuzzy
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"ఈ ఫైల్ ప్రామాణికం కాని ఫార్మాట్ నుండి దిగుమతి చేయబడింది, ఇది అణువులోని మొత్తం"
+" సమాచారాన్ని వ్రాయలేకపోవచ్చు.\n"
+"\n"
+"మీరు ప్రస్తుత ఫార్మాట్‌కు ఎగుమతి చేయాలనుకుంటున్నారా లేదా ప్రామాణిక ఆకృతిలో "
+"సేవ్ చేయాలనుకుంటున్నారా?"
 
 #: mainwindow.cpp:1417
 msgid "Export"
@@ -292,7 +315,7 @@ msgstr "ఎగుమతి చెయ్యి"
 
 #: mainwindow.cpp:1441
 msgid "Save chemical file"
-msgstr ""
+msgstr "రసాయన ఫైల్‌ను సేవ్ చేయండి"
 
 #: mainwindow.cpp:1482
 #, fuzzy
@@ -301,15 +324,17 @@ msgstr "దిగుమతి మాలిక్యూల్ ఫైలు"
 
 #: mainwindow.cpp:1566
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "ఫైల్‌ను సేవ్ చేయడం ప్రోగ్రెస్‌లో ఉంది…"
 
 #: mainwindow.cpp:1568
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
+"“% 1” ఫైల్‌ను సేవ్ చేస్తోంది\n"
+"\"% 2\"తో"
 
 #: mainwindow.cpp:1681
 #, fuzzy, qt-format
@@ -351,6 +376,7 @@ msgstr "పరిక్ష ప్రదర్శించు"
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
 #: mainwindow.cpp:1827 menubuilder.cpp:79:42
+#, fuzzy
 msgid "&File"
 msgstr "&ఫైల్"
 
@@ -390,7 +416,7 @@ msgstr "(&S) దాచు"
 #: mainwindow.cpp:1870:108
 #, fuzzy
 msgid "Save &As…"
-msgstr "(&A) ఇలా దాచు..."
+msgstr "(&A) ఇలా దాచు…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -406,7 +432,7 @@ msgstr "అణువు"
 
 #: mainwindow.cpp:1890
 msgid "&Graphics…"
-msgstr ""
+msgstr "&గ్రాఫిక్స్…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -425,7 +451,7 @@ msgstr "(&R) ఇటీవలివి తెరువండి"
 
 #: mainwindow.cpp:1921
 msgid "No recent files"
-msgstr ""
+msgstr "ఇటీవలి ఫైల్‌లు లేవు"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
@@ -435,7 +461,7 @@ msgstr "(&E) సరిదిద్దు"
 
 #: mainwindow.cpp:1939
 msgid "&Copy Graphics"
-msgstr ""
+msgstr "&కాపీ గ్రాఫిక్స్"
 
 #: mainwindow.cpp:1943
 #, fuzzy
@@ -451,11 +477,11 @@ msgstr "(&V) చూడు"
 
 #: mainwindow.cpp:1957
 msgid "Set Background Color…"
-msgstr ""
+msgstr "నేపథ్య రంగును సెట్ చేయండి…"
 
 #: mainwindow.cpp:1961
 msgid "Rendering…"
-msgstr ""
+msgstr "రెండరింగ్…"
 
 #: mainwindow.cpp:1969
 msgid "Projection"
@@ -467,7 +493,7 @@ msgstr "దృష్టికోణం"
 
 #: mainwindow.cpp:1977
 msgid "Orthographic"
-msgstr ""
+msgstr "ఆర్థోగ్రాఫిక్"
 
 #: mainwindow.cpp:1996
 #, fuzzy
@@ -476,11 +502,11 @@ msgstr "పొడిగింతలు"
 
 #: mainwindow.cpp:1998
 msgid "User Interface Language…"
-msgstr ""
+msgstr "వినియోగదారు ఇంటర్‌ఫేస్ భాష…"
 
 #: mainwindow.cpp:2002
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&ఆవర్తన పట్టిక…"
 
 #: mainwindow.cpp:2008 menubuilder.cpp:83
 msgid "&Help"
@@ -494,7 +520,7 @@ msgstr "(&A) గురించి"
 
 #: mainwindow.cpp:2016
 msgid "&Discussion Forum"
-msgstr ""
+msgstr "&చర్చ ఫోరమ్"
 
 #: mainwindow.cpp:2020
 #, fuzzy
@@ -510,24 +536,25 @@ msgstr "సమస్యని తెలియపరచ౦డి"
 
 #: mainwindow.cpp:2028
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&ఒక లక్షణాన్ని సూచించండి"
 
 #: mainwindow.cpp:2052
 msgid "System Language"
-msgstr ""
+msgstr "సిస్టమ్ భాష"
 
 #: mainwindow.cpp:2060
 msgid "Language"
-msgstr ""
+msgstr "భాష"
 
 #: mainwindow.cpp:2060
+#, fuzzy
 msgid "User Interface Language:"
-msgstr ""
+msgstr "వినియోగదారు ఇంటర్‌ఫేస్ భాష"
 
 #: mainwindow.cpp:2165
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "అన్ని మద్దతు ఉన్న ఫార్మాట్‌లు (%1);;అన్ని ఫైల్‌లు (*);;"
 
 #: mainwindow.cpp:2181
 #, fuzzy
@@ -556,12 +583,14 @@ msgstr "జాలాకార వ్యవస్థ సవరణకు అవర
 
 #: mainwindow.cpp:2282
 msgid "Network timeout or other error."
-msgstr "జాలాకార వ్యవస్థ  నిర్ణీతవ్యవధిలో ప్రతిస్పందించలేదు లేక ఇతర ప్రతిబంధకము ఏర్పడి ఉండవచ్చు ."
+msgstr ""
+"జాలాకార వ్యవస్థ  నిర్ణీతవ్యవధిలో ప్రతిస్పందించలేదు లేక ఇతర ప్రతిబంధకము ఏర్పడి"
+" ఉండవచ్చు ."
 
 #: mainwindow.cpp:2321
-#, qt-format
+#, fuzzy, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "మీ సంస్కరణ: % 1"
 
 #: mainwindow.cpp:2322
 #, fuzzy, qt-format
@@ -573,25 +602,26 @@ msgstr "(గిట్ సవరణ: %1)"
 #: mainwindow.cpp:2324
 msgid "An update is available, do you want to download it now?\n"
 msgstr ""
+"నవీకరణ అందుబాటులో ఉంది, మీరు దీన్ని ఇప్పుడే డౌన్‌లోడ్ చేయాలనుకుంటున్నారా?\n"
 
 #: mainwindow.cpp:2326
 msgid "Version Update"
-msgstr ""
+msgstr "సంస్కరణ నవీకరణ"
 
 #: mainwindow.cpp:2384
-#, qt-format
+#, fuzzy, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr ""
+msgstr "“% 1” ఫైల్ ఫార్మాట్‌ను లోడ్ చేస్తున్నప్పుడు లోపం."
 
 #: mainwindow.cpp:2400
 #, fuzzy
 msgid "Select file format"
-msgstr "దాఖలు: "
+msgstr "దాఖలు:"
 
 #: mainwindow.cpp:2405 mainwindow.cpp:2416
-#, qt-format
+#, fuzzy, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr ""
+msgstr "అవగాడ్రో \"% 1\"ని తెరవలేదు."
 
 #: mainwindow.cpp:2415
 #, fuzzy
@@ -627,7 +657,7 @@ msgstr "కొత్త దృశ్యం"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "vtk"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -638,7 +668,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
