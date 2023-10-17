@@ -262,6 +262,7 @@ protected slots:
    * @param displayTypes A list of
    */
   void setActiveDisplayTypes(QStringList displayTypes);
+  void setDisabledDisplayTypes(QStringList displayTypes);
 
   void undoEdit();
   void redoEdit();

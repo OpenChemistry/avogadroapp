@@ -10,9 +10,9 @@
 #include "backgroundfileformat.h"
 #include "menubuilder.h"
 #include "renderingdialog.h"
+#include "tdxcontroller.h"
 #include "tooltipfilter.h"
 #include "viewfactory.h"
-#include "tdxcontroller.h"
 
 #include <avogadro/core/elements.h>
 #include <avogadro/io/cjsonformat.h>
@@ -1153,8 +1153,8 @@ bool populateTools(T* glWidget)
     if (tool)
       glWidget->addTool(tool);
   }
-  glWidget->setDefaultTool(QObject::tr("Navigate tool"));
-  glWidget->setActiveTool(QObject::tr("Navigate tool"));
+  glWidget->setDefaultTool("Navigator");
+  glWidget->setActiveTool("Navigator");
   return true;
 }
 
@@ -1650,6 +1650,36 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 #endif
 }
 
+void MainWindow::setDisabledDisplayTypes(QStringList displayTypes)
+{
+  ScenePluginModel* scenePluginModel(nullptr);
+  GLWidget* glWidget(nullptr);
+#ifdef AVO_USE_VTK
+  VTK::vtkGLWidget* vtkWidget(nullptr);
+#endif
+  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
+    scenePluginModel = &glWidget->sceneModel();
+  }
+#ifdef AVO_USE_VTK
+  else if ((vtkWidget = qobject_cast<VTK::vtkGLWidget*>(
+              m_multiViewWidget->activeWidget()))) {
+    scenePluginModel = &vtkWidget->sceneModel();
+  }
+#endif
+
+  foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
+    foreach (const QString& name, displayTypes)
+      if (scene->objectName() == name)
+        scene->setEnabled(false);
+
+  if (glWidget)
+    glWidget->updateScene();
+#ifdef AVO_USE_VTK
+  else if (vtkWidget)
+    vtkWidget->updateScene();
+#endif
+}
+
 void MainWindow::undoEdit()
 {
   if (m_molecule) {
@@ -1875,7 +1905,7 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(path, action, 960);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
-  
+
   // Export
   QStringList exportPath = path;
   exportPath << tr("&Export");
@@ -2453,9 +2483,54 @@ void MainWindow::registerExtensionCommand(QString command, QString description)
 bool MainWindow::handleCommand(const QString& command,
                                const QVariantMap& options)
 {
+  // handle a few basic commands
+  if (command == "setProjection") {
+    if (options.contains("type")) {
+      QString type = options.value("type").toString();
+      if (type == "perspective")
+        setProjectionPerspective();
+      else if (type == "orthographic")
+        setProjectionOrthographic();
+    }
+    if (options.contains("perspective"))
+      setProjectionPerspective();
+    else if (options.contains("orthographic"))
+      setProjectionOrthographic();
+    return true;
+  } else if (command == "setRenderTypes") {
+    QStringList enableTypes, disableTypes;
+    if (options.contains("types")) {
+      enableTypes = options.value("types").toStringList();
+    } else {
+      // list of true / false types
+      for (auto key : options.keys()) {
+        if (options.value(key).toBool())
+          enableTypes << key;
+        else
+          disableTypes << key;
+      }
+    }
+    setActiveDisplayTypes(enableTypes);
+    setDisabledDisplayTypes(disableTypes);
+    return true;
+  }
+
+  // pass any remaining commands to the tools or extensions
   if (m_toolCommandMap.contains(command)) {
+    // get the active widget
+    GLWidget* glWidget =
+      qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+
+    if (glWidget == nullptr)
+      return false;
+
     auto* tool = m_toolCommandMap.value(command);
-    return tool->handleCommand(command, options);
+    auto* currentTool = glWidget->activeTool();
+    glWidget->setActiveTool(tool->objectName());
+    bool result = tool->handleCommand(command, options);
+    glWidget->setActiveTool(currentTool);
+    
+    return result;
   } else if (m_extensionCommandMap.contains(command)) {
     auto* extension = m_extensionCommandMap.value(command);
     return extension->handleCommand(command, options);
