@@ -855,7 +855,7 @@ bool MainWindow::addScript(const QString& filePath)
       typePath = "charges";
       break;
     case 5:
-      typePath = "energy"
+      typePath = "energy";
       break;
     default:
       typePath = "other";
