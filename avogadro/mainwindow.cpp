@@ -826,7 +826,8 @@ bool MainWindow::addScript(const QString& filePath)
   // TODO: add some sort of warning?
   QStringList types;
   types << tr("Commands") << tr("Input Generators") << tr("File Formats")
-        << tr("Charges", "atomic electrostatics");
+        << tr("Charges", "atomic electrostatics")
+        << tr("Force Fields", "potential energy calculators");
 
   bool ok;
   QString item =
@@ -852,6 +853,9 @@ bool MainWindow::addScript(const QString& filePath)
       break;
     case 4:
       typePath = "charges";
+      break;
+    case 5:
+      typePath = "energy"
       break;
     default:
       typePath = "other";
@@ -2529,7 +2533,7 @@ bool MainWindow::handleCommand(const QString& command,
     glWidget->setActiveTool(tool->objectName());
     bool result = tool->handleCommand(command, options);
     glWidget->setActiveTool(currentTool);
-    
+
     return result;
   } else if (m_extensionCommandMap.contains(command)) {
     auto* extension = m_extensionCommandMap.value(command);
