@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.95.1\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2023-10-08 02:02+0000\n"
+"POT-Creation-Date: 2023-10-22 02:03+0000\n"
 "PO-Revision-Date: 2023-05-21 03:59+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/avogadro/"
@@ -121,7 +121,7 @@ msgid "Open chemical file"
 msgstr "ნაერთის ფაილის გახსნა"
 
 #: mainwindow.cpp:790 mainwindow.cpp:814 mainwindow.cpp:1338
-#: mainwindow.cpp:2404
+#: mainwindow.cpp:2434
 msgid "Cannot open file"
 msgstr "ფაილის გახსნის შეცდომა"
 
@@ -233,10 +233,6 @@ msgstr ""
 msgid "Unknown error"
 msgstr "უცნობი შეცდომა"
 
-#: mainwindow.cpp:1156 mainwindow.cpp:1157
-msgid "Navigate tool"
-msgstr "ნავიგაციის ხელსაწყო"
-
 #: mainwindow.cpp:1279
 msgid "Common image formats"
 msgstr "გამოსახულების გავრცელებული ფორმატები"
@@ -263,7 +259,7 @@ msgstr "Bitmap გრაფიკის ექსპორტი"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1307 mainwindow.cpp:1409 mainwindow.cpp:2180:39
+#: mainwindow.cpp:1307 mainwindow.cpp:1409 mainwindow.cpp:2210:39
 msgid "Avogadro"
 msgstr "Avogadro"
 
@@ -310,43 +306,43 @@ msgstr ""
 "ფაილის %1 ჩაწერა:\n"
 "%2-ით"
 
-#: mainwindow.cpp:1681
+#: mainwindow.cpp:1711
 #, qt-format
 msgid "&Undo %1"
 msgstr "&გაუქმება %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1684 mainwindow.cpp:1928:123
+#: mainwindow.cpp:1714 mainwindow.cpp:1958:123
 msgid "&Undo"
 msgstr "&დაბრუნება"
 
-#: mainwindow.cpp:1689
+#: mainwindow.cpp:1719
 #, qt-format
 msgid "&Redo %1"
 msgstr "&თავიდან %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1692 mainwindow.cpp:1933:129
+#: mainwindow.cpp:1722 mainwindow.cpp:1963:129
 msgid "&Redo"
 msgstr "&თავიდან"
 
-#: mainwindow.cpp:1808
+#: mainwindow.cpp:1838
 msgid "&Testing"
 msgstr "&გამოცდა"
 
-#: mainwindow.cpp:1810
+#: mainwindow.cpp:1840
 msgid "Record test…"
 msgstr "ჩაწერის გამოცდა…"
 
-#: mainwindow.cpp:1813
+#: mainwindow.cpp:1843
 msgid "Play test…"
 msgstr "ტესტის დაკვრა…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:1827 menubuilder.cpp:79:42
+#: mainwindow.cpp:1857 menubuilder.cpp:79:42
 msgid "&File"
 msgstr "&ფაილი"
 
@@ -354,13 +350,13 @@ msgstr "&ფაილი"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1829:81 rc.cpp:87
+#: mainwindow.cpp:1859:81 rc.cpp:87
 msgid "&New"
 msgstr "&ახალი"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1838:57
+#: mainwindow.cpp:1868:57
 msgid "&Open…"
 msgstr "&გახსნა…"
 
@@ -368,7 +364,7 @@ msgstr "&გახსნა…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1847:90 rc.cpp:96
+#: mainwindow.cpp:1877:90 rc.cpp:96
 msgid "&Close"
 msgstr "&დახურვა"
 
@@ -376,27 +372,27 @@ msgstr "&დახურვა"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1861:99 rc.cpp:105
+#: mainwindow.cpp:1891:99 rc.cpp:105
 msgid "&Save"
 msgstr "&შენახვა"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1870:108
+#: mainwindow.cpp:1900:108
 msgid "Save &As…"
 msgstr "შენახვა &როგორც…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1881:201
+#: mainwindow.cpp:1911:201
 msgid "&Export"
 msgstr "&გატანა"
 
-#: mainwindow.cpp:1882
+#: mainwindow.cpp:1912
 msgid "&Molecule…"
 msgstr "&მოლეკულა…"
 
-#: mainwindow.cpp:1890
+#: mainwindow.cpp:1920
 msgid "&Graphics…"
 msgstr "&გრაფიკა…"
 
@@ -404,174 +400,174 @@ msgstr "&გრაფიკა…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1899:66 rc.cpp:72
+#: mainwindow.cpp:1929:66 rc.cpp:72
 msgid "&Quit"
 msgstr "&გასვლა"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1909:195
+#: mainwindow.cpp:1939:195
 msgid "Open Recent"
 msgstr "ბოლო ფალის გახსნა"
 
-#: mainwindow.cpp:1921
+#: mainwindow.cpp:1951
 msgid "No recent files"
 msgstr "უახლესი ფაილების გარეშე"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1927 menubuilder.cpp:79:51
+#: mainwindow.cpp:1957 menubuilder.cpp:79:51
 msgid "&Edit"
 msgstr "&ჩასწორება"
 
-#: mainwindow.cpp:1939
+#: mainwindow.cpp:1969
 msgid "&Copy Graphics"
 msgstr "&გრაფიკის კოპირება"
 
-#: mainwindow.cpp:1943
+#: mainwindow.cpp:1973
 msgid "Ctrl+Alt+C"
 msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1956 menubuilder.cpp:79:48
+#: mainwindow.cpp:1986 menubuilder.cpp:79:48
 msgid "&View"
 msgstr "&ხედი"
 
-#: mainwindow.cpp:1957
+#: mainwindow.cpp:1987
 msgid "Set Background Color…"
 msgstr "ფონის ფერის დაყენება…"
 
-#: mainwindow.cpp:1961
+#: mainwindow.cpp:1991
 msgid "Rendering…"
 msgstr "რენდერი…"
 
-#: mainwindow.cpp:1969
+#: mainwindow.cpp:1999
 msgid "Projection"
 msgstr "პროექცია"
 
-#: mainwindow.cpp:1970
+#: mainwindow.cpp:2000
 msgid "Perspective"
 msgstr "პერსპექტივა"
 
-#: mainwindow.cpp:1977
+#: mainwindow.cpp:2007
 msgid "Orthographic"
 msgstr "ორთოგრაფიული"
 
-#: mainwindow.cpp:1996
+#: mainwindow.cpp:2026
 msgid "&Extensions"
 msgstr "&გაფართოებები"
 
-#: mainwindow.cpp:1998
+#: mainwindow.cpp:2028
 msgid "User Interface Language…"
 msgstr "მომხმარებლის ინტერფეისის ენა…"
 
-#: mainwindow.cpp:2002
+#: mainwindow.cpp:2032
 msgid "&Periodic Table…"
 msgstr "&პერიოდულობის ცხრილი…"
 
-#: mainwindow.cpp:2008 menubuilder.cpp:83
+#: mainwindow.cpp:2038 menubuilder.cpp:83
 msgid "&Help"
 msgstr "&დახმარება"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2009:120
+#: mainwindow.cpp:2039:120
 msgid "&About"
 msgstr "&შესახებ"
 
-#: mainwindow.cpp:2016
+#: mainwindow.cpp:2046
 msgid "&Discussion Forum"
 msgstr "&ფორუმი"
 
-#: mainwindow.cpp:2020
+#: mainwindow.cpp:2050
 msgid "&Avogadro Website"
 msgstr "&Avogadro-ის ვებგვერდი"
 
-#: mainwindow.cpp:2024
+#: mainwindow.cpp:2054
 msgid "&Report a Bug"
 msgstr "&შეცდომის ანგარიში"
 
-#: mainwindow.cpp:2028
+#: mainwindow.cpp:2058
 msgid "&Suggest a Feature"
 msgstr "&ფუნქციის შეთავაზება"
 
-#: mainwindow.cpp:2052
+#: mainwindow.cpp:2082
 msgid "System Language"
 msgstr "სისტემის ენა"
 
-#: mainwindow.cpp:2060
+#: mainwindow.cpp:2090
 msgid "Language"
 msgstr "ენა"
 
-#: mainwindow.cpp:2060
+#: mainwindow.cpp:2090
 msgid "User Interface Language:"
 msgstr "მომხმარებლის ინტერფეისის ენა:"
 
-#: mainwindow.cpp:2165
+#: mainwindow.cpp:2195
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "ყველა მხარდაჭერილი ფორმატი (%1);;ყველა ფაილი (*);;"
 
-#: mainwindow.cpp:2181
+#: mainwindow.cpp:2211
 msgid "Do you want to save the changes to the document?"
 msgstr "გნებავთ დოკუმენტის ცვლილებების შენახვა?"
 
-#: mainwindow.cpp:2189
+#: mainwindow.cpp:2219
 msgid "Your changes will be lost if you don't save them."
 msgstr "თქვენი ცვლილებები დაიკარგება, თუ არ შეინახავთ."
 
-#: mainwindow.cpp:2197
+#: mainwindow.cpp:2227
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:2199
+#: mainwindow.cpp:2229
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2281
+#: mainwindow.cpp:2311
 msgid "Network Download Failed"
 msgstr "ქსელიდან გადმოწერის შეცდომა"
 
-#: mainwindow.cpp:2282
+#: mainwindow.cpp:2312
 msgid "Network timeout or other error."
 msgstr "ქსელის დრო ამოიწურა ან სხვა შეცდომა."
 
-#: mainwindow.cpp:2321
+#: mainwindow.cpp:2351
 #, qt-format
 msgid "Your version: %1"
 msgstr "თქვენი ვერსია: %1"
 
-#: mainwindow.cpp:2322
+#: mainwindow.cpp:2352
 #, qt-format
 msgid "New version: %1"
 msgstr "ახალი ვერსია: %1"
 
-#: mainwindow.cpp:2324
+#: mainwindow.cpp:2354
 msgid "An update is available, do you want to download it now?\n"
 msgstr "ხელმისაწვდომია განახლება. გნებავთ, ახლავე გადმოწეროთ?\n"
 
-#: mainwindow.cpp:2326
+#: mainwindow.cpp:2356
 msgid "Version Update"
 msgstr "ვერსიის განახლება"
 
-#: mainwindow.cpp:2384
+#: mainwindow.cpp:2414
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "შეცდომა ფაილის ტიპი %1-ის კითხვისას."
 
-#: mainwindow.cpp:2400
+#: mainwindow.cpp:2430
 msgid "Select file format"
 msgstr "აირჩიეთ ფაილის ფორმატი"
 
-#: mainwindow.cpp:2405 mainwindow.cpp:2416
+#: mainwindow.cpp:2435 mainwindow.cpp:2446
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "ავოგადროს არ შეუძლია გახსნას \"%1\"."
 
-#: mainwindow.cpp:2415
+#: mainwindow.cpp:2445
 msgid "Cannot open files"
 msgstr "ფაილის გახსნის შეცდომა"
 
@@ -876,6 +872,9 @@ msgstr "Temuri Doghonadze"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Temuri.doghonadze@gmail.com"
+
+#~ msgid "Navigate tool"
+#~ msgstr "ნავიგაციის ხელსაწყო"
 
 #~ msgid ""
 #~ "<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
