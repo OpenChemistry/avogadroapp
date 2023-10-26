@@ -30,7 +30,7 @@ include(DetermineVersion)
 
 # Set up our version.
 set(AvogadroApp_VERSION_MAJOR   "1")
-set(AvogadroApp_VERSION_MINOR   "97")
+set(AvogadroApp_VERSION_MINOR   "98")
 set(AvogadroApp_VERSION_PATCH   "0")
 set(AvogadroApp_VERSION
   "${AvogadroApp_VERSION_MAJOR}.${AvogadroApp_VERSION_MINOR}.${AvogadroApp_VERSION_PATCH}")
