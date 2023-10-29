@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2023-10-22 02:03+0000\n"
+"POT-Creation-Date: 2023-10-29 02:01+0000\n"
 "PO-Revision-Date: 2023-04-26 22:57+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -117,11 +117,11 @@ msgstr "Omstart påkrevd"
 msgid "Please restart Avogadro to use the new language."
 msgstr "Start Avogadro på ny for å ta i bruk det nye språket."
 
-#: mainwindow.cpp:765 mainwindow.cpp:1436
+#: mainwindow.cpp:765 mainwindow.cpp:1440
 msgid "Chemical Markup Language"
 msgstr "Kjemisk oppmerkingsspråk"
 
-#: mainwindow.cpp:766 mainwindow.cpp:1435
+#: mainwindow.cpp:766 mainwindow.cpp:1439
 msgid "Chemical JSON"
 msgstr "Kjemi-JSON"
 
@@ -129,12 +129,12 @@ msgstr "Kjemi-JSON"
 msgid "Open chemical file"
 msgstr "Åpne kjemifil"
 
-#: mainwindow.cpp:790 mainwindow.cpp:814 mainwindow.cpp:1338
-#: mainwindow.cpp:2434
+#: mainwindow.cpp:790 mainwindow.cpp:814 mainwindow.cpp:1342
+#: mainwindow.cpp:2438
 msgid "Cannot open file"
 msgstr "Kan ikke åpne fil"
 
-#: mainwindow.cpp:791 mainwindow.cpp:815 mainwindow.cpp:1339
+#: mainwindow.cpp:791 mainwindow.cpp:815 mainwindow.cpp:1343
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "Kan ikke åpne angitt fil %1"
@@ -160,24 +160,29 @@ msgctxt "atomic electrostatics"
 msgid "Charges"
 msgstr "Ladinger"
 
-#: mainwindow.cpp:833
+#: mainwindow.cpp:830
+msgctxt "potential energy calculators"
+msgid "Force Fields"
+msgstr ""
+
+#: mainwindow.cpp:834
 msgid "Install Plugin Script"
 msgstr "Installer programtilleggsskript"
 
-#: mainwindow.cpp:833
+#: mainwindow.cpp:834
 msgid "Script Type:"
 msgstr "Skripttype:"
 
-#: mainwindow.cpp:884 mainwindow.cpp:1334
+#: mainwindow.cpp:888 mainwindow.cpp:1338
 msgid "Select file reader"
 msgstr "Velg filleser"
 
-#: mainwindow.cpp:913
+#: mainwindow.cpp:917
 #, fuzzy
 msgid "Reading File"
 msgstr "Leser fil"
 
-#: mainwindow.cpp:915
+#: mainwindow.cpp:919
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -186,16 +191,16 @@ msgstr ""
 "Åpner fil «%1»\n"
 "med «%2»"
 
-#: mainwindow.cpp:946
+#: mainwindow.cpp:950
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Molekyl innlastet (%1 atomer, %2 bindinger)"
 
-#: mainwindow.cpp:951
+#: mainwindow.cpp:955
 msgid "File error"
 msgstr "Filfeil"
 
-#: mainwindow.cpp:952
+#: mainwindow.cpp:956
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -204,17 +209,17 @@ msgstr ""
 "Klarte ikke å lese filen «%1»:\n"
 "%2"
 
-#: mainwindow.cpp:979
+#: mainwindow.cpp:983
 #, fuzzy, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "Lagret fil %1."
 
-#: mainwindow.cpp:987
+#: mainwindow.cpp:991
 msgid "Error saving file"
 msgstr "Klarte ikke å lagre fil"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:992
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -224,11 +229,11 @@ msgstr ""
 "Klarte ikke å lagre «%1»\n"
 "%2"
 
-#: mainwindow.cpp:1027
+#: mainwindow.cpp:1031
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Feil: Klarte ikke å igangsette OpenGL-kontekst"
 
-#: mainwindow.cpp:1028
+#: mainwindow.cpp:1032
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -239,47 +244,47 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:1029
+#: mainwindow.cpp:1033
 msgid "Unknown error"
 msgstr "Ukjent feil"
 
-#: mainwindow.cpp:1279
+#: mainwindow.cpp:1283
 msgid "Common image formats"
 msgstr "Vanlige bildeformater"
 
-#: mainwindow.cpp:1281
+#: mainwindow.cpp:1285
 msgid "All files"
 msgstr "Alle filer"
 
-#: mainwindow.cpp:1281
+#: mainwindow.cpp:1285
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1282
+#: mainwindow.cpp:1286
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1282
+#: mainwindow.cpp:1286
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1291
+#: mainwindow.cpp:1295
 #, fuzzy
 msgid "Export Bitmap Graphics"
 msgstr "Eksporter bitmap-grafikk"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1307 mainwindow.cpp:1409 mainwindow.cpp:2210:39
+#: mainwindow.cpp:1311 mainwindow.cpp:1413 mainwindow.cpp:2214:39
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1308
+#: mainwindow.cpp:1312
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Kan ikke lagre fil %1."
 
-#: mainwindow.cpp:1410
+#: mainwindow.cpp:1414
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -291,24 +296,24 @@ msgstr ""
 "\n"
 "Ønsker du å eksportere til nåværende format, eller lagre i et standardformat?"
 
-#: mainwindow.cpp:1417
+#: mainwindow.cpp:1421
 msgid "Export"
 msgstr "Eksporter"
 
-#: mainwindow.cpp:1441
+#: mainwindow.cpp:1445
 msgid "Save chemical file"
 msgstr "Lagre kjemifil"
 
-#: mainwindow.cpp:1482
+#: mainwindow.cpp:1486
 msgid "Export Molecule"
 msgstr "Eksporter molekyl"
 
-#: mainwindow.cpp:1566
+#: mainwindow.cpp:1570
 #, fuzzy
 msgid "Saving File in Progress…"
 msgstr "Lagrer fil …"
 
-#: mainwindow.cpp:1568
+#: mainwindow.cpp:1572
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -318,43 +323,43 @@ msgstr ""
 "Lagrer fil «%1»\n"
 "med «%2»"
 
-#: mainwindow.cpp:1711
+#: mainwindow.cpp:1715
 #, qt-format
 msgid "&Undo %1"
 msgstr "&Angre %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1714 mainwindow.cpp:1958:123
+#: mainwindow.cpp:1718 mainwindow.cpp:1962:123
 msgid "&Undo"
 msgstr "&Angre"
 
-#: mainwindow.cpp:1719
+#: mainwindow.cpp:1723
 #, qt-format
 msgid "&Redo %1"
 msgstr "&Gjenta %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1722 mainwindow.cpp:1963:129
+#: mainwindow.cpp:1726 mainwindow.cpp:1967:129
 msgid "&Redo"
 msgstr "&Gjenta"
 
-#: mainwindow.cpp:1838
+#: mainwindow.cpp:1842
 msgid "&Testing"
 msgstr "&Testing"
 
-#: mainwindow.cpp:1840
+#: mainwindow.cpp:1844
 msgid "Record test…"
 msgstr "Opptakstest …"
 
-#: mainwindow.cpp:1843
+#: mainwindow.cpp:1847
 msgid "Play test…"
 msgstr "Avspillingstest …"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:1857 menubuilder.cpp:79:42
+#: mainwindow.cpp:1861 menubuilder.cpp:79:42
 msgid "&File"
 msgstr "&Fil"
 
@@ -362,13 +367,13 @@ msgstr "&Fil"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1859:81 rc.cpp:87
+#: mainwindow.cpp:1863:81 rc.cpp:87
 msgid "&New"
 msgstr "&Ny"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1868:57
+#: mainwindow.cpp:1872:57
 msgid "&Open…"
 msgstr "&Åpne …"
 
@@ -376,7 +381,7 @@ msgstr "&Åpne …"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1877:90 rc.cpp:96
+#: mainwindow.cpp:1881:90 rc.cpp:96
 msgid "&Close"
 msgstr "&Lukk"
 
@@ -384,28 +389,28 @@ msgstr "&Lukk"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1891:99 rc.cpp:105
+#: mainwindow.cpp:1895:99 rc.cpp:105
 msgid "&Save"
 msgstr "&Lagre"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1900:108
+#: mainwindow.cpp:1904:108
 #, fuzzy
 msgid "Save &As…"
 msgstr "Lagre &som …"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1911:201
+#: mainwindow.cpp:1915:201
 msgid "&Export"
 msgstr "&Eksporter"
 
-#: mainwindow.cpp:1912
+#: mainwindow.cpp:1916
 msgid "&Molecule…"
 msgstr "&Molekyl …"
 
-#: mainwindow.cpp:1920
+#: mainwindow.cpp:1924
 msgid "&Graphics…"
 msgstr "&Grafikk …"
 
@@ -413,180 +418,180 @@ msgstr "&Grafikk …"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1929:66 rc.cpp:72
+#: mainwindow.cpp:1933:66 rc.cpp:72
 msgid "&Quit"
 msgstr "&Avslutt"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1939:195
+#: mainwindow.cpp:1943:195
 msgid "Open Recent"
 msgstr "Åpne nylige"
 
-#: mainwindow.cpp:1951
+#: mainwindow.cpp:1955
 msgid "No recent files"
 msgstr "Ingen nylige filer"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1957 menubuilder.cpp:79:51
+#: mainwindow.cpp:1961 menubuilder.cpp:79:51
 msgid "&Edit"
 msgstr "&Rediger"
 
-#: mainwindow.cpp:1969
+#: mainwindow.cpp:1973
 msgid "&Copy Graphics"
 msgstr "&Kopier grafikk"
 
-#: mainwindow.cpp:1973
+#: mainwindow.cpp:1977
 msgid "Ctrl+Alt+C"
 msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1986 menubuilder.cpp:79:48
+#: mainwindow.cpp:1990 menubuilder.cpp:79:48
 msgid "&View"
 msgstr "&Vis"
 
-#: mainwindow.cpp:1987
+#: mainwindow.cpp:1991
 #, fuzzy
 msgid "Set Background Color…"
 msgstr "Sett bakgrunnsfarge …"
 
-#: mainwindow.cpp:1991
+#: mainwindow.cpp:1995
 #, fuzzy
 msgid "Rendering…"
 msgstr "Tegner …"
 
-#: mainwindow.cpp:1999
+#: mainwindow.cpp:2003
 #, fuzzy
 msgid "Projection"
 msgstr "Projeksjon"
 
-#: mainwindow.cpp:2000
+#: mainwindow.cpp:2004
 msgid "Perspective"
 msgstr "Perspektiv"
 
-#: mainwindow.cpp:2007
+#: mainwindow.cpp:2011
 msgid "Orthographic"
 msgstr "Ortografisk"
 
-#: mainwindow.cpp:2026
+#: mainwindow.cpp:2030
 msgid "&Extensions"
 msgstr "&Utvidelser"
 
-#: mainwindow.cpp:2028
+#: mainwindow.cpp:2032
 msgid "User Interface Language…"
 msgstr "Brukergrensesnittsspråk …"
 
-#: mainwindow.cpp:2032
+#: mainwindow.cpp:2036
 msgid "&Periodic Table…"
 msgstr "&Den periodiske tabell …"
 
-#: mainwindow.cpp:2038 menubuilder.cpp:83
+#: mainwindow.cpp:2042 menubuilder.cpp:83
 msgid "&Help"
 msgstr "&Hjelp"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2039:120
+#: mainwindow.cpp:2043:120
 msgid "&About"
 msgstr "&Om"
 
-#: mainwindow.cpp:2046
+#: mainwindow.cpp:2050
 msgid "&Discussion Forum"
 msgstr "&Diskusjonsforum"
 
-#: mainwindow.cpp:2050
+#: mainwindow.cpp:2054
 msgid "&Avogadro Website"
 msgstr "%Avogadro-nettsiden"
 
-#: mainwindow.cpp:2054
+#: mainwindow.cpp:2058
 msgid "&Report a Bug"
 msgstr "%Rapporter en feil"
 
-#: mainwindow.cpp:2058
+#: mainwindow.cpp:2062
 msgid "&Suggest a Feature"
 msgstr "%Foreslå en funksjon"
 
-#: mainwindow.cpp:2082
+#: mainwindow.cpp:2086
 msgid "System Language"
 msgstr "Systemspråk"
 
-#: mainwindow.cpp:2090
+#: mainwindow.cpp:2094
 msgid "Language"
 msgstr "Språk"
 
-#: mainwindow.cpp:2090
+#: mainwindow.cpp:2094
 msgid "User Interface Language:"
 msgstr "Brukergrensesnittsspråk:"
 
-#: mainwindow.cpp:2195
+#: mainwindow.cpp:2199
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Alle støttede formater (%1);;Alle filer (*);;"
 
-#: mainwindow.cpp:2211
+#: mainwindow.cpp:2215
 #, fuzzy
 msgid "Do you want to save the changes to the document?"
 msgstr "Vil du lagre endringene du har gjort i dokumentet?"
 
-#: mainwindow.cpp:2219
+#: mainwindow.cpp:2223
 msgid "Your changes will be lost if you don't save them."
 msgstr "Dine endringer vil gå tapt hvis du ikke lagrer dem."
 
-#: mainwindow.cpp:2227
+#: mainwindow.cpp:2231
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl + S"
 
-#: mainwindow.cpp:2229
+#: mainwindow.cpp:2233
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl + D"
 
-#: mainwindow.cpp:2311
+#: mainwindow.cpp:2315
 msgid "Network Download Failed"
 msgstr "Nettverksnedlasting mislyktes"
 
-#: mainwindow.cpp:2312
+#: mainwindow.cpp:2316
 msgid "Network timeout or other error."
 msgstr "Nettverkstidsavbrudd eller annen feil."
 
-#: mainwindow.cpp:2351
+#: mainwindow.cpp:2355
 #, qt-format
 msgid "Your version: %1"
 msgstr "Din versjon: %1"
 
-#: mainwindow.cpp:2352
+#: mainwindow.cpp:2356
 #, qt-format
 msgid "New version: %1"
 msgstr "Ny versjon: %1"
 
-#: mainwindow.cpp:2354
+#: mainwindow.cpp:2358
 #, fuzzy
 msgid "An update is available, do you want to download it now?\n"
 msgstr "Vil du laste ned den nye versjonen nå?\n"
 
-#: mainwindow.cpp:2356
+#: mainwindow.cpp:2360
 #, fuzzy
 msgid "Version Update"
 msgstr "Ny versjon"
 
-#: mainwindow.cpp:2414
+#: mainwindow.cpp:2418
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Kunne ikke laste inn «%1»-filformatet."
 
-#: mainwindow.cpp:2430
+#: mainwindow.cpp:2434
 msgid "Select file format"
 msgstr "Velg filformat"
 
-#: mainwindow.cpp:2435 mainwindow.cpp:2446
+#: mainwindow.cpp:2439 mainwindow.cpp:2450
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro kan ikke åpne «%1»."
 
-#: mainwindow.cpp:2445
+#: mainwindow.cpp:2449
 msgid "Cannot open files"
 msgstr "Kan ikke åpne filer"
 
