@@ -76,9 +76,11 @@ if(INSTALL_BUNDLE_FILES)
     get_filename_component(BABEL_DIR "${OBABEL_EXE}" PATH)
     if(WIN32)
       file(GLOB BABEL_PLUGINS ${BABEL_DIR}/*.obf)
+      file(GLOB BABEL_LIB ${BABEL_DIR}/openbabel*.dll)
       install(
         FILES
           ${BABEL_PLUGINS}
+          ${BABEL_LIB}
           ${BABEL_DIR}/inchi.dll
           ${BABEL_DIR}/libxml2.dll
         DESTINATION ${INSTALL_RUNTIME_DIR})
