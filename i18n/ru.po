@@ -6,13 +6,14 @@
 # Anna Malinovskaia <tacitcoast@gmail.com>, 2021.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Covarubio <6amffsl@gmail.com>, 2022.
+# Ivanushka <oplata.kes1@mail.ru>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-10-29 02:01+0000\n"
-"PO-Revision-Date: 2022-12-06 12:47+0000\n"
-"Last-Translator: Covarubio <6amffsl@gmail.com>\n"
+"PO-Revision-Date: 2023-11-04 09:34+0000\n"
+"Last-Translator: Ivanushka <oplata.kes1@mail.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ru/>\n"
 "Language: ru\n"
@@ -21,38 +22,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.15-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
 msgid "Version:"
-msgstr "(Подверсия Git: %1)"
+msgstr "Версия:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:28:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Версия библиотеки Avogadro:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
 msgid "Qt Version:"
-msgstr "(Подверсия Git: %1)"
+msgstr "Версия Qt:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:30:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "Версия SSL:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -67,9 +62,8 @@ msgid "No file name set in BackgroundFileFormat!"
 msgstr "В BackgroundFileFormat не задано имя файла!"
 
 #: mainwindow.cpp:320
-#, fuzzy
 msgid "Ready…"
-msgstr "Подготовка..."
+msgstr "Подготовка…"
 
 #: mainwindow.cpp:397
 msgid "Tool"
@@ -97,17 +91,16 @@ msgid "File"
 msgstr "Файл"
 
 #: mainwindow.cpp:451
-#, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
-msgstr "Инструмент"
+msgstr "Инструменты"
 
 #: mainwindow.cpp:683
 msgid "Untitled"
 msgstr "Безымянный"
 
 #: mainwindow.cpp:688
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
@@ -115,11 +108,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:744
 msgid "Restart needed"
-msgstr ""
+msgstr "Нужен перезапуск"
 
 #: mainwindow.cpp:745
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Пожалуйста, перезагрузите Avogadro, чтобы использовать новый язык."
 
 #: mainwindow.cpp:765 mainwindow.cpp:1440
 msgid "Chemical Markup Language"
@@ -149,34 +142,33 @@ msgstr "Открытая Молекула"
 
 #: mainwindow.cpp:828
 msgid "Commands"
-msgstr ""
+msgstr "Команды"
 
 #: mainwindow.cpp:828
 msgid "Input Generators"
-msgstr ""
+msgstr "Генераторы входных файлов"
 
 #: mainwindow.cpp:828
-#, fuzzy
 msgid "File Formats"
-msgstr "Ошибка файла"
+msgstr "Форматы файлов"
 
 #: mainwindow.cpp:829
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Заряды"
 
 #: mainwindow.cpp:830
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "Силовые поля"
 
 #: mainwindow.cpp:834
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Установить плагин скриптом"
 
 #: mainwindow.cpp:834
 msgid "Script Type:"
-msgstr ""
+msgstr "Тип скрипта:"
 
 #: mainwindow.cpp:888 mainwindow.cpp:1338
 msgid "Select file reader"
@@ -214,24 +206,23 @@ msgstr ""
 "%2"
 
 #: mainwindow.cpp:983
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Невозможно сохранить файл %1."
+msgstr "Сохраненный файл %1."
 
 #: mainwindow.cpp:991
-#, fuzzy
 msgid "Error saving file"
-msgstr "Ошибка запуска RPC-сервера:"
+msgstr "Ошибка сохранения файла"
 
 #: mainwindow.cpp:992
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
-"Ошибка при чтении файла \"%1\":\n"
+"Ошибка при сохранении файла \"%1\":\n"
 "%2"
 
 #: mainwindow.cpp:1031
@@ -315,7 +306,7 @@ msgstr "Молекула Экспорта"
 
 #: mainwindow.cpp:1570
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Выполняется сохранение файла…"
 
 #: mainwindow.cpp:1572
 #, qt-format
@@ -354,14 +345,12 @@ msgid "&Testing"
 msgstr "& Тестирование"
 
 #: mainwindow.cpp:1844
-#, fuzzy
 msgid "Record test…"
-msgstr "Запись теста ..."
+msgstr "Запись теста…"
 
 #: mainwindow.cpp:1847
-#, fuzzy
 msgid "Play test…"
-msgstr "Воспроизвести тест ..."
+msgstr "Воспроизведение теста…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -380,9 +369,8 @@ msgstr "С&оздать"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1872:57
-#, fuzzy
 msgid "&Open…"
-msgstr "&Открыть"
+msgstr "&Открыть…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -403,9 +391,8 @@ msgstr "&Сохранить"
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1904:108
-#, fuzzy
 msgid "Save &As…"
-msgstr "Сохранить &как..."
+msgstr "Сохранить &как…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -414,14 +401,12 @@ msgid "&Export"
 msgstr "&Экспортировать"
 
 #: mainwindow.cpp:1916
-#, fuzzy
 msgid "&Molecule…"
-msgstr "Молекулы"
+msgstr "&Молекулы…"
 
 #: mainwindow.cpp:1924
-#, fuzzy
 msgid "&Graphics…"
-msgstr "&Графика..."
+msgstr "&Графика…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -448,15 +433,12 @@ msgid "&Edit"
 msgstr "&Правка"
 
 #: mainwindow.cpp:1973
-#, fuzzy
 msgid "&Copy Graphics"
-msgstr "&Графика..."
+msgstr "&Копировать графику..."
 
 #: mainwindow.cpp:1977
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -465,13 +447,12 @@ msgid "&View"
 msgstr "&Вид"
 
 #: mainwindow.cpp:1991
-#, fuzzy
 msgid "Set Background Color…"
-msgstr "Выбрать &цвет фона..."
+msgstr "Выбрать цвет фона…"
 
 #: mainwindow.cpp:1995
 msgid "Rendering…"
-msgstr ""
+msgstr "Рендеринг…"
 
 #: mainwindow.cpp:2003
 msgid "Projection"
@@ -491,11 +472,11 @@ msgstr "&Расширения"
 
 #: mainwindow.cpp:2032
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Язык интерфейса пользователя…"
 
 #: mainwindow.cpp:2036
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Периодическая таблица…"
 
 #: mainwindow.cpp:2042 menubuilder.cpp:83
 msgid "&Help"
@@ -508,38 +489,32 @@ msgid "&About"
 msgstr "&О программе"
 
 #: mainwindow.cpp:2050
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Дискуссионный форум"
+msgstr "&Дискуссионный форум"
 
 #: mainwindow.cpp:2054
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Веб-сайт Avogadro"
+msgstr "&Веб-сайт Avogadro"
 
 #: mainwindow.cpp:2058
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Сообщить об ошибке"
+msgstr "&Сообщить об ошибке"
 
 #: mainwindow.cpp:2062
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Предложить фичу"
 
 #: mainwindow.cpp:2086
 msgid "System Language"
-msgstr ""
+msgstr "Системный язык"
 
 #: mainwindow.cpp:2094
 msgid "Language"
-msgstr ""
+msgstr "Язык"
 
 #: mainwindow.cpp:2094
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Язык пользовательского интерфейса:"
 
 #: mainwindow.cpp:2199
 #, qt-format
@@ -547,7 +522,6 @@ msgid "All supported formats (%1);;All files (*);;"
 msgstr "Все поддерживаемые форматы (%1) ;; Все файлы (*) ;;"
 
 #: mainwindow.cpp:2215
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
 msgstr "Вы хотите сохранить изменения, внесенные в документ?"
 
@@ -566,10 +540,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2315
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Сбой при проверке обновлений"
+msgstr "Сетевой сбой при загрузке"
 
 #: mainwindow.cpp:2316
 msgid "Network timeout or other error."
@@ -578,22 +550,20 @@ msgstr "Истекло время ожидания сети или другая 
 #: mainwindow.cpp:2355
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Ваша версия: %1"
 
 #: mainwindow.cpp:2356
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Подверсия Git: %1)"
+msgstr "Новая версия: %1"
 
 #: mainwindow.cpp:2358
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "Доступно обновление, Вы хотите загрузить его?\n"
 
 #: mainwindow.cpp:2360
 msgid "Version Update"
-msgstr ""
+msgstr "Обновление версии"
 
 #: mainwindow.cpp:2418
 #, qt-format
@@ -601,9 +571,8 @@ msgid "Error while loading the “%1” file format."
 msgstr "Ошибка при загрузке формата файла «%1»."
 
 #: mainwindow.cpp:2434
-#, fuzzy
 msgid "Select file format"
-msgstr "Выбрать программу чтения файлов"
+msgstr "Выберите формат файла"
 
 #: mainwindow.cpp:2439 mainwindow.cpp:2450
 #, qt-format
@@ -635,14 +604,12 @@ msgid "&Window"
 msgstr "&Окно"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Новое окно просмотра"
+msgstr "3D вид"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -653,16 +620,10 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-#| "\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-"
-#| "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
-#| "#0000ff;\">BSD-3-Clause</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-"
@@ -672,15 +633,10 @@ msgstr ""
 "<html> <head/> <body> <p> <span style=\" font-size:10pt; font-weight:600;\"> "
 "Лицензия: </span> <a href=\"http://opensource.org/licenses/BSD-3-Clause\"> "
 "<span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\"> "
-"BSD-3-Пункт </span> </a> </p> </body> </html>"
+"BSD-3-Clause </span> </a> </p> </body> </html>"
 
 #. i18n: file: aboutdialog.ui:278
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span "
-#| "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
-#| "org</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
 "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
@@ -692,11 +648,6 @@ msgstr ""
 
 #. i18n: file: aboutdialog.ui:307
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" "
-#| "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></"
-#| "p></body></html>"
 msgid ""
 "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
 "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
@@ -713,8 +664,6 @@ msgstr "OK"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
@@ -726,8 +675,6 @@ msgstr "&Открыть"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -744,32 +691,24 @@ msgstr "Очистить последние"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+N"
 msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+W"
 msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Shift+S"
@@ -781,22 +720,17 @@ msgstr "Вернуться к сохраненному"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
-msgstr "Выбрать &цвет фона..."
+msgstr "Выбрать &цвет фона…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Z"
 msgctxt "Undo"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+Z"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
@@ -818,8 +752,6 @@ msgstr "Вставить"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+V"
 msgctxt "Paste"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
@@ -831,8 +763,6 @@ msgstr "Копировать"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+C"
 msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
@@ -844,8 +774,6 @@ msgstr "Вырезать"
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+X"
 msgctxt "Cut"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
@@ -862,8 +790,6 @@ msgstr "Выделить все"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
@@ -875,8 +801,6 @@ msgstr "Снять выделение"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
@@ -924,26 +848,24 @@ msgstr "&Импорт"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Затеняющее окружение:"
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Включить"
 
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Сила тени:"
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid "User Selections"
 msgid "Edge Detection:"
-msgstr "Пользовательский выбор"
+msgstr "Детектирование ребер:"
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
@@ -952,10 +874,8 @@ msgstr "Сохранить"
 
 #. i18n: file: renderingdialog.ui:158
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "&Закрыть"
+msgstr "Закрыть"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
