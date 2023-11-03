@@ -4,13 +4,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Koen Roggemans <koen@roggemans.net>, 2022, 2023.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-10-29 02:01+0000\n"
-"PO-Revision-Date: 2023-04-30 15:50+0000\n"
-"Last-Translator: Koen Roggemans <koen@roggemans.net>\n"
+"PO-Revision-Date: 2023-11-04 09:34+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/nl/>\n"
 "Language: nl\n"
@@ -18,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -156,7 +158,7 @@ msgstr "Kosten"
 #: mainwindow.cpp:830
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "Krachtveld"
 
 #: mainwindow.cpp:834
 msgid "Install Plugin Script"
