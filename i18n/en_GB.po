@@ -2,13 +2,14 @@
 # Marcus D. Hanwell <marcus@cryos.org>, 2009.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Andi Chandler <andi@gowling.com>, 2023.
+# matterhorn103 <milner94@live.co.uk>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-10-29 02:01+0000\n"
-"PO-Revision-Date: 2023-05-01 22:48+0000\n"
-"Last-Translator: Andi Chandler <andi@gowling.com>\n"
+"PO-Revision-Date: 2023-11-08 18:34+0000\n"
+"Last-Translator: matterhorn103 <milner94@live.co.uk>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_GB/>\n"
 "Language: en_GB\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -154,7 +155,7 @@ msgstr "Charges"
 #: mainwindow.cpp:830
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "Force Fields"
 
 #: mainwindow.cpp:834
 msgid "Install Plugin Script"
