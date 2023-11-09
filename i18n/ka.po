@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Avogadro 1.95.1\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-10-29 02:01+0000\n"
-"PO-Revision-Date: 2023-05-21 03:59+0000\n"
+"PO-Revision-Date: 2023-11-10 06:36+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ka/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -154,7 +154,7 @@ msgstr "მუხტები"
 #: mainwindow.cpp:830
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "ძალის ველები"
 
 #: mainwindow.cpp:834
 msgid "Install Plugin Script"
