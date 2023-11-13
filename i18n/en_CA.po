@@ -1,54 +1,48 @@
-# English (Canada) translation for avogadro
-# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
-# This file is distributed under the same license as the avogadro package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+# Marcus D. Hanwell <mdh55@pitt.edu>, 2008.
+# Marcus D. Hanwell <marcus@cryos.org>, 2009.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
+# Andi Chandler <andi@gowling.com>, 2023.
+# matterhorn103 <milner94@live.co.uk>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: avogadro\n"
+"Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-10-29 02:01+0000\n"
-"PO-Revision-Date: 2021-09-26 12:57+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
-"Language-Team: English (Canada) <https://hosted.weblate.org/projects/"
-"avogadro/avogadroapp/en_CA/>\n"
-"Language: en_CA\n"
+"PO-Revision-Date: 2023-11-08 18:34+0000\n"
+"Last-Translator: matterhorn103 <milner94@live.co.uk>\n"
+"Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
+"avogadro/avogadroapp/en_GB/>\n"
+"Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
 msgid "Version:"
-msgstr "(Git revision: %1)"
+msgstr "Version:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:28:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Avogadro Library Version:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
 msgid "Qt Version:"
-msgstr "(Git revision: %1)"
+msgstr "Qt Version:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:30:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSL Version:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -87,15 +81,11 @@ msgid "Layers"
 msgstr "Layers"
 
 #: mainwindow.cpp:446
-#, fuzzy
-#| msgid "File"
 msgctxt "File toolbar"
 msgid "File"
 msgstr "File"
 
 #: mainwindow.cpp:451
-#, fuzzy
-#| msgid "Tools"
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Tools"
@@ -113,11 +103,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:744
 msgid "Restart needed"
-msgstr ""
+msgstr "Restart needed"
 
 #: mainwindow.cpp:745
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Please restart Avogadro to use the new language."
 
 #: mainwindow.cpp:765 mainwindow.cpp:1440
 msgid "Chemical Markup Language"
@@ -160,12 +150,12 @@ msgstr "File formats"
 #: mainwindow.cpp:829
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Charges"
 
 #: mainwindow.cpp:830
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "Force Fields"
 
 #: mainwindow.cpp:834
 msgid "Install Plugin Script"
@@ -319,8 +309,8 @@ msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"Saving file “%1”\n"
-"with “%2”"
+"Saving file ‘%1’\n"
+"with ‘%2’"
 
 #: mainwindow.cpp:1715
 #, qt-format
@@ -437,17 +427,12 @@ msgid "&Edit"
 msgstr "&Edit"
 
 #: mainwindow.cpp:1973
-#, fuzzy
-#| msgid "&Graphics…"
 msgid "&Copy Graphics"
-msgstr "&Graphics…"
+msgstr "&Copy Graphics"
 
 #: mainwindow.cpp:1977
-#, fuzzy
-#| msgctxt "Select All"
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -461,7 +446,7 @@ msgstr "Set Background colour…"
 
 #: mainwindow.cpp:1995
 msgid "Rendering…"
-msgstr ""
+msgstr "Rendering…"
 
 #: mainwindow.cpp:2003
 msgid "Projection"
@@ -481,11 +466,11 @@ msgstr "&Extensions"
 
 #: mainwindow.cpp:2032
 msgid "User Interface Language…"
-msgstr ""
+msgstr "User Interface Language…"
 
 #: mainwindow.cpp:2036
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Periodic Table…"
 
 #: mainwindow.cpp:2042 menubuilder.cpp:83
 msgid "&Help"
@@ -498,38 +483,32 @@ msgid "&About"
 msgstr "&About"
 
 #: mainwindow.cpp:2050
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Discussion Forum"
+msgstr "&Discussion Forum"
 
 #: mainwindow.cpp:2054
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadro Website"
+msgstr "&Avogadro Website"
 
 #: mainwindow.cpp:2058
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Report a bug"
+msgstr "&Report a Bug"
 
 #: mainwindow.cpp:2062
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Suggest a Feature"
 
 #: mainwindow.cpp:2086
 msgid "System Language"
-msgstr ""
+msgstr "System Language"
 
 #: mainwindow.cpp:2094
 msgid "Language"
-msgstr ""
+msgstr "Language"
 
 #: mainwindow.cpp:2094
 msgid "User Interface Language:"
-msgstr ""
+msgstr "User Interface Language:"
 
 #: mainwindow.cpp:2199
 #, qt-format
@@ -555,10 +534,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2315
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Network Update Check Failed"
+msgstr "Network Download Failed"
 
 #: mainwindow.cpp:2316
 msgid "Network timeout or other error."
@@ -567,27 +544,25 @@ msgstr "Network timeout or other error."
 #: mainwindow.cpp:2355
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Your version: %1"
 
 #: mainwindow.cpp:2356
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Git revision: %1)"
+msgstr "New version: %1"
 
 #: mainwindow.cpp:2358
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "An update is available, do you want to download it now?\n"
 
 #: mainwindow.cpp:2360
 msgid "Version Update"
-msgstr ""
+msgstr "Version Update"
 
 #: mainwindow.cpp:2418
 #, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "Error while loading the “%1” file format."
+msgstr "Error while loading the ‘%1’ file format."
 
 #: mainwindow.cpp:2434
 msgid "Select file format"
@@ -596,7 +571,7 @@ msgstr "Select file format"
 #: mainwindow.cpp:2439 mainwindow.cpp:2450
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "Avogadro cannot open “%1”."
+msgstr "Avogadro cannot open ‘%1’."
 
 #: mainwindow.cpp:2449
 msgid "Cannot open files"
@@ -623,14 +598,12 @@ msgid "&Window"
 msgstr "&Window"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "New View"
+msgstr "3D View"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -641,7 +614,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -869,26 +842,24 @@ msgstr "&Import"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Ambient Occlusion:"
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Enable"
 
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Shadow Strength:"
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid "User Selections"
 msgid "Edge Detection:"
-msgstr "User Selections"
+msgstr "Edge Detection:"
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
@@ -897,10 +868,8 @@ msgstr "Save"
 
 #. i18n: file: renderingdialog.ui:158
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "&Close"
+msgstr "Close"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
@@ -931,7 +900,23 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 ",,bburns@aundae.com,debianmaster@gmail.com,jenfraggleubuntu@googlemail."
-"com,,,,,bburns@aundae.com"
+"com,,,,,bburns@aundae.com,debianmaster@gmail.com,,"
+"jenfraggleubuntu@googlemail.com,,,,,avogadro-devel@lists.sourceforge.net,,"
+"bburns@aundae.com,debianmaster@gmail.com,,jenfraggleubuntu@googlemail."
+"com,,,,,avogadro-devel@lists.sourceforge.net,,bburns@aundae.com,"
+"debianmaster@gmail.com,,jenfraggleubuntu@googlemail.com,,,,,,avogadro-"
+"devel@lists.sourceforge.net,,bburns@aundae.com,debianmaster@gmail.com,,"
+"jenfraggleubuntu@googlemail.com,,,,,,,avogadro-devel@lists.sourceforge.net,,"
+"bburns@aundae.com,debianmaster@gmail.com,,jenfraggleubuntu@googlemail."
+"com,,,,,,,avogadro-devel@lists.sourceforge.net,,bburns@aundae.com,"
+"debianmaster@gmail.com,,jenfraggleubuntu@googlemail.com,,,,,,,avogadro-"
+"devel@lists.sourceforge.net,,bburns@aundae.com,debianmaster@gmail.com,,"
+"jenfraggleubuntu@googlemail.com,,,,,,,,,avogadro-devel@lists.sourceforge.net,"
+"bburns@aundae.com,debianmaster@gmail.com,,jenfraggleubuntu@googlemail."
+"com,,,,,,,,avogadro-devel@lists.sourceforge.net,bburns@aundae.com,"
+"debianmaster@gmail.com,,jenfraggleubuntu@googlemail.com,,,,,,,,avogadro-"
+"devel@lists.sourceforge.net,bburns@aundae.com,debianmaster@gmail.com,,"
+"jenfraggleubuntu@googlemail.com,,,"
 
 #~ msgid "Navigate tool"
 #~ msgstr "Navigate tool"
@@ -982,9 +967,8 @@ msgstr ""
 #~ "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 #~ "\">Qt Version:</span></p></body></html>"
 
-#, fuzzy
 #~ msgid "Set background color…"
-#~ msgstr "Set &Background Colour..."
+#~ msgstr "Set background colour…"
 
 #~ msgid "&Full Screen Mode"
 #~ msgstr "&Full Screen Mode"
@@ -1040,6 +1024,15 @@ msgstr ""
 #~ msgid "Reset Display Types"
 #~ msgstr "Reset Display Types"
 
+#~ msgid "SMILES"
+#~ msgstr "SMILES"
+
+#~ msgid "InChI"
+#~ msgstr "InChI"
+
+#~ msgid "IUPAC InChI identifier"
+#~ msgstr "IUPAC InChI identifier"
+
 #, fuzzy
 #~ msgid "&Open..."
 #~ msgstr "&Open"
@@ -1054,6 +1047,17 @@ msgstr ""
 #~ msgstr ""
 #~ "<h3>%1</h3><br/><br/>Application Version: %2<br/><br/>Library Version: "
 #~ "%3<br/><br/>Open Babel Version: %4"
+
+#~ msgid ""
+#~ "<br/><br/>Qt Version: %1<br/><br/>For more information check the <a "
+#~ "href=\"http://avogadro.cc/\">Avogadro homepage</a>.<br/><br/>The program "
+#~ "is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF "
+#~ "DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.<br/>"
+#~ msgstr ""
+#~ "<br/><br/>Qt Version: %1<br/><br/>For more information check the <a "
+#~ "href=\"http://avogadro.cc/\">Avogadro homepage</a>.<br/><br/>The program "
+#~ "is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF "
+#~ "DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.<br/>"
 
 #~ msgid "Cut Molecule"
 #~ msgstr "Cut Molecule"
@@ -1071,7 +1075,7 @@ msgstr ""
 #~ msgstr "Messages"
 
 #~ msgid "&Minimize"
-#~ msgstr "&Minimize"
+#~ msgstr "&Minimise"
 
 #~ msgid "Ctrl+M"
 #~ msgstr "Ctrl+M"
@@ -1205,6 +1209,9 @@ msgstr ""
 
 #~ msgid "Paste failed (format unavailable)."
 #~ msgstr "Paste failed (format unavailable)."
+
+#~ msgid "Copy failed (format unavailable)."
+#~ msgstr "Copy failed (format unavailable)."
 
 #~ msgid "Copy failed (mdl unavailable)."
 #~ msgstr "Copy failed (mdl unavailable)."
@@ -1402,6 +1409,9 @@ msgstr ""
 
 #~ msgid "Toolbars"
 #~ msgstr "Toolbars"
+
+#~ msgid "Copy As"
+#~ msgstr "Copy As"
 
 #~ msgid "E&xtensions"
 #~ msgstr "E&xtensions"
