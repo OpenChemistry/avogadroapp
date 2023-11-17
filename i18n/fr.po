@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-10-29 02:01+0000\n"
-"PO-Revision-Date: 2023-07-27 21:08+0000\n"
+"PO-Revision-Date: 2023-11-18 12:02+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.2\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -155,11 +155,9 @@ msgid "Charges"
 msgstr "Charges"
 
 #: mainwindow.cpp:830
-#, fuzzy
-#| msgid "Force Field"
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr "Champ de force"
+msgstr "Champs de force"
 
 #: mainwindow.cpp:834
 msgid "Install Plugin Script"
