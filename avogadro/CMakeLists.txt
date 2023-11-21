@@ -25,6 +25,14 @@ else()
   find_package(Qt5 COMPONENTS Concurrent Widgets Network REQUIRED)
 endif()
 
+# use LTO if available
+cmake_policy(SET CMP0069 NEW)
+include(CheckIPOSupported)
+check_ipo_supported(RESULT lto_supported OUTPUT lto_error)
+if(lto_supported)
+  set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+endif()
+
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
 
 set(avogadro_srcs
