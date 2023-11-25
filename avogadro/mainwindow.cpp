@@ -15,6 +15,7 @@
 #include "viewfactory.h"
 
 #include <avogadro/core/elements.h>
+#include <avogadro/core/variant.h>
 #include <avogadro/io/cjsonformat.h>
 #include <avogadro/io/cmlformat.h>
 #include <avogadro/io/fileformat.h>
@@ -946,7 +947,38 @@ void MainWindow::backgroundReaderFinished()
     } else {
       m_fileReadMolecule->setData("fileName", Core::Variant());
     }
+
     setMolecule(m_fileReadMolecule);
+
+    // check if the modelView is set
+    if (m_fileReadMolecule->hasData("modelView")) {
+      MatrixX m = m_fileReadMolecule->data("modelView").value<MatrixX>();
+      // convert to an Affine3f for the camera
+      Eigen::Affine3f a;
+      a.matrix() = m.cast<float>();
+      
+      if (auto* glWidget =
+        qobject_cast<QtOpenGL::GLWidget*>(m_multiViewWidget->activeWidget()))
+      {
+        glWidget->renderer().camera().setModelView(a);
+        glWidget->requestUpdate();
+      }
+    }
+    // and the projection matrix
+    if (m_fileReadMolecule->hasData("projection")) {
+      MatrixX m = m_fileReadMolecule->data("projection").value<MatrixX>();
+      // convert to an Affine3f for the camera
+      Eigen::Affine3f a;
+      a.matrix() = m.cast<float>();
+      
+      if (auto* glWidget =
+        qobject_cast<QtOpenGL::GLWidget*>(m_multiViewWidget->activeWidget()))
+      {
+        glWidget->renderer().camera().setProjection(a);
+        glWidget->requestUpdate();
+      }
+    }
+
     statusBar()->showMessage(tr("Molecule loaded (%1 atoms, %2 bonds)")
                                .arg(m_molecule->atomCount())
                                .arg(m_molecule->bondCount()),
@@ -1379,6 +1411,21 @@ bool MainWindow::saveFile(bool async)
     return saveFileAs(async);
   }
 
+  // get the camera modelView and projection to save it
+  if (auto* glWidget =
+        qobject_cast<QtOpenGL::GLWidget*>(m_multiViewWidget->activeWidget())) {
+
+    auto affine = glWidget->renderer().camera().modelView();
+    MatrixX m = affine.matrix().cast<double>();
+    Core::Variant modelView(m);
+    mol->setData("modelView", modelView);
+
+    affine = glWidget->renderer().camera().projection();
+    m = affine.matrix().cast<double>();
+    Core::Variant projection(m);
+    mol->setData("projection", projection);
+  }
+
   if (!mol->hasData("fileName"))
     return saveFileAs(async);
 
@@ -1555,6 +1602,21 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
   if (!mol) {
     delete writer;
     return false;
+  }
+
+  // get the camera modelView and projection to save it
+  if (auto* glWidget =
+        qobject_cast<QtOpenGL::GLWidget*>(m_multiViewWidget->activeWidget())) {
+
+    auto affine = glWidget->renderer().camera().modelView();
+    MatrixX m = affine.matrix().cast<double>();
+    Core::Variant modelView(m);
+    mol->setData("modelView", modelView);
+
+    affine = glWidget->renderer().camera().projection();
+    m = affine.matrix().cast<double>();
+    Core::Variant projection(m);
+    mol->setData("projection", projection);
   }
 
   // Prepare the background thread to write the selected file.
