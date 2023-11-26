@@ -34,7 +34,7 @@ namespace QtOpenGL {
 class GLWidget;
 }
 
-namespace Io { 
+namespace Io {
 class FileFormat;
 }
 
@@ -432,7 +432,7 @@ private:
   QList<QtGui::ToolPlugin*> m_tools;
   QList<QtGui::ExtensionPlugin*> m_extensions;
   // map from script commands to tools and extensions
-  QMap<QString, QtGui::ToolPlugin*> m_toolCommandMap;
+  QMap<QString, QString> m_toolCommandMap;
   QMap<QString, QtGui::ExtensionPlugin*> m_extensionCommandMap;
   // used for help - provide description for a command
   QMap<QString, QString> m_commandDescriptionsMap;

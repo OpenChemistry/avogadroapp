@@ -2528,7 +2528,7 @@ void MainWindow::registerToolCommand(QString command, QString description)
   if (!tool)
     return;
 
-  m_toolCommandMap.insert(command, tool);
+  m_toolCommandMap.insert(command, tool->name());
 }
 
 void MainWindow::registerExtensionCommand(QString command, QString description)
@@ -2590,12 +2590,21 @@ bool MainWindow::handleCommand(const QString& command,
     if (glWidget == nullptr)
       return false;
 
-    auto* tool = m_toolCommandMap.value(command);
+    QString toolName = m_toolCommandMap.value(command);
     auto* currentTool = glWidget->activeTool();
-    glWidget->setActiveTool(tool->objectName());
+
+    // find the requested tool
+    auto* tool = currentTool;
+    foreach (ToolPlugin* toolPlugin, glWidget->tools()) {
+      if (toolPlugin->name() == toolName) {
+        glWidget->setActiveTool(toolPlugin);
+        tool = toolPlugin;
+        break;
+      }
+    }
+
     bool result = tool->handleCommand(command, options);
     glWidget->setActiveTool(currentTool);
-
     return result;
   } else if (m_extensionCommandMap.contains(command)) {
     auto* extension = m_extensionCommandMap.value(command);
