@@ -1972,16 +1972,15 @@ void MainWindow::buildMenu()
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
 
   // Export action for menu
-  QStringList exportMenuPath = path;
-  exportMenuPath << tr("&Export");
+  QStringList exportPath = path;
+  exportPath << tr("&Export");
   action = new QAction(tr("&Molecule…"), this);
-  m_menuBuilder->addAction(exportMenuPath, action, 110);
+  m_menuBuilder->addAction(exportPath, action, 110);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
   connect(action, SIGNAL(triggered()), this, SLOT(exportFile()));
   // Export action for toolbar with more clear name
-  QStringList exportToolbarPath = path;
   action = new QAction(tr("Export Molecule…"), this);
   m_fileToolBar->addAction(action);
 #ifndef Q_OS_MAC
@@ -1990,7 +1989,7 @@ void MainWindow::buildMenu()
   connect(action, SIGNAL(triggered()), this, SLOT(exportFile()));
   // Export graphics
   action = new QAction(tr("&Graphics…"), this);
-  m_menuBuilder->addAction(exportMenuPath, action, 100);
+  m_menuBuilder->addAction(exportPath, action, 100);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
