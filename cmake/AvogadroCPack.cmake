@@ -88,7 +88,8 @@ if(INSTALL_BUNDLE_FILES)
         DESTINATION ${INSTALL_RUNTIME_DIR})
     elseif(APPLE)
       file(GLOB LIBINCHI ${BABEL_DIR}/../lib/libinchi.*)
-      install(FILES ${LIBINCHI} DESTINATION ${INSTALL_LIBRARY_DIR}/../Frameworks/)
+      file(GLOB BABEL_LIB ${BABEL_DIR}/../lib/libopenbabel.*)
+      install(FILES ${LIBINCHI} ${BABEL_LIB} DESTINATION ${INSTALL_LIBRARY_DIR}/../Frameworks/)
       install(DIRECTORY "${BABEL_DIR}/../lib/openbabel"
         DESTINATION ${INSTALL_LIBRARY_DIR})
       install(DIRECTORY "${BABEL_DIR}/../share/openbabel"
