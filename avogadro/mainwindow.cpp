@@ -1971,11 +1971,17 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
 
-  // Export
+  // Export action for menu
   QStringList exportPath = path;
   exportPath << tr("&Export");
   action = new QAction(tr("&Molecule…"), this);
   m_menuBuilder->addAction(exportPath, action, 110);
+#ifndef Q_OS_MAC
+  action->setIcon(QIcon::fromTheme("document-export"));
+#endif
+  connect(action, SIGNAL(triggered()), this, SLOT(exportFile()));
+  // Export action for toolbar with more clear name
+  action = new QAction(tr("Export Molecule…"), this);
   m_fileToolBar->addAction(action);
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
