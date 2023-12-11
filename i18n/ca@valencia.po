@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-ca\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2023-10-29 02:01+0000\n"
+"POT-Creation-Date: 2023-12-11 21:00+0000\n"
 "PO-Revision-Date: 2016-06-10 06:14+0000\n"
 "Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
 "Language-Team: Català <tradgnome@softcatala.org>\n"
@@ -62,167 +62,167 @@ msgstr ""
 msgid "No file name set in BackgroundFileFormat!"
 msgstr ""
 
-#: mainwindow.cpp:320
+#: mainwindow.cpp:321
 msgid "Ready…"
 msgstr ""
 
-#: mainwindow.cpp:397
+#: mainwindow.cpp:398
 #, fuzzy
 msgid "Tool"
 msgstr "Eines"
 
-#: mainwindow.cpp:401
+#: mainwindow.cpp:402
 msgid "Display Types"
 msgstr "Mostra tipus"
 
-#: mainwindow.cpp:410
+#: mainwindow.cpp:411
 msgid "View Configuration"
 msgstr ""
 
-#: mainwindow.cpp:414
+#: mainwindow.cpp:415
 #, fuzzy
 msgid "Molecules"
 msgstr "Molècula"
 
-#: mainwindow.cpp:423
+#: mainwindow.cpp:424
 msgid "Layers"
 msgstr ""
 
-#: mainwindow.cpp:446
+#: mainwindow.cpp:447
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
 msgstr "&Fitxer"
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:452
 #, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Eines"
 
-#: mainwindow.cpp:683
+#: mainwindow.cpp:684
 #, fuzzy
 msgid "Untitled"
 msgstr "sense títol"
 
-#: mainwindow.cpp:688
+#: mainwindow.cpp:689
 #, fuzzy, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:744
+#: mainwindow.cpp:745
 msgid "Restart needed"
 msgstr ""
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:746
 msgid "Please restart Avogadro to use the new language."
 msgstr ""
 
-#: mainwindow.cpp:765 mainwindow.cpp:1440
+#: mainwindow.cpp:766 mainwindow.cpp:1486
 msgid "Chemical Markup Language"
 msgstr ""
 
-#: mainwindow.cpp:766 mainwindow.cpp:1439
+#: mainwindow.cpp:767 mainwindow.cpp:1485
 msgid "Chemical JSON"
 msgstr ""
 
-#: mainwindow.cpp:772
+#: mainwindow.cpp:773
 msgid "Open chemical file"
 msgstr ""
 
-#: mainwindow.cpp:790 mainwindow.cpp:814 mainwindow.cpp:1342
-#: mainwindow.cpp:2438
+#: mainwindow.cpp:791 mainwindow.cpp:815 mainwindow.cpp:1373
+#: mainwindow.cpp:2505
 #, fuzzy
 msgid "Cannot open file"
 msgstr "No es pot alçar el fitxer %1"
 
-#: mainwindow.cpp:791 mainwindow.cpp:815 mainwindow.cpp:1343
+#: mainwindow.cpp:792 mainwindow.cpp:816 mainwindow.cpp:1374
 #, fuzzy, qt-format
 msgid "Can't open supplied file %1"
 msgstr "No es pot alçar el fitxer %1"
 
-#: mainwindow.cpp:804
+#: mainwindow.cpp:805
 #, fuzzy
 msgid "Open Molecule"
 msgstr "Molècula"
 
-#: mainwindow.cpp:828
+#: mainwindow.cpp:829
 msgid "Commands"
 msgstr ""
 
-#: mainwindow.cpp:828
+#: mainwindow.cpp:829
 msgid "Input Generators"
 msgstr ""
 
-#: mainwindow.cpp:828
+#: mainwindow.cpp:829
 #, fuzzy
 msgid "File Formats"
 msgstr "Fitxer: "
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:830
 msgctxt "atomic electrostatics"
 msgid "Charges"
 msgstr ""
 
-#: mainwindow.cpp:830
+#: mainwindow.cpp:831
 msgctxt "potential energy calculators"
 msgid "Force Fields"
 msgstr ""
 
-#: mainwindow.cpp:834
+#: mainwindow.cpp:835
 msgid "Install Plugin Script"
 msgstr ""
 
-#: mainwindow.cpp:834
+#: mainwindow.cpp:835
 msgid "Script Type:"
 msgstr ""
 
-#: mainwindow.cpp:888 mainwindow.cpp:1338
+#: mainwindow.cpp:889 mainwindow.cpp:1369
 msgid "Select file reader"
 msgstr ""
 
-#: mainwindow.cpp:917
+#: mainwindow.cpp:918
 #, fuzzy
 msgid "Reading File"
 msgstr "Obri un fitxer"
 
-#: mainwindow.cpp:919
+#: mainwindow.cpp:920
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
 
-#: mainwindow.cpp:950
+#: mainwindow.cpp:982
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
-#: mainwindow.cpp:955
+#: mainwindow.cpp:987
 #, fuzzy
 msgid "File error"
 msgstr "Fitxer: "
 
-#: mainwindow.cpp:956
+#: mainwindow.cpp:988
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
 
-#: mainwindow.cpp:983
+#: mainwindow.cpp:1015
 #, fuzzy, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "No es pot alçar el fitxer %1"
 
-#: mainwindow.cpp:991
+#: mainwindow.cpp:1022
 msgid "Error saving file"
 msgstr ""
 
-#: mainwindow.cpp:992
+#: mainwindow.cpp:1023
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -230,11 +230,11 @@ msgid ""
 "%2"
 msgstr ""
 
-#: mainwindow.cpp:1031
+#: mainwindow.cpp:1062
 msgid "Error: Failed to initialize OpenGL context"
 msgstr ""
 
-#: mainwindow.cpp:1032
+#: mainwindow.cpp:1063
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -242,46 +242,46 @@ msgid ""
 "%1"
 msgstr ""
 
-#: mainwindow.cpp:1033
+#: mainwindow.cpp:1064
 msgid "Unknown error"
 msgstr ""
 
-#: mainwindow.cpp:1283
+#: mainwindow.cpp:1314
 msgid "Common image formats"
 msgstr "Formats d'imatge comuns"
 
-#: mainwindow.cpp:1285
+#: mainwindow.cpp:1316
 msgid "All files"
 msgstr "Tots els fitxers"
 
-#: mainwindow.cpp:1285
+#: mainwindow.cpp:1316
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1286
+#: mainwindow.cpp:1317
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1286
+#: mainwindow.cpp:1317
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1295
+#: mainwindow.cpp:1326
 msgid "Export Bitmap Graphics"
 msgstr "Exporta el gràfic de mapa de bits."
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1311 mainwindow.cpp:1413 mainwindow.cpp:2214:39
+#: mainwindow.cpp:1342 mainwindow.cpp:1459 mainwindow.cpp:2281:39
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1312
+#: mainwindow.cpp:1343
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "No es pot alçar el fitxer %1"
 
-#: mainwindow.cpp:1414
+#: mainwindow.cpp:1460
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -289,24 +289,24 @@ msgid ""
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
 
-#: mainwindow.cpp:1421
+#: mainwindow.cpp:1467
 msgid "Export"
 msgstr "Exporta"
 
-#: mainwindow.cpp:1445
+#: mainwindow.cpp:1491
 msgid "Save chemical file"
 msgstr ""
 
-#: mainwindow.cpp:1486
+#: mainwindow.cpp:1532
 #, fuzzy
 msgid "Export Molecule"
 msgstr "Importa fitxer molècula"
 
-#: mainwindow.cpp:1570
+#: mainwindow.cpp:1631
 msgid "Saving File in Progress…"
 msgstr ""
 
-#: mainwindow.cpp:1572
+#: mainwindow.cpp:1633
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -314,44 +314,44 @@ msgid ""
 "with “%2”"
 msgstr ""
 
-#: mainwindow.cpp:1715
+#: mainwindow.cpp:1776
 #, fuzzy, qt-format
 msgid "&Undo %1"
 msgstr "&Desfés"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1718 mainwindow.cpp:1962:123
+#: mainwindow.cpp:1779 mainwindow.cpp:2029:123
 msgid "&Undo"
 msgstr "&Desfés"
 
-#: mainwindow.cpp:1723
+#: mainwindow.cpp:1784
 #, fuzzy, qt-format
 msgid "&Redo %1"
 msgstr "&Refés"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1726 mainwindow.cpp:1967:129
+#: mainwindow.cpp:1787 mainwindow.cpp:2034:129
 msgid "&Redo"
 msgstr "&Refés"
 
-#: mainwindow.cpp:1842
+#: mainwindow.cpp:1903
 #, fuzzy
 msgid "&Testing"
 msgstr "Configuració"
 
-#: mainwindow.cpp:1844
+#: mainwindow.cpp:1905
 msgid "Record test…"
 msgstr ""
 
-#: mainwindow.cpp:1847
+#: mainwindow.cpp:1908
 msgid "Play test…"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:1861 menubuilder.cpp:79:42
+#: mainwindow.cpp:1922 menubuilder.cpp:79:42
 msgid "&File"
 msgstr "&Fitxer"
 
@@ -359,13 +359,13 @@ msgstr "&Fitxer"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1863:81 rc.cpp:87
+#: mainwindow.cpp:1924:81 rc.cpp:87
 msgid "&New"
 msgstr "&Nou"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1872:57
+#: mainwindow.cpp:1933:57
 #, fuzzy
 msgid "&Open…"
 msgstr "&Obri"
@@ -374,7 +374,7 @@ msgstr "&Obri"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1881:90 rc.cpp:96
+#: mainwindow.cpp:1942:90 rc.cpp:96
 msgid "&Close"
 msgstr "&Tanca"
 
@@ -382,30 +382,35 @@ msgstr "&Tanca"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1895:99 rc.cpp:105
+#: mainwindow.cpp:1956:99 rc.cpp:105
 msgid "&Save"
 msgstr "Al&ça"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1904:108
+#: mainwindow.cpp:1965:108
 #, fuzzy
 msgid "Save &As…"
 msgstr "Anomena i al&ça..."
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1915:201
+#: mainwindow.cpp:1976:201
 #, fuzzy
 msgid "&Export"
 msgstr "Exporta"
 
-#: mainwindow.cpp:1916
+#: mainwindow.cpp:1977
 #, fuzzy
 msgid "&Molecule…"
 msgstr "Molècula"
 
-#: mainwindow.cpp:1924
+#: mainwindow.cpp:1984
+#, fuzzy
+msgid "Export Molecule…"
+msgstr "Importa fitxer molècula"
+
+#: mainwindow.cpp:1991
 #, fuzzy
 msgid "&Graphics…"
 msgstr "&Gràfics..."
@@ -414,33 +419,33 @@ msgstr "&Gràfics..."
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1933:66 rc.cpp:72
+#: mainwindow.cpp:2000:66 rc.cpp:72
 msgid "&Quit"
 msgstr "&Ix"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1943:195
+#: mainwindow.cpp:2010:195
 #, fuzzy
 msgid "Open Recent"
 msgstr "Obri &recent"
 
-#: mainwindow.cpp:1955
+#: mainwindow.cpp:2022
 msgid "No recent files"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1961 menubuilder.cpp:79:51
+#: mainwindow.cpp:2028 menubuilder.cpp:79:51
 msgid "&Edit"
 msgstr "&Edita"
 
-#: mainwindow.cpp:1973
+#: mainwindow.cpp:2040
 #, fuzzy
 msgid "&Copy Graphics"
 msgstr "&Gràfics..."
 
-#: mainwindow.cpp:1977
+#: mainwindow.cpp:2044
 #, fuzzy
 #| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
@@ -448,156 +453,156 @@ msgstr "Ctrl+A"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1990 menubuilder.cpp:79:48
+#: mainwindow.cpp:2057 menubuilder.cpp:79:48
 msgid "&View"
 msgstr "&Visualitza"
 
-#: mainwindow.cpp:1991
+#: mainwindow.cpp:2058
 #, fuzzy
 msgid "Set Background Color…"
 msgstr "Estableix color de &fons..."
 
-#: mainwindow.cpp:1995
+#: mainwindow.cpp:2062
 msgid "Rendering…"
 msgstr ""
 
-#: mainwindow.cpp:2003
+#: mainwindow.cpp:2070
 msgid "Projection"
 msgstr ""
 
-#: mainwindow.cpp:2004
+#: mainwindow.cpp:2071
 msgid "Perspective"
 msgstr ""
 
-#: mainwindow.cpp:2011
+#: mainwindow.cpp:2078
 msgid "Orthographic"
 msgstr ""
 
-#: mainwindow.cpp:2030
+#: mainwindow.cpp:2097
 #, fuzzy
 msgid "&Extensions"
 msgstr "Extensions"
 
-#: mainwindow.cpp:2032
+#: mainwindow.cpp:2099
 msgid "User Interface Language…"
 msgstr ""
 
-#: mainwindow.cpp:2036
+#: mainwindow.cpp:2103
 msgid "&Periodic Table…"
 msgstr ""
 
-#: mainwindow.cpp:2042 menubuilder.cpp:83
+#: mainwindow.cpp:2109 menubuilder.cpp:83
 msgid "&Help"
 msgstr "&Ajuda"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2043:120
+#: mainwindow.cpp:2110:120
 msgid "&About"
 msgstr "&Quant a"
 
-#: mainwindow.cpp:2050
+#: mainwindow.cpp:2117
 msgid "&Discussion Forum"
 msgstr ""
 
-#: mainwindow.cpp:2054
+#: mainwindow.cpp:2121
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
 msgstr "Lloc web d'Avogadro"
 
-#: mainwindow.cpp:2058
+#: mainwindow.cpp:2125
 #, fuzzy
 #| msgid "Report a Bug"
 msgid "&Report a Bug"
 msgstr "Informa d'un error"
 
-#: mainwindow.cpp:2062
+#: mainwindow.cpp:2129
 msgid "&Suggest a Feature"
 msgstr ""
 
-#: mainwindow.cpp:2086
+#: mainwindow.cpp:2153
 msgid "System Language"
 msgstr ""
 
-#: mainwindow.cpp:2094
+#: mainwindow.cpp:2161
 msgid "Language"
 msgstr ""
 
-#: mainwindow.cpp:2094
+#: mainwindow.cpp:2161
 msgid "User Interface Language:"
 msgstr ""
 
-#: mainwindow.cpp:2199
+#: mainwindow.cpp:2266
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr ""
 
-#: mainwindow.cpp:2215
+#: mainwindow.cpp:2282
 #, fuzzy
 msgid "Do you want to save the changes to the document?"
 msgstr "Voleu alçar els canvis que heu fet al document?"
 
-#: mainwindow.cpp:2223
+#: mainwindow.cpp:2290
 msgid "Your changes will be lost if you don't save them."
 msgstr "Els canvis es perdran si no els alceu."
 
-#: mainwindow.cpp:2231
+#: mainwindow.cpp:2298
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:2233
+#: mainwindow.cpp:2300
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2315
+#: mainwindow.cpp:2382
 #, fuzzy
 #| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
 msgstr "Comprovació d'actualització per xarxa errònia"
 
-#: mainwindow.cpp:2316
+#: mainwindow.cpp:2383
 msgid "Network timeout or other error."
 msgstr "Temps sobrepassat o un altre error."
 
-#: mainwindow.cpp:2355
+#: mainwindow.cpp:2422
 #, qt-format
 msgid "Your version: %1"
 msgstr ""
 
-#: mainwindow.cpp:2356
+#: mainwindow.cpp:2423
 #, fuzzy, qt-format
 #| msgctxt "%1 is the Git revision number."
 #| msgid "(Git revision: %1)"
 msgid "New version: %1"
 msgstr "(Revisio del Git: %1)"
 
-#: mainwindow.cpp:2358
+#: mainwindow.cpp:2425
 msgid "An update is available, do you want to download it now?\n"
 msgstr ""
 
-#: mainwindow.cpp:2360
+#: mainwindow.cpp:2427
 msgid "Version Update"
 msgstr ""
 
-#: mainwindow.cpp:2418
+#: mainwindow.cpp:2485
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr ""
 
-#: mainwindow.cpp:2434
+#: mainwindow.cpp:2501
 #, fuzzy
 msgid "Select file format"
 msgstr "Fitxer: "
 
-#: mainwindow.cpp:2439 mainwindow.cpp:2450
+#: mainwindow.cpp:2506 mainwindow.cpp:2517
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr ""
 
-#: mainwindow.cpp:2449
+#: mainwindow.cpp:2516
 #, fuzzy
 msgid "Cannot open files"
 msgstr "No es pot alçar el fitxer %1"
