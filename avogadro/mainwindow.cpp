@@ -454,8 +454,9 @@ void MainWindow::setupInterface()
 
   // Create the scene plugin model
   m_sceneTreeView->setAlternatingRowColors(true);
-  m_sceneTreeView->header()->stretchLastSection();
+  m_sceneTreeView->header()->setStretchLastSection(false);
   m_sceneTreeView->header()->setVisible(false);
+  m_sceneTreeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
   connect(m_sceneTreeView, &QAbstractItemView::activated, this,
           &MainWindow::sceneItemActivated);
   connect(m_sceneTreeView, &QAbstractItemView::clicked, this,
@@ -956,10 +957,9 @@ void MainWindow::backgroundReaderFinished()
       // convert to an Affine3f for the camera
       Eigen::Affine3f a;
       a.matrix() = m.cast<float>();
-      
-      if (auto* glWidget =
-        qobject_cast<QtOpenGL::GLWidget*>(m_multiViewWidget->activeWidget()))
-      {
+
+      if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(
+            m_multiViewWidget->activeWidget())) {
         glWidget->renderer().camera().setModelView(a);
         glWidget->requestUpdate();
       }
@@ -970,10 +970,9 @@ void MainWindow::backgroundReaderFinished()
       // convert to an Affine3f for the camera
       Eigen::Affine3f a;
       a.matrix() = m.cast<float>();
-      
-      if (auto* glWidget =
-        qobject_cast<QtOpenGL::GLWidget*>(m_multiViewWidget->activeWidget()))
-      {
+
+      if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(
+            m_multiViewWidget->activeWidget())) {
         glWidget->renderer().camera().setProjection(a);
         glWidget->requestUpdate();
       }
@@ -1199,6 +1198,11 @@ void MainWindow::viewActivated(QWidget* widget)
   if (auto* glWidget = qobject_cast<GLWidget*>(widget)) {
     bool firstRun = populatePluginModel(glWidget->sceneModel(), this);
     m_sceneTreeView->setModel(&glWidget->sceneModel());
+    // tweak the size of columns
+    m_sceneTreeView->header()->setSectionResizeMode(1, QHeaderView::Fixed);
+    m_sceneTreeView->header()->resizeSection(1, 40);
+    m_sceneTreeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+
     populateTools(glWidget);
 
     foreach (ExtensionPlugin* extension, m_extensions) {
