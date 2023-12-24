@@ -95,7 +95,7 @@
 #include <avogadro/vtk/vtkglwidget.h>
 #endif
 
-#ifdef Q_OS_MAC
+#if defined(Q_OS_MAC) && !(QT_VERSION >= 0x050E00)
 #include "qcocoamessagebox.h"
 #define MESSAGEBOX QCocoaMessageBox
 #else
@@ -956,10 +956,9 @@ void MainWindow::backgroundReaderFinished()
       // convert to an Affine3f for the camera
       Eigen::Affine3f a;
       a.matrix() = m.cast<float>();
-      
-      if (auto* glWidget =
-        qobject_cast<QtOpenGL::GLWidget*>(m_multiViewWidget->activeWidget()))
-      {
+
+      if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(
+            m_multiViewWidget->activeWidget())) {
         glWidget->renderer().camera().setModelView(a);
         glWidget->requestUpdate();
       }
@@ -970,10 +969,9 @@ void MainWindow::backgroundReaderFinished()
       // convert to an Affine3f for the camera
       Eigen::Affine3f a;
       a.matrix() = m.cast<float>();
-      
-      if (auto* glWidget =
-        qobject_cast<QtOpenGL::GLWidget*>(m_multiViewWidget->activeWidget()))
-      {
+
+      if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(
+            m_multiViewWidget->activeWidget())) {
         glWidget->renderer().camera().setProjection(a);
         glWidget->requestUpdate();
       }

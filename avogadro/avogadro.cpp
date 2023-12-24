@@ -137,7 +137,7 @@ int main(int argc, char* argv[])
   // Go through the possible translations / locale codes
   // to get the localized names for the language dialog
   if (successfulPath.isEmpty()) {
-    // the default for most systems 
+    // the default for most systems
     // (e.g., /usr/bin/avogadro2 -> /usr/share/avogadro2/i18n/)
     // or /Applications/Avogadro2.app/Contents/share/avogadro2/i18n/
     // .. etc.
@@ -151,7 +151,7 @@ int main(int argc, char* argv[])
   QStringList languages, codes;
 
   languages << "System"; // we handle this in the dialog
-  codes << ""; // default is the system language
+  codes << "";           // default is the system language
 
   bool addedUS = false;
 
