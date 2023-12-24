@@ -61,7 +61,7 @@ ExternalProject_Add(i18n
 )
 endif()
 
-install(DIRECTORY "${AvogadroApp_SOURCE_DIR}/../avogadro-i18n/avogadroapp/" 
+install(DIRECTORY "${AvogadroApp_SOURCE_DIR}/../avogadro-i18n/avogadroapp/"
   "${AvogadroApp_SOURCE_DIR}/../avogadro-i18n/avogadrolibs/"
   DESTINATION "${INSTALL_DATA_DIR}/avogadro2/i18n"
   FILES_MATCHING PATTERN "*.qm"
@@ -105,9 +105,12 @@ endif()
 # Handle Mac OS X specific icons etc.
 if(APPLE)
   # add some Objective-C++ code
-  list(APPEND avogadro_srcs mac.mm ../thirdparty/qcocoacontrols/qcocoamessagebox.mm)
-  include_directories(SYSTEM "${AvogadroApp_SOURCE_DIR}/thirdparty/qcocoacontrols")
-  set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -framework Cocoa")
+  list(APPEND avogadro_srcs mac.mm)
+  if (QT_VERSION EQUAL 5)
+    list(APPEND avogadro_srcs ../thirdparty/qcocoacontrols/qcocoamessagebox.mm)
+    include_directories(SYSTEM "${AvogadroApp_SOURCE_DIR}/thirdparty/qcocoacontrols")
+    set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -framework Cocoa")
+  endif()
 
   # for all the translations, create a .lproj directory
   # Migrated from Avo 1.x - contributed by Geoff Hutchison
@@ -164,9 +167,9 @@ endif()
 
 if(USE_3DCONNEXION AND (WIN32 OR APPLE))
   list(APPEND avogadro_srcs icons/3dx_pivot.png)
-  list(APPEND avogadro_srcs tdxcontroller.cpp) 
-  list(APPEND avogadro_srcs "${AvogadroApp_SOURCE_DIR}/thirdparty/3DConnexion/src/navlib_load.cpp") 
-  list(APPEND avogadro_srcs "${AvogadroApp_SOURCE_DIR}/thirdparty/3DConnexion/src/navlib_stub.c") 
+  list(APPEND avogadro_srcs tdxcontroller.cpp)
+  list(APPEND avogadro_srcs "${AvogadroApp_SOURCE_DIR}/thirdparty/3DConnexion/src/navlib_load.cpp")
+  list(APPEND avogadro_srcs "${AvogadroApp_SOURCE_DIR}/thirdparty/3DConnexion/src/navlib_stub.c")
   set_source_files_properties(icons/3dx_pivot.png PROPERTIES
   MACOSX_PACKAGE_LOCATION Resources)
 endif()
@@ -207,7 +210,7 @@ if(USE_3DCONNEXION AND (WIN32 OR APPLE))
 	elseif(WIN32)
 		install(FILES "icons/3dx_pivot.png" DESTINATION "${CMAKE_INSTALL_BINDIR}/img")
 	endif()
-endif()  
+endif()
 
 install(TARGETS avogadro
   RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}

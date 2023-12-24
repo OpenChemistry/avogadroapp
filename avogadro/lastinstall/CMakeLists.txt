@@ -45,7 +45,7 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
     # .. for whatever reason, they don't have a Qt::QJpegPlugin
     # .. only the versioned Qt5::QJpegPlugin, etc.
     if(QT_VERSION EQUAL 6)
-      foreach(qt_plugin Qt6::QJpegPlugin Qt6::QWbmpPlugin Qt6::QWebpPlugin Qt6::QGifPlugin)
+      foreach(qt_plugin Qt6::QJpegPlugin Qt6::QGifPlugin)
         get_property(location TARGET ${qt_plugin} PROPERTY LOCATION_RELEASE)
         list(APPEND plugins ${location})
       endforeach()
@@ -70,8 +70,12 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
   endif()
   set(CMAKE_INSTALL_UCRT_LIBRARIES TRUE)
   include(InstallRequiredSystemLibraries)
-  include(DeployQt5)
-  install_qt5_executable(${exe} "${plugins}" "${ob_plugins}" "${dirs}" "")
+  if(QT_VERSION EQUAL 5)
+    include(DeployQt5)
+    install_qt5_executable(${exe} "${plugins}" "${ob_plugins}" "${dirs}" "")
+  else() # Qt6
+  endif()
+
   if (INSTALL_BUNDLE_FILES)
     # Fixup the bundle
     install(CODE "
