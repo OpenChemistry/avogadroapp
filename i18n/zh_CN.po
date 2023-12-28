@@ -9,13 +9,15 @@
 # alchemistcai <alchemistcai@163.com>, 2022, 2023.
 # 黄子腾 <still_down@outlook.com>, 2023.
 # Chiyu Liang <532117255@qq.com>, 2023.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
 "PO-Revision-Date: 2023-12-28 04:26+0000\n"
-"Last-Translator: Chiyu Liang <532117255@qq.com>\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -161,7 +163,7 @@ msgstr "电荷"
 #: mainwindow.cpp:831
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "力场:"
 
 #: mainwindow.cpp:835
 msgid "Install Plugin Script"
