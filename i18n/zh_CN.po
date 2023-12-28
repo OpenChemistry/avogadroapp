@@ -15,9 +15,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2023-12-28 04:26+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"PO-Revision-Date: 2023-12-28 17:23+0000\n"
+"Last-Translator: Chiyu Liang <532117255@qq.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -163,7 +162,7 @@ msgstr "电荷"
 #: mainwindow.cpp:831
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr "力场:"
+msgstr "力场"
 
 #: mainwindow.cpp:835
 msgid "Install Plugin Script"
@@ -406,10 +405,8 @@ msgid "&Molecule…"
 msgstr "分子(&M)…"
 
 #: mainwindow.cpp:1984
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "导出分子"
+msgstr "导出分子……"
 
 #: mainwindow.cpp:1991
 msgid "&Graphics…"
@@ -500,20 +497,16 @@ msgid "&Discussion Forum"
 msgstr "讨论区(&D)"
 
 #: mainwindow.cpp:2121
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "阿伏伽德罗网站"
+msgstr "&Avogadro 网站"
 
 #: mainwindow.cpp:2125
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "报告缺陷"
+msgstr "问题反馈"
 
 #: mainwindow.cpp:2129
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "功能建议"
 
 #: mainwindow.cpp:2153
 msgid "System Language"
@@ -577,9 +570,9 @@ msgid "Version Update"
 msgstr "版本更新"
 
 #: mainwindow.cpp:2485
-#, fuzzy, qt-format
+#, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "加载 %1  文件格式时出错。"
+msgstr "加载 '%1' 文件格式时出错。"
 
 #: mainwindow.cpp:2501
 msgid "Select file format"
@@ -597,7 +590,6 @@ msgstr "无法打开文件"
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:79:45
-#, fuzzy
 msgid "&Build"
 msgstr "构建(&B)"
 
