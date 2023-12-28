@@ -95,7 +95,7 @@
 #include <avogadro/vtk/vtkglwidget.h>
 #endif
 
-#if defined(Q_OS_MAC) && !(QT_VERSION >= 0x050E00)
+#if defined(Q_OS_MAC) && (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 #include "qcocoamessagebox.h"
 #define MESSAGEBOX QCocoaMessageBox
 #else
