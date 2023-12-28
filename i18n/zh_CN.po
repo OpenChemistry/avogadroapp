@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2023-12-28 17:23+0000\n"
+"PO-Revision-Date: 2023-12-29 12:53+0000\n"
 "Last-Translator: Chiyu Liang <532117255@qq.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hans/>\n"
@@ -406,7 +406,7 @@ msgstr "分子(&M)…"
 
 #: mainwindow.cpp:1984
 msgid "Export Molecule…"
-msgstr "导出分子……"
+msgstr "导出分子…"
 
 #: mainwindow.cpp:1991
 msgid "&Graphics…"
@@ -494,7 +494,7 @@ msgstr "关于(&A)"
 
 #: mainwindow.cpp:2117
 msgid "&Discussion Forum"
-msgstr "讨论区(&D)"
+msgstr "论坛(&D)"
 
 #: mainwindow.cpp:2121
 msgid "&Avogadro Website"
@@ -506,7 +506,7 @@ msgstr "问题反馈"
 
 #: mainwindow.cpp:2129
 msgid "&Suggest a Feature"
-msgstr "功能建议"
+msgstr "功能建议(&S)"
 
 #: mainwindow.cpp:2153
 msgid "System Language"
@@ -691,7 +691,7 @@ msgstr "最近的"
 #. i18n: file: mainwindow.ui:116
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Clear Recent"
-msgstr "清除最近使用（&C)"
+msgstr "清除最近使用(&C)"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
