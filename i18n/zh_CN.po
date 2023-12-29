@@ -8,13 +8,15 @@
 # Hugel <qihu@nfschina.com>, 2022.
 # alchemistcai <alchemistcai@163.com>, 2022, 2023.
 # 黄子腾 <still_down@outlook.com>, 2023.
+# Chiyu Liang <532117255@qq.com>, 2023.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2023-01-03 22:17+0000\n"
-"Last-Translator: alchemistcai <alchemistcai@163.com>\n"
+"PO-Revision-Date: 2023-12-29 12:53+0000\n"
+"Last-Translator: Chiyu Liang <532117255@qq.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -22,14 +24,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.15.1-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgid "Version Update"
 msgid "Version:"
 msgstr "版本更新"
 
@@ -37,21 +37,19 @@ msgstr "版本更新"
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:28:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Avogadro 库版本："
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgid "New version: %1"
 msgid "Qt Version:"
-msgstr "新版本：%1"
+msgstr "Qt 版本："
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:30:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSL 版本："
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -164,7 +162,7 @@ msgstr "电荷"
 #: mainwindow.cpp:831
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "力场"
 
 #: mainwindow.cpp:835
 msgid "Install Plugin Script"
@@ -407,10 +405,8 @@ msgid "&Molecule…"
 msgstr "分子(&M)…"
 
 #: mainwindow.cpp:1984
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "导出分子"
+msgstr "导出分子…"
 
 #: mainwindow.cpp:1991
 msgid "&Graphics…"
@@ -498,23 +494,19 @@ msgstr "关于(&A)"
 
 #: mainwindow.cpp:2117
 msgid "&Discussion Forum"
-msgstr "讨论区(&D)"
+msgstr "论坛(&D)"
 
 #: mainwindow.cpp:2121
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "阿伏伽德罗网站"
+msgstr "&Avogadro 网站"
 
 #: mainwindow.cpp:2125
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "报告缺陷"
+msgstr "问题反馈"
 
 #: mainwindow.cpp:2129
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "功能建议(&S)"
 
 #: mainwindow.cpp:2153
 msgid "System Language"
@@ -578,9 +570,9 @@ msgid "Version Update"
 msgstr "版本更新"
 
 #: mainwindow.cpp:2485
-#, fuzzy, qt-format
+#, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "加载 %1  文件格式时出错。"
+msgstr "加载 '%1' 文件格式时出错。"
 
 #: mainwindow.cpp:2501
 msgid "Select file format"
@@ -699,7 +691,7 @@ msgstr "最近的"
 #. i18n: file: mainwindow.ui:116
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Clear Recent"
-msgstr "清除最近使用（&C)"
+msgstr "清除最近使用(&C)"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -888,70 +880,26 @@ msgstr "保存"
 
 #. i18n: file: renderingdialog.ui:158
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "关闭(&C)"
+msgstr "关闭"
 
+#, fuzzy
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-",Launchpad Contributions:,Tao Wei,cuiweicui,rainofchaos,yjjart,郑思涵, ,"
-"Launchpad Contributions:,Tao Wei,Yinghua Wang,cuiweicui,rainofchaos,yjjart,郑"
-"思涵, ,Launchpad Contributions:,Tao Wei,Xinfeng,Yinghua Wang,cuiweicui,"
-"rainofchaos,yjjart,郑思涵, ,Launchpad Contributions:,Xinfeng,Yinghua Wang,"
-"cuiweicui,yjjart,冯超, ,Launchpad Contributions:,Tao Wei,Xinfeng,cuiweicui,"
-"yjjart,冯超,王英华,郑思涵, ,Launchpad Contributions:,Ann J,Avogadro Team,Tao "
-"Wei,Xinfeng,cuiweicui,yjjart,冯超,英华,郑思涵, ,Launchpad Contributions:,Ann "
-"J,Avogadro Team,Tao Wei,Xinfeng,cuiweicui,yjjart,冯超,英华,郑思涵, ,"
-"Launchpad Contributions:,Ann J,Avogadro Team,Tao Wei,Xinfeng,cuiweicui,"
-"yjjart,冯超,英华,郑思涵, ,Launchpad Contributions:,Ann J,Avogadro Team,Tao "
-"Wei,Xinfeng,cuiweicui,yjjart,冯超,英华,郑思涵, ,Launchpad Contributions:,Ann "
-"J,Avogadro Team,Tao Wei,Xinfeng,cuiweicui,yjjart,冯超,英华,郑思涵, ,"
-"Launchpad Contributions:,Ann J,Avogadro Team,Colin Zhao,Tao Wei,Xinfeng,"
-"cuiweicui,yjjart,冯超,英华,郑思涵, ,Launchpad Contributions:,Avogadro Team,"
-"CHEN Siqiong,Chen Yang,Colin Zhao,David Gao,Feng Chao,MarkWu,Wylmer Wang,"
-"Xinfeng,Ye, Qing,ZhangCheng,cuiweicui,tmpplus,yjjart,郑思涵, ,Launchpad "
-"Contributions:,Avogadro Team,CHEN Siqiong,Chen Yang,Colin Zhao,David Gao,"
-"Feng Chao,MarkWu,Wylmer Wang,Xinfeng,Ye, Qing,ZhangCheng,cuiweicui,tmpplus,"
-"yjjart,郑思涵, ,Launchpad Contributions:,Avogadro Team,CHEN Siqiong,Chen "
-"Yang,Colin Zhao,David Gao,Feng Chao,MarkWu,Wylmer Wang,Xinfeng,Ye, Qing,"
-"ZhangCheng,cuiweicui,tmpplus,yjjart,郑思涵"
+"Launchpad Contributions: Ann J,Avogadro Team,Chen Siqiong,Chen Yang,Chiyu "
+"Liang,Colin Zhao,David Gao,Feng Chao,MarkWu,Tao Wei,Wylmer Wang,Xinfeng,Ye "
+"Qing,ZhangCheng,cuiweicui,tmpplus,yjjart,郑思涵,英华,"
 
+#, fuzzy
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-",,,cuiweicui1985@gmail.com,rainofchaos@gmail.com,yjjart@gmail.com,"
-"sihanzheng@gmail.com,,,,,cuiweicui1985@gmail.com,rainofchaos@gmail.com,"
-"yjjart@gmail.com,sihanzheng@gmail.com,,,,,,cuiweicui1985@gmail.com,"
-"rainofchaos@gmail.com,yjjart@gmail.com,sihanzheng@gmail.com,,,,,"
-"cuiweicui1985@gmail.com,yjjart@gmail.com,rainofchaos@gmail.com,,,"
-"weitao1979@gmail.com,,cuiweicui1985@gmail.com,yjjart@gmail.com,"
-"rainofchaos@gmail.com,wantinghard@gmail.com,sihanzheng@gmail.com,,,,avogadro-"
-"devel@lists.sourceforge.net,weitao1979@gmail.com,,cuiweicui1985@gmail.com,"
-"yjjart@gmail.com,rainofchaos@gmail.com,wantinghard@gmail.com,"
-"sihanzheng@gmail.com,,,,avogadro-devel@lists.sourceforge.net,"
-"weitao1979@gmail.com,,cuiweicui1985@gmail.com,yjjart@gmail.com,"
-"rainofchaos@gmail.com,wantinghard@gmail.com,sihanzheng@gmail.com,,,,avogadro-"
-"devel@lists.sourceforge.net,weitao1979@gmail.com,,cuiweicui1985@gmail.com,"
-"yjjart@gmail.com,rainofchaos@gmail.com,wantinghard@gmail.com,"
-"sihanzheng@gmail.com,,,,avogadro-devel@lists.sourceforge.net,"
-"weitao1979@gmail.com,,cuiweicui1985@gmail.com,yjjart@gmail.com,"
-"rainofchaos@gmail.com,wantinghard@gmail.com,sihanzheng@gmail.com,,,,avogadro-"
-"devel@lists.sourceforge.net,weitao1979@gmail.com,,cuiweicui1985@gmail.com,"
-"yjjart@gmail.com,rainofchaos@gmail.com,wantinghard@gmail.com,"
-"sihanzheng@gmail.com,,,,avogadro-devel@lists.sourceforge.net,,"
-"weitao1979@gmail.com,,cuiweicui1985@gmail.com,yjjart@gmail.com,"
-"rainofchaos@gmail.com,wantinghard@gmail.com,sihanzheng@gmail.com,,,avogadro-"
-"devel@lists.sourceforge.net,chensiqiong@126.com,frankensteinyang@gmail.com,,,"
-"chaofeng111@gmail.com,,,,allen19920930@gmail.com,skyxxzc@gmail.com,"
-"cuiweicui1985@gmail.com,,yjjart@gmail.com,sihanzheng@gmail.com,,,avogadro-"
-"devel@lists.sourceforge.net,chensiqiong@126.com,frankensteinyang@gmail.com,,,"
-"chaofeng111@gmail.com,,,,allen19920930@gmail.com,skyxxzc@gmail.com,"
-"cuiweicui1985@gmail.com,,yjjart@gmail.com,sihanzheng@gmail.com,,,avogadro-"
-"devel@lists.sourceforge.net,chensiqiong@126.com,frankensteinyang@gmail.com,,,"
-"chaofeng111@gmail.com,,,,allen19920930@gmail.com,skyxxzc@gmail.com,"
-"cuiweicui1985@gmail.com,,yjjart@gmail.com,sihanzheng@gmail.com"
+"cuiweicui1985@gmail.com,rainofchaos@gmail.com,yjjart@gmail."
+"com,sihanzheng@gmail.com,weitao1979@gmail.com,wantinghard@gmail.com,avogadro-"
+"devel@lists.sourceforge.net,chensiqiong@126.com,frankensteinyang@gmail."
+"com,chaofeng111@gmail.com,allen19920930@gmail.com,skyxxzc@gmail."
+"com,sihanzheng@gmail.com,cyliang532@gmail.com"
 
 #~ msgid "Navigate tool"
 #~ msgstr "导航工具"
