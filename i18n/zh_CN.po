@@ -8,14 +8,14 @@
 # Hugel <qihu@nfschina.com>, 2022.
 # alchemistcai <alchemistcai@163.com>, 2022, 2023.
 # 黄子腾 <still_down@outlook.com>, 2023.
-# Chiyu Liang <532117255@qq.com>, 2023.
+# Chiyu Liang <532117255@qq.com>, 2023, 2024.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2023-12-29 12:53+0000\n"
+"PO-Revision-Date: 2024-01-01 03:07+0000\n"
 "Last-Translator: Chiyu Liang <532117255@qq.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hans/>\n"
@@ -31,7 +31,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
 msgid "Version:"
-msgstr "版本更新"
+msgstr "版本："
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
@@ -53,11 +53,11 @@ msgstr "SSL 版本："
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr "BackgroundFileFormat 中没有设置分子！"
+msgstr "没有在 BackgroundFileFormat 中设置分子！"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "BackgroundFileFormat 中没有设置文件格式！"
+msgstr "没有在 BackgroundFileFormat 中设置文件格式！"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
@@ -110,11 +110,11 @@ msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:745
 msgid "Restart needed"
-msgstr "需要重新启动"
+msgstr "需要重启"
 
 #: mainwindow.cpp:746
 msgid "Please restart Avogadro to use the new language."
-msgstr "使用新的语言需要重新启动Avogadro。"
+msgstr "重启 Avogadro 以应用新的语言设置。"
 
 #: mainwindow.cpp:766 mainwindow.cpp:1486
 msgid "Chemical Markup Language"
@@ -192,7 +192,7 @@ msgstr ""
 #: mainwindow.cpp:982
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr "分子已加载 （%1 个原子， %2 个键）"
+msgstr "分子加载完毕 （%1 个原子， %2 个键）"
 
 #: mainwindow.cpp:987
 msgid "File error"
@@ -204,7 +204,7 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
-"读取文件“ %1”时出错：\n"
+"读取文件“ %1” 时出错：\n"
 "%2"
 
 #: mainwindow.cpp:1015
@@ -290,7 +290,7 @@ msgid ""
 msgstr ""
 "该文件是从非标准格式导入的，该格式可能无法写入分子中的所有信息。\n"
 "\n"
-"你要导出为当前格式，还是以标准格式保存？"
+"您希望导出为当前格式，还是以标准格式保存？"
 
 #: mainwindow.cpp:1467
 msgid "Export"
@@ -315,8 +315,8 @@ msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"以“ %2”扩展名\n"
-"保存文件“ %1”"
+"以 “ %2” 扩展名\n"
+"保存文件 “ %1”"
 
 #: mainwindow.cpp:1776
 #, qt-format
@@ -498,11 +498,11 @@ msgstr "论坛(&D)"
 
 #: mainwindow.cpp:2121
 msgid "&Avogadro Website"
-msgstr "&Avogadro 网站"
+msgstr "Avogadro 网站(&A)"
 
 #: mainwindow.cpp:2125
 msgid "&Report a Bug"
-msgstr "问题反馈"
+msgstr "问题反馈(&R)"
 
 #: mainwindow.cpp:2129
 msgid "&Suggest a Feature"
@@ -527,7 +527,7 @@ msgstr "所有受支持的格式（%1）;;所有文件（*）;;"
 
 #: mainwindow.cpp:2282
 msgid "Do you want to save the changes to the document?"
-msgstr "是否要保存对文档的更改？"
+msgstr "要保存对文档的更改吗？"
 
 #: mainwindow.cpp:2290
 msgid "Your changes will be lost if you don't save them."
@@ -549,12 +549,12 @@ msgstr "网络下载失败"
 
 #: mainwindow.cpp:2383
 msgid "Network timeout or other error."
-msgstr "网络超时或发生其它错误."
+msgstr "网络超时或发生其它错误。"
 
 #: mainwindow.cpp:2422
 #, qt-format
 msgid "Your version: %1"
-msgstr "你的版本： %1"
+msgstr "当前版本： %1"
 
 #: mainwindow.cpp:2423
 #, qt-format
@@ -563,7 +563,7 @@ msgstr "新版本：%1"
 
 #: mainwindow.cpp:2425
 msgid "An update is available, do you want to download it now?\n"
-msgstr "有更新，你现在想要下载吗?\n"
+msgstr "发现可用更新，现在下载吗？\n"
 
 #: mainwindow.cpp:2427
 msgid "Version Update"
@@ -572,7 +572,7 @@ msgstr "版本更新"
 #: mainwindow.cpp:2485
 #, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "加载 '%1' 文件格式时出错。"
+msgstr "加载 '%1' 格式时出错。"
 
 #: mainwindow.cpp:2501
 msgid "Select file format"
@@ -581,7 +581,7 @@ msgstr "选择文件格式"
 #: mainwindow.cpp:2506 mainwindow.cpp:2517
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "Avogadro 无法打开“%1”。"
+msgstr "Avogadro 无法打开 “%1”。"
 
 #: mainwindow.cpp:2516
 msgid "Cannot open files"
@@ -613,7 +613,7 @@ msgstr "3D 视图"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -624,7 +624,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -817,17 +817,17 @@ msgstr "教程"
 #. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
-msgstr "阿伏伽德罗帮助"
+msgstr "Avogadro 帮助"
 
 #. i18n: file: mainwindow.ui:293
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Release Notes"
-msgstr "发行注记"
+msgstr "版本说明"
 
 #. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
-msgstr "报告缺陷"
+msgstr "问题反馈"
 
 #. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -837,12 +837,12 @@ msgstr "常见问题"
 #. i18n: file: mainwindow.ui:308
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
-msgstr "阿伏伽德罗网站"
+msgstr "Avogadro 网站"
 
 #. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr "讨论区"
+msgstr "论坛"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -852,26 +852,24 @@ msgstr "导入(&I)"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "环境光遮蔽："
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "启用"
 
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "阴影强度："
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid "User Selections"
 msgid "Edge Detection:"
-msgstr "用户选择"
+msgstr "边缘检测："
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
