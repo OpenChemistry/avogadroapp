@@ -4,13 +4,13 @@
 # translator <kvb@tuta.io>, 2022.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2022.
 # Translator <kvb@tuta.io>, 2022, 2023.
-# Norwid Behrnd <nbehrnd@yahoo.com>, 2023.
+# Norwid Behrnd <nbehrnd@yahoo.com>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2023-11-18 12:02+0000\n"
+"PO-Revision-Date: 2024-01-04 00:20+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.2\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -402,10 +402,8 @@ msgid "&Molecule…"
 msgstr "&Molécule…"
 
 #: mainwindow.cpp:1984
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "Exporter la molécule"
+msgstr "Exporter la molécule …"
 
 #: mainwindow.cpp:1991
 msgid "&Graphics…"
