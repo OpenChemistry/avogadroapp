@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 # Irina Puscas <irinapuscas82@gmail.com>, 2021.
-# Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2023.
+# Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2023-12-29 12:53+0000\n"
+"PO-Revision-Date: 2024-01-01 03:07+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ro/>\n"
@@ -26,7 +26,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
 msgid "Version:"
-msgstr "Versiune:"
+msgstr "Versiunea:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
@@ -48,139 +48,132 @@ msgstr "Versiunea SSL:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr "Nici o molecula setata in BackgroundFileFormat!"
+msgstr "Nici o moleculă definită în „BackgroundFileFormat”!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
-#, fuzzy
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "Nici o molecula setata in BackgroundFileFormat!"
+msgstr "Niciun format de fișier definit în „BackgroundFileFormat”!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Niciun nume de fișier definit în „BackgroundFileFormat”!"
 
 #: mainwindow.cpp:321
 msgid "Ready…"
-msgstr ""
+msgstr "Gata…"
 
 #: mainwindow.cpp:398
 msgid "Tool"
-msgstr ""
+msgstr "Instrument"
 
 #: mainwindow.cpp:402
 msgid "Display Types"
-msgstr ""
+msgstr "Tipuri de afișare"
 
 #: mainwindow.cpp:411
 msgid "View Configuration"
-msgstr ""
+msgstr "Vizualizați configurația"
 
 #: mainwindow.cpp:415
-#, fuzzy
 msgid "Molecules"
-msgstr "Moleculă"
+msgstr "Molecule"
 
 #: mainwindow.cpp:424
 msgid "Layers"
-msgstr ""
+msgstr "Straturi"
 
 #: mainwindow.cpp:447
 msgctxt "File toolbar"
 msgid "File"
-msgstr ""
+msgstr "Fişier"
 
 #: mainwindow.cpp:452
 msgctxt "Tools toolbar"
 msgid "Tools"
-msgstr ""
+msgstr "Instrumente"
 
 #: mainwindow.cpp:684
-#, fuzzy
 msgid "Untitled"
-msgstr "fără nume"
+msgstr "Fără titlu"
 
 #: mainwindow.cpp:689
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:745
 msgid "Restart needed"
-msgstr ""
+msgstr "Este necesară repornirea"
 
 #: mainwindow.cpp:746
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Trebuie să reporniți Avogadro pentru a utiliza noua limbă."
 
 #: mainwindow.cpp:766 mainwindow.cpp:1486
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Limbaj de marcare chimică"
 
 #: mainwindow.cpp:767 mainwindow.cpp:1485
 msgid "Chemical JSON"
-msgstr ""
+msgstr "JSON chimic"
 
 #: mainwindow.cpp:773
 msgid "Open chemical file"
-msgstr ""
+msgstr "Deschide fișierul chimic"
 
 #: mainwindow.cpp:791 mainwindow.cpp:815 mainwindow.cpp:1373
 #: mainwindow.cpp:2505
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Nu se poate salva fișierul %1."
+msgstr "Nu se poate deschide fișierul"
 
 #: mainwindow.cpp:792 mainwindow.cpp:816 mainwindow.cpp:1374
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Nu se poate salva fișierul %1."
+msgstr "Nu se poate deschide fișierul furnizat %1"
 
 #: mainwindow.cpp:805
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Moleculă"
+msgstr "Deschideți molecula"
 
 #: mainwindow.cpp:829
 msgid "Commands"
-msgstr ""
+msgstr "Comenzi"
 
 #: mainwindow.cpp:829
 msgid "Input Generators"
-msgstr ""
+msgstr "Generatoare de date de intrare"
 
 #: mainwindow.cpp:829
-#, fuzzy
 msgid "File Formats"
-msgstr "Fișier: "
+msgstr "Formate de fișiere"
 
 #: mainwindow.cpp:830
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Sarcini"
 
 #: mainwindow.cpp:831
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "Câmpuri de forță"
 
 #: mainwindow.cpp:835
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Instalează scriptul modulului"
 
 #: mainwindow.cpp:835
 msgid "Script Type:"
-msgstr ""
+msgstr "Tipul de script:"
 
 #: mainwindow.cpp:889 mainwindow.cpp:1369
 msgid "Select file reader"
-msgstr ""
+msgstr "Selectați cititorul de fișiere"
 
 #: mainwindow.cpp:918
-#, fuzzy
 msgid "Reading File"
-msgstr "Deschide Fișier"
+msgstr "Se citește fișierul"
 
 #: mainwindow.cpp:920
 #, qt-format
@@ -188,16 +181,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Se deschide fișierul „%1”\n"
+"cu „%2”"
 
 #: mainwindow.cpp:982
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Moleculă încărcată (%1 atomi, %2 legături)"
 
 #: mainwindow.cpp:987
-#, fuzzy
 msgid "File error"
-msgstr "Fișier: "
+msgstr "Eroare de fișier"
 
 #: mainwindow.cpp:988
 #, qt-format
@@ -205,16 +199,18 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Eroare la citirea fișierului „%1”:\n"
+"%2"
 
 #: mainwindow.cpp:1015
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Nu se poate salva fișierul %1."
+msgstr "Fișier salvat ca %1"
 
 #: mainwindow.cpp:1022
 msgid "Error saving file"
-msgstr ""
+msgstr "Eroare la salvarea fișierului"
 
 #: mainwindow.cpp:1023
 #, qt-format
@@ -223,10 +219,12 @@ msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"Eroare la salvarea fișierului „%1”:\n"
+"%2"
 
 #: mainwindow.cpp:1062
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Eroare: Nu s-a reușit inițializarea contextului OpenGL"
 
 #: mainwindow.cpp:1063
 #, qt-format
@@ -235,10 +233,13 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"Se necesită OpenGL 2.0 sau o versiune mai mare, se iese.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1064
 msgid "Unknown error"
-msgstr ""
+msgstr "Eroare necunoscută"
 
 #: mainwindow.cpp:1314
 msgid "Common image formats"
@@ -282,23 +283,27 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Acest fișier a fost importat dintr-un format nestandardizat care s-ar putea "
+"să nu fie capabil să scrie toate informațiile din moleculă.\n"
+"\n"
+"Doriți să exportați în formatul curent sau să salvați într-un format "
+"standard?"
 
 #: mainwindow.cpp:1467
 msgid "Export"
-msgstr ""
+msgstr "Exportare"
 
 #: mainwindow.cpp:1491
 msgid "Save chemical file"
-msgstr ""
+msgstr "Salvează fișierul chimic"
 
 #: mainwindow.cpp:1532
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Taie molecula"
+msgstr "Exportare moleculă"
 
 #: mainwindow.cpp:1631
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Salvarea fișierului în curs…"
 
 #: mainwindow.cpp:1633
 #, qt-format
@@ -307,49 +312,48 @@ msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
+"Se salvează fișierul „%1”\n"
+"cu „%2”"
 
 #: mainwindow.cpp:1776
 #, qt-format
 msgid "&Undo %1"
-msgstr ""
+msgstr "&Anulează %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1779 mainwindow.cpp:2029:123
 msgid "&Undo"
-msgstr ""
+msgstr "&Anulează"
 
 #: mainwindow.cpp:1784
 #, qt-format
 msgid "&Redo %1"
-msgstr ""
+msgstr "&Refă %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1787 mainwindow.cpp:2034:129
 msgid "&Redo"
-msgstr ""
+msgstr "&Refă"
 
 #: mainwindow.cpp:1903
-#, fuzzy
 msgid "&Testing"
-msgstr "Setări"
+msgstr "&Testare"
 
 #: mainwindow.cpp:1905
-#, fuzzy
 msgid "Record test…"
-msgstr "Înregistrare test..."
+msgstr "Înregistrare test…"
 
 #: mainwindow.cpp:1908
-#, fuzzy
 msgid "Play test…"
-msgstr "Vizualizare test"
+msgstr "Vizualizare test…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
 #: mainwindow.cpp:1922 menubuilder.cpp:79:42
 msgid "&File"
-msgstr ""
+msgstr "&Fişier"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -357,13 +361,13 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1924:81 rc.cpp:87
 msgid "&New"
-msgstr ""
+msgstr "&Nou"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1933:57
 msgid "&Open…"
-msgstr ""
+msgstr "&Deschide…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -371,7 +375,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1942:90 rc.cpp:96
 msgid "&Close"
-msgstr ""
+msgstr "În&chide"
 
 #. i18n: file: mainwindow.ui:147
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -379,33 +383,31 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1956:99 rc.cpp:105
 msgid "&Save"
-msgstr ""
+msgstr "&Salvează"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1965:108
 msgid "Save &As…"
-msgstr ""
+msgstr "Salve&ază ca…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1976:201
 msgid "&Export"
-msgstr ""
+msgstr "&Exportare"
 
 #: mainwindow.cpp:1977
-#, fuzzy
 msgid "&Molecule…"
-msgstr "Moleculă"
+msgstr "&Moleculă…"
 
 #: mainwindow.cpp:1984
-#, fuzzy
 msgid "Export Molecule…"
-msgstr "Taie molecula"
+msgstr "Exportare moleculă…"
 
 #: mainwindow.cpp:1991
 msgid "&Graphics…"
-msgstr ""
+msgstr "&Imagini…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -413,124 +415,116 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2000:66 rc.cpp:72
 msgid "&Quit"
-msgstr ""
+msgstr "&Ieșire"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2010:195
-#, fuzzy
 msgid "Open Recent"
-msgstr "Deschide Fișier"
+msgstr "Deschide recent"
 
 #: mainwindow.cpp:2022
 msgid "No recent files"
-msgstr ""
+msgstr "Nu există fișiere recente"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:2028 menubuilder.cpp:79:51
 msgid "&Edit"
-msgstr ""
+msgstr "&Editare"
 
 #: mainwindow.cpp:2040
-#, fuzzy
-#| msgid "Export Bitmap Graphics"
 msgid "&Copy Graphics"
-msgstr "Exportă ca imagine bitmap"
+msgstr "&Copiere imagini"
 
 #: mainwindow.cpp:2044
-#, fuzzy
-#| msgid "Ctrl+M"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+M"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:2057 menubuilder.cpp:79:48
 msgid "&View"
-msgstr ""
+msgstr "&Vizualizare"
 
 #: mainwindow.cpp:2058
 msgid "Set Background Color…"
-msgstr ""
+msgstr "Stabilește culoarea de fundal…"
 
 #: mainwindow.cpp:2062
 msgid "Rendering…"
-msgstr ""
+msgstr "Procesare…"
 
 #: mainwindow.cpp:2070
 msgid "Projection"
-msgstr ""
+msgstr "Proiecție"
 
 #: mainwindow.cpp:2071
 msgid "Perspective"
-msgstr ""
+msgstr "Perspectivă"
 
 #: mainwindow.cpp:2078
 msgid "Orthographic"
-msgstr ""
+msgstr "Ortografic"
 
 #: mainwindow.cpp:2097
 msgid "&Extensions"
-msgstr ""
+msgstr "&Extensii"
 
 #: mainwindow.cpp:2099
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Limba interfeței cu utilizatorul…"
 
 #: mainwindow.cpp:2103
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Tabel periodic…"
 
 #: mainwindow.cpp:2109 menubuilder.cpp:83
 msgid "&Help"
-msgstr ""
+msgstr "&Ajutor"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2110:120
 msgid "&About"
-msgstr ""
+msgstr "&Despre"
 
 #: mainwindow.cpp:2117
 msgid "&Discussion Forum"
-msgstr ""
+msgstr "Forum &de discuții"
 
 #: mainwindow.cpp:2121
-#, fuzzy
-#| msgid "Avogadro"
 msgid "&Avogadro Website"
-msgstr "Avogadro"
+msgstr "Situl web &al Avogadro"
 
 #: mainwindow.cpp:2125
 msgid "&Report a Bug"
-msgstr ""
+msgstr "&Raportați o eroare"
 
 #: mainwindow.cpp:2129
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Sugerați o caracteristică"
 
 #: mainwindow.cpp:2153
 msgid "System Language"
-msgstr ""
+msgstr "Limba sistemului"
 
 #: mainwindow.cpp:2161
 msgid "Language"
-msgstr ""
+msgstr "Limba"
 
 #: mainwindow.cpp:2161
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Limba interfeței cu utilizatorul:"
 
 #: mainwindow.cpp:2266
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "Toate formatele acceptate (%1);;Toate fișierele (*);;"
 
 #: mainwindow.cpp:2282
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
-msgstr "Vreți să salvați schimbările efectuate în document?"
+msgstr "Doriți să salvați schimbările efectuate în document?"
 
 #: mainwindow.cpp:2290
 msgid "Your changes will be lost if you don't save them."
@@ -548,80 +542,76 @@ msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2382
 msgid "Network Download Failed"
-msgstr ""
+msgstr "Descărcarea din rețea a eșuat"
 
 #: mainwindow.cpp:2383
 msgid "Network timeout or other error."
 msgstr ""
+"Depășire a timpului de așteptare pentru conectarea la rețea sau altă eroare."
 
 #: mainwindow.cpp:2422
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Versiunea dvs.: %1"
 
 #: mainwindow.cpp:2423
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Revizie git: %1)"
+msgstr "Versiunea nouă: %1"
 
 #: mainwindow.cpp:2425
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "O actualizare este disponibilă, doriți să o descărcați acum?\n"
 
 #: mainwindow.cpp:2427
 msgid "Version Update"
-msgstr ""
+msgstr "Actualizare versiune"
 
 #: mainwindow.cpp:2485
 #, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr ""
+msgstr "Eroare la încărcarea formatului de fișier „%1”."
 
 #: mainwindow.cpp:2501
-#, fuzzy
 msgid "Select file format"
-msgstr "Fișier: "
+msgstr "Selectați formatul fișierului"
 
 #: mainwindow.cpp:2506 mainwindow.cpp:2517
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr ""
+msgstr "Avogadro nu poate deschide „%1”."
 
 #: mainwindow.cpp:2516
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Nu se poate salva fișierul %1."
+msgstr "Nu se pot deschide fișierele"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:79:45
 msgid "&Build"
-msgstr ""
+msgstr "&Construire"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
 #: menubuilder.cpp:80:54
 msgid "&Select"
-msgstr ""
+msgstr "&Selectați"
 
 #: menubuilder.cpp:83
 msgid "Se&ttings"
-msgstr ""
+msgstr "Con&figurări"
 
 #: menubuilder.cpp:83
-#, fuzzy
 msgid "&Window"
-msgstr "Fereastră"
+msgstr "&Fereastră"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
 msgid "3D View"
-msgstr ""
+msgstr "Vizualizare în 3D"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -632,7 +622,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0,1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -642,6 +632,10 @@ msgid ""
 "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
 "#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Licența: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:278
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -650,6 +644,9 @@ msgid ""
 "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:307
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -658,113 +655,97 @@ msgid ""
 "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:334
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
-msgstr "Accept(ă)"
+msgstr "Ok"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+M"
 msgctxt "File | Open"
 msgid "Ctrl+O"
-msgstr "Ctrl+M"
+msgstr "Ctrl+O"
 
 #. i18n: file: mainwindow.ui:90
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Open"
-msgstr ""
+msgstr "&Deschide"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+M"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
-msgstr "Ctrl+M"
+msgstr "Ctrl+Q"
 
 #. i18n: file: mainwindow.ui:111
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Recent"
-msgstr ""
+msgstr "Recent"
 
 #. i18n: file: mainwindow.ui:116
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Clear Recent"
-msgstr ""
+msgstr "Șterge re&cent"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+M"
 msgctxt "File | New"
 msgid "Ctrl+N"
-msgstr "Ctrl+M"
+msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+M"
 msgctxt "File | Close"
 msgid "Ctrl+W"
-msgstr "Ctrl+M"
+msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgctxt "Save"
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgctxt "Save"
-#| msgid "Ctrl+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
-msgstr "Ctrl+S"
+msgstr "Ctrl+Shift+S"
 
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Revert To Saved"
-msgstr ""
+msgstr "Revenire la stadiul salvat"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color…"
-msgstr ""
+msgstr "Sta&bilește culoarea de fundal…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+M"
 msgctxt "Undo"
 msgid "Ctrl+Z"
-msgstr "Ctrl+M"
+msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgctxt "Save"
-#| msgid "Ctrl+S"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
-msgstr "Ctrl+S"
+msgstr "Ctrl+Shift+Z"
 
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr ""
+msgstr "Centrare"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
-msgstr ""
+msgstr "Alinierea vizualizării la axe"
 
 #. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -773,133 +754,120 @@ msgstr "Lipește"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+M"
 msgctxt "Paste"
 msgid "Ctrl+V"
-msgstr "Ctrl+M"
+msgstr "Ctrl+V"
 
 #. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Copy"
-msgstr ""
+msgstr "Copiază"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+M"
 msgctxt "Copy"
 msgid "Ctrl+C"
-msgstr "Ctrl+M"
+msgstr "Ctrl+C"
 
 #. i18n: file: mainwindow.ui:248
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Cut"
-msgstr ""
+msgstr "Taie"
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+M"
 msgctxt "Cut"
 msgid "Ctrl+X"
-msgstr "Ctrl+M"
+msgstr "Ctrl+X"
 
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
-msgstr ""
+msgstr "Curățare"
 
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr ""
+msgstr "Selectează tot"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+M"
 msgctxt "Select All"
 msgid "Ctrl+A"
-msgstr "Ctrl+M"
+msgstr "Ctrl+A"
 
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr ""
+msgstr "Nu selectați nimic"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgctxt "Save"
-#| msgid "Ctrl+S"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
-msgstr "Ctrl+S"
+msgstr "Ctrl+Shift+A"
 
 #. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Tutorials"
-msgstr ""
+msgstr "Tutoriale"
 
 #. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
-msgstr ""
+msgstr "Ajutor Avogadro"
 
 #. i18n: file: mainwindow.ui:293
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Release Notes"
-msgstr ""
+msgstr "Note de lansare"
 
 #. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
-msgstr ""
+msgstr "Raportați o eroare"
 
 #. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "FAQ"
-msgstr ""
+msgstr "Întrebări și răspunsuri frecvente"
 
 #. i18n: file: mainwindow.ui:308
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
-msgstr ""
+msgstr "Situl web al Avogadro"
 
 #. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Forum de discuții"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Import"
-msgstr ""
+msgstr "&Import"
 
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Ocluziune ambientală:"
 
 #. i18n: file: renderingdialog.ui:40
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Activare"
 
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Intensitatea umbrei:"
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid "User Selections"
 msgid "Edge Detection:"
-msgstr "Selecțiile utilizatorului"
+msgstr "Detectarea marginilor:"
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
@@ -909,15 +877,19 @@ msgstr "Salvează"
 #. i18n: file: renderingdialog.ui:158
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
 msgid "Close"
-msgstr ""
+msgstr "Închide"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr " ,Launchpad Contributions:,Calin Alexandru,Razvan Stefanescu"
+msgstr ""
+"Remus-Gabriel Chelu, Irina Puscas, contribuții Launchpad: Calin Alexandru, "
+"Razvan Stefanescu"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ",,alexandru136@gmail.com,razvan.stefanescu@gmail.com"
+msgstr ""
+"remusgabriel.chelu@disroot.org,irinapuscas82@gmail.com,alexandru136@gmail."
+"com,razvan.stefanescu@gmail.com"
 
 #, fuzzy
 #~ msgid "Molecule File…"
