@@ -456,7 +456,8 @@ void MainWindow::setupInterface()
   m_sceneTreeView->setAlternatingRowColors(true);
   m_sceneTreeView->header()->setStretchLastSection(false);
   m_sceneTreeView->header()->setVisible(false);
-  m_sceneTreeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+  if (m_sceneTreeView->header()->count() > 0)
+    m_sceneTreeView->header()->setSectionResizeMode(0, QHeaderView::Stretch);
   connect(m_sceneTreeView, &QAbstractItemView::activated, this,
           &MainWindow::sceneItemActivated);
   connect(m_sceneTreeView, &QAbstractItemView::clicked, this,
