@@ -56,6 +56,7 @@
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeySequence>
+#include <QtGui/QPalette>
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -2178,12 +2179,20 @@ void MainWindow::buildTools()
 {
   PluginManager* plugin = PluginManager::instance();
 
+  // determine if need dark mode or light mode icons
+  // e.g. https://www.qt.io/blog/dark-mode-on-windows-11-with-qt-6.5
+  const QPalette defaultPalette;
+  // is the text lighter than the window color?
+  bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
+                   defaultPalette.color(QPalette::Window).lightness());
+
   // Now the tool plugins need to be built/added.
   QList<ToolPluginFactory*> toolPluginFactories =
     plugin->pluginFactories<ToolPluginFactory>();
   foreach (ToolPluginFactory* factory, toolPluginFactories) {
     ToolPlugin* tool = factory->createInstance(QCoreApplication::instance());
     tool->setParent(this);
+    tool->setIcon(darkMode);
     if (tool)
       m_tools << tool;
   }
