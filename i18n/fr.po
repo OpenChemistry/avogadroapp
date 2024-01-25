@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2024-01-04 00:20+0000\n"
+"PO-Revision-Date: 2024-01-23 16:01+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -26,7 +26,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
 msgid "Version:"
-msgstr "Version :"
+msgstr "Version :"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
@@ -94,7 +94,7 @@ msgstr "Outils"
 
 #: mainwindow.cpp:684
 msgid "Untitled"
-msgstr "Sans nom"
+msgstr "Sans titre"
 
 #: mainwindow.cpp:689
 #, qt-format
@@ -117,7 +117,7 @@ msgstr "Langage de balisage chimique (CML)"
 
 #: mainwindow.cpp:767 mainwindow.cpp:1485
 msgid "Chemical JSON"
-msgstr "Produit chimique JSON"
+msgstr "format JSON chimique"
 
 #: mainwindow.cpp:773
 msgid "Open chemical file"
@@ -187,7 +187,7 @@ msgstr ""
 #: mainwindow.cpp:982
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr "Molécule chargée (%1 atomes, %2 liaisions)"
+msgstr "Molécule chargée (%1 atomes, %2 liaisons)"
 
 #: mainwindow.cpp:987
 msgid "File error"
@@ -551,12 +551,12 @@ msgstr "Délai d'attente réseau expiré, ou autre erreur."
 #: mainwindow.cpp:2422
 #, qt-format
 msgid "Your version: %1"
-msgstr "Votre version : %1"
+msgstr "Votre version : %1"
 
 #: mainwindow.cpp:2423
 #, qt-format
 msgid "New version: %1"
-msgstr "Nouvelle version : %1"
+msgstr "Nouvelle version : %1"
 
 #: mainwindow.cpp:2425
 msgid "An update is available, do you want to download it now?\n"
@@ -622,7 +622,7 @@ msgstr "VTK"
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr "0,1"
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
