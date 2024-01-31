@@ -9,13 +9,14 @@
 # Acun <acun1993@gmail.com>, 2021.
 # Oğuz Ersen <oguz@ersen.moe>, 2022, 2023.
 # Hakkı Konu <hakkikonu@gmail.com>, 2023.
+# Emir <bitigchi@me.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2023-12-13 18:05+0000\n"
-"Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
+"PO-Revision-Date: 2024-02-01 14:16+0000\n"
+"Last-Translator: Emir <bitigchi@me.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
 "Language: tr\n"
@@ -23,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3-rc\n"
+"X-Generator: Weblate 5.4-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -36,19 +37,19 @@ msgstr "Sürüm:"
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:28:9
 msgid "Avogadro Library Version:"
-msgstr "Avogadro Kütüphanesi Sürümü:"
+msgstr "Avogadro kitaplığı sürümü:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
 msgid "Qt Version:"
-msgstr "Qt Sürümü:"
+msgstr "Qt sürümü:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:30:21
 msgid "SSL Version:"
-msgstr "SSL Sürümü:"
+msgstr "SSL sürümü:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -72,7 +73,7 @@ msgstr "Araç"
 
 #: mainwindow.cpp:402
 msgid "Display Types"
-msgstr "Tipleri Görüntüle"
+msgstr "Türleri Görüntüle"
 
 #: mainwindow.cpp:411
 msgid "View Configuration"
@@ -98,7 +99,7 @@ msgstr "Araçlar"
 
 #: mainwindow.cpp:684
 msgid "Untitled"
-msgstr "İsimsiz"
+msgstr "Adsız"
 
 #: mainwindow.cpp:689
 #, qt-format
@@ -117,7 +118,7 @@ msgstr "Yeni dili kullanmak için lütfen Avogadro'yu yeniden başlatın."
 
 #: mainwindow.cpp:766 mainwindow.cpp:1486
 msgid "Chemical Markup Language"
-msgstr "Kimyasal Biçimlendirme Dili (Markup Language)"
+msgstr "Kimyasal İşaretleme Dili"
 
 #: mainwindow.cpp:767 mainwindow.cpp:1485
 msgid "Chemical JSON"
@@ -125,7 +126,7 @@ msgstr "Kimyasal JSON"
 
 #: mainwindow.cpp:773
 msgid "Open chemical file"
-msgstr "Kimyasal dosyayı aç"
+msgstr "Kimyasal dosya aç"
 
 #: mainwindow.cpp:791 mainwindow.cpp:815 mainwindow.cpp:1373
 #: mainwindow.cpp:2505
@@ -139,7 +140,7 @@ msgstr "Sağlanan %1 dosyası açılamıyor"
 
 #: mainwindow.cpp:805
 msgid "Open Molecule"
-msgstr "Molekülü aç"
+msgstr "Molekül aç"
 
 #: mainwindow.cpp:829
 msgid "Commands"
@@ -147,7 +148,7 @@ msgstr "Komutlar"
 
 #: mainwindow.cpp:829
 msgid "Input Generators"
-msgstr "Girdi Oluşturucuları"
+msgstr "Girdi Üreteçleri"
 
 #: mainwindow.cpp:829
 msgid "File Formats"
@@ -169,7 +170,7 @@ msgstr "Eklenti Betiğini Kur"
 
 #: mainwindow.cpp:835
 msgid "Script Type:"
-msgstr "Betik Türü:"
+msgstr "Betik türü:"
 
 #: mainwindow.cpp:889 mainwindow.cpp:1369
 msgid "Select file reader"
@@ -247,7 +248,7 @@ msgstr "Bilinmeyen hata"
 
 #: mainwindow.cpp:1314
 msgid "Common image formats"
-msgstr "Genel resim biçimleri"
+msgstr "Genel görsel biçimleri"
 
 #: mainwindow.cpp:1316
 msgid "All files"
@@ -267,7 +268,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1326
 msgid "Export Bitmap Graphics"
-msgstr "Dışa Aktar Bitmap"
+msgstr "Biteşlem Grafik Dışa Aktar"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -278,7 +279,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:1343
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Dosya kaydedilemiyor %1."
+msgstr "%1 dosyası kaydedilemiyor."
 
 #: mainwindow.cpp:1460
 msgid ""
@@ -299,11 +300,11 @@ msgstr "Dışa Aktar"
 
 #: mainwindow.cpp:1491
 msgid "Save chemical file"
-msgstr "Kimyasal dosyayı kaydedin"
+msgstr "Kimyasal dosyayı kaydet"
 
 #: mainwindow.cpp:1532
 msgid "Export Molecule"
-msgstr "Molekül Dosyasını İçe Aktar"
+msgstr "Molekül Dosyası İçe Aktar"
 
 #: mainwindow.cpp:1631
 msgid "Saving File in Progress…"
@@ -322,7 +323,7 @@ msgstr ""
 #: mainwindow.cpp:1776
 #, qt-format
 msgid "&Undo %1"
-msgstr "&Geri Al %1"
+msgstr "&Geri Al: %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -333,7 +334,7 @@ msgstr "&Geri Al"
 #: mainwindow.cpp:1784
 #, qt-format
 msgid "&Redo %1"
-msgstr "&Yinele %1"
+msgstr "&Yinele: %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -343,15 +344,15 @@ msgstr "&Yinele"
 
 #: mainwindow.cpp:1903
 msgid "&Testing"
-msgstr "&Test et"
+msgstr "&Sına"
 
 #: mainwindow.cpp:1905
 msgid "Record test…"
-msgstr "Testi kaydet…"
+msgstr "Sınamayı kaydet…"
 
 #: mainwindow.cpp:1908
 msgid "Play test…"
-msgstr "Testi oynat…"
+msgstr "Sınamayı oynat…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -419,23 +420,23 @@ msgstr "&Grafikler…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2000:66 rc.cpp:72
 msgid "&Quit"
-msgstr "&Çıkış"
+msgstr "&Çık"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2010:195
 msgid "Open Recent"
-msgstr "En Son Dosyayı Aç"
+msgstr "Son Kullanılan Dosyayı Aç"
 
 #: mainwindow.cpp:2022
 msgid "No recent files"
-msgstr "Yeni dosya yok"
+msgstr "Son kullanılan dosya yok"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:2028 menubuilder.cpp:79:51
 msgid "&Edit"
-msgstr "&Düzenle"
+msgstr "&Düzen"
 
 #: mainwindow.cpp:2040
 msgid "&Copy Graphics"
@@ -443,13 +444,13 @@ msgstr "Grafikleri &Kopyala"
 
 #: mainwindow.cpp:2044
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+Alt+C"
+msgstr "Kontrol+Seçenek+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:2057 menubuilder.cpp:79:48
 msgid "&View"
-msgstr "&Göster"
+msgstr "&Görünüm"
 
 #: mainwindow.cpp:2058
 msgid "Set Background Color…"
@@ -469,7 +470,7 @@ msgstr "Perspektif"
 
 #: mainwindow.cpp:2078
 msgid "Orthographic"
-msgstr "İmla"
+msgstr "Ortografik"
 
 #: mainwindow.cpp:2097
 msgid "&Extensions"
@@ -519,7 +520,7 @@ msgstr "Dil"
 
 #: mainwindow.cpp:2161
 msgid "User Interface Language:"
-msgstr "Kullanıcı Arayüzü Dili:"
+msgstr "Kullanıcı arayüzü dili:"
 
 #: mainwindow.cpp:2266
 #, qt-format
@@ -537,12 +538,12 @@ msgstr "Kaydetmezseniz yaptığınız değişiklikler kaybolacak."
 #: mainwindow.cpp:2298
 msgctxt "Save"
 msgid "Ctrl+S"
-msgstr "Ctrl+S"
+msgstr "Kontrol+S"
 
 #: mainwindow.cpp:2300
 msgctxt "Discard"
 msgid "Ctrl+D"
-msgstr "Ctrl+D"
+msgstr "Kontrol+D"
 
 #: mainwindow.cpp:2382
 msgid "Network Download Failed"
@@ -582,7 +583,7 @@ msgstr "Dosya biçimi seç"
 #: mainwindow.cpp:2506 mainwindow.cpp:2517
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "Avogadro “%1”i açamıyor."
+msgstr "Avogadro, şunu açamıyor: \"%1\"."
 
 #: mainwindow.cpp:2516
 msgid "Cannot open files"
@@ -592,7 +593,7 @@ msgstr "Dosyalar açılamıyor"
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:79:45
 msgid "&Build"
-msgstr "&İnşa Et"
+msgstr "&Yapı"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
@@ -610,7 +611,7 @@ msgstr "&Pencere"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
 msgid "3D View"
-msgstr "3D Görünüm"
+msgstr "3B Görünüm"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
@@ -671,7 +672,7 @@ msgstr "Tamam"
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "File | Open"
 msgid "Ctrl+O"
-msgstr "Ctrl+O"
+msgstr "Kontrol+O"
 
 #. i18n: file: mainwindow.ui:90
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -682,12 +683,12 @@ msgstr "&Aç"
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
-msgstr "Ctrl+Q"
+msgstr "Kontrol+Q"
 
 #. i18n: file: mainwindow.ui:111
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Recent"
-msgstr "En Son Dosyalar"
+msgstr "Son Kullanılan Dosyalar"
 
 #. i18n: file: mainwindow.ui:116
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -698,25 +699,25 @@ msgstr "Son Kullanılan Dosyaları Temizle"
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "File | New"
 msgid "Ctrl+N"
-msgstr "Ctrl+N"
+msgstr "Kontrol+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "File | Close"
 msgid "Ctrl+W"
-msgstr "Ctrl+W"
+msgstr "Kontrol+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "File | Save"
 msgid "Ctrl+S"
-msgstr "Ctrl+S"
+msgstr "Kontrol+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
-msgstr "Ctrl+Shift+S"
+msgstr "Kontrol+Üst Karakter+S"
 
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -732,13 +733,13 @@ msgstr "&Arka Plan Rengini Ayarla…"
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "Undo"
 msgid "Ctrl+Z"
-msgstr "Ctrl+Z"
+msgstr "Kontrol+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
-msgstr "Ctrl+Shift+Z"
+msgstr "Kontrol+Üst Karakter+Z"
 
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -759,7 +760,7 @@ msgstr "Yapıştır"
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "Paste"
 msgid "Ctrl+V"
-msgstr "Ctrl+V"
+msgstr "Kontrol+V"
 
 #. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -770,7 +771,7 @@ msgstr "Kopyala"
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "Copy"
 msgid "Ctrl+C"
-msgstr "Ctrl+C"
+msgstr "Kontrol+C"
 
 #. i18n: file: mainwindow.ui:248
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -781,7 +782,7 @@ msgstr "Kes"
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "Cut"
 msgid "Ctrl+X"
-msgstr "Ctrl+X"
+msgstr "Kontrol+X"
 
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -797,23 +798,23 @@ msgstr "Tümünü Seç"
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "Select All"
 msgid "Ctrl+A"
-msgstr "Ctrl+A"
+msgstr "Kontrol+A"
 
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Hiçbirini Seçme"
+msgstr "Tümünün Seçimini Kaldır"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
-msgstr "Ctrl+Shift+A"
+msgstr "Kontrol+Üst Karakter+A"
 
 #. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Tutorials"
-msgstr "Eğitim"
+msgstr "Öğreticiler"
 
 #. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -865,12 +866,12 @@ msgstr "Etkinleştir"
 #. i18n: file: renderingdialog.ui:82
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr "Gölge Gücü:"
+msgstr "Gölge gücü:"
 
 #. i18n: file: renderingdialog.ui:100
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid "Edge Detection:"
-msgstr "Kenar algılama:"
+msgstr "Kenar algılaması:"
 
 #. i18n: file: renderingdialog.ui:138
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
