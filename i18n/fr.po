@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2024-02-01 14:16+0000\n"
+"PO-Revision-Date: 2024-02-06 22:01+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -546,7 +546,7 @@ msgstr "Le téléchargement depuis le réseau a échoué"
 
 #: mainwindow.cpp:2383
 msgid "Network timeout or other error."
-msgstr "Délai d'attente du réseau expiré, ou autre erreur."
+msgstr "Délai d'attente du réseau est expiré, ou autre erreur."
 
 #: mainwindow.cpp:2422
 #, qt-format
