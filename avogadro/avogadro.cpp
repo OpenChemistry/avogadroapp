@@ -18,6 +18,10 @@
 #include <QtCore/QStandardPaths>
 #include <QtCore/QTranslator>
 
+// install a message handler (for Windows)
+#include <QFile>
+#include <QTextStream>
+
 #include "application.h"
 #include "mainwindow.h"
 
@@ -30,6 +34,65 @@ void removeMacSpecificMenuItems();
 #endif
 
 #define DEBUG false
+
+// Based on  https://doc.qt.io/qt-5/qtglobal.html#qInstallMessageHandler
+void myMessageOutput(QtMsgType type, const QMessageLogContext& context,
+                     const QString& msg)
+{
+  QByteArray localMsg = msg.toLocal8Bit();
+  QString file = context.file;
+  QString function = context.function;
+  // get current date and time
+  QDateTime dateTime = QDateTime::currentDateTime();
+  QString dateTimeString = dateTime.toString("yyyy-MM-dd hh:mm:ss");
+
+  QString message;
+  switch (type) {
+    case QtInfoMsg:
+      message = QString("Info: %1 (%2:%3, %4)\n")
+                  .arg(localMsg.constData())
+                  .arg(file)
+                  .arg(context.line)
+                  .arg(function);
+      break;
+    case QtWarningMsg:
+      message = QString("Warning: %1 (%2:%3, %4)\n")
+                  .arg(localMsg.constData())
+                  .arg(file)
+                  .arg(context.line)
+                  .arg(function);
+      break;
+    case QtCriticalMsg:
+      message = QString("Critical: %1 (%2:%3, %4)\n")
+                  .arg(localMsg.constData())
+                  .arg(file)
+                  .arg(context.line)
+                  .arg(function);
+      break;
+    case QtFatalMsg:
+      message = QString("Fatal: %1 (%2:%3, %4)\n")
+                  .arg(localMsg.constData())
+                  .arg(file)
+                  .arg(context.line)
+                  .arg(function);
+      break;
+    case QtDebugMsg:
+    default:
+      message = QString("Debug: %1 (%2:%3, %4)\n")
+                  .arg(localMsg.constData())
+                  .arg(file)
+                  .arg(context.line)
+                  .arg(function);
+      break;
+  }
+
+  QString writableDocs =
+    QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+  QFile outFile(writableDocs + "/avogadro2.log");
+  outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+  QTextStream ts(&outFile);
+  ts << message << endl;
+}
 
 int main(int argc, char* argv[])
 {
@@ -51,6 +114,9 @@ int main(int argc, char* argv[])
 #ifdef Q_OS_WIN
   // We need to ensure desktop OpenGL is loaded for our rendering.
   QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
+
+  // install the message handler (goes to Documents / avogadro2.log)
+  qInstallMessageHandler(myMessageOutput);
 #endif
 
   Avogadro::Application app(argc, argv);
