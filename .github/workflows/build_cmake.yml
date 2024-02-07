@@ -51,7 +51,7 @@ jobs:
             os: windows-latest,
             cc: "cl", cxx: "cl",
             build_type: "Release",
-            cmake_flags: "",
+            cmake_flags: "-DOPENSSL_ROOT_DIR=D:\\a\\Tools\\OpenSSL\\Win_x64",
             build_flags: "-j 2",
             cpack_flags: "-G NSIS",
           }
@@ -94,7 +94,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get -qq update
-        sudo apt-get -qq install ninja-build libeigen3-dev libboost-all-dev libglew-dev libxml2-dev 
+        sudo apt-get -qq install ninja-build libeigen3-dev libboost-all-dev libglew-dev libxml2-dev
         sudo apt-get -qq install qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libqt5x11extras5-dev libqt5svg5-dev
     - name: Install Dependencies (macOS)
       if: runner.os == 'macOS'
@@ -157,10 +157,10 @@ jobs:
 
     - name: Fix Mac plugins
       if: runner.os == 'macOS'
-      working-directory: ${{ runner.workspace }}/build/prefix/lib/openbabel 
+      working-directory: ${{ runner.workspace }}/build/prefix/lib/openbabel
       run: |
         for plugin in *.so; do
-          for libpath in `otool -L ${plugin} | grep '/Users/runner/work' | awk '{print $1}'`; do 
+          for libpath in `otool -L ${plugin} | grep '/Users/runner/work' | awk '{print $1}'`; do
             export lib=`echo $libpath | cut -d '/' -f 9`;
             echo "Fixing $plugin $lib $libpath"
             install_name_tool -change $libpath @executable_path/../Frameworks/$lib $plugin
@@ -168,7 +168,7 @@ jobs:
         done
         cd .. # build/prefix/lib
         for plugin in libinchi.?.?.?.dylib; do
-          for libpath in `otool -L ${plugin} | grep '/Users/runner/work' | awk '{print $1}'`; do 
+          for libpath in `otool -L ${plugin} | grep '/Users/runner/work' | awk '{print $1}'`; do
             export lib=`echo $libpath | cut -d '/' -f 9`;
             echo "Fixing $plugin $lib $libpath"
             install_name_tool -change $libpath @executable_path/../Frameworks/$lib $plugin
@@ -299,4 +299,3 @@ jobs:
         rm -rf ./* || true
         rm -rf ./.??* || true
         ls -la ./
- 
