@@ -53,7 +53,7 @@ jobs:
             build_type: "Release",
             cmake_flags: "-DOPENSSL_ROOT_DIR=D:\\a\\Tools\\OpenSSL\\Win_x64",
             build_flags: "-j 2",
-            cpack_flags: "-G NSIS",
+            cpack_flags: "-G NSIS -DOPENSSL_ROOT_DIR=D:\\a\\Tools\\OpenSSL\\Win_x64",
           }
         - {
             name: "Ubuntu Address Sanitizer", artifact: "",
