@@ -53,8 +53,8 @@ if(INSTALL_BUNDLE_FILES)
 
   # grab OpenSSL for Windows
   if(WIN32)
-    if (OPENSSL_ROOT_DIR)
-      file(GLOB OPENSSL_DLL ${OPENSSL_ROOT_DIR}/bin/*.dll)
+    if(DEFINED ENV{OPENSSL_ROOT_DIR})
+      file(GLOB OPENSSL_DLL $ENV{OPENSSL_ROOT_DIR}/bin/*.dll)
       install(FILES ${OPENSSL_DLL} DESTINATION ${INSTALL_RUNTIME_DIR})
     endif()
   endif()

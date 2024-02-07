@@ -53,7 +53,8 @@ jobs:
             build_type: "Release",
             cmake_flags: "-DOPENSSL_ROOT_DIR=D:\\a\\Tools\\OpenSSL\\Win_x64",
             build_flags: "-j 2",
-            cpack_flags: "-G NSIS -DOPENSSL_ROOT_DIR=D:\\a\\Tools\\OpenSSL\\Win_x64",
+            cpack_flags: "-G NSIS",
+            ssl_env: "D:\\a\\Tools\\OpenSSL\\Win_x64",
           }
         - {
             name: "Ubuntu Address Sanitizer", artifact: "",
@@ -236,10 +237,14 @@ jobs:
         if [ -z "${P12_PASSWORD}" ]; then
           unset CODESIGN_IDENTITY # to prevent cpack failing when trying to sign
         fi
+        if [ -z "${OPENSSL_ROOT_DIR}" ]; then
+          unset OPENSSL_ROOT_DIR
+        fi
         cpack ${{ matrix.config.cpack_flags }}
       env:
         P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
         CODESIGN_IDENTITY: ${{ secrets.CODESIGN_ID }}
+        OPENSSL_ROOT_DIR: ${{ matrix.config.ssl_env }}
       working-directory: ${{ runner.workspace }}/build/avogadroapp
 
     - name: AppImage
