@@ -91,7 +91,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext& context,
   QFile outFile(writableDocs + "/avogadro2.log");
   outFile.open(QIODevice::WriteOnly | QIODevice::Append);
   QTextStream ts(&outFile);
-  ts << message << endl;
+  ts << message << Qt::endl;
 }
 
 int main(int argc, char* argv[])
