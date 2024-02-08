@@ -51,10 +51,10 @@ jobs:
             os: windows-latest,
             cc: "cl", cxx: "cl",
             build_type: "Release",
-            cmake_flags: "-DOPENSSL_ROOT_DIR=D:\\a\\Tools\\OpenSSL\\Win_x64",
+            cmake_flags: "",
             build_flags: "-j 2",
             cpack_flags: "-G NSIS",
-            ssl_env: "D:\\a\\Tools\\OpenSSL\\Win_x64",
+            ssl_env: "D:\\a\\avogadroapp\\Qt\\Tools\\OpenSSLv3\\Win_x64",
           }
         - {
             name: "Ubuntu Address Sanitizer", artifact: "",
@@ -160,15 +160,15 @@ jobs:
         CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake $GITHUB_WORKSPACE ${{env.FEATURES}} -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} ${{matrix.config.cmake_flags}}
       shell: bash
 
-    - name: Setup tmate session
-      if: runner.os == 'Windows'
-      uses: mxschmitt/action-tmate@v3
-
     - name: Build
       run: |
         CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake --build . --config ${{matrix.config.build_type}} ${{matrix.config.build_flags}}
       shell: bash
       working-directory: ${{ runner.workspace }}/build
+
+    - name: Setup tmate session
+      if: failure()
+      uses: mxschmitt/action-tmate@v3
 
     - name: Fix Mac plugins
       if: runner.os == 'macOS'
