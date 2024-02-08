@@ -139,9 +139,11 @@ jobs:
       if: runner.os == 'Windows'
       uses: jurplel/install-qt-action@v3
       with:
-        tools: 'tools_opensslv3_x64'
+        aqtversion: '==3.1.*'
         host: 'windows'
         target: 'desktop'
+        toolsOnly: 'true'
+        tools: 'tools_opensslv3_x64'
 
     - name: Configure MSVC Command Prompt
       if: runner.os == 'Windows'
