@@ -16,7 +16,7 @@ if(APPLE)
     "${AvogadroApp_SOURCE_DIR}/avogadro/icons/avogadro.icns")
   set(CPACK_BUNDLE_ICON "${CPACK_PACKAGE_ICON}")
 
-  if(${CMAKE_VERSION} VERSION_GREATER "3.19.0") 
+  if(${CMAKE_VERSION} VERSION_GREATER "3.19.0")
     # add the codesign options to the package
     configure_file("${CMAKE_CURRENT_LIST_DIR}/deploy-osx.cmake.in" "${AvogadroApp_BINARY_DIR}/deploy-osx.cmake" @ONLY)
     set(CPACK_PRE_BUILD_SCRIPTS "${AvogadroApp_BINARY_DIR}/deploy-osx.cmake")
@@ -50,6 +50,16 @@ if(INSTALL_BUNDLE_FILES)
 
   install(DIRECTORY "${AvogadroLibs_DATA_DIR}/avogadro2"
     DESTINATION ${INSTALL_DATA_DIR})
+
+  # grab OpenSSL for Windows
+  if(WIN32)
+    if(EXISTS "D:/a/avogadroapp/Qt/Tools/OpenSSLv3/Win_x64/")
+      set(OPENSSL_ROOT_DIR "D:/a/avogadroapp/Qt/Tools/OpenSSLv3/Win_x64")
+      message(STATUS "Using OpenSSL from ${OPENSSL_ROOT_DIR}")
+      file(GLOB OPENSSL_DLL ${OPENSSL_ROOT_DIR}/bin/*.dll)
+      install(FILES ${OPENSSL_DLL} DESTINATION ${INSTALL_RUNTIME_DIR})
+    endif()
+  endif()
 
   # create a list of exe to run fixup_bundle on
   set(BUNDLE_EXE_LIST "")

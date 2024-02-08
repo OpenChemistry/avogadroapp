@@ -33,6 +33,16 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
     set(dirs ${dirs} "${vtk_dlls_dir}")
   endif()
 
+  # grab OpenSSL for Windows
+  if(WIN32)
+    if(EXISTS "${Qt5_Dir}/../../Tools/OpenSSLv3/Win_x64/")
+      set(OPENSSL_ROOT_DIR "${Qt5_Dir}/../../Tools/OpenSSLv3/Win_x64/")
+      message(STATUS "Using OpenSSL from ${OPENSSL_ROOT_DIR}")
+      file(GLOB OPENSSL_DLL ${OPENSSL_ROOT_DIR}/bin/*.dll)
+      install(FILES ${OPENSSL_DLL} DESTINATION ${INSTALL_RUNTIME_DIR})
+    endif()
+  endif()
+
   set(plugins "")
   foreach(plugin ${AvogadroLibs_PLUGINS})
     get_property(location TARGET ${plugin} PROPERTY LOCATION)

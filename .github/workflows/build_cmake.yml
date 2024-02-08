@@ -54,6 +54,7 @@ jobs:
             cmake_flags: "",
             build_flags: "-j 2",
             cpack_flags: "-G NSIS",
+            ssl_env: "D:\\a\\avogadroapp\\Qt\\Tools\\OpenSSLv3\\Win_x64",
           }
         - {
             name: "Ubuntu Address Sanitizer", artifact: "",
@@ -94,7 +95,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get -qq update
-        sudo apt-get -qq install ninja-build libeigen3-dev libboost-all-dev libglew-dev libxml2-dev 
+        sudo apt-get -qq install ninja-build libeigen3-dev libboost-all-dev libglew-dev libxml2-dev
         sudo apt-get -qq install qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libqt5x11extras5-dev libqt5svg5-dev
     - name: Install Dependencies (macOS)
       if: runner.os == 'macOS'
@@ -131,8 +132,20 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
-        cached: ${{ steps.cache-qt.outputs.cache-hit }}
+        aqtversion: '==3.1.*'
+        cache: true
         version: ${{ env.QT_VERSION }}
+
+    - name: Install OpenSSL (Win64)
+      if: runner.os == 'Windows'
+      uses: jurplel/install-qt-action@v3
+      with:
+        aqtversion: '==3.1.*'
+        cache: true
+        host: 'windows'
+        target: 'desktop'
+        tools-only: 'true'
+        tools: 'tools_opensslv3_x64'
 
     - name: Configure MSVC Command Prompt
       if: runner.os == 'Windows'
@@ -155,12 +168,16 @@ jobs:
       shell: bash
       working-directory: ${{ runner.workspace }}/build
 
+    - name: Setup tmate session
+      if: failure()
+      uses: mxschmitt/action-tmate@v3
+
     - name: Fix Mac plugins
       if: runner.os == 'macOS'
-      working-directory: ${{ runner.workspace }}/build/prefix/lib/openbabel 
+      working-directory: ${{ runner.workspace }}/build/prefix/lib/openbabel
       run: |
         for plugin in *.so; do
-          for libpath in `otool -L ${plugin} | grep '/Users/runner/work' | awk '{print $1}'`; do 
+          for libpath in `otool -L ${plugin} | grep '/Users/runner/work' | awk '{print $1}'`; do
             export lib=`echo $libpath | cut -d '/' -f 9`;
             echo "Fixing $plugin $lib $libpath"
             install_name_tool -change $libpath @executable_path/../Frameworks/$lib $plugin
@@ -168,7 +185,7 @@ jobs:
         done
         cd .. # build/prefix/lib
         for plugin in libinchi.?.?.?.dylib; do
-          for libpath in `otool -L ${plugin} | grep '/Users/runner/work' | awk '{print $1}'`; do 
+          for libpath in `otool -L ${plugin} | grep '/Users/runner/work' | awk '{print $1}'`; do
             export lib=`echo $libpath | cut -d '/' -f 9`;
             echo "Fixing $plugin $lib $libpath"
             install_name_tool -change $libpath @executable_path/../Frameworks/$lib $plugin
@@ -236,10 +253,14 @@ jobs:
         if [ -z "${P12_PASSWORD}" ]; then
           unset CODESIGN_IDENTITY # to prevent cpack failing when trying to sign
         fi
+        if [ -z "${OPENSSL_ROOT_DIR}" ]; then
+          unset OPENSSL_ROOT_DIR
+        fi
         cpack ${{ matrix.config.cpack_flags }}
       env:
         P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
         CODESIGN_IDENTITY: ${{ secrets.CODESIGN_ID }}
+        OPENSSL_ROOT_DIR: ${{ matrix.config.ssl_env }}
       working-directory: ${{ runner.workspace }}/build/avogadroapp
 
     - name: AppImage
@@ -280,10 +301,6 @@ jobs:
         CODESIGN_IDENTITY: ${{ secrets.CODESIGN_ID }}
         PRODUCT_BUNDLE_IDENTIFIER: cc.avogadro
 
-    - name: Setup tmate session
-      if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v3
-
     - name: Upload
       if: matrix.config.artifact != 0
       uses: actions/upload-artifact@v4
@@ -299,4 +316,3 @@ jobs:
         rm -rf ./* || true
         rm -rf ./.??* || true
         ls -la ./
- 
