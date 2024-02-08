@@ -150,6 +150,10 @@ jobs:
         CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake $GITHUB_WORKSPACE ${{env.FEATURES}} -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} ${{matrix.config.cmake_flags}}
       shell: bash
 
+    - name: Setup tmate session
+      if: runner.os == 'Windows'
+      uses: mxschmitt/action-tmate@v3
+
     - name: Build
       run: |
         CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake --build . --config ${{matrix.config.build_type}} ${{matrix.config.build_flags}}
@@ -284,10 +288,6 @@ jobs:
         NOTARIZE_PASSWORD: ${{ secrets.AC_PASSWORD }}
         CODESIGN_IDENTITY: ${{ secrets.CODESIGN_ID }}
         PRODUCT_BUNDLE_IDENTIFIER: cc.avogadro
-
-    - name: Setup tmate session
-      if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v3
 
     - name: Upload
       if: matrix.config.artifact != 0
