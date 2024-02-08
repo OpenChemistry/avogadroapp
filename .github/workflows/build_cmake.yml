@@ -132,7 +132,8 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
-        cached: ${{ steps.cache-qt.outputs.cache-hit }}
+        aqtversion: '==3.1.*'
+        cache: true
         version: ${{ env.QT_VERSION }}
 
     - name: Install OpenSSL (Win64)
@@ -140,9 +141,10 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         aqtversion: '==3.1.*'
+        cache: true
         host: 'windows'
         target: 'desktop'
-        toolsOnly: 'true'
+        tools-only: 'true'
         tools: 'tools_opensslv3_x64'
 
     - name: Configure MSVC Command Prompt
