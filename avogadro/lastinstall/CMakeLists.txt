@@ -46,7 +46,7 @@ if((APPLE OR WIN32) AND NOT ${CMAKE_VERSION} VERSION_LESS 2.8.8)
       file(GLOB OPENSSL_DLL ${OPENSSL_ROOT_DIR}/bin/*.dll)
       install(FILES ${OPENSSL_DLL} DESTINATION ${INSTALL_RUNTIME_DIR})
     endif()
-endif()
+  endif()
 
   set(plugins "")
   foreach(plugin ${AvogadroLibs_PLUGINS})
