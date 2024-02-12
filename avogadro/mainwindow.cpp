@@ -2192,7 +2192,11 @@ void MainWindow::buildTools()
   foreach (ToolPluginFactory* factory, toolPluginFactories) {
     ToolPlugin* tool = factory->createInstance(QCoreApplication::instance());
     tool->setParent(this);
-    tool->setIcon(darkMode);
+    if (darkMode) {
+    tool->setIcon(true);
+} else {
+    tool->setIcon(false);
+}
     if (tool)
       m_tools << tool;
   }
