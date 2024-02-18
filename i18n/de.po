@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2024-01-23 16:01+0000\n"
+"PO-Revision-Date: 2024-02-19 19:02+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -591,8 +591,9 @@ msgstr "Dateien können nicht geöffnet werden"
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:79:45
+#, fuzzy
 msgid "&Build"
-msgstr "&Erstellen"
+msgstr "S&truktur"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
