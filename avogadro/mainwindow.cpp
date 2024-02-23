@@ -78,6 +78,7 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QTreeView>
+#include <QtWidgets/QShortcut>
 
 #include <QScreen>
 
@@ -1184,10 +1185,26 @@ bool populateTools(T* glWidget)
   PluginManager* plugin = PluginManager::instance();
   QList<ToolPluginFactory*> toolPluginFactories =
     plugin->pluginFactories<ToolPluginFactory>();
+
+  // Initialize counter for shortcuts
+  int shortcutKey = Qt::Key_1;
+
   foreach (ToolPluginFactory* factory, toolPluginFactories) {
     ToolPlugin* tool = factory->createInstance(QCoreApplication::instance());
     if (tool)
       glWidget->addTool(tool);
+    // Create a new shortcut for the tool
+      QShortcut* shortcut = new QShortcut(QKeySequence(shortcutKey), glWidget);
+      QObject::connect(shortcut, &QShortcut::activated, [=]() {
+        glWidget->setActiveTool(tool->objectName());
+        // Pretty sure we need one of the below but all out of scope
+        // this->toolActivated()
+        // toolActivated()
+        // this->setActiveTool()
+      });
+
+      // Increment the shortcut key for the next tool
+      ++shortcutKey;
   }
   glWidget->setDefaultTool("Navigator");
   glWidget->setActiveTool("Navigator");
