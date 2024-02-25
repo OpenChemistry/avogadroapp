@@ -2201,6 +2201,7 @@ void MainWindow::buildTools()
   std::sort(m_tools.begin(), m_tools.end(), ToolSort);
 
   int index = 1;
+  int shortcutKey = Qt::Key_1;
   foreach (ToolPlugin* toolPlugin, m_tools) {
     // Add action to toolbar.
     toolPlugin->setParent(this);
@@ -2208,7 +2209,9 @@ void MainWindow::buildTools()
     action->setParent(m_toolToolBar);
     action->setCheckable(true);
     if (index < 10)
-      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index)));
+      action->setShortcut(QKeySequence(shortcutKey));
+    if (index == 10)
+      action->setShortcut(QKeySequence(Qt::Key_0));
     action->setData(toolPlugin->objectName());
     m_toolToolBar->addAction(action);
 
@@ -2218,6 +2221,7 @@ void MainWindow::buildTools()
     toolPlugin->registerCommands();
 
     ++index;
+    ++shortcutKey;
   }
 
   // add the fake tooltip method
