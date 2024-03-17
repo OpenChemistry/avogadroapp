@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2024-02-06 22:01+0000\n"
+"PO-Revision-Date: 2024-03-12 22:01+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -395,7 +395,7 @@ msgstr "Enregistrer &sous…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1976:201
 msgid "&Export"
-msgstr "&Exporter"
+msgstr "E&xporter"
 
 #: mainwindow.cpp:1977
 msgid "&Molecule…"
@@ -421,7 +421,7 @@ msgstr "&Quitter"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2010:195
 msgid "Open Recent"
-msgstr "Récemment ouvert"
+msgstr "&Récemment ouvert"
 
 #: mainwindow.cpp:2022
 msgid "No recent files"
@@ -469,7 +469,7 @@ msgstr "Orthogonale"
 
 #: mainwindow.cpp:2097
 msgid "&Extensions"
-msgstr "&Extensions"
+msgstr "E&xtensions"
 
 #: mainwindow.cpp:2099
 msgid "User Interface Language…"
@@ -499,11 +499,11 @@ msgstr "&Site web d’Avogadro"
 
 #: mainwindow.cpp:2125
 msgid "&Report a Bug"
-msgstr "&Signaler une erreur"
+msgstr "Signaler une &erreur"
 
 #: mainwindow.cpp:2129
 msgid "&Suggest a Feature"
-msgstr "&Suggérer une fonctionnalité"
+msgstr "Suggérer une &fonctionnalité"
 
 #: mainwindow.cpp:2153
 msgid "System Language"
@@ -684,7 +684,7 @@ msgstr "Ctrl+Q"
 #. i18n: file: mainwindow.ui:111
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Recent"
-msgstr "Récemment ouvert"
+msgstr "&Récemment ouvert"
 
 #. i18n: file: mainwindow.ui:116
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -783,7 +783,7 @@ msgstr "Ctrl+X"
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
-msgstr "Effacer"
+msgstr "&Effacer"
 
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -825,7 +825,7 @@ msgstr "Notes sur cette version"
 #. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
-msgstr "Signaler un bogue"
+msgstr "Signaler un &bogue"
 
 #. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

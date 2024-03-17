@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Hoseok Seo <ddinghoya@gmail.com>, 2022.
-# simmon <simmon@nplob.com>, 2023.
+# simmon <simmon@nplob.com>, 2023, 2024.
 # 이남규 <athiv123@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2023-04-30 15:50+0000\n"
+"PO-Revision-Date: 2024-03-17 10:01+0000\n"
 "Last-Translator: simmon <simmon@nplob.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ko/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.5-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -157,7 +157,7 @@ msgstr "요금"
 #: mainwindow.cpp:831
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "역장"
 
 #: mainwindow.cpp:835
 msgid "Install Plugin Script"
@@ -400,10 +400,8 @@ msgid "&Molecule…"
 msgstr "분자...(&M)"
 
 #: mainwindow.cpp:1984
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "분자 내보내기"
+msgstr "분자 내보내기…"
 
 #: mainwindow.cpp:1991
 msgid "&Graphics…"
@@ -881,12 +879,12 @@ msgstr "닫기"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-"Launchpad Contributions:,Avogadro Team,Bundo,Kim Hanjo,Para, Sang-hyeon Lee,"
-"dlonie, park gong gu, seokhyun an"
+"Launchpad Contributions:,Avogadro Team,Bundo,Kim Hanjo,Para, Sang-hyeon "
+"Lee,dlonie, park gong gu, seokhyun an, simmon"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "loniedavid@gmail.com, an6207@gmail.com"
+msgstr "loniedavid@gmail.com, an6207@gmail.com, simmon@nplob.com"
 
 #~ msgid "Navigate tool"
 #~ msgstr "탐색 도구"
