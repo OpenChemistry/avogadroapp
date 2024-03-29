@@ -4,7 +4,7 @@
 ******************************************************************************/
 
 #include "mainwindow.h"
-
+#include "preferencesdialog.h"
 #include "aboutdialog.h"
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
@@ -300,7 +300,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 
   // Now set up the interface.
   setupInterface();
-
+initializeActions();
   // Build up the standard menus, incorporate dynamic menus.
   buildMenu();
   updateRecentFiles();
@@ -356,7 +356,23 @@ MainWindow::~MainWindow()
   delete m_menuBuilder;
   delete m_viewFactory;
 }
+void MainWindow::initializeActions()
+{
+    // Example initialization, adjust according to your needs
+    m_actionPreferences = new QAction(tr("&Preferences"), this);
+    connect(m_actionPreferences, &QAction::triggered, this, &MainWindow::showPreferencesDialog);
+    // Add m_actionPreferences to the appropriate menu or toolbar
+}
 
+void MainWindow::showPreferencesDialog()
+{
+   PreferencesDialog dialog(this);
+    dialog.loadSettings();
+
+    if (dialog.exec() == QDialog::Accepted) {
+        dialog.applySettings(); // Apply and save settings
+    }
+}
 void MainWindow::setupInterface()
 {
   // We take care of setting up the main interface here, along with any custom
