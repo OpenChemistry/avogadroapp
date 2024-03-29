@@ -522,26 +522,30 @@ void MainWindow::dragEnterEvent(QDragEnterEvent* event)
   else
     event->ignore();
 }
-
 void MainWindow::dropEvent(QDropEvent* event)
 {
-  if (event->mimeData()->hasUrls()) {
-    // TODO: check for ZIP, TAR, PY scripts (plugins)
-    foreach (const QUrl& url, event->mimeData()->urls()) {
-      if (url.isLocalFile()) {
-        QString fileName = url.toLocalFile();
-        QFileInfo info(fileName);
-        QString extension = info.completeSuffix(); // e.g. .tar.gz or .pdb.gz
+  const QMimeData* mimeData = event->mimeData();
 
-        if (extension == "py")
-          addScript(fileName);
-        else
-          openFile(fileName);
-      }
+  if (mimeData->hasUrls()) {
+    QList<QUrl> urlList = mimeData->urls();
+  .
+    for (int i = 0; i < urlList.size() && i < 10; ++i) {
+      QString filePath = urlList.at(i).toLocalFile();
+      openFile(filePath);
     }
     event->acceptProposedAction();
-  } else
+  }
+ 
+  else if (mimeData->hasText()) {
+
+    QString textData = mimeData->text();
+  
+    event->acceptProposedAction();
+  }
+
+  else {
     event->ignore();
+  }
 }
 
 void MainWindow::moleculeReady(int)
