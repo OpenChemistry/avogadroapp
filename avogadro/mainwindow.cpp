@@ -50,7 +50,7 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
-
+#include <QMouseEvent>
 #include <QOpenGLFramebufferObject>
 #include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
@@ -228,6 +228,7 @@ using VTK::vtkGLWidget;
 #endif
 
 MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
+  : QMainWindow(/* parent */), dragStartPosition()
   : m_molecule(nullptr)
   , m_rwMolecule(nullptr)
   , m_moleculeModel(nullptr)
@@ -355,6 +356,47 @@ MainWindow::~MainWindow()
   delete m_molecule;
   delete m_menuBuilder;
   delete m_viewFactory;
+}
+
+void MainWindow::mousePressEvent(QMouseEvent* event)
+{
+  if (event->button() == Qt::LeftButton)
+    dragStartPosition = event->pos();
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent* event)
+{
+  if (!(event->buttons() & Qt::LeftButton))
+    return;
+  if ((event->pos() - dragStartPosition).manhattanLength() < QApplication::startDragDistance())
+    return;
+
+  performDrag();
+}
+
+void MainWindow::performDrag()
+{
+  // Assuming you have a method to get the currently selected molecule as a string in a specific format
+  QString moleculeData = /* method to get molecule data */;
+  if (moleculeData.isEmpty())
+    return;
+
+  auto* mimeData = new QMimeData;
+  mimeData->setText(moleculeData); // For demonstration, using plain text. Adjust based on actual data format.
+
+  // Create a drag object
+  auto* drag = new QDrag(this);
+  drag->setMimeData(mimeData);
+  
+  // You can set an appropriate pixmap for the drag object if you like
+  // QPixmap pixmap(iconSize);
+  // QPainter painter(&pixmap);
+  // painter.drawPixmap(QPoint(), /* your pixmap here */);
+  // painter.end();
+  // drag->setPixmap(pixmap);
+
+  // Execute the drag operation
+  drag->exec(Qt::CopyAction | Qt::MoveAction);
 }
 
 void MainWindow::setupInterface()
@@ -524,29 +566,28 @@ void MainWindow::dragEnterEvent(QDragEnterEvent* event)
 }
 void MainWindow::dropEvent(QDropEvent* event)
 {
-  const QMimeData* mimeData = event->mimeData();
-
-  if (mimeData->hasUrls()) {
-    QList<QUrl> urlList = mimeData->urls();
-  .
-    for (int i = 0; i < urlList.size() && i < 10; ++i) {
-      QString filePath = urlList.at(i).toLocalFile();
-      openFile(filePath);
+  if (event->mimeData()->hasUrls()) {
+    QList<QUrl> urls = event->mimeData()->urls();
+    for (const QUrl &url : urls) {
+      if (url.isLocalFile()) {
+        QString fileName = url.toLocalFile();
+        QFileInfo info(fileName);
+        
+        // Distinguish Python scripts for special handling
+        if (info.suffix().compare("py", Qt::CaseInsensitive) == 0) {
+          addScript(fileName);
+        } else {
+          
+          openFile(fileName);
+        }
+      }
     }
     event->acceptProposedAction();
-  }
- 
-  else if (mimeData->hasText()) {
-
-    QString textData = mimeData->text();
-  
-    event->acceptProposedAction();
-  }
-
-  else {
+  } else {
     event->ignore();
   }
 }
+
 
 void MainWindow::moleculeReady(int)
 {

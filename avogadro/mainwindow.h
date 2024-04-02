@@ -9,6 +9,8 @@
 #include <QtCore/QStringList>
 #include <QtCore/QVariantMap>
 #include <QtWidgets/QMainWindow>
+#include <QMimeData>
+#include <QDrag>
 
 #ifdef QTTESTING
 class pqTestUtility;
@@ -161,6 +163,9 @@ signals:
   void moleculeChanged(QtGui::Molecule* molecue);
 
 protected:
+ void mousePressEvent(QMouseEvent* event) override;
+  void mouseMoveEvent(QMouseEvent* event) override;
+
   void closeEvent(QCloseEvent* event);
 
   // Handle drag and drop -- accept files dragged on the window
@@ -391,6 +396,7 @@ private slots:
   void setProjectionPerspective();
 
 private:
+QPoint dragStartPosition; // To store the start position of a drag operation
   QtGui::Molecule* m_molecule;
   QtGui::RWMolecule* m_rwMolecule;
   QtGui::MoleculeModel* m_moleculeModel;
@@ -479,7 +485,7 @@ private:
    * Initialize the tool plugins.
    */
   void buildTools();
-
+ void performDrag();
   /**
    * Convenience function that converts a file extension to a wildcard
    * expression, e.g. "out" to "*.out". This method also checks for "extensions"
