@@ -12,8 +12,9 @@ RenderingDialog::RenderingDialog(QWidget *parent_, SolidPipeline &pipeline)
   : QDialog(parent_), m_ui(new Ui::RenderingDialog), m_solidPipeline(pipeline)
 {
   m_ui->setupUi(this);
-  
+
   m_ui->aoEnableCheckBox->setCheckState(pipeline.getAoEnabled()? Qt::Checked : Qt::Unchecked);
+  m_ui->dofEnableCheckBox->setCheckState(pipeline.getDofEnabled()? Qt::Checked : Qt::Unchecked);
   m_ui->aoStrengthDoubleSpinBox->setMinimum(0.0);
   m_ui->aoStrengthDoubleSpinBox->setValue(pipeline.getAoStrength());
   m_ui->aoStrengthDoubleSpinBox->setMaximum(2.0);
@@ -23,6 +24,8 @@ RenderingDialog::RenderingDialog(QWidget *parent_, SolidPipeline &pipeline)
   
   connect(m_ui->aoEnableCheckBox, SIGNAL(stateChanged(int)),
           SLOT(aoEnableCheckBoxChanged(int)));
+  connect(m_ui->dofEnableCheckBox, SIGNAL(stateChanged(int)),
+          SLOT(dofEnableCheckBoxChanged(int)));
   connect(m_ui->saveButton, SIGNAL(clicked()),
           SLOT(saveButtonClicked()));
   connect(m_ui->closeButton, SIGNAL(clicked()),
@@ -39,6 +42,11 @@ bool RenderingDialog::aoEnabled()
   return m_ui->aoEnableCheckBox->checkState() == Qt::Checked;
 }
 
+bool RenderingDialog::dofEnabled()
+{
+  return m_ui->dofEnableCheckBox->checkState() == Qt::Checked;
+}
+
 float RenderingDialog::aoStrength()
 {
   return m_ui->aoStrengthDoubleSpinBox->value();
@@ -47,6 +55,15 @@ float RenderingDialog::aoStrength()
 bool RenderingDialog::edEnabled()
 {
   return m_ui->edEnableCheckBox->checkState() == Qt::Checked;
+}
+
+// will correct this one.
+void RenderingDialog::dofEnableCheckBoxChanged(int state)
+{
+  if (state == Qt::Unchecked)
+    m_ui->aoStrengthDoubleSpinBox->setEnabled(false);
+  else
+    m_ui->aoStrengthDoubleSpinBox->setEnabled(true);
 }
 
 void RenderingDialog::aoEnableCheckBoxChanged(int state)
@@ -60,6 +77,7 @@ void RenderingDialog::aoEnableCheckBoxChanged(int state)
 void RenderingDialog::saveButtonClicked()
 {
   m_solidPipeline.setAoEnabled(aoEnabled());
+  m_solidPipeline.setDofEnabled(dofEnabled());
   m_solidPipeline.setAoStrength(aoStrength());
   m_solidPipeline.setEdEnabled(edEnabled());
   this->accept();
