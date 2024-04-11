@@ -389,6 +389,8 @@ void MainWindow::setupInterface()
   if (pipeline) {
     pipeline->setAoEnabled(
       settings.value("MainWindow/ao_enabled", true).toBool());
+    pipeline->setDofEnabled(
+      settings.value("MainWindow/dof_enabled", true).toBool());
     pipeline->setAoStrength(
       settings.value("MainWindow/ao_strength", 1.0f).toFloat());
     pipeline->setEdEnabled(
@@ -577,7 +579,7 @@ void setDefaultViews(MultiViewWidget* viewWidget)
     bool anyPluginTrue = false;
     // load plugins normally, if all non-ignore are false.
     // restore the default behavior
-    for (ScenePlugin* plugin : sceneModel->scenePlugins()) {
+    for (auto plugin : sceneModel->scenePlugins()) {
       QString settingsKey("MainWindow/" + plugin->objectName());
       bool enabled = settings.value(settingsKey, plugin->isEnabled()).toBool();
       if (plugin->defaultBehavior() != ScenePlugin::DefaultBehavior::Ignore &&
@@ -1497,9 +1499,6 @@ bool MainWindow::saveFileAs(bool async)
   QFileDialog saveDialog(this, tr("Save chemical file"), dir, filter);
   saveDialog.setAcceptMode(QFileDialog::AcceptSave);
   saveDialog.exec();
-  if (saveDialog.selectedFiles().isEmpty()) // user cancel
-    return false;
-
   QString fileName = saveDialog.selectedFiles().first();
 
   if (fileName.isEmpty()) // user cancel
@@ -1837,6 +1836,7 @@ void MainWindow::setRenderingSettings()
     dialog.exec();
     QSettings settings;
     settings.setValue("MainWindow/ao_enabled", pipeline->getAoEnabled());
+    settings.setValue("MainWindow/dof_enabled", pipeline->getDofEnabled());
     settings.setValue("MainWindow/ao_strength", pipeline->getAoStrength());
     settings.setValue("MainWindow/ed_enabled", pipeline->getEdEnabled());
   }
