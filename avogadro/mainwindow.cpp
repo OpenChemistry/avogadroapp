@@ -579,7 +579,7 @@ void setDefaultViews(MultiViewWidget* viewWidget)
     bool anyPluginTrue = false;
     // load plugins normally, if all non-ignore are false.
     // restore the default behavior
-    for (auto plugin : sceneModel->scenePlugins()) {
+    for (ScenePlugin* plugin : sceneModel->scenePlugins()) {
       QString settingsKey("MainWindow/" + plugin->objectName());
       bool enabled = settings.value(settingsKey, plugin->isEnabled()).toBool();
       if (plugin->defaultBehavior() != ScenePlugin::DefaultBehavior::Ignore &&
@@ -1499,6 +1499,9 @@ bool MainWindow::saveFileAs(bool async)
   QFileDialog saveDialog(this, tr("Save chemical file"), dir, filter);
   saveDialog.setAcceptMode(QFileDialog::AcceptSave);
   saveDialog.exec();
+  if (saveDialog.selectedFiles().isEmpty()) // user cancel
+    return false;
+
   QString fileName = saveDialog.selectedFiles().first();
 
   if (fileName.isEmpty()) // user cancel
