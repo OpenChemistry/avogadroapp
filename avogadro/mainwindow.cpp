@@ -1980,41 +1980,45 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
   // Initialize autosave feature
-m_autosaveInterval = 5; // Autosave interval in minutes
-m_autosaveTimer = new QTimer(this);
-connect(m_autosaveTimer, &QTimer::timeout, this, &MainWindow::autosaveDocument);
-m_autosaveTimer->start(m_autosaveInterval * 60000); // Convert minutes to milliseconds
+  m_autosaveInterval = 5; // Autosave interval in minutes
+  m_autosaveTimer = new QTimer(this);
+  connect(m_autosaveTimer, &QTimer::timeout, this,
+          &MainWindow::autosaveDocument);
+  m_autosaveTimer->start(m_autosaveInterval *
+                         60000); // Convert minutes to milliseconds
 
-void MainWindow::autosaveDocument()
-{
+  void MainWindow::autosaveDocument()
+  {
     if (!m_molecule || !m_moleculeDirty) {
-        return; // No molecule loaded or no changes made since the last save.
+      return; // No molecule loaded or no changes made since the last save.
     }
 
-    QString autosaveDirPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/autosave";
+    QString autosaveDirPath =
+      QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
+      "/autosave";
     QDir autosaveDir(autosaveDirPath);
     if (!autosaveDir.exists()) {
-        autosaveDir.mkpath(".");
+      autosaveDir.mkpath(".");
     }
 
     // Construct autosave file name
     QString autosaveFilename;
     if (m_molecule->hasData("fileName")) {
-        QFileInfo fileInfo(m_molecule->data("fileName").toString().c_str());
-        autosaveFilename = fileInfo.baseName() + "_autosave.cjson";
+      QFileInfo fileInfo(m_molecule->data("fileName").toString().c_str());
+      autosaveFilename = fileInfo.baseName() + "_autosave.cjson";
     } else {
-        autosaveFilename = "unsaved_autosave.cjson";
+      autosaveFilename = "unsaved_autosave.cjson";
     }
     QString autosaveFilePath = autosaveDirPath + "/" + autosaveFilename;
 
     // Use CJSON format for autosaving
     Io::CjsonFormat writer;
     if (!writer.writeFile(autosaveFilePath, *m_molecule)) {
-        qWarning() << "Failed to autosave the document to" << autosaveFilePath;
+      qWarning() << "Failed to autosave the document to" << autosaveFilePath;
     } else {
-        qDebug() << "Document autosaved to" << autosaveFilePath;
+      qDebug() << "Document autosaved to" << autosaveFilePath;
     }
-}
+  }
 
   // Export action for menu
   QStringList exportPath = path;
