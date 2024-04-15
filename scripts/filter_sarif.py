@@ -64,58 +64,42 @@ def parse_pattern(line):
 
 
 def filter_sarif(args):
-    if args.split_lines:
-        tmp = []
-        for pattern in args.patterns:
-            tmp = tmp + re.split("\r?\n", pattern)
-        args.patterns = tmp
+    try:
+        with open(args.input, "r", encoding="UTF-8") as file:
+            sarif = json.load(file)
+    except Exception as e:
+        print(f"Error reading SARIF file: {e}")
+        return
 
-    args.patterns = [parse_pattern(pattern) for pattern in args.patterns if pattern]
-
-    print("Given patterns:")
-    for sign, file_pattern, rule_pattern in args.patterns:
-        sign_text = "positive" if sign else "negative"
-        print(f"files: {file_pattern}    rules: {rule_pattern} ({sign_text})")
-
-    with open(args.input, "r", encoding="UTF-8") as file:
-        sarif = json.load(file)
-
-    for run in sarif.get("runs", []):
-        if run.get("results", []):
-            new_results = []
-            for result in run["results"]:
-                if result.get("locations", []):
-                    new_locations = []
-                    for location in result["locations"]:
-                        # TODO: The uri field is optional. We might have to fetch the
-                        #  actual uri from "artifacts" via "index"
-                        # (https://github.com/microsoft/sarif-tutorials/blob/main/docs/2-Basics.md)
-                        uri = (
-                            location.get("physicalLocation", {})
-                            .get("artifactLocation", {})
-                            .get("uri", None)
-                        )
-                        # TODO: The ruleId field is optional and potentially ambiguous.
-                        # We might have to fetch the actual ruleId from the rule metadata
-                        # via the ruleIndex field.
-                        # (https://github.com/microsoft/sarif-tutorials/blob/main/docs/2-Basics.md)
-                        rule_id = result["ruleId"]
-                        if uri is None or match_path_and_rule(
-                            uri, rule_id, args.patterns
-                        ):
-                            new_locations.append(location)
-                    result["locations"] = new_locations
-                    if new_locations:
+    try:
+        for run in sarif.get("runs", []):
+            if run.get("results", []):
+                new_results = []
+                for result in run["results"]:
+                    if result.get("locations", []):
+                        new_locations = []
+                        for location in result["locations"]:
+                            uri = (
+                                location.get("physicalLocation", {})
+                                .get("artifactLocation", {})
+                                .get("uri", None)
+                            )
+                            rule_id = result["ruleId"]
+                            if uri is None or match_path_and_rule(
+                                uri, rule_id, args.patterns
+                            ):
+                                new_locations.append(location)
+                        result["locations"] = new_locations
+                        if new_locations:
+                            new_results.append(result)
+                    else:
                         new_results.append(result)
-                else:
-                    # locations array doesn't exist or is empty, so we can't match on anything
-                    # therefore, we include the result in the output
-                    new_results.append(result)
-            run["results"] = new_results
+                run["results"] = new_results
 
-    with open(args.output, "w", encoding="UTF-8") as file:
-        json.dump(sarif, file, indent=args.indent)
-
+        with open(args.output, "w", encoding="UTF-8") as file:
+            json.dump(sarif, file, indent=args.indent)
+    except Exception as e:
+        print(f"Error processing SARIF file: {e}")
 
 def main():
     parser = argparse.ArgumentParser(prog="filter-sarif")

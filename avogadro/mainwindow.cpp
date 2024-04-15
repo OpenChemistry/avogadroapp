@@ -4,11 +4,11 @@
 ******************************************************************************/
 
 #include "mainwindow.h"
-#include "preferencesdialog.h"
 #include "aboutdialog.h"
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
 #include "menubuilder.h"
+#include "preferencesdialog.h"
 #include "renderingdialog.h"
 #include "tdxcontroller.h"
 #include "tooltipfilter.h"
@@ -300,7 +300,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 
   // Now set up the interface.
   setupInterface();
-initializeActions();
+  initializeActions();
   // Build up the standard menus, incorporate dynamic menus.
   buildMenu();
   updateRecentFiles();
@@ -358,20 +358,21 @@ MainWindow::~MainWindow()
 }
 void MainWindow::initializeActions()
 {
-    // Example initialization, adjust according to your needs
-    m_actionPreferences = new QAction(tr("&Preferences"), this);
-    connect(m_actionPreferences, &QAction::triggered, this, &MainWindow::showPreferencesDialog);
-    // Add m_actionPreferences to the appropriate menu or toolbar
+  // Example initialization, adjust according to your needs
+  m_actionPreferences = new QAction(tr("&Preferences"), this);
+  connect(m_actionPreferences, &QAction::triggered, this,
+          &MainWindow::showPreferencesDialog);
+  // Add m_actionPreferences to the appropriate menu or toolbar
 }
 
 void MainWindow::showPreferencesDialog()
 {
-   PreferencesDialog dialog(this);
-    dialog.loadSettings();
+  PreferencesDialog dialog(this);
+  dialog.loadSettings();
 
-    if (dialog.exec() == QDialog::Accepted) {
-        dialog.applySettings(); // Apply and save settings
-    }
+  if (dialog.exec() == QDialog::Accepted) {
+    dialog.applySettings(); // Apply and save settings
+  }
 }
 void MainWindow::setupInterface()
 {
