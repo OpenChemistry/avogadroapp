@@ -38,6 +38,8 @@
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
+#include <QMouseEvent>
+#include <QOpenGLFramebufferObject>
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
@@ -50,8 +52,6 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
-#include <QMouseEvent>
-#include <QOpenGLFramebufferObject>
 #include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
@@ -228,7 +228,8 @@ using VTK::vtkGLWidget;
 #endif
 
 MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
-  : QMainWindow(/* parent */), dragStartPosition()
+  : QMainWindow(/* parent */)
+  , dragStartPosition()
   : m_molecule(nullptr)
   , m_rwMolecule(nullptr)
   , m_moleculeModel(nullptr)
@@ -368,7 +369,8 @@ void MainWindow::mouseMoveEvent(QMouseEvent* event)
 {
   if (!(event->buttons() & Qt::LeftButton))
     return;
-  if ((event->pos() - dragStartPosition).manhattanLength() < QApplication::startDragDistance())
+  if ((event->pos() - dragStartPosition).manhattanLength() <
+      QApplication::startDragDistance())
     return;
 
   performDrag();
@@ -376,18 +378,20 @@ void MainWindow::mouseMoveEvent(QMouseEvent* event)
 
 void MainWindow::performDrag()
 {
-  // Assuming you have a method to get the currently selected molecule as a string in a specific format
+  // Assuming you have a method to get the currently selected molecule as a
+  // string in a specific format
   QString moleculeData = /* method to get molecule data */;
   if (moleculeData.isEmpty())
     return;
 
   auto* mimeData = new QMimeData;
-  mimeData->setText(moleculeData); // For demonstration, using plain text. Adjust based on actual data format.
+  mimeData->setText(moleculeData); // For demonstration, using plain text.
+                                   // Adjust based on actual data format.
 
   // Create a drag object
   auto* drag = new QDrag(this);
   drag->setMimeData(mimeData);
-  
+
   // You can set an appropriate pixmap for the drag object if you like
   // QPixmap pixmap(iconSize);
   // QPainter painter(&pixmap);
@@ -568,16 +572,16 @@ void MainWindow::dropEvent(QDropEvent* event)
 {
   if (event->mimeData()->hasUrls()) {
     QList<QUrl> urls = event->mimeData()->urls();
-    for (const QUrl &url : urls) {
+    for (const QUrl& url : urls) {
       if (url.isLocalFile()) {
         QString fileName = url.toLocalFile();
         QFileInfo info(fileName);
-        
+
         // Distinguish Python scripts for special handling
         if (info.suffix().compare("py", Qt::CaseInsensitive) == 0) {
           addScript(fileName);
         } else {
-          
+
           openFile(fileName);
         }
       }
@@ -587,7 +591,6 @@ void MainWindow::dropEvent(QDropEvent* event)
     event->ignore();
   }
 }
-
 
 void MainWindow::moleculeReady(int)
 {
