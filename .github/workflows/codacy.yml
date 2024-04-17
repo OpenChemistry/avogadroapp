@@ -53,13 +53,17 @@ jobs:
           # This will handover control about PR rejection to the GitHub side
           max-allowed-issues: 2147483647
 
-      - name: Filter out MISRA
+      # Filter out MISRA and potentially reduce the number of runs in the SARIF output
+      - name: Filter and Reduce SARIF
         run: |
           pip install globber
-          python3 scripts/filter_sarif.py --input results.sarif --output filtered.sarif --split-lines -- "-**/*.*:cppcheck_misra*"
+          python3 scripts/filter_and_reduce_sarif.py --input results.sarif --output filtered_and_reduced.sarif
+        env:
+          PYTHONUNBUFFERED: 1
 
-      # Upload the SARIF file generated in the previous step
+
+       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: filtered.sarif
+          sarif_file: filtered_and_reduced.sarif
