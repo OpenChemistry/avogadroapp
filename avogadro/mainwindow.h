@@ -6,6 +6,8 @@
 #ifndef AVOGADRO_MAINWINDOW_H
 #define AVOGADRO_MAINWINDOW_H
 
+#include <QDrag>
+#include <QMimeData>
 #include <QtCore/QStringList>
 #include <QtCore/QVariantMap>
 #include <QtWidgets/QMainWindow>
@@ -69,7 +71,7 @@ public:
 
 public slots:
   void setMolecule(Avogadro::QtGui::Molecule* molecule);
-
+  void autosaveDocument(); // line to declare the autosave slot
   /**
    * Update internal state to reflect that the molecule has been modified.
    */
@@ -161,6 +163,9 @@ signals:
   void moleculeChanged(QtGui::Molecule* molecue);
 
 protected:
+  void mousePressEvent(QMouseEvent* event) override;
+  void mouseMoveEvent(QMouseEvent* event) override;
+
   void closeEvent(QCloseEvent* event);
 
   // Handle drag and drop -- accept files dragged on the window
@@ -391,6 +396,7 @@ private slots:
   void setProjectionPerspective();
 
 private:
+  QPoint dragStartPosition; // To store the start position of a drag operation
   QtGui::Molecule* m_molecule;
   QtGui::RWMolecule* m_rwMolecule;
   QtGui::MoleculeModel* m_moleculeModel;
@@ -398,7 +404,8 @@ private:
   QtGui::ScenePlugin* m_activeScenePlugin;
   bool m_queuedFilesStarted;
   QStringList m_queuedFiles;
-
+  QTimer* m_autosaveTimer; // for the autosave timer
+  int m_autosaveInterval;  // for autosave interval in minutes
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 
@@ -478,7 +485,7 @@ private:
    * Initialize the tool plugins.
    */
   void buildTools();
-
+  void performDrag();
   /**
    * Convenience function that converts a file extension to a wildcard
    * expression, e.g. "out" to "*.out". This method also checks for "extensions"

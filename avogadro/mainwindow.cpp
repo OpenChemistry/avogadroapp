@@ -38,6 +38,8 @@
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
+#include <QMouseEvent>
+#include <QOpenGLFramebufferObject>
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
@@ -50,8 +52,6 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
-
-#include <QOpenGLFramebufferObject>
 #include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
@@ -228,6 +228,8 @@ using VTK::vtkGLWidget;
 #endif
 
 MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
+  : QMainWindow(/* parent */)
+  , dragStartPosition()
   : m_molecule(nullptr)
   , m_rwMolecule(nullptr)
   , m_moleculeModel(nullptr)
@@ -355,6 +357,50 @@ MainWindow::~MainWindow()
   delete m_molecule;
   delete m_menuBuilder;
   delete m_viewFactory;
+}
+
+void MainWindow::mousePressEvent(QMouseEvent* event)
+{
+  if (event->button() == Qt::LeftButton)
+    dragStartPosition = event->pos();
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent* event)
+{
+  if (!(event->buttons() & Qt::LeftButton))
+    return;
+  if ((event->pos() - dragStartPosition).manhattanLength() <
+      QApplication::startDragDistance())
+    return;
+
+  performDrag();
+}
+
+void MainWindow::performDrag()
+{
+  // Assuming you have a method to get the currently selected molecule as a
+  // string in a specific format
+  QString moleculeData = /* method to get molecule data */;
+  if (moleculeData.isEmpty())
+    return;
+
+  auto* mimeData = new QMimeData;
+  mimeData->setText(moleculeData); // For demonstration, using plain text.
+                                   // Adjust based on actual data format.
+
+  // Create a drag object
+  auto* drag = new QDrag(this);
+  drag->setMimeData(mimeData);
+
+  // You can set an appropriate pixmap for the drag object if you like
+  // QPixmap pixmap(iconSize);
+  // QPainter painter(&pixmap);
+  // painter.drawPixmap(QPoint(), /* your pixmap here */);
+  // painter.end();
+  // drag->setPixmap(pixmap);
+
+  // Execute the drag operation
+  drag->exec(Qt::CopyAction | Qt::MoveAction);
 }
 
 void MainWindow::setupInterface()
@@ -522,26 +568,28 @@ void MainWindow::dragEnterEvent(QDragEnterEvent* event)
   else
     event->ignore();
 }
-
 void MainWindow::dropEvent(QDropEvent* event)
 {
   if (event->mimeData()->hasUrls()) {
-    // TODO: check for ZIP, TAR, PY scripts (plugins)
-    foreach (const QUrl& url, event->mimeData()->urls()) {
+    QList<QUrl> urls = event->mimeData()->urls();
+    for (const QUrl& url : urls) {
       if (url.isLocalFile()) {
         QString fileName = url.toLocalFile();
         QFileInfo info(fileName);
-        QString extension = info.completeSuffix(); // e.g. .tar.gz or .pdb.gz
 
-        if (extension == "py")
+        // Distinguish Python scripts for special handling
+        if (info.suffix().compare("py", Qt::CaseInsensitive) == 0) {
           addScript(fileName);
-        else
+        } else {
+
           openFile(fileName);
+        }
       }
     }
     event->acceptProposedAction();
-  } else
+  } else {
     event->ignore();
+  }
 }
 
 void MainWindow::moleculeReady(int)
@@ -1979,6 +2027,46 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(path, action, 960);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
+  // Initialize autosave feature
+  m_autosaveInterval = 5; // Autosave interval in minutes
+  m_autosaveTimer = new QTimer(this);
+  connect(m_autosaveTimer, &QTimer::timeout, this,
+          &MainWindow::autosaveDocument);
+  m_autosaveTimer->start(m_autosaveInterval *
+                         60000); // Convert minutes to milliseconds
+
+  void MainWindow::autosaveDocument()
+  {
+    if (!m_molecule || !m_moleculeDirty) {
+      return; // No molecule loaded or no changes made since the last save.
+    }
+
+    QString autosaveDirPath =
+      QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
+      "/autosave";
+    QDir autosaveDir(autosaveDirPath);
+    if (!autosaveDir.exists()) {
+      autosaveDir.mkpath(".");
+    }
+
+    // Construct autosave file name
+    QString autosaveFilename;
+    if (m_molecule->hasData("fileName")) {
+      QFileInfo fileInfo(m_molecule->data("fileName").toString().c_str());
+      autosaveFilename = fileInfo.baseName() + "_autosave.cjson";
+    } else {
+      autosaveFilename = "unsaved_autosave.cjson";
+    }
+    QString autosaveFilePath = autosaveDirPath + "/" + autosaveFilename;
+
+    // Use CJSON format for autosaving
+    Io::CjsonFormat writer;
+    if (!writer.writeFile(autosaveFilePath, *m_molecule)) {
+      qWarning() << "Failed to autosave the document to" << autosaveFilePath;
+    } else {
+      qDebug() << "Document autosaved to" << autosaveFilePath;
+    }
+  }
 
   // Export action for menu
   QStringList exportPath = path;
