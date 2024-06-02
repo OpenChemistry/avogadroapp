@@ -28,10 +28,12 @@ public:
 
   bool aoEnabled();
   float aoStrength();
+  bool fogEnabled();
   bool edEnabled();
 
 protected slots:
   void aoEnableCheckBoxChanged(int state);
+  void fogEnableCheckBoxChanged(int state);
   void saveButtonClicked();
   void closeButtonClicked();
 
