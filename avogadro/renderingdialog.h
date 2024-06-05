@@ -28,6 +28,7 @@ public:
 
   bool aoEnabled();
   float aoStrength();
+  float fogStrength();
   bool fogEnabled();
   bool edEnabled();
 

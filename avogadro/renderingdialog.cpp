@@ -20,6 +20,11 @@ RenderingDialog::RenderingDialog(QWidget *parent_, SolidPipeline &pipeline)
   m_ui->aoStrengthDoubleSpinBox->setMaximum(2.0);
   m_ui->aoStrengthDoubleSpinBox->setDecimals(1);
   m_ui->aoStrengthDoubleSpinBox->setSingleStep(0.1);
+  m_ui->fogStrengthDoubleSpinBox->setMinimum(0.0);
+  m_ui->fogStrengthDoubleSpinBox->setValue(pipeline.getFogStrength());
+  m_ui->fogStrengthDoubleSpinBox->setMaximum(2.0);
+  m_ui->fogStrengthDoubleSpinBox->setDecimals(1);
+  m_ui->fogStrengthDoubleSpinBox->setSingleStep(0.1);
   m_ui->edEnableCheckBox->setCheckState(pipeline.getEdEnabled()? Qt::Checked : Qt::Unchecked);
   
   connect(m_ui->aoEnableCheckBox, SIGNAL(stateChanged(int)),
@@ -52,6 +57,11 @@ float RenderingDialog::aoStrength()
   return m_ui->aoStrengthDoubleSpinBox->value();
 }
 
+float RenderingDialog::fogStrength()
+{
+  return m_ui->fogStrengthDoubleSpinBox->value();
+}
+
 bool RenderingDialog::edEnabled()
 {
   return m_ui->edEnableCheckBox->checkState() == Qt::Checked;
@@ -62,9 +72,9 @@ bool RenderingDialog::edEnabled()
 void RenderingDialog::fogEnableCheckBoxChanged(int state)
 {
   if (state == Qt::Unchecked)
-    m_ui->aoStrengthDoubleSpinBox->setEnabled(false);
+    m_ui->fogStrengthDoubleSpinBox->setEnabled(false);
   else
-    m_ui->aoStrengthDoubleSpinBox->setEnabled(true);
+    m_ui->fogStrengthDoubleSpinBox->setEnabled(true);
 }
 
 void RenderingDialog::aoEnableCheckBoxChanged(int state)
@@ -79,6 +89,7 @@ void RenderingDialog::saveButtonClicked()
 {
   m_solidPipeline.setAoEnabled(aoEnabled());
   m_solidPipeline.setAoStrength(aoStrength());
+  m_solidPipeline.setFogStrength(fogStrength());
   m_solidPipeline.setFogEnabled(fogEnabled());
   m_solidPipeline.setEdEnabled(edEnabled());
   this->accept();
