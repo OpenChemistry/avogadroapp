@@ -28,6 +28,7 @@ public:
 
   bool aoEnabled();
   bool dofEnabled();
+  float dofStrength();
   float aoStrength();
   bool edEnabled();
 
