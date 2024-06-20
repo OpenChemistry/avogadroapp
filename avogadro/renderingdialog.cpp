@@ -25,6 +25,13 @@ RenderingDialog::RenderingDialog(QWidget *parent_, SolidPipeline &pipeline)
   m_ui->dofStrengthDoubleSpinBox->setMaximum(2.0);
   m_ui->dofStrengthDoubleSpinBox->setDecimals(1);
   m_ui->dofStrengthDoubleSpinBox->setSingleStep(0.1);
+  m_ui->dofPositionDoubleSpinBox->setMinimum(0.0);
+  m_ui->dofPositionDoubleSpinBox->setValue(pipeline.getDofPosition());
+  // We can adjust the max and min value 
+  // after testing with several molecules
+  m_ui->dofPositionDoubleSpinBox->setMaximum(20.0);
+  m_ui->dofPositionDoubleSpinBox->setDecimals(1);
+  m_ui->dofPositionDoubleSpinBox->setSingleStep(0.1);
   m_ui->edEnableCheckBox->setCheckState(pipeline.getEdEnabled()? Qt::Checked : Qt::Unchecked);
   
   connect(m_ui->aoEnableCheckBox, SIGNAL(stateChanged(int)),
@@ -62,18 +69,27 @@ float RenderingDialog::dofStrength()
   return m_ui->dofStrengthDoubleSpinBox->value();
 }
 
+float RenderingDialog::dofPosition()
+{
+  return m_ui->dofPositionDoubleSpinBox->value();
+}
+
 bool RenderingDialog::edEnabled()
 {
   return m_ui->edEnableCheckBox->checkState() == Qt::Checked;
 }
 
-// will correct this one.
+
 void RenderingDialog::dofEnableCheckBoxChanged(int state)
 {
-  if (state == Qt::Unchecked)
+  if (state == Qt::Unchecked){
     m_ui->dofStrengthDoubleSpinBox->setEnabled(false);
-  else
+    m_ui->dofPositionDoubleSpinBox->setEnabled(false);
+  }
+  else{
     m_ui->dofStrengthDoubleSpinBox->setEnabled(true);
+    m_ui->dofPositionDoubleSpinBox->setEnabled(true);
+  }
 }
 
 void RenderingDialog::aoEnableCheckBoxChanged(int state)
@@ -90,6 +106,7 @@ void RenderingDialog::saveButtonClicked()
   m_solidPipeline.setDofEnabled(dofEnabled());
   m_solidPipeline.setAoStrength(aoStrength());
   m_solidPipeline.setDofStrength(dofStrength());
+  m_solidPipeline.setDofPosition(dofPosition());
   m_solidPipeline.setEdEnabled(edEnabled());
   this->accept();
 }
