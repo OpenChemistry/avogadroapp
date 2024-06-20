@@ -389,6 +389,8 @@ void MainWindow::setupInterface()
   if (pipeline) {
     pipeline->setAoEnabled(
       settings.value("MainWindow/ao_enabled", true).toBool());
+    pipeline->setDofEnabled(
+      settings.value("MainWindow/dof_enabled", true).toBool());
     pipeline->setAoStrength(
       settings.value("MainWindow/ao_strength", 1.0f).toFloat());
     pipeline->setEdEnabled(
@@ -1837,6 +1839,7 @@ void MainWindow::setRenderingSettings()
     dialog.exec();
     QSettings settings;
     settings.setValue("MainWindow/ao_enabled", pipeline->getAoEnabled());
+    settings.setValue("MainWindow/dof_enabled", pipeline->getDofEnabled());
     settings.setValue("MainWindow/ao_strength", pipeline->getAoStrength());
     settings.setValue("MainWindow/ed_enabled", pipeline->getEdEnabled());
   }

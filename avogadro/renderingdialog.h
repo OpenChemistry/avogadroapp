@@ -27,11 +27,15 @@ public:
   ~RenderingDialog() override;
 
   bool aoEnabled();
+  bool dofEnabled();
+  float dofStrength();
   float aoStrength();
+  float dofPosition();
   bool edEnabled();
 
 protected slots:
   void aoEnableCheckBoxChanged(int state);
+  void dofEnableCheckBoxChanged(int state);
   void saveButtonClicked();
   void closeButtonClicked();
 
