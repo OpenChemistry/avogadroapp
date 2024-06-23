@@ -97,7 +97,7 @@
                <item row="0" column="0">
                   <widget class="QLabel" name="label_3">
                      <property name="text">
-                        <string>Fog:</string>
+                        <string>FOG : </string>
                      </property>
                   </widget>
                </item>
@@ -128,7 +128,7 @@
                <item row="1" column="0">
                   <widget class="QLabel" name="label_5">
                      <property name="text">
-                        <string>Fog Strength:</string>
+                        <string>FOG STRENGTH:</string>
                      </property>
                   </widget>
                </item>
@@ -136,6 +136,33 @@
                   <layout class="QHBoxLayout" name="horizontalLayout_6">
                      <item>
                         <widget class="QDoubleSpinBox" name="fogStrengthDoubleSpinBox"/>
+                     </item>
+                     <item>
+                        <spacer name="horizontalSpacer_6">
+                           <property name="orientation">
+                              <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                              <size>
+                                 <width>40</width>
+                                 <height>20</height>
+                              </size>
+                           </property>
+                        </spacer>
+                     </item>
+                  </layout>
+               </item>
+               <item row="2" column="0">
+                  <widget class="QLabel" name="label_5">
+                     <property name="text">
+                        <string>FOG Position:</string>
+                     </property>
+                  </widget>
+               </item>
+               <item row="2" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_6">
+                     <item>
+                        <widget class="QDoubleSpinBox" name="fogPositionDoubleSpinBox"/>
                      </item>
                      <item>
                         <spacer name="horizontalSpacer_6">

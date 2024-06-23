@@ -27,6 +27,7 @@ public:
   ~RenderingDialog() override;
 
   bool aoEnabled();
+  float fogPosition();
   float aoStrength();
   float fogStrength();
   bool fogEnabled();

@@ -20,11 +20,16 @@ RenderingDialog::RenderingDialog(QWidget *parent_, SolidPipeline &pipeline)
   m_ui->aoStrengthDoubleSpinBox->setMaximum(2.0);
   m_ui->aoStrengthDoubleSpinBox->setDecimals(1);
   m_ui->aoStrengthDoubleSpinBox->setSingleStep(0.1);
-  m_ui->fogStrengthDoubleSpinBox->setMinimum(0.0);
+  m_ui->fogStrengthDoubleSpinBox->setMinimum(-20.0);
   m_ui->fogStrengthDoubleSpinBox->setValue(pipeline.getFogStrength());
-  m_ui->fogStrengthDoubleSpinBox->setMaximum(2.0);
+  m_ui->fogStrengthDoubleSpinBox->setMaximum(20.0);
   m_ui->fogStrengthDoubleSpinBox->setDecimals(1);
   m_ui->fogStrengthDoubleSpinBox->setSingleStep(0.1);
+  m_ui->fogPositionDoubleSpinBox->setMinimum(-20.0);
+  m_ui->fogPositionDoubleSpinBox->setValue(pipeline.getFogPosition());
+  m_ui->fogPositionDoubleSpinBox->setMaximum(20.0);
+  m_ui->fogPositionDoubleSpinBox->setDecimals(1);
+  m_ui->fogPositionDoubleSpinBox->setSingleStep(0.1);
   m_ui->edEnableCheckBox->setCheckState(pipeline.getEdEnabled()? Qt::Checked : Qt::Unchecked);
   
   connect(m_ui->aoEnableCheckBox, SIGNAL(stateChanged(int)),
@@ -62,6 +67,11 @@ float RenderingDialog::fogStrength()
   return m_ui->fogStrengthDoubleSpinBox->value();
 }
 
+float RenderingDialog::fogPosition()
+{
+  return m_ui->fogPositionDoubleSpinBox->value();
+}
+
 bool RenderingDialog::edEnabled()
 {
   return m_ui->edEnableCheckBox->checkState() == Qt::Checked;
@@ -71,10 +81,14 @@ bool RenderingDialog::edEnabled()
 
 void RenderingDialog::fogEnableCheckBoxChanged(int state)
 {
-  if (state == Qt::Unchecked)
+  if (state == Qt::Unchecked){
+    m_ui->fogPositionDoubleSpinBox->setEnabled(false);
     m_ui->fogStrengthDoubleSpinBox->setEnabled(false);
-  else
+  }
+  else{
     m_ui->fogStrengthDoubleSpinBox->setEnabled(true);
+    m_ui->fogPositionDoubleSpinBox->setEnabled(true);
+  }
 }
 
 void RenderingDialog::aoEnableCheckBoxChanged(int state)
@@ -91,6 +105,7 @@ void RenderingDialog::saveButtonClicked()
   m_solidPipeline.setAoStrength(aoStrength());
   m_solidPipeline.setFogStrength(fogStrength());
   m_solidPipeline.setFogEnabled(fogEnabled());
+  m_solidPipeline.setFogPosition(fogPosition());
   m_solidPipeline.setEdEnabled(edEnabled());
   this->accept();
 }
