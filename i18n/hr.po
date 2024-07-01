@@ -2,15 +2,15 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-# Milo Ivir <mail@milotype.de>, 2021, 2022, 2023.
+# Milo Ivir <mail@milotype.de>, 2021, 2022, 2023, 2024.
 # Norwid Behrnd <nbehrnd@yahoo.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2024-05-13 07:31+0000\n"
-"Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
+"PO-Revision-Date: 2024-06-22 19:09+0000\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hr/>\n"
 "Language: hr\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.5.5-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -68,11 +68,11 @@ msgstr "Alat"
 
 #: mainwindow.cpp:402
 msgid "Display Types"
-msgstr "Tipovi prikaza"
+msgstr "Vrste prikaza"
 
 #: mainwindow.cpp:411
 msgid "View Configuration"
-msgstr "Prikaz konfiguracije"
+msgstr "Konfiguracija prikaza"
 
 #: mainwindow.cpp:415
 msgid "Molecules"
@@ -131,7 +131,7 @@ msgstr "Datoteka se ne može otvoriti"
 #: mainwindow.cpp:792 mainwindow.cpp:816 mainwindow.cpp:1374
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Nije moguće otvoriti isporučenu datoteku %1"
+msgstr "Nije moguće otvoriti datoteku %1"
 
 #: mainwindow.cpp:805
 msgid "Open Molecule"
@@ -152,12 +152,12 @@ msgstr "Datotečni formati"
 #: mainwindow.cpp:830
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr "Punjena"
+msgstr "Naboji"
 
 #: mainwindow.cpp:831
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr "Kraftfelder"
+msgstr "Polja sile"
 
 #: mainwindow.cpp:835
 msgid "Install Plugin Script"
@@ -187,7 +187,7 @@ msgstr ""
 #: mainwindow.cpp:982
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr "Molekula opterećena (%1 atoma, %2 veza)"
+msgstr "Nabijena molekula (%1 atoma, %2 veze)"
 
 #: mainwindow.cpp:987
 msgid "File error"
@@ -233,7 +233,7 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
-"Potreban je OpenGL 2.0 ili noviji, izlaz.\n"
+"Potreban je OpenGL 2.0 ili novia verzija, izlaz.\n"
 "\n"
 "%1"
 
@@ -312,7 +312,7 @@ msgid ""
 "with “%2”"
 msgstr ""
 "Spremanje datoteke „%1”\n"
-"sa „%2”"
+"u „%2” formatu"
 
 #: mainwindow.cpp:1776
 #, qt-format
@@ -323,7 +323,7 @@ msgstr "&Poništi %1"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1779 mainwindow.cpp:2029:123
 msgid "&Undo"
-msgstr "Poništi"
+msgstr "&Poništi"
 
 #: mainwindow.cpp:1784
 #, qt-format
@@ -334,7 +334,7 @@ msgstr "&Ponovi %1"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1787 mainwindow.cpp:2034:129
 msgid "&Redo"
-msgstr "V&rati poništeno"
+msgstr "&Ponovi"
 
 #: mainwindow.cpp:1903
 msgid "&Testing"
@@ -402,7 +402,7 @@ msgstr "&Molekula …"
 
 #: mainwindow.cpp:1984
 msgid "Export Molecule…"
-msgstr "Molekül exportieren…"
+msgstr "Izvezi molekulu …"
 
 #: mainwindow.cpp:1991
 msgid "&Graphics…"
@@ -464,7 +464,7 @@ msgstr "Perspektiva"
 
 #: mainwindow.cpp:2078
 msgid "Orthographic"
-msgstr "Pravopis"
+msgstr "Ortografski"
 
 #: mainwindow.cpp:2097
 msgid "&Extensions"
@@ -541,11 +541,11 @@ msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2382
 msgid "Network Download Failed"
-msgstr "Mrežno preuzimanje nije uspjelo"
+msgstr "Preuzimanje s mreže nije uspjelo"
 
 #: mainwindow.cpp:2383
 msgid "Network timeout or other error."
-msgstr "Mrežni timeout ili neka druga greška.."
+msgstr "Istek mrežne veze ili jedna druga greška."
 
 #: mainwindow.cpp:2422
 #, qt-format
@@ -587,7 +587,7 @@ msgstr "Nije moguće otvoriti datoteke"
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:79:45
 msgid "&Build"
-msgstr "Izgradnja"
+msgstr "&Izgradnja"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
@@ -738,12 +738,12 @@ msgstr "Ctrl+Shift+Z"
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "Sredina"
+msgstr "Centriraj"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
-msgstr "Poravnaj pogled osima"
+msgstr "Poravnaj pogled na osi"
 
 #. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -797,7 +797,7 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Bez odabira"
+msgstr "Poništi izbor"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -813,7 +813,7 @@ msgstr "Upute"
 #. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
-msgstr "Avogadrova pomoć"
+msgstr "Avogadro pomoć"
 
 #. i18n: file: mainwindow.ui:293
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -833,7 +833,7 @@ msgstr "ČPP"
 #. i18n: file: mainwindow.ui:308
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
-msgstr "Avogadrova web stranica"
+msgstr "Avogadro web stranica"
 
 #. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
