@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2024-08-02 18:09+0000\n"
+"PO-Revision-Date: 2024-08-12 08:04+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ro/>\n"
@@ -121,7 +121,7 @@ msgstr "JSON chimic"
 
 #: mainwindow.cpp:773
 msgid "Open chemical file"
-msgstr "Deschide fișierul chimic"
+msgstr "Deschide fișierul cu datele de chimie"
 
 #: mainwindow.cpp:791 mainwindow.cpp:815 mainwindow.cpp:1373
 #: mainwindow.cpp:2505
@@ -295,7 +295,7 @@ msgstr "Exportare"
 
 #: mainwindow.cpp:1491
 msgid "Save chemical file"
-msgstr "Salvează fișierul chimic"
+msgstr "Salvează fișierul cu datele de chimie"
 
 #: mainwindow.cpp:1532
 msgid "Export Molecule"
