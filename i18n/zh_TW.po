@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2024-08-12 08:04+0000\n"
+"PO-Revision-Date: 2024-08-13 08:09+0000\n"
 "Last-Translator: Ricky From Hong Kong <lamricky11@hotmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hant/>\n"
@@ -404,12 +404,11 @@ msgstr "分子（&M）…"
 
 #: mainwindow.cpp:1984
 msgid "Export Molecule…"
-msgstr "匯出分子檔案"
+msgstr "匯出分子檔案…"
 
 #: mainwindow.cpp:1991
-#, fuzzy
 msgid "&Graphics…"
-msgstr "圖形..."
+msgstr "圖形（&G）…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -453,9 +452,8 @@ msgid "&View"
 msgstr "檢視"
 
 #: mainwindow.cpp:2058
-#, fuzzy
 msgid "Set Background Color…"
-msgstr "設定背景顏色..."
+msgstr "設定背景顏色…"
 
 #: mainwindow.cpp:2062
 msgid "Rendering…"
@@ -769,9 +767,8 @@ msgstr "恢復到舊檔"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
-msgstr "設定背景顏色..."
+msgstr "設定背景顏色（&B）…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
