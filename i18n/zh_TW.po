@@ -5,14 +5,14 @@
 # crlambda <lm3c@protonmail.ch>, 2021.
 # 謝宗儒 <zongruxie4@gmail.com>, 2022.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
+# Ricky From Hong Kong <lamricky11@hotmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
 "PO-Revision-Date: 2024-08-12 08:04+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"Last-Translator: Ricky From Hong Kong <lamricky11@hotmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -66,9 +66,8 @@ msgid "No file name set in BackgroundFileFormat!"
 msgstr ""
 
 #: mainwindow.cpp:321
-#, fuzzy
 msgid "Ready…"
-msgstr "就緒..."
+msgstr "就緒…"
 
 #: mainwindow.cpp:398
 msgid "Tool"
@@ -344,14 +343,12 @@ msgid "&Testing"
 msgstr "&測試"
 
 #: mainwindow.cpp:1905
-#, fuzzy
 msgid "Record test…"
-msgstr "錄影測試..."
+msgstr "錄影測試…"
 
 #: mainwindow.cpp:1908
-#, fuzzy
 msgid "Play test…"
-msgstr "播放測試..."
+msgstr "播放測試…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -370,9 +367,8 @@ msgstr "新增..."
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1933:57
-#, fuzzy
 msgid "&Open…"
-msgstr "開啟"
+msgstr "開啟（&O）…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -393,9 +389,8 @@ msgstr "儲存"
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1965:108
-#, fuzzy
 msgid "Save &As…"
-msgstr "另存新檔..."
+msgstr "另存新檔（&A）…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -404,9 +399,8 @@ msgid "&Export"
 msgstr "&匯出"
 
 #: mainwindow.cpp:1977
-#, fuzzy
 msgid "&Molecule…"
-msgstr "分子"
+msgstr "分子（&M）…"
 
 #: mainwindow.cpp:1984
 msgid "Export Molecule…"
