@@ -4,13 +4,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # crlambda <lm3c@protonmail.ch>, 2021.
 # 謝宗儒 <zongruxie4@gmail.com>, 2022.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2022-01-27 21:56+0000\n"
-"Last-Translator: 謝宗儒 <zongruxie4@gmail.com>\n"
+"PO-Revision-Date: 2024-08-12 08:04+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -18,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -407,8 +409,6 @@ msgid "&Molecule…"
 msgstr "分子"
 
 #: mainwindow.cpp:1984
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
 msgstr "匯出分子檔案"
 
