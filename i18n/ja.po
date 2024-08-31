@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Takaki Iekura <tacostea@gmail.com>, 2021.
-# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2021, 2022, 2023.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2023-09-03 15:00+0000\n"
+"PO-Revision-Date: 2024-08-28 23:09+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -18,36 +18,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.0.1-dev\n"
+"X-Generator: Weblate 5.7.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgid "Version Update"
 msgid "Version:"
-msgstr "バージョンアップデート"
+msgstr "バージョン:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:28:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Avogadroライブラリーバージョン:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgid "New version: %1"
 msgid "Qt Version:"
-msgstr "新しいバージョン: %1"
+msgstr "Qtバージョン:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:30:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSLバージョン:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -112,11 +108,11 @@ msgstr "再起動する必要があります"
 
 #: mainwindow.cpp:746
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "新しい言語を使用するにはAvogadroを再起動してください。"
 
 #: mainwindow.cpp:766 mainwindow.cpp:1486
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Chemical Markup Language"
 
 #: mainwindow.cpp:767 mainwindow.cpp:1485
 msgid "Chemical JSON"
@@ -124,7 +120,7 @@ msgstr ""
 
 #: mainwindow.cpp:773
 msgid "Open chemical file"
-msgstr ""
+msgstr "化学ファイルを開く"
 
 #: mainwindow.cpp:791 mainwindow.cpp:815 mainwindow.cpp:1373
 #: mainwindow.cpp:2505
@@ -160,7 +156,7 @@ msgstr "電荷"
 #: mainwindow.cpp:831
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "力場"
 
 #: mainwindow.cpp:835
 msgid "Install Plugin Script"
@@ -210,7 +206,6 @@ msgid "Saved file %1"
 msgstr "ファイル %1 を保存しました"
 
 #: mainwindow.cpp:1022
-#, fuzzy
 msgid "Error saving file"
 msgstr "ファイルの保存でエラーが出ました"
 
@@ -273,7 +268,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:1343
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "ファイル %1 を保存できません"
+msgstr "ファイル %1 を保存できません。"
 
 #: mainwindow.cpp:1460
 msgid ""
@@ -300,7 +295,6 @@ msgid "Export Molecule"
 msgstr "分子のエクスポート"
 
 #: mainwindow.cpp:1631
-#, fuzzy
 msgid "Saving File in Progress…"
 msgstr "ファイルの保存中…"
 
@@ -402,13 +396,10 @@ msgid "&Molecule…"
 msgstr "分子 (&M)…"
 
 #: mainwindow.cpp:1984
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "分子のエクスポート"
+msgstr "分子のエクスポート…"
 
 #: mainwindow.cpp:1991
-#, fuzzy
 msgid "&Graphics…"
 msgstr "グラフィックス(&G) …"
 
@@ -437,7 +428,6 @@ msgid "&Edit"
 msgstr "編集 (&E)"
 
 #: mainwindow.cpp:2040
-#, fuzzy
 msgid "&Copy Graphics"
 msgstr "グラフィックスをコピー(&C)"
 
@@ -457,7 +447,7 @@ msgstr "背景色を設定…"
 
 #: mainwindow.cpp:2062
 msgid "Rendering…"
-msgstr ""
+msgstr "レンダリング…"
 
 #: mainwindow.cpp:2070
 msgid "Projection"
@@ -499,14 +489,13 @@ msgstr "ディスカッションフォーラム (&D)"
 
 #: mainwindow.cpp:2121
 msgid "&Avogadro Website"
-msgstr "Avogadro ウェブサイト (&A)"
+msgstr "Avogadroウェブサイト (&A)"
 
 #: mainwindow.cpp:2125
 msgid "&Report a Bug"
 msgstr "バグを報告 (&R)"
 
 #: mainwindow.cpp:2129
-#, fuzzy
 msgid "&Suggest a Feature"
 msgstr "機能を提案 (&S)"
 
@@ -566,7 +555,7 @@ msgstr "新しいバージョン: %1"
 
 #: mainwindow.cpp:2425
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "アップデートが利用可能です。今すぐダウンロードしますか?\n"
 
 #: mainwindow.cpp:2427
 msgid "Version Update"
@@ -627,7 +616,7 @@ msgstr "VTK"
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -793,7 +782,7 @@ msgstr "クリア"
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "すべて選択"
+msgstr "全て選択"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
