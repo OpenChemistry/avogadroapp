@@ -1810,7 +1810,7 @@ void MainWindow::setBackgroundColor()
   GLWidget* glWidget(nullptr);
   if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
     scene = &glWidget->renderer().scene();
-    pipeline = &glWidget->renderer().solidPipeline();
+  pipeline = &glWidget->renderer().solidPipeline();
   if (scene) {
     Vector4ub cColor = scene->backgroundColor();
     QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
@@ -1821,7 +1821,7 @@ void MainWindow::setBackgroundColor()
       cColor[2] = static_cast<unsigned char>(color.blue());
       cColor[3] = static_cast<unsigned char>(color.alpha());
       scene->setBackgroundColor(cColor);
-      if(pipeline)
+      if (pipeline)
         pipeline->setBackgroundColor(cColor);
       if (glWidget)
         glWidget->update();
@@ -1843,7 +1843,7 @@ void MainWindow::setRenderingSettings()
     dialog.exec();
     QSettings settings;
     settings.setValue("MainWindow/ao_enabled", pipeline->getAoEnabled());
-    settings.setValue("MainWindow/fog_enabled", pipeline->getFogEnabled());    
+    settings.setValue("MainWindow/fog_enabled", pipeline->getFogEnabled());
     settings.setValue("MainWindow/ao_strength", pipeline->getAoStrength());
     settings.setValue("MainWindow/ed_enabled", pipeline->getEdEnabled());
   }
@@ -2361,7 +2361,7 @@ void MainWindow::registerMoleQueue()
     patterns << QRegularExpression(
       QRegularExpression::wildcardToRegularExpression(
         extensionToWildCard(QString::fromStdString(*it))),
-        QRegularExpression::CaseInsensitive);
+      QRegularExpression::CaseInsensitive);
   }
 
   // Register the executable:
