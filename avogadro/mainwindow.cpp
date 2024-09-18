@@ -391,6 +391,8 @@ void MainWindow::setupInterface()
       settings.value("MainWindow/ao_enabled", true).toBool());
     pipeline->setDofEnabled(
       settings.value("MainWindow/dof_enabled", true).toBool());
+    pipeline->setFogEnabled(
+      settings.value("MainWindow/fog_enabled", true).toBool());
     pipeline->setAoStrength(
       settings.value("MainWindow/ao_strength", 1.0f).toFloat());
     pipeline->setEdEnabled(
@@ -1805,10 +1807,12 @@ void MainWindow::activeMoleculeEdited()
 
 void MainWindow::setBackgroundColor()
 {
+  Rendering::SolidPipeline* pipeline(nullptr);
   Rendering::Scene* scene(nullptr);
   GLWidget* glWidget(nullptr);
   if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
     scene = &glWidget->renderer().scene();
+    pipeline = &glWidget->renderer().solidPipeline();
   if (scene) {
     Vector4ub cColor = scene->backgroundColor();
     QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
@@ -1819,6 +1823,8 @@ void MainWindow::setBackgroundColor()
       cColor[2] = static_cast<unsigned char>(color.blue());
       cColor[3] = static_cast<unsigned char>(color.alpha());
       scene->setBackgroundColor(cColor);
+      if(pipeline)
+        pipeline->setBackgroundColor(cColor);
       if (glWidget)
         glWidget->update();
 
@@ -1840,6 +1846,7 @@ void MainWindow::setRenderingSettings()
     QSettings settings;
     settings.setValue("MainWindow/ao_enabled", pipeline->getAoEnabled());
     settings.setValue("MainWindow/dof_enabled", pipeline->getDofEnabled());
+    settings.setValue("MainWindow/fog_enabled", pipeline->getFogEnabled());    
     settings.setValue("MainWindow/ao_strength", pipeline->getAoStrength());
     settings.setValue("MainWindow/ed_enabled", pipeline->getEdEnabled());
   }

@@ -9,12 +9,13 @@
 # Robert Adam <dev@robert-adam.de>, 2022.
 # "Jörg S." <joerg.schwerdtfeger@gmail.com>, 2023.
 # Norwid Behrnd <nbehrnd@yahoo.com>, 2023, 2024.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2024-02-19 19:02+0000\n"
+"PO-Revision-Date: 2024-06-07 20:09+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -23,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.6-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -135,7 +136,7 @@ msgstr "Datei kann nicht geöffnet werden"
 #: mainwindow.cpp:792 mainwindow.cpp:816 mainwindow.cpp:1374
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Gelieferte Datei kann nicht geöffnet werden %1"
+msgstr "Bereitgestellte Datei kann nicht geöffnet werden %1"
 
 #: mainwindow.cpp:805
 msgid "Open Molecule"
@@ -147,7 +148,7 @@ msgstr "Befehle"
 
 #: mainwindow.cpp:829
 msgid "Input Generators"
-msgstr "Eingangsgeneratoren"
+msgstr "Eingabegeneratoren"
 
 #: mainwindow.cpp:829
 msgid "File Formats"
@@ -407,7 +408,7 @@ msgstr "&Molekül …"
 
 #: mainwindow.cpp:1984
 msgid "Export Molecule…"
-msgstr "Molekül exportieren …"
+msgstr "Molekül exportieren …"
 
 #: mainwindow.cpp:1991
 msgid "&Graphics…"
@@ -425,17 +426,17 @@ msgstr "&Beenden"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2010:195
 msgid "Open Recent"
-msgstr "Zuletzt geöffnet"
+msgstr "vor Kurzem geöffnet"
 
 #: mainwindow.cpp:2022
 msgid "No recent files"
-msgstr "Keine zuletzt geöffneten Dateien"
+msgstr "Keine kürzlich geöffneten Dateien"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:2028 menubuilder.cpp:79:51
 msgid "&Edit"
-msgstr "&Ändern"
+msgstr "&Bearbeiten"
 
 #: mainwindow.cpp:2040
 msgid "&Copy Graphics"
@@ -457,7 +458,7 @@ msgstr "Hintergrundfarbe einstellen …"
 
 #: mainwindow.cpp:2062
 msgid "Rendering…"
-msgstr "Wiedergabe …"
+msgstr "Wiedergabe …"
 
 #: mainwindow.cpp:2070
 msgid "Projection"
@@ -477,11 +478,11 @@ msgstr "&Erweiterungen"
 
 #: mainwindow.cpp:2099
 msgid "User Interface Language…"
-msgstr "Sprache der Benutzeroberfläche …"
+msgstr "Sprache der Benutzeroberfläche …"
 
 #: mainwindow.cpp:2103
 msgid "&Periodic Table…"
-msgstr "&Periodensystem…"
+msgstr "&Periodensystem …"
 
 #: mainwindow.cpp:2109 menubuilder.cpp:83
 msgid "&Help"
@@ -591,9 +592,8 @@ msgstr "Dateien können nicht geöffnet werden"
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:79:45
-#, fuzzy
 msgid "&Build"
-msgstr "S&truktur"
+msgstr "&Erstellen"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
@@ -932,12 +932,13 @@ msgstr ""
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-",,,erik_hahn@gmx.de,,,,armin_mohring@web.de,michael.kogan@gmx.net,"
-"steve@steve-m.de,loniedavid@gmail.com,,,soc@krg-nw.de,,,aleixosk@gmail.com,,"
-"avogadro-devel@lists.sourceforge.net,d@winzen4.de,,,,,,,,armin_mohring@web."
-"de,,,,coolx67@gmx.at,,,,,,,,simon@ochsenreither.de,,,aleixosk@gmail.com,,"
-"avogadro-devel@lists.sourceforge.net,,,,,,,,,armin_mohring@web.de,,,,"
-"coolx67@gmx.at,,,,tobannert@gmail.com,,,,simon@ochsenreither.de"
+",,,erik_hahn@gmx.de,,,,armin_mohring@web.de,michael.kogan@gmx."
+"net,steve@steve-m.de,loniedavid@gmail.com,,,soc@krg-nw.de,,,aleixosk@gmail."
+"com,,avogadro-devel@lists.sourceforge.net,d@winzen4."
+"de,,,,,,,,armin_mohring@web.de,,,,coolx67@gmx.at,,,,,,,,simon@ochsenreither."
+"de,,,aleixosk@gmail.com,,avogadro-devel@lists.sourceforge."
+"net,,,,,,,,,armin_mohring@web.de,,,,coolx67@gmx.at,,,,tobannert@gmail."
+"com,,,,simon@ochsenreither.de"
 
 #~ msgid "Navigate tool"
 #~ msgstr "Navigationswerkzeug"

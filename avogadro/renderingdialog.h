@@ -31,11 +31,15 @@ public:
   float dofStrength();
   float aoStrength();
   float dofPosition();
+  float fogPosition();
+  float fogStrength();
+  bool fogEnabled();
   bool edEnabled();
 
 protected slots:
   void aoEnableCheckBoxChanged(int state);
   void dofEnableCheckBoxChanged(int state);
+  void fogEnableCheckBoxChanged(int state);
   void saveButtonClicked();
   void closeButtonClicked();
 

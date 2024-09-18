@@ -20,7 +20,15 @@ endif()
 
 # Find the Qt components we need.
 if(QT_VERSION EQUAL 6)
-  find_package(Qt6 COMPONENTS Concurrent Widgets Network Core5Compat REQUIRED)
+  find_package(Qt6
+    COMPONENTS
+      Concurrent
+      Widgets
+      Network
+      Core5Compat
+      OpenGL
+      OpenGLWidgets
+    REQUIRED)
 else()
   find_package(Qt5 COMPONENTS Concurrent Widgets Network REQUIRED)
 endif()
@@ -204,7 +212,7 @@ if(ENABLE_TESTING)
   target_link_libraries(avogadro QtTesting)
 endif()
 if(QT_VERSION EQUAL 6)
-  target_link_libraries(avogadro Qt6::Core5Compat)
+  target_link_libraries(avogadro Qt6::Core5Compat Qt6::OpenGL Qt6::OpenGLWidgets)
 endif()
 
 if(USE_3DCONNEXION AND (WIN32 OR APPLE))

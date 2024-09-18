@@ -10,13 +10,15 @@
 # 黄子腾 <still_down@outlook.com>, 2023.
 # Chiyu Liang <532117255@qq.com>, 2023, 2024.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2023.
+# KeysBits <KeysBytes@gmail.com>, 2024.
+# zhang tengshuo <zhangtengshuo@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2024-01-01 03:07+0000\n"
-"Last-Translator: Chiyu Liang <532117255@qq.com>\n"
+"PO-Revision-Date: 2024-05-31 22:21+0000\n"
+"Last-Translator: zhang tengshuo <zhangtengshuo@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -24,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.6-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -498,7 +500,7 @@ msgstr "论坛(&D)"
 
 #: mainwindow.cpp:2121
 msgid "&Avogadro Website"
-msgstr "Avogadro 网站(&A)"
+msgstr "&Avogadro 网站"
 
 #: mainwindow.cpp:2125
 msgid "&Report a Bug"
@@ -563,7 +565,7 @@ msgstr "新版本：%1"
 
 #: mainwindow.cpp:2425
 msgid "An update is available, do you want to download it now?\n"
-msgstr "发现可用更新，现在下载吗？\n"
+msgstr "发现可用更新，是否立即下载？\n"
 
 #: mainwindow.cpp:2427
 msgid "Version Update"
@@ -881,23 +883,21 @@ msgstr "保存"
 msgid "Close"
 msgstr "关闭"
 
-#, fuzzy
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
 "Launchpad Contributions: Ann J,Avogadro Team,Chen Siqiong,Chen Yang,Chiyu "
 "Liang,Colin Zhao,David Gao,Feng Chao,MarkWu,Tao Wei,Wylmer Wang,Xinfeng,Ye "
-"Qing,ZhangCheng,cuiweicui,tmpplus,yjjart,郑思涵,英华,"
+"Qing,ZhangCheng,cuiweicui,tmpplus,yjjart,郑思涵,英华,张腾烁"
 
-#, fuzzy
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-"cuiweicui1985@gmail.com,rainofchaos@gmail.com,yjjart@gmail.com,"
-"sihanzheng@gmail.com,weitao1979@gmail.com,wantinghard@gmail.com,avogadro-"
-"devel@lists.sourceforge.net,chensiqiong@126.com,frankensteinyang@gmail.com,"
-"chaofeng111@gmail.com,allen19920930@gmail.com,skyxxzc@gmail.com,"
-"sihanzheng@gmail.com,cyliang532@gmail.com"
+"cuiweicui1985@gmail.com,rainofchaos@gmail.com,yjjart@gmail."
+"com,sihanzheng@gmail.com,weitao1979@gmail.com,wantinghard@gmail.com,avogadro-"
+"devel@lists.sourceforge.net,chensiqiong@126.com,frankensteinyang@gmail."
+"com,chaofeng111@gmail.com,allen19920930@gmail.com,skyxxzc@gmail."
+"com,sihanzheng@gmail.com,cyliang532@gmail.com,zhangtengshuo@gmail.com"
 
 #~ msgid "Navigate tool"
 #~ msgstr "导航工具"
