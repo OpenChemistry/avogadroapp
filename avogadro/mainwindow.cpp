@@ -2361,7 +2361,7 @@ void MainWindow::registerMoleQueue()
     patterns << QRegularExpression(
       QRegularExpression::wildcardToRegularExpression(
         extensionToWildCard(QString::fromStdString(*it))),
-      Qt::CaseInsensitive);
+      QRegularExpression::CaseInsensitiveOption);
   }
 
   // Register the executable:
