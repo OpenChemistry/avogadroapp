@@ -269,6 +269,8 @@ int main(int argc, char* argv[])
 
   // Set up the default format for our GL contexts.
   QSurfaceFormat defaultFormat = QSurfaceFormat::defaultFormat();
+  defaultFormat.setVersion(4, 0);
+  defaultFormat.setProfile(QSurfaceFormat::CoreProfile);
   defaultFormat.setSamples(4);
 #if defined(Q_OS_MAC) || defined(Q_OS_WIN)
   defaultFormat.setAlphaBufferSize(8);
