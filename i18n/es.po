@@ -7,15 +7,15 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2022.
 # Andrés Henao <andreshenao31@gmail.com>, 2022.
-# gallegonovato <fran-carro@hotmail.es>, 2022, 2023.
+# gallegonovato <fran-carro@hotmail.es>, 2022, 2023, 2024.
 # Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2023-12-13 18:05+0000\n"
-"Last-Translator: Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>\n"
+"PO-Revision-Date: 2024-10-24 19:19+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3-rc\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -852,7 +852,7 @@ msgstr "&Importar"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
 msgid "Enable ambient occlusion shadows"
-msgstr ""
+msgstr "Permitir sombras de oclusión ambiente"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -873,7 +873,7 @@ msgstr "Habilitar"
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, label)
 msgid "Strength of the ambient shadows"
-msgstr ""
+msgstr "Intensidad de las sombras ambientales"
 
 #. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -883,7 +883,7 @@ msgstr "Intensidad de la Sombra:"
 #. i18n: file: renderingdialog.ui:106
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "Efecto de niebla para la profundidad"
 
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -893,42 +893,42 @@ msgstr "Niebla:"
 #. i18n: file: renderingdialog.ui:140
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Strength:"
-msgstr ""
+msgstr "Intensidad de la niebla:"
 
 #. i18n: file: renderingdialog.ui:170
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Position:"
-msgstr ""
+msgstr "Posición de la niebla:"
 
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Add a depth blur"
-msgstr ""
+msgstr "Añadir un desenfoque de profundidad"
 
 #. i18n: file: renderingdialog.ui:211
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid "Depth Blur:"
-msgstr ""
+msgstr "Desenfoque de profundidad:"
 
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Intensidad del desenfoque de profundidad"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Intensidad del desenfoque:"
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Posición del desenfoque de profundidad"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Posición de desenfoque:"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, label_4)
@@ -938,7 +938,7 @@ msgstr ""
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 msgid "Edge Outline:"
-msgstr ""
+msgstr "Contorno del borde:"
 
 #. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
