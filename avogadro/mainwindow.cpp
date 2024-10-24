@@ -2359,10 +2359,12 @@ void MainWindow::registerMoleQueue()
   StringList exts = ffm.fileExtensions(FileFormat::Read | FileFormat::File);
 
   // Create patterns list
-  QList<QRegExp> patterns;
+  QList<QRegularExpression> patterns;
   for (auto it = exts.begin(), itEnd = exts.end(); it != itEnd; ++it) {
-    patterns << QRegExp(extensionToWildCard(QString::fromStdString(*it)),
-                        Qt::CaseInsensitive, QRegExp::Wildcard);
+    patterns << QRegularExpression(
+      QRegularExpression::wildcardToRegularExpression(
+        extensionToWildCard(QString::fromStdString(*it))),
+      QRegularExpression::CaseInsensitive);
   }
 
   // Register the executable:
