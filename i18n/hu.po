@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2024-01-04 00:20+0000\n"
+"PO-Revision-Date: 2024-10-27 20:00+0000\n"
 "Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hu/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -856,7 +856,7 @@ msgstr "&Importálás"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
 msgid "Enable ambient occlusion shadows"
-msgstr ""
+msgstr "Környezeti elzáródási árnyékok engedélyezése"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -877,7 +877,7 @@ msgstr "Engedélyezés"
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, label)
 msgid "Strength of the ambient shadows"
-msgstr ""
+msgstr "Környezeti árnyékok erőssége"
 
 #. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -887,7 +887,7 @@ msgstr "Árnyékerősség:"
 #. i18n: file: renderingdialog.ui:106
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "Köd erőssége a mélységjelzéshez"
 
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -897,52 +897,52 @@ msgstr "Köd:"
 #. i18n: file: renderingdialog.ui:140
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Strength:"
-msgstr ""
+msgstr "Köd erőssége:"
 
 #. i18n: file: renderingdialog.ui:170
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Position:"
-msgstr ""
+msgstr "Köd helye:"
 
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Add a depth blur"
-msgstr ""
+msgstr "Mélységi elmosódás hozzáadása"
 
 #. i18n: file: renderingdialog.ui:211
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid "Depth Blur:"
-msgstr ""
+msgstr "Mélységi elmosódás:"
 
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Mélységi elmosódás erőssége"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Elmosódás erőssége:"
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Mélységi elmosódás helye"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Elmosódás helye:"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, label_4)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "Körvonal hozzáadása az élatomokhoz"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 msgid "Edge Outline:"
-msgstr ""
+msgstr "Körvonal éle:"
 
 #. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
