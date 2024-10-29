@@ -874,7 +874,25 @@ bool MainWindow::addScript(const QString& filePath)
 
   QFileInfo info(filePath);
 
-  QString destinationPath(stdPaths[0] + '/' + typePath + '/' + info.fileName());
+  // check if the directory structure exists first
+  // and if not, create what we need
+  int i = 0;
+  bool createDir = true;
+  for (i = 0; i < stdPaths.size(); ++i) {
+    if (QDir(stdPaths[i] + '/' + typePath).exists()) {
+      createDir = false;
+      break;
+    }
+  }
+  if (createDir) {
+    // find a path we can create (e.g., first path might be admin-only)
+    for (i = 0; i < stdPaths.size(); ++i) {
+      if (QDir().mkpath(stdPaths[i] + '/' + typePath))
+        break;
+    }
+  }
+
+  QString destinationPath(stdPaths[i] + '/' + typePath + '/' + info.fileName());
   qDebug() << " copying " << filePath << " to " << destinationPath;
   QFile::remove(destinationPath); // silently fail if there's nothing to remove
   QFile::copy(filePath, destinationPath);
