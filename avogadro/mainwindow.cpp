@@ -2366,32 +2366,34 @@ bool MainWindow::saveFileIfNeeded()
 
 void MainWindow::registerMoleQueue()
 {
-#ifdef Avogadro_ENABLE_RPC
-  MoleQueue::Client client;
-  if (!client.connectToServer() || !client.isConnected())
-    return;
+  /*
+  #ifdef Avogadro_ENABLE_RPC
+    MoleQueue::Client client;
+    if (!client.connectToServer() || !client.isConnected())
+      return;
 
-  // Get all extensions;
-  typedef std::vector<std::string> StringList;
-  FileFormatManager& ffm = FileFormatManager::instance();
-  StringList exts = ffm.fileExtensions(FileFormat::Read | FileFormat::File);
+    // Get all extensions;
+    typedef std::vector<std::string> StringList;
+    FileFormatManager& ffm = FileFormatManager::instance();
+    StringList exts = ffm.fileExtensions(FileFormat::Read | FileFormat::File);
 
-  // Create patterns list
-  QList<QRegularExpression> patterns;
-  for (auto it = exts.begin(), itEnd = exts.end(); it != itEnd; ++it) {
-    patterns << QRegularExpression(
-      QRegularExpression::wildcardToRegularExpression(
-        extensionToWildCard(QString::fromStdString(*it))),
-      QRegularExpression::CaseInsensitive);
-  }
+    // Create patterns list
+    QList<QRegularExpression> patterns;
+    for (auto it = exts.begin(), itEnd = exts.end(); it != itEnd; ++it) {
+      patterns << QRegularExpression(
+        QRegularExpression::wildcardToRegularExpression(
+          extensionToWildCard(QString::fromStdString(*it))),
+        QRegularExpression::CaseInsensitive);
+    }
 
-  // Register the executable:
-  client.registerOpenWith("Avogadro2 (new)", qApp->applicationFilePath(),
-                          patterns);
+    // Register the executable:
+    client.registerOpenWith("Avogadro2 (new)", qApp->applicationFilePath(),
+                            patterns);
 
-  client.registerOpenWith("Avogadro2 (running)", "avogadro", "openFile",
-                          patterns);
-#endif // Avogadro_ENABLE_RPC
+    client.registerOpenWith("Avogadro2 (running)", "avogadro", "openFile",
+                            patterns);
+  #endif // Avogadro_ENABLE_RPC
+  */
 }
 
 void MainWindow::showAboutDialog()
