@@ -176,7 +176,7 @@ elseif(UNIX)
   install(FILES "icons/org.openchemistry.Avogadro2.desktop" DESTINATION "${INSTALL_XDG_APPS_DIR}")
   install(FILES "icons/org.openchemistry.Avogadro2.metainfo.xml" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/metainfo")
   install(FILES "icons/avogadro.png" DESTINATION "${INSTALL_XDG_ICON_DIR}"
-    RENAME "avogadro2.png")
+    RENAME "org.openchemistry.Avogadro2.png")
 elseif(WIN32)
   list(APPEND avogadro_srcs icons/avogadro.rc)
 endif()

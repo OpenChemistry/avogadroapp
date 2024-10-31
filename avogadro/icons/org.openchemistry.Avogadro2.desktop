@@ -1,10 +1,10 @@
 [Desktop Entry]
 Version=1.0
-Name=Avogadro2
+Name=Avogadro
 Comment=Advanced molecular editor
 Comment[hu]=Fejlett molekuláris szerkesztő
 Exec=avogadro2 %f
-Icon=avogadro2
+Icon=org.openchemistry.Avogadro2
 Terminal=false
 Type=Application
 Categories=Qt;Science;Chemistry;Physics;Education;
