@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2024-06-28 22:09+0000\n"
+"PO-Revision-Date: 2024-11-03 13:00+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_GB/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -846,7 +846,7 @@ msgstr "&Import"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
 msgid "Enable ambient occlusion shadows"
-msgstr ""
+msgstr "Enable ambient occlusion shadows"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -867,7 +867,7 @@ msgstr "Enable"
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, label)
 msgid "Strength of the ambient shadows"
-msgstr ""
+msgstr "Strength of the ambient shadows"
 
 #. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -877,7 +877,7 @@ msgstr "Shadow Strength:"
 #. i18n: file: renderingdialog.ui:106
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "Fog effect for depth cue"
 
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -887,52 +887,52 @@ msgstr "Fog:"
 #. i18n: file: renderingdialog.ui:140
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Strength:"
-msgstr ""
+msgstr "Fog Strength:"
 
 #. i18n: file: renderingdialog.ui:170
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Position:"
-msgstr ""
+msgstr "Fog Position:"
 
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Add a depth blur"
-msgstr ""
+msgstr "Add a depth blur"
 
 #. i18n: file: renderingdialog.ui:211
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid "Depth Blur:"
-msgstr ""
+msgstr "Depth Blur:"
 
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Strength of the depth blur"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Blur Strength :"
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Position of the depth blur"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Blur Position:"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, label_4)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "Add an outline to edge atoms"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 msgid "Edge Outline:"
-msgstr ""
+msgstr "Edge Outline:"
 
 #. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
