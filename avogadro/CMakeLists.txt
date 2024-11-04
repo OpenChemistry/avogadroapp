@@ -187,6 +187,8 @@ elseif(UNIX)
     RENAME "org.openchemistry.Avogadro2.png")
   install(FILES "icons/avogadro2_256.png" DESTINATION "${INSTALL_XDG_ICON_DIR}/hicolor/256x256/apps"
     RENAME "org.openchemistry.Avogadro2.png")
+  install(FILES "icons/avogadro2.svg" DESTINATION "${INSTALL_XDG_ICON_DIR}/hicolor/scalable/apps"
+    RENAME "org.openchemistry.Avogadro2.svg")
 elseif(WIN32)
   list(APPEND avogadro_srcs icons/avogadro.rc)
 endif()
