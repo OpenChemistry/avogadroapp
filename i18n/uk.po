@@ -4,53 +4,48 @@
 # Yuri Chornoivan <yurchor@gmail.com>, 2010, 2011.
 # Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
 # Tymofii Lytvynenko <till.svit@gmail.com>, 2021.
+# Yarema Kertytsky <y.kertytsky@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2021-11-13 17:53+0000\n"
-"Last-Translator: Tymofii Lytvynenko <till.svit@gmail.com>\n"
+"PO-Revision-Date: 2024-11-05 00:51+0000\n"
+"Last-Translator: Yarema Kertytsky <y.kertytsky@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9.1-dev\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.8.2\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
 msgid "Version:"
-msgstr "(Git-версія: %1)"
+msgstr "Версія:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:28:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Версія бібліотеки Avogadro:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
 msgid "Qt Version:"
-msgstr "(Git-версія: %1)"
+msgstr "Версія Qt:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:30:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "Версія SSL:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
@@ -89,18 +84,14 @@ msgid "Layers"
 msgstr "Шари"
 
 #: mainwindow.cpp:452
-#, fuzzy
-#| msgid "File"
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Файл"
 
 #: mainwindow.cpp:457
-#, fuzzy
-#| msgid "Tools"
 msgctxt "Tools toolbar"
 msgid "Tools"
-msgstr "Засоби"
+msgstr "Інструменти"
 
 #: mainwindow.cpp:691
 msgid "Untitled"
@@ -115,11 +106,11 @@ msgstr "%1%2 - Авоґадро %3"
 
 #: mainwindow.cpp:752
 msgid "Restart needed"
-msgstr ""
+msgstr "Потрібен перезапуск"
 
 #: mainwindow.cpp:753
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Перезапустіть Avogadro, щоб використовувати нову мову."
 
 #: mainwindow.cpp:773 mainwindow.cpp:1496
 msgid "Chemical Markup Language"
@@ -167,7 +158,7 @@ msgstr ""
 #: mainwindow.cpp:838
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "Силові поля"
 
 #: mainwindow.cpp:842
 msgid "Install Plugin Script"
@@ -213,24 +204,23 @@ msgstr ""
 "%2"
 
 #: mainwindow.cpp:1020
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Не вдалося зберегти файл %1."
+msgstr "Збережений файл %1"
 
 #: mainwindow.cpp:1027
-#, fuzzy
 msgid "Error saving file"
-msgstr "Помилка запуску сервера RPC:"
+msgstr "Помилка під час збереження файла!"
 
 #: mainwindow.cpp:1028
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
-"Помилка під час читання файлу '%1':\n"
+"Помилка під час зберігання '%1':\n"
 "%2"
 
 #: mainwindow.cpp:1067
@@ -314,17 +304,17 @@ msgstr "Експорт молекули"
 
 #: mainwindow.cpp:1644
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Триває збереження файлу…"
 
 #: mainwindow.cpp:1646
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"Відкриття файлу '%1'\n"
-"з '%2'"
+"Збереження файлу “%1”\n"
+"з “%2”"
 
 #: mainwindow.cpp:1789
 #, qt-format
@@ -353,12 +343,10 @@ msgid "&Testing"
 msgstr "&Тестування"
 
 #: mainwindow.cpp:1924
-#, fuzzy
 msgid "Record test…"
-msgstr "Записати тест…"
+msgstr "Запис тесту…"
 
 #: mainwindow.cpp:1927
-#, fuzzy
 msgid "Play test…"
 msgstr "Відтворити тест…"
 
@@ -379,9 +367,8 @@ msgstr "&Створити"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1952:57
-#, fuzzy
 msgid "&Open…"
-msgstr "Відкрити"
+msgstr "Відкрити…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -402,9 +389,8 @@ msgstr "&Зберегти"
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1984:108
-#, fuzzy
 msgid "Save &As…"
-msgstr "З&берегти як..."
+msgstr "Зберегти &як…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -413,15 +399,12 @@ msgid "&Export"
 msgstr "&Експорт"
 
 #: mainwindow.cpp:1996
-#, fuzzy
 msgid "&Molecule…"
-msgstr "Молекули"
+msgstr "& Молекула…"
 
 #: mainwindow.cpp:2003
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "Експорт молекули"
+msgstr "Експорт молекули…"
 
 #: mainwindow.cpp:2010
 #, fuzzy
@@ -453,15 +436,12 @@ msgid "&Edit"
 msgstr "З&міни"
 
 #: mainwindow.cpp:2059
-#, fuzzy
 msgid "&Copy Graphics"
-msgstr "&Графіка…"
+msgstr "&Копіювати графіку"
 
 #: mainwindow.cpp:2063
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -470,13 +450,12 @@ msgid "&View"
 msgstr "П&ерегляд"
 
 #: mainwindow.cpp:2077
-#, fuzzy
 msgid "Set Background Color…"
-msgstr "Встановити колір &тла..."
+msgstr "Встановити колір тла…"
 
 #: mainwindow.cpp:2081
 msgid "Rendering…"
-msgstr ""
+msgstr "Візуалізація…"
 
 #: mainwindow.cpp:2089
 msgid "Projection"
@@ -496,11 +475,11 @@ msgstr "&Розширення"
 
 #: mainwindow.cpp:2118
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Мова інтерфейсу користувача…"
 
 #: mainwindow.cpp:2122
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Періодична таблиця…"
 
 #: mainwindow.cpp:2128 menubuilder.cpp:83
 msgid "&Help"
@@ -513,38 +492,32 @@ msgid "&About"
 msgstr "&Про програму"
 
 #: mainwindow.cpp:2136
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Дискусійний форум"
+msgstr "&Дискусійний форум"
 
 #: mainwindow.cpp:2140
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Веб-сайт Avogadro"
+msgstr "&Веб-сайт Avogadro"
 
 #: mainwindow.cpp:2144
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Доповісти про помилку"
+msgstr "&Повідомити про помилку"
 
 #: mainwindow.cpp:2148
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Запропонувати функцію"
 
 #: mainwindow.cpp:2172
 msgid "System Language"
-msgstr ""
+msgstr "Мова системи"
 
 #: mainwindow.cpp:2180
 msgid "Language"
-msgstr ""
+msgstr "Мова"
 
 #: mainwindow.cpp:2180
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Мова інтерфейсу користувача:"
 
 #: mainwindow.cpp:2293
 #, qt-format
@@ -552,9 +525,8 @@ msgid "All supported formats (%1);;All files (*);;"
 msgstr "Усі підтримувані формати (%1);;Усі файли (*);;"
 
 #: mainwindow.cpp:2309
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
-msgstr "Бажаєте зберегти внесені Вами у документ зміни?"
+msgstr "Бажаєте зберегти внесені у документ зміни?"
 
 #: mainwindow.cpp:2317
 msgid "Your changes will be lost if you don't save them."
@@ -571,10 +543,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2409
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Спроба пошуку оновлення у мережі зазнала невдачі"
+msgstr "Завантаження через мережу не вдалось"
 
 #: mainwindow.cpp:2410
 msgid "Network timeout or other error."
@@ -583,37 +553,34 @@ msgstr "Перевищено час очікування на відповідь
 #: mainwindow.cpp:2449
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Ваша версія: %1"
 
 #: mainwindow.cpp:2450
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Git-версія: %1)"
+msgstr "Нова версія: %1"
 
 #: mainwindow.cpp:2452
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "Доступне оновлення. Завантажити його зараз?\n"
 
 #: mainwindow.cpp:2454
 msgid "Version Update"
-msgstr ""
+msgstr "Оновлення версії"
 
 #: mainwindow.cpp:2512
-#, fuzzy, qt-format
+#, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "Помилка під час завантаження FileFormat з ідентифікатором '%1'."
+msgstr "Помилка під час завантаження формату файлу “%1”."
 
 #: mainwindow.cpp:2528
-#, fuzzy
 msgid "Select file format"
-msgstr "Оберіть читач файлу"
+msgstr "Оберіть формат файлу"
 
 #: mainwindow.cpp:2533 mainwindow.cpp:2544
-#, fuzzy, qt-format
+#, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "Час очікування Avogadro закінчився і не може відкрити \"%1\"."
+msgstr "Avogadro не може відкрити \"%1\"."
 
 #: mainwindow.cpp:2543
 msgid "Cannot open files"
@@ -640,14 +607,12 @@ msgid "&Window"
 msgstr "&Вікно"
 
 #: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Нове вікно перегляду"
+msgstr "3D Огляд"
 
 #: viewfactory.cpp:28 viewfactory.cpp:38
 msgid "VTK"
-msgstr ""
+msgstr "ВТК"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -658,58 +623,42 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-#| "\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-"
-#| "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
-#| "#0000ff;\">BSD-3-Clause</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-"
 "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
 "#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">Ліцензія: </span><a href=\"http://opensource.org/licenses/BSD-3-"
-"Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
-"#0000ff;\">BSD-3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Ліцензія: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
+">BSD-3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:278
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span "
-#| "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
-#| "org</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
 "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span "
-"style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
-"span></a></p></body></html>"
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+"org</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:307
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" "
-#| "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></"
-#| "p></body></html>"
 msgid ""
 "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
 "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
-"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
-"body></html>"
+"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">www.kitware."
+"com</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:334
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -786,9 +735,8 @@ msgstr "Повернутися до збереженого"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
-msgstr "Встановити колір &тла..."
+msgstr "Встановити колір тла…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -929,12 +877,12 @@ msgstr "&Імпорт"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
 msgid "Enable ambient occlusion shadows"
-msgstr ""
+msgstr "Увімкнути тіні ambient occlusion"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Ambient Occlusion:"
 
 #. i18n: file: renderingdialog.ui:43
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
@@ -945,17 +893,17 @@ msgstr ""
 #. i18n: file: renderingdialog.ui:325
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Увімкнути"
 
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, label)
 msgid "Strength of the ambient shadows"
-msgstr ""
+msgstr "Сила тіней оточення"
 
 #. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Сила тіні:"
 
 #. i18n: file: renderingdialog.ui:106
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
@@ -970,52 +918,52 @@ msgstr "Рівень туману:"
 #. i18n: file: renderingdialog.ui:140
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Strength:"
-msgstr ""
+msgstr "Сила туману:"
 
 #. i18n: file: renderingdialog.ui:170
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Position:"
-msgstr ""
+msgstr "Позиція туману:"
 
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Add a depth blur"
-msgstr ""
+msgstr "Додати розмиття глибини"
 
 #. i18n: file: renderingdialog.ui:211
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid "Depth Blur:"
-msgstr ""
+msgstr "Глибина розмиття:"
 
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Сила глибини розмиття"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Сила розмиття:"
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Позиція глибини розмиття"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Позиція розмиття:"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, label_4)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "Додати контур до граничних атомів"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 msgid "Edge Outline:"
-msgstr ""
+msgstr "Обведення краю:"
 
 #. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
@@ -1024,10 +972,8 @@ msgstr "Зберегти"
 
 #. i18n: file: renderingdialog.ui:374
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "За&крити"
+msgstr "Закрити"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
