@@ -33,7 +33,7 @@ if(UNIX AND NOT APPLE)
     set(INSTALL_XDG_APPS_DIR "${INSTALL_DATA_DIR}/applications")
   endif()
   if(NOT INSTALL_XDG_ICON_DIR)
-    set(INSTALL_XDG_ICON_DIR "${INSTALL_DATA_DIR}/pixmaps")
+    set(INSTALL_XDG_ICON_DIR "${INSTALL_DATA_DIR}/icons")
   endif()
 endif()
 
