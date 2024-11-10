@@ -20,12 +20,12 @@ jobs:
     - name: Checkout avogadroapp
       uses: actions/checkout@v4
       with:
-        repository: openchemistry/avogadroapp
         path: avogadroapp
         
     - name: Checkout avogadrolibs
       uses: actions/checkout@v4
       with:
+        repository: openchemistry/avogadrolibs
         path: avogadrolibs
 
     - name: Checkout i18n
@@ -62,6 +62,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: flathub/shared-modules
+        path: shared-modules
 
     - name: Build with flatpak-builder
       uses: flatpak/flatpak-github-actions/flatpak-builder@v6
