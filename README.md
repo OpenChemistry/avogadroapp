@@ -72,6 +72,6 @@ Contributors Hall of Fame:
   [OpenChemistryLogo]: https://raw.githubusercontent.com/OpenChemistry/avogadrolibs/master/docs/OpenChemistry128.png "Open Chemistry"
   [Kitware]: http://kitware.com/ "Kitware, Inc."
   [Avogadro1]: http://avogadro.cc/ "Avogadro 1"
-  [Build]: https://two.avogadro.cc/install/build.html "Building Avogadro"
+  [Build]: https://two.avogadro.cc/develop/build.html#develop-build "Building Avogadro"
   [Contribution]: https://two.avogadro.cc/contrib/ "Contribution guide"
   [API]: https://two.avogadro.cc/api/ "API documentation"
