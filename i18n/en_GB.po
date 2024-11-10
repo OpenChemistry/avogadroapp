@@ -3,13 +3,15 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Andi Chandler <andi@gowling.com>, 2023, 2024.
 # matterhorn103 <milner94@live.co.uk>, 2023.
+# matterhorn103 <83813148+matterhorn103@users.noreply.github.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2024-11-03 13:00+0000\n"
-"Last-Translator: Andi Chandler <andi@gowling.com>\n"
+"PO-Revision-Date: 2024-11-11 00:57+0000\n"
+"Last-Translator: matterhorn103 <83813148+matterhorn103@users.noreply.github."
+"com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_GB/>\n"
 "Language: en_GB\n"
@@ -66,7 +68,7 @@ msgstr "Tool"
 
 #: mainwindow.cpp:407
 msgid "Display Types"
-msgstr "Display types"
+msgstr "Display Types"
 
 #: mainwindow.cpp:416
 msgid "View Configuration"
@@ -386,7 +388,7 @@ msgstr "&Save"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1984:108
 msgid "Save &As…"
-msgstr "Save &as…"
+msgstr "Save &As…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -400,7 +402,7 @@ msgstr "&Molecule…"
 
 #: mainwindow.cpp:2003
 msgid "Export Molecule…"
-msgstr "Export Molecule"
+msgstr "Export Molecule…"
 
 #: mainwindow.cpp:2010
 msgid "&Graphics…"
@@ -446,7 +448,7 @@ msgstr "&View"
 
 #: mainwindow.cpp:2077
 msgid "Set Background Color…"
-msgstr "Set Background colour…"
+msgstr "Set Background Colour…"
 
 #: mainwindow.cpp:2081
 msgid "Rendering…"
@@ -719,7 +721,7 @@ msgstr "Revert To Saved"
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color…"
-msgstr "Set &Background colour…"
+msgstr "Set &Background Colour…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
