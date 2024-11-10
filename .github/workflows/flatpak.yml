@@ -38,6 +38,12 @@ jobs:
       with:
         repository: openchemistry/avogadro-i18n
         path: avogadro-i18n
+    
+    - name: Checkout avogadrogenerators
+      uses: actions/checkout@v4
+      with:
+        repository: openchemistry/avogenerators
+        path: avogadrogenerators
 
     - name: Checkout crystals
       uses: actions/checkout@v4
