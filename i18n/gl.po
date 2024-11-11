@@ -3,20 +3,23 @@
 # This file is distributed under the same license as the Avogadro package.
 #
 # Marce Villarino <mvillarino@gmail.com>, 2010.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.1.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2016-06-10 06:19+0000\n"
-"Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
-"Language-Team: Galician <proxecto@trasno.net>\n"
+"PO-Revision-Date: 2024-11-11 19:52+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"Language-Team: Galician <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/gl/>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.8.2\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -398,7 +401,7 @@ msgstr "Gardar &como..."
 #: mainwindow.cpp:1995:201
 #, fuzzy
 msgid "&Export"
-msgstr "Exportar"
+msgstr "&Exportar"
 
 #: mainwindow.cpp:1996
 #, fuzzy
@@ -481,7 +484,7 @@ msgstr ""
 #: mainwindow.cpp:2116
 #, fuzzy
 msgid "&Extensions"
-msgstr "Extensións"
+msgstr "&Extensións"
 
 #: mainwindow.cpp:2118
 msgid "User Interface Language…"
@@ -888,7 +891,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "&Import"
-msgstr "Importar"
+msgstr "&Importar"
 
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
