@@ -65,6 +65,10 @@ jobs:
         repository: flathub/shared-modules
         path: shared-modules
 
+    - name: Setup tmate session
+      if: failure()
+      uses: mxschmitt/action-tmate@v3
+
     - name: Move manifest
       run: mv src/avogadroapp/flatpak/org.openchemistry.Avogadro2.yaml ./
 
@@ -74,4 +78,14 @@ jobs:
         bundle: avogadro2.flatpak
         branch: nightly
         manifest-path: org.openchemistry.Avogadro2.yaml
+        cache: false
         cache-key: flatpak-builder-${{ github.sha }}
+    
+    - name: Cleanup
+      if: ${{ always() }} # To ensure this step runs even when earlier steps fail
+      shell: bash
+      run: |
+        ls -la ./
+        rm -rf ./* || true
+        rm -rf ./.??* || true
+        ls -la ./
