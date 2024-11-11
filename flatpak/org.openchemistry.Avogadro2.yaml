@@ -46,10 +46,12 @@ modules:
       - -DQT_VERSION=6
       - -DDOWNLOAD_TO_SOURCE_DIR=ON
     sources:
-      # Don't fetch any Avogadro stuff, already done as part of GitHub Actions
+      # Avogadro stuff all already collected together as part of GitHub Actions
       # This means that if using this to build the Flatpak locally, the openchemistry repo and
-      # its submodules must be cloned in advance of running flatpak-builder with this manifest
-      
+      # its submodules must be cloned into ./src in advance of running flatpak-builder with this manifest
+      - type: dir
+        path: src
+
       # Now fetch third-party stuff where the source is expected in `openchemistry/thirdparty`
       # VTK
       - type: archive

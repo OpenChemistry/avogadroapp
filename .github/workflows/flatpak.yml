@@ -16,56 +16,57 @@ jobs:
       with:
         repository: openchemistry/openchemistry
         submodules: false
+        path: src
         
     - name: Checkout avogadroapp
       uses: actions/checkout@v4
       with:
-        path: avogadroapp
+        path: src/avogadroapp
         
     - name: Checkout avogadrolibs
       uses: actions/checkout@v4
       with:
         repository: openchemistry/avogadrolibs
-        path: avogadrolibs
+        path: src/avogadrolibs
 
     - name: Checkout i18n
       uses: actions/checkout@v4
       with:
         repository: openchemistry/avogadro-i18n
-        path: avogadro-i18n
+        path: src/avogadro-i18n
     
     - name: Checkout avogadrogenerators
       uses: actions/checkout@v4
       with:
         repository: openchemistry/avogenerators
-        path: avogadrogenerators
+        path: src/avogadrogenerators
 
     - name: Checkout crystals
       uses: actions/checkout@v4
       with:
         repository: openchemistry/crystals
-        path: crystals
+        path: src/crystals
 
     - name: Checkout fragments
       uses: actions/checkout@v4
       with:
         repository: openchemistry/fragments
-        path: fragments
+        path: src/fragments
 
     - name: Checkout molecules
       uses: actions/checkout@v4
       with:
         repository: openchemistry/molecules
-        path: molecules
+        path: src/molecules
 
     - name: Checkout Flathub shared-modules
       uses: actions/checkout@v4
       with:
         repository: flathub/shared-modules
-        path: shared-modules
+        path: src/shared-modules
 
     - name: Move manifest
-      run: mv avogadroapp/flatpak/org.openchemistry.Avogadro2.yaml ./
+      run: mv src/avogadroapp/flatpak/org.openchemistry.Avogadro2.yaml ./
 
     - name: Build with flatpak-builder
       uses: flatpak/flatpak-github-actions/flatpak-builder@v6
