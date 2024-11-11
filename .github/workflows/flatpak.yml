@@ -63,7 +63,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: flathub/shared-modules
-        path: src/shared-modules
+        path: shared-modules
 
     - name: Move manifest
       run: mv src/avogadroapp/flatpak/org.openchemistry.Avogadro2.yaml ./
