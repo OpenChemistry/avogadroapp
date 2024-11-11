@@ -106,7 +106,7 @@ int main(int argc, char* argv[])
   QCoreApplication::setOrganizationName("OpenChemistry");
   QCoreApplication::setOrganizationDomain("openchemistry.org");
   QCoreApplication::setApplicationName("Avogadro");
-  QGuiApplication::setDesktopFileName("avogadro2");
+  QGuiApplication::setDesktopFileName("org.openchemistry.Avogadro2");
 
   QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
