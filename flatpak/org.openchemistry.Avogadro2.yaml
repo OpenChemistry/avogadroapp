@@ -1,5 +1,4 @@
 app-id: org.openchemistry.Avogadro2
-default-branch: nightly
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
 runtime-version: "6.7"
@@ -48,9 +47,10 @@ modules:
     sources:
       # Avogadro stuff all already collected together as part of GitHub Actions
       # This means that if using this to build the Flatpak locally, the openchemistry repo and
-      # its submodules must be cloned into ./src in advance of running flatpak-builder with this manifest
+      # its submodules must be cloned into ./openchemistry in advance of running flatpak-builder
+      # with this manifest
       - type: dir
-        path: src
+        path: openchemistry
 
       # Now fetch third-party stuff where the source is expected in `openchemistry/thirdparty`
       # VTK
