@@ -81,13 +81,13 @@ modules:
         dest: Downloads
       # spglib
       - type: file
-        url: https://github.com/spglib/spglib/archive/v2.3.1.tar.gz
-        sha256: c295dbea7d2fc9e50639aa14331fef277878c35f00ef0766e688bfbb7b17d44c
+        url: https://github.com/spglib/spglib/archive/v2.5.0.tar.gz
+        sha256: b6026f5e85106c0c9ee57e54b9399890d0f29982e20e96ede0428b3efbe6b914
         dest: Downloads
       # libarchive
       - type: file
-        url: https://github.com/libarchive/libarchive/archive/v3.6.2.tar.gz
-        sha256: 652b84588488c2ff38db8f666cd7f781163f85bff4449dcb2e16d3c734f96697
+        url: https://github.com/libarchive/libarchive/archive/v3.7.7.tar.gz
+        sha256: fa62384995e8aa4f5a901c184fb5c91e56a29e24c05b6881a7f8fd5bbea694d2
         dest: Downloads
       # msgpackc
       - type: file
