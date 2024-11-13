@@ -2404,10 +2404,10 @@ void MainWindow::showAboutDialog()
 
 void MainWindow::openURL(const QString& url)
 {
-#if defined(Q_OS_MAC) || defined(Q_OS_WIN)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) || defined(Q_OS_MAC) || defined(Q_OS_WIN)
   QDesktopServices::openUrl(url);
 #else
-  // AppImage can't use QDesktopServices::openUrl, so we use QProcess:
+  // On Qt5, AppImage can't use QDesktopServices::openUrl, so we use QProcess:
   QProcess::execute(QString("xdg-open %1").arg(url));
 #endif
 }
