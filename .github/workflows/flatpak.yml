@@ -84,7 +84,7 @@ jobs:
       run: flatpak-builder --force-clean --user --install-deps-from=flathub --arch=x86_64 --default-branch=test --repo=repo builddir org.openchemistry.Avogadro2.yaml
 
     - name: Create bundle
-      run: flatpak build-bundle repo Avogadro2.flatpak org.openchemistry.Avogadro2
+      run: flatpak build-bundle repo Avogadro2.flatpak org.openchemistry.Avogadro2 test
 
     - name: Upload bundle
       uses: actions/upload-artifact@v4
