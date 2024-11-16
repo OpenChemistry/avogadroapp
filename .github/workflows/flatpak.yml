@@ -84,7 +84,7 @@ jobs:
       run: mv openchemistry/avogadroapp/flatpak/org.openchemistry.Avogadro2.yaml ./
 
     - name: Build with flatpak-builder
-      run: flatpak run org.flatpak.Builder --force-clean --user --install-deps-from=flathub --arch=x86_64 --default-branch=test --repo=repo builddir org.openchemistry.Avogadro2.yaml
+      run: dbus-run-session flatpak run org.flatpak.Builder --force-clean --user --install-deps-from=flathub --arch=x86_64 --default-branch=test --repo=repo builddir org.openchemistry.Avogadro2.yaml
 
     - name: Create bundle
       run: flatpak build-bundle repo Avogadro2.flatpak org.openchemistry.Avogadro2 test
