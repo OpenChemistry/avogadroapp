@@ -1,7 +1,7 @@
 app-id: org.openchemistry.Avogadro2
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
-runtime-version: "6.7"
+runtime-version: "6.8"
 command: avogadro2
 appdata-license: BSD-3-Clause AND GPL-2.0-only
 finish-args:
@@ -11,7 +11,6 @@ finish-args:
   - --device=dri  # OpenGL rendering
   - --share=network  # For plugin downloads
 cleanup:
-  - /include
   - /lib/cmake
   - '*.la'
   - '*.a'
@@ -24,6 +23,10 @@ modules:
   - name: rapidjson
     buildsystem: cmake-ninja
     builddir: true
+    config-opts:
+      - -DRAPIDJSON_BUILD_DOC=OFF
+      - -DRAPIDJSON_BUILD_EXAMPLES=OFF
+      - -DRAPIDJSON_BUILD_TESTS=OFF
     sources:
       - type: git
         url: https://github.com/Tencent/rapidjson.git
@@ -38,7 +41,7 @@ modules:
     no-make-install: true  # Superbuild doesn't have `install` command defined
     config-opts:
       # Match GitHub builds as much as possible, which generally means using defaults
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=Debug
       - -DUSE_VTK=ON
       - -DBUILD_GPL_PLUGINS=ON
       - -DBUILD_MOLEQUEUE=OFF
@@ -107,5 +110,9 @@ modules:
 
     post-install:
       # Manually copy contents of prefix dir over into main build dir
-      # -a option is recursive should preserve permissions and symlinks
-      - cp -a prefix/* -t ${FLATPAK_DEST}/
+      # -a option is recursive, should preserve permissions and symlinks
+      - cp -a prefix/bin -t ${FLATPAK_DEST}/
+      - cp -a prefix/lib -t ${FLATPAK_DEST}/
+      - cp -a prefix/lib64/* -t ${FLATPAK_DEST}/lib/  # Merge with lib
+      - ln -rs ${FLATPAK_DEST}/lib ${FLATPAK_DEST}/lib64  # Add a symlink so plugins get found
+      - cp -a prefix/share -t ${FLATPAK_DEST}/
