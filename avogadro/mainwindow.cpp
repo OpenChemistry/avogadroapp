@@ -368,6 +368,7 @@ void MainWindow::setupInterface()
   m_multiViewWidget->setFactory(m_viewFactory);
   setCentralWidget(m_multiViewWidget);
   auto* glWidget = new GLWidget(this);
+  m_viewFactory->setGLWidget(glWidget);
 
   // set the background color (alpha channel default should be opaque)
   auto color =

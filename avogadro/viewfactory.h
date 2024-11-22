@@ -7,6 +7,10 @@
 #define AVOGADRO_VIEWFACTORY_H
 
 #include <avogadro/qtgui/viewfactory.h>
+#include <avogadro/qtopengl/glwidget.h>
+#ifdef AVO_USE_VTK
+#include <avogadro/vtk/vtkglwidget.h>
+#endif
 
 namespace Avogadro {
 
@@ -18,6 +22,10 @@ public:
 
   QStringList views() const;
   QWidget* createView(const QString& view);
+  void setGLWidget(QtOpenGL::GLWidget* glWidget) { m_glWidget = glWidget; }
+
+protected:
+  QtOpenGL::GLWidget* m_glWidget = nullptr;
 };
 
 } // End namespace Avogadro
