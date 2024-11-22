@@ -6,21 +6,22 @@
 # 謝宗儒 <zongruxie4@gmail.com>, 2022.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
 # Ricky From Hong Kong <lamricky11@hotmail.com>, 2024.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2024-08-13 08:09+0000\n"
-"Last-Translator: Ricky From Hong Kong <lamricky11@hotmail.com>\n"
-"Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
-"avogadro/avogadroapp/zh_Hant/>\n"
+"PO-Revision-Date: 2024-11-19 01:26+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/avogadro/avogadroapp/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.9-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -811,6 +812,7 @@ msgstr "Ctrl+V"
 
 #. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
 msgid "Copy"
 msgstr "複製"
 

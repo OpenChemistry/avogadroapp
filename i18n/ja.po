@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2024-11-13 09:00+0000\n"
+"PO-Revision-Date: 2024-11-19 01:26+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -128,7 +128,7 @@ msgid "Cannot open file"
 msgstr "ファイルを開けません"
 
 #: mainwindow.cpp:799 mainwindow.cpp:823 mainwindow.cpp:1384
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
 msgstr "ファイル %1 を開けません"
 
@@ -517,7 +517,6 @@ msgid "All supported formats (%1);;All files (*);;"
 msgstr "サポートされているすべての形式（%1）;;すべてのファイル（*）;;"
 
 #: mainwindow.cpp:2309
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
 msgstr "ドキュメントの変更内容を保存しますか？"
 
@@ -712,7 +711,7 @@ msgstr "Ctrl+Shift+S"
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Revert To Saved"
-msgstr "保存した状態へ復帰"
+msgstr "保存した状態に差し戻す"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
