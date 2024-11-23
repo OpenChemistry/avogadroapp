@@ -32,7 +32,6 @@ QWidget* ViewFactory::createView(const QString& view)
     // get the background color, etc.
     if (m_glWidget != nullptr) {
       auto newWidget = new QtOpenGL::GLWidget(m_glWidget);
-      newWidget->setMolecule(m_glWidget->molecule());
       // set the background color, etc.
       auto bgColor = m_glWidget->renderer().scene().backgroundColor();
       newWidget->renderer().scene().setBackgroundColor(bgColor);
