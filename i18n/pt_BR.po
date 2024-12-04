@@ -6,13 +6,14 @@
 # Alexandre R Soares <ntegti@zipmail.com.br>, 2021.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Pedro Moreira <pedroltmoreira@gmail.com>, 2024.
+# Khemis <khemis@bol.com.br>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2024-03-11 01:02+0000\n"
-"Last-Translator: Pedro Moreira <pedroltmoreira@gmail.com>\n"
+"PO-Revision-Date: 2024-11-27 23:00+0000\n"
+"Last-Translator: Khemis <khemis@bol.com.br>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.9-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -158,7 +159,7 @@ msgstr "Cargas"
 #: mainwindow.cpp:838
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "Campos de Força"
 
 #: mainwindow.cpp:842
 msgid "Install Plugin Script"
@@ -449,7 +450,7 @@ msgstr "&Exibir"
 
 #: mainwindow.cpp:2077
 msgid "Set Background Color…"
-msgstr "Definir Cor do &Plano de Fundo…"
+msgstr "Definir Cor do Plano de Fundo…"
 
 #: mainwindow.cpp:2081
 msgid "Rendering…"
@@ -499,7 +500,7 @@ msgstr "Website do Avogadro"
 
 #: mainwindow.cpp:2144
 msgid "&Report a Bug"
-msgstr "&Relatar um problema"
+msgstr "&Relatar um Erro"
 
 #: mainwindow.cpp:2148
 msgid "&Suggest a Feature"
@@ -541,10 +542,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2409
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Falha na verificação de rede"
+msgstr "Falha no Download da Rede"
 
 #: mainwindow.cpp:2410
 msgid "Network timeout or other error."
@@ -562,7 +561,7 @@ msgstr "Nova versão: %1"
 
 #: mainwindow.cpp:2452
 msgid "An update is available, do you want to download it now?\n"
-msgstr "Uma atualização está disponível. Você quer baixá-la agora?\n"
+msgstr "Uma atualização está disponível. Deseja baixá-la agora?\n"
 
 #: mainwindow.cpp:2454
 msgid "Version Update"
@@ -623,7 +622,7 @@ msgstr "VTK"
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -897,7 +896,7 @@ msgstr ""
 #. i18n: file: renderingdialog.ui:170
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Position:"
-msgstr ""
+msgstr "Posição da Neblina:"
 
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
@@ -947,7 +946,7 @@ msgstr "Salvar"
 #. i18n: file: renderingdialog.ui:374
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
 msgid "Close"
-msgstr "Fe&char"
+msgstr "Fechar"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
