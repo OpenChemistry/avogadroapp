@@ -56,6 +56,11 @@ function(determine_version source_dir git_command var_prefix)
       set (${var_prefix}_VERSION_IS_RELEASE FALSE PARENT_SCOPE)
     endif()
   else()
+    # snapshot, so use the date
+    string(TIMESTAMP date "%Y%m%d" UTC)
+    set (patch_extra "${date}")
+    set (${var_prefix}_VERSION_PATCH_EXTRA ${patch_extra} PARENT_SCOPE)
+    set (${var_prefix}_VERSION "${${var_prefix}_VERSION_MAJOR}.${${var_prefix}_VERSION_MINOR}.${${var_prefix}_VERSION_PATCH}-${patch_extra}" PARENT_SCOPE)
     message(STATUS
       "Could not use git to determine source version, using version ${${var_prefix}_VERSION}"
     )
