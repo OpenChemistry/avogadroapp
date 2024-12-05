@@ -278,6 +278,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
     ExtensionPlugin* extension =
       factory->createInstance(QCoreApplication::instance());
     if (extension) {
+      qDebug() << " loading extension plugin: " << extension->name();
       extension->setParent(this);
       connect(this, &MainWindow::moleculeChanged, extension,
               &QtGui::ExtensionPlugin::setMolecule);
