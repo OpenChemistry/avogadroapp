@@ -854,6 +854,7 @@ bool MainWindow::addScript(const QString& filePath)
   QString typePath;
 
   int index = types.indexOf(item);
+
   // don't translate these
   switch (index) {
     case 0: // commands
@@ -865,10 +866,10 @@ bool MainWindow::addScript(const QString& filePath)
     case 2:
       typePath = "formatScripts";
       break;
-    case 4:
+    case 3:
       typePath = "charges";
       break;
-    case 5:
+    case 4:
       typePath = "energy";
       break;
     default:
