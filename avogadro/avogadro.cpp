@@ -49,28 +49,28 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext& context,
   QString message;
   switch (type) {
     case QtInfoMsg:
-      message = QString("Info: %1 (%2:%3, %4)\n")
+      message = QString("Info: %1 (%2:%3, %4)")
                   .arg(localMsg.constData())
                   .arg(file)
                   .arg(context.line)
                   .arg(function);
       break;
     case QtWarningMsg:
-      message = QString("Warning: %1 (%2:%3, %4)\n")
+      message = QString("Warning: %1 (%2:%3, %4)")
                   .arg(localMsg.constData())
                   .arg(file)
                   .arg(context.line)
                   .arg(function);
       break;
     case QtCriticalMsg:
-      message = QString("Critical: %1 (%2:%3, %4)\n")
+      message = QString("Critical: %1 (%2:%3, %4)")
                   .arg(localMsg.constData())
                   .arg(file)
                   .arg(context.line)
                   .arg(function);
       break;
     case QtFatalMsg:
-      message = QString("Fatal: %1 (%2:%3, %4)\n")
+      message = QString("Fatal: %1 (%2:%3, %4)")
                   .arg(localMsg.constData())
                   .arg(file)
                   .arg(context.line)
@@ -78,7 +78,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext& context,
       break;
     case QtDebugMsg:
     default:
-      message = QString("Debug: %1 (%2:%3, %4)\n")
+      message = QString("Debug: %1 (%2:%3, %4)")
                   .arg(localMsg.constData())
                   .arg(file)
                   .arg(context.line)
@@ -114,6 +114,12 @@ int main(int argc, char* argv[])
 #ifdef Q_OS_WIN
   // We need to ensure desktop OpenGL is loaded for our rendering.
   QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
+
+  // remove the previous log file
+  QString writableDocs =
+    QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+  QFile outFile(writableDocs + "/avogadro2.log");
+  outFile.remove(); // we don't care if this fails
 
   // install the message handler (goes to Documents / avogadro2.log)
   qInstallMessageHandler(myMessageOutput);
