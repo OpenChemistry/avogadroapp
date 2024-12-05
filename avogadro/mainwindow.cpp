@@ -300,10 +300,13 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   }
 
   // Now set up the interface.
+  qDebug() << " setting interface ";
   setupInterface();
 
   // Build up the standard menus, incorporate dynamic menus.
+  qDebug() << " building menu ";
   buildMenu();
+  qDebug() << " updating recent files ";
   updateRecentFiles();
 
   // Try to open the file(s) passed in.
@@ -312,6 +315,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
     // Give the plugins 5 seconds before timing out queued files.
     QTimer::singleShot(5000, this, &MainWindow::clearQueuedFiles);
   } else {
+    qDebug() << " creating new molecule ";
     newMolecule();
   }
 
@@ -2234,6 +2238,7 @@ void MainWindow::buildTools()
 
   int index = 1;
   foreach (ToolPlugin* toolPlugin, m_tools) {
+    qDebug() << " adding tool " << toolPlugin->objectName();
     // Add action to toolbar.
     toolPlugin->setParent(this);
     QAction* action = toolPlugin->activateAction();
