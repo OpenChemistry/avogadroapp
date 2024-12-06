@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2024-11-19 01:26+0000\n"
+"PO-Revision-Date: 2024-12-07 20:00+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -115,8 +115,9 @@ msgid "Chemical Markup Language"
 msgstr "Chemical Markup Language"
 
 #: mainwindow.cpp:774 mainwindow.cpp:1495
+#, fuzzy
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Chemical JSON"
 
 #: mainwindow.cpp:780
 msgid "Open chemical file"
@@ -860,7 +861,7 @@ msgstr ""
 #. i18n: file: renderingdialog.ui:325
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "有効化"
 
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, label)
