@@ -274,12 +274,11 @@ int main(int argc, char* argv[])
   }
 
   // Set up the default format for our GL contexts.
+#if defined(Q_OS_MAC)
   QSurfaceFormat defaultFormat = QSurfaceFormat::defaultFormat();
-  defaultFormat.setSamples(4);
-#if defined(Q_OS_MAC) || defined(Q_OS_WIN)
   defaultFormat.setAlphaBufferSize(8);
-#endif
   QSurfaceFormat::setDefaultFormat(defaultFormat);
+#endif
 
   QStringList fileNames;
   bool disableSettings = false;
