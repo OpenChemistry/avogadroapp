@@ -20,9 +20,13 @@
 
 // install a message handler (for Windows)
 #include <QFile>
+#include <QSslSocket>
 #include <QTextStream>
 
+#include <avogadro/core/version.h>
+
 #include "application.h"
+#include "avogadroappconfig.h"
 #include "mainwindow.h"
 
 #ifdef Q_OS_MAC
@@ -124,6 +128,12 @@ int main(int argc, char* argv[])
   // install the message handler (goes to Documents / avogadro2.log)
   qInstallMessageHandler(myMessageOutput);
 #endif
+
+  // output the version information
+  qDebug() << "Avogadroapp version: " << AvogadroApp_VERSION;
+  qDebug() << "Avogadrolibs version: " << Avogadro::version();
+  qDebug() << "Qt version: " << qVersion();
+  qDebug() << "SSL version: " << QSslSocket::sslLibraryVersionString();
 
   Avogadro::Application app(argc, argv);
 
