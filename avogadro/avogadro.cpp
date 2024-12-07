@@ -22,6 +22,8 @@
 #include <QFile>
 #include <QTextStream>
 
+#include <avogadro/core/version.h>
+
 #include "application.h"
 #include "mainwindow.h"
 
@@ -117,6 +119,12 @@ int main(int argc, char* argv[])
 
   // install the message handler (goes to Documents / avogadro2.log)
   qInstallMessageHandler(myMessageOutput);
+
+  // output the version information
+  qDebug() << "Avogadroapp version: " << AvogadroApp_VERSION;
+  qDebug() << "Avogadrolibs version: " << version();
+  qDebug() << "Qt version: " << qVersion();
+  qDebug() << "SSL version: " << QSslSocket::sslLibraryVersionString();
 #endif
 
   Avogadro::Application app(argc, argv);
