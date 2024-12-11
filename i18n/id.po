@@ -6,13 +6,14 @@
 # Ferdinand Tampubolon <dnandz@gmail.com>, 2021.
 # Reza Almanda <rezaalmanda27@gmail.com>, 2021, 2024.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
+# "C.Y.A.N" <bd3alz@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2024-09-09 01:09+0000\n"
-"Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
+"PO-Revision-Date: 2024-12-11 12:00+0000\n"
+"Last-Translator: \"C.Y.A.N\" <bd3alz@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
 "Language: id\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.9-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -140,11 +141,11 @@ msgstr "Buka Molekul"
 
 #: mainwindow.cpp:836
 msgid "Commands"
-msgstr ""
+msgstr "Perintah-perintah"
 
 #: mainwindow.cpp:836
 msgid "Input Generators"
-msgstr ""
+msgstr "Generator Masukan"
 
 #: mainwindow.cpp:836
 msgid "File Formats"
@@ -153,20 +154,20 @@ msgstr "Format file"
 #: mainwindow.cpp:837
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "menyeterum"
 
 #: mainwindow.cpp:838
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "Medan gaya"
 
 #: mainwindow.cpp:842
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Install Plugin Script"
 
 #: mainwindow.cpp:842
 msgid "Script Type:"
-msgstr ""
+msgstr "tipe Script:"
 
 #: mainwindow.cpp:896 mainwindow.cpp:1379
 msgid "Select file reader"
