@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2024-12-07 20:00+0000\n"
+"PO-Revision-Date: 2024-12-13 23:54+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.9-rc\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -47,15 +47,15 @@ msgstr "SSLバージョン:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormatに分子が設定されていません！"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormatにファイル形式が設定されていません！"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormatにファイル名が設定されていません！"
 
 #: mainwindow.cpp:322
 msgid "Ready…"
@@ -183,9 +183,9 @@ msgid ""
 msgstr ""
 
 #: mainwindow.cpp:987
-#, qt-format
+#, fuzzy, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "分子を読み込みました (%1原子、%2 結合)"
 
 #: mainwindow.cpp:992
 msgid "File error"
