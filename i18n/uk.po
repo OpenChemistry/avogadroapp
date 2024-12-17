@@ -5,13 +5,14 @@
 # Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
 # Tymofii Lytvynenko <till.svit@gmail.com>, 2021.
 # Yarema Kertytsky <y.kertytsky@gmail.com>, 2024.
+# Максим Горпиніч <mgorpinic2005@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-10-13 02:35+0000\n"
-"PO-Revision-Date: 2024-11-05 00:51+0000\n"
-"Last-Translator: Yarema Kertytsky <y.kertytsky@gmail.com>\n"
+"PO-Revision-Date: 2024-12-17 05:00+0000\n"
+"Last-Translator: Максим Горпиніч <mgorpinic2005@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/uk/>\n"
 "Language: uk\n"
@@ -20,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.9\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -148,12 +149,12 @@ msgstr "Генератори вхідних даних"
 
 #: mainwindow.cpp:836
 msgid "File Formats"
-msgstr "Формат файлу:"
+msgstr "Формат файлу"
 
 #: mainwindow.cpp:837
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Звинувачення"
 
 #: mainwindow.cpp:838
 msgctxt "potential energy calculators"
@@ -211,7 +212,7 @@ msgstr "Збережений файл %1"
 
 #: mainwindow.cpp:1027
 msgid "Error saving file"
-msgstr "Помилка під час збереження файла!"
+msgstr "Помилка під час збереження файла"
 
 #: mainwindow.cpp:1028
 #, qt-format
@@ -407,7 +408,6 @@ msgid "Export Molecule…"
 msgstr "Експорт молекули…"
 
 #: mainwindow.cpp:2010
-#, fuzzy
 msgid "&Graphics…"
 msgstr "&Графіка…"
 
@@ -451,7 +451,7 @@ msgstr "П&ерегляд"
 
 #: mainwindow.cpp:2077
 msgid "Set Background Color…"
-msgstr "Встановити колір тла…"
+msgstr "Установити колір фону…"
 
 #: mainwindow.cpp:2081
 msgid "Rendering…"
@@ -667,8 +667,6 @@ msgstr "Гаразд"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
@@ -680,8 +678,6 @@ msgstr "Відкрити"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -698,32 +694,24 @@ msgstr "Ви&лучити попередні"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+N"
 msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+W"
 msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Shift+S"
@@ -740,16 +728,12 @@ msgstr "Встановити колір тла…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Z"
 msgctxt "Undo"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+Z"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
@@ -771,8 +755,6 @@ msgstr "Вставити"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+V"
 msgctxt "Paste"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
@@ -780,12 +762,10 @@ msgstr "Ctrl+V"
 #. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Copy"
-msgstr "Копіювати"
+msgstr "копіювати"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+C"
 msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
@@ -797,8 +777,6 @@ msgstr "Вирізати"
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+X"
 msgctxt "Cut"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
@@ -806,7 +784,7 @@ msgstr "Ctrl+X"
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
-msgstr "Очистити"
+msgstr "очистити"
 
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -815,8 +793,6 @@ msgstr "Вибрати все"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
@@ -828,8 +804,6 @@ msgstr "Зняти вибір"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
@@ -882,7 +856,7 @@ msgstr "Увімкнути тіні ambient occlusion"
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr "Ambient Occlusion:"
+msgstr "Навколишня оклюзія:"
 
 #. i18n: file: renderingdialog.ui:43
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
@@ -908,7 +882,7 @@ msgstr "Сила тіні:"
 #. i18n: file: renderingdialog.ui:106
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "Ефект туману для сигналу глибини"
 
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -978,18 +952,18 @@ msgstr "Закрити"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-",Launchpad Contributions:,Vladimir Kurg,svv, ,Launchpad Contributions:,"
-"Vladimir Kurg,svv, ,Launchpad Contributions:, ,Launchpad Contributions:,"
-"Vladimir Kurg,svv, ,Launchpad Contributions:,Vladimir Kurg,svv, ,Launchpad "
-"Contributions:,Valeriy,Vladimir Kurg,svv, ,Launchpad Contributions:,Valeriy,"
-"Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv, ,Launchpad Contributions:,"
-"Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv, ,Launchpad "
-"Contributions:,Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv, ,"
-"Launchpad Contributions:,Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri "
-"Chornoivan,svv, ,Launchpad Contributions:,Vasiliy Meshko,Vladimir Kurg,Yuri "
-"Chornoivan,svv,yurchor, ,Launchpad Contributions:,Vasiliy Meshko,Vladimir "
-"Kurg,Yuri Chornoivan,svv,yurchor, ,Launchpad Contributions:,Vasiliy Meshko,"
-"Vladimir Kurg,Yuri Chornoivan,svv,yurchor"
+",Launchpad Contributions:,Vladimir Kurg,svv, ,Launchpad Contributions:"
+",Vladimir Kurg,svv, ,Launchpad Contributions:, ,Launchpad Contributions:"
+",Vladimir Kurg,svv, ,Launchpad Contributions:,Vladimir Kurg,svv, ,Launchpad "
+"Contributions:,Valeriy,Vladimir Kurg,svv, ,Launchpad Contributions:"
+",Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv, ,Launchpad "
+"Contributions:,Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv, "
+",Launchpad Contributions:,Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri "
+"Chornoivan,svv, ,Launchpad Contributions:,Valeriy,Vasiliy Meshko,Vladimir "
+"Kurg,Yuri Chornoivan,svv, ,Launchpad Contributions:,Vasiliy Meshko,Vladimir "
+"Kurg,Yuri Chornoivan,svv,yurchor, ,Launchpad Contributions:,Vasiliy "
+"Meshko,Vladimir Kurg,Yuri Chornoivan,svv,yurchor, ,Launchpad Contributions:"
+",Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv,yurchor"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
