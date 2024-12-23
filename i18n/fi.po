@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2024-10-13 02:35+0000\n"
+"POT-Creation-Date: 2024-12-22 02:35+0000\n"
 "PO-Revision-Date: 2024-12-17 05:00+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/avogadro/"
@@ -57,124 +57,124 @@ msgstr "BackgroundFileFormatissa ei ole määritetty tiedostomuotoa!"
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "BackgroundFileFormatissa ei ole asetettu tiedostonimeä!"
 
-#: mainwindow.cpp:322
+#: mainwindow.cpp:327
 msgid "Ready…"
 msgstr "Valmis…"
 
-#: mainwindow.cpp:403
+#: mainwindow.cpp:409
 msgid "Tool"
 msgstr "Työkalu"
 
-#: mainwindow.cpp:407
+#: mainwindow.cpp:413
 msgid "Display Types"
 msgstr "Näyttötyypit"
 
-#: mainwindow.cpp:416
+#: mainwindow.cpp:422
 msgid "View Configuration"
 msgstr "Näytä kokoonpano"
 
-#: mainwindow.cpp:420
+#: mainwindow.cpp:426
 msgid "Molecules"
 msgstr "Molekyylit"
 
-#: mainwindow.cpp:429
+#: mainwindow.cpp:435
 msgid "Layers"
 msgstr "Tasot"
 
-#: mainwindow.cpp:452
+#: mainwindow.cpp:458
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Tiedosto"
 
-#: mainwindow.cpp:457
+#: mainwindow.cpp:463
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Työkalut"
 
-#: mainwindow.cpp:691
+#: mainwindow.cpp:697
 msgid "Untitled"
 msgstr "Ei otsikkoa"
 
-#: mainwindow.cpp:696
+#: mainwindow.cpp:702
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Avogadro %3"
 
-#: mainwindow.cpp:752
+#: mainwindow.cpp:758
 msgid "Restart needed"
 msgstr "Uudelleenkäynnistys tarvitaan"
 
-#: mainwindow.cpp:753
+#: mainwindow.cpp:759
 msgid "Please restart Avogadro to use the new language."
 msgstr "Käynnistä Avogadro uudelleen käyttääksesi uutta kieltä."
 
-#: mainwindow.cpp:773 mainwindow.cpp:1496
+#: mainwindow.cpp:779 mainwindow.cpp:1521
 msgid "Chemical Markup Language"
 msgstr "Kemiallinen merkintäkieli"
 
-#: mainwindow.cpp:774 mainwindow.cpp:1495
+#: mainwindow.cpp:780 mainwindow.cpp:1520
 msgid "Chemical JSON"
 msgstr "Kemiallinen JSON"
 
-#: mainwindow.cpp:780
+#: mainwindow.cpp:786
 msgid "Open chemical file"
 msgstr "Avaa kemikaalitiedosto"
 
-#: mainwindow.cpp:798 mainwindow.cpp:822 mainwindow.cpp:1383
-#: mainwindow.cpp:2532
+#: mainwindow.cpp:804 mainwindow.cpp:828 mainwindow.cpp:1408
+#: mainwindow.cpp:2562
 msgid "Cannot open file"
 msgstr "Tiedostoa ei voi avata"
 
-#: mainwindow.cpp:799 mainwindow.cpp:823 mainwindow.cpp:1384
+#: mainwindow.cpp:805 mainwindow.cpp:829 mainwindow.cpp:1409
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "Toimitettua tiedostoa %1 ei voi avata"
 
-#: mainwindow.cpp:812
+#: mainwindow.cpp:818
 msgid "Open Molecule"
 msgstr "Avaa molekyyli"
 
-#: mainwindow.cpp:836
+#: mainwindow.cpp:842
 msgid "Commands"
 msgstr "Komennot"
 
-#: mainwindow.cpp:836
+#: mainwindow.cpp:842
 msgid "Input Generators"
 msgstr "Syöttögeneraattorit"
 
-#: mainwindow.cpp:836
+#: mainwindow.cpp:842
 msgid "File Formats"
 msgstr "Tiedostomuodot"
 
-#: mainwindow.cpp:837
+#: mainwindow.cpp:843
 msgctxt "atomic electrostatics"
 msgid "Charges"
 msgstr "Veloitukset"
 
-#: mainwindow.cpp:838
+#: mainwindow.cpp:844
 msgctxt "potential energy calculators"
 msgid "Force Fields"
 msgstr "Voimakentät"
 
-#: mainwindow.cpp:842
+#: mainwindow.cpp:848
 msgid "Install Plugin Script"
 msgstr "Asenna liitännäisen komentosarja"
 
-#: mainwindow.cpp:842
+#: mainwindow.cpp:848
 msgid "Script Type:"
 msgstr "Komentosarjan tyyppi:"
 
-#: mainwindow.cpp:896 mainwindow.cpp:1379
+#: mainwindow.cpp:921 mainwindow.cpp:1404
 msgid "Select file reader"
 msgstr "Valitse tiedostojen lukija"
 
-#: mainwindow.cpp:925
+#: mainwindow.cpp:950
 msgid "Reading File"
 msgstr "Tiedoston lukeminen"
 
-#: mainwindow.cpp:927
+#: mainwindow.cpp:952
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -183,16 +183,16 @@ msgstr ""
 "Avataan tiedosto '%1'\n"
 "'%2':lla"
 
-#: mainwindow.cpp:987
+#: mainwindow.cpp:1012
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Molekyyli ladattu (%1 atomia, %2 sidosta)"
 
-#: mainwindow.cpp:992
+#: mainwindow.cpp:1017
 msgid "File error"
 msgstr "Tiedostovirhe"
 
-#: mainwindow.cpp:993
+#: mainwindow.cpp:1018
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -201,17 +201,17 @@ msgstr ""
 "Virhe luettaessa tiedostoa '%1':\n"
 "%2"
 
-#: mainwindow.cpp:1020
+#: mainwindow.cpp:1045
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "Tallennettu tiedosto %1"
 
-#: mainwindow.cpp:1027
+#: mainwindow.cpp:1052
 msgid "Error saving file"
 msgstr "Virhe tallennettaessa tiedostoa"
 
-#: mainwindow.cpp:1028
+#: mainwindow.cpp:1053
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -221,11 +221,11 @@ msgstr ""
 "Virhe tallennettaessa '%1':\n"
 "%2"
 
-#: mainwindow.cpp:1067
+#: mainwindow.cpp:1092
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Virhe: OpenGL-kontekstin alustaminen epäonnistui"
 
-#: mainwindow.cpp:1068
+#: mainwindow.cpp:1093
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -236,46 +236,46 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:1069
+#: mainwindow.cpp:1094
 msgid "Unknown error"
 msgstr "Tuntematon virhe"
 
-#: mainwindow.cpp:1324
+#: mainwindow.cpp:1349
 msgid "Common image formats"
 msgstr "Yleiset kuvamuodot"
 
-#: mainwindow.cpp:1326
+#: mainwindow.cpp:1351
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
-#: mainwindow.cpp:1326
+#: mainwindow.cpp:1351
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1327
+#: mainwindow.cpp:1352
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1327
+#: mainwindow.cpp:1352
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1336
+#: mainwindow.cpp:1361
 msgid "Export Bitmap Graphics"
 msgstr "Vie bittikarttagrafiikka"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1352 mainwindow.cpp:1469 mainwindow.cpp:2308:39
+#: mainwindow.cpp:1377 mainwindow.cpp:1494 mainwindow.cpp:2334:39
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1353
+#: mainwindow.cpp:1378
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Tiedostoa %1 ei voida tallentaa."
 
-#: mainwindow.cpp:1470
+#: mainwindow.cpp:1495
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -287,23 +287,23 @@ msgstr ""
 "\n"
 "Haluatko viedä nykyiseen muotoon vai tallentaa vakiomuotoon?"
 
-#: mainwindow.cpp:1477
+#: mainwindow.cpp:1502
 msgid "Export"
 msgstr "Vie"
 
-#: mainwindow.cpp:1501
+#: mainwindow.cpp:1526
 msgid "Save chemical file"
 msgstr "Tallenna kemikaalitiedosto"
 
-#: mainwindow.cpp:1545
+#: mainwindow.cpp:1570
 msgid "Export Molecule"
 msgstr "Vie molekyyli"
 
-#: mainwindow.cpp:1644
+#: mainwindow.cpp:1669
 msgid "Saving File in Progress…"
 msgstr "Tiedoston tallentaminen käynnissä…"
 
-#: mainwindow.cpp:1646
+#: mainwindow.cpp:1671
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -313,43 +313,43 @@ msgstr ""
 "Tallennetaan tiedostoa ”%1”\n"
 "ja ”%2”"
 
-#: mainwindow.cpp:1789
+#: mainwindow.cpp:1814
 #, qt-format
 msgid "&Undo %1"
 msgstr "&Kumoa %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1792 mainwindow.cpp:2048:123
+#: mainwindow.cpp:1817 mainwindow.cpp:2073:123
 msgid "&Undo"
 msgstr "&Kumoa"
 
-#: mainwindow.cpp:1797
+#: mainwindow.cpp:1822
 #, qt-format
 msgid "&Redo %1"
 msgstr "&Tee uudelleen %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1800 mainwindow.cpp:2053:129
+#: mainwindow.cpp:1825 mainwindow.cpp:2078:129
 msgid "&Redo"
 msgstr "&Tee uudelleen"
 
-#: mainwindow.cpp:1922
+#: mainwindow.cpp:1947
 msgid "&Testing"
 msgstr "&Testaus"
 
-#: mainwindow.cpp:1924
+#: mainwindow.cpp:1949
 msgid "Record test…"
 msgstr "Nauhoita testi…"
 
-#: mainwindow.cpp:1927
+#: mainwindow.cpp:1952
 msgid "Play test…"
 msgstr "Toista testi…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:1941 menubuilder.cpp:79:42
+#: mainwindow.cpp:1966 menubuilder.cpp:79:42
 msgid "&File"
 msgstr "&Tiedosto"
 
@@ -357,13 +357,13 @@ msgstr "&Tiedosto"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1943:81 rc.cpp:87
+#: mainwindow.cpp:1968:81 rc.cpp:87
 msgid "&New"
 msgstr "&Uusi"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1952:57
+#: mainwindow.cpp:1977:57
 msgid "&Open…"
 msgstr "&Avaa…"
 
@@ -371,7 +371,7 @@ msgstr "&Avaa…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1961:90 rc.cpp:96
+#: mainwindow.cpp:1986:90 rc.cpp:96
 msgid "&Close"
 msgstr "&Sulje"
 
@@ -379,32 +379,32 @@ msgstr "&Sulje"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1975:99 rc.cpp:105
+#: mainwindow.cpp:2000:99 rc.cpp:105
 msgid "&Save"
 msgstr "&Tallenna"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1984:108
+#: mainwindow.cpp:2009:108
 msgid "Save &As…"
 msgstr "Tallenna &nimellä…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1995:201
+#: mainwindow.cpp:2020:201
 msgid "&Export"
 msgstr "&Vie"
 
-#: mainwindow.cpp:1996
+#: mainwindow.cpp:2021
 msgid "&Molecule…"
 msgstr "& Molekyyli…"
 
-#: mainwindow.cpp:2003
+#: mainwindow.cpp:2028
 #, fuzzy
 msgid "Export Molecule…"
 msgstr "Molekyyli"
 
-#: mainwindow.cpp:2010
+#: mainwindow.cpp:2035
 msgid "&Graphics…"
 msgstr "& Grafiikka…"
 
@@ -412,174 +412,174 @@ msgstr "& Grafiikka…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2019:66 rc.cpp:72
+#: mainwindow.cpp:2044:66 rc.cpp:72
 msgid "&Quit"
 msgstr "&Lopeta"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2029:195
+#: mainwindow.cpp:2054:195
 msgid "Open Recent"
 msgstr "Avaa viimeaikainen"
 
-#: mainwindow.cpp:2041
+#: mainwindow.cpp:2066
 msgid "No recent files"
 msgstr "Ei viimeaikaisia tiedostoja"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:2047 menubuilder.cpp:79:51
+#: mainwindow.cpp:2072 menubuilder.cpp:79:51
 msgid "&Edit"
 msgstr "&Muokkaa"
 
-#: mainwindow.cpp:2059
+#: mainwindow.cpp:2084
 msgid "&Copy Graphics"
 msgstr "&Kopioi grafiikka"
 
-#: mainwindow.cpp:2063
+#: mainwindow.cpp:2088
 msgid "Ctrl+Alt+C"
 msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:2076 menubuilder.cpp:79:48
+#: mainwindow.cpp:2101 menubuilder.cpp:79:48
 msgid "&View"
 msgstr "&Näytä"
 
-#: mainwindow.cpp:2077
+#: mainwindow.cpp:2102
 msgid "Set Background Color…"
 msgstr "Aseta taustaväri…"
 
-#: mainwindow.cpp:2081
+#: mainwindow.cpp:2106
 msgid "Rendering…"
 msgstr ""
 
-#: mainwindow.cpp:2089
+#: mainwindow.cpp:2114
 msgid "Projection"
 msgstr "Ulottuma"
 
-#: mainwindow.cpp:2090
+#: mainwindow.cpp:2115
 msgid "Perspective"
 msgstr "Perspektiivi"
 
-#: mainwindow.cpp:2097
+#: mainwindow.cpp:2122
 msgid "Orthographic"
 msgstr "Ortografinen"
 
-#: mainwindow.cpp:2116
+#: mainwindow.cpp:2141
 msgid "&Extensions"
 msgstr "&Laajennukset"
 
-#: mainwindow.cpp:2118
+#: mainwindow.cpp:2143
 msgid "User Interface Language…"
 msgstr "Käyttöliittymän kieli…"
 
-#: mainwindow.cpp:2122
+#: mainwindow.cpp:2147
 msgid "&Periodic Table…"
 msgstr ""
 
-#: mainwindow.cpp:2128 menubuilder.cpp:83
+#: mainwindow.cpp:2153 menubuilder.cpp:83
 msgid "&Help"
 msgstr "&Ohje"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2129:120
+#: mainwindow.cpp:2154:120
 msgid "&About"
 msgstr "&Tietoja"
 
-#: mainwindow.cpp:2136
+#: mainwindow.cpp:2161
 msgid "&Discussion Forum"
 msgstr "&Keskustelufoorumi"
 
-#: mainwindow.cpp:2140
+#: mainwindow.cpp:2165
 msgid "&Avogadro Website"
 msgstr "&Avogadron verkkosivusto"
 
-#: mainwindow.cpp:2144
+#: mainwindow.cpp:2169
 msgid "&Report a Bug"
 msgstr "&Ilmoita viasta"
 
-#: mainwindow.cpp:2148
+#: mainwindow.cpp:2173
 msgid "&Suggest a Feature"
 msgstr "&Ehdota ominaisuutta"
 
-#: mainwindow.cpp:2172
+#: mainwindow.cpp:2197
 msgid "System Language"
 msgstr "Järjestelmän kieli"
 
-#: mainwindow.cpp:2180
+#: mainwindow.cpp:2205
 msgid "Language"
 msgstr "Kieli"
 
-#: mainwindow.cpp:2180
+#: mainwindow.cpp:2205
 msgid "User Interface Language:"
 msgstr "Käyttöliittymän kieli:"
 
-#: mainwindow.cpp:2293
+#: mainwindow.cpp:2319
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Kaikki tuetut muodot (%1) ;; kaikki tiedostot (*) ;;"
 
-#: mainwindow.cpp:2309
+#: mainwindow.cpp:2335
 msgid "Do you want to save the changes to the document?"
 msgstr "Haluatko tallentaa muutokset asiakirjaan?"
 
-#: mainwindow.cpp:2317
+#: mainwindow.cpp:2343
 msgid "Your changes will be lost if you don't save them."
 msgstr "Muutokset menetetään, jos et tallenna niitä."
 
-#: mainwindow.cpp:2325
+#: mainwindow.cpp:2351
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:2327
+#: mainwindow.cpp:2353
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2409
+#: mainwindow.cpp:2439
 msgid "Network Download Failed"
 msgstr "Verkkolataus epäonnistui"
 
-#: mainwindow.cpp:2410
+#: mainwindow.cpp:2440
 msgid "Network timeout or other error."
 msgstr "Verkon aikakatkaisu tai muu virhe."
 
-#: mainwindow.cpp:2449
+#: mainwindow.cpp:2479
 #, qt-format
 msgid "Your version: %1"
 msgstr "Versiosi: %1"
 
-#: mainwindow.cpp:2450
+#: mainwindow.cpp:2480
 #, qt-format
 msgid "New version: %1"
 msgstr "Uusi versio: %1"
 
-#: mainwindow.cpp:2452
+#: mainwindow.cpp:2482
 msgid "An update is available, do you want to download it now?\n"
 msgstr "Päivitys on saatavilla, haluatko ladata sen nyt?\n"
 
-#: mainwindow.cpp:2454
+#: mainwindow.cpp:2484
 msgid "Version Update"
 msgstr "Version päivitys"
 
-#: mainwindow.cpp:2512
+#: mainwindow.cpp:2542
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Virhe ladattaessa tiedostomuotoa ”%1”."
 
-#: mainwindow.cpp:2528
+#: mainwindow.cpp:2558
 msgid "Select file format"
 msgstr "Valitse tiedostomuoto"
 
-#: mainwindow.cpp:2533 mainwindow.cpp:2544
+#: mainwindow.cpp:2563 mainwindow.cpp:2574
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro ei voi avata ”%1”."
 
-#: mainwindow.cpp:2543
+#: mainwindow.cpp:2573
 msgid "Cannot open files"
 msgstr "Tiedostoja ei voi avata"
 
@@ -603,13 +603,13 @@ msgstr "&Asetukset"
 msgid "&Window"
 msgstr "&Ikkuna"
 
-#: viewfactory.cpp:26 viewfactory.cpp:35
+#: viewfactory.cpp:22 viewfactory.cpp:31
 #, fuzzy
 #| msgid "New View"
 msgid "3D View"
 msgstr "Uusi näkymä"
 
-#: viewfactory.cpp:28 viewfactory.cpp:38
+#: viewfactory.cpp:24 viewfactory.cpp:43
 msgid "VTK"
 msgstr "VTK"
 
@@ -632,10 +632,10 @@ msgid ""
 "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
 "#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
-">License: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
-"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\""
-">BSD 3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+"\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-"
+"Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
+"#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:278
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -644,9 +644,9 @@ msgid ""
 "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
-"\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
-"org</span></a></p></body></html>"
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
+"style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:307
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -656,8 +656,8 @@ msgid ""
 "body></html>"
 msgstr ""
 "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
-"text-decoration: underline; color:#0000ff;\">www.kitware."
-"com</span></a></p></body></html>"
+"text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"body></html>"
 
 #. i18n: file: aboutdialog.ui:334
 #. i18n: ectx: property (text), widget (QPushButton, OK)
