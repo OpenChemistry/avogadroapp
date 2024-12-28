@@ -273,12 +273,16 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 
   QList<ExtensionPluginFactory*> extensions =
     plugin->pluginFactories<ExtensionPluginFactory>();
+#ifndef NDEBUG
   qDebug() << "Extension plugins dynamically found…" << extensions.size();
+#endif
   foreach (ExtensionPluginFactory* factory, extensions) {
     ExtensionPlugin* extension =
       factory->createInstance(QCoreApplication::instance());
     if (extension) {
+#ifdef Q_OS_WIN
       qDebug() << " loading extension plugin: " << extension->name();
+#endif
       extension->setParent(this);
       connect(this, &MainWindow::moleculeChanged, extension,
               &QtGui::ExtensionPlugin::setMolecule);
@@ -300,13 +304,19 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   }
 
   // Now set up the interface.
+#ifdef Q_OS_WIN
   qDebug() << " setting interface ";
+#endif
   setupInterface();
 
   // Build up the standard menus, incorporate dynamic menus.
+#ifdef Q_OS_WIN
   qDebug() << " building menu ";
+#endif
   buildMenu();
+#ifdef Q_OS_WIN
   qDebug() << " updating recent files ";
+#endif
   updateRecentFiles();
 
   // Try to open the file(s) passed in.
@@ -315,7 +325,9 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
     // Give the plugins 5 seconds before timing out queued files.
     QTimer::singleShot(5000, this, &MainWindow::clearQueuedFiles);
   } else {
+#ifdef Q_OS_WIN
     qDebug() << " creating new molecule ";
+#endif
     newMolecule();
   }
 
@@ -900,7 +912,9 @@ bool MainWindow::addScript(const QString& filePath)
   }
 
   QString destinationPath(stdPaths[i] + '/' + typePath + '/' + info.fileName());
+#ifndef NDEBUG
   qDebug() << " copying " << filePath << " to " << destinationPath;
+#endif
   QFile::remove(destinationPath); // silently fail if there's nothing to remove
   QFile::copy(filePath, destinationPath);
 
@@ -2240,7 +2254,9 @@ void MainWindow::buildTools()
 
   int index = 1;
   foreach (ToolPlugin* toolPlugin, m_tools) {
+#ifdef Q_OS_WIN
     qDebug() << " adding tool " << toolPlugin->objectName();
+#endif
     // Add action to toolbar.
     toolPlugin->setParent(this);
     QAction* action = toolPlugin->activateAction();
@@ -2412,7 +2428,8 @@ void MainWindow::showAboutDialog()
 
 void MainWindow::openURL(const QString& url)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) || defined(Q_OS_MAC) || defined(Q_OS_WIN)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) || defined(Q_OS_MAC) ||            \
+  defined(Q_OS_WIN)
   QDesktopServices::openUrl(url);
 #else
   // On Qt5, AppImage can't use QDesktopServices::openUrl, so we use QProcess:
@@ -2453,7 +2470,9 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
     settings.value("currentVersion", AvogadroApp_VERSION).toString();
   // could be something like 1.97.0-36-gcd224f0
 
-  // qDebug() << " update comparing " << lastVersion << " to " << latestRelease;
+#ifndef NDEBUG
+  qDebug() << " update comparing " << lastVersion << " to " << latestRelease;
+#endif
   QStringList releaseComponents = latestRelease.split('.');
   QStringList currentComponents = lastVersion.split('.');
   if (releaseComponents.size() != 3 || currentComponents.size() != 3)
