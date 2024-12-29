@@ -7,13 +7,14 @@
 # Reza Almanda <rezaalmanda27@gmail.com>, 2021, 2024.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # "C.Y.A.N" <bd3alz@gmail.com>, 2024.
+# Syifa Tadjoedin <31january2003@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2024-12-11 12:00+0000\n"
-"Last-Translator: \"C.Y.A.N\" <bd3alz@gmail.com>\n"
+"PO-Revision-Date: 2024-12-30 16:00+0000\n"
+"Last-Translator: Syifa Tadjoedin <31january2003@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
 "Language: id\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -304,7 +305,7 @@ msgstr "Ekspor Molekul"
 
 #: mainwindow.cpp:1669
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Sedang penyimpankan file…"
 
 #: mainwindow.cpp:1671
 #, qt-format
@@ -461,7 +462,7 @@ msgstr "Atur Warna &Latar belakang…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
-msgstr ""
+msgstr "Menjadikan…"
 
 #: mainwindow.cpp:2114
 msgid "Projection"
@@ -481,11 +482,11 @@ msgstr "&Ekstensi"
 
 #: mainwindow.cpp:2143
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Bahasa Antarmuka Pengguna…"
 
 #: mainwindow.cpp:2147
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Tabel Periodik…"
 
 #: mainwindow.cpp:2153 menubuilder.cpp:83
 msgid "&Help"
@@ -517,19 +518,19 @@ msgstr "Laporkan Kesalahan Program"
 
 #: mainwindow.cpp:2173
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Nyarankan Fitur Baru"
 
 #: mainwindow.cpp:2197
 msgid "System Language"
-msgstr ""
+msgstr "Bahasa Sistem"
 
 #: mainwindow.cpp:2205
 msgid "Language"
-msgstr ""
+msgstr "Bahasa"
 
 #: mainwindow.cpp:2205
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Bahasa Antarmuka Pemakai:"
 
 #: mainwindow.cpp:2319
 #, qt-format
@@ -555,10 +556,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2439
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Pencarian versi baru melalui jaringan telah gagal."
+msgstr "Proses unduhan telah gagal."
 
 #: mainwindow.cpp:2440
 msgid "Network timeout or other error."
@@ -567,22 +566,20 @@ msgstr "Ada kesalahan batasan waktu atau karena kesalahan lain."
 #: mainwindow.cpp:2479
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Versi anda: %1"
 
 #: mainwindow.cpp:2480
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Revisi Git: %1)"
+msgstr "(Versi baru: %1)"
 
 #: mainwindow.cpp:2482
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "Tersedia versi terbaru, apakah anda ingin unduhkan sekarang?\n"
 
 #: mainwindow.cpp:2484
 msgid "Version Update"
-msgstr ""
+msgstr "Pembaruan Versi"
 
 #: mainwindow.cpp:2542
 #, qt-format
@@ -623,14 +620,12 @@ msgid "&Window"
 msgstr "&Jendela"
 
 #: viewfactory.cpp:22 viewfactory.cpp:31
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Tampilan Baru"
+msgstr "Tampilan 3D"
 
 #: viewfactory.cpp:24 viewfactory.cpp:43
 msgid "VTK"
-msgstr ""
+msgstr "VTK"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -641,7 +636,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -681,7 +676,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:334
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
-msgstr "Ok"
+msgstr "OK"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -849,12 +844,12 @@ msgstr "Laporkan Kesalahan Program"
 #. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "FAQ"
-msgstr "Tanya dan Jawab"
+msgstr "Pertanyaan yang sering diajukan"
 
 #. i18n: file: mainwindow.ui:308
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
-msgstr "Web Avogadro"
+msgstr "Situs web Avogadro"
 
 #. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -869,12 +864,12 @@ msgstr "&Impor"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
 msgid "Enable ambient occlusion shadows"
-msgstr ""
+msgstr "Aktifkan bayangan oklusi sekitar"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Oklusi Sekitar:"
 
 #. i18n: file: renderingdialog.ui:43
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
@@ -885,22 +880,22 @@ msgstr ""
 #. i18n: file: renderingdialog.ui:325
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Aktifkan"
 
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, label)
 msgid "Strength of the ambient shadows"
-msgstr ""
+msgstr "Daya bayangan sekitar"
 
 #. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Daya Bayangan:"
 
 #. i18n: file: renderingdialog.ui:106
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "Efek kabut untuk tanda kedalaman"
 
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -910,52 +905,52 @@ msgstr "Kabut:"
 #. i18n: file: renderingdialog.ui:140
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Strength:"
-msgstr ""
+msgstr "Kekuatan Kabut:"
 
 #. i18n: file: renderingdialog.ui:170
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Position:"
-msgstr ""
+msgstr "Posisi Kabut:"
 
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Add a depth blur"
-msgstr ""
+msgstr "Tambahkan keburaman kedalaman"
 
 #. i18n: file: renderingdialog.ui:211
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid "Depth Blur:"
-msgstr ""
+msgstr "Keburaman Kedalaman:"
 
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Kekuatan Keburaman Kedalaman"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Kekuatan Keburaman:"
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Posisi keburaman kedalaman"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Posisi Keburaman:"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, label_4)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "Tambah garis besar untuk ujung atom"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 msgid "Edge Outline:"
-msgstr ""
+msgstr "Ujung Garis Besar:"
 
 #. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
@@ -964,10 +959,8 @@ msgstr "Simpan"
 
 #. i18n: file: renderingdialog.ui:374
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "&Tutup"
+msgstr "Tutup"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
