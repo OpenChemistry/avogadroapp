@@ -54,37 +54,32 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext& context,
   switch (type) {
     case QtInfoMsg:
       message = QString("Info: %1 (%2:%3, %4)")
-                  .arg(localMsg.constData())
-                  .arg(file)
+                  .arg(localMsg.constData(), file)
                   .arg(context.line)
                   .arg(function);
       break;
     case QtWarningMsg:
       message = QString("Warning: %1 (%2:%3, %4)")
-                  .arg(localMsg.constData())
-                  .arg(file)
+                  .arg(localMsg.constData(), file)
                   .arg(context.line)
                   .arg(function);
       break;
     case QtCriticalMsg:
       message = QString("Critical: %1 (%2:%3, %4)")
-                  .arg(localMsg.constData())
-                  .arg(file)
+                  .arg(localMsg.constData(), file)
                   .arg(context.line)
                   .arg(function);
       break;
     case QtFatalMsg:
       message = QString("Fatal: %1 (%2:%3, %4)")
-                  .arg(localMsg.constData())
-                  .arg(file)
+                  .arg(localMsg.constData(), file)
                   .arg(context.line)
                   .arg(function);
       break;
     case QtDebugMsg:
     default:
       message = QString("Debug: %1 (%2:%3, %4)")
-                  .arg(localMsg.constData())
-                  .arg(file)
+                  .arg(localMsg.constData(), file)
                   .arg(context.line)
                   .arg(function);
       break;

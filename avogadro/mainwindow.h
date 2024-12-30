@@ -89,7 +89,8 @@ public slots:
    * Use the FileFormat @a reader to load @a fileName. This method
    * takes ownership of @a reader and will delete it before returning.
    */
-  bool openFile(const QString& fileName, Io::FileFormat* reader = nullptr);
+  bool openFile(const QString& fileName,
+                Avogadro::Io::FileFormat* reader = nullptr);
 
   void exportGraphics(QString fileName);
 
@@ -158,7 +159,7 @@ signals:
   /**
    * Emitted when the active molecule in the application has changed.
    */
-  void moleculeChanged(QtGui::Molecule* molecue);
+  void moleculeChanged(Avogadro::QtGui::Molecule* molecue);
 
 protected:
   void closeEvent(QCloseEvent* event);
@@ -248,7 +249,7 @@ protected slots:
    * false, the return value indicates whether or not the file was written
    * successfully.
    */
-  bool saveFileAs(const QString& fileName, Io::FileFormat* writer,
+  bool saveFileAs(const QString& fileName, Avogadro::Io::FileFormat* writer,
                   bool async = true);
 
   /**
