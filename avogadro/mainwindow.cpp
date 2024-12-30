@@ -714,9 +714,8 @@ void MainWindow::updateWindowTitle()
   setWindowTitle(tr("%1%2 - Avogadro %3",
                     "window title: %1 = file name, %2 = • for "
                     "modified file, %3 = Avogadro version")
-                   .arg(QFileInfo(fileName).fileName())
-                   .arg(m_moleculeDirty ? "•" : "")
-                   .arg(AvogadroApp_VERSION));
+                   .arg(QFileInfo(fileName).fileName(),
+                        m_moleculeDirty ? "•" : "", AvogadroApp_VERSION));
 }
 
 #ifdef QTTESTING
@@ -788,8 +787,7 @@ void MainWindow::openFile()
     return;
 
   QString filter(QString("%1 (*.cml);;%2 (*.cjson)")
-                   .arg(tr("Chemical Markup Language"))
-                   .arg(tr("Chemical JSON")));
+                   .arg(tr("Chemical Markup Language"), tr("Chemical JSON")));
 
   QSettings settings;
   QString dir = settings.value("MainWindow/lastOpenDir").toString();
@@ -963,7 +961,7 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
   m_progressDialog->setMinimumDuration(750);
   m_progressDialog->setWindowTitle(tr("Reading File"));
   m_progressDialog->setLabelText(
-    tr("Opening file '%1'\nwith '%2'").arg(fileName).arg(ident));
+    tr("Opening file '%1'\nwith '%2'").arg(fileName, ident));
   /// @todo Add API to abort file ops
   m_progressDialog->setCancelButton(nullptr);
   connect(m_fileReadThread, &QThread::started, m_threadedReader,
@@ -1030,8 +1028,7 @@ void MainWindow::backgroundReaderFinished()
   } else {
     MESSAGEBOX::critical(this, tr("File error"),
                          tr("Error while reading file '%1':\n%2")
-                           .arg(fileName)
-                           .arg(m_threadedReader->error()));
+                           .arg(fileName, m_threadedReader->error()));
     delete m_fileReadMolecule;
   }
   m_fileReadThread->deleteLater();
@@ -1065,8 +1062,7 @@ bool MainWindow::backgroundWriterFinished()
       MESSAGEBOX::critical(
         this, tr("Error saving file"),
         tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
-          .arg(fileName)
-          .arg(m_threadedWriter->error()));
+          .arg(fileName, m_threadedWriter->error()));
     }
   }
   m_fileWriteThread->deleteLater();
@@ -1531,8 +1527,7 @@ bool MainWindow::saveFile(bool async)
 bool MainWindow::saveFileAs(bool async)
 {
   QString filter(QString("%1 (*.cjson);;%2 (*.cml)")
-                   .arg(tr("Chemical JSON"))
-                   .arg(tr("Chemical Markup Language")));
+                   .arg(tr("Chemical JSON"), tr("Chemical Markup Language")));
 
   QSettings settings;
   QString dir = settings.value("MainWindow/lastSaveDir").toString();
@@ -1683,8 +1678,7 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
   m_progressDialog->setWindowTitle(tr("Saving File in Progress…"));
   m_progressDialog->setLabelText(
     tr("Saving file “%1”\nwith “%2”", "%1 = file name, %2 = format")
-      .arg(fileName)
-      .arg(ident));
+      .arg(fileName, ident));
   /// @todo Add API to abort file ops
   m_progressDialog->setCancelButton(nullptr);
   connect(m_fileWriteThread, &QThread::started, m_threadedWriter,
@@ -2441,8 +2435,8 @@ void MainWindow::checkUpdate()
 {
   if (m_network == nullptr) {
     m_network = new QNetworkAccessManager(this);
-    connect(m_network, SIGNAL(finished(QNetworkReply*)), this,
-            SLOT(finishUpdateRequest(QNetworkReply*)));
+    connect(m_network, &QNetworkAccessManager::finished, this,
+            &MainWindow::finishUpdateRequest);
   }
 
   m_network->get(
@@ -2650,7 +2644,7 @@ bool MainWindow::handleCommand(const QString& command,
       enableTypes = options.value("types").toStringList();
     } else {
       // list of true / false types
-      for (auto key : options.keys()) {
+      for (const auto& key : options.keys()) {
         if (options.value(key).toBool())
           enableTypes << key;
         else
