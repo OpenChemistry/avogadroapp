@@ -8,14 +8,14 @@
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2022.
 # Andrés Henao <andreshenao31@gmail.com>, 2022.
 # gallegonovato <fran-carro@hotmail.es>, 2022, 2023, 2024.
-# Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>, 2023.
+# Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>, 2023, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2024-10-27 20:00+0000\n"
-"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"PO-Revision-Date: 2025-01-03 14:36+0000\n"
+"Last-Translator: Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.2-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -76,7 +76,7 @@ msgstr "Mostrar Tipos"
 
 #: mainwindow.cpp:422
 msgid "View Configuration"
-msgstr "Ver Configuración"
+msgstr "Configuración de Vista"
 
 #: mainwindow.cpp:426
 msgid "Molecules"
