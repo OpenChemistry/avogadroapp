@@ -57,7 +57,9 @@ void BackgroundFileFormat::read()
         isUTF16 = true;
         file.close();
         file.open(QIODevice::ReadOnly | QIODevice::Text);
+#if QT_VERSION < 0x060000
         in.setCodec("UTF-16");
+#endif
         text = in.readAll();
         file.close();
       }
@@ -79,7 +81,11 @@ void BackgroundFileFormat::read()
       if (tempFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream out(&tempFile);
         // set it to UTF-8
+#if QT_VERSION > 0x060000
+        out.setEncoding(QStringConverter::Utf8);
+#else
         out.setCodec("UTF-8");
+#endif
         out << text;
         out.flush();
         tempFile.close();
