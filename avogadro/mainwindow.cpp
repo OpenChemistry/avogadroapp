@@ -120,7 +120,7 @@ public:
   ~XMLEventObserver() { delete this->XMLStream; }
 
 protected:
-  virtual void setStream(QTextStream* stream)
+  virtual void setStream(QTextStream* stream) override
   {
     if (this->XMLStream) {
       this->XMLStream->writeEndElement();
@@ -142,13 +142,15 @@ protected:
   }
 
   virtual void onRecordEvent(const QString& widget, const QString& command,
-                             const QString& arguments)
+                             const QString& arguments,
+                             const int& eventType = 0) override
   {
     if (this->XMLStream) {
       this->XMLStream->writeStartElement("event");
       this->XMLStream->writeAttribute("widget", widget);
       this->XMLStream->writeAttribute("command", command);
       this->XMLStream->writeAttribute("arguments", arguments);
+      this->XMLStream->writeAttribute("eventType", QString::number(eventType));
       this->XMLStream->writeEndElement();
     }
   }
@@ -168,7 +170,7 @@ public:
   ~XMLEventSource() { delete this->XMLStream; }
 
 protected:
-  virtual void setContent(const QString& xmlfilename)
+  virtual void setContent(const QString& xmlfilename) override
   {
     delete this->XMLStream;
     this->XMLStream = nullptr;
@@ -182,7 +184,8 @@ protected:
     this->XMLStream = new QXmlStreamReader(data);
   }
 
-  int getNextEvent(QString& widget, QString& command, QString& arguments)
+  int getNextEvent(QString& widget, QString& command, QString& arguments,
+                   int& eventType) override
   {
     if (this->XMLStream->atEnd())
       return DONE;
