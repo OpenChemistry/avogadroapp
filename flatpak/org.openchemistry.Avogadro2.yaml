@@ -34,6 +34,25 @@ modules:
         # Would rather use 4d6cb08189cf7336821f04090b612baa2ca6a90d (same commit as openSUSE
         # Tumbleweed) as known to be good, but older commits like that don't seem to compile
         commit: 7c73dd7de7c4f14379b781418c6e947ad464c818
+        
+  - name: openbabel
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      # Match the way Avogadro builds Open Babel
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DENABLE_TESTS=OFF
+      - -DBUILD_GUI=OFF
+      - -DOPTIMIZE_NATIVE=OFF
+      - -DOB_USE_PREBUILT_BINARIES=OFF
+      - -DENABLE_VERSIONED_FORMATS=OFF
+      - -DWITH_JSON=ON
+      - -DWITH_COORDGEN=OFF
+      - -DWITH_MAEPARSER=OFF
+    sources:
+      - type: git
+        url: https://github.com/openbabel/openbabel.git
+        commit: 32cf131444c1555c749b356dab44fb9fe275271f
 
   - name: avogadro2
     buildsystem: cmake-ninja
@@ -47,6 +66,7 @@ modules:
       - -DBUILD_MOLEQUEUE=OFF
       - -DQT_VERSION=6
       - -DDOWNLOAD_TO_SOURCE_DIR=ON
+      - -DUSE_SYSTEM_OPENBABEL=ON
     sources:
       # Avogadro stuff all already collected together as part of GitHub Actions
       # This means that if using this to build the Flatpak locally, the openchemistry repo and
@@ -58,8 +78,8 @@ modules:
       # Now fetch third-party stuff where the source is expected in `openchemistry/thirdparty`
       # VTK
       - type: archive
-        url: https://www.vtk.org/files/release/9.3/VTK-9.3.0.tar.gz
-        sha256: fdc7b9295225b34e4fdddc49cd06e66e94260cb00efee456e0f66568c9681be9
+        url: https://github.com/Kitware/VTK/archive/4f02ae83179c6a1542ac3c335c73dea976578c63.tar.gz
+        sha256: 2d2da63dc660016628fc41c3a201e24d49a7e67b0d5d6fbbe655fb23f5099929
         dest: thirdparty/VTK
       
       # Other third-party sources would normally be downloaded by Avogadro build on the fly
