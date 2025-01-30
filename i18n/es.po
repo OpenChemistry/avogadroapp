@@ -9,13 +9,14 @@
 # Andrés Henao <andreshenao31@gmail.com>, 2022.
 # gallegonovato <fran-carro@hotmail.es>, 2022, 2023, 2024.
 # Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>, 2023, 2025.
+# Adrian Lopez <adrlop1012@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-01-03 14:36+0000\n"
-"Last-Translator: Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>\n"
+"PO-Revision-Date: 2025-01-30 14:08+0000\n"
+"Last-Translator: Adrian Lopez <adrlop1012@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -41,8 +42,9 @@ msgstr "Versión de la Biblioteca de Avogadro:"
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
+#, fuzzy
 msgid "Qt Version:"
-msgstr "Versión Qt:"
+msgstr "Qt Version:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
@@ -60,7 +62,8 @@ msgstr "¡No hay formato de archivo establecido en «BackgroundFileFormat»!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr "¡No hay nombre de archivo establecido en «BackgroundFileFormat»!"
+msgstr ""
+"No se ha establecido ningún nombre de archivo en «BackgroundFileFormat»!"
 
 #: mainwindow.cpp:327
 msgid "Ready…"
