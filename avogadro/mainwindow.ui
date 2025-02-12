@@ -65,17 +65,14 @@
     <addaction name="actionCopy"/>
     <addaction name="actionPaste"/>
     <addaction name="actionClear"/>
-   </widget>
-   <widget class="QMenu" name="menuSelect">
-    <property name="title">
-     <string>&amp;Select</string>
-    </property>
-   </widget>
-   <addaction name="menuFile"/>
+  
+    <addaction name="separator"/> 
+    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuView"/>
    <addaction name="menuBuild"/>
    <addaction name="menuSelect"/>
+    <addaction name="actionPreferences"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -323,6 +320,35 @@
     <string>&amp;Import</string>
    </property>
   </action>
+<action name="actionPreferences">
+  <property name="text">
+    <string>Preferences…</string>
+  </property>
+  <property name="icon">
+    <iconset>
+      <normaloff>:icons/preferences-icon.png</normaloff>:icons/preferences-icon.png
+    </iconset>
+  </property>
+  <property name="shortcut">
+    <string>Ctrl+P</string>
+  </property>
+</action>
+
+
+
+
+   <property name="text">
+    <string>Preferences…</string>
+  </property>
+    <property name="icon">
+    <iconset>
+      <normaloff>:icons/preferences-icon.png</normaloff>:icons/preferences-icon.png</iconset>
+  </property> 
+  -->
+</action>
+   <string>Preferences…</string>
+  </property>
+</action>
   <action name="actionExport">
    <property name="text">
     <string>&amp;Export</string>
@@ -337,6 +363,7 @@
    <sender>actionClose</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
+    <slot>showPreferencesDialog()</slot>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -350,10 +377,20 @@
    </hints>
   </connection>
   <connection>
-   <sender>actionQuit</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
+    <sender>actionQuit</sender>
+    <signal>triggered()</signal>
+    <receiver>MainWindow</receiver>
+    <slot>close()</slot>
+  </connection>
+  
+  <connection>
+    <sender>actionPreferences</sender>
+    <signal>triggered()</signal>
+    <receiver>MainWindow</receiver>
+    <slot>showPreferencesDialog()</slot>
+  </connection>
+</connections>
+
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
