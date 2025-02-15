@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-02-15 08:01+0000\n"
+"PO-Revision-Date: 2025-02-17 04:37+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fi/>\n"
@@ -273,7 +273,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:1378
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Tiedostoa %1 ei voida tallentaa."
+msgstr "Tiedostoa %1 ei voi tallentaa."
 
 #: mainwindow.cpp:1495
 msgid ""
