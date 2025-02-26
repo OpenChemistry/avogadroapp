@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
-# Ricky Tigg <ricky.tigg@gmail.com>, 2024.
+# Ricky Tigg <ricky.tigg@gmail.com>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2024-12-17 05:00+0000\n"
+"PO-Revision-Date: 2025-02-21 13:02+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fi/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9\n"
+"X-Generator: Weblate 5.10.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -55,7 +55,7 @@ msgstr "BackgroundFileFormatissa ei ole määritetty tiedostomuotoa!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr "BackgroundFileFormatissa ei ole asetettu tiedostonimeä!"
+msgstr "BackgroundFileFormatissa ei ole asetettu tiedoston nimeä!"
 
 #: mainwindow.cpp:327
 msgid "Ready…"
@@ -79,7 +79,7 @@ msgstr "Molekyylit"
 
 #: mainwindow.cpp:435
 msgid "Layers"
-msgstr "Tasot"
+msgstr "Kerrokset"
 
 #: mainwindow.cpp:458
 msgctxt "File toolbar"
@@ -273,7 +273,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:1378
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Tiedostoa %1 ei voida tallentaa."
+msgstr "Tiedostoa %1 ei voi tallentaa."
 
 #: mainwindow.cpp:1495
 msgid ""
@@ -400,9 +400,8 @@ msgid "&Molecule…"
 msgstr "& Molekyyli…"
 
 #: mainwindow.cpp:2028
-#, fuzzy
 msgid "Export Molecule…"
-msgstr "Molekyyli"
+msgstr "Vie molekyyli…"
 
 #: mainwindow.cpp:2035
 msgid "&Graphics…"
@@ -452,7 +451,7 @@ msgstr "Aseta taustaväri…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
-msgstr ""
+msgstr "Hahmonnoidaan…"
 
 #: mainwindow.cpp:2114
 msgid "Projection"
@@ -476,7 +475,7 @@ msgstr "Käyttöliittymän kieli…"
 
 #: mainwindow.cpp:2147
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Jaksollinen järjestelmä…"
 
 #: mainwindow.cpp:2153 menubuilder.cpp:83
 msgid "&Help"
@@ -587,7 +586,7 @@ msgstr "Tiedostoja ei voi avata"
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:79:45
 msgid "&Build"
-msgstr ""
+msgstr "&Rakenna"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
@@ -604,10 +603,8 @@ msgid "&Window"
 msgstr "&Ikkuna"
 
 #: viewfactory.cpp:22 viewfactory.cpp:31
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Uusi näkymä"
+msgstr "Kolmiulotteinen näkymä"
 
 #: viewfactory.cpp:24 viewfactory.cpp:43
 msgid "VTK"
@@ -740,7 +737,7 @@ msgstr "Ctrl+Shift+Z"
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "Keskitä"
+msgstr "Keskipiste"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -788,7 +785,7 @@ msgstr "Tyhjennä"
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "Valitse kaikki"
+msgstr "Valitse Kaikki"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -799,7 +796,7 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Poista valinnat"
+msgstr "Valitse ei mitään"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -850,12 +847,12 @@ msgstr "&Tuo"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
 msgid "Enable ambient occlusion shadows"
-msgstr ""
+msgstr "Ota ympäristön okkluusiovarjot käyttöön"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Ympäristön okkluusio:"
 
 #. i18n: file: renderingdialog.ui:43
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
@@ -871,72 +868,72 @@ msgstr "Ota käyttöön"
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, label)
 msgid "Strength of the ambient shadows"
-msgstr ""
+msgstr "Ympäristön varjojen voimakkuus"
 
 #. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Varjojen voimakkuus:"
 
 #. i18n: file: renderingdialog.ui:106
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "Sumuvaikutelma syvyysvihjeeseen"
 
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid "Fog:"
-msgstr ""
+msgstr "Sumu:"
 
 #. i18n: file: renderingdialog.ui:140
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Strength:"
-msgstr ""
+msgstr "Sumun voimakkuus:"
 
 #. i18n: file: renderingdialog.ui:170
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Position:"
-msgstr ""
+msgstr "Sumun asento:"
 
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Add a depth blur"
-msgstr ""
+msgstr "Lisää syvyyssumennus"
 
 #. i18n: file: renderingdialog.ui:211
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid "Depth Blur:"
-msgstr ""
+msgstr "Ssyvyyssumennus:"
 
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Syvyyden sumennuksen voimakkuus"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Sumennuksen voimakkuus:"
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Syvyyden sumennuksen asento"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Sumennuksen asento:"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, label_4)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "Lisää ääriviivat reuna-atomeihin"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 msgid "Edge Outline:"
-msgstr ""
+msgstr "Reunan ääriviivat:"
 
 #. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
@@ -950,32 +947,11 @@ msgstr "Sulje"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
-",Launchpad Contributions:,Ulla, ,Launchpad Contributions:,Geoff Hutchison,"
-"Ulla, ,Launchpad Contributions:,Avogadro Team,Geoff Hutchison,Ulla, ,"
-"Launchpad Contributions:,Mikko Nissinen,Ulla, ,Launchpad Contributions:,"
-"Avogadro Team,Mikko Nissinen,Ulla, ,Launchpad Contributions:,Avogadro Team,"
-"Mikko Nissinen,Ulla, ,Launchpad Contributions:,Avogadro Team,Mikko Nissinen,"
-"Ulla, ,Launchpad Contributions:,Avogadro Team,Mikko Nissinen,Ulla, ,"
-"Launchpad Contributions:,Avogadro Team,Mikko Nissinen,Ulla, ,Launchpad "
-"Contributions:,Avogadro Team,Mikko Nissinen,Ulla, ,Launchpad Contributions:,"
-"Avogadro Team,Mikko Nissinen,Ulla, ,Launchpad Contributions:,Avogadro Team,"
-"Geoff Hutchison,Mikko Nissinen,Ulla, ,Launchpad Contributions:,Avogadro Team,"
-"Geoff Hutchison,Mikko Nissinen,Ulla, ,Launchpad Contributions:,Avogadro Team,"
-"Geoff Hutchison,Mikko Nissinen,Ulla"
+msgstr "Ricky Tigg,"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-",,,,,,,,,avogadro-devel@lists.sourceforge.net,,,,,mikko.n94@gmail.com,,,,"
-"avogadro-devel@lists.sourceforge.net,mikko.n94@gmail.com,,,,avogadro-"
-"devel@lists.sourceforge.net,mikko.n94@gmail.com,,,,avogadro-devel@lists."
-"sourceforge.net,mikko.n94@gmail.com,,,,avogadro-devel@lists.sourceforge.net,"
-"mikko.n94@gmail.com,,,,avogadro-devel@lists.sourceforge.net,mikko.n94@gmail."
-"com,,,,avogadro-devel@lists.sourceforge.net,mikko.n94@gmail.com,,,,avogadro-"
-"devel@lists.sourceforge.net,mikko.n94@gmail.com,,,,avogadro-devel@lists."
-"sourceforge.net,,mikko@desu.biz,,,,avogadro-devel@lists.sourceforge.net,,"
-"mikko@desu.biz,,,,avogadro-devel@lists.sourceforge.net,,mikko@desu.biz,"
 
 #, fuzzy
 #~ msgid "Set background color…"
