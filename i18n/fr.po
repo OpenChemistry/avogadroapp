@@ -4,15 +4,15 @@
 # translator <kvb@tuta.io>, 2022.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2022.
 # Translator <kvb@tuta.io>, 2022, 2023.
-# Norwid Behrnd <nbehrnd@yahoo.com>, 2023, 2024.
+# Norwid Behrnd <nbehrnd@yahoo.com>, 2023, 2024, 2025.
 # Eric Remy <eric.remy3@free.fr>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-03-19 13:16+0000\n"
-"Last-Translator: Eric Remy <eric.remy3@free.fr>\n"
+"PO-Revision-Date: 2025-03-23 22:21+0000\n"
+"Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
 "Language: fr\n"
@@ -850,9 +850,8 @@ msgstr "&Importer"
 
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
-#, fuzzy
 msgid "Enable ambient occlusion shadows"
-msgstr "Active l'ombrage par occlusion ambiante"
+msgstr "Activer l'ombrage par occlusion ambiante"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -932,15 +931,13 @@ msgstr "Position du flou :"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, label_4)
-#, fuzzy
 msgid "Add an outline to edge atoms"
-msgstr "Ajouter un contour au atomes du bord"
+msgstr "Ajouter un contour aux atomes de bord"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#, fuzzy
 msgid "Edge Outline:"
-msgstr "Contour de bord :"
+msgstr "Contour de l'arête :"
 
 #. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
