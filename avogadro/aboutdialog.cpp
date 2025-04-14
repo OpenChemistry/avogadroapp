@@ -24,17 +24,17 @@ AboutDialog::AboutDialog(QWidget* parent_)
                "</p></body></html>");
 
   // Add the labels
-  m_ui->versionLabel->setText(html.arg("20").arg(tr("Version:")));
-  m_ui->libsLabel->setText(html.arg("10").arg(tr("Avogadro Library Version:")));
-  m_ui->qtVersionLabel->setText(html.arg("10").arg(tr("Qt Version:")));
-  m_ui->sslVersionLabel->setText(html.arg("10").arg(tr("SSL Version:")));
+  m_ui->versionLabel->setText(html.arg("20", tr("Version:")));
+  m_ui->libsLabel->setText(html.arg("10", tr("Avogadro Library Version:")));
+  m_ui->qtVersionLabel->setText(html.arg("10", tr("Qt Version:")));
+  m_ui->sslVersionLabel->setText(html.arg("10", tr("SSL Version:")));
 
   // Add the version numbers
-  m_ui->version->setText(html.arg("20").arg(AvogadroApp_VERSION));
-  m_ui->libsVersion->setText(html.arg("10").arg(version()));
-  m_ui->qtVersion->setText(html.arg("10").arg(qVersion()));
+  m_ui->version->setText(html.arg("20", AvogadroApp_VERSION));
+  m_ui->libsVersion->setText(html.arg("10", version()));
+  m_ui->qtVersion->setText(html.arg("10", qVersion()));
   m_ui->sslVersion->setText(
-    html.arg("10").arg(QSslSocket::sslLibraryVersionString()));
+    html.arg("10", QSslSocket::sslLibraryVersionString()));
 
   // Add support for a 2x replacement (mainly Mac OS X retina at this point).
   if (window()->devicePixelRatio() == 2) {
