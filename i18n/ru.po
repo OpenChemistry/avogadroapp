@@ -7,22 +7,23 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Covarubio <6amffsl@gmail.com>, 2022.
 # Ivanushka <oplata.kes1@mail.ru>, 2023.
+# Sergey Ponomarev <stokito@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2023-11-04 09:34+0000\n"
-"Last-Translator: Ivanushka <oplata.kes1@mail.ru>\n"
+"PO-Revision-Date: 2025-04-27 20:18+0000\n"
+"Last-Translator: Sergey Ponomarev <stokito@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.12-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -209,7 +210,7 @@ msgstr ""
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Сохраненный файл %1."
+msgstr "Сохранённый файл %1"
 
 #: mainwindow.cpp:1052
 msgid "Error saving file"
@@ -398,17 +399,15 @@ msgstr "Сохранить &как…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2020:201
 msgid "&Export"
-msgstr "&Экспортировать"
+msgstr "Экспорт"
 
 #: mainwindow.cpp:2021
 msgid "&Molecule…"
 msgstr "&Молекулы…"
 
 #: mainwindow.cpp:2028
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "Молекула Экспорта"
+msgstr "Экспорт молекулы…"
 
 #: mainwindow.cpp:2035
 msgid "&Graphics…"
@@ -440,7 +439,7 @@ msgstr "&Правка"
 
 #: mainwindow.cpp:2084
 msgid "&Copy Graphics"
-msgstr "&Копировать графику..."
+msgstr "&Копировать графику"
 
 #: mainwindow.cpp:2088
 msgid "Ctrl+Alt+C"
@@ -854,7 +853,7 @@ msgstr "&Импорт"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
 msgid "Enable ambient occlusion shadows"
-msgstr ""
+msgstr "Включить тени амбиентной среды"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -875,7 +874,7 @@ msgstr "Включить"
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, label)
 msgid "Strength of the ambient shadows"
-msgstr ""
+msgstr "Сила окружающих теней"
 
 #. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, label)
@@ -885,7 +884,7 @@ msgstr "Сила тени:"
 #. i18n: file: renderingdialog.ui:106
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "Эффект тумана для глубины"
 
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, label_3)
@@ -895,52 +894,52 @@ msgstr "Туман:"
 #. i18n: file: renderingdialog.ui:140
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Strength:"
-msgstr ""
+msgstr "Сила тумана:"
 
 #. i18n: file: renderingdialog.ui:170
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Fog Position:"
-msgstr ""
+msgstr "Позиция тумана:"
 
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, label_3)
 msgid "Add a depth blur"
-msgstr ""
+msgstr "Добавить размытие глубины"
 
 #. i18n: file: renderingdialog.ui:211
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid "Depth Blur:"
-msgstr ""
+msgstr "Глубина размытия::"
 
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Сила глубины размытия"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Сила размытия:"
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, label_5)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Позиция глубины размытия"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Позиция размытия:"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, label_4)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "Добавить контур для граничных атомов"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 msgid "Edge Outline:"
-msgstr ""
+msgstr "Обведение края:"
 
 #. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)

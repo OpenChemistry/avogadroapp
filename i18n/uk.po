@@ -6,13 +6,14 @@
 # Tymofii Lytvynenko <till.svit@gmail.com>, 2021.
 # Yarema Kertytsky <y.kertytsky@gmail.com>, 2024.
 # Максим Горпиніч <mgorpinic2005@gmail.com>, 2024.
+# Максим Горпиніч <maksimgorpinic4@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2024-12-17 05:00+0000\n"
-"Last-Translator: Максим Горпиніч <mgorpinic2005@gmail.com>\n"
+"PO-Revision-Date: 2025-05-13 14:02+0000\n"
+"Last-Translator: Максим Горпиніч <maksimgorpinic4@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/uk/>\n"
 "Language: uk\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.9\n"
+"X-Generator: Weblate 5.12-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -447,7 +448,7 @@ msgstr "Ctrl+Alt+C"
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:2101 menubuilder.cpp:79:48
 msgid "&View"
-msgstr "П&ерегляд"
+msgstr "&Переглянути"
 
 #: mainwindow.cpp:2102
 msgid "Set Background Color…"
@@ -741,7 +742,7 @@ msgstr "Ctrl+Shift+Z"
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "По центру"
+msgstr "Центр"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -762,7 +763,7 @@ msgstr "Ctrl+V"
 #. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Copy"
-msgstr "копіювати"
+msgstr "Копіювати"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -784,7 +785,7 @@ msgstr "Ctrl+X"
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
-msgstr "очистити"
+msgstr "Очистити"
 
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -951,32 +952,11 @@ msgstr "Закрити"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
-",Launchpad Contributions:,Vladimir Kurg,svv, ,Launchpad Contributions:,"
-"Vladimir Kurg,svv, ,Launchpad Contributions:, ,Launchpad Contributions:,"
-"Vladimir Kurg,svv, ,Launchpad Contributions:,Vladimir Kurg,svv, ,Launchpad "
-"Contributions:,Valeriy,Vladimir Kurg,svv, ,Launchpad Contributions:,Valeriy,"
-"Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv, ,Launchpad Contributions:,"
-"Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv, ,Launchpad "
-"Contributions:,Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv, ,"
-"Launchpad Contributions:,Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri "
-"Chornoivan,svv, ,Launchpad Contributions:,Vasiliy Meshko,Vladimir Kurg,Yuri "
-"Chornoivan,svv,yurchor, ,Launchpad Contributions:,Vasiliy Meshko,Vladimir "
-"Kurg,Yuri Chornoivan,svv,yurchor, ,Launchpad Contributions:,Vasiliy Meshko,"
-"Vladimir Kurg,Yuri Chornoivan,svv,yurchor"
+msgstr "Ваші імена"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
-",,,skrypnychuk@gmail.com,,,,skrypnychuk@gmail.com,,,,,,skrypnychuk@gmail."
-"com,,,,skrypnychuk@gmail.com,,,,,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,"
+msgstr "Ваші електронні листи"
 
 #, fuzzy
 #~| msgid "User Selections"
