@@ -46,6 +46,7 @@
 #include <QtCore/QMimeData>
 #include <QtCore/QProcess>
 #include <QtCore/QSettings>
+#include <QtCore/QSortFilterProxyModel>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QString>
 #include <QtCore/QThread>
@@ -430,6 +431,7 @@ void MainWindow::setupInterface()
   m_sceneTreeView->setIndentation(0);
   m_sceneTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_sceneTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
+  m_sceneTreeView->setSortingEnabled(true);
   m_sceneDock->setWidget(m_sceneTreeView);
   addDockWidget(Qt::LeftDockWidgetArea, m_sceneDock);
 
@@ -1245,7 +1247,13 @@ void MainWindow::viewActivated(QWidget* widget)
   ActiveObjects::instance().setActiveWidget(widget);
   if (auto* glWidget = qobject_cast<GLWidget*>(widget)) {
     bool firstRun = populatePluginModel(glWidget->sceneModel(), this);
-    m_sceneTreeView->setModel(&glWidget->sceneModel());
+    QSortFilterProxyModel* proxyModel = new QSortFilterProxyModel(this);
+
+    proxyModel->setSourceModel(&glWidget->sceneModel());
+    m_sceneTreeView->setModel(proxyModel);
+    m_sceneTreeView->setSortingEnabled(true);
+    // column 1 is the name, column 0 is the checkbox
+    m_sceneTreeView->sortByColumn(0, Qt::AscendingOrder);
     // tweak the size of columns
     m_sceneTreeView->header()->setSectionResizeMode(1, QHeaderView::Fixed);
     m_sceneTreeView->header()->resizeSection(1, 40);
