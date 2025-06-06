@@ -284,11 +284,16 @@ int main(int argc, char* argv[])
   }
 
   // Set up the default format for our GL contexts.
-#if defined(Q_OS_MAC)
   QSurfaceFormat defaultFormat = QSurfaceFormat::defaultFormat();
+#if defined(Q_OS_MAC)
   defaultFormat.setAlphaBufferSize(8);
-  QSurfaceFormat::setDefaultFormat(defaultFormat);
+#else
+  // On other platforms we can use a higher version of OpenGL
+  // with the compatibility profile.
+  defaultFormat.setVersion(4, 0);
+  defaultFormat.setProfile(QSurfaceFormat::CompatibilityProfile);
 #endif
+  QSurfaceFormat::setDefaultFormat(defaultFormat);
 
   QStringList fileNames;
   bool disableSettings = false;
