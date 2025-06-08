@@ -14,7 +14,7 @@ jobs:
 
     - name: 'Run clang-format-diff'
       run: |
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/openchemistry/avogadrolibs
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/openchemistry/avogadroapp
         git fetch origin master:master
 
         echo `which clang-format-diff-13`
