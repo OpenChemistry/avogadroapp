@@ -28,6 +28,7 @@
 #include <avogadro/qtgui/moleculemodel.h>
 #include <avogadro/qtgui/multiviewwidget.h>
 #include <avogadro/qtgui/periodictableview.h>
+#include <avogadro/qtgui/richtextdelegate.h>
 #include <avogadro/qtgui/rwmolecule.h>
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
@@ -440,9 +441,11 @@ void MainWindow::setupInterface()
   addDockWidget(Qt::LeftDockWidgetArea, m_viewDock);
 
   // Our molecule dock.
-  m_moleculeDock = new QDockWidget(tr("Molecules"), this);
+  m_moleculeDock = new QDockWidget(tr("Files"), this);
   m_moleculeTreeView = new QTreeView(m_moleculeDock);
   m_moleculeTreeView->setIndentation(0);
+  m_moleculeTreeView->setItemDelegateForColumn(
+    0, new QtGui::RichTextDelegate(m_moleculeTreeView));
   m_moleculeTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_moleculeTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
   m_moleculeDock->setWidget(m_moleculeTreeView);
