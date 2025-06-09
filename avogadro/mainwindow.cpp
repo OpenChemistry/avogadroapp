@@ -1192,10 +1192,28 @@ void MainWindow::sceneItemActivated(const QModelIndex& idx)
 {
   if (!idx.isValid())
     return;
-  auto* obj = static_cast<QObject*>(idx.internalPointer());
-  if (auto* scene = qobject_cast<ScenePlugin*>(obj)) {
-    m_viewDock->setWidget(scene->setupWidget());
-    m_activeScenePlugin = scene;
+
+  qDebug() << "Scene item activated: " << idx.row() << idx.column();
+  QSortFilterProxyModel* proxyModel =
+    qobject_cast<QSortFilterProxyModel*>(m_sceneTreeView->model());
+  if (!proxyModel)
+    return;
+
+  // get the source index
+  QModelIndex sourceIdx = proxyModel->mapToSource(idx);
+  if (!sourceIdx.isValid())
+    return;
+
+  QWidget* w = m_multiViewWidget->activeWidget();
+  if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
+    const ScenePluginModel* sceneModel = &glWidget->sceneModel();
+    if (sceneModel == nullptr)
+      return;
+
+    if (auto* plugin = sceneModel->scenePlugin(sourceIdx.row())) {
+      m_viewDock->setWidget(plugin->setupWidget());
+      m_activeScenePlugin = plugin;
+    }
   }
 }
 
