@@ -1193,7 +1193,6 @@ void MainWindow::sceneItemActivated(const QModelIndex& idx)
   if (!idx.isValid())
     return;
 
-  qDebug() << "Scene item activated: " << idx.row() << idx.column();
   QSortFilterProxyModel* proxyModel =
     qobject_cast<QSortFilterProxyModel*>(m_sceneTreeView->model());
   if (!proxyModel)
