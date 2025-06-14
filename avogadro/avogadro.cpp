@@ -146,6 +146,21 @@ int main(int argc, char* argv[])
   if (language != "System") {
     currentLocale = QLocale(language);
   }
+#ifdef Q_OS_MAC
+  else {
+    // On macOS, we can get the system language from the AppleLanguages
+    // setting, which is a list of preferred languages.
+    // https://www.qtcentre.org/threads/57433-SOLVED-Get-system-language-on-Mac-OS-X
+    QVariant osxLanguageSettings = settings.value("AppleLanguages");
+    QStringList displayLanguages = osxLanguageSettings.toStringList();
+    QString preferredLanguage = displayLanguages.first();
+    qDebug() << "preferred language is:" << preferredLanguage;
+    if (!preferredLanguage.isEmpty()) {
+      currentLocale = QLocale(preferredLanguage);
+    }
+  }
+#endif
+
   qDebug() << "Using locale: " << currentLocale.name();
 
   QStringList translationPaths;
