@@ -1,6 +1,6 @@
 name: Build Flatpak
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   flatpak:
@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Install dependencies
-      run: sudo apt update -qq && sudo apt install -y -qq flatpak flatpak-builder
+      run: sudo apt update -qq && sudo apt install -y -qq flatpak
     
     - name: Configure flatpak
       run: flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
