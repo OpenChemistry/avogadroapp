@@ -566,9 +566,14 @@ void MainWindow::dropEvent(QDropEvent* event)
         if (extension == "py")
           addScript(fileName);
         else
-          openFile(fileName);
+          // add these to m_queuedFiles
+          // so we can read them later
+          m_queuedFiles.append(fileName);
       }
     }
+    if (!m_queuedFiles.empty())
+      readQueuedFiles();
+
     event->acceptProposedAction();
   } else
     event->ignore();
@@ -953,6 +958,7 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
   // Prepare the background thread to read in the selected file.
   if (!m_fileReadThread)
     m_fileReadThread = new QThread(this);
+
   if (m_threadedReader)
     m_threadedReader->deleteLater();
   m_threadedReader = new BackgroundFileFormat(reader);
