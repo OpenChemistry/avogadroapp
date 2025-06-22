@@ -2,13 +2,14 @@
 # Copyright (C) 2006-2020 The Avogadro Project
 # This file is distributed under the same license as the Avogadro package.
 # phlostically <phlostically@mailinator.com>, 2021.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.93.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2021-09-26 12:57+0000\n"
-"Last-Translator: phlostically <phlostically@mailinator.com>\n"
+"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/eo/>\n"
 "Language: eo\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -436,16 +437,12 @@ msgid "&Edit"
 msgstr "R&edakti"
 
 #: mainwindow.cpp:2084
-#, fuzzy
-#| msgid "&Graphics…"
 msgid "&Copy Graphics"
-msgstr "&Grafiko…"
+msgstr ""
 
 #: mainwindow.cpp:2088
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Stir+A"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -617,10 +614,8 @@ msgid "&Window"
 msgstr "Fenestro (&W)"
 
 #: viewfactory.cpp:22 viewfactory.cpp:31
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Nova Vido"
+msgstr ""
 
 #: viewfactory.cpp:24 viewfactory.cpp:43
 msgid "VTK"
