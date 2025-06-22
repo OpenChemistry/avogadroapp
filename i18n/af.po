@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # Dillon Schultz <dillonschultz93@gmail.com>, 2021.
-# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2024.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2024-08-31 05:09+0000\n"
+"PO-Revision-Date: 2025-06-23 18:01+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Afrikaans <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/af/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7.1-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -50,9 +50,8 @@ msgid "No molecule set in BackgroundFileFormat!"
 msgstr ""
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
-#, fuzzy
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "##101TEST102102**Hello**"
+msgstr ""
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
@@ -75,9 +74,8 @@ msgid "View Configuration"
 msgstr ""
 
 #: mainwindow.cpp:426
-#, fuzzy
 msgid "Molecules"
-msgstr "Snij Molecule"
+msgstr ""
 
 #: mainwindow.cpp:435
 msgid "Layers"
@@ -98,11 +96,11 @@ msgid "Untitled"
 msgstr ""
 
 #: mainwindow.cpp:702
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr ""
 
 #: mainwindow.cpp:758
 msgid "Restart needed"
@@ -135,9 +133,8 @@ msgid "Can't open supplied file %1"
 msgstr ""
 
 #: mainwindow.cpp:818
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molecule afwis"
+msgstr ""
 
 #: mainwindow.cpp:842
 msgid "Commands"
@@ -174,9 +171,8 @@ msgid "Select file reader"
 msgstr ""
 
 #: mainwindow.cpp:950
-#, fuzzy
 msgid "Reading File"
-msgstr "Open Bestand"
+msgstr ""
 
 #: mainwindow.cpp:952
 #, qt-format
@@ -287,9 +283,8 @@ msgid "Save chemical file"
 msgstr ""
 
 #: mainwindow.cpp:1570
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Snij Molecule"
+msgstr ""
 
 #: mainwindow.cpp:1669
 msgid "Saving File in Progress…"
@@ -326,9 +321,8 @@ msgid "&Redo"
 msgstr ""
 
 #: mainwindow.cpp:1947
-#, fuzzy
 msgid "&Testing"
-msgstr "Bepalings"
+msgstr ""
 
 #: mainwindow.cpp:1949
 msgid "Record test…"
@@ -387,14 +381,12 @@ msgid "&Export"
 msgstr ""
 
 #: mainwindow.cpp:2021
-#, fuzzy
 msgid "&Molecule…"
-msgstr "Snij Molecule"
+msgstr ""
 
 #: mainwindow.cpp:2028
-#, fuzzy
 msgid "Export Molecule…"
-msgstr "Snij Molecule"
+msgstr ""
 
 #: mainwindow.cpp:2035
 msgid "&Graphics…"
@@ -430,9 +422,8 @@ msgid "&Copy Graphics"
 msgstr ""
 
 #: mainwindow.cpp:2088
-#, fuzzy
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -487,10 +478,8 @@ msgid "&Discussion Forum"
 msgstr ""
 
 #: mainwindow.cpp:2165
-#, fuzzy
-#| msgid "Avogadro"
 msgid "&Avogadro Website"
-msgstr "Avogadro"
+msgstr ""
 
 #: mainwindow.cpp:2169
 msgid "&Report a Bug"
@@ -526,10 +515,9 @@ msgid "Your changes will be lost if you don't save them."
 msgstr ""
 
 #: mainwindow.cpp:2351
-#, fuzzy
 msgctxt "Save"
 msgid "Ctrl+S"
-msgstr "Ctrl+M"
+msgstr ""
 
 #: mainwindow.cpp:2353
 #, fuzzy
@@ -653,10 +641,9 @@ msgstr "OK"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "File | Open"
 msgid "Ctrl+O"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:90
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -665,10 +652,9 @@ msgstr ""
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:111
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -682,31 +668,27 @@ msgstr ""
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "File | New"
 msgid "Ctrl+N"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "File | Close"
 msgid "Ctrl+W"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "File | Save"
 msgid "Ctrl+S"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -720,17 +702,15 @@ msgstr ""
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "Undo"
 msgid "Ctrl+Z"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -749,10 +729,9 @@ msgstr "Plak"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "Paste"
 msgid "Ctrl+V"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -761,10 +740,9 @@ msgstr ""
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "Copy"
 msgid "Ctrl+C"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:248
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -773,10 +751,9 @@ msgstr ""
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "Cut"
 msgid "Ctrl+X"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -790,10 +767,9 @@ msgstr ""
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "Select All"
 msgid "Ctrl+A"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -802,10 +778,9 @@ msgstr ""
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
-msgstr "Ctrl+M"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
