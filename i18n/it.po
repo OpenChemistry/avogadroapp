@@ -8,13 +8,14 @@
 # Giacomo <gradaellig@gmail.com>, 2021.
 # Alex B <alessandrobrugnera16@protonmail.com>, 2022.
 # nicola zanna <zanna.nicola1@gmail.com>, 2023.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2023-10-13 04:03+0000\n"
-"Last-Translator: nicola zanna <zanna.nicola1@gmail.com>\n"
+"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/it/>\n"
 "Language: it\n"
@@ -22,16 +23,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgid "Version Update"
 msgid "Version:"
-msgstr "Aggiornamento Versione"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
