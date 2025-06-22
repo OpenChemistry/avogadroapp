@@ -6,13 +6,14 @@
 # Carles Ferrando Garcia <carles.ferrando@gmail.com>, 2009, 2010.
 # Toni Hermoso Pulido <toniher@softcatala.cat>, 2009.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-ca\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2021-09-23 13:36+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ca/>\n"
 "Language: ca\n"
@@ -20,17 +21,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
 msgid "Version:"
-msgstr "(Revisio del Git: %1)"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
@@ -41,11 +39,8 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
 msgid "Qt Version:"
-msgstr "(Revisio del Git: %1)"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
@@ -109,11 +104,11 @@ msgid "Untitled"
 msgstr "sense títol"
 
 #: mainwindow.cpp:702
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr ""
 
 #: mainwindow.cpp:758
 msgid "Restart needed"
@@ -137,19 +132,17 @@ msgstr ""
 
 #: mainwindow.cpp:804 mainwindow.cpp:828 mainwindow.cpp:1408
 #: mainwindow.cpp:2562
-#, fuzzy
 msgid "Cannot open file"
-msgstr "No es pot desar el fitxer %1"
+msgstr ""
 
 #: mainwindow.cpp:805 mainwindow.cpp:829 mainwindow.cpp:1409
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "No es pot desar el fitxer %1"
+msgstr ""
 
 #: mainwindow.cpp:818
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molècula"
+msgstr ""
 
 #: mainwindow.cpp:842
 msgid "Commands"
@@ -160,9 +153,8 @@ msgid "Input Generators"
 msgstr ""
 
 #: mainwindow.cpp:842
-#, fuzzy
 msgid "File Formats"
-msgstr "Fitxer: "
+msgstr ""
 
 #: mainwindow.cpp:843
 msgctxt "atomic electrostatics"
@@ -187,9 +179,8 @@ msgid "Select file reader"
 msgstr ""
 
 #: mainwindow.cpp:950
-#, fuzzy
 msgid "Reading File"
-msgstr "Obre un fitxer"
+msgstr ""
 
 #: mainwindow.cpp:952
 #, qt-format
@@ -204,9 +195,8 @@ msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
 #: mainwindow.cpp:1017
-#, fuzzy
 msgid "File error"
-msgstr "Fitxer: "
+msgstr ""
 
 #: mainwindow.cpp:1018
 #, qt-format
@@ -216,10 +206,10 @@ msgid ""
 msgstr ""
 
 #: mainwindow.cpp:1045
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "No es pot desar el fitxer %1"
+msgstr ""
 
 #: mainwindow.cpp:1052
 msgid "Error saving file"
@@ -301,9 +291,8 @@ msgid "Save chemical file"
 msgstr ""
 
 #: mainwindow.cpp:1570
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Importa fitxer molècula"
+msgstr ""
 
 #: mainwindow.cpp:1669
 msgid "Saving File in Progress…"
@@ -342,9 +331,8 @@ msgid "&Redo"
 msgstr "&Refés"
 
 #: mainwindow.cpp:1947
-#, fuzzy
 msgid "&Testing"
-msgstr "Configuració"
+msgstr ""
 
 #: mainwindow.cpp:1949
 #, fuzzy
@@ -413,9 +401,8 @@ msgid "&Molecule…"
 msgstr "Molècula"
 
 #: mainwindow.cpp:2028
-#, fuzzy
 msgid "Export Molecule…"
-msgstr "Importa fitxer molècula"
+msgstr ""
 
 #: mainwindow.cpp:2035
 #, fuzzy
@@ -448,15 +435,12 @@ msgid "&Edit"
 msgstr "&Edita"
 
 #: mainwindow.cpp:2084
-#, fuzzy
 msgid "&Copy Graphics"
-msgstr "&Gràfics..."
+msgstr ""
 
 #: mainwindow.cpp:2088
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -565,10 +549,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2439
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Comprovació d'actualització per xarxa errònia"
+msgstr ""
 
 #: mainwindow.cpp:2440
 msgid "Network timeout or other error."
@@ -580,11 +562,9 @@ msgid "Your version: %1"
 msgstr ""
 
 #: mainwindow.cpp:2480
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Revisio del Git: %1)"
+msgstr ""
 
 #: mainwindow.cpp:2482
 msgid "An update is available, do you want to download it now?\n"
@@ -600,9 +580,8 @@ msgid "Error while loading the “%1” file format."
 msgstr "Error en carregar el format de fitxer «%1»."
 
 #: mainwindow.cpp:2558
-#, fuzzy
 msgid "Select file format"
-msgstr "Fitxer: "
+msgstr ""
 
 #: mainwindow.cpp:2563 mainwindow.cpp:2574
 #, qt-format
@@ -610,9 +589,8 @@ msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro no pot obrir «%1»."
 
 #: mainwindow.cpp:2573
-#, fuzzy
 msgid "Cannot open files"
-msgstr "No es pot desar el fitxer %1"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -636,10 +614,8 @@ msgid "&Window"
 msgstr "Finestra"
 
 #: viewfactory.cpp:22 viewfactory.cpp:31
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Nova vista"
+msgstr ""
 
 #: viewfactory.cpp:24 viewfactory.cpp:43
 msgid "VTK"
