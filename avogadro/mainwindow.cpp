@@ -421,8 +421,7 @@ void MainWindow::setupInterface()
     pipeline->setEdEnabled(
       settings.value("MainWindow/ed_enabled", false).toBool());
 
-    // background color
-    Vector4ub bgColor;
+    // set background color
     pipeline->setBackgroundColor(cColor);
   }
 
