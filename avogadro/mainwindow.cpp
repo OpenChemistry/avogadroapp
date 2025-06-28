@@ -420,6 +420,10 @@ void MainWindow::setupInterface()
       settings.value("MainWindow/ao_strength", 1.0f).toFloat());
     pipeline->setEdEnabled(
       settings.value("MainWindow/ed_enabled", false).toBool());
+
+    // background color
+    Vector4ub bgColor;
+    pipeline->setBackgroundColor(cColor);
   }
 
   // Our tool dock.
