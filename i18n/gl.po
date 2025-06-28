@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Avogadro package.
 #
 # Marce Villarino <mvillarino@gmail.com>, 2010.
-# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2024.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.1.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2024-11-11 19:52+0000\n"
+"PO-Revision-Date: 2025-06-23 18:01+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/gl/>\n"
@@ -18,17 +18,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
 msgid "Version:"
-msgstr "(Revisión de Git: %1)"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
@@ -39,11 +36,8 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
 msgid "Qt Version:"
-msgstr "(Revisión de Git: %1)"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
@@ -107,11 +101,11 @@ msgid "Untitled"
 msgstr "sen título"
 
 #: mainwindow.cpp:702
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr ""
 
 #: mainwindow.cpp:758
 msgid "Restart needed"
@@ -135,19 +129,17 @@ msgstr ""
 
 #: mainwindow.cpp:804 mainwindow.cpp:828 mainwindow.cpp:1408
 #: mainwindow.cpp:2562
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Non foi posíbel gardar o ficheiro %1."
+msgstr ""
 
 #: mainwindow.cpp:805 mainwindow.cpp:829 mainwindow.cpp:1409
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Non foi posíbel gardar o ficheiro %1."
+msgstr ""
 
 #: mainwindow.cpp:818
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molécula"
+msgstr ""
 
 #: mainwindow.cpp:842
 msgid "Commands"
@@ -158,9 +150,8 @@ msgid "Input Generators"
 msgstr ""
 
 #: mainwindow.cpp:842
-#, fuzzy
 msgid "File Formats"
-msgstr "Ficheiro: "
+msgstr ""
 
 #: mainwindow.cpp:843
 msgctxt "atomic electrostatics"
@@ -185,9 +176,8 @@ msgid "Select file reader"
 msgstr ""
 
 #: mainwindow.cpp:950
-#, fuzzy
 msgid "Reading File"
-msgstr "Abrir un ficheiro"
+msgstr ""
 
 #: mainwindow.cpp:952
 #, qt-format
@@ -202,9 +192,8 @@ msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
 #: mainwindow.cpp:1017
-#, fuzzy
 msgid "File error"
-msgstr "Ficheiro: "
+msgstr ""
 
 #: mainwindow.cpp:1018
 #, qt-format
@@ -214,10 +203,10 @@ msgid ""
 msgstr ""
 
 #: mainwindow.cpp:1045
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Non foi posíbel gardar o ficheiro %1."
+msgstr ""
 
 #: mainwindow.cpp:1052
 msgid "Error saving file"
@@ -299,9 +288,8 @@ msgid "Save chemical file"
 msgstr ""
 
 #: mainwindow.cpp:1570
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Importar un ficheiro de molécula"
+msgstr ""
 
 #: mainwindow.cpp:1669
 msgid "Saving File in Progress…"
@@ -316,9 +304,9 @@ msgid ""
 msgstr ""
 
 #: mainwindow.cpp:1814
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Desfacer"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -327,9 +315,9 @@ msgid "&Undo"
 msgstr "&Desfacer"
 
 #: mainwindow.cpp:1822
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Refacer"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -338,9 +326,8 @@ msgid "&Redo"
 msgstr "&Refacer"
 
 #: mainwindow.cpp:1947
-#, fuzzy
 msgid "&Testing"
-msgstr "Configuracións"
+msgstr ""
 
 #: mainwindow.cpp:1949
 #, fuzzy
@@ -409,9 +396,8 @@ msgid "&Molecule…"
 msgstr "Molécula"
 
 #: mainwindow.cpp:2028
-#, fuzzy
 msgid "Export Molecule…"
-msgstr "Importar un ficheiro de molécula"
+msgstr ""
 
 #: mainwindow.cpp:2035
 #, fuzzy
@@ -444,15 +430,12 @@ msgid "&Edit"
 msgstr "&Editar"
 
 #: mainwindow.cpp:2084
-#, fuzzy
 msgid "&Copy Graphics"
-msgstr "&Gráficos..."
+msgstr ""
 
 #: mainwindow.cpp:2088
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+E"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -561,10 +544,8 @@ msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2439
-#, fuzzy
-#| msgid "Network Update Check Failed"
 msgid "Network Download Failed"
-msgstr "Fallou a comprobación da actualización pola rede"
+msgstr ""
 
 #: mainwindow.cpp:2440
 msgid "Network timeout or other error."
@@ -576,11 +557,9 @@ msgid "Your version: %1"
 msgstr ""
 
 #: mainwindow.cpp:2480
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#, qt-format
 msgid "New version: %1"
-msgstr "(Revisión de Git: %1)"
+msgstr ""
 
 #: mainwindow.cpp:2482
 msgid "An update is available, do you want to download it now?\n"
@@ -596,9 +575,8 @@ msgid "Error while loading the “%1” file format."
 msgstr ""
 
 #: mainwindow.cpp:2558
-#, fuzzy
 msgid "Select file format"
-msgstr "Ficheiro: "
+msgstr ""
 
 #: mainwindow.cpp:2563 mainwindow.cpp:2574
 #, qt-format
@@ -606,9 +584,8 @@ msgid "Avogadro cannot open “%1”."
 msgstr ""
 
 #: mainwindow.cpp:2573
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Non foi posíbel gardar o ficheiro %1."
+msgstr ""
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -632,10 +609,8 @@ msgid "&Window"
 msgstr "Xanela"
 
 #: viewfactory.cpp:22 viewfactory.cpp:31
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Nova vista"
+msgstr ""
 
 #: viewfactory.cpp:24 viewfactory.cpp:43
 msgid "VTK"
@@ -684,11 +659,9 @@ msgstr "Aceptar"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
-msgstr "Ctrl+A"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:90
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -697,11 +670,9 @@ msgstr "&Abrir"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
-msgstr "Ctrl+S"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:111
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -731,19 +702,15 @@ msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
-msgstr "Ctrl+G"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
-msgstr "Ctrl+Maiúsc+G"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -833,11 +800,9 @@ msgstr "Escoller todo"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
-msgstr "Ctrl+E"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -846,11 +811,9 @@ msgstr "Non escoller nada"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
-msgstr "Ctrl+Maiúsc+E"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)

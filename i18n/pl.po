@@ -4,22 +4,23 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Urszula <urszula127@gmail.com>, 2021.
 # Jakub Brzeski <jakubbrzeski4@gmail.com>, 2023.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2023-06-20 10:50+0000\n"
-"Last-Translator: Jakub Brzeski <jakubbrzeski4@gmail.com>\n"
+"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.18.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -102,11 +103,11 @@ msgid "Untitled"
 msgstr "bez nazwy"
 
 #: mainwindow.cpp:702
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr ""
 
 #: mainwindow.cpp:758
 msgid "Restart needed"
@@ -130,19 +131,17 @@ msgstr "Otwórz plik chemiczny"
 
 #: mainwindow.cpp:804 mainwindow.cpp:828 mainwindow.cpp:1408
 #: mainwindow.cpp:2562
-#, fuzzy
 msgid "Cannot open file"
-msgstr "Nie można było zapisać pliku %1."
+msgstr ""
 
 #: mainwindow.cpp:805 mainwindow.cpp:829 mainwindow.cpp:1409
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Nie można było zapisać pliku %1."
+msgstr ""
 
 #: mainwindow.cpp:818
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Cząsteczka"
+msgstr ""
 
 #: mainwindow.cpp:842
 msgid "Commands"
@@ -153,9 +152,8 @@ msgid "Input Generators"
 msgstr "Generatory wejść"
 
 #: mainwindow.cpp:842
-#, fuzzy
 msgid "File Formats"
-msgstr "Plik: "
+msgstr ""
 
 #: mainwindow.cpp:843
 msgctxt "atomic electrostatics"
@@ -180,9 +178,8 @@ msgid "Select file reader"
 msgstr "Wybierz odtwarzacz plików"
 
 #: mainwindow.cpp:950
-#, fuzzy
 msgid "Reading File"
-msgstr "Otwórz plik"
+msgstr ""
 
 #: mainwindow.cpp:952
 #, qt-format
@@ -199,9 +196,8 @@ msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Naładowana cząsteczka (%1 atomy, %2 wiązania)"
 
 #: mainwindow.cpp:1017
-#, fuzzy
 msgid "File error"
-msgstr "Plik: "
+msgstr ""
 
 #: mainwindow.cpp:1018
 #, qt-format
@@ -213,10 +209,10 @@ msgstr ""
 "%2"
 
 #: mainwindow.cpp:1045
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Nie można było zapisać pliku %1."
+msgstr ""
 
 #: mainwindow.cpp:1052
 msgid "Error saving file"
@@ -452,15 +448,12 @@ msgid "&Edit"
 msgstr "&Edycja"
 
 #: mainwindow.cpp:2084
-#, fuzzy
 msgid "&Copy Graphics"
-msgstr "&Grafika..."
+msgstr ""
 
 #: mainwindow.cpp:2088
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -602,9 +595,8 @@ msgid "Error while loading the “%1” file format."
 msgstr ""
 
 #: mainwindow.cpp:2558
-#, fuzzy
 msgid "Select file format"
-msgstr "Plik: "
+msgstr ""
 
 #: mainwindow.cpp:2563 mainwindow.cpp:2574
 #, qt-format
@@ -612,9 +604,8 @@ msgid "Avogadro cannot open “%1”."
 msgstr ""
 
 #: mainwindow.cpp:2573
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Nie można było zapisać pliku %1."
+msgstr ""
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -638,10 +629,8 @@ msgid "&Window"
 msgstr "Okno"
 
 #: viewfactory.cpp:22 viewfactory.cpp:31
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Nowy widok"
+msgstr ""
 
 #: viewfactory.cpp:24 viewfactory.cpp:43
 msgid "VTK"

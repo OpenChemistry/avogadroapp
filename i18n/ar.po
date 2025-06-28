@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-20 12:01+0000\n"
+"PO-Revision-Date: 2025-06-23 18:01+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ar/>\n"
@@ -24,10 +24,8 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgid "Description:"
 msgid "Version:"
-msgstr "الوصف"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
@@ -103,11 +101,11 @@ msgid "Untitled"
 msgstr "بلا عنوان"
 
 #: mainwindow.cpp:702
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "أفوجادرو"
+msgstr ""
 
 #: mainwindow.cpp:758
 msgid "Restart needed"
@@ -131,19 +129,17 @@ msgstr ""
 
 #: mainwindow.cpp:804 mainwindow.cpp:828 mainwindow.cpp:1408
 #: mainwindow.cpp:2562
-#, fuzzy
 msgid "Cannot open file"
-msgstr "لا يمكن حفظ الملف %1."
+msgstr ""
 
 #: mainwindow.cpp:805 mainwindow.cpp:829 mainwindow.cpp:1409
-#, fuzzy, qt-format
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "لا يمكن حفظ الملف %1."
+msgstr ""
 
 #: mainwindow.cpp:818
-#, fuzzy
 msgid "Open Molecule"
-msgstr "جزيئ"
+msgstr ""
 
 #: mainwindow.cpp:842
 msgid "Commands"
@@ -154,9 +150,8 @@ msgid "Input Generators"
 msgstr ""
 
 #: mainwindow.cpp:842
-#, fuzzy
 msgid "File Formats"
-msgstr "الملف: "
+msgstr ""
 
 #: mainwindow.cpp:843
 msgctxt "atomic electrostatics"
@@ -181,9 +176,8 @@ msgid "Select file reader"
 msgstr ""
 
 #: mainwindow.cpp:950
-#, fuzzy
 msgid "Reading File"
-msgstr "افتح ملف"
+msgstr ""
 
 #: mainwindow.cpp:952
 #, qt-format
@@ -198,9 +192,8 @@ msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
 #: mainwindow.cpp:1017
-#, fuzzy
 msgid "File error"
-msgstr "الملف: "
+msgstr ""
 
 #: mainwindow.cpp:1018
 #, qt-format
@@ -210,10 +203,10 @@ msgid ""
 msgstr ""
 
 #: mainwindow.cpp:1045
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "لا يمكن حفظ الملف %1."
+msgstr ""
 
 #: mainwindow.cpp:1052
 msgid "Error saving file"
@@ -295,9 +288,8 @@ msgid "Save chemical file"
 msgstr ""
 
 #: mainwindow.cpp:1570
-#, fuzzy
 msgid "Export Molecule"
-msgstr "قص جزيئا"
+msgstr ""
 
 #: mainwindow.cpp:1669
 msgid "Saving File in Progress…"
@@ -334,9 +326,8 @@ msgid "&Redo"
 msgstr "&كرّر"
 
 #: mainwindow.cpp:1947
-#, fuzzy
 msgid "&Testing"
-msgstr "إعدادات"
+msgstr ""
 
 #: mainwindow.cpp:1949
 #, fuzzy
@@ -405,9 +396,8 @@ msgid "&Molecule…"
 msgstr "جزيئ"
 
 #: mainwindow.cpp:2028
-#, fuzzy
 msgid "Export Molecule…"
-msgstr "قص جزيئا"
+msgstr ""
 
 #: mainwindow.cpp:2035
 #, fuzzy
@@ -440,15 +430,12 @@ msgid "&Edit"
 msgstr "&تحرير"
 
 #: mainwindow.cpp:2084
-#, fuzzy
 msgid "&Copy Graphics"
-msgstr "&الرسومات..."
+msgstr ""
 
 #: mainwindow.cpp:2088
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -588,9 +575,8 @@ msgid "Error while loading the “%1” file format."
 msgstr ""
 
 #: mainwindow.cpp:2558
-#, fuzzy
 msgid "Select file format"
-msgstr "الملف: "
+msgstr ""
 
 #: mainwindow.cpp:2563 mainwindow.cpp:2574
 #, qt-format
@@ -598,9 +584,8 @@ msgid "Avogadro cannot open “%1”."
 msgstr ""
 
 #: mainwindow.cpp:2573
-#, fuzzy
 msgid "Cannot open files"
-msgstr "لا يمكن حفظ الملف %1."
+msgstr ""
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -625,10 +610,8 @@ msgid "&Window"
 msgstr "نافذة"
 
 #: viewfactory.cpp:22 viewfactory.cpp:31
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "عرض جديد"
+msgstr ""
 
 #: viewfactory.cpp:24 viewfactory.cpp:43
 msgid "VTK"

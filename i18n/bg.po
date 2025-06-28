@@ -4,13 +4,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # Apostol Penkov <apostol.penkov@gmail.com>, 2020.
 # Salif Mehmed <mail@salif.eu>, 2023.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2023-08-05 17:51+0000\n"
-"Last-Translator: Salif Mehmed <mail@salif.eu>\n"
+"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Bulgarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/bg/>\n"
 "Language: bg\n"
@@ -18,16 +19,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgid "Description:"
 msgid "Version:"
-msgstr "Описание:"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
@@ -150,9 +149,8 @@ msgid "Input Generators"
 msgstr ""
 
 #: mainwindow.cpp:842
-#, fuzzy
 msgid "File Formats"
-msgstr "Грещка във файла"
+msgstr ""
 
 #: mainwindow.cpp:843
 msgctxt "atomic electrostatics"
@@ -208,27 +206,22 @@ msgstr ""
 "%2"
 
 #: mainwindow.cpp:1045
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Не може да бъде запазен файлът %1."
+msgstr ""
 
 #: mainwindow.cpp:1052
-#, fuzzy
 msgid "Error saving file"
 msgstr ""
-"Грешка с прочитането на файла '%1':\n"
-"%2"
 
 #: mainwindow.cpp:1053
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
-"Грешка с прочитането на файла '%1':\n"
-"%2"
 
 #: mainwindow.cpp:1092
 msgid "Error: Failed to initialize OpenGL context"
@@ -310,14 +303,12 @@ msgid "Saving File in Progress…"
 msgstr ""
 
 #: mainwindow.cpp:1671
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"Отварящ файл „%1“\n"
-"с „%2“"
 
 #: mainwindow.cpp:1814
 #, qt-format
@@ -448,15 +439,12 @@ msgid "&Edit"
 msgstr "&Редактиране"
 
 #: mainwindow.cpp:2084
-#, fuzzy
 msgid "&Copy Graphics"
-msgstr "&Графика..."
+msgstr ""
 
 #: mainwindow.cpp:2088
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -596,9 +584,8 @@ msgid "Error while loading the “%1” file format."
 msgstr ""
 
 #: mainwindow.cpp:2558
-#, fuzzy
 msgid "Select file format"
-msgstr "Изберете четец на файлове"
+msgstr ""
 
 #: mainwindow.cpp:2563 mainwindow.cpp:2574
 #, qt-format
@@ -606,9 +593,8 @@ msgid "Avogadro cannot open “%1”."
 msgstr ""
 
 #: mainwindow.cpp:2573
-#, fuzzy
 msgid "Cannot open files"
-msgstr "Не може да бъде запазен файлът %1."
+msgstr ""
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -632,10 +618,8 @@ msgid "&Window"
 msgstr "Прозорец"
 
 #: viewfactory.cpp:22 viewfactory.cpp:31
-#, fuzzy
-#| msgid "New View"
 msgid "3D View"
-msgstr "Нов изглед"
+msgstr ""
 
 #: viewfactory.cpp:24 viewfactory.cpp:43
 msgid "VTK"

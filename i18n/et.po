@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2021-09-23 13:36+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/et/>\n"
 "Language: et\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -96,11 +97,11 @@ msgid "Untitled"
 msgstr ""
 
 #: mainwindow.cpp:702
-#, fuzzy, qt-format
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avogadro"
+msgstr ""
 
 #: mainwindow.cpp:758
 msgid "Restart needed"
@@ -133,9 +134,8 @@ msgid "Can't open supplied file %1"
 msgstr ""
 
 #: mainwindow.cpp:818
-#, fuzzy
 msgid "Open Molecule"
-msgstr "Molekul"
+msgstr ""
 
 #: mainwindow.cpp:842
 msgid "Commands"
@@ -172,9 +172,8 @@ msgid "Select file reader"
 msgstr ""
 
 #: mainwindow.cpp:950
-#, fuzzy
 msgid "Reading File"
-msgstr "Ava fail"
+msgstr ""
 
 #: mainwindow.cpp:952
 #, qt-format
@@ -285,9 +284,8 @@ msgid "Save chemical file"
 msgstr ""
 
 #: mainwindow.cpp:1570
-#, fuzzy
 msgid "Export Molecule"
-msgstr "Impordi molekuli fail"
+msgstr ""
 
 #: mainwindow.cpp:1669
 msgid "Saving File in Progress…"
@@ -391,9 +389,8 @@ msgid "&Molecule…"
 msgstr "Molekul"
 
 #: mainwindow.cpp:2028
-#, fuzzy
 msgid "Export Molecule…"
-msgstr "Impordi molekuli fail"
+msgstr ""
 
 #: mainwindow.cpp:2035
 msgid "&Graphics…"
@@ -410,9 +407,8 @@ msgstr ""
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2054:195
-#, fuzzy
 msgid "Open Recent"
-msgstr "Ava fail"
+msgstr ""
 
 #: mainwindow.cpp:2066
 msgid "No recent files"
@@ -429,10 +425,8 @@ msgid "&Copy Graphics"
 msgstr ""
 
 #: mainwindow.cpp:2088
-#, fuzzy
-#| msgid "Ctrl+A"
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -487,10 +481,8 @@ msgid "&Discussion Forum"
 msgstr ""
 
 #: mainwindow.cpp:2165
-#, fuzzy
-#| msgid "Avogadro"
 msgid "&Avogadro Website"
-msgstr "Avogadro"
+msgstr ""
 
 #: mainwindow.cpp:2169
 msgid "&Report a Bug"
