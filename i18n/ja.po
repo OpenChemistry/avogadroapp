@@ -572,7 +572,7 @@ msgstr "バージョンアップデート"
 #: mainwindow.cpp:2542
 #, fuzzy, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "ファイルフォーマット “%1” の読み込みに失敗。"
+msgstr "ファイルフォーマット “%1” の読み込み中にエラー。"
 
 #: mainwindow.cpp:2558
 msgid "Select file format"
