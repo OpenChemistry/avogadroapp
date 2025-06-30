@@ -2,13 +2,14 @@
 # Copyright (C) 2006-2020 The Avogadro Project
 # This file is distributed under the same license as the Avogadro package.
 # rahul bahuguna <rahulbiit@gmail.com>, 2021.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.93.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2021-05-31 18:51+0000\n"
-"Last-Translator: rahul bahuguna <rahulbiit@gmail.com>\n"
+"PO-Revision-Date: 2025-07-01 17:02+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Sanskrit <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sa/>\n"
 "Language: sa\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n==2 ? 1 : 2;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -88,7 +89,7 @@ msgstr ""
 #, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
-msgstr "उपकरण:"
+msgstr "उपकरण"
 
 #: mainwindow.cpp:697
 msgid "Untitled"
@@ -290,12 +291,12 @@ msgid "Saving File in Progress…"
 msgstr ""
 
 #: mainwindow.cpp:1671
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
-msgstr "इदानिं %2 सह पत्रम %1 उदघाटयति"
+msgstr ""
 
 #: mainwindow.cpp:1814
 #, qt-format
@@ -382,12 +383,11 @@ msgstr ""
 #: mainwindow.cpp:2021
 #, fuzzy
 msgid "&Molecule…"
-msgstr "अणु:"
+msgstr "अणु…"
 
 #: mainwindow.cpp:2028
-#, fuzzy
 msgid "Export Molecule…"
-msgstr "अणु:"
+msgstr ""
 
 #: mainwindow.cpp:2035
 msgid "&Graphics…"
@@ -556,9 +556,8 @@ msgid "Error while loading the “%1” file format."
 msgstr ""
 
 #: mainwindow.cpp:2558
-#, fuzzy
 msgid "Select file format"
-msgstr "पत्र पाठयेता चिनोतु"
+msgstr ""
 
 #: mainwindow.cpp:2563 mainwindow.cpp:2574
 #, qt-format
