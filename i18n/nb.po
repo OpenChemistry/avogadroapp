@@ -310,7 +310,7 @@ msgstr "Eksporter molekyl"
 
 #: mainwindow.cpp:1669
 msgid "Saving File in Progress…"
-msgstr "Lagrer fil pågår …"
+msgstr ""
 
 #: mainwindow.cpp:1671
 #, qt-format
@@ -578,9 +578,8 @@ msgid "An update is available, do you want to download it now?\n"
 msgstr "Vil du laste ned den nye versjonen nå?\n"
 
 #: mainwindow.cpp:2484
-#, fuzzy
 msgid "Version Update"
-msgstr "Ny versjon"
+msgstr ""
 
 #: mainwindow.cpp:2542
 #, qt-format
