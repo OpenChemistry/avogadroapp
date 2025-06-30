@@ -234,7 +234,7 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
-"OpenGL 2.0以降が必要です、終了します。\n"
+"OpenGL 2.0以降が必要なため終了します。\n"
 "\n"
 "%1"
 
@@ -306,12 +306,14 @@ msgid "Saving File in Progress…"
 msgstr "ファイルの保存中…"
 
 #: mainwindow.cpp:1671
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
+"ファイル “%1” を保存中\n"
+"ライター “%2”"
 
 #: mainwindow.cpp:1814
 #, qt-format
@@ -474,7 +476,7 @@ msgstr "エクステンション (&E)"
 
 #: mainwindow.cpp:2143
 msgid "User Interface Language…"
-msgstr ""
+msgstr "ユーザインターフェイス言語…"
 
 #: mainwindow.cpp:2147
 msgid "&Periodic Table…"
@@ -516,7 +518,7 @@ msgstr "言語"
 
 #: mainwindow.cpp:2205
 msgid "User Interface Language:"
-msgstr ""
+msgstr "ユーザインターフェイス言語:"
 
 #: mainwindow.cpp:2319
 #, qt-format
@@ -568,9 +570,9 @@ msgid "Version Update"
 msgstr "バージョンアップデート"
 
 #: mainwindow.cpp:2542
-#, qt-format
+#, fuzzy, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr ""
+msgstr "ファイルフォーマット “%1” の読み込みに失敗。"
 
 #: mainwindow.cpp:2558
 msgid "Select file format"
