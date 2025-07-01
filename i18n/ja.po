@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-07-01 17:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -58,8 +58,9 @@ msgid "No file name set in BackgroundFileFormat!"
 msgstr "BackgroundFileFormatにファイル名が設定されていません！"
 
 #: mainwindow.cpp:327
+#, fuzzy
 msgid "Ready…"
-msgstr ""
+msgstr "準備…"
 
 #: mainwindow.cpp:409
 msgid "Tool"
@@ -176,11 +177,13 @@ msgid "Reading File"
 msgstr "ファイルの読み込み中"
 
 #: mainwindow.cpp:952
-#, qt-format
+#, fuzzy, qt-format
 msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"ファイル '%1' を開いています\n"
+"リーダー '%2'"
 
 #: mainwindow.cpp:1012
 #, fuzzy, qt-format
@@ -231,6 +234,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 2.0以降が必要なため終了します。\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1094
 msgid "Unknown error"
@@ -300,12 +306,14 @@ msgid "Saving File in Progress…"
 msgstr "ファイルの保存中…"
 
 #: mainwindow.cpp:1671
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
+"ファイル “%1” を保存中\n"
+"ライター “%2”"
 
 #: mainwindow.cpp:1814
 #, qt-format
@@ -468,7 +476,7 @@ msgstr "エクステンション (&E)"
 
 #: mainwindow.cpp:2143
 msgid "User Interface Language…"
-msgstr ""
+msgstr "ユーザインターフェイス言語…"
 
 #: mainwindow.cpp:2147
 msgid "&Periodic Table…"
@@ -510,7 +518,7 @@ msgstr "言語"
 
 #: mainwindow.cpp:2205
 msgid "User Interface Language:"
-msgstr ""
+msgstr "ユーザインターフェイス言語:"
 
 #: mainwindow.cpp:2319
 #, qt-format
@@ -562,9 +570,9 @@ msgid "Version Update"
 msgstr "バージョンアップデート"
 
 #: mainwindow.cpp:2542
-#, qt-format
+#, fuzzy, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr ""
+msgstr "ファイルフォーマット “%1” の読み込み中にエラー。"
 
 #: mainwindow.cpp:2558
 msgid "Select file format"

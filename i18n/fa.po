@@ -2,13 +2,14 @@
 # Copyright (C) 2006-2020 The Avogadro Project
 # This file is distributed under the same license as the Avogadro package.
 # Ahmad Abdolmaleki <ahmadubuntu@gmail.com>, 2021.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.93.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2021-05-31 18:51+0000\n"
-"Last-Translator: Ahmad Abdolmaleki <ahmadubuntu@gmail.com>\n"
+"PO-Revision-Date: 2025-07-01 17:02+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fa/>\n"
 "Language: fa\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -384,9 +385,8 @@ msgid "&Molecule…"
 msgstr "مولکول‌ها"
 
 #: mainwindow.cpp:2028
-#, fuzzy
 msgid "Export Molecule…"
-msgstr "مولکول‌ها"
+msgstr ""
 
 #: mainwindow.cpp:2035
 msgid "&Graphics…"
