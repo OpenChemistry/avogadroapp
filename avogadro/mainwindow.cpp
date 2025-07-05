@@ -548,6 +548,30 @@ void MainWindow::closeEvent(QCloseEvent* e)
   QMainWindow::closeEvent(e);
 }
 
+void MainWindow::changeEvent(QEvent* e)
+{
+  // it's supposed to be through a theme change
+  // but on macOS, it seems to be triggered
+  // by a palette change, so we handle both
+  if (e->type() == QEvent::ApplicationPaletteChange ||
+      e->type() == QEvent::PaletteChange || e->type() == QEvent::ThemeChange) {
+    e->accept();
+
+    const QPalette defaultPalette;
+    // is the text lighter than the window color?
+    bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
+                     defaultPalette.color(QPalette::Window).lightness());
+
+    // Handle theme changes by telling tools to update their icons.
+    for (ToolPlugin* tool : m_tools) {
+      if (tool != nullptr)
+        tool->setIcon(darkMode);
+    }
+  }
+
+  QMainWindow::changeEvent(e);
+}
+
 void MainWindow::dragEnterEvent(QDragEnterEvent* event)
 {
   if (event->mimeData()->hasUrls())
