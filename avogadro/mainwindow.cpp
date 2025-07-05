@@ -550,7 +550,13 @@ void MainWindow::closeEvent(QCloseEvent* e)
 
 void MainWindow::changeEvent(QEvent* e)
 {
-  if (e->type() == QEvent::ThemeChange) {
+  // it's supposed to be through a theme change
+  // but on macOS, it seems to be triggered
+  // by a palette change, so we handle both
+  if (e->type() == QEvent::ApplicationPaletteChange ||
+      e->type() == QEvent::PaletteChange || e->type() == QEvent::ThemeChange) {
+    e->accept();
+
     const QPalette defaultPalette;
     // is the text lighter than the window color?
     bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
@@ -562,6 +568,8 @@ void MainWindow::changeEvent(QEvent* e)
         tool->setIcon(darkMode);
     }
   }
+
+  QMainWindow::changeEvent(e);
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent* event)
