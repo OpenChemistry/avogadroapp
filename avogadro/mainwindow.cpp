@@ -548,6 +548,22 @@ void MainWindow::closeEvent(QCloseEvent* e)
   QMainWindow::closeEvent(e);
 }
 
+void MainWindow::changeEvent(QEvent* e)
+{
+  if (e->type() == QEvent::ThemeChange) {
+    const QPalette defaultPalette;
+    // is the text lighter than the window color?
+    bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
+                     defaultPalette.color(QPalette::Window).lightness());
+
+    // Handle theme changes by telling tools to update their icons.
+    for (ToolPlugin* tool : m_tools) {
+      if (tool != nullptr)
+        tool->setIcon(darkMode);
+    }
+  }
+}
+
 void MainWindow::dragEnterEvent(QDragEnterEvent* event)
 {
   if (event->mimeData()->hasUrls())
