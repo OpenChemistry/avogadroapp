@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Avogadro 1.93.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-07-01 17:02+0000\n"
+"PO-Revision-Date: 2025-07-17 02:01+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Sanskrit <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sa/>\n"
@@ -381,9 +381,8 @@ msgid "&Export"
 msgstr ""
 
 #: mainwindow.cpp:2021
-#, fuzzy
 msgid "&Molecule…"
-msgstr "अणु…"
+msgstr ""
 
 #: mainwindow.cpp:2028
 msgid "Export Molecule…"
