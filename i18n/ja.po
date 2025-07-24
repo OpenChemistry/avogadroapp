@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-07-01 17:02+0000\n"
+"PO-Revision-Date: 2025-07-24 06:03+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -741,8 +741,9 @@ msgstr "Ctrl+Shift+Z"
 
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#, fuzzy
 msgid "Center"
-msgstr "中央"
+msgstr "中心"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
