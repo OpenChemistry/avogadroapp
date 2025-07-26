@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-07-17 02:01+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Malay <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ms/>\n"
@@ -52,9 +52,8 @@ msgid "No molecule set in BackgroundFileFormat!"
 msgstr "Tiada molekul yang ditetapkan di BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
-#, fuzzy
 msgid "No file format set in BackgroundFileFormat!"
-msgstr "Tiada molekul yang ditetapkan di BackgroundFileFormat!"
+msgstr ""
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
