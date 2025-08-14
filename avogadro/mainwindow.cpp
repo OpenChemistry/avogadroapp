@@ -98,13 +98,6 @@
 #include <avogadro/vtk/vtkglwidget.h>
 #endif
 
-#if defined(Q_OS_MAC) && (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-#include "qcocoamessagebox.h"
-#define MESSAGEBOX QCocoaMessageBox
-#else
-#define MESSAGEBOX QMessageBox
-#endif
-
 namespace Avogadro {
 
 #ifdef QTTESTING
@@ -807,9 +800,9 @@ void MainWindow::setLocale(const QString& locale)
     settings.setValue("locale", locale);
   }
 
-  MESSAGEBOX::information(this, tr("Restart needed"),
-                          tr("Please restart Avogadro to use the new "
-                             "language."));
+  QMessageBox::information(this, tr("Restart needed"),
+                           tr("Please restart Avogadro to use the new "
+                              "language."));
 }
 
 void MainWindow::readSettings()
@@ -853,8 +846,8 @@ void MainWindow::openFile()
     reader = new Io::CjsonFormat;
 
   if (!openFile(fileName, reader)) {
-    MESSAGEBOX::information(this, tr("Cannot open file"),
-                            tr("Can't open supplied file %1").arg(fileName));
+    QMessageBox::information(this, tr("Cannot open file"),
+                             tr("Can't open supplied file %1").arg(fileName));
   }
 }
 
@@ -876,7 +869,7 @@ void MainWindow::importFile()
   settings.setValue("MainWindow/lastOpenDir", dir);
 
   if (!openFile(reply.second, reply.first->newInstance())) {
-    MESSAGEBOX::information(
+    QMessageBox::information(
       this, tr("Cannot open file"),
       tr("Can't open supplied file %1").arg(reply.second));
   }
@@ -1069,10 +1062,10 @@ void MainWindow::backgroundReaderFinished()
                                .arg(m_molecule->bondCount()),
                              5000);
   } else {
-    MESSAGEBOX::critical(this, tr("File error"),
-                         tr("Error while reading file '%1':\n%2")
-                           .arg(fileName)
-                           .arg(m_threadedReader->error()));
+    QMessageBox::critical(this, tr("File error"),
+                          tr("Error while reading file '%1':\n%2")
+                            .arg(fileName)
+                            .arg(m_threadedReader->error()));
     delete m_fileReadMolecule;
   }
   m_fileReadThread->deleteLater();
@@ -1103,7 +1096,7 @@ bool MainWindow::backgroundWriterFinished()
       updateWindowTitle();
       success = true;
     } else {
-      MESSAGEBOX::critical(
+      QMessageBox::critical(
         this, tr("Error saving file"),
         tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
           .arg(fileName)
@@ -1144,9 +1137,9 @@ void MainWindow::viewConfigActivated() {}
 void MainWindow::rendererInvalid()
 {
   auto* widget = qobject_cast<GLWidget*>(sender());
-  MESSAGEBOX::warning(this, tr("Error: Failed to initialize OpenGL context"),
-                      tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
-                        .arg(widget ? widget->error() : tr("Unknown error")));
+  QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
+                       tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
+                         .arg(widget ? widget->error() : tr("Unknown error")));
   // Process events, and then set a single shot timer. This is needed to ensure
   // the RPC server also exits cleanly.
   QApplication::processEvents();
@@ -1452,8 +1445,8 @@ void MainWindow::exportGraphics(QString fileName)
   QImage exportImage = renderToImage(size);
 
   if (!exportImage.save(fileName)) {
-    MESSAGEBOX::warning(this, tr("Avogadro"),
-                        tr("Cannot save file %1.").arg(fileName));
+    QMessageBox::warning(this, tr("Avogadro"),
+                         tr("Cannot save file %1.").arg(fileName));
   }
 }
 
@@ -1483,8 +1476,8 @@ void MainWindow::openRecentFile()
                                        FileFormat::File | FileFormat::Read);
 
     if (!openFile(fileName, format ? format->newInstance() : nullptr)) {
-      MESSAGEBOX::information(this, tr("Cannot open file"),
-                              tr("Can't open supplied file %1").arg(fileName));
+      QMessageBox::information(this, tr("Cannot open file"),
+                               tr("Can't open supplied file %1").arg(fileName));
     }
   }
 }
@@ -1567,7 +1560,7 @@ bool MainWindow::saveFile(bool async)
        .empty();
   if (writable) {
     // Warn the user that the format may lose data.
-    MESSAGEBOX box(this);
+    QMessageBox box(this);
     box.setModal(true);
     box.setWindowTitle(tr("Avogadro"));
     box.setText(tr("This file was imported from a non-standard format which "
@@ -2410,7 +2403,7 @@ bool MainWindow::saveFileIfNeeded()
     // the static functions. This is more work, but gives us some nice
     // fine-grain control. This helps both on Windows and Mac
     // look more "native."
-    QPointer<MESSAGEBOX> msgBox = new MESSAGEBOX(
+    QPointer<QMessageBox> msgBox = new QMessageBox(
       QMessageBox::Warning, tr("Avogadro"),
       tr("Do you want to save the changes to the document?"),
       QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel, this);
@@ -2517,8 +2510,8 @@ void MainWindow::checkUpdate()
 void MainWindow::finishUpdateRequest(QNetworkReply* reply)
 {
   if (!reply->isReadable()) {
-    MESSAGEBOX::warning(this, tr("Network Download Failed"),
-                        tr("Network timeout or other error."));
+    QMessageBox::warning(this, tr("Network Download Failed"),
+                         tr("Network timeout or other error."));
     reply->deleteLater();
     return;
   }
@@ -2564,9 +2557,9 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
   QString text =
     tr("An update is available, do you want to download it now?\n");
   text += currentVersion + '\n' + newVersion;
-  auto result = MESSAGEBOX::information(this, tr("Version Update"), text,
-                                        QMessageBox::Ok | QMessageBox::Ignore |
-                                          QMessageBox::Cancel);
+  auto result = QMessageBox::information(this, tr("Version Update"), text,
+                                         QMessageBox::Ok | QMessageBox::Ignore |
+                                           QMessageBox::Cancel);
 
   if (result == QMessageBox::Cancel)
     return;
@@ -2642,10 +2635,10 @@ void MainWindow::readQueuedFiles()
       "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : nullptr)) {
-      MESSAGEBOX::warning(this, tr("Cannot open file"),
-                          tr("Avogadro cannot open"
-                             " “%1”.")
-                            .arg(file));
+      QMessageBox::warning(this, tr("Cannot open file"),
+                           tr("Avogadro cannot open"
+                              " “%1”.")
+                             .arg(file));
     }
   }
 }
@@ -2653,10 +2646,10 @@ void MainWindow::readQueuedFiles()
 void MainWindow::clearQueuedFiles()
 {
   if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
-    MESSAGEBOX::warning(this, tr("Cannot open files"),
-                        tr("Avogadro cannot open"
-                           " “%1”.")
-                          .arg(m_queuedFiles.join("\n")));
+    QMessageBox::warning(this, tr("Cannot open files"),
+                         tr("Avogadro cannot open"
+                            " “%1”.")
+                           .arg(m_queuedFiles.join("\n")));
     m_queuedFiles.clear();
   }
 }
