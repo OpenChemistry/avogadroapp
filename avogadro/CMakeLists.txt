@@ -122,11 +122,6 @@ endif()
 if(APPLE)
   # add some Objective-C++ code
   list(APPEND avogadro_srcs mac.mm)
-  if (QT_VERSION EQUAL 5)
-    list(APPEND avogadro_srcs ../thirdparty/qcocoacontrols/qcocoamessagebox.mm)
-    include_directories(SYSTEM "${AvogadroApp_SOURCE_DIR}/thirdparty/qcocoacontrols")
-    set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -framework Cocoa")
-  endif()
 
   # for all the translations, create a .lproj directory
   # Migrated from Avo 1.x - contributed by Geoff Hutchison
