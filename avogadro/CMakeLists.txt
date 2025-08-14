@@ -151,11 +151,12 @@ if(APPLE)
       ERROR_QUIET)")
   endforeach()
 
-  list(APPEND avogadro_srcs icons/avogadro.icns)
+  list(APPEND avogadro_srcs icons/Assets.car)
+  list(APPEND avogadro_srcs icons/AppIcon.icns)
   list(APPEND avogadro_srcs icons/doc.icns)
   list(APPEND avogadro_srcs icons/cml.icns)
   list(APPEND avogadro_srcs icons/cjson.icns)
-  set(MACOSX_BUNDLE_ICON_FILE avogadro.icns)
+  set(MACOSX_BUNDLE_ICON_FILE AppIcon)
   set(MACOSX_BUNDLE_BUNDLE_VERSION "${AvogadroApp_VERSION}")
   set(MACOSX_BUNDLE_INFO_STRING "Avogadro - version ${AvogadroApp_VERSION}")
 
@@ -163,7 +164,9 @@ if(APPLE)
   set(MACOSX_BUNDLE_GUI_IDENTIFIER "cc.avogadro")
   set(MACOSX_BUNDLE_BUNDLE_NAME "Avogadro")
 
-  set_source_files_properties(icons/avogadro.icns PROPERTIES
+  set_source_files_properties(icons/Assets.car PROPERTIES
+    MACOSX_PACKAGE_LOCATION Resources)
+  set_source_files_properties(icons/AppIcon.icns PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources)
   set_source_files_properties(icons/doc.icns PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources)

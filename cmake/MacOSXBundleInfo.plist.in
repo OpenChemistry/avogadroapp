@@ -17,7 +17,9 @@
 		<key>CFBundleGetInfoString</key>
 		<string>${MACOSX_BUNDLE_INFO_STRING}</string>
 		<key>CFBundleIconFile</key>
-		<string>${MACOSX_BUNDLE_ICON_FILE}</string>
+		<string>AppIcon</string>
+		<key>CFBundleIconName</key>
+		<string>AppIcon</string>
 		<key>CFBundleIdentifier</key>
 		<string>${MACOSX_BUNDLE_GUI_IDENTIFIER}</string>
 		<key>CFBundleInfoDictionaryVersion</key>
@@ -305,6 +307,7 @@
 				<key>CFBundleTypeExtensions</key>
 				<array>
 					<string>cjson</string>
+					<string>cmpk</string>
 				</array>
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
