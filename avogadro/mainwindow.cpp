@@ -2389,7 +2389,7 @@ bool MainWindow::saveFileIfNeeded()
     // the static functions. This is more work, but gives us some nice
     // fine-grain control. This helps both on Windows and Mac
     // look more "native."
-    QPointer<QMessageBox> msgBox = new QMessageBox(
+    QMessageBox msgBox(
       QMessageBox::Warning, tr("Avogadro"),
       tr("Do you want to save the changes to the document?"),
       QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel, this);
