@@ -21,7 +21,11 @@ namespace {
  */
 struct PriorityText
 {
-  PriorityText(QString  string, int pri) : text(std::move(string)), priority(pri) {}
+  PriorityText(QString string, int pri)
+    : text(std::move(string))
+    , priority(pri)
+  {
+  }
 
   QString text;
   int priority;
@@ -42,19 +46,13 @@ int floor100(int x)
 }
 }
 
-MenuBuilder::MenuBuilder()
-{
-}
+MenuBuilder::MenuBuilder() {}
 
 void MenuBuilder::addAction(const QStringList& pathList, QAction* action,
                             int priority)
 {
   QString path(pathList.join("|"));
   if (m_menuActions.contains(path)) {
-#ifdef Q_OS_MAC
-    // If we're on Mac, make sure to filter out the action icon
-    action->setIcon(QIcon());
-#endif
     m_menuActions[path].append(action);
   } else {
     QList<QAction*> list;

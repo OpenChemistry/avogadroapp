@@ -2038,27 +2038,21 @@ void MainWindow::buildMenu()
   // New
   auto* action = new QAction(tr("&New"), this);
   action->setShortcut(QKeySequence::New);
-#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-new"));
-#endif
   m_menuBuilder->addAction(path, action, 999);
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::newMolecule);
   // Open
   action = new QAction(tr("&Open…"), this);
   action->setShortcut(QKeySequence::Open);
-#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-open"));
-#endif
   m_menuBuilder->addAction(path, action, 998);
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::importFile);
 
   action = new QAction(tr("&Close"), this);
   action->setShortcut(QKeySequence::Close);
-#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-close"));
-#endif
   m_menuBuilder->addAction(path, action, 981);
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &QWidget::close);
@@ -2070,18 +2064,14 @@ void MainWindow::buildMenu()
   // Save
   action = new QAction(tr("&Save"), this);
   action->setShortcut(QKeySequence::Save);
-#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-save"));
-#endif
   m_menuBuilder->addAction(path, action, 965);
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::saveFile);
   // Save As
   action = new QAction(tr("Save &As…"), this);
   action->setShortcut(QKeySequence::SaveAs);
-#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-save-as"));
-#endif
   m_menuBuilder->addAction(path, action, 960);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
@@ -2142,14 +2132,10 @@ void MainWindow::buildMenu()
   QStringList editPath;
   editPath << tr("&Edit");
   m_undo = new QAction(tr("&Undo"), this);
-#ifndef Q_OS_MAC
   m_undo->setIcon(QIcon::fromTheme("edit-undo"));
-#endif
   m_undo->setShortcut(QKeySequence::Undo);
   m_redo = new QAction(tr("&Redo"), this);
-#ifndef Q_OS_MAC
   m_redo->setIcon(QIcon::fromTheme("edit-redo"));
-#endif
   m_redo->setShortcut(QKeySequence::Redo);
 
   m_copyImage = new QAction(tr("&Copy Graphics"), this);
@@ -2412,20 +2398,20 @@ bool MainWindow::saveFileIfNeeded()
     // Unfortunately, it also closes the window when the box disappears!
     // msgBox->setWindowModality(Qt::WindowModal);
     // second line of text
-    msgBox->setInformativeText(
+    msgBox.setInformativeText(
       tr("Your changes will be lost if you don't save them."));
-    msgBox->setDefaultButton(QMessageBox::Save);
+    msgBox.setDefaultButton(QMessageBox::Save);
 #ifdef Q_OS_MAC
-    msgBox->setWindowModality(Qt::WindowModal);
+//    msgBox.setWindowModality(Qt::WindowModal);
 #endif
 
     // OK, now add shortcuts for save and discard
-    msgBox->button(QMessageBox::Save)
+    msgBox.button(QMessageBox::Save)
       ->setShortcut(QKeySequence(tr("Ctrl+S", "Save")));
-    msgBox->button(QMessageBox::Discard)
+    msgBox.button(QMessageBox::Discard)
       ->setShortcut(QKeySequence(tr("Ctrl+D", "Discard")));
 
-    int response = msgBox->exec();
+    int response = msgBox.exec();
 
     switch (static_cast<QMessageBox::StandardButton>(response)) {
       case QMessageBox::Save:
