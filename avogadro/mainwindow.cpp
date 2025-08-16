@@ -4,11 +4,11 @@
 ******************************************************************************/
 
 #include "mainwindow.h"
-
 #include "aboutdialog.h"
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
 #include "menubuilder.h"
+#include "preferencesdialog.h"
 #include "renderingdialog.h"
 #include "tdxcontroller.h"
 #include "tooltipfilter.h"
@@ -306,7 +306,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   qDebug() << " setting interface ";
 #endif
   setupInterface();
-
+  initializeActions();
   // Build up the standard menus, incorporate dynamic menus.
 #ifdef Q_OS_WIN
   qDebug() << " building menu ";
@@ -371,7 +371,24 @@ MainWindow::~MainWindow()
   delete m_menuBuilder;
   delete m_viewFactory;
 }
+void MainWindow::initializeActions()
+{
+  // Example initialization, adjust according to your needs
+  m_actionPreferences = new QAction(tr("&Preferences"), this);
+  connect(m_actionPreferences, &QAction::triggered, this,
+          &MainWindow::showPreferencesDialog);
+  // Add m_actionPreferences to the appropriate menu or toolbar
+}
 
+void MainWindow::showPreferencesDialog()
+{
+  PreferencesDialog dialog(this);
+  dialog.loadSettings();
+
+  if (dialog.exec() == QDialog::Accepted) {
+    dialog.applySettings(); // Apply and save settings
+  }
+}
 void MainWindow::setupInterface()
 {
   // We take care of setting up the main interface here, along with any custom

@@ -6,10 +6,10 @@
 #ifndef AVOGADRO_MAINWINDOW_H
 #define AVOGADRO_MAINWINDOW_H
 
+#include "preferencesdialog.h"
 #include <QtCore/QStringList>
 #include <QtCore/QVariantMap>
 #include <QtWidgets/QMainWindow>
-
 #ifdef QTTESTING
 class pqTestUtility;
 #endif
@@ -19,7 +19,7 @@ class QThread;
 class QTreeView;
 class QNetworkAccessManager;
 class QNetworkReply;
-
+class QAction;
 namespace Ui {
 class AboutDialog;
 }
@@ -74,7 +74,8 @@ public slots:
    * Update internal state to reflect that the molecule has been modified.
    */
   void markMoleculeDirty();
-
+  void showPreferencesDialog();
+  void initializeActions();
   /**
    * Update internal state to reflect that the molecule is not modified.
    */
@@ -446,7 +447,7 @@ private:
   QAction* m_copyImage;
   QAction* m_viewPerspective;
   QAction* m_viewOrthographic;
-
+  QAction* m_actionPreferences;
   ViewFactory* m_viewFactory;
 
   QNetworkAccessManager* m_network = nullptr;
