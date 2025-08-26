@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sk/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -86,7 +86,7 @@ msgstr ""
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Súbor"
+msgstr "Súbor"
 
 #: mainwindow.cpp:463
 #, fuzzy
@@ -306,7 +306,7 @@ msgstr ""
 #: mainwindow.cpp:1814
 #, fuzzy, qt-format
 msgid "&Undo %1"
-msgstr "&Vrátiť späť"
+msgstr "&Vrátiť späť %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -317,7 +317,7 @@ msgstr "&Vrátiť späť"
 #: mainwindow.cpp:1822
 #, fuzzy, qt-format
 msgid "&Redo %1"
-msgstr "&Opakovať"
+msgstr "&Opakovať %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -333,12 +333,12 @@ msgstr "Nastavenia"
 #: mainwindow.cpp:1949
 #, fuzzy
 msgid "Record test…"
-msgstr "Test nahrávania..."
+msgstr "Test nahrávania…"
 
 #: mainwindow.cpp:1952
 #, fuzzy
 msgid "Play test…"
-msgstr "Test prehrávania..."
+msgstr "Test prehrávania…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -359,7 +359,7 @@ msgstr "&Nový"
 #: mainwindow.cpp:1977:57
 #, fuzzy
 msgid "&Open…"
-msgstr "&Otvoriť"
+msgstr "&Otvoriť…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -382,7 +382,7 @@ msgstr "&Uložiť"
 #: mainwindow.cpp:2009:108
 #, fuzzy
 msgid "Save &As…"
-msgstr "Uložiť &ako..."
+msgstr "Uložiť &ako…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -394,7 +394,7 @@ msgstr "&Export"
 #: mainwindow.cpp:2021
 #, fuzzy
 msgid "&Molecule…"
-msgstr "Molekula"
+msgstr "&Molekula…"
 
 #: mainwindow.cpp:2028
 msgid "Export Molecule…"
@@ -403,7 +403,7 @@ msgstr ""
 #: mainwindow.cpp:2035
 #, fuzzy
 msgid "&Graphics…"
-msgstr "&Grafický..."
+msgstr "&Grafický…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -447,7 +447,7 @@ msgstr "&Pohľad"
 #: mainwindow.cpp:2102
 #, fuzzy
 msgid "Set Background Color…"
-msgstr "Nastaviť farbu &pozadia..."
+msgstr "Nastaviť farbu pozadia…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
@@ -496,7 +496,7 @@ msgstr ""
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Webová stránka Avogadro"
+msgstr "Webová stránka &Avogadro"
 
 #: mainwindow.cpp:2169
 #, fuzzy
@@ -730,7 +730,7 @@ msgstr "Vrátiť sa k uloženiu"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
-msgstr "Nastaviť farbu &pozadia..."
+msgstr "Nastaviť farbu &pozadia…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -970,7 +970,7 @@ msgstr "Uložiť"
 #, fuzzy
 #| msgid "&Close"
 msgid "Close"
-msgstr "&Zavrieť"
+msgstr "Zavrieť"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
