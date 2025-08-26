@@ -9,13 +9,14 @@
 # Alex B <alessandrobrugnera16@protonmail.com>, 2022.
 # nicola zanna <zanna.nicola1@gmail.com>, 2023.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
+# Daniel Colciaghi <danielcolciaghi@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
 "PO-Revision-Date: 2025-08-27 08:02+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"Last-Translator: Daniel Colciaghi <danielcolciaghi@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/it/>\n"
 "Language: it\n"
@@ -30,7 +31,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:27:3
 msgid "Version:"
-msgstr ""
+msgstr "Versione:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
