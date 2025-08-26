@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Avogadro 1.93.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/eo/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -204,10 +204,10 @@ msgstr ""
 "%2"
 
 #: mainwindow.cpp:1045
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Konservis dosieron %1."
+msgstr "Konservis dosieron %1"
 
 #: mainwindow.cpp:1052
 msgid "Error saving file"
@@ -406,7 +406,7 @@ msgstr "&Molekulo…"
 #, fuzzy
 #| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "Eksporti Molekulon"
+msgstr "Eksporti Molekulon…"
 
 #: mainwindow.cpp:2035
 msgid "&Graphics…"
@@ -451,8 +451,9 @@ msgid "&View"
 msgstr "&Vidi"
 
 #: mainwindow.cpp:2102
+#, fuzzy
 msgid "Set Background Color…"
-msgstr "Agordi Fonan Koloron… (&B)"
+msgstr "Agordi Fonan Koloron…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
@@ -493,22 +494,20 @@ msgid "&About"
 msgstr "Pri (&A)"
 
 #: mainwindow.cpp:2161
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Diskutejo"
+msgstr ""
 
 #: mainwindow.cpp:2165
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Retejo de Avogadro"
+msgstr "Retejo de &Avogadro"
 
 #: mainwindow.cpp:2169
 #, fuzzy
 #| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Raporti cimon"
+msgstr "&Raporti cimon"
 
 #: mainwindow.cpp:2173
 msgid "&Suggest a Feature"
@@ -977,14 +976,14 @@ msgstr ""
 #, fuzzy
 #| msgid "&Save"
 msgid "Save"
-msgstr "Kon&servi"
+msgstr "Konservi"
 
 #. i18n: file: renderingdialog.ui:374
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
 #, fuzzy
 #| msgid "&Close"
 msgid "Close"
-msgstr "Fermi (&C)"
+msgstr "Fermi"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
