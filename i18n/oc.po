@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/oc/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -86,7 +86,7 @@ msgstr ""
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Fichièr"
+msgstr "Fichièr"
 
 #: mainwindow.cpp:463
 #, fuzzy
@@ -355,7 +355,7 @@ msgstr "&Novèl"
 #: mainwindow.cpp:1977:57
 #, fuzzy
 msgid "&Open…"
-msgstr "Do&brir"
+msgstr "Do&brir…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -378,19 +378,19 @@ msgstr "&Enregistrar"
 #: mainwindow.cpp:2009:108
 #, fuzzy
 msgid "Save &As…"
-msgstr "Enregistrar &jos..."
+msgstr "Enregistrar &jos…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2020:201
 #, fuzzy
 msgid "&Export"
-msgstr "Exportar"
+msgstr "&Exportar"
 
 #: mainwindow.cpp:2021
 #, fuzzy
 msgid "&Molecule…"
-msgstr "Molecula"
+msgstr "&Molecula…"
 
 #: mainwindow.cpp:2028
 msgid "Export Molecule…"
@@ -399,7 +399,7 @@ msgstr ""
 #: mainwindow.cpp:2035
 #, fuzzy
 msgid "&Graphics…"
-msgstr "&Grafics..."
+msgstr "&Grafics…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -443,7 +443,7 @@ msgstr "&Afichatge"
 #: mainwindow.cpp:2102
 #, fuzzy
 msgid "Set Background Color…"
-msgstr "Definir la color d&e rèire plan..."
+msgstr "Definir la color de rèire plan…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
@@ -464,7 +464,7 @@ msgstr ""
 #: mainwindow.cpp:2141
 #, fuzzy
 msgid "&Extensions"
-msgstr "Extensions"
+msgstr "&Extensions"
 
 #: mainwindow.cpp:2143
 msgid "User Interface Language…"
@@ -492,7 +492,7 @@ msgstr ""
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Site Web d'Avogadro"
+msgstr "Site Web d'&Avogadro"
 
 #: mainwindow.cpp:2169
 #, fuzzy
@@ -726,7 +726,7 @@ msgstr "Tornar a la version enregistrada"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
-msgstr "Definir la color d&e rèire plan..."
+msgstr "Definir la color d&e rèire plan…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -863,7 +863,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "&Import"
-msgstr "Importar"
+msgstr "&Importar"
 
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
@@ -966,7 +966,7 @@ msgstr "Enregistrar"
 #, fuzzy
 #| msgid "&Close"
 msgid "Close"
-msgstr "&Tampar"
+msgstr "Tampar"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
