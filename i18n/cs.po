@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/cs/>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -92,7 +92,7 @@ msgstr ""
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Soubor"
+msgstr "Soubor"
 
 #: mainwindow.cpp:463
 #, fuzzy
@@ -339,12 +339,12 @@ msgstr ""
 #: mainwindow.cpp:1949
 #, fuzzy
 msgid "Record test…"
-msgstr "Zkouška nahrávání..."
+msgstr "Zkouška nahrávání…"
 
 #: mainwindow.cpp:1952
 #, fuzzy
 msgid "Play test…"
-msgstr "Zkouška přehrávání..."
+msgstr "Zkouška přehrávání…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -365,7 +365,7 @@ msgstr "&Nový"
 #: mainwindow.cpp:1977:57
 #, fuzzy
 msgid "&Open…"
-msgstr "&Otevřít"
+msgstr "&Otevřít…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -388,7 +388,7 @@ msgstr "&Uložit"
 #: mainwindow.cpp:2009:108
 #, fuzzy
 msgid "Save &As…"
-msgstr "Uložit &jako..."
+msgstr "Uložit &jako…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -436,7 +436,7 @@ msgstr "Úp&ravy"
 #: mainwindow.cpp:2084
 #, fuzzy
 msgid "&Copy Graphics"
-msgstr "&Obrazové znázornění..."
+msgstr "&Obrazové znázornění"
 
 #: mainwindow.cpp:2088
 msgid "Ctrl+Alt+C"
@@ -451,7 +451,7 @@ msgstr "&Pohled"
 #: mainwindow.cpp:2102
 #, fuzzy
 msgid "Set Background Color…"
-msgstr "Nastavit barvu &pozadí..."
+msgstr "Nastavit barvu pozadí…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
@@ -500,7 +500,7 @@ msgstr ""
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Domovská stránka Avogadro"
+msgstr "Domovská stránka &Avogadro"
 
 #: mainwindow.cpp:2169
 #, fuzzy
@@ -735,7 +735,7 @@ msgstr "Obnovit původní stav"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
-msgstr "Nastavit barvu &pozadí..."
+msgstr "Nastavit barvu &pozadí…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
