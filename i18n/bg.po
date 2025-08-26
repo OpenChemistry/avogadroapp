@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Bulgarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/bg/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -87,7 +87,7 @@ msgstr ""
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Файл"
+msgstr "Файл"
 
 #: mainwindow.cpp:463
 #, fuzzy
@@ -339,12 +339,12 @@ msgstr "&Настройки"
 #: mainwindow.cpp:1949
 #, fuzzy
 msgid "Record test…"
-msgstr "Запиши теста"
+msgstr "Запиши теста…"
 
 #: mainwindow.cpp:1952
 #, fuzzy
 msgid "Play test…"
-msgstr "Възпроизведи теста"
+msgstr "Възпроизведи теста…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -365,7 +365,7 @@ msgstr "&Нов"
 #: mainwindow.cpp:1977:57
 #, fuzzy
 msgid "&Open…"
-msgstr "&Отваряне"
+msgstr "&Отваряне…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -388,7 +388,7 @@ msgstr "&Запазване"
 #: mainwindow.cpp:2009:108
 #, fuzzy
 msgid "Save &As…"
-msgstr "Запазване &като..."
+msgstr "Запазване &като…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -400,18 +400,18 @@ msgstr "Изнасяне"
 #: mainwindow.cpp:2021
 #, fuzzy
 msgid "&Molecule…"
-msgstr "Молекула"
+msgstr "&Молекула…"
 
 #: mainwindow.cpp:2028
 #, fuzzy
 #| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "Изнасяне на молекула"
+msgstr "Изнасяне на молекула…"
 
 #: mainwindow.cpp:2035
 #, fuzzy
 msgid "&Graphics…"
-msgstr "&Графика..."
+msgstr "&Графика…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -455,7 +455,7 @@ msgstr "&Изглед"
 #: mainwindow.cpp:2102
 #, fuzzy
 msgid "Set Background Color…"
-msgstr "Задаване на цвят на &фона..."
+msgstr "Задаване на цвят на фона…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
@@ -738,7 +738,7 @@ msgstr "Върни на Последно Съхранени"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
-msgstr "Задаване на цвят на &фона..."
+msgstr "Задаване на цвят на &фона…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -978,7 +978,7 @@ msgstr "Запазване"
 #, fuzzy
 #| msgid "&Close"
 msgid "Close"
-msgstr "&Затваряне"
+msgstr "Затваряне"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
