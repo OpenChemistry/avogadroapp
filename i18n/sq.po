@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Albanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sq/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -86,7 +86,7 @@ msgstr ""
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Skedari"
+msgstr "Skedari"
 
 #: mainwindow.cpp:463
 #, fuzzy
@@ -305,7 +305,7 @@ msgstr ""
 #: mainwindow.cpp:1814
 #, fuzzy, qt-format
 msgid "&Undo %1"
-msgstr "&Zhbëj"
+msgstr "&Zhbëj %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -316,7 +316,7 @@ msgstr "&Zhbëj"
 #: mainwindow.cpp:1822
 #, fuzzy, qt-format
 msgid "&Redo %1"
-msgstr "&Ribëj"
+msgstr "&Ribëj %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -355,7 +355,7 @@ msgstr "&I Ri"
 #: mainwindow.cpp:1977:57
 #, fuzzy
 msgid "&Open…"
-msgstr "&Hape"
+msgstr "&Hape…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -378,19 +378,19 @@ msgstr "&Ruaje"
 #: mainwindow.cpp:2009:108
 #, fuzzy
 msgid "Save &As…"
-msgstr "Ruaji &Si..."
+msgstr "Ruaji &Si…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2020:201
 #, fuzzy
 msgid "&Export"
-msgstr "Eksporto"
+msgstr "&Eksporto"
 
 #: mainwindow.cpp:2021
 #, fuzzy
 msgid "&Molecule…"
-msgstr "Molekula"
+msgstr "&Molekula…"
 
 #: mainwindow.cpp:2028
 msgid "Export Molecule…"
@@ -399,7 +399,7 @@ msgstr ""
 #: mainwindow.cpp:2035
 #, fuzzy
 msgid "&Graphics…"
-msgstr "&Grafikët..."
+msgstr "&Grafikët…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -491,13 +491,13 @@ msgstr ""
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadro Website"
+msgstr "&Avogadro Website"
 
 #: mainwindow.cpp:2169
 #, fuzzy
 #| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Raporto një difekt"
+msgstr "&Raporto një difekt"
 
 #: mainwindow.cpp:2173
 msgid "&Suggest a Feature"
@@ -964,7 +964,7 @@ msgstr "Ruaje"
 #, fuzzy
 #| msgid "&Close"
 msgid "Close"
-msgstr "&Mbylle"
+msgstr "Mbylle"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"

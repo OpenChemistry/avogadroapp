@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sv/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -87,7 +87,7 @@ msgstr ""
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Arkiv"
+msgstr "Arkiv"
 
 #: mainwindow.cpp:463
 #, fuzzy
@@ -334,12 +334,12 @@ msgstr ""
 #: mainwindow.cpp:1949
 #, fuzzy
 msgid "Record test…"
-msgstr "Spela in test..."
+msgstr "Spela in test…"
 
 #: mainwindow.cpp:1952
 #, fuzzy
 msgid "Play test…"
-msgstr "Spela upp test..."
+msgstr "Spela upp test…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -360,7 +360,7 @@ msgstr "&Ny"
 #: mainwindow.cpp:1977:57
 #, fuzzy
 msgid "&Open…"
-msgstr "&Öppna"
+msgstr "&Öppna…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -383,19 +383,19 @@ msgstr "&Spara"
 #: mainwindow.cpp:2009:108
 #, fuzzy
 msgid "Save &As…"
-msgstr "Spara s&om..."
+msgstr "Spara s&om…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2020:201
 #, fuzzy
 msgid "&Export"
-msgstr "Exportera"
+msgstr "&Exportera"
 
 #: mainwindow.cpp:2021
 #, fuzzy
 msgid "&Molecule…"
-msgstr "Molekyl"
+msgstr "&Molekyl…"
 
 #: mainwindow.cpp:2028
 msgid "Export Molecule…"
@@ -404,7 +404,7 @@ msgstr ""
 #: mainwindow.cpp:2035
 #, fuzzy
 msgid "&Graphics…"
-msgstr "&Grafik..."
+msgstr "&Grafik…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -448,7 +448,7 @@ msgstr "&Visa"
 #: mainwindow.cpp:2102
 #, fuzzy
 msgid "Set Background Color…"
-msgstr "Ange &bakgrundsfärg..."
+msgstr "Ange bakgrundsfärg…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
@@ -497,13 +497,13 @@ msgstr ""
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadros webbplats"
+msgstr "&Avogadros webbplats"
 
 #: mainwindow.cpp:2169
 #, fuzzy
 #| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Rapportera ett fel"
+msgstr "&Rapportera ett fel"
 
 #: mainwindow.cpp:2173
 msgid "&Suggest a Feature"
@@ -731,7 +731,7 @@ msgstr "Återgå till sparad"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
-msgstr "Ange &bakgrundsfärg..."
+msgstr "Ange &bakgrundsfärg…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -868,7 +868,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "&Import"
-msgstr "Importera"
+msgstr "&Importera"
 
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
@@ -971,7 +971,7 @@ msgstr "Spara"
 #, fuzzy
 #| msgid "&Close"
 msgid "Close"
-msgstr "Stän&g"
+msgstr "Stäng"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"

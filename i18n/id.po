@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -135,7 +135,7 @@ msgstr "Tidak dapat membuka berkas"
 #: mainwindow.cpp:805 mainwindow.cpp:829 mainwindow.cpp:1409
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Tidak dapat membuka berkas %1."
+msgstr "Tidak dapat membuka berkas %1"
 
 #: mainwindow.cpp:818
 msgid "Open Molecule"
@@ -408,7 +408,7 @@ msgstr "&Molekul…"
 #, fuzzy
 #| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "Ekspor Molekul"
+msgstr "Ekspor Molekul…"
 
 #: mainwindow.cpp:2035
 msgid "&Graphics…"
@@ -498,13 +498,13 @@ msgstr "&Tentang"
 #, fuzzy
 #| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Forum Diskusi"
+msgstr "Forum &Diskusi"
 
 #: mainwindow.cpp:2165
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Web Avogadro"
+msgstr "Web &Avogadro"
 
 #: mainwindow.cpp:2169
 #, fuzzy
@@ -553,7 +553,7 @@ msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2439
 msgid "Network Download Failed"
-msgstr "Proses unduhan telah gagal."
+msgstr "Proses unduhan telah gagal"
 
 #: mainwindow.cpp:2440
 msgid "Network timeout or other error."

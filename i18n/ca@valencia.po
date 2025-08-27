@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-ca\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Valencian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ca@valencia/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -89,7 +89,7 @@ msgstr ""
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Fitxer"
+msgstr "Fitxer"
 
 #: mainwindow.cpp:463
 #, fuzzy
@@ -259,7 +259,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1361
 msgid "Export Bitmap Graphics"
-msgstr "Exporta el gràfic de mapa de bits."
+msgstr "Exporta el gràfic de mapa de bits"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -270,7 +270,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:1378
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "No es pot alçar el fitxer %1"
+msgstr "No es pot alçar el fitxer %1."
 
 #: mainwindow.cpp:1495
 msgid ""
@@ -307,7 +307,7 @@ msgstr ""
 #: mainwindow.cpp:1814
 #, fuzzy, qt-format
 msgid "&Undo %1"
-msgstr "&Desfés"
+msgstr "&Desfés %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -318,7 +318,7 @@ msgstr "&Desfés"
 #: mainwindow.cpp:1822
 #, fuzzy, qt-format
 msgid "&Redo %1"
-msgstr "&Refés"
+msgstr "&Refés %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -357,7 +357,7 @@ msgstr "&Nou"
 #: mainwindow.cpp:1977:57
 #, fuzzy
 msgid "&Open…"
-msgstr "&Obri"
+msgstr "&Obri…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -380,7 +380,7 @@ msgstr "Al&ça"
 #: mainwindow.cpp:2009:108
 #, fuzzy
 msgid "Save &As…"
-msgstr "Anomena i al&ça..."
+msgstr "Anomena i al&ça…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -392,7 +392,7 @@ msgstr "&Exporta"
 #: mainwindow.cpp:2021
 #, fuzzy
 msgid "&Molecule…"
-msgstr "Molècula"
+msgstr "&Molècula…"
 
 #: mainwindow.cpp:2028
 msgid "Export Molecule…"
@@ -401,7 +401,7 @@ msgstr ""
 #: mainwindow.cpp:2035
 #, fuzzy
 msgid "&Graphics…"
-msgstr "&Gràfics..."
+msgstr "&Gràfics…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -445,7 +445,7 @@ msgstr "&Visualitza"
 #: mainwindow.cpp:2102
 #, fuzzy
 msgid "Set Background Color…"
-msgstr "Estableix color de &fons..."
+msgstr "Estableix color de fons…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
@@ -728,7 +728,7 @@ msgstr "Desfés l'alçat"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
-msgstr "Estableix color de &fons..."
+msgstr "Estableix color de &fons…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -968,7 +968,7 @@ msgstr "Alça"
 #, fuzzy
 #| msgid "&Close"
 msgid "Close"
-msgstr "&Tanca"
+msgstr "Tanca"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"

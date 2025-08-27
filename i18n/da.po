@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/da/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -87,7 +87,7 @@ msgstr ""
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Fil"
+msgstr "Fil"
 
 #: mainwindow.cpp:463
 #, fuzzy
@@ -334,12 +334,12 @@ msgstr ""
 #: mainwindow.cpp:1949
 #, fuzzy
 msgid "Record test…"
-msgstr "Optag test..."
+msgstr "Optag test…"
 
 #: mainwindow.cpp:1952
 #, fuzzy
 msgid "Play test…"
-msgstr "Afspil test..."
+msgstr "Afspil test…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -360,7 +360,7 @@ msgstr "&Ny"
 #: mainwindow.cpp:1977:57
 #, fuzzy
 msgid "&Open…"
-msgstr "Å&ben"
+msgstr "Å&ben…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -383,7 +383,7 @@ msgstr "&Gem"
 #: mainwindow.cpp:2009:108
 #, fuzzy
 msgid "Save &As…"
-msgstr "Gem &som..."
+msgstr "Gem &som…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -395,7 +395,7 @@ msgstr "&Eksportér"
 #: mainwindow.cpp:2021
 #, fuzzy
 msgid "&Molecule…"
-msgstr "Molekyle"
+msgstr "&Molekyle…"
 
 #: mainwindow.cpp:2028
 msgid "Export Molecule…"
@@ -404,7 +404,7 @@ msgstr ""
 #: mainwindow.cpp:2035
 #, fuzzy
 msgid "&Graphics…"
-msgstr "&Grafik..."
+msgstr "&Grafik…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -448,7 +448,7 @@ msgstr "&Vis"
 #: mainwindow.cpp:2102
 #, fuzzy
 msgid "Set Background Color…"
-msgstr "Sæt &baggrundsfarve..."
+msgstr "Sæt &baggrundsfarve…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
@@ -496,13 +496,13 @@ msgstr ""
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadro's hjemmeside"
+msgstr "&Avogadro's hjemmeside"
 
 #: mainwindow.cpp:2169
 #, fuzzy
 #| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Rapportér en fejl"
+msgstr "&Rapportér en fejl"
 
 #: mainwindow.cpp:2173
 msgid "&Suggest a Feature"
@@ -724,7 +724,7 @@ msgstr "Tilbage til gemte"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
-msgstr "Sæt &baggrundsfarve..."
+msgstr "Sæt &baggrundsfarve…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -964,7 +964,7 @@ msgstr "Gem"
 #, fuzzy
 #| msgid "&Close"
 msgid "Close"
-msgstr "&Luk"
+msgstr "Luk"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"

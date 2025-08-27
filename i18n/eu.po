@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/eu/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -85,7 +85,7 @@ msgstr "Geruzak"
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Fitxategia"
+msgstr "Fitxategia"
 
 #: mainwindow.cpp:463
 #, fuzzy
@@ -127,13 +127,14 @@ msgstr "Fitxategi kimikoa ireki"
 
 #: mainwindow.cpp:804 mainwindow.cpp:828 mainwindow.cpp:1408
 #: mainwindow.cpp:2562
+#, fuzzy
 msgid "Cannot open file"
-msgstr "Ezin da %1 fitxategia ireki."
+msgstr "Ezin da fitxategia ireki"
 
 #: mainwindow.cpp:805 mainwindow.cpp:829 mainwindow.cpp:1409
-#, qt-format
+#, fuzzy, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Ezin da emandako %1 fitxategia ireki."
+msgstr "Ezin da emandako %1 fitxategia ireki"
 
 #: mainwindow.cpp:818
 msgid "Open Molecule"
@@ -205,10 +206,10 @@ msgstr ""
 "%2"
 
 #: mainwindow.cpp:1045
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "%1 fitxategia gorde da."
+msgstr "%1 fitxategia gorde da"
 
 #: mainwindow.cpp:1052
 msgid "Error saving file"
@@ -387,7 +388,7 @@ msgstr "&Gorde"
 #: mainwindow.cpp:2009:108
 #, fuzzy
 msgid "Save &As…"
-msgstr "Gorde &Honela..."
+msgstr "Gorde &Honela…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -398,18 +399,18 @@ msgstr "&Esportatu"
 #: mainwindow.cpp:2021
 #, fuzzy
 msgid "&Molecule…"
-msgstr "Molekula"
+msgstr "&Molekula…"
 
 #: mainwindow.cpp:2028
 #, fuzzy
 #| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "Esportatu Molekula"
+msgstr "Esportatu Molekula…"
 
 #: mainwindow.cpp:2035
 #, fuzzy
 msgid "&Graphics…"
-msgstr "&Grafikoak..."
+msgstr "&Grafikoak…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -453,7 +454,7 @@ msgstr "&Ikusi"
 #: mainwindow.cpp:2102
 #, fuzzy
 msgid "Set Background Color…"
-msgstr "Ezarri &Atzeko Planoaren Kolorea..."
+msgstr "Ezarri Atzeko Planoaren Kolorea…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
@@ -502,7 +503,7 @@ msgstr ""
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Avogadro-ren Webgunea"
+msgstr "&Avogadro-ren Webgunea"
 
 #: mainwindow.cpp:2169
 #, fuzzy
@@ -736,7 +737,7 @@ msgstr "Leheneratu Gordetakora"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
-msgstr "Ezarri &Atzeko Planoaren Kolorea..."
+msgstr "Ezarri &Atzeko Planoaren Kolorea…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -873,7 +874,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "&Import"
-msgstr "Inportatu"
+msgstr "&Inportatu"
 
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, label_2)
@@ -976,7 +977,7 @@ msgstr "Gorde"
 #, fuzzy
 #| msgid "&Close"
 msgid "Close"
-msgstr "&Itxi"
+msgstr "Itxi"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"

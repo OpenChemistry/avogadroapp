@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-06-23 18:01+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/pl/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -89,7 +89,7 @@ msgstr "Warstwy"
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Plik"
+msgstr "Plik"
 
 #: mainwindow.cpp:463
 #, fuzzy
@@ -308,8 +308,9 @@ msgid "Export Molecule"
 msgstr "Eksportuj Molekułe"
 
 #: mainwindow.cpp:1669
+#, fuzzy
 msgid "Saving File in Progress…"
-msgstr "Zapisywanie pliku"
+msgstr "Zapisywanie pliku…"
 
 #: mainwindow.cpp:1671
 #, qt-format
@@ -322,9 +323,9 @@ msgstr ""
 "z pomocą \"%2\""
 
 #: mainwindow.cpp:1814
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Undo %1"
-msgstr "&Cofnij"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -333,9 +334,9 @@ msgid "&Undo"
 msgstr "&Cofnij"
 
 #: mainwindow.cpp:1822
-#, fuzzy, qt-format
+#, qt-format
 msgid "&Redo %1"
-msgstr "&Powtórz"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -348,12 +349,14 @@ msgid "&Testing"
 msgstr "Ustawienia"
 
 #: mainwindow.cpp:1949
+#, fuzzy
 msgid "Record test…"
-msgstr "Rejestruj test..."
+msgstr "Rejestruj test…"
 
 #: mainwindow.cpp:1952
+#, fuzzy
 msgid "Play test…"
-msgstr "Odtwórz test..."
+msgstr "Odtwórz test…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -374,7 +377,7 @@ msgstr "&Nowy"
 #: mainwindow.cpp:1977:57
 #, fuzzy
 msgid "&Open…"
-msgstr "&Otwórz"
+msgstr "&Otwórz…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -397,30 +400,30 @@ msgstr "Z&apisz"
 #: mainwindow.cpp:2009:108
 #, fuzzy
 msgid "Save &As…"
-msgstr "Zapisz &jako..."
+msgstr "Zapisz &jako…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2020:201
 #, fuzzy
 msgid "&Export"
-msgstr "Eksportuj"
+msgstr "&Eksportuj"
 
 #: mainwindow.cpp:2021
 #, fuzzy
 msgid "&Molecule…"
-msgstr "Cząsteczka"
+msgstr "&Cząsteczka…"
 
 #: mainwindow.cpp:2028
 #, fuzzy
 #| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "Eksportuj Molekułe"
+msgstr "Eksportuj Molekułe…"
 
 #: mainwindow.cpp:2035
 #, fuzzy
 msgid "&Graphics…"
-msgstr "&Grafika..."
+msgstr "&Grafika…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -464,7 +467,7 @@ msgstr "&Widok"
 #: mainwindow.cpp:2102
 #, fuzzy
 msgid "Set Background Color…"
-msgstr "Ustaw &kolor tła..."
+msgstr "Ustaw kolor tła…"
 
 #: mainwindow.cpp:2106
 msgid "Rendering…"
@@ -509,13 +512,13 @@ msgstr "&O programie"
 #, fuzzy
 #| msgid "Discussion Forum"
 msgid "&Discussion Forum"
-msgstr "Forum dyskusyjne"
+msgstr "Forum &dyskusyjne"
 
 #: mainwindow.cpp:2165
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Strona internetowa Avogadro"
+msgstr "Strona internetowa &Avogadro"
 
 #: mainwindow.cpp:2169
 #, fuzzy
@@ -775,7 +778,7 @@ msgstr "Przywróć do zapisu"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
-msgstr "Ustaw &kolor tła..."
+msgstr "Ustaw &kolor tła…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -1014,7 +1017,7 @@ msgstr "Zapisz"
 #, fuzzy
 #| msgid "&Close"
 msgid "Close"
-msgstr "&Zamknij"
+msgstr "Zamknij"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
