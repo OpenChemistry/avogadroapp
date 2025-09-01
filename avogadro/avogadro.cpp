@@ -13,6 +13,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QLocale>
+#include <QtCore/QOperatingSystemVersion>
 #include <QtCore/QProcess>
 #include <QtCore/QSettings>
 #include <QtCore/QStandardPaths>
@@ -104,7 +105,16 @@ int main(int argc, char* argv[])
   // call some Objective-C++
   removeMacSpecificMenuItems();
   // Native Mac applications do not have icons in the menus
-  // QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+  // until Tahoe (macOS 26)
+  // (and only do this with Qt 6.7 or later)
+  bool oldQtVersion = true;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  oldQtVersion = false;
+#endif
+  auto currentOS = QOperatingSystemVersion::current();
+  if (oldQtVersion || currentOS.majorVersion() < 26) {
+    QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+  }
 #endif
 
   QCoreApplication::setOrganizationName("OpenChemistry");
