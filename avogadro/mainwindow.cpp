@@ -463,8 +463,13 @@ void MainWindow::setupInterface()
   m_moleculeDock->raise();
 
   // Switch to our fallback icons if there are no platform-specific icons.
-  if (!QIcon::hasThemeIcon("document-new"))
+  if (!QIcon::hasThemeIcon("document-new")) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    QIcon::setFallbackThemeName("fallback");
+#else
     QIcon::setThemeName("fallback");
+#endif
+  }
 
   QIcon icon(":/icons/avogadro.png");
   setWindowIcon(icon);
@@ -2038,14 +2043,22 @@ void MainWindow::buildMenu()
   // New
   auto* action = new QAction(tr("&New"), this);
   action->setShortcut(QKeySequence::New);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentNew));
+#else
   action->setIcon(QIcon::fromTheme("document-new"));
+#endif
   m_menuBuilder->addAction(path, action, 999);
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::newMolecule);
   // Open
   action = new QAction(tr("&Open…"), this);
   action->setShortcut(QKeySequence::Open);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentOpen));
+#else
   action->setIcon(QIcon::fromTheme("document-open"));
+#endif
   m_menuBuilder->addAction(path, action, 998);
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::importFile);
@@ -2061,17 +2074,27 @@ void MainWindow::buildMenu()
   action = new QAction("", this);
   action->setSeparator(true);
   m_menuBuilder->addAction(path, action, 980);
+
   // Save
   action = new QAction(tr("&Save"), this);
   action->setShortcut(QKeySequence::Save);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentSave));
+#else
   action->setIcon(QIcon::fromTheme("document-save"));
+#endif
   m_menuBuilder->addAction(path, action, 965);
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::saveFile);
+
   // Save As
   action = new QAction(tr("Save &As…"), this);
   action->setShortcut(QKeySequence::SaveAs);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentSaveAs));
+#else
   action->setIcon(QIcon::fromTheme("document-save-as"));
+#endif
   m_menuBuilder->addAction(path, action, 960);
   m_fileToolBar->addAction(action);
   connect(action, SIGNAL(triggered()), SLOT(saveFileAs()));
@@ -2117,7 +2140,9 @@ void MainWindow::buildMenu()
   for (int i = 0; i < 10; ++i) {
     action = new QAction(QString::number(i), this);
     m_actionRecentFiles.push_back(action);
-#ifndef Q_OS_MAC
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentOpenRecent));
+#else
     action->setIcon(QIcon::fromTheme("document-open-recent"));
 #endif
     action->setVisible(false);
@@ -2132,10 +2157,19 @@ void MainWindow::buildMenu()
   QStringList editPath;
   editPath << tr("&Edit");
   m_undo = new QAction(tr("&Undo"), this);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  m_undo->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::EditUndo));
+#else
   m_undo->setIcon(QIcon::fromTheme("edit-undo"));
+#endif
   m_undo->setShortcut(QKeySequence::Undo);
+
   m_redo = new QAction(tr("&Redo"), this);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  m_redo->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::EditRedo));
+#else
   m_redo->setIcon(QIcon::fromTheme("edit-redo"));
+#endif
   m_redo->setShortcut(QKeySequence::Redo);
 
   m_copyImage = new QAction(tr("&Copy Graphics"), this);
@@ -2209,9 +2243,7 @@ void MainWindow::buildMenu()
   QStringList helpPath;
   helpPath << tr("&Help");
   auto* about = new QAction(tr("&About"), this);
-#ifndef Q_OS_MAC
   about->setIcon(QIcon::fromTheme("help-about"));
-#endif
   m_menuBuilder->addAction(helpPath, about, 500);
   connect(about, &QAction::triggered, this, &MainWindow::showAboutDialog);
 
@@ -2401,9 +2433,6 @@ bool MainWindow::saveFileIfNeeded()
     msgBox.setInformativeText(
       tr("Your changes will be lost if you don't save them."));
     msgBox.setDefaultButton(QMessageBox::Save);
-#ifdef Q_OS_MAC
-//    msgBox.setWindowModality(Qt::WindowModal);
-#endif
 
     // OK, now add shortcuts for save and discard
     msgBox.button(QMessageBox::Save)

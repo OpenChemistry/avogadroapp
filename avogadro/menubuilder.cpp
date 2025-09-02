@@ -6,6 +6,7 @@
 #include "menubuilder.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QOperatingSystemVersion>
 #include <QtWidgets/QMenuBar>
 
 #include <algorithm>
@@ -46,13 +47,33 @@ int floor100(int x)
 }
 }
 
-MenuBuilder::MenuBuilder() {}
+MenuBuilder::MenuBuilder()
+{
+#ifdef Q_OS_MAC
+  bool oldQtVersion = true;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  oldQtVersion = false;
+#endif
+  auto currentOS = QOperatingSystemVersion::current();
+  if (oldQtVersion || currentOS.majorVersion() < 26) {
+    // If we're on Mac, check if we're on Tahoe or later.
+    if (currentOS.majorVersion() < 26)
+      m_showIcons = false;
+  }
+#endif
+}
 
 void MenuBuilder::addAction(const QStringList& pathList, QAction* action,
                             int priority)
 {
   QString path(pathList.join("|"));
   if (m_menuActions.contains(path)) {
+#ifdef Q_OS_MAC
+    // If we're on Mac, don't show icons by default
+    if (!m_showIcons) {
+      action->setIcon(QIcon());
+    }
+#endif
     m_menuActions[path].append(action);
   } else {
     QList<QAction*> list;
