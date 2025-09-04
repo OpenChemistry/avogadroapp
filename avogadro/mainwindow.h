@@ -1,23 +1,13 @@
 /******************************************************************************
-
   This source file is part of the Avogadro project.
-
-  Copyright 2012-2016 Kitware, Inc.
-
-  This source code is released under the New BSD License, (the "License").
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-
+  This source code is released under the 3-Clause BSD License, (see "LICENSE").
 ******************************************************************************/
 
 #ifndef AVOGADRO_MAINWINDOW_H
 #define AVOGADRO_MAINWINDOW_H
 
 #include <QtCore/QStringList>
+#include <QtCore/QVariantMap>
 #include <QtWidgets/QMainWindow>
 
 #ifdef QTTESTING
@@ -27,9 +17,10 @@ class pqTestUtility;
 class QProgressDialog;
 class QThread;
 class QTreeView;
+class QNetworkAccessManager;
+class QNetworkReply;
 
 namespace Ui {
-class MainWindow;
 class AboutDialog;
 }
 
@@ -55,8 +46,12 @@ class Molecule;
 class MoleculeModel;
 class MultiViewWidget;
 class RWMolecule;
+class LayerModel;
 }
 
+#ifdef _3DCONNEXION
+class TDxController;
+#endif
 /**
  * @class MainWindow
  * @author Marcus D. Hanwell
@@ -96,6 +91,27 @@ public slots:
    */
   bool openFile(const QString& fileName, Io::FileFormat* reader = nullptr);
 
+  void exportGraphics(QString fileName);
+
+  /**
+   * Export a file, using the full selection of formats capable of writing.
+   * The format will be guessed based on the filename extension.
+   * If @a async is true (default), the file is saved asynchronously.
+   * @return If @a async is true, this function returns true if a suitable
+   * writer was found (not if the write was successful). If @a async is
+   * false, the return value indicates whether or not the file was written
+   * successfully.
+   */
+  bool exportFile(const QString& fileName, bool async = true);
+
+  /**
+   * Export a file, using the full selection of formats capable of writing.
+   * Will use @a format to determine the file format to use.
+   * @return String-representation of the exported file, or an empty string if
+   * the export failed.
+   */
+  std::string exportString(const std::string& format);
+
   /**
    * Move @a fileName as a plugin script (i.e. put it in the correct dir)
    */
@@ -120,6 +136,24 @@ public:
    */
   void readSettings();
 
+  /**
+   * Set the list of possible translations
+   */
+  void setTranslationList(const QStringList& list, const QStringList& codes)
+  {
+    m_translationList = list;
+    m_localeCodes = codes;
+  }
+
+  /**
+   * Handle script commands
+   * @param command The command to execute
+   * @param options The options to the command
+   *
+   * @return True if the command was handled, false otherwise
+   */
+  bool handleCommand(const QString& command, const QVariantMap& options);
+
 signals:
   /**
    * Emitted when the active molecule in the application has changed.
@@ -130,10 +164,16 @@ protected:
   void closeEvent(QCloseEvent* event);
 
   // Handle drag and drop -- accept files dragged on the window
-  void dragEnterEvent(QDragEnterEvent *event);
-  void dropEvent(QDropEvent *event);
+  void dragEnterEvent(QDragEnterEvent* event);
+  void dropEvent(QDropEvent* event);
 
 protected slots:
+
+  /**
+   * Set the preferred locale
+   */
+  void setLocale(const QString& locale);
+
   /**
    * Slot provided for extensions to indicate a molecule is ready to be read in.
    * This slot will then pass a molecule to the extension for the data to be
@@ -170,7 +210,7 @@ protected slots:
   /**
    * Save the current molecule to its current fileName. If it is not a standard
    * format, offer to export and warn about possible data loss.
-   * If @a async is true (default), the file is loaded asynchronously.
+   * If @a async is true (default), the file is saved asynchronously.
    * @return If @a async is true, this function returns true if a suitable
    * writer was found (not if the write was successful). If @a async is
    * false, the return value indicates whether or not the file was written
@@ -181,7 +221,7 @@ protected slots:
   /**
    * Prompt for a file location, and attempt to save the active molecule to the
    * specified location.
-   * If @a async is true (default), the file is loaded asynchronously.
+   * If @a async is true (default), the file is saved asynchronously.
    * @return If @a async is true, this function returns true if a suitable
    * writer was found (not if the write was successful). If @a async is
    * false, the return value indicates whether or not the file was written
@@ -191,7 +231,7 @@ protected slots:
 
   /**
    * Export a file, using the full selection of formats capable of writing.
-   * If @a async is true (default), the file is loaded asynchronously.
+   * If @a async is true (default), the file is saved asynchronously.
    * @return If @a async is true, this function returns true if a suitable
    * writer was found (not if the write was successful). If @a async is
    * false, the return value indicates whether or not the file was written
@@ -202,7 +242,7 @@ protected slots:
   /**
    * If specified, use the FileFormat @a writer to save the file. This method
    * takes ownership of @a writer and will delete it before returning.
-   * If @a async is true (default), the file is loaded asynchronously.
+   * If @a async is true (default), the file is saved asynchronously.
    * @return If @a async is true, this function returns true if the write begins
    * successfully (not if the writer completes). If @a async is
    * false, the return value indicates whether or not the file was written
@@ -222,10 +262,12 @@ protected slots:
    * @param displayTypes A list of
    */
   void setActiveDisplayTypes(QStringList displayTypes);
+  void setDisabledDisplayTypes(QStringList displayTypes);
 
   void undoEdit();
   void redoEdit();
   void activeMoleculeEdited();
+  void refreshDisplayTypes();
 
 #ifdef QTTESTING
 protected slots:
@@ -237,6 +279,26 @@ protected slots:
 
 private slots:
   void showAboutDialog();
+
+  void showLanguageDialog();
+
+  void openURL(const QString& url);
+
+  void openForum();
+
+  void openWebsite();
+
+  void openBugReport();
+
+  void openFeatureRequest();
+
+  void checkUpdate();
+
+  void finishUpdateRequest(QNetworkReply*);
+
+  void registerToolCommand(QString command, QString description);
+
+  void registerExtensionCommand(QString command, QString description);
 
   /**
    * @brief Register file formats from extensions when ready.
@@ -300,6 +362,11 @@ private slots:
   void moleculeActivated(const QModelIndex& index);
 
   /**
+   * @brief Change the active layer
+   */
+  void layerActivated(const QModelIndex& index);
+
+  /**
    * @brief Change the configuration dialog to reflect active scene item.
    */
   void sceneItemActivated(const QModelIndex& index);
@@ -309,10 +376,17 @@ private slots:
    */
   void viewActivated(QWidget* widget);
 
+  QImage renderToImage(const QSize& size);
+
   void exportGraphics();
+
+  void copyGraphics();
 
   void setBackgroundColor();
 
+  void setRenderingSettings();
+
+  // void setFogColor();
   void setProjectionOrthographic();
 
   void setProjectionPerspective();
@@ -321,11 +395,16 @@ private:
   QtGui::Molecule* m_molecule;
   QtGui::RWMolecule* m_rwMolecule;
   QtGui::MoleculeModel* m_moleculeModel;
+  QtGui::LayerModel* m_layerModel;
+  QtGui::ScenePlugin* m_activeScenePlugin;
   bool m_queuedFilesStarted;
   QStringList m_queuedFiles;
 
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
+
+  QStringList m_translationList;
+  QStringList m_localeCodes;
 
   MenuBuilder* m_menuBuilder;
 
@@ -344,26 +423,39 @@ private:
 
   QtGui::MultiViewWidget* m_multiViewWidget;
   QTreeView* m_sceneTreeView;
+  QTreeView* m_layerTreeView;
   QTreeView* m_moleculeTreeView;
   QDockWidget* m_toolDock;
   QDockWidget* m_viewDock;
+  QDockWidget* m_sceneDock;
+  QDockWidget* m_layerDock;
+  QDockWidget* m_moleculeDock;
   QList<QtGui::ToolPlugin*> m_tools;
   QList<QtGui::ExtensionPlugin*> m_extensions;
+  // map from script commands to tools and extensions
+  QMap<QString, QString> m_toolCommandMap;
+  QMap<QString, QtGui::ExtensionPlugin*> m_extensionCommandMap;
+  // used for help - provide description for a command
+  QMap<QString, QString> m_commandDescriptionsMap;
 
   QAction* m_undo;
   QAction* m_redo;
+  QAction* m_copyImage;
   QAction* m_viewPerspective;
   QAction* m_viewOrthographic;
 
   ViewFactory* m_viewFactory;
+
+  QNetworkAccessManager* m_network = nullptr;
+#ifdef _3DCONNEXION
+  TDxController* m_TDxController;
+#endif
 
 #ifdef QTTESTING
   pqTestUtility* m_testUtility;
   QString m_testFile;
   bool m_testExit;
 #endif
-
-  Ui::MainWindow* m_ui; // used for the default menu bar
 
   /**
    * Set up the main window widgets, connect signals and slots, etc.

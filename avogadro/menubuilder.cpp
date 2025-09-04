@@ -1,23 +1,15 @@
 /******************************************************************************
-
   This source file is part of the Avogadro project.
-
-  Copyright 2013 Kitware, Inc.
-
-  This source code is released under the New BSD License, (the "License").
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-
+  This source code is released under the 3-Clause BSD License, (see "LICENSE").
 ******************************************************************************/
 
 #include "menubuilder.h"
 
 #include <QtCore/QDebug>
 #include <QtWidgets/QMenuBar>
+
+#include <algorithm>
+#include <utility>
 
 namespace Avogadro {
 
@@ -29,7 +21,7 @@ namespace {
  */
 struct PriorityText
 {
-  PriorityText(const QString& string, int pri) : text(string), priority(pri) {}
+  PriorityText(QString  string, int pri) : text(std::move(string)), priority(pri) {}
 
   QString text;
   int priority;
@@ -176,7 +168,7 @@ void MenuBuilder::buildMenu(QMenu* menu, const QString& path)
     }
   }
 
-  //  qSort(actionText.begin(), actionText.end(), lessThan);
+  std::sort(actionText.begin(), actionText.end(), lessThan);
 
   // When an action's priority is below this value, insert a separator.
   // Separators are inserted as needed at multiples of 100.
@@ -209,7 +201,7 @@ void MenuBuilder::buildMenu(QMenu* menu, const QString& path)
         if (action->text() == text.text) {
           // build the new submenu, insert,
           // then remove the placeholder
-          QMenu* subMenu = new QMenu(text.text, menu);
+          auto* subMenu = new QMenu(text.text, menu);
           buildMenu(subMenu, submenuMap[text.text]);
           menu->insertMenu(action, subMenu);
           menu->removeAction(action);

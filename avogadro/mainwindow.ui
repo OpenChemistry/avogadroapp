@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>576</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -79,10 +79,10 @@
   </widget>
   <action name="actionOpen">
    <property name="text">
-    <string>&amp;Open...</string>
+    <string>&amp;Open…</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+O</string>
+    <string comment="File | Open">Ctrl+O</string>
    </property>
   </action>
   <action name="actionOpenTool">
@@ -95,7 +95,7 @@
     <string>&amp;Quit</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Q</string>
+    <string comment="File | Quit">Ctrl+Q</string>
    </property>
    <property name="menuRole">
     <enum>QAction::QuitRole</enum>
@@ -121,7 +121,7 @@
     <string>&amp;New</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+N</string>
+    <string comment="File | New">Ctrl+N</string>
    </property>
   </action>
   <action name="actionNewTool">
@@ -134,7 +134,7 @@
     <string>&amp;Close</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+W</string>
+    <string comment="File | Close">Ctrl+W</string>
    </property>
   </action>
   <action name="actionCloseTool">
@@ -147,7 +147,7 @@
     <string>&amp;Save</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string comment="File | Save">Ctrl+S</string>
    </property>
   </action>
   <action name="actionSaveTool">
@@ -157,32 +157,15 @@
   </action>
   <action name="actionSaveAs">
    <property name="text">
-    <string>Save &amp;As...</string>
+    <string>Save &amp;As…</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+S</string>
+    <string comment="File | Save As">Ctrl+Shift+S</string>
    </property>
   </action>
   <action name="actionRevert">
    <property name="text">
     <string>Revert To Saved</string>
-   </property>
-  </action>
-  <action name="actionExportGraphics">
-   <property name="text">
-    <string>&amp;Graphics...</string>
-   </property>
-  </action>
-  <action name="actionFullScreen">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/view-fullscreen.png</normaloff>:/icons/view-fullscreen.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Full Screen Mode</string>
-   </property>
-   <property name="shortcut">
-    <string>Esc</string>
    </property>
   </action>
   <action name="actionSetBackgroundColor">
@@ -191,7 +174,7 @@
      <normaloff>:/icons/fill-color.png</normaloff>:/icons/fill-color.png</iconset>
    </property>
    <property name="text">
-    <string>Set &amp;Background Color...</string>
+    <string>Set &amp;Background Color…</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -211,7 +194,7 @@
     <string>&amp;Undo</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Z</string>
+    <string comment="Undo">Ctrl+Z</string>
    </property>
   </action>
   <action name="actionRedo">
@@ -223,28 +206,7 @@
     <string>&amp;Redo</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+Z</string>
-   </property>
-  </action>
-  <action name="actionNewView">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/tab-new.png</normaloff>:/icons/tab-new.png</iconset>
-   </property>
-   <property name="text">
-    <string>New View</string>
-   </property>
-  </action>
-  <action name="actionCloseView">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/tab-close.png</normaloff>:/icons/tab-close.png</iconset>
-   </property>
-   <property name="text">
-    <string>Close View</string>
+    <string comment="Redo">Ctrl+Shift+Z</string>
    </property>
   </action>
   <action name="actionCenter">
@@ -270,7 +232,7 @@
     <string>Paste</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+V</string>
+    <string comment="Paste">Ctrl+V</string>
    </property>
   </action>
   <action name="actionCopy">
@@ -278,7 +240,7 @@
     <string>Copy</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+C</string>
+    <string comment="Copy">Ctrl+C</string>
    </property>
   </action>
   <action name="actionCut">
@@ -286,7 +248,7 @@
     <string>Cut</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+X</string>
+    <string comment="Cut">Ctrl+X</string>
    </property>
   </action>
   <action name="actionClear">
@@ -299,7 +261,7 @@
     <string>Select All</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+A</string>
+    <string comment="Select All">Ctrl+A</string>
    </property>
   </action>
   <action name="actionSelect_None">
@@ -307,19 +269,7 @@
     <string>Select None</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+A</string>
-   </property>
-  </action>
-  <action name="configureAvogadroAction">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/configure.png</normaloff>:/icons/configure.png</iconset>
-   </property>
-   <property name="text">
-    <string>Configure Avogadro...</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::PreferencesRole</enum>
+    <string comment="Select None">Ctrl+Shift+A</string>
    </property>
   </action>
   <action name="actionTutorials">
@@ -328,31 +278,6 @@
    </property>
    <property name="text">
     <string>Tutorials</string>
-   </property>
-  </action>
-  <action name="actionDuplicateView">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/tab-duplicate.png</normaloff>:/icons/tab-duplicate.png</iconset>
-   </property>
-   <property name="text">
-    <string>Duplicate View</string>
-   </property>
-  </action>
-  <action name="actionDisplayAxes">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Display Axes</string>
-   </property>
-  </action>
-  <action name="actionDebugInformation">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Debug Information</string>
    </property>
   </action>
   <action name="actionAvogadro_Help">
@@ -381,107 +306,6 @@
   <action name="actionAvogadro_Website">
    <property name="text">
     <string>Avogadro Website</string>
-   </property>
-  </action>
-  <action name="pluginManagerAction">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/preferences-plugin.png</normaloff>:/icons/preferences-plugin.png</iconset>
-   </property>
-   <property name="text">
-    <string>Plugin Manager...</string>
-   </property>
-  </action>
-  <action name="projectTreeEditorAction">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/view-list-tree.png</normaloff>:/icons/view-list-tree.png</iconset>
-   </property>
-   <property name="text">
-    <string>Project Tree Editor...</string>
-   </property>
-  </action>
-  <action name="actionDetachView">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/icons/tab-detach.png</normaloff>:/icons/tab-detach.png</iconset>
-   </property>
-   <property name="text">
-    <string>Detach View</string>
-   </property>
-  </action>
-  <action name="actionImport_File">
-   <property name="text">
-    <string>Molecule File...</string>
-   </property>
-  </action>
-  <action name="actionQuickRender">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Use Quick Render</string>
-   </property>
-  </action>
-  <action name="actionExportGL2PS">
-   <property name="text">
-    <string>&amp;Vector Graphics...</string>
-   </property>
-  </action>
-  <action name="actionDisplayUnitCellAxes">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Display Unit Cell Axes</string>
-   </property>
-  </action>
-  <action name="actionAllMolecules">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>All Molecules in File...</string>
-   </property>
-  </action>
-  <action name="actionResetDisplayTypes">
-   <property name="text">
-    <string>Reset Display Types</string>
-   </property>
-  </action>
-  <action name="actionPerspective">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Perspective</string>
-   </property>
-  </action>
-  <action name="actionOrthographic">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Orthographic</string>
-   </property>
-  </action>
-  <action name="actionSMILES">
-   <property name="text">
-    <string>SMILES</string>
-   </property>
-  </action>
-  <action name="actionInChI">
-   <property name="text">
-    <string>InChI</string>
-   </property>
-   <property name="toolTip">
-    <string>IUPAC InChI identifier</string>
    </property>
   </action>
   <action name="actionAvogadro_Forum">

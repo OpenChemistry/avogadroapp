@@ -1,29 +1,21 @@
 /******************************************************************************
-
- This source file is part of the Avogadro project.
-
- Copyright 2013 Kitware, Inc.
-
- This source code is released under the New BSD License, (the "License").
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
-
- ******************************************************************************/
+  This source file is part of the Avogadro project.
+  This source code is released under the 3-Clause BSD License, (see "LICENSE").
+******************************************************************************/
 
 #include "aboutdialog.h"
 #include "avogadroappconfig.h"
 #include "ui_aboutdialog.h"
+
+#include <QSslSocket>
 
 #include <avogadro/core/version.h>
 
 namespace Avogadro {
 
 AboutDialog::AboutDialog(QWidget* parent_)
-  : QDialog(parent_), m_ui(new Ui::AboutDialog)
+  : QDialog(parent_)
+  , m_ui(new Ui::AboutDialog)
 {
   m_ui->setupUi(this);
 
@@ -31,9 +23,18 @@ AboutDialog::AboutDialog(QWidget* parent_)
                "<span style=\" font-size:%1pt; font-weight:600;\">%2</span>"
                "</p></body></html>");
 
+  // Add the labels
+  m_ui->versionLabel->setText(html.arg("20").arg(tr("Version:")));
+  m_ui->libsLabel->setText(html.arg("10").arg(tr("Avogadro Library Version:")));
+  m_ui->qtVersionLabel->setText(html.arg("10").arg(tr("Qt Version:")));
+  m_ui->sslVersionLabel->setText(html.arg("10").arg(tr("SSL Version:")));
+
+  // Add the version numbers
   m_ui->version->setText(html.arg("20").arg(AvogadroApp_VERSION));
   m_ui->libsVersion->setText(html.arg("10").arg(version()));
   m_ui->qtVersion->setText(html.arg("10").arg(qVersion()));
+  m_ui->sslVersion->setText(
+    html.arg("10").arg(QSslSocket::sslLibraryVersionString()));
 
   // Add support for a 2x replacement (mainly Mac OS X retina at this point).
   if (window()->devicePixelRatio() == 2) {

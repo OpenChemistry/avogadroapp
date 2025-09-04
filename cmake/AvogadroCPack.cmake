@@ -4,7 +4,7 @@ set(CPACK_PACKAGE_VERSION_MINOR ${AvogadroApp_VERSION_MINOR})
 set(CPACK_PACKAGE_VERSION_PATCH ${AvogadroApp_VERSION_PATCH})
 set(CPACK_PACKAGE_VERSION ${AvogadroApp_VERSION})
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "Avogadro2")
-set(CPACK_PACKAGE_VENDOR "http://openchemistry.org/")
+set(CPACK_PACKAGE_VENDOR "https://avogadro.cc/")
 set(CPACK_PACKAGE_DESCRIPTION
   "An advanced molecule editor and visualization application.")
 
@@ -15,6 +15,13 @@ if(APPLE)
   set(CPACK_PACKAGE_ICON
     "${AvogadroApp_SOURCE_DIR}/avogadro/icons/avogadro.icns")
   set(CPACK_BUNDLE_ICON "${CPACK_PACKAGE_ICON}")
+
+  if(${CMAKE_VERSION} VERSION_GREATER "3.19.0")
+    # add the codesign options to the package
+    configure_file("${CMAKE_CURRENT_LIST_DIR}/deploy-osx.cmake.in" "${AvogadroApp_BINARY_DIR}/deploy-osx.cmake" @ONLY)
+    set(CPACK_PRE_BUILD_SCRIPTS "${AvogadroApp_BINARY_DIR}/deploy-osx.cmake")
+  endif()
+
 else()
   set(CPACK_RESOURCE_FILE_LICENSE "${AvogadroApp_SOURCE_DIR}/LICENSE")
 endif()
@@ -35,6 +42,7 @@ else()
   option(INSTALL_BUNDLE_FILES "Add install rules to bundle files" OFF)
 endif()
 if(INSTALL_BUNDLE_FILES)
+  include(BundleUtilities)
   # First the AvogadroLibs files that are not detected.
   find_package(AvogadroLibs REQUIRED NO_MODULE)
   install(DIRECTORY "${AvogadroLibs_LIBRARY_DIR}/avogadro2"
@@ -43,20 +51,47 @@ if(INSTALL_BUNDLE_FILES)
   install(DIRECTORY "${AvogadroLibs_DATA_DIR}/avogadro2"
     DESTINATION ${INSTALL_DATA_DIR})
 
+  # grab OpenSSL for Windows
+  if(WIN32)
+    find_package(OpenSSL REQUIRED)
+    if (DEFINED OPENSSL_FOUND)
+      set(OPENSSL_ROOT_DIR "${OPENSSL_INCLUDE_DIR}/.." CACHE PATH "OpenSSL root directory")
+      message(STATUS "Using OpenSSL from ${OPENSSL_ROOT_DIR}")
+      file(GLOB OPENSSL_DLL ${OPENSSL_ROOT_DIR}/bin/*.dll)
+      install(FILES ${OPENSSL_DLL} DESTINATION ${INSTALL_RUNTIME_DIR})
+    endif()
+  endif()
+
+  # create a list of exe to run fixup_bundle on
+  set(BUNDLE_EXE_LIST "")
+
+  # look for genXrd
+  find_program(GENXRD_EXE genXrdPattern)
+  if (GENXRD_EXE)
+    list(APPEND BUNDLE_EXE_LIST ${GENXRD_EXE})
+    install(PROGRAMS ${GENXRD_EXE} DESTINATION ${INSTALL_RUNTIME_DIR})
+  endif()
+
+  # look for yaehmop (eht_bind)
+  find_program(EHT_BIND_EXE eht_bind)
+  if(EHT_BIND_EXE)
+    list(APPEND BUNDLE_EXE_LIST ${EHT_BIND_EXE})
+    install(PROGRAMS ${EHT_BIND_EXE} DESTINATION ${INSTALL_RUNTIME_DIR})
+  endif()
+
   find_program(OBABEL_EXE obabel)
   if(OBABEL_EXE)
     find_program(OBMM_EXE obmm)
-    install(FILES ${OBABEL_EXE} ${OBMM_EXE} DESTINATION ${INSTALL_RUNTIME_DIR}
-      PERMISSIONS
-        OWNER_READ OWNER_EXECUTE
-        GROUP_READ GROUP_EXECUTE
-        WORLD_READ WORLD_EXECUTE)
+    list(APPEND BUNDLE_EXE_LIST ${OBABEL_EXE} ${OBMM_EXE})
+    install(PROGRAMS ${OBABEL_EXE} ${OBMM_EXE} DESTINATION ${INSTALL_RUNTIME_DIR})
     get_filename_component(BABEL_DIR "${OBABEL_EXE}" PATH)
     if(WIN32)
       file(GLOB BABEL_PLUGINS ${BABEL_DIR}/*.obf)
+      file(GLOB BABEL_LIB ${BABEL_DIR}/openbabel*.dll)
       install(
         FILES
           ${BABEL_PLUGINS}
+          ${BABEL_LIB}
           ${BABEL_DIR}/inchi.dll
           ${BABEL_DIR}/libxml2.dll
         DESTINATION ${INSTALL_RUNTIME_DIR})
@@ -64,7 +99,8 @@ if(INSTALL_BUNDLE_FILES)
         DESTINATION ${INSTALL_RUNTIME_DIR})
     elseif(APPLE)
       file(GLOB LIBINCHI ${BABEL_DIR}/../lib/libinchi.*)
-      install(FILES ${LIBINCHI} DESTINATION ${INSTALL_LIBRARY_DIR}/../Frameworks/)
+      file(GLOB BABEL_LIB ${BABEL_DIR}/../lib/libopenbabel.*)
+      install(FILES ${LIBINCHI} ${BABEL_LIB} DESTINATION ${INSTALL_LIBRARY_DIR}/../Frameworks/)
       install(DIRECTORY "${BABEL_DIR}/../lib/openbabel"
         DESTINATION ${INSTALL_LIBRARY_DIR})
       install(DIRECTORY "${BABEL_DIR}/../share/openbabel"

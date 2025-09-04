@@ -1,276 +1,118 @@
 app-id: org.openchemistry.Avogadro2
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
-runtime-version: '5.15'
+runtime-version: "6.8"
 command: avogadro2
-rename-desktop-file: avogadro2.desktop
+appdata-license: BSD-3-Clause AND GPL-2.0-only
 finish-args:
-  - --share=ipc
   - --socket=wayland
-  - --socket=fallback-x11
-  - --device=dri
-  - --filesystem=home
-  # Molequeue enjoy its life in the menu tray.
-  - --talk-name=org.freedesktop.Notifications
-  - --talk-name=org.kde.StatusNotifierWatcher
-  # Allow Avogadro to communicate with Molequeue.
-  - --share=network
-  - --talk-name=org.freedesktop.DBus
-  - --talk-name=org.freedesktop.DBus.Proprieties
-  - --system-talk-name=org.freedesktop.DBus
-  - --system-talk-name=org.freedesktop.DBus.Proprieties
+  - --socket=fallback-x11  # To support X11
+  - --share=ipc  # Bad performance on X11 without
+  - --device=dri  # OpenGL rendering
+  - --share=network  # For plugin downloads
 cleanup:
-  - /include
   - /lib/cmake
-  - /share/doc
-  - "*.la"
-  - "*.a"
+  - '*.la'
+  - '*.a'
 
 modules:
-  - shared-modules/glew/glew.json
+  # Needed to compile glew apparently
   - shared-modules/glu/glu-9.json
 
-  - name: python3-numpy
-    buildsystem: simple
-    build-commands:
-      - python3 setup.py install --prefix=${FLATPAK_DEST} --root=/ --optimize=1
-    sources:
-      - type: archive
-        url: https://github.com/numpy/numpy/releases/download/v1.20.2/numpy-1.20.2.tar.gz
-        sha256: c049f410c78e76ffb0af830a8afbdf8baac09897b4152b97b1a3b8345ee338ff
-
-  - name: Eigen3
-    buildsystem: cmake-ninja
-    builddir: true
-    sources:
-      - type: archive
-        url: https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.bz2
-        sha256: 0fa5cafe78f66d2b501b43016858070d52ba47bd9b1016b0165a7b8e04675677
-
-  - name: hdf5
+  # Open Babel is broken without patched rapidjson
+  - name: rapidjson
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTING:BOOL=OFF
-      - -DHDF5_BUILD_EXAMPLES:BOOL=OFF
+      - -DRAPIDJSON_BUILD_DOC=OFF
+      - -DRAPIDJSON_BUILD_EXAMPLES=OFF
+      - -DRAPIDJSON_BUILD_TESTS=OFF
     sources:
-      - type: archive
-        url: https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.5/src/hdf5-1.10.5.tar.bz2
-        sha256: 68d6ea8843d2a106ec6a7828564c1689c7a85714a35d8efafa2fee20ca366f44
+      - type: git
+        url: https://github.com/Tencent/rapidjson.git
+        # Commit used was simply most recent at the time of writing
+        # Would rather use 4d6cb08189cf7336821f04090b612baa2ca6a90d (same commit as openSUSE
+        # Tumbleweed) as known to be good, but older commits like that don't seem to compile
+        commit: 7c73dd7de7c4f14379b781418c6e947ad464c818
 
-  - name: libmsym
-    buildsystem: cmake
+  - name: avogadro2
+    buildsystem: cmake-ninja
+    builddir: true  # Build outside of source tree, just like other builds
+    no-make-install: true  # Superbuild doesn't have `install` command defined
     config-opts:
-      - -DCMAKE_INSTALL_PREFIX:PATH=/app
-      - -DMSYM_BUILD_PYTHON:BOOL=ON
-      - -DBUILD_SHARED_LIBS:BOOL=ON
+      # Match GitHub builds as much as possible, which generally means using defaults
+      - -DCMAKE_BUILD_TYPE=Debug
+      - -DUSE_VTK=ON
+      - -DBUILD_GPL_PLUGINS=ON
+      - -DBUILD_MOLEQUEUE=OFF
+      - -DQT_VERSION=6
+      - -DDOWNLOAD_TO_SOURCE_DIR=ON
     sources:
-      - type: archive
-        url: https://github.com/mcodev31/libmsym/archive/refs/tags/v0.2.3-paper.tar.gz
-        sha256: 3741ebe163cf40696570d6b62e4834ca587d43dcac9de713994cc5e2960fb8fd
+      # Avogadro stuff all already collected together as part of GitHub Actions
+      # This means that if using this to build the Flatpak locally, the openchemistry repo and
+      # its submodules must be cloned into ./openchemistry in advance of running flatpak-builder
+      # with this manifest
+      - type: dir
+        path: openchemistry
 
-  - name: pybind11    
-    buildsystem: simple
-    build-commands:
-      - python3 setup.py build
-      - cmake -DPYBIND11_INSTALL=ON -DPYBIND11_TEST=OFF -DCMAKE_INSTALL_INCLUDEDIR:PATH=${FLATPAK_DEST}/include -DCMAKE_INSTALL_LIBDIR:PATH=${FLATPAK_DEST}/lib -DCMAKE_INSTALL_DATAROOTDIR:PATH=${FLATPAK_DEST}/share .
-      - python3 setup.py install --prefix=${FLATPAK_DEST}
-      - cmake --build .
-      - cmake --install .
-    sources:
+      # Now fetch third-party stuff where the source is expected in `openchemistry/thirdparty`
+      # VTK
       - type: archive
-        url: https://github.com/pybind/pybind11/archive/v2.6.2.tar.gz
-        sha256: 8ff2fff22df038f5cd02cea8af56622bc67f5b64534f1b83b9f133b8366acff2
-
-  - name: mmtf-cpp
-    buildsystem: cmake
-    config-opts:
-      - -DBUILD_TESTS:BOOL=OFF
-      - -Dmmtf_build_local:BOOL=ON
-      - -Dmmtf_build_examples:BOOL=OFF
-    sources:
-      - type: archive
-        url: https://github.com/rcsb/mmtf-cpp/archive/refs/tags/v1.0.0.tar.gz
-        sha256: 881f69c4bb56605fa63fd5ca50842facc4947f686cbf678ad04930674d714f40
-
-  - name: msgpack
-    buildsystem: cmake
-    config-opts:
-      - -DCMAKE_INSTALL_PREFIX:PATH=/app
-      - -DBUILD_SHARED_LIBS:BOOL=ON
-      - -DMSGPACK_ENABLE_STATIC:BOOL=OFF
-      - -DCMAKE_INSTALL_LIBDIR:PATH=lib
-      - -DMSGPACK_BUILD_EXAMPLES:BOOL=OFF
-      - -DMSGPACK_CXX11:BOOL=ON
-    sources:
-      - type: archive
+        url: https://www.vtk.org/files/release/9.3/VTK-9.3.0.tar.gz
+        sha256: fdc7b9295225b34e4fdddc49cd06e66e94260cb00efee456e0f66568c9681be9
+        dest: thirdparty/VTK
+      
+      # Other third-party sources would normally be downloaded by Avogadro build on the fly
+      # Flatpaks aren't allowed network access during build so have to download source archives
+      # ahead of time to download_dir (which we've indicated using `-DDOWNLOAD_TO_SOURCE_DIR=ON`)
+      # Match order in projects.cmake
+      # glew
+      # (Should be able to use shared module but not picked up for whatever reason)
+      - type: file
+        url: https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.tgz
+        sha256: d4fc82893cfb00109578d0a1a2337fb8ca335b3ceccf97b97e5cc7f08e4353e1
+        dest: Downloads
+      # Eigen3
+      - type: file
+        url: https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+        sha256: 8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72
+        dest: Downloads
+      # OpenBabel
+      - type: file
+        url: https://github.com/openbabel/openbabel/archive/32cf131444c1555c749b356dab44fb9fe275271f.tar.gz
+        sha256: 7b471015df510b30057b8356f42729a35dfd1f4fa85f205c56bbaf3c64e85071
+        dest: Downloads
+      # spglib
+      - type: file
+        url: https://github.com/spglib/spglib/archive/v2.5.0.tar.gz
+        sha256: b6026f5e85106c0c9ee57e54b9399890d0f29982e20e96ede0428b3efbe6b914
+        dest: Downloads
+      # libarchive
+      - type: file
+        url: https://github.com/libarchive/libarchive/archive/v3.7.7.tar.gz
+        sha256: fa62384995e8aa4f5a901c184fb5c91e56a29e24c05b6881a7f8fd5bbea694d2
+        dest: Downloads
+      # msgpackc
+      - type: file
         url: https://github.com/msgpack/msgpack-c/releases/download/cpp-3.3.0/msgpack-3.3.0.tar.gz
         sha256: 6e114d12a5ddb8cb11f669f83f32246e484a8addd0ce93f274996f1941c1f07b
-
-  - name: OpenBabel
-    buildsystem: cmake
-    builddir: true
-    config-opts:
-      - -DENABLE_TESTS:BOOL=OFF
-      - -DBUILD_GUI:BOOL=OFF
-      - -DOPTIMIZE_NATIVE:BOOL=OFF
-      - -DOB_USE_PREBUILT_BINARIES:BOOL=OFF
-      - -DENABLE_VERSIONED_FORMATS:BOOL=OFF
-      - -DWITH_JSON:BOOL=OFF
-      - -DWITH_MAEPARSER:BOOL=OFF
-    sources:
-      - type: archive
-        url: https://github.com/openbabel/openbabel/releases/download/openbabel-3-1-1/openbabel-3.1.1-source.tar.bz2
-        sha256: a6ec8381d59ea32a4b241c8b1fbd799acb52be94ab64cdbd72506fb4e2270e68
-
-  - name: zeromq
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
-    sources:
-      - type: archive
-        url: https://github.com/zeromq/libzmq/releases/download/v4.3.4/zeromq-4.3.4.tar.gz
-        sha256: c593001a89f5a85dd2ddf564805deb860e02471171b3f204944857336295c3e5
-
-  - name: spglib
-    buildsystem: simple
-    ensure-writable:
-      - /lib/python3.8/site-packages/easy-install.pth
-    build-commands:
-      - cmake -DCMAKE_INSTALL_INCLUDEDIR:PATH=${FLATPAK_DEST}/include -DCMAKE_INSTALL_LIBDIR:PATH=${FLATPAK_DEST}/lib .
-      - cmake --build .
-      - cmake --install .
-      - cd python && python3 setup.py build
-      - cd python && python3 setup.py install --skip-build --force --prefix=${FLATPAK_DEST}
-    sources:
-      - type: archive
-        url: https://github.com/spglib/spglib/archive/refs/tags/v1.16.1.tar.gz
-        sha256: e90682239e4ef63b492fa4e44f7dbcde2e2fe2e688579d96b01f2730dfdf5b2e
-
-  - name: MoleQueue
-    buildsystem: simple
-    build-commands:
-      - install -Dm0644 molequeue/app/icons/molequeue.png /app/share/icons/hicolor/32x32/apps/${FLATPAK_ID}.Molequeue.png
-      - cmake -DENABLE_TESTING:BOOL=OFF -DBUILD_DOCUMENTATION:BOOL=OFF -DCMAKE_INSTALL_PREFIX:PATH=/app -Wno-dev .
-      - cmake --build .
-      - cmake --install .
-      - install -Dm0644 ${FLATPAK_ID}.Molequeue.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.Molequeue.desktop
-      - desktop-file-validate ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.Molequeue.desktop
-    sources:
-      - type: archive
-        url: https://github.com/OpenChemistry/molequeue/releases/download/0.9.0/molequeue-0.9.0.tar.bz2
-        sha256: 2825fa9645fca707796ad32967c307bec76dab4f6c305befeebeac8c7f7f2ef0
+        dest: Downloads
+      # mmtf-cpp
       - type: file
-        path: org.openchemistry.Avogadro2.Molequeue.desktop
+        url: https://github.com/rcsb/mmtf-cpp/archive/refs/tags/v1.1.0.tar.gz
+        sha256: 021173bdc1814b1d0541c4426277d39df2b629af53151999b137e015418f76c0
+        dest: Downloads
+      # libmsym
+      - type: file
+        url: https://github.com/mcodev31/libmsym/archive/refs/tags/v0.2.3-paper.tar.gz
+        sha256: 3741ebe163cf40696570d6b62e4834ca587d43dcac9de713994cc5e2960fb8fd
+        dest: Downloads
 
-  #- name: protobuf
-    #buildsystem: cmake
-    #subdir: cmake
-    #sources:
-      #- type: archive
-        #url: https://github.com/protocolbuffers/protobuf/releases/download/v3.15.6/protobuf-cpp-3.15.6.tar.gz
-        #sha256: bbdfb7455431d7d58666e8a2996d14b236718ff238eecde10646581e4c87f168
-
-  #- name: protocall-OpenChemistry 
-    #buildsystem: cmake
-    #sources:
-      #- type: git
-        #url: https://github.com/OpenChemistry/protocall
-
-    # Avogadrolibs does not build with VTK 9.0.1
-    # https://github.com/OpenChemistry/avogadrolibs/issues/516
-  #- name: VTK
-    #buildsystem: cmake
-    #builddir: true
-    #config-opts:
-    #- -DBUILD_SHARED_LIBS=ON
-    #- -DOpenGL_GL_PREFERENCE=GLVND
-    #- -DBUILD_TESTING:BOOL=OFF
-    #- -DVTK_Group_Rendering:BOOL=OFF
-    #- -DVTK_Group_StandAlone:BOOL=OFF
-    #- -DModule_vtkDomainsChemistry:BOOL=ON
-    #- -DModule_vtkViewsContext2D:BOOL=ON
-    #- -DModule_vtkChartsCore:BOOL=ON
-    #- -DModule_vtkRenderingVolumeOpenGL2:BOOL=ON
-    #- -DModule_vtkGUISupportQt:BOOL=ON
-    #- -DModule_vtkRenderingQt:BOOL=ON
-    #- -DModule_vtkViewsInfovis:BOOL=OFF
-    #- -DModule_vtkRenderingFreeTypeOpenGL2:BOOL=ON
-    #- -DVTK_USE_SYSTEM_ZLIB:BOOL=ON
-    #- -DVTK_USE_SYSTEM_EIGEN:BOOL=ON
-    #- -DVTK_BUILD_QT_DESIGNER_PLUGIN:BOOL=OFF
-    #- -DVTK_QT_VERSION:STRING=5
-    #- -DCMAKE_BUILD_TYPE=Release
-    #- -DVTK_PYTHON_VERSION:STRING=3
-    #- -DVTK_GROUP_ENABLE_Qt=YES
-    #- -DVTK_MODULE_ENABLE_VTK_GUISupportQt=YES
-    #- -DModule_vtkGUISupportQtOpenGL:BOOL=ON
-    #- -DVTK_BUILD_COMPILE_TOOLS_ONLY:BOOL=ON
-    ##- -DVTK_MODULE_ENABLE_VTK_RenderingContextOpenGL2=YES
-    #sources:
-      #- type: archive
-        #url: https://www.vtk.org/files/release/9.0/VTK-9.0.1.tar.gz
-        #sha256: 1b39a5e191c282861e7af4101eaa8585969a2de05f5646c9199a161213a622c7
-
-  - name: avogadrolibs
-    buildsystem: cmake
-    builddir: true
-    subdir: avogadrolibs
-    config-opts:
-      - -DCMAKE_BUILD_TYPE:STRING=Release
-      - -DENABLE_TRANSLATIONS:BOOL=ON
-      - -DUSE_HDF5:BOOL=ON
-      - -DUSE_PYTHON:BOOL=ON
-      - -DUSE_QT:BOOL=ON
-      - -DUSE_LIBMSYM:BOOL=ON
-      - -DUSE_SPGLIB:BOOL=ON
-      - -DUSE_MMTF:BOOL=ON
-      - -DUSE_MOLEQUEUE:BOOL=ON
-      - -DUSE_PROTOCALL:BOOL=OFF
-      - -DUSE_VTK:BOOL=OFF
-      - -DBUILD_GPL_PLUGINS:BOOL=ON
-      - -DBUILD_STATIC_PLUGINS:BOOL=ON
-      - -Dlibmsym_DIR:PATH=${FLATPAK_DEST}/lib/cmake/libmsym
-      - -Dpybind11_DIR:PATH=${FLATPAK_DEST}/lib/python3.8/site-packages/pybind11-2.6.2-py3.8.egg/pybind11/share/cmake/pybind11/
-    sources:
-      - type: git
-        url: https://github.com/OpenChemistry/avogadrolibs
-        tag: '1.94.0'
-        commit: 51edf2b873a0a2b0dc85f6f18d67b59980cc8b0d
-        dest: avogadrolibs
-      - type: archive
-        url: https://github.com/OpenChemistry/molecules/archive/refs/heads/master.zip
-        sha256: a1275e8139c2021127514abdccfb13e20b1cca0791d14459e9f50065ca566f02
-        dest: molecules
-        dest-filename: molecules.zip
-      - type: archive
-        url: https://github.com/OpenChemistry/crystals/archive/refs/heads/master.zip
-        sha256: 090e6334192ebe3e39463f903614c13fa665cb9c24c6f2f1307c69710225b83e
-        dest: crystals
-        dest-filename: crystals.zip
-
-  - name: Avogadro2
-    buildsystem: cmake
-    config-opts:
-      - -DENABLE_RPATH:BOOL=ON
-      - -DENABLE_TESTING:BOOL=OFF
-      - -DBUILD_DOCUMENTATION:BOOL=OFF
-      - -DCMAKE_BUILD_TYPE:STRING=Release
     post-install:
-      - install -Dm644 avogadro/icons/avogadro2_64.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/${FLATPAK_ID}.png
-      - install -Dm644 avogadro/icons/avogadro2_128.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png
-      - install -Dm644 avogadro/icons/avogadro2_256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
-      - install -Dm644 avogadro/icons/avogadro2_512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
-      - desktop-file-edit --set-icon=${FLATPAK_ID} ${FLATPAK_DEST}/share/applications/avogadro2.desktop
-      # Remove Education category fix Avogadro2 not appearing in menu entry, no clue why.
-      - desktop-file-edit --remove-category=Education ${FLATPAK_DEST}/share/applications/avogadro2.desktop
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
-    sources:
-      - type: git
-        url: https://github.com/OpenChemistry/avogadroapp
-        tag: '1.94.0'
-        commit: 320fa12fc73025339afec8783dad1d6bb78204ad
-      - type: file
-        path: org.openchemistry.Avogadro2.metainfo.xml
+      # Manually copy contents of prefix dir over into main build dir
+      # -a option is recursive, should preserve permissions and symlinks
+      - cp -a prefix/bin -t ${FLATPAK_DEST}/
+      - cp -a prefix/lib -t ${FLATPAK_DEST}/
+      - cp -a prefix/lib64/* -t ${FLATPAK_DEST}/lib/  # Merge with lib
+      - ln -rs ${FLATPAK_DEST}/lib ${FLATPAK_DEST}/lib64  # Add a symlink so plugins get found
+      - cp -a prefix/share -t ${FLATPAK_DEST}/

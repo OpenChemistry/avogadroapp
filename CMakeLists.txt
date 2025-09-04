@@ -1,16 +1,21 @@
-cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 
 # Use the new policy for linking to qtmain
 if(POLICY CMP0020)
 #  cmake_policy(SET CMP0020 NEW)
 endif()
 
+# Set CMP0080 to OLD for now for BundleUtilities, this needs porting to NEW.
+if(POLICY CMP0080)
+  cmake_policy(SET CMP0080 OLD)
+endif()
+
 project(AvogadroApp)
 
 set(CMAKE_MODULE_PATH ${AvogadroApp_SOURCE_DIR}/cmake)
 
-# Request C++11 standard, using new CMake variables.
-set(CMAKE_CXX_STANDARD 11)
+# Request C++17 standard, using new CMake variables.
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS False)
 # Set symbol visibility defaults for all targets.
@@ -25,7 +30,7 @@ include(DetermineVersion)
 
 # Set up our version.
 set(AvogadroApp_VERSION_MAJOR   "1")
-set(AvogadroApp_VERSION_MINOR   "94")
+set(AvogadroApp_VERSION_MINOR   "100")
 set(AvogadroApp_VERSION_PATCH   "0")
 set(AvogadroApp_VERSION
   "${AvogadroApp_VERSION_MAJOR}.${AvogadroApp_VERSION_MINOR}.${AvogadroApp_VERSION_PATCH}")
@@ -46,6 +51,12 @@ endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
+set(QT_VERSION "5" CACHE STRING "What major version of Qt")
+set(QT_VERSIONS_SUPPORTED 5 6)
+set_property(CACHE QT_VERSION PROPERTY STRINGS 5 6)
+if(NOT QT_VERSION IN_LIST QT_VERSIONS_SUPPORTED)
+  message(FATAL_ERROR "Qt version must be one of ${QT_VERSIONS_SUPPORTED}")
+endif()
 option(ENABLE_TESTING "Enable testing and building the tests." OFF)
 
 if(ENABLE_TESTING)

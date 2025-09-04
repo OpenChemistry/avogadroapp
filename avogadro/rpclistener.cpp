@@ -1,17 +1,6 @@
 /******************************************************************************
-
   This source file is part of the Avogadro project.
-
-  Copyright 2012-2013 Kitware, Inc.
-
-  This source code is released under the New BSD License, (the "License").
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-
+  This source code is released under the 3-Clause BSD License, (see "LICENSE").
 ******************************************************************************/
 
 #include "rpclistener.h"
@@ -32,22 +21,21 @@
 
 namespace Avogadro {
 
-using std::string;
 using Io::FileFormatManager;
 using QtGui::Molecule;
+using std::string;
 
 RpcListener::RpcListener(QObject* parent_)
-  : QObject(parent_), m_pingClient(nullptr)
+  : QObject(parent_)
+  , m_pingClient(nullptr)
 {
   m_rpc = new MoleQueue::JsonRpc(this);
 
   m_connectionListener =
     new MoleQueue::LocalSocketConnectionListener(this, "avogadro");
 
-  connect(
-    m_connectionListener,
-    &MoleQueue::ConnectionListener::connectionError,
-    this, &RpcListener::connectionError);
+  connect(m_connectionListener, &MoleQueue::ConnectionListener::connectionError,
+          this, &RpcListener::connectionError);
 
   m_rpc->addConnectionListener(m_connectionListener);
 
@@ -55,7 +43,7 @@ RpcListener::RpcListener(QObject* parent_)
           &RpcListener::messageReceived);
 
   // Find the main window.
-  m_window = 0;
+  m_window = nullptr;
   foreach (QWidget* widget, QApplication::topLevelWidgets())
     if ((m_window = qobject_cast<MainWindow*>(widget)))
       break;
@@ -91,8 +79,8 @@ void RpcListener::connectionError(MoleQueue::ConnectionListener::Error error,
     if (result) {
       QJsonObject request(m_pingClient->emptyRequest());
       request["method"] = QLatin1String("internalPing");
-      connect(m_pingClient, &MoleQueue::JsonRpcClient::resultReceived,
-              this, &RpcListener::receivePingResponse);
+      connect(m_pingClient, &MoleQueue::JsonRpcClient::resultReceived, this,
+              &RpcListener::receivePingResponse);
       result = m_pingClient->sendRequest(request);
     }
 
@@ -120,31 +108,9 @@ void RpcListener::receivePingResponse(const QJsonObject& response)
   if (pingSuccessful) {
     qDebug() << "Other server is alive. Not starting new instance.";
   } else {
-    QString title(tr("Error starting RPC server:"));
-    QString label(
-      tr("An error occurred while starting Avogadro's RPC listener. "
-         "This may be happen for a\nnumber of reasons:\n\t"
-         "A previous instance of Avogadro may have crashed.\n\t"
-         "A running Avogadro instance was too busy to respond.\n\n"
-         "If no other Avogadro instance is running on this machine, it "
-         "is safe to replace the dead\nserver. "
-         "Otherwise, this instance of avogadro may be started without "
-         "RPC capabilities\n(this will prevent RPC enabled applications "
-         "from communicating with Avogadro)."));
-    QStringList items;
-    items << tr("Replace the dead server with a new instance.");
-    items << tr("Start without RPC capabilities.");
-    bool ok(false);
-    QString item(
-      QInputDialog::getItem(nullptr, title, label, items, 0, false, &ok));
-
-    if (ok && item == items.first()) {
-      qDebug() << "Starting new server.";
-      m_connectionListener->stop(true);
-      m_connectionListener->start();
-    } else {
-      qDebug() << "Starting without RPC capabilities.";
-    }
+    qDebug() << "Starting new server.";
+    m_connectionListener->stop(true);
+    m_connectionListener->start();
   }
 }
 
@@ -153,76 +119,8 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
   QString method = message.method();
   QJsonObject params = message.params().toObject();
 
-  if (method == "openFile") {
-    if (m_window) {
-      // Read the supplied file.
-      string fileName = params["fileName"].toString().toStdString();
-      Molecule* molecule = new Molecule(this);
-      bool success =
-        FileFormatManager::instance().readFile(*molecule, fileName);
-      if (success) {
-        emit callSetMolecule(molecule);
-
-        // set response
-        MoleQueue::Message response = message.generateResponse();
-        response.setResult(true);
-        response.send();
-      } else {
-        delete molecule;
-
-        // send error response
-        MoleQueue::Message errorMessage = message.generateErrorResponse();
-        errorMessage.setErrorCode(-1);
-        errorMessage.setErrorMessage(
-          QString("Failed to read file: %1")
-            .arg(
-              QString::fromStdString(FileFormatManager::instance().error())));
-        errorMessage.send();
-      }
-    } else {
-      // send error response
-      MoleQueue::Message errorMessage = message.generateErrorResponse();
-      errorMessage.setErrorCode(-1);
-      errorMessage.setErrorMessage("No Active Avogadro Window");
-      errorMessage.send();
-    }
-  } else if (method == "loadMolecule") {
-    if (m_window) {
-      // get molecule data and format
-      string content = params["content"].toString().toStdString();
-      string format = params["format"].toString().toStdString();
-
-      // read molecule data
-      Molecule* molecule = new Molecule(this);
-      bool success =
-        FileFormatManager::instance().readString(*molecule, content, format);
-      if (success) {
-        emit callSetMolecule(molecule);
-
-        // send response
-        MoleQueue::Message response = message.generateResponse();
-        response.setResult(true);
-        response.send();
-      } else {
-        delete molecule;
-
-        // send error response
-        MoleQueue::Message errorMessage = message.generateErrorResponse();
-        errorMessage.setErrorCode(-1);
-        errorMessage.setErrorMessage(
-          QString("Failed to read Chemical JSON: %1")
-            .arg(
-              QString::fromStdString(FileFormatManager::instance().error())));
-        errorMessage.send();
-      }
-    } else {
-      // send error response
-      MoleQueue::Message errorMessage = message.generateErrorResponse();
-      errorMessage.setErrorCode(-1);
-      errorMessage.setErrorMessage("No Active Avogadro Window");
-      errorMessage.send();
-    }
-  } else if (method == "kill") {
+  // check for quit message first, since it doesn't require a window
+  if (method == "kill") {
     // Only allow avogadro to be killed through RPC if it was started with the
     // '--testing' flag.
     if (qApp->arguments().contains("--testing")) {
@@ -239,14 +137,109 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
         "Ignoring kill command. Start with '--testing' to enable.");
       errorMessage.send();
     }
-  } else {
+  }
+
+  // check if there's an active window
+  if (m_window == nullptr) {
+    // send error response
     MoleQueue::Message errorMessage = message.generateErrorResponse();
-    errorMessage.setErrorCode(-32601);
-    errorMessage.setErrorMessage("Method not found");
-    QJsonObject errorDataObject;
-    errorDataObject.insert("request", message.toJsonObject());
-    errorMessage.setErrorData(errorDataObject);
+    errorMessage.setErrorCode(-1);
+    errorMessage.setErrorMessage("No Active Avogadro Window");
     errorMessage.send();
+    return;
+  }
+
+  // okay, window is open
+  if (method == "openFile") {
+    // Read the supplied file.
+    string fileName = params["fileName"].toString().toStdString();
+    auto* molecule = new Molecule(this);
+    bool success = FileFormatManager::instance().readFile(*molecule, fileName);
+    if (success) {
+      emit callSetMolecule(molecule);
+
+      // set response
+      MoleQueue::Message response = message.generateResponse();
+      response.setResult(true);
+      response.send();
+    } else {
+      delete molecule;
+
+      // send error response
+      MoleQueue::Message errorMessage = message.generateErrorResponse();
+      errorMessage.setErrorCode(-1);
+      errorMessage.setErrorMessage(
+        QString("Failed to read file: %1")
+          .arg(QString::fromStdString(FileFormatManager::instance().error())));
+      errorMessage.send();
+    }
+  } else if (method == "saveGraphic") {
+    // Read the supplied file.
+    QString fileName = params["fileName"].toString();
+
+    // save the image
+    m_window->exportGraphics(fileName);
+
+    // set response
+    MoleQueue::Message response = message.generateResponse();
+    response.setResult(true);
+    response.send();
+  } else if (method == "exportFile") {
+    // Save to the supplied file name
+    QString filename = params["fileName"].toString();
+
+    bool result = m_window->exportFile(filename);
+
+    // set response
+    MoleQueue::Message response = message.generateResponse();
+    response.setResult(result);
+    response.send();
+  } else if (method == "loadMolecule") {
+    // get molecule data and format
+    string content = params["content"].toString().toStdString();
+    string format = params["format"].toString().toStdString();
+
+    // read molecule data
+    auto* molecule = new Molecule(this);
+    bool success =
+      FileFormatManager::instance().readString(*molecule, content, format);
+    if (success) {
+      emit callSetMolecule(molecule);
+
+      // send response
+      MoleQueue::Message response = message.generateResponse();
+      response.setResult(true);
+      response.send();
+    } else {
+      delete molecule;
+
+      // send error response
+      MoleQueue::Message errorMessage = message.generateErrorResponse();
+      errorMessage.setErrorCode(-1);
+      errorMessage.setErrorMessage(
+        QString("Failed to read Chemical JSON: %1")
+          .arg(QString::fromStdString(FileFormatManager::instance().error())));
+      errorMessage.send();
+    }
+  } else { // ask the main window to handle the message
+    QVariantMap options = params.toVariantMap();
+    bool success = m_window->handleCommand(method, options);
+
+    if (success) {
+      // send response
+      MoleQueue::Message response = message.generateResponse();
+      response.setResult(true);
+      response.send();
+    } else {
+      // send error response
+      MoleQueue::Message errorMessage = message.generateErrorResponse();
+      errorMessage.setErrorCode(-32601);
+      errorMessage.setErrorMessage("Method not found");
+      QJsonObject errorDataObject;
+      errorDataObject.insert("request", message.toJsonObject());
+      errorMessage.setErrorData(errorDataObject);
+      errorMessage.send();
+    }
   }
 }
 

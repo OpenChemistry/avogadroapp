@@ -1,17 +1,6 @@
 /******************************************************************************
-
   This source file is part of the Avogadro project.
-
-  Copyright 2014 Kitware, Inc.
-
-  This source code is released under the New BSD License, (the "License").
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
-
+  This source code is released under the 3-Clause BSD License, (see "LICENSE").
 ******************************************************************************/
 
 #include "viewfactory.h"
@@ -23,30 +12,35 @@
 
 namespace Avogadro {
 
-ViewFactory::ViewFactory()
-{
-}
+ViewFactory::ViewFactory() {}
 
-ViewFactory::~ViewFactory()
-{
-}
+ViewFactory::~ViewFactory() {}
 
 QStringList ViewFactory::views() const
 {
   QStringList views;
-  views << "3D View";
+  views << QObject::tr("3D View");
 #ifdef AVO_USE_VTK
-  views << "VTK";
+  views << QObject::tr("VTK");
 #endif
   return views;
 }
 
 QWidget* ViewFactory::createView(const QString& view)
 {
-  if (view == "3D View")
-    return new QtOpenGL::GLWidget;
+  if (view == QObject::tr("3D View")) {
+    // get the background color, etc.
+    if (m_glWidget != nullptr) {
+      auto newWidget = new QtOpenGL::GLWidget(m_glWidget);
+      // set the background color, etc.
+      auto bgColor = m_glWidget->renderer().scene().backgroundColor();
+      newWidget->renderer().scene().setBackgroundColor(bgColor);
+      return newWidget;
+    } else
+      return new QtOpenGL::GLWidget;
+  }
 #ifdef AVO_USE_VTK
-  else if (view == "VTK")
+  else if (view == QObject::tr("VTK"))
     return new VTK::vtkGLWidget;
 #endif
   return nullptr;

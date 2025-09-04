@@ -2,142 +2,232 @@
 # Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-#
+# ejatjon amar <3395087980@qq.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2016-06-10 06:26+0000\n"
-"Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
-"Language-Team: Uyghur <ug@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2024-12-22 02:35+0000\n"
+"PO-Revision-Date: 2021-10-14 18:32+0000\n"
+"Last-Translator: ejatjon amar <3395087980@qq.com>\n"
+"Language-Team: Uyghur <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/ug/>\n"
+"Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
-#: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
+#. i18n: file: aboutdialog.ui:62
+#. i18n: ectx: property (text), widget (QLabel, versionLabel)
+#: aboutdialog.cpp:27:3
+#, fuzzy
+#| msgid "Description:"
+msgid "Version:"
+msgstr "چۈشەندۈرۈش:"
+
+#. i18n: file: aboutdialog.ui:117
+#. i18n: ectx: property (text), widget (QLabel, libsLabel)
+#: aboutdialog.cpp:28:9
+msgid "Avogadro Library Version:"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:164
+#. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
+#: aboutdialog.cpp:29:15
+msgid "Qt Version:"
+msgstr ""
+
+#. i18n: file: aboutdialog.ui:181
+#. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
+#: aboutdialog.cpp:30:21
+msgid "SSL Version:"
+msgstr ""
+
+#: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat دا ھېچقانداق مولېكۇلا ئورنىتىلمىغان!"
 
-#: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
-msgid "No Io::FileFormat set in BackgroundFileFormat!"
-msgstr ""
+#: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
+msgid "No file format set in BackgroundFileFormat!"
+msgstr "BackgroundFileFormat دا ھۆججەت فورماتى يوق!"
 
-#: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
+#: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat دا ھۆججەت ئىسمى يوق!"
 
-#: mainwindow.cpp:292
-msgid "Ready..."
-msgstr ""
+#: mainwindow.cpp:327
+msgid "Ready…"
+msgstr "تەييار…"
 
-#: mainwindow.cpp:318
-#, fuzzy
+#: mainwindow.cpp:409
 msgid "Tool"
-msgstr "قوراللار"
+msgstr "قورال"
 
-#: mainwindow.cpp:322
+#: mainwindow.cpp:413
 msgid "Display Types"
-msgstr ""
+msgstr "تىپلارنى كۆرسىتىش"
 
-#: mainwindow.cpp:331
+#: mainwindow.cpp:422
 msgid "View Configuration"
-msgstr ""
+msgstr "سەپلىمىنى كۆرۈش"
 
-#: mainwindow.cpp:337
-#, fuzzy
+#: mainwindow.cpp:426
 msgid "Molecules"
 msgstr "مولېكۇلا"
 
-#: mainwindow.cpp:486
+#: mainwindow.cpp:435
+msgid "Layers"
+msgstr "قەۋەت"
+
+#: mainwindow.cpp:458
 #, fuzzy
+#| msgid "File"
+msgctxt "File toolbar"
+msgid "File"
+msgstr "ھۆججەت"
+
+#: mainwindow.cpp:463
+#, fuzzy
+msgctxt "Tools toolbar"
+msgid "Tools"
+msgstr "قوراللار"
+
+#: mainwindow.cpp:697
 msgid "Untitled"
 msgstr "ماۋزۇسىز"
 
-#: mainwindow.cpp:491
+#: mainwindow.cpp:702
 #, qt-format
+msgctxt ""
+"window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr ""
 
-#: mainwindow.cpp:533 mainwindow.cpp:1064
+#: mainwindow.cpp:758
+msgid "Restart needed"
+msgstr ""
+
+#: mainwindow.cpp:759
+msgid "Please restart Avogadro to use the new language."
+msgstr ""
+
+#: mainwindow.cpp:779 mainwindow.cpp:1521
 msgid "Chemical Markup Language"
 msgstr ""
 
-#: mainwindow.cpp:534 mainwindow.cpp:1063
+#: mainwindow.cpp:780 mainwindow.cpp:1520
 msgid "Chemical JSON"
 msgstr ""
 
-#: mainwindow.cpp:540
+#: mainwindow.cpp:786
 msgid "Open chemical file"
 msgstr ""
 
-#: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
+#: mainwindow.cpp:804 mainwindow.cpp:828 mainwindow.cpp:1408
+#: mainwindow.cpp:2562
 msgid "Cannot open file"
 msgstr ""
 
-#: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
+#: mainwindow.cpp:805 mainwindow.cpp:829 mainwindow.cpp:1409
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr ""
 
-#: mainwindow.cpp:572
+#: mainwindow.cpp:818
 #, fuzzy
 msgid "Open Molecule"
 msgstr "مولېكۇلا"
 
-#: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
+#: mainwindow.cpp:842
+msgid "Commands"
+msgstr ""
+
+#: mainwindow.cpp:842
+msgid "Input Generators"
+msgstr ""
+
+#: mainwindow.cpp:842
+#, fuzzy
+msgid "File Formats"
+msgstr "ھۆججەت: "
+
+#: mainwindow.cpp:843
+msgctxt "atomic electrostatics"
+msgid "Charges"
+msgstr ""
+
+#: mainwindow.cpp:844
+msgctxt "potential energy calculators"
+msgid "Force Fields"
+msgstr ""
+
+#: mainwindow.cpp:848
+msgid "Install Plugin Script"
+msgstr ""
+
+#: mainwindow.cpp:848
+msgid "Script Type:"
+msgstr ""
+
+#: mainwindow.cpp:921 mainwindow.cpp:1404
 msgid "Select file reader"
 msgstr ""
 
-#: mainwindow.cpp:625
+#: mainwindow.cpp:950
 #, fuzzy
 msgid "Reading File"
 msgstr "ھۆججەت ئاچ"
 
-#: mainwindow.cpp:627
+#: mainwindow.cpp:952
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
 
-#: mainwindow.cpp:656
+#: mainwindow.cpp:1012
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
-#: mainwindow.cpp:661 mainwindow.cpp:695
+#: mainwindow.cpp:1017
 #, fuzzy
 msgid "File error"
 msgstr "ھۆججەت: "
 
-#: mainwindow.cpp:662
+#: mainwindow.cpp:1018
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
 
-#: mainwindow.cpp:688
+#: mainwindow.cpp:1045
 #, qt-format
-msgid "File written: %1"
+msgctxt "%1 = filename"
+msgid "Saved file %1"
 msgstr ""
 
-#: mainwindow.cpp:696
+#: mainwindow.cpp:1052
+msgid "Error saving file"
+msgstr ""
+
+#: mainwindow.cpp:1053
 #, qt-format
+msgctxt "%1 = file name, %2 = error message"
 msgid ""
-"Error while writing file '%1':\n"
+"Error while saving '%1':\n"
 "%2"
 msgstr ""
 
-#: mainwindow.cpp:735
+#: mainwindow.cpp:1092
 msgid "Error: Failed to initialize OpenGL context"
 msgstr ""
 
-#: mainwindow.cpp:736
+#: mainwindow.cpp:1093
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -145,50 +235,46 @@ msgid ""
 "%1"
 msgstr ""
 
-#: mainwindow.cpp:737
+#: mainwindow.cpp:1094
 msgid "Unknown error"
 msgstr ""
 
-#: mainwindow.cpp:814 mainwindow.cpp:815
-msgid "Navigate tool"
-msgstr ""
-
-#: mainwindow.cpp:889
+#: mainwindow.cpp:1349
 msgid "Common image formats"
 msgstr ""
 
-#: mainwindow.cpp:891
+#: mainwindow.cpp:1351
 msgid "All files"
 msgstr "ھەممە ھۆججەتلەر"
 
-#: mainwindow.cpp:891
+#: mainwindow.cpp:1351
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:892
+#: mainwindow.cpp:1352
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:892
+#: mainwindow.cpp:1352
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:901
+#: mainwindow.cpp:1361
 msgid "Export Bitmap Graphics"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:940 mainwindow.cpp:1037 mainwindow.cpp:1668:33
+#: mainwindow.cpp:1377 mainwindow.cpp:1494 mainwindow.cpp:2334:39
 msgid "Avogadro"
 msgstr ""
 
-#: mainwindow.cpp:941
+#: mainwindow.cpp:1378
 #, qt-format
 msgid "Cannot save file %1."
 msgstr ""
 
-#: mainwindow.cpp:1038
+#: mainwindow.cpp:1495
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -196,85 +282,92 @@ msgid ""
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
 
-#: mainwindow.cpp:1045
+#: mainwindow.cpp:1502
 msgid "Export"
 msgstr "چىقار"
 
-#: mainwindow.cpp:1070
+#: mainwindow.cpp:1526
 msgid "Save chemical file"
 msgstr ""
 
-#: mainwindow.cpp:1098
+#: mainwindow.cpp:1570
 #, fuzzy
 msgid "Export Molecule"
 msgstr "مولېكۇلا"
 
-#: mainwindow.cpp:1150
-msgid "Writing File"
+#: mainwindow.cpp:1669
+msgid "Saving File in Progress…"
 msgstr ""
 
-#: mainwindow.cpp:1152
+#: mainwindow.cpp:1671
 #, qt-format
+msgctxt "%1 = file name, %2 = format"
 msgid ""
-"Writing file '%1'\n"
-"with '%2'"
+"Saving file “%1”\n"
+"with “%2”"
 msgstr ""
 
-#: mainwindow.cpp:1260
+#: mainwindow.cpp:1814
 #, fuzzy, qt-format
 msgid "&Undo %1"
 msgstr "يېنىۋال(&U)"
 
-#. i18n: file: mainwindow.ui:211
+#. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1263 mainwindow.cpp:1487:126
+#: mainwindow.cpp:1817 mainwindow.cpp:2073:123
 msgid "&Undo"
 msgstr "يېنىۋال(&U)"
 
-#: mainwindow.cpp:1268
+#: mainwindow.cpp:1822
 #, fuzzy, qt-format
 msgid "&Redo %1"
 msgstr "قايتىلا(&R)"
 
-#. i18n: file: mainwindow.ui:223
+#. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1271 mainwindow.cpp:1492:132
+#: mainwindow.cpp:1825 mainwindow.cpp:2078:129
 msgid "&Redo"
 msgstr "قايتىلا(&R)"
 
-#: mainwindow.cpp:1368
+#: mainwindow.cpp:1947
 #, fuzzy
 msgid "&Testing"
 msgstr "تەڭشەكلەر"
 
-#: mainwindow.cpp:1370
-msgid "Record test..."
+#: mainwindow.cpp:1949
+msgid "Record test…"
 msgstr ""
 
-#: mainwindow.cpp:1373
-msgid "Play test..."
+#: mainwindow.cpp:1952
+msgid "Play test…"
 msgstr ""
+
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1966 menubuilder.cpp:79:42
+msgid "&File"
+msgstr "ھۆججەت(&F)"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1389:75 rc.cpp:81
+#: mainwindow.cpp:1968:81 rc.cpp:87
 msgid "&New"
 msgstr "يېڭى(&N)"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1398:51
+#: mainwindow.cpp:1977:57
 #, fuzzy
-msgid "&Open..."
+msgid "&Open…"
 msgstr "ئاچ(&O)"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1407:84 rc.cpp:90
+#: mainwindow.cpp:1986:90 rc.cpp:96
 msgid "&Close"
 msgstr "ياپ(&C)"
 
@@ -282,257 +375,299 @@ msgstr "ياپ(&C)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1421:93 rc.cpp:99
+#: mainwindow.cpp:2000:99 rc.cpp:105
 msgid "&Save"
 msgstr "ساقلا(&S)"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1430:102
-msgid "Save &As..."
+#: mainwindow.cpp:2009:108
+#, fuzzy
+msgid "Save &As…"
 msgstr "باشقا ئاتتا ساقلا(&A)…"
 
-#. i18n: file: mainwindow.ui:504
+#. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1441:264
+#: mainwindow.cpp:2020:201
 #, fuzzy
 msgid "&Export"
 msgstr "چىقار"
 
-#: mainwindow.cpp:1442
+#: mainwindow.cpp:2021
 #, fuzzy
-msgid "&Molecule..."
+msgid "&Molecule…"
 msgstr "مولېكۇلا"
 
-#. i18n: file: mainwindow.ui:173
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1450:111
-msgid "&Graphics..."
+#: mainwindow.cpp:2028
+#, fuzzy
+msgid "Export Molecule…"
+msgstr "مولېكۇلا"
+
+#: mainwindow.cpp:2035
+msgid "&Graphics…"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1458:60 rc.cpp:66
+#: mainwindow.cpp:2044:66 rc.cpp:72
 msgid "&Quit"
 msgstr "چېكىن(&Q)"
 
-#: mainwindow.cpp:1480
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:2054:195
+#, fuzzy
+msgid "Open Recent"
+msgstr "يېقىنقىنى ئاچ(&R)"
+
+#: mainwindow.cpp:2066
 msgid "No recent files"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1486 menubuilder.cpp:87:45
+#: mainwindow.cpp:2072 menubuilder.cpp:79:51
 msgid "&Edit"
 msgstr "تەھرىر(&E)"
 
+#: mainwindow.cpp:2084
+msgid "&Copy Graphics"
+msgstr ""
+
+#: mainwindow.cpp:2088
+#, fuzzy
+#| msgid "Ctrl+O"
+msgid "Ctrl+Alt+C"
+msgstr "Ctrl+O"
+
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1506 menubuilder.cpp:87:42
+#: mainwindow.cpp:2101 menubuilder.cpp:79:48
 msgid "&View"
 msgstr "كۆرۈنۈش(&V)"
 
-#: mainwindow.cpp:1507
+#: mainwindow.cpp:2102
 #, fuzzy
-msgid "Set background color..."
+msgid "Set Background Color…"
 msgstr "تەگلىك رەڭگىنى بەلگىلەش(&B)…"
 
-#: mainwindow.cpp:1511
+#: mainwindow.cpp:2106
+msgid "Rendering…"
+msgstr ""
+
+#: mainwindow.cpp:2114
 msgid "Projection"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:463
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1512:240
+#: mainwindow.cpp:2115
 msgid "Perspective"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:471
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1519:243
+#: mainwindow.cpp:2122
 msgid "Orthographic"
 msgstr ""
 
-#: mainwindow.cpp:1533
+#: mainwindow.cpp:2141
 #, fuzzy
 msgid "&Extensions"
 msgstr "كېڭەيتمىلەر"
 
-#: mainwindow.cpp:1540 menubuilder.cpp:91
+#: mainwindow.cpp:2143
+msgid "User Interface Language…"
+msgstr ""
+
+#: mainwindow.cpp:2147
+msgid "&Periodic Table…"
+msgstr ""
+
+#: mainwindow.cpp:2153 menubuilder.cpp:83
 msgid "&Help"
 msgstr "ياردەم(&H)"
 
-#: mainwindow.cpp:1653
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:2154:120
+msgid "&About"
+msgstr "ھەققىدە(&A)"
+
+#: mainwindow.cpp:2161
+msgid "&Discussion Forum"
+msgstr ""
+
+#: mainwindow.cpp:2165
+msgid "&Avogadro Website"
+msgstr ""
+
+#: mainwindow.cpp:2169
+msgid "&Report a Bug"
+msgstr ""
+
+#: mainwindow.cpp:2173
+msgid "&Suggest a Feature"
+msgstr ""
+
+#: mainwindow.cpp:2197
+msgid "System Language"
+msgstr ""
+
+#: mainwindow.cpp:2205
+msgid "Language"
+msgstr ""
+
+#: mainwindow.cpp:2205
+msgid "User Interface Language:"
+msgstr ""
+
+#: mainwindow.cpp:2319
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr ""
 
-#: mainwindow.cpp:1669
+#: mainwindow.cpp:2335
 #, fuzzy
-msgid "Do you want to save the changes you made in the document?"
+msgid "Do you want to save the changes to the document?"
 msgstr "ئەگەر ساقلىمىسىڭىز ئۆزگەرتكەنلىرىڭىزنىڭ ھەممىسى يوقايدۇ."
 
-#: mainwindow.cpp:1678
+#: mainwindow.cpp:2343
 #, fuzzy
 msgid "Your changes will be lost if you don't save them."
 msgstr "ئەگەر ساقلىمىسىڭىز ئۆزگەرتكەنلىرىڭىزنىڭ ھەممىسى يوقايدۇ."
 
-#: mainwindow.cpp:1685
+#: mainwindow.cpp:2351
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:1686
+#: mainwindow.cpp:2353
 #, fuzzy
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+O"
 
-#: mainwindow.cpp:1752
-#, qt-format
-msgid "Error while loading FileFormat with id '%1'."
+#: mainwindow.cpp:2439
+msgid "Network Download Failed"
 msgstr ""
 
-#: mainwindow.cpp:1773
-#, qt-format
-msgid "Avogadro timed out and doesn't know how to open '%1'."
+#: mainwindow.cpp:2440
+msgid "Network timeout or other error."
 msgstr ""
 
-#: mainwindow.cpp:1783
+#: mainwindow.cpp:2479
+#, qt-format
+msgid "Your version: %1"
+msgstr ""
+
+#: mainwindow.cpp:2480
+#, qt-format
+msgid "New version: %1"
+msgstr ""
+
+#: mainwindow.cpp:2482
+msgid "An update is available, do you want to download it now?\n"
+msgstr ""
+
+#: mainwindow.cpp:2484
+msgid "Version Update"
+msgstr ""
+
+#: mainwindow.cpp:2542
+#, qt-format
+msgid "Error while loading the “%1” file format."
+msgstr ""
+
+#: mainwindow.cpp:2558
+#, fuzzy
+msgid "Select file format"
+msgstr "ھۆججەت: "
+
+#: mainwindow.cpp:2563 mainwindow.cpp:2574
+#, qt-format
+msgid "Avogadro cannot open “%1”."
+msgstr ""
+
+#: mainwindow.cpp:2573
 msgid "Cannot open files"
 msgstr ""
 
-#: mainwindow.cpp:1784
-#, qt-format
-msgid "Avogadro timed out and cannot open '%1'."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:87:36
-msgid "&File"
-msgstr "ھۆججەت(&F)"
-
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
-#: menubuilder.cpp:87:39
+#: menubuilder.cpp:79:45
 msgid "&Build"
 msgstr "ياساش(&B)"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
-#: menubuilder.cpp:88:48
+#: menubuilder.cpp:80:54
 msgid "&Select"
 msgstr "تاللا(&S)"
 
-#: menubuilder.cpp:91
+#: menubuilder.cpp:83
 msgid "Se&ttings"
 msgstr ""
 
-#: menubuilder.cpp:91
+#: menubuilder.cpp:83
 #, fuzzy
 msgid "&Window"
 msgstr "كۆزنەك"
 
-#: rpclistener.cpp:123
-msgid "Error starting RPC server:"
-msgstr ""
+#: viewfactory.cpp:22 viewfactory.cpp:31
+#, fuzzy
+#| msgid "&View"
+msgid "3D View"
+msgstr "كۆرۈنۈش(&V)"
 
-#: rpclistener.cpp:125
-msgid ""
-"An error occurred while starting Avogadro's RPC listener. This may be happen "
-"for a\n"
-"number of reasons:\n"
-"\tA previous instance of Avogadro may have crashed.\n"
-"\tA running Avogadro instance was too busy to respond.\n"
-"\n"
-"If no other Avogadro instance is running on this machine, it is safe to "
-"replace the dead\n"
-"server. Otherwise, this instance of avogadro may be started without RPC "
-"capabilities\n"
-"(this will prevent RPC enabled applications from communicating with "
-"Avogadro)."
-msgstr ""
-
-#: rpclistener.cpp:135
-msgid "Replace the dead server with a new instance."
-msgstr ""
-
-#: rpclistener.cpp:136
-msgid "Start without RPC capabilities."
-msgstr ""
-
-#. i18n: file: aboutdialog.ui:62
-#. i18n: ectx: property (text), widget (QLabel, versionLabel)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
-"\">Version:</span></p></body></html>"
+#: viewfactory.cpp:24 viewfactory.cpp:43
+msgid "VTK"
 msgstr ""
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
-"span></p></body></html>"
-msgstr ""
-
-#. i18n: file: aboutdialog.ui:117
-#. i18n: ectx: property (text), widget (QLabel, libs)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">AvogadroLibs Version:</span></p></body></html>"
-msgstr ""
-
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
 #. i18n: file: aboutdialog.ui:171
 #. i18n: ectx: property (text), widget (QLabel, qtVersion)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
-"span></p></body></html>"
+#. i18n: file: aboutdialog.ui:188
+#. i18n: ectx: property (text), widget (QLabel, sslVersion)
+msgid "0.1"
 msgstr ""
 
-#. i18n: file: aboutdialog.ui:164
-#. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
-"Version:</span></p></body></html>"
-msgstr ""
-
-#. i18n: file: aboutdialog.ui:224
+#. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
 msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
-"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
-"\">BSD-3-Clause</span></a></p></body></html>"
+"\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-"
+"Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
+"#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
 
-#. i18n: file: aboutdialog.ui:261
+#. i18n: file: aboutdialog.ui:278
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid ""
-"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
-"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
+"style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
 
-#. i18n: file: aboutdialog.ui:290
+#. i18n: file: aboutdialog.ui:307
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid ""
-"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
-"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
 
-#. i18n: file: aboutdialog.ui:323
+#. i18n: file: aboutdialog.ui:334
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
 msgstr "جەزملە"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+O"
+msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
 
@@ -543,6 +678,9 @@ msgstr "ئاچ(&O)"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+Q"
+msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
@@ -558,260 +696,286 @@ msgstr ""
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+N"
+msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+W"
+msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+S"
+msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+S"
+msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
-msgstr ""
+msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Revert To Saved"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:182
+#. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&Full Screen Mode"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:185
-#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-msgid "Esc"
-msgstr "Esc"
-
-#. i18n: file: mainwindow.ui:194
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Set &Background Color..."
+#, fuzzy
+msgid "Set &Background Color…"
 msgstr "تەگلىك رەڭگىنى بەلگىلەش(&B)…"
 
-#. i18n: file: mainwindow.ui:199
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "ھەققىدە(&A)"
-
-#. i18n: file: mainwindow.ui:214
+#. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+O"
+msgctxt "Undo"
 msgid "Ctrl+Z"
-msgstr ""
+msgstr "Ctrl+O"
 
-#. i18n: file: mainwindow.ui:226
+#. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+S"
+msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
-msgstr ""
+msgstr "Ctrl+S"
 
-#. i18n: file: mainwindow.ui:235
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "New View"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:247
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Close View"
-msgstr "كۆرۈنۈشنى ياپ"
-
-#. i18n: file: mainwindow.ui:256
+#. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
 msgstr "مەركەز"
 
-#. i18n: file: mainwindow.ui:265
+#. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:270
+#. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Paste"
 msgstr "چاپلا"
 
-#. i18n: file: mainwindow.ui:273
+#. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+O"
+msgctxt "Paste"
 msgid "Ctrl+V"
-msgstr ""
+msgstr "Ctrl+O"
 
-#. i18n: file: mainwindow.ui:278
+#. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Copy"
 msgstr "كۆچۈر"
 
-#. i18n: file: mainwindow.ui:281
+#. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+C"
+msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
 
-#. i18n: file: mainwindow.ui:286
+#. i18n: file: mainwindow.ui:248
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Cut"
 msgstr "كەس"
 
-#. i18n: file: mainwindow.ui:289
+#. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+O"
+msgctxt "Cut"
 msgid "Ctrl+X"
-msgstr ""
+msgstr "Ctrl+O"
 
-#. i18n: file: mainwindow.ui:294
+#. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
 msgstr "تازىلا"
 
-#. i18n: file: mainwindow.ui:299
+#. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
 msgstr "ھەممىنى تاللا"
 
-#. i18n: file: mainwindow.ui:302
+#. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+O"
+msgctxt "Select All"
 msgid "Ctrl+A"
-msgstr ""
+msgstr "Ctrl+O"
 
-#. i18n: file: mainwindow.ui:307
+#. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
 msgstr "ھەممىنى تاللىما"
 
-#. i18n: file: mainwindow.ui:310
+#. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+S"
+msgctxt "Select None"
 msgid "Ctrl+Shift+A"
-msgstr ""
+msgstr "Ctrl+S"
 
-#. i18n: file: mainwindow.ui:319
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Configure Avogadro..."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:330
+#. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Tutorials"
 msgstr "ئوقۇشلۇق"
 
-#. i18n: file: mainwindow.ui:339
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Duplicate View"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:347
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Display Axes"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:355
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Debug Information"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:363
+#. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:368
+#. i18n: file: mainwindow.ui:293
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Release Notes"
 msgstr "تارقىتىش چۈشەندۈرۈشى"
 
-#. i18n: file: mainwindow.ui:373
+#. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:378
+#. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "FAQ"
 msgstr "FAQ"
 
-#. i18n: file: mainwindow.ui:383
+#. i18n: file: mainwindow.ui:308
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:392
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Plugin Manager..."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:401
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Project Tree Editor..."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:410
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Detach View"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:415
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Molecule File..."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:426
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Use Quick Render"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:431
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&Vector Graphics..."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:439
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Display Unit Cell Axes"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:447
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "All Molecules in File..."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:452
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Reset Display Types"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:476
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "SMILES"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:481
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "InChI"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:484
-#. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
-msgid "IUPAC InChI identifier"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:489
+#. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:494
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Open Recent"
-msgstr "يېقىنقىنى ئاچ(&R)"
-
-#. i18n: file: mainwindow.ui:499
+#. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "&Import"
 msgstr "ئىمپورت قىل"
+
+#. i18n: file: renderingdialog.ui:31
+#. i18n: ectx: property (toolTip), widget (QLabel, label_2)
+msgid "Enable ambient occlusion shadows"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:34
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+msgid "Ambient Occlusion:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:43
+#. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
+#. i18n: file: renderingdialog.ui:118
+#. i18n: ectx: property (text), widget (QCheckBox, fogEnableCheckBox)
+#. i18n: file: renderingdialog.ui:220
+#. i18n: ectx: property (text), widget (QCheckBox, dofEnableCheckBox)
+#. i18n: file: renderingdialog.ui:325
+#. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
+msgid "Enable"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:85
+#. i18n: ectx: property (toolTip), widget (QLabel, label)
+msgid "Strength of the ambient shadows"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:88
+#. i18n: ectx: property (text), widget (QLabel, label)
+msgid "Shadow Strength:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:106
+#. i18n: ectx: property (toolTip), widget (QLabel, label_3)
+msgid "Fog effect for depth cue"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:109
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid "Fog:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:140
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Fog Strength:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:170
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Fog Position:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:208
+#. i18n: ectx: property (toolTip), widget (QLabel, label_3)
+msgid "Add a depth blur"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:211
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid "Depth Blur:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:242
+#. i18n: ectx: property (toolTip), widget (QLabel, label_5)
+msgid "Strength of the depth blur"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:245
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Blur Strength :"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:272
+#. i18n: ectx: property (toolTip), widget (QLabel, label_5)
+msgid "Position of the depth blur"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:275
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Blur Position:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:313
+#. i18n: ectx: property (toolTip), widget (QLabel, label_4)
+msgid "Add an outline to edge atoms"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:316
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+msgid "Edge Outline:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:354
+#. i18n: ectx: property (text), widget (QPushButton, saveButton)
+msgid "Save"
+msgstr "ساقلا"
+
+#. i18n: file: renderingdialog.ui:374
+#. i18n: ectx: property (text), widget (QPushButton, closeButton)
+#, fuzzy
+#| msgid "&Close"
+msgid "Close"
+msgstr "ياپ(&C)"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
@@ -825,6 +989,28 @@ msgid "Your emails"
 msgstr ""
 ",,,,avogadro-devel@lists.sourceforge.net,,,,,avogadro-devel@lists."
 "sourceforge.net,,,,,avogadro-devel@lists.sourceforge.net,,"
+
+#, fuzzy
+#~ msgid "Set background color…"
+#~ msgstr "تەگلىك رەڭگىنى بەلگىلەش(&B)…"
+
+#~ msgid "Esc"
+#~ msgstr "Esc"
+
+#~ msgid "Close View"
+#~ msgstr "كۆرۈنۈشنى ياپ"
+
+#, fuzzy
+#~ msgid "Molecule File…"
+#~ msgstr "مولېكۇلا"
+
+#, fuzzy
+#~ msgid "&Open..."
+#~ msgstr "ئاچ(&O)"
+
+#, fuzzy
+#~ msgid "&Molecule..."
+#~ msgstr "مولېكۇلا"
 
 #~ msgid "Messages"
 #~ msgstr "ئۇچۇرلار"
@@ -840,9 +1026,6 @@ msgstr ""
 
 #~ msgid "Save..."
 #~ msgstr "ساقلاش…"
-
-#~ msgid "Save"
-#~ msgstr "ساقلا"
 
 #~ msgid "Untitled %1"
 #~ msgstr "ماۋزۇسىز %1"
@@ -933,9 +1116,6 @@ msgstr ""
 
 #~ msgid "Name:"
 #~ msgstr "ئاتى:"
-
-#~ msgid "Description:"
-#~ msgstr "چۈشەندۈرۈش:"
 
 #~ msgid "Form"
 #~ msgstr "كۆزنەك"

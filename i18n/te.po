@@ -2,282 +2,403 @@
 # Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-#
+# Balavamsi Krishna <balavamsikrishna38@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2020-09-12 12:18-0400\n"
-"PO-Revision-Date: 2016-06-10 06:26+0000\n"
-"Last-Translator: nrao <nagamalli.s@gmail.com>\n"
-"Language-Team: Telugu <te@li.org>\n"
+"POT-Creation-Date: 2024-12-22 02:35+0000\n"
+"PO-Revision-Date: 2023-10-13 04:03+0000\n"
+"Last-Translator: Balavamsi Krishna <balavamsikrishna38@gmail.com>\n"
+"Language-Team: Telugu <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/te/>\n"
 "Language: te\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
 
-#: backgroundfileformat.cpp:40 backgroundfileformat.cpp:65
+#. i18n: file: aboutdialog.ui:62
+#. i18n: ectx: property (text), widget (QLabel, versionLabel)
+#: aboutdialog.cpp:27:3
+#, fuzzy
+#| msgctxt "%1 is the Git revision number."
+#| msgid "(Git revision: %1)"
+msgid "Version:"
+msgstr "(గిట్ సవరణ: %1)"
+
+#. i18n: file: aboutdialog.ui:117
+#. i18n: ectx: property (text), widget (QLabel, libsLabel)
+#: aboutdialog.cpp:28:9
+#, fuzzy
+msgid "Avogadro Library Version:"
+msgstr "అవగాడ్రో లైబ్రరీ వెర్షన్"
+
+#. i18n: file: aboutdialog.ui:164
+#. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
+#: aboutdialog.cpp:29:15
+#, fuzzy
+#| msgctxt "%1 is the Git revision number."
+#| msgid "(Git revision: %1)"
+msgid "Qt Version:"
+msgstr "Qt వెర్షన్:"
+
+#. i18n: file: aboutdialog.ui:181
+#. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
+#: aboutdialog.cpp:30:21
+#, fuzzy
+msgid "SSL Version:"
+msgstr "SSL వెర్షన్"
+
+#: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
+#, fuzzy
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "బ్యాక్‌గ్రౌండ్‌ఫైల్ ఫార్మాట్‌లో అణువు ఏదీ సెట్ చేయబడలేదు!"
 
-#: backgroundfileformat.cpp:43 backgroundfileformat.cpp:68
-msgid "No Io::FileFormat set in BackgroundFileFormat!"
-msgstr ""
+#: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
+#, fuzzy
+msgid "No file format set in BackgroundFileFormat!"
+msgstr "BackgroundFileFormatలో ఫైల్ ఫార్మాట్ సెట్ చేయబడదు!"
 
-#: backgroundfileformat.cpp:46 backgroundfileformat.cpp:71
+#: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
 msgstr ""
 
-#: mainwindow.cpp:292
-msgid "Ready..."
-msgstr ""
+#: mainwindow.cpp:327
+msgid "Ready…"
+msgstr "సిద్ధంగా ఉంది…"
 
-#: mainwindow.cpp:318
+#: mainwindow.cpp:409
 #, fuzzy
 msgid "Tool"
 msgstr "పనిముట్లు"
 
-#: mainwindow.cpp:322
+#: mainwindow.cpp:413
 msgid "Display Types"
 msgstr "చూపించు విధములు"
 
-#: mainwindow.cpp:331
+#: mainwindow.cpp:422
 msgid "View Configuration"
-msgstr ""
+msgstr "కాన్ఫిగరేషన్‌ని వీక్షించండి"
 
-#: mainwindow.cpp:337
+#: mainwindow.cpp:426
 #, fuzzy
 msgid "Molecules"
 msgstr "అణువు"
 
-#: mainwindow.cpp:486
+#: mainwindow.cpp:435
+msgid "Layers"
+msgstr "పొరలు"
+
+#: mainwindow.cpp:458
+#, fuzzy
+msgctxt "File toolbar"
+msgid "File"
+msgstr "&ఫైల్"
+
+#: mainwindow.cpp:463
+#, fuzzy
+msgctxt "Tools toolbar"
+msgid "Tools"
+msgstr "పనిముట్లు"
+
+#: mainwindow.cpp:697
 #, fuzzy
 msgid "Untitled"
 msgstr "విశేష నామము లేని"
 
-#: mainwindow.cpp:491
+#: mainwindow.cpp:702
 #, fuzzy, qt-format
+msgctxt ""
+"window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "అవొగడ్రో"
 
-#: mainwindow.cpp:533 mainwindow.cpp:1064
+#: mainwindow.cpp:758
+msgid "Restart needed"
+msgstr "పునఃప్రారంభం అవసరం"
+
+#: mainwindow.cpp:759
+msgid "Please restart Avogadro to use the new language."
+msgstr "దయచేసి కొత్త భాషను ఉపయోగించడానికి Avogadroని పునఃప్రారంభించండి."
+
+#: mainwindow.cpp:779 mainwindow.cpp:1521
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "రసాయన మార్కప్ భాష"
 
-#: mainwindow.cpp:534 mainwindow.cpp:1063
+#: mainwindow.cpp:780 mainwindow.cpp:1520
+#, fuzzy
 msgid "Chemical JSON"
-msgstr ""
+msgstr "రసాయన JSON"
 
-#: mainwindow.cpp:540
+#: mainwindow.cpp:786
 msgid "Open chemical file"
-msgstr ""
+msgstr "రసాయన ఫైల్‌ను తెరవండి"
 
-#: mainwindow.cpp:558 mainwindow.cpp:582 mainwindow.cpp:971 mainwindow.cpp:1772
+#: mainwindow.cpp:804 mainwindow.cpp:828 mainwindow.cpp:1408
+#: mainwindow.cpp:2562
 #, fuzzy
 msgid "Cannot open file"
 msgstr "జబితా సేవ్ చేయలేను %1."
 
-#: mainwindow.cpp:559 mainwindow.cpp:583 mainwindow.cpp:972
+#: mainwindow.cpp:805 mainwindow.cpp:829 mainwindow.cpp:1409
 #, fuzzy, qt-format
 msgid "Can't open supplied file %1"
 msgstr "జబితా సేవ్ చేయలేను %1."
 
-#: mainwindow.cpp:572
+#: mainwindow.cpp:818
 #, fuzzy
 msgid "Open Molecule"
 msgstr "అణువు"
 
-#: mainwindow.cpp:596 mainwindow.cpp:967 mainwindow.cpp:1768
-msgid "Select file reader"
+#: mainwindow.cpp:842
+msgid "Commands"
+msgstr "ఆదేశాలు"
+
+#: mainwindow.cpp:842
+msgid "Input Generators"
+msgstr "ఇన్‌పుట్ జనరేటర్లు"
+
+#: mainwindow.cpp:842
+#, fuzzy
+msgid "File Formats"
+msgstr "దాఖలు:"
+
+#: mainwindow.cpp:843
+msgctxt "atomic electrostatics"
+msgid "Charges"
+msgstr "ఛార్జీలు"
+
+#: mainwindow.cpp:844
+msgctxt "potential energy calculators"
+msgid "Force Fields"
 msgstr ""
 
-#: mainwindow.cpp:625
+#: mainwindow.cpp:848
+msgid "Install Plugin Script"
+msgstr "ప్లగిన్ స్క్రిప్ట్‌ను ఇన్‌స్టాల్ చేయండి"
+
+#: mainwindow.cpp:848
+#, fuzzy
+msgid "Script Type:"
+msgstr "స్క్రిప్ట్ రకం"
+
+#: mainwindow.cpp:921 mainwindow.cpp:1404
+msgid "Select file reader"
+msgstr "ఫైల్ రీడర్‌ని ఎంచుకోండి"
+
+#: mainwindow.cpp:950
 #, fuzzy
 msgid "Reading File"
 msgstr "దస్త్రాన్ని తెరువు"
 
-#: mainwindow.cpp:627
-#, qt-format
+#: mainwindow.cpp:952
+#, fuzzy, qt-format
 msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"'% 1' ఫైల్‌ను తెరుస్తోంది\n"
+"'% 2'తో"
 
-#: mainwindow.cpp:656
-#, qt-format
+#: mainwindow.cpp:1012
+#, fuzzy, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "మాలిక్యూల్ లోడ్ చేయబడింది (% 1 పరమాణువులు,% 2 బంధాలు)"
 
-#: mainwindow.cpp:661 mainwindow.cpp:695
+#: mainwindow.cpp:1017
 #, fuzzy
 msgid "File error"
-msgstr "దాఖలు: "
+msgstr "దాఖలు:"
 
-#: mainwindow.cpp:662
-#, qt-format
+#: mainwindow.cpp:1018
+#, fuzzy, qt-format
 msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"'% 1' ఫైల్‌ని చదివేటప్పుడు లోపం:\n"
+"% 2"
 
-#: mainwindow.cpp:688
-#, qt-format
-msgid "File written: %1"
-msgstr ""
+#: mainwindow.cpp:1045
+#, fuzzy, qt-format
+msgctxt "%1 = filename"
+msgid "Saved file %1"
+msgstr "జబితా సేవ్ చేయలేను %1."
 
-#: mainwindow.cpp:696
-#, qt-format
+#: mainwindow.cpp:1052
+msgid "Error saving file"
+msgstr "ఫైల్‌ను సేవ్ చేయడంలో లోపం"
+
+#: mainwindow.cpp:1053
+#, fuzzy, qt-format
+msgctxt "%1 = file name, %2 = error message"
 msgid ""
-"Error while writing file '%1':\n"
+"Error while saving '%1':\n"
 "%2"
 msgstr ""
+"'% 1'ని సేవ్ చేస్తున్నప్పుడు లోపం:\n"
+"% 2"
 
-#: mainwindow.cpp:735
+#: mainwindow.cpp:1092
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "లోపం: OpenGL సందర్భాన్ని ప్రారంభించడంలో విఫలమైంది"
 
-#: mainwindow.cpp:736
-#, qt-format
+#: mainwindow.cpp:1093
+#, fuzzy, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
 "\n"
 "%1"
 msgstr ""
+"OpenGL 2.0 లేదా అంతకంటే ఎక్కువ అవసరం, నిష్క్రమిస్తోంది.\n"
+"\n"
+"% 1"
 
-#: mainwindow.cpp:737
+#: mainwindow.cpp:1094
 msgid "Unknown error"
 msgstr ""
 
-#: mainwindow.cpp:814 mainwindow.cpp:815
-msgid "Navigate tool"
-msgstr ""
-
-#: mainwindow.cpp:889
+#: mainwindow.cpp:1349
 msgid "Common image formats"
 msgstr ""
 
-#: mainwindow.cpp:891
+#: mainwindow.cpp:1351
 msgid "All files"
 msgstr "అన్ని ఫైళ్ళు"
 
-#: mainwindow.cpp:891
+#: mainwindow.cpp:1351
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:892
+#: mainwindow.cpp:1352
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:892
+#: mainwindow.cpp:1352
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:901
+#: mainwindow.cpp:1361
 msgid "Export Bitmap Graphics"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:940 mainwindow.cpp:1037 mainwindow.cpp:1668:33
+#: mainwindow.cpp:1377 mainwindow.cpp:1494 mainwindow.cpp:2334:39
 msgid "Avogadro"
 msgstr "అవొగడ్రో"
 
-#: mainwindow.cpp:941
+#: mainwindow.cpp:1378
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "జబితా సేవ్ చేయలేను %1."
 
-#: mainwindow.cpp:1038
+#: mainwindow.cpp:1495
+#, fuzzy
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"ఈ ఫైల్ ప్రామాణికం కాని ఫార్మాట్ నుండి దిగుమతి చేయబడింది, ఇది అణువులోని మొత్తం సమాచారాన్ని వ్రాయలేకపోవచ్చు.\n"
+"\n"
+"మీరు ప్రస్తుత ఫార్మాట్‌కు ఎగుమతి చేయాలనుకుంటున్నారా లేదా ప్రామాణిక ఆకృతిలో సేవ్ చేయాలనుకుంటున్నారా?"
 
-#: mainwindow.cpp:1045
+#: mainwindow.cpp:1502
 msgid "Export"
 msgstr "ఎగుమతి చెయ్యి"
 
-#: mainwindow.cpp:1070
+#: mainwindow.cpp:1526
 msgid "Save chemical file"
-msgstr ""
+msgstr "రసాయన ఫైల్‌ను సేవ్ చేయండి"
 
-#: mainwindow.cpp:1098
+#: mainwindow.cpp:1570
 #, fuzzy
 msgid "Export Molecule"
 msgstr "దిగుమతి మాలిక్యూల్ ఫైలు"
 
-#: mainwindow.cpp:1150
-msgid "Writing File"
-msgstr ""
+#: mainwindow.cpp:1669
+msgid "Saving File in Progress…"
+msgstr "ఫైల్‌ను సేవ్ చేయడం ప్రోగ్రెస్‌లో ఉంది…"
 
-#: mainwindow.cpp:1152
-#, qt-format
+#: mainwindow.cpp:1671
+#, fuzzy, qt-format
+msgctxt "%1 = file name, %2 = format"
 msgid ""
-"Writing file '%1'\n"
-"with '%2'"
+"Saving file “%1”\n"
+"with “%2”"
 msgstr ""
+"“% 1” ఫైల్‌ను సేవ్ చేస్తోంది\n"
+"\"% 2\"తో"
 
-#: mainwindow.cpp:1260
+#: mainwindow.cpp:1814
 #, fuzzy, qt-format
 msgid "&Undo %1"
 msgstr "(&U) సరిచేయు"
 
-#. i18n: file: mainwindow.ui:211
+#. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1263 mainwindow.cpp:1487:126
+#: mainwindow.cpp:1817 mainwindow.cpp:2073:123
 msgid "&Undo"
 msgstr "(&U) సరిచేయు"
 
-#: mainwindow.cpp:1268
+#: mainwindow.cpp:1822
 #, fuzzy, qt-format
 msgid "&Redo %1"
 msgstr "(&R) పునరాచరణ"
 
-#. i18n: file: mainwindow.ui:223
+#. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1271 mainwindow.cpp:1492:132
+#: mainwindow.cpp:1825 mainwindow.cpp:2078:129
 msgid "&Redo"
 msgstr "(&R) పునరాచరణ"
 
-#: mainwindow.cpp:1368
+#: mainwindow.cpp:1947
 #, fuzzy
 msgid "&Testing"
 msgstr "అమరికలు"
 
-#: mainwindow.cpp:1370
+#: mainwindow.cpp:1949
 #, fuzzy
-msgid "Record test..."
+msgid "Record test…"
 msgstr "పరిక్ష నమోదు"
 
-#: mainwindow.cpp:1373
+#: mainwindow.cpp:1952
 #, fuzzy
-msgid "Play test..."
+msgid "Play test…"
 msgstr "పరిక్ష ప్రదర్శించు"
+
+#. i18n: file: mainwindow.ui:32
+#. i18n: ectx: property (title), widget (QMenu, menuFile)
+#: mainwindow.cpp:1966 menubuilder.cpp:79:42
+#, fuzzy
+msgid "&File"
+msgstr "&ఫైల్"
 
 #. i18n: file: mainwindow.ui:121
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1389:75 rc.cpp:81
+#: mainwindow.cpp:1968:81 rc.cpp:87
 msgid "&New"
 msgstr "(&N) కొత్తది"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1398:51
+#: mainwindow.cpp:1977:57
 #, fuzzy
-msgid "&Open..."
+msgid "&Open…"
 msgstr "(&O) తెరువు"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1407:84 rc.cpp:90
+#: mainwindow.cpp:1986:90 rc.cpp:96
 msgid "&Close"
 msgstr "(&C) మూసివేయి"
 
@@ -285,255 +406,306 @@ msgstr "(&C) మూసివేయి"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1421:93 rc.cpp:99
+#: mainwindow.cpp:2000:99 rc.cpp:105
 msgid "&Save"
 msgstr "(&S) దాచు"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1430:102
-msgid "Save &As..."
-msgstr "(&A) ఇలా దాచు..."
+#: mainwindow.cpp:2009:108
+#, fuzzy
+msgid "Save &As…"
+msgstr "(&A) ఇలా దాచు…"
 
-#. i18n: file: mainwindow.ui:504
+#. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1441:264
+#: mainwindow.cpp:2020:201
 #, fuzzy
 msgid "&Export"
 msgstr "ఎగుమతి చెయ్యి"
 
-#: mainwindow.cpp:1442
+#: mainwindow.cpp:2021
 #, fuzzy
-msgid "&Molecule..."
+msgid "&Molecule…"
 msgstr "అణువు"
 
-#. i18n: file: mainwindow.ui:173
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1450:111
-msgid "&Graphics..."
-msgstr ""
+#: mainwindow.cpp:2028
+#, fuzzy
+msgid "Export Molecule…"
+msgstr "దిగుమతి మాలిక్యూల్ ఫైలు"
+
+#: mainwindow.cpp:2035
+msgid "&Graphics…"
+msgstr "&గ్రాఫిక్స్…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1458:60 rc.cpp:66
+#: mainwindow.cpp:2044:66 rc.cpp:72
 msgid "&Quit"
 msgstr "(&Q) విరమించు"
 
-#: mainwindow.cpp:1480
+#. i18n: file: mainwindow.ui:318
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:2054:195
+#, fuzzy
+msgid "Open Recent"
+msgstr "(&R) ఇటీవలివి తెరువండి"
+
+#: mainwindow.cpp:2066
 msgid "No recent files"
-msgstr ""
+msgstr "ఇటీవలి ఫైల్‌లు లేవు"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:1486 menubuilder.cpp:87:45
+#: mainwindow.cpp:2072 menubuilder.cpp:79:51
 msgid "&Edit"
 msgstr "(&E) సరిదిద్దు"
 
+#: mainwindow.cpp:2084
+msgid "&Copy Graphics"
+msgstr "&కాపీ గ్రాఫిక్స్"
+
+#: mainwindow.cpp:2088
+#, fuzzy
+#| msgid "Ctrl+A"
+msgid "Ctrl+Alt+C"
+msgstr "Ctrl+A"
+
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:1506 menubuilder.cpp:87:42
+#: mainwindow.cpp:2101 menubuilder.cpp:79:48
 msgid "&View"
 msgstr "(&V) చూడు"
 
-#: mainwindow.cpp:1507
-msgid "Set background color..."
-msgstr ""
+#: mainwindow.cpp:2102
+msgid "Set Background Color…"
+msgstr "నేపథ్య రంగును సెట్ చేయండి…"
 
-#: mainwindow.cpp:1511
+#: mainwindow.cpp:2106
+msgid "Rendering…"
+msgstr "రెండరింగ్…"
+
+#: mainwindow.cpp:2114
 msgid "Projection"
 msgstr "ప్రదర్శన"
 
-#. i18n: file: mainwindow.ui:463
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1512:240
+#: mainwindow.cpp:2115
 msgid "Perspective"
 msgstr "దృష్టికోణం"
 
-#. i18n: file: mainwindow.ui:471
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1519:243
+#: mainwindow.cpp:2122
 msgid "Orthographic"
-msgstr ""
+msgstr "ఆర్థోగ్రాఫిక్"
 
-#: mainwindow.cpp:1533
+#: mainwindow.cpp:2141
 #, fuzzy
 msgid "&Extensions"
 msgstr "పొడిగింతలు"
 
-#: mainwindow.cpp:1540 menubuilder.cpp:91
+#: mainwindow.cpp:2143
+msgid "User Interface Language…"
+msgstr "వినియోగదారు ఇంటర్‌ఫేస్ భాష…"
+
+#: mainwindow.cpp:2147
+msgid "&Periodic Table…"
+msgstr "&ఆవర్తన పట్టిక…"
+
+#: mainwindow.cpp:2153 menubuilder.cpp:83
 msgid "&Help"
 msgstr "&సహాయం"
 
-#: mainwindow.cpp:1653
+#. i18n: file: mainwindow.ui:182
+#. i18n: ectx: property (text), widget (QMenu, menuSelect)
+#: mainwindow.cpp:2154:120
+msgid "&About"
+msgstr "(&A) గురించి"
+
+#: mainwindow.cpp:2161
+msgid "&Discussion Forum"
+msgstr "&చర్చ ఫోరమ్"
+
+#: mainwindow.cpp:2165
+#, fuzzy
+#| msgid "Avogadro Website"
+msgid "&Avogadro Website"
+msgstr "అవగాడ్రో వెబ్సైట్"
+
+#: mainwindow.cpp:2169
+#, fuzzy
+#| msgid "Report a Bug"
+msgid "&Report a Bug"
+msgstr "సమస్యని తెలియపరచ౦డి"
+
+#: mainwindow.cpp:2173
+msgid "&Suggest a Feature"
+msgstr "&ఒక లక్షణాన్ని సూచించండి"
+
+#: mainwindow.cpp:2197
+msgid "System Language"
+msgstr "సిస్టమ్ భాష"
+
+#: mainwindow.cpp:2205
+msgid "Language"
+msgstr "భాష"
+
+#: mainwindow.cpp:2205
+#, fuzzy
+msgid "User Interface Language:"
+msgstr "వినియోగదారు ఇంటర్‌ఫేస్ భాష"
+
+#: mainwindow.cpp:2319
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "అన్ని మద్దతు ఉన్న ఫార్మాట్‌లు (%1);;అన్ని ఫైల్‌లు (*);;"
 
-#: mainwindow.cpp:1669
+#: mainwindow.cpp:2335
 #, fuzzy
-msgid "Do you want to save the changes you made in the document?"
+msgid "Do you want to save the changes to the document?"
 msgstr "జబితాలోని మార్పులను భద్రపర్చమంటారా?"
 
-#: mainwindow.cpp:1678
+#: mainwindow.cpp:2343
 msgid "Your changes will be lost if you don't save them."
 msgstr "మీరు చేసిన మార్పులు దాచనిచో పోవును."
 
-#: mainwindow.cpp:1685
+#: mainwindow.cpp:2351
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:1686
+#: mainwindow.cpp:2353
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:1752
-#, qt-format
-msgid "Error while loading FileFormat with id '%1'."
-msgstr ""
+#: mainwindow.cpp:2439
+#, fuzzy
+#| msgid "Network Update Check Failed"
+msgid "Network Download Failed"
+msgstr "జాలాకార వ్యవస్థ సవరణకు అవరోధం ఏర్పడింది"
 
-#: mainwindow.cpp:1773
-#, qt-format
-msgid "Avogadro timed out and doesn't know how to open '%1'."
-msgstr ""
+#: mainwindow.cpp:2440
+msgid "Network timeout or other error."
+msgstr "జాలాకార వ్యవస్థ  నిర్ణీతవ్యవధిలో ప్రతిస్పందించలేదు లేక ఇతర ప్రతిబంధకము ఏర్పడి ఉండవచ్చు ."
 
-#: mainwindow.cpp:1783
+#: mainwindow.cpp:2479
+#, fuzzy, qt-format
+msgid "Your version: %1"
+msgstr "మీ సంస్కరణ: % 1"
+
+#: mainwindow.cpp:2480
+#, fuzzy, qt-format
+#| msgctxt "%1 is the Git revision number."
+#| msgid "(Git revision: %1)"
+msgid "New version: %1"
+msgstr "(గిట్ సవరణ: %1)"
+
+#: mainwindow.cpp:2482
+msgid "An update is available, do you want to download it now?\n"
+msgstr "నవీకరణ అందుబాటులో ఉంది, మీరు దీన్ని ఇప్పుడే డౌన్‌లోడ్ చేయాలనుకుంటున్నారా?\n"
+
+#: mainwindow.cpp:2484
+msgid "Version Update"
+msgstr "సంస్కరణ నవీకరణ"
+
+#: mainwindow.cpp:2542
+#, fuzzy, qt-format
+msgid "Error while loading the “%1” file format."
+msgstr "“% 1” ఫైల్ ఫార్మాట్‌ను లోడ్ చేస్తున్నప్పుడు లోపం."
+
+#: mainwindow.cpp:2558
+#, fuzzy
+msgid "Select file format"
+msgstr "దాఖలు:"
+
+#: mainwindow.cpp:2563 mainwindow.cpp:2574
+#, fuzzy, qt-format
+msgid "Avogadro cannot open “%1”."
+msgstr "అవగాడ్రో \"% 1\"ని తెరవలేదు."
+
+#: mainwindow.cpp:2573
 #, fuzzy
 msgid "Cannot open files"
 msgstr "జబితా సేవ్ చేయలేను %1."
 
-#: mainwindow.cpp:1784
-#, qt-format
-msgid "Avogadro timed out and cannot open '%1'."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:32
-#. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: menubuilder.cpp:87:36
-msgid "&File"
-msgstr "&ఫైల్"
-
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
-#: menubuilder.cpp:87:39
+#: menubuilder.cpp:79:45
 msgid "&Build"
 msgstr "& నిర్మించు"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
-#: menubuilder.cpp:88:48
+#: menubuilder.cpp:80:54
 msgid "&Select"
 msgstr "(&S) ఎంచుకోండి"
 
-#: menubuilder.cpp:91
+#: menubuilder.cpp:83
 msgid "Se&ttings"
 msgstr "సన్నివేశాలు"
 
-#: menubuilder.cpp:91
+#: menubuilder.cpp:83
 #, fuzzy
 msgid "&Window"
 msgstr "కిటికీ"
 
-#: rpclistener.cpp:123
-msgid "Error starting RPC server:"
-msgstr ""
+#: viewfactory.cpp:22 viewfactory.cpp:31
+#, fuzzy
+#| msgid "New View"
+msgid "3D View"
+msgstr "కొత్త దృశ్యం"
 
-#: rpclistener.cpp:125
-msgid ""
-"An error occurred while starting Avogadro's RPC listener. This may be happen "
-"for a\n"
-"number of reasons:\n"
-"\tA previous instance of Avogadro may have crashed.\n"
-"\tA running Avogadro instance was too busy to respond.\n"
-"\n"
-"If no other Avogadro instance is running on this machine, it is safe to "
-"replace the dead\n"
-"server. Otherwise, this instance of avogadro may be started without RPC "
-"capabilities\n"
-"(this will prevent RPC enabled applications from communicating with "
-"Avogadro)."
-msgstr ""
-
-#: rpclistener.cpp:135
-msgid "Replace the dead server with a new instance."
-msgstr ""
-
-#: rpclistener.cpp:136
-msgid "Start without RPC capabilities."
-msgstr ""
-
-#. i18n: file: aboutdialog.ui:62
-#. i18n: ectx: property (text), widget (QLabel, versionLabel)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;"
-"\">Version:</span></p></body></html>"
-msgstr ""
+#: viewfactory.cpp:24 viewfactory.cpp:43
+msgid "VTK"
+msgstr "vtk"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:20pt; font-weight:600;\">0.1</"
-"span></p></body></html>"
-msgstr ""
-
-#. i18n: file: aboutdialog.ui:117
-#. i18n: ectx: property (text), widget (QLabel, libs)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">AvogadroLibs Version:</span></p></body></html>"
-msgstr ""
-
 #. i18n: file: aboutdialog.ui:124
 #. i18n: ectx: property (text), widget (QLabel, libsVersion)
 #. i18n: file: aboutdialog.ui:171
 #. i18n: ectx: property (text), widget (QLabel, qtVersion)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">0.1</"
-"span></p></body></html>"
-msgstr ""
+#. i18n: file: aboutdialog.ui:188
+#. i18n: ectx: property (text), widget (QLabel, sslVersion)
+msgid "0.1"
+msgstr "0.1"
 
-#. i18n: file: aboutdialog.ui:164
-#. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
-msgid ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">Qt "
-"Version:</span></p></body></html>"
-msgstr ""
-
-#. i18n: file: aboutdialog.ui:224
+#. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
 msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-Clause"
-"\"><span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;"
-"\">BSD-3-Clause</span></a></p></body></html>"
+"\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-"
+"Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
+"#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
 
-#. i18n: file: aboutdialog.ui:261
+#. i18n: file: aboutdialog.ui:278
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid ""
-"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span style="
-"\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
+"style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
 "span></a></p></body></html>"
 msgstr ""
 
-#. i18n: file: aboutdialog.ui:290
+#. i18n: file: aboutdialog.ui:307
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 msgid ""
-"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
-"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
+"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+"text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
 "body></html>"
 msgstr ""
 
-#. i18n: file: aboutdialog.ui:323
+#. i18n: file: aboutdialog.ui:334
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
 msgstr "సరే"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+O"
+msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctr+O"
 
@@ -544,6 +716,9 @@ msgstr "(&O) తెరువు"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+Q"
+msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
 
@@ -559,21 +734,33 @@ msgstr "& ఇటీవలివి తొలగించు"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+N"
+msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+W"
+msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+S"
+msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+Shift+S"
+msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Shift+S"
 
@@ -582,237 +769,250 @@ msgstr "Ctrl+Shift+S"
 msgid "Revert To Saved"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:182
+#. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&Full Screen Mode"
+msgid "Set &Background Color…"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:185
+#. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-msgid "Esc"
-msgstr "Esc"
-
-#. i18n: file: mainwindow.ui:194
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Set &Background Color..."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:199
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&About"
-msgstr "(&A) గురించి"
-
-#. i18n: file: mainwindow.ui:214
-#. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+Z"
+msgctxt "Undo"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
-#. i18n: file: mainwindow.ui:226
+#. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+Shift+Z"
+msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
 
-#. i18n: file: mainwindow.ui:235
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "New View"
-msgstr "కొత్త దృశ్యం"
-
-#. i18n: file: mainwindow.ui:247
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Close View"
-msgstr "దృశ్యమును  మూసివేయుము"
-
-#. i18n: file: mainwindow.ui:256
+#. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
 msgstr "నడుము"
 
-#. i18n: file: mainwindow.ui:265
+#. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:270
+#. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Paste"
 msgstr "అతికించుము"
 
-#. i18n: file: mainwindow.ui:273
+#. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+V"
+msgctxt "Paste"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
 
-#. i18n: file: mainwindow.ui:278
+#. i18n: file: mainwindow.ui:240
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Copy"
 msgstr "కాపీ చెయ్యి"
 
-#. i18n: file: mainwindow.ui:281
+#. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+C"
+msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
 
-#. i18n: file: mainwindow.ui:286
+#. i18n: file: mainwindow.ui:248
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Cut"
 msgstr "కత్తిరించుము"
 
-#. i18n: file: mainwindow.ui:289
+#. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+X"
+msgctxt "Cut"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
 
-#. i18n: file: mainwindow.ui:294
+#. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
 msgstr "చెరిపివేయము"
 
-#. i18n: file: mainwindow.ui:299
+#. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
 msgstr "అన్నిటినీ ఎంచుకొనుము"
 
-#. i18n: file: mainwindow.ui:302
+#. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+A"
+msgctxt "Select All"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
 
-#. i18n: file: mainwindow.ui:307
+#. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
 msgstr "ఎమీ ఎంచుకోకు"
 
-#. i18n: file: mainwindow.ui:310
+#. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
+#, fuzzy
+#| msgid "Ctrl+Shift+A"
+msgctxt "Select None"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
 
-#. i18n: file: mainwindow.ui:319
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Configure Avogadro..."
-msgstr "అవగాడ్రో ఆకృతీకరించుట"
-
-#. i18n: file: mainwindow.ui:330
+#. i18n: file: mainwindow.ui:280
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Tutorials"
 msgstr "పాఠాలు"
 
-#. i18n: file: mainwindow.ui:339
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Duplicate View"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:347
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Display Axes"
-msgstr "ప్రదర్శించు అక్షాలతో"
-
-#. i18n: file: mainwindow.ui:355
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Debug Information"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:363
+#. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
 msgstr "అవగాడ్రో సహాయం"
 
-#. i18n: file: mainwindow.ui:368
+#. i18n: file: mainwindow.ui:293
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Release Notes"
 msgstr "విడుదల నివేదిక"
 
-#. i18n: file: mainwindow.ui:373
+#. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
 msgstr "సమస్యని తెలియపరచ౦డి"
 
-#. i18n: file: mainwindow.ui:378
+#. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "FAQ"
 msgstr "సందేహాలు"
 
-#. i18n: file: mainwindow.ui:383
+#. i18n: file: mainwindow.ui:308
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Website"
 msgstr "అవగాడ్రో వెబ్సైట్"
 
-#. i18n: file: mainwindow.ui:392
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Plugin Manager..."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:401
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Project Tree Editor..."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:410
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Detach View"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:415
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Molecule File..."
-msgstr "అణు జబితా..."
-
-#. i18n: file: mainwindow.ui:426
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Use Quick Render"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:431
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "&Vector Graphics..."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:439
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Display Unit Cell Axes"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:447
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "All Molecules in File..."
-msgstr ""
-
-#. i18n: file: mainwindow.ui:452
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "Reset Display Types"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:476
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "SMILES"
-msgstr "నవ్వులు"
-
-#. i18n: file: mainwindow.ui:481
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-msgid "InChI"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:484
-#. i18n: ectx: property (toolTip), widget (QMenu, menuSelect)
-msgid "IUPAC InChI identifier"
-msgstr ""
-
-#. i18n: file: mainwindow.ui:489
+#. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
 msgstr ""
 
-#. i18n: file: mainwindow.ui:494
-#. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
-msgid "Open Recent"
-msgstr "(&R) ఇటీవలివి తెరువండి"
-
-#. i18n: file: mainwindow.ui:499
+#. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "&Import"
 msgstr "దిగుమతించు"
+
+#. i18n: file: renderingdialog.ui:31
+#. i18n: ectx: property (toolTip), widget (QLabel, label_2)
+msgid "Enable ambient occlusion shadows"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:34
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+msgid "Ambient Occlusion:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:43
+#. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
+#. i18n: file: renderingdialog.ui:118
+#. i18n: ectx: property (text), widget (QCheckBox, fogEnableCheckBox)
+#. i18n: file: renderingdialog.ui:220
+#. i18n: ectx: property (text), widget (QCheckBox, dofEnableCheckBox)
+#. i18n: file: renderingdialog.ui:325
+#. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
+msgid "Enable"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:85
+#. i18n: ectx: property (toolTip), widget (QLabel, label)
+msgid "Strength of the ambient shadows"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:88
+#. i18n: ectx: property (text), widget (QLabel, label)
+msgid "Shadow Strength:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:106
+#. i18n: ectx: property (toolTip), widget (QLabel, label_3)
+msgid "Fog effect for depth cue"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:109
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid "Fog:"
+msgstr "అస్పష్టత"
+
+#. i18n: file: renderingdialog.ui:140
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Fog Strength:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:170
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Fog Position:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:208
+#. i18n: ectx: property (toolTip), widget (QLabel, label_3)
+msgid "Add a depth blur"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:211
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid "Depth Blur:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:242
+#. i18n: ectx: property (toolTip), widget (QLabel, label_5)
+msgid "Strength of the depth blur"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:245
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Blur Strength :"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:272
+#. i18n: ectx: property (toolTip), widget (QLabel, label_5)
+msgid "Position of the depth blur"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:275
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Blur Position:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:313
+#. i18n: ectx: property (toolTip), widget (QLabel, label_4)
+msgid "Add an outline to edge atoms"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:316
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+msgid "Edge Outline:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:354
+#. i18n: ectx: property (text), widget (QPushButton, saveButton)
+msgid "Save"
+msgstr "భద్రపరచు"
+
+#. i18n: file: renderingdialog.ui:374
+#. i18n: ectx: property (text), widget (QPushButton, closeButton)
+#, fuzzy
+#| msgid "&Close"
+msgid "Close"
+msgstr "(&C) మూసివేయి"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
@@ -822,9 +1022,46 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ",,nagamalli.s@gmail.com,,,nagamalli.s@gmail.com"
 
-#~ msgctxt "%1 is the Git revision number."
-#~ msgid "(Git revision: %1)"
-#~ msgstr "(గిట్ సవరణ: %1)"
+#, fuzzy
+#~| msgid "User Selections"
+#~ msgid "Edge Detection:"
+#~ msgstr "వినియోగదారుని ఎంపికలు"
+
+#~ msgid "Esc"
+#~ msgstr "Esc"
+
+#~ msgid "Close View"
+#~ msgstr "దృశ్యమును  మూసివేయుము"
+
+#, fuzzy
+#~ msgid "Configure Avogadro…"
+#~ msgstr "అవగాడ్రో ఆకృతీకరించుట"
+
+#~ msgid "Display Axes"
+#~ msgstr "ప్రదర్శించు అక్షాలతో"
+
+#, fuzzy
+#~ msgid "Project Tree Editor…"
+#~ msgstr "వ్యవస్థ వంశావళి"
+
+#, fuzzy
+#~ msgid "Molecule File…"
+#~ msgstr "అణు జబితా..."
+
+#, fuzzy
+#~ msgid "All Molecules in File…"
+#~ msgstr "అణు జబితా..."
+
+#~ msgid "SMILES"
+#~ msgstr "నవ్వులు"
+
+#, fuzzy
+#~ msgid "&Open..."
+#~ msgstr "(&O) తెరువు"
+
+#, fuzzy
+#~ msgid "&Molecule..."
+#~ msgstr "అణువు"
 
 #~ msgid "Cut Molecule"
 #~ msgstr "అణువును ఖండిచు"
@@ -903,9 +1140,6 @@ msgstr ",,nagamalli.s@gmail.com,,,nagamalli.s@gmail.com"
 
 #~ msgid "Save..."
 #~ msgstr "భద్రపరచు..."
-
-#~ msgid "Save"
-#~ msgstr "భద్రపరచు"
 
 #~ msgid "Untitled %1"
 #~ msgstr "విశేష నామము లేని %1"
@@ -1002,9 +1236,6 @@ msgstr ",,nagamalli.s@gmail.com,,,nagamalli.s@gmail.com"
 #~ msgid "Label"
 #~ msgstr "గుర్తు"
 
-#~ msgid "User Selections"
-#~ msgstr "వినియోగదారుని ఎంపికలు"
-
 #~ msgid "Error"
 #~ msgstr "తప్పు"
 
@@ -1052,12 +1283,6 @@ msgstr ",,nagamalli.s@gmail.com,,,nagamalli.s@gmail.com"
 #~ msgctxt "Level of fog in the scene"
 #~ msgid "Undefined"
 #~ msgstr "నిర్వచించబడలేదు"
-
-#~ msgid "Network Update Check Failed"
-#~ msgstr "జాలాకార వ్యవస్థ సవరణకు అవరోధం ఏర్పడింది"
-
-#~ msgid "Network timeout or other error."
-#~ msgstr "జాలాకార వ్యవస్థ  నిర్ణీతవ్యవధిలో ప్రతిస్పందించలేదు లేక ఇతర ప్రతిబంధకము ఏర్పడి ఉండవచ్చు ."
 
 #~ msgctxt "Indicates an updated Avogadro version is available"
 #~ msgid "Updated Version of Avogadro Available"
@@ -1119,9 +1344,6 @@ msgstr ",,nagamalli.s@gmail.com,,,nagamalli.s@gmail.com"
 
 #~ msgid "Main Toolbar"
 #~ msgstr "ప్రధాన పనిముట్ల పట్టీ"
-
-#~ msgid "Project Tree"
-#~ msgstr "వ్యవస్థ వంశావళి"
 
 #~ msgid "&Paste"
 #~ msgstr "(&P) అతికించండి"
@@ -1191,6 +1413,3 @@ msgstr ",,nagamalli.s@gmail.com,,,nagamalli.s@gmail.com"
 
 #~ msgid "Quality:"
 #~ msgstr "నాణ్యత:"
-
-#~ msgid "Fog:"
-#~ msgstr "అస్పష్టత"
