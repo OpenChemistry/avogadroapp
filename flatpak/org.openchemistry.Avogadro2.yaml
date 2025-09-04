@@ -124,8 +124,8 @@ modules:
         dest: Downloads
       # libmsym
       - type: file
-        url: https://github.com/mcodev31/libmsym/archive/refs/tags/v0.2.3-paper.tar.gz
-        sha256: 3741ebe163cf40696570d6b62e4834ca587d43dcac9de713994cc5e2960fb8fd
+        url: https://github.com/mcodev31/libmsym/archive/85e47232376a8e735c2a7b5283f40b59b3953db1.tar.gz
+        sha256: 456e2c1e0c78e212115d4d332f557f108b6d41b730d5fd6639c2452df31b7096
         dest: Downloads
 
     post-install:
