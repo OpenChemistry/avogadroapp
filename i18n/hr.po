@@ -2,7 +2,7 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-# Milo Ivir <mail@milotype.de>, 2021, 2022, 2023, 2024.
+# Milo Ivir <mail@milotype.de>, 2021, 2022, 2023, 2024, 2025.
 # Norwid Behrnd <nbehrnd@yahoo.com>, 2024.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2025.
 msgid ""
@@ -11,8 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
 "PO-Revision-Date: 2025-09-08 18:01+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hr/>\n"
 "Language: hr\n"
@@ -662,7 +661,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:334
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
-msgstr "OK"
+msgstr "U redu"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
