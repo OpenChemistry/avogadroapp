@@ -12,6 +12,8 @@ if(USE_VTK)
   add_definitions(-DAVO_USE_VTK)
 endif()
 
+find_package(JKQtPlotter${QT_VERSION} REQUIRED)
+
 if(MSVC)
   add_definitions("-D_CRT_SECURE_NO_WARNINGS")
 else()
