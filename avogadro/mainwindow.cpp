@@ -433,7 +433,7 @@ void MainWindow::setupInterface()
   addDockWidget(Qt::LeftDockWidgetArea, m_sceneDock);
 
   // Our dock for configuring the display types.
-  m_viewDock = new QDockWidget(tr("Display Type Configuration"), this);
+  m_viewDock = new QDockWidget(tr("Display Type Settings"), this);
   addDockWidget(Qt::LeftDockWidgetArea, m_viewDock);
 
   // Our molecule dock.
