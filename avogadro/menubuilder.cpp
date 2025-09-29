@@ -56,9 +56,9 @@ MenuBuilder::MenuBuilder()
 #endif
   auto currentOS = QOperatingSystemVersion::current();
   if (oldQtVersion || currentOS.majorVersion() < 26) {
-    // If we're on Mac, check if we're on Tahoe or later.
-    if (currentOS.majorVersion() < 26)
-      m_showIcons = false;
+    // If we're on an old Qt version, don't show icons by default
+    // .. or if we're running on macOS before Tahoe
+    m_showIcons = false;
   }
 #endif
 }
@@ -72,6 +72,8 @@ void MenuBuilder::addAction(const QStringList& pathList, QAction* action,
     // If we're on Mac, don't show icons by default
     if (!m_showIcons) {
       action->setIcon(QIcon());
+    } else {
+      action->setIconVisibleInMenu(true);
     }
 #endif
     m_menuActions[path].append(action);
