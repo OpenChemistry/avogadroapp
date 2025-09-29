@@ -31,7 +31,7 @@
 #include "mainwindow.h"
 
 #ifdef Q_OS_MAC
-void removeMacSpecificMenuItems();
+// void removeMacSpecificMenuItems();
 #endif
 
 #ifdef Avogadro_ENABLE_RPC
@@ -103,7 +103,7 @@ int main(int argc, char* argv[])
 {
 #ifdef Q_OS_MAC
   // call some Objective-C++
-  removeMacSpecificMenuItems();
+  // removeMacSpecificMenuItems();
   // Native Mac applications do not have icons in the menus
   // until Tahoe (macOS 26)
   // (and only do this with Qt 6.7 or later)

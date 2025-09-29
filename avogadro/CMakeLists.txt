@@ -123,7 +123,7 @@ endif()
 # Handle Mac OS X specific icons etc.
 if(APPLE)
   # add some Objective-C++ code
-  list(APPEND avogadro_srcs mac.mm)
+  # list(APPEND avogadro_srcs mac.mm)
 
   # for all the translations, create a .lproj directory
   # Migrated from Avo 1.x - contributed by Geoff Hutchison

@@ -44,6 +44,8 @@
 		<false/>
 		<key>NSAppleScriptEnabled</key>
 		<true/>
+		<key>UIDesignRequiresCompatibility</key>
+		<true/>
 		<key>CFBundleDocumentTypes</key>
 		<array>
 			<dict>
