@@ -61,7 +61,6 @@ modules:
     config-opts:
       # Match GitHub builds as much as possible, which generally means using defaults
       - -DCMAKE_BUILD_TYPE=Debug
-      - -DUSE_VTK=ON
       - -DBUILD_GPL_PLUGINS=ON
       - -DBUILD_MOLEQUEUE=OFF
       - -DQT_VERSION=6
@@ -76,11 +75,11 @@ modules:
         path: openchemistry
 
       # Now fetch third-party stuff where the source is expected in `openchemistry/thirdparty`
-      # VTK
+      # JKQtPlotter
       - type: archive
-        url: https://github.com/Kitware/VTK/archive/4f02ae83179c6a1542ac3c335c73dea976578c63.tar.gz
-        sha256: 2d2da63dc660016628fc41c3a201e24d49a7e67b0d5d6fbbe655fb23f5099929
-        dest: thirdparty/VTK
+        url: https://github.com/jkriege2/JKQtPlotter/archive/5fd8951edc73a077096c84c5a4474c29f239ed66.tar.gz
+        sha256: 0deba5af19525f5411b12064c79469337651268b22d48e39fda469303b38539a
+        dest: thirdparty/jkqtplotter
       
       # Other third-party sources would normally be downloaded by Avogadro build on the fly
       # Flatpaks aren't allowed network access during build so have to download source archives
