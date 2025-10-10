@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-10-10 17:14+0000\n"
+"PO-Revision-Date: 2025-10-11 14:30+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
@@ -406,8 +406,6 @@ msgid "&Molecule…"
 msgstr "&Molekul…"
 
 #: mainwindow.cpp:2028
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
 msgstr "Ekspor Molekul…"
 
@@ -441,11 +439,11 @@ msgstr "&Edit"
 
 #: mainwindow.cpp:2084
 msgid "&Copy Graphics"
-msgstr ""
+msgstr "Salin Grafis"
 
 #: mainwindow.cpp:2088
 msgid "Ctrl+Alt+C"
-msgstr ""
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -496,22 +494,16 @@ msgid "&About"
 msgstr "&Tentang"
 
 #: mainwindow.cpp:2161
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
 msgstr "Forum &Diskusi"
 
 #: mainwindow.cpp:2165
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Web &Avogadro"
+msgstr "Situs Web &Avogadro"
 
 #: mainwindow.cpp:2169
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Laporkan Kesalahan Program"
+msgstr "Laporkan Bug"
 
 #: mainwindow.cpp:2173
 msgid "&Suggest a Feature"
