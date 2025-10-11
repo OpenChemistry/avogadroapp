@@ -206,7 +206,7 @@ elseif(WIN32)
 
   # configure the NSI and MSIX installer scripts
   configure_file("${AvogadroApp_SOURCE_DIR}/cmake/avogadro2.nsi.in" "${CMAKE_INSTALL_PREFIX}/avogadro2.nsi" @ONLY)
-  configure_file("${AvogadroApp_SOURCE_DIR}/cmake/AppManifest.xml.in" "${CMAKE_INSTALL_PREFIX}/AppxManifest.xml" @ONLY)
+  configure_file("${AvogadroApp_SOURCE_DIR}/cmake/AppxManifest.xml.in" "${CMAKE_INSTALL_PREFIX}/AppxManifest.xml" @ONLY)
 endif()
 
 if(USE_3DCONNEXION AND (WIN32 OR APPLE))
