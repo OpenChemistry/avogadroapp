@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+    xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+    xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+    xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+    IgnorableNamespaces="uap rescap">
+
+  <!-- Must match your Partner Center-assigned identity -->
+  <Identity
+      Name="AvogadroProject.Avogadro2"
+      Publisher="CN=CN=31EF52D4-76D2-4993-B363-42AD3F51D578, O=OpenChemistry, L=City, S=State, C=US"
+      Version="1.0.0.0" />
+
+  <Properties>
+    <DisplayName>ms-resource:AppDisplayName</DisplayName>
+    <PublisherDisplayName>Avogadro Project</PublisherDisplayName>
+    <Description>ms-resource:AppDescription</Description>
+    <Logo>share\icons\avogadro_logo.png</Logo>
+  </Properties>
+
+  <Resources>
+    <Resource Language="en-us"/>
+    <Resource Language="fr-fr"/>
+    <Resource Language="de-de"/>
+    <Resource Language="zh-cn"/>
+  </Resources>
+
+  <Dependencies>
+    <TargetDeviceFamily
+        Name="Windows.Desktop"
+        MinVersion="10.0.17763.0"
+        MaxVersionTested="10.0.22621.0" />
+  </Dependencies>
+
+  <Applications>
+    <Application
+        Id="Avogadro2"
+        Executable="bin\avogadro2.exe"
+        EntryPoint="Windows.FullTrustApplication">
+
+      <uap:VisualElements
+          DisplayName="ms-resource:AppDisplayName"
+          Description="ms-resource:AppDescription"
+          BackgroundColor="transparent"
+          Square150x150Logo="share\icons\Square150x150Logo.png"
+          Square44x44Logo="share\icons\Square44x44Logo.png">
+
+        <!-- Optional but highly recommended -->
+        <uap:DefaultTile
+            Wide310x150Logo="share\icons\Wide310x150Logo.png"
+            Square310x310Logo="share\icons\Square310x310Logo.png"
+            Square71x71Logo="share\icons\Square71x71Logo.png"
+            ShortName="Avogadro" />
+
+        <!-- Show the app name on medium and wide tiles -->
+        <uap:ShowNameOnTiles>
+          <uap:ShowOn Tile="square150x150Logo" />
+          <uap:ShowOn Tile="wide310x150Logo" />
+        </uap:ShowNameOnTiles>
+
+        <!-- Optional: foreground color override for tile text -->
+        <uap:SplashScreen Image="share\icons\SplashScreen.png" BackgroundColor="#0078D7"/>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>

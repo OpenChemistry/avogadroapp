@@ -1,0 +1,259 @@
+; Avogadro2 Installer Script
+!include "MUI2.nsh"
+
+; Basic Information
+!define APP_NAME "Avogadro2"
+!define APP_VERSION "@AvogadroApp_VERSION@"
+!define APP_PUBLISHER "Avogadro"
+!define APP_EXE "avogadro2.exe"
+!define INSTALL_DIR "$PROGRAMFILES\${APP_NAME}"
+
+; General Settings
+Name "${APP_NAME}"
+OutFile "Avogadro2-Setup.exe"
+InstallDir "${INSTALL_DIR}"
+InstallDirRegKey HKLM "Software\${APP_NAME}" "InstallDir"
+RequestExecutionLevel admin
+
+; Interface Settings
+!define MUI_ABORTWARNING
+!define MUI_ICON "${NSISDIR}\Contrib\Graphics\Icons\modern-install.ico"
+!define MUI_UNICON "${NSISDIR}\Contrib\Graphics\Icons\modern-uninstall.ico"
+
+; Pages
+!insertmacro MUI_PAGE_DIRECTORY
+!insertmacro MUI_PAGE_INSTFILES
+!insertmacro MUI_PAGE_FINISH
+
+!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_INSTFILES
+
+;--------------------------------
+; Upgrade logic
+;--------------------------------
+Function .onInit
+  ; Check if Avogadro 2 already installed
+  ReadRegStr $OLD_INSTDIR HKLM "Software\Avogadro2" "Install_Dir"
+  ${If} $OLD_INSTDIR != ""
+    MessageBox MB_YESNO|MB_ICONQUESTION "An existing version of Avogadro 2 was found at:$\n$OLD_INSTDIR$\n$\nDo you want to upgrade (overwrite) it?" IDYES do_upgrade IDNO no_upgrade
+    do_upgrade:
+      StrCpy $INSTDIR $OLD_INSTDIR
+      Goto done
+    no_upgrade:
+      ; continue to let user pick new directory
+    done:
+  ${EndIf}
+FunctionEnd
+
+; Language Selection
+!insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_LANGUAGE "Arabic"
+!insertmacro MUI_LANGUAGE "Basque"
+!insertmacro MUI_LANGUAGE "Croatian"
+!insertmacro MUI_LANGUAGE "Czech"
+!insertmacro MUI_LANGUAGE "Danish"
+!insertmacro MUI_LANGUAGE "Dutch"
+!insertmacro MUI_LANGUAGE "Esperanto"
+!insertmacro MUI_LANGUAGE "Estonian"
+!insertmacro MUI_LANGUAGE "Finnish"
+!insertmacro MUI_LANGUAGE "French"
+!insertmacro MUI_LANGUAGE "German"
+!insertmacro MUI_LANGUAGE "Greek"
+!insertmacro MUI_LANGUAGE "Hindi"
+!insertmacro MUI_LANGUAGE "Hungarian"
+!insertmacro MUI_LANGUAGE "Hebrew"
+!insertmacro MUI_LANGUAGE "Indonesian"
+!insertmacro MUI_LANGUAGE "Italian"
+!insertmacro MUI_LANGUAGE "Japanese"
+!insertmacro MUI_LANGUAGE "Korean"
+!insertmacro MUI_LANGUAGE "Malay"
+!insertmacro MUI_LANGUAGE "Norwegian"
+!insertmacro MUI_LANGUAGE "Polish"
+!insertmacro MUI_LANGUAGE "Portuguese"
+!insertmacro MUI_LANGUAGE "PortugueseBR"
+!insertmacro MUI_LANGUAGE "Romanian"
+!insertmacro MUI_LANGUAGE "Russian"
+!insertmacro MUI_LANGUAGE "Serbian"
+!insertmacro MUI_LANGUAGE "SimpChinese"
+!insertmacro MUI_LANGUAGE "Slovak"
+!insertmacro MUI_LANGUAGE "Slovenian"
+!insertmacro MUI_LANGUAGE "Spanish"
+!insertmacro MUI_LANGUAGE "Swedish"
+!insertmacro MUI_LANGUAGE "Thai"
+!insertmacro MUI_LANGUAGE "TradChinese"
+!insertmacro MUI_LANGUAGE "Turkish"
+!insertmacro MUI_LANGUAGE "Ukranian"
+!insertmacro MUI_LANGUAGE "Vietnamese"
+
+
+; Function to register file associations
+Function RegisterFileAssociation
+    ; Parameters: $0 = file extension (e.g., ".xyz")
+    ;            $1 = file type name (e.g., "XYZ.File")
+    ;            $2 = description (e.g., "XYZ Chemical File")
+    ;            $3 = icon file path
+    Pop $3
+    Pop $2
+    Pop $1
+    Pop $0
+
+    WriteRegStr HKCR "$0" "" "$1"
+    WriteRegStr HKCR "$1" "" "$2"
+    WriteRegStr HKCR "$1\DefaultIcon" "" "$3"
+    WriteRegStr HKCR "$1\shell" "" "open"
+    WriteRegStr HKCR "$1\shell\open" "" "Open with ${APP_NAME}"
+    WriteRegStr HKCR "$1\shell\open\command" "" '"$INSTDIR\bin\${APP_EXE}" "%1"'
+FunctionEnd
+
+; Function to unregister file associations
+Function un.UnregisterFileAssociation
+    ; Parameter: $0 = file extension
+    Pop $0
+
+    ReadRegStr $1 HKCR "$0" ""
+    DeleteRegKey HKCR "$1"
+    DeleteRegKey HKCR "$0"
+FunctionEnd
+
+; Installer Section
+Section "Install"
+    SetOutPath "$INSTDIR"
+
+    ; Copy bin directory
+    SetOutPath "$INSTDIR\bin"
+    File /r "bin\*.*"
+
+    ; Copy lib directory
+    SetOutPath "$INSTDIR\lib"
+    File /r "lib\*.*"
+
+    ; Copy share directory (includes icon files)
+    SetOutPath "$INSTDIR\share"
+    File /r "share\*.*"
+
+    ; Create uninstaller
+    SetOutPath "$INSTDIR"
+    WriteUninstaller "$INSTDIR\Uninstall.exe"
+
+    ; Create Start Menu shortcuts
+    CreateDirectory "$SMPROGRAMS\${APP_NAME}"
+    CreateShortcut "$SMPROGRAMS\${APP_NAME}\${APP_NAME}.lnk" "$INSTDIR\bin\${APP_EXE}"
+    CreateShortcut "$SMPROGRAMS\${APP_NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+
+    ; Create Desktop shortcut
+    CreateShortcut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\bin\${APP_EXE}"
+
+    ; Register file associations
+    Push ".xyz"
+    Push "Avogadro2.XYZ"
+    Push "XYZ Chemical File"
+    Push "$INSTDIR\share\avogadro2\doc.ico"
+    Call RegisterFileAssociation
+
+    Push ".pdb"
+    Push "Avogadro2.PDB"
+    Push "Protein Data Bank File"
+    Push "$INSTDIR\share\avogadro2\doc.ico"
+    Call RegisterFileAssociation
+
+    Push ".cml"
+    Push "Avogadro2.CML"
+    Push "Chemical Markup Language File"
+    Push "$INSTDIR\share\avogadro2\cml.ico"
+    Call RegisterFileAssociation
+
+    Push ".cjson"
+    Push "Avogadro2.CJSON"
+    Push "Chemical JSON File"
+    Push "$INSTDIR\share\avogadro2\cjson.ico"
+    Call RegisterFileAssociation
+
+    Push ".mol"
+    Push "Avogadro2.MOL"
+    Push "MDL Molfile"
+    Push "$INSTDIR\share\avogadro2\doc.ico"
+    Call RegisterFileAssociation
+
+    Push ".mol2"
+    Push "Avogadro2.MOL2"
+    Push "Tripos Mol2 File"
+    Push "$INSTDIR\share\avogadro2\doc.ico"
+    Call RegisterFileAssociation
+
+    Push ".sdf"
+    Push "Avogadro2.SDF"
+    Push "Structure Data File"
+    Push "$INSTDIR\share\avogadro2\doc.ico"
+    Call RegisterFileAssociation
+
+    ; Notify Windows of file association changes
+    System::Call 'shell32.dll::SHChangeNotify(i, i, i, i) v (0x08000000, 0, 0, 0)'
+
+    ; Write registry keys for Add/Remove Programs
+    WriteRegStr HKLM "Software\${APP_NAME}" "InstallDir" "$INSTDIR"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayName" "${APP_NAME}"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "UninstallString" "$INSTDIR\Uninstall.exe"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayIcon" "$INSTDIR\bin\${APP_EXE}"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "Publisher" "${APP_PUBLISHER}"
+    WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "DisplayVersion" "${APP_VERSION}"
+    WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "NoModify" 1
+    WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "NoRepair" 1
+
+SectionEnd
+
+; Uninstaller Section
+Section "Uninstall"
+    ; Unregister file associations
+    Push ".xyz"
+    Call un.UnregisterFileAssociation
+
+    Push ".pdb"
+    Call un.UnregisterFileAssociation
+
+    Push ".cml"
+    Call un.UnregisterFileAssociation
+
+    Push ".cjson"
+    Call un.UnregisterFileAssociation
+
+    Push ".mol"
+    Call un.UnregisterFileAssociation
+
+    Push ".mol2"
+    Call un.UnregisterFileAssociation
+
+    Push ".sdf"
+    Call un.UnregisterFileAssociation
+
+    ; Notify Windows of file association changes
+    System::Call 'shell32.dll::SHChangeNotify(i, i, i, i) v (0x08000000, 0, 0, 0)'
+
+    ; Remove files and directories
+    RMDir /r "$INSTDIR\bin"
+    RMDir /r "$INSTDIR\lib"
+    RMDir /r "$INSTDIR\share"
+    Delete "$INSTDIR\Uninstall.exe"
+    RMDir "$INSTDIR"
+
+    ; Remove shortcuts
+    Delete "$SMPROGRAMS\${APP_NAME}\${APP_NAME}.lnk"
+    Delete "$SMPROGRAMS\${APP_NAME}\Uninstall.lnk"
+    RMDir "$SMPROGRAMS\${APP_NAME}"
+    Delete "$DESKTOP\${APP_NAME}.lnk"
+
+    ; Remove registry keys
+    DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
+    DeleteRegKey HKLM "Software\${APP_NAME}"
+
+SectionEnd
+
+;--------------------------------
+; Preserve user data
+;--------------------------------
+; Optional: keep user settings
+Function un.onInit
+  MessageBox MB_YESNO|MB_ICONQUESTION "Do you want to remove user configuration files in %APPDATA%\Avogadro?" IDYES remove_user_data IDNO keep_user_data
+  remove_user_data:
+    RMDir /r "$APPDATA\Avogadro"
+  keep_user_data:
+FunctionEnd
