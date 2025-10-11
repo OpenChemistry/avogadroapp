@@ -9,13 +9,14 @@
 # "C.Y.A.N" <bd3alz@gmail.com>, 2024.
 # Syifa Tadjoedin <31january2003@gmail.com>, 2024.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
+# Arif Budiman <arifpedia@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2024-12-22 02:35+0000\n"
-"PO-Revision-Date: 2025-08-27 08:02+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"PO-Revision-Date: 2025-10-11 14:30+0000\n"
+"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
 "Language: id\n"
@@ -23,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.14-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #. i18n: file: aboutdialog.ui:62
@@ -52,7 +53,7 @@ msgstr "Versi SSL:"
 
 #: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr "Tidak ada molekul yang diatur dalam Format File Latar Belakang!"
+msgstr "Tidak ada set molekul yang ditetapkan dalam BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
 msgid "No file format set in BackgroundFileFormat!"
@@ -60,7 +61,7 @@ msgstr "Tidak ada format file yang diatur di BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
 msgid "No file name set in BackgroundFileFormat!"
-msgstr "Tidak ada nama file di setel dalam file format latarbelakang!"
+msgstr "Tidak ada nama berkas yang ditetapkan dalam BackgroundFileFormat!"
 
 #: mainwindow.cpp:327
 msgid "Ready…"
@@ -98,7 +99,7 @@ msgstr "Alat"
 
 #: mainwindow.cpp:697
 msgid "Untitled"
-msgstr "Tanpa judul"
+msgstr "Tanpa Judul"
 
 #: mainwindow.cpp:702
 #, qt-format
@@ -267,7 +268,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1361
 msgid "Export Bitmap Graphics"
-msgstr "Ekspor gambar Bitmap"
+msgstr "Ekspor Grafik Bitmap"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -278,7 +279,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:1378
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Tidak bisa menyimpan berkas %1."
+msgstr "Tidak dapat menyimpan berkas %1."
 
 #: mainwindow.cpp:1495
 msgid ""
@@ -405,8 +406,6 @@ msgid "&Molecule…"
 msgstr "&Molekul…"
 
 #: mainwindow.cpp:2028
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
 msgstr "Ekspor Molekul…"
 
@@ -436,21 +435,21 @@ msgstr "Tidak ada File barusan"
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:2072 menubuilder.cpp:79:51
 msgid "&Edit"
-msgstr "&Dirubah"
+msgstr "&Edit"
 
 #: mainwindow.cpp:2084
 msgid "&Copy Graphics"
-msgstr ""
+msgstr "Salin Grafis"
 
 #: mainwindow.cpp:2088
 msgid "Ctrl+Alt+C"
-msgstr ""
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:2101 menubuilder.cpp:79:48
 msgid "&View"
-msgstr "&Tampilkan"
+msgstr "&Lihat"
 
 #: mainwindow.cpp:2102
 msgid "Set Background Color…"
@@ -474,7 +473,7 @@ msgstr "Ortografi"
 
 #: mainwindow.cpp:2141
 msgid "&Extensions"
-msgstr "&Ekstensi"
+msgstr "&Perpanjangan"
 
 #: mainwindow.cpp:2143
 msgid "User Interface Language…"
@@ -495,22 +494,16 @@ msgid "&About"
 msgstr "&Tentang"
 
 #: mainwindow.cpp:2161
-#, fuzzy
-#| msgid "Discussion Forum"
 msgid "&Discussion Forum"
 msgstr "Forum &Diskusi"
 
 #: mainwindow.cpp:2165
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Web &Avogadro"
+msgstr "Situs Web &Avogadro"
 
 #: mainwindow.cpp:2169
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
-msgstr "Laporkan Kesalahan Program"
+msgstr "Laporkan Bug"
 
 #: mainwindow.cpp:2173
 msgid "&Suggest a Feature"
@@ -553,11 +546,11 @@ msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2439
 msgid "Network Download Failed"
-msgstr "Proses unduhan telah gagal"
+msgstr "Unduhan Jaringan Gagal"
 
 #: mainwindow.cpp:2440
 msgid "Network timeout or other error."
-msgstr "Ada kesalahan batasan waktu atau karena kesalahan lain."
+msgstr "Waktu tunggu jaringan habis atau kesalahan lain."
 
 #: mainwindow.cpp:2479
 #, qt-format
@@ -599,7 +592,7 @@ msgstr "Tidak bisa membuka file"
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
 #: menubuilder.cpp:79:45
 msgid "&Build"
-msgstr "Mem&bangun"
+msgstr "&Bangun"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
@@ -672,7 +665,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:334
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
-msgstr "OK"
+msgstr "Baiklah"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -750,7 +743,7 @@ msgstr "Ctrl+Shift+Z"
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "Tengah"
+msgstr "Pusat"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -760,7 +753,7 @@ msgstr "Sejajarkan tampilan ke sumbu"
 #. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Paste"
-msgstr "Tempelkan"
+msgstr "Tempel"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -793,7 +786,7 @@ msgstr "Ctrl+X"
 #. i18n: file: mainwindow.ui:256
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Clear"
-msgstr "Hapus"
+msgstr "Jelas"
 
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -809,7 +802,7 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Tidak Ada yang dipilih"
+msgstr "Pilih Tidak Ada"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
