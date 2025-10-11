@@ -191,6 +191,22 @@ elseif(UNIX)
     RENAME "org.openchemistry.Avogadro2.svg")
 elseif(WIN32)
   list(APPEND avogadro_srcs icons/avogadro.rc)
+  # copy icons
+  install(FILES "icons/avogadro.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/doc.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/cml.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/cjson.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+
+  # for the MSIX installer
+  install(FILES "icons/Avogadro2-310x150.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/Avogadro2_44.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/Avogadro2_71.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/Avogadro2_150.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/Avogadro2_310.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+
+  # configure the NSI and MSIX installer scripts
+  configure_file("${AvogadroApp_SOURCE_DIR}/../cmake/avogadro2.nsi.in" "${CMAKE_INSTALL_PREFIX}/avogadro2.nsi" @ONLY)
+  configure_file("${AvogadroApp_SOURCE_DIR}/../cmake/AppManifest.xml.in" "${CMAKE_INSTALL_PREFIX}/AppxManifest.xml" @ONLY)
 endif()
 
 if(USE_3DCONNEXION AND (WIN32 OR APPLE))
