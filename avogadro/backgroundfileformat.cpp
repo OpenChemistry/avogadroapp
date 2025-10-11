@@ -71,7 +71,7 @@ void BackgroundFileFormat::read()
     else {
       // write it to a temporary file and we'll read it back in
       // some formats (like the generic output) need a file
-      // not just a string bugger
+      // not just a string buffer
 
       // first, we need the *name* of the file, not the full path
       // because we're going to save a copy in a temp directory
