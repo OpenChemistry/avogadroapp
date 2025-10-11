@@ -19,6 +19,11 @@ AboutDialog::AboutDialog(QWidget* parent_)
 {
   m_ui->setupUi(this);
 
+  // description text
+  // mostly to get picked up for the installer
+  // and Linux .desktop file
+  QString description(tr("Molecular editor and visualizer"));
+
   QString html("<html><head/><body><p>"
                "<span style=\" font-size:%1pt; font-weight:600;\">%2</span>"
                "</p></body></html>");
