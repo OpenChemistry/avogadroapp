@@ -48,14 +48,26 @@
             Square310x310Logo="share\icons\avogadro2_310.png"
             Square71x71Logo="share\icons\avogadro2_71.png"
             ShortName="Avogadro" />
-
-        <!-- Show the app name on medium and wide tiles -->
-        <uap:ShowNameOnTiles>
-          <uap:ShowOn Tile="square150x150Logo" />
-          <uap:ShowOn Tile="wide310x150Logo" />
-        </uap:ShowNameOnTiles>
-
       </uap:VisualElements>
+
+      <Extensions>
+        <!-- File associations for common molecular file formats -->
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="avogadromolecule">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.cjson</uap:FileType>
+              <uap:FileType>.cml</uap:FileType>
+              <uap:FileType>.xyz</uap:FileType>
+              <uap:FileType>.pdb</uap:FileType>
+              <uap:FileType>.mol</uap:FileType>
+              <uap:FileType>.mol2</uap:FileType>
+              <uap:FileType>.sdf</uap:FileType>
+              </uap:SupportedFileTypes>
+            <uap:DisplayName>Molecule File</uap:DisplayName>
+            <uap:Logo>share\icons\avogadro2_44.png</uap:Logo>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+      </Extensions>
     </Application>
   </Applications>
 
