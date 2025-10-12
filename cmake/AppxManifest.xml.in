@@ -9,7 +9,7 @@
   <Identity
       Name="AvogadroProject.Avogadro2"
       Publisher="CN=31EF52D4-76D2-4993-B363-42AD3F51D578, O=OpenChemistry, L=Pittsburgh, S=PA, C=US"
-      Version="@AvogadroApp_VERSION@" />
+      Version="@AvogadroApp_VERSION@.0" />
 
   <Properties>
     <DisplayName>Avogadro 2</DisplayName>
