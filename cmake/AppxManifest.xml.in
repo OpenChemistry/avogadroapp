@@ -8,7 +8,7 @@
   <!-- Must match your Partner Center-assigned identity -->
   <Identity
       Name="AvogadroProject.Avogadro2"
-      Publisher="CN=CN=31EF52D4-76D2-4993-B363-42AD3F51D578, O=OpenChemistry, L=Pittsburgh, S=PA, C=US"
+      Publisher="CN=31EF52D4-76D2-4993-B363-42AD3F51D578, O=OpenChemistry, L=Pittsburgh, S=PA, C=US"
       Version="@AvogadroApp_VERSION@" />
 
   <Properties>
