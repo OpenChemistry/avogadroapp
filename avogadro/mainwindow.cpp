@@ -1,6 +1,6 @@
 /******************************************************************************
-  This source file is part of the Avogadro project.
-  This source code is released under the 3-Clause BSD License, (see "LICENSE").
+ This source file is part of the Avogadro project.
+ This source code is released under the 3-Clause BSD License, (see "LICENSE").
 ******************************************************************************/
 
 #include "mainwindow.h"
@@ -534,6 +534,37 @@ void MainWindow::setupInterface()
   // connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
   connect(m_multiViewWidget, &QtGui::MultiViewWidget::activeWidgetChanged, this,
           &MainWindow::viewActivated);
+}
+
+void MainWindow::closeActiveMolecule()
+{
+  if (!saveFileIfNeeded()) {
+    return;
+  }
+
+  Molecule* currentMol = m_molecule;
+  const QList<Molecule*> molecules = m_moleculeModel->molecules();
+  const int idx = molecules.indexOf(currentMol);
+
+  if (idx < 0 || molecules.isEmpty()) {
+    return;
+  }
+
+  if (idx == 0) {
+    // if the current molecule is the first one in the list, and it is not the
+    // only one we make the next molecule the starting one
+    if (molecules.size() > 1) {
+      setMolecule(molecules[idx + 1]);
+    } else {
+      newMolecule();
+    }
+  }
+  // otherwise we just set the current molecule to the one before
+  else {
+    setMolecule(molecules[idx - 1]);
+  }
+
+  m_moleculeModel->removeItem(currentMol);
 }
 
 void MainWindow::closeEvent(QCloseEvent* e)
@@ -2063,12 +2094,13 @@ void MainWindow::buildMenu()
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::importFile);
 
+  // close current molecule
   action = new QAction(tr("&Close"), this);
   action->setShortcut(QKeySequence::Close);
   action->setIcon(QIcon::fromTheme("document-close"));
   m_menuBuilder->addAction(path, action, 981);
   m_fileToolBar->addAction(action);
-  connect(action, &QAction::triggered, this, &QWidget::close);
+  connect(action, &QAction::triggered, this, &MainWindow::closeActiveMolecule);
 
   // Separator (after open recent)
   action = new QAction("", this);
