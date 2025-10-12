@@ -28,23 +28,6 @@ RequestExecutionLevel admin
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
 
-;--------------------------------
-; Upgrade logic
-;--------------------------------
-Function .onInit
-  ; Check if Avogadro 2 already installed
-  ReadRegStr $OLD_INSTDIR HKLM "Software\Avogadro2" "Install_Dir"
-  ${If} $OLD_INSTDIR != ""
-    MessageBox MB_YESNO|MB_ICONQUESTION "An existing version of Avogadro 2 was found at:$\n$OLD_INSTDIR$\n$\nDo you want to upgrade (overwrite) it?" IDYES do_upgrade IDNO no_upgrade
-    do_upgrade:
-      StrCpy $INSTDIR $OLD_INSTDIR
-      Goto done
-    no_upgrade:
-      ; continue to let user pick new directory
-    done:
-  ${EndIf}
-FunctionEnd
-
 ; Language Selection
 !insertmacro MUI_LANGUAGE "English"
 !insertmacro MUI_LANGUAGE "Arabic"
@@ -82,7 +65,6 @@ FunctionEnd
 !insertmacro MUI_LANGUAGE "Thai"
 !insertmacro MUI_LANGUAGE "TradChinese"
 !insertmacro MUI_LANGUAGE "Turkish"
-!insertmacro MUI_LANGUAGE "Ukranian"
 !insertmacro MUI_LANGUAGE "Vietnamese"
 
 
