@@ -19,7 +19,7 @@
   </Properties>
 
   <Resources>
-    <Resource Language="x-generate" />
+    <Resource Language="en-us" />
   </Resources>
 
   <Dependencies>
@@ -36,8 +36,8 @@
         EntryPoint="Windows.FullTrustApplication">
 
       <uap:VisualElements
-          DisplayName="ms-resource:AppDisplayName"
-          Description="ms-resource:AppDescription"
+          DisplayName="Avogadro 2"
+          Description="Molecular editor and visualizer"
           BackgroundColor="transparent"
           Square150x150Logo="share\icons\Avogadro2_150.png"
           Square44x44Logo="share\icons\avogadro2_44.png">
