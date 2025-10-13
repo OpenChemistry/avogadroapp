@@ -2,7 +2,9 @@
     <qresource prefix="/">
         <file>icons/avogadro.png</file>
         <file>icons/avogadro@2x.png</file>
-        <file>icons/Avogadro2_About.png</file>
-        <file>icons/Avogadro2_About@2x.png</file>
+        <file>icons/Avogadro2-about-dark.png</file>
+        <file>icons/Avogadro2-about-dark@2x.png</file>
+        <file>icons/Avogadro2-about-light.png</file>
+        <file>icons/Avogadro2-about-light@2x.png</file>
     </qresource>
 </RCC>
