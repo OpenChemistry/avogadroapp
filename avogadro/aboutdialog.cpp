@@ -41,12 +41,21 @@ AboutDialog::AboutDialog(QWidget* parent_)
   m_ui->sslVersion->setText(
     html.arg("10").arg(QSslSocket::sslLibraryVersionString()));
 
-  // Add support for a 2x replacement (mainly Mac OS X retina at this point).
-  if (window()->devicePixelRatio() == 2) {
-    QPixmap pix(":/icons/Avogadro2_About@2x.png");
+  // check for light or dark mode
+  const QPalette defaultPalette;
+  // is the text lighter than the window color?
+  bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
+                   defaultPalette.color(QPalette::Window).lightness());
+  QString theme = darkMode ? "dark" : "light";
+  QString pixels = window()->devicePixelRatio() == 2 ? "@2x" : "";
+
+  QString path(":/icons/Avogadro2-about-" + theme + pixels + ".png");
+  QPixmap pix(path);
+
+  if (window()->devicePixelRatio() == 2)
     pix.setDevicePixelRatio(2);
-    m_ui->Image->setPixmap(pix);
-  }
+
+  m_ui->Image->setPixmap(QPixmap(path));
 }
 
 AboutDialog::~AboutDialog()
