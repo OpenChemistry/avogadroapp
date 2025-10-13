@@ -112,7 +112,21 @@ public:
   {
     this->XMLStream = nullptr;
   }
-  ~XMLEventObserver() { delete this->XMLStream; }
+  ~XMLEventObserver()
+  {
+    if (this->XMLStream) {
+      this->XMLStream->writeEndElement(); // close properly
+      this->XMLStream->writeEndDocument();
+      delete this->XMLStream;
+      this->XMLStream = nullptr;
+    }
+
+    // Flush any remaining content to the stream
+    if (this->Stream && !this->XMLString.isEmpty()) {
+      *this->Stream << this->XMLString;
+      this->Stream->flush(); // Ensure it's written
+    }
+  }
 
 protected:
   virtual void setStream(QTextStream* stream) override
@@ -123,8 +137,10 @@ protected:
       delete this->XMLStream;
       this->XMLStream = nullptr;
     }
-    if (this->Stream)
+    if (this->Stream) {
       *this->Stream << this->XMLString;
+      this->Stream->flush(); // make sure to flush
+    }
 
     this->XMLString = QString();
     pqEventObserver::setStream(stream);
@@ -197,6 +213,8 @@ protected:
     widget = this->XMLStream->attributes().value("widget").toString();
     command = this->XMLStream->attributes().value("command").toString();
     arguments = this->XMLStream->attributes().value("arguments").toString();
+    eventType =
+      this->XMLStream->attributes().value("eventType").toString().toInt();
     return SUCCESS;
   }
 };
@@ -306,6 +324,12 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   qDebug() << " setting interface ";
 #endif
   setupInterface();
+
+#ifdef QTTESTING
+  m_testUtility = new pqTestUtility(this);
+  m_testUtility->addEventObserver("xml", new XMLEventObserver(this));
+  m_testUtility->addEventSource("xml", new XMLEventSource(this));
+#endif
 
   // Build up the standard menus, incorporate dynamic menus.
 #ifdef Q_OS_WIN
@@ -2022,19 +2046,14 @@ void MainWindow::buildMenu()
   QStringList testingPath;
   testingPath << tr("&Testing");
   QAction* actionRecord = new QAction(this);
-  actionRecord->setText(tr("Record test…"));
+  actionRecord->setText(tr("&Record Test…"));
   m_menuBuilder->addAction(testingPath, actionRecord, 10);
   QAction* actionPlay = new QAction(this);
-  actionPlay->setText(tr("Play test…"));
+  actionPlay->setText(tr("&Play Test…"));
   m_menuBuilder->addAction(testingPath, actionPlay, 5);
 
   connect(actionRecord, SIGNAL(triggered()), SLOT(record()));
   connect(actionPlay, SIGNAL(triggered()), SLOT(play()));
-
-  m_testUtility = new pqTestUtility(this);
-  m_testUtility->addEventObserver("xml", new XMLEventObserver(this));
-  m_testUtility->addEventSource("xml", new XMLEventSource(this));
-
   m_testExit = true;
 #endif
 
