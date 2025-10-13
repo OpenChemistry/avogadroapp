@@ -1,6 +1,9 @@
 ; Avogadro2 Installer Script
 !include "MUI2.nsh"
 
+; Compressor
+SetCompressor /SOLID lzma
+
 ; Basic Information
 !define APP_NAME "Avogadro2"
 !define APP_VERSION "@AvogadroApp_VERSION@"
