@@ -297,6 +297,8 @@ private slots:
 
   void checkUpdate();
 
+  void closeActiveMolecule();
+
   void finishUpdateRequest(QNetworkReply*);
 
   void registerToolCommand(QString command, QString description);
