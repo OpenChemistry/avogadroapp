@@ -679,7 +679,7 @@ void setWidgetMolecule(T* glWidget, M* mol)
 {
   glWidget->setMolecule(mol);
   glWidget->updateScene();
-  glWidget->resetCamera();
+  // glWidget->resetCamera();
 }
 
 void setDefaultViews(MultiViewWidget* viewWidget)
@@ -1200,8 +1200,8 @@ void MainWindow::rendererInvalid()
   QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
                        tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
                          .arg(widget ? widget->error() : tr("Unknown error")));
-  // Process events, and then set a single shot timer. This is needed to ensure
-  // the RPC server also exits cleanly.
+  // Process events, and then set a single shot timer. This is needed to
+  // ensure the RPC server also exits cleanly.
   QApplication::processEvents();
   QTimer::singleShot(500, this, &QWidget::close);
 }
