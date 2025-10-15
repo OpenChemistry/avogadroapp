@@ -4,14 +4,14 @@
 # Andi Chandler <andi@gowling.com>, 2023, 2024.
 # matterhorn103 <milner94@live.co.uk>, 2023.
 # matterhorn103 <83813148+matterhorn103@users.noreply.github.com>, 2024.
+# Ashay <ashays185@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-10-11 15:44+0000\n"
-"PO-Revision-Date: 2024-11-11 00:57+0000\n"
-"Last-Translator: matterhorn103 <83813148+matterhorn103@users.noreply.github."
-"com>\n"
+"PO-Revision-Date: 2025-10-16 08:08+0000\n"
+"Last-Translator: Ashay <ashays185@gmail.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_GB/>\n"
 "Language: en_GB\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.14-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Molecular editor and visualiser"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
