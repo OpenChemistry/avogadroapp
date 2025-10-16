@@ -679,7 +679,8 @@ void setWidgetMolecule(T* glWidget, M* mol)
 {
   glWidget->setMolecule(mol);
   glWidget->updateScene();
-  glWidget->resetCamera();
+  if (mol->atomCount() == 0)
+    glWidget->resetCamera();
 }
 
 void setDefaultViews(MultiViewWidget* viewWidget)
