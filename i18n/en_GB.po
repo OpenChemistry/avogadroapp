@@ -1,7 +1,7 @@
 # Marcus D. Hanwell <mdh55@pitt.edu>, 2008.
 # Marcus D. Hanwell <marcus@cryos.org>, 2009.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
-# Andi Chandler <andi@gowling.com>, 2023, 2024.
+# Andi Chandler <andi@gowling.com>, 2023, 2024, 2025.
 # matterhorn103 <milner94@live.co.uk>, 2023.
 # matterhorn103 <83813148+matterhorn103@users.noreply.github.com>, 2024.
 # Ashay <ashays185@gmail.com>, 2025.
@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-10-11 15:44+0000\n"
-"PO-Revision-Date: 2025-10-16 08:08+0000\n"
-"Last-Translator: Ashay <ashays185@gmail.com>\n"
+"PO-Revision-Date: 2025-10-20 04:50+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_GB/>\n"
 "Language: en_GB\n"
@@ -80,7 +80,7 @@ msgstr "View Configuration"
 
 #: mainwindow.cpp:440
 msgid "Files"
-msgstr ""
+msgstr "Files"
 
 #: mainwindow.cpp:451
 msgid "Layers"
