@@ -1201,8 +1201,8 @@ void MainWindow::rendererInvalid()
   QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
                        tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
                          .arg(widget ? widget->error() : tr("Unknown error")));
-  // Process events, and then set a single shot timer. This is needed to
-  // ensure the RPC server also exits cleanly.
+  // Process events, and then set a single shot timer. This is needed to ensure
+  // the RPC server also exits cleanly.
   QApplication::processEvents();
   QTimer::singleShot(500, this, &QWidget::close);
 }
@@ -1255,6 +1255,12 @@ void MainWindow::layerActivated(const QModelIndex& idx)
 
 void MainWindow::moleculeActivated(const QModelIndex& idx)
 {
+  QList<Molecule*> molecules = m_moleculeModel->molecules();
+  if (idx.isValid() && idx.row() == molecules.size()) {
+    newMolecule();
+    return;
+  }
+
   auto* obj = static_cast<QObject*>(idx.internalPointer());
   if (auto* mol = qobject_cast<Molecule*>(obj)) {
     if (idx.column() == 0)
@@ -1263,7 +1269,6 @@ void MainWindow::moleculeActivated(const QModelIndex& idx)
     // Deleting a molecule, we must also create a new one if it is the last.
     if (idx.column() == 1) {
       if (m_molecule == mol) {
-        QList<Molecule*> molecules = m_moleculeModel->molecules();
         int molIdx = molecules.indexOf(mol);
         if (molIdx > 0)
           setMolecule(molecules[molIdx - 1]);
