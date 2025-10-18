@@ -620,6 +620,10 @@ void MainWindow::changeEvent(QEvent* e)
       if (tool != nullptr)
         tool->setIcon(darkMode);
     }
+
+    // change the theme of the molecule model
+    if (m_moleculeModel != nullptr)
+      m_moleculeModel->loadIcons(darkMode);
   }
 
   QMainWindow::changeEvent(e);

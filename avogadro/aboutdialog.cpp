@@ -47,6 +47,11 @@ AboutDialog::AboutDialog(QWidget* parent_)
   bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
                    defaultPalette.color(QPalette::Window).lightness());
   QString theme = darkMode ? "dark" : "light";
+  loadImage(theme);
+}
+
+void AboutDialog::loadImage(const QString& theme)
+{
   QString pixels = window()->devicePixelRatio() == 2 ? "@2x" : "";
 
   QString path(":/icons/Avogadro2-about-" + theme + pixels + ".png");
@@ -56,6 +61,25 @@ AboutDialog::AboutDialog(QWidget* parent_)
     pix.setDevicePixelRatio(2);
 
   m_ui->Image->setPixmap(QPixmap(path));
+}
+
+void AboutDialog::changeEvent(QEvent* e)
+{
+  // it's supposed to be through a theme change
+  // but on macOS, it seems to be triggered
+  // by a palette change, so we handle both
+  if (e->type() == QEvent::ApplicationPaletteChange ||
+      e->type() == QEvent::PaletteChange || e->type() == QEvent::ThemeChange) {
+    e->accept();
+
+    const QPalette defaultPalette;
+    // is the text lighter than the window color?
+    bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
+                     defaultPalette.color(QPalette::Window).lightness());
+
+    QString theme = darkMode ? "dark" : "light";
+    loadImage(theme);
+  }
 }
 
 AboutDialog::~AboutDialog()

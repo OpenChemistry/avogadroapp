@@ -21,6 +21,11 @@ public:
   AboutDialog(QWidget* Parent);
   ~AboutDialog();
 
+  void loadImage(const QString& theme);
+
+  // handle theme changes
+  void changeEvent(QEvent* event) override;
+
 private:
   Ui::AboutDialog* m_ui;
 };
