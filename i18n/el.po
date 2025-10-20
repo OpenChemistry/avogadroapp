@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2025-10-11 15:44+0000\n"
+"POT-Creation-Date: 2025-10-19 02:53+0000\n"
 "PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/avogadro/"
@@ -61,161 +61,161 @@ msgstr ""
 msgid "No file name set in BackgroundFileFormat!"
 msgstr ""
 
-#: mainwindow.cpp:337
+#: mainwindow.cpp:361
 msgid "Ready…"
 msgstr ""
 
-#: mainwindow.cpp:422
+#: mainwindow.cpp:446
 #, fuzzy
 msgid "Tool"
 msgstr "Εργαλεία"
 
-#: mainwindow.cpp:426
+#: mainwindow.cpp:450
 msgid "Display Types"
 msgstr "Τύποι Προβολής"
 
-#: mainwindow.cpp:436
+#: mainwindow.cpp:460
 msgid "View Configuration"
 msgstr ""
 
-#: mainwindow.cpp:440
+#: mainwindow.cpp:464
 msgid "Files"
 msgstr ""
 
-#: mainwindow.cpp:451
+#: mainwindow.cpp:475
 msgid "Layers"
 msgstr ""
 
-#: mainwindow.cpp:479
+#: mainwindow.cpp:503
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Αρχείο"
 
-#: mainwindow.cpp:484
+#: mainwindow.cpp:508
 #, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Εργαλεία"
 
-#: mainwindow.cpp:747
+#: mainwindow.cpp:807
 #, fuzzy
 msgid "Untitled"
 msgstr "χωρίς τίτλο"
 
-#: mainwindow.cpp:752
+#: mainwindow.cpp:812
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr ""
 
-#: mainwindow.cpp:808
+#: mainwindow.cpp:868
 msgid "Restart needed"
 msgstr ""
 
-#: mainwindow.cpp:809
+#: mainwindow.cpp:869
 msgid "Please restart Avogadro to use the new language."
 msgstr ""
 
-#: mainwindow.cpp:829 mainwindow.cpp:1597
+#: mainwindow.cpp:889 mainwindow.cpp:1662
 msgid "Chemical Markup Language"
 msgstr ""
 
-#: mainwindow.cpp:830 mainwindow.cpp:1596
+#: mainwindow.cpp:890 mainwindow.cpp:1661
 msgid "Chemical JSON"
 msgstr ""
 
-#: mainwindow.cpp:836
+#: mainwindow.cpp:896
 msgid "Open chemical file"
 msgstr ""
 
-#: mainwindow.cpp:854 mainwindow.cpp:878 mainwindow.cpp:1484
-#: mainwindow.cpp:2653
+#: mainwindow.cpp:914 mainwindow.cpp:938 mainwindow.cpp:1549
+#: mainwindow.cpp:2714
 msgid "Cannot open file"
 msgstr ""
 
-#: mainwindow.cpp:855 mainwindow.cpp:879 mainwindow.cpp:1485
+#: mainwindow.cpp:915 mainwindow.cpp:939 mainwindow.cpp:1550
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr ""
 
-#: mainwindow.cpp:868
+#: mainwindow.cpp:928
 msgid "Open Molecule"
 msgstr ""
 
-#: mainwindow.cpp:892
+#: mainwindow.cpp:952
 msgid "Commands"
 msgstr ""
 
-#: mainwindow.cpp:892
+#: mainwindow.cpp:952
 msgid "Input Generators"
 msgstr ""
 
-#: mainwindow.cpp:892
+#: mainwindow.cpp:952
 msgid "File Formats"
 msgstr ""
 
-#: mainwindow.cpp:893
+#: mainwindow.cpp:953
 msgctxt "atomic electrostatics"
 msgid "Charges"
 msgstr ""
 
-#: mainwindow.cpp:894
+#: mainwindow.cpp:954
 msgctxt "potential energy calculators"
 msgid "Force Fields"
 msgstr ""
 
-#: mainwindow.cpp:898
+#: mainwindow.cpp:958
 msgid "Install Plugin Script"
 msgstr ""
 
-#: mainwindow.cpp:898
+#: mainwindow.cpp:958
 msgid "Script Type:"
 msgstr ""
 
-#: mainwindow.cpp:973 mainwindow.cpp:1480
+#: mainwindow.cpp:1033 mainwindow.cpp:1545
 msgid "Select file reader"
 msgstr ""
 
-#: mainwindow.cpp:1003
+#: mainwindow.cpp:1063
 msgid "Reading File"
 msgstr ""
 
-#: mainwindow.cpp:1005
+#: mainwindow.cpp:1065
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
 
-#: mainwindow.cpp:1065
+#: mainwindow.cpp:1125
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
-#: mainwindow.cpp:1070
+#: mainwindow.cpp:1130
 msgid "File error"
 msgstr ""
 
-#: mainwindow.cpp:1071
+#: mainwindow.cpp:1131
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
 
-#: mainwindow.cpp:1098
+#: mainwindow.cpp:1158
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr ""
 
-#: mainwindow.cpp:1105
+#: mainwindow.cpp:1165
 msgid "Error saving file"
 msgstr ""
 
-#: mainwindow.cpp:1106
+#: mainwindow.cpp:1166
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -223,11 +223,11 @@ msgid ""
 "%2"
 msgstr ""
 
-#: mainwindow.cpp:1145
+#: mainwindow.cpp:1205
 msgid "Error: Failed to initialize OpenGL context"
 msgstr ""
 
-#: mainwindow.cpp:1146
+#: mainwindow.cpp:1206
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -235,46 +235,46 @@ msgid ""
 "%1"
 msgstr ""
 
-#: mainwindow.cpp:1147
+#: mainwindow.cpp:1207
 msgid "Unknown error"
 msgstr ""
 
-#: mainwindow.cpp:1425
+#: mainwindow.cpp:1490
 msgid "Common image formats"
 msgstr "Κοινοί τύποι εικόνων"
 
-#: mainwindow.cpp:1427
+#: mainwindow.cpp:1492
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
-#: mainwindow.cpp:1427
+#: mainwindow.cpp:1492
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1428
+#: mainwindow.cpp:1493
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1428
+#: mainwindow.cpp:1493
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1437
+#: mainwindow.cpp:1502
 msgid "Export Bitmap Graphics"
 msgstr "Εξαγωγή Γραφικών Bitmap"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1453 mainwindow.cpp:1570 mainwindow.cpp:2425:39
+#: mainwindow.cpp:1518 mainwindow.cpp:1635 mainwindow.cpp:2486:36
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1454
+#: mainwindow.cpp:1519
 #, fuzzy, qt-format
 msgid "Cannot save file %1."
 msgstr "Μη δυνατή αποθήκευση του αρχείου %1."
 
-#: mainwindow.cpp:1571
+#: mainwindow.cpp:1636
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -282,23 +282,23 @@ msgid ""
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
 
-#: mainwindow.cpp:1578
+#: mainwindow.cpp:1643
 msgid "Export"
 msgstr "Εξαγωγή"
 
-#: mainwindow.cpp:1602
+#: mainwindow.cpp:1667
 msgid "Save chemical file"
 msgstr ""
 
-#: mainwindow.cpp:1646
+#: mainwindow.cpp:1711
 msgid "Export Molecule"
 msgstr ""
 
-#: mainwindow.cpp:1745
+#: mainwindow.cpp:1810
 msgid "Saving File in Progress…"
 msgstr ""
 
-#: mainwindow.cpp:1747
+#: mainwindow.cpp:1812
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -308,45 +308,43 @@ msgstr ""
 "Αποθήκευση αρχείου «%1»\n"
 "με «%2»"
 
-#: mainwindow.cpp:1890
+#: mainwindow.cpp:1955
 #, qt-format
 msgid "&Undo %1"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1893 mainwindow.cpp:2159:123
+#: mainwindow.cpp:1958 mainwindow.cpp:2220:120
 msgid "&Undo"
 msgstr "Α&ναίρεση"
 
-#: mainwindow.cpp:1898
+#: mainwindow.cpp:1963
 #, qt-format
 msgid "&Redo %1"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1901 mainwindow.cpp:2167:129
+#: mainwindow.cpp:1966 mainwindow.cpp:2228:126
 msgid "&Redo"
 msgstr "Επανα&φορά"
 
-#: mainwindow.cpp:2023
+#: mainwindow.cpp:2088
 msgid "&Testing"
 msgstr ""
 
-#: mainwindow.cpp:2025
-#, fuzzy
-msgid "Record test…"
-msgstr "Δοκιμή Εγγραφής…"
+#: mainwindow.cpp:2090
+msgid "&Record Test…"
+msgstr ""
 
-#: mainwindow.cpp:2028
-#, fuzzy
-msgid "Play test…"
-msgstr "Δοκιμή Αναπαραγωγής…"
+#: mainwindow.cpp:2093
+msgid "&Play Test…"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:2042 menubuilder.cpp:100:42
+#: mainwindow.cpp:2102 menubuilder.cpp:100:39
 msgid "&File"
 msgstr "&Αρχείο"
 
@@ -354,13 +352,13 @@ msgstr "&Αρχείο"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2044:81 rc.cpp:87
+#: mainwindow.cpp:2104:78 rc.cpp:84
 msgid "&New"
 msgstr "&Νέο"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2055:57
+#: mainwindow.cpp:2115:54
 #, fuzzy
 msgid "&Open…"
 msgstr "&Άνοιγμα…"
@@ -369,7 +367,7 @@ msgstr "&Άνοιγμα…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2066:90 rc.cpp:96
+#: mainwindow.cpp:2127:87 rc.cpp:93
 msgid "&Close"
 msgstr "&Κλείσιμο"
 
@@ -377,34 +375,34 @@ msgstr "&Κλείσιμο"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2079:99 rc.cpp:105
+#: mainwindow.cpp:2140:96 rc.cpp:102
 msgid "&Save"
 msgstr "&Αποθήκευση"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2091:108
+#: mainwindow.cpp:2152:105
 #, fuzzy
 msgid "Save &As…"
 msgstr "Αποθήκευση &ως…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2104:201
+#: mainwindow.cpp:2165:198
 #, fuzzy
 msgid "&Export"
 msgstr "&Εξαγωγή"
 
-#: mainwindow.cpp:2105
+#: mainwindow.cpp:2166
 #, fuzzy
 msgid "&Molecule…"
 msgstr "&Μόριο…"
 
-#: mainwindow.cpp:2112
+#: mainwindow.cpp:2173
 msgid "Export Molecule…"
 msgstr ""
 
-#: mainwindow.cpp:2119
+#: mainwindow.cpp:2180
 #, fuzzy
 msgid "&Graphics…"
 msgstr "&Γραφικά…"
@@ -413,194 +411,194 @@ msgstr "&Γραφικά…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2128:66 rc.cpp:72
+#: mainwindow.cpp:2189:63 rc.cpp:69
 msgid "&Quit"
 msgstr "Έ&ξοδος"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2138:195
+#: mainwindow.cpp:2199:192
 #, fuzzy
 msgid "Open Recent"
 msgstr "Άνοιγμα πρόσ&φατου"
 
-#: mainwindow.cpp:2152
+#: mainwindow.cpp:2213
 msgid "No recent files"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:2158 menubuilder.cpp:100:51
+#: mainwindow.cpp:2219 menubuilder.cpp:100:48
 msgid "&Edit"
 msgstr "&Επεξεργασία"
 
-#: mainwindow.cpp:2175
+#: mainwindow.cpp:2236
 msgid "&Copy Graphics"
 msgstr ""
 
-#: mainwindow.cpp:2179
+#: mainwindow.cpp:2240
 msgid "Ctrl+Alt+C"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:2192 menubuilder.cpp:100:48
+#: mainwindow.cpp:2253 menubuilder.cpp:100:45
 msgid "&View"
 msgstr "Π&ροβολή"
 
-#: mainwindow.cpp:2193
+#: mainwindow.cpp:2254
 #, fuzzy
 msgid "Set Background Color…"
 msgstr "Ορισμός χρώματος φόντου…"
 
-#: mainwindow.cpp:2197
+#: mainwindow.cpp:2258
 msgid "Rendering…"
 msgstr ""
 
-#: mainwindow.cpp:2205
+#: mainwindow.cpp:2266
 msgid "Projection"
 msgstr "Προβολή"
 
-#: mainwindow.cpp:2206
+#: mainwindow.cpp:2267
 msgid "Perspective"
 msgstr "Προοπτική"
 
-#: mainwindow.cpp:2213
+#: mainwindow.cpp:2274
 msgid "Orthographic"
 msgstr "Ορθογραφικές"
 
-#: mainwindow.cpp:2232
+#: mainwindow.cpp:2293
 #, fuzzy
 msgid "&Extensions"
 msgstr "&Επεκτάσεις"
 
-#: mainwindow.cpp:2234
+#: mainwindow.cpp:2295
 msgid "User Interface Language…"
 msgstr ""
 
-#: mainwindow.cpp:2238
+#: mainwindow.cpp:2299
 msgid "&Periodic Table…"
 msgstr ""
 
-#: mainwindow.cpp:2244 menubuilder.cpp:104
+#: mainwindow.cpp:2305 menubuilder.cpp:104
 msgid "&Help"
 msgstr "&Βοήθεια"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2245:120
+#: mainwindow.cpp:2306:117
 msgid "&About"
 msgstr "&Σχετικά"
 
-#: mainwindow.cpp:2250
+#: mainwindow.cpp:2311
 msgid "&Discussion Forum"
 msgstr ""
 
-#: mainwindow.cpp:2254
+#: mainwindow.cpp:2315
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
 msgstr "Ιστοσελίδα Avogadro"
 
-#: mainwindow.cpp:2258
+#: mainwindow.cpp:2319
 #, fuzzy
 #| msgid "Report a Bug"
 msgid "&Report a Bug"
 msgstr "Αναφορά σφάλματος"
 
-#: mainwindow.cpp:2262
+#: mainwindow.cpp:2323
 msgid "&Suggest a Feature"
 msgstr ""
 
-#: mainwindow.cpp:2286
+#: mainwindow.cpp:2347
 msgid "System Language"
 msgstr ""
 
-#: mainwindow.cpp:2294
+#: mainwindow.cpp:2355
 msgid "Language"
 msgstr ""
 
-#: mainwindow.cpp:2294
+#: mainwindow.cpp:2355
 msgid "User Interface Language:"
 msgstr ""
 
-#: mainwindow.cpp:2410
+#: mainwindow.cpp:2471
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr ""
 
-#: mainwindow.cpp:2426
+#: mainwindow.cpp:2487
 #, fuzzy
 msgid "Do you want to save the changes to the document?"
 msgstr "Επιθυμείτε να αποθηκευτούν οι αλλαγές που κάνατε στο αρχείο?"
 
-#: mainwindow.cpp:2434
+#: mainwindow.cpp:2495
 msgid "Your changes will be lost if you don't save them."
 msgstr "Οι αλλαγές θα χαθούν οριστικά αν δεν τις αποθηκεύσετε."
 
-#: mainwindow.cpp:2439
+#: mainwindow.cpp:2500
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:2441
+#: mainwindow.cpp:2502
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2528
+#: mainwindow.cpp:2589
 msgid "Network Download Failed"
 msgstr ""
 
-#: mainwindow.cpp:2529
+#: mainwindow.cpp:2590
 msgid "Network timeout or other error."
 msgstr "Αποσύνδεση δικτύου η αλλο σφάλμα."
 
-#: mainwindow.cpp:2570
+#: mainwindow.cpp:2631
 #, qt-format
 msgid "Your version: %1"
 msgstr ""
 
-#: mainwindow.cpp:2571
+#: mainwindow.cpp:2632
 #, qt-format
 msgid "New version: %1"
 msgstr ""
 
-#: mainwindow.cpp:2573
+#: mainwindow.cpp:2634
 msgid "An update is available, do you want to download it now?\n"
 msgstr ""
 
-#: mainwindow.cpp:2575
+#: mainwindow.cpp:2636
 msgid "Version Update"
 msgstr ""
 
-#: mainwindow.cpp:2633
+#: mainwindow.cpp:2694
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Σφάλμα κατά τη φόρτωση της μορφής αρχείου «%1»."
 
-#: mainwindow.cpp:2649
+#: mainwindow.cpp:2710
 msgid "Select file format"
 msgstr ""
 
-#: mainwindow.cpp:2654 mainwindow.cpp:2665
+#: mainwindow.cpp:2715 mainwindow.cpp:2726
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Το Avogadro δεν μπορεί να ανοίξει το «%1»."
 
-#: mainwindow.cpp:2664
+#: mainwindow.cpp:2725
 msgid "Cannot open files"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
-#: menubuilder.cpp:100:45
+#: menubuilder.cpp:100:42
 msgid "&Build"
 msgstr "&Κατασκευή"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
-#: menubuilder.cpp:101:54
+#: menubuilder.cpp:101:51
 msgid "&Select"
 msgstr "&Επιλογή"
 
@@ -638,26 +636,18 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-"
 "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
-"#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
+"#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
 
-#. i18n: file: aboutdialog.ui:278
+#. i18n: file: aboutdialog.ui:291
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid ""
 "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
-"style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"style=\" text-decoration: underline; color:#0096ff;\">two.avogadro.cc</"
 "span></a></p></body></html>"
 msgstr ""
 
-#. i18n: file: aboutdialog.ui:307
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-msgid ""
-"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
-"text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
-"body></html>"
-msgstr ""
-
-#. i18n: file: aboutdialog.ui:334
+#. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
 msgstr "Εντάξει"
@@ -1008,6 +998,14 @@ msgstr ""
 "kolxoz83@gmail.com,,elkosmas@gmail.com,,,,athmakrigiannis@gmail.com,,,a."
 "brzns@gmail.com,kolxoz83@gmail.com,,elkosmas@gmail.com,,,,"
 "athmakrigiannis@gmail.com"
+
+#, fuzzy
+#~ msgid "Record test…"
+#~ msgstr "Δοκιμή Εγγραφής…"
+
+#, fuzzy
+#~ msgid "Play test…"
+#~ msgstr "Δοκιμή Αναπαραγωγής…"
 
 #, fuzzy
 #~ msgid "Molecules"
