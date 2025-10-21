@@ -5,13 +5,14 @@
 # matterhorn103 <milner94@live.co.uk>, 2023.
 # matterhorn103 <83813148+matterhorn103@users.noreply.github.com>, 2024.
 # Ashay <ashays185@gmail.com>, 2025.
+# Geoff Hutchison <geoff.hutchison@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-10-19 02:53+0000\n"
-"PO-Revision-Date: 2025-10-16 08:08+0000\n"
-"Last-Translator: Ashay <ashays185@gmail.com>\n"
+"PO-Revision-Date: 2025-10-21 13:02+0000\n"
+"Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_GB/>\n"
 "Language: en_GB\n"
@@ -346,7 +347,7 @@ msgstr "&Testing"
 
 #: mainwindow.cpp:2090
 msgid "&Record Test…"
-msgstr ""
+msgstr "&Record Test…"
 
 #: mainwindow.cpp:2093
 msgid "&Play Test…"
