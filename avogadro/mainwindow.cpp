@@ -2607,21 +2607,50 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
   qDebug() << " update comparing " << lastVersion << " to " << latestRelease;
 #endif
   QStringList releaseComponents = latestRelease.split('.');
-  QStringList currentComponents = lastVersion.split('.');
-  if (releaseComponents.size() != 3 || currentComponents.size() != 3)
+  QStringList lastComponents = lastVersion.split('.');
+  QStringList currentComponents = QString(AvogadroApp_VERSION).split('.');
+
+  if (releaseComponents.size() != 3 || lastComponents.size() != 3 ||
+      currentComponents.size() != 3)
     // something is very wrong
     return;
 
-  if (currentComponents[0] > releaseComponents[0] ||
-      (currentComponents[0] == releaseComponents[0] &&
-       currentComponents[1] > releaseComponents[1]))
-    // no update needed
-    return;
+  int lastMajor = lastComponents[0].toInt();
+  int lastMinor = lastComponents[1].toInt();
+  int lastPatch = lastComponents[2].toInt();
+  int currentMajor = currentComponents[0].toInt();
+  int currentMinor = currentComponents[1].toInt();
+  int currentPatch = currentComponents[2].toInt();
+  int releaseMajor = releaseComponents[0].toInt();
+  int releaseMinor = releaseComponents[1].toInt();
+  int releasePatch = releaseComponents[2].toInt();
 
-  if (currentComponents[0] == releaseComponents[0] &&
-      currentComponents[1] == releaseComponents[1] &&
-      currentComponents[2] >= releaseComponents[2]) {
+  // okay, decide if we're using the version from settings
+  // or the compiled version to determine if an update is available
+  // e.g., if currentComponents is newer than last
+  // we should save the current version in settings
+  // and use that to see if there's an update
+
+  if (currentMajor > lastMajor ||
+      (currentMajor == lastMajor && currentMinor > lastMinor) ||
+      (currentMajor == lastMajor && currentMinor == lastMinor &&
+       currentPatch > lastPatch)) {
+    settings.setValue("currentVersion", AvogadroApp_VERSION);
+    settings.sync();
+  }
+
+  // they're presumably the same now, so let's see if the current
+  // version is newer than the latest release
+
+  if (currentMajor > releaseMajor ||
+      (currentMajor == releaseMajor && currentMinor > releaseMinor) ||
+      (currentMajor == releaseMajor && currentMinor == releaseMinor &&
+       currentComponents[2] > releaseComponents[2])) {
     // this will work for like "0-36-whatever" > "0" but not "1"
+#ifdef NDEBUG
+    qDebug() << "current version is newer than latest release";
+#endif
+    // no update needed
     return;
   }
 
