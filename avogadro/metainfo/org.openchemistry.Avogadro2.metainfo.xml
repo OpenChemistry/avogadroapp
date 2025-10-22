@@ -78,6 +78,19 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.102.0" date="2025-10-23">
+      <url type="details">https://two.avogadro.cc/install/versions/v1102.html</url>
+      <description>
+        <p>Highlights</p>
+        <ul>
+        <li>This release is intended as a final beta before a 2.0 stable release</li>
+        <li>Add the popular auto optimize tool</li>
+        <li>Updated charts, including spectra using the JKQtPlotter framework</li>
+        <li>Use `pixi` if available to install Python and plugins</li>
+        <li>A pile of bug fixes, updated language translations, and more</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.101.0" date="2025-09-14">
       <url type="details">https://two.avogadro.cc/install/versions/v1101.html</url>
       <description>
