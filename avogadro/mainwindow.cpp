@@ -2645,7 +2645,7 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
   if (currentMajor > releaseMajor ||
       (currentMajor == releaseMajor && currentMinor > releaseMinor) ||
       (currentMajor == releaseMajor && currentMinor == releaseMinor &&
-       currentComponents[2] > releaseComponents[2])) {
+       currentComponents[2] >= releaseComponents[2])) {
     // this will work for like "0-36-whatever" > "0" but not "1"
 #ifdef NDEBUG
     qDebug() << "current version is newer than latest release";
