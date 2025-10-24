@@ -90,7 +90,7 @@ jobs:
       run: flatpak build-bundle repo Avogadro2.flatpak org.openchemistry.Avogadro2 test
 
     - name: Upload bundle
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         path: Avogadro2.flatpak
     

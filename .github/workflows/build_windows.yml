@@ -130,7 +130,7 @@ jobs:
     - name: Upload
       if: matrix.config.artifact != 0
       id: upload-artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         path: ${{ runner.workspace }}/build/avogadroapp/Avogadro*.*
         name: ${{ matrix.config.artifact }}
@@ -150,7 +150,7 @@ jobs:
     - name: Upload
       if: matrix.config.artifact != 0
       id: upload-signed-artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         path: ${{ runner.workspace }}/build/Avogadro2*.*
         name: 'Win64-signed.exe'
