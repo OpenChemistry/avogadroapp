@@ -1666,8 +1666,8 @@ bool MainWindow::saveFileAs(bool async)
 
   QFileDialog saveDialog(this, tr("Save chemical file"), dir, filter);
   saveDialog.setAcceptMode(QFileDialog::AcceptSave);
-  saveDialog.exec();
-  if (saveDialog.selectedFiles().isEmpty()) // user cancel
+  bool ok = saveDialog.exec();
+  if (!ok || saveDialog.selectedFiles().isEmpty()) // user cancel
     return false;
 
   QString fileName = saveDialog.selectedFiles().first();
