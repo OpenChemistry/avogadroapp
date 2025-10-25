@@ -193,6 +193,7 @@ elseif(WIN32)
   list(APPEND avogadro_srcs icons/avogadro.rc)
   # copy icons
   install(FILES "icons/avogadro.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/avogadro.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
   install(FILES "icons/doc.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
   install(FILES "icons/cml.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
   install(FILES "icons/cjson.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
