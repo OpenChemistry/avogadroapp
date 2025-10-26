@@ -32,12 +32,12 @@ jobs:
     - name: Checkout avogadroapp
       uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       with:
-        repository: openchemistry/avogadroapp
         path: openchemistry/avogadroapp
 
     - name: Checkout avogadrolibs
       uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       with:
+        repository: openchemistry/avogadrolibs
         path: openchemistry/avogadrolibs
 
     - name: Checkout i18n
@@ -46,11 +46,11 @@ jobs:
         repository: openchemistry/avogadro-i18n
         path: openchemistry/avogadro-i18n
 
-    - name: Checkout avogadrogenerators
+    - name: Checkout avogenerators
       uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       with:
         repository: openchemistry/avogenerators
-        path: openchemistry/avogadrogenerators
+        path: openchemistry/avogenerators
 
     - name: Checkout crystals
       uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
