@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-10-19 02:53+0000\n"
-"PO-Revision-Date: 2025-10-11 18:07+0000\n"
+"PO-Revision-Date: 2025-10-27 06:02+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.14.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -353,11 +353,11 @@ msgstr "&Sına"
 
 #: mainwindow.cpp:2090
 msgid "&Record Test…"
-msgstr ""
+msgstr "Sınamayı &Kaydet…"
 
 #: mainwindow.cpp:2093
 msgid "&Play Test…"
-msgstr ""
+msgstr "Sınamayı &Oynat…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -641,6 +641,10 @@ msgid ""
 "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
 "#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Lisans: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\""
+">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:291
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -649,6 +653,9 @@ msgid ""
 "style=\" text-decoration: underline; color:#0096ff;\">two.avogadro.cc</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0096ff;\""
+">two.avogadro.cc</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
