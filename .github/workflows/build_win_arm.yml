@@ -1,4 +1,4 @@
-name: Windows Build
+name: Windows ARM Build
 # Many thanks to Cristian Adam for examples
 # e.g. https://github.com/cristianadam/HelloWorld/blob/master/.github/workflows/build_cmake.yml
 # https://cristianadam.eu/20191222/using-github-actions-with-c-plus-plus-and-cmake/
@@ -28,8 +28,8 @@ jobs:
       matrix:
         config:
         - {
-            name: "Windows Qt6", artifact: "Win64.exe",
-            os: windows-latest,
+            name: "Windows Qt6 ARM", artifact: "Win-ARM.exe",
+            os: windows-11-arm,
             cc: "cl", cxx: "cl",
             build_type: "Release",
             cmake_flags: "-DCMAKE_TOOLCHAIN_FILE=/c/vcpkg/scripts/buildsystems/vcpkg.cmake -DUSE_SYSTEM_EIGEN=ON -DUSE_SYSTEM_LIBARCHIVE=ON -DUSE_SYSTEM_LIBXML2=ON -DUSE_SYSTEM_ZLIB=ON",
@@ -53,7 +53,7 @@ jobs:
       if: runner.os == 'Windows'
       uses: ilammy/msvc-dev-cmd@0b201ec74fa43914dc39ae48a89fd1d8cb592756 # v1.13.0
       with:
-        arch: x64
+        arch: arm64
 
     - name: Install Dependencies (Windows)
       if: runner.os == 'Windows'
@@ -81,10 +81,10 @@ jobs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        gh release download -R prefix-dev/pixi -p "pixi-x86_64-pc-windows-msvc.exe"
-        # wget https://github.com/prefix-dev/pixi/releases/latest/download/pixi-x86_64-pc-windows-msvc.exe
+        gh release download -R prefix-dev/pixi -p "pixi-aarch64-pc-windows-msvc.exe"
+        # wget https://github.com/prefix-dev/pixi/releases/latest/download/pixi-aarch64-pc-windows-msvc.exe
         # move pixi to prefix/bin
-        mv pixi-x86_64-pc-windows-msvc.exe prefix/bin/pixi.exe
+        mv pixi-aarch64-pc-windows-msvc.exe prefix/bin/pixi.exe
         # run windeployqt
         windeployqt --release prefix/bin/avogadro2.exe
         mv prefix avogadro2
