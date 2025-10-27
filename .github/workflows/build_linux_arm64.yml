@@ -106,7 +106,7 @@ jobs:
         ./linuxdeploy-aarch64.AppImage -d appdir/usr/share/applications/*.desktop --plugin qt --library /usr/lib/aarch64-linux-gnu/libssl.so.3 --library /usr/lib/aarch64-linux-gnu/libcrypto.so.3 --appdir appdir
         # add the custom AppRun
         rm appdir/AppRun
-        cp ../avogadrolibs/openchemistry/avogadrolibs/scripts/AppImage.sh appdir/AppRun
+        cp ../${{ github.event.repository.name }}/openchemistry/avogadrolibs/scripts/AppImage.sh appdir/AppRun
         chmod a+x appdir/AppRun
         ./appimagetool-aarch64.AppImage appdir
         mv Avogadro*.AppImage avogadroapp/Avogadro2-aarch64.AppImage # for upload
