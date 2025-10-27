@@ -78,6 +78,16 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.102.1" date="2025-10-27">
+      <url type="details">https://two.avogadro.cc/install/versions/v11021.html</url>
+      <description>
+        <p>Highlights</p>
+        <ul>
+        <li>This release fixes a number of bugs in the recent 1.102.0 release.</li>
+        <li>Many thanks to everyone submitting bug reports!</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.102.0" date="2025-10-23">
       <url type="details">https://two.avogadro.cc/install/versions/v1102.html</url>
       <description>
