@@ -2,225 +2,220 @@
 # Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
-#
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2016-06-10 06:25+0000\n"
-"Last-Translator: Avogadro Team <avogadro-devel@lists.sourceforge.net>\n"
-"Language-Team: Slovak <sk@li.org>\n"
+"POT-Creation-Date: 2025-10-19 02:53+0000\n"
+"PO-Revision-Date: 2025-08-27 08:02+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.13\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
-"X-Generator: Launchpad (build 18609)\n"
+
+#: aboutdialog.cpp:25
+msgid "Molecular editor and visualizer"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
-#: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#: aboutdialog.cpp:32:3
 msgid "Version:"
-msgstr "(Git revízia: %1)"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
-#: aboutdialog.cpp:28:9
+#: aboutdialog.cpp:33:9
 msgid "Avogadro Library Version:"
 msgstr ""
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
-#: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#: aboutdialog.cpp:34:15
 msgid "Qt Version:"
-msgstr "(Git revízia: %1)"
+msgstr ""
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
-#: aboutdialog.cpp:30:21
+#: aboutdialog.cpp:35:21
 msgid "SSL Version:"
 msgstr ""
 
-#: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
+#: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
 msgstr ""
 
-#: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
+#: backgroundfileformat.cpp:39 backgroundfileformat.cpp:116
 msgid "No file format set in BackgroundFileFormat!"
 msgstr ""
 
-#: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
+#: backgroundfileformat.cpp:42 backgroundfileformat.cpp:119
 msgid "No file name set in BackgroundFileFormat!"
 msgstr ""
 
-#: mainwindow.cpp:321
+#: mainwindow.cpp:361
 msgid "Ready…"
 msgstr ""
 
-#: mainwindow.cpp:398
+#: mainwindow.cpp:446
 #, fuzzy
 msgid "Tool"
 msgstr "Nástroje"
 
-#: mainwindow.cpp:402
+#: mainwindow.cpp:450
 msgid "Display Types"
 msgstr "Zobraziť typy"
 
-#: mainwindow.cpp:411
+#: mainwindow.cpp:460
 msgid "View Configuration"
 msgstr ""
 
-#: mainwindow.cpp:415
-#, fuzzy
-msgid "Molecules"
-msgstr "Molekula"
+#: mainwindow.cpp:464
+msgid "Files"
+msgstr ""
 
-#: mainwindow.cpp:424
+#: mainwindow.cpp:475
 msgid "Layers"
 msgstr ""
 
-#: mainwindow.cpp:447
+#: mainwindow.cpp:503
 #, fuzzy
 msgctxt "File toolbar"
 msgid "File"
-msgstr "&Súbor"
+msgstr "Súbor"
 
-#: mainwindow.cpp:452
+#: mainwindow.cpp:508
 #, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Nástroje"
 
-#: mainwindow.cpp:684
+#: mainwindow.cpp:807
 #, fuzzy
 msgid "Untitled"
 msgstr "nepomenované"
 
-#: mainwindow.cpp:689
-#, fuzzy, qt-format
+#: mainwindow.cpp:812
+#, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr "Avodagro"
+msgstr ""
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:868
 msgid "Restart needed"
 msgstr ""
 
-#: mainwindow.cpp:746
+#: mainwindow.cpp:869
 msgid "Please restart Avogadro to use the new language."
 msgstr ""
 
-#: mainwindow.cpp:766 mainwindow.cpp:1486
+#: mainwindow.cpp:889 mainwindow.cpp:1662
 msgid "Chemical Markup Language"
 msgstr ""
 
-#: mainwindow.cpp:767 mainwindow.cpp:1485
+#: mainwindow.cpp:890 mainwindow.cpp:1661
 msgid "Chemical JSON"
 msgstr ""
 
-#: mainwindow.cpp:773
+#: mainwindow.cpp:896
 msgid "Open chemical file"
 msgstr ""
 
-#: mainwindow.cpp:791 mainwindow.cpp:815 mainwindow.cpp:1373
-#: mainwindow.cpp:2505
-#, fuzzy
+#: mainwindow.cpp:914 mainwindow.cpp:938 mainwindow.cpp:1549
+#: mainwindow.cpp:2714
 msgid "Cannot open file"
-msgstr "Nedá sa uložiť súbor %1."
+msgstr ""
 
-#: mainwindow.cpp:792 mainwindow.cpp:816 mainwindow.cpp:1374
-#, fuzzy, qt-format
+#: mainwindow.cpp:915 mainwindow.cpp:939 mainwindow.cpp:1550
+#, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Nedá sa uložiť súbor %1."
+msgstr ""
 
-#: mainwindow.cpp:805
-#, fuzzy
+#: mainwindow.cpp:928
 msgid "Open Molecule"
-msgstr "Molekula"
+msgstr ""
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:952
 msgid "Commands"
 msgstr ""
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:952
 msgid "Input Generators"
 msgstr ""
 
-#: mainwindow.cpp:829
-#, fuzzy
+#: mainwindow.cpp:952
 msgid "File Formats"
-msgstr "Súbor: "
+msgstr ""
 
-#: mainwindow.cpp:830
+#: mainwindow.cpp:953
 msgctxt "atomic electrostatics"
 msgid "Charges"
 msgstr ""
 
-#: mainwindow.cpp:831
+#: mainwindow.cpp:954
 msgctxt "potential energy calculators"
 msgid "Force Fields"
 msgstr ""
 
-#: mainwindow.cpp:835
+#: mainwindow.cpp:958
 msgid "Install Plugin Script"
 msgstr ""
 
-#: mainwindow.cpp:835
+#: mainwindow.cpp:958
 msgid "Script Type:"
 msgstr ""
 
-#: mainwindow.cpp:889 mainwindow.cpp:1369
+#: mainwindow.cpp:1033 mainwindow.cpp:1545
 msgid "Select file reader"
 msgstr ""
 
-#: mainwindow.cpp:918
+#: mainwindow.cpp:1063
 #, fuzzy
 msgid "Reading File"
 msgstr "Otvor Súbor"
 
-#: mainwindow.cpp:920
+#: mainwindow.cpp:1065
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
 
-#: mainwindow.cpp:982
+#: mainwindow.cpp:1125
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr ""
 
-#: mainwindow.cpp:987
-#, fuzzy
+#: mainwindow.cpp:1130
 msgid "File error"
-msgstr "Súbor: "
+msgstr ""
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:1131
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
 
-#: mainwindow.cpp:1015
-#, fuzzy, qt-format
+#: mainwindow.cpp:1158
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Nedá sa uložiť súbor %1."
+msgstr ""
 
-#: mainwindow.cpp:1022
+#: mainwindow.cpp:1165
 msgid "Error saving file"
 msgstr ""
 
-#: mainwindow.cpp:1023
+#: mainwindow.cpp:1166
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -228,11 +223,11 @@ msgid ""
 "%2"
 msgstr ""
 
-#: mainwindow.cpp:1062
+#: mainwindow.cpp:1205
 msgid "Error: Failed to initialize OpenGL context"
 msgstr ""
 
-#: mainwindow.cpp:1063
+#: mainwindow.cpp:1206
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -240,46 +235,46 @@ msgid ""
 "%1"
 msgstr ""
 
-#: mainwindow.cpp:1064
+#: mainwindow.cpp:1207
 msgid "Unknown error"
 msgstr ""
 
-#: mainwindow.cpp:1314
+#: mainwindow.cpp:1490
 msgid "Common image formats"
 msgstr "Bežné formáty obrázkov"
 
-#: mainwindow.cpp:1316
+#: mainwindow.cpp:1492
 msgid "All files"
 msgstr "Všetky súbory"
 
-#: mainwindow.cpp:1316
+#: mainwindow.cpp:1492
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1317
+#: mainwindow.cpp:1493
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1317
+#: mainwindow.cpp:1493
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1326
+#: mainwindow.cpp:1502
 msgid "Export Bitmap Graphics"
 msgstr "Exportovať Bitmapove Obrázky"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1342 mainwindow.cpp:1459 mainwindow.cpp:2281:39
+#: mainwindow.cpp:1518 mainwindow.cpp:1635 mainwindow.cpp:2486:36
 msgid "Avogadro"
 msgstr "Avodagro"
 
-#: mainwindow.cpp:1343
+#: mainwindow.cpp:1519
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Nedá sa uložiť súbor %1."
 
-#: mainwindow.cpp:1460
+#: mainwindow.cpp:1636
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -287,24 +282,23 @@ msgid ""
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
 
-#: mainwindow.cpp:1467
+#: mainwindow.cpp:1643
 msgid "Export"
 msgstr "Export"
 
-#: mainwindow.cpp:1491
+#: mainwindow.cpp:1667
 msgid "Save chemical file"
 msgstr ""
 
-#: mainwindow.cpp:1532
-#, fuzzy
+#: mainwindow.cpp:1711
 msgid "Export Molecule"
-msgstr "Import súboru molekúl"
+msgstr ""
 
-#: mainwindow.cpp:1631
+#: mainwindow.cpp:1810
 msgid "Saving File in Progress…"
 msgstr ""
 
-#: mainwindow.cpp:1633
+#: mainwindow.cpp:1812
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -312,46 +306,44 @@ msgid ""
 "with “%2”"
 msgstr ""
 
-#: mainwindow.cpp:1776
+#: mainwindow.cpp:1955
 #, fuzzy, qt-format
 msgid "&Undo %1"
-msgstr "&Vrátiť späť"
+msgstr "&Vrátiť späť %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1779 mainwindow.cpp:2029:123
+#: mainwindow.cpp:1958 mainwindow.cpp:2220:120
 msgid "&Undo"
 msgstr "&Vrátiť späť"
 
-#: mainwindow.cpp:1784
+#: mainwindow.cpp:1963
 #, fuzzy, qt-format
 msgid "&Redo %1"
-msgstr "&Opakovať"
+msgstr "&Opakovať %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1787 mainwindow.cpp:2034:129
+#: mainwindow.cpp:1966 mainwindow.cpp:2228:126
 msgid "&Redo"
 msgstr "&Opakovať"
 
-#: mainwindow.cpp:1903
+#: mainwindow.cpp:2088
 #, fuzzy
 msgid "&Testing"
 msgstr "Nastavenia"
 
-#: mainwindow.cpp:1905
-#, fuzzy
-msgid "Record test…"
-msgstr "Test nahrávania..."
+#: mainwindow.cpp:2090
+msgid "&Record Test…"
+msgstr ""
 
-#: mainwindow.cpp:1908
-#, fuzzy
-msgid "Play test…"
-msgstr "Test prehrávania..."
+#: mainwindow.cpp:2093
+msgid "&Play Test…"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:1922 menubuilder.cpp:79:42
+#: mainwindow.cpp:2102 menubuilder.cpp:100:39
 msgid "&File"
 msgstr "&Súbor"
 
@@ -359,22 +351,22 @@ msgstr "&Súbor"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1924:81 rc.cpp:87
+#: mainwindow.cpp:2104:78 rc.cpp:84
 msgid "&New"
 msgstr "&Nový"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1933:57
+#: mainwindow.cpp:2115:54
 #, fuzzy
 msgid "&Open…"
-msgstr "&Otvoriť"
+msgstr "&Otvoriť…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1942:90 rc.cpp:96
+#: mainwindow.cpp:2127:87 rc.cpp:93
 msgid "&Close"
 msgstr "&Zavrieť"
 
@@ -382,259 +374,247 @@ msgstr "&Zavrieť"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1956:99 rc.cpp:105
+#: mainwindow.cpp:2140:96 rc.cpp:102
 msgid "&Save"
 msgstr "&Uložiť"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1965:108
+#: mainwindow.cpp:2152:105
 #, fuzzy
 msgid "Save &As…"
-msgstr "Uložiť &ako..."
+msgstr "Uložiť &ako…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1976:201
+#: mainwindow.cpp:2165:198
 #, fuzzy
 msgid "&Export"
-msgstr "Export"
+msgstr "&Export"
 
-#: mainwindow.cpp:1977
+#: mainwindow.cpp:2166
 #, fuzzy
 msgid "&Molecule…"
-msgstr "Molekula"
+msgstr "&Molekula…"
 
-#: mainwindow.cpp:1984
-#, fuzzy
+#: mainwindow.cpp:2173
 msgid "Export Molecule…"
-msgstr "Import súboru molekúl"
+msgstr ""
 
-#: mainwindow.cpp:1991
+#: mainwindow.cpp:2180
 #, fuzzy
 msgid "&Graphics…"
-msgstr "&Grafický..."
+msgstr "&Grafický…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2000:66 rc.cpp:72
+#: mainwindow.cpp:2189:63 rc.cpp:69
 msgid "&Quit"
 msgstr "&Ukončiť"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2010:195
+#: mainwindow.cpp:2199:192
 #, fuzzy
 msgid "Open Recent"
 msgstr "Otvoriť &nedávne"
 
-#: mainwindow.cpp:2022
+#: mainwindow.cpp:2213
 msgid "No recent files"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:2028 menubuilder.cpp:79:51
+#: mainwindow.cpp:2219 menubuilder.cpp:100:48
 msgid "&Edit"
 msgstr "&Upraviť"
 
-#: mainwindow.cpp:2040
-#, fuzzy
+#: mainwindow.cpp:2236
 msgid "&Copy Graphics"
-msgstr "&Grafický..."
+msgstr ""
 
-#: mainwindow.cpp:2044
-#, fuzzy
-#| msgid "Ctrl+A"
+#: mainwindow.cpp:2240
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr ""
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:2057 menubuilder.cpp:79:48
+#: mainwindow.cpp:2253 menubuilder.cpp:100:45
 msgid "&View"
 msgstr "&Pohľad"
 
-#: mainwindow.cpp:2058
+#: mainwindow.cpp:2254
 #, fuzzy
 msgid "Set Background Color…"
-msgstr "Nastaviť farbu &pozadia..."
+msgstr "Nastaviť farbu pozadia…"
 
-#: mainwindow.cpp:2062
+#: mainwindow.cpp:2258
 msgid "Rendering…"
 msgstr ""
 
-#: mainwindow.cpp:2070
+#: mainwindow.cpp:2266
 msgid "Projection"
 msgstr ""
 
-#: mainwindow.cpp:2071
+#: mainwindow.cpp:2267
 msgid "Perspective"
 msgstr ""
 
-#: mainwindow.cpp:2078
+#: mainwindow.cpp:2274
 msgid "Orthographic"
 msgstr ""
 
-#: mainwindow.cpp:2097
+#: mainwindow.cpp:2293
 #, fuzzy
 msgid "&Extensions"
 msgstr "Rozšírenia"
 
-#: mainwindow.cpp:2099
+#: mainwindow.cpp:2295
 msgid "User Interface Language…"
 msgstr ""
 
-#: mainwindow.cpp:2103
+#: mainwindow.cpp:2299
 msgid "&Periodic Table…"
 msgstr ""
 
-#: mainwindow.cpp:2109 menubuilder.cpp:83
+#: mainwindow.cpp:2305 menubuilder.cpp:104
 msgid "&Help"
 msgstr "&Pomocník"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2110:120
+#: mainwindow.cpp:2306:117
 msgid "&About"
 msgstr "&O programe"
 
-#: mainwindow.cpp:2117
+#: mainwindow.cpp:2311
 msgid "&Discussion Forum"
 msgstr ""
 
-#: mainwindow.cpp:2121
+#: mainwindow.cpp:2315
 #, fuzzy
 #| msgid "Avogadro Website"
 msgid "&Avogadro Website"
-msgstr "Webová stránka Avogadro"
+msgstr "Webová stránka &Avogadro"
 
-#: mainwindow.cpp:2125
+#: mainwindow.cpp:2319
 #, fuzzy
 #| msgid "Report a Bug"
 msgid "&Report a Bug"
 msgstr "Ohlásiť chybu"
 
-#: mainwindow.cpp:2129
+#: mainwindow.cpp:2323
 msgid "&Suggest a Feature"
 msgstr ""
 
-#: mainwindow.cpp:2153
+#: mainwindow.cpp:2347
 msgid "System Language"
 msgstr ""
 
-#: mainwindow.cpp:2161
+#: mainwindow.cpp:2355
 msgid "Language"
 msgstr ""
 
-#: mainwindow.cpp:2161
+#: mainwindow.cpp:2355
 msgid "User Interface Language:"
 msgstr ""
 
-#: mainwindow.cpp:2266
+#: mainwindow.cpp:2471
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr ""
 
-#: mainwindow.cpp:2282
+#: mainwindow.cpp:2487
 #, fuzzy
 msgid "Do you want to save the changes to the document?"
 msgstr "Prajete si uložiť zmeny vykonané v dokumente?"
 
-#: mainwindow.cpp:2290
+#: mainwindow.cpp:2495
 msgid "Your changes will be lost if you don't save them."
 msgstr "Vaše zmeny sa stratia ak ich neuložíte"
 
-#: mainwindow.cpp:2298
+#: mainwindow.cpp:2500
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:2300
+#: mainwindow.cpp:2502
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2382
-#, fuzzy
-#| msgid "Network Update Check Failed"
+#: mainwindow.cpp:2589
 msgid "Network Download Failed"
-msgstr "Kontrola sieťovej aktualizácie zlyhala"
+msgstr ""
 
-#: mainwindow.cpp:2383
+#: mainwindow.cpp:2590
 msgid "Network timeout or other error."
 msgstr "Uplynul časový limit siete alebo iná chyba."
 
-#: mainwindow.cpp:2422
+#: mainwindow.cpp:2631
 #, qt-format
 msgid "Your version: %1"
 msgstr ""
 
-#: mainwindow.cpp:2423
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#: mainwindow.cpp:2632
+#, qt-format
 msgid "New version: %1"
-msgstr "(Git revízia: %1)"
+msgstr ""
 
-#: mainwindow.cpp:2425
+#: mainwindow.cpp:2634
 msgid "An update is available, do you want to download it now?\n"
 msgstr ""
 
-#: mainwindow.cpp:2427
+#: mainwindow.cpp:2636
 msgid "Version Update"
 msgstr ""
 
-#: mainwindow.cpp:2485
+#: mainwindow.cpp:2694
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr ""
 
-#: mainwindow.cpp:2501
-#, fuzzy
+#: mainwindow.cpp:2710
 msgid "Select file format"
-msgstr "Súbor: "
+msgstr ""
 
-#: mainwindow.cpp:2506 mainwindow.cpp:2517
+#: mainwindow.cpp:2715 mainwindow.cpp:2726
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr ""
 
-#: mainwindow.cpp:2516
-#, fuzzy
+#: mainwindow.cpp:2725
 msgid "Cannot open files"
-msgstr "Nedá sa uložiť súbor %1."
+msgstr ""
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
-#: menubuilder.cpp:79:45
+#: menubuilder.cpp:100:42
 msgid "&Build"
 msgstr "&Zostaviť"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
-#: menubuilder.cpp:80:54
+#: menubuilder.cpp:101:51
 msgid "&Select"
 msgstr "&Výber"
 
-#: menubuilder.cpp:83
+#: menubuilder.cpp:104
 msgid "Se&ttings"
 msgstr "&Nastavenia"
 
-#: menubuilder.cpp:83
+#: menubuilder.cpp:104
 #, fuzzy
 msgid "&Window"
 msgstr "Okno"
 
-#: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
+#: viewfactory.cpp:22 viewfactory.cpp:31
 msgid "3D View"
-msgstr "Nový pohľad"
+msgstr ""
 
-#: viewfactory.cpp:28 viewfactory.cpp:38
+#: viewfactory.cpp:24 viewfactory.cpp:43
 msgid "VTK"
 msgstr ""
 
@@ -655,26 +635,18 @@ msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-"
 "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
-"#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
+"#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
 
-#. i18n: file: aboutdialog.ui:278
+#. i18n: file: aboutdialog.ui:291
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid ""
 "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
-"style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"style=\" text-decoration: underline; color:#0096ff;\">two.avogadro.cc</"
 "span></a></p></body></html>"
 msgstr ""
 
-#. i18n: file: aboutdialog.ui:307
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-msgid ""
-"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
-"text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
-"body></html>"
-msgstr ""
-
-#. i18n: file: aboutdialog.ui:334
+#. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
 msgstr "OK"
@@ -751,7 +723,7 @@ msgstr "Vrátiť sa k uloženiu"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #, fuzzy
 msgid "Set &Background Color…"
-msgstr "Nastaviť farbu &pozadia..."
+msgstr "Nastaviť farbu &pozadia…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -891,40 +863,107 @@ msgid "&Import"
 msgstr "Import"
 
 #. i18n: file: renderingdialog.ui:31
+#. i18n: ectx: property (toolTip), widget (QLabel, label_2)
+msgid "Enable ambient occlusion shadows"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:40
+#. i18n: file: renderingdialog.ui:43
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
-#. i18n: file: renderingdialog.ui:109
+#. i18n: file: renderingdialog.ui:118
+#. i18n: ectx: property (text), widget (QCheckBox, fogEnableCheckBox)
+#. i18n: file: renderingdialog.ui:220
+#. i18n: ectx: property (text), widget (QCheckBox, dofEnableCheckBox)
+#. i18n: file: renderingdialog.ui:325
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:82
+#. i18n: file: renderingdialog.ui:85
+#. i18n: ectx: property (toolTip), widget (QLabel, label)
+msgid "Strength of the ambient shadows"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:100
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid "User Selections"
-msgid "Edge Detection:"
-msgstr "Výber používateľa"
+#. i18n: file: renderingdialog.ui:106
+#. i18n: ectx: property (toolTip), widget (QLabel, label_3)
+msgid "Fog effect for depth cue"
+msgstr ""
 
-#. i18n: file: renderingdialog.ui:138
+#. i18n: file: renderingdialog.ui:109
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid "Fog:"
+msgstr "Hmla:"
+
+#. i18n: file: renderingdialog.ui:140
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Fog Strength:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:170
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Fog Position:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:208
+#. i18n: ectx: property (toolTip), widget (QLabel, label_3)
+msgid "Add a depth blur"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:211
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid "Depth Blur:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:242
+#. i18n: ectx: property (toolTip), widget (QLabel, label_5)
+msgid "Strength of the depth blur"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:245
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Blur Strength :"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:272
+#. i18n: ectx: property (toolTip), widget (QLabel, label_5)
+msgid "Position of the depth blur"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:275
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Blur Position:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:313
+#. i18n: ectx: property (toolTip), widget (QLabel, label_4)
+msgid "Add an outline to edge atoms"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:316
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+msgid "Edge Outline:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
 msgid "Save"
 msgstr "Uložiť"
 
-#. i18n: file: renderingdialog.ui:158
+#. i18n: file: renderingdialog.ui:374
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
 #, fuzzy
 #| msgid "&Close"
 msgid "Close"
-msgstr "&Zavrieť"
+msgstr "Zavrieť"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
@@ -950,6 +989,23 @@ msgstr ""
 "net,,,,,avogadro-devel@lists.sourceforge.net,,,,,avogadro-devel@lists."
 "sourceforge.net,,,,,avogadro-devel@lists.sourceforge.net,,,,,avogadro-"
 "devel@lists.sourceforge.net,,"
+
+#, fuzzy
+#~ msgid "Record test…"
+#~ msgstr "Test nahrávania…"
+
+#, fuzzy
+#~ msgid "Play test…"
+#~ msgstr "Test prehrávania…"
+
+#, fuzzy
+#~ msgid "Molecules"
+#~ msgstr "Molekula"
+
+#, fuzzy
+#~| msgid "User Selections"
+#~ msgid "Edge Detection:"
+#~ msgstr "Výber používateľa"
 
 #, fuzzy
 #~ msgid "Set background color…"
@@ -1454,6 +1510,3 @@ msgstr ""
 
 #~ msgid "Set the global rendering quality."
 #~ msgstr "Nastaviť celkovú kvalitu vykreslenia."
-
-#~ msgid "Fog:"
-#~ msgstr "Hmla:"

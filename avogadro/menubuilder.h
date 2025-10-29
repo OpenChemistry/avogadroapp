@@ -82,6 +82,9 @@ private:
 
   /** Get the priority of a submenu (takes the highest priority). */
   int priorityGroup(const QString& path);
+
+  /** Should we show icons in the menu? */
+  bool m_showIcons = true;
 };
 
 } // End namespace Avogadro.

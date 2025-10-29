@@ -4,188 +4,187 @@
 # Yuri Chornoivan <yurchor@gmail.com>, 2010, 2011.
 # Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
 # Tymofii Lytvynenko <till.svit@gmail.com>, 2021.
+# Yarema Kertytsky <y.kertytsky@gmail.com>, 2024.
+# Максим Горпиніч <mgorpinic2005@gmail.com>, 2024.
+# Максим Горпиніч <maksimgorpinic4@gmail.com>, 2025.
+# Максим Горпиніч <gorpinicmaksim0@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2023-12-11 21:00+0000\n"
-"PO-Revision-Date: 2021-11-13 17:53+0000\n"
-"Last-Translator: Tymofii Lytvynenko <till.svit@gmail.com>\n"
+"POT-Creation-Date: 2025-10-19 02:53+0000\n"
+"PO-Revision-Date: 2025-10-21 13:02+0000\n"
+"Last-Translator: Максим Горпиніч <gorpinicmaksim0@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9.1-dev\n"
+"Plural-Forms: nplurals=3; plural="
+"(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? "
+"1 : 2);\n"
+"X-Generator: Weblate 5.14-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
+
+#: aboutdialog.cpp:25
+msgid "Molecular editor and visualizer"
+msgstr "Молекулярний редактор та візуалізатор"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
-#: aboutdialog.cpp:27:3
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#: aboutdialog.cpp:32:3
 msgid "Version:"
-msgstr "(Git-версія: %1)"
+msgstr "Версія:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
-#: aboutdialog.cpp:28:9
+#: aboutdialog.cpp:33:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Версія бібліотеки Avogadro:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
-#: aboutdialog.cpp:29:15
-#, fuzzy
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#: aboutdialog.cpp:34:15
 msgid "Qt Version:"
-msgstr "(Git-версія: %1)"
+msgstr "Версія Qt:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
-#: aboutdialog.cpp:30:21
+#: aboutdialog.cpp:35:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "Версія SSL:"
 
-#: backgroundfileformat.cpp:29 backgroundfileformat.cpp:54
+#: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
 msgstr "У BackgroundFileFormat немає молекули!"
 
-#: backgroundfileformat.cpp:32 backgroundfileformat.cpp:57
+#: backgroundfileformat.cpp:39 backgroundfileformat.cpp:116
 msgid "No file format set in BackgroundFileFormat!"
 msgstr "У BackgroundFileFormat не встановлено формат файлу!"
 
-#: backgroundfileformat.cpp:35 backgroundfileformat.cpp:60
+#: backgroundfileformat.cpp:42 backgroundfileformat.cpp:119
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "Назви файлу не встановлено у BackgroundFileFormat!"
 
-#: mainwindow.cpp:321
+#: mainwindow.cpp:361
 msgid "Ready…"
 msgstr "Готово…"
 
-#: mainwindow.cpp:398
+#: mainwindow.cpp:446
 msgid "Tool"
 msgstr "Засіб"
 
-#: mainwindow.cpp:402
+#: mainwindow.cpp:450
 msgid "Display Types"
 msgstr "Типи показу"
 
-#: mainwindow.cpp:411
+#: mainwindow.cpp:460
 msgid "View Configuration"
 msgstr "Переглянути конфігурацію"
 
-#: mainwindow.cpp:415
-msgid "Molecules"
-msgstr "Молекули"
+#: mainwindow.cpp:464
+msgid "Files"
+msgstr "Файли"
 
-#: mainwindow.cpp:424
+#: mainwindow.cpp:475
 msgid "Layers"
 msgstr "Шари"
 
-#: mainwindow.cpp:447
-#, fuzzy
-#| msgid "File"
+#: mainwindow.cpp:503
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Файл"
 
-#: mainwindow.cpp:452
-#, fuzzy
-#| msgid "Tools"
+#: mainwindow.cpp:508
 msgctxt "Tools toolbar"
 msgid "Tools"
-msgstr "Засоби"
+msgstr "Інструменти"
 
-#: mainwindow.cpp:684
+#: mainwindow.cpp:807
 msgid "Untitled"
 msgstr "Без назви"
 
-#: mainwindow.cpp:689
+#: mainwindow.cpp:812
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Авоґадро %3"
 
-#: mainwindow.cpp:745
+#: mainwindow.cpp:868
 msgid "Restart needed"
-msgstr ""
+msgstr "Потрібен перезапуск"
 
-#: mainwindow.cpp:746
+#: mainwindow.cpp:869
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Перезапустіть Avogadro, щоб використовувати нову мову."
 
-#: mainwindow.cpp:766 mainwindow.cpp:1486
+#: mainwindow.cpp:889 mainwindow.cpp:1662
 msgid "Chemical Markup Language"
 msgstr "Мова хімічної розмітки"
 
-#: mainwindow.cpp:767 mainwindow.cpp:1485
+#: mainwindow.cpp:890 mainwindow.cpp:1661
 msgid "Chemical JSON"
 msgstr "Хімічний JSON"
 
-#: mainwindow.cpp:773
+#: mainwindow.cpp:896
 msgid "Open chemical file"
 msgstr "Відкрити хімічний файл"
 
-#: mainwindow.cpp:791 mainwindow.cpp:815 mainwindow.cpp:1373
-#: mainwindow.cpp:2505
+#: mainwindow.cpp:914 mainwindow.cpp:938 mainwindow.cpp:1549
+#: mainwindow.cpp:2714
 msgid "Cannot open file"
 msgstr "Не вдається відкрити файл"
 
-#: mainwindow.cpp:792 mainwindow.cpp:816 mainwindow.cpp:1374
+#: mainwindow.cpp:915 mainwindow.cpp:939 mainwindow.cpp:1550
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "Не вдається відкрити наданий файл %1"
 
-#: mainwindow.cpp:805
+#: mainwindow.cpp:928
 msgid "Open Molecule"
 msgstr "Відкрита молекула"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:952
 msgid "Commands"
 msgstr "Команди"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:952
 msgid "Input Generators"
 msgstr "Генератори вхідних даних"
 
-#: mainwindow.cpp:829
+#: mainwindow.cpp:952
 msgid "File Formats"
-msgstr "Формат файлу:"
+msgstr "Формат файлу"
 
-#: mainwindow.cpp:830
+#: mainwindow.cpp:953
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Звинувачення"
 
-#: mainwindow.cpp:831
+#: mainwindow.cpp:954
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "Силові поля"
 
-#: mainwindow.cpp:835
+#: mainwindow.cpp:958
 msgid "Install Plugin Script"
 msgstr "Установити скрипт плагіна"
 
-#: mainwindow.cpp:835
+#: mainwindow.cpp:958
 msgid "Script Type:"
 msgstr "Тип скрипта:"
 
-#: mainwindow.cpp:889 mainwindow.cpp:1369
+#: mainwindow.cpp:1033 mainwindow.cpp:1545
 msgid "Select file reader"
 msgstr "Оберіть читач файлу"
 
-#: mainwindow.cpp:918
+#: mainwindow.cpp:1063
 msgid "Reading File"
 msgstr "Читання файлу"
 
-#: mainwindow.cpp:920
+#: mainwindow.cpp:1065
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -194,16 +193,16 @@ msgstr ""
 "Відкриття файлу '%1'\n"
 "з '%2'"
 
-#: mainwindow.cpp:982
+#: mainwindow.cpp:1125
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Молекула завантажила (%1 атомів, %2 зв'язків)"
 
-#: mainwindow.cpp:987
+#: mainwindow.cpp:1130
 msgid "File error"
 msgstr "Помилка файлу"
 
-#: mainwindow.cpp:988
+#: mainwindow.cpp:1131
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -212,32 +211,31 @@ msgstr ""
 "Помилка під час читання файлу '%1':\n"
 "%2"
 
-#: mainwindow.cpp:1015
-#, fuzzy, qt-format
+#: mainwindow.cpp:1158
+#, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr "Не вдалося зберегти файл %1."
+msgstr "Збережений файл %1"
 
-#: mainwindow.cpp:1022
-#, fuzzy
+#: mainwindow.cpp:1165
 msgid "Error saving file"
-msgstr "Помилка запуску сервера RPC:"
+msgstr "Помилка під час збереження файла"
 
-#: mainwindow.cpp:1023
-#, fuzzy, qt-format
+#: mainwindow.cpp:1166
+#, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
-"Помилка під час читання файлу '%1':\n"
+"Помилка під час зберігання '%1':\n"
 "%2"
 
-#: mainwindow.cpp:1062
+#: mainwindow.cpp:1205
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Помилка: Не вдалося ініціалізувати контекст OpenGL"
 
-#: mainwindow.cpp:1063
+#: mainwindow.cpp:1206
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -248,46 +246,46 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:1064
+#: mainwindow.cpp:1207
 msgid "Unknown error"
 msgstr "Невідома помилка"
 
-#: mainwindow.cpp:1314
+#: mainwindow.cpp:1490
 msgid "Common image formats"
 msgstr "Поширені формати зображень"
 
-#: mainwindow.cpp:1316
+#: mainwindow.cpp:1492
 msgid "All files"
 msgstr "Усі файли"
 
-#: mainwindow.cpp:1316
+#: mainwindow.cpp:1492
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1317
+#: mainwindow.cpp:1493
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1317
+#: mainwindow.cpp:1493
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1326
+#: mainwindow.cpp:1502
 msgid "Export Bitmap Graphics"
 msgstr "Експорт до растрового зображення"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1342 mainwindow.cpp:1459 mainwindow.cpp:2281:39
+#: mainwindow.cpp:1518 mainwindow.cpp:1635 mainwindow.cpp:2486:36
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1343
+#: mainwindow.cpp:1519
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Не вдалося зберегти файл %1."
 
-#: mainwindow.cpp:1460
+#: mainwindow.cpp:1636
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -300,71 +298,69 @@ msgstr ""
 "Ви хочете експортувати до поточного формату або зберегти в усталеному "
 "форматі?"
 
-#: mainwindow.cpp:1467
+#: mainwindow.cpp:1643
 msgid "Export"
 msgstr "Експортувати"
 
-#: mainwindow.cpp:1491
+#: mainwindow.cpp:1667
 msgid "Save chemical file"
 msgstr "Зберегти хімічний файл"
 
-#: mainwindow.cpp:1532
+#: mainwindow.cpp:1711
 msgid "Export Molecule"
 msgstr "Експорт молекули"
 
-#: mainwindow.cpp:1631
+#: mainwindow.cpp:1810
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Триває збереження файлу…"
 
-#: mainwindow.cpp:1633
-#, fuzzy, qt-format
+#: mainwindow.cpp:1812
+#, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"Відкриття файлу '%1'\n"
-"з '%2'"
+"Збереження файлу “%1”\n"
+"з “%2”"
 
-#: mainwindow.cpp:1776
+#: mainwindow.cpp:1955
 #, qt-format
 msgid "&Undo %1"
 msgstr "&Повернути %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1779 mainwindow.cpp:2029:123
+#: mainwindow.cpp:1958 mainwindow.cpp:2220:120
 msgid "&Undo"
 msgstr "&Вернути"
 
-#: mainwindow.cpp:1784
+#: mainwindow.cpp:1963
 #, qt-format
 msgid "&Redo %1"
 msgstr "&Повторити %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1787 mainwindow.cpp:2034:129
+#: mainwindow.cpp:1966 mainwindow.cpp:2228:126
 msgid "&Redo"
 msgstr "&Повторити"
 
-#: mainwindow.cpp:1903
+#: mainwindow.cpp:2088
 msgid "&Testing"
 msgstr "&Тестування"
 
-#: mainwindow.cpp:1905
-#, fuzzy
-msgid "Record test…"
-msgstr "Записати тест…"
+#: mainwindow.cpp:2090
+msgid "&Record Test…"
+msgstr "&Тест запису…"
 
-#: mainwindow.cpp:1908
-#, fuzzy
-msgid "Play test…"
-msgstr "Відтворити тест…"
+#: mainwindow.cpp:2093
+msgid "&Play Test…"
+msgstr "&Відтворити Тест…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:1922 menubuilder.cpp:79:42
+#: mainwindow.cpp:2102 menubuilder.cpp:100:39
 msgid "&File"
 msgstr "&Файл"
 
@@ -372,22 +368,21 @@ msgstr "&Файл"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1924:81 rc.cpp:87
+#: mainwindow.cpp:2104:78 rc.cpp:84
 msgid "&New"
 msgstr "&Створити"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1933:57
-#, fuzzy
+#: mainwindow.cpp:2115:54
 msgid "&Open…"
-msgstr "Відкрити"
+msgstr "Відкрити…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1942:90 rc.cpp:96
+#: mainwindow.cpp:2127:87 rc.cpp:93
 msgid "&Close"
 msgstr "За&крити"
 
@@ -395,36 +390,31 @@ msgstr "За&крити"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1956:99 rc.cpp:105
+#: mainwindow.cpp:2140:96 rc.cpp:102
 msgid "&Save"
 msgstr "&Зберегти"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1965:108
-#, fuzzy
+#: mainwindow.cpp:2152:105
 msgid "Save &As…"
-msgstr "З&берегти як..."
+msgstr "Зберегти &як…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:1976:201
+#: mainwindow.cpp:2165:198
 msgid "&Export"
 msgstr "&Експорт"
 
-#: mainwindow.cpp:1977
-#, fuzzy
+#: mainwindow.cpp:2166
 msgid "&Molecule…"
-msgstr "Молекули"
+msgstr "& Молекула…"
 
-#: mainwindow.cpp:1984
-#, fuzzy
-#| msgid "Export Molecule"
+#: mainwindow.cpp:2173
 msgid "Export Molecule…"
-msgstr "Експорт молекули"
+msgstr "Експорт молекули…"
 
-#: mainwindow.cpp:1991
-#, fuzzy
+#: mainwindow.cpp:2180
 msgid "&Graphics…"
 msgstr "&Графіка…"
 
@@ -432,222 +422,204 @@ msgstr "&Графіка…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2000:66 rc.cpp:72
+#: mainwindow.cpp:2189:63 rc.cpp:69
 msgid "&Quit"
 msgstr "Ви&йти"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2010:195
+#: mainwindow.cpp:2199:192
 msgid "Open Recent"
 msgstr "Відкрити недавні"
 
-#: mainwindow.cpp:2022
+#: mainwindow.cpp:2213
 msgid "No recent files"
 msgstr "Немає останніх файлів"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:2028 menubuilder.cpp:79:51
+#: mainwindow.cpp:2219 menubuilder.cpp:100:48
 msgid "&Edit"
 msgstr "З&міни"
 
-#: mainwindow.cpp:2040
-#, fuzzy
+#: mainwindow.cpp:2236
 msgid "&Copy Graphics"
-msgstr "&Графіка…"
+msgstr "&Копіювати графіку"
 
-#: mainwindow.cpp:2044
-#, fuzzy
-#| msgid "Ctrl+A"
+#: mainwindow.cpp:2240
 msgid "Ctrl+Alt+C"
-msgstr "Ctrl+A"
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:2057 menubuilder.cpp:79:48
+#: mainwindow.cpp:2253 menubuilder.cpp:100:45
 msgid "&View"
-msgstr "П&ерегляд"
+msgstr "&Переглянути"
 
-#: mainwindow.cpp:2058
-#, fuzzy
+#: mainwindow.cpp:2254
 msgid "Set Background Color…"
-msgstr "Встановити колір &тла..."
+msgstr "Установити колір фону…"
 
-#: mainwindow.cpp:2062
+#: mainwindow.cpp:2258
 msgid "Rendering…"
-msgstr ""
+msgstr "Візуалізація…"
 
-#: mainwindow.cpp:2070
+#: mainwindow.cpp:2266
 msgid "Projection"
 msgstr "Проєкція"
 
-#: mainwindow.cpp:2071
+#: mainwindow.cpp:2267
 msgid "Perspective"
 msgstr "Перспектива"
 
-#: mainwindow.cpp:2078
+#: mainwindow.cpp:2274
 msgid "Orthographic"
 msgstr "Ортографічна"
 
-#: mainwindow.cpp:2097
+#: mainwindow.cpp:2293
 msgid "&Extensions"
 msgstr "&Розширення"
 
-#: mainwindow.cpp:2099
+#: mainwindow.cpp:2295
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Мова інтерфейсу користувача…"
 
-#: mainwindow.cpp:2103
+#: mainwindow.cpp:2299
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Періодична таблиця…"
 
-#: mainwindow.cpp:2109 menubuilder.cpp:83
+#: mainwindow.cpp:2305 menubuilder.cpp:104
 msgid "&Help"
 msgstr "Довідка"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2110:120
+#: mainwindow.cpp:2306:117
 msgid "&About"
 msgstr "&Про програму"
 
-#: mainwindow.cpp:2117
-#, fuzzy
-#| msgid "Discussion Forum"
+#: mainwindow.cpp:2311
 msgid "&Discussion Forum"
-msgstr "Дискусійний форум"
+msgstr "&Дискусійний форум"
 
-#: mainwindow.cpp:2121
-#, fuzzy
-#| msgid "Avogadro Website"
+#: mainwindow.cpp:2315
 msgid "&Avogadro Website"
-msgstr "Веб-сайт Avogadro"
+msgstr "&Веб-сайт Avogadro"
 
-#: mainwindow.cpp:2125
-#, fuzzy
-#| msgid "Report a Bug"
+#: mainwindow.cpp:2319
 msgid "&Report a Bug"
-msgstr "Доповісти про помилку"
+msgstr "&Повідомити про помилку"
 
-#: mainwindow.cpp:2129
+#: mainwindow.cpp:2323
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Запропонувати функцію"
 
-#: mainwindow.cpp:2153
+#: mainwindow.cpp:2347
 msgid "System Language"
-msgstr ""
+msgstr "Мова системи"
 
-#: mainwindow.cpp:2161
+#: mainwindow.cpp:2355
 msgid "Language"
-msgstr ""
+msgstr "Мова"
 
-#: mainwindow.cpp:2161
+#: mainwindow.cpp:2355
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Мова інтерфейсу користувача:"
 
-#: mainwindow.cpp:2266
+#: mainwindow.cpp:2471
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Усі підтримувані формати (%1);;Усі файли (*);;"
 
-#: mainwindow.cpp:2282
-#, fuzzy
+#: mainwindow.cpp:2487
 msgid "Do you want to save the changes to the document?"
-msgstr "Бажаєте зберегти внесені Вами у документ зміни?"
+msgstr "Бажаєте зберегти внесені у документ зміни?"
 
-#: mainwindow.cpp:2290
+#: mainwindow.cpp:2495
 msgid "Your changes will be lost if you don't save them."
 msgstr "Внесені вами зміни буде втрачено, якщо ви не збережете їх."
 
-#: mainwindow.cpp:2298
+#: mainwindow.cpp:2500
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:2300
+#: mainwindow.cpp:2502
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2382
-#, fuzzy
-#| msgid "Network Update Check Failed"
+#: mainwindow.cpp:2589
 msgid "Network Download Failed"
-msgstr "Спроба пошуку оновлення у мережі зазнала невдачі"
+msgstr "Завантаження через мережу не вдалось"
 
-#: mainwindow.cpp:2383
+#: mainwindow.cpp:2590
 msgid "Network timeout or other error."
 msgstr "Перевищено час очікування на відповідь або інша помилка."
 
-#: mainwindow.cpp:2422
+#: mainwindow.cpp:2631
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Ваша версія: %1"
 
-#: mainwindow.cpp:2423
-#, fuzzy, qt-format
-#| msgctxt "%1 is the Git revision number."
-#| msgid "(Git revision: %1)"
+#: mainwindow.cpp:2632
+#, qt-format
 msgid "New version: %1"
-msgstr "(Git-версія: %1)"
+msgstr "Нова версія: %1"
 
-#: mainwindow.cpp:2425
+#: mainwindow.cpp:2634
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "Доступне оновлення. Завантажити його зараз?\n"
 
-#: mainwindow.cpp:2427
+#: mainwindow.cpp:2636
 msgid "Version Update"
-msgstr ""
+msgstr "Оновлення версії"
 
-#: mainwindow.cpp:2485
-#, fuzzy, qt-format
+#: mainwindow.cpp:2694
+#, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "Помилка під час завантаження FileFormat з ідентифікатором '%1'."
+msgstr "Помилка під час завантаження формату файлу “%1”."
 
-#: mainwindow.cpp:2501
-#, fuzzy
+#: mainwindow.cpp:2710
 msgid "Select file format"
-msgstr "Оберіть читач файлу"
+msgstr "Оберіть формат файлу"
 
-#: mainwindow.cpp:2506 mainwindow.cpp:2517
-#, fuzzy, qt-format
+#: mainwindow.cpp:2715 mainwindow.cpp:2726
+#, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "Час очікування Avogadro закінчився і не може відкрити \"%1\"."
+msgstr "Avogadro не може відкрити \"%1\"."
 
-#: mainwindow.cpp:2516
+#: mainwindow.cpp:2725
 msgid "Cannot open files"
 msgstr "Не вдається відкрити файли"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
-#: menubuilder.cpp:79:45
+#: menubuilder.cpp:100:42
 msgid "&Build"
 msgstr "&Збирання"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
-#: menubuilder.cpp:80:54
+#: menubuilder.cpp:101:51
 msgid "&Select"
 msgstr "&Вибір"
 
-#: menubuilder.cpp:83
+#: menubuilder.cpp:104
 msgid "Se&ttings"
 msgstr "П&араметри"
 
-#: menubuilder.cpp:83
+#: menubuilder.cpp:104
 msgid "&Window"
 msgstr "&Вікно"
 
-#: viewfactory.cpp:26 viewfactory.cpp:35
-#, fuzzy
-#| msgid "New View"
+#: viewfactory.cpp:22 viewfactory.cpp:31
 msgid "3D View"
-msgstr "Нове вікно перегляду"
+msgstr "3D Огляд"
 
-#: viewfactory.cpp:28 viewfactory.cpp:38
+#: viewfactory.cpp:24 viewfactory.cpp:43
 msgid "VTK"
-msgstr ""
+msgstr "ВТК"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -658,68 +630,39 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-#| "\">License: </span><a href=\"http://opensource.org/licenses/BSD-3-"
-#| "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
-#| "#0000ff;\">BSD-3-Clause</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
 "\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-"
 "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
-"#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
+"#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
-"\">Ліцензія: </span><a href=\"http://opensource.org/licenses/BSD-3-"
-"Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
-"#0000ff;\">BSD-3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Ліцензія: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\""
+">BSD 3-Clause</span></a></p></body></html>"
 
-#. i18n: file: aboutdialog.ui:278
+#. i18n: file: aboutdialog.ui:291
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span "
-#| "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
-#| "org</span></a></p></body></html>"
 msgid ""
 "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
-"style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
+"style=\" text-decoration: underline; color:#0096ff;\">two.avogadro.cc</"
 "span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><a href=\"http://www.openchemistry.org\"><span "
-"style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry.org</"
-"span></a></p></body></html>"
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0096ff;\""
+">two.avogadro.cc</span></a></p></body></html>"
 
-#. i18n: file: aboutdialog.ui:307
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid ""
-#| "<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" "
-#| "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></"
-#| "p></body></html>"
-msgid ""
-"<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
-"text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
-"body></html>"
-msgstr ""
-"<html><head/><body><p><a href=\"http://www.kitware.com\"><span style=\" text-"
-"decoration: underline; color:#0000ff;\">www.kitware.com</span></a></p></"
-"body></html>"
-
-#. i18n: file: aboutdialog.ui:334
+#. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
 msgid "OK"
 msgstr "Гаразд"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
@@ -731,8 +674,6 @@ msgstr "Відкрити"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -749,32 +690,24 @@ msgstr "Ви&лучити попередні"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+N"
 msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+W"
 msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Shift+S"
@@ -786,22 +719,17 @@ msgstr "Повернутися до збереженого"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
-msgstr "Встановити колір &тла..."
+msgstr "Встановити колір тла…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Z"
 msgctxt "Undo"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+Z"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
@@ -809,7 +737,7 @@ msgstr "Ctrl+Shift+Z"
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "По центру"
+msgstr "Центр"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -823,8 +751,6 @@ msgstr "Вставити"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+V"
 msgctxt "Paste"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
@@ -836,8 +762,6 @@ msgstr "Копіювати"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+C"
 msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
@@ -849,8 +773,6 @@ msgstr "Вирізати"
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+X"
 msgctxt "Cut"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
@@ -867,8 +789,6 @@ msgstr "Вибрати все"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
@@ -880,8 +800,6 @@ msgstr "Зняти вибір"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
@@ -927,69 +845,156 @@ msgid "&Import"
 msgstr "&Імпорт"
 
 #. i18n: file: renderingdialog.ui:31
+#. i18n: ectx: property (toolTip), widget (QLabel, label_2)
+msgid "Enable ambient occlusion shadows"
+msgstr "Увімкнути тіні ambient occlusion"
+
+#. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Навколишня оклюзія:"
 
-#. i18n: file: renderingdialog.ui:40
+#. i18n: file: renderingdialog.ui:43
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
-#. i18n: file: renderingdialog.ui:109
+#. i18n: file: renderingdialog.ui:118
+#. i18n: ectx: property (text), widget (QCheckBox, fogEnableCheckBox)
+#. i18n: file: renderingdialog.ui:220
+#. i18n: ectx: property (text), widget (QCheckBox, dofEnableCheckBox)
+#. i18n: file: renderingdialog.ui:325
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Увімкнути"
 
-#. i18n: file: renderingdialog.ui:82
+#. i18n: file: renderingdialog.ui:85
+#. i18n: ectx: property (toolTip), widget (QLabel, label)
+msgid "Strength of the ambient shadows"
+msgstr "Сила тіней оточення"
+
+#. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Сила тіні:"
 
-#. i18n: file: renderingdialog.ui:100
+#. i18n: file: renderingdialog.ui:106
+#. i18n: ectx: property (toolTip), widget (QLabel, label_3)
+msgid "Fog effect for depth cue"
+msgstr "Ефект туману для сигналу глибини"
+
+#. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#, fuzzy
-#| msgid "User Selections"
-msgid "Edge Detection:"
-msgstr "Вибране користувачем"
+msgid "Fog:"
+msgstr "Рівень туману:"
 
-#. i18n: file: renderingdialog.ui:138
+#. i18n: file: renderingdialog.ui:140
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Fog Strength:"
+msgstr "Сила туману:"
+
+#. i18n: file: renderingdialog.ui:170
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Fog Position:"
+msgstr "Позиція туману:"
+
+#. i18n: file: renderingdialog.ui:208
+#. i18n: ectx: property (toolTip), widget (QLabel, label_3)
+msgid "Add a depth blur"
+msgstr "Додати розмиття глибини"
+
+#. i18n: file: renderingdialog.ui:211
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+msgid "Depth Blur:"
+msgstr "Глибина розмиття:"
+
+#. i18n: file: renderingdialog.ui:242
+#. i18n: ectx: property (toolTip), widget (QLabel, label_5)
+msgid "Strength of the depth blur"
+msgstr "Сила глибини розмиття"
+
+#. i18n: file: renderingdialog.ui:245
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Blur Strength :"
+msgstr "Сила розмиття:"
+
+#. i18n: file: renderingdialog.ui:272
+#. i18n: ectx: property (toolTip), widget (QLabel, label_5)
+msgid "Position of the depth blur"
+msgstr "Позиція глибини розмиття"
+
+#. i18n: file: renderingdialog.ui:275
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+msgid "Blur Position:"
+msgstr "Позиція розмиття:"
+
+#. i18n: file: renderingdialog.ui:313
+#. i18n: ectx: property (toolTip), widget (QLabel, label_4)
+msgid "Add an outline to edge atoms"
+msgstr "Додати контур до граничних атомів"
+
+#. i18n: file: renderingdialog.ui:316
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+msgid "Edge Outline:"
+msgstr "Обведення краю:"
+
+#. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
 msgid "Save"
 msgstr "Зберегти"
 
-#. i18n: file: renderingdialog.ui:158
+#. i18n: file: renderingdialog.ui:374
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "За&крити"
+msgstr "Закрити"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
-",Launchpad Contributions:,Vladimir Kurg,svv, ,Launchpad Contributions:,"
-"Vladimir Kurg,svv, ,Launchpad Contributions:, ,Launchpad Contributions:,"
-"Vladimir Kurg,svv, ,Launchpad Contributions:,Vladimir Kurg,svv, ,Launchpad "
-"Contributions:,Valeriy,Vladimir Kurg,svv, ,Launchpad Contributions:,Valeriy,"
-"Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv, ,Launchpad Contributions:,"
-"Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv, ,Launchpad "
-"Contributions:,Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri Chornoivan,svv, ,"
-"Launchpad Contributions:,Valeriy,Vasiliy Meshko,Vladimir Kurg,Yuri "
-"Chornoivan,svv, ,Launchpad Contributions:,Vasiliy Meshko,Vladimir Kurg,Yuri "
-"Chornoivan,svv,yurchor, ,Launchpad Contributions:,Vasiliy Meshko,Vladimir "
-"Kurg,Yuri Chornoivan,svv,yurchor, ,Launchpad Contributions:,Vasiliy Meshko,"
-"Vladimir Kurg,Yuri Chornoivan,svv,yurchor"
+msgstr "Ваші імена"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
-",,,skrypnychuk@gmail.com,,,,skrypnychuk@gmail.com,,,,,,skrypnychuk@gmail."
-"com,,,,skrypnychuk@gmail.com,,,,,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,,,,"
-"vasiliymeshko@gmail.com,,yurchor@gmail.com,skrypnychuk@gmail.com,"
+msgstr "Ваші електронні листи"
+
+#~ msgid "Record test…"
+#~ msgstr "Запис тесту…"
+
+#~ msgid "Play test…"
+#~ msgstr "Відтворити тест…"
+
+#~ msgid ""
+#~ "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+#~ "\">License: </span><a href=\"https://opensource.org/licenses/BSD-3-"
+#~ "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
+#~ "#0000ff;\">BSD 3-Clause</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;"
+#~ "\">Ліцензія: </span><a href=\"https://opensource.org/licenses/BSD-3-"
+#~ "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
+#~ "#0000ff;\">BSD-3-Clause</span></a></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
+#~ "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+#~ "org</span></a></p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
+#~ "style=\" text-decoration: underline; color:#0000ff;\">www.openchemistry."
+#~ "org</span></a></p></body></html>"
+
+#~ msgid ""
+#~ "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+#~ "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></"
+#~ "p></body></html>"
+#~ msgstr ""
+#~ "<html><head/><body><p><a href=\"https://www.kitware.com\"><span style=\" "
+#~ "text-decoration: underline; color:#0000ff;\">www.kitware.com</span></a></"
+#~ "p></body></html>"
+
+#~ msgid "Molecules"
+#~ msgstr "Молекули"
+
+#, fuzzy
+#~| msgid "User Selections"
+#~ msgid "Edge Detection:"
+#~ msgstr "Вибране користувачем"
 
 #~ msgid "Navigate tool"
 #~ msgstr "Знаряддя навігації"
@@ -1626,6 +1631,3 @@ msgstr ""
 
 #~ msgid "Set the global rendering quality."
 #~ msgstr "Встановити загальну якість обробки."
-
-#~ msgid "Fog:"
-#~ msgstr "Рівень туману:"

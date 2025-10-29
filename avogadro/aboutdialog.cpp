@@ -19,6 +19,11 @@ AboutDialog::AboutDialog(QWidget* parent_)
 {
   m_ui->setupUi(this);
 
+  // description text
+  // mostly to get picked up for the installer
+  // and Linux .desktop file
+  QString description(tr("Molecular editor and visualizer"));
+
   QString html("<html><head/><body><p>"
                "<span style=\" font-size:%1pt; font-weight:600;\">%2</span>"
                "</p></body></html>");
@@ -36,11 +41,44 @@ AboutDialog::AboutDialog(QWidget* parent_)
   m_ui->sslVersion->setText(
     html.arg("10").arg(QSslSocket::sslLibraryVersionString()));
 
-  // Add support for a 2x replacement (mainly Mac OS X retina at this point).
-  if (window()->devicePixelRatio() == 2) {
-    QPixmap pix(":/icons/Avogadro2_About@2x.png");
+  // check for light or dark mode
+  const QPalette defaultPalette;
+  // is the text lighter than the window color?
+  bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
+                   defaultPalette.color(QPalette::Window).lightness());
+  QString theme = darkMode ? "dark" : "light";
+  loadImage(theme);
+}
+
+void AboutDialog::loadImage(const QString& theme)
+{
+  QString pixels = window()->devicePixelRatio() == 2 ? "@2x" : "";
+
+  QString path(":/icons/Avogadro2-about-" + theme + pixels + ".png");
+  QPixmap pix(path);
+
+  if (window()->devicePixelRatio() == 2)
     pix.setDevicePixelRatio(2);
-    m_ui->Image->setPixmap(pix);
+
+  m_ui->Image->setPixmap(QPixmap(path));
+}
+
+void AboutDialog::changeEvent(QEvent* e)
+{
+  // it's supposed to be through a theme change
+  // but on macOS, it seems to be triggered
+  // by a palette change, so we handle both
+  if (e->type() == QEvent::ApplicationPaletteChange ||
+      e->type() == QEvent::PaletteChange || e->type() == QEvent::ThemeChange) {
+    e->accept();
+
+    const QPalette defaultPalette;
+    // is the text lighter than the window color?
+    bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
+                     defaultPalette.color(QPalette::Window).lightness());
+
+    QString theme = darkMode ? "dark" : "light";
+    loadImage(theme);
   }
 }
 

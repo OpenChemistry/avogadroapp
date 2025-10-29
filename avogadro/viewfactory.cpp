@@ -12,13 +12,9 @@
 
 namespace Avogadro {
 
-ViewFactory::ViewFactory()
-{
-}
+ViewFactory::ViewFactory() {}
 
-ViewFactory::~ViewFactory()
-{
-}
+ViewFactory::~ViewFactory() {}
 
 QStringList ViewFactory::views() const
 {
@@ -32,8 +28,17 @@ QStringList ViewFactory::views() const
 
 QWidget* ViewFactory::createView(const QString& view)
 {
-  if (view == QObject::tr("3D View"))
-    return new QtOpenGL::GLWidget;
+  if (view == QObject::tr("3D View")) {
+    // get the background color, etc.
+    if (m_glWidget != nullptr) {
+      auto newWidget = new QtOpenGL::GLWidget(m_glWidget);
+      // set the background color, etc.
+      auto bgColor = m_glWidget->renderer().scene().backgroundColor();
+      newWidget->renderer().scene().setBackgroundColor(bgColor);
+      return newWidget;
+    } else
+      return new QtOpenGL::GLWidget;
+  }
 #ifdef AVO_USE_VTK
   else if (view == QObject::tr("VTK"))
     return new VTK::vtkGLWidget;

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+    xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+    xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+    xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+    IgnorableNamespaces="uap rescap">
+
+  <!-- Must match your Partner Center-assigned identity -->
+  <Identity
+      Name="AvogadroProject.Avogadro2"
+      Publisher="CN=31EF52D4-76D2-4993-B363-42AD3F51D578"
+      Version="@AvogadroApp_VERSION@.0" />
+
+  <Properties>
+    <DisplayName>Avogadro2</DisplayName>
+    <PublisherDisplayName>Avogadro Project</PublisherDisplayName>
+    <Description>Molecular editor and visualizer</Description>
+    <Logo>share\icons\avogadro.png</Logo>
+  </Properties>
+
+  <Resources>
+    <Resource Language="en-us" />
+  </Resources>
+
+  <Dependencies>
+    <TargetDeviceFamily
+        Name="Windows.Desktop"
+        MinVersion="10.0.17763.0"
+        MaxVersionTested="10.0.22621.0" />
+  </Dependencies>
+
+  <Applications>
+    <Application
+        Id="Avogadro2"
+        Executable="bin\avogadro2.exe"
+        EntryPoint="Windows.FullTrustApplication">
+
+      <uap:VisualElements
+          DisplayName="Avogadro 2"
+          Description="Molecular editor and visualizer"
+          BackgroundColor="transparent"
+          Square150x150Logo="share\icons\Avogadro2_150.png"
+          Square44x44Logo="share\icons\avogadro2_44.png">
+
+        <!-- Optional but highly recommended -->
+        <uap:DefaultTile
+            Wide310x150Logo="share\icons\Avogadro2-310x150.png"
+            Square310x310Logo="share\icons\avogadro2_310.png"
+            Square71x71Logo="share\icons\avogadro2_71.png"
+            ShortName="Avogadro" />
+      </uap:VisualElements>
+
+      <Extensions>
+        <!-- File associations for common molecular file formats -->
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="avogadromolecule">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.cjson</uap:FileType>
+              <uap:FileType>.cml</uap:FileType>
+              <uap:FileType>.xyz</uap:FileType>
+              <uap:FileType>.pdb</uap:FileType>
+              <uap:FileType>.mol</uap:FileType>
+              <uap:FileType>.mol2</uap:FileType>
+              <uap:FileType>.sdf</uap:FileType>
+              </uap:SupportedFileTypes>
+            <uap:DisplayName>Molecule File</uap:DisplayName>
+            <uap:Logo>share\icons\avogadro2_44.png</uap:Logo>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>

@@ -12,6 +12,8 @@ if(USE_VTK)
   add_definitions(-DAVO_USE_VTK)
 endif()
 
+find_package(JKQTPlotter${QT_VERSION} REQUIRED)
+
 if(MSVC)
   add_definitions("-D_CRT_SECURE_NO_WARNINGS")
 else()
@@ -20,9 +22,21 @@ endif()
 
 # Find the Qt components we need.
 if(QT_VERSION EQUAL 6)
-  find_package(Qt6 COMPONENTS Concurrent Widgets Network Core5Compat REQUIRED)
+  find_package(Qt6
+    COMPONENTS
+      Concurrent
+      Widgets
+      Network
+      OpenGL
+      OpenGLWidgets
+    REQUIRED)
 else()
-  find_package(Qt5 COMPONENTS Concurrent Widgets Network REQUIRED)
+  find_package(Qt5
+    COMPONENTS
+      Concurrent
+      Widgets
+      Network
+    REQUIRED)
 endif()
 
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
@@ -109,12 +123,7 @@ endif()
 # Handle Mac OS X specific icons etc.
 if(APPLE)
   # add some Objective-C++ code
-  list(APPEND avogadro_srcs mac.mm)
-  if (QT_VERSION EQUAL 5)
-    list(APPEND avogadro_srcs ../thirdparty/qcocoacontrols/qcocoamessagebox.mm)
-    include_directories(SYSTEM "${AvogadroApp_SOURCE_DIR}/thirdparty/qcocoacontrols")
-    set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -framework Cocoa")
-  endif()
+  # list(APPEND avogadro_srcs mac.mm)
 
   # for all the translations, create a .lproj directory
   # Migrated from Avo 1.x - contributed by Geoff Hutchison
@@ -139,11 +148,12 @@ if(APPLE)
       ERROR_QUIET)")
   endforeach()
 
-  list(APPEND avogadro_srcs icons/avogadro.icns)
+  list(APPEND avogadro_srcs icons/Assets.car)
+  list(APPEND avogadro_srcs icons/AppIcon.icns)
   list(APPEND avogadro_srcs icons/doc.icns)
   list(APPEND avogadro_srcs icons/cml.icns)
   list(APPEND avogadro_srcs icons/cjson.icns)
-  set(MACOSX_BUNDLE_ICON_FILE avogadro.icns)
+  set(MACOSX_BUNDLE_ICON_FILE AppIcon)
   set(MACOSX_BUNDLE_BUNDLE_VERSION "${AvogadroApp_VERSION}")
   set(MACOSX_BUNDLE_INFO_STRING "Avogadro - version ${AvogadroApp_VERSION}")
 
@@ -151,7 +161,9 @@ if(APPLE)
   set(MACOSX_BUNDLE_GUI_IDENTIFIER "cc.avogadro")
   set(MACOSX_BUNDLE_BUNDLE_NAME "Avogadro")
 
-  set_source_files_properties(icons/avogadro.icns PROPERTIES
+  set_source_files_properties(icons/Assets.car PROPERTIES
+    MACOSX_PACKAGE_LOCATION Resources)
+  set_source_files_properties(icons/AppIcon.icns PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources)
   set_source_files_properties(icons/doc.icns PROPERTIES
     MACOSX_PACKAGE_LOCATION Resources)
@@ -161,12 +173,41 @@ if(APPLE)
     MACOSX_PACKAGE_LOCATION Resources)
 
 elseif(UNIX)
-  install(FILES "icons/avogadro2.desktop" DESTINATION "${INSTALL_XDG_APPS_DIR}")
-  install(FILES "icons/avogadro2.appdata.xml" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/metainfo")
-  install(FILES "icons/avogadro.png" DESTINATION "${INSTALL_XDG_ICON_DIR}"
-    RENAME "avogadro2.png")
+  install(FILES "metainfo/org.openchemistry.Avogadro2.desktop" DESTINATION "${INSTALL_XDG_APPS_DIR}")
+  install(FILES "metainfo/org.openchemistry.Avogadro2.metainfo.xml" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/metainfo")
+  install(FILES "icons/avogadro.png" DESTINATION "${INSTALL_XDG_ICON_DIR}/hicolor/32x32/apps"
+    RENAME "org.openchemistry.Avogadro2.png")
+  install(FILES "icons/avogadro.png" DESTINATION "${INSTALL_XDG_ICON_DIR}/hicolor/16x16@2/apps"
+    RENAME "org.openchemistry.Avogadro2.png")
+  install(FILES "icons/avogadro2_64.png" DESTINATION "${INSTALL_XDG_ICON_DIR}/hicolor/64x64/apps"
+    RENAME "org.openchemistry.Avogadro2.png")
+  install(FILES "icons/avogadro2_64.png" DESTINATION "${INSTALL_XDG_ICON_DIR}/hicolor/32x32@2/apps"
+    RENAME "org.openchemistry.Avogadro2.png")
+  install(FILES "icons/avogadro2_128.png" DESTINATION "${INSTALL_XDG_ICON_DIR}/hicolor/128x128/apps"
+    RENAME "org.openchemistry.Avogadro2.png")
+  install(FILES "icons/avogadro2_256.png" DESTINATION "${INSTALL_XDG_ICON_DIR}/hicolor/256x256/apps"
+    RENAME "org.openchemistry.Avogadro2.png")
+  install(FILES "icons/avogadro2.svg" DESTINATION "${INSTALL_XDG_ICON_DIR}/hicolor/scalable/apps"
+    RENAME "org.openchemistry.Avogadro2.svg")
 elseif(WIN32)
   list(APPEND avogadro_srcs icons/avogadro.rc)
+  # copy icons
+  install(FILES "icons/avogadro.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/avogadro.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/doc.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/cml.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/cjson.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+
+  # for the MSIX installer
+  install(FILES "icons/Avogadro2-310x150.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/Avogadro2_44.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/Avogadro2_71.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/Avogadro2_150.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+  install(FILES "icons/Avogadro2_310.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
+
+  # configure the NSI and MSIX installer scripts
+  configure_file("${AvogadroApp_SOURCE_DIR}/cmake/avogadro2.nsi.in" "${CMAKE_INSTALL_PREFIX}/avogadro2.nsi" @ONLY)
+  configure_file("${AvogadroApp_SOURCE_DIR}/cmake/AppxManifest.xml.in" "${CMAKE_INSTALL_PREFIX}/AppxManifest.xml" @ONLY)
 endif()
 
 if(USE_3DCONNEXION AND (WIN32 OR APPLE))
@@ -201,10 +242,10 @@ else()
   set_target_properties(avogadro PROPERTIES OUTPUT_NAME "avogadro2")
 endif()
 if(ENABLE_TESTING)
-  target_link_libraries(avogadro QtTesting)
+  target_link_libraries(avogadro qttesting)
 endif()
 if(QT_VERSION EQUAL 6)
-  target_link_libraries(avogadro Qt6::Core5Compat)
+  target_link_libraries(avogadro Qt6::OpenGL Qt6::OpenGLWidgets)
 endif()
 
 if(USE_3DCONNEXION AND (WIN32 OR APPLE))

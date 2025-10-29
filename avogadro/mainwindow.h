@@ -161,11 +161,14 @@ signals:
   void moleculeChanged(QtGui::Molecule* molecue);
 
 protected:
-  void closeEvent(QCloseEvent* event);
+  void closeEvent(QCloseEvent* event) override;
 
   // Handle drag and drop -- accept files dragged on the window
-  void dragEnterEvent(QDragEnterEvent* event);
-  void dropEvent(QDropEvent* event);
+  void dragEnterEvent(QDragEnterEvent* event) override;
+  void dropEvent(QDropEvent* event) override;
+
+  // handle theme changes
+  void changeEvent(QEvent* event) override;
 
 protected slots:
 
@@ -294,6 +297,8 @@ private slots:
 
   void checkUpdate();
 
+  void closeActiveMolecule();
+
   void finishUpdateRequest(QNetworkReply*);
 
   void registerToolCommand(QString command, QString description);
@@ -386,6 +391,7 @@ private slots:
 
   void setRenderingSettings();
 
+  // void setFogColor();
   void setProjectionOrthographic();
 
   void setProjectionPerspective();

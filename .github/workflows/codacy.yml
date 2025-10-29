@@ -14,32 +14,36 @@
 name: Codacy Security Scan
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ master ]
-  schedule:
-    - cron: '28 10 * * 6'
+  workflow_dispatch:
+#  push:
+#    branches: [ master ]
+#  pull_request:
+#    # The branches below must be a subset of the branches above
+#    branches: [ master ]
+#  schedule:
+#    - cron: '28 10 * * 6'
 
 permissions:
   contents: read
 
 jobs:
   codacy-security-scan:
+    name: Codacy Security Scan
     permissions:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-    name: Codacy Security Scan
     runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       # Execute Codacy Analysis CLI and generate a SARIF output with the security issues identified during the analysis
       - name: Run Codacy Analysis CLI
-        uses: codacy/codacy-analysis-cli-action@master
+        uses: codacy/codacy-analysis-cli-action@562ee3e92b8e92df8b67e0a5ff8aa8e261919c08 # v4.4.7
         with:
           # Check https://github.com/codacy/codacy-analysis-cli#project-token to get your project token from your Codacy repository
           # You can also omit the token and run the tools that support default configurations
@@ -57,13 +61,10 @@ jobs:
       - name: Filter and Reduce SARIF
         run: |
           pip install globber
-          python3 scripts/filter_and_reduce_sarif.py --input results.sarif --output filtered_and_reduced.sarif
-        env:
-          PYTHONUNBUFFERED: 1
-
+          python3 scripts/github-actions/filter_sarif.py --input results.sarif --output filtered.sarif --split-lines -- "-**/*.*:cppcheck_misra*"
 
        # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@4e94bd11f71e507f7f87df81788dff88d1dacbfb # v4.31.0
         with:
           sarif_file: filtered_and_reduced.sarif

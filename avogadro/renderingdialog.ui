@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>284</width>
-    <height>182</height>
+    <height>422</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,7 +26,10 @@
    <item>
     <layout class="QFormLayout" name="formLayout">
      <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="enableAO_label">
+       <property name="toolTip">
+        <string>Enable ambient occlusion shadows</string>
+       </property>
        <property name="text">
         <string>Ambient Occlusion:</string>
        </property>
@@ -44,7 +47,7 @@
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -64,7 +67,7 @@
        <item>
         <spacer name="horizontalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -77,7 +80,10 @@
       </layout>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="shadow_label">
+       <property name="toolTip">
+        <string>Strength of the ambient shadows</string>
+       </property>
        <property name="text">
         <string>Shadow Strength:</string>
        </property>
@@ -88,23 +94,26 @@
    <item>
     <widget class="Line" name="line">
      <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+      <enum>Qt::Orientation::Horizontal</enum>
      </property>
     </widget>
    </item>
    <item>
     <layout class="QFormLayout" name="formLayout_2">
      <item row="0" column="0">
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="enableFog_label">
+       <property name="toolTip">
+        <string>Fog effect for depth cue</string>
+       </property>
        <property name="text">
-        <string>Edge Detection:</string>
+        <string>Fog:</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QCheckBox" name="edEnableCheckBox">
+        <widget class="QCheckBox" name="fogEnableCheckBox">
          <property name="text">
           <string>Enable</string>
          </property>
@@ -113,7 +122,64 @@
        <item>
         <spacer name="horizontalSpacer_3">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="fogStrength_label">
+       <property name="text">
+        <string>Fog Strength:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QDoubleSpinBox" name="fogStrengthDoubleSpinBox"/>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="fogPosition_label">
+       <property name="toolTip">
+        <string/>
+       </property>
+       <property name="text">
+        <string>Fog Position:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <item>
+        <widget class="QDoubleSpinBox" name="fogPositionDoubleSpinBox"/>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -128,7 +194,157 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
+    <widget class="Line" name="line_2">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QFormLayout" name="formLayout_3">
+     <item row="0" column="0">
+      <widget class="QLabel" name="depthBlurEnable_label">
+       <property name="toolTip">
+        <string>Add a depth blur</string>
+       </property>
+       <property name="text">
+        <string>Depth Blur:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
+       <item>
+        <widget class="QCheckBox" name="dofEnableCheckBox">
+         <property name="text">
+          <string>Enable</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_9">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="blurStrength_label">
+       <property name="toolTip">
+        <string>Strength of the depth blur</string>
+       </property>
+       <property name="text">
+        <string>Blur Strength :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_10">
+       <item>
+        <widget class="QDoubleSpinBox" name="dofStrengthDoubleSpinBox"/>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_8">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="blurPosition_label">
+       <property name="toolTip">
+        <string>Position of the depth blur</string>
+       </property>
+       <property name="text">
+        <string>Blur Position:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <item>
+        <widget class="QDoubleSpinBox" name="dofPositionDoubleSpinBox"/>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_10">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line_3">
+     <property name="orientation">
+      <enum>Qt::Orientation::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QFormLayout" name="formLayout_4">
+     <item row="0" column="0">
+      <widget class="QLabel" name="edgeOutline_label">
+       <property name="toolTip">
+        <string>Add an outline to edge atoms</string>
+       </property>
+       <property name="text">
+        <string>Edge Outline:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <item>
+        <widget class="QCheckBox" name="edEnableCheckBox">
+         <property name="text">
+          <string>Enable</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
       <widget class="QPushButton" name="saveButton">
        <property name="styleSheet">
@@ -140,9 +356,9 @@
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer_4">
+      <spacer name="horizontalSpacer_5">
        <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+        <enum>Qt::Orientation::Horizontal</enum>
        </property>
        <property name="sizeHint" stdset="0">
         <size>

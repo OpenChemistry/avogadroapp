@@ -1,0 +1,98 @@
+name: Clang-Tidy Static Analysis
+
+on:
+  workflow_dispatch:
+
+env:
+  FEATURES: -DUSE_VTK=ON -DBUILD_GPL_PLUGINS=ON -DWITH_COORDGEN=OFF -DUSE_YAEHMOP=ON
+  BUILD_TYPE: RelWithDebInfo
+  QT_VERSION: 5.15.2
+
+jobs:
+  build:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - {
+            name: "Ubuntu Analysis",
+            os: ubuntu-latest,
+            cc: "clang", cxx: "clang++",
+            cmake_flags: "-G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DUSE_SYSTEM_LIBXML2=ON -USE_SYSTEM_ZLIB=ON",
+            cpack: "",
+          }
+
+    steps:
+
+    - name: Install Dependencies (Linux)
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get -qq update
+        sudo apt-get -qq install ninja-build bear libeigen3-dev libboost-all-dev libglew-dev libxml2-dev
+        sudo apt-get -qq install qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools libqt5x11extras5-dev libqt5svg5-dev
+        sudo apt-get -qq install clang-tidy
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@b7840a6733f49e2a39c4355260d2375063d39b61 # v3
+      with:
+        cache: true
+        version: ${{ env.QT_VERSION }}
+
+    - name: Checkout Repositories
+      uses: ./.github/actions/checkout-repositories
+
+    - name: Grab cache files
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+      if: runner.os != 'Windows'
+      with:
+        path: |
+          ${{ runner.workspace }}/build/thirdparty
+          ${{ runner.workspace }}/build/Downloads
+        key: ${{ matrix.config.name }}-thirdparty
+
+    - name: Configure
+      run: |
+        if [ ! -d "${{ runner.workspace }}/build" ]; then mkdir "${{ runner.workspace }}/build"; fi
+        cd "${{ runner.workspace }}/build"
+        CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake $GITHUB_WORKSPACE ${{env.FEATURES}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} ${{matrix.config.cmake_flags}}
+      shell: bash
+
+    - name: Build
+      run: |
+        CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} ninja
+        # only re-compile avogadrolibs
+        (cd avogadrolibs; ninja clean)
+        bear -- ninja
+      shell: bash
+      working-directory: ${{ runner.workspace }}/build
+
+    - name: Create results directory
+      run: |
+        mkdir ${{ runner.workspace }}/clang-tidy-result
+
+    - name: Analyze
+      run: |
+        # generate the fixes and we'll make a diff
+        run-clang-tidy -p ../build -fix
+        cd avogadrolibs
+        pwd
+        echo "Generating diff"
+        git diff >${{ runner.workspace }}/clang-tidy-result/tidy.patch
+      working-directory: ${{ runner.workspace }}/avogadrolibs
+
+    - name: Save PR metadata
+      run: |
+        echo ${{ github.event.number }} > ${{ runner.workspace }}/clang-tidy-result/pr-id.txt
+        echo ${{ github.event.pull_request.head.repo.full_name }} > ${{ runner.workspace }}/clang-tidy-result/pr-head-repo.txt
+        echo ${{ github.event.pull_request.head.ref }} > ${{ runner.workspace }}/clang-tidy-result/pr-head-ref.txt
+
+    - uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+      with:
+        name: clang-tidy-result
+        path: ${{ runner.workspace }}/clang-tidy-result/
+
+    - name: Setup tmate session
+      if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@c0afd6f790e3a5564914980036ebf83216678101 # v3.23

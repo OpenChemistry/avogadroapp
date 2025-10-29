@@ -13,6 +13,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QLocale>
+#include <QtCore/QOperatingSystemVersion>
 #include <QtCore/QProcess>
 #include <QtCore/QSettings>
 #include <QtCore/QStandardPaths>
@@ -20,13 +21,17 @@
 
 // install a message handler (for Windows)
 #include <QFile>
+#include <QSslSocket>
 #include <QTextStream>
 
+#include <avogadro/core/version.h>
+
 #include "application.h"
+#include "avogadroappconfig.h"
 #include "mainwindow.h"
 
 #ifdef Q_OS_MAC
-void removeMacSpecificMenuItems();
+// void removeMacSpecificMenuItems();
 #endif
 
 #ifdef Avogadro_ENABLE_RPC
@@ -49,28 +54,28 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext& context,
   QString message;
   switch (type) {
     case QtInfoMsg:
-      message = QString("Info: %1 (%2:%3, %4)\n")
+      message = QString("Info: %1 (%2:%3, %4)")
                   .arg(localMsg.constData())
                   .arg(file)
                   .arg(context.line)
                   .arg(function);
       break;
     case QtWarningMsg:
-      message = QString("Warning: %1 (%2:%3, %4)\n")
+      message = QString("Warning: %1 (%2:%3, %4)")
                   .arg(localMsg.constData())
                   .arg(file)
                   .arg(context.line)
                   .arg(function);
       break;
     case QtCriticalMsg:
-      message = QString("Critical: %1 (%2:%3, %4)\n")
+      message = QString("Critical: %1 (%2:%3, %4)")
                   .arg(localMsg.constData())
                   .arg(file)
                   .arg(context.line)
                   .arg(function);
       break;
     case QtFatalMsg:
-      message = QString("Fatal: %1 (%2:%3, %4)\n")
+      message = QString("Fatal: %1 (%2:%3, %4)")
                   .arg(localMsg.constData())
                   .arg(file)
                   .arg(context.line)
@@ -78,7 +83,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext& context,
       break;
     case QtDebugMsg:
     default:
-      message = QString("Debug: %1 (%2:%3, %4)\n")
+      message = QString("Debug: %1 (%2:%3, %4)")
                   .arg(localMsg.constData())
                   .arg(file)
                   .arg(context.line)
@@ -98,15 +103,24 @@ int main(int argc, char* argv[])
 {
 #ifdef Q_OS_MAC
   // call some Objective-C++
-  removeMacSpecificMenuItems();
+  // removeMacSpecificMenuItems();
   // Native Mac applications do not have icons in the menus
-  QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+  // until Tahoe (macOS 26)
+  // (and only do this with Qt 6.7 or later)
+  bool oldQtVersion = true;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  oldQtVersion = false;
+#endif
+  auto currentOS = QOperatingSystemVersion::current();
+  if (oldQtVersion || currentOS.majorVersion() < 26) {
+    QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+  }
 #endif
 
   QCoreApplication::setOrganizationName("OpenChemistry");
   QCoreApplication::setOrganizationDomain("openchemistry.org");
   QCoreApplication::setApplicationName("Avogadro");
-  QGuiApplication::setDesktopFileName("avogadro2");
+  QGuiApplication::setDesktopFileName("org.openchemistry.Avogadro2");
 
   QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -115,9 +129,21 @@ int main(int argc, char* argv[])
   // We need to ensure desktop OpenGL is loaded for our rendering.
   QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
 
+  // remove the previous log file
+  QString writableDocs =
+    QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+  QFile outFile(writableDocs + "/avogadro2.log");
+  outFile.remove(); // we don't care if this fails
+
   // install the message handler (goes to Documents / avogadro2.log)
   qInstallMessageHandler(myMessageOutput);
 #endif
+
+  // output the version information
+  qDebug() << "Avogadroapp version: " << AvogadroApp_VERSION;
+  qDebug() << "Avogadrolibs version: " << Avogadro::version();
+  qDebug() << "Qt version: " << qVersion();
+  qDebug() << "SSL version: " << QSslSocket::sslLibraryVersionString();
 
   Avogadro::Application app(argc, argv);
 
@@ -130,6 +156,21 @@ int main(int argc, char* argv[])
   if (language != "System") {
     currentLocale = QLocale(language);
   }
+#ifdef Q_OS_MAC
+  else {
+    // On macOS, we can get the system language from the AppleLanguages
+    // setting, which is a list of preferred languages.
+    // https://www.qtcentre.org/threads/57433-SOLVED-Get-system-language-on-Mac-OS-X
+    QVariant osxLanguageSettings = settings.value("AppleLanguages");
+    QStringList displayLanguages = osxLanguageSettings.toStringList();
+    QString preferredLanguage = displayLanguages.first();
+    qDebug() << "preferred language is:" << preferredLanguage;
+    if (!preferredLanguage.isEmpty()) {
+      currentLocale = QLocale(preferredLanguage);
+    }
+  }
+#endif
+
   qDebug() << "Using locale: " << currentLocale.name();
 
   QStringList translationPaths;
@@ -268,12 +309,11 @@ int main(int argc, char* argv[])
   }
 
   // Set up the default format for our GL contexts.
+#if defined(Q_OS_MAC)
   QSurfaceFormat defaultFormat = QSurfaceFormat::defaultFormat();
-  defaultFormat.setSamples(4);
-#if defined(Q_OS_MAC) || defined(Q_OS_WIN)
   defaultFormat.setAlphaBufferSize(8);
-#endif
   QSurfaceFormat::setDefaultFormat(defaultFormat);
+#endif
 
   QStringList fileNames;
   bool disableSettings = false;

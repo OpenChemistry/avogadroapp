@@ -1,6 +1,6 @@
 /******************************************************************************
-  This source file is part of the Avogadro project.
-  This source code is released under the 3-Clause BSD License, (see "LICENSE").
+ This source file is part of the Avogadro project.
+ This source code is released under the 3-Clause BSD License, (see "LICENSE").
 ******************************************************************************/
 
 #include "mainwindow.h"
@@ -28,6 +28,7 @@
 #include <avogadro/qtgui/moleculemodel.h>
 #include <avogadro/qtgui/multiviewwidget.h>
 #include <avogadro/qtgui/periodictableview.h>
+#include <avogadro/qtgui/richtextdelegate.h>
 #include <avogadro/qtgui/rwmolecule.h>
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
@@ -46,6 +47,7 @@
 #include <QtCore/QMimeData>
 #include <QtCore/QProcess>
 #include <QtCore/QSettings>
+#include <QtCore/QSortFilterProxyModel>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QString>
 #include <QtCore/QThread>
@@ -96,13 +98,6 @@
 #include <avogadro/vtk/vtkglwidget.h>
 #endif
 
-#if defined(Q_OS_MAC) && (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-#include "qcocoamessagebox.h"
-#define MESSAGEBOX QCocoaMessageBox
-#else
-#define MESSAGEBOX QMessageBox
-#endif
-
 namespace Avogadro {
 
 #ifdef QTTESTING
@@ -117,10 +112,24 @@ public:
   {
     this->XMLStream = nullptr;
   }
-  ~XMLEventObserver() { delete this->XMLStream; }
+  ~XMLEventObserver()
+  {
+    if (this->XMLStream) {
+      this->XMLStream->writeEndElement(); // close properly
+      this->XMLStream->writeEndDocument();
+      delete this->XMLStream;
+      this->XMLStream = nullptr;
+    }
+
+    // Flush any remaining content to the stream
+    if (this->Stream && !this->XMLString.isEmpty()) {
+      *this->Stream << this->XMLString;
+      this->Stream->flush(); // Ensure it's written
+    }
+  }
 
 protected:
-  virtual void setStream(QTextStream* stream)
+  virtual void setStream(QTextStream* stream) override
   {
     if (this->XMLStream) {
       this->XMLStream->writeEndElement();
@@ -128,8 +137,10 @@ protected:
       delete this->XMLStream;
       this->XMLStream = nullptr;
     }
-    if (this->Stream)
+    if (this->Stream) {
       *this->Stream << this->XMLString;
+      this->Stream->flush(); // make sure to flush
+    }
 
     this->XMLString = QString();
     pqEventObserver::setStream(stream);
@@ -142,13 +153,15 @@ protected:
   }
 
   virtual void onRecordEvent(const QString& widget, const QString& command,
-                             const QString& arguments)
+                             const QString& arguments,
+                             const int& eventType = 0) override
   {
     if (this->XMLStream) {
       this->XMLStream->writeStartElement("event");
       this->XMLStream->writeAttribute("widget", widget);
       this->XMLStream->writeAttribute("command", command);
       this->XMLStream->writeAttribute("arguments", arguments);
+      this->XMLStream->writeAttribute("eventType", QString::number(eventType));
       this->XMLStream->writeEndElement();
     }
   }
@@ -168,7 +181,7 @@ public:
   ~XMLEventSource() { delete this->XMLStream; }
 
 protected:
-  virtual void setContent(const QString& xmlfilename)
+  virtual void setContent(const QString& xmlfilename) override
   {
     delete this->XMLStream;
     this->XMLStream = nullptr;
@@ -182,7 +195,8 @@ protected:
     this->XMLStream = new QXmlStreamReader(data);
   }
 
-  int getNextEvent(QString& widget, QString& command, QString& arguments)
+  int getNextEvent(QString& widget, QString& command, QString& arguments,
+                   int& eventType) override
   {
     if (this->XMLStream->atEnd())
       return DONE;
@@ -199,6 +213,8 @@ protected:
     widget = this->XMLStream->attributes().value("widget").toString();
     command = this->XMLStream->attributes().value("command").toString();
     arguments = this->XMLStream->attributes().value("arguments").toString();
+    eventType =
+      this->XMLStream->attributes().value("eventType").toString().toInt();
     return SUCCESS;
   }
 };
@@ -273,11 +289,16 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 
   QList<ExtensionPluginFactory*> extensions =
     plugin->pluginFactories<ExtensionPluginFactory>();
+#ifndef NDEBUG
   qDebug() << "Extension plugins dynamically found…" << extensions.size();
+#endif
   foreach (ExtensionPluginFactory* factory, extensions) {
     ExtensionPlugin* extension =
       factory->createInstance(QCoreApplication::instance());
     if (extension) {
+#ifdef Q_OS_WIN
+      qDebug() << " loading extension plugin: " << extension->name();
+#endif
       extension->setParent(this);
       connect(this, &MainWindow::moleculeChanged, extension,
               &QtGui::ExtensionPlugin::setMolecule);
@@ -299,10 +320,25 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   }
 
   // Now set up the interface.
+#ifdef Q_OS_WIN
+  qDebug() << " setting interface ";
+#endif
   setupInterface();
 
+#ifdef QTTESTING
+  m_testUtility = new pqTestUtility(this);
+  m_testUtility->addEventObserver("xml", new XMLEventObserver(this));
+  m_testUtility->addEventSource("xml", new XMLEventSource(this));
+#endif
+
   // Build up the standard menus, incorporate dynamic menus.
+#ifdef Q_OS_WIN
+  qDebug() << " building menu ";
+#endif
   buildMenu();
+#ifdef Q_OS_WIN
+  qDebug() << " updating recent files ";
+#endif
   updateRecentFiles();
 
   // Try to open the file(s) passed in.
@@ -311,6 +347,9 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
     // Give the plugins 5 seconds before timing out queued files.
     QTimer::singleShot(5000, this, &MainWindow::clearQueuedFiles);
   } else {
+#ifdef Q_OS_WIN
+    qDebug() << " creating new molecule ";
+#endif
     newMolecule();
   }
 
@@ -368,6 +407,7 @@ void MainWindow::setupInterface()
   m_multiViewWidget->setFactory(m_viewFactory);
   setCentralWidget(m_multiViewWidget);
   auto* glWidget = new GLWidget(this);
+  m_viewFactory->setGLWidget(glWidget);
 
   // set the background color (alpha channel default should be opaque)
   auto color =
@@ -388,11 +428,18 @@ void MainWindow::setupInterface()
   Rendering::SolidPipeline* pipeline = &glWidget->renderer().solidPipeline();
   if (pipeline) {
     pipeline->setAoEnabled(
-      settings.value("MainWindow/ao_enabled", true).toBool());
+      settings.value("MainWindow/ao_enabled", false).toBool());
+    pipeline->setDofEnabled(
+      settings.value("MainWindow/dof_enabled", false).toBool());
+    pipeline->setFogEnabled(
+      settings.value("MainWindow/fog_enabled", true).toBool());
     pipeline->setAoStrength(
       settings.value("MainWindow/ao_strength", 1.0f).toFloat());
     pipeline->setEdEnabled(
-      settings.value("MainWindow/ed_enabled", true).toBool());
+      settings.value("MainWindow/ed_enabled", false).toBool());
+
+    // set background color
+    pipeline->setBackgroundColor(cColor);
   }
 
   // Our tool dock.
@@ -405,6 +452,7 @@ void MainWindow::setupInterface()
   m_sceneTreeView->setIndentation(0);
   m_sceneTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_sceneTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
+  m_sceneTreeView->setSortingEnabled(true);
   m_sceneDock->setWidget(m_sceneTreeView);
   addDockWidget(Qt::LeftDockWidgetArea, m_sceneDock);
 
@@ -413,9 +461,11 @@ void MainWindow::setupInterface()
   addDockWidget(Qt::LeftDockWidgetArea, m_viewDock);
 
   // Our molecule dock.
-  m_moleculeDock = new QDockWidget(tr("Molecules"), this);
+  m_moleculeDock = new QDockWidget(tr("Files"), this);
   m_moleculeTreeView = new QTreeView(m_moleculeDock);
   m_moleculeTreeView->setIndentation(0);
+  m_moleculeTreeView->setItemDelegateForColumn(
+    0, new QtGui::RichTextDelegate(m_moleculeTreeView));
   m_moleculeTreeView->setSelectionBehavior(QAbstractItemView::SelectRows);
   m_moleculeTreeView->setSelectionMode(QAbstractItemView::SingleSelection);
   m_moleculeDock->setWidget(m_moleculeTreeView);
@@ -437,8 +487,13 @@ void MainWindow::setupInterface()
   m_moleculeDock->raise();
 
   // Switch to our fallback icons if there are no platform-specific icons.
-  if (!QIcon::hasThemeIcon("document-new"))
+  if (!QIcon::hasThemeIcon("document-new")) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    QIcon::setFallbackThemeName("fallback");
+#else
     QIcon::setThemeName("fallback");
+#endif
+  }
 
   QIcon icon(":/icons/avogadro.png");
   setWindowIcon(icon);
@@ -505,6 +560,37 @@ void MainWindow::setupInterface()
           &MainWindow::viewActivated);
 }
 
+void MainWindow::closeActiveMolecule()
+{
+  if (!saveFileIfNeeded()) {
+    return;
+  }
+
+  Molecule* currentMol = m_molecule;
+  const QList<Molecule*> molecules = m_moleculeModel->molecules();
+  const int idx = molecules.indexOf(currentMol);
+
+  if (idx < 0 || molecules.isEmpty()) {
+    return;
+  }
+
+  if (idx == 0) {
+    // if the current molecule is the first one in the list, and it is not the
+    // only one we make the next molecule the starting one
+    if (molecules.size() > 1) {
+      setMolecule(molecules[idx + 1]);
+    } else {
+      newMolecule();
+    }
+  }
+  // otherwise we just set the current molecule to the one before
+  else {
+    setMolecule(molecules[idx - 1]);
+  }
+
+  m_moleculeModel->removeItem(currentMol);
+}
+
 void MainWindow::closeEvent(QCloseEvent* e)
 {
   writeSettings();
@@ -513,6 +599,34 @@ void MainWindow::closeEvent(QCloseEvent* e)
     return;
   }
   QMainWindow::closeEvent(e);
+}
+
+void MainWindow::changeEvent(QEvent* e)
+{
+  // it's supposed to be through a theme change
+  // but on macOS, it seems to be triggered
+  // by a palette change, so we handle both
+  if (e->type() == QEvent::ApplicationPaletteChange ||
+      e->type() == QEvent::PaletteChange || e->type() == QEvent::ThemeChange) {
+    e->accept();
+
+    const QPalette defaultPalette;
+    // is the text lighter than the window color?
+    bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
+                     defaultPalette.color(QPalette::Window).lightness());
+
+    // Handle theme changes by telling tools to update their icons.
+    for (ToolPlugin* tool : m_tools) {
+      if (tool != nullptr)
+        tool->setIcon(darkMode);
+    }
+
+    // change the theme of the molecule model
+    if (m_moleculeModel != nullptr)
+      m_moleculeModel->loadIcons(darkMode);
+  }
+
+  QMainWindow::changeEvent(e);
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent* event)
@@ -536,9 +650,14 @@ void MainWindow::dropEvent(QDropEvent* event)
         if (extension == "py")
           addScript(fileName);
         else
-          openFile(fileName);
+          // add these to m_queuedFiles
+          // so we can read them later
+          m_queuedFiles.append(fileName);
       }
     }
+    if (!m_queuedFiles.empty())
+      readQueuedFiles();
+
     event->acceptProposedAction();
   } else
     event->ignore();
@@ -564,7 +683,8 @@ void setWidgetMolecule(T* glWidget, M* mol)
 {
   glWidget->setMolecule(mol);
   glWidget->updateScene();
-  glWidget->resetCamera();
+  if (mol->atomCount() == 0)
+    glWidget->resetCamera();
 }
 
 void setDefaultViews(MultiViewWidget* viewWidget)
@@ -745,9 +865,9 @@ void MainWindow::setLocale(const QString& locale)
     settings.setValue("locale", locale);
   }
 
-  MESSAGEBOX::information(this, tr("Restart needed"),
-                          tr("Please restart Avogadro to use the new "
-                             "language."));
+  QMessageBox::information(this, tr("Restart needed"),
+                           tr("Please restart Avogadro to use the new "
+                              "language."));
 }
 
 void MainWindow::readSettings()
@@ -791,8 +911,8 @@ void MainWindow::openFile()
     reader = new Io::CjsonFormat;
 
   if (!openFile(fileName, reader)) {
-    MESSAGEBOX::information(this, tr("Cannot open file"),
-                            tr("Can't open supplied file %1").arg(fileName));
+    QMessageBox::information(this, tr("Cannot open file"),
+                             tr("Can't open supplied file %1").arg(fileName));
   }
 }
 
@@ -814,7 +934,7 @@ void MainWindow::importFile()
   settings.setValue("MainWindow/lastOpenDir", dir);
 
   if (!openFile(reply.second, reply.first->newInstance())) {
-    MESSAGEBOX::information(
+    QMessageBox::information(
       this, tr("Cannot open file"),
       tr("Can't open supplied file %1").arg(reply.second));
   }
@@ -844,6 +964,7 @@ bool MainWindow::addScript(const QString& filePath)
   QString typePath;
 
   int index = types.indexOf(item);
+
   // don't translate these
   switch (index) {
     case 0: // commands
@@ -855,10 +976,10 @@ bool MainWindow::addScript(const QString& filePath)
     case 2:
       typePath = "formatScripts";
       break;
-    case 4:
+    case 3:
       typePath = "charges";
       break;
-    case 5:
+    case 4:
       typePath = "energy";
       break;
     default:
@@ -870,8 +991,28 @@ bool MainWindow::addScript(const QString& filePath)
 
   QFileInfo info(filePath);
 
-  QString destinationPath(stdPaths[0] + '/' + typePath + '/' + info.fileName());
+  // check if the directory structure exists first
+  // and if not, create what we need
+  int i = 0;
+  bool createDir = true;
+  for (i = 0; i < stdPaths.size(); ++i) {
+    if (QDir(stdPaths[i] + '/' + typePath).exists()) {
+      createDir = false;
+      break;
+    }
+  }
+  if (createDir) {
+    // find a path we can create (e.g., first path might be admin-only)
+    for (i = 0; i < stdPaths.size(); ++i) {
+      if (QDir().mkpath(stdPaths[i] + '/' + typePath))
+        break;
+    }
+  }
+
+  QString destinationPath(stdPaths[i] + '/' + typePath + '/' + info.fileName());
+#ifndef NDEBUG
   qDebug() << " copying " << filePath << " to " << destinationPath;
+#endif
   QFile::remove(destinationPath); // silently fail if there's nothing to remove
   QFile::copy(filePath, destinationPath);
 
@@ -902,6 +1043,7 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
   // Prepare the background thread to read in the selected file.
   if (!m_fileReadThread)
     m_fileReadThread = new QThread(this);
+
   if (m_threadedReader)
     m_threadedReader->deleteLater();
   m_threadedReader = new BackgroundFileFormat(reader);
@@ -985,10 +1127,10 @@ void MainWindow::backgroundReaderFinished()
                                .arg(m_molecule->bondCount()),
                              5000);
   } else {
-    MESSAGEBOX::critical(this, tr("File error"),
-                         tr("Error while reading file '%1':\n%2")
-                           .arg(fileName)
-                           .arg(m_threadedReader->error()));
+    QMessageBox::critical(this, tr("File error"),
+                          tr("Error while reading file '%1':\n%2")
+                            .arg(fileName)
+                            .arg(m_threadedReader->error()));
     delete m_fileReadMolecule;
   }
   m_fileReadThread->deleteLater();
@@ -1019,7 +1161,7 @@ bool MainWindow::backgroundWriterFinished()
       updateWindowTitle();
       success = true;
     } else {
-      MESSAGEBOX::critical(
+      QMessageBox::critical(
         this, tr("Error saving file"),
         tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
           .arg(fileName)
@@ -1060,9 +1202,9 @@ void MainWindow::viewConfigActivated() {}
 void MainWindow::rendererInvalid()
 {
   auto* widget = qobject_cast<GLWidget*>(sender());
-  MESSAGEBOX::warning(this, tr("Error: Failed to initialize OpenGL context"),
-                      tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
-                        .arg(widget ? widget->error() : tr("Unknown error")));
+  QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
+                       tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
+                         .arg(widget ? widget->error() : tr("Unknown error")));
   // Process events, and then set a single shot timer. This is needed to ensure
   // the RPC server also exits cleanly.
   QApplication::processEvents();
@@ -1117,6 +1259,12 @@ void MainWindow::layerActivated(const QModelIndex& idx)
 
 void MainWindow::moleculeActivated(const QModelIndex& idx)
 {
+  QList<Molecule*> molecules = m_moleculeModel->molecules();
+  if (idx.isValid() && idx.row() == molecules.size()) {
+    newMolecule();
+    return;
+  }
+
   auto* obj = static_cast<QObject*>(idx.internalPointer());
   if (auto* mol = qobject_cast<Molecule*>(obj)) {
     if (idx.column() == 0)
@@ -1125,7 +1273,6 @@ void MainWindow::moleculeActivated(const QModelIndex& idx)
     // Deleting a molecule, we must also create a new one if it is the last.
     if (idx.column() == 1) {
       if (m_molecule == mol) {
-        QList<Molecule*> molecules = m_moleculeModel->molecules();
         int molIdx = molecules.indexOf(mol);
         if (molIdx > 0)
           setMolecule(molecules[molIdx - 1]);
@@ -1144,10 +1291,27 @@ void MainWindow::sceneItemActivated(const QModelIndex& idx)
 {
   if (!idx.isValid())
     return;
-  auto* obj = static_cast<QObject*>(idx.internalPointer());
-  if (auto* scene = qobject_cast<ScenePlugin*>(obj)) {
-    m_viewDock->setWidget(scene->setupWidget());
-    m_activeScenePlugin = scene;
+
+  QSortFilterProxyModel* proxyModel =
+    qobject_cast<QSortFilterProxyModel*>(m_sceneTreeView->model());
+  if (!proxyModel)
+    return;
+
+  // get the source index
+  QModelIndex sourceIdx = proxyModel->mapToSource(idx);
+  if (!sourceIdx.isValid())
+    return;
+
+  QWidget* w = m_multiViewWidget->activeWidget();
+  if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
+    const ScenePluginModel* sceneModel = &glWidget->sceneModel();
+    if (sceneModel == nullptr)
+      return;
+
+    if (auto* plugin = sceneModel->scenePlugin(sourceIdx.row())) {
+      m_viewDock->setWidget(plugin->setupWidget());
+      m_activeScenePlugin = plugin;
+    }
   }
 }
 
@@ -1199,7 +1363,13 @@ void MainWindow::viewActivated(QWidget* widget)
   ActiveObjects::instance().setActiveWidget(widget);
   if (auto* glWidget = qobject_cast<GLWidget*>(widget)) {
     bool firstRun = populatePluginModel(glWidget->sceneModel(), this);
-    m_sceneTreeView->setModel(&glWidget->sceneModel());
+    QSortFilterProxyModel* proxyModel = new QSortFilterProxyModel(this);
+
+    proxyModel->setSourceModel(&glWidget->sceneModel());
+    m_sceneTreeView->setModel(proxyModel);
+    m_sceneTreeView->setSortingEnabled(true);
+    // column 1 is the name, column 0 is the checkbox
+    m_sceneTreeView->sortByColumn(0, Qt::AscendingOrder);
     // tweak the size of columns
     m_sceneTreeView->header()->setSectionResizeMode(1, QHeaderView::Fixed);
     m_sceneTreeView->header()->resizeSection(1, 40);
@@ -1345,8 +1515,8 @@ void MainWindow::exportGraphics(QString fileName)
   QImage exportImage = renderToImage(size);
 
   if (!exportImage.save(fileName)) {
-    MESSAGEBOX::warning(this, tr("Avogadro"),
-                        tr("Cannot save file %1.").arg(fileName));
+    QMessageBox::warning(this, tr("Avogadro"),
+                         tr("Cannot save file %1.").arg(fileName));
   }
 }
 
@@ -1376,8 +1546,8 @@ void MainWindow::openRecentFile()
                                        FileFormat::File | FileFormat::Read);
 
     if (!openFile(fileName, format ? format->newInstance() : nullptr)) {
-      MESSAGEBOX::information(this, tr("Cannot open file"),
-                              tr("Can't open supplied file %1").arg(fileName));
+      QMessageBox::information(this, tr("Cannot open file"),
+                               tr("Can't open supplied file %1").arg(fileName));
     }
   }
 }
@@ -1460,7 +1630,7 @@ bool MainWindow::saveFile(bool async)
        .empty();
   if (writable) {
     // Warn the user that the format may lose data.
-    MESSAGEBOX box(this);
+    QMessageBox box(this);
     box.setModal(true);
     box.setWindowTitle(tr("Avogadro"));
     box.setText(tr("This file was imported from a non-standard format which "
@@ -1496,8 +1666,8 @@ bool MainWindow::saveFileAs(bool async)
 
   QFileDialog saveDialog(this, tr("Save chemical file"), dir, filter);
   saveDialog.setAcceptMode(QFileDialog::AcceptSave);
-  saveDialog.exec();
-  if (saveDialog.selectedFiles().isEmpty()) // user cancel
+  bool ok = saveDialog.exec();
+  if (!ok || saveDialog.selectedFiles().isEmpty()) // user cancel
     return false;
 
   QString fileName = saveDialog.selectedFiles().first();
@@ -1803,10 +1973,12 @@ void MainWindow::activeMoleculeEdited()
 
 void MainWindow::setBackgroundColor()
 {
+  Rendering::SolidPipeline* pipeline(nullptr);
   Rendering::Scene* scene(nullptr);
   GLWidget* glWidget(nullptr);
   if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
     scene = &glWidget->renderer().scene();
+  pipeline = &glWidget->renderer().solidPipeline();
   if (scene) {
     Vector4ub cColor = scene->backgroundColor();
     QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
@@ -1817,6 +1989,8 @@ void MainWindow::setBackgroundColor()
       cColor[2] = static_cast<unsigned char>(color.blue());
       cColor[3] = static_cast<unsigned char>(color.alpha());
       scene->setBackgroundColor(cColor);
+      if (pipeline)
+        pipeline->setBackgroundColor(cColor);
       if (glWidget)
         glWidget->update();
 
@@ -1838,6 +2012,8 @@ void MainWindow::setRenderingSettings()
     QSettings settings;
     settings.setValue("MainWindow/ao_enabled", pipeline->getAoEnabled());
     settings.setValue("MainWindow/ao_strength", pipeline->getAoStrength());
+    settings.setValue("MainWindow/dof_enabled", pipeline->getDofEnabled());
+    settings.setValue("MainWindow/fog_enabled", pipeline->getFogEnabled());
     settings.setValue("MainWindow/ed_enabled", pipeline->getEdEnabled());
   }
 }
@@ -1911,19 +2087,14 @@ void MainWindow::buildMenu()
   QStringList testingPath;
   testingPath << tr("&Testing");
   QAction* actionRecord = new QAction(this);
-  actionRecord->setText(tr("Record test…"));
+  actionRecord->setText(tr("&Record Test…"));
   m_menuBuilder->addAction(testingPath, actionRecord, 10);
   QAction* actionPlay = new QAction(this);
-  actionPlay->setText(tr("Play test…"));
+  actionPlay->setText(tr("&Play Test…"));
   m_menuBuilder->addAction(testingPath, actionPlay, 5);
 
   connect(actionRecord, SIGNAL(triggered()), SLOT(record()));
   connect(actionPlay, SIGNAL(triggered()), SLOT(play()));
-
-  m_testUtility = new pqTestUtility(this);
-  m_testUtility->addEventObserver("xml", new XMLEventObserver(this));
-  m_testUtility->addEventSource("xml", new XMLEventSource(this));
-
   m_testExit = true;
 #endif
 
@@ -1932,7 +2103,9 @@ void MainWindow::buildMenu()
   // New
   auto* action = new QAction(tr("&New"), this);
   action->setShortcut(QKeySequence::New);
-#ifndef Q_OS_MAC
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentNew));
+#else
   action->setIcon(QIcon::fromTheme("document-new"));
 #endif
   m_menuBuilder->addAction(path, action, 999);
@@ -1941,39 +2114,46 @@ void MainWindow::buildMenu()
   // Open
   action = new QAction(tr("&Open…"), this);
   action->setShortcut(QKeySequence::Open);
-#ifndef Q_OS_MAC
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentOpen));
+#else
   action->setIcon(QIcon::fromTheme("document-open"));
 #endif
   m_menuBuilder->addAction(path, action, 998);
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::importFile);
 
+  // close current molecule
   action = new QAction(tr("&Close"), this);
   action->setShortcut(QKeySequence::Close);
-#ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-close"));
-#endif
   m_menuBuilder->addAction(path, action, 981);
   m_fileToolBar->addAction(action);
-  connect(action, &QAction::triggered, this, &QWidget::close);
+  connect(action, &QAction::triggered, this, &MainWindow::closeActiveMolecule);
 
   // Separator (after open recent)
   action = new QAction("", this);
   action->setSeparator(true);
   m_menuBuilder->addAction(path, action, 980);
+
   // Save
   action = new QAction(tr("&Save"), this);
   action->setShortcut(QKeySequence::Save);
-#ifndef Q_OS_MAC
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentSave));
+#else
   action->setIcon(QIcon::fromTheme("document-save"));
 #endif
   m_menuBuilder->addAction(path, action, 965);
   m_fileToolBar->addAction(action);
   connect(action, &QAction::triggered, this, &MainWindow::saveFile);
+
   // Save As
   action = new QAction(tr("Save &As…"), this);
   action->setShortcut(QKeySequence::SaveAs);
-#ifndef Q_OS_MAC
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentSaveAs));
+#else
   action->setIcon(QIcon::fromTheme("document-save-as"));
 #endif
   m_menuBuilder->addAction(path, action, 960);
@@ -2061,7 +2241,9 @@ void MainWindow::buildMenu()
   for (int i = 0; i < 10; ++i) {
     action = new QAction(QString::number(i), this);
     m_actionRecentFiles.push_back(action);
-#ifndef Q_OS_MAC
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+    action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentOpenRecent));
+#else
     action->setIcon(QIcon::fromTheme("document-open-recent"));
 #endif
     action->setVisible(false);
@@ -2076,12 +2258,17 @@ void MainWindow::buildMenu()
   QStringList editPath;
   editPath << tr("&Edit");
   m_undo = new QAction(tr("&Undo"), this);
-#ifndef Q_OS_MAC
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  m_undo->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::EditUndo));
+#else
   m_undo->setIcon(QIcon::fromTheme("edit-undo"));
 #endif
   m_undo->setShortcut(QKeySequence::Undo);
+
   m_redo = new QAction(tr("&Redo"), this);
-#ifndef Q_OS_MAC
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  m_redo->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::EditRedo));
+#else
   m_redo->setIcon(QIcon::fromTheme("edit-redo"));
 #endif
   m_redo->setShortcut(QKeySequence::Redo);
@@ -2157,9 +2344,7 @@ void MainWindow::buildMenu()
   QStringList helpPath;
   helpPath << tr("&Help");
   auto* about = new QAction(tr("&About"), this);
-#ifndef Q_OS_MAC
   about->setIcon(QIcon::fromTheme("help-about"));
-#endif
   m_menuBuilder->addAction(helpPath, about, 500);
   connect(about, &QAction::triggered, this, &MainWindow::showAboutDialog);
 
@@ -2245,6 +2430,9 @@ void MainWindow::buildTools()
 
   int index = 1;
   foreach (ToolPlugin* toolPlugin, m_tools) {
+#ifdef Q_OS_WIN
+    qDebug() << " adding tool " << toolPlugin->objectName();
+#endif
     // Add action to toolbar.
     toolPlugin->setParent(this);
     QAction* action = toolPlugin->activateAction();
@@ -2334,7 +2522,7 @@ bool MainWindow::saveFileIfNeeded()
     // the static functions. This is more work, but gives us some nice
     // fine-grain control. This helps both on Windows and Mac
     // look more "native."
-    QPointer<MESSAGEBOX> msgBox = new MESSAGEBOX(
+    QMessageBox msgBox(
       QMessageBox::Warning, tr("Avogadro"),
       tr("Do you want to save the changes to the document?"),
       QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel, this);
@@ -2343,20 +2531,17 @@ bool MainWindow::saveFileIfNeeded()
     // Unfortunately, it also closes the window when the box disappears!
     // msgBox->setWindowModality(Qt::WindowModal);
     // second line of text
-    msgBox->setInformativeText(
+    msgBox.setInformativeText(
       tr("Your changes will be lost if you don't save them."));
-    msgBox->setDefaultButton(QMessageBox::Save);
-#ifdef Q_OS_MAC
-    msgBox->setWindowModality(Qt::WindowModal);
-#endif
+    msgBox.setDefaultButton(QMessageBox::Save);
 
     // OK, now add shortcuts for save and discard
-    msgBox->button(QMessageBox::Save)
+    msgBox.button(QMessageBox::Save)
       ->setShortcut(QKeySequence(tr("Ctrl+S", "Save")));
-    msgBox->button(QMessageBox::Discard)
+    msgBox.button(QMessageBox::Discard)
       ->setShortcut(QKeySequence(tr("Ctrl+D", "Discard")));
 
-    int response = msgBox->exec();
+    int response = msgBox.exec();
 
     switch (static_cast<QMessageBox::StandardButton>(response)) {
       case QMessageBox::Save:
@@ -2378,30 +2563,34 @@ bool MainWindow::saveFileIfNeeded()
 
 void MainWindow::registerMoleQueue()
 {
-#ifdef Avogadro_ENABLE_RPC
-  MoleQueue::Client client;
-  if (!client.connectToServer() || !client.isConnected())
-    return;
+  /*
+  #ifdef Avogadro_ENABLE_RPC
+    MoleQueue::Client client;
+    if (!client.connectToServer() || !client.isConnected())
+      return;
 
-  // Get all extensions;
-  typedef std::vector<std::string> StringList;
-  FileFormatManager& ffm = FileFormatManager::instance();
-  StringList exts = ffm.fileExtensions(FileFormat::Read | FileFormat::File);
+    // Get all extensions;
+    typedef std::vector<std::string> StringList;
+    FileFormatManager& ffm = FileFormatManager::instance();
+    StringList exts = ffm.fileExtensions(FileFormat::Read | FileFormat::File);
 
-  // Create patterns list
-  QList<QRegExp> patterns;
-  for (auto it = exts.begin(), itEnd = exts.end(); it != itEnd; ++it) {
-    patterns << QRegExp(extensionToWildCard(QString::fromStdString(*it)),
-                        Qt::CaseInsensitive, QRegExp::Wildcard);
-  }
+    // Create patterns list
+    QList<QRegularExpression> patterns;
+    for (auto it = exts.begin(), itEnd = exts.end(); it != itEnd; ++it) {
+      patterns << QRegularExpression(
+        QRegularExpression::wildcardToRegularExpression(
+          extensionToWildCard(QString::fromStdString(*it))),
+        QRegularExpression::CaseInsensitive);
+    }
 
-  // Register the executable:
-  client.registerOpenWith("Avogadro2 (new)", qApp->applicationFilePath(),
-                          patterns);
+    // Register the executable:
+    client.registerOpenWith("Avogadro2 (new)", qApp->applicationFilePath(),
+                            patterns);
 
-  client.registerOpenWith("Avogadro2 (running)", "avogadro", "openFile",
-                          patterns);
-#endif // Avogadro_ENABLE_RPC
+    client.registerOpenWith("Avogadro2 (running)", "avogadro", "openFile",
+                            patterns);
+  #endif // Avogadro_ENABLE_RPC
+  */
 }
 
 void MainWindow::showAboutDialog()
@@ -2412,10 +2601,11 @@ void MainWindow::showAboutDialog()
 
 void MainWindow::openURL(const QString& url)
 {
-#if defined(Q_OS_MAC) || defined(Q_OS_WIN)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) || defined(Q_OS_MAC) ||            \
+  defined(Q_OS_WIN)
   QDesktopServices::openUrl(url);
 #else
-  // AppImage can't use QDesktopServices::openUrl, so we use QProcess:
+  // On Qt5, AppImage can't use QDesktopServices::openUrl, so we use QProcess:
   QProcess::execute(QString("xdg-open %1").arg(url));
 #endif
 }
@@ -2436,8 +2626,8 @@ void MainWindow::checkUpdate()
 void MainWindow::finishUpdateRequest(QNetworkReply* reply)
 {
   if (!reply->isReadable()) {
-    MESSAGEBOX::warning(this, tr("Network Download Failed"),
-                        tr("Network timeout or other error."));
+    QMessageBox::warning(this, tr("Network Download Failed"),
+                         tr("Network timeout or other error."));
     reply->deleteLater();
     return;
   }
@@ -2453,23 +2643,54 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
     settings.value("currentVersion", AvogadroApp_VERSION).toString();
   // could be something like 1.97.0-36-gcd224f0
 
-  // qDebug() << " update comparing " << lastVersion << " to " << latestRelease;
+#ifndef NDEBUG
+  qDebug() << " update comparing " << lastVersion << " to " << latestRelease;
+#endif
   QStringList releaseComponents = latestRelease.split('.');
-  QStringList currentComponents = lastVersion.split('.');
-  if (releaseComponents.size() != 3 || currentComponents.size() != 3)
+  QStringList lastComponents = lastVersion.split('.');
+  QStringList currentComponents = QString(AvogadroApp_VERSION).split('.');
+
+  if (releaseComponents.size() != 3 || lastComponents.size() != 3 ||
+      currentComponents.size() != 3)
     // something is very wrong
     return;
 
-  if (currentComponents[0] > releaseComponents[0] ||
-      (currentComponents[0] == releaseComponents[0] &&
-       currentComponents[1] > releaseComponents[1]))
-    // no update needed
-    return;
+  int lastMajor = lastComponents[0].toInt();
+  int lastMinor = lastComponents[1].toInt();
+  int lastPatch = lastComponents[2].toInt();
+  int currentMajor = currentComponents[0].toInt();
+  int currentMinor = currentComponents[1].toInt();
+  int currentPatch = currentComponents[2].toInt();
+  int releaseMajor = releaseComponents[0].toInt();
+  int releaseMinor = releaseComponents[1].toInt();
+  int releasePatch = releaseComponents[2].toInt();
 
-  if (currentComponents[0] == releaseComponents[0] &&
-      currentComponents[1] == releaseComponents[1] &&
-      currentComponents[2] >= releaseComponents[2]) {
+  // okay, decide if we're using the version from settings
+  // or the compiled version to determine if an update is available
+  // e.g., if currentComponents is newer than last
+  // we should save the current version in settings
+  // and use that to see if there's an update
+
+  if (currentMajor > lastMajor ||
+      (currentMajor == lastMajor && currentMinor > lastMinor) ||
+      (currentMajor == lastMajor && currentMinor == lastMinor &&
+       currentPatch > lastPatch)) {
+    settings.setValue("currentVersion", AvogadroApp_VERSION);
+    settings.sync();
+  }
+
+  // they're presumably the same now, so let's see if the current
+  // version is newer than the latest release
+
+  if (currentMajor > releaseMajor ||
+      (currentMajor == releaseMajor && currentMinor > releaseMinor) ||
+      (currentMajor == releaseMajor && currentMinor == releaseMinor &&
+       currentComponents[2] >= releaseComponents[2])) {
     // this will work for like "0-36-whatever" > "0" but not "1"
+#ifdef NDEBUG
+    qDebug() << "current version is newer than latest release";
+#endif
+    // no update needed
     return;
   }
 
@@ -2481,9 +2702,9 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
   QString text =
     tr("An update is available, do you want to download it now?\n");
   text += currentVersion + '\n' + newVersion;
-  auto result = MESSAGEBOX::information(this, tr("Version Update"), text,
-                                        QMessageBox::Ok | QMessageBox::Ignore |
-                                          QMessageBox::Cancel);
+  auto result = QMessageBox::information(this, tr("Version Update"), text,
+                                         QMessageBox::Ok | QMessageBox::Ignore |
+                                           QMessageBox::Cancel);
 
   if (result == QMessageBox::Cancel)
     return;
@@ -2559,10 +2780,10 @@ void MainWindow::readQueuedFiles()
       "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : nullptr)) {
-      MESSAGEBOX::warning(this, tr("Cannot open file"),
-                          tr("Avogadro cannot open"
-                             " “%1”.")
-                            .arg(file));
+      QMessageBox::warning(this, tr("Cannot open file"),
+                           tr("Avogadro cannot open"
+                              " “%1”.")
+                             .arg(file));
     }
   }
 }
@@ -2570,10 +2791,10 @@ void MainWindow::readQueuedFiles()
 void MainWindow::clearQueuedFiles()
 {
   if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
-    MESSAGEBOX::warning(this, tr("Cannot open files"),
-                        tr("Avogadro cannot open"
-                           " “%1”.")
-                          .arg(m_queuedFiles.join("\n")));
+    QMessageBox::warning(this, tr("Cannot open files"),
+                         tr("Avogadro cannot open"
+                            " “%1”.")
+                           .arg(m_queuedFiles.join("\n")));
     m_queuedFiles.clear();
   }
 }

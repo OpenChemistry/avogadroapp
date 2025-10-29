@@ -6,6 +6,7 @@
 #include "menubuilder.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QOperatingSystemVersion>
 #include <QtWidgets/QMenuBar>
 
 #include <algorithm>
@@ -21,7 +22,11 @@ namespace {
  */
 struct PriorityText
 {
-  PriorityText(QString  string, int pri) : text(std::move(string)), priority(pri) {}
+  PriorityText(QString string, int pri)
+    : text(std::move(string))
+    , priority(pri)
+  {
+  }
 
   QString text;
   int priority;
@@ -44,6 +49,18 @@ int floor100(int x)
 
 MenuBuilder::MenuBuilder()
 {
+#ifdef Q_OS_MAC
+  bool oldQtVersion = true;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
+  oldQtVersion = false;
+#endif
+  auto currentOS = QOperatingSystemVersion::current();
+  if (oldQtVersion || currentOS.majorVersion() < 26) {
+    // If we're on an old Qt version, don't show icons by default
+    // .. or if we're running on macOS before Tahoe
+    m_showIcons = false;
+  }
+#endif
 }
 
 void MenuBuilder::addAction(const QStringList& pathList, QAction* action,
@@ -52,8 +69,12 @@ void MenuBuilder::addAction(const QStringList& pathList, QAction* action,
   QString path(pathList.join("|"));
   if (m_menuActions.contains(path)) {
 #ifdef Q_OS_MAC
-    // If we're on Mac, make sure to filter out the action icon
-    action->setIcon(QIcon());
+    // If we're on Mac, don't show icons by default
+    if (!m_showIcons) {
+      action->setIcon(QIcon());
+    } else {
+      action->setIconVisibleInMenu(true);
+    }
 #endif
     m_menuActions[path].append(action);
   } else {
