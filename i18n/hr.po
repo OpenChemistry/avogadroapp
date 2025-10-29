@@ -11,8 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-10-19 02:53+0000\n"
 "PO-Revision-Date: 2025-10-30 20:02+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hr/>\n"
 "Language: hr\n"
@@ -27,7 +26,7 @@ msgstr ""
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Uređivač i vizualizator molekula"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -335,13 +334,13 @@ msgstr "&Poništi"
 #: mainwindow.cpp:1963
 #, qt-format
 msgid "&Redo %1"
-msgstr "&Ponovi %1"
+msgstr "Po&novi %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:1966 mainwindow.cpp:2228:126
 msgid "&Redo"
-msgstr "&Ponovi"
+msgstr "Po&novi"
 
 #: mainwindow.cpp:2088
 msgid "&Testing"
@@ -349,11 +348,11 @@ msgstr "&Testiranje"
 
 #: mainwindow.cpp:2090
 msgid "&Record Test…"
-msgstr "Snimi test …"
+msgstr "S&nimi test …"
 
 #: mainwindow.cpp:2093
 msgid "&Play Test…"
-msgstr "Reproduciraj test …"
+msgstr "Pokreni &test …"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -413,7 +412,7 @@ msgstr "Izvezi molekulu …"
 
 #: mainwindow.cpp:2180
 msgid "&Graphics…"
-msgstr "&Slike …"
+msgstr "S&like …"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -421,7 +420,7 @@ msgstr "&Slike …"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2189:63 rc.cpp:69
 msgid "&Quit"
-msgstr "&Izlaz"
+msgstr "&Zatvori aplikaciju"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -637,6 +636,10 @@ msgid ""
 "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
 "#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Licenca: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\""
+">BSD s 3 klauzule</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:291
 #. i18n: ectx: property (text), widget (QLabel, label_2)
@@ -645,6 +648,9 @@ msgid ""
 "style=\" text-decoration: underline; color:#0096ff;\">two.avogadro.cc</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span style="
+"\" text-decoration: underline; color:#0096ff;\""
+">two.avogadro.cc</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
