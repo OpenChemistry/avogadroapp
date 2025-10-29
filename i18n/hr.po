@@ -353,7 +353,7 @@ msgstr "Snimi test …"
 
 #: mainwindow.cpp:2093
 msgid "&Play Test…"
-msgstr ""
+msgstr "Reproduciraj test …"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
