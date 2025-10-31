@@ -82,14 +82,14 @@ install(DIRECTORY "${AvogadroApp_SOURCE_DIR}/../avogadro-i18n/avogadroapp/"
 )
 
 if(APPLE OR WIN32 OR INSTALL_BUNDLE_FILES)
-# copy the qt translation files
-get_filename_component(_qttranslationdir "${Qt5_DIR}/../../../translations" ABSOLUTE)
-message(STATUS "Install Qt translations ${_qttranslationdir}")
-install(DIRECTORY "${_qttranslationdir}/"
-DESTINATION "${INSTALL_DATA_DIR}/avogadro2/i18n"
-FILES_MATCHING PATTERN "qt_*.qm" PATTERN "qtbase*.qm"
-# technically, this also copies qt_help.* but that's not a big deal
-)
+  # copy the qt translation files
+  get_filename_component(_qttranslationdir "${Qt${QT_VERSION}_DIR}/../../../translations" ABSOLUTE)
+  message(STATUS "Install Qt translations ${_qttranslationdir}")
+  install(DIRECTORY "${_qttranslationdir}/"
+    DESTINATION "${INSTALL_DATA_DIR}/avogadro2/i18n"
+    FILES_MATCHING PATTERN "qt_*.qm" PATTERN "qtbase*.qm"
+    # technically, this also copies qt_help.* but that's not a big deal
+  )
 endif()
 
 if(Avogadro_ENABLE_RPC)
