@@ -30,13 +30,6 @@ if(QT_VERSION EQUAL 6)
       OpenGL
       OpenGLWidgets
     REQUIRED)
-else()
-  find_package(Qt5
-    COMPONENTS
-      Concurrent
-      Widgets
-      Network
-    REQUIRED)
 endif()
 
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
@@ -101,11 +94,9 @@ if(Avogadro_ENABLE_RPC)
 endif()
 
 if(ENABLE_TESTING)
-if(QT_VERSION EQUAL 6)
-  find_package(Qt6 COMPONENTS Test REQUIRED)
-elseif(QT_VERSION EQUAL 5)
-  find_package(Qt5 COMPONENTS Test REQUIRED)
-endif()
+  if(QT_VERSION EQUAL 6)
+    find_package(Qt6 COMPONENTS Test REQUIRED)
+  endif()
   find_package(QtTesting REQUIRED NO_MODULE)
   include_directories(${QtTesting_INCLUDE_DIRS})
   link_directories(${QtTesting_LIBRARY_DIR})
@@ -224,9 +215,6 @@ add_executable(avogadro WIN32 MACOSX_BUNDLE
 target_link_libraries(avogadro Qt::Widgets Qt::Network Qt::Concurrent)
 if(WIN32)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD")
-if(QT_VERSION EQUAL 5)
-  target_link_libraries(avogadro Qt::WinMain)
-endif()
 endif()
 set_target_properties(avogadro PROPERTIES AUTOMOC TRUE)
 target_link_libraries(avogadro Avogadro::QtOpenGL Avogadro::QtGui Avogadro::QtPlugins)
