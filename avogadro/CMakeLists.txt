@@ -30,13 +30,6 @@ if(QT_VERSION EQUAL 6)
       OpenGL
       OpenGLWidgets
     REQUIRED)
-else()
-  find_package(Qt5
-    COMPONENTS
-      Concurrent
-      Widgets
-      Network
-    REQUIRED)
 endif()
 
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
@@ -82,14 +75,14 @@ install(DIRECTORY "${AvogadroApp_SOURCE_DIR}/../avogadro-i18n/avogadroapp/"
 )
 
 if(APPLE OR WIN32 OR INSTALL_BUNDLE_FILES)
-# copy the qt translation files
-get_filename_component(_qttranslationdir "${Qt5_DIR}/../../../translations" ABSOLUTE)
-message(STATUS "Install Qt translations ${_qttranslationdir}")
-install(DIRECTORY "${_qttranslationdir}/"
-DESTINATION "${INSTALL_DATA_DIR}/avogadro2/i18n"
-FILES_MATCHING PATTERN "qt_*.qm" PATTERN "qtbase*.qm"
-# technically, this also copies qt_help.* but that's not a big deal
-)
+  # copy the qt translation files
+  get_filename_component(_qttranslationdir "${Qt${QT_VERSION}_DIR}/../../../translations" ABSOLUTE)
+  message(STATUS "Install Qt translations ${_qttranslationdir}")
+  install(DIRECTORY "${_qttranslationdir}/"
+    DESTINATION "${INSTALL_DATA_DIR}/avogadro2/i18n"
+    FILES_MATCHING PATTERN "qt_*.qm" PATTERN "qtbase*.qm"
+    # technically, this also copies qt_help.* but that's not a big deal
+  )
 endif()
 
 if(Avogadro_ENABLE_RPC)
@@ -101,11 +94,9 @@ if(Avogadro_ENABLE_RPC)
 endif()
 
 if(ENABLE_TESTING)
-if(QT_VERSION EQUAL 6)
-  find_package(Qt6 COMPONENTS Test REQUIRED)
-elseif(QT_VERSION EQUAL 5)
-  find_package(Qt5 COMPONENTS Test REQUIRED)
-endif()
+  if(QT_VERSION EQUAL 6)
+    find_package(Qt6 COMPONENTS Test REQUIRED)
+  endif()
   find_package(QtTesting REQUIRED NO_MODULE)
   include_directories(${QtTesting_INCLUDE_DIRS})
   link_directories(${QtTesting_LIBRARY_DIR})
@@ -224,9 +215,6 @@ add_executable(avogadro WIN32 MACOSX_BUNDLE
 target_link_libraries(avogadro Qt::Widgets Qt::Network Qt::Concurrent)
 if(WIN32)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD")
-if(QT_VERSION EQUAL 5)
-  target_link_libraries(avogadro Qt::WinMain)
-endif()
 endif()
 set_target_properties(avogadro PROPERTIES AUTOMOC TRUE)
 target_link_libraries(avogadro Avogadro::QtOpenGL Avogadro::QtGui Avogadro::QtPlugins)
