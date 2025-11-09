@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Avogadro 1.101.0\n"
+"Project-Id-Version: Avogadro 1.102.1\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2025-10-19 02:53+0000\n"
+"POT-Creation-Date: 2025-11-09 02:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,7 +123,7 @@ msgid "Open chemical file"
 msgstr ""
 
 #: mainwindow.cpp:914 mainwindow.cpp:938 mainwindow.cpp:1549
-#: mainwindow.cpp:2714
+#: mainwindow.cpp:2743
 msgid "Cannot open file"
 msgstr ""
 
@@ -531,39 +531,39 @@ msgstr ""
 msgid "Network timeout or other error."
 msgstr ""
 
-#: mainwindow.cpp:2631
+#: mainwindow.cpp:2660
 #, qt-format
 msgid "Your version: %1"
 msgstr ""
 
-#: mainwindow.cpp:2632
+#: mainwindow.cpp:2661
 #, qt-format
 msgid "New version: %1"
 msgstr ""
 
-#: mainwindow.cpp:2634
+#: mainwindow.cpp:2663
 msgid "An update is available, do you want to download it now?\n"
 msgstr ""
 
-#: mainwindow.cpp:2636
+#: mainwindow.cpp:2665
 msgid "Version Update"
 msgstr ""
 
-#: mainwindow.cpp:2694
+#: mainwindow.cpp:2723
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr ""
 
-#: mainwindow.cpp:2710
+#: mainwindow.cpp:2739
 msgid "Select file format"
 msgstr ""
 
-#: mainwindow.cpp:2715 mainwindow.cpp:2726
+#: mainwindow.cpp:2744 mainwindow.cpp:2755
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr ""
 
-#: mainwindow.cpp:2725
+#: mainwindow.cpp:2754
 msgid "Cannot open files"
 msgstr ""
 
@@ -812,12 +812,12 @@ msgid "&Import"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:31
-#. i18n: ectx: property (toolTip), widget (QLabel, label_2)
+#. i18n: ectx: property (toolTip), widget (QLabel, enableAO_label)
 msgid "Enable ambient occlusion shadows"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:34
-#. i18n: ectx: property (text), widget (QLabel, label_2)
+#. i18n: ectx: property (text), widget (QLabel, enableAO_label)
 msgid "Ambient Occlusion:"
 msgstr ""
 
@@ -833,72 +833,72 @@ msgid "Enable"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:85
-#. i18n: ectx: property (toolTip), widget (QLabel, label)
+#. i18n: ectx: property (toolTip), widget (QLabel, shadow_label)
 msgid "Strength of the ambient shadows"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:88
-#. i18n: ectx: property (text), widget (QLabel, label)
+#. i18n: ectx: property (text), widget (QLabel, shadow_label)
 msgid "Shadow Strength:"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:106
-#. i18n: ectx: property (toolTip), widget (QLabel, label_3)
+#. i18n: ectx: property (toolTip), widget (QLabel, enableFog_label)
 msgid "Fog effect for depth cue"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:109
-#. i18n: ectx: property (text), widget (QLabel, label_3)
+#. i18n: ectx: property (text), widget (QLabel, enableFog_label)
 msgid "Fog:"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:140
-#. i18n: ectx: property (text), widget (QLabel, label_5)
+#. i18n: ectx: property (text), widget (QLabel, fogStrength_label)
 msgid "Fog Strength:"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:170
-#. i18n: ectx: property (text), widget (QLabel, label_5)
+#. i18n: ectx: property (text), widget (QLabel, fogPosition_label)
 msgid "Fog Position:"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:208
-#. i18n: ectx: property (toolTip), widget (QLabel, label_3)
+#. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
 msgid "Add a depth blur"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:211
-#. i18n: ectx: property (text), widget (QLabel, label_3)
+#. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
 msgid "Depth Blur:"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:242
-#. i18n: ectx: property (toolTip), widget (QLabel, label_5)
+#. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
 msgid "Strength of the depth blur"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:245
-#. i18n: ectx: property (text), widget (QLabel, label_5)
+#. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
 msgid "Blur Strength :"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:272
-#. i18n: ectx: property (toolTip), widget (QLabel, label_5)
+#. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
 msgid "Position of the depth blur"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:275
-#. i18n: ectx: property (text), widget (QLabel, label_5)
+#. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
 msgid "Blur Position:"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:313
-#. i18n: ectx: property (toolTip), widget (QLabel, label_4)
+#. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
 msgid "Add an outline to edge atoms"
 msgstr ""
 
 #. i18n: file: renderingdialog.ui:316
-#. i18n: ectx: property (text), widget (QLabel, label_4)
+#. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
 msgid "Edge Outline:"
 msgstr ""
 
