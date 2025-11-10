@@ -6,13 +6,14 @@
 # Translator <kvb@tuta.io>, 2022, 2023.
 # Norwid Behrnd <nbehrnd@yahoo.com>, 2023, 2024, 2025.
 # Eric Remy <eric.remy3@free.fr>, 2025.
+# "David D." <dadu042@users.noreply.hosted.weblate.org>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-10-19 02:53+0000\n"
-"PO-Revision-Date: 2025-03-23 22:21+0000\n"
-"Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
+"PO-Revision-Date: 2025-11-11 11:51+0000\n"
+"Last-Translator: \"David D.\" <dadu042@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
 "Language: fr\n"
@@ -20,12 +21,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Éditeur et visualiseur moléculaire"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -81,7 +82,7 @@ msgstr "Voir la configuration"
 
 #: mainwindow.cpp:464
 msgid "Files"
-msgstr ""
+msgstr "Fichiers"
 
 #: mainwindow.cpp:475
 msgid "Layers"
@@ -348,7 +349,7 @@ msgstr "&Test"
 
 #: mainwindow.cpp:2090
 msgid "&Record Test…"
-msgstr ""
+msgstr "&Enregistrer test…"
 
 #: mainwindow.cpp:2093
 msgid "&Play Test…"
@@ -637,6 +638,10 @@ msgid ""
 "Clause\"><span style=\" font-size:10pt; text-decoration: underline; color:"
 "#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\""
+">Licence : </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\""
+"><span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\""
+">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:291
 #. i18n: ectx: property (text), widget (QLabel, label_2)
