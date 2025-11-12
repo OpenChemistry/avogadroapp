@@ -69,7 +69,7 @@ public:
 
 public slots:
   void setMolecule(Avogadro::QtGui::Molecule* molecule);
-  void autosaveDocument(); // line to declare the autosave slot
+  void autosaveDocument(); // Autosave the current document
   /**
    * Update internal state to reflect that the molecule has been modified.
    */
@@ -135,6 +135,17 @@ public:
    * settings.
    */
   void readSettings();
+
+  /**
+   * Attempt to recover autosave files from a crash
+   */
+  void checkAutosaveRecovery();
+
+  void startAutosaveTimer();
+
+  QString autosaveFilePath() const;
+
+  void cleanupAutosaves(QString filename);
 
   /**
    * Set the list of possible translations
@@ -405,7 +416,6 @@ private:
   bool m_queuedFilesStarted;
   QStringList m_queuedFiles;
   QTimer* m_autosaveTimer; // for the autosave timer
-  int m_autosaveInterval;  // for autosave interval in minutes
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 
