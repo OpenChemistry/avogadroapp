@@ -415,7 +415,7 @@ private:
   QtGui::ScenePlugin* m_activeScenePlugin;
   bool m_queuedFilesStarted;
   QStringList m_queuedFiles;
-  QTimer* m_autosaveTimer; // for the autosave timer
+  QTimer* m_autosaveTimer = nullptr; // for the autosave timer
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 

@@ -1252,9 +1252,10 @@ void MainWindow::startAutosaveTimer()
     return;
 
   m_autosaveTimer = new QTimer(this);
+  qDebug() << "Starting autosave timer";
 
   QSettings settings;
-  int intervalMinutes = settings.value("autosave/interval", 5).toInt();
+  int intervalMinutes = settings.value("autosave/interval", 2).toInt();
   int intervalMs = qMax(1, intervalMinutes) * 60 * 1000;
 
   connect(m_autosaveTimer, &QTimer::timeout, this,
