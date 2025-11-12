@@ -46,6 +46,7 @@
 #include <QtCore/QJsonObject>
 #include <QtCore/QMimeData>
 #include <QtCore/QProcess>
+#include <QtCore/QRandomGenerator>
 #include <QtCore/QSettings>
 #include <QtCore/QSortFilterProxyModel>
 #include <QtCore/QStandardPaths>
@@ -276,6 +277,9 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   }
   // The default settings will be used if everything was cleared.
   readSettings();
+
+  // check for auto-save files
+  checkAutosaveRecovery();
 
   // check for version update
   checkUpdate();
@@ -761,6 +765,9 @@ void MainWindow::setMolecule(Molecule* mol)
   if (oldMolecule)
     oldMolecule->disconnect(this);
 
+  // start the autosave timer
+  startAutosaveTimer();
+
   // Check if the molecule needs to update the current one.
   QWidget* w = m_multiViewWidget->activeWidget();
   if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
@@ -1174,7 +1181,86 @@ bool MainWindow::backgroundWriterFinished()
   m_threadedWriter = nullptr;
   m_progressDialog->deleteLater();
   m_progressDialog = nullptr;
+
+  // On successful save, remove any autosave files
+  if (success)
+    cleanupAutosaves(fileName);
+
   return success;
+}
+
+void MainWindow::cleanupAutosaves(QString fileName)
+{
+  if (fileName.isEmpty())
+    return;
+
+  qDebug() << "Cleaning up autosaves for " << fileName;
+
+  QString autosaveDirPath =
+    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
+    "/autosave";
+  QDir autosaveDir(autosaveDirPath);
+  QStringList autosaveFiles =
+    autosaveDir.entryList(QStringList() << "*_autosave.cjson", QDir::Files);
+  // check if fileName is in autosaveFiles
+  for (const QString& file : autosaveFiles) {
+    if (file.contains(fileName)) {
+      // we don't need this anymore because the real file is saved
+      QFile::remove(autosaveDir.absoluteFilePath(file));
+      break;
+    }
+  }
+}
+
+void MainWindow::checkAutosaveRecovery()
+{
+  QString autosaveDirPath =
+    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
+    "/autosave";
+  QDir autosaveDir(autosaveDirPath);
+  if (!autosaveDir.exists())
+    return;
+
+  QStringList autosaveFiles =
+    autosaveDir.entryList(QStringList() << "*_autosave.cjson", QDir::Files);
+  if (autosaveFiles.isEmpty())
+    return; // great, nothing to do
+
+  QMessageBox::StandardButton reply = QMessageBox::question(
+    this, tr("Recover Autosaved Files"),
+    tr("Autosave files were found from a previous session.\n"
+       "Would you like to recover them?"),
+    QMessageBox::Yes | QMessageBox::No);
+
+  if (reply == QMessageBox::Yes) {
+    for (const QString& file : autosaveFiles) {
+      QString path = autosaveDir.absoluteFilePath(file);
+      openFile(path, new Io::CjsonFormat);
+    }
+  }
+
+  // Optionally, cleanup old autosaves
+  if (reply == QMessageBox::No) {
+    for (const QString& file : autosaveFiles)
+      QFile::remove(autosaveDir.absoluteFilePath(file));
+  }
+}
+
+void MainWindow::startAutosaveTimer()
+{
+  if (m_autosaveTimer)
+    return;
+
+  m_autosaveTimer = new QTimer(this);
+  qDebug() << "Starting autosave timer";
+
+  QSettings settings;
+  int intervalMinutes = settings.value("autosave/interval", 2).toInt();
+  int intervalMs = qMax(1, intervalMinutes) * 60 * 1000;
+
+  connect(m_autosaveTimer, &QTimer::timeout, this,
+          &MainWindow::autosaveDocument);
+  m_autosaveTimer->start(intervalMs);
 }
 
 void MainWindow::toolActivated()
@@ -2326,6 +2412,46 @@ void MainWindow::buildMenu()
 
   // Now actually add all menu entries.
   m_menuBuilder->buildMenuBar(menuBar());
+}
+
+void MainWindow::autosaveDocument()
+{
+  if (!m_molecule || !m_moleculeDirty) {
+    return; // No molecule loaded or no changes made since the last save.
+  }
+
+  QString autosaveDirPath =
+    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
+    "/autosave";
+  QDir autosaveDir(autosaveDirPath);
+  if (!autosaveDir.exists()) {
+    autosaveDir.mkpath(".");
+  }
+
+  // Construct autosave file name
+  QString autosaveFileName;
+  if (m_molecule->hasData("fileName")) {
+    QFileInfo fileInfo(m_molecule->data("fileName").toString().c_str());
+    autosaveFileName = fileInfo.baseName() + "_autosave.cjson";
+  } else {
+    QString formula = QString::fromStdString(m_molecule->formula());
+    formula.remove(QRegularExpression("[^A-Za-z0-9]")); // sanitize
+    QString uid =
+      QString::number(QRandomGenerator::global()->generate(), 16).left(5);
+
+    autosaveFileName =
+      tr("untitled") + QString("%1_%2_autosave.cjson").arg(formula).arg(uid);
+  }
+
+  QString autosaveFilePath = autosaveDirPath + "/" + autosaveFileName;
+
+  // Use CJSON format for autosaving
+  Io::CjsonFormat writer;
+  if (!writer.writeFile(autosaveFilePath.toLocal8Bit().data(), *m_molecule)) {
+    qWarning() << "Failed to autosave the document to" << autosaveFilePath;
+  } else {
+    qDebug() << "Document autosaved to" << autosaveFilePath;
+  }
 }
 
 void MainWindow::buildMenu(QtGui::ExtensionPlugin* extension)
