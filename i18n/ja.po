@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-11-12 22:54+0000\n"
-"PO-Revision-Date: 2025-09-21 04:01+0000\n"
+"PO-Revision-Date: 2025-11-14 06:51+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -521,8 +521,9 @@ msgid "&Suggest a Feature"
 msgstr "機能を提案 (&S)"
 
 #: mainwindow.cpp:2443
+#, fuzzy
 msgid "untitled"
-msgstr ""
+msgstr "無題"
 
 #: mainwindow.cpp:2473
 msgid "System Language"

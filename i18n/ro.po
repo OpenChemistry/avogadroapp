@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-11-12 22:54+0000\n"
-"PO-Revision-Date: 2025-10-21 13:02+0000\n"
+"PO-Revision-Date: 2025-11-14 06:51+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ro/>\n"
@@ -17,9 +17,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : "
+"(n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -228,13 +228,15 @@ msgstr ""
 
 #: mainwindow.cpp:1230
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Recuperează fișierele salvate automat"
 
 #: mainwindow.cpp:1231
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Au fost găsite fișiere salvate automat dintr-o sesiune anterioară.\n"
+"Doriți să le recuperați?"
 
 #: mainwindow.cpp:1291
 msgid "Error: Failed to initialize OpenGL context"
@@ -521,7 +523,7 @@ msgstr "&Sugerați o caracteristică"
 
 #: mainwindow.cpp:2443
 msgid "untitled"
-msgstr ""
+msgstr "fără titlu"
 
 #: mainwindow.cpp:2473
 msgid "System Language"
@@ -961,7 +963,7 @@ msgstr "Remus-Gabriel Chelu"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "remusgabriel.chelu@disroot.org"
+msgstr "remusgabriel.chelu@disroot.org, 2023, 2024, 2025"
 
 #~ msgid "Record test…"
 #~ msgstr "Înregistrare test…"
