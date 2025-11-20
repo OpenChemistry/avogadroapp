@@ -10,9 +10,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-11-12 22:54+0000\n"
-"PO-Revision-Date: 2025-11-17 23:51+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"PO-Revision-Date: 2025-11-21 23:53+0000\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hr/>\n"
 "Language: hr\n"
@@ -231,13 +230,15 @@ msgstr ""
 
 #: mainwindow.cpp:1230
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Obnovi automatski spremljene datoteke"
 
 #: mainwindow.cpp:1231
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Pronađene su datoteke automatskog spremanja iz prethodne sesije.\n"
+"Želiš li ih obnoviti?"
 
 #: mainwindow.cpp:1291
 msgid "Error: Failed to initialize OpenGL context"
