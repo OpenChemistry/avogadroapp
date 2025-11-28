@@ -2268,8 +2268,14 @@ void MainWindow::buildMenu()
 #ifndef Q_OS_MAC
   action->setIcon(QIcon::fromTheme("document-export"));
 #endif
-  connect(action, &QAction::triggered, this,
-          static_cast<void (MainWindow::*)()>(&MainWindow::exportGraphics));
+  connect(action, SIGNAL(triggered()), this, SLOT(exportGraphics()));
+  // also add to the toolbar
+  action = new QAction(tr("Export Graphics…"), this);
+  m_fileToolBar->addAction(action);
+#ifndef Q_OS_MAC
+  action->setIcon(QIcon::fromTheme("document-export"));
+#endif
+  connect(action, SIGNAL(triggered()), this, SLOT(exportGraphics()));
 
   // Quit
   action = new QAction(tr("&Quit"), this);
