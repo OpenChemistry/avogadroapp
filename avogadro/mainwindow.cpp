@@ -1968,9 +1968,12 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
   //  foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
   //    scene->setEnabled(false);
   foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
-    foreach (const QString& name, displayTypes)
+    foreach (const QString& name, displayTypes) {
       if (scene->objectName() == name)
         scene->setEnabled(true);
+      if (scene->name() == name)
+        scene->setEnabled(true);
+    }
 
   if (glWidget)
     glWidget->updateScene();
