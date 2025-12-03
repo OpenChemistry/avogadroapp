@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Gustavo Sousa Jr <grsousajunior@gmail.com>, 2020, 2022.
-# Alexandre R Soares <ntegti@zipmail.com.br>, 2021.
+# Alexandre R Soares <ntegti@zipmail.com.br>, 2021, 2025.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Pedro Moreira <pedroltmoreira@gmail.com>, 2024.
 # Khemis <khemis@bol.com.br>, 2024.
@@ -13,9 +13,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-11-12 22:54+0000\n"
-"PO-Revision-Date: 2025-03-13 17:07+0000\n"
-"Last-Translator: nicejammer "
-"<snoring_parrot@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2025-12-04 18:00+0000\n"
+"Last-Translator: Alexandre R Soares <ntegti@zipmail.com.br>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -23,12 +22,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Editor e visualizador molecular"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -84,7 +83,7 @@ msgstr "Ver Configurações"
 
 #: mainwindow.cpp:468
 msgid "Files"
-msgstr ""
+msgstr "Arquivos"
 
 #: mainwindow.cpp:479
 msgid "Layers"
@@ -232,13 +231,15 @@ msgstr ""
 
 #: mainwindow.cpp:1230
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Recuperar Arquivos Salvos Automaticamente"
 
 #: mainwindow.cpp:1231
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Foram encontrados arquivos salvos automaticamente em uma sessão anterior.\n"
+"Deseja recuperá-los?"
 
 #: mainwindow.cpp:1291
 msgid "Error: Failed to initialize OpenGL context"
