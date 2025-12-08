@@ -685,10 +685,14 @@ void MainWindow::newMolecule()
 template<class T, class M>
 void setWidgetMolecule(T* glWidget, M* mol)
 {
+  // reset the camera when the previous molecule was empty
+  M* previousMol = glWidget->molecule();
+  bool needReset = (previousMol == nullptr || previousMol->atomCount() == 0);
   glWidget->setMolecule(mol);
   glWidget->updateScene();
-  if (mol->atomCount() == 0)
+  if (needReset) {
     glWidget->resetCamera();
+  }
 }
 
 void setDefaultViews(MultiViewWidget* viewWidget)
