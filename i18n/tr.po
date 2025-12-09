@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-11-12 22:54+0000\n"
-"PO-Revision-Date: 2025-10-27 06:02+0000\n"
+"PO-Revision-Date: 2025-12-10 18:00+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14.1-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -234,13 +234,15 @@ msgstr ""
 
 #: mainwindow.cpp:1230
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Otomatik Kaydedilen Dosyaları Kurtar"
 
 #: mainwindow.cpp:1231
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Önceki oturumdan otomatik kaydedilen dosyalar bulundu.\n"
+"Onları kurtarmak ister misiniz?"
 
 #: mainwindow.cpp:1291
 msgid "Error: Failed to initialize OpenGL context"
@@ -527,7 +529,7 @@ msgstr "Özellik &Öner"
 
 #: mainwindow.cpp:2443
 msgid "untitled"
-msgstr ""
+msgstr "adsız"
 
 #: mainwindow.cpp:2473
 msgid "System Language"
