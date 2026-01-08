@@ -6,13 +6,13 @@
 # Translator <kvb@tuta.io>, 2022, 2023.
 # Norwid Behrnd <nbehrnd@yahoo.com>, 2023, 2024, 2025.
 # Eric Remy <eric.remy3@free.fr>, 2025.
-# "David D." <dadu042@users.noreply.hosted.weblate.org>, 2025.
+# "David D." <dadu042@users.noreply.hosted.weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-11-12 22:54+0000\n"
-"PO-Revision-Date: 2025-11-11 11:51+0000\n"
+"PO-Revision-Date: 2026-01-09 10:01+0000\n"
 "Last-Translator: \"David D.\" <dadu042@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: aboutdialog.cpp:25
@@ -230,13 +230,15 @@ msgstr ""
 
 #: mainwindow.cpp:1230
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Restaurer fichiers auto-enregistrés"
 
 #: mainwindow.cpp:1231
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Les fichiers auto-enregistrés proviennent d’une session précédente.\n"
+"Voudriez-vous les récupérer ?"
 
 #: mainwindow.cpp:1291
 msgid "Error: Failed to initialize OpenGL context"
@@ -523,7 +525,7 @@ msgstr "Suggérer une &fonctionnalité"
 
 #: mainwindow.cpp:2443
 msgid "untitled"
-msgstr ""
+msgstr "sans titre"
 
 #: mainwindow.cpp:2473
 msgid "System Language"
@@ -664,6 +666,9 @@ msgid ""
 "style=\" text-decoration: underline; color:#0096ff;\">two.avogadro.cc</"
 "span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "
+"style=\" text-decoration: underline; color:#0096ff;\">two.avogadro.cc</span>"
+"</a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
