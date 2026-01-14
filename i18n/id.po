@@ -9,13 +9,13 @@
 # "C.Y.A.N" <bd3alz@gmail.com>, 2024.
 # Syifa Tadjoedin <31january2003@gmail.com>, 2024.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
-# Arif Budiman <arifpedia@gmail.com>, 2025.
+# Arif Budiman <arifpedia@gmail.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-11-12 22:54+0000\n"
-"PO-Revision-Date: 2025-11-12 17:51+0000\n"
+"PO-Revision-Date: 2026-01-11 07:01+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -978,7 +978,8 @@ msgstr ""
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "Email anda"
+msgstr ""
+"avogadro-devel@lists.sourceforge.net,hay@samsul.web.id,arifpedia@gmail.com"
 
 #~ msgid "Record test…"
 #~ msgstr "Rekam Percobaan…"
