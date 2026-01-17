@@ -10,13 +10,14 @@
 # "Jörg S." <joerg.schwerdtfeger@gmail.com>, 2023.
 # Norwid Behrnd <nbehrnd@yahoo.com>, 2023, 2024, 2025.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
+# Frank Hoffmann <kohaerenz@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2025-11-12 22:54+0000\n"
-"PO-Revision-Date: 2025-03-23 22:21+0000\n"
-"Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
+"PO-Revision-Date: 2026-01-18 22:01+0000\n"
+"Last-Translator: Frank Hoffmann <kohaerenz@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -24,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.15.2\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -85,7 +86,7 @@ msgstr "Konfiguration anzeigen"
 
 #: mainwindow.cpp:468
 msgid "Files"
-msgstr ""
+msgstr "Dateien"
 
 #: mainwindow.cpp:479
 msgid "Layers"
@@ -233,13 +234,16 @@ msgstr ""
 
 #: mainwindow.cpp:1230
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Wiederherstellen automatisch gespeicherter Dateien"
 
 #: mainwindow.cpp:1231
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Es wurden automatisch gespeicherte Dateien vom einer vorhergehenden Sitzung "
+"gefunden\n"
+"Möchten Sie sie wiederherstellen?"
 
 #: mainwindow.cpp:1291
 msgid "Error: Failed to initialize OpenGL context"
@@ -854,7 +858,7 @@ msgstr "Importieren"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, enableAO_label)
 msgid "Enable ambient occlusion shadows"
-msgstr ""
+msgstr "Aktiviere Schatten durch Umgebungsabdunklung"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, enableAO_label)
@@ -875,7 +879,7 @@ msgstr "Aktivieren"
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, shadow_label)
 msgid "Strength of the ambient shadows"
-msgstr ""
+msgstr "Stärke der Umgebungsabschattung"
 
 #. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, shadow_label)
@@ -885,7 +889,7 @@ msgstr "Schattenstärke:"
 #. i18n: file: renderingdialog.ui:106
 #. i18n: ectx: property (toolTip), widget (QLabel, enableFog_label)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "Nebel-Effekt für Tiefenwahrnehmung"
 
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, enableFog_label)
@@ -895,12 +899,12 @@ msgstr "Nebel:"
 #. i18n: file: renderingdialog.ui:140
 #. i18n: ectx: property (text), widget (QLabel, fogStrength_label)
 msgid "Fog Strength:"
-msgstr ""
+msgstr "Nebel-Effekt-Stärke:"
 
 #. i18n: file: renderingdialog.ui:170
 #. i18n: ectx: property (text), widget (QLabel, fogPosition_label)
 msgid "Fog Position:"
-msgstr ""
+msgstr "Nebel-Effekt-Position:"
 
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
@@ -920,22 +924,22 @@ msgstr "Intensität der Tiefenunschärfe"
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Unschärfe-Stärke:"
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Position der Tiefenunschärfe"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Unschärfe-Position:"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "Füge den Randatomen eine Kontur hinzu"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
