@@ -9,12 +9,12 @@
 #include <QtCore/QJsonObject>
 #include <QtCore/QObject>
 
-#include <molequeue/servercore/connectionlistener.h>
+#include "rpc/connectionlistener.h"
+#include "rpc/message.h"
 
-namespace MoleQueue {
+namespace Avogadro::RPC {
 class JsonRpc;
 class JsonRpcClient;
-class Message;
 }
 
 namespace Avogadro {
@@ -35,7 +35,7 @@ class RpcListener : public QObject
   Q_OBJECT
 
 public:
-  explicit RpcListener(QObject* parent = 0);
+  explicit RpcListener(QObject* parent = nullptr);
   ~RpcListener();
 
   void start();
@@ -44,18 +44,17 @@ signals:
   /**
    * Calls the MainWidow::setMolecule() method with @p molecule.
    */
-  void callSetMolecule(Avogadro::QtGui::Molecule* molecule);
-
-private slots:
-  void connectionError(MoleQueue::ConnectionListener::Error, const QString&);
-  void receivePingResponse(const QJsonObject& response = QJsonObject());
-  void messageReceived(const MoleQueue::Message& message);
+  void callSetMolecule(QtGui::Molecule* molecule);
 
 private:
-  MoleQueue::JsonRpc* m_rpc;
-  MoleQueue::ConnectionListener* m_connectionListener;
+  // These are connected using new-style connect, no need for slots keyword
+  void connectionError(RPC::ConnectionListener::Error, const QString&);
+  void receivePingResponse(const QJsonObject& response = QJsonObject());
+  void messageReceived(const RPC::Message& message);
+  RPC::JsonRpc* m_rpc;
+  RPC::ConnectionListener* m_connectionListener;
   MainWindow* m_window;
-  MoleQueue::JsonRpcClient* m_pingClient;
+  RPC::JsonRpcClient* m_pingClient;
 };
 
 } // End Avogadro namespace
