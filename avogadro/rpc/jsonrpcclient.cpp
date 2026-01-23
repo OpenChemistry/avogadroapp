@@ -87,14 +87,14 @@ QJsonObject JsonRpcClient::emptyRequest()
 
 bool JsonRpcClient::sendRequest(const QJsonObject& request)
 {
-  if (!m_socket)
+  if (!m_socket || !m_socket->isOpen())
     return false;
 
   QJsonDocument document(request);
   QDataStream stream(m_socket);
   stream.setVersion(QDataStream::Qt_4_8);
   stream << document.toJson();
-  return true;
+  return (stream.status() == QDataStream::Ok);
 }
 
 void JsonRpcClient::readPacket(const QByteArray message)
