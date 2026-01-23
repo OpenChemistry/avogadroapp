@@ -132,8 +132,13 @@ void JsonRpcClient::readSocket()
 {
   if (m_socket->bytesAvailable() > 0) {
     QDataStream stream(m_socket);
+    stream.setVersion(QDataStream::Qt_4_8);
     QByteArray json;
     stream >> json;
+    if (stream.status() != QDataStream::Ok) {
+      // Incomplete read, wait for more data
+      return;
+    }
     emit newPacket(json);
     if (m_socket->bytesAvailable() > 0)
       QTimer::singleShot(0, this, SLOT(readSocket()));

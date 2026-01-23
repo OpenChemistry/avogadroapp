@@ -12,6 +12,7 @@
 #include "connection.h"
 
 class QLocalSocket;
+class QDataStream;
 
 namespace Avogadro::RPC {
 

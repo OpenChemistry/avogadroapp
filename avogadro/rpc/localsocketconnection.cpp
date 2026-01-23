@@ -141,11 +141,11 @@ bool LocalSocketConnection::send(const PacketType& packet,
   // (*m_dataStream) << packet sends two packets instead of one.
   // To fix this, we write the message to a byte array and send it
   // as a single raw data packet.
-#ifdef _WIN32
+`#ifdef` _WIN32
   PacketType byteArray;
   QDataStream tmpStream(&byteArray, QIODevice::WriteOnly);
   tmpStream << packet;
-  m_dataStream->writeRawData(byteArray, byteArray.size());
+  m_dataStream->writeRawData(byteArray.constData(), byteArray.size());
 #else
   (*m_dataStream) << packet;
 #endif
@@ -155,7 +155,8 @@ bool LocalSocketConnection::send(const PacketType& packet,
 
 void LocalSocketConnection::flush()
 {
-  m_socket->flush();
+  if (m_socket)
+    m_socket->flush();
 }
 
 void LocalSocketConnection::socketDestroyed()

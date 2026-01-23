@@ -125,6 +125,7 @@ void JsonRpc::newPacket(const PacketType& packet,
     errorDataObject.insert("QJsonParseError::errorString", error.errorString());
     errorDataObject.insert("QJsonParseError::offset", error.offset);
     errorDataObject.insert("bytes received", QLatin1String(packet.constData()));
+    errorMessage.setErrorData(errorDataObject);
     errorMessage.send();
     return;
   }
@@ -140,7 +141,15 @@ void JsonRpc::handleJsonValue(Connection* conn, const EndpointIdType& endpoint,
 {
   // Handle batch requests recursively
   if (json.isArray()) {
-    foreach (const QJsonValue& val, json.toArray())
+    const auto batch = json.toArray();
+    if (batch.isEmpty()) {
+      Message errorMessage(Message::Error, conn, endpoint);
+      errorMessage.setErrorCode(-32600);
+      errorMessage.setErrorMessage("Invalid Request");
+      errorMessage.send();
+      return;
+    }
+    foreach (const QJsonValue& val, batch)
       handleJsonValue(conn, endpoint, val);
     return;
   }

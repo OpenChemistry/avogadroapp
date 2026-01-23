@@ -333,6 +333,16 @@ bool Message::parse(Message& errorMessage_)
   // Validate the message
   QStringList errors;
 
+  // Capture id early so error responses can include it when valid.
+  if (m_rawJson.contains("id")) {
+    const QJsonValue idVal = m_rawJson.value("id");
+    if (idVal.isDouble() || idVal.isString() || idVal.isNull()) {
+      m_id = MessageIdType(idVal);
+    } else {
+      errors << "id must be a string, number, or null.";
+    }
+  }
+
   // jsonrpc must equal "2.0"
   if (!m_rawJson.contains("jsonrpc"))
     errors << "jsonrpc key missing.";
@@ -370,6 +380,7 @@ bool Message::parse(Message& errorMessage_)
     errorMessage_.setErrorMessage("Invalid request");
     errorMessage_.setErrorData(errorDataObject);
     return false;
+  }
   }
 
   // Results, errors, and notifications cannot return errors. Parse them
