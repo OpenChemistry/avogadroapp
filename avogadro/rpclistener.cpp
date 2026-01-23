@@ -15,9 +15,9 @@
 #include <avogadro/io/fileformatmanager.h>
 #include <avogadro/qtgui/molecule.h>
 
-#include <molequeue/client/jsonrpcclient.h>
-#include <molequeue/servercore/jsonrpc.h>
-#include <molequeue/servercore/localsocketconnectionlistener.h>
+#include "rpc/jsonrpc.h"
+#include "rpc/jsonrpcclient.h"
+#include "rpc/localsocketconnectionlistener.h"
 
 namespace Avogadro {
 
@@ -29,17 +29,17 @@ RpcListener::RpcListener(QObject* parent_)
   : QObject(parent_)
   , m_pingClient(nullptr)
 {
-  m_rpc = new MoleQueue::JsonRpc(this);
+  m_rpc = new RPC::JsonRpc(this);
 
   m_connectionListener =
-    new MoleQueue::LocalSocketConnectionListener(this, "avogadro");
+    new RPC::LocalSocketConnectionListener(this, "avogadro");
 
-  connect(m_connectionListener, &MoleQueue::ConnectionListener::connectionError,
-          this, &RpcListener::connectionError);
+  connect(m_connectionListener, &RPC::ConnectionListener::connectionError, this,
+          &RpcListener::connectionError);
 
   m_rpc->addConnectionListener(m_connectionListener);
 
-  connect(m_rpc, &MoleQueue::JsonRpc::messageReceived, this,
+  connect(m_rpc, &RPC::JsonRpc::messageReceived, this,
           &RpcListener::messageReceived);
 
   // Find the main window.
@@ -65,21 +65,21 @@ void RpcListener::start()
   m_connectionListener->start();
 }
 
-void RpcListener::connectionError(MoleQueue::ConnectionListener::Error error,
+void RpcListener::connectionError(RPC::ConnectionListener::Error error,
                                   const QString& message)
 {
   qDebug() << "Error starting RPC server:" << message;
-  if (error == MoleQueue::ConnectionListener::AddressInUseError) {
+  if (error == RPC::ConnectionListener::AddressInUseError) {
     // Try to ping the existing server to see if it is alive:
     if (!m_pingClient)
-      m_pingClient = new MoleQueue::JsonRpcClient(this);
+      m_pingClient = new RPC::JsonRpcClient(this);
     bool result(
       m_pingClient->connectToServer(m_connectionListener->connectionString()));
 
     if (result) {
       QJsonObject request(m_pingClient->emptyRequest());
       request["method"] = QLatin1String("internalPing");
-      connect(m_pingClient, &MoleQueue::JsonRpcClient::resultReceived, this,
+      connect(m_pingClient, &RPC::JsonRpcClient::resultReceived, this,
               &RpcListener::receivePingResponse);
       result = m_pingClient->sendRequest(request);
     }
@@ -88,7 +88,7 @@ void RpcListener::connectionError(MoleQueue::ConnectionListener::Error error,
     if (!result)
       receivePingResponse();
     else // Otherwise wait 200 ms
-      QTimer::singleShot(200, this, SLOT(receivePingResponse()));
+      QTimer::singleShot(200, this, [this]() { receivePingResponse(); });
   }
 }
 
@@ -114,7 +114,7 @@ void RpcListener::receivePingResponse(const QJsonObject& response)
   }
 }
 
-void RpcListener::messageReceived(const MoleQueue::Message& message)
+void RpcListener::messageReceived(const RPC::Message& message)
 {
   QString method = message.method();
   QJsonObject params = message.params().toObject();
@@ -124,14 +124,14 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
     // Only allow avogadro to be killed through RPC if it was started with the
     // '--testing' flag.
     if (qApp->arguments().contains("--testing")) {
-      MoleQueue::Message response = message.generateResponse();
+      RPC::Message response = message.generateResponse();
       response.setResult(true);
       response.send();
 
       qApp->quit();
     } else {
       // send error response
-      MoleQueue::Message errorMessage = message.generateErrorResponse();
+      RPC::Message errorMessage = message.generateErrorResponse();
       errorMessage.setErrorCode(-1);
       errorMessage.setErrorMessage(
         "Ignoring kill command. Start with '--testing' to enable.");
@@ -142,7 +142,7 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
   // check if there's an active window
   if (m_window == nullptr) {
     // send error response
-    MoleQueue::Message errorMessage = message.generateErrorResponse();
+    RPC::Message errorMessage = message.generateErrorResponse();
     errorMessage.setErrorCode(-1);
     errorMessage.setErrorMessage("No Active Avogadro Window");
     errorMessage.send();
@@ -159,14 +159,14 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
       emit callSetMolecule(molecule);
 
       // set response
-      MoleQueue::Message response = message.generateResponse();
+      RPC::Message response = message.generateResponse();
       response.setResult(true);
       response.send();
     } else {
       delete molecule;
 
       // send error response
-      MoleQueue::Message errorMessage = message.generateErrorResponse();
+      RPC::Message errorMessage = message.generateErrorResponse();
       errorMessage.setErrorCode(-1);
       errorMessage.setErrorMessage(
         QString("Failed to read file: %1")
@@ -181,7 +181,7 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
     m_window->exportGraphics(fileName);
 
     // set response
-    MoleQueue::Message response = message.generateResponse();
+    RPC::Message response = message.generateResponse();
     response.setResult(true);
     response.send();
   } else if (method == "exportFile") {
@@ -191,7 +191,7 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
     bool result = m_window->exportFile(filename);
 
     // set response
-    MoleQueue::Message response = message.generateResponse();
+    RPC::Message response = message.generateResponse();
     response.setResult(result);
     response.send();
   } else if (method == "loadMolecule") {
@@ -207,14 +207,14 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
       emit callSetMolecule(molecule);
 
       // send response
-      MoleQueue::Message response = message.generateResponse();
+      RPC::Message response = message.generateResponse();
       response.setResult(true);
       response.send();
     } else {
       delete molecule;
 
       // send error response
-      MoleQueue::Message errorMessage = message.generateErrorResponse();
+      RPC::Message errorMessage = message.generateErrorResponse();
       errorMessage.setErrorCode(-1);
       errorMessage.setErrorMessage(
         QString("Failed to read Chemical JSON: %1")
@@ -227,12 +227,12 @@ void RpcListener::messageReceived(const MoleQueue::Message& message)
 
     if (success) {
       // send response
-      MoleQueue::Message response = message.generateResponse();
+      RPC::Message response = message.generateResponse();
       response.setResult(true);
       response.send();
     } else {
       // send error response
-      MoleQueue::Message errorMessage = message.generateErrorResponse();
+      RPC::Message errorMessage = message.generateErrorResponse();
       errorMessage.setErrorCode(-32601);
       errorMessage.setErrorMessage("Method not found");
       QJsonObject errorDataObject;

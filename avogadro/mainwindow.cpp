@@ -91,9 +91,8 @@
 #include <pqTestUtility.h>
 #endif
 
-#ifdef Avogadro_ENABLE_RPC
-#include <molequeue/client/client.h>
-#endif // Avogadro_ENABLE_RPC
+// RPC functionality is provided by the local rpc library
+// The registerMoleQueue() function is currently disabled
 
 #ifdef AVO_USE_VTK
 #include <avogadro/vtk/vtkglwidget.h>
@@ -1198,7 +1197,9 @@ void MainWindow::cleanupAutosaves(QString fileName)
   if (fileName.isEmpty())
     return;
 
+#ifndef NDEBUG
   qDebug() << "Cleaning up autosaves for " << fileName;
+#endif
 
   QString autosaveDirPath =
     QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
@@ -1256,7 +1257,6 @@ void MainWindow::startAutosaveTimer()
     return;
 
   m_autosaveTimer = new QTimer(this);
-  qDebug() << "Starting autosave timer";
 
   QSettings settings;
   int intervalMinutes = settings.value("autosave/interval", 2).toInt();
