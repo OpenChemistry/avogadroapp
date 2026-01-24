@@ -381,7 +381,7 @@ bool Message::parse(Message& errorMessage_)
     errorMessage_.setErrorData(errorDataObject);
     return false;
   }
-  }
+  
 
   // Results, errors, and notifications cannot return errors. Parse them
   // as best we can and return true.
