@@ -1738,7 +1738,8 @@ bool MainWindow::saveFile(bool async)
     else if (box.clickedButton() == cancelButton)
       return false;
     else if (box.clickedButton() == exportButton)
-      return exportFile(async);
+      return exportFile(QString ::fromStdString(fileName),
+                        async); // save in current format
   }
 
   // Otherwise, prompt for a new valid format.
