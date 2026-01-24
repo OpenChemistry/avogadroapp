@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Takaki Iekura <tacostea@gmail.com>, 2021.
-# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2021, 2022, 2023, 2024, 2025.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2021, 2022, 2023, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-01-24 12:45-0500\n"
-"PO-Revision-Date: 2025-11-14 06:51+0000\n"
+"PO-Revision-Date: 2026-01-25 06:46+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -425,8 +425,9 @@ msgid "&Graphics…"
 msgstr "グラフィックス(&G) …"
 
 #: mainwindow.cpp:2280
+#, fuzzy
 msgid "Export Graphics…"
-msgstr ""
+msgstr "グラフィックのエクスポート…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
