@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-01-25 03:21+0000\n"
-"PO-Revision-Date: 2026-01-18 22:01+0000\n"
+"PO-Revision-Date: 2026-01-27 03:19+0000\n"
 "Last-Translator: Frank Hoffmann <kohaerenz@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -25,12 +25,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15.2\n"
+"X-Generator: Weblate 5.16-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Molekül-Editor und Visualisierungstool"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -434,7 +434,7 @@ msgstr "&Grafik …"
 
 #: mainwindow.cpp:2281
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Exportiere Graphik…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -534,7 +534,7 @@ msgstr "&Feature vorschlagen"
 
 #: mainwindow.cpp:2457
 msgid "untitled"
-msgstr ""
+msgstr "ohne Titel"
 
 #: mainwindow.cpp:2487
 msgid "System Language"
