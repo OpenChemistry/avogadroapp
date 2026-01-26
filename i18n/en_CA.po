@@ -4,13 +4,14 @@
 # Andi Chandler <andi@gowling.com>, 2023.
 # matterhorn103 <milner94@live.co.uk>, 2023.
 # btbt_bt <belegdal@yahoo.ca>, 2024.
+# Geoff Hutchison <geoff.hutchison@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-01-25 03:21+0000\n"
-"PO-Revision-Date: 2024-12-17 05:00+0000\n"
-"Last-Translator: btbt_bt <belegdal@yahoo.ca>\n"
+"PO-Revision-Date: 2026-01-27 03:19+0000\n"
+"Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
 "Language-Team: English (Canada) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_CA/>\n"
 "Language: en_CA\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9\n"
+"X-Generator: Weblate 5.16-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -651,6 +652,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
+"License: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
+"<span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\">"
+"BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
