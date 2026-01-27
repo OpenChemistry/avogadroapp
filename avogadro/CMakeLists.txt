@@ -12,7 +12,11 @@ if(USE_VTK)
   add_definitions(-DAVO_USE_VTK)
 endif()
 
-find_package(JKQTPlotter${QT_VERSION} REQUIRED)
+option(USE_PLOTTER "Enable JKQTPlotter for charts and spectra" ON)
+if(USE_PLOTTER)
+  # should be passed along by avogadrolibs as well
+  find_package(JKQTPlotter${QT_VERSION} REQUIRED)
+endif()
 
 if(MSVC)
   add_definitions("-D_CRT_SECURE_NO_WARNINGS")
