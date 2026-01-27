@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-01-25 03:21+0000\n"
-"PO-Revision-Date: 2026-01-25 06:46+0000\n"
+"PO-Revision-Date: 2026-01-28 10:56+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -80,7 +80,7 @@ msgstr "設定の表示"
 
 #: mainwindow.cpp:467
 msgid "Files"
-msgstr ""
+msgstr "ファイル"
 
 #: mainwindow.cpp:478
 msgid "Layers"
@@ -526,7 +526,6 @@ msgid "&Suggest a Feature"
 msgstr "機能を提案 (&S)"
 
 #: mainwindow.cpp:2457
-#, fuzzy
 msgid "untitled"
 msgstr "無題"
 
@@ -737,7 +736,6 @@ msgstr "Ctrl+Shift+Z"
 
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Center"
 msgstr "中心"
 
