@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2026-01-24 17:46+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
@@ -75,8 +75,8 @@ msgid "Display Types"
 msgstr "Tipuri de afișare"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "Vizualizați configurația"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -957,6 +957,9 @@ msgstr "Remus-Gabriel Chelu"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "remusgabriel.chelu@disroot.org, 2023, 2024, 2025, 2026"
+
+#~ msgid "View Configuration"
+#~ msgstr "Vizualizați configurația"
 
 #~ msgid ""
 #~ "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "

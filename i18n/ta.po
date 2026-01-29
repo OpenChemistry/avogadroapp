@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2025-11-03 04:51+0000\n"
 "Last-Translator: DJ Aswin <imaswin2604@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/avogadro/"
@@ -74,8 +74,8 @@ msgid "Display Types"
 msgstr "காட்சி வகைகள்"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "உள்ளமைவைக் காண்க"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -949,6 +949,9 @@ msgstr "உங்கள் பெயர்கள்"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "உங்கள் மின்னஞ்சல்கள்"
+
+#~ msgid "View Configuration"
+#~ msgstr "உள்ளமைவைக் காண்க"
 
 #~ msgid "Record test…"
 #~ msgstr "பதிவு சோதனை…"

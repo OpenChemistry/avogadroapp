@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2025-12-04 18:00+0000\n"
 "Last-Translator: Alexandre R Soares <ntegti@zipmail.com.br>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -78,8 +78,8 @@ msgid "Display Types"
 msgstr "Mostrar tipos"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "Ver Configurações"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -954,6 +954,9 @@ msgstr "Seus nomes"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Seus e-mails"
+
+#~ msgid "View Configuration"
+#~ msgstr "Ver Configurações"
 
 #~ msgid "Record test…"
 #~ msgstr "Gravar teste…"

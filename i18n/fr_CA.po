@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2016-06-10 06:19+0000\n"
 "Last-Translator: Geoff Hutchison <Unknown>\n"
 "Language-Team: French (Canada) <fr_CA@li.org>\n"
@@ -71,7 +71,7 @@ msgid "Display Types"
 msgstr ""
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
+msgid "Display Type Settings"
 msgstr ""
 
 #: mainwindow.cpp:467

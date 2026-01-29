@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.93.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Sanskrit <https://hosted.weblate.org/projects/avogadro/"
@@ -73,8 +73,8 @@ msgid "Display Types"
 msgstr "दर्शन भेद"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "विन्यास आरक्षयतु"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -933,6 +933,9 @@ msgstr ""
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
+
+#~ msgid "View Configuration"
+#~ msgstr "विन्यास आरक्षयतु"
 
 #~ msgid "Molecules"
 #~ msgstr "अणु:"

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2025-03-15 11:32+0000\n"
 "Last-Translator: gmkeebiy <gmkeebiy@sharklasers.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -83,8 +83,8 @@ msgid "Display Types"
 msgstr "显示类型"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "查看配置"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -961,6 +961,9 @@ msgid "Your emails"
 msgstr ""
 "cuiweicui1985@gmail.com,rainofchaos@gmail.com,yjjart@gmail.com,sihanzheng@gmail.com,weitao1979@gmail.com,wantinghard@gmail.com,avogadro-"
 "devel@lists.sourceforge.net,chensiqiong@126.com,frankensteinyang@gmail.com,chaofeng111@gmail.com,allen19920930@gmail.com,skyxxzc@gmail.com,sihanzheng@gmail.com,cyliang532@gmail.com,zhangtengshuo@gmail.com"
+
+#~ msgid "View Configuration"
+#~ msgstr "查看配置"
 
 #~ msgid "Record test…"
 #~ msgstr "录制测试…"

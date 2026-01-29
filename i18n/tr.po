@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2025-12-10 18:00+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
@@ -81,8 +81,8 @@ msgid "Display Types"
 msgstr "Türleri Görüntüle"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "Yapılandırmayı Görüntüle"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -992,6 +992,9 @@ msgstr ""
 "devel@lists.sourceforge.net,,efe.ciftci@linux.org.tr,,posta@huseyinkozan.com.tr,,apshalasha@gmail.com,rainman.neu@gmail.com,para4360@gmail.com,,ytopcu@gmail.com,,,,,abdurrahmanolgac@bireczaci.com,avogadro-"
 "devel@lists.sourceforge.net,,efe.ciftci@linux.org.tr,,,,apshalasha@gmail.com,rainman.neu@gmail.com,para4360@gmail.com,,ytopcu@gmail.com,,hhaydarakdag@gmail.com,,,,abdurrahmanolgac@bireczaci.com,avogadro-"
 "devel@lists.sourceforge.net,,efe.ciftci@linux.org.tr,,,,,kudretemre@hotmail.com,apshalasha@gmail.com,rainman.neu@gmail.com,para4360@gmail.com,,ytopcu@gmail.com,,hhaydarakdag@gmail.com,"
+
+#~ msgid "View Configuration"
+#~ msgstr "Yapılandırmayı Görüntüle"
 
 #~ msgid ""
 #~ "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "

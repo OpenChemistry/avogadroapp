@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2026-01-27 03:19+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
@@ -76,8 +76,8 @@ msgid "Display Types"
 msgstr "Vrste prikaza"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "Konfiguracija prikaza"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -957,6 +957,9 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 "avogadro-devel@lists.sourceforge.net, trebelnik2@gmail.com, mail@milotype.de"
+
+#~ msgid "View Configuration"
+#~ msgstr "Konfiguracija prikaza"
 
 #~ msgid ""
 #~ "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "

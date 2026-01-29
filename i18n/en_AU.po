@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2026-01-27 03:18+0000\n"
 "Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
 "Language-Team: English (Australia) <https://hosted.weblate.org/projects/"
@@ -75,8 +75,8 @@ msgid "Display Types"
 msgstr "Display types"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "View Configuration"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -652,10 +652,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
-"License: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
-"<span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\">"
-"BSD 3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-"
+"weight:600;\">License: </span><a href=\"https://opensource.org/licenses/"
+"BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
+"color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -985,6 +985,9 @@ msgstr ""
 "devel@lists.sourceforge.net,bburns@aundae.com,debianmaster@gmail.com,,jenfraggleubuntu@googlemail.com,,,,,,,,avogadro-"
 "devel@lists.sourceforge.net,bburns@aundae.com,debianmaster@gmail.com,,jenfraggleubuntu@googlemail.com,,,,,,,,avogadro-"
 "devel@lists.sourceforge.net,bburns@aundae.com,debianmaster@gmail.com,,jenfraggleubuntu@googlemail.com,,,"
+
+#~ msgid "View Configuration"
+#~ msgstr "View Configuration"
 
 #~ msgid "Record test…"
 #~ msgstr "Record test…"
