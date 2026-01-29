@@ -449,7 +449,7 @@ void MainWindow::setupInterface()
   m_toolDock = new QDockWidget(tr("Tool"), this);
   addDockWidget(Qt::LeftDockWidgetArea, m_toolDock);
 
-  // Our scene/view dock.
+  // Our dock for toggling different display types.
   m_sceneDock = new QDockWidget(tr("Display Types"), this);
   m_sceneTreeView = new QTreeView(m_sceneDock);
   m_sceneTreeView->setIndentation(0);
@@ -459,8 +459,8 @@ void MainWindow::setupInterface()
   m_sceneDock->setWidget(m_sceneTreeView);
   addDockWidget(Qt::LeftDockWidgetArea, m_sceneDock);
 
-  // Our view dock.
-  m_viewDock = new QDockWidget(tr("View Configuration"), this);
+  // Our dock for configuring the display types.
+  m_viewDock = new QDockWidget(tr("Display Type Settings"), this);
   addDockWidget(Qt::LeftDockWidgetArea, m_viewDock);
 
   // Our molecule dock.
@@ -474,7 +474,7 @@ void MainWindow::setupInterface()
   m_moleculeDock->setWidget(m_moleculeTreeView);
   addDockWidget(Qt::LeftDockWidgetArea, m_moleculeDock);
 
-  // Our molecule dock.
+  // Our layer dock.
   m_layerDock = new QDockWidget(tr("Layers"), this);
   m_layerTreeView = new QTreeView(m_layerDock);
   m_layerTreeView->setIndentation(0);
