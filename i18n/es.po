@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2026-01-27 03:19+0000\n"
 "Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
@@ -82,8 +82,8 @@ msgid "Display Types"
 msgstr "Mostrar Tipos"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "Configuración de Vista"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -659,10 +659,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
-"Licencia: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
-"<span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\">"
-"BSD 3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-"
+"weight:600;\">Licencia: </span><a href=\"https://opensource.org/licenses/"
+"BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
+"color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -1040,6 +1040,9 @@ msgstr ""
 "devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,,,,debianmaster@gmail.com,,,jonay.santana@gmail.com,,luciomartinez@openmailbox.org,tres.14159@gmail.com,pczoido@gmail.com,paco@byasl.com,ra.hermosillac@gmail.com,rvnovaes@gmail.com,,victorhera@gmail.com,,,,fitoschido@gmail.com,alfonsoeromero@gmail.com,andrescastellanosmosquera@gmail.com,aherraez@users.sourceforge.net,avogadro-"
 "devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,,,,debianmaster@gmail.com,,,jonay.santana@gmail.com,,luciomartinez@openmailbox.org,tres.14159@gmail.com,pczoido@gmail.com,paco@byasl.com,ra.hermosillac@gmail.com,rvnovaes@gmail.com,,victorhera@gmail.com,,,,,,alfonsoeromero@gmail.com,andrescastellanosmosquera@gmail.com,aherraez@users.sourceforge.net,avogadro-"
 "devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,,,fede@riddler.com.ar,debianmaster@gmail.com,,,jonay.santana@gmail.com,,martinezlucio.com@gmail.com,tres.14159@gmail.com,,pczoido@gmail.com,paco@byasl.com,,ra.hermosillac@gmail.com,rvnovaes@gmail.com,,victorhera@gmail.com,"
+
+#~ msgid "View Configuration"
+#~ msgstr "Configuración de Vista"
 
 #~ msgid "Record test…"
 #~ msgstr "Grabar prueba…"

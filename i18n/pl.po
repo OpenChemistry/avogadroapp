@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2025-08-27 08:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/avogadro/"
@@ -77,8 +77,8 @@ msgid "Display Types"
 msgstr "Wyświetl Typy"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "Wyświetl konfigurację"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -1041,6 +1041,9 @@ msgstr ""
 "devel@lists.sourceforge.net,gosimek@gmail.com,,,nysander@quanteam.pl,romano473@gmail.com,,,,fblost@gmail.com,avogadro-"
 "devel@lists.sourceforge.net,gosimek@gmail.com,,,,nysander@quanteam.pl,romano473@gmail.com,,,,fblost@gmail.com,avogadro-"
 "devel@lists.sourceforge.net,gosimek@gmail.com,,,,nysander@quanteam.pl,romano473@gmail.com,"
+
+#~ msgid "View Configuration"
+#~ msgstr "Wyświetl konfigurację"
 
 #, fuzzy
 #~ msgid "Record test…"

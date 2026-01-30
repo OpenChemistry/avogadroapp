@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2026-01-28 10:56+0000\n"
 "Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
@@ -77,8 +77,8 @@ msgid "Display Types"
 msgstr "Types d’affichage"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "Voir la configuration"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -658,10 +658,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
-"Licence: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
-"<span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\">"
-"BSD 3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-"
+"weight:600;\">Licence: </span><a href=\"https://opensource.org/licenses/"
+"BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
+"color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -966,6 +966,9 @@ msgstr ""
 "psycojoker@gmail.com, louis.ricard@polytechnique.edu "
 "nizar.kerkeni@gmail.com, jacob.benoit.1@gmail.com, nizarus@nizarus.org, "
 "nizarus@nizarus.tn, pierre.slamich@gmail.com, etc"
+
+#~ msgid "View Configuration"
+#~ msgstr "Voir la configuration"
 
 #~ msgid ""
 #~ "<html><head/><body><p><a href=\"https://www.openchemistry.org\"><span "

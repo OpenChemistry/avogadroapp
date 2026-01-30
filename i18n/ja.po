@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2026-01-28 10:56+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
@@ -75,8 +75,8 @@ msgid "Display Types"
 msgstr "表示タイプ"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "設定の表示"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -984,6 +984,9 @@ msgstr ""
 "devel@lists.sourceforge.net,,ktns.87@gmail.com,,,,,avogadro-"
 "devel@lists.sourceforge.net,,ktns.87@gmail.com,,,,,avogadro-"
 "devel@lists.sourceforge.net,,ktns.87@gmail.com,,"
+
+#~ msgid "View Configuration"
+#~ msgstr "設定の表示"
 
 #, fuzzy
 #~ msgid "Record test…"

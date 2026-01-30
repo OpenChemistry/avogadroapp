@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2025-03-01 05:03+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/avogadro/"
@@ -74,8 +74,8 @@ msgid "Display Types"
 msgstr "Näyttötyypit"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "Näytä kokoonpano"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -948,6 +948,9 @@ msgstr "Ricky Tigg,"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Sähköpostisi"
+
+#~ msgid "View Configuration"
+#~ msgstr "Näytä kokoonpano"
 
 #~ msgid "Record test…"
 #~ msgstr "Nauhoita testi…"

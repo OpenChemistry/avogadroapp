@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-01-25 03:21+0000\n"
+"POT-Creation-Date: 2026-01-29 19:22+0000\n"
 "PO-Revision-Date: 2025-07-01 17:02+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
@@ -78,8 +78,8 @@ msgid "Display Types"
 msgstr "Visningstyper"
 
 #: mainwindow.cpp:463
-msgid "View Configuration"
-msgstr "Vis oppsett"
+msgid "Display Type Settings"
+msgstr ""
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -999,6 +999,9 @@ msgid "Your emails"
 msgstr ""
 "epost@anotheragency.no, anders.oftedal@gmail.com, simen@simenh.com, "
 "simenheg@gmail.com, sol-moe@online.no"
+
+#~ msgid "View Configuration"
+#~ msgstr "Vis oppsett"
 
 #~ msgid "Record test…"
 #~ msgstr "Opptakstest …"
