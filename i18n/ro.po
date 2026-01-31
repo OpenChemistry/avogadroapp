@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-01-29 19:22+0000\n"
-"PO-Revision-Date: 2026-01-24 17:46+0000\n"
+"PO-Revision-Date: 2026-02-01 13:01+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ro/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr "Editor și vizualizator molecular"
+msgstr "Editor și vizor molecular"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -76,7 +76,7 @@ msgstr "Tipuri de afișare"
 
 #: mainwindow.cpp:463
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Configurarea tipului de afișare"
 
 #: mainwindow.cpp:467
 msgid "Files"
