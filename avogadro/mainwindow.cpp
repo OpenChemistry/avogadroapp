@@ -775,6 +775,7 @@ void MainWindow::setMolecule(Molecule* mol)
   QWidget* w = m_multiViewWidget->activeWidget();
   if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
     setWidgetMolecule(glWidget, mol);
+    glWidget->setFocus();
   }
 #ifdef AVO_USE_VTK
   else if (auto* vtkWidget = qobject_cast<vtkGLWidget*>(w)) {
@@ -1940,6 +1941,7 @@ void MainWindow::setActiveTool(QString toolName)
         m_toolDock->setWindowTitle(toolPlugin->activateAction()->text());
       }
     }
+    glWidget->setFocus();
   }
 
   if (!toolName.isEmpty()) {
