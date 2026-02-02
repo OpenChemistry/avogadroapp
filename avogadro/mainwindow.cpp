@@ -1218,6 +1218,43 @@ void MainWindow::cleanupAutosaves(QString fileName)
   }
 }
 
+void MainWindow::cleanupCurrentAutosave()
+{
+  if (!m_molecule)
+    return;
+
+  QString autosaveDirPath =
+    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
+    "/autosave";
+  QDir autosaveDir(autosaveDirPath);
+  if (!autosaveDir.exists())
+    return;
+
+  QStringList autosaveFiles =
+    autosaveDir.entryList(QStringList() << "*_autosave.cjson", QDir::Files);
+
+  // Determine the search pattern based on whether the molecule has a filename
+  QString searchPattern;
+  if (m_molecule->hasData("fileName")) {
+    QFileInfo fileInfo(m_molecule->data("fileName").toString().c_str());
+    searchPattern = fileInfo.baseName();
+  } else {
+    // For untitled documents, match by formula
+    searchPattern = QString::fromStdString(m_molecule->formula());
+    searchPattern.remove(QRegularExpression("[^A-Za-z0-9]"));
+  }
+
+  if (searchPattern.isEmpty())
+    return;
+
+  for (const QString& file : autosaveFiles) {
+    if (file.contains(searchPattern)) {
+      QFile::remove(autosaveDir.absoluteFilePath(file));
+      // Don't break - there might be multiple autosaves for untitled documents
+    }
+  }
+}
+
 void MainWindow::checkAutosaveRecovery()
 {
   QString autosaveDirPath =
@@ -2652,6 +2689,7 @@ bool MainWindow::saveFileIfNeeded()
         // fails:
         return saveFile(/*async=*/false);
       case QMessageBox::Discard:
+        cleanupCurrentAutosave();
         markMoleculeClean();
         return true;
       default:

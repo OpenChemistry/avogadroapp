@@ -147,6 +147,8 @@ public:
 
   void cleanupAutosaves(QString filename);
 
+  void cleanupCurrentAutosave();
+
   /**
    * Set the list of possible translations
    */
