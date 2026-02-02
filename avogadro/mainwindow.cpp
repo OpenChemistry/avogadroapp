@@ -1090,6 +1090,19 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
   return true;
 }
 
+void MainWindow::setDefaultFileDialogPath(const QString& path)
+{
+  if (path.isEmpty())
+    return;
+
+  QFileInfo info(path);
+  QString dir = info.isDir() ? path : info.absolutePath();
+
+  QSettings settings;
+  settings.setValue("MainWindow/lastOpenDir", dir);
+  settings.setValue("MainWindow/lastSaveDir", dir);
+}
+
 void MainWindow::backgroundReaderFinished()
 {
   QString fileName = m_threadedReader->fileName();

@@ -19,7 +19,8 @@ namespace Avogadro {
 
 Application::Application(int& argc, char** argv)
   : QApplication(argc, argv)
-{ }
+{
+}
 
 // Handle open events (e.g., Mac OS X open files)
 bool Application::event(QEvent* event)
@@ -52,6 +53,10 @@ bool Application::loadFile(const QString& fileName)
     qDebug() << " don't have a window! ";
     return false;
   }
+
+  // Set the default directory for file dialogs based on the opened file
+  // This respects the current working directory when launching from CLI
+  const_cast<MainWindow*>(window)->setDefaultFileDialogPath(fileName);
 
   if (!const_cast<MainWindow*>(window)->openFile(fileName)) {
     qDebug() << " failed to open through MainWindow";

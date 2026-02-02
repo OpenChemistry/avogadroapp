@@ -91,6 +91,13 @@ public slots:
    */
   bool openFile(const QString& fileName, Io::FileFormat* reader = nullptr);
 
+  /**
+   * Set the default directory for open/save dialogs.
+   * Called when opening files from the command line to respect the
+   * current working directory.
+   */
+  void setDefaultFileDialogPath(const QString& path);
+
   void exportGraphics(QString fileName);
 
   /**
