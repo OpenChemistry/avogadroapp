@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-01-29 19:22+0000\n"
-"PO-Revision-Date: 2026-01-11 07:01+0000\n"
+"PO-Revision-Date: 2026-02-05 04:01+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.16-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -81,7 +81,7 @@ msgstr "Tipe Tampilan"
 
 #: mainwindow.cpp:463
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Pengaturan Tipe Tampilan"
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -233,13 +233,15 @@ msgstr ""
 
 #: mainwindow.cpp:1235
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Pulihkan Berkas yang Tersimpan Otomatis"
 
 #: mainwindow.cpp:1236
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Berkas simpan otomatis ditemukan dari sesi sebelumnya.\n"
+"Apakah Anda ingin memulihkannya?"
 
 #: mainwindow.cpp:1295
 msgid "Error: Failed to initialize OpenGL context"
@@ -429,7 +431,7 @@ msgstr "&Grafik…"
 
 #: mainwindow.cpp:2281
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Ekspor Grafis…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -529,7 +531,7 @@ msgstr "&Nyarankan Fitur Baru"
 
 #: mainwindow.cpp:2457
 msgid "untitled"
-msgstr ""
+msgstr "tanpa judul"
 
 #: mainwindow.cpp:2487
 msgid "System Language"
