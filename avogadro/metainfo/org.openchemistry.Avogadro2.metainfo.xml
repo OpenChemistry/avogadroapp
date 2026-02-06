@@ -78,13 +78,30 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.103.0" date="2026-02-06">
+      <url type="details">https://two.avogadro.cc/install/versions/v1103.html</url>
+      <description>
+        <p>Highlights</p>
+        <ul>
+        <li>Switch to use OpenGL 4.0 core profile for improved rendering speed</li>
+        <li>Volumetric rendering style for surfaces (orbitals, electron density, spin density)</li>
+        <li>Add peptide builder</li>
+        <li>Add keyboard shortcuts for functional groups and ligands to template tool</li>
+        <li>Display both alpha / beta orbitals in the orbital window</li>
+        <li>Performance optimizations for basis set calculations</li>
+        <li>Improved heuristics for opening CIF and crystallographic files</li>
+        <li>Update conformer plots for RMSD and energy</li>
+        <li>Support for isotope specification for atoms</li>
+        <li>Improved LAMMPS and Turbomole support</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.102.1" date="2025-10-27">
       <url type="details">https://two.avogadro.cc/install/versions/v11021.html</url>
       <description>
         <p>Highlights</p>
         <ul>
         <li>This release fixes a number of bugs in the recent 1.102.0 release.</li>
-        <li>Many thanks to everyone submitting bug reports!</li>
         </ul>
       </description>
     </release>
