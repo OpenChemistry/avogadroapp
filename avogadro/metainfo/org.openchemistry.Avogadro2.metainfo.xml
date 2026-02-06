@@ -93,7 +93,6 @@
         <li>Update conformer plots for RMSD and energy</li>
         <li>Support for isotope specification for atoms</li>
         <li>Improved LAMMPS and Turbomole support</li>
-        <li>Many thanks to everyone submitting feedback, suggestions and bug reports!</li>
         </ul>
       </description>
     </release>
@@ -103,7 +102,6 @@
         <p>Highlights</p>
         <ul>
         <li>This release fixes a number of bugs in the recent 1.102.0 release.</li>
-        <li>Many thanks to everyone submitting bug reports!</li>
         </ul>
       </description>
     </release>
