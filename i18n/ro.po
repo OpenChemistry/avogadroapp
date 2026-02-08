@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-08 22:13+0000\n"
-"PO-Revision-Date: 2026-02-01 13:01+0000\n"
+"PO-Revision-Date: 2026-02-10 00:09+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ro/>\n"
@@ -261,7 +261,7 @@ msgstr "Eroare necunoscută"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "Configurări %1"
 
 #: mainwindow.cpp:1635
 msgid "Common image formats"
