@@ -1451,6 +1451,10 @@ void MainWindow::sceneItemActivated(const QModelIndex& idx)
 
     if (auto* plugin = sceneModel->scenePlugin(sourceIdx.row())) {
       m_viewDock->setWidget(plugin->setupWidget());
+      m_viewDock->setWindowTitle(
+        tr("%1 Settings",
+           "settings for a particular display type like wireframe")
+          .arg(plugin->name()));
       m_activeScenePlugin = plugin;
     }
   }
