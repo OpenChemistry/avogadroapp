@@ -2,16 +2,15 @@
 # Copyright (C) 2006-2021 The Avogadro Project
 # This file is distributed under the same license as the Avogadro package.
 # Temuri Doghonadze <temuri@delta-net.ge>, 2022.
-# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022, 2023, 2024.
+# Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022, 2023, 2024, 2026.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.95.1\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-08 22:13+0000\n"
-"PO-Revision-Date: 2025-11-19 02:51+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"PO-Revision-Date: 2026-02-14 09:09+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ka/>\n"
 "Language: ka\n"
@@ -19,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
@@ -258,7 +257,7 @@ msgstr "უცნობი შეცდომა"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1-ის მორგება"
 
 #: mainwindow.cpp:1635
 msgid "Common image formats"
