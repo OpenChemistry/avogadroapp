@@ -148,6 +148,11 @@ public:
    */
   void checkAutosaveRecovery();
 
+  /**
+   * Scan standard directories for pyproject.toml-based plugin packages.
+   */
+  void loadPackages();
+
   void startAutosaveTimer();
 
   QString autosaveFilePath() const;

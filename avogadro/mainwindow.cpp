@@ -27,12 +27,14 @@
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/qtgui/moleculemodel.h>
 #include <avogadro/qtgui/multiviewwidget.h>
+#include <avogadro/qtgui/packagemanager.h>
 #include <avogadro/qtgui/periodictableview.h>
 #include <avogadro/qtgui/richtextdelegate.h>
 #include <avogadro/qtgui/rwmolecule.h>
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
 #include <avogadro/qtgui/toolplugin.h>
+#include <avogadro/qtgui/utilities.h>
 #include <avogadro/qtopengl/activeobjects.h>
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/qtplugins/pluginmanager.h>
@@ -289,6 +291,9 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
+
+  // Scan for pyproject.toml-based plugin packages.
+  loadPackages();
 
   QList<ExtensionPluginFactory*> extensions =
     plugin->pluginFactories<ExtensionPluginFactory>();
@@ -1266,6 +1271,37 @@ void MainWindow::cleanupCurrentAutosave()
       // Don't break - there might be multiple autosaves for untitled documents
     }
   }
+}
+
+void MainWindow::loadPackages()
+{
+  QStringList dirs;
+
+  // Add the standard install locations
+  QStringList stdPaths =
+    QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
+  foreach (const QString& dirStr, stdPaths) {
+    QString path = dirStr + "/packages";
+    dirs << path;
+  }
+
+  // Add the install-relative library path
+  dirs << QCoreApplication::applicationDirPath() + "/../" +
+            QtGui::Utilities::libraryDirectory() + "/avogadro2/packages";
+
+  // Check the directories for new packages
+  QtGui::PackageManager* pkgManager = QtGui::PackageManager::instance();
+  foreach (const QString& dir, dirs) {
+#ifndef NDEBUG
+    qDebug() << "Checking for packages in" << dir;
+#endif
+    pkgManager->scanDirectory(dir);
+  }
+
+  // TODO: we should prompt the user to install anything new
+
+  // Replay cached registrations so consumer plugins get their signals
+  pkgManager->loadRegisteredPackages();
 }
 
 void MainWindow::checkAutosaveRecovery()
