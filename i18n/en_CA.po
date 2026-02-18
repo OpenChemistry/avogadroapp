@@ -5,13 +5,14 @@
 # matterhorn103 <milner94@live.co.uk>, 2023.
 # btbt_bt <belegdal@yahoo.ca>, 2024.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2026.
+# Marcus Minhorst <marcus.minhorst@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-08 22:13+0000\n"
-"PO-Revision-Date: 2026-01-27 03:19+0000\n"
-"Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
+"PO-Revision-Date: 2026-02-19 05:09+0000\n"
+"Last-Translator: Marcus Minhorst <marcus.minhorst@gmail.com>\n"
 "Language-Team: English (Canada) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_CA/>\n"
 "Language: en_CA\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -76,7 +77,7 @@ msgstr "Display types"
 
 #: mainwindow.cpp:463
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Display Type Settings"
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -228,13 +229,15 @@ msgstr ""
 
 #: mainwindow.cpp:1286
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Recover Autosaved Files"
 
 #: mainwindow.cpp:1287
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Autosave files were found from a previous session.\n"
+"Would you like to recover them?"
 
 #: mainwindow.cpp:1346
 msgid "Error: Failed to initialize OpenGL context"
@@ -259,7 +262,7 @@ msgstr "Unknown error"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1 Settings"
 
 #: mainwindow.cpp:1635
 msgid "Common image formats"
@@ -362,11 +365,11 @@ msgstr "&Testing"
 
 #: mainwindow.cpp:2240
 msgid "&Record Test…"
-msgstr ""
+msgstr "&Record Test…"
 
 #: mainwindow.cpp:2243
 msgid "&Play Test…"
-msgstr ""
+msgstr "&Play Test…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -430,7 +433,7 @@ msgstr "&Graphics…"
 
 #: mainwindow.cpp:2337
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Export Graphics…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
