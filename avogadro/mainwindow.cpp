@@ -1291,14 +1291,35 @@ void MainWindow::loadPackages()
 
   // Check the directories for new packages
   QtGui::PackageManager* pkgManager = QtGui::PackageManager::instance();
+  QStringList newPackages;
   foreach (const QString& dir, dirs) {
 #ifndef NDEBUG
     qDebug() << "Checking for packages in" << dir;
 #endif
-    pkgManager->scanDirectory(dir);
+    newPackages.append(pkgManager->scanDirectory(dir));
   }
 
-  // TODO: we should prompt the user to install anything new
+  // If there are new or updated packages, ask the user before installing
+  if (!newPackages.isEmpty()) {
+    QStringList packageNames;
+    foreach (const QString& dir, newPackages) {
+      packageNames << QFileInfo(dir).baseName();
+    }
+
+    // TODO: list the packages and count, maybe the versions
+    auto reply =
+      QMessageBox::question(this, tr("Install New Packages"),
+                            tr("New or updated packages were found.\n"
+                               "Would you like to install them now?"),
+                            QMessageBox::Yes | QMessageBox::No);
+    if (reply != QMessageBox::Yes)
+      return;
+
+    // TODO: show a dialog listing the new packages and let the user
+    // choose which to install
+    pkgManager->installPackages(newPackages);
+    return; // Registration and loadRegisteredPackages run in PackageManager
+  }
 
   // Replay cached registrations so consumer plugins get their signals
   pkgManager->loadRegisteredPackages();
