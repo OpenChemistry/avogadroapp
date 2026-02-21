@@ -1315,8 +1315,11 @@ void MainWindow::loadPackages()
                             tr("New or updated packages were found.\n"
                                "Would you like to install them now?"),
                             QMessageBox::Yes | QMessageBox::No);
-    if (reply != QMessageBox::Yes)
+    if (reply != QMessageBox::Yes) {
+      // Still need to replay cached registrations for already-installed packages
+      pkgManager->loadRegisteredPackages();
       return;
+    }
 
     // TODO: show a dialog listing the new packages and let the user
     // choose which to install
