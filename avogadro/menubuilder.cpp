@@ -208,9 +208,11 @@ void MenuBuilder::buildMenu(QMenu* menu, const QString& path)
       bool replacedItem = false;
       foreach (QAction* action, menu->actions()) {
         if (action->text() == text.text) {
-          // insert the new action and then remove the old one
-          menu->insertAction(action, actions[text.text]);
-          menu->removeAction(action);
+          if (action != actions[text.text]) {
+            // insert the new action and then remove the old one
+            menu->insertAction(action, actions[text.text]);
+            menu->removeAction(action);
+          }
           replacedItem = true;
           break;
         }

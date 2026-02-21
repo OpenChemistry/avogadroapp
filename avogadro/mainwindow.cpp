@@ -1316,7 +1316,8 @@ void MainWindow::loadPackages()
                                "Would you like to install them now?"),
                             QMessageBox::Yes | QMessageBox::No);
     if (reply != QMessageBox::Yes) {
-      // Still need to replay cached registrations for already-installed packages
+      // Still need to replay cached registrations for already-installed
+      // packages
       pkgManager->loadRegisteredPackages();
       return;
     }
@@ -1324,16 +1325,21 @@ void MainWindow::loadPackages()
     // TODO: show a dialog listing the new packages and let the user
     // choose which to install
     connect(pkgManager, &QtGui::PackageManager::packagesInstalled, this,
-            [this]() {
+            [this, pkgManager]() {
+              disconnect(pkgManager, &QtGui::PackageManager::packagesInstalled,
+                         this, nullptr);
               foreach (ExtensionPlugin* ext, m_extensions)
                 buildMenu(ext);
+              m_menuBuilder->buildMenuBar(menuBar());
             });
     pkgManager->installPackages(newPackages);
     return; // Registration and loadRegisteredPackages run in PackageManager
   }
 
-  // Replay cached registrations so consumer plugins get their signals
-  qDebug() << "Replaying cached registrations";
+  // Load cached registrations so consumer plugins get their signals
+#ifndef DEBUG
+  qDebug() << "Load cached packages";
+#endif
   pkgManager->loadRegisteredPackages();
 }
 
