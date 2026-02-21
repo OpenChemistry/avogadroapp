@@ -292,9 +292,6 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   // Call this a second time, not needed but ensures plugins only load once.
   plugin->load();
 
-  // Scan for pyproject.toml-based plugin packages.
-  loadPackages();
-
   QList<ExtensionPluginFactory*> extensions =
     plugin->pluginFactories<ExtensionPluginFactory>();
 #ifndef NDEBUG
@@ -321,10 +318,16 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
       connect(extension, &QtGui::ExtensionPlugin::registerCommand, this,
               &MainWindow::registerExtensionCommand);
       extension->registerCommands();
-
-      buildMenu(extension);
       m_extensions.append(extension);
     }
+  }
+
+  // Scan for pyproject.toml-based plugin packages.
+  loadPackages();
+
+  // now we can build the menus for extensions
+  foreach (ExtensionPlugin* extension, m_extensions) {
+    buildMenu(extension);
   }
 
   // Now set up the interface.
@@ -1317,11 +1320,17 @@ void MainWindow::loadPackages()
 
     // TODO: show a dialog listing the new packages and let the user
     // choose which to install
+    connect(pkgManager, &QtGui::PackageManager::packagesInstalled, this,
+            [this]() {
+              foreach (ExtensionPlugin* ext, m_extensions)
+                buildMenu(ext);
+            });
     pkgManager->installPackages(newPackages);
     return; // Registration and loadRegisteredPackages run in PackageManager
   }
 
   // Replay cached registrations so consumer plugins get their signals
+  qDebug() << "Replaying cached registrations";
   pkgManager->loadRegisteredPackages();
 }
 
