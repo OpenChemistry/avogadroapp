@@ -27,12 +27,14 @@
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/qtgui/moleculemodel.h>
 #include <avogadro/qtgui/multiviewwidget.h>
+#include <avogadro/qtgui/packagemanager.h>
 #include <avogadro/qtgui/periodictableview.h>
 #include <avogadro/qtgui/richtextdelegate.h>
 #include <avogadro/qtgui/rwmolecule.h>
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
 #include <avogadro/qtgui/toolplugin.h>
+#include <avogadro/qtgui/utilities.h>
 #include <avogadro/qtopengl/activeobjects.h>
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/qtplugins/pluginmanager.h>
@@ -316,10 +318,16 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
       connect(extension, &QtGui::ExtensionPlugin::registerCommand, this,
               &MainWindow::registerExtensionCommand);
       extension->registerCommands();
-
-      buildMenu(extension);
       m_extensions.append(extension);
     }
+  }
+
+  // Scan for pyproject.toml-based plugin packages.
+  loadPackages();
+
+  // now we can build the menus for extensions
+  foreach (ExtensionPlugin* extension, m_extensions) {
+    buildMenu(extension);
   }
 
   // Now set up the interface.
@@ -1266,6 +1274,73 @@ void MainWindow::cleanupCurrentAutosave()
       // Don't break - there might be multiple autosaves for untitled documents
     }
   }
+}
+
+void MainWindow::loadPackages()
+{
+  QStringList dirs;
+
+  // Add the standard install locations
+  QStringList stdPaths =
+    QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
+  foreach (const QString& dirStr, stdPaths) {
+    QString path = dirStr + "/packages";
+    dirs << path;
+  }
+
+  // Add the install-relative library path
+  dirs << QCoreApplication::applicationDirPath() + "/../" +
+            QtGui::Utilities::libraryDirectory() + "/avogadro2/packages";
+
+  // Check the directories for new packages
+  QtGui::PackageManager* pkgManager = QtGui::PackageManager::instance();
+  QStringList newPackages;
+  foreach (const QString& dir, dirs) {
+#ifndef NDEBUG
+    qDebug() << "Checking for packages in" << dir;
+#endif
+    newPackages.append(pkgManager->scanDirectory(dir));
+  }
+
+  // If there are new or updated packages, ask the user before installing
+  if (!newPackages.isEmpty()) {
+    QStringList packageNames;
+    foreach (const QString& dir, newPackages) {
+      packageNames << QFileInfo(dir).baseName();
+    }
+
+    // TODO: list the packages and count, maybe the versions
+    auto reply =
+      QMessageBox::question(this, tr("Install New Packages"),
+                            tr("New or updated packages were found.\n"
+                               "Would you like to install them now?"),
+                            QMessageBox::Yes | QMessageBox::No);
+    if (reply != QMessageBox::Yes) {
+      // Still need to replay cached registrations for already-installed
+      // packages
+      pkgManager->loadRegisteredPackages();
+      return;
+    }
+
+    // TODO: show a dialog listing the new packages and let the user
+    // choose which to install
+    connect(pkgManager, &QtGui::PackageManager::packagesInstalled, this,
+            [this, pkgManager]() {
+              disconnect(pkgManager, &QtGui::PackageManager::packagesInstalled,
+                         this, nullptr);
+              foreach (ExtensionPlugin* ext, m_extensions)
+                buildMenu(ext);
+              m_menuBuilder->buildMenuBar(menuBar());
+            });
+    pkgManager->installPackages(newPackages);
+    return; // Registration and loadRegisteredPackages run in PackageManager
+  }
+
+  // Load cached registrations so consumer plugins get their signals
+#ifndef DEBUG
+  qDebug() << "Load cached packages";
+#endif
+  pkgManager->loadRegisteredPackages();
 }
 
 void MainWindow::checkAutosaveRecovery()
