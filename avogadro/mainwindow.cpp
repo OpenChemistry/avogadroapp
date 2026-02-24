@@ -1330,7 +1330,7 @@ void MainWindow::loadPackages()
   }
 
   // Load cached registrations so consumer plugins get their signals
-#ifndef DEBUG
+#ifndef NDEBUG
   qDebug() << "Load registered packages";
 #endif
   pkgManager->loadRegisteredPackages();
