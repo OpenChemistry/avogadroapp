@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-08 22:13+0000\n"
-"PO-Revision-Date: 2026-01-28 10:56+0000\n"
-"Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
+"PO-Revision-Date: 2026-02-23 06:09+0000\n"
+"Last-Translator: \"David D.\" <dadu042@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
 "Language: fr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: aboutdialog.cpp:25
@@ -78,7 +78,7 @@ msgstr "Types d’affichage"
 
 #: mainwindow.cpp:463
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Paramètres type d’affichage"
 
 #: mainwindow.cpp:467
 msgid "Files"
@@ -263,7 +263,7 @@ msgstr "Erreur inconnue"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "Paramètres %1"
 
 #: mainwindow.cpp:1635
 msgid "Common image formats"
@@ -435,7 +435,7 @@ msgstr "&Graphique…"
 
 #: mainwindow.cpp:2337
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Exporter graphiques…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -664,10 +664,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
-"<html><head/><body><p><span style=\" font-size:10pt; font-"
-"weight:600;\">Licence: </span><a href=\"https://opensource.org/licenses/"
-"BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
-"color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
+"License : </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
+"<span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\">"
+"BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
