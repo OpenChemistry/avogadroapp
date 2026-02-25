@@ -1316,15 +1316,18 @@ void MainWindow::loadPackages()
       packageNames << QFileInfo(dir).baseName();
     }
 
-    // TODO: list the packages and count, maybe the versions
-    auto reply =
-      QMessageBox::question(this, tr("Install New Packages"),
-                            tr("New or updated packages were found.\n"
-                               "Would you like to install them now?"),
-                            QMessageBox::Yes | QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
-      // TODO: show a dialog listing the new packages and let the user
-      // choose which to install
+    QMessageBox msgBox(this);
+    msgBox.setWindowTitle(tr("Install New Packages"));
+    msgBox.setText(tr("%n new or updated package(s) were found.\n"
+                      "Would you like to install them now?",
+                      "", packageNames.size()));
+    msgBox.setDetailedText(packageNames.join("\n"));
+#ifndef Q_OS_MAC
+    msgBox.setIcon(QMessageBox::Question);
+#endif
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::Yes);
+    if (msgBox.exec() == QMessageBox::Yes) {
       pkgManager->installPackages(newPackages);
     }
   }
