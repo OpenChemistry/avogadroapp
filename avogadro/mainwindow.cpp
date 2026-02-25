@@ -317,6 +317,12 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
               this, &MainWindow::setActiveDisplayTypes);
       connect(extension, &QtGui::ExtensionPlugin::registerCommand, this,
               &MainWindow::registerExtensionCommand);
+      connect(extension, &QtGui::ExtensionPlugin::actionsChanged, this,
+              [this, extension]() {
+                buildMenu(extension);
+                if (m_initialized)
+                  m_menuBuilder->buildMenuBar(menuBar());
+              });
       extension->registerCommands();
       m_extensions.append(extension);
     }
@@ -347,6 +353,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   qDebug() << " building menu ";
 #endif
   buildMenu();
+  m_initialized = true;
 #ifdef Q_OS_WIN
   qDebug() << " updating recent files ";
 #endif
@@ -1315,30 +1322,16 @@ void MainWindow::loadPackages()
                             tr("New or updated packages were found.\n"
                                "Would you like to install them now?"),
                             QMessageBox::Yes | QMessageBox::No);
-    if (reply != QMessageBox::Yes) {
-      // Still need to replay cached registrations for already-installed
-      // packages
-      pkgManager->loadRegisteredPackages();
-      return;
+    if (reply == QMessageBox::Yes) {
+      // TODO: show a dialog listing the new packages and let the user
+      // choose which to install
+      pkgManager->installPackages(newPackages);
     }
-
-    // TODO: show a dialog listing the new packages and let the user
-    // choose which to install
-    connect(pkgManager, &QtGui::PackageManager::packagesInstalled, this,
-            [this, pkgManager]() {
-              disconnect(pkgManager, &QtGui::PackageManager::packagesInstalled,
-                         this, nullptr);
-              foreach (ExtensionPlugin* ext, m_extensions)
-                buildMenu(ext);
-              m_menuBuilder->buildMenuBar(menuBar());
-            });
-    pkgManager->installPackages(newPackages);
-    return; // Registration and loadRegisteredPackages run in PackageManager
   }
 
   // Load cached registrations so consumer plugins get their signals
-#ifndef DEBUG
-  qDebug() << "Load cached packages";
+#ifndef NDEBUG
+  qDebug() << "Load registered packages";
 #endif
   pkgManager->loadRegisteredPackages();
 }
