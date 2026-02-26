@@ -419,6 +419,10 @@ void MainWindow::setupInterface()
   // We take care of setting up the main interface here, along with any custom
   // pieces that might be added for saved settings etc.
   setAcceptDrops(true); // allow drag-and-drop of files
+
+  connect(qApp, &QGuiApplication::screenRemoved, this,
+          [this](QScreen*) { ensureWindowOnScreen(); });
+
   QSettings settings;
 
   m_multiViewWidget = new QtGui::MultiViewWidget(this);
@@ -904,6 +908,23 @@ void MainWindow::readSettings()
   move(settings.value("pos", QPoint(20, 20)).toPoint());
   settings.endGroup();
   m_recentFiles = settings.value("recentFiles", QStringList()).toStringList();
+
+  ensureWindowOnScreen();
+}
+
+void MainWindow::ensureWindowOnScreen()
+{
+  // If the window is not accessible on any available screen (e.g. it was on a
+  // monitor that is no longer connected), move it to the primary screen.
+  const QRect windowGeom = frameGeometry();
+  for (const QScreen* screen : QGuiApplication::screens()) {
+    const QRect intersection =
+      screen->availableGeometry().intersected(windowGeom);
+    if (intersection.width() >= 100 && intersection.height() >= 50)
+      return; // window is accessible — nothing to do
+  }
+  const QRect primary = QGuiApplication::primaryScreen()->availableGeometry();
+  move(primary.topLeft() + QPoint(20, 20));
 }
 
 void MainWindow::openFile()
