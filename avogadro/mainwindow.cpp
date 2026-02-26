@@ -1317,11 +1317,20 @@ void MainWindow::loadPackages()
     }
 
     QMessageBox msgBox(this);
-    msgBox.setWindowTitle(tr("Install New Packages"));
-    msgBox.setText(tr("%n new or updated package(s) were found.\n"
-                      "Would you like to install them now?",
-                      "", packageNames.size()));
-    msgBox.setDetailedText(packageNames.join("\n"));
+    msgBox.setWindowTitle(tr("Let’s finish your setup"));
+    QString text(tr("Avogadro can generate input files for Gaussian, ORCA, "
+                    "and other computational chemistry packages."));
+
+#ifdef Q_OS_MAC || Q_OS_WIN
+    text.append(
+      tr("This requires setup that will download and configure Python."));
+#else
+    text.append(tr("This requires setup to configure a Python environment."));
+#endif
+
+    msgBox.setText(text);
+    msgBox.setInformativeText(tr("This may require an Internet connection."));
+
 #ifndef Q_OS_MAC
     msgBox.setIcon(QMessageBox::Question);
 #endif
