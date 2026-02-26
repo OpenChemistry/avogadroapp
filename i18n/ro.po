@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-22 03:44+0000\n"
-"PO-Revision-Date: 2026-02-10 00:09+0000\n"
+"PO-Revision-Date: 2026-02-26 12:09+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ro/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -228,13 +228,15 @@ msgstr ""
 
 #: mainwindow.cpp:1314
 msgid "Install New Packages"
-msgstr ""
+msgstr "Instalează pachete noi"
 
 #: mainwindow.cpp:1315
 msgid ""
 "New or updated packages were found.\n"
 "Would you like to install them now?"
 msgstr ""
+"Au fost găsite pachete noi sau actualizate.\n"
+"Doriți să le instalați acum?"
 
 #: mainwindow.cpp:1361
 msgid "Recover Autosaved Files"
