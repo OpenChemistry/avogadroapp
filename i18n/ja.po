@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-22 03:44+0000\n"
-"PO-Revision-Date: 2026-01-28 10:56+0000\n"
+"PO-Revision-Date: 2026-02-26 19:25+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -76,7 +76,7 @@ msgstr "表示タイプ"
 
 #: mainwindow.cpp:471
 msgid "Display Type Settings"
-msgstr ""
+msgstr "表示形式の設定"
 
 #: mainwindow.cpp:475
 msgid "Files"
@@ -229,23 +229,28 @@ msgstr ""
 
 #: mainwindow.cpp:1314
 msgid "Install New Packages"
-msgstr ""
+msgstr "新しいパッケージをインストール"
 
 #: mainwindow.cpp:1315
+#, fuzzy
 msgid ""
 "New or updated packages were found.\n"
 "Would you like to install them now?"
 msgstr ""
+"新しいまたは庚申されたバージョンが見つかりました。\n"
+"今インストールしますか？"
 
 #: mainwindow.cpp:1361
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "自動保存されたファイルを復元"
 
 #: mainwindow.cpp:1362
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"前回のセッションで自動保存されたファイルが見つかりました。\n"
+"復元させますか？"
 
 #: mainwindow.cpp:1421
 msgid "Error: Failed to initialize OpenGL context"
@@ -270,7 +275,7 @@ msgstr "不明なエラー"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1 設定"
 
 #: mainwindow.cpp:1710
 msgid "Common image formats"
@@ -441,7 +446,6 @@ msgid "&Graphics…"
 msgstr "グラフィックス(&G) …"
 
 #: mainwindow.cpp:2412
-#, fuzzy
 msgid "Export Graphics…"
 msgstr "グラフィックのエクスポート…"
 
@@ -671,6 +675,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
+"ライセンス: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
+"<span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\">3"
+"条項BSD</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
