@@ -914,8 +914,9 @@ void MainWindow::readSettings()
 
 void MainWindow::ensureWindowOnScreen()
 {
-  // If the window is not accessible on any available screen (e.g. it was on a
-  // monitor that is no longer connected), move it to the primary screen.
+  // If the window is not accessible on any available screen
+  // (e.g. it was on a monitor that is no longer connected),
+  // move it to the primary screen.
   const QRect windowGeom = frameGeometry();
   for (const QScreen* screen : QGuiApplication::screens()) {
     const QRect intersection =
@@ -923,8 +924,13 @@ void MainWindow::ensureWindowOnScreen()
     if (intersection.width() >= 100 && intersection.height() >= 50)
       return; // window is accessible — nothing to do
   }
-  const QRect primary = QGuiApplication::primaryScreen()->availableGeometry();
-  move(primary.topLeft() + QPoint(20, 20));
+
+  QScreen* primaryScreen = QGuiApplication::primaryScreen();
+  // We should always have a primary screen, but just in case
+  if (primaryScreen) {
+    const QRect primary = primaryScreen->availableGeometry();
+    move(primary.topLeft() + QPoint(20, 20));
+  }
 }
 
 void MainWindow::openFile()
