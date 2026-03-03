@@ -419,6 +419,10 @@ void MainWindow::setupInterface()
   // We take care of setting up the main interface here, along with any custom
   // pieces that might be added for saved settings etc.
   setAcceptDrops(true); // allow drag-and-drop of files
+
+  connect(qApp, &QGuiApplication::screenRemoved, this,
+          [this](QScreen*) { ensureWindowOnScreen(); });
+
   QSettings settings;
 
   m_multiViewWidget = new QtGui::MultiViewWidget(this);
@@ -904,6 +908,29 @@ void MainWindow::readSettings()
   move(settings.value("pos", QPoint(20, 20)).toPoint());
   settings.endGroup();
   m_recentFiles = settings.value("recentFiles", QStringList()).toStringList();
+
+  ensureWindowOnScreen();
+}
+
+void MainWindow::ensureWindowOnScreen()
+{
+  // If the window is not accessible on any available screen
+  // (e.g. it was on a monitor that is no longer connected),
+  // move it to the primary screen.
+  const QRect windowGeom = frameGeometry();
+  for (const QScreen* screen : QGuiApplication::screens()) {
+    const QRect intersection =
+      screen->availableGeometry().intersected(windowGeom);
+    if (intersection.width() >= 100 && intersection.height() >= 50)
+      return; // window is accessible — nothing to do
+  }
+
+  QScreen* primaryScreen = QGuiApplication::primaryScreen();
+  // We should always have a primary screen, but just in case
+  if (primaryScreen) {
+    const QRect primary = primaryScreen->availableGeometry();
+    move(primary.topLeft() + QPoint(20, 20));
+  }
 }
 
 void MainWindow::openFile()
@@ -1316,15 +1343,27 @@ void MainWindow::loadPackages()
       packageNames << QFileInfo(dir).baseName();
     }
 
-    // TODO: list the packages and count, maybe the versions
-    auto reply =
-      QMessageBox::question(this, tr("Install New Packages"),
-                            tr("New or updated packages were found.\n"
-                               "Would you like to install them now?"),
-                            QMessageBox::Yes | QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
-      // TODO: show a dialog listing the new packages and let the user
-      // choose which to install
+    QMessageBox msgBox(this);
+    msgBox.setWindowTitle(tr("Let’s finish your setup"));
+    QString text(tr("Avogadro can generate input files for Gaussian, ORCA, "
+                    "and other computational chemistry packages."));
+
+#ifdef Q_OS_MAC || Q_OS_WIN
+    text.append(
+      tr("This requires setup that will download and configure Python."));
+#else
+    text.append(tr("This requires setup to configure a Python environment."));
+#endif
+
+    msgBox.setText(text);
+    msgBox.setInformativeText(tr("This may require an Internet connection."));
+
+#ifndef Q_OS_MAC
+    msgBox.setIcon(QMessageBox::Question);
+#endif
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::Yes);
+    if (msgBox.exec() == QMessageBox::Yes) {
       pkgManager->installPackages(newPackages);
     }
   }

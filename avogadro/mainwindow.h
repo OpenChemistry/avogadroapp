@@ -493,6 +493,12 @@ private:
    */
   void setupInterface();
 
+  /**
+   * If the window is not visible on any available screen, move it to the
+   * primary screen. Called on startup and when a screen is removed.
+   */
+  void ensureWindowOnScreen();
+
   /** Show a dialog to remap custom elements, if present. */
   void reassignCustomElements();
 
