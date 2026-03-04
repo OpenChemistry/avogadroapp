@@ -8,13 +8,16 @@
 # Pedro Moreira <pedroltmoreira@gmail.com>, 2024.
 # Khemis <khemis@bol.com.br>, 2024.
 # nicejammer <snoring_parrot@users.noreply.hosted.weblate.org>, 2025.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2026.
+# croomfolk <croomfolk@proton.me>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-26 19:32+0000\n"
-"PO-Revision-Date: 2025-12-04 18:00+0000\n"
-"Last-Translator: Alexandre R Soares <ntegti@zipmail.com.br>\n"
+"PO-Revision-Date: 2026-03-02 00:09+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -22,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -79,7 +82,7 @@ msgstr "Mostrar tipos"
 
 #: mainwindow.cpp:478
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Configurações de Exibição"
 
 #: mainwindow.cpp:482
 msgid "Files"
@@ -116,7 +119,7 @@ msgstr "Reinicialização necessária"
 
 #: mainwindow.cpp:895
 msgid "Please restart Avogadro to use the new language."
-msgstr "Por favor, reinicie o Avogadro para usar o novo idioma."
+msgstr "Reinicie o Avogadro para usar o novo idioma."
 
 #: mainwindow.cpp:915 mainwindow.cpp:1888
 msgid "Chemical Markup Language"
@@ -168,7 +171,7 @@ msgstr "Campos de Força"
 
 #: mainwindow.cpp:984
 msgid "Install Plugin Script"
-msgstr "Instalar Plugin Script"
+msgstr "Instalar Script de Plugin"
 
 #: mainwindow.cpp:984
 msgid "Script Type:"
@@ -231,7 +234,7 @@ msgstr ""
 
 #: mainwindow.cpp:1320
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Vamos terminar de configurar seu sistema"
 
 #: mainwindow.cpp:1321
 msgid ""
@@ -249,7 +252,7 @@ msgstr ""
 
 #: mainwindow.cpp:1332
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Isso pode exigir uma conexão de Internet."
 
 #: mainwindow.cpp:1366
 msgid "Recover Autosaved Files"
@@ -286,7 +289,7 @@ msgstr "Erro desconhecido"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1Preferências"
 
 #: mainwindow.cpp:1715
 msgid "Common image formats"
@@ -310,7 +313,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1727
 msgid "Export Bitmap Graphics"
-msgstr "Exportar Gráficos BMP"
+msgstr "Exportar Gráficos Bitmap"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -389,11 +392,11 @@ msgstr "&Testes"
 
 #: mainwindow.cpp:2320
 msgid "&Record Test…"
-msgstr ""
+msgstr "&Gravar teste…"
 
 #: mainwindow.cpp:2323
 msgid "&Play Test…"
-msgstr ""
+msgstr "&Executar Teste…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -457,7 +460,7 @@ msgstr "&Gráficos…"
 
 #: mainwindow.cpp:2417
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Exportar Gráficos…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -557,7 +560,7 @@ msgstr "&Sugerir uma Funcionalidade"
 
 #: mainwindow.cpp:2593
 msgid "untitled"
-msgstr ""
+msgstr "sem título"
 
 #: mainwindow.cpp:2623
 msgid "System Language"
@@ -685,6 +688,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
+"Licença: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
+"<span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\">"
+"BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)

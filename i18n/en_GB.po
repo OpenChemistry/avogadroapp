@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-26 19:32+0000\n"
-"PO-Revision-Date: 2026-02-26 12:09+0000\n"
+"PO-Revision-Date: 2026-02-28 09:09+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_GB/>\n"
@@ -229,25 +229,27 @@ msgstr ""
 
 #: mainwindow.cpp:1320
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Let’s finish your setup"
 
 #: mainwindow.cpp:1321
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro can generate input files for Gaussian, ORCA, and other "
+"computational chemistry packages."
 
 #: mainwindow.cpp:1326
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "This requires setup that will download and configure Python."
 
 #: mainwindow.cpp:1328
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "This requires setup to configure a Python environment."
 
 #: mainwindow.cpp:1332
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "This may require an Internet connection."
 
 #: mainwindow.cpp:1366
 msgid "Recover Autosaved Files"
