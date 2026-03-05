@@ -91,7 +91,21 @@ void MenuBuilder::addAction(const QStringList& pathList, QAction* action,
     if (hasPriority)
       priority = newPriority;
   }
+
+  // On first registration of this action, arrange for it to be removed from
+  // our maps when it is destroyed (e.g. via deleteLater in unregisterFeature).
+  if (!m_priorities.contains(action)) {
+    connect(action, &QObject::destroyed, this,
+            [this](QObject* obj) { removeAction(static_cast<QAction*>(obj)); });
+  }
   m_priorities[action] = priority;
+}
+
+void MenuBuilder::removeAction(QAction* action)
+{
+  m_priorities.remove(action);
+  for (auto& list : m_menuActions)
+    list.removeAll(action);
 }
 
 void MenuBuilder::buildMenuBar(QMenuBar* menuBar)
