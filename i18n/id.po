@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-26 19:32+0000\n"
-"PO-Revision-Date: 2026-02-05 04:01+0000\n"
+"PO-Revision-Date: 2026-03-06 07:09+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -233,25 +233,28 @@ msgstr ""
 
 #: mainwindow.cpp:1320
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Mari selesaikan pengaturan Anda"
 
 #: mainwindow.cpp:1321
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro dapat menghasilkan file input untuk Gaussian, ORCA, dan paket kimia "
+"komputasi lainnya."
 
 #: mainwindow.cpp:1326
 msgid "This requires setup that will download and configure Python."
 msgstr ""
+"Ini memerlukan pengaturan yang akan mengunduh dan mengonfigurasi Python."
 
 #: mainwindow.cpp:1328
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Ini memerlukan pengaturan untuk mengonfigurasi lingkungan Python."
 
 #: mainwindow.cpp:1332
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Ini mungkin memerlukan koneksi Internet."
 
 #: mainwindow.cpp:1366
 msgid "Recover Autosaved Files"
@@ -288,7 +291,7 @@ msgstr "Rusak tidak diketahui"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "Pengaturan %1"
 
 #: mainwindow.cpp:1715
 msgid "Common image formats"
