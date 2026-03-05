@@ -1310,26 +1310,84 @@ void MainWindow::cleanupCurrentAutosave()
   }
 }
 
+static bool copyDirectoryRecursively(const QString& srcPath,
+                                     const QString& dstPath)
+{
+  QDir srcDir(srcPath);
+  if (!srcDir.exists())
+    return false;
+
+  if (!QDir().mkpath(dstPath))
+    return false;
+
+  const QStringList entries =
+    srcDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
+  QDir dstDir(dstPath);
+  for (const QString& entry : entries) {
+    const QString src = srcDir.filePath(entry);
+    const QString dst = dstDir.filePath(entry);
+    if (QFileInfo(src).isDir()) {
+      if (!copyDirectoryRecursively(src, dst))
+        return false;
+    } else {
+      if (!QFile::copy(src, dst))
+        return false;
+    }
+  }
+  return true;
+}
+
 void MainWindow::loadPackages()
 {
-  QStringList dirs;
+  // Writable user plugin directory (create if needed)
+  const QString writablePluginsDir =
+    QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) +
+    QStringLiteral("/plugins");
+  QDir().mkpath(writablePluginsDir);
 
-  // Add the standard install locations
-  QStringList stdPaths =
-    QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
-  foreach (const QString& dirStr, stdPaths) {
-    QString path = dirStr + "/plugins";
-    dirs << path;
+  // Bundled (potentially read-only) plugin directory relative to the app
+  const QString bundledPluginsDir =
+    QCoreApplication::applicationDirPath() + QStringLiteral("/../") +
+    QtGui::Utilities::libraryDirectory() + QStringLiteral("/avogadro2/plugins");
+
+  // Copy bundled packages to the writable location if not already present.
+  // This handles read-only filesystems (AppImage, admin installs, etc.) in
+  // which pixi/pip cannot create .pixi/.venv environments in the bundled path.
+  QDir bundledDir(bundledPluginsDir);
+  if (bundledDir.exists()) {
+    const QStringList subdirs =
+      bundledDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+    for (const QString& subdir : subdirs) {
+      const QString srcPath = bundledDir.absoluteFilePath(subdir);
+      // Only copy directories that look like packages
+      if (!QDir(srcPath).exists(QStringLiteral("pyproject.toml")))
+        continue;
+      const QString dstPath = writablePluginsDir + QLatin1Char('/') + subdir;
+      if (!QDir(dstPath).exists()) {
+#ifndef NDEBUG
+        qDebug() << "Copying bundled package" << subdir
+                 << "to writable location";
+#endif
+        if (!copyDirectoryRecursively(srcPath, dstPath)) {
+          qWarning() << "Failed to copy bundled package" << srcPath << "to"
+                     << dstPath;
+        }
+      }
+    }
   }
 
-  // Add the install-relative library path
-  dirs << QCoreApplication::applicationDirPath() + "/../" +
-            QtGui::Utilities::libraryDirectory() + "/avogadro2/plugins";
+  // Scan writable AppLocalDataLocation/plugins paths for new packages.
+  // The bundled path is intentionally excluded — packages are copied above.
+  QStringList dirs;
+  const QStringList stdPaths =
+    QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
+  for (const QString& dirStr : stdPaths) {
+    dirs << dirStr + QStringLiteral("/plugins");
+  }
 
-  // Check the directories for new packages
   QtGui::PackageManager* pkgManager = QtGui::PackageManager::instance();
   QStringList newPackages;
-  foreach (const QString& dir, dirs) {
+  for (const QString& dir : dirs) {
 #ifndef NDEBUG
     qDebug() << "Checking for packages in" << dir;
 #endif
@@ -1338,7 +1396,7 @@ void MainWindow::loadPackages()
 
   // Filter out packages in non-writable directories (can't create .pixi/.venv)
   QStringList writablePackages;
-  foreach (const QString& dir, newPackages) {
+  for (const QString& dir : newPackages) {
     if (QFileInfo(dir).isWritable())
       writablePackages << dir;
   }
@@ -1367,6 +1425,7 @@ void MainWindow::loadPackages()
     msgBox.setInformativeText(tr("This may require an Internet connection."));
 
 #ifndef Q_OS_MAC
+    // somehow on macOS this results in a non-native dialog
     msgBox.setIcon(QMessageBox::Question);
 #endif
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
