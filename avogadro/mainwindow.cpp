@@ -1336,6 +1336,14 @@ void MainWindow::loadPackages()
     newPackages.append(pkgManager->scanDirectory(dir));
   }
 
+  // Filter out packages in non-writable directories (can't create .pixi/.venv)
+  QStringList writablePackages;
+  foreach (const QString& dir, newPackages) {
+    if (QFileInfo(dir).isWritable())
+      writablePackages << dir;
+  }
+  newPackages = writablePackages;
+
   // If there are new or updated packages, ask the user before installing
   if (!newPackages.isEmpty()) {
     QStringList packageNames;
