@@ -44,6 +44,12 @@ public:
   void addAction(const QStringList& path, QAction* action, int priority = -1);
 
   /**
+   * @brief Remove an action from the menu builder.
+   * Safe to call with a partially-destroyed QAction (pointer used as key only).
+   */
+  void removeAction(QAction* action);
+
+  /**
    * @brief Populate the supplied menu bar with the items added to builder.
    * Ordering
    * is attempted, ensuring File is first, Help is last and ordering by priority
