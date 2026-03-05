@@ -1318,13 +1318,13 @@ void MainWindow::loadPackages()
   QStringList stdPaths =
     QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
   foreach (const QString& dirStr, stdPaths) {
-    QString path = dirStr + "/packages";
+    QString path = dirStr + "/plugins";
     dirs << path;
   }
 
   // Add the install-relative library path
   dirs << QCoreApplication::applicationDirPath() + "/../" +
-            QtGui::Utilities::libraryDirectory() + "/avogadro2/packages";
+            QtGui::Utilities::libraryDirectory() + "/avogadro2/plugins";
 
   // Check the directories for new packages
   QtGui::PackageManager* pkgManager = QtGui::PackageManager::instance();
