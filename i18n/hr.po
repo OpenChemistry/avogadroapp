@@ -11,8 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-26 19:32+0000\n"
 "PO-Revision-Date: 2026-03-07 02:02+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hr/>\n"
 "Language: hr\n"
@@ -230,25 +229,27 @@ msgstr ""
 
 #: mainwindow.cpp:1320
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Završimo s postavljanjem"
 
 #: mainwindow.cpp:1321
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro može generirati datoteke unosa za Gaussian, ORCA i druge pakete "
+"računalne kemije."
 
 #: mainwindow.cpp:1326
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Ovo zahtijeva postavljanje koje će preuzeti i konfigurirati Python."
 
 #: mainwindow.cpp:1328
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Ovo zahtijeva postavljanje za konfiguriranje Python okruženja."
 
 #: mainwindow.cpp:1332
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Ovo može zahtijevati internetsku vezu."
 
 #: mainwindow.cpp:1366
 msgid "Recover Autosaved Files"
@@ -285,7 +286,7 @@ msgstr "Nepoznata greška"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr "Postavke"
+msgstr "%1 postavke"
 
 #: mainwindow.cpp:1715
 msgid "Common image formats"
