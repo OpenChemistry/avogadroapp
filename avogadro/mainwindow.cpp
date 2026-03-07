@@ -1364,10 +1364,8 @@ void MainWindow::loadPackages()
         continue;
       const QString dstPath = writablePluginsDir + QLatin1Char('/') + subdir;
       if (!QDir(dstPath).exists()) {
-#ifndef NDEBUG
         qDebug() << "Copying bundled package" << subdir
                  << "to writable location";
-#endif
         if (!copyDirectoryRecursively(srcPath, dstPath)) {
           qWarning() << "Failed to copy bundled package" << srcPath << "to"
                      << dstPath;
@@ -1409,20 +1407,33 @@ void MainWindow::loadPackages()
       packageNames << QFileInfo(dir).baseName();
     }
 
+    QSettings settings;
+    settings.beginGroup("MainWindow");
+    bool firstRun = settings.value("firstRun", true).toBool();
+    settings.endGroup();
+
     QMessageBox msgBox(this);
-    msgBox.setWindowTitle(tr("Let’s finish your setup"));
-    QString text(tr("Avogadro can generate input files for Gaussian, ORCA, "
-                    "and other computational chemistry packages."));
+
+    if (firstRun) {
+      msgBox.setWindowTitle(tr("Let’s finish your setup"));
+      QString text(tr("Avogadro can generate input files for Gaussian, ORCA, "
+                      "and other computational chemistry packages."));
 
 #ifdef Q_OS_MAC || Q_OS_WIN
-    text.append(
-      tr("This requires setup that will download and configure Python."));
+      text.append(
+        tr("This requires setup that will download and configure Python."));
 #else
-    text.append(tr("This requires setup to configure a Python environment."));
+      text.append(tr("This requires setup to configure a Python environment."));
 #endif
 
-    msgBox.setText(text);
-    msgBox.setInformativeText(tr("This may require an Internet connection."));
+      msgBox.setText(text);
+      msgBox.setInformativeText(tr("This may require an Internet connection."));
+    } else {
+      msgBox.setWindowTitle(tr("Install updated plugins?"));
+      msgBox.setText(tr("The following plugins are available:"));
+      msgBox.setInformativeText(tr("Would you like to install them?"));
+      msgBox.setDetailedText(packageNames.join("\n"));
+    }
 
 #ifndef Q_OS_MAC
     // somehow on macOS this results in a non-native dialog
