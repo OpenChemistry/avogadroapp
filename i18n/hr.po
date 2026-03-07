@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-26 19:32+0000\n"
-"PO-Revision-Date: 2026-03-07 02:02+0000\n"
+"PO-Revision-Date: 2026-03-08 12:09+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hr/>\n"
@@ -345,7 +345,7 @@ msgstr "Spremi kemijsku datoteku"
 
 #: mainwindow.cpp:1937
 msgid "Export Molecule"
-msgstr "Izvoz molekule"
+msgstr "Izvezi molekulu"
 
 #: mainwindow.cpp:2036
 msgid "Saving File in Progress…"
@@ -457,7 +457,7 @@ msgstr "S&like …"
 
 #: mainwindow.cpp:2417
 msgid "Export Graphics…"
-msgstr "Izvoz slika …"
+msgstr "Izvezi slike …"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
