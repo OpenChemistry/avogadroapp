@@ -4,13 +4,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 # Milo Ivir <mail@milotype.de>, 2021, 2022, 2023, 2024, 2025, 2026.
 # Norwid Behrnd <nbehrnd@yahoo.com>, 2024.
-# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2025.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-26 19:32+0000\n"
-"PO-Revision-Date: 2026-01-27 03:19+0000\n"
+"PO-Revision-Date: 2026-03-07 02:02+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hr/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -77,7 +77,7 @@ msgstr "Vrste prikaza"
 
 #: mainwindow.cpp:478
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Postavke vrste prikaza"
 
 #: mainwindow.cpp:482
 msgid "Files"
@@ -229,25 +229,27 @@ msgstr ""
 
 #: mainwindow.cpp:1320
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Završimo s postavljanjem"
 
 #: mainwindow.cpp:1321
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro može generirati datoteke unosa za Gaussian, ORCA i druge pakete "
+"računalne kemije."
 
 #: mainwindow.cpp:1326
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Ovo zahtijeva postavljanje koje će preuzeti i konfigurirati Python."
 
 #: mainwindow.cpp:1328
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Ovo zahtijeva postavljanje za konfiguriranje Python okruženja."
 
 #: mainwindow.cpp:1332
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Ovo može zahtijevati internetsku vezu."
 
 #: mainwindow.cpp:1366
 msgid "Recover Autosaved Files"
@@ -284,7 +286,7 @@ msgstr "Nepoznata greška"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1 postavke"
 
 #: mainwindow.cpp:1715
 msgid "Common image formats"
