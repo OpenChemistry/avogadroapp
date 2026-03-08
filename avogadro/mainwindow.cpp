@@ -1415,6 +1415,8 @@ void MainWindow::loadPackages()
     QMessageBox msgBox(this);
 
     if (firstRun) {
+      settings.setValue("firstRun", false);
+
       msgBox.setWindowTitle(tr("Let’s finish your setup"));
       QString text(tr("Avogadro can generate input files for Gaussian, ORCA, "
                       "and other computational chemistry packages."));
