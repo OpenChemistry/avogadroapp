@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-02-26 19:32+0000\n"
+"POT-Creation-Date: 2026-03-08 03:37+0000\n"
 "PO-Revision-Date: 2025-03-15 11:32+0000\n"
 "Last-Translator: gmkeebiy <gmkeebiy@sharklasers.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -74,120 +74,120 @@ msgstr "没有在 BackgroundFileFormat 中设置文件名！"
 msgid "Ready…"
 msgstr "就绪…"
 
-#: mainwindow.cpp:464
+#: mainwindow.cpp:468
 msgid "Tool"
 msgstr "工具"
 
-#: mainwindow.cpp:468
+#: mainwindow.cpp:472
 msgid "Display Types"
 msgstr "显示类型"
 
-#: mainwindow.cpp:478
+#: mainwindow.cpp:482
 msgid "Display Type Settings"
 msgstr ""
 
-#: mainwindow.cpp:482
+#: mainwindow.cpp:486
 msgid "Files"
 msgstr ""
 
-#: mainwindow.cpp:493
+#: mainwindow.cpp:497
 msgid "Layers"
 msgstr "图层"
 
-#: mainwindow.cpp:521
+#: mainwindow.cpp:525
 msgctxt "File toolbar"
 msgid "File"
 msgstr "文件"
 
-#: mainwindow.cpp:526
+#: mainwindow.cpp:530
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "工具"
 
-#: mainwindow.cpp:833
+#: mainwindow.cpp:837
 msgid "Untitled"
 msgstr "无标题"
 
-#: mainwindow.cpp:838
+#: mainwindow.cpp:842
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Avogadro %3"
 
-#: mainwindow.cpp:894
+#: mainwindow.cpp:898
 msgid "Restart needed"
 msgstr "需要重启"
 
-#: mainwindow.cpp:895
+#: mainwindow.cpp:899
 msgid "Please restart Avogadro to use the new language."
 msgstr "重启 Avogadro 以应用新的语言设置。"
 
-#: mainwindow.cpp:915 mainwindow.cpp:1888
+#: mainwindow.cpp:942 mainwindow.cpp:1993
 msgid "Chemical Markup Language"
 msgstr "化学标记语言"
 
-#: mainwindow.cpp:916 mainwindow.cpp:1887
+#: mainwindow.cpp:943 mainwindow.cpp:1992
 msgid "Chemical JSON"
 msgstr "化学 JSON"
 
-#: mainwindow.cpp:922
+#: mainwindow.cpp:949
 msgid "Open chemical file"
 msgstr "打开化学文件"
 
-#: mainwindow.cpp:940 mainwindow.cpp:964 mainwindow.cpp:1774
-#: mainwindow.cpp:3020
+#: mainwindow.cpp:967 mainwindow.cpp:991 mainwindow.cpp:1879
+#: mainwindow.cpp:3125
 msgid "Cannot open file"
 msgstr "无法打开文件"
 
-#: mainwindow.cpp:941 mainwindow.cpp:965 mainwindow.cpp:1775
+#: mainwindow.cpp:968 mainwindow.cpp:992 mainwindow.cpp:1880
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "无法打开提供的文件 %1"
 
-#: mainwindow.cpp:954
+#: mainwindow.cpp:981
 msgid "Open Molecule"
 msgstr "打开分子"
 
-#: mainwindow.cpp:978
+#: mainwindow.cpp:1005
 msgid "Commands"
 msgstr "命令"
 
-#: mainwindow.cpp:978
+#: mainwindow.cpp:1005
 msgid "Input Generators"
 msgstr "输入生成器"
 
-#: mainwindow.cpp:978
+#: mainwindow.cpp:1005
 msgid "File Formats"
 msgstr "文件格式"
 
-#: mainwindow.cpp:979
+#: mainwindow.cpp:1006
 msgctxt "atomic electrostatics"
 msgid "Charges"
 msgstr "电荷"
 
-#: mainwindow.cpp:980
+#: mainwindow.cpp:1007
 msgctxt "potential energy calculators"
 msgid "Force Fields"
 msgstr "力场"
 
-#: mainwindow.cpp:984
+#: mainwindow.cpp:1011
 msgid "Install Plugin Script"
 msgstr "安装插件脚本"
 
-#: mainwindow.cpp:984
+#: mainwindow.cpp:1011
 msgid "Script Type:"
 msgstr "脚本类型："
 
-#: mainwindow.cpp:1059 mainwindow.cpp:1770
+#: mainwindow.cpp:1086 mainwindow.cpp:1875
 msgid "Select file reader"
 msgstr "选择文件阅读器"
 
-#: mainwindow.cpp:1089
+#: mainwindow.cpp:1116
 msgid "Reading File"
 msgstr "读取文件"
 
-#: mainwindow.cpp:1091
+#: mainwindow.cpp:1118
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -196,16 +196,16 @@ msgstr ""
 "打开文件“ %1”\n"
 "使用“ %2”"
 
-#: mainwindow.cpp:1164
+#: mainwindow.cpp:1191
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "分子加载完毕 （%1 个原子， %2 个键）"
 
-#: mainwindow.cpp:1169
+#: mainwindow.cpp:1196
 msgid "File error"
 msgstr "文件错误"
 
-#: mainwindow.cpp:1170
+#: mainwindow.cpp:1197
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -214,17 +214,17 @@ msgstr ""
 "读取文件“ %1” 时出错：\n"
 "%2"
 
-#: mainwindow.cpp:1197
+#: mainwindow.cpp:1224
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "保存的文件 %1"
 
-#: mainwindow.cpp:1204
+#: mainwindow.cpp:1231
 msgid "Error saving file"
 msgstr "保存文件时出错"
 
-#: mainwindow.cpp:1205
+#: mainwindow.cpp:1232
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -234,43 +234,55 @@ msgstr ""
 "保存“%1”时出错：\n"
 "%2"
 
-#: mainwindow.cpp:1320
+#: mainwindow.cpp:1418
 msgid "Let’s finish your setup"
 msgstr ""
 
-#: mainwindow.cpp:1321
+#: mainwindow.cpp:1419
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
 
-#: mainwindow.cpp:1326
+#: mainwindow.cpp:1424
 msgid "This requires setup that will download and configure Python."
 msgstr ""
 
-#: mainwindow.cpp:1328
+#: mainwindow.cpp:1426
 msgid "This requires setup to configure a Python environment."
 msgstr ""
 
-#: mainwindow.cpp:1332
+#: mainwindow.cpp:1430
 msgid "This may require an Internet connection."
 msgstr ""
 
-#: mainwindow.cpp:1366
+#: mainwindow.cpp:1432
+msgid "Install updated plugins?"
+msgstr ""
+
+#: mainwindow.cpp:1433
+msgid "The following plugins are available:"
+msgstr ""
+
+#: mainwindow.cpp:1434
+msgid "Would you like to install them?"
+msgstr ""
+
+#: mainwindow.cpp:1471
 msgid "Recover Autosaved Files"
 msgstr ""
 
-#: mainwindow.cpp:1367
+#: mainwindow.cpp:1472
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
 
-#: mainwindow.cpp:1426
+#: mainwindow.cpp:1531
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "错误：初始化 OpenGL 上下文失败"
 
-#: mainwindow.cpp:1427
+#: mainwindow.cpp:1532
 #, qt-format
 msgid ""
 "OpenGL 2.0 or greater required, exiting.\n"
@@ -281,52 +293,52 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:1428
+#: mainwindow.cpp:1533
 msgid "Unknown error"
 msgstr "未知错误"
 
-#: mainwindow.cpp:1535
+#: mainwindow.cpp:1640
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
 msgstr ""
 
-#: mainwindow.cpp:1715
+#: mainwindow.cpp:1820
 msgid "Common image formats"
 msgstr "常见的图像格式"
 
-#: mainwindow.cpp:1717
+#: mainwindow.cpp:1822
 msgid "All files"
 msgstr "所有文件"
 
-#: mainwindow.cpp:1717
+#: mainwindow.cpp:1822
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1718
+#: mainwindow.cpp:1823
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1718
+#: mainwindow.cpp:1823
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1727
+#: mainwindow.cpp:1832
 msgid "Export Bitmap Graphics"
 msgstr "导出位图图形"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1743 mainwindow.cpp:1860 mainwindow.cpp:2762:34
+#: mainwindow.cpp:1848 mainwindow.cpp:1965 mainwindow.cpp:2867:34
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1744
+#: mainwindow.cpp:1849
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "无法保存文件 %1。"
 
-#: mainwindow.cpp:1861
+#: mainwindow.cpp:1966
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -337,23 +349,23 @@ msgstr ""
 "\n"
 "您希望导出为当前格式，还是以标准格式保存？"
 
-#: mainwindow.cpp:1868
+#: mainwindow.cpp:1973
 msgid "Export"
 msgstr "导出"
 
-#: mainwindow.cpp:1893
+#: mainwindow.cpp:1998
 msgid "Save chemical file"
 msgstr "保存化学文件"
 
-#: mainwindow.cpp:1937
+#: mainwindow.cpp:2042
 msgid "Export Molecule"
 msgstr "导出分子"
 
-#: mainwindow.cpp:2036
+#: mainwindow.cpp:2141
 msgid "Saving File in Progress…"
 msgstr "正在保存文件…"
 
-#: mainwindow.cpp:2038
+#: mainwindow.cpp:2143
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -363,43 +375,43 @@ msgstr ""
 "以 “ %2” 扩展名\n"
 "保存文件 “ %1”"
 
-#: mainwindow.cpp:2185
+#: mainwindow.cpp:2290
 #, qt-format
 msgid "&Undo %1"
 msgstr "撤销(&U) %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2188 mainwindow.cpp:2456:118
+#: mainwindow.cpp:2293 mainwindow.cpp:2561:118
 msgid "&Undo"
 msgstr "撤销(&U)"
 
-#: mainwindow.cpp:2193
+#: mainwindow.cpp:2298
 #, qt-format
 msgid "&Redo %1"
 msgstr "重做(&R) %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2196 mainwindow.cpp:2464:124
+#: mainwindow.cpp:2301 mainwindow.cpp:2569:124
 msgid "&Redo"
 msgstr "重做(&R)"
 
-#: mainwindow.cpp:2318
+#: mainwindow.cpp:2423
 msgid "&Testing"
 msgstr "测试(&T)"
 
-#: mainwindow.cpp:2320
+#: mainwindow.cpp:2425
 msgid "&Record Test…"
 msgstr ""
 
-#: mainwindow.cpp:2323
+#: mainwindow.cpp:2428
 msgid "&Play Test…"
 msgstr ""
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:2332 menubuilder.cpp:102:37
+#: mainwindow.cpp:2437 menubuilder.cpp:116:37
 msgid "&File"
 msgstr "文件(&F)"
 
@@ -407,13 +419,13 @@ msgstr "文件(&F)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2334:76 rc.cpp:82
+#: mainwindow.cpp:2439:76 rc.cpp:82
 msgid "&New"
 msgstr "新建(&N)"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2345:52
+#: mainwindow.cpp:2450:52
 msgid "&Open…"
 msgstr "打开(&O)…"
 
@@ -421,7 +433,7 @@ msgstr "打开(&O)…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2357:85 rc.cpp:91
+#: mainwindow.cpp:2462:85 rc.cpp:91
 msgid "&Close"
 msgstr "关闭(&C)"
 
@@ -429,35 +441,35 @@ msgstr "关闭(&C)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2370:94 rc.cpp:100
+#: mainwindow.cpp:2475:94 rc.cpp:100
 msgid "&Save"
 msgstr "保存(&S)"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2382:103
+#: mainwindow.cpp:2487:103
 msgid "Save &As…"
 msgstr "另存为(&A)…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2395:196
+#: mainwindow.cpp:2500:196
 msgid "&Export"
 msgstr "导出(&E)"
 
-#: mainwindow.cpp:2396
+#: mainwindow.cpp:2501
 msgid "&Molecule…"
 msgstr "分子(&M)…"
 
-#: mainwindow.cpp:2403
+#: mainwindow.cpp:2508
 msgid "Export Molecule…"
 msgstr "导出分子…"
 
-#: mainwindow.cpp:2410
+#: mainwindow.cpp:2515
 msgid "&Graphics…"
 msgstr "图形(&G)…"
 
-#: mainwindow.cpp:2417
+#: mainwindow.cpp:2522
 msgid "Export Graphics…"
 msgstr ""
 
@@ -465,198 +477,198 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2425:61 rc.cpp:67
+#: mainwindow.cpp:2530:61 rc.cpp:67
 msgid "&Quit"
 msgstr "退出(&Q)"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2435:190
+#: mainwindow.cpp:2540:190
 msgid "Open Recent"
 msgstr "打开最近文件"
 
-#: mainwindow.cpp:2449
+#: mainwindow.cpp:2554
 msgid "No recent files"
 msgstr "无最近文件"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:2455 menubuilder.cpp:102:46
+#: mainwindow.cpp:2560 menubuilder.cpp:116:46
 msgid "&Edit"
 msgstr "编辑(&E)"
 
-#: mainwindow.cpp:2472
+#: mainwindow.cpp:2577
 msgid "&Copy Graphics"
 msgstr "复制图形(&C)"
 
-#: mainwindow.cpp:2476
+#: mainwindow.cpp:2581
 msgid "Ctrl+Alt+C"
 msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:2489 menubuilder.cpp:102:43
+#: mainwindow.cpp:2594 menubuilder.cpp:116:43
 msgid "&View"
 msgstr "视图(&V)"
 
-#: mainwindow.cpp:2490
+#: mainwindow.cpp:2595
 msgid "Set Background Color…"
 msgstr "设置背景颜色…"
 
-#: mainwindow.cpp:2494
+#: mainwindow.cpp:2599
 msgid "Rendering…"
 msgstr "正在渲染…"
 
-#: mainwindow.cpp:2502
+#: mainwindow.cpp:2607
 msgid "Projection"
 msgstr "投影方法"
 
-#: mainwindow.cpp:2503
+#: mainwindow.cpp:2608
 msgid "Perspective"
 msgstr "透视"
 
-#: mainwindow.cpp:2510
+#: mainwindow.cpp:2615
 msgid "Orthographic"
 msgstr "正交"
 
-#: mainwindow.cpp:2529
+#: mainwindow.cpp:2634
 msgid "&Extensions"
 msgstr "扩展(&E)"
 
-#: mainwindow.cpp:2531
+#: mainwindow.cpp:2636
 msgid "User Interface Language…"
 msgstr "用户界面语言…"
 
-#: mainwindow.cpp:2535
+#: mainwindow.cpp:2640
 msgid "&Periodic Table…"
 msgstr "元素周期表(&P)…"
 
-#: mainwindow.cpp:2541 menubuilder.cpp:106
+#: mainwindow.cpp:2646 menubuilder.cpp:120
 msgid "&Help"
 msgstr "帮助(&H)"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2542:115
+#: mainwindow.cpp:2647:115
 msgid "&About"
 msgstr "关于(&A)"
 
-#: mainwindow.cpp:2547
+#: mainwindow.cpp:2652
 msgid "&Discussion Forum"
 msgstr "论坛(&D)"
 
-#: mainwindow.cpp:2551
+#: mainwindow.cpp:2656
 msgid "&Avogadro Website"
 msgstr "&Avogadro 网站"
 
-#: mainwindow.cpp:2555
+#: mainwindow.cpp:2660
 msgid "&Report a Bug"
 msgstr "问题反馈(&R)"
 
-#: mainwindow.cpp:2559
+#: mainwindow.cpp:2664
 msgid "&Suggest a Feature"
 msgstr "功能建议(&S)"
 
-#: mainwindow.cpp:2593
+#: mainwindow.cpp:2698
 msgid "untitled"
 msgstr ""
 
-#: mainwindow.cpp:2623
+#: mainwindow.cpp:2728
 msgid "System Language"
 msgstr "系统语言"
 
-#: mainwindow.cpp:2631
+#: mainwindow.cpp:2736
 msgid "Language"
 msgstr "语言"
 
-#: mainwindow.cpp:2631
+#: mainwindow.cpp:2736
 msgid "User Interface Language:"
 msgstr "用户界面语言："
 
-#: mainwindow.cpp:2747
+#: mainwindow.cpp:2852
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "所有受支持的格式（%1）;;所有文件（*）;;"
 
-#: mainwindow.cpp:2763
+#: mainwindow.cpp:2868
 msgid "Do you want to save the changes to the document?"
 msgstr "要保存对文档的更改吗？"
 
-#: mainwindow.cpp:2771
+#: mainwindow.cpp:2876
 msgid "Your changes will be lost if you don't save them."
 msgstr "如果不保存，您的更改将丢失。"
 
-#: mainwindow.cpp:2776
+#: mainwindow.cpp:2881
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:2778
+#: mainwindow.cpp:2883
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:2866
+#: mainwindow.cpp:2971
 msgid "Network Download Failed"
 msgstr "网络下载失败"
 
-#: mainwindow.cpp:2867
+#: mainwindow.cpp:2972
 msgid "Network timeout or other error."
 msgstr "网络超时或发生其它错误。"
 
-#: mainwindow.cpp:2937
+#: mainwindow.cpp:3042
 #, qt-format
 msgid "Your version: %1"
 msgstr "当前版本： %1"
 
-#: mainwindow.cpp:2938
+#: mainwindow.cpp:3043
 #, qt-format
 msgid "New version: %1"
 msgstr "新版本：%1"
 
-#: mainwindow.cpp:2940
+#: mainwindow.cpp:3045
 msgid "An update is available, do you want to download it now?\n"
 msgstr "发现可用更新，是否立即下载？\n"
 
-#: mainwindow.cpp:2942
+#: mainwindow.cpp:3047
 msgid "Version Update"
 msgstr "版本更新"
 
-#: mainwindow.cpp:3000
+#: mainwindow.cpp:3105
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "加载 '%1' 格式时出错。"
 
-#: mainwindow.cpp:3016
+#: mainwindow.cpp:3121
 msgid "Select file format"
 msgstr "选择文件格式"
 
-#: mainwindow.cpp:3021 mainwindow.cpp:3032
+#: mainwindow.cpp:3126 mainwindow.cpp:3137
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro 无法打开 “%1”。"
 
-#: mainwindow.cpp:3031
+#: mainwindow.cpp:3136
 msgid "Cannot open files"
 msgstr "无法打开文件"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
-#: menubuilder.cpp:102:40
+#: menubuilder.cpp:116:40
 msgid "&Build"
 msgstr "构建(&B)"
 
 #. i18n: file: mainwindow.ui:71
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
-#: menubuilder.cpp:103:49
+#: menubuilder.cpp:117:49
 msgid "&Select"
 msgstr "选择(&S)"
 
-#: menubuilder.cpp:106
+#: menubuilder.cpp:120
 msgid "Se&ttings"
 msgstr "设置(&T)"
 
-#: menubuilder.cpp:106
+#: menubuilder.cpp:120
 msgid "&Window"
 msgstr "窗口(&W)"
 
