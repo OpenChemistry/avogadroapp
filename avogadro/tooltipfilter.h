@@ -13,5 +13,5 @@ Q_OBJECT
 public:
 ToolTipFilter(QObject *parent);
 
-bool eventFilter(QObject *object, QEvent *event);
+bool eventFilter(QObject* object, QEvent* event) override;
 };

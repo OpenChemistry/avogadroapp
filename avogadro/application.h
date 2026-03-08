@@ -19,7 +19,7 @@ public:
   bool loadFile(const QString& fileName);
 
 protected:
-  bool event(QEvent* event);
+  bool event(QEvent* event) override;
 
 private:
 };

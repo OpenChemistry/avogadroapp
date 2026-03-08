@@ -38,7 +38,7 @@ public:
   explicit LocalSocketConnection(QObject* parentObject,
                                  const QString& connectionString);
 
-  ~LocalSocketConnection();
+  ~LocalSocketConnection() override;
 
   /// Opens the connection to the server
   void open() override;

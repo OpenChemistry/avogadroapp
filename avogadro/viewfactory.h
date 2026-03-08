@@ -18,10 +18,10 @@ class ViewFactory : public QtGui::ViewFactory
 {
 public:
   ViewFactory();
-  ~ViewFactory();
+  ~ViewFactory() override;
 
-  QStringList views() const;
-  QWidget* createView(const QString& view);
+  QStringList views() const override;
+  QWidget* createView(const QString& view) override;
   void setGLWidget(QtOpenGL::GLWidget* glWidget) { m_glWidget = glWidget; }
 
 protected:
