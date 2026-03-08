@@ -1421,7 +1421,7 @@ void MainWindow::loadPackages()
       QString text(tr("Avogadro can generate input files for Gaussian, ORCA, "
                       "and other computational chemistry packages."));
 
-#ifdef Q_OS_MAC || Q_OS_WIN
+#if defined(Q_OS_MAC) || defined(Q_OS_WIN)
       text.append(
         tr("This requires setup that will download and configure Python."));
 #else
