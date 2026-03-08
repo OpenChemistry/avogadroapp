@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-02-26 19:32+0000\n"
-"PO-Revision-Date: 2026-03-06 07:09+0000\n"
+"PO-Revision-Date: 2026-03-08 12:09+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
@@ -148,15 +148,15 @@ msgstr "Buka Molekul"
 
 #: mainwindow.cpp:978
 msgid "Commands"
-msgstr "Perintah-perintah"
+msgstr "Perintah"
 
 #: mainwindow.cpp:978
 msgid "Input Generators"
-msgstr "Generator Masukan"
+msgstr "Generator Input"
 
 #: mainwindow.cpp:978
 msgid "File Formats"
-msgstr "Format file"
+msgstr "Format File"
 
 #: mainwindow.cpp:979
 msgctxt "atomic electrostatics"
