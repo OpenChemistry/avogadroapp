@@ -35,7 +35,7 @@ public:
   explicit LocalSocketConnectionListener(QObject* parentObject,
                                          const QString& connectionString);
 
-  ~LocalSocketConnectionListener();
+  ~LocalSocketConnectionListener() override;
 
   /// Start listening for incoming connections.
   void start() override;

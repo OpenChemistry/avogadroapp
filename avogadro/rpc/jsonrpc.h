@@ -38,7 +38,7 @@ class JsonRpc : public QObject
   Q_OBJECT
 public:
   explicit JsonRpc(QObject* parent_ = nullptr);
-  ~JsonRpc();
+  ~JsonRpc() override;
 
   /**
    * @brief Register a connection listener with this JsonRpc instance.

@@ -19,7 +19,7 @@ class AboutDialog : public QDialog
   Q_OBJECT
 public:
   AboutDialog(QWidget* Parent);
-  ~AboutDialog();
+  ~AboutDialog() override;
 
   void loadImage(const QString& theme);
 

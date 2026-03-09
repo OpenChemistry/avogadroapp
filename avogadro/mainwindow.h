@@ -65,7 +65,7 @@ class MainWindow : public QMainWindow
   Q_OBJECT
 public:
   MainWindow(const QStringList& fileNames, bool disableSettings = false);
-  ~MainWindow();
+  ~MainWindow() override;
 
 public slots:
   void setMolecule(Avogadro::QtGui::Molecule* molecule);

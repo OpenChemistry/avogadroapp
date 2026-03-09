@@ -29,7 +29,7 @@ class JsonRpcClient : public QObject
 
 public:
   explicit JsonRpcClient(QObject* parent_ = nullptr);
-  ~JsonRpcClient();
+  ~JsonRpcClient() override;
 
   /// Query if the client is connected to a server.
   bool isConnected() const;

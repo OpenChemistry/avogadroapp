@@ -36,7 +36,7 @@ class RpcListener : public QObject
 
 public:
   explicit RpcListener(QObject* parent = nullptr);
-  ~RpcListener();
+  ~RpcListener() override;
 
   void start();
 
