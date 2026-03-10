@@ -47,10 +47,10 @@ void LocalSocketConnectionListener::start()
   // path.
   QString socketPath = QDir::tempPath() + QLatin1Char('/') + m_connectionString;
   QFileInfo fi(socketPath);
-  if (fi.exists() && !fi.isSocket()) {
+  if (fi.isDir()) {
     emit connectionError(
       UnknownError,
-      QString("Cannot start RPC server: '%1' exists but is not a socket")
+      QString("Cannot start RPC server: '%1' is a directory, not a socket")
         .arg(socketPath));
     return;
   }
