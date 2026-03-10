@@ -3,15 +3,15 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Andi Chandler <andi@gowling.com>, 2023.
 # matterhorn103 <milner94@live.co.uk>, 2023.
-# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025, 2026.
 # Geoff Hutchison <geoff.hutchison@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-08 03:37+0000\n"
-"PO-Revision-Date: 2026-01-27 03:18+0000\n"
-"Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
+"PO-Revision-Date: 2026-03-11 10:10+0000\n"
+"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: English (Australia) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_AU/>\n"
 "Language: en_AU\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -146,8 +146,9 @@ msgid "Commands"
 msgstr "Commands"
 
 #: mainwindow.cpp:1005
+#, fuzzy
 msgid "Input Generators"
-msgstr "Input Generators"
+msgstr "Input Generator"
 
 #: mainwindow.cpp:1005
 msgid "File Formats"
