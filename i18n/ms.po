@@ -4,13 +4,13 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 # Azuwan <azuwan.io@aol.com>, 2021.
 # Kazuki278 <muadz.hakim.7@gmail.com>, 2021.
-# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-08 03:37+0000\n"
-"PO-Revision-Date: 2025-08-27 08:02+0000\n"
+"PO-Revision-Date: 2026-03-11 10:09+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Malay <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ms/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -150,8 +150,9 @@ msgid "Commands"
 msgstr ""
 
 #: mainwindow.cpp:1005
+#, fuzzy
 msgid "Input Generators"
-msgstr ""
+msgstr "Penjana Input"
 
 #: mainwindow.cpp:1005
 msgid "File Formats"
