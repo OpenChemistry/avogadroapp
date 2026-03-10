@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-08 03:37+0000\n"
-"PO-Revision-Date: 2026-03-07 02:02+0000\n"
+"PO-Revision-Date: 2026-03-11 10:10+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -148,8 +148,9 @@ msgid "Commands"
 msgstr "コマンド"
 
 #: mainwindow.cpp:1005
+#, fuzzy
 msgid "Input Generators"
-msgstr "インプットジェネレータ"
+msgstr "インプットファイルを作る"
 
 #: mainwindow.cpp:1005
 msgid "File Formats"
