@@ -1531,7 +1531,7 @@ void MainWindow::rendererInvalid()
 {
   auto* widget = qobject_cast<GLWidget*>(sender());
   QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
-                       tr("OpenGL 2.0 or greater required, exiting.\n\n%1")
+                       tr("OpenGL 4.0 or greater required, exiting.\n\n%1")
                          .arg(widget ? widget->error() : tr("Unknown error")));
   // Process events, and then set a single shot timer. This is needed to ensure
   // the RPC server also exits cleanly.
@@ -2908,6 +2908,7 @@ bool MainWindow::saveFileIfNeeded()
 void MainWindow::registerMoleQueue()
 {
   /*
+  // TODO - get MoleQueue working with Qt6
   #ifdef Avogadro_ENABLE_RPC
     MoleQueue::Client client;
     if (!client.connectToServer() || !client.isConnected())

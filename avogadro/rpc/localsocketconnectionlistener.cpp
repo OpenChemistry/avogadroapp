@@ -10,6 +10,8 @@
 #include "localsocketconnection.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QDir>
+#include <QtCore/QFileInfo>
 #include <QtNetwork/QLocalServer>
 #include <QtNetwork/QLocalSocket>
 
@@ -36,6 +38,24 @@ LocalSocketConnectionListener::~LocalSocketConnectionListener()
 
 void LocalSocketConnectionListener::start()
 {
+#if defined(Q_OS_UNIX)
+  // On Unix, QLocalServer creates a socket file in /tmp. If that path already
+  // exists but is not a socket (e.g. someone created /tmp/avogadro as a
+  // directory), listen() will fail with AddressInUseError. That would trigger
+  // the ping-and-retry logic, which tries to connect to a directory and
+  // crashes. Detect this case early and emit UnknownError so we skip the ping
+  // path.
+  QString socketPath = QDir::tempPath() + QLatin1Char('/') + m_connectionString;
+  QFileInfo fi(socketPath);
+  if (fi.exists() && !fi.isSocket()) {
+    emit connectionError(
+      UnknownError,
+      QString("Cannot start RPC server: '%1' exists but is not a socket")
+        .arg(socketPath));
+    return;
+  }
+#endif
+
   if (!m_server->listen(m_connectionString)) {
     emit connectionError(toConnectionListenerError(m_server->serverError()),
                          m_server->errorString());
