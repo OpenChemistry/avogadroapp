@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-08 03:37+0000\n"
-"PO-Revision-Date: 2026-02-28 09:09+0000\n"
+"PO-Revision-Date: 2026-03-10 08:09+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ro/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.16.1-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -254,15 +254,15 @@ msgstr "Acest lucru poate necesita o conexiune la Internet."
 
 #: mainwindow.cpp:1432
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Instalați modulele actualizate?"
 
 #: mainwindow.cpp:1433
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Sunt disponibile următoarele module:"
 
 #: mainwindow.cpp:1434
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "Doriți să le instalați?"
 
 #: mainwindow.cpp:1471
 msgid "Recover Autosaved Files"

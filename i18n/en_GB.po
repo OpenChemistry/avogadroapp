@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-08 03:37+0000\n"
-"PO-Revision-Date: 2026-02-28 09:09+0000\n"
+"PO-Revision-Date: 2026-03-10 08:09+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_GB/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16.1-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -253,15 +253,15 @@ msgstr "This may require an Internet connection."
 
 #: mainwindow.cpp:1432
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Install updated plugins?"
 
 #: mainwindow.cpp:1433
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "The following plugins are available:"
 
 #: mainwindow.cpp:1434
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "Would you like to install them?"
 
 #: mainwindow.cpp:1471
 msgid "Recover Autosaved Files"
