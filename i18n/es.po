@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-08 03:37+0000\n"
 "PO-Revision-Date: 2026-03-11 10:10+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -88,7 +88,7 @@ msgstr ""
 
 #: mainwindow.cpp:486
 msgid "Files"
-msgstr ""
+msgstr "Archivos"
 
 #: mainwindow.cpp:497
 msgid "Layers"
