@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Avogadro 1.95.1\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-08 03:37+0000\n"
-"PO-Revision-Date: 2026-02-14 09:09+0000\n"
+"PO-Revision-Date: 2026-03-12 20:12+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ka/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
@@ -248,7 +248,7 @@ msgstr ""
 
 #: mainwindow.cpp:1432
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "დავაყენო განახლებული დამატებები?"
 
 #: mainwindow.cpp:1433
 msgid "The following plugins are available:"
