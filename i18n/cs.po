@@ -8,13 +8,13 @@
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Martin Slavík <martin.d.slavik@gmail.com>, 2023.
 # Tomáš Poláček <ostriz2@seznam.cz>, 2024.
-# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-08 03:37+0000\n"
-"PO-Revision-Date: 2025-08-27 08:02+0000\n"
+"PO-Revision-Date: 2026-03-11 10:09+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/cs/>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -154,8 +154,9 @@ msgid "Commands"
 msgstr ""
 
 #: mainwindow.cpp:1005
+#, fuzzy
 msgid "Input Generators"
-msgstr ""
+msgstr "Tvůrce vstupu"
 
 #: mainwindow.cpp:1005
 msgid "File Formats"

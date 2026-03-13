@@ -5,13 +5,14 @@
 # Apostol Penkov <apostol.penkov@gmail.com>, 2020.
 # Salif Mehmed <mail@salif.eu>, 2023.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
+# Ivo Pilev <pilevivo8@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-08 03:37+0000\n"
-"PO-Revision-Date: 2025-08-27 08:02+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"PO-Revision-Date: 2026-03-12 20:12+0000\n"
+"Last-Translator: Ivo Pilev <pilevivo8@gmail.com>\n"
 "Language-Team: Bulgarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/bg/>\n"
 "Language: bg\n"
@@ -19,12 +20,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
+#, fuzzy
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Молекулярен едитор и показвач"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -36,31 +38,31 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:33:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Avogadro версии в читалището:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:34:15
 msgid "Qt Version:"
-msgstr ""
+msgstr "Qt Версии:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:35:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSL Версии:"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Няма молекула поставена в BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:39 backgroundfileformat.cpp:116
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Няма формиран файл в BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:42 backgroundfileformat.cpp:119
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Няма поставено име в BackgroundFileFormat!"
 
 #: mainwindow.cpp:379
 msgid "Ready…"
@@ -76,15 +78,15 @@ msgstr "Типове дисплеи"
 
 #: mainwindow.cpp:482
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Настройки за тип Дисплей"
 
 #: mainwindow.cpp:486
 msgid "Files"
-msgstr ""
+msgstr "Файлове"
 
 #: mainwindow.cpp:497
 msgid "Layers"
-msgstr ""
+msgstr "Слоеве"
 
 #: mainwindow.cpp:525
 #, fuzzy
@@ -111,23 +113,23 @@ msgstr "%1%2 - Авогардо %3"
 
 #: mainwindow.cpp:898
 msgid "Restart needed"
-msgstr ""
+msgstr "Трябва рестартиране"
 
 #: mainwindow.cpp:899
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Моля рестартирайте Avogardo за да ползвате нов език."
 
 #: mainwindow.cpp:942 mainwindow.cpp:1993
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Химическа Маркировачен Език"
 
 #: mainwindow.cpp:943 mainwindow.cpp:1992
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Химичен JSON"
 
 #: mainwindow.cpp:949
 msgid "Open chemical file"
-msgstr ""
+msgstr "Отвори Химичен файл"
 
 #: mainwindow.cpp:967 mainwindow.cpp:991 mainwindow.cpp:1879
 #: mainwindow.cpp:3125
@@ -145,33 +147,33 @@ msgstr "Отвори Молекулата"
 
 #: mainwindow.cpp:1005
 msgid "Commands"
-msgstr ""
+msgstr "Команди"
 
 #: mainwindow.cpp:1005
 msgid "Input Generators"
-msgstr ""
+msgstr "Генератор на Вход"
 
 #: mainwindow.cpp:1005
 msgid "File Formats"
-msgstr ""
+msgstr "Формати за файл"
 
 #: mainwindow.cpp:1006
 msgctxt "atomic electrostatics"
 msgid "Charges"
-msgstr ""
+msgstr "Зареждания"
 
 #: mainwindow.cpp:1007
 msgctxt "potential energy calculators"
 msgid "Force Fields"
-msgstr ""
+msgstr "Защитни полета"
 
 #: mainwindow.cpp:1011
 msgid "Install Plugin Script"
-msgstr ""
+msgstr "Инсталирай Plugin Script"
 
 #: mainwindow.cpp:1011
 msgid "Script Type:"
-msgstr ""
+msgstr "Скрипт Тип:"
 
 #: mainwindow.cpp:1086 mainwindow.cpp:1875
 msgid "Select file reader"
@@ -193,7 +195,7 @@ msgstr ""
 #: mainwindow.cpp:1191
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Молекула заразена (%1 атом, %2 връзка)"
 
 #: mainwindow.cpp:1196
 msgid "File error"
@@ -212,7 +214,7 @@ msgstr ""
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr ""
+msgstr "Запазена файл %1"
 
 #: mainwindow.cpp:1231
 msgid "Error saving file"

@@ -11,12 +11,13 @@
 # Alejandro Díaz-Moscoso <a.diaz.moscoso@csic.es>, 2023, 2025.
 # Adrian Lopez <adrlop1012@gmail.com>, 2025.
 # Saúl Palacios <palacios22c@gmail.com>, 2025.
+# Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-08 03:37+0000\n"
-"PO-Revision-Date: 2026-01-27 03:19+0000\n"
+"PO-Revision-Date: 2026-03-11 10:10+0000\n"
 "Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
@@ -25,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: aboutdialog.cpp:25
@@ -87,7 +88,7 @@ msgstr ""
 
 #: mainwindow.cpp:486
 msgid "Files"
-msgstr ""
+msgstr "Archivos"
 
 #: mainwindow.cpp:497
 msgid "Layers"
@@ -153,8 +154,9 @@ msgid "Commands"
 msgstr "Comandos"
 
 #: mainwindow.cpp:1005
+#, fuzzy
 msgid "Input Generators"
-msgstr "Generadores de entradas"
+msgstr "Generador de Entrada"
 
 #: mainwindow.cpp:1005
 msgid "File Formats"
