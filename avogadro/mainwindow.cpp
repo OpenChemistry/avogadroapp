@@ -1376,6 +1376,8 @@ void MainWindow::loadPackages()
         // Skip the new "plugins" directory
         if (entry == QStringLiteral("plugins"))
           continue;
+        else if (entry == QStringLiteral("autosave"))
+          continue;
         oldEntries << entry;
       }
 
@@ -1489,8 +1491,6 @@ void MainWindow::loadPackages()
     QMessageBox msgBox(this);
 
     if (firstRun) {
-      settings.setValue("MainWindow/firstRun", false);
-
       msgBox.setWindowTitle(tr("Let’s finish your setup"));
       QString text(tr("Avogadro can generate input files for Gaussian, ORCA, "
                       "and other computational chemistry packages."));
@@ -1521,6 +1521,8 @@ void MainWindow::loadPackages()
       pkgManager->installPackages(newPackages);
     }
   }
+
+  settings.setValue("MainWindow/firstRun", false);
 
   // Load cached registrations so consumer plugins get their signals
 #ifndef NDEBUG
