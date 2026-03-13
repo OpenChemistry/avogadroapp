@@ -669,12 +669,9 @@ void MainWindow::dropEvent(QDropEvent* event)
         QFileInfo info(fileName);
         QString extension = info.completeSuffix(); // e.g. .tar.gz or .pdb.gz
 
-        if (extension == "py")
-          addScript(fileName);
-        else
-          // add these to m_queuedFiles
-          // so we can read them later
-          m_queuedFiles.append(fileName);
+        // add these to m_queuedFiles
+        // so we can read them later
+        m_queuedFiles.append(fileName);
       }
     }
     if (!m_queuedFiles.empty())
@@ -993,87 +990,6 @@ void MainWindow::importFile()
   }
 }
 
-bool MainWindow::addScript(const QString& filePath)
-{
-  if (filePath.isEmpty()) {
-    return false;
-  }
-
-  // Ask the user what type of script this is
-  // TODO: add some sort of warning?
-  QStringList types;
-  types << tr("Commands") << tr("Input Generators") << tr("File Formats")
-        << tr("Charges", "atomic electrostatics")
-        << tr("Force Fields", "potential energy calculators");
-
-  bool ok;
-  QString item =
-    QInputDialog::getItem(this, tr("Install Plugin Script"), tr("Script Type:"),
-                          types, 0, false, &ok);
-
-  if (!ok || item.isEmpty())
-    return false;
-
-  QString typePath;
-
-  int index = types.indexOf(item);
-
-  // don't translate these
-  switch (index) {
-    case 0: // commands
-      typePath = "commands";
-      break;
-    case 1:
-      typePath = "inputGenerators";
-      break;
-    case 2:
-      typePath = "formatScripts";
-      break;
-    case 3:
-      typePath = "charges";
-      break;
-    case 4:
-      typePath = "energy";
-      break;
-    default:
-      typePath = "other";
-  }
-
-  QStringList stdPaths =
-    QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
-
-  QFileInfo info(filePath);
-
-  // check if the directory structure exists first
-  // and if not, create what we need
-  int i = 0;
-  bool createDir = true;
-  for (i = 0; i < stdPaths.size(); ++i) {
-    if (QDir(stdPaths[i] + '/' + typePath).exists()) {
-      createDir = false;
-      break;
-    }
-  }
-  if (createDir) {
-    // find a path we can create (e.g., first path might be admin-only)
-    for (i = 0; i < stdPaths.size(); ++i) {
-      if (QDir().mkpath(stdPaths[i] + '/' + typePath))
-        break;
-    }
-  }
-
-  QString destinationPath(stdPaths[i] + '/' + typePath + '/' + info.fileName());
-#ifndef NDEBUG
-  qDebug() << " copying " << filePath << " to " << destinationPath;
-#endif
-  QFile::remove(destinationPath); // silently fail if there's nothing to remove
-  QFile::copy(filePath, destinationPath);
-
-  // TODO: Ask that type of plugin script to reload?
-
-  return true;
-}
-
 bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
 {
   if (fileName.isEmpty()) {
@@ -1337,12 +1253,93 @@ static bool copyDirectoryRecursively(const QString& srcPath,
   return true;
 }
 
+static qint64 recursiveDirSize(const QString& dirPath)
+{
+  // Surprised this doesn't already exist with Qt...
+  qint64 size = 0;
+  QDir dir(dirPath);
+  const auto fileInfos = dir.entryInfoList(QDir::Files | QDir::Dirs |
+                                           QDir::Hidden | QDir::NoDotAndDotDot);
+  for (const QFileInfo& fi : fileInfos) {
+    if (fi.isDir())
+      size += recursiveDirSize(fi.absoluteFilePath());
+    else
+      size += fi.size();
+  }
+  return size;
+}
+
 void MainWindow::loadPackages()
 {
+  QSettings settings;
+  settings.beginGroup("MainWindow");
+  bool firstRun = settings.value("firstRun", true).toBool();
+  settings.endGroup();
+
+  // if it's the first run, see if there's anything in the plugins directory
+  // .. we should ask the user to remove it
+  const QString writeableDir =
+    QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+  if (firstRun) {
+    // Check for old files/directories from previous Avogadro versions
+    // (before the migration to the "plugins" subdirectory)
+    QDir appDataDir(writeableDir);
+    if (appDataDir.exists()) {
+      QStringList oldEntries;
+      const auto entries = appDataDir.entryList(
+        QDir::AllEntries | QDir::Hidden | QDir::NoDotAndDotDot);
+      for (const QString& entry : entries) {
+        // Skip the new "plugins" directory
+        if (entry == QStringLiteral("plugins"))
+          continue;
+        else if (entry == QStringLiteral("autosave"))
+          continue;
+        oldEntries << entry;
+      }
+
+      if (!oldEntries.isEmpty()) {
+        // Calculate total disk space used by old entries
+        qint64 totalBytes = 0;
+        for (const QString& entry : oldEntries) {
+          QString path = appDataDir.filePath(entry);
+          QFileInfo info(path);
+          if (info.isDir())
+            totalBytes += recursiveDirSize(path);
+          else
+            totalBytes += info.size();
+        }
+        QString sizeStr = QLocale().formattedDataSize(
+          totalBytes, 1, QLocale::DataSizeTraditionalFormat);
+
+        QMessageBox msgBox(this);
+        msgBox.setWindowTitle(tr("Found Previous Avogadro Files"));
+        msgBox.setText(
+          tr("Files from a previous version of Avogadro were found in "
+             "the plugins directory, using %1 of space.\n\n"
+             "These files are no longer needed and can be safely removed.")
+            .arg(sizeStr));
+        msgBox.setDetailedText(oldEntries.join(QStringLiteral("\n")));
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::Yes);
+        msgBox.setButtonText(QMessageBox::Yes, tr("Remove Old Files"));
+        msgBox.setButtonText(QMessageBox::No, tr("Keep Files"));
+
+        if (msgBox.exec() == QMessageBox::Yes) {
+          for (const QString& entry : oldEntries) {
+            QString path = appDataDir.filePath(entry);
+            QFileInfo info(path);
+            if (info.isDir())
+              QDir(path).removeRecursively();
+            else
+              QFile::remove(path);
+          }
+        }
+      }
+    }
+  }
+
   // Writable user plugin directory (create if needed)
-  const QString writablePluginsDir =
-    QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) +
-    QStringLiteral("/plugins");
+  const QString writablePluginsDir = writeableDir + QStringLiteral("/plugins");
   QDir().mkpath(writablePluginsDir);
 
   // Bundled (potentially read-only) plugin directory relative to the app
@@ -1407,16 +1404,9 @@ void MainWindow::loadPackages()
       packageNames << QFileInfo(dir).baseName();
     }
 
-    QSettings settings;
-    settings.beginGroup("MainWindow");
-    bool firstRun = settings.value("firstRun", true).toBool();
-    settings.endGroup();
-
     QMessageBox msgBox(this);
 
     if (firstRun) {
-      settings.setValue("firstRun", false);
-
       msgBox.setWindowTitle(tr("Let’s finish your setup"));
       QString text(tr("Avogadro can generate input files for Gaussian, ORCA, "
                       "and other computational chemistry packages."));
@@ -1447,6 +1437,8 @@ void MainWindow::loadPackages()
       pkgManager->installPackages(newPackages);
     }
   }
+
+  settings.setValue("MainWindow/firstRun", false);
 
   // Load cached registrations so consumer plugins get their signals
 #ifndef NDEBUG

@@ -119,11 +119,6 @@ public slots:
    */
   std::string exportString(const std::string& format);
 
-  /**
-   * Move @a fileName as a plugin script (i.e. put it in the correct dir)
-   */
-  bool addScript(const QString& fileName);
-
 #ifdef QTTESTING
   void playTest(const QString& fileName, bool exit = true);
 #endif
