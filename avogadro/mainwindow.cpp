@@ -669,12 +669,9 @@ void MainWindow::dropEvent(QDropEvent* event)
         QFileInfo info(fileName);
         QString extension = info.completeSuffix(); // e.g. .tar.gz or .pdb.gz
 
-        if (extension == "py")
-          addScript(fileName);
-        else
-          // add these to m_queuedFiles
-          // so we can read them later
-          m_queuedFiles.append(fileName);
+        // add these to m_queuedFiles
+        // so we can read them later
+        m_queuedFiles.append(fileName);
       }
     }
     if (!m_queuedFiles.empty())
@@ -991,87 +988,6 @@ void MainWindow::importFile()
       this, tr("Cannot open file"),
       tr("Can't open supplied file %1").arg(reply.second));
   }
-}
-
-bool MainWindow::addScript(const QString& filePath)
-{
-  if (filePath.isEmpty()) {
-    return false;
-  }
-
-  // Ask the user what type of script this is
-  // TODO: add some sort of warning?
-  QStringList types;
-  types << tr("Commands") << tr("Input Generators") << tr("File Formats")
-        << tr("Charges", "atomic electrostatics")
-        << tr("Force Fields", "potential energy calculators");
-
-  bool ok;
-  QString item =
-    QInputDialog::getItem(this, tr("Install Plugin Script"), tr("Script Type:"),
-                          types, 0, false, &ok);
-
-  if (!ok || item.isEmpty())
-    return false;
-
-  QString typePath;
-
-  int index = types.indexOf(item);
-
-  // don't translate these
-  switch (index) {
-    case 0: // commands
-      typePath = "commands";
-      break;
-    case 1:
-      typePath = "inputGenerators";
-      break;
-    case 2:
-      typePath = "formatScripts";
-      break;
-    case 3:
-      typePath = "charges";
-      break;
-    case 4:
-      typePath = "energy";
-      break;
-    default:
-      typePath = "other";
-  }
-
-  QStringList stdPaths =
-    QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
-
-  QFileInfo info(filePath);
-
-  // check if the directory structure exists first
-  // and if not, create what we need
-  int i = 0;
-  bool createDir = true;
-  for (i = 0; i < stdPaths.size(); ++i) {
-    if (QDir(stdPaths[i] + '/' + typePath).exists()) {
-      createDir = false;
-      break;
-    }
-  }
-  if (createDir) {
-    // find a path we can create (e.g., first path might be admin-only)
-    for (i = 0; i < stdPaths.size(); ++i) {
-      if (QDir().mkpath(stdPaths[i] + '/' + typePath))
-        break;
-    }
-  }
-
-  QString destinationPath(stdPaths[i] + '/' + typePath + '/' + info.fileName());
-#ifndef NDEBUG
-  qDebug() << " copying " << filePath << " to " << destinationPath;
-#endif
-  QFile::remove(destinationPath); // silently fail if there's nothing to remove
-  QFile::copy(filePath, destinationPath);
-
-  // TODO: Ask that type of plugin script to reload?
-
-  return true;
 }
 
 bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
