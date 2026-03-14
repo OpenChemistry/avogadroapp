@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-14 17:20+0000\n"
-"PO-Revision-Date: 2026-03-10 08:09+0000\n"
+"PO-Revision-Date: 2026-03-15 19:09+0000\n"
 "Last-Translator: Milo Ivir <mail@milotype.de>\n"
 "Language-Team: Croatian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hr/>\n"
@@ -199,7 +199,7 @@ msgstr ""
 
 #: mainwindow.cpp:1315
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Pronađene prethodne Avogadro datoteke"
 
 #: mainwindow.cpp:1317
 #, qt-format
@@ -209,14 +209,18 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Datoteke iz prethodne Avogadro verzije su pronađene u direktoriju dodataka i "
+"zauzimaju %1 memorije.\n"
+"\n"
+"Ove datoteke više nisu potrebne i mogu se sigurno ukloniti."
 
 #: mainwindow.cpp:1324
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Ukloni stare datoteke"
 
 #: mainwindow.cpp:1325
 msgid "Keep Files"
-msgstr ""
+msgstr "Zadrži datoteke"
 
 #: mainwindow.cpp:1410
 msgid "Let’s finish your setup"
@@ -277,6 +281,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"Potrebna je OpenGL 4.0 ili novija licenca. Aplikacija se zatvara.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1527
 msgid "Unknown error"
