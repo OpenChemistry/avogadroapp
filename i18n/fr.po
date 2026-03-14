@@ -8,13 +8,14 @@
 # Eric Remy <eric.remy3@free.fr>, 2025.
 # "David D." <dadu042@users.noreply.hosted.weblate.org>, 2025, 2026.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
+# FX Coudert <fxcoudert@ik.me>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-14 17:20+0000\n"
-"PO-Revision-Date: 2026-03-11 10:09+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"PO-Revision-Date: 2026-03-15 19:09+0000\n"
+"Last-Translator: FX Coudert <fxcoudert@ik.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
 "Language: fr\n"
@@ -229,30 +230,32 @@ msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro peut générer des fichiers d'entrée pour Gaussian, ORCA, et d'autres "
+"codes de chimie computationnelle."
 
 #: mainwindow.cpp:1416
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Cela nécessite de télécharger et de configurer Python."
 
 #: mainwindow.cpp:1418
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Cela nécessite de configurer un environnement Python."
 
 #: mainwindow.cpp:1422
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Cela peut nécessiter une connexion Internet."
 
 #: mainwindow.cpp:1424
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Installer les plugins mis à jour ?"
 
 #: mainwindow.cpp:1425
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Les plugins suivants sont disponibles :"
 
 #: mainwindow.cpp:1426
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "Voulez-vous les installer ?"
 
 #: mainwindow.cpp:1465
 msgid "Recover Autosaved Files"
@@ -271,12 +274,15 @@ msgid "Error: Failed to initialize OpenGL context"
 msgstr "Erreur : échec de l’initialisation du contexte OpenGL"
 
 #: mainwindow.cpp:1526
-#, qt-format
+#, fuzzy, qt-format
 msgid ""
 "OpenGL 4.0 or greater required, exiting.\n"
 "\n"
 "%1"
 msgstr ""
+"OpenGL 4.0 ou ultérieur requis, je quitte.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1527
 msgid "Unknown error"
