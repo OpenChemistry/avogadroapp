@@ -12,13 +12,14 @@
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
 # Frank Hoffmann <kohaerenz@gmail.com>, 2026.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
+# Jakob Blahusch <jakob.blahusch@blahusch.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-14 17:20+0000\n"
-"PO-Revision-Date: 2026-03-11 10:09+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"PO-Revision-Date: 2026-03-15 19:10+0000\n"
+"Last-Translator: Jakob Blahusch <jakob.blahusch@blahusch.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -222,7 +223,7 @@ msgstr ""
 
 #: mainwindow.cpp:1325
 msgid "Keep Files"
-msgstr ""
+msgstr "Dateien behalten"
 
 #: mainwindow.cpp:1410
 msgid "Let’s finish your setup"
