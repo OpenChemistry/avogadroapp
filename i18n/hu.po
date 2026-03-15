@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # SoftwareByRedline <krajczar.david41@gmail.com>, 2021.
-# ovari <ovari123@zoho.com>, 2021, 2022, 2023, 2024.
+# ovari <ovari123@zoho.com>, 2021, 2022, 2023, 2024, 2026.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2026.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
 msgid ""
@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-14 17:20+0000\n"
-"PO-Revision-Date: 2026-03-11 10:09+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"PO-Revision-Date: 2026-03-15 19:09+0000\n"
+"Last-Translator: ovari <ovari123@zoho.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/hu/>\n"
 "Language: hu\n"
@@ -25,7 +25,7 @@ msgstr ""
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Molekuláris szerkesztő és megjelenítő"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -83,11 +83,11 @@ msgstr "Megjelenítési típusok"
 
 #: mainwindow.cpp:482
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Kijelzőtípus-beállítások"
 
 #: mainwindow.cpp:486
 msgid "Files"
-msgstr ""
+msgstr "Fájlok"
 
 #: mainwindow.cpp:497
 msgid "Layers"
@@ -205,7 +205,7 @@ msgstr ""
 
 #: mainwindow.cpp:1315
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Korábbi Avogadro-fájlokat találat"
 
 #: mainwindow.cpp:1317
 #, qt-format
@@ -215,58 +215,66 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Az Avogadro egy korábbi verziójából származó fájlok találhatók a bővítmények "
+"könyvtárában, %1 helyet foglalnak.\n"
+"\n"
+"Ezekre a fájlokra már nincs szükség, és biztonságosan eltávolíthatók."
 
 #: mainwindow.cpp:1324
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Régi fájlok eltávolítása"
 
 #: mainwindow.cpp:1325
 msgid "Keep Files"
-msgstr ""
+msgstr "Fájlok megtartása"
 
 #: mainwindow.cpp:1410
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Beállítás befejezése"
 
 #: mainwindow.cpp:1411
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Az Avogadro bemeneti fájlokat tud létrehozni Gaussian, ORCA és más számítási "
+"kémiai csomagokhoz."
 
 #: mainwindow.cpp:1416
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Ehhez telepítésre van szükség a Python letöltéséhez és beállításához."
 
 #: mainwindow.cpp:1418
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Ehhez beállítás szükséges egy Python környezet beállításához."
 
 #: mainwindow.cpp:1422
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Internetkapcsolat lehet szükséges."
 
 #: mainwindow.cpp:1424
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Frissített bővítmények telepítése?"
 
 #: mainwindow.cpp:1425
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "A következő bővítmények érhetők el:"
 
 #: mainwindow.cpp:1426
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "Szeretné telepíteni őket?"
 
 #: mainwindow.cpp:1465
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Automatikusan mentett fájlok helyreállítása"
 
 #: mainwindow.cpp:1466
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Egy korábbi munkamenetből automatikus mentési fájlok találata.\n"
+"Szeretné visszaállítani őket?"
 
 #: mainwindow.cpp:1525
 msgid "Error: Failed to initialize OpenGL context"
@@ -279,6 +287,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 4.0 vagy újabb szükséges, kilépés a folyamatból.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1527
 msgid "Unknown error"
@@ -288,7 +299,7 @@ msgstr "Ismeretlen hiba"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1 beállításai"
 
 #: mainwindow.cpp:1814
 msgid "Common image formats"
@@ -392,11 +403,11 @@ msgstr "&Vizsgálás"
 
 #: mainwindow.cpp:2419
 msgid "&Record Test…"
-msgstr ""
+msgstr "Vizsgálás &felvétele…"
 
 #: mainwindow.cpp:2422
 msgid "&Play Test…"
-msgstr ""
+msgstr "Vizsgálás &lejátszása…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -460,7 +471,7 @@ msgstr "&Grafika…"
 
 #: mainwindow.cpp:2516
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Grafika exportálása…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -560,7 +571,7 @@ msgstr "&Javaslat új funkcióra"
 
 #: mainwindow.cpp:2692
 msgid "untitled"
-msgstr ""
+msgstr "névtelen"
 
 #: mainwindow.cpp:2722
 msgid "System Language"
