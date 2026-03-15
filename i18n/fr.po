@@ -9,13 +9,14 @@
 # "David D." <dadu042@users.noreply.hosted.weblate.org>, 2025, 2026.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
 # FX Coudert <fxcoudert@ik.me>, 2026.
+# Alexander Krappe <alexander.krappe@fu-berlin.de>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-14 17:20+0000\n"
-"PO-Revision-Date: 2026-03-15 19:09+0000\n"
-"Last-Translator: FX Coudert <fxcoudert@ik.me>\n"
+"PO-Revision-Date: 2026-03-15 19:10+0000\n"
+"Last-Translator: Alexander Krappe <alexander.krappe@fu-berlin.de>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
 "Language: fr\n"
@@ -215,7 +216,7 @@ msgstr ""
 
 #: mainwindow.cpp:1324
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Supprimer Anciens Fichiers"
 
 #: mainwindow.cpp:1325
 msgid "Keep Files"
