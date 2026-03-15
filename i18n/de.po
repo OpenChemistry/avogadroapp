@@ -13,13 +13,14 @@
 # Frank Hoffmann <kohaerenz@gmail.com>, 2026.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
 # Jakob Blahusch <jakob.blahusch@blahusch.com>, 2026.
+# Alexander Krappe <alexander.krappe@fu-berlin.de>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-14 17:20+0000\n"
 "PO-Revision-Date: 2026-03-15 19:10+0000\n"
-"Last-Translator: Jakob Blahusch <jakob.blahusch@blahusch.com>\n"
+"Last-Translator: Alexander Krappe <alexander.krappe@fu-berlin.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -84,7 +85,7 @@ msgstr "Darstellungsarten"
 
 #: mainwindow.cpp:482
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Darstellungsoptionen"
 
 #: mainwindow.cpp:486
 msgid "Files"
@@ -206,7 +207,7 @@ msgstr ""
 
 #: mainwindow.cpp:1315
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Vorherige Avogadro-Dateien gefunden"
 
 #: mainwindow.cpp:1317
 #, qt-format
@@ -216,10 +217,15 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Dateien einer früheren Avogadro-Version wurden im Plugin-Verzeichnis "
+"gefunden. Diese nutzen %1 Speicherplatz.\n"
+"\n"
+"Diese Dateien werden nicht mehr benötigt und können bedenkenlos entfernt "
+"werden."
 
 #: mainwindow.cpp:1324
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Alte Dateien entfernen"
 
 #: mainwindow.cpp:1325
 msgid "Keep Files"
@@ -227,37 +233,41 @@ msgstr "Dateien behalten"
 
 #: mainwindow.cpp:1410
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Beende die Installation"
 
 #: mainwindow.cpp:1411
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro kann Input-Dateien für Gaussian, ORCA und andere Computerchemie-"
+"Programme erzeugen."
 
 #: mainwindow.cpp:1416
 msgid "This requires setup that will download and configure Python."
 msgstr ""
+"Dazu ist eine Installation erforderlich, die Python herunterlädt und "
+"installiert."
 
 #: mainwindow.cpp:1418
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Dazu muss zunächst eine Python-Umgebung eingerichtet werden."
 
 #: mainwindow.cpp:1422
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Dies benötigt eine Internetverbindung."
 
 #: mainwindow.cpp:1424
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Aktualisierte Erweiterungen installieren?"
 
 #: mainwindow.cpp:1425
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Folgende Erweiterungen sind verfügbar:"
 
 #: mainwindow.cpp:1426
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "Möchten Sie diese installieren?"
 
 #: mainwindow.cpp:1465
 msgid "Recover Autosaved Files"
@@ -269,7 +279,7 @@ msgid ""
 "Would you like to recover them?"
 msgstr ""
 "Es wurden automatisch gespeicherte Dateien vom einer vorhergehenden Sitzung "
-"gefunden\n"
+"gefunden.\n"
 "Möchten Sie sie wiederherstellen?"
 
 #: mainwindow.cpp:1525
@@ -283,6 +293,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 4.0 oder höher benötigt, beende das Programm.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1527
 msgid "Unknown error"
@@ -292,11 +305,11 @@ msgstr "Unbekannter Fehler"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1 Einstellungen"
 
 #: mainwindow.cpp:1814
 msgid "Common image formats"
-msgstr "übliche Dateiformate für Bilder"
+msgstr "Übliche Dateiformate für Bilder"
 
 #: mainwindow.cpp:1816
 msgid "All files"
@@ -336,7 +349,7 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
-"Diese Datei wurde aus einem nicht Standardformat importiert, das "
+"Diese Datei wurde aus einem nicht-Standardformat importiert, das "
 "möglicherweise nicht alle Informationen in das Molekül schreiben kann.\n"
 "\n"
 "Möchten Sie in das aktuelle Format exportieren oder in einem Standardformat "
@@ -356,7 +369,7 @@ msgstr "Molekül exportieren"
 
 #: mainwindow.cpp:2135
 msgid "Saving File in Progress…"
-msgstr "Datei wird gespeichert …"
+msgstr "Datei wird gespeichert…"
 
 #: mainwindow.cpp:2137
 #, qt-format
@@ -396,11 +409,11 @@ msgstr "&Testen"
 
 #: mainwindow.cpp:2419
 msgid "&Record Test…"
-msgstr ""
+msgstr "&Test aufnehmen…"
 
 #: mainwindow.cpp:2422
 msgid "&Play Test…"
-msgstr ""
+msgstr "&Test abspielen…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -420,7 +433,7 @@ msgstr "&Neu"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2444:52
 msgid "&Open…"
-msgstr "&Öffnen …"
+msgstr "&Öffnen…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -442,7 +455,7 @@ msgstr "&Sichern"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2481:103
 msgid "Save &As…"
-msgstr "Speichern &als …"
+msgstr "Speichern &als…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -452,15 +465,15 @@ msgstr "&Exportieren"
 
 #: mainwindow.cpp:2495
 msgid "&Molecule…"
-msgstr "&Molekül …"
+msgstr "&Molekül…"
 
 #: mainwindow.cpp:2502
 msgid "Export Molecule…"
-msgstr "Molekül exportieren …"
+msgstr "Molekül exportieren…"
 
 #: mainwindow.cpp:2509
 msgid "&Graphics…"
-msgstr "&Grafik …"
+msgstr "&Grafik…"
 
 #: mainwindow.cpp:2516
 msgid "Export Graphics…"
@@ -478,7 +491,7 @@ msgstr "&Beenden"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2534:190
 msgid "Open Recent"
-msgstr "vor Kurzem geöffnet"
+msgstr "Vor Kurzem geöffnet"
 
 #: mainwindow.cpp:2548
 msgid "No recent files"
@@ -496,7 +509,7 @@ msgstr "Grafiken &kopieren"
 
 #: mainwindow.cpp:2575
 msgid "Ctrl+Alt+C"
-msgstr "Strg+Alt+N"
+msgstr "Strg+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -506,11 +519,11 @@ msgstr "&Ansicht"
 
 #: mainwindow.cpp:2589
 msgid "Set Background Color…"
-msgstr "Hintergrundfarbe einstellen …"
+msgstr "Hintergrundfarbe einstellen…"
 
 #: mainwindow.cpp:2593
 msgid "Rendering…"
-msgstr "Wiedergabe …"
+msgstr "Wiedergabe…"
 
 #: mainwindow.cpp:2601
 msgid "Projection"
@@ -530,11 +543,11 @@ msgstr "&Erweiterungen"
 
 #: mainwindow.cpp:2630
 msgid "User Interface Language…"
-msgstr "Sprache der Benutzeroberfläche …"
+msgstr "Sprache der Benutzeroberfläche…"
 
 #: mainwindow.cpp:2634
 msgid "&Periodic Table…"
-msgstr "&Periodensystem …"
+msgstr "&Periodensystem…"
 
 #: mainwindow.cpp:2640 menubuilder.cpp:120
 msgid "&Help"
@@ -761,7 +774,7 @@ msgstr "Zur gespeicherten Version zurückkehren"
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Set &Background Color…"
-msgstr "&Hintergrundfarbe einstellen …"
+msgstr "&Hintergrundfarbe einstellen…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
