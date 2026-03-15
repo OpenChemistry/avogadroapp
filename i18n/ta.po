@@ -4,13 +4,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 # தமிழ்நேரம் <anishprabu.t@gmail.com>, 2024, 2025.
 # DJ Aswin <imaswin2604@gmail.com>, 2025.
+# தமிழ்நேரம் <tamilneram247@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-14 17:20+0000\n"
-"PO-Revision-Date: 2025-11-03 04:51+0000\n"
-"Last-Translator: DJ Aswin <imaswin2604@gmail.com>\n"
+"PO-Revision-Date: 2026-03-15 19:09+0000\n"
+"Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ta/>\n"
 "Language: ta\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14.1-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -214,7 +215,7 @@ msgstr ""
 
 #: mainwindow.cpp:1325
 msgid "Keep Files"
-msgstr ""
+msgstr "கோப்புகளை வைத்திருங்கள்"
 
 #: mainwindow.cpp:1410
 msgid "Let’s finish your setup"
@@ -288,7 +289,7 @@ msgstr "பொதுவான பட வடிவங்கள்"
 
 #: mainwindow.cpp:1816
 msgid "All files"
-msgstr "அனைத்து கோப்புகள்"
+msgstr "அனைத்து கோப்புகள்"
 
 #: mainwindow.cpp:1816
 msgid "BMP"
