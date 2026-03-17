@@ -41,6 +41,7 @@
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
+#include <QtCore/QDateTime>
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
@@ -325,6 +326,26 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
               });
       extension->registerCommands();
       m_extensions.append(extension);
+    }
+  }
+
+  // Clean the pixi cache if it's been more than 30 days
+  QSettings settings;
+  QDateTime lastCleaned = settings.value("pixi/lastCacheClean").toDateTime();
+  QDateTime now = QDateTime::currentDateTime();
+  if (!lastCleaned.isValid() || lastCleaned.daysTo(now) > 30) {
+#ifdef Q_OS_WIN
+    QString pixiPath =
+      QtGui::Utilities::findExecutablePath(QStringLiteral("pixi.exe"));
+#else
+    QString pixiPath =
+      QtGui::Utilities::findExecutablePath(QStringLiteral("pixi"));
+#endif
+    if (!pixiPath.isEmpty()) {
+      QProcess::startDetached(pixiPath, QStringList() << "clean"
+                                                      << "cache"
+                                                      << "-y");
+      settings.setValue("pixi/lastCacheClean", now);
     }
   }
 
