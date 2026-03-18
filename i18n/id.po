@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-14 17:20+0000\n"
-"PO-Revision-Date: 2026-03-08 12:09+0000\n"
+"PO-Revision-Date: 2026-03-17 06:09+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/id/>\n"
@@ -65,7 +65,7 @@ msgstr "Tidak ada format file yang diatur di BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:42 backgroundfileformat.cpp:119
 msgid "No file name set in BackgroundFileFormat!"
-msgstr "Tidak ada nama berkas yang ditetapkan dalam BackgroundFileFormat!"
+msgstr "Tidak ada nama file yang ditetapkan dalam BackgroundFileFormat!"
 
 #: mainwindow.cpp:379
 msgid "Ready…"
@@ -135,12 +135,12 @@ msgstr "Buka File Kimia"
 #: mainwindow.cpp:964 mainwindow.cpp:988 mainwindow.cpp:1873
 #: mainwindow.cpp:3120
 msgid "Cannot open file"
-msgstr "Tidak dapat membuka berkas"
+msgstr "Tidak dapat membuka file"
 
 #: mainwindow.cpp:965 mainwindow.cpp:989 mainwindow.cpp:1874
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Tidak dapat membuka berkas %1"
+msgstr "Tidak dapat membuka file %1"
 
 #: mainwindow.cpp:978
 msgid "Open Molecule"
@@ -203,7 +203,7 @@ msgstr ""
 
 #: mainwindow.cpp:1315
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Ditemukan File Avogadro Sebelumnya"
 
 #: mainwindow.cpp:1317
 #, qt-format
@@ -213,14 +213,18 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"File dari versi Avogadro sebelumnya ditemukan di direktori plugin, "
+"menggunakan ruang sebesar %1.\n"
+"\n"
+"File-file ini tidak lagi diperlukan dan dapat dihapus dengan aman."
 
 #: mainwindow.cpp:1324
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Hapus File Lama"
 
 #: mainwindow.cpp:1325
 msgid "Keep Files"
-msgstr ""
+msgstr "Simpan File"
 
 #: mainwindow.cpp:1410
 msgid "Let’s finish your setup"
@@ -249,26 +253,26 @@ msgstr "Ini mungkin memerlukan koneksi Internet."
 
 #: mainwindow.cpp:1424
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Instal plugin yang diperbarui?"
 
 #: mainwindow.cpp:1425
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Plugin berikut tersedia:"
 
 #: mainwindow.cpp:1426
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "Apakah Anda ingin menginstalnya?"
 
 #: mainwindow.cpp:1465
 msgid "Recover Autosaved Files"
-msgstr "Pulihkan Berkas yang Tersimpan Otomatis"
+msgstr "Pulihkan File yang Tersimpan Otomatis"
 
 #: mainwindow.cpp:1466
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
-"Berkas simpan otomatis ditemukan dari sesi sebelumnya.\n"
+"File simpan otomatis ditemukan dari sesi sebelumnya.\n"
 "Apakah Anda ingin memulihkannya?"
 
 #: mainwindow.cpp:1525
@@ -282,6 +286,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 4.0 atau yang lebih baru diperlukan, keluar.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1527
 msgid "Unknown error"
@@ -299,7 +306,7 @@ msgstr "Format gambar yang pada umumnya"
 
 #: mainwindow.cpp:1816
 msgid "All files"
-msgstr "Semua berkas"
+msgstr "Semua file"
 
 #: mainwindow.cpp:1816
 msgid "BMP"
@@ -326,7 +333,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:1843
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Tidak dapat menyimpan berkas %1."
+msgstr "Tidak dapat menyimpan file %1."
 
 #: mainwindow.cpp:1960
 msgid ""

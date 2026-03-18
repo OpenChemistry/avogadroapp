@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-14 17:20+0000\n"
-"PO-Revision-Date: 2026-03-10 08:09+0000\n"
+"PO-Revision-Date: 2026-03-17 06:09+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ro/>\n"
@@ -198,7 +198,7 @@ msgstr ""
 
 #: mainwindow.cpp:1315
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "S-au găsit fișiere Avogadro dintr-o versiune anterioară"
 
 #: mainwindow.cpp:1317
 #, qt-format
@@ -208,14 +208,18 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"În directorul „plugins” au fost găsite fișiere dintr-o versiune anterioară a "
+"programului Avogadro, care ocupă %1 din spațiu.\n"
+"\n"
+"Aceste fișiere nu mai sunt necesare și pot fi șterse în siguranță."
 
 #: mainwindow.cpp:1324
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Elimină fișierele vechi"
 
 #: mainwindow.cpp:1325
 msgid "Keep Files"
-msgstr ""
+msgstr "Păstrează fișierele"
 
 #: mainwindow.cpp:1410
 msgid "Let’s finish your setup"
@@ -278,6 +282,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"Se necesită OpenGL 4.0 sau o versiune mai mare, se iese.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1527
 msgid "Unknown error"
