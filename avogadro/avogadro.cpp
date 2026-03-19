@@ -115,6 +115,11 @@ int main(int argc, char* argv[])
   if (oldQtVersion || currentOS.majorVersion() < 26) {
     QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
   }
+#if QT_VERSION >= QT_VERSION_CHECK(6, 8, 0)
+  // Use Qt-managed popup windows for combo boxes and context menus.
+  // Native macOS popups can fail to appear in windows with QOpenGLWidget.
+  QCoreApplication::setAttribute(Qt::AA_DontUseNativeMenuWindows);
+#endif
 #endif
 
   QCoreApplication::setOrganizationName("OpenChemistry");
