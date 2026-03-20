@@ -8,9 +8,6 @@
 
 #include <avogadro/qtgui/viewfactory.h>
 #include <avogadro/qtopengl/glwidget.h>
-#ifdef AVO_USE_VTK
-#include <avogadro/vtk/vtkglwidget.h>
-#endif
 
 namespace Avogadro {
 
