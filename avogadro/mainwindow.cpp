@@ -97,10 +97,6 @@
 // RPC functionality is provided by the local rpc library
 // The registerMoleQueue() function is currently disabled
 
-#ifdef AVO_USE_VTK
-#include <avogadro/vtk/vtkglwidget.h>
-#endif
-
 namespace Avogadro {
 
 #ifdef QTTESTING
@@ -242,9 +238,6 @@ using QtOpenGL::GLWidget;
 using QtPlugins::PluginManager;
 using std::string;
 using std::vector;
-#ifdef AVO_USE_VTK
-using VTK::vtkGLWidget;
-#endif
 
 MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   : m_molecule(nullptr)
@@ -814,11 +807,6 @@ void MainWindow::setMolecule(Molecule* mol)
     setWidgetMolecule(glWidget, mol);
     glWidget->setFocus();
   }
-#ifdef AVO_USE_VTK
-  else if (auto* vtkWidget = qobject_cast<vtkGLWidget*>(w)) {
-    setWidgetMolecule(vtkWidget, mol);
-  }
-#endif
 }
 
 void MainWindow::markMoleculeDirty()
@@ -1588,11 +1576,6 @@ void MainWindow::layerActivated(const QModelIndex& idx)
       if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
         glWidget->updateScene();
       }
-#ifdef AVO_USE_VTK
-      else if (auto* vtkWidget = qobject_cast<vtkGLWidget*>(w)) {
-        vtkWidget->updateScene();
-      }
-#endif
     }
   }
   refreshDisplayTypes();
@@ -1752,27 +1735,6 @@ void MainWindow::viewActivated(QWidget* widget)
     }
     ActiveObjects::instance().setActiveGLWidget(glWidget);
   }
-#ifdef AVO_USE_VTK
-  else if (auto* vtkWidget = qobject_cast<vtkGLWidget*>(widget)) {
-    bool firstRun = populatePluginModel(vtkWidget->sceneModel(), this);
-    m_sceneTreeView->setModel(&vtkWidget->sceneModel());
-
-    if (firstRun) {
-      setActiveTool("Navigator");
-      vtkWidget->updateScene();
-    } else {
-      m_moleculeModel->setActiveMolecule(vtkWidget->molecule());
-      m_layerModel->addMolecule(m_molecule);
-    }
-    if (m_molecule != vtkWidget->molecule() && vtkWidget->molecule()) {
-      m_rwMolecule = nullptr;
-      m_molecule = vtkWidget->molecule();
-      emit moleculeChanged(m_molecule);
-      m_moleculeModel->setActiveMolecule(m_molecule);
-      m_layerModel->addMolecule(m_molecule);
-    }
-  }
-#endif
   updateWindowTitle();
   activeMoleculeEdited();
 }
@@ -2213,18 +2175,9 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 {
   ScenePluginModel* scenePluginModel(nullptr);
   GLWidget* glWidget(nullptr);
-#ifdef AVO_USE_VTK
-  VTK::vtkGLWidget* vtkWidget(nullptr);
-#endif
   if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
     scenePluginModel = &glWidget->sceneModel();
   }
-#ifdef AVO_USE_VTK
-  else if ((vtkWidget = qobject_cast<VTK::vtkGLWidget*>(
-              m_multiViewWidget->activeWidget()))) {
-    scenePluginModel = &vtkWidget->sceneModel();
-  }
-#endif
 
   //  foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
   //    scene->setEnabled(false);
@@ -2238,28 +2191,15 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 
   if (glWidget)
     glWidget->updateScene();
-#ifdef AVO_USE_VTK
-  else if (vtkWidget)
-    vtkWidget->updateScene();
-#endif
 }
 
 void MainWindow::setDisabledDisplayTypes(QStringList displayTypes)
 {
   ScenePluginModel* scenePluginModel(nullptr);
   GLWidget* glWidget(nullptr);
-#ifdef AVO_USE_VTK
-  VTK::vtkGLWidget* vtkWidget(nullptr);
-#endif
   if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
     scenePluginModel = &glWidget->sceneModel();
   }
-#ifdef AVO_USE_VTK
-  else if ((vtkWidget = qobject_cast<VTK::vtkGLWidget*>(
-              m_multiViewWidget->activeWidget()))) {
-    scenePluginModel = &vtkWidget->sceneModel();
-  }
-#endif
 
   foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
     foreach (const QString& name, displayTypes)
@@ -2268,10 +2208,6 @@ void MainWindow::setDisabledDisplayTypes(QStringList displayTypes)
 
   if (glWidget)
     glWidget->updateScene();
-#ifdef AVO_USE_VTK
-  else if (vtkWidget)
-    vtkWidget->updateScene();
-#endif
 }
 
 void MainWindow::undoEdit()
