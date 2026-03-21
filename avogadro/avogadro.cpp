@@ -99,6 +99,26 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext& context,
   ts << message << Qt::endl;
 }
 
+// Fixes issues with Nvidia drivers giving a GLES-style context instead of
+// a Desktop context.
+// Taken from https://github.com/openscad/openscad/pull/6711
+void configureOpenGLContext()
+{
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+
+  if (qEnvironmentVariableIsEmpty("QT_OPENGL")) {
+    QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
+  }
+
+  auto format = QSurfaceFormat::defaultFormat();
+  format.setRenderableType(QSurfaceFormat::OpenGL);
+  format.setProfile(QSurfaceFormat::CompatibilityProfile);
+  if (format.depthBufferSize() < 24) format.setDepthBufferSize(24);
+  if (format.stencilBufferSize() < 8) format.setStencilBufferSize(8);
+  QSurfaceFormat::setDefaultFormat(format);
+#endif
+}
+
 int main(int argc, char* argv[])
 {
 #ifdef Q_OS_MAC
@@ -126,6 +146,8 @@ int main(int argc, char* argv[])
   QCoreApplication::setOrganizationDomain("openchemistry.org");
   QCoreApplication::setApplicationName("Avogadro");
   QGuiApplication::setDesktopFileName("org.openchemistry.Avogadro2");
+
+  configureOpenGLContext();
 
   QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
