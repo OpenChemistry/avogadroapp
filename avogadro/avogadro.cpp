@@ -113,8 +113,10 @@ void configureOpenGLContext()
   auto format = QSurfaceFormat::defaultFormat();
   format.setRenderableType(QSurfaceFormat::OpenGL);
   format.setProfile(QSurfaceFormat::CompatibilityProfile);
-  if (format.depthBufferSize() < 24) format.setDepthBufferSize(24);
-  if (format.stencilBufferSize() < 8) format.setStencilBufferSize(8);
+  if (format.depthBufferSize() < 24)
+    format.setDepthBufferSize(24);
+  if (format.stencilBufferSize() < 8)
+    format.setStencilBufferSize(8);
   QSurfaceFormat::setDefaultFormat(format);
 #endif
 }
