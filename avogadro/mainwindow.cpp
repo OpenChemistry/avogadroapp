@@ -399,7 +399,8 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   auto* nextShortcut = new QShortcut(QKeySequence::NextChild, this);
   connect(nextShortcut, &QShortcut::activated, this, &MainWindow::nextMolecule);
 
-  auto* prevShortcut = new QShortcut(QKeySequence::PreviousChild, this);
+  // QKeySequence::PreviousChild not working for some reason
+  auto* prevShortcut = new QShortcut(QKeySequence("Ctrl+Shift+Tab"), this);
   connect(prevShortcut, &QShortcut::activated, this, &MainWindow::previousMolecule);
 
 #ifdef _3DCONNEXION
