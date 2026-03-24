@@ -62,6 +62,7 @@
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeySequence>
+#include <QtGui/QShortcut>
 #include <QtGui/QPalette>
 
 #include <QtNetwork/QNetworkAccessManager>
@@ -393,6 +394,13 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   statusBar()->showMessage(tr("Ready…"), 2000);
 
   updateWindowTitle();
+
+  // Add non-action shortcuts
+  auto* nextShortcut = new QShortcut(QKeySequence::NextChild, this);
+  connect(nextShortcut, &QShortcut::activated, this, &MainWindow::nextMolecule);
+
+  auto* prevShortcut = new QShortcut(QKeySequence::PreviousChild, this);
+  connect(prevShortcut, &QShortcut::activated, this, &MainWindow::previousMolecule);
 
 #ifdef _3DCONNEXION
   GLWidget* glWidget =
@@ -1616,33 +1624,39 @@ void MainWindow::moleculeActivated(const QModelIndex& idx)
 void MainWindow::nextMolecule()
 {
   QList<Molecule*> molecules = m_moleculeModel->molecules();
-  QModelIndex idxNext = m_moleculeTreeView->indexBelow(m_moleculeTreeView->currentIndex());
-
-  // If we're at the last molecule, loop back around to the beginning
-  if (idxNext.isValid() && idxNext.row() == molecules.size()) {
-    setMolecule(molecules[0]);
-  } else {
-    auto* obj = static_cast<QObject*>(idxNext.internalPointer());
-    if (auto* mol = qobject_cast<Molecule*>(obj)) {
-      setMolecule(mol);
-    }
+  // Only 1 molecule, do nothing
+  if (molecules.size() < 2) {
+    return;
   }
+
+  int currentMol = molecules.indexOf(m_molecule);
+  // -1 indicates our molecule isn't in the list.
+  // Something has probably gone very wrong here if this is the case.
+  if (currentMol < 0) {
+    return;
+  }
+  // Modulo the total size because then if we are at the max we roll back to zero.
+  int nextMol = (currentMol + 1) % molecules.size();
+  setMolecule(molecules[nextMol]);
 }
 
 void MainWindow::previousMolecule()
 {
   QList<Molecule*> molecules = m_moleculeModel->molecules();
-  QModelIndex idxPrev = m_moleculeTreeView->indexAbove(m_moleculeTreeView->currentIndex());
-
-  // If we're at the first molecule, loop back around to the end
-  if (idxPrev.isValid() && idxPrev.row() == 0) {
-    setMolecule(molecules[molecules.size() - 1]);
-  } else {
-    auto* obj = static_cast<QObject*>(idxPrev.internalPointer());
-    if (auto* mol = qobject_cast<Molecule*>(obj)) {
-      setMolecule(mol);
-    }
+  // Only 1 molecule, do nothing
+  if (molecules.size() < 2) {
+    return;
   }
+
+  int currentMol = molecules.indexOf(m_molecule);
+  // -1 indicates our molecule isn't in the list.
+  // Something has probably gone very wrong here if this is the case.
+  if (currentMol < 0) {
+    return;
+  }
+  // 0 is first molecule, e.g. (0 - 1 + 6) % 6 = 5 <- last molecule
+  int prevMol = (currentMol - 1 + molecules.size()) % molecules.size();
+  setMolecule(molecules[prevMol]);
 }
 
 void MainWindow::sceneItemActivated(const QModelIndex& idx)
