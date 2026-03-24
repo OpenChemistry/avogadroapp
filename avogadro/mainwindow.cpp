@@ -569,6 +569,8 @@ void MainWindow::setupInterface()
           &MainWindow::moleculeActivated);
   connect(m_moleculeTreeView, &QAbstractItemView::clicked, this,
           &MainWindow::moleculeActivated);
+  
+  
 
   m_layerModel = new QtGui::LayerModel(this);
   m_layerTreeView->setModel(m_layerModel);
@@ -1607,6 +1609,38 @@ void MainWindow::moleculeActivated(const QModelIndex& idx)
         }
       }
       m_moleculeModel->removeItem(mol);
+    }
+  }
+}
+
+void MainWindow::nextMolecule()
+{
+  QList<Molecule*> molecules = m_moleculeModel->molecules();
+  QModelIndex idxNext = m_moleculeTreeView->indexBelow(m_moleculeTreeView->currentIndex());
+
+  // If we're at the last molecule, loop back around to the beginning
+  if (idxNext.isValid() && idxNext.row() == molecules.size()) {
+    setMolecule(molecules[0]);
+  } else {
+    auto* obj = static_cast<QObject*>(idxNext.internalPointer());
+    if (auto* mol = qobject_cast<Molecule*>(obj)) {
+      setMolecule(mol);
+    }
+  }
+}
+
+void MainWindow::previousMolecule()
+{
+  QList<Molecule*> molecules = m_moleculeModel->molecules();
+  QModelIndex idxPrev = m_moleculeTreeView->indexAbove(m_moleculeTreeView->currentIndex());
+
+  // If we're at the first molecule, loop back around to the end
+  if (idxPrev.isValid() && idxPrev.row() == 0) {
+    setMolecule(molecules[molecules.size() - 1]);
+  } else {
+    auto* obj = static_cast<QObject*>(idxPrev.internalPointer());
+    if (auto* mol = qobject_cast<Molecule*>(obj)) {
+      setMolecule(mol);
     }
   }
 }

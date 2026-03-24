@@ -387,6 +387,16 @@ private slots:
   void moleculeActivated(const QModelIndex& index);
 
   /**
+   * @brief Shortcut to move to the next molecule (down in the list)
+   */
+  void nextMolecule();
+
+  /**
+   * @brief Shortcut to move to the previous molecule (up in the list)
+   */
+  void previousMolecule();
+
+  /**
    * @brief Change the active layer
    */
   void layerActivated(const QModelIndex& index);
@@ -469,6 +479,7 @@ private:
   QAction* m_copyImage;
   QAction* m_viewPerspective;
   QAction* m_viewOrthographic;
+  QAction* m_nextMolecule;
 
   ViewFactory* m_viewFactory;
 
