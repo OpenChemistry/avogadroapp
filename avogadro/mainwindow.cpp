@@ -62,6 +62,7 @@
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeySequence>
+#include <QtGui/QShortcut>
 #include <QtGui/QPalette>
 
 #include <QtNetwork/QNetworkAccessManager>
@@ -394,6 +395,14 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 
   updateWindowTitle();
 
+  // Add non-action shortcuts
+  auto* nextShortcut = new QShortcut(QKeySequence::NextChild, this);
+  connect(nextShortcut, &QShortcut::activated, this, &MainWindow::nextMolecule);
+
+  // QKeySequence::PreviousChild not working for some reason
+  auto* prevShortcut = new QShortcut(QKeySequence("Ctrl+Shift+Tab"), this);
+  connect(prevShortcut, &QShortcut::activated, this, &MainWindow::previousMolecule);
+
 #ifdef _3DCONNEXION
   GLWidget* glWidget =
     qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
@@ -569,6 +578,8 @@ void MainWindow::setupInterface()
           &MainWindow::moleculeActivated);
   connect(m_moleculeTreeView, &QAbstractItemView::clicked, this,
           &MainWindow::moleculeActivated);
+  
+  
 
   m_layerModel = new QtGui::LayerModel(this);
   m_layerTreeView->setModel(m_layerModel);
@@ -1609,6 +1620,44 @@ void MainWindow::moleculeActivated(const QModelIndex& idx)
       m_moleculeModel->removeItem(mol);
     }
   }
+}
+
+void MainWindow::nextMolecule()
+{
+  QList<Molecule*> molecules = m_moleculeModel->molecules();
+  // Only 1 molecule, do nothing
+  if (molecules.size() < 2) {
+    return;
+  }
+
+  int currentMol = molecules.indexOf(m_molecule);
+  // -1 indicates our molecule isn't in the list.
+  // Something has probably gone very wrong here if this is the case.
+  if (currentMol < 0) {
+    return;
+  }
+  // Modulo the total size because then if we are at the max we roll back to zero.
+  int nextMol = (currentMol + 1) % molecules.size();
+  setMolecule(molecules[nextMol]);
+}
+
+void MainWindow::previousMolecule()
+{
+  QList<Molecule*> molecules = m_moleculeModel->molecules();
+  // Only 1 molecule, do nothing
+  if (molecules.size() < 2) {
+    return;
+  }
+
+  int currentMol = molecules.indexOf(m_molecule);
+  // -1 indicates our molecule isn't in the list.
+  // Something has probably gone very wrong here if this is the case.
+  if (currentMol < 0) {
+    return;
+  }
+  // 0 is first molecule, e.g. (0 - 1 + 6) % 6 = 5 <- last molecule
+  int prevMol = (currentMol - 1 + molecules.size()) % molecules.size();
+  setMolecule(molecules[prevMol]);
 }
 
 void MainWindow::sceneItemActivated(const QModelIndex& idx)
