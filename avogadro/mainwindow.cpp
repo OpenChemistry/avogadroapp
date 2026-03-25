@@ -399,7 +399,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 #ifdef Q_OS_MAC
   auto* nextShortcut = new QShortcut(QKeySequence("Meta+Tab"), this);
 #else
-  auto* nextShortcut = new QShortcut(QKeySequence::NextChild, this);
+  auto* nextShortcut = new QShortcut(QKeySequence("Ctrl+Tab"), this);
 #endif
   connect(nextShortcut, &QShortcut::activated, this, &MainWindow::nextMolecule);
 
