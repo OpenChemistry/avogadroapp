@@ -62,8 +62,8 @@
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeySequence>
-#include <QtGui/QShortcut>
 #include <QtGui/QPalette>
+#include <QtGui/QShortcut>
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -396,12 +396,21 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   updateWindowTitle();
 
   // Add non-action shortcuts
+#ifdef Q_OS_MAC
+  auto* nextShortcut = new QShortcut(QKeySequence("Meta+Tab"), this);
+#else
   auto* nextShortcut = new QShortcut(QKeySequence::NextChild, this);
+#endif
   connect(nextShortcut, &QShortcut::activated, this, &MainWindow::nextMolecule);
 
   // QKeySequence::PreviousChild not working for some reason
+#ifdef Q_OS_MAC
+  auto* prevShortcut = new QShortcut(QKeySequence("Meta+Shift+Tab"), this);
+#else
   auto* prevShortcut = new QShortcut(QKeySequence("Ctrl+Shift+Tab"), this);
-  connect(prevShortcut, &QShortcut::activated, this, &MainWindow::previousMolecule);
+#endif
+  connect(prevShortcut, &QShortcut::activated, this,
+          &MainWindow::previousMolecule);
 
 #ifdef _3DCONNEXION
   GLWidget* glWidget =
@@ -578,8 +587,6 @@ void MainWindow::setupInterface()
           &MainWindow::moleculeActivated);
   connect(m_moleculeTreeView, &QAbstractItemView::clicked, this,
           &MainWindow::moleculeActivated);
-  
-  
 
   m_layerModel = new QtGui::LayerModel(this);
   m_layerTreeView->setModel(m_layerModel);
@@ -1636,7 +1643,8 @@ void MainWindow::nextMolecule()
   if (currentMol < 0) {
     return;
   }
-  // Modulo the total size because then if we are at the max we roll back to zero.
+  // Modulo the total size because then if we are at the max we roll back to
+  // zero.
   int nextMol = (currentMol + 1) % molecules.size();
   setMolecule(molecules[nextMol]);
 }
