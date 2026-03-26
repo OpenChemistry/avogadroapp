@@ -12,13 +12,14 @@
 # Adrian Lopez <adrlop1012@gmail.com>, 2025.
 # Saúl Palacios <palacios22c@gmail.com>, 2025.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
+# "Juan E. Arias Martinez" <jeam.professional@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-03-14 17:32+0000\n"
-"Last-Translator: Geoff Hutchison <geoff.hutchison@gmail.com>\n"
+"PO-Revision-Date: 2026-03-26 02:09+0000\n"
+"Last-Translator: \"Juan E. Arias Martinez\" <jeam.professional@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -49,7 +50,7 @@ msgstr "Versión de la Biblioteca de Avogadro:"
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:34:15
 msgid "Qt Version:"
-msgstr "Version de QT:"
+msgstr "Versión de Qt:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
@@ -68,7 +69,7 @@ msgstr "¡No hay formato de archivo establecido en «BackgroundFileFormat»!"
 #: backgroundfileformat.cpp:42 backgroundfileformat.cpp:119
 msgid "No file name set in BackgroundFileFormat!"
 msgstr ""
-"No se ha establecido ningún nombre de archivo en «BackgroundFileFormat»!"
+"¡No se ha establecido ningún nombre de archivo en «BackgroundFileFormat»!"
 
 #: mainwindow.cpp:393
 msgid "Ready…"
@@ -80,11 +81,11 @@ msgstr "Herramienta"
 
 #: mainwindow.cpp:486
 msgid "Display Types"
-msgstr "Mostrar Tipos"
+msgstr "Tipos de Representación Gráfica"
 
 #: mainwindow.cpp:496
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Configuración de Tipos de Representación Grafica"
 
 #: mainwindow.cpp:500
 msgid "Files"
@@ -117,11 +118,11 @@ msgstr "%1 %2 - Avogadro %3"
 
 #: mainwindow.cpp:904
 msgid "Restart needed"
-msgstr "En necesario reiniciar el programa"
+msgstr "Es necesario reiniciar el programa"
 
 #: mainwindow.cpp:905
 msgid "Please restart Avogadro to use the new language."
-msgstr "Reinicie Avogadro para usar el nuevo idioma."
+msgstr "Por favor reinicie Avogadro para usar el nuevo idioma."
 
 #: mainwindow.cpp:948 mainwindow.cpp:1970
 msgid "Chemical Markup Language"
@@ -143,7 +144,7 @@ msgstr "No se puede abrir el archivo"
 #: mainwindow.cpp:974 mainwindow.cpp:998 mainwindow.cpp:1857
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr "No se puede abrir el archivo especificado %1"
+msgstr "No se puede abrir el archivo proveído %1"
 
 #: mainwindow.cpp:987
 msgid "Open Molecule"
@@ -206,7 +207,7 @@ msgstr ""
 
 #: mainwindow.cpp:1324
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Se Encontraron Previos Archivos de Avogadro"
 
 #: mainwindow.cpp:1326
 #, qt-format
@@ -216,48 +217,54 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Archivos de una versión previa de Avogadro se encontraron en el directorio "
+"de extensiones, usando %1 de espacio.\n"
+"\n"
+"Estos archivos ya no se necesitan y se pueden remover de forma segura."
 
 #: mainwindow.cpp:1333
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Remover Archivos Antiguos"
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
-msgstr ""
+msgstr "Conservar Archivos"
 
 #: mainwindow.cpp:1419
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Terminemos su configuración"
 
 #: mainwindow.cpp:1420
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro puede generar archivos de entrada para Gaussian, ORCA, y otros "
+"programas de química computacional."
 
 #: mainwindow.cpp:1425
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Esto requiere configuración que bajará y configurará Python."
 
 #: mainwindow.cpp:1427
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Esto requiere la configuración de un entorno de Python."
 
 #: mainwindow.cpp:1431
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Esto puede requerir de una conexión a Internet."
 
 #: mainwindow.cpp:1433
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "¿ Instalar las extensiones actualizadas?"
 
 #: mainwindow.cpp:1434
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Las siguientes extensiones están disponibles:"
 
 #: mainwindow.cpp:1435
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "¿ Le gustaría instalarlos?"
 
 #: mainwindow.cpp:1474
 msgid "Recover Autosaved Files"
