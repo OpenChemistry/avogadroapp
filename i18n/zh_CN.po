@@ -8,7 +8,7 @@
 # Hugel <qihu@nfschina.com>, 2022.
 # alchemistcai <alchemistcai@163.com>, 2022, 2023.
 # 黄子腾 <still_down@outlook.com>, 2023.
-# Chiyu Liang <532117255@qq.com>, 2023, 2024.
+# Chiyu Liang <532117255@qq.com>, 2023, 2024, 2026.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2023.
 # KeysBits <KeysBytes@gmail.com>, 2024.
 # zhang tengshuo <zhangtengshuo@gmail.com>, 2024.
@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2025-03-15 11:32+0000\n"
-"Last-Translator: gmkeebiy <gmkeebiy@sharklasers.com>\n"
+"PO-Revision-Date: 2026-03-28 05:09+0000\n"
+"Last-Translator: Chiyu Liang <532117255@qq.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -27,12 +27,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "分子编辑器和可视化工具"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -84,11 +84,11 @@ msgstr "显示类型"
 
 #: mainwindow.cpp:496
 msgid "Display Type Settings"
-msgstr ""
+msgstr "显示设置"
 
 #: mainwindow.cpp:500
 msgid "Files"
-msgstr ""
+msgstr "文件"
 
 #: mainwindow.cpp:511
 msgid "Layers"
@@ -206,7 +206,7 @@ msgstr ""
 
 #: mainwindow.cpp:1324
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "找到了之前的 Avogadro 文件"
 
 #: mainwindow.cpp:1326
 #, qt-format
@@ -216,24 +216,28 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"在插件目录中找到了之前版本的 Avogadro 文件，占用了%1的空间。\n"
+"\n"
+"这些文件不再需要，可以安全地移除。"
 
 #: mainwindow.cpp:1333
 msgid "Remove Old Files"
-msgstr ""
+msgstr "移除旧文件"
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
-msgstr ""
+msgstr "保留文件"
 
 #: mainwindow.cpp:1419
+#, fuzzy
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "完成初始设置"
 
 #: mainwindow.cpp:1420
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
-msgstr ""
+msgstr "Avogadro 可以生成用于 Gaussian，ORCA 等计算化学包的输入文件。"
 
 #: mainwindow.cpp:1425
 msgid "This requires setup that will download and configure Python."
@@ -249,19 +253,19 @@ msgstr ""
 
 #: mainwindow.cpp:1433
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "安装更新的插件？"
 
 #: mainwindow.cpp:1434
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "以下插件可用："
 
 #: mainwindow.cpp:1435
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "安装它们吗？"
 
 #: mainwindow.cpp:1474
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "恢复自动保存文件"
 
 #: mainwindow.cpp:1475
 msgid ""
@@ -289,7 +293,7 @@ msgstr "未知错误"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1 设置"
 
 #: mainwindow.cpp:1797
 msgid "Common image formats"
@@ -459,7 +463,7 @@ msgstr "图形(&G)…"
 
 #: mainwindow.cpp:2473
 msgid "Export Graphics…"
-msgstr ""
+msgstr "导出图像…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -559,7 +563,7 @@ msgstr "功能建议(&S)"
 
 #: mainwindow.cpp:2649
 msgid "untitled"
-msgstr ""
+msgstr "未命名"
 
 #: mainwindow.cpp:2679
 msgid "System Language"
