@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Avogadro package.
 # Temuri Doghonadze <temuri@delta-net.ge>, 2022.
 # Temuri Doghonadze <temuri.doghonadze@gmail.com>, 2022, 2023, 2024, 2026.
-# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2025.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 1.95.1\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-03-12 20:12+0000\n"
+"PO-Revision-Date: 2026-03-28 05:09+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ka/>\n"
@@ -209,11 +209,11 @@ msgstr ""
 
 #: mainwindow.cpp:1333
 msgid "Remove Old Files"
-msgstr ""
+msgstr "ძველი ფაილების წაშლა"
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
-msgstr ""
+msgstr "ფაილების შენარჩუნება"
 
 #: mainwindow.cpp:1419
 msgid "Let’s finish your setup"
@@ -270,6 +270,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"საჭიროა OpenGL 4.0 ან უფრო ახალი. გასვლა.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1536
 msgid "Unknown error"
