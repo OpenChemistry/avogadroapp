@@ -10,13 +10,14 @@
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
 # FX Coudert <fxcoudert@ik.me>, 2026.
 # Alexander Krappe <alexander.krappe@fu-berlin.de>, 2026.
+# Li Chaoyu <2395074867@qq.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-03-15 19:10+0000\n"
-"Last-Translator: Alexander Krappe <alexander.krappe@fu-berlin.de>\n"
+"PO-Revision-Date: 2026-03-31 14:09+0000\n"
+"Last-Translator: Li Chaoyu <2395074867@qq.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
 "Language: fr\n"
@@ -203,7 +204,7 @@ msgstr ""
 
 #: mainwindow.cpp:1324
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Fichers d'Avogadro Précédent trouvés"
 
 #: mainwindow.cpp:1326
 #, qt-format
