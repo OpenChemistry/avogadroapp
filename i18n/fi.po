@@ -4,13 +4,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Ricky Tigg <ricky.tigg@gmail.com>, 2024, 2025, 2026.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
 "PO-Revision-Date: 2026-03-31 14:09+0000\n"
-"Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fi/>\n"
 "Language: fi\n"
@@ -79,7 +81,7 @@ msgstr "Näyttötyypin asetukset"
 
 #: mainwindow.cpp:500
 msgid "Files"
-msgstr ""
+msgstr "Tiedostot"
 
 #: mainwindow.cpp:511
 msgid "Layers"
