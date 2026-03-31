@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-03-28 05:09+0000\n"
+"PO-Revision-Date: 2026-03-31 14:09+0000\n"
 "Last-Translator: Chiyu Liang <532117255@qq.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/avogadro/avogadroapp/zh_Hans/>\n"
@@ -229,9 +229,8 @@ msgid "Keep Files"
 msgstr "保留文件"
 
 #: mainwindow.cpp:1419
-#, fuzzy
 msgid "Let’s finish your setup"
-msgstr "完成初始设置"
+msgstr "让我们完成你的设置"
 
 #: mainwindow.cpp:1420
 msgid ""
@@ -241,15 +240,15 @@ msgstr "Avogadro 可以生成用于 Gaussian，ORCA 等计算化学包的输入�
 
 #: mainwindow.cpp:1425
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "这需要下载并配置 Python。"
 
 #: mainwindow.cpp:1427
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "这需要配置 Python 环境。"
 
 #: mainwindow.cpp:1431
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "这可能需要互联网连接。"
 
 #: mainwindow.cpp:1433
 msgid "Install updated plugins?"
@@ -272,6 +271,8 @@ msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"找到了上次会话中自动保存的文件。\n"
+"需要恢复它们吗？"
 
 #: mainwindow.cpp:1534
 msgid "Error: Failed to initialize OpenGL context"
@@ -284,6 +285,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"要求版本 4.0 及以上的 OpenGL，正在退出。\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1536
 msgid "Unknown error"
@@ -395,11 +399,11 @@ msgstr "测试(&T)"
 
 #: mainwindow.cpp:2376
 msgid "&Record Test…"
-msgstr ""
+msgstr "录制测试(&R)…"
 
 #: mainwindow.cpp:2379
 msgid "&Play Test…"
-msgstr ""
+msgstr "播放测试(&P)…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -687,6 +691,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">许可"
+"证： </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\"><span "
+"style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\">BSD 3-"
+"Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -910,7 +918,7 @@ msgstr "阴影强度："
 #. i18n: file: renderingdialog.ui:106
 #. i18n: ectx: property (toolTip), widget (QLabel, enableFog_label)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "用于提示深度的雾化效果"
 
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, enableFog_label)
@@ -940,32 +948,32 @@ msgstr "深度模糊："
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "深度虚化的强度"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "虚化强度："
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "深度虚化的位置"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
 msgid "Blur Position:"
-msgstr ""
+msgstr "虚化位置："
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "为边缘原子添加轮廓线"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
 msgid "Edge Outline:"
-msgstr ""
+msgstr "边缘轮廓："
 
 #. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
