@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
-# Ricky Tigg <ricky.tigg@gmail.com>, 2024, 2025.
+# Ricky Tigg <ricky.tigg@gmail.com>, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2025-03-01 05:03+0000\n"
+"PO-Revision-Date: 2026-03-31 14:09+0000\n"
 "Last-Translator: Ricky Tigg <ricky.tigg@gmail.com>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fi/>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.3-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Molekyylimuokkain ja visualisoija"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -75,7 +75,7 @@ msgstr "Näyttötyypit"
 
 #: mainwindow.cpp:496
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Näyttötyypin asetukset"
 
 #: mainwindow.cpp:500
 msgid "Files"
@@ -197,7 +197,7 @@ msgstr ""
 
 #: mainwindow.cpp:1324
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Löytyi aiempia Avogadro-tiedostoja"
 
 #: mainwindow.cpp:1326
 #, qt-format
@@ -207,58 +207,66 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Liitännäishakemistosta löytyi tiedostoja Avogadron aiemmasta versiosta, ja "
+"ne vievät %1 tilaa.\n"
+"\n"
+"Näitä tiedostoja ei enää tarvita, ja ne voidaan poistaa turvallisesti."
 
 #: mainwindow.cpp:1333
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Poista vanhat tiedostot"
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
-msgstr ""
+msgstr "Säilytä tiedostot"
 
 #: mainwindow.cpp:1419
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Viimeistellään asennus"
 
 #: mainwindow.cpp:1420
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro voi luoda syötetiedostoja Gaussianille, ORCAlle ja muille "
+"laskennallisen kemian paketeille."
 
 #: mainwindow.cpp:1425
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Tämä vaatii asennuksen, joka lataa ja määrittää Pythonin."
 
 #: mainwindow.cpp:1427
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Tämä vaatii Python-ympäristön määrittämisen."
 
 #: mainwindow.cpp:1431
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Tämä saattaa vaatia internetyhteyden."
 
 #: mainwindow.cpp:1433
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Asennetaanko päivitetyt liitännäiset?"
 
 #: mainwindow.cpp:1434
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Seuraavat liitännäiset ovat saatavilla:"
 
 #: mainwindow.cpp:1435
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "Haluatko asentaa ne?"
 
 #: mainwindow.cpp:1474
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Palauta automaattisesti tallennetut tiedostot"
 
 #: mainwindow.cpp:1475
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Automaattisen tallennuksen tiedostoja löytyi edellisestä istunnosta.\n"
+"Haluatko palauttaa ne?"
 
 #: mainwindow.cpp:1534
 msgid "Error: Failed to initialize OpenGL context"
@@ -271,6 +279,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL v. 4.0 tai uudempi vaaditaan, lopetetaan.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1536
 msgid "Unknown error"
@@ -280,7 +291,7 @@ msgstr "Tuntematon virhe"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1 Asetukset"
 
 #: mainwindow.cpp:1797
 msgid "Common image formats"
@@ -383,11 +394,11 @@ msgstr "&Testaus"
 
 #: mainwindow.cpp:2376
 msgid "&Record Test…"
-msgstr ""
+msgstr "&Nauhoita testi…"
 
 #: mainwindow.cpp:2379
 msgid "&Play Test…"
-msgstr ""
+msgstr "&Toista testi…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -451,7 +462,7 @@ msgstr "& Grafiikka…"
 
 #: mainwindow.cpp:2473
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Vie grafiikkaa…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -551,7 +562,7 @@ msgstr "&Ehdota ominaisuutta"
 
 #: mainwindow.cpp:2649
 msgid "untitled"
-msgstr ""
+msgstr "ilman otsikkoa"
 
 #: mainwindow.cpp:2679
 msgid "System Language"
@@ -675,6 +686,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
+"Lisenssi: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
+"<span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\">"
+"BSD 3-lauseke</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
