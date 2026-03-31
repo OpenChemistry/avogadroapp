@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-03-31 14:09+0000\n"
+"PO-Revision-Date: 2026-04-01 10:31+0000\n"
 "Last-Translator: Chiyu Liang <532117255@qq.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/avogadro/avogadroapp/zh_Hans/>\n"
@@ -106,7 +106,7 @@ msgstr "工具"
 
 #: mainwindow.cpp:843
 msgid "Untitled"
-msgstr "无标题"
+msgstr "未命名"
 
 #: mainwindow.cpp:848
 #, qt-format
@@ -155,7 +155,7 @@ msgstr "选择文件阅读器"
 
 #: mainwindow.cpp:1041
 msgid "Reading File"
-msgstr "读取文件"
+msgstr "读取文件中"
 
 #: mainwindow.cpp:1043
 #, qt-format
@@ -163,13 +163,13 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
-"打开文件“ %1”\n"
-"使用“ %2”"
+"使用 '%2'\n"
+"打开文件 '%1'"
 
 #: mainwindow.cpp:1116
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr "分子加载完毕 （%1 个原子， %2 个键）"
+msgstr "分子已加载 (%1 个原子，%2 根键)"
 
 #: mainwindow.cpp:1121
 msgid "File error"
@@ -181,7 +181,7 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
-"读取文件“ %1” 时出错：\n"
+"读取文件 '%1' 时出错：\n"
 "%2"
 
 #: mainwindow.cpp:1149
@@ -201,7 +201,7 @@ msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
-"保存“%1”时出错：\n"
+"保存 '%1' 时出错：\n"
 "%2"
 
 #: mainwindow.cpp:1324
@@ -216,7 +216,7 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
-"在插件目录中找到了之前版本的 Avogadro 文件，占用了%1的空间。\n"
+"在插件目录中找到了之前版本的 Avogadro 文件，占用了 %1 的空间。\n"
 "\n"
 "这些文件不再需要，可以安全地移除。"
 
@@ -264,7 +264,7 @@ msgstr "安装它们吗？"
 
 #: mainwindow.cpp:1474
 msgid "Recover Autosaved Files"
-msgstr "恢复自动保存文件"
+msgstr "恢复自动保存的文件"
 
 #: mainwindow.cpp:1475
 msgid ""
@@ -272,7 +272,7 @@ msgid ""
 "Would you like to recover them?"
 msgstr ""
 "找到了上次会话中自动保存的文件。\n"
-"需要恢复它们吗？"
+"恢复它们吗？"
 
 #: mainwindow.cpp:1534
 msgid "Error: Failed to initialize OpenGL context"
@@ -301,7 +301,7 @@ msgstr "%1 设置"
 
 #: mainwindow.cpp:1797
 msgid "Common image formats"
-msgstr "常见的图像格式"
+msgstr "常见图像格式"
 
 #: mainwindow.cpp:1799
 msgid "All files"
@@ -343,7 +343,7 @@ msgid ""
 msgstr ""
 "该文件是从非标准格式导入的，该格式可能无法写入分子中的所有信息。\n"
 "\n"
-"您希望导出为当前格式，还是以标准格式保存？"
+"导出为当前格式，还是标准格式？"
 
 #: mainwindow.cpp:1950
 msgid "Export"
@@ -584,7 +584,7 @@ msgstr "用户界面语言："
 #: mainwindow.cpp:2803
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr "所有受支持的格式（%1）;;所有文件（*）;;"
+msgstr "所有受支持格式 (%1);;所有文件 (*);;"
 
 #: mainwindow.cpp:2819
 msgid "Do you want to save the changes to the document?"
@@ -633,7 +633,7 @@ msgstr "版本更新"
 #: mainwindow.cpp:3057
 #, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "加载 '%1' 格式时出错。"
+msgstr "加载 '%1' 文件格式时出错。"
 
 #: mainwindow.cpp:3073
 msgid "Select file format"
@@ -923,17 +923,17 @@ msgstr "用于提示深度的雾化效果"
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, enableFog_label)
 msgid "Fog:"
-msgstr "雾效:"
+msgstr "雾化："
 
 #. i18n: file: renderingdialog.ui:140
 #. i18n: ectx: property (text), widget (QLabel, fogStrength_label)
 msgid "Fog Strength:"
-msgstr "雾效强度："
+msgstr "雾化强度："
 
 #. i18n: file: renderingdialog.ui:170
 #. i18n: ectx: property (text), widget (QLabel, fogPosition_label)
 msgid "Fog Position:"
-msgstr "雾效位置："
+msgstr "雾化位置："
 
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
