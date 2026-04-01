@@ -39,47 +39,61 @@
     <control>pointing</control>
     <display_length compare="ge">768</display_length>
   </recommends>
-  <url type="homepage">https://two.avogadro.cc/</url>
-  <url type="help">https://two.avogadro.cc/docs</url>
+  <url type="homepage">https://avogadro.cc/</url>
+  <url type="help">https://avogadro.cc/docs</url>
   <url type="faq">https://discuss.avogadro.cc/</url>
   <url type="bugtracker">https://github.com/OpenChemistry/avogadrolibs/issues</url>
   <url type="translate">https://hosted.weblate.org/engage/avogadro/</url>
   <url type="donation">https://opencollective.com/open-chemistry</url>
   <screenshots>
     <screenshot type="default">
-      <image>https://two.avogadro.cc/_images/home_screenshot_1.png</image>
+      <image>https://avogadro.cc/_images/home_screenshot_1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://two.avogadro.cc/_images/home_splash_1.png</image>
+      <image>https://avogadro.cc/_images/home_splash_1.png</image>
     </screenshot>
     <screenshot>
-      <image>https://two.avogadro.cc/_images/bondcentric.png</image>
+      <image>https://avogadro.cc/_images/bondcentric.png</image>
     </screenshot>
     <screenshot>
-      <image>https://two.avogadro.cc/_images/ferrocene.png</image>
+      <image>https://avogadro.cc/_images/ferrocene.png</image>
     </screenshot>
     <screenshot>
-      <image>https://two.avogadro.cc/_images/covid-spike.png</image>
+      <image>https://avogadro.cc/_images/covid-spike.png</image>
     </screenshot>
     <screenshot>
-      <image>https://two.avogadro.cc/_images/benzene-mo.png</image>
+      <image>https://avogadro.cc/_images/benzene-mo.png</image>
     </screenshot>
     <screenshot>
-      <image>https://two.avogadro.cc/_images/zeolite.png</image>
+      <image>https://avogadro.cc/_images/zeolite.png</image>
     </screenshot>
     <screenshot>
-      <image>https://two.avogadro.cc/_images/AuNP.png</image>
+      <image>https://avogadro.cc/_images/AuNP.png</image>
     </screenshot>
     <screenshot>
-      <image>https://two.avogadro.cc/_images/C180.png</image>
+      <image>https://avogadro.cc/_images/C180.png</image>
     </screenshot>
     <screenshot>
-      <image>https://two.avogadro.cc/_images/phenol-qtaim.png</image>
+      <image>https://avogadro.cc/_images/phenol-qtaim.png</image>
     </screenshot>
   </screenshots>
   <releases>
+      <release version="2.0.0" date="2026-04-01">
+      <url type="details">https://avogadro.cc/install/versions/v200.html</url>
+      <description>
+        <p>Highlights</p>
+        <ul>
+        <li>New plugin system will load menu commands, input generators, file formats, energy and electrostatic models, including installation of any required libraries and tools using [`pixi`](https://pixi.prefix.dev/latest/installation/) on Mac and Windows. (Highly recommended on Linux too)</li>
+        <li>New plugin install window and index, including over 20 plugins (and growing)</li>
+        <li>Faster geometry optimizations ~50% faster on all models, and up to 5-10x faster on large molecules using UFF.</li>
+        <li>Added a faster protocol for using external energy models, including ML potentials, XTB, and more.</li>
+        <li>Added a simple molecular dynamics mode to the AutoOpt tool, including with energy models.</li>
+        <li>Improved ORCA input generator, including syntax highlighting</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.103.0" date="2026-02-06">
-      <url type="details">https://two.avogadro.cc/install/versions/v1103.html</url>
+      <url type="details">https://avogadro.cc/install/versions/v1103.html</url>
       <description>
         <p>Highlights</p>
         <ul>
@@ -97,7 +111,7 @@
       </description>
     </release>
     <release version="1.102.1" date="2025-10-27">
-      <url type="details">https://two.avogadro.cc/install/versions/v11021.html</url>
+      <url type="details">https://avogadro.cc/install/versions/v11021.html</url>
       <description>
         <p>Highlights</p>
         <ul>
@@ -106,7 +120,7 @@
       </description>
     </release>
     <release version="1.102.0" date="2025-10-23">
-      <url type="details">https://two.avogadro.cc/install/versions/v1102.html</url>
+      <url type="details">https://avogadro.cc/install/versions/v1102.html</url>
       <description>
         <p>Highlights</p>
         <ul>
@@ -119,7 +133,7 @@
       </description>
     </release>
     <release version="1.101.0" date="2025-09-14">
-      <url type="details">https://two.avogadro.cc/install/versions/v1101.html</url>
+      <url type="details">https://avogadro.cc/install/versions/v1101.html</url>
       <description>
         <p>Highlights</p>
         <ul>
@@ -133,7 +147,7 @@
       </description>
     </release>
     <release version="1.100.0" date="2025-01-21">
-      <url type="details">https://two.avogadro.cc/install/versions/v1100.html</url>
+      <url type="details">https://avogadro.cc/install/versions/v1100.html</url>
       <description>
         <p>Highlights</p>
         <ul>
@@ -151,7 +165,7 @@
       </description>
     </release>
     <release version="1.99.0" date="2024-02-10">
-          <url type="details">https://two.avogadro.cc/install/versions/v199.html</url>
+          <url type="details">https://avogadro.cc/install/versions/v199.html</url>
       <description>
         <p>Highlights</p>
         <ul>
@@ -169,14 +183,14 @@
       </description>
     </release>
     <release version="1.98.1" date="2023-11-02">
-      <url type="details">https://two.avogadro.cc/install/versions/v1981.html</url>
+      <url type="details">https://avogadro.cc/install/versions/v1981.html</url>
       <description>
         <p>This is a bug-fix release, particularly for Windows users, removing a filename filter that affected opening and saving files.</p>
         <p>This also includes the openbabel-3.dll which was left out of Windows releases.</p>
       </description>
     </release>
     <release version="1.98.0" date="2023-10-27">
-          <url type="details">https://two.avogadro.cc/install/versions/v198.html</url>
+          <url type="details">https://avogadro.cc/install/versions/v198.html</url>
       <description>
         <p>Highlights</p>
         <ul>
@@ -200,7 +214,7 @@
       </description>
     </release>
     <release version="1.97.0" date="2022-07-21">
-          <url type="details">https://two.avogadro.cc/install/versions/v197.html</url>
+          <url type="details">https://avogadro.cc/install/versions/v197.html</url>
       <description>
         <p>Highlights</p>
         <ul>
@@ -216,7 +230,7 @@
       </description>
     </release>
     <release version="1.96.0" date="2022-06-02">
-          <url type="details">https://two.avogadro.cc/install/versions/v196.html</url>
+          <url type="details">https://avogadro.cc/install/versions/v196.html</url>
       <description>
         <p>New features</p>
         <ul>
@@ -240,7 +254,7 @@
       </description>
     </release>
     <release version="1.95.1" date="2021-08-27">
-          <url type="details">https://two.avogadro.cc/install/versions/v1951.html</url>
+          <url type="details">https://avogadro.cc/install/versions/v1951.html</url>
       <description>
       <p>This release fixes several bugs in the recent 1.95.0 release and is recommended for all users.</p>
         <p>New features</p>
@@ -251,7 +265,7 @@
       </description>
     </release>
     <release version="1.95.0" date="2021-08-20">
-          <url type="details">https://two.avogadro.cc/install/versions/v195.html</url>
+          <url type="details">https://avogadro.cc/install/versions/v195.html</url>
       <description>
       <p>This release includes many new features, including new protein ribbon / cartoon renderings and the new “Layer” system as part of Google Summer of Code by @serk12.</p>
         <p>New features</p>
@@ -275,7 +289,7 @@
       </description>
     </release>
     <release version="1.94.0" date="2021-06-03">
-          <url type="details">https://two.avogadro.cc/install/versions/v194.html</url>
+          <url type="details">https://avogadro.cc/install/versions/v194.html</url>
       <description>
       <p>As part of the release, we've made it easier to download scripts and data, including new input generators, molecule fragments, and build and analysis commands. These scripts make it much easier to integrate Avogadro with many open source chemistry Python tools, including RDKit, ASE, etc.</p>
         <p>New features</p>
@@ -303,7 +317,7 @@
       </description>
     </release>
         <release version="1.93.0" date="2020-02-05">
-          <url type="details">https://two.avogadro.cc/install/versions/v193.html</url>
+          <url type="details">https://avogadro.cc/install/versions/v193.html</url>
       <description>
         <ul>
           <li>Support for Open Babel 3.0</li>
@@ -314,7 +328,7 @@
       </description>
     </release>
         <release version="1.92.0" date="2018-10-31">
-          <url type="details">https://two.avogadro.cc/install/versions/v192.html</url>
+          <url type="details">https://avogadro.cc/install/versions/v192.html</url>
       <description>
         <ul>
           <li>Added support for the MMTF format form use with the Protein Data Bank</li>
@@ -325,13 +339,13 @@
       </description>
     </release>
         <release version="1.91.0" date="2018-08-22">
-          <url type="details">https://two.avogadro.cc/install/versions/v193.html</url>
+          <url type="details">https://avogadro.cc/install/versions/v193.html</url>
       <description>
         <p>This release has a lot of new work completed over the last year, including the results of our first Google Summer of Code where two students worked on projects under the program.</p>
       </description>
     </release>
         <release version="1.90.0" date="2016-12-03">
-          <url type="details">https://two.avogadro.cc/install/versions/v193.html</url>
+          <url type="details">https://avogadro.cc/install/versions/v193.html</url>
       <description>
         <p>In particular v1.90 includes substantial improvements for handling crystallographic unit cells, including space group symmetry, and handling VASP calculations, as a result of a Google Summer of Code project of Patrick Avery.</p>
       </description>
