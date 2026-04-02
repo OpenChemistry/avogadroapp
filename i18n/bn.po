@@ -7,14 +7,16 @@ msgstr ""
 "Project-Id-Version: Avogadro 1.103.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-04-03 01:09+0000\n"
+"Last-Translator: \"Sabbir Hossain (Nipu)\" <sabbir80@student.sust.edu>\n"
+"Language-Team: Bengali <https://hosted.weblate.org/projects/avogadro/"
+"avogadroapp/bn/>\n"
 "Language: bn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
@@ -24,120 +26,120 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:32 :3
 msgid "Version:"
-msgstr ""
+msgstr "ভার্শন:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:33 :9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "অ্যাভোগেড্রো লাইব্রেরী ভার্শন:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:34 :15
 msgid "Qt Version:"
-msgstr ""
+msgstr "Qt ভার্শন:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:35 :21
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSL ভার্শন:"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat-এ কোনো অণু সেট করা নেই!"
 
 #: backgroundfileformat.cpp:39 backgroundfileformat.cpp:116
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat-এ কোনো ফাইল ফরম্যাট সেট করা নেই!"
 
 #: backgroundfileformat.cpp:42 backgroundfileformat.cpp:119
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "BackgroundFileFormat-এ কোনো ফাইলের নাম সেট করা নেই!"
 
 #: mainwindow.cpp:393
 msgid "Ready…"
-msgstr ""
+msgstr "প্রস্তুত…"
 
 #: mainwindow.cpp:482
 msgid "Tool"
-msgstr ""
+msgstr "সরঞ্জাম"
 
 #: mainwindow.cpp:486
 msgid "Display Types"
-msgstr ""
+msgstr "প্রদর্শনের ধরণ"
 
 #: mainwindow.cpp:496
 msgid "Display Type Settings"
-msgstr ""
+msgstr "প্রদর্শনের ধরণ সেটিংস"
 
 #: mainwindow.cpp:500
 msgid "Files"
-msgstr ""
+msgstr "ফাইলসমূহ"
 
 #: mainwindow.cpp:511
 msgid "Layers"
-msgstr ""
+msgstr "স্তর"
 
 #: mainwindow.cpp:539
 msgctxt "File toolbar"
 msgid "File"
-msgstr ""
+msgstr "ফাইল"
 
 #: mainwindow.cpp:544
 msgctxt "Tools toolbar"
 msgid "Tools"
-msgstr ""
+msgstr "সরঞ্জামসমূহ"
 
 #: mainwindow.cpp:843
 msgid "Untitled"
-msgstr ""
+msgstr "শিরোনামহীন"
 
 #: mainwindow.cpp:848
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr ""
+msgstr "%1%2 - অ্যাভোগেড্রো %3"
 
 #: mainwindow.cpp:904
 msgid "Restart needed"
-msgstr ""
+msgstr "পুনরায় চালু করা প্রয়োজন"
 
 #: mainwindow.cpp:905
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "নতুন ভাষাটি ব্যবহার করতে অনুগ্রহ করে অ্যাভোগেড্রো পুনরায় চালু করুন।"
 
 #: mainwindow.cpp:948 mainwindow.cpp:1970
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "রাসায়নিক মার্কআপ ভাষা"
 
 #: mainwindow.cpp:949 mainwindow.cpp:1969
 msgid "Chemical JSON"
-msgstr ""
+msgstr "রাসায়নিক JSON"
 
 #: mainwindow.cpp:955
 msgid "Open chemical file"
-msgstr ""
+msgstr "রাসায়নিক ফাইল খুলুন"
 
 #: mainwindow.cpp:973 mainwindow.cpp:997 mainwindow.cpp:1856
 #: mainwindow.cpp:3077
 msgid "Cannot open file"
-msgstr ""
+msgstr "ফাইলটি খোলা যাচ্ছে না"
 
 #: mainwindow.cpp:974 mainwindow.cpp:998 mainwindow.cpp:1857
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr ""
+msgstr "সরবরাহকৃত ফাইল %1 খোলা যাচ্ছে না"
 
 #: mainwindow.cpp:987
 msgid "Open Molecule"
-msgstr ""
+msgstr "অণু খুলুন"
 
 #: mainwindow.cpp:1011 mainwindow.cpp:1852
 msgid "Select file reader"
-msgstr ""
+msgstr "ফাইল রিডার নির্বাচন করুন"
 
 #: mainwindow.cpp:1041
 msgid "Reading File"
