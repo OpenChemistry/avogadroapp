@@ -3030,18 +3030,28 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
     settings.sync();
   }
 
-  // they're presumably the same now, so let's see if the current
-  // version is newer than the latest release
+  // Check if the saved version (from "Ignore") is already >= the latest
+  // release. When the user clicks Ignore, we save latestRelease as
+  // currentVersion, so on next launch lastVersion will match or exceed the
+  // release.
+  if (lastMajor > releaseMajor ||
+      (lastMajor == releaseMajor && lastMinor > releaseMinor) ||
+      (lastMajor == releaseMajor && lastMinor == releaseMinor &&
+       lastPatch >= releasePatch)) {
+#ifndef NDEBUG
+    qDebug() << "saved version is newer than latest release (user ignored)";
+#endif
+    return;
+  }
 
+  // Check if the compiled version is already >= the latest release.
   if (currentMajor > releaseMajor ||
       (currentMajor == releaseMajor && currentMinor > releaseMinor) ||
       (currentMajor == releaseMajor && currentMinor == releaseMinor &&
-       currentComponents[2] >= releaseComponents[2])) {
-    // this will work for like "0-36-whatever" > "0" but not "1"
-#ifdef NDEBUG
+       currentPatch >= releasePatch)) {
+#ifndef NDEBUG
     qDebug() << "current version is newer than latest release";
 #endif
-    // no update needed
     return;
   }
 
