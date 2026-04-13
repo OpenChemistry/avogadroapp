@@ -1168,6 +1168,8 @@ bool MainWindow::backgroundWriterFinished()
       m_threadedWriter->molecule()->setData("fileName", qPrintable(fileName));
       markMoleculeClean();
       updateWindowTitle();
+      m_recentFiles.prepend(fileName);
+      updateRecentFiles();
       success = true;
     } else {
       QMessageBox::critical(
