@@ -116,7 +116,7 @@ jobs:
 
     - name: Sign Windows release
       if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/')
-      uses: signpath/github-action-submit-signing-request@bc66d86b015a46e9c6d9700de73143a82f9570ff # v2.1
+      uses: signpath/github-action-submit-signing-request@b9d91eadd323de506c0c81cf0c7fe7438f3360fd # v2.2
       continue-on-error: true
       with:
         api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
