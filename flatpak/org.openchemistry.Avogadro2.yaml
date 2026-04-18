@@ -1,7 +1,7 @@
 app-id: org.openchemistry.Avogadro2
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
-runtime-version: "6.8"
+runtime-version: "6.9"
 command: avogadro2
 appdata-license: BSD-3-Clause AND GPL-2.0-only
 finish-args:
@@ -19,6 +19,27 @@ modules:
   # Needed to compile glew apparently
   - shared-modules/glu/glu-9.json
 
+  # Pixi, for running Python plugins for Avogadro and managing their dependencies
+  - name: pixi
+    buildsystem: simple
+    build-commands:
+      - ls -la .
+      - tar -xf pixi.tar.gz -z
+      - install -Dm755 pixi /app/bin/pixi
+    sources:
+      - type: file
+        url: https://github.com/prefix-dev/pixi/releases/download/v0.56.0/pixi-x86_64-unknown-linux-musl.tar.gz
+        sha256: 054293ee9ebd366ea51c5d5c7e63d39b7f33c0393cdf346045534b9739204234
+        dest-filename: pixi.tar.gz
+        only-arches:
+          - x86_64
+      - type: file
+        url: https://github.com/prefix-dev/pixi/releases/download/v0.56.0/pixi-aarch64-unknown-linux-musl.tar.gz
+        sha256: 6460a1eddd310bc350ec85f17344600e5237aaaf083c091ec2e62318f5b20f97
+        dest-filename: pixi.tar.gz
+        only-arches:
+          - aarch64
+
   # Open Babel is broken without patched rapidjson
   - name: rapidjson
     buildsystem: cmake-ninja
@@ -27,6 +48,7 @@ modules:
       - -DRAPIDJSON_BUILD_DOC=OFF
       - -DRAPIDJSON_BUILD_EXAMPLES=OFF
       - -DRAPIDJSON_BUILD_TESTS=OFF
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.10
     sources:
       - type: git
         url: https://github.com/Tencent/rapidjson.git
@@ -49,6 +71,7 @@ modules:
       - -DWITH_JSON=ON
       - -DWITH_COORDGEN=OFF
       - -DWITH_MAEPARSER=OFF
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.10
     sources:
       - type: git
         url: https://github.com/openbabel/openbabel.git
@@ -76,9 +99,9 @@ modules:
 
       # Now fetch third-party stuff where the source is expected in `openchemistry/thirdparty`
       # JKQtPlotter
-      - type: archive
-        url: https://github.com/jkriege2/JKQtPlotter/archive/5fd8951edc73a077096c84c5a4474c29f239ed66.tar.gz
-        sha256: 0deba5af19525f5411b12064c79469337651268b22d48e39fda469303b38539a
+      - type: git
+        url: https://github.com/jkriege2/JKQtPlotter.git
+        commit: d243218119b1632987df26baea0d4bc6ccdee533
         dest: thirdparty/jkqtplotter
       
       # Other third-party sources would normally be downloaded by Avogadro build on the fly
@@ -96,30 +119,15 @@ modules:
         url: https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
         sha256: 8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72
         dest: Downloads
-      # OpenBabel
-      - type: file
-        url: https://github.com/openbabel/openbabel/archive/32cf131444c1555c749b356dab44fb9fe275271f.tar.gz
-        sha256: 7b471015df510b30057b8356f42729a35dfd1f4fa85f205c56bbaf3c64e85071
-        dest: Downloads
       # spglib
       - type: file
-        url: https://github.com/spglib/spglib/archive/v2.5.0.tar.gz
-        sha256: b6026f5e85106c0c9ee57e54b9399890d0f29982e20e96ede0428b3efbe6b914
+        url: https://github.com/spglib/spglib/archive/v2.7.0.tar.gz
+        sha256: b22fc9abae9716c574fbc6d55cfc53ed654a714fccc5657a26ff5d18114bd8bd
         dest: Downloads
       # libarchive
       - type: file
-        url: https://github.com/libarchive/libarchive/archive/v3.7.7.tar.gz
-        sha256: fa62384995e8aa4f5a901c184fb5c91e56a29e24c05b6881a7f8fd5bbea694d2
-        dest: Downloads
-      # msgpackc
-      - type: file
-        url: https://github.com/msgpack/msgpack-c/releases/download/cpp-3.3.0/msgpack-3.3.0.tar.gz
-        sha256: 6e114d12a5ddb8cb11f669f83f32246e484a8addd0ce93f274996f1941c1f07b
-        dest: Downloads
-      # mmtf-cpp
-      - type: file
-        url: https://github.com/rcsb/mmtf-cpp/archive/refs/tags/v1.1.0.tar.gz
-        sha256: 021173bdc1814b1d0541c4426277d39df2b629af53151999b137e015418f76c0
+        url: https://github.com/libarchive/libarchive/archive/v3.8.5.tar.gz
+        sha256: 3877c692621d8fbe9512592cf824c98c4b393525ab96735616ff628086158777
         dest: Downloads
       # libmsym
       - type: file
