@@ -1813,7 +1813,13 @@ QImage MainWindow::renderToImage(const QSize& size)
     scene = &viewWidget->renderer().scene();
   }
   Vector4ub cColor = scene->backgroundColor();
+  unsigned char red = cColor[0];
+  unsigned char green = cColor[1];
+  unsigned char blue = cColor[2];
   unsigned char alpha = cColor[3];
+  cColor[0] = 0;
+  cColor[1] = 0;
+  cColor[2] = 0;
   cColor[3] = 0; // 100% transparent for export
   scene->setBackgroundColor(cColor);
 
@@ -1829,6 +1835,9 @@ QImage MainWindow::renderToImage(const QSize& size)
 
   // set the GL widget back to the right background color (i.e., not 100%
   // transparent)
+  cColor[0] = red;
+  cColor[1] = green;
+  cColor[2] = blue;
   cColor[3] = alpha; // previous color
   scene->setBackgroundColor(cColor);
   glWidget->repaint();
