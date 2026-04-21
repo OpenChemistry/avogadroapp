@@ -13,13 +13,16 @@
 # Saúl Palacios <palacios22c@gmail.com>, 2025.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
 # "Juan E. Arias Martinez" <jeam.professional@gmail.com>, 2026.
+# Francisco Serrador <fserrador@gmail.com>, 2026.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-03-28 05:09+0000\n"
-"Last-Translator: \"Juan E. Arias Martinez\" <jeam.professional@gmail.com>\n"
+"PO-Revision-Date: 2026-04-16 18:09+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -27,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: aboutdialog.cpp:25
@@ -85,7 +88,7 @@ msgstr "Tipos de Representación Gráfica"
 
 #: mainwindow.cpp:496
 msgid "Display Type Settings"
-msgstr "Opciones de Visualización"
+msgstr "Exhibir ajustes de tecla"
 
 #: mainwindow.cpp:500
 msgid "Files"
@@ -224,11 +227,11 @@ msgstr ""
 
 #: mainwindow.cpp:1333
 msgid "Remove Old Files"
-msgstr "Remover Archivos Antiguos"
+msgstr "Eliminar archivos antiguos"
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
-msgstr "Conservar Archivos"
+msgstr "Conservar archivos"
 
 #: mainwindow.cpp:1419
 msgid "Let’s finish your setup"
@@ -256,15 +259,15 @@ msgstr "Esto puede requerir de una conexión a Internet."
 
 #: mainwindow.cpp:1433
 msgid "Install updated plugins?"
-msgstr "¿ Instalar las extensiones actualizadas?"
+msgstr "¿Instalar las extensiones actualizadas?"
 
 #: mainwindow.cpp:1434
 msgid "The following plugins are available:"
-msgstr "Las siguientes extensiones están disponibles:"
+msgstr "Están disponibles los siguientes complementos:"
 
 #: mainwindow.cpp:1435
 msgid "Would you like to install them?"
-msgstr "¿ Le gustaría instalarlos?"
+msgstr "¿Le gustaría instalarlos?"
 
 #: mainwindow.cpp:1474
 msgid "Recover Autosaved Files"
@@ -289,7 +292,7 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
-"Se requiere OpenGL versión 4.0 o posterior. Saliendo.\n"
+"Se requiere OpenGL 2.0 o superior, saliendo.\n"
 "\n"
 "%1"
 
@@ -404,11 +407,11 @@ msgstr "&Probando"
 
 #: mainwindow.cpp:2376
 msgid "&Record Test…"
-msgstr "&Registrar Prueba…"
+msgstr "G&rabar prueba…"
 
 #: mainwindow.cpp:2379
 msgid "&Play Test…"
-msgstr "&Iniciar Prueba…"
+msgstr "Re&producir prueba…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -472,7 +475,7 @@ msgstr "&Gráficos…"
 
 #: mainwindow.cpp:2473
 msgid "Export Graphics…"
-msgstr "Exportar Gráficas…"
+msgstr "Exportar gráfico…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -534,7 +537,7 @@ msgstr "Ortográfica"
 
 #: mainwindow.cpp:2585
 msgid "&Extensions"
-msgstr "&Extensiones"
+msgstr "E&xtensiones"
 
 #: mainwindow.cpp:2587
 msgid "User Interface Language…"
@@ -546,7 +549,7 @@ msgstr "&Tabla Periódica…"
 
 #: mainwindow.cpp:2597 menubuilder.cpp:120
 msgid "&Help"
-msgstr "&Ayuda"
+msgstr "Ay&uda"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -560,7 +563,7 @@ msgstr "&Foro de Discusión"
 
 #: mainwindow.cpp:2607
 msgid "&Avogadro Website"
-msgstr "&Sitio Web de Avogadro"
+msgstr "Sitio &web de Avogadro"
 
 #: mainwindow.cpp:2611
 msgid "&Report a Bug"
@@ -572,7 +575,7 @@ msgstr "&Sugerir una Característica"
 
 #: mainwindow.cpp:2649
 msgid "untitled"
-msgstr "sin titulo"
+msgstr "sin título"
 
 #: mainwindow.cpp:2679
 msgid "System Language"
@@ -993,90 +996,29 @@ msgstr "Cerrar"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-",Launchpad Contributions:,Andres Montejo Martinez,DiegoJ,Edgardo "
-"Fredz,Enterhase,Feder Sáiz,Federico Vera,Gabriel Ruiz,Geoff "
-"Hutchison,Gothmog,Javier García Díaz,Luis J. Claros,Pablo Catarecha,Rogelio "
-"Castillo A.,cocoloco, ,Launchpad Contributions:,Andres Montejo "
-"Martinez,DiegoJ,Edgardo Fredz,Enterhase,Feder Sáiz,Federico Vera,Gabriel "
-"Ruiz,Geoff Hutchison,Gothmog,Javier García Díaz,Luis J. Claros,Pablo "
-"Catarecha,Rogelio Castillo A.,cocoloco, ,Launchpad Contributions:,Andres "
-"Montejo Martinez,Avogadro Team,DiegoJ,Edgardo Fredz,Enterhase,Feder "
-"Sáiz,Federico Vera,Gabriel Ruiz,Geoff Hutchison,Gothmog,Javier García "
-"Díaz,Luis J. Claros,Pablo Catarecha,Rogelio Castillo A.,cocoloco, ,Launchpad "
-"Contributions:,Andres Montejo Martinez,DiegoJ,Enterhase,FJModrego,Feder "
-"Sáiz,Federico Vera,Gabriel Ruiz,Geoff Hutchison,Gothmog,Pablo "
-"Catarecha,Rogelio Castillo A.,Victor Herrero,cocolocotero, ,Launchpad "
-"Contributions:,Andres Montejo Martinez,DiegoJ,Edgardo "
-"Fredz,Enterhase,FJModrego,Feder Sáiz,Federico Vera,Gabriel Ruiz,Geoff "
-"Hutchison,Gothmog,Javier García Díaz,Luis J. Claros,Pablo Catarecha,Rogelio "
-"Castillo A.,Victor Herrero,cocolocotero,guillermo.abruza, ,Launchpad "
-"Contributions:,Andres Montejo Martinez,Angel Herráez,DiegoJ,Edgardo "
-"Fredz,Enterhase,FJModrego,Feder Sáiz,Federico Vera,Gabriel Ruiz,Geoff "
-"Hutchison,Gothmog,Javier García Díaz,Luis J. Claros,Pablo Catarecha,Rogelio "
-"Castillo A.,Victor Herrero,cocolocotero,guillermo.abruza, ,Launchpad "
-"Contributions:,Andres Montejo Martinez,Angel Herráez,Avogadro "
-"Team,DiegoJ,Edgardo Fredz,Enterhase,FJModrego,Feder Sáiz,Federico "
-"Vera,Gabriel Ruiz,Geoff Hutchison,Gothmog,Javier García Díaz,Luis J. "
-"Claros,Miguel de Dios,Pablo Catarecha,Rogelio Castillo A.,Victor "
-"Herrero,cocolocotero,guillermo.abruza, ,Launchpad Contributions:,Andres "
-"Montejo Martinez,Angel Herráez,Avogadro Team,DiegoJ,Edgardo "
-"Fredz,Enterhase,FJModrego,Feder Sáiz,Federico Vera,Gabriel Ruiz,Geoff "
-"Hutchison,Gothmog,Javier García Díaz,Jonay,Luis J. Claros,Miguel de "
-"Dios,North Wind,Pablo Catarecha,Rogelio Castillo A.,Victor "
-"Herrero,cocolocotero,guillermo.abruza, ,Launchpad Contributions:,Andres "
-"Montejo Martinez,Angel Herráez,Avogadro Team,DiegoJ,Edgardo "
-"Fredz,Enterhase,FJModrego,Feder Sáiz,Federico Vera,Gabriel Ruiz,Geoff "
-"Hutchison,Gothmog,Javier García Díaz,Jonay,Luis J. Claros,Miguel de "
-"Dios,North Wind,Pablo Catarecha,Rogelio Castillo A.,Victor "
-"Herrero,cocolocotero,guillermo.abruza, ,Launchpad Contributions:,Andres "
-"Montejo Martinez,Angel Herráez,Avogadro Team,DiegoJ,Edgardo "
-"Fredz,Enterhase,FJModrego,Feder Sáiz,Fido,Gabriel Ruiz,Geoff "
-"Hutchison,Gothmog,Javier García Díaz,Jonay,Luis J. Claros,Miguel de "
-"Dios,North Wind,Pablo Catarecha,Ricardo A. Hermosilla Carrillo,Rogelio "
-"Castillo A.,Victor Herrero,cocolocotero,guillermo.abruza,sebikul, ,Launchpad "
-"Contributions:,Andres Montejo Martinez,Angel Herráez,Avogadro "
-"Team,DiegoJ,Edgardo Fredz,Enterhase,FJModrego,Feder Sáiz,Fido,Gabriel "
-"Ruiz,Geoff Hutchison,Gothmog,Javier García Díaz,Jonay,Luis J. Claros,Miguel "
-"Valdiri Badillo,Miguel de Dios,North Wind,Pablo Catarecha,Ricardo A. "
-"Hermosilla Carrillo,Rogelio Castillo A.,Victor "
-"Herrero,cocolocotero,guillermo.abruza,sebikul, ,Launchpad "
-"Contributions:,Andres Montejo Martinez,Angel Herráez,Avogadro "
-"Team,DiegoJ,Edgardo Fredz,Enterhase,FJModrego,Feder Sáiz,Fido,Gabriel "
-"Ruiz,Geoff Hutchison,Gothmog,Javier García Díaz,Jonay,Luis J. Claros,Miguel "
-"Valdiri Badillo,Miguel de Dios,North Wind,Pablo Catarecha,Ricardo A. "
-"Hermosilla Carrillo,Rogelio Castillo A.,Victor "
-"Herrero,cocolocotero,guillermo.abruza,sebikul, ,Launchpad "
-"Contributions:,Adolfo Jayme,Alfonso E. Romero,Andres,Angel Herráez,Avogadro "
-"Team,DiegoJ,Edgardo Fredz,FJModrego,Feder Sáiz,Fido,Gabriel Ruiz,Geoff "
-"Hutchison,Javier García Díaz,Jonay,LinuxNerdo,Lucio,Miguel de Dios,Pablo "
-"Catarecha,Paco Molinero,Ricardo A. Hermosilla Carrillo,Roberto Vasconcelos "
-"Novaes,Rogelio Castillo A.,Victor Herrero,guillermo.abruza, ,Launchpad "
-"Contributions:,Adolfo Jayme,Alfonso E. Romero,Andres,Angel Herráez,Avogadro "
-"Team,DiegoJ,Edgardo Fredz,FJModrego,Feder Sáiz,Fido,Gabriel Ruiz,Geoff "
-"Hutchison,Javier García Díaz,Jonay,LinuxNerdo,Lucio,Miguel de Dios,Pablo "
-"Catarecha,Paco Molinero,Ricardo A. Hermosilla Carrillo,Roberto Vasconcelos "
-"Novaes,Rogelio Castillo A.,Victor Herrero,guillermo.abruza, ,Launchpad "
-"Contributions:,Adolfo Jayme,Adonis,Alfonso E. Romero,Andres,Angel "
-"Herráez,Avogadro Team,DiegoJ,Edgardo Fredz,FJModrego,Feder Sáiz,Federico "
-"Vera,Gabriel Ruiz,Geoff Hutchison,Javier García "
-"Díaz,Jonay,LinuxNerdo,Lucio,Miguel de Dios,North Wind,Pablo Catarecha,Paco "
-"Molinero,Reyni Anderson Ruiz Lara,Ricardo A. Hermosilla Carrillo,Roberto "
-"Vasconcelos Novaes,Rogelio Castillo A.,Victor Herrero,guillermo.abruza"
+"Launchpad Contributions: Adonis, Alfonso E. Romero, Andres Montejo Martinez, "
+"Angel Herráez, Avogadro Team, Carrillo, DiegoJ, Edgardo Fredz, Enterhase, "
+"FJModrego, Feder Sáiz, Federico Vera, Fido, Gabriel Ruiz, Geoff Hutchison, "
+"Gothmog, Javier García Díaz, Jonay, LinuxNerdo, Luis J. Claros, North Wind, "
+"Miguel Valdiri Badillo, Lucio, Miguel de Dios, North Wind, Pablo Catarecha, "
+"Paco Molinero, Reyni Anderson, Ricardo A. Hermosilla, Roberto Vasconcelos "
+"Novaes, Rogelio Castillo A., Ruiz Lara, Francisco Serrador, Victor Herrero, "
+"cocolocotero, guillermo.abruza, sebikul,"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
-",,Nathan_chud@hotmail.com,diegojromerolopez@gmail.com,medeshago@gmail.com,patricio.oshee@gmail.com,federsaiz@googlemail.com,,debianmaster@gmail.com,,,,,pczoido@gmail.com,,jalvarezrom@gmail.com,,,Nathan_chud@hotmail.com,diegojromerolopez@gmail.com,medeshago@gmail.com,patricio.oshee@gmail.com,federsaiz@googlemail.com,,debianmaster@gmail.com,,,,,pczoido@gmail.com,,jalvarezrom@gmail.com,,,Nathan_chud@hotmail.com,avogadro-"
-"devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,patricio.oshee@gmail.com,federsaiz@googlemail.com,,debianmaster@gmail.com,,,,,pczoido@gmail.com,,jalvarezrom@gmail.com,,,Nathan_chud@hotmail.com,diegojromerolopez@gmail.com,patricio.oshee@gmail.com,,federsaiz@googlemail.com,,debianmaster@gmail.com,,,pczoido@gmail.com,,victorhera@gmail.com,jalvarezrom@gmail.com,,,Nathan_chud@hotmail.com,diegojromerolopez@gmail.com,medeshago@gmail.com,patricio.oshee@gmail.com,,federsaiz@googlemail.com,,debianmaster@gmail.com,,,,,pczoido@gmail.com,,victorhera@gmail.com,jalvarezrom@gmail.com,,,,Nathan_chud@hotmail.com,aherraez@users.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,patricio.oshee@gmail.com,,,,debianmaster@gmail.com,,,,,pczoido@gmail.com,,victorhera@gmail.com,jalvarezrom@gmail.com,,,,Nathan_chud@hotmail.com,aherraez@users.sourceforge.net,avogadro-"
-"devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,patricio.oshee@gmail.com,,,,debianmaster@gmail.com,,,,,tres.14159@gmail.com,pczoido@gmail.com,,victorhera@gmail.com,jalvarezrom@gmail.com,,,,Nathan_chud@hotmail.com,aherraez@users.sourceforge.net,avogadro-"
-"devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,patricio.oshee@gmail.com,,,,debianmaster@gmail.com,,,,jonay.santana@gmail.com,,tres.14159@gmail.com,,pczoido@gmail.com,,victorhera@gmail.com,jalvarezrom@gmail.com,,,,Nathan_chud@hotmail.com,aherraez@users.sourceforge.net,avogadro-"
-"devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,patricio.oshee@gmail.com,,,,debianmaster@gmail.com,,,,jonay.santana@gmail.com,,tres.14159@gmail.com,,pczoido@gmail.com,,victorhera@gmail.com,jalvarezrom@gmail.com,,,,Nathan_chud@hotmail.com,aherraez@users.sourceforge.net,avogadro-"
-"devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,patricio.oshee@gmail.com,,,,debianmaster@gmail.com,,,,jonay.santana@gmail.com,,tres.14159@gmail.com,,pczoido@gmail.com,ra.hermosillac@gmail.com,,victorhera@gmail.com,jalvarezrom@gmail.com,,,,,Nathan_chud@hotmail.com,aherraez@users.sourceforge.net,avogadro-"
-"devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,patricio.oshee@gmail.com,,,,debianmaster@gmail.com,,,,jonay.santana@gmail.com,,catastro1@tutopia.com,tres.14159@gmail.com,,pczoido@gmail.com,ra.hermosillac@gmail.com,,victorhera@gmail.com,jalvarezrom@gmail.com,,,,,Nathan_chud@hotmail.com,aherraez@users.sourceforge.net,avogadro-"
-"devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,patricio.oshee@gmail.com,,,,debianmaster@gmail.com,,,,jonay.santana@gmail.com,,catastro1@tutopia.com,tres.14159@gmail.com,,pczoido@gmail.com,ra.hermosillac@gmail.com,,victorhera@gmail.com,jalvarezrom@gmail.com,,,,,fitoschido@gmail.com,alfonsoeromero@gmail.com,andrescastellanosmosquera@gmail.com,aherraez@users.sourceforge.net,avogadro-"
-"devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,,,,debianmaster@gmail.com,,,jonay.santana@gmail.com,,luciomartinez@openmailbox.org,tres.14159@gmail.com,pczoido@gmail.com,paco@byasl.com,ra.hermosillac@gmail.com,rvnovaes@gmail.com,,victorhera@gmail.com,,,,fitoschido@gmail.com,alfonsoeromero@gmail.com,andrescastellanosmosquera@gmail.com,aherraez@users.sourceforge.net,avogadro-"
-"devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,,,,debianmaster@gmail.com,,,jonay.santana@gmail.com,,luciomartinez@openmailbox.org,tres.14159@gmail.com,pczoido@gmail.com,paco@byasl.com,ra.hermosillac@gmail.com,rvnovaes@gmail.com,,victorhera@gmail.com,,,,,,alfonsoeromero@gmail.com,andrescastellanosmosquera@gmail.com,aherraez@users.sourceforge.net,avogadro-"
-"devel@lists.sourceforge.net,diegojromerolopez@gmail.com,medeshago@gmail.com,,,fede@riddler.com.ar,debianmaster@gmail.com,,,jonay.santana@gmail.com,,martinezlucio.com@gmail.com,tres.14159@gmail.com,,pczoido@gmail.com,paco@byasl.com,,ra.hermosillac@gmail.com,rvnovaes@gmail.com,,victorhera@gmail.com,"
+"aherraez@users.sourceforge.net, alejandromoulia@gmail.com, avogadro-"
+"devel@lists.sourceforge.net, catastro1@tutopia.com, debianmaster@gmail.com, "
+"diegojromerolopez@gmail.com, diegosuarez@hotmail.es, "
+"djdracaufeu@hotmail.com, federsaiz@googlemail.com, fitoschido@gmail.com, "
+"fjavilesn@gmail.com, grovertapia@hotmail.com, jdiegosuarez@hotmail.es, "
+"joseb.gutierrez@gmail.com, mauro.dec@gmail.com, medeshago@gmail.com, "
+"meilan@adinet.com.uy, memaljo@yahoo.com, monkey.libre@gmail.com, "
+"nathan_chud@hotmail.com, nzahlut@live.com, jalvarezrom@gmail.com, "
+"joseb.gutierrez@gmail.com, paco@byasl.com, patricio.oshee@gmail.com, "
+"pczoido@gmail.com, spanish_nerdo@hotmail.com, tres.14159@gmail.com, "
+"victorhera@gmail.com,"
 
 #~ msgid "VTK"
 #~ msgstr "VTK"
