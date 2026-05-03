@@ -2,7 +2,7 @@
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
-# ssantos <ssantos@web.de>, 2020, 2021, 2023.
+# ssantos <ssantos@web.de>, 2020, 2021, 2023, 2026.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Gustavo Sousa Jr <grsousajunior@gmail.com>, 2022.
 # Khemis <khemis@bol.com.br>, 2024.
@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2025-08-27 08:02+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"PO-Revision-Date: 2026-05-04 20:09+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/pt/>\n"
 "Language: pt\n"
@@ -21,12 +21,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.17.1\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Editor e visualizador molecular"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -78,11 +78,11 @@ msgstr "Tipos de Visualização"
 
 #: mainwindow.cpp:496
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Configurações de Exibição"
 
 #: mainwindow.cpp:500
 msgid "Files"
-msgstr ""
+msgstr "Ficheiros"
 
 #: mainwindow.cpp:511
 msgid "Layers"
@@ -200,7 +200,7 @@ msgstr ""
 
 #: mainwindow.cpp:1324
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Ficheiro Avogadro anterior encontrado"
 
 #: mainwindow.cpp:1326
 #, qt-format
@@ -210,52 +210,58 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Foram encontrados ficheiros de uma versão anterior do Avogadro na pasta de "
+"plugins, a utilizar %1 de espaço de disco.\n"
+"\n"
+"Esses ficheiros já não são necessários e podem ser removidos com segurança."
 
 #: mainwindow.cpp:1333
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Remover ficheiros antigos"
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
-msgstr ""
+msgstr "Manter ficheiros"
 
 #: mainwindow.cpp:1419
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Vamos terminar de configurar o seu sistema"
 
 #: mainwindow.cpp:1420
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro pode gerar ficheiros de entrada para Gaussian, ORCA, e outros "
+"pacotes de química computacional."
 
 #: mainwindow.cpp:1425
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Isto requer uma configuração que descarregará e configurará o Python."
 
 #: mainwindow.cpp:1427
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Isto requer configuração para criar um ambiente do Python."
 
 #: mainwindow.cpp:1431
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Isto pode exigir uma conexão à Internet."
 
 #: mainwindow.cpp:1433
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Instalar plugins atualizados?"
 
 #: mainwindow.cpp:1434
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Os seguintes plugins estão disponíveis:"
 
 #: mainwindow.cpp:1435
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "Gostaria de instalá-los?"
 
 #: mainwindow.cpp:1474
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Recuperar ficheiros automaticamente gravados"
 
 #: mainwindow.cpp:1475
 msgid ""
