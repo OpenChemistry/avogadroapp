@@ -489,9 +489,9 @@ private:
 #endif
 
 #ifdef QTTESTING
-  pqTestUtility* m_testUtility;
+  pqTestUtility* m_testUtility = nullptr;
   QString m_testFile;
-  bool m_testExit;
+  bool m_testExit = true;
 #endif
 
   /**
