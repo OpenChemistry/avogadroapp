@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-05-04 20:09+0000\n"
+"PO-Revision-Date: 2026-05-25 12:11+0000\n"
 "Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/pt/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.17.1\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -268,6 +268,8 @@ msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Ficheiros gravados automaticamente numa sessão anterior foram encontrados.\n"
+"Deseja recuperá-los?"
 
 #: mainwindow.cpp:1534
 msgid "Error: Failed to initialize OpenGL context"
@@ -280,6 +282,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 4.0 ou superior é necessário, a sair do programa.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1536
 msgid "Unknown error"
@@ -289,7 +294,7 @@ msgstr "Erro desconhecido"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1 Configurações"
 
 #: mainwindow.cpp:1797
 msgid "Common image formats"
@@ -392,11 +397,11 @@ msgstr "&Testes"
 
 #: mainwindow.cpp:2376
 msgid "&Record Test…"
-msgstr ""
+msgstr "&Gravar teste…"
 
 #: mainwindow.cpp:2379
 msgid "&Play Test…"
-msgstr ""
+msgstr "&Reproduzir Teste…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -451,8 +456,6 @@ msgid "&Molecule…"
 msgstr "&Moléculas…"
 
 #: mainwindow.cpp:2459
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
 msgstr "Exportar Molécula…"
 
@@ -462,7 +465,7 @@ msgstr "&Gráficos…"
 
 #: mainwindow.cpp:2473
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Exportar Gráficos…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -562,7 +565,7 @@ msgstr "&Sugerir uma funcionalidade"
 
 #: mainwindow.cpp:2649
 msgid "untitled"
-msgstr ""
+msgstr "sem título"
 
 #: mainwindow.cpp:2679
 msgid "System Language"
@@ -686,6 +689,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
+"Licença: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
+"<span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\">"
+"BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -929,37 +936,37 @@ msgstr "Posição da Neblina:"
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
 msgid "Add a depth blur"
-msgstr ""
+msgstr "Adicionar um desfoque de profundidade"
 
 #. i18n: file: renderingdialog.ui:211
 #. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
 msgid "Depth Blur:"
-msgstr ""
+msgstr "Desfoque de profundidade:"
 
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Intensidade do desfoque de profundidade"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Intensidade do desfoque:"
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Posição do desfoque de profundidade"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Posição do desfoque:"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "Adicionar um contorno aos átomos de borda"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
