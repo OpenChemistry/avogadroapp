@@ -48,7 +48,9 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 #include <QtCore/QMimeData>
+#ifndef Q_OS_WASM
 #include <QtCore/QProcess>
+#endif
 #include <QtCore/QRandomGenerator>
 #include <QtCore/QSettings>
 #include <QtCore/QSortFilterProxyModel>
@@ -323,6 +325,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
     }
   }
 
+#ifndef Q_OS_WASM
   // Clean the pixi cache if it's been more than 30 days
   QSettings settings;
   QDateTime lastCleaned = settings.value("pixi/lastCacheClean").toDateTime();
@@ -342,6 +345,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
       settings.setValue("pixi/lastCacheClean", now);
     }
   }
+#endif
 
   // Scan for pyproject.toml-based plugin packages.
   loadPackages();
@@ -1802,6 +1806,12 @@ QImage MainWindow::renderToImage(const QSize& size)
 {
   QImage exportImage(size, QImage::Format_ARGB32);
 
+#ifdef Q_OS_WASM
+  qWarning("Image export is not implemented for the WebAssembly OpenGL window.");
+  return exportImage;
+#endif
+
+#ifndef Q_OS_WASM
   auto* glWidget =
     qobject_cast<QOpenGLWidget*>(m_multiViewWidget->activeWidget());
 
@@ -1850,6 +1860,7 @@ QImage MainWindow::renderToImage(const QSize& size)
     if (ok)
       exportImage.setText("CML", tmpCml.c_str());
   }
+#endif
 
   return exportImage;
 }

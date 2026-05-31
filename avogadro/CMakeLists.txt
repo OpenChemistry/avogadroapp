@@ -103,7 +103,7 @@ endif()
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # if we are building statically then we need HDF5 targets
-if(NOT BUILD_SHARED_LIBS)
+if(NOT BUILD_SHARED_LIBS AND USE_HDF5)
   find_package(HDF5 REQUIRED COMPONENTS C)
 endif()
 
@@ -208,6 +208,29 @@ endif()
 
 add_executable(avogadro WIN32 MACOSX_BUNDLE
   ${avogadro_srcs} ${ui_srcs} ${rcc_srcs})
+if(EMSCRIPTEN)
+  find_program(AVOGADRO_GZIP_EXECUTABLE gzip)
+  target_compile_options(avogadro PRIVATE -pthread)
+  target_link_options(avogadro PRIVATE
+    -pthread
+    --bind
+    "SHELL:-sMIN_WEBGL_VERSION=2"
+    "SHELL:-sMAX_WEBGL_VERSION=2"
+    "SHELL:-sEXPORTED_RUNTIME_METHODS=['specialHTMLTargets','JSEvents']")
+  if(AVOGADRO_GZIP_EXECUTABLE)
+    add_custom_command(TARGET avogadro POST_BUILD
+      COMMAND "${CMAKE_COMMAND}" -E copy
+        "$<TARGET_FILE_DIR:avogadro>/$<TARGET_FILE_BASE_NAME:avogadro>.wasm"
+        "$<TARGET_FILE_DIR:avogadro>/$<TARGET_FILE_BASE_NAME:avogadro>.wasm.gz.tmp"
+      COMMAND "${AVOGADRO_GZIP_EXECUTABLE}" -9 -f
+        "$<TARGET_FILE_DIR:avogadro>/$<TARGET_FILE_BASE_NAME:avogadro>.wasm.gz.tmp"
+      COMMAND "${CMAKE_COMMAND}" -E rename
+        "$<TARGET_FILE_DIR:avogadro>/$<TARGET_FILE_BASE_NAME:avogadro>.wasm.gz.tmp.gz"
+        "$<TARGET_FILE_DIR:avogadro>/$<TARGET_FILE_BASE_NAME:avogadro>.wasm.gz"
+      COMMENT "Compressing $<TARGET_FILE_BASE_NAME:avogadro>.wasm"
+      VERBATIM)
+  endif()
+endif()
 target_link_libraries(avogadro Qt::Widgets Qt::Network Qt::Concurrent)
 if(WIN32)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD")
@@ -240,10 +263,98 @@ if(USE_3DCONNEXION AND (WIN32 OR APPLE))
 	endif()
 endif()
 
+if(EMSCRIPTEN)
+  file(GENERATE
+    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/index.html"
+    CONTENT [[<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Avogadro wasm</title>
+    <style>
+      html, body, #screen {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="screen"></div>
+    <script>
+      var screen = document.getElementById("screen");
+      var Module = {
+        qtContainerElements: [screen],
+        print: console.log,
+        printErr: console.error
+      };
+    </script>
+    <script src="$<TARGET_FILE_NAME:avogadro>"></script>
+  </body>
+</html>
+]])
+  file(GENERATE
+    OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/serve-wasm.py"
+    CONTENT [[#!/usr/bin/env python3
+from pathlib import Path
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlsplit
+
+
+class Handler(SimpleHTTPRequestHandler):
+    extensions_map = {
+        **SimpleHTTPRequestHandler.extensions_map,
+        ".wasm": "application/wasm",
+    }
+
+    def do_GET(self):
+        parsed = urlsplit(self.path)
+        if parsed.path.endswith(".wasm"):
+            accept_encoding = self.headers.get("Accept-Encoding", "")
+            compressed_path = Path(self.translate_path(parsed.path + ".gz"))
+            if "gzip" in accept_encoding and compressed_path.is_file():
+                self.send_response(200)
+                self.send_header("Content-Type", "application/wasm")
+                self.send_header("Content-Encoding", "gzip")
+                self.send_header("Vary", "Accept-Encoding")
+                self.send_header("Content-Length", str(compressed_path.stat().st_size))
+                self.end_headers()
+                with compressed_path.open("rb") as source:
+                    self.copyfile(source, self.wfile)
+                return
+
+        super().do_GET()
+
+    def end_headers(self):
+        self.send_header("Cross-Origin-Opener-Policy", "same-origin")
+        self.send_header("Cross-Origin-Embedder-Policy", "require-corp")
+        self.send_header("Cross-Origin-Resource-Policy", "same-origin")
+        super().end_headers()
+
+
+if __name__ == "__main__":
+    ThreadingHTTPServer(("127.0.0.1", 8000), Handler).serve_forever()
+]])
+endif()
+
 install(TARGETS avogadro
   RUNTIME DESTINATION ${INSTALL_RUNTIME_DIR}
   BUNDLE DESTINATION .
   )
+if(EMSCRIPTEN)
+  install(FILES "$<TARGET_FILE_DIR:avogadro>/$<TARGET_FILE_BASE_NAME:avogadro>.wasm"
+    DESTINATION ${INSTALL_RUNTIME_DIR})
+  if(AVOGADRO_GZIP_EXECUTABLE)
+    install(FILES "$<TARGET_FILE_DIR:avogadro>/$<TARGET_FILE_BASE_NAME:avogadro>.wasm.gz"
+      DESTINATION ${INSTALL_RUNTIME_DIR})
+  endif()
+  install(FILES "${CMAKE_CURRENT_BINARY_DIR}/index.html"
+    DESTINATION ${INSTALL_RUNTIME_DIR})
+  install(PROGRAMS "${CMAKE_CURRENT_BINARY_DIR}/serve-wasm.py"
+    DESTINATION ${INSTALL_RUNTIME_DIR})
+endif()
 
 # Keep "add_subdirectory(lastinstall)" last: fixup_bundle needs to be
 # *after* all other install(TARGETS and install(FILES calls

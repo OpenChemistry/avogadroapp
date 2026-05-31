@@ -14,14 +14,18 @@
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QLocale>
 #include <QtCore/QOperatingSystemVersion>
+#ifndef Q_OS_WASM
 #include <QtCore/QProcess>
+#endif
 #include <QtCore/QSettings>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QTranslator>
 
 // install a message handler (for Windows)
 #include <QFile>
+#ifndef Q_OS_WASM
 #include <QSslSocket>
+#endif
 #include <QTextStream>
 
 #include <avogadro/core/version.h>
@@ -104,7 +108,17 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext& context,
 // Taken from https://github.com/openscad/openscad/pull/6711
 void configureOpenGLContext()
 {
-#if defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
+#if defined(Q_OS_WASM)
+  auto format = QSurfaceFormat::defaultFormat();
+  format.setRenderableType(QSurfaceFormat::OpenGLES);
+  format.setVersion(3, 0);
+  format.setProfile(QSurfaceFormat::NoProfile);
+  if (format.depthBufferSize() < 24)
+    format.setDepthBufferSize(24);
+  if (format.stencilBufferSize() < 8)
+    format.setStencilBufferSize(8);
+  QSurfaceFormat::setDefaultFormat(format);
+#elif defined(Q_OS_UNIX) && !defined(Q_OS_MACOS)
 
   if (qEnvironmentVariableIsEmpty("QT_OPENGL")) {
     QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
@@ -172,7 +186,9 @@ int main(int argc, char* argv[])
   qDebug() << "Avogadroapp version: " << AvogadroApp_VERSION;
   qDebug() << "Avogadrolibs version: " << Avogadro::version();
   qDebug() << "Qt version: " << qVersion();
+#ifndef Q_OS_WASM
   qDebug() << "SSL version: " << QSslSocket::sslLibraryVersionString();
+#endif
 
   Avogadro::Application app(argc, argv);
 
@@ -204,6 +220,13 @@ int main(int argc, char* argv[])
 
   QStringList translationPaths;
   // check environment variable and local paths
+#ifdef Q_OS_WASM
+  const QString translationsEnv = qEnvironmentVariable("AVOGADRO_TRANSLATIONS");
+  if (!translationsEnv.isEmpty()) {
+    foreach (const QString& path, translationsEnv.split(':'))
+      translationPaths << path;
+  }
+#else
   foreach (const QString& variable, QProcess::systemEnvironment()) {
     QStringList split1 = variable.split('=');
     if (split1[0] == "AVOGADRO_TRANSLATIONS") {
@@ -211,6 +234,7 @@ int main(int argc, char* argv[])
         translationPaths << path;
     }
   }
+#endif
 
   translationPaths << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
   translationPaths << QCoreApplication::applicationDirPath() +
@@ -342,8 +366,14 @@ int main(int argc, char* argv[])
 #if defined(Q_OS_MAC)
   defaultFormat.setAlphaBufferSize(8);
 #endif
+#if defined(Q_OS_WASM)
+  defaultFormat.setRenderableType(QSurfaceFormat::OpenGLES);
+  defaultFormat.setVersion(3, 0);
+  defaultFormat.setProfile(QSurfaceFormat::NoProfile);
+#else
   defaultFormat.setVersion(4, 0);
   defaultFormat.setProfile(QSurfaceFormat::CoreProfile);
+#endif
   QSurfaceFormat::setDefaultFormat(defaultFormat);
 
   QStringList fileNames;
@@ -386,7 +416,7 @@ int main(int argc, char* argv[])
 #endif
   window.show();
 
-#ifdef Avogadro_ENABLE_RPC
+#if defined(Avogadro_ENABLE_RPC) && !defined(Q_OS_WASM)
   // create rpc listener
   Avogadro::RpcListener listener;
   listener.start();
