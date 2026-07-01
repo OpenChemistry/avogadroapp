@@ -13,13 +13,14 @@
 # KeysBits <KeysBytes@gmail.com>, 2024.
 # zhang tengshuo <zhangtengshuo@gmail.com>, 2024.
 # gmkeebiy <gmkeebiy@sharklasers.com>, 2025.
+# eNoWater <rf_sun@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-04-01 10:31+0000\n"
-"Last-Translator: Chiyu Liang <532117255@qq.com>\n"
+"PO-Revision-Date: 2026-07-02 11:01+0000\n"
+"Last-Translator: eNoWater <rf_sun@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -27,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.7.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -121,7 +122,7 @@ msgstr "需要重启"
 
 #: mainwindow.cpp:905
 msgid "Please restart Avogadro to use the new language."
-msgstr "重启 Avogadro 以应用新的语言设置。"
+msgstr "请重启 Avogadro 以应用新的语言设置。"
 
 #: mainwindow.cpp:948 mainwindow.cpp:1970
 msgid "Chemical Markup Language"
@@ -222,7 +223,7 @@ msgstr ""
 
 #: mainwindow.cpp:1333
 msgid "Remove Old Files"
-msgstr "移除旧文件"
+msgstr "删除旧文件"
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
@@ -248,7 +249,7 @@ msgstr "这需要配置 Python 环境。"
 
 #: mainwindow.cpp:1431
 msgid "This may require an Internet connection."
-msgstr "这可能需要互联网连接。"
+msgstr "这可能需要网络连接。"
 
 #: mainwindow.cpp:1433
 msgid "Install updated plugins?"
@@ -559,7 +560,7 @@ msgstr "&Avogadro 网站"
 
 #: mainwindow.cpp:2611
 msgid "&Report a Bug"
-msgstr "问题反馈(&R)"
+msgstr "报告问题(&R)"
 
 #: mainwindow.cpp:2615
 msgid "&Suggest a Feature"
@@ -624,7 +625,7 @@ msgstr "新版本：%1"
 
 #: mainwindow.cpp:2997
 msgid "An update is available, do you want to download it now?\n"
-msgstr "发现可用更新，是否立即下载？\n"
+msgstr "有可用更新，您要立即下载吗？\n"
 
 #: mainwindow.cpp:2999
 msgid "Version Update"
@@ -633,7 +634,7 @@ msgstr "版本更新"
 #: mainwindow.cpp:3057
 #, qt-format
 msgid "Error while loading the “%1” file format."
-msgstr "加载 '%1' 文件格式时出错。"
+msgstr "加载“%1”文件格式时出错。"
 
 #: mainwindow.cpp:3073
 msgid "Select file format"
@@ -994,9 +995,7 @@ msgstr ""
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
-"cuiweicui1985@gmail.com,rainofchaos@gmail.com,yjjart@gmail.com,sihanzheng@gmail.com,weitao1979@gmail.com,wantinghard@gmail.com,avogadro-"
-"devel@lists.sourceforge.net,chensiqiong@126.com,frankensteinyang@gmail.com,chaofeng111@gmail.com,allen19920930@gmail.com,skyxxzc@gmail.com,sihanzheng@gmail.com,cyliang532@gmail.com,zhangtengshuo@gmail.com"
+msgstr "你的邮箱"
 
 #~ msgid "VTK"
 #~ msgstr "VTK"
