@@ -14,13 +14,15 @@
 # zhang tengshuo <zhangtengshuo@gmail.com>, 2024.
 # gmkeebiy <gmkeebiy@sharklasers.com>, 2025.
 # eNoWater <rf_sun@users.noreply.hosted.weblate.org>, 2026.
+# reducedradius <137701630+flytothehighest@users.noreply.github.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-07-02 11:01+0000\n"
-"Last-Translator: eNoWater <rf_sun@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2026-07-07 15:01+0000\n"
+"Last-Translator: reducedradius "
+"<137701630+flytothehighest@users.noreply.github.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -28,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.7.dev0\n"
+"X-Generator: Weblate 2026.7.1.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -995,7 +997,9 @@ msgstr ""
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "你的邮箱"
+msgstr ""
+"cuiweicui1985@gmail.com,rainofchaos@gmail.com,yjjart@gmail.com,sihanzheng@gmail.com,weitao1979@gmail.com,wantinghard@gmail.com,avogadro-"
+"devel@lists.sourceforge.net,chensiqiong@126.com,frankensteinyang@gmail.com,chaofeng111@gmail.com,allen19920930@gmail.com,skyxxzc@gmail.com,sihanzheng@gmail.com,cyliang532@gmail.com,zhangtengshuo@gmail.com,feixiang512@outlook.com"
 
 #~ msgid "VTK"
 #~ msgstr "VTK"
