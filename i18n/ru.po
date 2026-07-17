@@ -10,13 +10,14 @@
 # Sergey Ponomarev <stokito@gmail.com>, 2025.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
 # alevtina-karashokova <karashokovaaa@basealt.ru>, 2026.
+# DatVex <kinorealme241@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-07-16 13:01+0000\n"
-"Last-Translator: alevtina-karashokova <karashokovaaa@basealt.ru>\n"
+"PO-Revision-Date: 2026-07-18 10:01+0000\n"
+"Last-Translator: DatVex <kinorealme241@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ru/>\n"
 "Language: ru\n"
@@ -325,7 +326,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1809
 msgid "Export Bitmap Graphics"
-msgstr "Экспорт растрового изображения"
+msgstr "Экспорт растровой графики"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -336,7 +337,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:1826
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Невозможно сохранить файл %1."
+msgstr "Не удаётся сохранить файл %1."
 
 #: mainwindow.cpp:1943
 msgid ""
@@ -783,7 +784,7 @@ msgstr "Ctrl+Shift+Z"
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "По центру"
+msgstr "Центрировать"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -831,7 +832,7 @@ msgstr "Очистить"
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "Выделить все"
+msgstr "Выбрать всё"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -842,7 +843,7 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Снять выделение"
+msgstr "Отменить выбор"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
