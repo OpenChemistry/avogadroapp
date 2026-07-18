@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-07-18 10:01+0000\n"
+"PO-Revision-Date: 2026-07-19 07:25+0000\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/cs/>\n"
@@ -218,7 +218,7 @@ msgstr ""
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
-msgstr ""
+msgstr "Ponechat soubory"
 
 #: mainwindow.cpp:1419
 msgid "Let’s finish your setup"
@@ -308,7 +308,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1809
 msgid "Export Bitmap Graphics"
-msgstr "Vyvést jako bitmapu do souboru"
+msgstr "Exportovat rastrovou grafiku"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -319,7 +319,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:1826
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Nemohu uložit soubor %1."
+msgstr "Soubor %1 nelze uložit."
 
 #: mainwindow.cpp:1943
 msgid ""
@@ -493,7 +493,7 @@ msgstr ""
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:2545 menubuilder.cpp:116:43
 msgid "&View"
-msgstr "&Pohled"
+msgstr "&Zobrazení"
 
 #: mainwindow.cpp:2546
 #, fuzzy
@@ -602,11 +602,11 @@ msgstr "Ctrl+D"
 
 #: mainwindow.cpp:2923
 msgid "Network Download Failed"
-msgstr ""
+msgstr "Stažení ze sítě se nezdařilo"
 
 #: mainwindow.cpp:2924
 msgid "Network timeout or other error."
-msgstr "Vypršení času na síti nebo jiná chyba."
+msgstr "Vypršel časový limit sítě nebo došlo k jiné chybě."
 
 #: mainwindow.cpp:2994
 #, qt-format
@@ -787,7 +787,7 @@ msgstr "Ctrl+Shift+Z"
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "Vystředit"
+msgstr "Vycentrovat"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -901,9 +901,8 @@ msgstr ""
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
-msgstr "Importovat"
+msgstr "&Import"
 
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, enableAO_label)
