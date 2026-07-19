@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-07-19 07:25+0000\n"
+"PO-Revision-Date: 2026-07-19 12:15+0000\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/cs/>\n"
@@ -57,7 +57,7 @@ msgstr "Verze SSL:"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "V BackgroundFileFormat není nastavena molekula!"
 
 #: backgroundfileformat.cpp:39 backgroundfileformat.cpp:116
 msgid "No file format set in BackgroundFileFormat!"
@@ -65,7 +65,7 @@ msgstr ""
 
 #: backgroundfileformat.cpp:42 backgroundfileformat.cpp:119
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "V BackgroundFileFormat není nastaven název souboru!"
 
 #: mainwindow.cpp:393
 msgid "Ready…"
@@ -105,9 +105,8 @@ msgid "Tools"
 msgstr "Nástroje"
 
 #: mainwindow.cpp:843
-#, fuzzy
 msgid "Untitled"
-msgstr "bez názvu"
+msgstr "Bez názvu"
 
 #: mainwindow.cpp:848
 #, qt-format
@@ -478,7 +477,7 @@ msgstr ""
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:2511 menubuilder.cpp:116:46
 msgid "&Edit"
-msgstr "Úp&ravy"
+msgstr "Ú&pravy"
 
 #: mainwindow.cpp:2528
 #, fuzzy
@@ -517,9 +516,8 @@ msgid "Orthographic"
 msgstr "Ortograficky"
 
 #: mainwindow.cpp:2585
-#, fuzzy
 msgid "&Extensions"
-msgstr "Rozšíření"
+msgstr "&Rozšíření"
 
 #: mainwindow.cpp:2587
 msgid "User Interface Language…"
@@ -1002,10 +1000,8 @@ msgstr "Uložit"
 
 #. i18n: file: renderingdialog.ui:374
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
-msgstr "&Zavřít"
+msgstr "Zavřít"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
