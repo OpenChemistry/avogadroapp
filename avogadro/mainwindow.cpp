@@ -48,6 +48,7 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 #include <QtCore/QMimeData>
+#include <QtCore/QPointer>
 #include <QtCore/QProcess>
 #include <QtCore/QRandomGenerator>
 #include <QtCore/QSettings>
@@ -1061,6 +1062,32 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
     tr("Opening file '%1'\nwith '%2'").arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
   m_progressDialog->setCancelButton(nullptr);
+
+  // Some readers (e.g. Generic Output) only know which program wrote the file
+  // after they start parsing it, so poll for a better identifier and refresh
+  // the label once it changes. The timer is a child of the dialog, so it goes
+  // away with it, and the guards cover a read finishing between timeouts.
+  QPointer<QProgressDialog> dialog(m_progressDialog);
+  QPointer<BackgroundFileFormat> backgroundReader(m_threadedReader);
+  auto* identifierTimer = new QTimer(m_progressDialog);
+  identifierTimer->setInterval(1000);
+  connect(
+    identifierTimer, &QTimer::timeout, this,
+    [dialog, backgroundReader, identifierTimer, fileName, ident] {
+      if (dialog.isNull() || backgroundReader.isNull()) {
+        identifierTimer->stop();
+        return;
+      }
+      QString current =
+        QString::fromStdString(backgroundReader->fileFormat()->identifier());
+      if (current == ident)
+        return;
+      dialog->setLabelText(
+        MainWindow::tr("Opening file '%1'\nwith '%2'").arg(fileName, current));
+      identifierTimer->stop();
+    });
+  identifierTimer->start();
+
   connect(m_fileReadThread, &QThread::started, m_threadedReader,
           &BackgroundFileFormat::read);
   connect(m_threadedReader, &BackgroundFileFormat::finished, m_fileReadThread,
@@ -1452,7 +1479,7 @@ void MainWindow::loadPackages()
     } else {
       msgBox.setWindowTitle(tr("Install updated plugins?"));
       msgBox.setText(tr("The following plugins are available:"));
-      msgBox.setInformativeText(tr("Would you like to install them?"));
+      msgBox.setInformativeText(tr("Would you like to update them?"));
       msgBox.setDetailedText(packageNames.join("\n"));
     }
 
