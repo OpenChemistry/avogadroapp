@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-03-31 14:09+0000\n"
-"Last-Translator: Li Chaoyu <2395074867@qq.com>\n"
+"PO-Revision-Date: 2026-05-11 08:11+0000\n"
+"Last-Translator: \"David D.\" <dadu042@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
 "Language: fr\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.5-dev\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: aboutdialog.cpp:25
@@ -214,6 +214,11 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Des fichiers d’une version précédente d’Avogadro ont été trouvés dans le "
+"répertoire des plugins, utilisant %1 de l’espace.\n"
+"\n"
+"Ces fichiers ne sont plus nécessaires et peuvent être retirés en toute "
+"sécurité."
 
 #: mainwindow.cpp:1333
 msgid "Remove Old Files"
@@ -221,11 +226,11 @@ msgstr "Supprimer Anciens Fichiers"
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
-msgstr ""
+msgstr "Garder fichiers"
 
 #: mainwindow.cpp:1419
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Terminons votre installation"
 
 #: mainwindow.cpp:1420
 msgid ""
@@ -276,13 +281,13 @@ msgid "Error: Failed to initialize OpenGL context"
 msgstr "Erreur : échec de l’initialisation du contexte OpenGL"
 
 #: mainwindow.cpp:1535
-#, fuzzy, qt-format
+#, qt-format
 msgid ""
 "OpenGL 4.0 or greater required, exiting.\n"
 "\n"
 "%1"
 msgstr ""
-"OpenGL 4.0 ou ultérieur requis, je quitte.\n"
+"OpenGL 4.0 ou ultérieur requis, sortie.\n"
 "\n"
 "%1"
 

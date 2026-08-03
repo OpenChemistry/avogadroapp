@@ -9,13 +9,15 @@
 # Ivanushka <oplata.kes1@mail.ru>, 2023.
 # Sergey Ponomarev <stokito@gmail.com>, 2025.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
+# alevtina-karashokova <karashokovaaa@basealt.ru>, 2026.
+# DatVex <kinorealme241@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-03-11 10:10+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"PO-Revision-Date: 2026-07-18 10:01+0000\n"
+"Last-Translator: DatVex <kinorealme241@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ru/>\n"
 "Language: ru\n"
@@ -24,12 +26,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Редактор и визуализатор молекул"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -81,11 +83,11 @@ msgstr "Стили отображения"
 
 #: mainwindow.cpp:496
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Параметры стилей отображения"
 
 #: mainwindow.cpp:500
 msgid "Files"
-msgstr ""
+msgstr "Файлы"
 
 #: mainwindow.cpp:511
 msgid "Layers"
@@ -118,7 +120,7 @@ msgstr "Нужен перезапуск"
 
 #: mainwindow.cpp:905
 msgid "Please restart Avogadro to use the new language."
-msgstr "Пожалуйста, перезагрузите Avogadro, чтобы использовать новый язык."
+msgstr "Перезагрузите Avogadro, чтобы использовать новый язык."
 
 #: mainwindow.cpp:948 mainwindow.cpp:1970
 msgid "Chemical Markup Language"
@@ -140,11 +142,11 @@ msgstr "Невозможно открыть файл"
 #: mainwindow.cpp:974 mainwindow.cpp:998 mainwindow.cpp:1857
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr "Невозможно сохранить файл %1"
+msgstr "Невозможно открыть предоставленный файл %1"
 
 #: mainwindow.cpp:987
 msgid "Open Molecule"
-msgstr "Открытая Молекула"
+msgstr "Открытая молекула"
 
 #: mainwindow.cpp:1011 mainwindow.cpp:1852
 msgid "Select file reader"
@@ -166,7 +168,7 @@ msgstr ""
 #: mainwindow.cpp:1116
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr "Загруженная молекула (%1 атомов, %2 связи)"
+msgstr "Молекула загружена (атомов — %1, связей — %2)"
 
 #: mainwindow.cpp:1121
 msgid "File error"
@@ -203,7 +205,7 @@ msgstr ""
 
 #: mainwindow.cpp:1324
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Найдены файлы предыдущей версии Avogadro"
 
 #: mainwindow.cpp:1326
 #, qt-format
@@ -213,58 +215,69 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"В каталоге plugins обнаружены файлы из предыдущей версии Avogadro, "
+"занимающие %1 места.\n"
+"\n"
+"Эти файлы больше не нужны и их можно безопасно удалить."
 
 #: mainwindow.cpp:1333
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Удалить старые файлы"
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
-msgstr ""
+msgstr "Оставить файлы"
 
 #: mainwindow.cpp:1419
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Завершим настройку"
 
 #: mainwindow.cpp:1420
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro может генерировать файлы ввода для Gaussian, ORCA и других пакетов "
+"программного обеспечения для вычислительной химии."
 
 #: mainwindow.cpp:1425
 msgid "This requires setup that will download and configure Python."
 msgstr ""
+"Для этого потребуется программа установки, которая загрузит и настроит "
+"Python."
 
 #: mainwindow.cpp:1427
 msgid "This requires setup to configure a Python environment."
 msgstr ""
+"Для этого потребуется программа установки, чтобы настроить среду Python."
 
 #: mainwindow.cpp:1431
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Для этого потребуется подключение к Интернету."
 
 #: mainwindow.cpp:1433
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Установить обновлённые расширения?"
 
 #: mainwindow.cpp:1434
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Доступны следующие расширения:"
 
 #: mainwindow.cpp:1435
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "Вы хотите установить их?"
 
 #: mainwindow.cpp:1474
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Восстановить файлы автосохранения"
 
 #: mainwindow.cpp:1475
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Обнаружены файлы автосохранения из предыдущего сеанса.\n"
+"Вы хотите восстановить их?"
 
 #: mainwindow.cpp:1534
 msgid "Error: Failed to initialize OpenGL context"
@@ -277,6 +290,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"Требуется OpenGL 4.0 или более поздней версии, завершение работы.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1536
 msgid "Unknown error"
@@ -286,11 +302,11 @@ msgstr "Неизвестная ошибка"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "Параметры %1"
 
 #: mainwindow.cpp:1797
 msgid "Common image formats"
-msgstr "Распространенные форматы изображений"
+msgstr "Распространённые форматы изображений"
 
 #: mainwindow.cpp:1799
 msgid "All files"
@@ -310,7 +326,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:1809
 msgid "Export Bitmap Graphics"
-msgstr "Экспорт растрового изображения"
+msgstr "Экспорт растровой графики"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -321,7 +337,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:1826
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Невозможно сохранить файл %1."
+msgstr "Не удаётся сохранить файл %1."
 
 #: mainwindow.cpp:1943
 msgid ""
@@ -346,7 +362,7 @@ msgstr "Сохранить химический файл"
 
 #: mainwindow.cpp:2019
 msgid "Export Molecule"
-msgstr "Молекула Экспорта"
+msgstr "Экспорт молекулы"
 
 #: mainwindow.cpp:2118
 msgid "Saving File in Progress…"
@@ -365,7 +381,7 @@ msgstr ""
 #: mainwindow.cpp:2241
 #, qt-format
 msgid "&Undo %1"
-msgstr "& Отменить %1"
+msgstr "&Отменить %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -376,7 +392,7 @@ msgstr "&Отменить"
 #: mainwindow.cpp:2249
 #, qt-format
 msgid "&Redo %1"
-msgstr "& Повторить %1"
+msgstr "&Повторить %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -386,15 +402,15 @@ msgstr "&Повторить"
 
 #: mainwindow.cpp:2374
 msgid "&Testing"
-msgstr "& Тестирование"
+msgstr "&Тестирование"
 
 #: mainwindow.cpp:2376
 msgid "&Record Test…"
-msgstr ""
+msgstr "&Запись теста…"
 
 #: mainwindow.cpp:2379
 msgid "&Play Test…"
-msgstr ""
+msgstr "&Воспроизведение теста…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -442,7 +458,7 @@ msgstr "Сохранить &как…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2451:196
 msgid "&Export"
-msgstr "Экспорт"
+msgstr "&Экспорт"
 
 #: mainwindow.cpp:2452
 msgid "&Molecule…"
@@ -458,7 +474,7 @@ msgstr "&Графика…"
 
 #: mainwindow.cpp:2473
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Экспорт графики…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -472,7 +488,7 @@ msgstr "В&ыход"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2491:190
 msgid "Open Recent"
-msgstr "Открыть недавние"
+msgstr "Открыть последние"
 
 #: mainwindow.cpp:2505
 msgid "No recent files"
@@ -516,7 +532,7 @@ msgstr "Перспектива"
 
 #: mainwindow.cpp:2566
 msgid "Orthographic"
-msgstr "oртографический вид"
+msgstr "Ортографический вид"
 
 #: mainwindow.cpp:2585
 msgid "&Extensions"
@@ -554,11 +570,11 @@ msgstr "&Сообщить об ошибке"
 
 #: mainwindow.cpp:2615
 msgid "&Suggest a Feature"
-msgstr "&Предложить фичу"
+msgstr "&Предложить функцию"
 
 #: mainwindow.cpp:2649
 msgid "untitled"
-msgstr ""
+msgstr "без имени"
 
 #: mainwindow.cpp:2679
 msgid "System Language"
@@ -579,7 +595,7 @@ msgstr "Все поддерживаемые форматы (%1) ;; Все фай
 
 #: mainwindow.cpp:2819
 msgid "Do you want to save the changes to the document?"
-msgstr "Вы хотите сохранить изменения, внесенные в документ?"
+msgstr "Вы хотите сохранить изменения, внесённые в документ?"
 
 #: mainwindow.cpp:2827
 msgid "Your changes will be lost if you don't save them."
@@ -615,7 +631,7 @@ msgstr "Новая версия: %1"
 
 #: mainwindow.cpp:2997
 msgid "An update is available, do you want to download it now?\n"
-msgstr "Доступно обновление, Вы хотите загрузить его?\n"
+msgstr "Доступно обновление, вы хотите загрузить его?\n"
 
 #: mainwindow.cpp:2999
 msgid "Version Update"
@@ -633,7 +649,7 @@ msgstr "Выберите формат файла"
 #: mainwindow.cpp:3078 mainwindow.cpp:3089
 #, qt-format
 msgid "Avogadro cannot open “%1”."
-msgstr "Авогадро не может открыть «%1»."
+msgstr "Avogadro не удалось открыть «%1»."
 
 #: mainwindow.cpp:3088
 msgid "Cannot open files"
@@ -653,7 +669,7 @@ msgstr "&Выделить"
 
 #: menubuilder.cpp:120
 msgid "Se&ttings"
-msgstr "&Настройки"
+msgstr "&Параметры"
 
 #: menubuilder.cpp:120
 msgid "&Window"
@@ -682,6 +698,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
+"Лицензия: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
+"<span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\">"
+"BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -713,7 +733,7 @@ msgstr "Последние документы"
 #. i18n: file: mainwindow.ui:116
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Clear Recent"
-msgstr "Очистить последние"
+msgstr "&Очистить последние"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -742,7 +762,7 @@ msgstr "Ctrl+Shift+S"
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Revert To Saved"
-msgstr "Вернуться к сохраненному"
+msgstr "Вернуться к сохранённому"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -764,7 +784,7 @@ msgstr "Ctrl+Shift+Z"
 #. i18n: file: mainwindow.ui:218
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Center"
-msgstr "По центру"
+msgstr "Центрировать"
 
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -812,7 +832,7 @@ msgstr "Очистить"
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "Выделить все"
+msgstr "Выбрать всё"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -823,7 +843,7 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Снять выделение"
+msgstr "Отменить выбор"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -874,12 +894,12 @@ msgstr "&Импорт"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, enableAO_label)
 msgid "Enable ambient occlusion shadows"
-msgstr "Включить тени амбиентной среды"
+msgstr "Включить окружающее затенение"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, enableAO_label)
 msgid "Ambient Occlusion:"
-msgstr "Затеняющее окружение:"
+msgstr "Окружающее затенение:"
 
 #. i18n: file: renderingdialog.ui:43
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
@@ -925,17 +945,17 @@ msgstr "Позиция тумана:"
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
 msgid "Add a depth blur"
-msgstr "Добавить размытие глубины"
+msgstr "Добавить размытие по глубине"
 
 #. i18n: file: renderingdialog.ui:211
 #. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
 msgid "Depth Blur:"
-msgstr "Глубина размытия::"
+msgstr "Размытие по глубине:"
 
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
 msgid "Strength of the depth blur"
-msgstr "Сила глубины размытия"
+msgstr "Сила размытия по глубине"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
@@ -945,7 +965,7 @@ msgstr "Сила размытия:"
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
 msgid "Position of the depth blur"
-msgstr "Позиция глубины размытия"
+msgstr "Позиция размытия по глубине"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
@@ -955,7 +975,7 @@ msgstr "Позиция размытия:"
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
 msgid "Add an outline to edge atoms"
-msgstr "Добавить контур для граничных атомов"
+msgstr "Добавить контур для краевых атомов"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
@@ -1013,15 +1033,15 @@ msgstr ""
 "Astanin,Vladimir Kurg,dn2010,poruchik, ,Launchpad Contributions:,Alexander "
 "Sapronov,Andrey Smolenkov,Auduf,Avogadro Team,DooMka,Egor "
 "Bushmelyov,Konstantin Tokarev,ManDrive,Michael Rybinsky,Nick Gorbunov,Nkolay "
-"Parukhin,Oleg Koptev,Panda-Yuliya,Scott,Vasily Astanin,Vladimir "
-"Kurg,dn2010, ,Launchpad Contributions:,Alexander Sapronov,Andrey "
-"Smolenkov,Auduf,Avogadro Team,DooMka,Egor Bushmelyov,Konstantin "
-"Tokarev,ManDrive,Michael Rybinsky,Nick Gorbunov,Nkolay Parukhin,Oleg "
-"Koptev,Panda-Yuliya,Scott,Vasily Astanin,Vladimir Kurg,dn2010, ,Launchpad "
-"Contributions:,Alexander Sapronov,Andrey Smolenkov,Auduf,Avogadro "
+"Parukhin,Oleg Koptev,Panda-Yuliya,Scott,Vasily Astanin,Vladimir Kurg,dn2010, "
+",Launchpad Contributions:,Alexander Sapronov,Andrey Smolenkov,Auduf,Avogadro "
 "Team,DooMka,Egor Bushmelyov,Konstantin Tokarev,ManDrive,Michael "
 "Rybinsky,Nick Gorbunov,Nkolay Parukhin,Oleg Koptev,Panda-Yuliya,Scott,Vasily "
-"Astanin,Vladimir Kurg,dn2010"
+"Astanin,Vladimir Kurg,dn2010, ,Launchpad Contributions:,Alexander "
+"Sapronov,Andrey Smolenkov,Auduf,Avogadro Team,DooMka,Egor "
+"Bushmelyov,Konstantin Tokarev,ManDrive,Michael Rybinsky,Nick Gorbunov,Nkolay "
+"Parukhin,Oleg Koptev,Panda-Yuliya,Scott,Vasily Astanin,Vladimir "
+"Kurg,dn2010,Alevtina Karashokova"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
@@ -1032,7 +1052,7 @@ msgstr ""
 "devel@lists.sourceforge.net,,,annulen@yandex.ru,,parukhin@gmail.com,koptev.oleg@gmail.com,,,madcad@yandex.ru,,dn2010@km.ru,,,,,,5097@mail.ru,avogadro-"
 "devel@lists.sourceforge.net,,,annulen@yandex.ru,roman_romul@mail.ru,,,parukhin@gmail.com,koptev.oleg@gmail.com,,,madcad@yandex.ru,,dn2010@km.ru,,,,,5097@mail.ru,avogadro-"
 "devel@lists.sourceforge.net,,,annulen@yandex.ru,roman_romul@mail.ru,,,parukhin@gmail.com,koptev.oleg@gmail.com,,,madcad@yandex.ru,,dn2010@km.ru,,,,,5097@mail.ru,avogadro-"
-"devel@lists.sourceforge.net,,,annulen@yandex.ru,roman_romul@mail.ru,,,parukhin@gmail.com,koptev.oleg@gmail.com,,,madcad@yandex.ru,,dn2010@km.ru"
+"devel@lists.sourceforge.net,,,annulen@yandex.ru,roman_romul@mail.ru,,,parukhin@gmail.com,koptev.oleg@gmail.com,,,madcad@yandex.ru,,dn2010@km.ru,,,alevkarash@altlinux.org"
 
 #~ msgid "VTK"
 #~ msgstr "VTK"

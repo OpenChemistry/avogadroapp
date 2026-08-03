@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-03-12 20:12+0000\n"
+"PO-Revision-Date: 2026-05-04 20:09+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -199,8 +199,9 @@ msgstr ""
 "%2"
 
 #: mainwindow.cpp:1324
+#, fuzzy
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "以前のAvogadroファイルを発見"
 
 #: mainwindow.cpp:1326
 #, qt-format
@@ -213,11 +214,11 @@ msgstr ""
 
 #: mainwindow.cpp:1333
 msgid "Remove Old Files"
-msgstr ""
+msgstr "古いファイルを削除"
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
-msgstr ""
+msgstr "ファイルを保持"
 
 #: mainwindow.cpp:1419
 msgid "Let’s finish your setup"

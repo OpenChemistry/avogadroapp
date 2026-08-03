@@ -2,7 +2,7 @@
 # Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
 # This file is distributed under the same license as the avogadro package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
-# ssantos <ssantos@web.de>, 2020, 2021, 2023.
+# ssantos <ssantos@web.de>, 2020, 2021, 2023, 2026.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Gustavo Sousa Jr <grsousajunior@gmail.com>, 2022.
 # Khemis <khemis@bol.com.br>, 2024.
@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2025-08-27 08:02+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"PO-Revision-Date: 2026-05-25 12:11+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/pt/>\n"
 "Language: pt\n"
@@ -21,12 +21,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Editor e visualizador molecular"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -78,11 +78,11 @@ msgstr "Tipos de Visualização"
 
 #: mainwindow.cpp:496
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Configurações de Exibição"
 
 #: mainwindow.cpp:500
 msgid "Files"
-msgstr ""
+msgstr "Ficheiros"
 
 #: mainwindow.cpp:511
 msgid "Layers"
@@ -200,7 +200,7 @@ msgstr ""
 
 #: mainwindow.cpp:1324
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Ficheiro Avogadro anterior encontrado"
 
 #: mainwindow.cpp:1326
 #, qt-format
@@ -210,58 +210,66 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Foram encontrados ficheiros de uma versão anterior do Avogadro na pasta de "
+"plugins, a utilizar %1 de espaço de disco.\n"
+"\n"
+"Esses ficheiros já não são necessários e podem ser removidos com segurança."
 
 #: mainwindow.cpp:1333
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Remover ficheiros antigos"
 
 #: mainwindow.cpp:1334
 msgid "Keep Files"
-msgstr ""
+msgstr "Manter ficheiros"
 
 #: mainwindow.cpp:1419
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Vamos terminar de configurar o seu sistema"
 
 #: mainwindow.cpp:1420
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro pode gerar ficheiros de entrada para Gaussian, ORCA, e outros "
+"pacotes de química computacional."
 
 #: mainwindow.cpp:1425
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Isto requer uma configuração que descarregará e configurará o Python."
 
 #: mainwindow.cpp:1427
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Isto requer configuração para criar um ambiente do Python."
 
 #: mainwindow.cpp:1431
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Isto pode exigir uma conexão à Internet."
 
 #: mainwindow.cpp:1433
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Instalar plugins atualizados?"
 
 #: mainwindow.cpp:1434
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Os seguintes plugins estão disponíveis:"
 
 #: mainwindow.cpp:1435
 msgid "Would you like to install them?"
-msgstr ""
+msgstr "Gostaria de instalá-los?"
 
 #: mainwindow.cpp:1474
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Recuperar ficheiros automaticamente gravados"
 
 #: mainwindow.cpp:1475
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Ficheiros gravados automaticamente numa sessão anterior foram encontrados.\n"
+"Deseja recuperá-los?"
 
 #: mainwindow.cpp:1534
 msgid "Error: Failed to initialize OpenGL context"
@@ -274,6 +282,9 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 4.0 ou superior é necessário, a sair do programa.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1536
 msgid "Unknown error"
@@ -283,7 +294,7 @@ msgstr "Erro desconhecido"
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1 Configurações"
 
 #: mainwindow.cpp:1797
 msgid "Common image formats"
@@ -386,11 +397,11 @@ msgstr "&Testes"
 
 #: mainwindow.cpp:2376
 msgid "&Record Test…"
-msgstr ""
+msgstr "&Gravar teste…"
 
 #: mainwindow.cpp:2379
 msgid "&Play Test…"
-msgstr ""
+msgstr "&Reproduzir Teste…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -445,8 +456,6 @@ msgid "&Molecule…"
 msgstr "&Moléculas…"
 
 #: mainwindow.cpp:2459
-#, fuzzy
-#| msgid "Export Molecule"
 msgid "Export Molecule…"
 msgstr "Exportar Molécula…"
 
@@ -456,7 +465,7 @@ msgstr "&Gráficos…"
 
 #: mainwindow.cpp:2473
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Exportar Gráficos…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -556,7 +565,7 @@ msgstr "&Sugerir uma funcionalidade"
 
 #: mainwindow.cpp:2649
 msgid "untitled"
-msgstr ""
+msgstr "sem título"
 
 #: mainwindow.cpp:2679
 msgid "System Language"
@@ -680,6 +689,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
+"Licença: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
+"<span style=\" font-size:10pt; text-decoration: underline; color:#0000ff;\">"
+"BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -923,37 +936,37 @@ msgstr "Posição da Neblina:"
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
 msgid "Add a depth blur"
-msgstr ""
+msgstr "Adicionar um desfoque de profundidade"
 
 #. i18n: file: renderingdialog.ui:211
 #. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
 msgid "Depth Blur:"
-msgstr ""
+msgstr "Desfoque de profundidade:"
 
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Intensidade do desfoque de profundidade"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Intensidade do desfoque:"
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Posição do desfoque de profundidade"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Posição do desfoque:"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "Adicionar um contorno aos átomos de borda"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
