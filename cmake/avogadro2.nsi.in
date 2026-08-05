@@ -103,6 +103,9 @@ FunctionEnd
 
 ; Installer Section
 Section "Install"
+    ; Use the all-users shell folders for Start Menu and Desktop shortcuts.
+    SetShellVarContext all
+
     SetOutPath "$INSTDIR"
 
     ; Copy bin directory
@@ -189,6 +192,9 @@ SectionEnd
 
 ; Uninstaller Section
 Section "Uninstall"
+    ; Remove shortcuts from the same all-users shell folders used by install.
+    SetShellVarContext all
+
     ; Unregister file associations
     Push ".xyz"
     Call un.UnregisterFileAssociation
