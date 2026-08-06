@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-03-22 03:46+0000\n"
-"PO-Revision-Date: 2026-07-18 10:01+0000\n"
-"Last-Translator: DatVex <kinorealme241@gmail.com>\n"
+"PO-Revision-Date: 2026-08-06 08:01+0000\n"
+"Last-Translator: alevtina-karashokova <karashokovaaa@basealt.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ru/>\n"
 "Language: ru\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.8.dev0\n"
+"X-Generator: Weblate 2026.8.1.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -59,7 +59,7 @@ msgstr "Версия SSL:"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr "Нет молекулы, установленной в BackgroundFileFormat!"
+msgstr "Молекула не задана в BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:39 backgroundfileformat.cpp:116
 msgid "No file format set in BackgroundFileFormat!"
@@ -617,7 +617,7 @@ msgstr "Сетевой сбой при загрузке"
 
 #: mainwindow.cpp:2924
 msgid "Network timeout or other error."
-msgstr "Истекло время ожидания сети или другая ошибка."
+msgstr "Истекло время соединения, или другая ошибка."
 
 #: mainwindow.cpp:2994
 #, qt-format
