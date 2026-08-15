@@ -56,7 +56,7 @@ modules:
         # Would rather use 4d6cb08189cf7336821f04090b612baa2ca6a90d (same commit as openSUSE
         # Tumbleweed) as known to be good, but older commits like that don't seem to compile
         commit: 7c73dd7de7c4f14379b781418c6e947ad464c818
-        
+
   - name: openbabel
     buildsystem: cmake-ninja
     builddir: true
@@ -103,18 +103,24 @@ modules:
         url: https://github.com/jkriege2/JKQtPlotter.git
         commit: d243218119b1632987df26baea0d4bc6ccdee533
         dest: thirdparty/jkqtplotter
-      
+
       # Other third-party sources would normally be downloaded by Avogadro build on the fly
       # Flatpaks aren't allowed network access during build so have to download source archives
       # ahead of time to download_dir (which we've indicated using `-DDOWNLOAD_TO_SOURCE_DIR=ON`)
-      # Match order in projects.cmake
+      #
+      # The block below is generated from openchemistry's cmake/projects.cmake so that version
+      # bumps there can't silently break this build. Don't edit it by hand -- bump the version in
+      # projects.cmake and run:
+      #   cmake -DMANIFEST=avogadroapp/flatpak/org.openchemistry.Avogadro2.yaml \
+      #         -P cmake/flatpak_sources.cmake
+      # (glew should be able to use the shared module but isn't picked up for whatever reason)
+      # BEGIN GENERATED SOURCES -- edit projects.cmake, then run cmake/flatpak_sources.cmake
       # glew
-      # (Should be able to use shared module but not picked up for whatever reason)
       - type: file
         url: https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.tgz
         sha256: d4fc82893cfb00109578d0a1a2337fb8ca335b3ceccf97b97e5cc7f08e4353e1
         dest: Downloads
-      # Eigen3
+      # eigen
       - type: file
         url: https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
         sha256: 8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72
@@ -126,14 +132,15 @@ modules:
         dest: Downloads
       # libarchive
       - type: file
-        url: https://github.com/libarchive/libarchive/archive/v3.8.5.tar.gz
-        sha256: 3877c692621d8fbe9512592cf824c98c4b393525ab96735616ff628086158777
+        url: https://github.com/libarchive/libarchive/archive/v3.8.7.tar.gz
+        sha256: bc942030fe7cb30e04eed31bd5f63c38cdfd712315b303e91b64e58f05db2346
         dest: Downloads
       # libmsym
       - type: file
         url: https://github.com/mcodev31/libmsym/archive/85e47232376a8e735c2a7b5283f40b59b3953db1.tar.gz
         sha256: 456e2c1e0c78e212115d4d332f557f108b6d41b730d5fd6639c2452df31b7096
         dest: Downloads
+      # END GENERATED SOURCES
 
     post-install:
       # Manually copy contents of prefix dir over into main build dir
