@@ -281,6 +281,14 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   // check for version update
   checkUpdate();
 
+#ifdef QTTESTING
+  // Set up QtTesting before constructing any widgets so startup and plugin
+  // UI can participate in record/playback.
+  m_testUtility = new pqTestUtility(this);
+  m_testUtility->addEventObserver("xml", new XMLEventObserver(this));
+  m_testUtility->addEventSource("xml", new XMLEventSource(this));
+#endif
+
   // Now load the plugins.
   PluginManager* plugin = PluginManager::instance();
   plugin->load();
@@ -357,12 +365,6 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   qDebug() << " setting interface ";
 #endif
   setupInterface();
-
-#ifdef QTTESTING
-  m_testUtility = new pqTestUtility(this);
-  m_testUtility->addEventObserver("xml", new XMLEventObserver(this));
-  m_testUtility->addEventSource("xml", new XMLEventSource(this));
-#endif
 
   // Build up the standard menus, incorporate dynamic menus.
 #ifdef Q_OS_WIN
@@ -2428,16 +2430,18 @@ void MainWindow::setProjectionOrthographic()
 #ifdef QTTESTING
 void MainWindow::record()
 {
+  QFileDialog::Options options = QFileDialog::DontUseNativeDialog;
   QString fileName = QFileDialog::getSaveFileName(
-    this, "Test file name", QString(), "XML Files (*.xml)");
+    this, "Test file name", QString(), "XML Files (*.xml)", nullptr, options);
   if (!fileName.isEmpty())
     m_testUtility->recordTests(fileName);
 }
 
 void MainWindow::play()
 {
+  QFileDialog::Options options = QFileDialog::DontUseNativeDialog;
   QString fileName = QFileDialog::getOpenFileName(
-    this, "Test file name", QString(), "XML Files (*.xml)");
+    this, "Test file name", QString(), "XML Files (*.xml)", nullptr, options);
   if (!fileName.isEmpty())
     m_testUtility->playTests(fileName);
 }
