@@ -10,9 +10,7 @@ name: Windows ARM Build
 on: [push, pull_request, workflow_dispatch]
 
 env:
-  QT_VERSION: 6.10.0
-  # this is different from MACOSX_DEPLOYMENT_TARGET to prevent build problems
-  # we set MACOSX_DEPLOYMENT_TARGET later
+  QT_VERSION: 6.10.1
   FEATURES: -DBUILD_GPL_PLUGINS=ON -DWITH_COORDGEN=OFF -DQT_VERSION=6 -DUSE_3DCONNEXION=OFF -DBUILD_MOLEQUEUE=OFF
 
 concurrency:
@@ -55,12 +53,14 @@ jobs:
       with:
         arch: arm64
 
+    - name: Ensure vcpkg is up to date
+      if: runner.os == 'Windows'
+      uses: ./.github/actions/update-vcpkg
+
     - name: Install Dependencies (Windows)
       if: runner.os == 'Windows'
       run: |
         choco install nsis
-        cd /c/vcpkg
-        git pull origin master
         vcpkg install libarchive eigen3 libxml2 zlib
       shell: bash
 
