@@ -132,8 +132,8 @@ modules:
         dest: Downloads
       # libarchive
       - type: file
-        url: https://github.com/libarchive/libarchive/archive/v3.8.7.tar.gz
-        sha256: bc942030fe7cb30e04eed31bd5f63c38cdfd712315b303e91b64e58f05db2346
+        url: https://github.com/libarchive/libarchive/archive/v3.8.9.tar.gz
+        sha256: 744346f6bca195c8f894f847bb32a16e9bcae6002624a58fadc81e80f595b3cb
         dest: Downloads
       # libmsym
       - type: file
