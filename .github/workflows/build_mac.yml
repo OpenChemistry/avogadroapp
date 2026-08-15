@@ -6,10 +6,10 @@ name: Mac Build Matrix
 on: [push, pull_request, workflow_dispatch]
 
 env:
-  QT_VERSION: 6.10.0
+  QT_VERSION: 6.10.1
   # this is different from MACOSX_DEPLOYMENT_TARGET to prevent build problems
   # we set MACOSX_DEPLOYMENT_TARGET later
-  MACOS_TARGET: 13
+  MACOS_TARGET: 14
   FEATURES: -DBUILD_GPL_PLUGINS=ON -DBUILD_MOLEQUEUE=OFF -DWITH_COORDGEN=OFF -DQT_VERSION=6 -DUSE_YAEHMOP=ON
   CACHE: -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
   SCCACHE_GHA_ENABLED: "true"
@@ -91,15 +91,15 @@ jobs:
           done
         done
         cd .. # build/prefix/lib
-        for plugin in libinchi.?.?.?.dylib libopenbabel.?.?.?.dylib; do
+        for plugin in libinchi.*.dylib libopenbabel.*.dylib; do
           for libpath in `otool -L ${plugin} | grep '/Users/runner/work' | awk '{print $1}'`; do
             export lib=`echo $libpath | cut -d '/' -f 9`;
             echo "Fixing $plugin $lib $libpath"
             install_name_tool -change $libpath @executable_path/../Frameworks/$lib $plugin
           done
         done
-        otool -L libinchi.?.?.?.dylib
-        otool -L libopenbabel.?.?.?.dylib
+        otool -L libinchi.*.dylib
+        otool -L libopenbabel.*.dylib
         # cp -p libinchi* ../Avogadro2.app/Contents/Frameworks/
         # cp -p libopenbabel* ../Avogadro2.app/Contents/Frameworks/
         # finally, fixup the binaries

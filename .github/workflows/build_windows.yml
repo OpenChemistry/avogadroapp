@@ -10,9 +10,8 @@ name: Windows Build
 on: [push, pull_request, workflow_dispatch]
 
 env:
-  QT_VERSION: 6.10.0
-  # this is different from MACOSX_DEPLOYMENT_TARGET to prevent build problems
-  # we set MACOSX_DEPLOYMENT_TARGET later
+  # Pinned to 6.8.3 - newer Qt fails to deploy on some Windows 10 systems
+  QT_VERSION: 6.8.3
   FEATURES: -DBUILD_GPL_PLUGINS=ON -DWITH_COORDGEN=OFF -DQT_VERSION=6 -DUSE_3DCONNEXION=OFF -DBUILD_MOLEQUEUE=OFF
 
 concurrency:
