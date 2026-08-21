@@ -74,7 +74,7 @@ if(WIN32)
   set(SENTRY_ENVIRONMENT "nightly" CACHE STRING
     "Sentry environment name reported with each event")
 elseif(USE_SENTRY)
-  message("Disabling USE_SENTRY - it is only supported on Windows.")
+  message(WARNING "Disabling USE_SENTRY - it is only supported on Windows.")
   set(USE_SENTRY OFF CACHE BOOL
     "Enable Sentry crash reporting (diagnostic builds)" FORCE)
 endif()

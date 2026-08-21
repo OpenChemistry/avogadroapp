@@ -22,13 +22,6 @@ jobs:
   build:
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
-    # Job level so that the symbol upload step can test them from its `if`:
-    # the secrets context is not available there, and a step's own env block
-    # is not reliably visible to its own condition.
-    env:
-      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-      SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
     strategy:
       fail-fast: false
       matrix:
@@ -138,12 +131,27 @@ jobs:
     # avogadroapp symbols are needed: crashes usually land in a plugin or in
     # Avogadro::Rendering rather than in avogadro2.exe itself.
     - name: Upload debug symbols
-      if: matrix.config.sentry && env.SENTRY_AUTH_TOKEN != ''
+      if: matrix.config.sentry
       shell: bash
       working-directory: ${{ runner.workspace }}/build
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+        SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+        # Pinned rather than "latest", to match how this workflow pins every
+        # action to a SHA. The checksum is of the released Windows binary.
+        SENTRY_CLI_VERSION: "3.6.2"
+        SENTRY_CLI_SHA256: "5c90cb0045cef3d3c36113c2aa21a7dcae11627d2d6e3098b679dea5b6681be3"
       run: |
-        curl -sL -o sentry-cli.exe \
-          https://downloads.sentry-cdn.com/sentry-cli/latest/sentry-cli-Windows-x86_64.exe
+        if [ -z "${SENTRY_AUTH_TOKEN:-}" ]; then
+          echo "SENTRY_AUTH_TOKEN is not set - skipping debug symbol upload."
+          echo "The diagnostic build is still produced; crashes just will not"
+          echo "symbolicate until the secret is configured."
+          exit 0
+        fi
+        curl -sSfL -o sentry-cli.exe \
+          "https://downloads.sentry-cdn.com/sentry-cli/${SENTRY_CLI_VERSION}/sentry-cli-Windows-x86_64.exe"
+        echo "${SENTRY_CLI_SHA256}  sentry-cli.exe" | sha256sum --check --strict
         ./sentry-cli.exe debug-files upload --include-sources \
           avogadroapp avogadrolibs prefix/bin
 

@@ -62,14 +62,43 @@ std::vector<std::string> homeDirectoryNeedles;
 constexpr char homeReplacement[] = "<user home>";
 constexpr size_t homeReplacementLength = sizeof(homeReplacement) - 1;
 
+char toLowerChar(char character)
+{
+  return static_cast<char>(std::tolower(static_cast<unsigned char>(character)));
+}
+
 std::string toLower(const std::string& text)
 {
   std::string result(text);
-  for (char& character : result) {
-    character =
-      static_cast<char>(std::tolower(static_cast<unsigned char>(character)));
-  }
+  for (char& character : result)
+    character = toLowerChar(character);
   return result;
+}
+
+/// Case insensitive search for @a needle within @a text, starting at @a from.
+/// @a needle must already be lowercased. Allocates nothing, which matters
+/// because this runs on the before_send path.
+std::string::size_type findLowered(const std::string& text,
+                                   const std::string& needle,
+                                   std::string::size_type from)
+{
+  if (needle.empty() || text.size() < needle.size())
+    return std::string::npos;
+
+  const std::string::size_type last = text.size() - needle.size();
+  for (std::string::size_type at = from; at <= last; ++at) {
+    bool matched = true;
+    for (std::string::size_type i = 0; i < needle.size(); ++i) {
+      if (toLowerChar(text[at + i]) != needle[i]) {
+        matched = false;
+        break;
+      }
+    }
+    if (matched)
+      return at;
+  }
+
+  return std::string::npos;
 }
 
 /// Replace every spelling of the user's home directory in @a text.
@@ -79,19 +108,17 @@ bool scrubString(std::string& text)
   if (homeDirectoryNeedles.empty() || text.empty())
     return false;
 
-  // Windows paths are case insensitive, so match on a lowercased copy and
-  // splice the original. The copy is only made when there is something to
-  // search, keeping the common "nothing to do" path allocation free.
-  std::string lowered = toLower(text);
+  // Windows paths are case insensitive, so compare that way. The search
+  // itself allocates nothing, so a string with no home directory in it - by
+  // far the common case - costs only the scan.
   bool modified = false;
 
   for (const std::string& needle : homeDirectoryNeedles) {
-    std::string::size_type at = lowered.find(needle);
+    std::string::size_type at = findLowered(text, needle, 0);
     while (at != std::string::npos) {
       text.replace(at, needle.size(), homeReplacement);
-      lowered.replace(at, needle.size(), homeReplacement);
       modified = true;
-      at = lowered.find(needle, at + homeReplacementLength);
+      at = findLowered(text, needle, at + homeReplacementLength);
     }
   }
 

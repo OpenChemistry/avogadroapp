@@ -32,9 +32,14 @@ endif()
 
 if(USE_SENTRY)
   find_package(sentry REQUIRED)
-  # Drives the #cmakedefine in avogadroappconfig.h.in, which is the single
-  # source of truth for whether crash reporting is compiled in.
+  # These drive the #cmakedefine lines in avogadroappconfig.h.in, which is the
+  # single source of truth for how crash reporting is compiled in. The names
+  # have to match the macros being defined - #cmakedefine tests the variable
+  # named after it, not the one substituted into the value - so the SENTRY_*
+  # cache entries are copied across here rather than used directly.
   set(AVOGADRO_USE_SENTRY ON)
+  set(AVOGADRO_SENTRY_DSN "${SENTRY_DSN}")
+  set(AVOGADRO_SENTRY_ENVIRONMENT "${SENTRY_ENVIRONMENT}")
 endif()
 
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)

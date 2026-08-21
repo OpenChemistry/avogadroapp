@@ -1,7 +1,13 @@
 #cmakedefine AvogadroApp_VERSION "@AvogadroApp_VERSION@"
 
 /* Crash reporting via sentry-native. Only the Windows diagnostic build sets
-   these; every other build leaves them undefined. */
+   these; every other build leaves them undefined.
+
+   The cmakedefine directive below tests the variable named right after it, not
+   the one substituted into the value, so these have to be driven by
+   AVOGADRO_SENTRY_* variables rather than by the SENTRY_* cache entries.
+   (Do not write that directive's literal token in this comment - configure_file
+   rewrites it even here.) */
 #cmakedefine AVOGADRO_USE_SENTRY
-#cmakedefine AVOGADRO_SENTRY_DSN "@SENTRY_DSN@"
-#cmakedefine AVOGADRO_SENTRY_ENVIRONMENT "@SENTRY_ENVIRONMENT@"
+#cmakedefine AVOGADRO_SENTRY_DSN "@AVOGADRO_SENTRY_DSN@"
+#cmakedefine AVOGADRO_SENTRY_ENVIRONMENT "@AVOGADRO_SENTRY_ENVIRONMENT@"
