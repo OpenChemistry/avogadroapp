@@ -30,6 +30,13 @@ if(QT_VERSION EQUAL 6)
     REQUIRED)
 endif()
 
+if(USE_SENTRY)
+  find_package(sentry REQUIRED)
+  # Drives the #cmakedefine in avogadroappconfig.h.in, which is the single
+  # source of truth for whether crash reporting is compiled in.
+  set(AVOGADRO_USE_SENTRY ON)
+endif()
+
 configure_file(avogadroappconfig.h.in avogadroappconfig.h)
 
 set(avogadro_srcs
@@ -43,6 +50,10 @@ set(avogadro_srcs
   tooltipfilter.cpp
   viewfactory.cpp
 )
+
+if(USE_SENTRY)
+  list(APPEND avogadro_srcs crashreporter.cpp crashreporter.h)
+endif()
 
 qt_wrap_ui(ui_srcs
   aboutdialog.ui
@@ -216,6 +227,9 @@ set_target_properties(avogadro PROPERTIES AUTOMOC TRUE)
 target_link_libraries(avogadro Avogadro::QtOpenGL Avogadro::QtGui Avogadro::QtPlugins)
 if(Avogadro_ENABLE_RPC)
   target_link_libraries(avogadro AvogadroRPC)
+endif()
+if(USE_SENTRY)
+  target_link_libraries(avogadro sentry::sentry)
 endif()
 if(APPLE)
   set_target_properties(avogadro PROPERTIES OUTPUT_NAME ${MACOSX_BUNDLE_NAME})

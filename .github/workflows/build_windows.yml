@@ -22,6 +22,13 @@ jobs:
   build:
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
+    # Job level so that the symbol upload step can test them from its `if`:
+    # the secrets context is not available there, and a step's own env block
+    # is not reliably visible to its own condition.
+    env:
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+      SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
     strategy:
       fail-fast: false
       matrix:
@@ -33,6 +40,22 @@ jobs:
             build_type: "Release",
             cmake_flags: "-DCMAKE_TOOLCHAIN_FILE=/c/vcpkg/scripts/buildsystems/vcpkg.cmake -DUSE_SYSTEM_EIGEN=ON -DUSE_SYSTEM_LIBARCHIVE=ON -DUSE_SYSTEM_LIBXML2=ON -DUSE_SYSTEM_ZLIB=ON",
             build_flags: "-j 2",
+            package: "Avogadro2",
+            sentry: false,
+          }
+        # Diagnostic build with Sentry crash reporting compiled in. Ships as a
+        # separate installer; the release build above gets no crash reporting.
+        # RelWithDebInfo rather than Release: MSVC Release passes no /Zi, so it
+        # emits no PDBs and every frame would come back as a raw address.
+        - {
+            name: "Windows Qt6 (Sentry)", artifact: "Win64-diagnostic.exe",
+            os: windows-latest,
+            cc: "cl", cxx: "cl",
+            build_type: "RelWithDebInfo",
+            cmake_flags: "-DCMAKE_TOOLCHAIN_FILE=/c/vcpkg/scripts/buildsystems/vcpkg.cmake -DUSE_SYSTEM_EIGEN=ON -DUSE_SYSTEM_LIBARCHIVE=ON -DUSE_SYSTEM_LIBXML2=ON -DUSE_SYSTEM_ZLIB=ON",
+            build_flags: "-j 2",
+            package: "Avogadro2-Diagnostic",
+            sentry: true,
           }
 
     steps:
@@ -69,14 +92,60 @@ jobs:
       run: |
         if [ ! -d "${{ runner.workspace }}/build" ]; then mkdir "${{ runner.workspace }}/build"; fi
         cd "${{ runner.workspace }}/build"
-        CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake $GITHUB_WORKSPACE/openchemistry ${{env.FEATURES}} -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} ${{matrix.config.cmake_flags}}
+        SENTRY_ARGS=""
+        if [ "${USE_SENTRY}" = "true" ]; then
+          # An unset SENTRY_DSN secret is fine: the build then reports itself
+          # as unavailable at runtime rather than failing to configure.
+          SENTRY_ARGS="-DUSE_SENTRY=ON -DSENTRY_DSN=${SENTRY_DSN} -DSENTRY_ENVIRONMENT=nightly"
+        fi
+        CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake $GITHUB_WORKSPACE/openchemistry ${{env.FEATURES}} -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} ${{matrix.config.cmake_flags}} $SENTRY_ARGS
       shell: bash
+      env:
+        USE_SENTRY: ${{ matrix.config.sentry }}
+        SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
 
     - name: Build
       run: |
         CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake --build . --config ${{matrix.config.build_type}} ${{matrix.config.build_flags}}
       shell: bash
       working-directory: ${{ runner.workspace }}/build
+
+    # The crashpad binaries reach the prefix through crashpad's own install
+    # rules, which sentry-native does not drive directly when building shared.
+    # If they go missing the application still starts and simply never reports
+    # a crash, so fail here rather than shipping that.
+    - name: Verify crash handler binaries
+      if: matrix.config.sentry
+      shell: bash
+      working-directory: ${{ runner.workspace }}/build
+      run: |
+        status=0
+        for binary in avogadro2.exe sentry.dll crashpad_handler.exe crashpad_wer.dll; do
+          if [ -f "prefix/bin/$binary" ]; then
+            echo "found    prefix/bin/$binary"
+          else
+            echo "MISSING  prefix/bin/$binary"
+            status=1
+          fi
+        done
+        echo "--- debug symbols found ---"
+        find . -name '*.pdb' -not -path './Downloads/*' | head -40
+        exit $status
+
+    # Runs before packaging, which moves prefix/ out from under us. Sentry
+    # matches minidumps to symbols by debug ID, so this does not have to agree
+    # with the release name the application reports. Both avogadrolibs and
+    # avogadroapp symbols are needed: crashes usually land in a plugin or in
+    # Avogadro::Rendering rather than in avogadro2.exe itself.
+    - name: Upload debug symbols
+      if: matrix.config.sentry && env.SENTRY_AUTH_TOKEN != ''
+      shell: bash
+      working-directory: ${{ runner.workspace }}/build
+      run: |
+        curl -sL -o sentry-cli.exe \
+          https://downloads.sentry-cdn.com/sentry-cli/latest/sentry-cli-Windows-x86_64.exe
+        ./sentry-cli.exe debug-files upload --include-sources \
+          avogadroapp avogadrolibs prefix/bin
 
     - name: Create Windows Packages
       if: runner.os == 'Windows'
@@ -102,7 +171,7 @@ jobs:
           VERSION=$(date +%Y-%m-%d)
         fi
 
-        mv Avogadro2-Setup.exe ../Avogadro2-${VERSION}.exe
+        mv Avogadro2-Setup.exe ../${{matrix.config.package}}-${VERSION}.exe
       working-directory: ${{ runner.workspace }}/build/
       env:
         GH_TOKEN: ${{ github.token }}
@@ -115,8 +184,10 @@ jobs:
         path: ${{ runner.workspace }}/build/Avogadro2*.*
         name: ${{ matrix.config.artifact }}
 
+    # Release-only from here down. The diagnostic build is not signed under the
+    # release policy and gets no Store-identity MSIX package.
     - name: Sign Windows release
-      if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/')
+      if: ${{ !matrix.config.sentry && github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/') }}
       uses: signpath/github-action-submit-signing-request@b9d91eadd323de506c0c81cf0c7fe7438f3360fd # v2.2
       continue-on-error: true
       with:
@@ -129,7 +200,7 @@ jobs:
         output-artifact-directory: '../build/'
 
     - name: Create MSIX
-      if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/')
+      if: ${{ !matrix.config.sentry && github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/') }}
       shell: powershell
       run:
         # create MSIX
@@ -139,6 +210,7 @@ jobs:
         GH_TOKEN: ${{ github.token }}
 
     - name: Upload MSIX
+      if: ${{ !matrix.config.sentry }}
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         path: ${{ runner.workspace }}/build/Avogadro2.msix

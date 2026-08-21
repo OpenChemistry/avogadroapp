@@ -28,6 +28,7 @@
 
 #include "application.h"
 #include "avogadroappconfig.h"
+#include "crashreporter.h"
 #include "mainwindow.h"
 
 #ifdef Q_OS_MAC
@@ -158,6 +159,7 @@ int main(int argc, char* argv[])
   // We need to ensure desktop OpenGL is loaded for our rendering.
   QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
 
+#ifndef AVOGADRO_USE_SENTRY
   // remove the previous log file
   QString writableDocs =
     QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
@@ -167,6 +169,14 @@ int main(int argc, char* argv[])
   // install the message handler (goes to Documents / avogadro2.log)
   qInstallMessageHandler(myMessageOutput);
 #endif
+#endif
+
+  // Start crash reporting before the QApplication instance exists, so that a
+  // crash while Qt loads its platform plugin is still caught. This also has to
+  // come after the message handler above: the Qt integration chains to
+  // whichever handler was installed first, so installing one afterwards would
+  // silently discard every breadcrumb.
+  Avogadro::CrashReporterGuard crashReporterGuard;
 
   // output the version information
   qDebug() << "Avogadroapp version: " << AvogadroApp_VERSION;
@@ -371,6 +381,14 @@ int main(int argc, char* argv[])
 #endif
     } else if (*it == "--disable-settings") {
       disableSettings = true;
+    } else if (*it == "--crash-test") {
+#ifdef AVOGADRO_USE_SENTRY
+      Avogadro::CrashReporter::triggerTestCrash();
+#else
+      qWarning("Avogadro called with --crash-test but crash reporting is "
+               "disabled.");
+      return EXIT_FAILURE;
+#endif
     } else if (it->startsWith("-")) {
       qWarning("Unknown command line option '%s'", qPrintable(*it));
       return EXIT_FAILURE;

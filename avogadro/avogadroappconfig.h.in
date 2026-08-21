@@ -1,1 +1,7 @@
 #cmakedefine AvogadroApp_VERSION "@AvogadroApp_VERSION@"
+
+/* Crash reporting via sentry-native. Only the Windows diagnostic build sets
+   these; every other build leaves them undefined. */
+#cmakedefine AVOGADRO_USE_SENTRY
+#cmakedefine AVOGADRO_SENTRY_DSN "@SENTRY_DSN@"
+#cmakedefine AVOGADRO_SENTRY_ENVIRONMENT "@SENTRY_ENVIRONMENT@"
