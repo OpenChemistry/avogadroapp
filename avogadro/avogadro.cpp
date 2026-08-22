@@ -404,6 +404,10 @@ int main(int argc, char* argv[])
 #endif
   window.show();
 
+  // On a diagnostic build, ask about crash reporting the first time it runs.
+  // A no-op everywhere else.
+  Avogadro::CrashReporter::promptForConsentIfNeeded(&window);
+
 #ifdef Avogadro_ENABLE_RPC
   // create rpc listener
   Avogadro::RpcListener listener;

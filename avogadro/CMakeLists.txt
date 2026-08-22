@@ -57,7 +57,9 @@ set(avogadro_srcs
 )
 
 if(USE_SENTRY)
-  list(APPEND avogadro_srcs crashreporter.cpp crashreporter.h)
+  list(APPEND avogadro_srcs
+    crashreporter.cpp crashreporter.h
+    crashreportdialog.cpp crashreportdialog.h)
 endif()
 
 qt_wrap_ui(ui_srcs
@@ -208,6 +210,26 @@ elseif(WIN32)
   install(FILES "icons/Avogadro2_150.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
   install(FILES "icons/Avogadro2_310.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
 
+  # Installer identity. The diagnostic build is meant to install beside a
+  # release install rather than on top of it, so everything derived from
+  # APP_NAME has to differ: install directory, Start Menu group, shortcuts and
+  # the uninstall registry keys. APP_EXE deliberately does not differ - the
+  # executable keeps its name.
+  if(USE_SENTRY)
+    set(NSIS_APP_NAME "Avogadro2 Diagnostic")
+    set(NSIS_OUTFILE "Avogadro2-Diagnostic-Setup.exe")
+    # File associations are global, shared state. The ProgIDs in the NSIS
+    # script are fixed strings rather than APP_NAME-derived, so registering
+    # them here would repoint .cml and friends at this build, and uninstalling
+    # would delete them out from under a release install. Leave them alone -
+    # a tester's normal Avogadro stays the file handler.
+    set(NSIS_FILE_ASSOCIATIONS "")
+  else()
+    set(NSIS_APP_NAME "Avogadro2")
+    set(NSIS_OUTFILE "Avogadro2-Setup.exe")
+    set(NSIS_FILE_ASSOCIATIONS "!define REGISTER_FILE_ASSOCIATIONS")
+  endif()
+
   # configure the NSI and MSIX installer scripts
   configure_file("${AvogadroApp_SOURCE_DIR}/cmake/avogadro2.nsi.in" "${CMAKE_INSTALL_PREFIX}/avogadro2.nsi" @ONLY)
   configure_file("${AvogadroApp_SOURCE_DIR}/cmake/AppxManifest.xml.in" "${CMAKE_INSTALL_PREFIX}/AppxManifest.xml" @ONLY)
@@ -235,6 +257,11 @@ if(Avogadro_ENABLE_RPC)
 endif()
 if(USE_SENTRY)
   target_link_libraries(avogadro sentry::sentry)
+  # sentry.dll, crashpad_handler.exe and crashpad_wer.dll need no install rule
+  # here: sentry-native installs them into the shared prefix already, which is
+  # the same bin directory the installer packages.
+  install(FILES "${AvogadroApp_SOURCE_DIR}/cmake/COPYING.sentry"
+    DESTINATION "${INSTALL_DOC_DIR}/avogadro2")
 endif()
 if(APPLE)
   set_target_properties(avogadro PROPERTIES OUTPUT_NAME ${MACOSX_BUNDLE_NAME})

@@ -179,7 +179,9 @@ jobs:
           VERSION=$(date +%Y-%m-%d)
         fi
 
-        mv Avogadro2-Setup.exe ../${{matrix.config.package}}-${VERSION}.exe
+        # NSIS OutFile is "<package>-Setup.exe", set from NSIS_OUTFILE in
+        # avogadro/CMakeLists.txt, so these two names have to stay in step.
+        mv ${{matrix.config.package}}-Setup.exe ../${{matrix.config.package}}-${VERSION}.exe
       working-directory: ${{ runner.workspace }}/build/
       env:
         GH_TOKEN: ${{ github.token }}

@@ -8,6 +8,7 @@
 #include "aboutdialog.h"
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
+#include "crashreporter.h"
 #include "menubuilder.h"
 #include "renderingdialog.h"
 #include "tdxcontroller.h"
@@ -2706,6 +2707,15 @@ void MainWindow::buildMenu()
   auto* bug = new QAction(tr("&Report a Bug"), this);
   m_menuBuilder->addAction(helpPath, bug, 20);
   connect(bug, &QAction::triggered, this, &MainWindow::openBugReport);
+
+  // Only present on the diagnostic build, which is the only one that has
+  // anything to report.
+  if (CrashReporter::isAvailable()) {
+    auto* crashReporting = new QAction(tr("&Crash Reporting…"), this);
+    m_menuBuilder->addAction(helpPath, crashReporting, 15);
+    connect(crashReporting, &QAction::triggered, this,
+            [this]() { CrashReporter::showSettingsDialog(this); });
+  }
 
   auto* feature = new QAction(tr("&Suggest a Feature"), this);
   m_menuBuilder->addAction(helpPath, feature, 10);

@@ -8,6 +8,8 @@
 
 #include "avogadroappconfig.h"
 
+class QWidget;
+
 namespace Avogadro {
 
 /**
@@ -51,6 +53,17 @@ public:
 
   /** Record the user's decision and apply it to the running handler. */
   static void setConsent(bool consentGiven);
+
+  /**
+   * Ask the user about crash reporting, if they have not been asked before.
+   *
+   * Call this once the main window is up. Does nothing on a build without
+   * crash reporting, or once the question has been answered.
+   */
+  static void promptForConsentIfNeeded(QWidget* parentWidget);
+
+  /** Show the crash reporting settings, letting the user change their mind. */
+  static void showSettingsDialog(QWidget* parentWidget);
 
   /**
    * Deliberately crash the application to verify the crash handler.
@@ -98,6 +111,8 @@ inline bool CrashReporter::consentRequested()
   return false;
 }
 inline void CrashReporter::setConsent(bool) {}
+inline void CrashReporter::promptForConsentIfNeeded(QWidget*) {}
+inline void CrashReporter::showSettingsDialog(QWidget*) {}
 inline void CrashReporter::triggerTestCrash() {}
 
 #endif // AVOGADRO_USE_SENTRY

@@ -8,6 +8,8 @@
 
 #include "crashreporter.h"
 
+#include "crashreportdialog.h"
+
 #ifndef AVOGADRO_USE_SENTRY
 // Without this the inline no-op definitions in the header are also in scope,
 // and the failure is a wall of redefinition errors rather than a useful one.
@@ -349,6 +351,28 @@ void CrashReporter::setConsent(bool consentGiven)
   settings.setValue(consentAskedKey, true);
 
   applyConsent(consentGiven);
+}
+
+void CrashReporter::promptForConsentIfNeeded(QWidget* parentWidget)
+{
+  if (!isAvailable() || consentRequested())
+    return;
+
+  // First run has no checkbox: the answer is which button was pressed, and
+  // either answer counts as having been asked.
+  CrashReportDialog dialog(true, parentWidget);
+  setConsent(dialog.exec() == QDialog::Accepted);
+}
+
+void CrashReporter::showSettingsDialog(QWidget* parentWidget)
+{
+  if (!isAvailable())
+    return;
+
+  CrashReportDialog dialog(false, parentWidget);
+  dialog.setConsentGiven(hasConsent());
+  if (dialog.exec() == QDialog::Accepted)
+    setConsent(dialog.consentGiven());
 }
 
 void CrashReporter::triggerTestCrash()
