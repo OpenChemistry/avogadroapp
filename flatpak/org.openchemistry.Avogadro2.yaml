@@ -75,7 +75,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/openbabel/openbabel.git
-        commit: 32cf131444c1555c749b356dab44fb9fe275271f
+        commit: 1afe81019b781c857eecb86251e106e2f31da928
 
   - name: avogadro2
     buildsystem: cmake-ninja
@@ -117,13 +117,13 @@ modules:
       # BEGIN GENERATED SOURCES -- edit projects.cmake, then run cmake/flatpak_sources.cmake
       # glew
       - type: file
-        url: https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.tgz
-        sha256: d4fc82893cfb00109578d0a1a2337fb8ca335b3ceccf97b97e5cc7f08e4353e1
+        url: https://github.com/nigels-com/glew/releases/download/glew-2.3.1/glew-2.3.1.tgz
+        sha256: b64790f94b926acd7e8f84c5d6000a86cb43967bd1e688b03089079799c9e889
         dest: Downloads
       # eigen
       - type: file
-        url: https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
-        sha256: 8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72
+        url: https://gitlab.com/libeigen/eigen/-/archive/3.4.1/eigen-3.4.1.tar.gz
+        sha256: b93c667d1b69265cdb4d9f30ec21f8facbbe8b307cf34c0b9942834c6d4fdbe2
         dest: Downloads
       # spglib
       - type: file

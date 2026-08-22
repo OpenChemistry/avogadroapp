@@ -8,6 +8,7 @@
 #include "aboutdialog.h"
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
+#include "crashreporter.h"
 #include "menubuilder.h"
 #include "renderingdialog.h"
 #include "tdxcontroller.h"
@@ -609,6 +610,7 @@ void MainWindow::setupInterface()
 
   viewActivated(glWidget);
   buildTools();
+  CrashReporter::attachSessionContext(glWidget);
   // Connect to the invalid context signal, check whether GL is initialized.
   // connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
   connect(m_multiViewWidget, &QtGui::MultiViewWidget::activeWidgetChanged, this,
@@ -1036,6 +1038,10 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
     return false;
 
   QString ident = QString::fromStdString(reader->identifier());
+  if (CrashReporter::isAvailable()) {
+    CrashReporter::addBreadcrumb(QStringLiteral("file"),
+                                 QStringLiteral("open format=%1").arg(ident));
+  }
 
   // Prepare the background thread to read in the selected file.
   if (!m_fileReadThread)
@@ -1558,14 +1564,19 @@ void MainWindow::toolActivated()
   if (auto* action = qobject_cast<QAction*>(sender())) {
     if (auto* glWidget =
           qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())) {
-      glWidget->setActiveTool(action->data().toString());
+      const QString toolId = action->data().toString();
+      glWidget->setActiveTool(toolId);
+      if (CrashReporter::isAvailable()) {
+        CrashReporter::addBreadcrumb(
+          QStringLiteral("tool"), QStringLiteral("activated %1").arg(toolId));
+      }
       if (glWidget->activeTool()) {
         m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
 
         // uncheck the toolbar
         foreach (QAction* barAction, m_toolToolBar->actions()) {
-          if (action->data().toString() != barAction->data().toString())
+          if (toolId != barAction->data().toString())
             barAction->setChecked(false);
         }
       }
@@ -2706,6 +2717,15 @@ void MainWindow::buildMenu()
   auto* bug = new QAction(tr("&Report a Bug"), this);
   m_menuBuilder->addAction(helpPath, bug, 20);
   connect(bug, &QAction::triggered, this, &MainWindow::openBugReport);
+
+  // Only present on the diagnostic build, which is the only one that has
+  // anything to report.
+  if (CrashReporter::isAvailable()) {
+    auto* crashReporting = new QAction(tr("&Crash Reporting…"), this);
+    m_menuBuilder->addAction(helpPath, crashReporting, 15);
+    connect(crashReporting, &QAction::triggered, this,
+            [this]() { CrashReporter::showSettingsDialog(this); });
+  }
 
   auto* feature = new QAction(tr("&Suggest a Feature"), this);
   m_menuBuilder->addAction(helpPath, feature, 10);

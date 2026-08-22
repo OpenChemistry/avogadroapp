@@ -66,6 +66,19 @@ endif()
 
 option(Avogadro_ENABLE_RPC "Enable RPC server" ON)
 
+# Crash reporting via sentry-native, used only by the separate Windows
+# diagnostic build. Off everywhere else.
+if(WIN32)
+  option(USE_SENTRY "Enable Sentry crash reporting (diagnostic builds)" OFF)
+  set(SENTRY_DSN "" CACHE STRING "Sentry DSN for crash reports")
+  set(SENTRY_ENVIRONMENT "nightly" CACHE STRING
+    "Sentry environment name reported with each event")
+elseif(USE_SENTRY)
+  message(WARNING "Disabling USE_SENTRY - it is only supported on Windows.")
+  set(USE_SENTRY OFF CACHE BOOL
+    "Enable Sentry crash reporting (diagnostic builds)" FORCE)
+endif()
+
 add_subdirectory(avogadro)
 
 option(BUILD_DOCUMENTATION "Build project documentation" OFF)

@@ -6,15 +6,16 @@
 SetCompressor /SOLID lzma
 
 ; Basic Information
-!define APP_NAME "Avogadro2"
+!define APP_NAME "@NSIS_APP_NAME@"
 !define APP_VERSION "@AvogadroApp_VERSION@"
 !define APP_PUBLISHER "Avogadro"
 !define APP_EXE "avogadro2.exe"
 !define INSTALL_DIR "$PROGRAMFILES64\${APP_NAME}"
+@NSIS_FILE_ASSOCIATIONS@
 
 ; General Settings
 Name "${APP_NAME}"
-OutFile "Avogadro2-Setup.exe"
+OutFile "@NSIS_OUTFILE@"
 InstallDir "${INSTALL_DIR}"
 InstallDirRegKey HKLM "Software\${APP_NAME}" "InstallDir"
 RequestExecutionLevel admin
@@ -72,6 +73,9 @@ RequestExecutionLevel admin
 !insertmacro MUI_LANGUAGE "Vietnamese"
 
 
+; File associations are registered only by the release build - see the
+; NSIS_FILE_ASSOCIATIONS comment in avogadro/CMakeLists.txt.
+!ifdef REGISTER_FILE_ASSOCIATIONS
 ; Function to register file associations
 Function RegisterFileAssociation
     ; Parameters: $0 = file extension (e.g., ".xyz")
@@ -90,7 +94,9 @@ Function RegisterFileAssociation
     WriteRegStr HKCR "$1\shell\open" "" "Open with ${APP_NAME}"
     WriteRegStr HKCR "$1\shell\open\command" "" '"$INSTDIR\bin\${APP_EXE}" "%1"'
 FunctionEnd
+!endif
 
+!ifdef REGISTER_FILE_ASSOCIATIONS
 ; Function to unregister file associations
 Function un.UnregisterFileAssociation
     ; Parameter: $0 = file extension
@@ -100,6 +106,7 @@ Function un.UnregisterFileAssociation
     DeleteRegKey HKCR "$1"
     DeleteRegKey HKCR "$0"
 FunctionEnd
+!endif
 
 ; Installer Section
 Section "Install"
@@ -129,6 +136,7 @@ Section "Install"
     ; Create Desktop shortcut
     CreateShortcut "$DESKTOP\${APP_NAME}.lnk" "$INSTDIR\bin\${APP_EXE}"
 
+!ifdef REGISTER_FILE_ASSOCIATIONS
     ; Register file associations
     Push ".xyz"
     Push "Avogadro2.XYZ"
@@ -174,6 +182,7 @@ Section "Install"
 
     ; Notify Windows of file association changes
     System::Call 'shell32.dll::SHChangeNotify(i, i, i, i) v (0x08000000, 0, 0, 0)'
+!endif
 
     ; Write registry keys for Add/Remove Programs
     WriteRegStr HKLM "Software\${APP_NAME}" "InstallDir" "$INSTDIR"
@@ -189,6 +198,7 @@ SectionEnd
 
 ; Uninstaller Section
 Section "Uninstall"
+!ifdef REGISTER_FILE_ASSOCIATIONS
     ; Unregister file associations
     Push ".xyz"
     Call un.UnregisterFileAssociation
@@ -213,6 +223,7 @@ Section "Uninstall"
 
     ; Notify Windows of file association changes
     System::Call 'shell32.dll::SHChangeNotify(i, i, i, i) v (0x08000000, 0, 0, 0)'
+!endif
 
     ; Remove files and directories
     RMDir /r "$INSTDIR\bin"
