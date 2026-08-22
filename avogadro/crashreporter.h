@@ -8,6 +8,12 @@
 
 #include "avogadroappconfig.h"
 
+// QStringList is a type alias in Qt 6 rather than a class, so it cannot be
+// forward declared by hand - this is Qt's own header for the purpose. It also
+// declares QString.
+#include <QtCore/qcontainerfwd.h>
+
+class QOpenGLWidget;
 class QWidget;
 
 namespace Avogadro {
@@ -66,6 +72,29 @@ public:
   static void showSettingsDialog(QWidget* parentWidget);
 
   /**
+   * Gather what the crash reporter can learn about this session: the OpenGL
+   * driver in use and which plugins are loaded.
+   *
+   * Call once, after the plugins have loaded and the view exists. The driver
+   * strings are read on the first rendered frame, since there is no context
+   * to query before then. @a glWidget may be null, in which case only the
+   * plugin list is recorded.
+   */
+  static void attachSessionContext(QOpenGLWidget* glWidget);
+
+  /**
+   * Leave a trail of what was happening in the run-up to a crash.
+   *
+   * Pass only non-identifying values: a file format identifier rather than a
+   * file name, a tool name rather than what it was applied to.
+   *
+   * Unlike the rest of this class, guard calls that have to build their
+   * message with isAvailable() - formatting the string is not free, and would
+   * otherwise be paid on every platform to be thrown away.
+   */
+  static void addBreadcrumb(const QString& category, const QString& message);
+
+  /**
    * Deliberately crash the application to verify the crash handler.
    *
    * This exists only to validate the reporting pipeline end to end, and is
@@ -113,6 +142,8 @@ inline bool CrashReporter::consentRequested()
 inline void CrashReporter::setConsent(bool) {}
 inline void CrashReporter::promptForConsentIfNeeded(QWidget*) {}
 inline void CrashReporter::showSettingsDialog(QWidget*) {}
+inline void CrashReporter::attachSessionContext(QOpenGLWidget*) {}
+inline void CrashReporter::addBreadcrumb(const QString&, const QString&) {}
 inline void CrashReporter::triggerTestCrash() {}
 
 #endif // AVOGADRO_USE_SENTRY

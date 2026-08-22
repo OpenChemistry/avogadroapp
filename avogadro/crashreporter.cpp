@@ -22,6 +22,17 @@
 #include <QtCore/QSettings>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QString>
+#include <QtCore/QStringList>
+
+#include <avogadro/core/version.h>
+#include <avogadro/qtgui/extensionplugin.h>
+#include <avogadro/qtgui/sceneplugin.h>
+#include <avogadro/qtgui/toolplugin.h>
+#include <avogadro/qtplugins/pluginmanager.h>
+
+#include <QtGui/QOpenGLContext>
+#include <QtGui/QOpenGLFunctions>
+#include <QtOpenGLWidgets/QOpenGLWidget>
 
 #include <sentry.h>
 
@@ -225,6 +236,50 @@ QString crashHandlerPath()
 #endif
 }
 
+/// Store @a names as a single readable field of @a parent.
+void setStringList(sentry_value_t parent, const char* key,
+                   const QStringList& names)
+{
+  const QString joined = names.join(QStringLiteral(", "));
+  sentry_value_set_by_key(parent, key,
+                          sentry_value_new_string(joined.toUtf8().constData()));
+}
+
+/// glGetString can return null; sentry_set_tag needs a real string. Handing
+/// the driver's own pointer straight to sentry avoids a QString round trip.
+const char* glString(QOpenGLFunctions* gl, GLenum name)
+{
+  const GLubyte* value = gl->glGetString(name);
+  return value == nullptr ? "" : reinterpret_cast<const char*>(value);
+}
+
+/// Tags rather than context, so these can be grouped and filtered on: "every
+/// crash from this driver" is the question worth asking.
+void recordOpenGLContextInfo(QOpenGLWidget* glWidget)
+{
+  glWidget->makeCurrent();
+  if (QOpenGLContext* context = QOpenGLContext::currentContext()) {
+    QOpenGLFunctions* gl = context->functions();
+    sentry_set_tag("gl.vendor", glString(gl, GL_VENDOR));
+    sentry_set_tag("gl.renderer", glString(gl, GL_RENDERER));
+    sentry_set_tag("gl.version", glString(gl, GL_VERSION));
+  }
+  glWidget->doneCurrent();
+}
+
+/// Sorted identifiers of every loaded plugin of one kind.
+template<typename Factory>
+QStringList pluginIdentifiers()
+{
+  QStringList names;
+  const auto factories =
+    QtPlugins::PluginManager::instance()->pluginFactories<Factory>();
+  for (Factory* factory : factories)
+    names << factory->identifier();
+  names.sort();
+  return names;
+}
+
 void applyConsent(bool consentGiven)
 {
   if (!sentryInitialized)
@@ -309,6 +364,10 @@ void CrashReporter::initialize()
 
   sentryInitialized = true;
 
+  // Versions worth having on every report, whatever else we manage to attach.
+  sentry_set_tag("qt.version", qVersion());
+  sentry_set_tag("avogadrolibs.version", Avogadro::version());
+
   // Carry over the decision the user made in an earlier run.
   applyConsent(hasConsent());
 #endif
@@ -373,6 +432,44 @@ void CrashReporter::showSettingsDialog(QWidget* parentWidget)
   dialog.setConsentGiven(hasConsent());
   if (dialog.exec() == QDialog::Accepted)
     setConsent(dialog.consentGiven());
+}
+
+void CrashReporter::attachSessionContext(QOpenGLWidget* glWidget)
+{
+  if (!sentryInitialized)
+    return;
+
+  // The driver strings can only be read once there is a context, so wait for
+  // the first swapped frame rather than querying now.
+  if (glWidget != nullptr) {
+    QObject::connect(
+      glWidget, &QOpenGLWidget::frameSwapped, glWidget,
+      [glWidget]() { recordOpenGLContextInfo(glWidget); },
+      Qt::SingleShotConnection);
+  }
+
+  // A stack trace ending inside a plugin library is otherwise hard to tell
+  // apart from one in the core.
+  sentry_value_t plugins = sentry_value_new_object();
+  setStringList(plugins, "scene",
+                pluginIdentifiers<QtGui::ScenePluginFactory>());
+  setStringList(plugins, "tool", pluginIdentifiers<QtGui::ToolPluginFactory>());
+  setStringList(plugins, "extension",
+                pluginIdentifiers<QtGui::ExtensionPluginFactory>());
+  sentry_set_context("plugins", plugins);
+}
+
+void CrashReporter::addBreadcrumb(const QString& category,
+                                  const QString& message)
+{
+  if (!sentryInitialized)
+    return;
+
+  sentry_value_t crumb =
+    sentry_value_new_breadcrumb("default", message.toUtf8().constData());
+  sentry_value_set_by_key(
+    crumb, "category", sentry_value_new_string(category.toUtf8().constData()));
+  sentry_add_breadcrumb(crumb);
 }
 
 void CrashReporter::triggerTestCrash()
