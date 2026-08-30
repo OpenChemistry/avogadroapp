@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-08-23 02:37+0000\n"
-"PO-Revision-Date: 2026-08-09 10:03+0000\n"
+"PO-Revision-Date: 2026-08-31 04:51+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -51,9 +51,9 @@ msgid "SSL Version:"
 msgstr "SSLバージョン:"
 
 #: aboutdialog.cpp:47
-#, qt-format
+#, fuzzy, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1 (診断)"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
@@ -68,8 +68,9 @@ msgid "No file name set in BackgroundFileFormat!"
 msgstr "BackgroundFileFormatにファイル名が設定されていません！"
 
 #: crashreportdialog.cpp:21
+#, fuzzy
 msgid "Crash Reporting"
-msgstr ""
+msgstr "クラッシュレポート"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -88,22 +89,25 @@ msgid ""
 msgstr ""
 
 #: crashreportdialog.cpp:52
+#, fuzzy
 msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"あなたが同意しない場合何も送信しません。ヘルプ→クラッシュレポートからいつでも"
+"変更できます。"
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "クラッシュレポートを送信する"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "送信しない"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "Avogadro開発者にクラッシュレポートを送信"
 
 #: mainwindow.cpp:396
 #, fuzzy
@@ -298,7 +302,7 @@ msgstr "以下のプラグインが利用可能:"
 
 #: mainwindow.cpp:1488
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "アップデートしますか？"
 
 #: mainwindow.cpp:1527
 msgid "Recover Autosaved Files"
@@ -605,7 +609,7 @@ msgstr "バグを報告 (&R)"
 
 #: mainwindow.cpp:2724
 msgid "&Crash Reporting…"
-msgstr ""
+msgstr "クラッシュレポート (&C)"
 
 #: mainwindow.cpp:2730
 msgid "&Suggest a Feature"
