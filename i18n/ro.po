@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-08-23 02:37+0000\n"
-"PO-Revision-Date: 2026-03-17 06:09+0000\n"
+"PO-Revision-Date: 2026-09-02 22:51+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ro/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
@@ -53,7 +53,7 @@ msgstr "Versiunea SSL:"
 #: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1 (Diagnostic)"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
@@ -69,7 +69,7 @@ msgstr "Niciun nume de fișier definit în „BackgroundFileFormat”!"
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"
-msgstr ""
+msgstr "Raportarea erorilor"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -77,6 +77,9 @@ msgid ""
 "developers when Avogadro crashes, which helps us fix crashes we cannot "
 "reproduce ourselves."
 msgstr ""
+"Aceasta este o versiune de diagnosticare a programului Avogadro. Ea poate "
+"trimite un raport către dezvoltatori atunci când Avogadro se blochează, ceea "
+"ce ne ajută să remediem blocările pe care nu le putem reproduce noi înșine."
 
 #: crashreportdialog.cpp:38
 msgid ""
@@ -86,24 +89,32 @@ msgid ""
 "useful, but it may incidentally include fragments of what you were working "
 "on, such as part of a file name or a molecule you had open."
 msgstr ""
+"Un raport de eroare conține o imagine a memoriei programului Avogadro în "
+"momentul în care acesta s-a blocat, împreună cu informații despre sistemul "
+"de operare, controlorul grafic și versiunea Avogadro, precum și un jurnal al "
+"activității recente. Această imagine a memoriei face ca raportul să fie "
+"util, dar poate include, întâmplător, fragmente din ceea ce lucrați, cum ar "
+"fi o parte dintr-un nume de fișier sau o moleculă pe care o aveți deschisă."
 
 #: crashreportdialog.cpp:52
 msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"Nu se trimite nimic fără acordul dumneavoastră. Puteți modifica această "
+"opțiune oricând din meniu, la Ajutor → Raportarea erorilor."
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "Trimiteți rapoarte privind erorile"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "Nu trimiteți"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "Trimiteți rapoartele de erori către dezvoltatorii Avogadro"
 
 #: mainwindow.cpp:396
 msgid "Ready…"
@@ -300,7 +311,7 @@ msgstr "Sunt disponibile următoarele module:"
 
 #: mainwindow.cpp:1488
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "Doriți să le actualizați?"
 
 #: mainwindow.cpp:1527
 msgid "Recover Autosaved Files"
@@ -605,7 +616,7 @@ msgstr "&Raportați o eroare"
 
 #: mainwindow.cpp:2724
 msgid "&Crash Reporting…"
-msgstr ""
+msgstr "Raportarea &erorilor…"
 
 #: mainwindow.cpp:2730
 msgid "&Suggest a Feature"
