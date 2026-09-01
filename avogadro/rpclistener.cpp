@@ -137,6 +137,9 @@ void RpcListener::messageReceived(const RPC::Message& message)
         "Ignoring kill command. Start with '--testing' to enable.");
       errorMessage.send();
     }
+    // Either way the request has been answered. Without this the message
+    // falls through to the handler chain below and a second reply is sent.
+    return;
   }
 
   // check if there's an active window
