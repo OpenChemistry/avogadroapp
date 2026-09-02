@@ -6,6 +6,7 @@
 #ifndef AVOGADRO_MAINWINDOW_H
 #define AVOGADRO_MAINWINDOW_H
 
+#include <QtCore/QHash>
 #include <QtCore/QStringList>
 #include <QtCore/QVariantMap>
 #include <QtWidgets/QMainWindow>
@@ -64,7 +65,8 @@ class MainWindow : public QMainWindow
 {
   Q_OBJECT
 public:
-  MainWindow(const QStringList& fileNames, bool disableSettings = false);
+  MainWindow(const QStringList& fileNames, bool disableSettings = false,
+             bool skipAutosave = false);
   ~MainWindow() override;
 
 public slots:
@@ -166,19 +168,59 @@ public:
   }
 
   /**
+   * The outcome of dispatching a script command.
+   */
+  enum class CommandStatus
+  {
+    NotHandled, ///< No tool or extension claims this command.
+    Finished,   ///< The command ran to completion.
+    Failed,     ///< The command was claimed, but could not be carried out.
+    Started,    ///< Still running; commandCompleted() will follow.
+    Busy        ///< That plugin is already running a command.
+  };
+
+  /**
    * Handle script commands
    * @param command The command to execute
    * @param options The options to the command
+   * @param token Identifies this command in a later commandCompleted()
+   * @param message Set to a message from the plugin, if it supplied one
+   * @param result Set to any results the plugin returned
    *
-   * @return True if the command was handled, false otherwise
+   * @return The outcome of the command. A return of CommandStatus::Started
+   * means the command is still running, and commandCompleted() will be
+   * emitted with @a token once it ends.
    */
-  bool handleCommand(const QString& command, const QVariantMap& options);
+  CommandStatus handleCommand(const QString& command,
+                              const QVariantMap& options, quint64 token = 0,
+                              QString* message = nullptr,
+                              QVariantMap* result = nullptr);
+
+  /**
+   * Stop waiting for the command identified by @a token.
+   *
+   * The plugin may still be working -- this does not cancel anything -- but
+   * its result will be ignored and it is free to accept another command.
+   * Used when the caller has given up waiting, so that a plugin which never
+   * reports back does not stay busy for the life of the session.
+   */
+  void abandonCommand(quint64 token);
 
 signals:
   /**
    * Emitted when the active molecule in the application has changed.
    */
   void moleculeChanged(QtGui::Molecule* molecue);
+
+  /**
+   * Emitted when a command that returned CommandStatus::Started has ended.
+   * @param token The token that was passed to handleCommand()
+   * @param success True if the command finished, false if it failed
+   * @param message An optional message from the plugin
+   * @param result Any results the plugin returned
+   */
+  void commandCompleted(quint64 token, bool success, const QString& message,
+                        const QVariantMap& result);
 
 protected:
   void closeEvent(QCloseEvent* event) override;
@@ -325,6 +367,18 @@ private slots:
 
   void registerExtensionCommand(QString command, QString description);
 
+  /** A plugin reports that a command is running in the background. */
+  void pluginCommandStarted();
+
+  /** A plugin reports that a command has finished. */
+  void pluginCommandFinished(const QString& message, const QVariantMap& result);
+
+  /** A plugin reports that a started command could not be completed. */
+  void pluginCommandFailed(const QString& message);
+
+  /** Drop a destroyed plugin from the in-flight command map. */
+  void pluginDestroyed(QObject* plugin);
+
   /**
    * @brief Register file formats from extensions when ready.
    */
@@ -427,6 +481,31 @@ private slots:
   void setProjectionPerspective();
 
 private:
+  /**
+   * Connect a plugin's command lifecycle signals. Safe to call repeatedly --
+   * the connections are unique. Tool instances belong to each GLWidget rather
+   * than to m_tools, so this is done on first use rather than at load time.
+   */
+  template<typename PluginType>
+  void connectCommandSignals(PluginType* plugin)
+  {
+    connect(plugin, &PluginType::commandStarted, this,
+            &MainWindow::pluginCommandStarted, Qt::UniqueConnection);
+    connect(plugin, &PluginType::commandFinished, this,
+            &MainWindow::pluginCommandFinished, Qt::UniqueConnection);
+    connect(plugin, &PluginType::commandFailed, this,
+            &MainWindow::pluginCommandFailed, Qt::UniqueConnection);
+    connect(plugin, &QObject::destroyed, this, &MainWindow::pluginDestroyed,
+            Qt::UniqueConnection);
+  }
+
+  /** Start tracking the signals a plugin emits while handling a command. */
+  void beginPluginCommand(QObject* plugin);
+
+  /** Stop tracking, and work out how the command ended. */
+  CommandStatus endPluginCommand(QObject* plugin, bool claimed, quint64 token,
+                                 QString* message, QVariantMap* result);
+
   QtGui::Molecule* m_molecule;
   QtGui::RWMolecule* m_rwMolecule;
   QtGui::MoleculeModel* m_moleculeModel;
@@ -435,6 +514,9 @@ private:
   bool m_queuedFilesStarted;
   QStringList m_queuedFiles;
   QTimer* m_autosaveTimer = nullptr; // for the autosave timer
+  // Skip autosave recovery and writing autosaves entirely, so that a
+  // scripted or automated run neither prompts nor leaves files behind.
+  bool m_skipAutosave = false;
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 
@@ -473,6 +555,18 @@ private:
   QMap<QString, QtGui::ExtensionPlugin*> m_extensionCommandMap;
   // used for help - provide description for a command
   QMap<QString, QString> m_commandDescriptionsMap;
+
+  // Tracks the command currently inside handleCommand(), so that a plugin
+  // emitting commandStarted() / commandFinished() / commandFailed() during
+  // the call can be attributed without waiting for the signal to come back.
+  QObject* m_currentCommandPlugin = nullptr;
+  bool m_currentCommandStarted = false;
+  bool m_currentCommandEnded = false;
+  bool m_currentCommandFailed = false;
+  QString m_currentCommandMessage;
+  QVariantMap m_currentCommandResult;
+  // Plugins running a command in the background, and the token to report.
+  QHash<QObject*, quint64> m_inFlightCommands;
 
   QAction* m_undo;
   QAction* m_redo;

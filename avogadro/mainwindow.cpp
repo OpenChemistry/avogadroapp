@@ -242,7 +242,8 @@ using QtPlugins::PluginManager;
 using std::string;
 using std::vector;
 
-MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
+MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
+                       bool skipAutosave)
   : m_molecule(nullptr)
   , m_rwMolecule(nullptr)
   , m_moleculeModel(nullptr)
@@ -277,7 +278,9 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   readSettings();
 
   // check for auto-save files
-  checkAutosaveRecovery();
+  m_skipAutosave = skipAutosave;
+  if (!m_skipAutosave)
+    checkAutosaveRecovery();
 
   // check for version update
   checkUpdate();
@@ -822,7 +825,8 @@ void MainWindow::setMolecule(Molecule* mol)
     oldMolecule->disconnect(this);
 
   // start the autosave timer
-  startAutosaveTimer();
+  if (!m_skipAutosave)
+    startAutosaveTimer();
 
   // Check if the molecule needs to update the current one.
   QWidget* w = m_multiViewWidget->activeWidget();
@@ -3252,9 +3256,123 @@ void MainWindow::registerExtensionCommand(QString command, QString description)
   m_extensionCommandMap.insert(command, extension);
 }
 
-bool MainWindow::handleCommand(const QString& command,
-                               const QVariantMap& options)
+void MainWindow::beginPluginCommand(QObject* plugin)
 {
+  m_currentCommandPlugin = plugin;
+  m_currentCommandStarted = false;
+  m_currentCommandEnded = false;
+  m_currentCommandFailed = false;
+  m_currentCommandMessage.clear();
+  m_currentCommandResult.clear();
+}
+
+MainWindow::CommandStatus MainWindow::endPluginCommand(QObject* plugin,
+                                                       bool claimed,
+                                                       quint64 token,
+                                                       QString* message,
+                                                       QVariantMap* result)
+{
+  m_currentCommandPlugin = nullptr;
+
+  if (message != nullptr)
+    *message = m_currentCommandMessage;
+  if (result != nullptr)
+    *result = m_currentCommandResult;
+
+  if (!claimed)
+    return CommandStatus::NotHandled;
+  if (m_currentCommandFailed)
+    return CommandStatus::Failed;
+  // A plugin that finished during the call, or never asked to be waited for,
+  // is done. Anything else is still running.
+  if (m_currentCommandEnded || !m_currentCommandStarted)
+    return CommandStatus::Finished;
+
+  m_inFlightCommands.insert(plugin, token);
+  return CommandStatus::Started;
+}
+
+void MainWindow::pluginCommandStarted()
+{
+  if (sender() == m_currentCommandPlugin)
+    m_currentCommandStarted = true;
+}
+
+void MainWindow::pluginCommandFinished(const QString& message,
+                                       const QVariantMap& result)
+{
+  // Emitted from inside handleCommand(): the command never went asynchronous.
+  if (sender() == m_currentCommandPlugin) {
+    m_currentCommandEnded = true;
+    m_currentCommandMessage = message;
+    m_currentCommandResult = result;
+    return;
+  }
+
+  // Otherwise this belongs to a command that is still running. Plugins emit
+  // this for work the user started from the GUI as well, so only report it
+  // when a script is actually waiting on this plugin.
+  auto match = m_inFlightCommands.find(sender());
+  if (match == m_inFlightCommands.end())
+    return;
+
+  const quint64 token = match.value();
+  m_inFlightCommands.erase(match);
+  emit commandCompleted(token, true, message, result);
+}
+
+void MainWindow::pluginCommandFailed(const QString& message)
+{
+  if (sender() == m_currentCommandPlugin) {
+    m_currentCommandEnded = true;
+    m_currentCommandFailed = true;
+    m_currentCommandMessage = message;
+    return;
+  }
+
+  auto match = m_inFlightCommands.find(sender());
+  if (match == m_inFlightCommands.end())
+    return;
+
+  const quint64 token = match.value();
+  m_inFlightCommands.erase(match);
+  emit commandCompleted(token, false, message, QVariantMap());
+}
+
+void MainWindow::abandonCommand(quint64 token)
+{
+  for (auto it = m_inFlightCommands.begin(); it != m_inFlightCommands.end();
+       ++it) {
+    if (it.value() == token) {
+      m_inFlightCommands.erase(it);
+      return;
+    }
+  }
+}
+
+void MainWindow::pluginDestroyed(QObject* plugin)
+{
+  auto match = m_inFlightCommands.find(plugin);
+  if (match == m_inFlightCommands.end())
+    return;
+
+  const quint64 token = match.value();
+  m_inFlightCommands.erase(match);
+  emit commandCompleted(token, false, tr("The plugin was unloaded."),
+                        QVariantMap());
+}
+
+MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
+                                                    const QVariantMap& options,
+                                                    quint64 token,
+                                                    QString* message,
+                                                    QVariantMap* result)
+{
+  if (message != nullptr)
+    message->clear();
+  if (result != nullptr)
+    result->clear();
+
   // handle a few basic commands
   if (command == "setProjection") {
     if (options.contains("type")) {
@@ -3268,7 +3386,7 @@ bool MainWindow::handleCommand(const QString& command,
       setProjectionPerspective();
     else if (options.contains("orthographic"))
       setProjectionOrthographic();
-    return true;
+    return CommandStatus::Finished;
   } else if (command == "setRenderTypes") {
     QStringList enableTypes, disableTypes;
     if (options.contains("types")) {
@@ -3284,7 +3402,7 @@ bool MainWindow::handleCommand(const QString& command,
     }
     setActiveDisplayTypes(enableTypes);
     setDisabledDisplayTypes(disableTypes);
-    return true;
+    return CommandStatus::Finished;
   }
 
   // pass any remaining commands to the tools or extensions
@@ -3294,7 +3412,7 @@ bool MainWindow::handleCommand(const QString& command,
       qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
 
     if (glWidget == nullptr)
-      return false;
+      return CommandStatus::NotHandled;
 
     QString toolName = m_toolCommandMap.value(command);
     auto* currentTool = glWidget->activeTool();
@@ -3309,14 +3427,29 @@ bool MainWindow::handleCommand(const QString& command,
       }
     }
 
-    bool result = tool->handleCommand(command, options);
+    if (tool == nullptr)
+      return CommandStatus::NotHandled;
+    if (m_inFlightCommands.contains(tool))
+      return CommandStatus::Busy;
+
+    connectCommandSignals(tool);
+    beginPluginCommand(tool);
+    bool claimed = tool->handleCommand(command, options);
     glWidget->setActiveTool(currentTool);
-    return result;
+    return endPluginCommand(tool, claimed, token, message, result);
   } else if (m_extensionCommandMap.contains(command)) {
     auto* extension = m_extensionCommandMap.value(command);
-    return extension->handleCommand(command, options);
+    if (extension == nullptr)
+      return CommandStatus::NotHandled;
+    if (m_inFlightCommands.contains(extension))
+      return CommandStatus::Busy;
+
+    connectCommandSignals(extension);
+    beginPluginCommand(extension);
+    bool claimed = extension->handleCommand(command, options);
+    return endPluginCommand(extension, claimed, token, message, result);
   }
-  return false;
+  return CommandStatus::NotHandled;
 }
 
 } // End of Avogadro namespace

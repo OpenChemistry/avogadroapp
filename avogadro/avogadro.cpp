@@ -358,6 +358,7 @@ int main(int argc, char* argv[])
 
   QStringList fileNames;
   bool disableSettings = false;
+  bool skipAutosave = false;
 #ifdef QTTESTING
   QString testFile;
   bool testExit = true;
@@ -381,6 +382,8 @@ int main(int argc, char* argv[])
 #endif
     } else if (*it == "--disable-settings") {
       disableSettings = true;
+    } else if (*it == "--skip-autosave") {
+      skipAutosave = true;
     } else if (*it == "--crash-test") {
 #ifdef AVOGADRO_USE_SENTRY
       Avogadro::CrashReporter::triggerTestCrash();
@@ -397,7 +400,7 @@ int main(int argc, char* argv[])
     }
   }
 
-  Avogadro::MainWindow window(fileNames, disableSettings);
+  Avogadro::MainWindow window(fileNames, disableSettings, skipAutosave);
   window.setTranslationList(languages, codes);
 #ifdef QTTESTING
   window.playTest(testFile, testExit);
