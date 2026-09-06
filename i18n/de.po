@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-03-22 03:46+0000\n"
+"POT-Creation-Date: 2026-08-23 02:37+0000\n"
 "PO-Revision-Date: 2026-03-15 19:10+0000\n"
 "Last-Translator: Alexander Krappe <alexander.krappe@fu-berlin.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
@@ -31,33 +31,38 @@ msgstr ""
 "X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
-#: aboutdialog.cpp:25
+#: aboutdialog.cpp:26
 msgid "Molecular editor and visualizer"
 msgstr "Molekül-Editor und Visualisierungstool"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
-#: aboutdialog.cpp:32:3
+#: aboutdialog.cpp:33:3
 msgid "Version:"
 msgstr "Version:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
-#: aboutdialog.cpp:33:9
+#: aboutdialog.cpp:34:9
 msgid "Avogadro Library Version:"
 msgstr "Avogadro-Bibliotheksversion:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
-#: aboutdialog.cpp:34:15
+#: aboutdialog.cpp:35:15
 msgid "Qt Version:"
 msgstr "Qt-Version:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
-#: aboutdialog.cpp:35:21
+#: aboutdialog.cpp:36:21
 msgid "SSL Version:"
 msgstr "SSL-Version:"
+
+#: aboutdialog.cpp:47
+#, qt-format
+msgid "%1 (Diagnostic)"
+msgstr ""
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
@@ -71,94 +76,132 @@ msgstr "Kein Dateiformat in BackgroundFileFormat eingestellt!"
 msgid "No file name set in BackgroundFileFormat!"
 msgstr "Es wurde kein Dateiname im BackgroundFileFormat festgelegt!"
 
-#: mainwindow.cpp:393
+#: crashreportdialog.cpp:21
+msgid "Crash Reporting"
+msgstr ""
+
+#: crashreportdialog.cpp:27
+msgid ""
+"This is a diagnostic build of Avogadro. It can send a report to the "
+"developers when Avogadro crashes, which helps us fix crashes we cannot "
+"reproduce ourselves."
+msgstr ""
+
+#: crashreportdialog.cpp:38
+msgid ""
+"A crash report contains a snapshot of Avogadro's memory at the moment it "
+"failed, along with your operating system, graphics driver and Avogadro "
+"version, and a log of recent activity. That memory snapshot makes the report "
+"useful, but it may incidentally include fragments of what you were working "
+"on, such as part of a file name or a molecule you had open."
+msgstr ""
+
+#: crashreportdialog.cpp:52
+msgid ""
+"Nothing is sent unless you agree. You can change this at any time under Help "
+"→ Crash Reporting."
+msgstr ""
+
+#: crashreportdialog.cpp:63
+msgid "Send Crash Reports"
+msgstr ""
+
+#: crashreportdialog.cpp:64
+msgid "Don't Send"
+msgstr ""
+
+#: crashreportdialog.cpp:67
+msgid "Send crash reports to the Avogadro developers"
+msgstr ""
+
+#: mainwindow.cpp:396
 msgid "Ready…"
 msgstr "Bereit …"
 
-#: mainwindow.cpp:482
+#: mainwindow.cpp:502
 msgid "Tool"
 msgstr "Werkzeug"
 
-#: mainwindow.cpp:486
+#: mainwindow.cpp:506
 msgid "Display Types"
 msgstr "Darstellungsarten"
 
-#: mainwindow.cpp:496
+#: mainwindow.cpp:516
 msgid "Display Type Settings"
 msgstr "Darstellungsoptionen"
 
-#: mainwindow.cpp:500
+#: mainwindow.cpp:520
 msgid "Files"
 msgstr "Dateien"
 
-#: mainwindow.cpp:511
+#: mainwindow.cpp:531
 msgid "Layers"
 msgstr "Ebenen"
 
-#: mainwindow.cpp:539
+#: mainwindow.cpp:559
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Datei"
 
-#: mainwindow.cpp:544
+#: mainwindow.cpp:564
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Werkzeuge"
 
-#: mainwindow.cpp:843
+#: mainwindow.cpp:864
 msgid "Untitled"
 msgstr "Unbenannt"
 
-#: mainwindow.cpp:848
+#: mainwindow.cpp:869
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Avogadro %3"
 
-#: mainwindow.cpp:904
+#: mainwindow.cpp:925
 msgid "Restart needed"
 msgstr "Neustart benötigt"
 
-#: mainwindow.cpp:905
+#: mainwindow.cpp:926
 msgid "Please restart Avogadro to use the new language."
 msgstr "Bitte starten Sie Avogadro neu, um die neue Sprache zu verwenden."
 
-#: mainwindow.cpp:948 mainwindow.cpp:1970
+#: mainwindow.cpp:969 mainwindow.cpp:2076
 msgid "Chemical Markup Language"
 msgstr "Chemische Markup-Sprache"
 
-#: mainwindow.cpp:949 mainwindow.cpp:1969
+#: mainwindow.cpp:970 mainwindow.cpp:2075
 msgid "Chemical JSON"
 msgstr "Chemische JSON"
 
-#: mainwindow.cpp:955
+#: mainwindow.cpp:976
 msgid "Open chemical file"
 msgstr "Chemiedatei öffnen"
 
-#: mainwindow.cpp:973 mainwindow.cpp:997 mainwindow.cpp:1856
-#: mainwindow.cpp:3077
+#: mainwindow.cpp:994 mainwindow.cpp:1018 mainwindow.cpp:1962
+#: mainwindow.cpp:3202
 msgid "Cannot open file"
 msgstr "Datei kann nicht geöffnet werden"
 
-#: mainwindow.cpp:974 mainwindow.cpp:998 mainwindow.cpp:1857
+#: mainwindow.cpp:995 mainwindow.cpp:1019 mainwindow.cpp:1963
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "Bereitgestellte Datei kann nicht geöffnet werden %1"
 
-#: mainwindow.cpp:987
+#: mainwindow.cpp:1008
 msgid "Open Molecule"
 msgstr "Molekül öffnen"
 
-#: mainwindow.cpp:1011 mainwindow.cpp:1852
+#: mainwindow.cpp:1032 mainwindow.cpp:1958
 msgid "Select file reader"
 msgstr "Wählen Sie den Dateireader"
 
-#: mainwindow.cpp:1041
+#: mainwindow.cpp:1066
 msgid "Reading File"
 msgstr "Datei lesen"
 
-#: mainwindow.cpp:1043
+#: mainwindow.cpp:1068 mainwindow.cpp:1092
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -167,16 +210,16 @@ msgstr ""
 "Datei „%1“ öffnen\n"
 "mit „%2“"
 
-#: mainwindow.cpp:1116
+#: mainwindow.cpp:1167
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Moleküle geladen (%1 Atome, %2 Bindungen)"
 
-#: mainwindow.cpp:1121
+#: mainwindow.cpp:1172
 msgid "File error"
 msgstr "Dateifehler"
 
-#: mainwindow.cpp:1122
+#: mainwindow.cpp:1173
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -185,17 +228,17 @@ msgstr ""
 "Fehler beim Lesen der Datei '%1':\n"
 "%2"
 
-#: mainwindow.cpp:1149
+#: mainwindow.cpp:1200
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "Gespeicherte Datei %1"
 
-#: mainwindow.cpp:1156
+#: mainwindow.cpp:1209
 msgid "Error saving file"
 msgstr "Fehler beim Speichern der Datei"
 
-#: mainwindow.cpp:1157
+#: mainwindow.cpp:1210
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -205,11 +248,11 @@ msgstr ""
 "Fehler beim Speichern von „%1“:\n"
 "%2"
 
-#: mainwindow.cpp:1324
+#: mainwindow.cpp:1377
 msgid "Found Previous Avogadro Files"
 msgstr "Vorherige Avogadro-Dateien gefunden"
 
-#: mainwindow.cpp:1326
+#: mainwindow.cpp:1379
 #, qt-format
 msgid ""
 "Files from a previous version of Avogadro were found in the plugins "
@@ -223,19 +266,19 @@ msgstr ""
 "Diese Dateien werden nicht mehr benötigt und können bedenkenlos entfernt "
 "werden."
 
-#: mainwindow.cpp:1333
+#: mainwindow.cpp:1386
 msgid "Remove Old Files"
 msgstr "Alte Dateien entfernen"
 
-#: mainwindow.cpp:1334
+#: mainwindow.cpp:1387
 msgid "Keep Files"
 msgstr "Dateien behalten"
 
-#: mainwindow.cpp:1419
+#: mainwindow.cpp:1472
 msgid "Let’s finish your setup"
 msgstr "Beende die Installation"
 
-#: mainwindow.cpp:1420
+#: mainwindow.cpp:1473
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
@@ -243,37 +286,37 @@ msgstr ""
 "Avogadro kann Input-Dateien für Gaussian, ORCA und andere Computerchemie-"
 "Programme erzeugen."
 
-#: mainwindow.cpp:1425
+#: mainwindow.cpp:1478
 msgid "This requires setup that will download and configure Python."
 msgstr ""
 "Dazu ist eine Installation erforderlich, die Python herunterlädt und "
 "installiert."
 
-#: mainwindow.cpp:1427
+#: mainwindow.cpp:1480
 msgid "This requires setup to configure a Python environment."
 msgstr "Dazu muss zunächst eine Python-Umgebung eingerichtet werden."
 
-#: mainwindow.cpp:1431
+#: mainwindow.cpp:1484
 msgid "This may require an Internet connection."
 msgstr "Dies benötigt eine Internetverbindung."
 
-#: mainwindow.cpp:1433
+#: mainwindow.cpp:1486
 msgid "Install updated plugins?"
 msgstr "Aktualisierte Erweiterungen installieren?"
 
-#: mainwindow.cpp:1434
+#: mainwindow.cpp:1487
 msgid "The following plugins are available:"
 msgstr "Folgende Erweiterungen sind verfügbar:"
 
-#: mainwindow.cpp:1435
-msgid "Would you like to install them?"
-msgstr "Möchten Sie diese installieren?"
+#: mainwindow.cpp:1488
+msgid "Would you like to update them?"
+msgstr ""
 
-#: mainwindow.cpp:1474
+#: mainwindow.cpp:1527
 msgid "Recover Autosaved Files"
 msgstr "Wiederherstellen automatisch gespeicherter Dateien"
 
-#: mainwindow.cpp:1475
+#: mainwindow.cpp:1528
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
@@ -282,11 +325,11 @@ msgstr ""
 "gefunden.\n"
 "Möchten Sie sie wiederherstellen?"
 
-#: mainwindow.cpp:1534
+#: mainwindow.cpp:1592
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Fehler: OpenGL-Kontext konnte nicht initialisiert werden"
 
-#: mainwindow.cpp:1535
+#: mainwindow.cpp:1593
 #, qt-format
 msgid ""
 "OpenGL 4.0 or greater required, exiting.\n"
@@ -297,52 +340,52 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:1536
+#: mainwindow.cpp:1594
 msgid "Unknown error"
 msgstr "Unbekannter Fehler"
 
-#: mainwindow.cpp:1638
+#: mainwindow.cpp:1735
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
 msgstr "%1 Einstellungen"
 
-#: mainwindow.cpp:1797
+#: mainwindow.cpp:1903
 msgid "Common image formats"
 msgstr "Übliche Dateiformate für Bilder"
 
-#: mainwindow.cpp:1799
+#: mainwindow.cpp:1905
 msgid "All files"
 msgstr "Alle Dateien"
 
-#: mainwindow.cpp:1799
+#: mainwindow.cpp:1905
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:1800
+#: mainwindow.cpp:1906
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:1800
+#: mainwindow.cpp:1906
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:1809
+#: mainwindow.cpp:1915
 msgid "Export Bitmap Graphics"
 msgstr "Bitmap-Grafik exportieren"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:1825 mainwindow.cpp:1942 mainwindow.cpp:2818:34
+#: mainwindow.cpp:1931 mainwindow.cpp:2048 mainwindow.cpp:2933:34
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:1826
+#: mainwindow.cpp:1932
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Datei %1 kann nicht gespeichert werden."
 
-#: mainwindow.cpp:1943
+#: mainwindow.cpp:2049
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -355,23 +398,23 @@ msgstr ""
 "Möchten Sie in das aktuelle Format exportieren oder in einem Standardformat "
 "speichern?"
 
-#: mainwindow.cpp:1950
+#: mainwindow.cpp:2056
 msgid "Export"
 msgstr "Exportieren"
 
-#: mainwindow.cpp:1975
+#: mainwindow.cpp:2081
 msgid "Save chemical file"
 msgstr "Chemiedatei speichern"
 
-#: mainwindow.cpp:2019
+#: mainwindow.cpp:2125
 msgid "Export Molecule"
 msgstr "Molekül exportieren"
 
-#: mainwindow.cpp:2118
+#: mainwindow.cpp:2224
 msgid "Saving File in Progress…"
 msgstr "Datei wird gespeichert…"
 
-#: mainwindow.cpp:2120
+#: mainwindow.cpp:2226
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -381,43 +424,43 @@ msgstr ""
 "Speichern der Datei „%1“\n"
 "mit „%2“"
 
-#: mainwindow.cpp:2241
+#: mainwindow.cpp:2347
 #, qt-format
 msgid "&Undo %1"
 msgstr "&Rückgängig machen %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2244 mainwindow.cpp:2512:118
+#: mainwindow.cpp:2350 mainwindow.cpp:2618:118
 msgid "&Undo"
 msgstr "&Rückgängig"
 
-#: mainwindow.cpp:2249
+#: mainwindow.cpp:2355
 #, qt-format
 msgid "&Redo %1"
 msgstr "&Wiederholen %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2252 mainwindow.cpp:2520:124
+#: mainwindow.cpp:2358 mainwindow.cpp:2626:124
 msgid "&Redo"
 msgstr "&Wiederholen"
 
-#: mainwindow.cpp:2374
+#: mainwindow.cpp:2480
 msgid "&Testing"
 msgstr "&Testen"
 
-#: mainwindow.cpp:2376
+#: mainwindow.cpp:2482
 msgid "&Record Test…"
 msgstr "&Test aufnehmen…"
 
-#: mainwindow.cpp:2379
+#: mainwindow.cpp:2485
 msgid "&Play Test…"
 msgstr "&Test abspielen…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:2388 menubuilder.cpp:116:37
+#: mainwindow.cpp:2494 menubuilder.cpp:116:37
 msgid "&File"
 msgstr "&Datei"
 
@@ -425,13 +468,13 @@ msgstr "&Datei"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2390:76 rc.cpp:82
+#: mainwindow.cpp:2496:76 rc.cpp:82
 msgid "&New"
 msgstr "&Neu"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2401:52
+#: mainwindow.cpp:2507:52
 msgid "&Open…"
 msgstr "&Öffnen…"
 
@@ -439,7 +482,7 @@ msgstr "&Öffnen…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2413:85 rc.cpp:91
+#: mainwindow.cpp:2519:85 rc.cpp:91
 msgid "&Close"
 msgstr "&Schließen"
 
@@ -447,35 +490,35 @@ msgstr "&Schließen"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2426:94 rc.cpp:100
+#: mainwindow.cpp:2532:94 rc.cpp:100
 msgid "&Save"
 msgstr "&Sichern"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2438:103
+#: mainwindow.cpp:2544:103
 msgid "Save &As…"
 msgstr "Speichern &als…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2451:196
+#: mainwindow.cpp:2557:196
 msgid "&Export"
 msgstr "&Exportieren"
 
-#: mainwindow.cpp:2452
+#: mainwindow.cpp:2558
 msgid "&Molecule…"
 msgstr "&Molekül…"
 
-#: mainwindow.cpp:2459
+#: mainwindow.cpp:2565
 msgid "Export Molecule…"
 msgstr "Molekül exportieren…"
 
-#: mainwindow.cpp:2466
+#: mainwindow.cpp:2572
 msgid "&Graphics…"
 msgstr "&Grafik…"
 
-#: mainwindow.cpp:2473
+#: mainwindow.cpp:2579
 msgid "Export Graphics…"
 msgstr "Exportiere Graphik…"
 
@@ -483,178 +526,182 @@ msgstr "Exportiere Graphik…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2481:61 rc.cpp:67
+#: mainwindow.cpp:2587:61 rc.cpp:67
 msgid "&Quit"
 msgstr "&Beenden"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2491:190
+#: mainwindow.cpp:2597:190
 msgid "Open Recent"
 msgstr "Vor Kurzem geöffnet"
 
-#: mainwindow.cpp:2505
+#: mainwindow.cpp:2611
 msgid "No recent files"
 msgstr "Keine kürzlich geöffneten Dateien"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:2511 menubuilder.cpp:116:46
+#: mainwindow.cpp:2617 menubuilder.cpp:116:46
 msgid "&Edit"
 msgstr "&Bearbeiten"
 
-#: mainwindow.cpp:2528
+#: mainwindow.cpp:2634
 msgid "&Copy Graphics"
 msgstr "Grafiken &kopieren"
 
-#: mainwindow.cpp:2532
+#: mainwindow.cpp:2638
 msgid "Ctrl+Alt+C"
 msgstr "Strg+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:2545 menubuilder.cpp:116:43
+#: mainwindow.cpp:2651 menubuilder.cpp:116:43
 msgid "&View"
 msgstr "&Ansicht"
 
-#: mainwindow.cpp:2546
+#: mainwindow.cpp:2652
 msgid "Set Background Color…"
 msgstr "Hintergrundfarbe einstellen…"
 
-#: mainwindow.cpp:2550
+#: mainwindow.cpp:2656
 msgid "Rendering…"
 msgstr "Wiedergabe…"
 
-#: mainwindow.cpp:2558
+#: mainwindow.cpp:2664
 msgid "Projection"
 msgstr "Projektion"
 
-#: mainwindow.cpp:2559
+#: mainwindow.cpp:2665
 msgid "Perspective"
 msgstr "Perspektive"
 
-#: mainwindow.cpp:2566
+#: mainwindow.cpp:2672
 msgid "Orthographic"
 msgstr "Orthografisch"
 
-#: mainwindow.cpp:2585
+#: mainwindow.cpp:2691
 msgid "&Extensions"
 msgstr "&Erweiterungen"
 
-#: mainwindow.cpp:2587
+#: mainwindow.cpp:2693
 msgid "User Interface Language…"
 msgstr "Sprache der Benutzeroberfläche…"
 
-#: mainwindow.cpp:2591
+#: mainwindow.cpp:2697
 msgid "&Periodic Table…"
 msgstr "&Periodensystem…"
 
-#: mainwindow.cpp:2597 menubuilder.cpp:120
+#: mainwindow.cpp:2703 menubuilder.cpp:120
 msgid "&Help"
 msgstr "&Hilfe"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2598:115
+#: mainwindow.cpp:2704:115
 msgid "&About"
 msgstr "&Über"
 
-#: mainwindow.cpp:2603
+#: mainwindow.cpp:2709
 msgid "&Discussion Forum"
 msgstr "&Diskussionsforum"
 
-#: mainwindow.cpp:2607
+#: mainwindow.cpp:2713
 msgid "&Avogadro Website"
 msgstr "&Avogadro-Website"
 
-#: mainwindow.cpp:2611
+#: mainwindow.cpp:2717
 msgid "&Report a Bug"
 msgstr "&Fehler melden"
 
-#: mainwindow.cpp:2615
+#: mainwindow.cpp:2724
+msgid "&Crash Reporting…"
+msgstr ""
+
+#: mainwindow.cpp:2730
 msgid "&Suggest a Feature"
 msgstr "&Feature vorschlagen"
 
-#: mainwindow.cpp:2649
+#: mainwindow.cpp:2764
 msgid "untitled"
 msgstr "ohne Titel"
 
-#: mainwindow.cpp:2679
+#: mainwindow.cpp:2794
 msgid "System Language"
 msgstr "Systemsprache"
 
-#: mainwindow.cpp:2687
+#: mainwindow.cpp:2802
 msgid "Language"
 msgstr "Sprache"
 
-#: mainwindow.cpp:2687
+#: mainwindow.cpp:2802
 msgid "User Interface Language:"
 msgstr "Sprache der Benutzeroberfläche:"
 
-#: mainwindow.cpp:2803
+#: mainwindow.cpp:2918
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Alle unterstützten Formate (%1);;Alle Dateien (*);;"
 
-#: mainwindow.cpp:2819
+#: mainwindow.cpp:2934
 msgid "Do you want to save the changes to the document?"
 msgstr "Wollen Sie die Änderungen am Dokument speichern?"
 
-#: mainwindow.cpp:2827
+#: mainwindow.cpp:2942
 msgid "Your changes will be lost if you don't save them."
 msgstr "Ihre Änderungen gehen verloren, wenn Sie sie nicht speichern."
 
-#: mainwindow.cpp:2832
+#: mainwindow.cpp:2947
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Strg+S"
 
-#: mainwindow.cpp:2834
+#: mainwindow.cpp:2949
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Strg+D"
 
-#: mainwindow.cpp:2923
+#: mainwindow.cpp:3038
 msgid "Network Download Failed"
 msgstr "Herunterladen über das Netzwerk fehlgeschlagen"
 
-#: mainwindow.cpp:2924
+#: mainwindow.cpp:3039
 msgid "Network timeout or other error."
 msgstr "Netzwerk-Zeitüberschreitung oder anderer Fehler."
 
-#: mainwindow.cpp:2994
+#: mainwindow.cpp:3119
 #, qt-format
 msgid "Your version: %1"
 msgstr "Ihre Version: %1"
 
-#: mainwindow.cpp:2995
+#: mainwindow.cpp:3120
 #, qt-format
 msgid "New version: %1"
 msgstr "Neue Version: %1"
 
-#: mainwindow.cpp:2997
+#: mainwindow.cpp:3122
 msgid "An update is available, do you want to download it now?\n"
 msgstr "Ein Update ist verfügbar, möchten Sie es jetzt herunterladen?\n"
 
-#: mainwindow.cpp:2999
+#: mainwindow.cpp:3124
 msgid "Version Update"
 msgstr "Versionsaktualisierung"
 
-#: mainwindow.cpp:3057
+#: mainwindow.cpp:3182
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Fehler beim Laden des Dateiformats „%1“."
 
-#: mainwindow.cpp:3073
+#: mainwindow.cpp:3198
 msgid "Select file format"
 msgstr "Dateiformat auswählen"
 
-#: mainwindow.cpp:3078 mainwindow.cpp:3089
+#: mainwindow.cpp:3203 mainwindow.cpp:3214
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro kann „%1“ nicht öffnen."
 
-#: mainwindow.cpp:3088
+#: mainwindow.cpp:3213
 msgid "Cannot open files"
 msgstr "Dateien können nicht geöffnet werden"
 
@@ -1051,6 +1098,9 @@ msgstr ""
 "m.de,loniedavid@gmail.com,,,soc@krg-nw.de,,,aleixosk@gmail.com,,avogadro-"
 "devel@lists.sourceforge.net,d@winzen4.de,,,,,,,,armin_mohring@web.de,,,,coolx67@gmx.at,,,,,,,,simon@ochsenreither.de,,,aleixosk@gmail.com,,avogadro-"
 "devel@lists.sourceforge.net,,,,,,,,,armin_mohring@web.de,,,,coolx67@gmx.at,,,,tobannert@gmail.com,,,,simon@ochsenreither.de"
+
+#~ msgid "Would you like to install them?"
+#~ msgstr "Möchten Sie diese installieren?"
 
 #~ msgid "VTK"
 #~ msgstr "VTK"
