@@ -58,6 +58,7 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
+#include <QtCore/QVersionNumber>
 
 #include <QOpenGLFramebufferObject>
 #include <QtGui/QClipboard>
@@ -1386,6 +1387,12 @@ static bool copyDirectoryRecursively(const QString& srcPath,
     srcDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
   QDir dstDir(dstPath);
   for (const QString& entry : entries) {
+    // Never carry a dot entry across. Those names are reserved for the
+    // Python environment at the destination, which is preserved rather than
+    // replaced, and QDir::Hidden would not agree across platforms about
+    // which of them are listed here in the first place.
+    if (entry.startsWith(QLatin1Char('.')))
+      continue;
     const QString src = srcDir.filePath(entry);
     const QString dst = dstDir.filePath(entry);
     if (QFileInfo(src).isDir()) {
@@ -1397,6 +1404,129 @@ static bool copyDirectoryRecursively(const QString& srcPath,
     }
   }
   return true;
+}
+
+// Rank of the PEP 440 suffix that follows a version's release numbers, and,
+// in @p number, the release count that goes with it. QVersionNumber stops at
+// the first non-digit and ignores everything after it, so without this a
+// 2.0.0 release would never replace the 2.0.0rc1 that preceded it. The
+// ordering is PEP 440's:
+//   2.0.dev1 < 2.0a1 < 2.0b1 < 2.0rc1 < 2.0 < 2.0.post1
+// Epochs and local versions are not handled: a local version ("+abc") does
+// not order against the release it is built from, so it ranks as final.
+static int versionSuffixRank(QString suffix, int& number)
+{
+  number = 0;
+
+  // PEP 440 allows ".", "-" and "_" as separators before the marker.
+  suffix = suffix.toLower();
+  while (!suffix.isEmpty() &&
+         (suffix.at(0) == QLatin1Char('.') ||
+          suffix.at(0) == QLatin1Char('-') || suffix.at(0) == QLatin1Char('_')))
+    suffix.remove(0, 1);
+
+  // A marker that is a prefix of another must come after it, so that "alpha"
+  // is not read as "a", "preview" as "pre", or "rc"/"rev" as "r".
+  static const struct
+  {
+    const char* marker;
+    int rank;
+  } markers[] = { { "dev", 0 }, { "alpha", 1 },   { "a", 1 },   { "beta", 2 },
+                  { "b", 2 },   { "preview", 3 }, { "pre", 3 }, { "rc", 3 },
+                  { "c", 3 },   { "post", 5 },    { "rev", 5 }, { "r", 5 } };
+
+  constexpr int finalRank = 4;
+  for (const auto& marker : markers) {
+    const QLatin1String name(marker.marker);
+    if (!suffix.startsWith(name))
+      continue;
+    // Digits after the marker are its release count ("rc2" beats "rc1").
+    number = QStringView(suffix).mid(name.size()).toInt();
+    return marker.rank;
+  }
+
+  // No marker: a plain release, or something we do not recognise and must
+  // not invent an ordering for.
+  return finalRank;
+}
+
+// Whether @p bundled is a strictly newer release than @p installed. An
+// installed version that is missing or unreadable counts as older: that copy
+// is damaged, and replacing it is the repair.
+static bool isNewerVersion(const QString& bundled, const QString& installed)
+{
+  if (installed.isEmpty())
+    return true;
+
+  qsizetype bundledSuffix = 0;
+  qsizetype installedSuffix = 0;
+  const QVersionNumber bundledVersion =
+    QVersionNumber::fromString(bundled, &bundledSuffix);
+  const QVersionNumber installedVersion =
+    QVersionNumber::fromString(installed, &installedSuffix);
+
+  // Nothing numeric to compare (a date, a git hash): only an exact match can
+  // safely be called "not newer".
+  if (bundledVersion.isNull() || installedVersion.isNull())
+    return bundled != installed;
+
+  const int release = QVersionNumber::compare(bundledVersion, installedVersion);
+  if (release != 0)
+    return release > 0;
+
+  // Same release numbers, so the suffixes decide.
+  int bundledNumber = 0;
+  int installedNumber = 0;
+  const int bundledRank =
+    versionSuffixRank(bundled.mid(bundledSuffix), bundledNumber);
+  const int installedRank =
+    versionSuffixRank(installed.mid(installedSuffix), installedNumber);
+
+  if (bundledRank != installedRank)
+    return bundledRank > installedRank;
+  return bundledNumber > installedNumber;
+}
+
+// Delete a package's own files, leaving anything whose name starts with a dot
+// (.pixi, .venv) in place: the Python environment is expensive to rebuild,
+// and installing the package again repairs it against the new manifest.
+// Entries are matched by name rather than by QDir::Hidden, whose meaning
+// differs between platforms.
+static void removePackageFiles(const QString& dirPath)
+{
+  QDir dir(dirPath);
+  const QStringList entries =
+    dir.entryList(QDir::AllEntries | QDir::Hidden | QDir::NoDotAndDotDot);
+  for (const QString& entry : entries) {
+    if (entry.startsWith(QLatin1Char('.')))
+      continue;
+    const QString path = dir.filePath(entry);
+    if (QFileInfo(path).isDir())
+      QDir(path).removeRecursively();
+    else
+      QFile::remove(path);
+  }
+}
+
+// Move every entry of @p srcPath into @p dstPath, creating it if needed.
+// Staging sits beside the destination on the same filesystem, so each move is
+// a rename rather than a second copy. Nothing staged is a dot entry, so the
+// Python environment left in place at the destination is never in the way.
+static bool movePackageFiles(const QString& srcPath, const QString& dstPath)
+{
+  if (!QDir().mkpath(dstPath))
+    return false;
+
+  QDir srcDir(srcPath);
+  QDir dstDir(dstPath);
+  const QStringList entries =
+    srcDir.entryList(QDir::AllEntries | QDir::Hidden | QDir::NoDotAndDotDot);
+  bool moved = true;
+  for (const QString& entry : entries) {
+    if (!QDir().rename(srcDir.filePath(entry), dstDir.filePath(entry)))
+      moved = false;
+  }
+  return moved;
 }
 
 static qint64 recursiveDirSize(const QString& dirPath)
@@ -1496,6 +1626,13 @@ void MainWindow::loadPackages()
   // Copy bundled packages to the writable location if not already present.
   // This handles read-only filesystems (AppImage, admin installs, etc.) in
   // which pixi/pip cannot create .pixi/.venv environments in the bundled path.
+
+  // Staging area for package copies. It sits outside the plugin directory so
+  // that a leftover from an interrupted copy is never scanned as a package in
+  // its own right, and under the same root so that moving files out of it is
+  // a rename rather than a second copy.
+  const QString stagingDir = writeableDir + QStringLiteral("/staging");
+
   QDir bundledDir(bundledPluginsDir);
   if (bundledDir.exists()) {
     const QStringList subdirs =
@@ -1506,15 +1643,58 @@ void MainWindow::loadPackages()
       if (!QDir(srcPath).exists(QStringLiteral("pyproject.toml")))
         continue;
       const QString dstPath = writablePluginsDir + QLatin1Char('/') + subdir;
-      if (!QDir(dstPath).exists()) {
-        qDebug() << "Copying bundled package" << subdir
-                 << "to writable location";
-        if (!copyDirectoryRecursively(srcPath, dstPath)) {
-          qWarning() << "Failed to copy bundled package" << srcPath << "to"
-                     << dstPath;
-        }
+
+      // Refresh the copy when the bundled package is a newer release, not
+      // only when there is no copy at all: an Avogadro upgrade ships fixes to
+      // these packages (a missing [tool.pixi] table, a renamed entry point),
+      // and a copy made by an older version would otherwise be kept for ever.
+      //
+      // The comparison is by version and never by content. The plugin
+      // downloader installs into this very directory, so a package the user
+      // has updated themselves must not be reverted to the bundled copy —
+      // and with only content to go on, every launch would revert it again.
+      const QString bundledVersion =
+        QtGui::PackageManager::packageVersion(srcPath);
+      if (bundledVersion.isEmpty())
+        continue; // unreadable; leave whatever is already installed alone
+
+      const bool haveCopy = QDir(dstPath).exists();
+      if (haveCopy &&
+          !isNewerVersion(bundledVersion,
+                          QtGui::PackageManager::packageVersion(dstPath)))
+        continue;
+
+      // Copy into a staging directory first. Copying straight over the
+      // installed package would destroy a working one the moment anything
+      // went wrong part way through — and since a half-copy can already
+      // carry the bundled version in its pyproject.toml, nothing above would
+      // ever offer to repair it.
+      const QString stagePath = stagingDir + QLatin1Char('/') + subdir;
+      QDir(stagePath).removeRecursively(); // leftovers from an interrupted run
+      if (!copyDirectoryRecursively(srcPath, stagePath)) {
+        qWarning() << "Failed to stage bundled package" << srcPath << "at"
+                   << stagePath;
+        QDir(stagePath).removeRecursively();
+        continue; // whatever is installed stays as it was
       }
+
+      qDebug() << (haveCopy ? "Refreshing bundled package"
+                            : "Copying bundled package")
+               << subdir;
+
+      // Only now replace the package's own files, so that the window in
+      // which the destination is incomplete is a few renames wide. Dot
+      // entries are left alone throughout: the Python environment is
+      // expensive to rebuild, and the install pass below repairs it against
+      // the new manifest.
+      removePackageFiles(dstPath);
+      if (!movePackageFiles(stagePath, dstPath)) {
+        qWarning() << "Failed to install bundled package" << subdir << "into"
+                   << dstPath;
+      }
+      QDir(stagePath).removeRecursively();
     }
+    QDir(stagingDir).removeRecursively();
   }
 
   // Scan writable AppLocalDataLocation/plugins paths for new packages.
