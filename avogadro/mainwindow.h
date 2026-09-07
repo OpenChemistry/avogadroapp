@@ -232,6 +232,10 @@ protected:
   // handle theme changes
   void changeEvent(QEvent* event) override;
 
+  // Route the reserved camera-navigation keyboard shortcut to the GL widget
+  // even when keyboard focus is elsewhere (docks, tool settings, layer view).
+  bool eventFilter(QObject* watched, QEvent* event) override;
+
 protected slots:
 
   /**

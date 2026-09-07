@@ -63,6 +63,7 @@
 #include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
+#include <QtGui/QKeyEvent>
 #include <QtGui/QKeySequence>
 #include <QtGui/QPalette>
 #include <QtGui/QShortcut>
@@ -71,6 +72,7 @@
 #include <QtNetwork/QNetworkReply>
 
 #include <QActionGroup>
+#include <QtWidgets/QAbstractSpinBox>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QColorDialog>
 #include <QtWidgets/QDockWidget>
@@ -78,12 +80,15 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QInputDialog>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QMessageBox>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QProgressDialog>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QTreeView>
@@ -268,6 +273,11 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
   , m_TDxController(nullptr)
 #endif
 {
+  // Route the reserved camera-navigation shortcut (Ctrl/Cmd+arrow) to the
+  // GL widget even when keyboard focus is elsewhere (docks, tool settings,
+  // layer view).
+  qApp->installEventFilter(this);
+
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
     QSettings settings;
@@ -651,6 +661,74 @@ void MainWindow::closeActiveMolecule()
   }
 
   m_moleculeModel->removeItem(currentMol);
+}
+
+namespace {
+
+// Ctrl (Command on macOS) + arrow keys always drive the camera. Ctrl+Shift is
+// excluded: it belongs to the manipulator tool.
+bool isNavigationShortcut(const QKeyEvent* e)
+{
+  if (!(e->modifiers() & Qt::ControlModifier) ||
+      (e->modifiers() & Qt::ShiftModifier))
+    return false;
+
+  switch (e->key()) {
+    case Qt::Key_Left:
+    case Qt::Key_Right:
+    case Qt::Key_Up:
+    case Qt::Key_Down:
+      return true;
+    default:
+      return false;
+  }
+}
+
+// Never steal the sequence from something the user is typing in.
+bool isTextEntry(const QWidget* widget)
+{
+  return qobject_cast<const QLineEdit*>(widget) != nullptr ||
+         qobject_cast<const QAbstractSpinBox*>(widget) != nullptr ||
+         qobject_cast<const QTextEdit*>(widget) != nullptr ||
+         qobject_cast<const QPlainTextEdit*>(widget) != nullptr;
+}
+
+} // namespace
+
+bool MainWindow::eventFilter(QObject* watched, QEvent* event)
+{
+  const QEvent::Type type = event->type();
+  if (type != QEvent::KeyPress && type != QEvent::ShortcutOverride)
+    return QMainWindow::eventFilter(watched, event);
+
+  auto* keyEvent = static_cast<QKeyEvent*>(event);
+  if (!isNavigationShortcut(keyEvent))
+    return QMainWindow::eventFilter(watched, event);
+
+  QWidget* focus = QApplication::focusWidget();
+  if (focus == nullptr || focus->window() != this || isTextEntry(focus))
+    return QMainWindow::eventFilter(watched, event);
+
+  GLWidget* glWidget = ActiveObjects::instance().activeGLWidget();
+  // watched == glWidget covers both "the view already has focus" (deliver
+  // normally) and the re-entrant pass from the sendEvent() below, which would
+  // otherwise recurse forever.
+  if (glWidget == nullptr || watched == glWidget)
+    return QMainWindow::eventFilter(watched, event);
+
+  // Claim the sequence before QShortcutMap can consume it; the matching key
+  // press arrives on the next pass.
+  if (type == QEvent::ShortcutOverride) {
+    event->accept();
+    return true;
+  }
+
+  QKeyEvent forwarded(QEvent::KeyPress, keyEvent->key(), keyEvent->modifiers(),
+                      keyEvent->text(), keyEvent->isAutoRepeat(),
+                      static_cast<ushort>(keyEvent->count()));
+  forwarded.ignore();
+  QApplication::sendEvent(glWidget, &forwarded);
+  return forwarded.isAccepted();
 }
 
 void MainWindow::closeEvent(QCloseEvent* e)
