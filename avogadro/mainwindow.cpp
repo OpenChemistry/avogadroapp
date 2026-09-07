@@ -58,6 +58,7 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
+#include <QtCore/QVersionNumber>
 
 #include <QOpenGLFramebufferObject>
 #include <QtGui/QClipboard>
@@ -1317,6 +1318,46 @@ static bool copyDirectoryRecursively(const QString& srcPath,
   return true;
 }
 
+// Whether @p bundled is a strictly newer release than @p installed. An
+// installed version that is missing or unreadable counts as older: that copy
+// is damaged, and replacing it is the repair.
+static bool isNewerVersion(const QString& bundled, const QString& installed)
+{
+  if (installed.isEmpty())
+    return true;
+
+  const QVersionNumber bundledVersion = QVersionNumber::fromString(bundled);
+  const QVersionNumber installedVersion = QVersionNumber::fromString(installed);
+
+  // Nothing numeric to compare (a date, a git hash): only an exact match can
+  // safely be called "not newer".
+  if (bundledVersion.isNull() || installedVersion.isNull())
+    return bundled != installed;
+
+  return bundledVersion > installedVersion;
+}
+
+// Delete a package's own files, leaving anything whose name starts with a dot
+// (.pixi, .venv) in place: the Python environment is expensive to rebuild,
+// and installing the package again repairs it against the new manifest.
+// Entries are matched by name rather than by QDir::Hidden, whose meaning
+// differs between platforms.
+static void removePackageFiles(const QString& dirPath)
+{
+  QDir dir(dirPath);
+  const QStringList entries =
+    dir.entryList(QDir::AllEntries | QDir::Hidden | QDir::NoDotAndDotDot);
+  for (const QString& entry : entries) {
+    if (entry.startsWith(QLatin1Char('.')))
+      continue;
+    const QString path = dir.filePath(entry);
+    if (QFileInfo(path).isDir())
+      QDir(path).removeRecursively();
+    else
+      QFile::remove(path);
+  }
+}
+
 static qint64 recursiveDirSize(const QString& dirPath)
 {
   // Surprised this doesn't already exist with Qt...
@@ -1424,13 +1465,45 @@ void MainWindow::loadPackages()
       if (!QDir(srcPath).exists(QStringLiteral("pyproject.toml")))
         continue;
       const QString dstPath = writablePluginsDir + QLatin1Char('/') + subdir;
-      if (!QDir(dstPath).exists()) {
+
+      // Refresh the copy when the bundled package is a newer release, not
+      // only when there is no copy at all: an Avogadro upgrade ships fixes to
+      // these packages (a missing [tool.pixi] table, a renamed entry point),
+      // and a copy made by an older version would otherwise be kept for ever.
+      //
+      // The comparison is by version and never by content. The plugin
+      // downloader installs into this very directory, so a package the user
+      // has updated themselves must not be reverted to the bundled copy —
+      // and with only content to go on, every launch would revert it again.
+      const QString bundledVersion =
+        QtGui::PackageManager::packageVersion(srcPath);
+      if (bundledVersion.isEmpty())
+        continue; // unreadable; leave whatever is already installed alone
+
+      const bool haveCopy = QDir(dstPath).exists();
+      if (haveCopy &&
+          !isNewerVersion(bundledVersion,
+                          QtGui::PackageManager::packageVersion(dstPath)))
+        continue;
+
+      if (haveCopy) {
+        qDebug() << "Refreshing bundled package" << subdir;
+        // Drop the old files first, so that a renamed source tree cannot
+        // leave orphans behind. The environment stays put and is repaired by
+        // the install pass below.
+        removePackageFiles(dstPath);
+      } else {
         qDebug() << "Copying bundled package" << subdir
                  << "to writable location";
-        if (!copyDirectoryRecursively(srcPath, dstPath)) {
-          qWarning() << "Failed to copy bundled package" << srcPath << "to"
-                     << dstPath;
-        }
+      }
+
+      if (!copyDirectoryRecursively(srcPath, dstPath)) {
+        qWarning() << "Failed to copy bundled package" << srcPath << "to"
+                   << dstPath;
+        // A half-copied package can already carry the bundled version in its
+        // pyproject.toml, so nothing above would ever ask for it again. Start
+        // over from nothing instead.
+        QDir(dstPath).removeRecursively();
       }
     }
   }
