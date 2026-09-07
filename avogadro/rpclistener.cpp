@@ -89,7 +89,9 @@ const BuiltinCommand builtinCommands[] = {
   { "moleculeInfo", "Report summary statistics about the active molecule." },
   { "openFile", "Read a file from disk and make it the active molecule." },
   { "renderImage", "Render the current view to a PNG, inline or to a "
-                   "file." },
+                   "file. Omit width/height for the native framebuffer "
+                   "resolution, or supply both together to fit that "
+                   "render onto a canvas of exactly that size." },
   { "saveGraphic", "Render the current view and save it as an image at "
                    "the window's current size." },
   { "setProjection",
@@ -468,29 +470,45 @@ void RpcListener::messageReceived(const RPC::Message& message)
       }
     }
   } else if (method == "renderImage") {
-    const QSize defaultSize = m_window->activeViewSize();
-    int width = params.contains("width")
-                  ? params["width"].toInt(defaultSize.width())
-                  : defaultSize.width();
-    int height = params.contains("height")
-                   ? params["height"].toInt(defaultSize.height())
-                   : defaultSize.height();
-    width = qBound(1, width, 8192);
-    height = qBound(1, height, 8192);
+    // Width and height must be given together, or not at all: with only
+    // one of the two, there is no native size available yet (the grab
+    // hasn't happened) to derive the other from without rendering twice, so
+    // rather than guess an aspect ratio we reject the request outright.
+    const bool haveWidth = params.contains("width");
+    const bool haveHeight = params.contains("height");
+    if (haveWidth != haveHeight) {
+      sendError(message, errorRequestFailed,
+                tr("renderImage requires both width and height, or "
+                   "neither."));
+      return;
+    }
+
+    QSize requestedSize;
+    if (haveWidth && haveHeight) {
+      int width = qBound(1, params["width"].toInt(), 8192);
+      int height = qBound(1, params["height"].toInt(), 8192);
+      requestedSize = QSize(width, height);
+    }
+    // else: leave requestedSize null, so renderToImage() returns the
+    // native framebuffer grab untouched, at the maximum quality available.
+
     const bool transparentBackground =
       params["transparentBackground"].toBool(false);
     QString fileName = params["fileName"].toString();
 
-    QImage image =
-      m_window->renderToImage(QSize(width, height), transparentBackground);
+    QSize nativeSize;
+    QImage image = m_window->renderToImage(requestedSize, transparentBackground,
+                                           &nativeSize);
 
     if (!fileName.isEmpty()) {
       if (QFileInfo(fileName).suffix().isEmpty())
         fileName += ".png";
       if (image.save(fileName, "PNG")) {
         QVariantMap result;
-        result["width"] = width;
-        result["height"] = height;
+        result["width"] = image.width();
+        result["height"] = image.height();
+        result["nativeWidth"] = nativeSize.width();
+        result["nativeHeight"] = nativeSize.height();
         result["fileName"] = fileName;
 
         RPC::Message response = message.generateResponse();
@@ -507,8 +525,10 @@ void RpcListener::messageReceived(const RPC::Message& message)
       image.save(&buffer, "PNG");
 
       QVariantMap result;
-      result["width"] = width;
-      result["height"] = height;
+      result["width"] = image.width();
+      result["height"] = image.height();
+      result["nativeWidth"] = nativeSize.width();
+      result["nativeHeight"] = nativeSize.height();
       result["format"] = QStringLiteral("png");
       result["data"] = QString::fromLatin1(bytes.toBase64());
 

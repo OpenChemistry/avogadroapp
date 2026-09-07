@@ -2126,9 +2126,10 @@ QtOpenGL::GLWidget* MainWindow::activeGLWidget() const
   return qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
 }
 
-QImage MainWindow::renderToImage(const QSize& size, bool transparentBackground)
+QImage MainWindow::renderToImage(const QSize& requestedSize,
+                                 bool transparentBackground, QSize* nativeSize)
 {
-  QImage exportImage(size, QImage::Format_ARGB32);
+  QImage exportImage;
 
   auto* glWidget =
     qobject_cast<QOpenGLWidget*>(m_multiViewWidget->activeWidget());
@@ -2170,13 +2171,53 @@ QImage MainWindow::renderToImage(const QSize& size, bool transparentBackground)
   scene->setBackgroundColor(cColor);
   glWidget->repaint();
 
-  if (!transparentBackground) {
-    // Composite the transparent render over the view's actual background
-    // colour, so the caller gets an opaque image.
+  if (nativeSize != nullptr)
+    *nativeSize = exportImage.size();
+
+  if (requestedSize.isValid() && !requestedSize.isEmpty()) {
+    // Fit the native grab onto a canvas of exactly requestedSize: scale
+    // preserving aspect ratio, then centre it, filling any letterboxing
+    // with either the view's background colour or transparency. This also
+    // serves as the "!transparentBackground" composite for this path, so
+    // that block must not run again below.
+    //
+    // Note: padding to a different aspect ratio preserves the original
+    // framing rather than re-composing the scene, so a render padded to an
+    // aspect ratio it wasn't composed for will sit smaller in frame than a
+    // true render at that aspect would. This is a deliberate stopgap until
+    // a real offscreen framebuffer render path replaces the
+    // grab-and-resample approach here.
+    QImage fitted(requestedSize, QImage::Format_ARGB32_Premultiplied);
+    fitted.fill(transparentBackground ? QColor(Qt::transparent)
+                                      : QColor(red, green, blue, 255));
+    QImage scaled = exportImage.scaled(requestedSize, Qt::KeepAspectRatio,
+                                       Qt::SmoothTransformation);
+    // QImage::scaled() propagates the source's device pixel ratio (2 on a
+    // Retina grab). QPainter::drawImage() honours that ratio and draws at
+    // logical size, so without resetting it here the content lands scaled
+    // down into a corner of "fitted" instead of filling it. "fitted" itself
+    // is already ratio-1.0 (default-constructed), and requestedSize/painter
+    // coordinates below are in raw pixels, so the drawn image must match.
+    scaled.setDevicePixelRatio(1.0);
+    QPainter painter(&fitted);
+    painter.drawImage((requestedSize.width() - scaled.width()) / 2,
+                      (requestedSize.height() - scaled.height()) / 2, scaled);
+    painter.end();
+    exportImage = fitted.convertToFormat(QImage::Format_ARGB32);
+  } else if (!transparentBackground) {
+    // No resize requested: composite the transparent render over the
+    // view's actual background colour, so the caller gets an opaque image.
     QImage opaqueImage(exportImage.size(), QImage::Format_ARGB32_Premultiplied);
     opaqueImage.fill(QColor(red, green, blue, 255));
+    // Draw a ratio-1.0 copy of the source: opaqueImage was constructed with
+    // exportImage.size() (raw pixels) at the default ratio of 1.0, but a
+    // Retina grabFramebuffer() image carries devicePixelRatio() == 2.
+    // QPainter::drawImage() honours the source ratio and would draw it at
+    // half size into the top-left quadrant otherwise.
+    QImage source = exportImage;
+    source.setDevicePixelRatio(1.0);
     QPainter painter(&opaqueImage);
-    painter.drawImage(0, 0, exportImage);
+    painter.drawImage(0, 0, source);
     painter.end();
     exportImage = opaqueImage.convertToFormat(QImage::Format_ARGB32);
   }
@@ -2225,8 +2266,10 @@ void MainWindow::exportGraphics(QString fileName)
   if (QFileInfo(fileName).suffix().isEmpty())
     fileName += ".png";
 
-  const QSize size = m_multiViewWidget->activeWidget()->size();
-  QImage exportImage = renderToImage(size);
+  // Pass no size, so we get the untouched native framebuffer grab (full
+  // device resolution), not a copy resampled down to the logical widget
+  // size.
+  QImage exportImage = renderToImage();
 
   if (!exportImage.save(fileName)) {
     QMessageBox::warning(this, tr("Avogadro"),
@@ -2236,7 +2279,10 @@ void MainWindow::exportGraphics(QString fileName)
 
 void MainWindow::copyGraphics()
 {
-  QImage exportImage = renderToImage(m_multiViewWidget->activeWidget()->size());
+  // Pass no size, so we get the untouched native framebuffer grab (full
+  // device resolution), not a copy resampled down to the logical widget
+  // size.
+  QImage exportImage = renderToImage();
   QApplication::clipboard()->setImage(exportImage);
 }
 

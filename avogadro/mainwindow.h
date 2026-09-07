@@ -234,13 +234,21 @@ public:
   QtOpenGL::GLWidget* activeGLWidget() const;
 
   /**
-   * Render the active view to an image of the requested size.
-   * @param size The image size, in pixels.
+   * Render the active view to an image.
+   * @param requestedSize The desired output size, in pixels. If null or
+   * empty (the default), the native framebuffer grab is returned untouched,
+   * at whatever resolution the view actually rendered (i.e. widget size
+   * times device pixel ratio). Otherwise the native grab is scaled with
+   * Qt::KeepAspectRatio and centred on a canvas of exactly this size.
    * @param transparentBackground If true (the default, matching prior
    * behaviour) the background is left transparent; otherwise the image is
    * composited over the view's current background colour.
+   * @param nativeSize If non-null, receives the native grab's actual
+   * dimensions (before any scaling to requestedSize was applied).
    */
-  QImage renderToImage(const QSize& size, bool transparentBackground = true);
+  QImage renderToImage(const QSize& requestedSize = QSize(),
+                       bool transparentBackground = true,
+                       QSize* nativeSize = nullptr);
 
 signals:
   /**
