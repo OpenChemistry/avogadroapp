@@ -66,6 +66,7 @@
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QKeySequence>
+#include <QtGui/QPainter>
 #include <QtGui/QPalette>
 #include <QtGui/QShortcut>
 
@@ -1279,6 +1280,7 @@ bool MainWindow::backgroundWriterFinished()
 {
   QString fileName = m_threadedWriter->fileName();
   bool success = false;
+  QString errorMessage;
   if (!m_progressDialog->wasCanceled()) {
     if (m_threadedWriter->success()) {
       statusBar()->showMessage(
@@ -1290,12 +1292,15 @@ bool MainWindow::backgroundWriterFinished()
       updateRecentFiles();
       success = true;
     } else {
+      errorMessage = m_threadedWriter->error();
       QMessageBox::critical(
         this, tr("Error saving file"),
         tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
           .arg(fileName)
-          .arg(m_threadedWriter->error()));
+          .arg(errorMessage));
     }
+  } else {
+    errorMessage = tr("The save was canceled.");
   }
   m_fileWriteThread->deleteLater();
   m_fileWriteThread = nullptr;
@@ -1307,6 +1312,16 @@ bool MainWindow::backgroundWriterFinished()
   // On successful save, remove any autosave files
   if (success)
     cleanupAutosaves(fileName);
+
+  // Report back to a script that is waiting on this export via RPC, the
+  // same way a plugin command does.
+  if (m_pendingExportToken != 0) {
+    const quint64 token = m_pendingExportToken;
+    m_pendingExportToken = 0;
+    QVariantMap result;
+    result["fileName"] = fileName;
+    emit commandCompleted(token, success, errorMessage, result);
+  }
 
   return success;
 }
@@ -2100,7 +2115,18 @@ void MainWindow::viewActivated(QWidget* widget)
   activeMoleculeEdited();
 }
 
-QImage MainWindow::renderToImage(const QSize& size)
+QSize MainWindow::activeViewSize() const
+{
+  QWidget* widget = m_multiViewWidget->activeWidget();
+  return widget != nullptr ? widget->size() : QSize();
+}
+
+QtOpenGL::GLWidget* MainWindow::activeGLWidget() const
+{
+  return qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+}
+
+QImage MainWindow::renderToImage(const QSize& size, bool transparentBackground)
 {
   QImage exportImage(size, QImage::Format_ARGB32);
 
@@ -2143,6 +2169,17 @@ QImage MainWindow::renderToImage(const QSize& size)
   cColor[3] = alpha; // previous color
   scene->setBackgroundColor(cColor);
   glWidget->repaint();
+
+  if (!transparentBackground) {
+    // Composite the transparent render over the view's actual background
+    // colour, so the caller gets an opaque image.
+    QImage opaqueImage(exportImage.size(), QImage::Format_ARGB32_Premultiplied);
+    opaqueImage.fill(QColor(red, green, blue, 255));
+    QPainter painter(&opaqueImage);
+    painter.drawImage(0, 0, exportImage);
+    painter.end();
+    exportImage = opaqueImage.convertToFormat(QImage::Format_ARGB32);
+  }
 
   // Now we embed molecular information into the file, if possible
   if (m_molecule && m_molecule->atomCount() < 1000) {
@@ -2397,7 +2434,7 @@ bool MainWindow::exportFile(bool async)
   return saveFileAs(reply.second, reply.first->newInstance(), async);
 }
 
-bool MainWindow::exportFile(const QString& fileName, bool async)
+bool MainWindow::exportFile(const QString& fileName, bool async, quint64 token)
 {
   if (fileName.isEmpty()) {
     return false;
@@ -2413,6 +2450,11 @@ bool MainWindow::exportFile(const QString& fileName, bool async)
 
   if (!writers.empty()) {
     writer = writers[0]->newInstance();
+    // Remember the token so backgroundWriterFinished() can report back once
+    // the write completes, the same way a plugin command does. Only takes
+    // effect for an async write; harmless otherwise since it is cleared
+    // there before it could be read again.
+    m_pendingExportToken = token;
     return saveFileAs(fileName, writer, async);
   }
 
@@ -3512,6 +3554,33 @@ void MainWindow::registerExtensionCommand(QString command, QString description)
     return;
 
   m_extensionCommandMap.insert(command, extension);
+}
+
+QVariantList MainWindow::pluginCommands() const
+{
+  QVariantList commands;
+
+  for (auto it = m_toolCommandMap.constBegin();
+       it != m_toolCommandMap.constEnd(); ++it) {
+    QVariantMap entry;
+    entry["name"] = it.key();
+    entry["description"] = m_commandDescriptionsMap.value(it.key());
+    entry["kind"] = QStringLiteral("tool");
+    entry["plugin"] = it.value();
+    commands.append(entry);
+  }
+
+  for (auto it = m_extensionCommandMap.constBegin();
+       it != m_extensionCommandMap.constEnd(); ++it) {
+    QVariantMap entry;
+    entry["name"] = it.key();
+    entry["description"] = m_commandDescriptionsMap.value(it.key());
+    entry["kind"] = QStringLiteral("extension");
+    entry["plugin"] = it.value() != nullptr ? it.value()->name() : QString();
+    commands.append(entry);
+  }
+
+  return commands;
 }
 
 void MainWindow::beginPluginCommand(QObject* plugin)

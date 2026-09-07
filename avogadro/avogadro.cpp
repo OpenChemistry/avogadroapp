@@ -359,6 +359,7 @@ int main(int argc, char* argv[])
   QStringList fileNames;
   bool disableSettings = false;
   bool skipAutosave = false;
+  QString rpcName = QStringLiteral("avogadro");
 #ifdef QTTESTING
   QString testFile;
   bool testExit = true;
@@ -366,7 +367,9 @@ int main(int argc, char* argv[])
   QStringList args = QCoreApplication::arguments();
   for (QStringList::const_iterator it = args.constBegin() + 1;
        it != args.constEnd(); ++it) {
-    if (*it == "--test-file" && it + 1 != args.constEnd()) {
+    if (*it == "--rpc-name" && it + 1 != args.constEnd()) {
+      rpcName = *(++it);
+    } else if (*it == "--test-file" && it + 1 != args.constEnd()) {
 #ifdef QTTESTING
       testFile = *(++it);
 #else
@@ -413,7 +416,7 @@ int main(int argc, char* argv[])
 
 #ifdef Avogadro_ENABLE_RPC
   // create rpc listener
-  Avogadro::RpcListener listener;
+  Avogadro::RpcListener listener(rpcName);
   listener.start();
 #endif
 
