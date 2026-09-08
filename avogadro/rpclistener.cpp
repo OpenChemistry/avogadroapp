@@ -19,6 +19,7 @@
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
 #include <avogadro/qtopengl/glwidget.h>
+#include <avogadro/rendering/camera.h>
 
 #include <QtCore/QBuffer>
 #include <QtCore/QByteArray>
@@ -41,6 +42,8 @@ using Io::FileFormatManager;
 using QtGui::Molecule;
 using QtGui::ScenePlugin;
 using QtOpenGL::GLWidget;
+using Rendering::Camera;
+using Rendering::Projection;
 using std::string;
 
 namespace {
@@ -77,6 +80,8 @@ const BuiltinCommand builtinCommands[] = {
   { "exportFile",
     "Write the active molecule to a file, guessing the format from the "
     "extension." },
+  { "getCamera", "Report the active view's camera: distance to focus, "
+                 "focus point, projection and the model view matrix." },
   { "getMolecule", "Return the active molecule serialized as a string." },
   { "internalPing", "Check whether the server is responsive." },
   { "kill", "Shut down Avogadro. Only enabled when started with "
@@ -94,12 +99,56 @@ const BuiltinCommand builtinCommands[] = {
                    "render onto a canvas of exactly that size." },
   { "saveGraphic", "Render the current view and save it as an image at "
                    "the window's current size." },
+  { "setCamera", "Apply a model view matrix and/or projection settings to "
+                 "the active view's camera." },
   { "setProjection",
     "Switch between perspective and orthographic projection." },
   { "setRenderTypes", "Enable or disable scene display types by name." },
   { "version",
     "Report Avogadro application, library, Qt and protocol versions." },
 };
+
+QString projectionToString(Projection projection)
+{
+  return projection == Rendering::Orthographic ? QStringLiteral("orthographic")
+                                               : QStringLiteral("perspective");
+}
+
+Projection projectionFromString(const QString& name)
+{
+  return name == QLatin1String("orthographic") ? Rendering::Orthographic
+                                               : Rendering::Perspective;
+}
+
+/// Flatten the camera's model view matrix into 16 floats in row-major order,
+/// i.e. element [row * 4 + col] is modelView(row, col). This is the order
+/// "setCamera" expects back, and the order every "getCamera" reply uses.
+QVariantList modelViewToVariantList(const Camera& camera)
+{
+  QVariantList result;
+  result.reserve(16);
+  const auto& matrix = camera.modelView().matrix();
+  for (int row = 0; row < 4; ++row) {
+    for (int col = 0; col < 4; ++col)
+      result.append(static_cast<double>(matrix(row, col)));
+  }
+  return result;
+}
+
+/// Serialize the read-back shape shared by "getCamera" and "setCamera".
+QVariantMap cameraToVariantMap(const Camera& camera)
+{
+  QVariantMap result;
+  result["distance"] = static_cast<double>(camera.distance(camera.focus()));
+  const Vector3f focus = camera.focus();
+  result["focus"] = QVariantList{ static_cast<double>(focus.x()),
+                                  static_cast<double>(focus.y()),
+                                  static_cast<double>(focus.z()) };
+  result["projection"] = projectionToString(camera.projectionType());
+  result["orthographicScale"] = static_cast<double>(camera.orthographicScale());
+  result["modelView"] = modelViewToVariantList(camera);
+  return result;
+}
 } // namespace
 
 RpcListener::RpcListener(const QString& connectionName, QObject* parent_)
@@ -555,6 +604,60 @@ void RpcListener::messageReceived(const RPC::Message& message)
 
     RPC::Message response = message.generateResponse();
     response.setResult(QJsonArray::fromVariantList(types));
+    response.send();
+  } else if (method == "getCamera") {
+    // Read-back: payload goes straight in "result", like "listDisplayTypes".
+    GLWidget* glWidget = m_window->activeGLWidget();
+    if (glWidget == nullptr) {
+      sendError(message, errorRequestFailed, tr("No active view."));
+      return;
+    }
+
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonObject::fromVariantMap(
+      cameraToVariantMap(glWidget->renderer().camera())));
+    response.send();
+  } else if (method == "setCamera") {
+    GLWidget* glWidget = m_window->activeGLWidget();
+    if (glWidget == nullptr) {
+      sendError(message, errorRequestFailed, tr("No active view."));
+      return;
+    }
+
+    Camera& camera = glWidget->renderer().camera();
+
+    if (params.contains("modelView")) {
+      const QJsonArray values = params["modelView"].toArray();
+      if (values.size() != 16) {
+        sendError(message, errorRequestFailed,
+                  tr("setCamera's modelView must be exactly 16 numbers, in "
+                     "row-major order."));
+        return;
+      }
+      Eigen::Matrix4f matrix;
+      for (int row = 0; row < 4; ++row) {
+        for (int col = 0; col < 4; ++col)
+          matrix(row, col) =
+            static_cast<float>(values.at(row * 4 + col).toDouble());
+      }
+      Eigen::Affine3f transform;
+      transform.matrix() = matrix;
+      camera.setModelView(transform);
+    }
+
+    if (params.contains("projection"))
+      camera.setProjectionType(
+        projectionFromString(params["projection"].toString()));
+
+    if (params.contains("orthographicScale")) {
+      camera.setOrthographicScale(
+        static_cast<float>(params["orthographicScale"].toDouble()));
+    }
+
+    glWidget->requestUpdate();
+
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonObject::fromVariantMap(cameraToVariantMap(camera)));
     response.send();
   } else { // ask the main window to handle the message
     QVariantMap options = params.toVariantMap();
