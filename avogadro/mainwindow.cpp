@@ -455,6 +455,10 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 
 MainWindow::~MainWindow()
 {
+  // Do this first, while our members are still alive: the views, and the
+  // plugins parented to them, are deleted later by QWidget::~QWidget.
+  disconnectCommandSignals();
+
 #ifdef _3DCONNEXION
   m_TDxController->disableController();
 #endif
@@ -3606,6 +3610,19 @@ void MainWindow::abandonCommand(quint64 token)
       return;
     }
   }
+}
+
+void MainWindow::disconnectCommandSignals()
+{
+  foreach (const QMetaObject::Connection& connection,
+           m_pluginCommandConnections)
+    disconnect(connection);
+
+  m_pluginCommandConnections.clear();
+  // Nothing can report back now, so no token is still owed a reply. The
+  // RPC listener fails any request still waiting when the application
+  // quits, so callers are not left hanging.
+  m_inFlightCommands.clear();
 }
 
 void MainWindow::pluginDestroyed(QObject* plugin)

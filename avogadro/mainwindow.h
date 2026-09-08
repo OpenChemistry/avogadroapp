@@ -7,6 +7,7 @@
 #define AVOGADRO_MAINWINDOW_H
 
 #include <QtCore/QHash>
+#include <QtCore/QList>
 #include <QtCore/QStringList>
 #include <QtCore/QVariantMap>
 #include <QtWidgets/QMainWindow>
@@ -493,15 +494,44 @@ private:
   template<typename PluginType>
   void connectCommandSignals(PluginType* plugin)
   {
-    connect(plugin, &PluginType::commandStarted, this,
-            &MainWindow::pluginCommandStarted, Qt::UniqueConnection);
-    connect(plugin, &PluginType::commandFinished, this,
-            &MainWindow::pluginCommandFinished, Qt::UniqueConnection);
-    connect(plugin, &PluginType::commandFailed, this,
-            &MainWindow::pluginCommandFailed, Qt::UniqueConnection);
-    connect(plugin, &QObject::destroyed, this, &MainWindow::pluginDestroyed,
-            Qt::UniqueConnection);
+    // Each connection is remembered so that ~MainWindow can sever it while
+    // this object's members are still alive. See disconnectCommandSignals().
+    rememberConnection(connect(plugin, &PluginType::commandStarted, this,
+                               &MainWindow::pluginCommandStarted,
+                               Qt::UniqueConnection));
+    rememberConnection(connect(plugin, &PluginType::commandFinished, this,
+                               &MainWindow::pluginCommandFinished,
+                               Qt::UniqueConnection));
+    rememberConnection(connect(plugin, &PluginType::commandFailed, this,
+                               &MainWindow::pluginCommandFailed,
+                               Qt::UniqueConnection));
+    rememberConnection(connect(plugin, &QObject::destroyed, this,
+                               &MainWindow::pluginDestroyed,
+                               Qt::UniqueConnection));
   }
+
+  /**
+   * Keep a connection made by connectCommandSignals() so it can be undone.
+   * A repeated Qt::UniqueConnection returns an invalid handle, which is
+   * dropped rather than accumulated.
+   */
+  void rememberConnection(const QMetaObject::Connection& connection)
+  {
+    if (connection)
+      m_pluginCommandConnections.append(connection);
+  }
+
+  /**
+   * Sever every connection made by connectCommandSignals().
+   *
+   * This must happen before ~MainWindow lets its members go. Plugins are
+   * parented to the views, which QWidget::~QWidget deletes *after* our own
+   * members are destroyed but *before* QObject::~QObject would have severed
+   * these connections. Without this, a plugin's destroyed() signal still
+   * reaches pluginDestroyed(), which then reads a destroyed
+   * m_inFlightCommands and the application crashes on quit.
+   */
+  void disconnectCommandSignals();
 
   /** Start tracking the signals a plugin emits while handling a command. */
   void beginPluginCommand(QObject* plugin);
@@ -571,6 +601,8 @@ private:
   QVariantMap m_currentCommandResult;
   // Plugins running a command in the background, and the token to report.
   QHash<QObject*, quint64> m_inFlightCommands;
+  // Connections made by connectCommandSignals(), undone in ~MainWindow.
+  QList<QMetaObject::Connection> m_pluginCommandConnections;
 
   QAction* m_undo;
   QAction* m_redo;
