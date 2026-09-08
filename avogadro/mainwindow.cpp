@@ -66,6 +66,7 @@
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QKeySequence>
+#include <QtGui/QPainter>
 #include <QtGui/QPalette>
 #include <QtGui/QShortcut>
 
@@ -1283,6 +1284,7 @@ bool MainWindow::backgroundWriterFinished()
 {
   QString fileName = m_threadedWriter->fileName();
   bool success = false;
+  QString errorMessage;
   if (!m_progressDialog->wasCanceled()) {
     if (m_threadedWriter->success()) {
       statusBar()->showMessage(
@@ -1294,12 +1296,15 @@ bool MainWindow::backgroundWriterFinished()
       updateRecentFiles();
       success = true;
     } else {
+      errorMessage = m_threadedWriter->error();
       QMessageBox::critical(
         this, tr("Error saving file"),
         tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
           .arg(fileName)
-          .arg(m_threadedWriter->error()));
+          .arg(errorMessage));
     }
+  } else {
+    errorMessage = tr("The save was canceled.");
   }
   m_fileWriteThread->deleteLater();
   m_fileWriteThread = nullptr;
@@ -1311,6 +1316,16 @@ bool MainWindow::backgroundWriterFinished()
   // On successful save, remove any autosave files
   if (success)
     cleanupAutosaves(fileName);
+
+  // Report back to a script that is waiting on this export via RPC, the
+  // same way a plugin command does.
+  if (m_pendingExportToken != 0) {
+    const quint64 token = m_pendingExportToken;
+    m_pendingExportToken = 0;
+    QVariantMap result;
+    result["fileName"] = fileName;
+    emit commandCompleted(token, success, errorMessage, result);
+  }
 
   return success;
 }
@@ -2104,9 +2119,21 @@ void MainWindow::viewActivated(QWidget* widget)
   activeMoleculeEdited();
 }
 
-QImage MainWindow::renderToImage(const QSize& size)
+QSize MainWindow::activeViewSize() const
 {
-  QImage exportImage(size, QImage::Format_ARGB32);
+  QWidget* widget = m_multiViewWidget->activeWidget();
+  return widget != nullptr ? widget->size() : QSize();
+}
+
+QtOpenGL::GLWidget* MainWindow::activeGLWidget() const
+{
+  return qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+}
+
+QImage MainWindow::renderToImage(const QSize& requestedSize,
+                                 bool transparentBackground, QSize* nativeSize)
+{
+  QImage exportImage;
 
   auto* glWidget =
     qobject_cast<QOpenGLWidget*>(m_multiViewWidget->activeWidget());
@@ -2118,6 +2145,12 @@ QImage MainWindow::renderToImage(const QSize& size)
          qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
     scene = &viewWidget->renderer().scene();
   }
+
+  // Without an active GL view there is nothing to grab; hand back a null
+  // image so callers can report the failure rather than crash here.
+  if (scene == nullptr || glWidget == nullptr)
+    return QImage();
+
   Vector4ub cColor = scene->backgroundColor();
   unsigned char red = cColor[0];
   unsigned char green = cColor[1];
@@ -2147,6 +2180,57 @@ QImage MainWindow::renderToImage(const QSize& size)
   cColor[3] = alpha; // previous color
   scene->setBackgroundColor(cColor);
   glWidget->repaint();
+
+  if (nativeSize != nullptr)
+    *nativeSize = exportImage.size();
+
+  if (requestedSize.isValid() && !requestedSize.isEmpty()) {
+    // Fit the native grab onto a canvas of exactly requestedSize: scale
+    // preserving aspect ratio, then centre it, filling any letterboxing
+    // with either the view's background colour or transparency. This also
+    // serves as the "!transparentBackground" composite for this path, so
+    // that block must not run again below.
+    //
+    // Note: padding to a different aspect ratio preserves the original
+    // framing rather than re-composing the scene, so a render padded to an
+    // aspect ratio it wasn't composed for will sit smaller in frame than a
+    // true render at that aspect would. This is a deliberate stopgap until
+    // a real offscreen framebuffer render path replaces the
+    // grab-and-resample approach here.
+    QImage fitted(requestedSize, QImage::Format_ARGB32_Premultiplied);
+    fitted.fill(transparentBackground ? QColor(Qt::transparent)
+                                      : QColor(red, green, blue, 255));
+    QImage scaled = exportImage.scaled(requestedSize, Qt::KeepAspectRatio,
+                                       Qt::SmoothTransformation);
+    // QImage::scaled() propagates the source's device pixel ratio (2 on a
+    // Retina grab). QPainter::drawImage() honours that ratio and draws at
+    // logical size, so without resetting it here the content lands scaled
+    // down into a corner of "fitted" instead of filling it. "fitted" itself
+    // is already ratio-1.0 (default-constructed), and requestedSize/painter
+    // coordinates below are in raw pixels, so the drawn image must match.
+    scaled.setDevicePixelRatio(1.0);
+    QPainter painter(&fitted);
+    painter.drawImage((requestedSize.width() - scaled.width()) / 2,
+                      (requestedSize.height() - scaled.height()) / 2, scaled);
+    painter.end();
+    exportImage = fitted.convertToFormat(QImage::Format_ARGB32);
+  } else if (!transparentBackground) {
+    // No resize requested: composite the transparent render over the
+    // view's actual background colour, so the caller gets an opaque image.
+    QImage opaqueImage(exportImage.size(), QImage::Format_ARGB32_Premultiplied);
+    opaqueImage.fill(QColor(red, green, blue, 255));
+    // Draw a ratio-1.0 copy of the source: opaqueImage was constructed with
+    // exportImage.size() (raw pixels) at the default ratio of 1.0, but a
+    // Retina grabFramebuffer() image carries devicePixelRatio() == 2.
+    // QPainter::drawImage() honours the source ratio and would draw it at
+    // half size into the top-left quadrant otherwise.
+    QImage source = exportImage;
+    source.setDevicePixelRatio(1.0);
+    QPainter painter(&opaqueImage);
+    painter.drawImage(0, 0, source);
+    painter.end();
+    exportImage = opaqueImage.convertToFormat(QImage::Format_ARGB32);
+  }
 
   // Now we embed molecular information into the file, if possible
   if (m_molecule && m_molecule->atomCount() < 1000) {
@@ -2192,8 +2276,10 @@ void MainWindow::exportGraphics(QString fileName)
   if (QFileInfo(fileName).suffix().isEmpty())
     fileName += ".png";
 
-  const QSize size = m_multiViewWidget->activeWidget()->size();
-  QImage exportImage = renderToImage(size);
+  // Pass no size, so we get the untouched native framebuffer grab (full
+  // device resolution), not a copy resampled down to the logical widget
+  // size.
+  QImage exportImage = renderToImage();
 
   if (!exportImage.save(fileName)) {
     QMessageBox::warning(this, tr("Avogadro"),
@@ -2203,7 +2289,10 @@ void MainWindow::exportGraphics(QString fileName)
 
 void MainWindow::copyGraphics()
 {
-  QImage exportImage = renderToImage(m_multiViewWidget->activeWidget()->size());
+  // Pass no size, so we get the untouched native framebuffer grab (full
+  // device resolution), not a copy resampled down to the logical widget
+  // size.
+  QImage exportImage = renderToImage();
   QApplication::clipboard()->setImage(exportImage);
 }
 
@@ -2401,9 +2490,17 @@ bool MainWindow::exportFile(bool async)
   return saveFileAs(reply.second, reply.first->newInstance(), async);
 }
 
-bool MainWindow::exportFile(const QString& fileName, bool async)
+bool MainWindow::exportFile(const QString& fileName, bool async, quint64 token)
 {
   if (fileName.isEmpty()) {
+    return false;
+  }
+
+  // A background write is already in flight. Its completion token would be
+  // overwritten below, so refuse the request rather than misreport which
+  // export finished. Checked here as well as in saveFileAs() so the token is
+  // never clobbered before that check runs.
+  if (m_fileWriteThread != nullptr) {
     return false;
   }
 
@@ -2417,6 +2514,11 @@ bool MainWindow::exportFile(const QString& fileName, bool async)
 
   if (!writers.empty()) {
     writer = writers[0]->newInstance();
+    // Remember the token so backgroundWriterFinished() can report back once
+    // the write completes, the same way a plugin command does. Only takes
+    // effect for an async write; harmless otherwise since it is cleared
+    // there before it could be read again.
+    m_pendingExportToken = token;
     return saveFileAs(fileName, writer, async);
   }
 
@@ -2444,25 +2546,29 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
   QString ident = QString::fromStdString(writer->identifier());
 
   // Figure out what molecule willl be saved, perform conversion if necessary.
-  QObject* molObj = m_moleculeModel->activeMolecule();
+  // Resolved before anything is allocated below: BackgroundFileFormat takes
+  // ownership of the writer, so bailing out after it is constructed would
+  // both double delete the writer and leave the write state half set up.
+  auto* mol = qobject_cast<Molecule*>(m_moleculeModel->activeMolecule());
 
-  if (!molObj) {
+  if (!mol) {
+    delete writer;
+    return false;
+  }
+
+  // Only one write can be in flight: m_threadedWriter, m_progressDialog and
+  // m_pendingExportToken are all single-slot state, so starting a second one
+  // now would strand the running thread and report its result against the
+  // wrong request. backgroundWriterFinished() clears the thread when it is
+  // done, so this only rejects genuinely concurrent writes.
+  if (m_fileWriteThread != nullptr) {
     delete writer;
     return false;
   }
 
   // Initialize out writer.
-  if (!m_fileWriteThread)
-    m_fileWriteThread = new QThread(this);
-  if (m_threadedWriter)
-    m_threadedWriter->deleteLater();
+  m_fileWriteThread = new QThread(this);
   m_threadedWriter = new BackgroundFileFormat(writer);
-
-  auto* mol = qobject_cast<Molecule*>(molObj);
-  if (!mol) {
-    delete writer;
-    return false;
-  }
 
   // get the camera modelView and projection to save it
   if (auto* glWidget =
@@ -3516,6 +3622,37 @@ void MainWindow::registerExtensionCommand(QString command, QString description)
     return;
 
   m_extensionCommandMap.insert(command, extension);
+}
+
+QVariantList MainWindow::pluginCommands() const
+{
+  QVariantList commands;
+
+  for (auto it = m_toolCommandMap.constBegin();
+       it != m_toolCommandMap.constEnd(); ++it) {
+    QVariantMap entry;
+    entry["name"] = it.key();
+    entry["description"] = m_commandDescriptionsMap.value(it.key());
+    entry["kind"] = QStringLiteral("tool");
+    entry["plugin"] = it.value();
+    // Any plugin command may report itself as started and finish later, so
+    // a caller has to be ready for a deferred reply from all of them.
+    entry["async"] = true;
+    commands.append(entry);
+  }
+
+  for (auto it = m_extensionCommandMap.constBegin();
+       it != m_extensionCommandMap.constEnd(); ++it) {
+    QVariantMap entry;
+    entry["name"] = it.key();
+    entry["description"] = m_commandDescriptionsMap.value(it.key());
+    entry["kind"] = QStringLiteral("extension");
+    entry["plugin"] = it.value() != nullptr ? it.value()->name() : QString();
+    entry["async"] = true;
+    commands.append(entry);
+  }
+
+  return commands;
 }
 
 void MainWindow::beginPluginCommand(QObject* plugin)

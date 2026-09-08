@@ -40,7 +40,14 @@ class RpcListener : public QObject
   Q_OBJECT
 
 public:
-  explicit RpcListener(QObject* parent = nullptr);
+  /**
+   * @param connectionName The local socket name to listen on, so a headless
+   * instance can run beside a user's regular session. Defaults to
+   * "avogadro", matching every client that does not pass --rpc-name.
+   */
+  explicit RpcListener(
+    const QString& connectionName = QStringLiteral("avogadro"),
+    QObject* parent = nullptr);
   ~RpcListener() override;
 
   void start();

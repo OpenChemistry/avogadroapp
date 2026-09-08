@@ -107,12 +107,17 @@ public slots:
    * Export a file, using the full selection of formats capable of writing.
    * The format will be guessed based on the filename extension.
    * If @a async is true (default), the file is saved asynchronously.
+   * @param token When @a async is true and non-zero, commandCompleted() is
+   * emitted with this token once the background write finishes, the same
+   * way a plugin command reports back. Used by the RPC listener's "wait"
+   * support; ignored otherwise.
    * @return If @a async is true, this function returns true if a suitable
    * writer was found (not if the write was successful). If @a async is
    * false, the return value indicates whether or not the file was written
    * successfully.
    */
-  bool exportFile(const QString& fileName, bool async = true);
+  bool exportFile(const QString& fileName, bool async = true,
+                  quint64 token = 0);
 
   /**
    * Export a file, using the full selection of formats capable of writing.
@@ -206,6 +211,45 @@ public:
    * reports back does not stay busy for the life of the session.
    */
   void abandonCommand(quint64 token);
+
+  /**
+   * The commands registered by tools and extensions, for RPC introspection
+   * (the "listCommands" method). Built-in commands answered directly by the
+   * RPC listener are not included; it has its own static table for those.
+   *
+   * Each entry is a map with "name", "description", "kind" ("tool" or
+   * "extension") and "plugin" (the owning plugin's display name).
+   */
+  QVariantList pluginCommands() const;
+
+  /**
+   * The size, in pixels, of the currently active view. An empty size if
+   * there is no active view.
+   */
+  QSize activeViewSize() const;
+
+  /**
+   * The active view, if it is an OpenGL widget. Returns nullptr for a
+   * non-GL view (e.g. a VTK crystal view) or when there is no active view.
+   */
+  QtOpenGL::GLWidget* activeGLWidget() const;
+
+  /**
+   * Render the active view to an image.
+   * @param requestedSize The desired output size, in pixels. If null or
+   * empty (the default), the native framebuffer grab is returned untouched,
+   * at whatever resolution the view actually rendered (i.e. widget size
+   * times device pixel ratio). Otherwise the native grab is scaled with
+   * Qt::KeepAspectRatio and centred on a canvas of exactly this size.
+   * @param transparentBackground If true (the default, matching prior
+   * behaviour) the background is left transparent; otherwise the image is
+   * composited over the view's current background colour.
+   * @param nativeSize If non-null, receives the native grab's actual
+   * dimensions (before any scaling to requestedSize was applied).
+   */
+  QImage renderToImage(const QSize& requestedSize = QSize(),
+                       bool transparentBackground = true,
+                       QSize* nativeSize = nullptr);
 
 signals:
   /**
@@ -470,8 +514,6 @@ private slots:
    */
   void viewActivated(QWidget* widget);
 
-  QImage renderToImage(const QSize& size);
-
   void exportGraphics();
 
   void copyGraphics();
@@ -567,6 +609,9 @@ private:
   BackgroundFileFormat* m_threadedWriter;
   QProgressDialog* m_progressDialog;
   QtGui::Molecule* m_fileReadMolecule;
+  // Set by exportFile() when the RPC listener is waiting on an async write;
+  // backgroundWriterFinished() reports back through commandCompleted().
+  quint64 m_pendingExportToken = 0;
 
   QToolBar* m_fileToolBar;
   QToolBar* m_toolToolBar;
