@@ -2141,6 +2141,12 @@ QImage MainWindow::renderToImage(const QSize& requestedSize,
          qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
     scene = &viewWidget->renderer().scene();
   }
+
+  // Without an active GL view there is nothing to grab; hand back a null
+  // image so callers can report the failure rather than crash here.
+  if (scene == nullptr || glWidget == nullptr)
+    return QImage();
+
   Vector4ub cColor = scene->backgroundColor();
   unsigned char red = cColor[0];
   unsigned char green = cColor[1];
@@ -2486,6 +2492,14 @@ bool MainWindow::exportFile(const QString& fileName, bool async, quint64 token)
     return false;
   }
 
+  // A background write is already in flight. Its completion token would be
+  // overwritten below, so refuse the request rather than misreport which
+  // export finished. Checked here as well as in saveFileAs() so the token is
+  // never clobbered before that check runs.
+  if (m_fileWriteThread != nullptr) {
+    return false;
+  }
+
   // Create one of our writers to save the file:
   FileFormat* writer = nullptr;
 
@@ -2528,25 +2542,29 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
   QString ident = QString::fromStdString(writer->identifier());
 
   // Figure out what molecule willl be saved, perform conversion if necessary.
-  QObject* molObj = m_moleculeModel->activeMolecule();
+  // Resolved before anything is allocated below: BackgroundFileFormat takes
+  // ownership of the writer, so bailing out after it is constructed would
+  // both double delete the writer and leave the write state half set up.
+  auto* mol = qobject_cast<Molecule*>(m_moleculeModel->activeMolecule());
 
-  if (!molObj) {
+  if (!mol) {
+    delete writer;
+    return false;
+  }
+
+  // Only one write can be in flight: m_threadedWriter, m_progressDialog and
+  // m_pendingExportToken are all single-slot state, so starting a second one
+  // now would strand the running thread and report its result against the
+  // wrong request. backgroundWriterFinished() clears the thread when it is
+  // done, so this only rejects genuinely concurrent writes.
+  if (m_fileWriteThread != nullptr) {
     delete writer;
     return false;
   }
 
   // Initialize out writer.
-  if (!m_fileWriteThread)
-    m_fileWriteThread = new QThread(this);
-  if (m_threadedWriter)
-    m_threadedWriter->deleteLater();
+  m_fileWriteThread = new QThread(this);
   m_threadedWriter = new BackgroundFileFormat(writer);
-
-  auto* mol = qobject_cast<Molecule*>(molObj);
-  if (!mol) {
-    delete writer;
-    return false;
-  }
 
   // get the camera modelView and projection to save it
   if (auto* glWidget =
@@ -3613,6 +3631,9 @@ QVariantList MainWindow::pluginCommands() const
     entry["description"] = m_commandDescriptionsMap.value(it.key());
     entry["kind"] = QStringLiteral("tool");
     entry["plugin"] = it.value();
+    // Any plugin command may report itself as started and finish later, so
+    // a caller has to be ready for a deferred reply from all of them.
+    entry["async"] = true;
     commands.append(entry);
   }
 
@@ -3623,6 +3644,7 @@ QVariantList MainWindow::pluginCommands() const
     entry["description"] = m_commandDescriptionsMap.value(it.key());
     entry["kind"] = QStringLiteral("extension");
     entry["plugin"] = it.value() != nullptr ? it.value()->name() : QString();
+    entry["async"] = true;
     commands.append(entry);
   }
 

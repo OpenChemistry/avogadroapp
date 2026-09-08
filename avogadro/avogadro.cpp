@@ -122,6 +122,27 @@ void configureOpenGLContext()
 #endif
 }
 
+namespace {
+
+/// Every command line option main() recognizes below. Used so that an option
+/// following a value-taking option (e.g. "--rpc-name --disable-settings") is
+/// not silently swallowed as that option's value. A value that merely starts
+/// with a dash, such as the socket name "-my-socket", is still accepted.
+bool isKnownOption(const QString& argument)
+{
+  static const char* const knownOptions[] = {
+    "--rpc-name",         "--test-file",     "--test-no-exit",
+    "--disable-settings", "--skip-autosave", "--crash-test"
+  };
+  for (const char* option : knownOptions) {
+    if (argument == QLatin1String(option))
+      return true;
+  }
+  return false;
+}
+
+} // namespace
+
 int main(int argc, char* argv[])
 {
 #ifdef Q_OS_MAC
@@ -367,9 +388,17 @@ int main(int argc, char* argv[])
   QStringList args = QCoreApplication::arguments();
   for (QStringList::const_iterator it = args.constBegin() + 1;
        it != args.constEnd(); ++it) {
-    if (*it == "--rpc-name" && it + 1 != args.constEnd()) {
+    if (*it == "--rpc-name") {
+      if (it + 1 == args.constEnd() || isKnownOption(*(it + 1))) {
+        qWarning("Avogadro called with --rpc-name but no socket name.");
+        return EXIT_FAILURE;
+      }
       rpcName = *(++it);
-    } else if (*it == "--test-file" && it + 1 != args.constEnd()) {
+    } else if (*it == "--test-file") {
+      if (it + 1 == args.constEnd() || isKnownOption(*(it + 1))) {
+        qWarning("Avogadro called with --test-file but no file name.");
+        return EXIT_FAILURE;
+      }
 #ifdef QTTESTING
       testFile = *(++it);
 #else

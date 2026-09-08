@@ -70,6 +70,10 @@ struct BuiltinCommand
 {
   const char* name;
   const char* description;
+  /// True when the command can outlive the call that starts it, i.e. a
+  /// request that passes "wait" may have its reply held until the work
+  /// finishes. False means the reply is always sent immediately.
+  bool async;
 };
 
 /// Every method this listener answers itself, i.e. everything handled below
@@ -79,33 +83,49 @@ struct BuiltinCommand
 const BuiltinCommand builtinCommands[] = {
   { "exportFile",
     "Write the active molecule to a file, guessing the format from the "
-    "extension." },
-  { "getCamera", "Report the active view's camera: distance to focus, "
-                 "focus point, projection and the model view matrix." },
-  { "getMolecule", "Return the active molecule serialized as a string." },
-  { "internalPing", "Check whether the server is responsive." },
-  { "kill", "Shut down Avogadro. Only enabled when started with "
-            "--testing." },
-  { "listCommands", "List every command the server understands." },
+    "extension.",
+    true },
+  { "getCamera",
+    "Report the active view's camera: distance to focus, "
+    "focus point, projection and the model view matrix.",
+    false },
+  { "getMolecule", "Return the active molecule serialized as a string.",
+    false },
+  { "internalPing", "Check whether the server is responsive.", false },
+  { "kill",
+    "Shut down Avogadro. Only enabled when started with "
+    "--testing.",
+    false },
+  { "listCommands", "List every command the server understands.", false },
   { "listDisplayTypes",
-    "List the scene display types available for the active view." },
-  { "loadMolecule", "Read molecule data from a string and make it the "
-                    "active molecule." },
-  { "moleculeInfo", "Report summary statistics about the active molecule." },
-  { "openFile", "Read a file from disk and make it the active molecule." },
-  { "renderImage", "Render the current view to a PNG, inline or to a "
-                   "file. Omit width/height for the native framebuffer "
-                   "resolution, or supply both together to fit that "
-                   "render onto a canvas of exactly that size." },
-  { "saveGraphic", "Render the current view and save it as an image at "
-                   "the window's current size." },
-  { "setCamera", "Apply a model view matrix and/or projection settings to "
-                 "the active view's camera." },
-  { "setProjection",
-    "Switch between perspective and orthographic projection." },
-  { "setRenderTypes", "Enable or disable scene display types by name." },
+    "List the scene display types available for the active view.", false },
+  { "loadMolecule",
+    "Read molecule data from a string and make it the "
+    "active molecule.",
+    false },
+  { "moleculeInfo", "Report summary statistics about the active molecule.",
+    false },
+  { "openFile", "Read a file from disk and make it the active molecule.",
+    false },
+  { "renderImage",
+    "Render the current view to a PNG, inline or to a "
+    "file. Omit width/height for the native framebuffer "
+    "resolution, or supply both together to fit that "
+    "render onto a canvas of exactly that size.",
+    false },
+  { "saveGraphic",
+    "Render the current view and save it as an image at "
+    "the window's current size.",
+    false },
+  { "setCamera",
+    "Apply a model view matrix and/or projection settings to "
+    "the active view's camera.",
+    false },
+  { "setProjection", "Switch between perspective and orthographic projection.",
+    false },
+  { "setRenderTypes", "Enable or disable scene display types by name.", false },
   { "version",
-    "Report Avogadro application, library, Qt and protocol versions." },
+    "Report Avogadro application, library, Qt and protocol versions.", false },
 };
 
 QString projectionToString(Projection projection)
@@ -418,15 +438,15 @@ void RpcListener::messageReceived(const RPC::Message& message)
       entry["description"] = QLatin1String(builtin.description);
       entry["kind"] = QStringLiteral("builtin");
       entry["plugin"] = QString();
-      entry["async"] = false;
-      entry["schema"] = QVariantMap();
+      entry["async"] = builtin.async;
       commands.append(entry);
     }
+    // Any tool or extension command may report itself as started and finish
+    // later, so they are all flagged as possibly asynchronous; whether a
+    // given call actually defers its reply is only known once it runs.
     const QVariantList pluginCommands = m_window->pluginCommands();
     for (const QVariant& item : pluginCommands) {
       QVariantMap entry = item.toMap();
-      entry["async"] = false;
-      entry["schema"] = QVariantMap();
       commands.append(entry);
     }
     std::sort(commands.begin(), commands.end(),
@@ -548,6 +568,13 @@ void RpcListener::messageReceived(const RPC::Message& message)
     QSize nativeSize;
     QImage image = m_window->renderToImage(requestedSize, transparentBackground,
                                            &nativeSize);
+    if (image.isNull()) {
+      // No active GL view, or the grab failed: there is nothing to save or
+      // encode, so report it rather than reply with a zero-sized image.
+      sendError(message, errorRequestFailed,
+                tr("Could not render the current view."));
+      return;
+    }
 
     if (!fileName.isEmpty()) {
       if (QFileInfo(fileName).suffix().isEmpty())
@@ -571,7 +598,11 @@ void RpcListener::messageReceived(const RPC::Message& message)
       QByteArray bytes;
       QBuffer buffer(&bytes);
       buffer.open(QIODevice::WriteOnly);
-      image.save(&buffer, "PNG");
+      if (!image.save(&buffer, "PNG")) {
+        sendError(message, errorRequestFailed,
+                  tr("Could not encode the render as PNG."));
+        return;
+      }
 
       QVariantMap result;
       result["width"] = image.width();
