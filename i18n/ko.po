@@ -14,8 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-08-23 02:37+0000\n"
 "PO-Revision-Date: 2026-09-09 08:51+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"Last-Translator: hooray804 <profs_35_pointer@icloud.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ko/>\n"
 "Language: ko\n"
@@ -57,7 +56,7 @@ msgstr "SSL 버전:"
 #: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1 (진단)"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
@@ -73,7 +72,7 @@ msgstr "BackgroundFileFormat에 설정된 파일 이름이 없습니다!"
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"
-msgstr ""
+msgstr "충돌 보고"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -81,6 +80,9 @@ msgid ""
 "developers when Avogadro crashes, which helps us fix crashes we cannot "
 "reproduce ourselves."
 msgstr ""
+"이 빌드는 Avogadro의 진단용 빌드입니다. Avogadro가 예기치 않게 종료될 때 "
+"개발자에게 오류 보고서를 전송할 수 있으며, 이는 개발팀이 자체적으로 재현하기 "
+"어려운 오류를 해결하는 데 도움이 됩니다."
 
 #: crashreportdialog.cpp:38
 msgid ""
@@ -90,12 +92,19 @@ msgid ""
 "useful, but it may incidentally include fragments of what you were working "
 "on, such as part of a file name or a molecule you had open."
 msgstr ""
+"오류 보고서에는 프로그램이 중단된 순간의 Avogadro 메모리 스냅샷과 함께 "
+"운영체제, 그래픽 드라이버, Avogadro 버전 정보, 그리고 최근 활동 로그가 "
+"포함됩니다. 이 메모리 스냅샷은 문제 해결에 큰 도움이 되지만, 파일 이름의 "
+"일부나 열려 있던 분자 구조처럼 작업 중이던 내용의 일부가 의도치 않게 포함될 "
+"수도 있습니다."
 
 #: crashreportdialog.cpp:52
 msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"동의하지 않으시면 아무것도 전송되지 않습니다. 이 설정은 언제든지 '도움말 → "
+"충돌 보고'에서 변경할 수 있습니다."
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
@@ -103,11 +112,11 @@ msgstr "충돌 보고서 보내기"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr "전송하지 않음"
+msgstr "보내지 않기"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "Avogadro 개발팀에 충돌 보고서 전송"
 
 #: mainwindow.cpp:396
 msgid "Ready…"
@@ -303,7 +312,7 @@ msgstr "설치 가능한 플러그인은 다음과 같습니다:"
 
 #: mainwindow.cpp:1488
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "해당 항목들을 업데이트하시겠습니까?"
 
 #: mainwindow.cpp:1527
 msgid "Recover Autosaved Files"
@@ -606,7 +615,7 @@ msgstr "결점 보고(&R)"
 
 #: mainwindow.cpp:2724
 msgid "&Crash Reporting…"
-msgstr ""
+msgstr "충돌 보고(&C)…"
 
 #: mainwindow.cpp:2730
 msgid "&Suggest a Feature"
