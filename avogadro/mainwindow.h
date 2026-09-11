@@ -675,6 +675,12 @@ private:
   void setupInterface();
 
   /**
+   * Add the dock widgets contributed by extension plugins to the window.
+   * Called once, after the plugins are loaded and the built-in docks exist.
+   */
+  void setupExtensionDocks();
+
+  /**
    * If the window is not visible on any available screen, move it to the
    * primary screen. Called on startup and when a screen is removed.
    */

@@ -636,6 +636,25 @@ void MainWindow::setupInterface()
   // connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
   connect(m_multiViewWidget, &QtGui::MultiViewWidget::activeWidgetChanged, this,
           &MainWindow::viewActivated);
+
+  setupExtensionDocks();
+}
+
+void MainWindow::setupExtensionDocks()
+{
+  foreach (QtGui::ExtensionPlugin* extension, m_extensions) {
+    foreach (QDockWidget* dock, extension->dockWidgets()) {
+      if (dock == nullptr)
+        continue;
+
+      addDockWidget(extension->preferredDockArea(dock), dock);
+
+      // Contributed docks start hidden -- the window already carries five of
+      // its own. The plugin shows its dock from its own menu action, which is
+      // also where it decides where that action lives.
+      dock->hide();
+    }
+  }
 }
 
 void MainWindow::closeActiveMolecule()
