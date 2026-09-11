@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-08-23 02:37+0000\n"
-"PO-Revision-Date: 2026-03-15 19:09+0000\n"
+"PO-Revision-Date: 2026-09-09 08:51+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_GB/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.9.1\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
@@ -70,7 +70,7 @@ msgstr "No file name set in BackgroundFileFormat!"
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"
-msgstr ""
+msgstr "Crash Reporting"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -100,7 +100,7 @@ msgstr ""
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "Don't Send"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
@@ -299,7 +299,7 @@ msgstr "The following plugins are available:"
 
 #: mainwindow.cpp:1488
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "Would you like to update them?"
 
 #: mainwindow.cpp:1527
 msgid "Recover Autosaved Files"
@@ -603,7 +603,7 @@ msgstr "&Report a Bug"
 
 #: mainwindow.cpp:2724
 msgid "&Crash Reporting…"
-msgstr ""
+msgstr "&Crash Reporting…"
 
 #: mainwindow.cpp:2730
 msgid "&Suggest a Feature"
