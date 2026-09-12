@@ -19,6 +19,7 @@
 #include <avogadro/core/variant.h>
 #include <avogadro/io/cjsonformat.h>
 #include <avogadro/io/cmlformat.h>
+#include <avogadro/io/compression.h>
 #include <avogadro/io/fileformat.h>
 #include <avogadro/io/fileformatmanager.h>
 #include <avogadro/qtgui/customelementdialog.h>
@@ -108,6 +109,32 @@
 // The registerMoleQueue() function is currently disabled
 
 namespace Avogadro {
+
+namespace {
+
+// The chemical format is named by the extension underneath any compression
+// suffix: "molecule.cjson.gz" is CJSON that happens to be gzipped, and
+// Io::FileFormat recovers the codec from the same file name on its own.
+QString chemicalSuffix(const QString& fileName)
+{
+  return QFileInfo(QString::fromStdString(
+                     Io::stripCompressionSuffix(fileName.toStdString())))
+    .suffix()
+    .toLower();
+}
+
+// Add @a extension ahead of any compression suffix, so that supplying a
+// default for "molecule.gz" yields "molecule.cjson.gz" rather than the
+// unreadable "molecule.gz.cjson".
+QString withChemicalExtension(const QString& fileName, const QString& extension)
+{
+  const std::string name = fileName.toStdString();
+  const std::string stripped = Io::stripCompressionSuffix(name);
+  return QString::fromStdString(stripped + "." + extension.toStdString() +
+                                name.substr(stripped.size()));
+}
+
+} // namespace
 
 #ifdef QTTESTING
 class XMLEventObserver : public pqEventObserver
@@ -1092,7 +1119,7 @@ void MainWindow::openFile()
   settings.setValue("MainWindow/lastOpenDir", dir);
 
   // Create one of our readers to read the file:
-  QString extension = info.suffix().toLower();
+  QString extension = chemicalSuffix(fileName);
   FileFormat* reader = nullptr;
   if (extension == "cml")
     reader = new Io::CmlFormat;
@@ -2394,11 +2421,11 @@ bool MainWindow::saveFile(bool async)
     return saveFileAs(async);
 
   string fileName = mol->data("fileName").toString();
-  QString extension =
-    QFileInfo(QString::fromStdString(fileName)).suffix().toLower();
+  QString extension = chemicalSuffix(QString::fromStdString(fileName));
 
   if (extension.isEmpty()) {
-    fileName += ".cjson";
+    fileName = withChemicalExtension(QString::fromStdString(fileName), "cjson")
+                 .toStdString();
     extension = QLatin1String("cjson");
   }
 
@@ -2469,8 +2496,9 @@ bool MainWindow::saveFileAs(bool async)
   dir = info.absoluteDir().absolutePath();
   settings.setValue("MainWindow/lastSaveDir", dir);
 
-  // Use manually entered extension if present
-  QString extension = info.suffix().toLower();
+  // Use manually entered extension if present, ignoring any compression
+  // suffix so that "molecule.cjson.gz" is recognised as CJSON.
+  QString extension = chemicalSuffix(fileName);
   // Otherwise, get extension from selected filter
   if (extension.isEmpty()) {
     QString filter = saveDialog.selectedNameFilter();
@@ -2479,7 +2507,7 @@ bool MainWindow::saveFileAs(bool async)
     else
       extension = "cjson";
 
-    fileName += "." + extension;
+    fileName = withChemicalExtension(fileName, extension);
   }
 
   // Create one of our writers to save the file:
@@ -2528,7 +2556,7 @@ bool MainWindow::exportFile(const QString& fileName, bool async, quint64 token)
 
   std::vector<const FileFormat*> writers =
     Io::FileFormatManager::instance().fileFormatsFromFileExtension(
-      QFileInfo(fileName).suffix().toStdString(),
+      chemicalSuffix(fileName).toStdString(),
       FileFormat::File | FileFormat::Write);
 
   if (!writers.empty()) {
