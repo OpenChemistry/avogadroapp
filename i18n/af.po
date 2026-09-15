@@ -5,13 +5,15 @@
 # Dillon Schultz <dillonschultz93@gmail.com>, 2021.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2024, 2025.
 # Jusef <afrikaansmanne@users.noreply.hosted.weblate.org>, 2026.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-13 06:15+0000\n"
 "PO-Revision-Date: 2026-09-16 10:51+0000\n"
-"Last-Translator: Jusef <afrikaansmanne@users.noreply.hosted.weblate.org>\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Afrikaans <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/af/>\n"
 "Language: af\n"
@@ -134,7 +136,7 @@ msgstr "Instellings vir vertoontipe"
 
 #: mainwindow.cpp:568
 msgid "Files"
-msgstr ""
+msgstr "Lêers"
 
 #: mainwindow.cpp:579
 msgid "Layers"
