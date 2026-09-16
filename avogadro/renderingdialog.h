@@ -23,7 +23,7 @@ class RenderingDialog : public QDialog
   Q_OBJECT
 
 public:
-  RenderingDialog(QWidget *parent, SolidPipeline &pipeline);
+  RenderingDialog(QWidget* parent, SolidPipeline& pipeline);
   ~RenderingDialog() override;
 
   bool aoEnabled();
@@ -35,17 +35,19 @@ public:
   float dofStrength();
   float dofPosition();
   bool edEnabled();
+  float edStrength();
 
 protected slots:
   void aoEnableCheckBoxChanged(int state);
   void fogEnableCheckBoxChanged(int state);
   void dofEnableCheckBoxChanged(int state);
+  void edEnableCheckBoxChanged(int state);
   void saveButtonClicked();
   void closeButtonClicked();
 
 private:
-  Ui::RenderingDialog *m_ui;
-  SolidPipeline &m_solidPipeline;
+  Ui::RenderingDialog* m_ui;
+  SolidPipeline& m_solidPipeline;
 };
 
 } // End namespace Avogadro

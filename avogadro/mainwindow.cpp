@@ -541,6 +541,8 @@ void MainWindow::setupInterface()
       settings.value("MainWindow/ao_strength", 1.0f).toFloat());
     pipeline->setEdEnabled(
       settings.value("MainWindow/ed_enabled", false).toBool());
+    pipeline->setEdStrength(
+      settings.value("MainWindow/ed_strength", 1.0f).toFloat());
 
     // set background color
     pipeline->setBackgroundColor(cColor);
@@ -2828,6 +2830,7 @@ void MainWindow::setRenderingSettings()
     settings.setValue("MainWindow/dof_enabled", pipeline->getDofEnabled());
     settings.setValue("MainWindow/fog_enabled", pipeline->getFogEnabled());
     settings.setValue("MainWindow/ed_enabled", pipeline->getEdEnabled());
+    settings.setValue("MainWindow/ed_strength", pipeline->getEdStrength());
   }
 }
 
