@@ -8,14 +8,19 @@
 
 namespace Avogadro {
 
-RenderingDialog::RenderingDialog(QWidget *parent_, SolidPipeline &pipeline)
-  : QDialog(parent_), m_ui(new Ui::RenderingDialog), m_solidPipeline(pipeline)
+RenderingDialog::RenderingDialog(QWidget* parent_, SolidPipeline& pipeline)
+  : QDialog(parent_)
+  , m_ui(new Ui::RenderingDialog)
+  , m_solidPipeline(pipeline)
 {
   m_ui->setupUi(this);
 
-  m_ui->aoEnableCheckBox->setCheckState(pipeline.getAoEnabled()? Qt::Checked : Qt::Unchecked);
-  m_ui->dofEnableCheckBox->setCheckState(pipeline.getDofEnabled()? Qt::Checked : Qt::Unchecked);
-  m_ui->fogEnableCheckBox->setCheckState(pipeline.getFogEnabled()? Qt::Checked : Qt::Unchecked);  
+  m_ui->aoEnableCheckBox->setCheckState(
+    pipeline.getAoEnabled() ? Qt::Checked : Qt::Unchecked);
+  m_ui->dofEnableCheckBox->setCheckState(
+    pipeline.getDofEnabled() ? Qt::Checked : Qt::Unchecked);
+  m_ui->fogEnableCheckBox->setCheckState(
+    pipeline.getFogEnabled() ? Qt::Checked : Qt::Unchecked);
   m_ui->aoStrengthDoubleSpinBox->setMinimum(0.0);
   m_ui->aoStrengthDoubleSpinBox->setValue(pipeline.getAoStrength());
   m_ui->aoStrengthDoubleSpinBox->setMaximum(2.0);
@@ -28,7 +33,7 @@ RenderingDialog::RenderingDialog(QWidget *parent_, SolidPipeline &pipeline)
   m_ui->dofStrengthDoubleSpinBox->setSingleStep(0.1);
   m_ui->dofPositionDoubleSpinBox->setMinimum(0.0);
   m_ui->dofPositionDoubleSpinBox->setValue(pipeline.getDofPosition());
-  // We can adjust the max and min value 
+  // We can adjust the max and min value
   // after testing with several molecules
   m_ui->dofPositionDoubleSpinBox->setMaximum(20.0);
   m_ui->dofPositionDoubleSpinBox->setDecimals(1);
@@ -43,18 +48,27 @@ RenderingDialog::RenderingDialog(QWidget *parent_, SolidPipeline &pipeline)
   m_ui->fogPositionDoubleSpinBox->setMaximum(20.0);
   m_ui->fogPositionDoubleSpinBox->setDecimals(1);
   m_ui->fogPositionDoubleSpinBox->setSingleStep(0.1);
-  m_ui->edEnableCheckBox->setCheckState(pipeline.getEdEnabled()? Qt::Checked : Qt::Unchecked);
-  
+  m_ui->edEnableCheckBox->setCheckState(
+    pipeline.getEdEnabled() ? Qt::Checked : Qt::Unchecked);
+  // 1.0 is the width the outline has always had; the range above it thickens
+  // the line rather than darkening it further.
+  m_ui->edStrengthDoubleSpinBox->setMinimum(0.0);
+  m_ui->edStrengthDoubleSpinBox->setValue(pipeline.getEdStrength());
+  m_ui->edStrengthDoubleSpinBox->setMaximum(5.0);
+  m_ui->edStrengthDoubleSpinBox->setDecimals(1);
+  m_ui->edStrengthDoubleSpinBox->setSingleStep(0.5);
+  m_ui->edStrengthDoubleSpinBox->setEnabled(pipeline.getEdEnabled());
+
   connect(m_ui->aoEnableCheckBox, SIGNAL(stateChanged(int)),
           SLOT(aoEnableCheckBoxChanged(int)));
   connect(m_ui->dofEnableCheckBox, SIGNAL(stateChanged(int)),
           SLOT(dofEnableCheckBoxChanged(int)));
   connect(m_ui->fogEnableCheckBox, SIGNAL(stateChanged(int)),
           SLOT(fogEnableCheckBoxChanged(int)));
-  connect(m_ui->saveButton, SIGNAL(clicked()),
-          SLOT(saveButtonClicked()));
-  connect(m_ui->closeButton, SIGNAL(clicked()),
-          SLOT(closeButtonClicked()));
+  connect(m_ui->edEnableCheckBox, SIGNAL(stateChanged(int)),
+          SLOT(edEnableCheckBoxChanged(int)));
+  connect(m_ui->saveButton, SIGNAL(clicked()), SLOT(saveButtonClicked()));
+  connect(m_ui->closeButton, SIGNAL(clicked()), SLOT(closeButtonClicked()));
 }
 
 RenderingDialog::~RenderingDialog()
@@ -105,14 +119,12 @@ bool RenderingDialog::edEnabled()
   return m_ui->edEnableCheckBox->checkState() == Qt::Checked;
 }
 
-
 void RenderingDialog::dofEnableCheckBoxChanged(int state)
 {
-  if (state == Qt::Unchecked){
+  if (state == Qt::Unchecked) {
     m_ui->dofStrengthDoubleSpinBox->setEnabled(false);
     m_ui->dofPositionDoubleSpinBox->setEnabled(false);
-  }
-  else{
+  } else {
     m_ui->dofStrengthDoubleSpinBox->setEnabled(true);
     m_ui->dofPositionDoubleSpinBox->setEnabled(true);
   }
@@ -120,11 +132,10 @@ void RenderingDialog::dofEnableCheckBoxChanged(int state)
 
 void RenderingDialog::fogEnableCheckBoxChanged(int state)
 {
-  if (state == Qt::Unchecked){
+  if (state == Qt::Unchecked) {
     m_ui->fogPositionDoubleSpinBox->setEnabled(false);
     m_ui->fogStrengthDoubleSpinBox->setEnabled(false);
-  }
-  else{
+  } else {
     m_ui->fogStrengthDoubleSpinBox->setEnabled(true);
     m_ui->fogPositionDoubleSpinBox->setEnabled(true);
   }
@@ -138,6 +149,16 @@ void RenderingDialog::aoEnableCheckBoxChanged(int state)
     m_ui->aoStrengthDoubleSpinBox->setEnabled(true);
 }
 
+float RenderingDialog::edStrength()
+{
+  return static_cast<float>(m_ui->edStrengthDoubleSpinBox->value());
+}
+
+void RenderingDialog::edEnableCheckBoxChanged(int state)
+{
+  m_ui->edStrengthDoubleSpinBox->setEnabled(state != Qt::Unchecked);
+}
+
 void RenderingDialog::saveButtonClicked()
 {
   m_solidPipeline.setAoEnabled(aoEnabled());
@@ -149,6 +170,7 @@ void RenderingDialog::saveButtonClicked()
   m_solidPipeline.setFogEnabled(fogEnabled());
   m_solidPipeline.setFogPosition(fogPosition());
   m_solidPipeline.setEdEnabled(edEnabled());
+  m_solidPipeline.setEdStrength(edStrength());
   this->accept();
 }
 
