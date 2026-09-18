@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-13 06:15+0000\n"
-"PO-Revision-Date: 2026-09-18 10:10+0000\n"
+"PO-Revision-Date: 2026-09-19 10:51+0000\n"
 "Last-Translator: Daniel Nylander <yeagersthlm@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sv/>\n"
@@ -373,7 +373,7 @@ msgstr "JPEG"
 
 #: mainwindow.cpp:2313
 msgid "Export Bitmap Graphics"
-msgstr "Exportera bitmappgrafik"
+msgstr "Exportera bitmappsgrafik"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
@@ -384,7 +384,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:2332
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Filen %1 kan inte sparas."
+msgstr "Kan inte spara filen %1."
 
 #: mainwindow.cpp:2452
 msgid ""
@@ -485,7 +485,7 @@ msgstr "&Öppna…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2942:85 rc.cpp:91
 msgid "&Close"
-msgstr "Stän&g"
+msgstr "&Stäng"
 
 #. i18n: file: mainwindow.ui:147
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -545,7 +545,7 @@ msgstr "Inga senaste filer"
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
 #: mainwindow.cpp:3040 menubuilder.cpp:116:46
 msgid "&Edit"
-msgstr "R&edigera"
+msgstr "&Redigera"
 
 #: mainwindow.cpp:3057
 msgid "&Copy Graphics"
@@ -559,7 +559,7 @@ msgstr "Ctrl+Alt+C"
 #. i18n: ectx: property (title), widget (QMenu, menuView)
 #: mainwindow.cpp:3074 menubuilder.cpp:116:43
 msgid "&View"
-msgstr "&Visa"
+msgstr "&Vy"
 
 #: mainwindow.cpp:3075
 msgid "Set Background Color…"
@@ -664,11 +664,11 @@ msgstr "Ctrl+D"
 
 #: mainwindow.cpp:3461
 msgid "Network Download Failed"
-msgstr "Nätverksnedladdning misslyckades"
+msgstr "Nätverkshämtning misslyckades"
 
 #: mainwindow.cpp:3462
 msgid "Network timeout or other error."
-msgstr "Nätverket överskred tidsgränsen, eller annat fel."
+msgstr "Tidsgränsen för nätverket överskreds eller ett annat fel uppstod."
 
 #: mainwindow.cpp:3542
 #, qt-format
@@ -720,7 +720,7 @@ msgstr "&Bygg"
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
 #: menubuilder.cpp:117:49
 msgid "&Select"
-msgstr "&Välj"
+msgstr "&Markera"
 
 #: menubuilder.cpp:120
 msgid "Se&ttings"
@@ -927,7 +927,7 @@ msgstr "Töm"
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "Markera allt"
+msgstr "Markera alla"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -938,7 +938,7 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Markera inget"
+msgstr "Avmarkera alla"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
