@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-13 06:15+0000\n"
-"PO-Revision-Date: 2026-09-18 10:07+0000\n"
+"PO-Revision-Date: 2026-09-18 10:08+0000\n"
 "Last-Translator: Daniel Nylander <yeagersthlm@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sv/>\n"
@@ -77,6 +77,9 @@ msgid ""
 "developers when Avogadro crashes, which helps us fix crashes we cannot "
 "reproduce ourselves."
 msgstr ""
+"Detta är en diagnostisk version av Avogadro. Den kan skicka en rapport till "
+"utvecklarna när Avogadro kraschar, vilket hjälper oss att åtgärda krascher "
+"som vi inte kan återskapa själva."
 
 #: crashreportdialog.cpp:38
 msgid ""
@@ -86,24 +89,31 @@ msgid ""
 "useful, but it may incidentally include fragments of what you were working "
 "on, such as part of a file name or a molecule you had open."
 msgstr ""
+"En kraschrapport innehåller en ögonblicksbild av Avogadros minne när "
+"programmet slutade fungera, operativsystemet, grafikdrivrutinen och Avogadro-"
+"versionen samt en logg över nylig aktivitet. Minnesbilden gör rapporten "
+"användbar men kan av misstag innehålla delar av det du arbetade med, "
+"exempelvis en del av ett filnamn eller en molekyl som var öppen."
 
 #: crashreportdialog.cpp:52
 msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"Inget skickas utan ditt godkännande. Du kan ändra detta när som helst under "
+"Hjälp → Kraschrapportering."
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "Skicka kraschrapporter"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "Skicka inte"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "Skicka kraschrapporter till Avogadros utvecklare"
 
 #: mainwindow.cpp:440
 msgid "Ready…"
@@ -152,7 +162,7 @@ msgstr "namnlös"
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr ""
+msgstr "%1%2 – Avogadro %3"
 
 #: mainwindow.cpp:1061
 msgid "Restart needed"
@@ -245,7 +255,7 @@ msgstr ""
 
 #: mainwindow.cpp:1353
 msgid "The save was canceled."
-msgstr ""
+msgstr "Sparandet avbröts."
 
 #: mainwindow.cpp:1656
 msgid "Found Previous Avogadro Files"
@@ -306,7 +316,7 @@ msgstr "Följande insticksmoduler är tillgängliga:"
 
 #: mainwindow.cpp:1817
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "Vill du uppdatera dem?"
 
 #: mainwindow.cpp:1856
 msgid "Recover Autosaved Files"
@@ -387,6 +397,11 @@ msgid ""
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Den här filen importerades från ett icke-standardiserat format som kanske "
+"inte kan skriva all information i molekylen.\n"
+"\n"
+"Vill du exportera till det aktuella formatet eller spara i ett "
+"standardformat?"
 
 #: mainwindow.cpp:2459
 msgid "Export"
@@ -442,11 +457,11 @@ msgstr "&Testning"
 
 #: mainwindow.cpp:2905
 msgid "&Record Test…"
-msgstr ""
+msgstr "&Spela in test…"
 
 #: mainwindow.cpp:2908
 msgid "&Play Test…"
-msgstr ""
+msgstr "&Spela upp test…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
@@ -544,11 +559,11 @@ msgstr "R&edigera"
 
 #: mainwindow.cpp:3057
 msgid "&Copy Graphics"
-msgstr ""
+msgstr "&Kopiera grafik"
 
 #: mainwindow.cpp:3061
 msgid "Ctrl+Alt+C"
-msgstr ""
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
@@ -618,7 +633,7 @@ msgstr "&Rapportera ett fel"
 
 #: mainwindow.cpp:3147
 msgid "&Crash Reporting…"
-msgstr ""
+msgstr "&Kraschrapportering…"
 
 #: mainwindow.cpp:3153
 msgid "&Suggest a Feature"
@@ -710,7 +725,7 @@ msgstr "Kan inte öppna filer"
 
 #: mainwindow.cpp:3820
 msgid "The plugin was unloaded."
-msgstr ""
+msgstr "Insticksmodulen lästes ur."
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -735,43 +750,43 @@ msgstr "Fönster"
 
 #: rpclistener.cpp:206
 msgid "Avogadro is shutting down."
-msgstr ""
+msgstr "Avogadro stängs av."
 
 #: rpclistener.cpp:521
 msgid "No molecule is open."
-msgstr ""
+msgstr "Ingen molekyl är öppen."
 
 #: rpclistener.cpp:550
 msgid "renderImage requires both width and height, or neither."
-msgstr ""
+msgstr "renderImage kräver både bredd och höjd, eller inget av dem."
 
 #: rpclistener.cpp:575
 msgid "Could not render the current view."
-msgstr ""
+msgstr "Kunde inte rendera den aktuella vyn."
 
 #: rpclistener.cpp:603
 msgid "Could not encode the render as PNG."
-msgstr ""
+msgstr "Kunde inte koda renderingen som PNG."
 
 #: rpclistener.cpp:643 rpclistener.cpp:654
 msgid "No active view."
-msgstr ""
+msgstr "Ingen aktiv vy."
 
 #: rpclistener.cpp:664
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
-msgstr ""
+msgstr "setCameras modelView måste vara exakt 16 tal i radordning."
 
 #: rpclistener.cpp:728 rpclistener.cpp:796
 msgid "The command failed."
-msgstr ""
+msgstr "Kommandot misslyckades."
 
 #: rpclistener.cpp:734
 msgid "That plugin is already running a command."
-msgstr ""
+msgstr "Insticksmodulen kör redan ett kommando."
 
 #: rpclistener.cpp:766
 msgid "The command timed out."
-msgstr ""
+msgstr "Tidsgränsen för kommandot överskreds."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
@@ -786,7 +801,7 @@ msgstr "3D-vy"
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -796,6 +811,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
+"Licens: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
+"<span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\">"
+"BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -1005,7 +1024,7 @@ msgstr "Avogadros webbplats"
 #. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Diskussionsforum"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
