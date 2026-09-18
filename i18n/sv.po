@@ -4,13 +4,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
+# Daniel Nylander <yeagersthlm@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-13 06:15+0000\n"
-"PO-Revision-Date: 2025-08-27 08:02+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"PO-Revision-Date: 2026-09-18 10:07+0000\n"
+"Last-Translator: Daniel Nylander <yeagersthlm@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sv/>\n"
 "Language: sv\n"
@@ -18,57 +19,57 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Molekylredigerare och visualiserare"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:33:3
 msgid "Version:"
-msgstr ""
+msgstr "Version:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:34:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Avogadro-bibliotekets version:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:35:15
 msgid "Qt Version:"
-msgstr ""
+msgstr "Qt-version:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:36:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSL-version:"
 
 #: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1 (diagnostik)"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Ingen molekyl angavs i BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:39 backgroundfileformat.cpp:116
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Inget filformat angavs i BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:42 backgroundfileformat.cpp:119
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Inget filnamn angavs i BackgroundFileFormat!"
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"
-msgstr ""
+msgstr "Kraschrapportering"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -106,7 +107,7 @@ msgstr ""
 
 #: mainwindow.cpp:440
 msgid "Ready…"
-msgstr ""
+msgstr "Klar…"
 
 #: mainwindow.cpp:550
 #, fuzzy
@@ -119,15 +120,15 @@ msgstr "Visningstyper"
 
 #: mainwindow.cpp:564
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Inställningar för visningstyp"
 
 #: mainwindow.cpp:568
 msgid "Files"
-msgstr ""
+msgstr "Filer"
 
 #: mainwindow.cpp:579
 msgid "Layers"
-msgstr ""
+msgstr "Lager"
 
 #: mainwindow.cpp:607
 #, fuzzy
@@ -155,45 +156,45 @@ msgstr ""
 
 #: mainwindow.cpp:1061
 msgid "Restart needed"
-msgstr ""
+msgstr "Omstart krävs"
 
 #: mainwindow.cpp:1062
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Starta om Avogadro för att använda det nya språket."
 
 #: mainwindow.cpp:1105 mainwindow.cpp:2479
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Chemical Markup Language"
 
 #: mainwindow.cpp:1106 mainwindow.cpp:2478
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Chemical JSON"
 
 #: mainwindow.cpp:1112
 msgid "Open chemical file"
-msgstr ""
+msgstr "Öppna kemisk fil"
 
 #: mainwindow.cpp:1130 mainwindow.cpp:1154 mainwindow.cpp:2365
 #: mainwindow.cpp:3625
 msgid "Cannot open file"
-msgstr ""
+msgstr "Det gick inte att öppna filen"
 
 #: mainwindow.cpp:1131 mainwindow.cpp:1155 mainwindow.cpp:2366
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr ""
+msgstr "Kan inte öppna den angivna filen %1"
 
 #: mainwindow.cpp:1144
 msgid "Open Molecule"
-msgstr ""
+msgstr "Öppna molekyl"
 
 #: mainwindow.cpp:1168 mainwindow.cpp:2361
 msgid "Select file reader"
-msgstr ""
+msgstr "Välj filläsare"
 
 #: mainwindow.cpp:1202
 msgid "Reading File"
-msgstr ""
+msgstr "Läser fil"
 
 #: mainwindow.cpp:1204 mainwindow.cpp:1228
 #, qt-format
@@ -201,15 +202,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Öppnar filen ”%1”\n"
+"med ”%2”"
 
 #: mainwindow.cpp:1303
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molekyl inläst (%1 atomer, %2 bindningar)"
 
 #: mainwindow.cpp:1308
 msgid "File error"
-msgstr ""
+msgstr "Filfel"
 
 #: mainwindow.cpp:1309
 #, qt-format
@@ -217,16 +220,18 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Fel vid läsning av filen ”%1”:\n"
+"%2"
 
 #: mainwindow.cpp:1337
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr ""
+msgstr "Sparade filen %1"
 
 #: mainwindow.cpp:1347
 msgid "Error saving file"
-msgstr ""
+msgstr "Fel vid sparande av fil"
 
 #: mainwindow.cpp:1348
 #, qt-format
@@ -235,6 +240,8 @@ msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"Fel vid sparande av ”%1”:\n"
+"%2"
 
 #: mainwindow.cpp:1353
 msgid "The save was canceled."
@@ -242,7 +249,7 @@ msgstr ""
 
 #: mainwindow.cpp:1656
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Tidigare Avogadro-filer hittades"
 
 #: mainwindow.cpp:1658
 #, qt-format
@@ -252,44 +259,50 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Filer från en tidigare version av Avogadro hittades i insticksmodulkatalogen "
+"och använder %1 utrymme.\n"
+"\n"
+"Dessa filer behövs inte längre och kan tas bort utan risk."
 
 #: mainwindow.cpp:1665
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Ta bort gamla filer"
 
 #: mainwindow.cpp:1666
 msgid "Keep Files"
-msgstr ""
+msgstr "Behåll filer"
 
 #: mainwindow.cpp:1801
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Slutför installationen"
 
 #: mainwindow.cpp:1802
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro kan skapa indatafiler för Gaussian, ORCA och andra "
+"beräkningskemiska paket."
 
 #: mainwindow.cpp:1807
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Detta kräver en installation som hämtar och konfigurerar Python."
 
 #: mainwindow.cpp:1809
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Detta kräver en installation som konfigurerar en Python-miljö."
 
 #: mainwindow.cpp:1813
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Detta kan kräva en internetanslutning."
 
 #: mainwindow.cpp:1815
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Installera uppdaterade insticksmoduler?"
 
 #: mainwindow.cpp:1816
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Följande insticksmoduler är tillgängliga:"
 
 #: mainwindow.cpp:1817
 msgid "Would you like to update them?"
@@ -297,17 +310,19 @@ msgstr ""
 
 #: mainwindow.cpp:1856
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Återställ automatiskt sparade filer"
 
 #: mainwindow.cpp:1857
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Automatiskt sparade filer från en tidigare session hittades.\n"
+"Vill du återställa dem?"
 
 #: mainwindow.cpp:1921
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Fel: OpenGL-kontexten kunde inte initieras"
 
 #: mainwindow.cpp:1922
 #, qt-format
@@ -316,16 +331,19 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"OpenGL 4.0 eller senare krävs. Avslutar.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1923
 msgid "Unknown error"
-msgstr ""
+msgstr "Okänt fel"
 
 #: mainwindow.cpp:2064
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "Inställningar för %1"
 
 #: mainwindow.cpp:2301
 msgid "Common image formats"
@@ -376,15 +394,15 @@ msgstr "Exportera"
 
 #: mainwindow.cpp:2484
 msgid "Save chemical file"
-msgstr ""
+msgstr "Spara kemisk fil"
 
 #: mainwindow.cpp:2529
 msgid "Export Molecule"
-msgstr ""
+msgstr "Exportera molekyl"
 
 #: mainwindow.cpp:2645
 msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Sparar fil…"
 
 #: mainwindow.cpp:2647
 #, qt-format
@@ -399,7 +417,7 @@ msgstr ""
 #: mainwindow.cpp:2768
 #, qt-format
 msgid "&Undo %1"
-msgstr ""
+msgstr "&Ångra %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -410,7 +428,7 @@ msgstr "&Ångra"
 #: mainwindow.cpp:2776
 #, qt-format
 msgid "&Redo %1"
-msgstr ""
+msgstr "&Gör om %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -420,7 +438,7 @@ msgstr "Gö&r om"
 
 #: mainwindow.cpp:2903
 msgid "&Testing"
-msgstr ""
+msgstr "&Testning"
 
 #: mainwindow.cpp:2905
 msgid "&Record Test…"
@@ -488,7 +506,7 @@ msgstr "&Molekyl…"
 
 #: mainwindow.cpp:2988
 msgid "Export Molecule…"
-msgstr ""
+msgstr "Exportera molekyl…"
 
 #: mainwindow.cpp:2995
 #, fuzzy
@@ -497,7 +515,7 @@ msgstr "&Grafik…"
 
 #: mainwindow.cpp:3002
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Exportera grafik…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -516,7 +534,7 @@ msgstr "Öppna s&enaste"
 
 #: mainwindow.cpp:3034
 msgid "No recent files"
-msgstr ""
+msgstr "Inga senaste filer"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
@@ -545,7 +563,7 @@ msgstr "Ange bakgrundsfärg…"
 
 #: mainwindow.cpp:3079
 msgid "Rendering…"
-msgstr ""
+msgstr "Renderar…"
 
 #: mainwindow.cpp:3087
 msgid "Projection"
@@ -566,11 +584,11 @@ msgstr "Tillägg"
 
 #: mainwindow.cpp:3116
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Språk för användargränssnittet…"
 
 #: mainwindow.cpp:3120
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Periodiska systemet…"
 
 #: mainwindow.cpp:3126 menubuilder.cpp:120
 msgid "&Help"
@@ -584,7 +602,7 @@ msgstr "&Om"
 
 #: mainwindow.cpp:3132
 msgid "&Discussion Forum"
-msgstr ""
+msgstr "&Diskussionsforum"
 
 #: mainwindow.cpp:3136
 #, fuzzy
@@ -604,28 +622,28 @@ msgstr ""
 
 #: mainwindow.cpp:3153
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Föreslå en funktion"
 
 #: mainwindow.cpp:3187
 msgid "untitled"
-msgstr ""
+msgstr "namnlös"
 
 #: mainwindow.cpp:3217
 msgid "System Language"
-msgstr ""
+msgstr "Systemspråk"
 
 #: mainwindow.cpp:3225
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 #: mainwindow.cpp:3225
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Språk för användargränssnittet:"
 
 #: mainwindow.cpp:3341
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "Alla format som stöds (%1);;Alla filer (*);;"
 
 #: mainwindow.cpp:3357
 #, fuzzy
@@ -648,7 +666,7 @@ msgstr "Ctrl+D"
 
 #: mainwindow.cpp:3461
 msgid "Network Download Failed"
-msgstr ""
+msgstr "Nätverksnedladdning misslyckades"
 
 #: mainwindow.cpp:3462
 msgid "Network timeout or other error."
@@ -657,20 +675,20 @@ msgstr "Nätverket överskred tidsgränsen, eller annat fel."
 #: mainwindow.cpp:3542
 #, qt-format
 msgid "Your version: %1"
-msgstr ""
+msgstr "Din version: %1"
 
 #: mainwindow.cpp:3543
 #, qt-format
 msgid "New version: %1"
-msgstr ""
+msgstr "Ny version: %1"
 
 #: mainwindow.cpp:3545
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "En uppdatering är tillgänglig. Vill du hämta den nu?\n"
 
 #: mainwindow.cpp:3547
 msgid "Version Update"
-msgstr ""
+msgstr "Versionsuppdatering"
 
 #: mainwindow.cpp:3605
 #, qt-format
@@ -679,7 +697,7 @@ msgstr "Ett fel uppstod när ”%1” filformatet skulle laddas."
 
 #: mainwindow.cpp:3621
 msgid "Select file format"
-msgstr ""
+msgstr "Välj filformat"
 
 #: mainwindow.cpp:3626 mainwindow.cpp:3637
 #, qt-format
@@ -688,7 +706,7 @@ msgstr "Avogadro kan inte öppna ”%1”."
 
 #: mainwindow.cpp:3636
 msgid "Cannot open files"
-msgstr ""
+msgstr "Kan inte öppna filer"
 
 #: mainwindow.cpp:3820
 msgid "The plugin was unloaded."
@@ -757,7 +775,7 @@ msgstr ""
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
-msgstr ""
+msgstr "3D-vy"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -998,12 +1016,12 @@ msgstr "&Importera"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, enableAO_label)
 msgid "Enable ambient occlusion shadows"
-msgstr ""
+msgstr "Aktivera omgivningsocklusionsskuggor"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, enableAO_label)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Omgivningsocklusion:"
 
 #. i18n: file: renderingdialog.ui:43
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
@@ -1014,22 +1032,22 @@ msgstr ""
 #. i18n: file: renderingdialog.ui:325
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Aktivera"
 
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, shadow_label)
 msgid "Strength of the ambient shadows"
-msgstr ""
+msgstr "Styrka för omgivningsskuggorna"
 
 #. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, shadow_label)
 msgid "Shadow Strength:"
-msgstr ""
+msgstr "Skuggstyrka:"
 
 #. i18n: file: renderingdialog.ui:106
 #. i18n: ectx: property (toolTip), widget (QLabel, enableFog_label)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "Dimeffekt för djupindikering"
 
 #. i18n: file: renderingdialog.ui:109
 #. i18n: ectx: property (text), widget (QLabel, enableFog_label)
@@ -1039,52 +1057,52 @@ msgstr "Dimma:"
 #. i18n: file: renderingdialog.ui:140
 #. i18n: ectx: property (text), widget (QLabel, fogStrength_label)
 msgid "Fog Strength:"
-msgstr ""
+msgstr "Dimstyrka:"
 
 #. i18n: file: renderingdialog.ui:170
 #. i18n: ectx: property (text), widget (QLabel, fogPosition_label)
 msgid "Fog Position:"
-msgstr ""
+msgstr "Dimposition:"
 
 #. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
 msgid "Add a depth blur"
-msgstr ""
+msgstr "Lägg till djuposkärpa"
 
 #. i18n: file: renderingdialog.ui:211
 #. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
 msgid "Depth Blur:"
-msgstr ""
+msgstr "Djuposkärpa:"
 
 #. i18n: file: renderingdialog.ui:242
 #. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Styrka för djuposkärpan"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Oskärpestyrka:"
 
 #. i18n: file: renderingdialog.ui:272
 #. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Position för djuposkärpan"
 
 #. i18n: file: renderingdialog.ui:275
 #. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Oskärpeposition:"
 
 #. i18n: file: renderingdialog.ui:313
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "Lägg till en kontur runt kantatomer"
 
 #. i18n: file: renderingdialog.ui:316
 #. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
 msgid "Edge Outline:"
-msgstr ""
+msgstr "Kantkontur:"
 
 #. i18n: file: renderingdialog.ui:354
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
