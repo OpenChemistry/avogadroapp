@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-13 06:15+0000\n"
-"PO-Revision-Date: 2026-09-18 10:08+0000\n"
+"PO-Revision-Date: 2026-09-18 10:10+0000\n"
 "Last-Translator: Daniel Nylander <yeagersthlm@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sv/>\n"
@@ -120,7 +120,6 @@ msgid "Ready…"
 msgstr "Klar…"
 
 #: mainwindow.cpp:550
-#, fuzzy
 msgid "Tool"
 msgstr "Verktyg"
 
@@ -141,21 +140,18 @@ msgid "Layers"
 msgstr "Lager"
 
 #: mainwindow.cpp:607
-#, fuzzy
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Arkiv"
 
 #: mainwindow.cpp:612
-#, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Verktyg"
 
 #: mainwindow.cpp:1000
-#, fuzzy
 msgid "Untitled"
-msgstr "namnlös"
+msgstr "Namnlös"
 
 #: mainwindow.cpp:1005
 #, qt-format
@@ -480,7 +476,6 @@ msgstr "&Ny"
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2930:52
-#, fuzzy
 msgid "&Open…"
 msgstr "&Öppna…"
 
@@ -503,19 +498,16 @@ msgstr "&Spara"
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2967:103
-#, fuzzy
 msgid "Save &As…"
 msgstr "Spara s&om…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2980:196
-#, fuzzy
 msgid "&Export"
 msgstr "&Exportera"
 
 #: mainwindow.cpp:2981
-#, fuzzy
 msgid "&Molecule…"
 msgstr "&Molekyl…"
 
@@ -524,7 +516,6 @@ msgid "Export Molecule…"
 msgstr "Exportera molekyl…"
 
 #: mainwindow.cpp:2995
-#, fuzzy
 msgid "&Graphics…"
 msgstr "&Grafik…"
 
@@ -543,7 +534,6 @@ msgstr "A&vsluta"
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:3020:190
-#, fuzzy
 msgid "Open Recent"
 msgstr "Öppna s&enaste"
 
@@ -572,7 +562,6 @@ msgid "&View"
 msgstr "&Visa"
 
 #: mainwindow.cpp:3075
-#, fuzzy
 msgid "Set Background Color…"
 msgstr "Ange bakgrundsfärg…"
 
@@ -593,9 +582,8 @@ msgid "Orthographic"
 msgstr "Ortografisk"
 
 #: mainwindow.cpp:3114
-#, fuzzy
 msgid "&Extensions"
-msgstr "Tillägg"
+msgstr "&Tillägg"
 
 #: mainwindow.cpp:3116
 msgid "User Interface Language…"
@@ -620,14 +608,10 @@ msgid "&Discussion Forum"
 msgstr "&Diskussionsforum"
 
 #: mainwindow.cpp:3136
-#, fuzzy
-#| msgid "Avogadro Website"
 msgid "&Avogadro Website"
 msgstr "&Avogadros webbplats"
 
 #: mainwindow.cpp:3140
-#, fuzzy
-#| msgid "Report a Bug"
 msgid "&Report a Bug"
 msgstr "&Rapportera ett fel"
 
@@ -661,9 +645,8 @@ msgid "All supported formats (%1);;All files (*);;"
 msgstr "Alla format som stöds (%1);;Alla filer (*);;"
 
 #: mainwindow.cpp:3357
-#, fuzzy
 msgid "Do you want to save the changes to the document?"
-msgstr "Vill du spara ändringarna som du gjort i dokumentet?"
+msgstr "Vill du spara ändringarna i dokumentet?"
 
 #: mainwindow.cpp:3365
 msgid "Your changes will be lost if you don't save them."
@@ -744,7 +727,6 @@ msgid "Se&ttings"
 msgstr "&Inställningar"
 
 #: menubuilder.cpp:120
-#, fuzzy
 msgid "&Window"
 msgstr "Fönster"
 
@@ -823,8 +805,6 @@ msgstr "OK"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
@@ -836,8 +816,6 @@ msgstr "&Öppna"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -854,32 +832,24 @@ msgstr "&Töm senaste"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+N"
 msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+W"
 msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Shift+S"
@@ -891,22 +861,17 @@ msgstr "Återgå till sparad"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
 msgstr "Ange &bakgrundsfärg…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Z"
 msgctxt "Undo"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+Z"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
@@ -928,8 +893,6 @@ msgstr "Klistra in"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+V"
 msgctxt "Paste"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
@@ -941,8 +904,6 @@ msgstr "Kopiera"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+C"
 msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
@@ -954,8 +915,6 @@ msgstr "Klipp ut"
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+X"
 msgctxt "Cut"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
@@ -972,8 +931,6 @@ msgstr "Markera allt"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
@@ -985,8 +942,6 @@ msgstr "Markera inget"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
@@ -1028,7 +983,6 @@ msgstr "Diskussionsforum"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
 msgstr "&Importera"
 
@@ -1130,8 +1084,6 @@ msgstr "Spara"
 
 #. i18n: file: renderingdialog.ui:374
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
 msgstr "Stäng"
 
