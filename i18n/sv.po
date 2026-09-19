@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-13 06:15+0000\n"
-"PO-Revision-Date: 2026-09-19 10:51+0000\n"
+"PO-Revision-Date: 2026-09-19 17:32+0000\n"
 "Last-Translator: Daniel Nylander <yeagersthlm@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sv/>\n"
@@ -428,13 +428,13 @@ msgstr ""
 #: mainwindow.cpp:2768
 #, qt-format
 msgid "&Undo %1"
-msgstr "&Ångra %1"
+msgstr "Å&ngra %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2771 mainwindow.cpp:3041:118
 msgid "&Undo"
-msgstr "&Ångra"
+msgstr "Å&ngra"
 
 #: mainwindow.cpp:2776
 #, qt-format
@@ -477,7 +477,7 @@ msgstr "&Ny"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:2930:52
 msgid "&Open…"
-msgstr "&Öppna…"
+msgstr "Ö&ppna…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -812,7 +812,7 @@ msgstr "Ctrl+O"
 #. i18n: file: mainwindow.ui:90
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Open"
-msgstr "&Öppna"
+msgstr "Ö&ppna"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
