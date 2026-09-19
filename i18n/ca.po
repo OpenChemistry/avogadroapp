@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-ca\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-13 06:15+0000\n"
-"PO-Revision-Date: 2026-09-19 10:51+0000\n"
+"PO-Revision-Date: 2026-09-19 17:32+0000\n"
 "Last-Translator: Àngel Oliveras Rovira <aoliverasrovira@somnuvol.coop>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ca/>\n"
@@ -124,9 +124,8 @@ msgid "Ready…"
 msgstr "Llest…"
 
 #: mainwindow.cpp:550
-#, fuzzy
 msgid "Tool"
-msgstr "Eines"
+msgstr "Eina"
 
 #: mainwindow.cpp:554
 msgid "Display Types"
@@ -145,21 +144,18 @@ msgid "Layers"
 msgstr "Capes"
 
 #: mainwindow.cpp:607
-#, fuzzy
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Fitxer"
 
 #: mainwindow.cpp:612
-#, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Eines"
 
 #: mainwindow.cpp:1000
-#, fuzzy
 msgid "Untitled"
-msgstr "sense títol"
+msgstr "Sense títol"
 
 #: mainwindow.cpp:1005
 #, qt-format
@@ -245,7 +241,7 @@ msgstr "Fitxer desat %1"
 
 #: mainwindow.cpp:1347
 msgid "Error saving file"
-msgstr ""
+msgstr "Error en desar el fitxer"
 
 #: mainwindow.cpp:1348
 #, qt-format
@@ -254,6 +250,8 @@ msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"Error en desar \"%1\":\n"
+"%2"
 
 #: mainwindow.cpp:1353
 msgid "The save was canceled."
@@ -261,7 +259,7 @@ msgstr ""
 
 #: mainwindow.cpp:1656
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "S'han trobat arxius previs d'Avogadro"
 
 #: mainwindow.cpp:1658
 #, qt-format
@@ -271,62 +269,70 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"S'han trobar arxius d'una versió anterior d'Avogadro en el directori "
+"d'extensions, utilitzant %1 d'espai.\n"
+"\n"
+"Aquests arxius ja no es necessiten i es poden eliminar de forma segura."
 
 #: mainwindow.cpp:1665
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Eliminar arxius antics"
 
 #: mainwindow.cpp:1666
 msgid "Keep Files"
-msgstr ""
+msgstr "Conservar arxius"
 
 #: mainwindow.cpp:1801
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Acabem la seva configuració"
 
 #: mainwindow.cpp:1802
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro pot generar arxius d'entrada per Gaussian, ORCA, i altres programes "
+"de química computacional."
 
 #: mainwindow.cpp:1807
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Això requereix configuració que baixarà i configurarà Python."
 
 #: mainwindow.cpp:1809
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Això requereix configuració d'un entorn Python."
 
 #: mainwindow.cpp:1813
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Això pot requerir connexió a Internet."
 
 #: mainwindow.cpp:1815
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Instal·lar les actualitzacions de les extensions?"
 
 #: mainwindow.cpp:1816
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Les següents extensions estan disponibles:"
 
 #: mainwindow.cpp:1817
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "Les vols actualitzar?"
 
 #: mainwindow.cpp:1856
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Recuperar arxius guardats automàticament"
 
 #: mainwindow.cpp:1857
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"S'han trobat arxius d'autoguardat d'una sessió anterior.\n"
+"Vols recuperar-los?"
 
 #: mainwindow.cpp:1921
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Error: no s'ha pogut inicialitzar el context OpenGL"
 
 #: mainwindow.cpp:1922
 #, qt-format
@@ -335,10 +341,13 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"Es necessita OpenGL 4.0 o superior, sortint.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1923
 msgid "Unknown error"
-msgstr ""
+msgstr "S'ha produït un error desconegut"
 
 #: mainwindow.cpp:2064
 #, qt-format
