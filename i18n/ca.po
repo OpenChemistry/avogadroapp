@@ -7,13 +7,16 @@
 # Toni Hermoso Pulido <toniher@softcatala.cat>, 2009.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025, 2026.
+# Àngel Oliveras Rovira <aoliverasrovira@somnuvol.coop>, 2026.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-ca\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-13 06:15+0000\n"
-"PO-Revision-Date: 2026-03-11 10:10+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"PO-Revision-Date: 2026-09-19 17:32+0000\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ca/>\n"
 "Language: ca\n"
@@ -21,12 +24,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Editor i visualitzador molecular"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -59,19 +62,19 @@ msgstr ""
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "No hi ha molècula establerta en «BackgroundFileFormat»!"
 
 #: backgroundfileformat.cpp:39 backgroundfileformat.cpp:116
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "No hi ha format d'arxiu en el «BackgroundFileFormat»!"
 
 #: backgroundfileformat.cpp:42 backgroundfileformat.cpp:119
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "No s'ha establert cap nom d'arxiu en «BackgroundFileFormat»!"
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"
-msgstr ""
+msgstr "Informe de fallada"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -79,6 +82,9 @@ msgid ""
 "developers when Avogadro crashes, which helps us fix crashes we cannot "
 "reproduce ourselves."
 msgstr ""
+"Això és un diagnòstic d'Avogadro. Pots enviar l'informe als desenvolupadors "
+"quan Avogadro falla, cosa que ens ajudarà a solucionar l'error que no puguem "
+"reproduir."
 
 #: crashreportdialog.cpp:38
 msgid ""
@@ -88,33 +94,40 @@ msgid ""
 "useful, but it may incidentally include fragments of what you were working "
 "on, such as part of a file name or a molecule you had open."
 msgstr ""
+"Un informe de fallada conté una instantània de la memòria de l'Avogadro en "
+"el moment de la fallada, com també del teu sistema operatiu, controlador de "
+"gràfics, versió d'Avogadro, i un registre de l'activitat recent. Aquesta "
+"instantània de memòria fa l'informe útil, però pot incloure accidentalment "
+"fragments del teu treball, com ara parts del nom de l'arxiu i de la molècula "
+"que tenies oberta."
 
 #: crashreportdialog.cpp:52
 msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"Res serà enviat sense el teu consentiment. Pots canviar-ho en qualsevol "
+"moment a Ajuda→Informes de Fallada."
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "Enviar informes de fallada"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "No enviar"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "Enviar informes de fallada als desenvolupadors d'Avogadro"
 
 #: mainwindow.cpp:440
 msgid "Ready…"
-msgstr ""
+msgstr "Llest…"
 
 #: mainwindow.cpp:550
-#, fuzzy
 msgid "Tool"
-msgstr "Eines"
+msgstr "Eina"
 
 #: mainwindow.cpp:554
 msgid "Display Types"
@@ -122,81 +135,78 @@ msgstr "Mostra tipus"
 
 #: mainwindow.cpp:564
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Configuració de visualització"
 
 #: mainwindow.cpp:568
 msgid "Files"
-msgstr ""
+msgstr "Arxius"
 
 #: mainwindow.cpp:579
 msgid "Layers"
-msgstr ""
+msgstr "Capes"
 
 #: mainwindow.cpp:607
-#, fuzzy
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Fitxer"
 
 #: mainwindow.cpp:612
-#, fuzzy
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Eines"
 
 #: mainwindow.cpp:1000
-#, fuzzy
 msgid "Untitled"
-msgstr "sense títol"
+msgstr "Sense títol"
 
 #: mainwindow.cpp:1005
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr ""
+msgstr "%1%2 - Avogadro%3"
 
 #: mainwindow.cpp:1061
 msgid "Restart needed"
-msgstr ""
+msgstr "És necessari un reinici"
 
 #: mainwindow.cpp:1062
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Si us plau, reiniciï l'Avogadro per utilitzar la nova llengua"
 
 #: mainwindow.cpp:1105 mainwindow.cpp:2479
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Llenguatge de Marques Químiques"
 
 #: mainwindow.cpp:1106 mainwindow.cpp:2478
 msgid "Chemical JSON"
-msgstr ""
+msgstr "JSON químic"
 
 #: mainwindow.cpp:1112
 msgid "Open chemical file"
-msgstr ""
+msgstr "Obrir arxiu químic"
 
 #: mainwindow.cpp:1130 mainwindow.cpp:1154 mainwindow.cpp:2365
 #: mainwindow.cpp:3625
 msgid "Cannot open file"
-msgstr ""
+msgstr "No es pot obrir l'arxiu"
 
 #: mainwindow.cpp:1131 mainwindow.cpp:1155 mainwindow.cpp:2366
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr ""
+msgstr "No es pot l'arxiu proporcionat %1"
 
 #: mainwindow.cpp:1144
 msgid "Open Molecule"
-msgstr ""
+msgstr "Obrir Molècula"
 
 #: mainwindow.cpp:1168 mainwindow.cpp:2361
 msgid "Select file reader"
-msgstr ""
+msgstr "Seleccionar lector d'arxius"
 
 #: mainwindow.cpp:1202
 msgid "Reading File"
-msgstr ""
+msgstr "Arxiu de lectura"
 
 #: mainwindow.cpp:1204 mainwindow.cpp:1228
 #, qt-format
@@ -204,15 +214,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"S'està obrint el fitxer \"%1\"\n"
+"amb \"%2\""
 
 #: mainwindow.cpp:1303
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molècula carregada (%1 àtoms, %2 enllaços)"
 
 #: mainwindow.cpp:1308
 msgid "File error"
-msgstr ""
+msgstr "Error de fitxer"
 
 #: mainwindow.cpp:1309
 #, qt-format
@@ -220,16 +232,18 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Error en llegir el fitxer \"%1\":\n"
+"%2"
 
 #: mainwindow.cpp:1337
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr ""
+msgstr "Fitxer desat %1"
 
 #: mainwindow.cpp:1347
 msgid "Error saving file"
-msgstr ""
+msgstr "Error en desar el fitxer"
 
 #: mainwindow.cpp:1348
 #, qt-format
@@ -238,6 +252,8 @@ msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"Error en desar \"%1\":\n"
+"%2"
 
 #: mainwindow.cpp:1353
 msgid "The save was canceled."
@@ -245,7 +261,7 @@ msgstr ""
 
 #: mainwindow.cpp:1656
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "S'han trobat arxius previs d'Avogadro"
 
 #: mainwindow.cpp:1658
 #, qt-format
@@ -255,62 +271,70 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"S'han trobar arxius d'una versió anterior d'Avogadro en el directori "
+"d'extensions, utilitzant %1 d'espai.\n"
+"\n"
+"Aquests arxius ja no es necessiten i es poden eliminar de forma segura."
 
 #: mainwindow.cpp:1665
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Eliminar arxius antics"
 
 #: mainwindow.cpp:1666
 msgid "Keep Files"
-msgstr ""
+msgstr "Conservar arxius"
 
 #: mainwindow.cpp:1801
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Acabem la seva configuració"
 
 #: mainwindow.cpp:1802
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro pot generar arxius d'entrada per Gaussian, ORCA, i altres programes "
+"de química computacional."
 
 #: mainwindow.cpp:1807
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Això requereix configuració que baixarà i configurarà Python."
 
 #: mainwindow.cpp:1809
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Això requereix configuració d'un entorn Python."
 
 #: mainwindow.cpp:1813
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Això pot requerir connexió a Internet."
 
 #: mainwindow.cpp:1815
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Instal·lar les actualitzacions de les extensions?"
 
 #: mainwindow.cpp:1816
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "Les següents extensions estan disponibles:"
 
 #: mainwindow.cpp:1817
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "Les vols actualitzar?"
 
 #: mainwindow.cpp:1856
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Recuperar arxius guardats automàticament"
 
 #: mainwindow.cpp:1857
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"S'han trobat arxius d'autoguardat d'una sessió anterior.\n"
+"Vols recuperar-los?"
 
 #: mainwindow.cpp:1921
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Error: no s'ha pogut inicialitzar el context OpenGL"
 
 #: mainwindow.cpp:1922
 #, qt-format
@@ -319,16 +343,19 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"Es necessita OpenGL 4.0 o superior, sortint.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:1923
 msgid "Unknown error"
-msgstr ""
+msgstr "S'ha produït un error desconegut"
 
 #: mainwindow.cpp:2064
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "Paràmetres"
 
 #: mainwindow.cpp:2301
 msgid "Common image formats"
