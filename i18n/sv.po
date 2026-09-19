@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-13 06:15+0000\n"
-"PO-Revision-Date: 2026-09-19 17:32+0000\n"
+"PO-Revision-Date: 2026-09-19 17:35+0000\n"
 "Last-Translator: Daniel Nylander <yeagersthlm@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sv/>\n"
@@ -728,7 +728,7 @@ msgstr "&Inställningar"
 
 #: menubuilder.cpp:120
 msgid "&Window"
-msgstr "Fönster"
+msgstr "Fö&nster"
 
 #: rpclistener.cpp:206
 msgid "Avogadro is shutting down."
