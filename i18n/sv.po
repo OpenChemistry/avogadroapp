@@ -4,13 +4,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # J. Lavoie <j.lavoie@net-c.ca>, 2021.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
+# Daniel Nylander <yeagersthlm@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-09-13 06:15+0000\n"
-"PO-Revision-Date: 2025-08-27 08:02+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"POT-Creation-Date: 2026-09-20 06:22+0000\n"
+"PO-Revision-Date: 2026-09-19 17:36+0000\n"
+"Last-Translator: Daniel Nylander <yeagersthlm@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/sv/>\n"
 "Language: sv\n"
@@ -18,57 +19,57 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Molekylredigerare och visualiserare"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:33:3
 msgid "Version:"
-msgstr ""
+msgstr "Version:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:34:9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Avogadro-bibliotekets version:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:35:15
 msgid "Qt Version:"
-msgstr ""
+msgstr "Qt-version:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:36:21
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSL-version:"
 
 #: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1 (Diagnostik)"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Ingen molekyl angavs i BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:39 backgroundfileformat.cpp:116
 msgid "No file format set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Inget filformat angavs i BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:42 backgroundfileformat.cpp:119
 msgid "No file name set in BackgroundFileFormat!"
-msgstr ""
+msgstr "Inget filnamn angavs i BackgroundFileFormat!"
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"
-msgstr ""
+msgstr "Kraschrapportering"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -76,6 +77,9 @@ msgid ""
 "developers when Avogadro crashes, which helps us fix crashes we cannot "
 "reproduce ourselves."
 msgstr ""
+"Detta är en diagnostisk version av Avogadro. Den kan skicka en rapport till "
+"utvecklarna när Avogadro kraschar, vilket hjälper oss att åtgärda krascher "
+"som vi inte kan återskapa själva."
 
 #: crashreportdialog.cpp:38
 msgid ""
@@ -85,166 +89,175 @@ msgid ""
 "useful, but it may incidentally include fragments of what you were working "
 "on, such as part of a file name or a molecule you had open."
 msgstr ""
+"En kraschrapport innehåller en ögonblicksbild av Avogadros minne när "
+"programmet slutade fungera, operativsystemet, grafikdrivrutinen och Avogadro-"
+"versionen samt en logg över nylig aktivitet. Minnesbilden gör rapporten "
+"användbar men kan av misstag innehålla delar av det du arbetade med, "
+"exempelvis en del av ett filnamn eller en molekyl som var öppen."
 
 #: crashreportdialog.cpp:52
 msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"Inget skickas utan ditt godkännande. Du kan ändra detta när som helst under "
+"Hjälp → Kraschrapportering."
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "Skicka kraschrapporter"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "Skicka inte"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "Skicka kraschrapporter till Avogadros utvecklare"
 
 #: mainwindow.cpp:440
 msgid "Ready…"
-msgstr ""
+msgstr "Klar…"
 
-#: mainwindow.cpp:550
-#, fuzzy
+#: mainwindow.cpp:552
 msgid "Tool"
 msgstr "Verktyg"
 
-#: mainwindow.cpp:554
+#: mainwindow.cpp:556
 msgid "Display Types"
 msgstr "Visningstyper"
 
-#: mainwindow.cpp:564
+#: mainwindow.cpp:566
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Inställningar för visningstyp"
 
-#: mainwindow.cpp:568
+#: mainwindow.cpp:570
 msgid "Files"
-msgstr ""
+msgstr "Filer"
 
-#: mainwindow.cpp:579
+#: mainwindow.cpp:581
 msgid "Layers"
-msgstr ""
+msgstr "Lager"
 
-#: mainwindow.cpp:607
-#, fuzzy
+#: mainwindow.cpp:609
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Arkiv"
 
-#: mainwindow.cpp:612
-#, fuzzy
+#: mainwindow.cpp:614
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Verktyg"
 
-#: mainwindow.cpp:1000
-#, fuzzy
+#: mainwindow.cpp:1002
 msgid "Untitled"
-msgstr "namnlös"
+msgstr "Namnlös"
 
-#: mainwindow.cpp:1005
+#: mainwindow.cpp:1007
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr ""
+msgstr "%1%2 – Avogadro %3"
 
-#: mainwindow.cpp:1061
+#: mainwindow.cpp:1063
 msgid "Restart needed"
-msgstr ""
+msgstr "Omstart krävs"
 
-#: mainwindow.cpp:1062
+#: mainwindow.cpp:1064
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Starta om Avogadro för att använda det nya språket."
 
-#: mainwindow.cpp:1105 mainwindow.cpp:2479
+#: mainwindow.cpp:1107 mainwindow.cpp:2481
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Chemical Markup Language"
 
-#: mainwindow.cpp:1106 mainwindow.cpp:2478
+#: mainwindow.cpp:1108 mainwindow.cpp:2480
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Chemical JSON"
 
-#: mainwindow.cpp:1112
+#: mainwindow.cpp:1114
 msgid "Open chemical file"
-msgstr ""
+msgstr "Öppna kemisk fil"
 
-#: mainwindow.cpp:1130 mainwindow.cpp:1154 mainwindow.cpp:2365
-#: mainwindow.cpp:3625
+#: mainwindow.cpp:1132 mainwindow.cpp:1156 mainwindow.cpp:2367
+#: mainwindow.cpp:3628
 msgid "Cannot open file"
-msgstr ""
+msgstr "Det gick inte att öppna filen"
 
-#: mainwindow.cpp:1131 mainwindow.cpp:1155 mainwindow.cpp:2366
+#: mainwindow.cpp:1133 mainwindow.cpp:1157 mainwindow.cpp:2368
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr ""
+msgstr "Kan inte öppna den angivna filen %1"
 
-#: mainwindow.cpp:1144
+#: mainwindow.cpp:1146
 msgid "Open Molecule"
-msgstr ""
+msgstr "Öppna molekyl"
 
-#: mainwindow.cpp:1168 mainwindow.cpp:2361
+#: mainwindow.cpp:1170 mainwindow.cpp:2363
 msgid "Select file reader"
-msgstr ""
+msgstr "Välj filläsare"
 
-#: mainwindow.cpp:1202
+#: mainwindow.cpp:1204
 msgid "Reading File"
-msgstr ""
+msgstr "Läser fil"
 
-#: mainwindow.cpp:1204 mainwindow.cpp:1228
+#: mainwindow.cpp:1206 mainwindow.cpp:1230
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Öppnar filen ”%1”\n"
+"med ”%2”"
 
-#: mainwindow.cpp:1303
+#: mainwindow.cpp:1305
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molekyl inläst (%1 atomer, %2 bindningar)"
 
-#: mainwindow.cpp:1308
+#: mainwindow.cpp:1310
 msgid "File error"
-msgstr ""
+msgstr "Filfel"
 
-#: mainwindow.cpp:1309
+#: mainwindow.cpp:1311
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Fel vid läsning av filen ”%1”:\n"
+"%2"
 
-#: mainwindow.cpp:1337
+#: mainwindow.cpp:1339
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr ""
+msgstr "Sparade filen %1"
 
-#: mainwindow.cpp:1347
+#: mainwindow.cpp:1349
 msgid "Error saving file"
-msgstr ""
+msgstr "Fel vid sparande av fil"
 
-#: mainwindow.cpp:1348
+#: mainwindow.cpp:1350
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"Fel vid sparande av ”%1”:\n"
+"%2"
 
-#: mainwindow.cpp:1353
+#: mainwindow.cpp:1355
 msgid "The save was canceled."
-msgstr ""
-
-#: mainwindow.cpp:1656
-msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Sparandet avbröts."
 
 #: mainwindow.cpp:1658
+msgid "Found Previous Avogadro Files"
+msgstr "Tidigare Avogadro-filer hittades"
+
+#: mainwindow.cpp:1660
 #, qt-format
 msgid ""
 "Files from a previous version of Avogadro were found in the plugins "
@@ -252,141 +265,157 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Filer från en tidigare version av Avogadro hittades i insticksmodulkatalogen "
+"och använder %1 utrymme.\n"
+"\n"
+"Dessa filer behövs inte längre och kan tas bort utan risk."
 
-#: mainwindow.cpp:1665
+#: mainwindow.cpp:1667
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Ta bort gamla filer"
 
-#: mainwindow.cpp:1666
+#: mainwindow.cpp:1668
 msgid "Keep Files"
-msgstr ""
+msgstr "Behåll filer"
 
-#: mainwindow.cpp:1801
+#: mainwindow.cpp:1803
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Slutför installationen"
 
-#: mainwindow.cpp:1802
+#: mainwindow.cpp:1804
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
-
-#: mainwindow.cpp:1807
-msgid "This requires setup that will download and configure Python."
-msgstr ""
+"Avogadro kan skapa indatafiler för Gaussian, ORCA och andra "
+"beräkningskemiska paket."
 
 #: mainwindow.cpp:1809
-msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgid "This requires setup that will download and configure Python."
+msgstr "Detta kräver en installation som hämtar och konfigurerar Python."
 
-#: mainwindow.cpp:1813
-msgid "This may require an Internet connection."
-msgstr ""
+#: mainwindow.cpp:1811
+msgid "This requires setup to configure a Python environment."
+msgstr "Detta kräver en installation som konfigurerar en Python-miljö."
 
 #: mainwindow.cpp:1815
-msgid "Install updated plugins?"
-msgstr ""
-
-#: mainwindow.cpp:1816
-msgid "The following plugins are available:"
-msgstr ""
+msgid "This may require an Internet connection."
+msgstr "Detta kan kräva en internetanslutning."
 
 #: mainwindow.cpp:1817
+msgid "Install updated plugins?"
+msgstr "Installera uppdaterade insticksmoduler?"
+
+#: mainwindow.cpp:1818
+msgid "The following plugins are available:"
+msgstr "Följande insticksmoduler är tillgängliga:"
+
+#: mainwindow.cpp:1819
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "Vill du uppdatera dem?"
 
-#: mainwindow.cpp:1856
+#: mainwindow.cpp:1858
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Återställ automatiskt sparade filer"
 
-#: mainwindow.cpp:1857
+#: mainwindow.cpp:1859
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Automatiskt sparade filer från en tidigare session hittades.\n"
+"Vill du återställa dem?"
 
-#: mainwindow.cpp:1921
+#: mainwindow.cpp:1923
 msgid "Error: Failed to initialize OpenGL context"
-msgstr ""
+msgstr "Fel: OpenGL-kontexten kunde inte initieras"
 
-#: mainwindow.cpp:1922
+#: mainwindow.cpp:1924
 #, qt-format
 msgid ""
 "OpenGL 4.0 or greater required, exiting.\n"
 "\n"
 "%1"
 msgstr ""
+"OpenGL 4.0 eller senare krävs. Avslutar.\n"
+"\n"
+"%1"
 
-#: mainwindow.cpp:1923
+#: mainwindow.cpp:1925
 msgid "Unknown error"
-msgstr ""
+msgstr "Okänt fel"
 
-#: mainwindow.cpp:2064
+#: mainwindow.cpp:2066
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "Inställningar för %1"
 
-#: mainwindow.cpp:2301
+#: mainwindow.cpp:2303
 msgid "Common image formats"
 msgstr "Vanliga bildformat"
 
-#: mainwindow.cpp:2303
+#: mainwindow.cpp:2305
 msgid "All files"
 msgstr "Alla filer"
 
-#: mainwindow.cpp:2303
+#: mainwindow.cpp:2305
 msgid "BMP"
 msgstr "BMP"
 
-#: mainwindow.cpp:2304
+#: mainwindow.cpp:2306
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:2304
+#: mainwindow.cpp:2306
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:2313
+#: mainwindow.cpp:2315
 msgid "Export Bitmap Graphics"
-msgstr "Exportera bitmappgrafik"
+msgstr "Exportera bitmappsgrafik"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:2331 mainwindow.cpp:2451 mainwindow.cpp:3356:34
+#: mainwindow.cpp:2333 mainwindow.cpp:2453 mainwindow.cpp:3359:34
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:2332
+#: mainwindow.cpp:2334
 #, qt-format
 msgid "Cannot save file %1."
-msgstr "Filen %1 kan inte sparas."
+msgstr "Kan inte spara filen %1."
 
-#: mainwindow.cpp:2452
+#: mainwindow.cpp:2454
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
 "\n"
 "Would you like to export to the current format, or save in a standard format?"
 msgstr ""
+"Den här filen importerades från ett icke-standardiserat format som kanske "
+"inte kan skriva all information i molekylen.\n"
+"\n"
+"Vill du exportera till det aktuella formatet eller spara i ett "
+"standardformat?"
 
-#: mainwindow.cpp:2459
+#: mainwindow.cpp:2461
 msgid "Export"
 msgstr "Exportera"
 
-#: mainwindow.cpp:2484
+#: mainwindow.cpp:2486
 msgid "Save chemical file"
-msgstr ""
+msgstr "Spara kemisk fil"
 
-#: mainwindow.cpp:2529
+#: mainwindow.cpp:2531
 msgid "Export Molecule"
-msgstr ""
-
-#: mainwindow.cpp:2645
-msgid "Saving File in Progress…"
-msgstr ""
+msgstr "Exportera molekyl"
 
 #: mainwindow.cpp:2647
+msgid "Saving File in Progress…"
+msgstr "Sparar fil…"
+
+#: mainwindow.cpp:2649
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -396,43 +425,43 @@ msgstr ""
 "Sparar filen ”%1”\n"
 "med ”%2”"
 
-#: mainwindow.cpp:2768
+#: mainwindow.cpp:2770
 #, qt-format
 msgid "&Undo %1"
-msgstr ""
+msgstr "Å&ngra %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2771 mainwindow.cpp:3041:118
+#: mainwindow.cpp:2773 mainwindow.cpp:3044:118
 msgid "&Undo"
-msgstr "&Ångra"
+msgstr "Å&ngra"
 
-#: mainwindow.cpp:2776
+#: mainwindow.cpp:2778
 #, qt-format
 msgid "&Redo %1"
-msgstr ""
+msgstr "&Gör om %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2779 mainwindow.cpp:3049:124
+#: mainwindow.cpp:2781 mainwindow.cpp:3052:124
 msgid "&Redo"
 msgstr "Gö&r om"
 
-#: mainwindow.cpp:2903
+#: mainwindow.cpp:2906
 msgid "&Testing"
-msgstr ""
-
-#: mainwindow.cpp:2905
-msgid "&Record Test…"
-msgstr ""
+msgstr "&Testning"
 
 #: mainwindow.cpp:2908
+msgid "&Record Test…"
+msgstr "&Spela in test…"
+
+#: mainwindow.cpp:2911
 msgid "&Play Test…"
-msgstr ""
+msgstr "&Spela upp test…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:2917 menubuilder.cpp:116:37
+#: mainwindow.cpp:2920 menubuilder.cpp:116:37
 msgid "&File"
 msgstr "&Arkiv"
 
@@ -440,259 +469,246 @@ msgstr "&Arkiv"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2919:76 rc.cpp:82
+#: mainwindow.cpp:2922:76 rc.cpp:82
 msgid "&New"
 msgstr "&Ny"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2930:52
-#, fuzzy
+#: mainwindow.cpp:2933:52
 msgid "&Open…"
-msgstr "&Öppna…"
+msgstr "Ö&ppna…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2942:85 rc.cpp:91
+#: mainwindow.cpp:2945:85 rc.cpp:91
 msgid "&Close"
-msgstr "Stän&g"
+msgstr "&Stäng"
 
 #. i18n: file: mainwindow.ui:147
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2955:94 rc.cpp:100
+#: mainwindow.cpp:2958:94 rc.cpp:100
 msgid "&Save"
 msgstr "&Spara"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2967:103
-#, fuzzy
+#: mainwindow.cpp:2970:103
 msgid "Save &As…"
 msgstr "Spara s&om…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2980:196
-#, fuzzy
+#: mainwindow.cpp:2983:196
 msgid "&Export"
 msgstr "&Exportera"
 
-#: mainwindow.cpp:2981
-#, fuzzy
+#: mainwindow.cpp:2984
 msgid "&Molecule…"
 msgstr "&Molekyl…"
 
-#: mainwindow.cpp:2988
+#: mainwindow.cpp:2991
 msgid "Export Molecule…"
-msgstr ""
+msgstr "Exportera molekyl…"
 
-#: mainwindow.cpp:2995
-#, fuzzy
+#: mainwindow.cpp:2998
 msgid "&Graphics…"
 msgstr "&Grafik…"
 
-#: mainwindow.cpp:3002
+#: mainwindow.cpp:3005
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Exportera grafik…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3010:61 rc.cpp:67
+#: mainwindow.cpp:3013:61 rc.cpp:67
 msgid "&Quit"
 msgstr "A&vsluta"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3020:190
-#, fuzzy
+#: mainwindow.cpp:3023:190
 msgid "Open Recent"
 msgstr "Öppna s&enaste"
 
-#: mainwindow.cpp:3034
+#: mainwindow.cpp:3037
 msgid "No recent files"
-msgstr ""
+msgstr "Inga senaste filer"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:3040 menubuilder.cpp:116:46
+#: mainwindow.cpp:3043 menubuilder.cpp:116:46
 msgid "&Edit"
-msgstr "R&edigera"
+msgstr "&Redigera"
 
-#: mainwindow.cpp:3057
+#: mainwindow.cpp:3060
 msgid "&Copy Graphics"
-msgstr ""
+msgstr "&Kopiera grafik"
 
-#: mainwindow.cpp:3061
+#: mainwindow.cpp:3064
 msgid "Ctrl+Alt+C"
-msgstr ""
+msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:3074 menubuilder.cpp:116:43
+#: mainwindow.cpp:3077 menubuilder.cpp:116:43
 msgid "&View"
-msgstr "&Visa"
+msgstr "&Vy"
 
-#: mainwindow.cpp:3075
-#, fuzzy
+#: mainwindow.cpp:3078
 msgid "Set Background Color…"
 msgstr "Ange bakgrundsfärg…"
 
-#: mainwindow.cpp:3079
+#: mainwindow.cpp:3082
 msgid "Rendering…"
-msgstr ""
+msgstr "Renderar…"
 
-#: mainwindow.cpp:3087
+#: mainwindow.cpp:3090
 msgid "Projection"
 msgstr "Projektion"
 
-#: mainwindow.cpp:3088
+#: mainwindow.cpp:3091
 msgid "Perspective"
 msgstr "Perspektiv"
 
-#: mainwindow.cpp:3095
+#: mainwindow.cpp:3098
 msgid "Orthographic"
 msgstr "Ortografisk"
 
-#: mainwindow.cpp:3114
-#, fuzzy
+#: mainwindow.cpp:3117
 msgid "&Extensions"
-msgstr "Tillägg"
+msgstr "&Tillägg"
 
-#: mainwindow.cpp:3116
+#: mainwindow.cpp:3119
 msgid "User Interface Language…"
-msgstr ""
+msgstr "Språk för användargränssnittet…"
 
-#: mainwindow.cpp:3120
+#: mainwindow.cpp:3123
 msgid "&Periodic Table…"
-msgstr ""
+msgstr "&Periodiska systemet…"
 
-#: mainwindow.cpp:3126 menubuilder.cpp:120
+#: mainwindow.cpp:3129 menubuilder.cpp:120
 msgid "&Help"
 msgstr "&Hjälp"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3127:115
+#: mainwindow.cpp:3130:115
 msgid "&About"
 msgstr "&Om"
 
-#: mainwindow.cpp:3132
+#: mainwindow.cpp:3135
 msgid "&Discussion Forum"
-msgstr ""
+msgstr "&Diskussionsforum"
 
-#: mainwindow.cpp:3136
-#, fuzzy
-#| msgid "Avogadro Website"
+#: mainwindow.cpp:3139
 msgid "&Avogadro Website"
 msgstr "&Avogadros webbplats"
 
-#: mainwindow.cpp:3140
-#, fuzzy
-#| msgid "Report a Bug"
+#: mainwindow.cpp:3143
 msgid "&Report a Bug"
 msgstr "&Rapportera ett fel"
 
-#: mainwindow.cpp:3147
+#: mainwindow.cpp:3150
 msgid "&Crash Reporting…"
-msgstr ""
+msgstr "&Kraschrapportering…"
 
-#: mainwindow.cpp:3153
+#: mainwindow.cpp:3156
 msgid "&Suggest a Feature"
-msgstr ""
+msgstr "&Föreslå en funktion"
 
-#: mainwindow.cpp:3187
+#: mainwindow.cpp:3190
 msgid "untitled"
-msgstr ""
+msgstr "namnlös"
 
-#: mainwindow.cpp:3217
+#: mainwindow.cpp:3220
 msgid "System Language"
-msgstr ""
+msgstr "Systemspråk"
 
-#: mainwindow.cpp:3225
+#: mainwindow.cpp:3228
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
-#: mainwindow.cpp:3225
+#: mainwindow.cpp:3228
 msgid "User Interface Language:"
-msgstr ""
+msgstr "Språk för användargränssnittet:"
 
-#: mainwindow.cpp:3341
+#: mainwindow.cpp:3344
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr ""
+msgstr "Alla format som stöds (%1);;Alla filer (*);;"
 
-#: mainwindow.cpp:3357
-#, fuzzy
+#: mainwindow.cpp:3360
 msgid "Do you want to save the changes to the document?"
-msgstr "Vill du spara ändringarna som du gjort i dokumentet?"
+msgstr "Vill du spara ändringarna i dokumentet?"
 
-#: mainwindow.cpp:3365
+#: mainwindow.cpp:3368
 msgid "Your changes will be lost if you don't save them."
 msgstr "Dina ändringar kommer att gå förlorade om du inte sparar dem."
 
-#: mainwindow.cpp:3370
+#: mainwindow.cpp:3373
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:3372
+#: mainwindow.cpp:3375
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:3461
+#: mainwindow.cpp:3464
 msgid "Network Download Failed"
-msgstr ""
+msgstr "Nätverkshämtning misslyckades"
 
-#: mainwindow.cpp:3462
+#: mainwindow.cpp:3465
 msgid "Network timeout or other error."
-msgstr "Nätverket överskred tidsgränsen, eller annat fel."
-
-#: mainwindow.cpp:3542
-#, qt-format
-msgid "Your version: %1"
-msgstr ""
-
-#: mainwindow.cpp:3543
-#, qt-format
-msgid "New version: %1"
-msgstr ""
+msgstr "Tidsgränsen för nätverket överskreds eller ett annat fel uppstod."
 
 #: mainwindow.cpp:3545
+#, qt-format
+msgid "Your version: %1"
+msgstr "Din version: %1"
+
+#: mainwindow.cpp:3546
+#, qt-format
+msgid "New version: %1"
+msgstr "Ny version: %1"
+
+#: mainwindow.cpp:3548
 msgid "An update is available, do you want to download it now?\n"
-msgstr ""
+msgstr "En uppdatering är tillgänglig. Vill du hämta den nu?\n"
 
-#: mainwindow.cpp:3547
+#: mainwindow.cpp:3550
 msgid "Version Update"
-msgstr ""
+msgstr "Versionsuppdatering"
 
-#: mainwindow.cpp:3605
+#: mainwindow.cpp:3608
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Ett fel uppstod när ”%1” filformatet skulle laddas."
 
-#: mainwindow.cpp:3621
+#: mainwindow.cpp:3624
 msgid "Select file format"
-msgstr ""
+msgstr "Välj filformat"
 
-#: mainwindow.cpp:3626 mainwindow.cpp:3637
+#: mainwindow.cpp:3629 mainwindow.cpp:3640
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro kan inte öppna ”%1”."
 
-#: mainwindow.cpp:3636
+#: mainwindow.cpp:3639
 msgid "Cannot open files"
-msgstr ""
+msgstr "Kan inte öppna filer"
 
-#: mainwindow.cpp:3820
+#: mainwindow.cpp:3823
 msgid "The plugin was unloaded."
-msgstr ""
+msgstr "Insticksmodulen lästes ur."
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -704,60 +720,59 @@ msgstr "&Bygg"
 #. i18n: ectx: property (title), widget (QMenu, menuSelect)
 #: menubuilder.cpp:117:49
 msgid "&Select"
-msgstr "&Välj"
+msgstr "&Markera"
 
 #: menubuilder.cpp:120
 msgid "Se&ttings"
 msgstr "&Inställningar"
 
 #: menubuilder.cpp:120
-#, fuzzy
 msgid "&Window"
-msgstr "Fönster"
+msgstr "Fö&nster"
 
 #: rpclistener.cpp:206
 msgid "Avogadro is shutting down."
-msgstr ""
+msgstr "Avogadro stängs av."
 
 #: rpclistener.cpp:521
 msgid "No molecule is open."
-msgstr ""
+msgstr "Ingen molekyl är öppen."
 
 #: rpclistener.cpp:550
 msgid "renderImage requires both width and height, or neither."
-msgstr ""
+msgstr "renderImage kräver både bredd och höjd, eller inget av dem."
 
 #: rpclistener.cpp:575
 msgid "Could not render the current view."
-msgstr ""
+msgstr "Kunde inte rendera den aktuella vyn."
 
 #: rpclistener.cpp:603
 msgid "Could not encode the render as PNG."
-msgstr ""
+msgstr "Kunde inte koda renderingen som PNG."
 
 #: rpclistener.cpp:643 rpclistener.cpp:654
 msgid "No active view."
-msgstr ""
+msgstr "Ingen aktiv vy."
 
 #: rpclistener.cpp:664
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
-msgstr ""
+msgstr "setCameras modelView måste vara exakt 16 tal i radordning."
 
 #: rpclistener.cpp:728 rpclistener.cpp:796
 msgid "The command failed."
-msgstr ""
+msgstr "Kommandot misslyckades."
 
 #: rpclistener.cpp:734
 msgid "That plugin is already running a command."
-msgstr ""
+msgstr "Insticksmodulen kör redan ett kommando."
 
 #: rpclistener.cpp:766
 msgid "The command timed out."
-msgstr ""
+msgstr "Tidsgränsen för kommandot överskreds."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
-msgstr ""
+msgstr "3D-vy"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -768,7 +783,7 @@ msgstr ""
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -778,6 +793,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-"
+"weight:600;\">Licens: </span><a href=\"https://opensource.org/licenses/BSD-3-"
+"Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
+"color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -786,8 +805,6 @@ msgstr "OK"
 
 #. i18n: file: mainwindow.ui:85
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+O"
 msgctxt "File | Open"
 msgid "Ctrl+O"
 msgstr "Ctrl+O"
@@ -795,12 +812,10 @@ msgstr "Ctrl+O"
 #. i18n: file: mainwindow.ui:90
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Open"
-msgstr "&Öppna"
+msgstr "Ö&ppna"
 
 #. i18n: file: mainwindow.ui:98
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Q"
 msgctxt "File | Quit"
 msgid "Ctrl+Q"
 msgstr "Ctrl+Q"
@@ -817,32 +832,24 @@ msgstr "&Töm senaste"
 
 #. i18n: file: mainwindow.ui:124
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+N"
 msgctxt "File | New"
 msgid "Ctrl+N"
 msgstr "Ctrl+N"
 
 #. i18n: file: mainwindow.ui:137
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+W"
 msgctxt "File | Close"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
 #. i18n: file: mainwindow.ui:150
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+S"
 msgctxt "File | Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
 #. i18n: file: mainwindow.ui:163
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+S"
 msgctxt "File | Save As"
 msgid "Ctrl+Shift+S"
 msgstr "Ctrl+Shift+S"
@@ -854,22 +861,17 @@ msgstr "Återgå till sparad"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "Set &Background Color…"
 msgstr "Ange &bakgrundsfärg…"
 
 #. i18n: file: mainwindow.ui:197
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Z"
 msgctxt "Undo"
 msgid "Ctrl+Z"
 msgstr "Ctrl+Z"
 
 #. i18n: file: mainwindow.ui:209
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+Z"
 msgctxt "Redo"
 msgid "Ctrl+Shift+Z"
 msgstr "Ctrl+Shift+Z"
@@ -891,8 +893,6 @@ msgstr "Klistra in"
 
 #. i18n: file: mainwindow.ui:235
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+V"
 msgctxt "Paste"
 msgid "Ctrl+V"
 msgstr "Ctrl+V"
@@ -904,8 +904,6 @@ msgstr "Kopiera"
 
 #. i18n: file: mainwindow.ui:243
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+C"
 msgctxt "Copy"
 msgid "Ctrl+C"
 msgstr "Ctrl+C"
@@ -917,8 +915,6 @@ msgstr "Klipp ut"
 
 #. i18n: file: mainwindow.ui:251
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+X"
 msgctxt "Cut"
 msgid "Ctrl+X"
 msgstr "Ctrl+X"
@@ -931,12 +927,10 @@ msgstr "Töm"
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "Markera allt"
+msgstr "Markera alla"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+A"
 msgctxt "Select All"
 msgid "Ctrl+A"
 msgstr "Ctrl+A"
@@ -944,12 +938,10 @@ msgstr "Ctrl+A"
 #. i18n: file: mainwindow.ui:269
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select None"
-msgstr "Markera inget"
+msgstr "Avmarkera alla"
 
 #. i18n: file: mainwindow.ui:272
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
-#, fuzzy
-#| msgid "Ctrl+Shift+A"
 msgctxt "Select None"
 msgid "Ctrl+Shift+A"
 msgstr "Ctrl+Shift+A"
@@ -987,139 +979,133 @@ msgstr "Avogadros webbplats"
 #. i18n: file: mainwindow.ui:313
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Discussion Forum"
-msgstr ""
+msgstr "Diskussionsforum"
 
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#, fuzzy
 msgid "&Import"
 msgstr "&Importera"
 
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, enableAO_label)
 msgid "Enable ambient occlusion shadows"
-msgstr ""
+msgstr "Aktivera omgivningsocklusionsskuggor"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, enableAO_label)
 msgid "Ambient Occlusion:"
-msgstr ""
+msgstr "Omgivningsocklusion:"
 
 #. i18n: file: renderingdialog.ui:43
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
-#. i18n: file: renderingdialog.ui:118
-#. i18n: ectx: property (text), widget (QCheckBox, fogEnableCheckBox)
-#. i18n: file: renderingdialog.ui:220
-#. i18n: ectx: property (text), widget (QCheckBox, dofEnableCheckBox)
-#. i18n: file: renderingdialog.ui:325
+#. i18n: file: renderingdialog.ui:108
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
+#. i18n: file: renderingdialog.ui:193
+#. i18n: ectx: property (text), widget (QCheckBox, fogEnableCheckBox)
+#. i18n: file: renderingdialog.ui:295
+#. i18n: ectx: property (text), widget (QCheckBox, dofEnableCheckBox)
 msgid "Enable"
-msgstr ""
+msgstr "Aktivera"
 
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, shadow_label)
 msgid "Strength of the ambient shadows"
-msgstr ""
+msgstr "Styrka för omgivningsskuggorna"
 
 #. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, shadow_label)
 msgid "Shadow Strength:"
+msgstr "Skuggstyrka:"
+
+#. i18n: file: renderingdialog.ui:130
+#. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
+msgid "Thickness of the outline, in pixels"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:106
+#. i18n: file: renderingdialog.ui:133
+#. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
+msgid "Outline Width:"
+msgstr ""
+
+#. i18n: file: renderingdialog.ui:160
+#. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
+msgid "Add an outline to edge atoms"
+msgstr "Lägg till en kontur runt kantatomer"
+
+#. i18n: file: renderingdialog.ui:163
+#. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
+msgid "Edge Outline:"
+msgstr "Kantkontur:"
+
+#. i18n: file: renderingdialog.ui:181
 #. i18n: ectx: property (toolTip), widget (QLabel, enableFog_label)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "Dimeffekt för djupindikering"
 
-#. i18n: file: renderingdialog.ui:109
+#. i18n: file: renderingdialog.ui:184
 #. i18n: ectx: property (text), widget (QLabel, enableFog_label)
 msgid "Fog:"
 msgstr "Dimma:"
 
-#. i18n: file: renderingdialog.ui:140
+#. i18n: file: renderingdialog.ui:215
 #. i18n: ectx: property (text), widget (QLabel, fogStrength_label)
 msgid "Fog Strength:"
-msgstr ""
-
-#. i18n: file: renderingdialog.ui:170
-#. i18n: ectx: property (text), widget (QLabel, fogPosition_label)
-msgid "Fog Position:"
-msgstr ""
-
-#. i18n: file: renderingdialog.ui:208
-#. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
-msgid "Add a depth blur"
-msgstr ""
-
-#. i18n: file: renderingdialog.ui:211
-#. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
-msgid "Depth Blur:"
-msgstr ""
-
-#. i18n: file: renderingdialog.ui:242
-#. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
-msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Dimstyrka:"
 
 #. i18n: file: renderingdialog.ui:245
+#. i18n: ectx: property (text), widget (QLabel, fogPosition_label)
+msgid "Fog Position:"
+msgstr "Dimposition:"
+
+#. i18n: file: renderingdialog.ui:283
+#. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
+msgid "Add a depth blur"
+msgstr "Lägg till djuposkärpa"
+
+#. i18n: file: renderingdialog.ui:286
+#. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
+msgid "Depth Blur:"
+msgstr "Djuposkärpa:"
+
+#. i18n: file: renderingdialog.ui:317
+#. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
+msgid "Strength of the depth blur"
+msgstr "Styrka för djuposkärpan"
+
+#. i18n: file: renderingdialog.ui:320
 #. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Oskärpestyrka:"
 
-#. i18n: file: renderingdialog.ui:272
+#. i18n: file: renderingdialog.ui:347
 #. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Position för djuposkärpan"
 
-#. i18n: file: renderingdialog.ui:275
+#. i18n: file: renderingdialog.ui:350
 #. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Oskärpeposition:"
 
-#. i18n: file: renderingdialog.ui:313
-#. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
-msgid "Add an outline to edge atoms"
-msgstr ""
-
-#. i18n: file: renderingdialog.ui:316
-#. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
-msgid "Edge Outline:"
-msgstr ""
-
-#. i18n: file: renderingdialog.ui:354
+#. i18n: file: renderingdialog.ui:384
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
 msgid "Save"
 msgstr "Spara"
 
-#. i18n: file: renderingdialog.ui:374
+#. i18n: file: renderingdialog.ui:404
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
-#, fuzzy
-#| msgid "&Close"
 msgid "Close"
 msgstr "Stäng"
 
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-",Launchpad Contributions:,Dostojevskji, ,Launchpad "
-"Contributions:,Dostojevskji, ,Launchpad Contributions:,Alexander "
-"Nordin,Dostojevskji, ,Launchpad Contributions:,Alexander "
-"Nordin,Dostojevskji, ,Launchpad Contributions:,Alexander "
-"Nordin,Dostojevskji, ,Launchpad Contributions:,Alexander "
-"Nordin,Dostojevskji, ,Launchpad Contributions:,Alexander "
-"Nordin,Dostojevskji, ,Launchpad Contributions:,Alexander Nordin,Daniel "
-"Nylander,Dostojevskji, ,Launchpad Contributions:,Alexander Nordin,Daniel "
-"Nylander,Dostojevskji, ,Launchpad Contributions:,Alexander Nordin,Daniel "
-"Nylander,Dostojevskji, ,Launchpad Contributions:,Alexander Nordin,Arve "
-"Eriksson,Daniel Nylander,Dostojevskji,Peter Sahlin, ,Launchpad "
-"Contributions:,Alexander Nordin,Arve Eriksson,Daniel "
-"Nylander,Dostojevskji,Geoff Hutchison,Peter Sahlin, ,Launchpad "
-"Contributions:,Alexander Nordin,Anders Jonsson,Arve Eriksson,Daniel "
-"Nylander,Dostojevskji,Geoff Hutchison,Peter Sahlin"
+"Alexander Nordin, Anders Jonsson, Arve Eriksson, Daniel Nylander, "
+"Dostojevskij, Peter Sahlin"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ",,darkangel_nr1@hotmail.com,,,darkangel_nr1@hotmail.com,,,nordinalex@gmail.com,darkangel_nr1@hotmail.com,,,nordinalex@gmail.com,darkangel_nr1@hotmail.com,,,nordinalex@gmail.com,darkangel_nr1@hotmail.com,,,nordinalex@gmail.com,darkangel_nr1@hotmail.com,,,nordinalex@gmail.com,darkangel_nr1@hotmail.com,,,nordinalex@gmail.com,yeager@ubuntu.com,darkangel_nr1@hotmail.com,,,nordinalex@gmail.com,yeager@ubuntu.com,darkangel_nr1@hotmail.com,,,nordinalex@gmail.com,yeager@ubuntu.com,darkangel_nr1@hotmail.com,,,nordinalex@gmail.com,,yeager@ubuntu.com,darkangel_nr1@hotmail.com,,,,nordinalex@gmail.com,,yeager@ubuntu.com,darkangel_nr1@hotmail.com,,,,,nordinalex@gmail.com,,,yeager@ubuntu.com,darkangel_nr1@hotmail.com,,"
+msgstr "nordinalex@gmail.com, yeager@ubuntu.com"
 
 #, fuzzy
 #~ msgid "Record test…"
