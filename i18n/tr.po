@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-13 06:15+0000\n"
-"PO-Revision-Date: 2026-09-09 08:51+0000\n"
+"PO-Revision-Date: 2026-09-24 19:28+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.9.1\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
@@ -258,7 +258,7 @@ msgstr ""
 
 #: mainwindow.cpp:1353
 msgid "The save was canceled."
-msgstr ""
+msgstr "Kaydetme işlemi iptal edildi."
 
 #: mainwindow.cpp:1656
 msgid "Found Previous Avogadro Files"
@@ -715,7 +715,7 @@ msgstr "Dosyalar açılamıyor"
 
 #: mainwindow.cpp:3820
 msgid "The plugin was unloaded."
-msgstr ""
+msgstr "Eklenti kaldırıldı."
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -739,43 +739,47 @@ msgstr "&Pencere"
 
 #: rpclistener.cpp:206
 msgid "Avogadro is shutting down."
-msgstr ""
+msgstr "Avogadro kapatılıyor."
 
 #: rpclistener.cpp:521
 msgid "No molecule is open."
-msgstr ""
+msgstr "Açık molekül yok."
 
 #: rpclistener.cpp:550
 msgid "renderImage requires both width and height, or neither."
 msgstr ""
+"renderImage, hem genişlik hem de yükseklik değerlerini gerektirir veya "
+"ikisini de gerektirmez."
 
 #: rpclistener.cpp:575
 msgid "Could not render the current view."
-msgstr ""
+msgstr "Geçerli görünüm oluşturulamadı."
 
 #: rpclistener.cpp:603
 msgid "Could not encode the render as PNG."
-msgstr ""
+msgstr "Görüntü, PNG olarak kodlanamadı."
 
 #: rpclistener.cpp:643 rpclistener.cpp:654
 msgid "No active view."
-msgstr ""
+msgstr "Etkin görünüm yok."
 
 #: rpclistener.cpp:664
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
 msgstr ""
+"setCamera'nın modelView'u, satır öncelikli sırayla tam olarak 16 sayı "
+"içermelidir."
 
 #: rpclistener.cpp:728 rpclistener.cpp:796
 msgid "The command failed."
-msgstr ""
+msgstr "Komut başarısız oldu."
 
 #: rpclistener.cpp:734
 msgid "That plugin is already running a command."
-msgstr ""
+msgstr "Bu eklenti zaten bir komut çalıştırıyor."
 
 #: rpclistener.cpp:766
 msgid "The command timed out."
-msgstr ""
+msgstr "Komut zaman aşımına uğradı."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
