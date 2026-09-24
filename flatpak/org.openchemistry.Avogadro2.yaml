@@ -122,8 +122,8 @@ modules:
         dest: Downloads
       # eigen
       - type: file
-        url: https://gitlab.com/libeigen/eigen/-/archive/3.4.1/eigen-3.4.1.tar.gz
-        sha256: b93c667d1b69265cdb4d9f30ec21f8facbbe8b307cf34c0b9942834c6d4fdbe2
+        url: https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz
+        sha256: e9c326dc8c05cd1e044c71f30f1b2e34a6161a3b6ecf445d56b53ff1669e3dec
         dest: Downloads
       # spglib
       - type: file
