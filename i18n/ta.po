@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-09-13 06:15+0000\n"
+"POT-Creation-Date: 2026-09-20 06:22+0000\n"
 "PO-Revision-Date: 2026-03-21 04:09+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/avogadro/"
@@ -109,90 +109,90 @@ msgstr ""
 msgid "Ready…"
 msgstr "தயார்…"
 
-#: mainwindow.cpp:550
+#: mainwindow.cpp:552
 msgid "Tool"
 msgstr "கருவி"
 
-#: mainwindow.cpp:554
+#: mainwindow.cpp:556
 msgid "Display Types"
 msgstr "காட்சி வகைகள்"
 
-#: mainwindow.cpp:564
+#: mainwindow.cpp:566
 msgid "Display Type Settings"
 msgstr "காட்சி வகை அமைப்புகள்"
 
-#: mainwindow.cpp:568
+#: mainwindow.cpp:570
 msgid "Files"
 msgstr "கோப்புகள்"
 
-#: mainwindow.cpp:579
+#: mainwindow.cpp:581
 msgid "Layers"
 msgstr "அடுக்குகள்"
 
-#: mainwindow.cpp:607
+#: mainwindow.cpp:609
 msgctxt "File toolbar"
 msgid "File"
 msgstr "கோப்பு"
 
-#: mainwindow.cpp:612
+#: mainwindow.cpp:614
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "கருவிகள்"
 
-#: mainwindow.cpp:1000
+#: mainwindow.cpp:1002
 msgid "Untitled"
 msgstr "தலைப்பிடப்படாத"
 
-#: mainwindow.cpp:1005
+#: mainwindow.cpp:1007
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1 %2 - அவோகாட்ரோ %3"
 
-#: mainwindow.cpp:1061
+#: mainwindow.cpp:1063
 msgid "Restart needed"
 msgstr "மறுதொடக்கம் தேவை"
 
-#: mainwindow.cpp:1062
+#: mainwindow.cpp:1064
 msgid "Please restart Avogadro to use the new language."
 msgstr "புதிய மொழியைப் பயன்படுத்த அவோகாட்ரோவை மறுதொடக்கம் செய்யுங்கள்."
 
-#: mainwindow.cpp:1105 mainwindow.cpp:2479
+#: mainwindow.cpp:1107 mainwindow.cpp:2481
 msgid "Chemical Markup Language"
 msgstr "வேதியியல் மார்க்அப் மொழி"
 
-#: mainwindow.cpp:1106 mainwindow.cpp:2478
+#: mainwindow.cpp:1108 mainwindow.cpp:2480
 msgid "Chemical JSON"
 msgstr "வேதியியல் சாதொபொகு"
 
-#: mainwindow.cpp:1112
+#: mainwindow.cpp:1114
 msgid "Open chemical file"
 msgstr "வேதியியல் கோப்பு திறந்த"
 
-#: mainwindow.cpp:1130 mainwindow.cpp:1154 mainwindow.cpp:2365
-#: mainwindow.cpp:3625
+#: mainwindow.cpp:1132 mainwindow.cpp:1156 mainwindow.cpp:2367
+#: mainwindow.cpp:3628
 msgid "Cannot open file"
 msgstr "கோப்பைத் திறக்க முடியாது"
 
-#: mainwindow.cpp:1131 mainwindow.cpp:1155 mainwindow.cpp:2366
+#: mainwindow.cpp:1133 mainwindow.cpp:1157 mainwindow.cpp:2368
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "வழங்கப்பட்ட கோப்பு %1 ஐ திறக்க முடியாது"
 
-#: mainwindow.cpp:1144
+#: mainwindow.cpp:1146
 msgid "Open Molecule"
 msgstr "திறந்த மூலக்கூறு"
 
-#: mainwindow.cpp:1168 mainwindow.cpp:2361
+#: mainwindow.cpp:1170 mainwindow.cpp:2363
 msgid "Select file reader"
 msgstr "கோப்பு வாசகரைத் தேர்ந்தெடுக்கவும்"
 
-#: mainwindow.cpp:1202
+#: mainwindow.cpp:1204
 msgid "Reading File"
 msgstr "கோப்பைப் படித்தல்"
 
-#: mainwindow.cpp:1204 mainwindow.cpp:1228
+#: mainwindow.cpp:1206 mainwindow.cpp:1230
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -201,16 +201,16 @@ msgstr ""
 "'%1' கோப்பைத் திறக்கும்\n"
 " '%2' உடன்"
 
-#: mainwindow.cpp:1303
+#: mainwindow.cpp:1305
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "மூலக்கூறு ஏற்றப்பட்டது ( %1 அணுக்கள், %2 பிணைப்புகள்)"
 
-#: mainwindow.cpp:1308
+#: mainwindow.cpp:1310
 msgid "File error"
 msgstr "கோப்பு பிழை"
 
-#: mainwindow.cpp:1309
+#: mainwindow.cpp:1311
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -219,17 +219,17 @@ msgstr ""
 "'%1' கோப்பைப் படிக்கும்போது பிழை:\n"
 " %2"
 
-#: mainwindow.cpp:1337
+#: mainwindow.cpp:1339
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "சேமித்த கோப்பு %1"
 
-#: mainwindow.cpp:1347
+#: mainwindow.cpp:1349
 msgid "Error saving file"
 msgstr "கோப்பைச் சேமிப்பதில் பிழை"
 
-#: mainwindow.cpp:1348
+#: mainwindow.cpp:1350
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -239,15 +239,15 @@ msgstr ""
 "'%1' சேமிக்கும் போது பிழை:\n"
 " %2"
 
-#: mainwindow.cpp:1353
+#: mainwindow.cpp:1355
 msgid "The save was canceled."
 msgstr ""
 
-#: mainwindow.cpp:1656
+#: mainwindow.cpp:1658
 msgid "Found Previous Avogadro Files"
 msgstr "முந்தைய அவகாட்ரோ கோப்புகள் கண்டுபிடிக்கப்பட்டன"
 
-#: mainwindow.cpp:1658
+#: mainwindow.cpp:1660
 #, qt-format
 msgid ""
 "Files from a previous version of Avogadro were found in the plugins "
@@ -260,19 +260,19 @@ msgstr ""
 "\n"
 "இந்தக் கோப்புகள் இனி தேவைப்படாது மற்றும் பாதுகாப்பாக அகற்றப்படலாம்."
 
-#: mainwindow.cpp:1665
+#: mainwindow.cpp:1667
 msgid "Remove Old Files"
 msgstr "பழைய கோப்புகளை அகற்று"
 
-#: mainwindow.cpp:1666
+#: mainwindow.cpp:1668
 msgid "Keep Files"
 msgstr "கோப்புகளை வைத்திருங்கள்"
 
-#: mainwindow.cpp:1801
+#: mainwindow.cpp:1803
 msgid "Let’s finish your setup"
 msgstr "உங்கள் அமைப்பை முடிப்போம்"
 
-#: mainwindow.cpp:1802
+#: mainwindow.cpp:1804
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
@@ -280,35 +280,35 @@ msgstr ""
 "அவகாட்ரோ காசியன், ORCA மற்றும் பிற கணக்கீட்டு வேதியியல் தொகுப்புகளுக்கான உள்ளீட்டு "
 "கோப்புகளை உருவாக்க முடியும்."
 
-#: mainwindow.cpp:1807
+#: mainwindow.cpp:1809
 msgid "This requires setup that will download and configure Python."
 msgstr "இதற்கு பைத்தானைப் பதிவிறக்கி உள்ளமைக்கும் அமைப்பு தேவை."
 
-#: mainwindow.cpp:1809
+#: mainwindow.cpp:1811
 msgid "This requires setup to configure a Python environment."
 msgstr "இதற்கு பைதான் சூழலை உள்ளமைக்க அமைக்க வேண்டும்."
 
-#: mainwindow.cpp:1813
+#: mainwindow.cpp:1815
 msgid "This may require an Internet connection."
 msgstr "இதற்கு இணைய இணைப்பு தேவைப்படலாம்."
 
-#: mainwindow.cpp:1815
+#: mainwindow.cpp:1817
 msgid "Install updated plugins?"
 msgstr "புதுப்பிக்கப்பட்ட செருகுநிரல்களை நிறுவவா?"
 
-#: mainwindow.cpp:1816
+#: mainwindow.cpp:1818
 msgid "The following plugins are available:"
 msgstr "பின்வரும் செருகுநிரல்கள் கிடைக்கின்றன:"
 
-#: mainwindow.cpp:1817
+#: mainwindow.cpp:1819
 msgid "Would you like to update them?"
 msgstr ""
 
-#: mainwindow.cpp:1856
+#: mainwindow.cpp:1858
 msgid "Recover Autosaved Files"
 msgstr "தானாக சேமிக்கப்பட்ட கோப்புகளை மீட்டெடுக்கவும்"
 
-#: mainwindow.cpp:1857
+#: mainwindow.cpp:1859
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
@@ -316,11 +316,11 @@ msgstr ""
 "முந்தைய அமர்விலிருந்து தானாகச் சேமிக்கும் கோப்புகள் கண்டறியப்பட்டன. \n"
 "அவற்றை மீட்டெடுக்க விரும்புகிறீர்களா?"
 
-#: mainwindow.cpp:1921
+#: mainwindow.cpp:1923
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "பிழை: ஓபன்சிஎல் சூழலைத் தொடங்குவதில் தோல்வி"
 
-#: mainwindow.cpp:1922
+#: mainwindow.cpp:1924
 #, qt-format
 msgid ""
 "OpenGL 4.0 or greater required, exiting.\n"
@@ -331,52 +331,52 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:1923
+#: mainwindow.cpp:1925
 msgid "Unknown error"
 msgstr "தெரியாத பிழை"
 
-#: mainwindow.cpp:2064
+#: mainwindow.cpp:2066
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
 msgstr "%1 அமைப்புகள்"
 
-#: mainwindow.cpp:2301
+#: mainwindow.cpp:2303
 msgid "Common image formats"
 msgstr "பொதுவான பட வடிவங்கள்"
 
-#: mainwindow.cpp:2303
+#: mainwindow.cpp:2305
 msgid "All files"
 msgstr "அனைத்து கோப்புகள்"
 
-#: mainwindow.cpp:2303
+#: mainwindow.cpp:2305
 msgid "BMP"
 msgstr "பி.எம்.பி."
 
-#: mainwindow.cpp:2304
+#: mainwindow.cpp:2306
 msgid "PNG"
 msgstr "பி.என்.சி."
 
-#: mainwindow.cpp:2304
+#: mainwindow.cpp:2306
 msgid "JPEG"
 msgstr "Jpeg"
 
-#: mainwindow.cpp:2313
+#: mainwindow.cpp:2315
 msgid "Export Bitmap Graphics"
 msgstr "பிட்மேப் கிராபிக்ச் ஏற்றுமதி"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:2331 mainwindow.cpp:2451 mainwindow.cpp:3356:34
+#: mainwindow.cpp:2333 mainwindow.cpp:2453 mainwindow.cpp:3359:34
 msgid "Avogadro"
 msgstr "அவோகாட்ரோ"
 
-#: mainwindow.cpp:2332
+#: mainwindow.cpp:2334
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "கோப்பு %1 ஐ சேமிக்க முடியாது."
 
-#: mainwindow.cpp:2452
+#: mainwindow.cpp:2454
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -389,23 +389,23 @@ msgstr ""
 " தற்போதைய வடிவமைப்பிற்கு ஏற்றுமதி செய்ய விரும்புகிறீர்களா, அல்லது நிலையான வடிவத்தில் "
 "சேமிக்க விரும்புகிறீர்களா?"
 
-#: mainwindow.cpp:2459
+#: mainwindow.cpp:2461
 msgid "Export"
 msgstr "ஏற்றுமதி"
 
-#: mainwindow.cpp:2484
+#: mainwindow.cpp:2486
 msgid "Save chemical file"
 msgstr "வேதியியல் கோப்பை சேமிக்கவும்"
 
-#: mainwindow.cpp:2529
+#: mainwindow.cpp:2531
 msgid "Export Molecule"
 msgstr "ஏற்றுமதி மூலக்கூறு"
 
-#: mainwindow.cpp:2645
+#: mainwindow.cpp:2647
 msgid "Saving File in Progress…"
 msgstr "கோப்பைச் சேமிப்பது முன்னேற்றத்தில் உள்ளது…"
 
-#: mainwindow.cpp:2647
+#: mainwindow.cpp:2649
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -415,43 +415,43 @@ msgstr ""
 "கோப்பு “%1”\n"
 " “%2” உடன்"
 
-#: mainwindow.cpp:2768
+#: mainwindow.cpp:2770
 #, qt-format
 msgid "&Undo %1"
 msgstr "& %1 ஐ செயல்தவிர்க்கவும்"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2771 mainwindow.cpp:3041:118
+#: mainwindow.cpp:2773 mainwindow.cpp:3044:118
 msgid "&Undo"
 msgstr "செயல்தவிர் (&u)"
 
-#: mainwindow.cpp:2776
+#: mainwindow.cpp:2778
 #, qt-format
 msgid "&Redo %1"
 msgstr "& மீண்டும் %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2779 mainwindow.cpp:3049:124
+#: mainwindow.cpp:2781 mainwindow.cpp:3052:124
 msgid "&Redo"
 msgstr "மீண்டும்செய் (&r)"
 
-#: mainwindow.cpp:2903
+#: mainwindow.cpp:2906
 msgid "&Testing"
 msgstr "& சோதனை"
 
-#: mainwindow.cpp:2905
+#: mainwindow.cpp:2908
 msgid "&Record Test…"
 msgstr "&பதிவு சோதனை…"
 
-#: mainwindow.cpp:2908
+#: mainwindow.cpp:2911
 msgid "&Play Test…"
 msgstr "&சோதனை விளையாடு…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:2917 menubuilder.cpp:116:37
+#: mainwindow.cpp:2920 menubuilder.cpp:116:37
 msgid "&File"
 msgstr "கோப்பு (&f)"
 
@@ -459,13 +459,13 @@ msgstr "கோப்பு (&f)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2919:76 rc.cpp:82
+#: mainwindow.cpp:2922:76 rc.cpp:82
 msgid "&New"
 msgstr "&புதிய"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2930:52
+#: mainwindow.cpp:2933:52
 msgid "&Open…"
 msgstr "& திறந்த…"
 
@@ -473,7 +473,7 @@ msgstr "& திறந்த…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2942:85 rc.cpp:91
+#: mainwindow.cpp:2945:85 rc.cpp:91
 msgid "&Close"
 msgstr "மூடு (&c)"
 
@@ -481,35 +481,35 @@ msgstr "மூடு (&c)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2955:94 rc.cpp:100
+#: mainwindow.cpp:2958:94 rc.cpp:100
 msgid "&Save"
 msgstr "சேமி (&s)"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2967:103
+#: mainwindow.cpp:2970:103
 msgid "Save &As…"
 msgstr "சேமிக்கவும்…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:2980:196
+#: mainwindow.cpp:2983:196
 msgid "&Export"
 msgstr "& ஏற்றுமதி"
 
-#: mainwindow.cpp:2981
+#: mainwindow.cpp:2984
 msgid "&Molecule…"
 msgstr "& மூலக்கூறு…"
 
-#: mainwindow.cpp:2988
+#: mainwindow.cpp:2991
 msgid "Export Molecule…"
 msgstr "ஏற்றுமதி மூலக்கூறு…"
 
-#: mainwindow.cpp:2995
+#: mainwindow.cpp:2998
 msgid "&Graphics…"
 msgstr "& கிராபிக்ச்…"
 
-#: mainwindow.cpp:3002
+#: mainwindow.cpp:3005
 msgid "Export Graphics…"
 msgstr "கிராபிக்ச் ஏற்றுமதி…"
 
@@ -517,186 +517,186 @@ msgstr "கிராபிக்ச் ஏற்றுமதி…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3010:61 rc.cpp:67
+#: mainwindow.cpp:3013:61 rc.cpp:67
 msgid "&Quit"
 msgstr "&வெளியேறு"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3020:190
+#: mainwindow.cpp:3023:190
 msgid "Open Recent"
 msgstr "அண்மைக் கால திறப்பு"
 
-#: mainwindow.cpp:3034
+#: mainwindow.cpp:3037
 msgid "No recent files"
 msgstr "அண்மைக் கால கோப்புகள் இல்லை"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:3040 menubuilder.cpp:116:46
+#: mainwindow.cpp:3043 menubuilder.cpp:116:46
 msgid "&Edit"
 msgstr "திருத்து (&e)"
 
-#: mainwindow.cpp:3057
+#: mainwindow.cpp:3060
 msgid "&Copy Graphics"
 msgstr "& கிராபிக்ச் நகலெடுக்கவும்"
 
-#: mainwindow.cpp:3061
+#: mainwindow.cpp:3064
 msgid "Ctrl+Alt+C"
 msgstr "Ctrl+alt+c"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:3074 menubuilder.cpp:116:43
+#: mainwindow.cpp:3077 menubuilder.cpp:116:43
 msgid "&View"
 msgstr "காண்க (&v)"
 
-#: mainwindow.cpp:3075
+#: mainwindow.cpp:3078
 msgid "Set Background Color…"
 msgstr "பின்னணி நிறத்தை அமைக்கவும்…"
 
-#: mainwindow.cpp:3079
+#: mainwindow.cpp:3082
 msgid "Rendering…"
 msgstr "ரெண்டரிங்…"
 
-#: mainwindow.cpp:3087
+#: mainwindow.cpp:3090
 msgid "Projection"
 msgstr "திட்டம்"
 
-#: mainwindow.cpp:3088
+#: mainwindow.cpp:3091
 msgid "Perspective"
 msgstr "முன்னோக்கு"
 
-#: mainwindow.cpp:3095
+#: mainwindow.cpp:3098
 msgid "Orthographic"
 msgstr "ஆர்த்தோகிராஃபிக்"
 
-#: mainwindow.cpp:3114
+#: mainwindow.cpp:3117
 msgid "&Extensions"
 msgstr "நீட்டிப்புகள்"
 
-#: mainwindow.cpp:3116
+#: mainwindow.cpp:3119
 msgid "User Interface Language…"
 msgstr "பயனர் இடைமுக மொழி…"
 
-#: mainwindow.cpp:3120
+#: mainwindow.cpp:3123
 msgid "&Periodic Table…"
 msgstr "கால அட்டவணை…"
 
-#: mainwindow.cpp:3126 menubuilder.cpp:120
+#: mainwindow.cpp:3129 menubuilder.cpp:120
 msgid "&Help"
 msgstr "உதவி (&h)"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3127:115
+#: mainwindow.cpp:3130:115
 msgid "&About"
 msgstr "&பற்றி"
 
-#: mainwindow.cpp:3132
+#: mainwindow.cpp:3135
 msgid "&Discussion Forum"
 msgstr "கலந்துரையாடல் மன்றம்"
 
-#: mainwindow.cpp:3136
+#: mainwindow.cpp:3139
 msgid "&Avogadro Website"
 msgstr "& அவோகாட்ரோ வலைத்தளம்"
 
-#: mainwindow.cpp:3140
+#: mainwindow.cpp:3143
 msgid "&Report a Bug"
 msgstr "ஒரு பிழையைப் புகாரளிக்கவும்"
 
-#: mainwindow.cpp:3147
+#: mainwindow.cpp:3150
 msgid "&Crash Reporting…"
 msgstr ""
 
-#: mainwindow.cpp:3153
+#: mainwindow.cpp:3156
 msgid "&Suggest a Feature"
 msgstr "ஒரு அம்சத்தை பரிந்துரைக்கவும்"
 
-#: mainwindow.cpp:3187
+#: mainwindow.cpp:3190
 msgid "untitled"
 msgstr "தலைப்பிடப்படாத"
 
-#: mainwindow.cpp:3217
+#: mainwindow.cpp:3220
 msgid "System Language"
 msgstr "கணினி மொழி"
 
-#: mainwindow.cpp:3225
+#: mainwindow.cpp:3228
 msgid "Language"
 msgstr "மொழி"
 
-#: mainwindow.cpp:3225
+#: mainwindow.cpp:3228
 msgid "User Interface Language:"
 msgstr "பயனர் இடைமுக மொழி:"
 
-#: mainwindow.cpp:3341
+#: mainwindow.cpp:3344
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "அனைத்து உதவி வடிவங்களும் (%1) ;; அனைத்து கோப்புகளும் (*) ;;"
 
-#: mainwindow.cpp:3357
+#: mainwindow.cpp:3360
 msgid "Do you want to save the changes to the document?"
 msgstr "ஆவணத்தில் மாற்றங்களைச் சேமிக்க விரும்புகிறீர்களா?"
 
-#: mainwindow.cpp:3365
+#: mainwindow.cpp:3368
 msgid "Your changes will be lost if you don't save them."
 msgstr "நீங்கள் அவற்றைக் காப்பாற்றாவிட்டால் உங்கள் மாற்றங்கள் இழக்கப்படும்."
 
-#: mainwindow.cpp:3370
+#: mainwindow.cpp:3373
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+s"
 
-#: mainwindow.cpp:3372
+#: mainwindow.cpp:3375
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+d"
 
-#: mainwindow.cpp:3461
+#: mainwindow.cpp:3464
 msgid "Network Download Failed"
 msgstr "பிணையம் பதிவிறக்கம் தோல்வியடைந்தது"
 
-#: mainwindow.cpp:3462
+#: mainwindow.cpp:3465
 msgid "Network timeout or other error."
 msgstr "பிணைய நேரம் முடிந்தது அல்லது பிற பிழை."
 
-#: mainwindow.cpp:3542
+#: mainwindow.cpp:3545
 #, qt-format
 msgid "Your version: %1"
 msgstr "உங்கள் பதிப்பு: %1"
 
-#: mainwindow.cpp:3543
+#: mainwindow.cpp:3546
 #, qt-format
 msgid "New version: %1"
 msgstr "புதிய பதிப்பு: %1"
 
-#: mainwindow.cpp:3545
+#: mainwindow.cpp:3548
 msgid "An update is available, do you want to download it now?\n"
 msgstr "ஒரு புதுப்பிப்பு கிடைக்கிறது, இப்போது அதை பதிவிறக்கம் செய்ய விரும்புகிறீர்களா?\n"
 
-#: mainwindow.cpp:3547
+#: mainwindow.cpp:3550
 msgid "Version Update"
 msgstr "பதிப்பு புதுப்பிப்பு"
 
-#: mainwindow.cpp:3605
+#: mainwindow.cpp:3608
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "“%1” கோப்பு வடிவமைப்பை ஏற்றும்போது பிழை."
 
-#: mainwindow.cpp:3621
+#: mainwindow.cpp:3624
 msgid "Select file format"
 msgstr "கோப்பு வடிவமைப்பைத் தேர்ந்தெடுக்கவும்"
 
-#: mainwindow.cpp:3626 mainwindow.cpp:3637
+#: mainwindow.cpp:3629 mainwindow.cpp:3640
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "அவோகாட்ரோ “%1” ஐ திறக்க முடியாது."
 
-#: mainwindow.cpp:3636
+#: mainwindow.cpp:3639
 msgid "Cannot open files"
 msgstr "கோப்புகளைத் திறக்க முடியாது"
 
-#: mainwindow.cpp:3820
+#: mainwindow.cpp:3823
 msgid "The plugin was unloaded."
 msgstr ""
 
@@ -988,12 +988,12 @@ msgstr "சுற்றுப்புற மறுப்பு:"
 
 #. i18n: file: renderingdialog.ui:43
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
-#. i18n: file: renderingdialog.ui:118
-#. i18n: ectx: property (text), widget (QCheckBox, fogEnableCheckBox)
-#. i18n: file: renderingdialog.ui:220
-#. i18n: ectx: property (text), widget (QCheckBox, dofEnableCheckBox)
-#. i18n: file: renderingdialog.ui:325
+#. i18n: file: renderingdialog.ui:108
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
+#. i18n: file: renderingdialog.ui:193
+#. i18n: ectx: property (text), widget (QCheckBox, fogEnableCheckBox)
+#. i18n: file: renderingdialog.ui:295
+#. i18n: ectx: property (text), widget (QCheckBox, dofEnableCheckBox)
 msgid "Enable"
 msgstr "இயக்கு"
 
@@ -1007,72 +1007,82 @@ msgstr "சுற்றுப்புற நிழல்களின் வல�
 msgid "Shadow Strength:"
 msgstr "நிழல் வலிமை:"
 
-#. i18n: file: renderingdialog.ui:106
-#. i18n: ectx: property (toolTip), widget (QLabel, enableFog_label)
-msgid "Fog effect for depth cue"
-msgstr "ஆழமான குறிப்புக்கு மூடுபனி விளைவு"
+#. i18n: file: renderingdialog.ui:130
+#. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
+msgid "Thickness of the outline, in pixels"
+msgstr ""
 
-#. i18n: file: renderingdialog.ui:109
-#. i18n: ectx: property (text), widget (QLabel, enableFog_label)
-msgid "Fog:"
-msgstr "மூடுபனி:"
+#. i18n: file: renderingdialog.ui:133
+#. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
+msgid "Outline Width:"
+msgstr ""
 
-#. i18n: file: renderingdialog.ui:140
-#. i18n: ectx: property (text), widget (QLabel, fogStrength_label)
-msgid "Fog Strength:"
-msgstr "மூடுபனி வலிமை:"
-
-#. i18n: file: renderingdialog.ui:170
-#. i18n: ectx: property (text), widget (QLabel, fogPosition_label)
-msgid "Fog Position:"
-msgstr "மூடுபனி நிலை:"
-
-#. i18n: file: renderingdialog.ui:208
-#. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
-msgid "Add a depth blur"
-msgstr "ஆழமான மங்கலைச் சேர்க்கவும்"
-
-#. i18n: file: renderingdialog.ui:211
-#. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
-msgid "Depth Blur:"
-msgstr "ஆழம் மங்கலானது:"
-
-#. i18n: file: renderingdialog.ui:242
-#. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
-msgid "Strength of the depth blur"
-msgstr "ஆழத்தின் வலிமை மங்கலானது"
-
-#. i18n: file: renderingdialog.ui:245
-#. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
-msgid "Blur Strength :"
-msgstr "மங்கலான வலிமை:"
-
-#. i18n: file: renderingdialog.ui:272
-#. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
-msgid "Position of the depth blur"
-msgstr "ஆழம் மங்கலின் நிலை"
-
-#. i18n: file: renderingdialog.ui:275
-#. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
-msgid "Blur Position:"
-msgstr "மங்கலான நிலை:"
-
-#. i18n: file: renderingdialog.ui:313
+#. i18n: file: renderingdialog.ui:160
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
 msgid "Add an outline to edge atoms"
 msgstr "விளிம்பு அணுக்களுக்கு ஒரு அவுட்லைன் சேர்க்கவும்"
 
-#. i18n: file: renderingdialog.ui:316
+#. i18n: file: renderingdialog.ui:163
 #. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
 msgid "Edge Outline:"
 msgstr "எட்ச் அவுட்லைன்:"
 
-#. i18n: file: renderingdialog.ui:354
+#. i18n: file: renderingdialog.ui:181
+#. i18n: ectx: property (toolTip), widget (QLabel, enableFog_label)
+msgid "Fog effect for depth cue"
+msgstr "ஆழமான குறிப்புக்கு மூடுபனி விளைவு"
+
+#. i18n: file: renderingdialog.ui:184
+#. i18n: ectx: property (text), widget (QLabel, enableFog_label)
+msgid "Fog:"
+msgstr "மூடுபனி:"
+
+#. i18n: file: renderingdialog.ui:215
+#. i18n: ectx: property (text), widget (QLabel, fogStrength_label)
+msgid "Fog Strength:"
+msgstr "மூடுபனி வலிமை:"
+
+#. i18n: file: renderingdialog.ui:245
+#. i18n: ectx: property (text), widget (QLabel, fogPosition_label)
+msgid "Fog Position:"
+msgstr "மூடுபனி நிலை:"
+
+#. i18n: file: renderingdialog.ui:283
+#. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
+msgid "Add a depth blur"
+msgstr "ஆழமான மங்கலைச் சேர்க்கவும்"
+
+#. i18n: file: renderingdialog.ui:286
+#. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
+msgid "Depth Blur:"
+msgstr "ஆழம் மங்கலானது:"
+
+#. i18n: file: renderingdialog.ui:317
+#. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
+msgid "Strength of the depth blur"
+msgstr "ஆழத்தின் வலிமை மங்கலானது"
+
+#. i18n: file: renderingdialog.ui:320
+#. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
+msgid "Blur Strength :"
+msgstr "மங்கலான வலிமை:"
+
+#. i18n: file: renderingdialog.ui:347
+#. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
+msgid "Position of the depth blur"
+msgstr "ஆழம் மங்கலின் நிலை"
+
+#. i18n: file: renderingdialog.ui:350
+#. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
+msgid "Blur Position:"
+msgstr "மங்கலான நிலை:"
+
+#. i18n: file: renderingdialog.ui:384
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
 msgid "Save"
 msgstr "சேமி"
 
-#. i18n: file: renderingdialog.ui:374
+#. i18n: file: renderingdialog.ui:404
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
 msgid "Close"
 msgstr "மூடு"
