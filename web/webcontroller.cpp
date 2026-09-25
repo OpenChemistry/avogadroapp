@@ -17,28 +17,6 @@
 
 namespace Avogadro::Web {
 namespace {
-// Core currently leaves document layer registrations alive on destruction.
-// The page repeatedly replaces documents, so release only our owned document's
-// registry entry and settings after discarding its undo commands.
-class DocumentMolecule final
-  : public QtGui::Molecule
-  , private Core::LayerManager
-{
-public:
-  ~DocumentMolecule() override
-  {
-    undoMolecule()->undoStack().clear();
-    auto info = getMoleculeInfo(this);
-    for (auto& settings : info->settings)
-      for (auto* value : settings.second)
-        delete value;
-    info->settings.clear();
-    deleteMolecule(this);
-    if (m_activeMolecule == this)
-      m_activeMolecule = nullptr;
-  }
-};
-
 QJsonObject failure(const QString& error)
 {
   return { { "ok", false }, { "error", error } };
@@ -170,7 +148,7 @@ void WebController::replaceMolecule(std::unique_ptr<QtGui::Molecule> next)
 
 void WebController::newMolecule()
 {
-  replaceMolecule(std::make_unique<DocumentMolecule>());
+  replaceMolecule(std::make_unique<QtGui::Molecule>());
 }
 
 QJsonObject WebController::loadMolecule(const QString& text,
@@ -181,7 +159,7 @@ QJsonObject WebController::loadMolecule(const QString& text,
     return failure("Supported formats: CJSON, MOL, SDF, XYZ.");
   bool multiple = false;
   const auto input = firstRecord(text, format, multiple).toStdString();
-  auto next = std::make_unique<DocumentMolecule>();
+  auto next = std::make_unique<QtGui::Molecule>();
   auto& formats = Io::FileFormatManager::instance();
   std::unique_ptr<Io::FileFormat> reader(formats.newFormatFromFileExtension(
     format.toStdString(), Io::FileFormat::Read));
