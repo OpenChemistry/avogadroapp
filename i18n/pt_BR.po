@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-20 06:22+0000\n"
-"PO-Revision-Date: 2026-03-15 19:09+0000\n"
-"Last-Translator: Pedro Moreira <pedroltmoreira@gmail.com>\n"
+"PO-Revision-Date: 2026-09-26 10:51+0000\n"
+"Last-Translator: Alexandre R Soares <ntegti@zipmail.com.br>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
@@ -58,7 +58,7 @@ msgstr "Versão SSL:"
 #: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1 (Diagnóstico)"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
@@ -74,7 +74,7 @@ msgstr "Nenhum nome de arquivo definido em BackgroundFileFormat!"
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"
-msgstr ""
+msgstr "Relatório de Falhas"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -82,6 +82,9 @@ msgid ""
 "developers when Avogadro crashes, which helps us fix crashes we cannot "
 "reproduce ourselves."
 msgstr ""
+"Este é um recurso de diagnóstico do Avogadro. Ela pode enviar um relatório "
+"aos desenvolvedores se o Avogadro travar, o que nos ajuda a corrigir falhas "
+"que não conseguimos reproduzir por conta própria."
 
 #: crashreportdialog.cpp:38
 msgid ""
@@ -91,24 +94,33 @@ msgid ""
 "useful, but it may incidentally include fragments of what you were working "
 "on, such as part of a file name or a molecule you had open."
 msgstr ""
+"Um relatório de falha contém um instantâneo da memória do Avogadro no "
+"momento em que ele falhou, incluindo informações sobre o seu sistema "
+"operacional, driver de vídeo e a versão do Avogadro, além de um registro de "
+"atividades recentes. Esse instantâneo da memória torna o relatório útil, mas "
+"pode conter, incidentalmente, fragmentos do conteúdo em que você estava "
+"trabalhando, como parte de um nome de arquivo ou uma molécula que estava "
+"aberta."
 
 #: crashreportdialog.cpp:52
 msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"É enviado somente se você concordar. Você pode alterar isso a qualquer "
+"momento em Ajuda → Relatório de Falhas."
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "Enviar Relatórios de Falha"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "Não Enviar"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "Enviar relatórios de falha aos desenvolvedores do Avogadro"
 
 #: mainwindow.cpp:440
 msgid "Ready…"
@@ -246,7 +258,7 @@ msgstr ""
 
 #: mainwindow.cpp:1355
 msgid "The save was canceled."
-msgstr ""
+msgstr "A gravação foi cancelada."
 
 #: mainwindow.cpp:1658
 msgid "Found Previous Avogadro Files"
@@ -308,7 +320,7 @@ msgstr "Estes plugins estão disponíveis:"
 
 #: mainwindow.cpp:1819
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "Você gostaria de atualizá-los?"
 
 #: mainwindow.cpp:1858
 msgid "Recover Autosaved Files"
@@ -702,8 +714,9 @@ msgid "Cannot open files"
 msgstr "Não foi possível abrir os arquivos %1"
 
 #: mainwindow.cpp:3823
+#, fuzzy
 msgid "The plugin was unloaded."
-msgstr ""
+msgstr "O plugin foi descarregado."
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -727,43 +740,46 @@ msgstr "&Janela"
 
 #: rpclistener.cpp:206
 msgid "Avogadro is shutting down."
-msgstr ""
+msgstr "O Avogadro está encerrando as atividades."
 
 #: rpclistener.cpp:521
 msgid "No molecule is open."
-msgstr ""
+msgstr "Nenhuma molécula está aberta."
 
 #: rpclistener.cpp:550
 msgid "renderImage requires both width and height, or neither."
 msgstr ""
+"renderImage requer tanto a largura quanto a altura, ou nenhuma das duas."
 
 #: rpclistener.cpp:575
 msgid "Could not render the current view."
-msgstr ""
+msgstr "Não foi possível renderizar a visualização atual."
 
 #: rpclistener.cpp:603
 msgid "Could not encode the render as PNG."
-msgstr ""
+msgstr "Não foi possível codificar a renderização como PNG."
 
 #: rpclistener.cpp:643 rpclistener.cpp:654
 msgid "No active view."
-msgstr ""
+msgstr "Nenhuma visualização ativa."
 
 #: rpclistener.cpp:664
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
 msgstr ""
+"O parâmetro modelView de setCamera deve consistir exatamente em 16 números, "
+"em ordem majoritária de linha (row-major)."
 
 #: rpclistener.cpp:728 rpclistener.cpp:796
 msgid "The command failed."
-msgstr ""
+msgstr "O comando falhou."
 
 #: rpclistener.cpp:734
 msgid "That plugin is already running a command."
-msgstr ""
+msgstr "Esse plugin já está executando um comando."
 
 #: rpclistener.cpp:766
 msgid "The command timed out."
-msgstr ""
+msgstr "Esgotou o tempo do comando."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
@@ -1015,12 +1031,12 @@ msgstr "Intensidade da Sombra:"
 #. i18n: file: renderingdialog.ui:130
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
 msgid "Thickness of the outline, in pixels"
-msgstr ""
+msgstr "Espessura do contorno, em pixels"
 
 #. i18n: file: renderingdialog.ui:133
 #. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
 msgid "Outline Width:"
-msgstr ""
+msgstr "Largura do contorno:"
 
 #. i18n: file: renderingdialog.ui:160
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
