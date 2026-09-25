@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Avogadro · Molecule editor</title>
+  <link rel="stylesheet" href="editor.css">
+</head>
+<body>
+  <header><strong>Avogadro</strong><span>Molecule editor</span><span id="document-name">Untitled</span></header>
+  <main>
+    <aside aria-label="Editor controls">
+      <fieldset id="controls" disabled>
+        <legend>Molecule</legend>
+        <div class="row"><button id="new">New</button><button id="open">Open…</button></div>
+        <input type="file" id="file" accept=".cjson,.mol,.sdf,.xyz" hidden>
+        <label>Download format<select id="format"><option value="cjson">CJSON</option><option value="mol">MOL</option><option value="sdf">SDF</option><option value="xyz">XYZ</option></select></label>
+        <button id="download">Download</button>
+        <hr>
+        <div class="tools" role="group" aria-label="Tools">
+          <button data-tool="navigate" aria-pressed="false">Navigate</button>
+          <button data-tool="draw" aria-pressed="true">Draw</button>
+          <button data-tool="select" aria-pressed="false">Select</button>
+        </div>
+        <section id="draw-options" aria-label="Draw options">
+          <label>Element<select id="element"></select></label>
+          <label>Bond<select id="bond"><option value="0">Automatic</option><option value="1">Single</option><option value="2">Double</option><option value="3">Triple</option></select></label>
+          <label class="check"><input type="checkbox" id="hydrogens" checked>Adjust hydrogens</label>
+        </section>
+        <div class="row"><button id="undo" disabled>Undo</button><button id="redo" disabled>Redo</button></div>
+        <button id="delete">Delete selected atoms</button>
+        <button id="reset">Fit molecule</button>
+      </fieldset>
+      <p id="help">Draw: click to add an atom, drag to create a bond, right-click to remove. Navigate: drag to rotate, right-drag to pan, scroll to zoom.</p>
+      <p>Files stay in your browser. CJSON preserves Avogadro data; other formats may omit properties.</p>
+    </aside>
+    <section id="workspace" aria-label="Molecular viewport">
+      <div id="viewport" tabindex="0"></div>
+      <div id="loading" role="status">Loading Avogadro…</div>
+    </section>
+  </main>
+  <footer><span id="counts">0 atoms · 0 bonds</span><span id="status" role="status" aria-live="polite"></span></footer>
+  <dialog id="discard-dialog" aria-labelledby="discard-title">
+    <h2 id="discard-title">Discard unsaved changes?</h2>
+    <p>Download your molecule first if you want to keep it.</p>
+    <form method="dialog"><button value="cancel" autofocus>Keep editing</button><button value="discard">Discard changes</button></form>
+  </dialog>
+  <script src="avogadro-web.js"></script>
+  <script src="qtloader.js"></script>
+  <script type="module" src="editor.js"></script>
+</body>
+</html>

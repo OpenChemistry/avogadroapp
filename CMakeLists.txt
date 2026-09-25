@@ -64,9 +64,24 @@ if(ENABLE_TESTING)
   enable_testing()
 endif()
 
-option(Avogadro_ENABLE_RPC "Enable RPC server" ON)
+option(AVOGADRO_WEB_EDITOR "Build the minimal web editor" ${EMSCRIPTEN})
+set(_rpc_default ON)
+if(AVOGADRO_WEB_EDITOR OR EMSCRIPTEN)
+  set(_rpc_default OFF)
+endif()
+option(Avogadro_ENABLE_RPC "Enable RPC server" ${_rpc_default})
+if(EMSCRIPTEN AND NOT AVOGADRO_WEB_EDITOR)
+  message(FATAL_ERROR "WASM builds use AVOGADRO_WEB_EDITOR=ON; the desktop shell is native-only")
+endif()
+if(AVOGADRO_WEB_EDITOR AND Avogadro_ENABLE_RPC)
+  message(FATAL_ERROR "The web editor requires Avogadro_ENABLE_RPC=OFF")
+endif()
 
-add_subdirectory(avogadro)
+if(AVOGADRO_WEB_EDITOR)
+  add_subdirectory(web)
+else()
+  add_subdirectory(avogadro)
+endif()
 
 option(BUILD_DOCUMENTATION "Build project documentation" OFF)
 
@@ -81,9 +96,11 @@ install(
     LICENSE
   DESTINATION "${INSTALL_DOC_DIR}/avogadro2")
 
-include(AvogadroCPack)
+if(NOT AVOGADRO_WEB_EDITOR)
+  include(AvogadroCPack)
+endif()
 
-if(ENABLE_TESTING)
+if(ENABLE_TESTING AND NOT AVOGADRO_WEB_EDITOR)
   include(BuildPackageTest)
   BuildPackageTest_Add("AvogadroApp" "${CMAKE_CURRENT_BINARY_DIR}")
   add_subdirectory(tests)

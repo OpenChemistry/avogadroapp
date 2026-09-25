@@ -1,0 +1,35 @@
+:root { color-scheme: light; font: 15px system-ui, sans-serif; color: #183336; background: #f5f7f6; }
+* { box-sizing: border-box; }
+body { margin: 0; height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; }
+header { display: flex; align-items: baseline; gap: 1rem; padding: 1rem 1.5rem; border-bottom: 1px solid #ccd8d5; }
+header strong { font-size: 1.35rem; color: #176459; }
+#document-name { margin-left: auto; max-width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+main { min-height: 0; display: grid; grid-template-columns: 240px 1fr; }
+aside { padding: 1rem; overflow: auto; border-right: 1px solid #ccd8d5; }
+fieldset { padding: 0; margin: 0; border: 0; min-width: 0; }
+legend { font-weight: 650; margin-bottom: .6rem; }
+button, select { font: inherit; color: inherit; border: 1px solid #afc2bc; background: white; padding: .55rem; border-radius: 6px; }
+button { cursor: pointer; }
+button:hover:not(:disabled) { background: #e4f0eb; }
+button:disabled { opacity: .45; cursor: default; }
+button[aria-pressed="true"] { background: #176459; color: white; border-color: #176459; }
+button:focus-visible, select:focus-visible { outline: 3px solid #65a994; outline-offset: 2px; }
+label { display: grid; gap: .35rem; margin: .75rem 0; }
+.check { display: flex; align-items: center; }
+.row, .tools { display: flex; gap: .4rem; margin: .6rem 0; }
+.row > *, .tools > * { flex: 1; min-width: 0; }
+.tools { flex-wrap: wrap; }
+.tools > * { flex: 1 0 auto; min-width: max-content; }
+fieldset > button { width: 100%; margin-bottom: .5rem; }
+hr { border: 0; border-top: 1px solid #ccd8d5; margin: 1rem 0; }
+aside p { color: #506e69; font-size: .8rem; line-height: 1.6; }
+#workspace { min-width: 0; min-height: 0; position: relative; }
+#viewport { width: 100%; height: 100%; overflow: hidden; outline: none; }
+#loading { position: absolute; inset: 0; display: grid; place-content: center; padding: 2rem; background: #f5f7f6; }
+#loading[hidden] { display: none; }
+footer { display: flex; gap: 1.5rem; padding: .7rem 1.5rem; border-top: 1px solid #ccd8d5; font-size: .85rem; min-height: 2.6rem; }
+#status[data-error="true"] { color: #a52a31; }
+dialog { max-width: 420px; border: 1px solid #afc2bc; border-radius: 12px; padding: 1.5rem; }
+dialog::backdrop { background: #132e3280; }
+dialog form { display: flex; justify-content: flex-end; gap: .5rem; }
+@media (max-width: 650px) { main { grid-template-columns: 185px 1fr; } aside { padding: .65rem; } header { padding: .65rem; } header > span:first-of-type { display: none; } }

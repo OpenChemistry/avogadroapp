@@ -7,9 +7,7 @@
 #include "avogadroappconfig.h"
 #include "ui_aboutdialog.h"
 
-#ifndef Q_OS_WASM
 #include <QSslSocket>
-#endif
 
 #include <avogadro/core/version.h>
 
@@ -40,12 +38,8 @@ AboutDialog::AboutDialog(QWidget* parent_)
   m_ui->version->setText(html.arg("20").arg(AvogadroApp_VERSION));
   m_ui->libsVersion->setText(html.arg("10").arg(version()));
   m_ui->qtVersion->setText(html.arg("10").arg(qVersion()));
-#ifdef Q_OS_WASM
-  m_ui->sslVersion->setText(html.arg("10").arg(tr("Not available")));
-#else
   m_ui->sslVersion->setText(
     html.arg("10").arg(QSslSocket::sslLibraryVersionString()));
-#endif
 
   // check for light or dark mode
   const QPalette defaultPalette;
