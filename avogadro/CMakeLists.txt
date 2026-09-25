@@ -196,6 +196,8 @@ elseif(UNIX)
     RENAME "org.openchemistry.Avogadro2.svg")
 elseif(WIN32)
   list(APPEND avogadro_srcs icons/avogadro.rc)
+  # MSVC merges this into the linker-generated manifest
+  list(APPEND avogadro_srcs avogadro.manifest)
   # copy icons
   install(FILES "icons/avogadro.png" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")
   install(FILES "icons/avogadro.ico" DESTINATION "${CMAKE_INSTALL_PREFIX}/share/icons")

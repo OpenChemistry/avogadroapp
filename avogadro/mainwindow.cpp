@@ -1191,7 +1191,8 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
   if (m_fileReadMolecule)
     m_fileReadMolecule->deleteLater();
   m_fileReadMolecule = new Molecule(this);
-  m_fileReadMolecule->setData("fileName", qPrintable(fileName));
+  // make sure the filename is UTF-8 for serialization
+  m_fileReadMolecule->setData("fileName", fileName.toStdString());
   m_threadedReader->moveToThread(m_fileReadThread);
   m_threadedReader->setMolecule(m_fileReadMolecule);
   m_threadedReader->setFileName(fileName);
@@ -1266,7 +1267,8 @@ void MainWindow::backgroundReaderFinished()
     delete m_fileReadMolecule;
   } else if (m_threadedReader->success()) {
     if (!fileName.isEmpty()) {
-      m_fileReadMolecule->setData("fileName", qPrintable(fileName));
+      // Make sure the fileName is UTF-8 for serialization
+      m_fileReadMolecule->setData("fileName", fileName.toStdString());
       m_recentFiles.prepend(fileName);
       updateRecentFiles();
     } else {
@@ -1337,7 +1339,7 @@ bool MainWindow::backgroundWriterFinished()
     if (m_threadedWriter->success()) {
       statusBar()->showMessage(
         tr("Saved file %1", "%1 = filename").arg(fileName));
-      m_threadedWriter->molecule()->setData("fileName", qPrintable(fileName));
+      m_threadedWriter->molecule()->setData("fileName", fileName.toStdString());
       markMoleculeClean();
       updateWindowTitle();
       m_recentFiles.prepend(fileName);
