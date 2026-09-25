@@ -2748,6 +2748,10 @@ void MainWindow::undoEdit()
     m_molecule->emitChanged(Molecule::Atoms | Molecule::Added);
     m_layerModel->updateRows();
     activeMoleculeEdited();
+
+    // if the undo stack is empty, mark m_moleculeDirty false
+    if (!m_molecule->undoMolecule()->undoStack().canUndo())
+      m_moleculeDirty = false;
   }
 }
 
@@ -2758,6 +2762,10 @@ void MainWindow::redoEdit()
     m_molecule->emitChanged(Molecule::Atoms | Molecule::Added);
     m_layerModel->updateRows();
     activeMoleculeEdited();
+
+    // we should have at least one undo command on the stack
+    if (!m_molecule->undoMolecule()->undoStack().canUndo())
+      m_moleculeDirty = true;
   }
 }
 
