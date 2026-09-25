@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-20 06:22+0000\n"
-"PO-Revision-Date: 2026-09-17 19:07+0000\n"
+"PO-Revision-Date: 2026-09-26 10:51+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ro/>\n"
@@ -1028,12 +1028,12 @@ msgstr "Intensitatea umbrei:"
 #. i18n: file: renderingdialog.ui:130
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
 msgid "Thickness of the outline, in pixels"
-msgstr ""
+msgstr "Grosimea conturului, în pixeli"
 
 #. i18n: file: renderingdialog.ui:133
 #. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
 msgid "Outline Width:"
-msgstr ""
+msgstr "Lățimea conturului:"
 
 #. i18n: file: renderingdialog.ui:160
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
