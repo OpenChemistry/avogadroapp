@@ -12,6 +12,8 @@
 #include <QtCore/QVariantMap>
 #include <QtWidgets/QMainWindow>
 
+#include <vector>
+
 #ifdef QTTESTING
 class pqTestUtility;
 #endif
@@ -581,6 +583,50 @@ private:
   /** Stop tracking, and work out how the command ended. */
   CommandStatus endPluginCommand(QObject* plugin, bool claimed, quint64 token,
                                  QString* message, QVariantMap* result);
+
+  /**
+   * @name Layer actions
+   * The per-action bodies behind the Layers dock's click handler
+   * (layerActivated()), shared with the addLayer/removeLayer/
+   * setActiveLayer/setLayerVisible/setLayerLocked RPC commands so that both
+   * drive the exact same code. Every layer is identified by its id (as
+   * QtGui::LayerModel::layerForRow() and layerCount() report it), not by a
+   * Layers dock row.
+   */
+  ///@{
+
+  /** Add a new layer, inheriting the active layer's settings. */
+  void addLayer();
+
+  /** Remove @p layer. */
+  void removeLayer(size_t layer);
+
+  /** Make @p layer the active layer. */
+  void setActiveLayer(size_t layer);
+
+  /**
+   * Show or hide @p layer, updating the active view if it changed. A no-op
+   * if it already matches @p visible.
+   */
+  void setLayerVisible(size_t layer, bool visible);
+
+  /**
+   * Lock or unlock @p layer against edits. A no-op if it already matches
+   * @p locked.
+   */
+  void setLayerLocked(size_t layer, bool locked);
+
+  /**
+   * Validate and translate the "layer" RPC option: on success, fills
+   * @p layer with the requested layer id and returns true; on failure,
+   * fills @p message with a translated explanation and returns false.
+   * Callers must check for an open molecule themselves first, since that
+   * failure uses a different message.
+   */
+  bool layerIdFromOptions(const QVariantMap& options, QString* message,
+                          size_t* layer) const;
+
+  ///@}
 
   QtGui::Molecule* m_molecule;
   QtGui::RWMolecule* m_rwMolecule;

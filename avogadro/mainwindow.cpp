@@ -15,6 +15,7 @@
 #include "tooltipfilter.h"
 #include "viewfactory.h"
 
+#include <avogadro/core/avogadrocore.h>
 #include <avogadro/core/elements.h>
 #include <avogadro/core/variant.h>
 #include <avogadro/io/cjsonformat.h>
@@ -98,6 +99,9 @@
 
 #include <QScreen>
 
+#include <cmath>
+#include <limits>
+
 #ifdef QTTESTING
 #include <QXmlStreamReader>
 #include <pqEventObserver.h>
@@ -132,6 +136,24 @@ QString withChemicalExtension(const QString& fileName, const QString& extension)
   const std::string stripped = Io::stripCompressionSuffix(name);
   return QString::fromStdString(stripped + "." + extension.toStdString() +
                                 name.substr(stripped.size()));
+}
+
+// True if @p value holds a whole number that fits in an int, writing it to
+// @p out. Used to validate script-supplied layer indices: QVariant::toInt()
+// rounds a fractional double in Qt 6, which would silently accept something
+// like 2.5, and casting an out-of-range double to int is undefined behavior,
+// which a huge value like 1e20 would otherwise reach.
+bool wholeNumber(const QVariant& value, int* out)
+{
+  bool ok = false;
+  const double asDouble = value.toDouble(&ok);
+  if (!ok || !std::isfinite(asDouble) || asDouble != std::floor(asDouble))
+    return false;
+  if (asDouble < static_cast<double>(std::numeric_limits<int>::min()) ||
+      asDouble > static_cast<double>(std::numeric_limits<int>::max()))
+    return false;
+  *out = static_cast<int>(asDouble);
+  return true;
 }
 
 } // namespace
@@ -1931,41 +1953,90 @@ void MainWindow::rendererInvalid()
   QTimer::singleShot(500, this, &QWidget::close);
 }
 
+void MainWindow::addLayer()
+{
+  m_layerModel->addLayer(m_molecule->undoMolecule());
+}
+
+void MainWindow::removeLayer(size_t layer)
+{
+  m_layerModel->removeLayerId(layer, m_molecule->undoMolecule());
+  QWidget* w = m_multiViewWidget->activeWidget();
+  if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w))
+    glWidget->updateScene();
+}
+
+void MainWindow::setActiveLayer(size_t layer)
+{
+  m_layerModel->setActiveLayerId(layer, m_molecule->undoMolecule());
+}
+
+void MainWindow::setLayerVisible(size_t layer, bool visible)
+{
+  m_layerModel->setLayerVisible(layer, visible);
+  QWidget* w = m_multiViewWidget->activeWidget();
+  if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w))
+    glWidget->updateScene();
+}
+
+void MainWindow::setLayerLocked(size_t layer, bool locked)
+{
+  m_layerModel->setLayerLocked(layer, locked);
+}
+
+bool MainWindow::layerIdFromOptions(const QVariantMap& options,
+                                    QString* message, size_t* layer) const
+{
+  if (!options.contains("layer")) {
+    if (message != nullptr)
+      *message = tr("Missing 'layer' parameter.");
+    return false;
+  }
+
+  int value = 0;
+  if (!wholeNumber(options.value("layer"), &value)) {
+    if (message != nullptr)
+      *message = tr("'layer' must be a whole number.");
+    return false;
+  }
+
+  if (value < 0 || static_cast<size_t>(value) >= m_layerModel->layerCount()) {
+    if (message != nullptr)
+      *message = tr("'layer' %1 is out of range.").arg(value);
+    return false;
+  }
+
+  *layer = static_cast<size_t>(value);
+  return true;
+}
+
 void MainWindow::layerActivated(const QModelIndex& idx)
 {
   m_layerModel->updateRows();
   if (idx.row() == m_layerModel->items() - 1) {
-    m_layerModel->addLayer(m_molecule->undoMolecule());
+    addLayer();
   } else {
-    bool updateGL = false;
-    if (idx.column() == QtGui::LayerModel::ColumnType::Name) {
-      m_layerModel->setActiveLayer(idx.row(), m_molecule->undoMolecule());
-    } else if (idx.column() == QtGui::LayerModel::ColumnType::Remove) {
-      if (m_layerModel->layerCount() > 1) {
-        m_layerModel->removeItem(idx.row(), m_molecule->undoMolecule());
-        updateGL = true;
-      }
-    } else if (idx.column() == QtGui::LayerModel::ColumnType::Lock) {
-      m_layerModel->flipLocked(idx.row());
-    } else if (idx.column() == QtGui::LayerModel::ColumnType::Visible) {
-      m_layerModel->flipVisible(idx.row());
-      updateGL = true;
-    } else if (idx.column() == QtGui::LayerModel::ColumnType::Menu) {
-      m_layerModel->setActiveLayer(idx.row(), m_molecule->undoMolecule());
-      if (m_sceneDock->isHidden()) {
-        m_sceneDock->show();
-        m_viewDock->show();
-        resizeDocks({ m_sceneDock, m_viewDock }, { 250, 50 }, Qt::Vertical);
-      } else {
-        m_sceneDock->hide();
-        m_viewDock->hide();
-      }
-    }
-
-    if (updateGL) {
-      QWidget* w = m_multiViewWidget->activeWidget();
-      if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
-        glWidget->updateScene();
+    const size_t layer = m_layerModel->layerForRow(idx.row());
+    if (layer != MaxIndex) {
+      if (idx.column() == QtGui::LayerModel::ColumnType::Name) {
+        setActiveLayer(layer);
+      } else if (idx.column() == QtGui::LayerModel::ColumnType::Remove) {
+        if (m_layerModel->layerCount() > 1)
+          removeLayer(layer);
+      } else if (idx.column() == QtGui::LayerModel::ColumnType::Lock) {
+        setLayerLocked(layer, !m_layerModel->layerLocked(layer));
+      } else if (idx.column() == QtGui::LayerModel::ColumnType::Visible) {
+        setLayerVisible(layer, !m_layerModel->layerVisible(layer));
+      } else if (idx.column() == QtGui::LayerModel::ColumnType::Menu) {
+        setActiveLayer(layer);
+        if (m_sceneDock->isHidden()) {
+          m_sceneDock->show();
+          m_viewDock->show();
+          resizeDocks({ m_sceneDock, m_viewDock }, { 250, 50 }, Qt::Vertical);
+        } else {
+          m_sceneDock->hide();
+          m_viewDock->hide();
+        }
       }
     }
   }
@@ -3866,6 +3937,123 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
     }
     setActiveDisplayTypes(enableTypes);
     setDisabledDisplayTypes(disableTypes);
+    return CommandStatus::Finished;
+  } else if (command == "addLayer") {
+    if (m_molecule == nullptr) {
+      if (message != nullptr)
+        *message = tr("No molecule is open.");
+      return CommandStatus::Failed;
+    }
+
+    // A new layer is appended after every existing one (see
+    // QtGui::RWLayerManager::addLayer()), so its id is simply the layer
+    // count before it is added.
+    const size_t newLayerId = m_layerModel->layerCount();
+    addLayer();
+    refreshDisplayTypes();
+
+    if (result != nullptr) {
+      result->insert("layer", static_cast<int>(newLayerId));
+      result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    }
+    return CommandStatus::Finished;
+  } else if (command == "removeLayer") {
+    if (m_molecule == nullptr) {
+      if (message != nullptr)
+        *message = tr("No molecule is open.");
+      return CommandStatus::Failed;
+    }
+
+    size_t layer = 0;
+    if (!layerIdFromOptions(options, message, &layer))
+      return CommandStatus::Failed;
+
+    if (m_layerModel->layerCount() <= 1) {
+      if (message != nullptr)
+        *message = tr("Cannot remove the last remaining layer.");
+      return CommandStatus::Failed;
+    }
+
+    removeLayer(layer);
+    refreshDisplayTypes();
+
+    if (result != nullptr)
+      result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    return CommandStatus::Finished;
+  } else if (command == "setActiveLayer") {
+    if (m_molecule == nullptr) {
+      if (message != nullptr)
+        *message = tr("No molecule is open.");
+      return CommandStatus::Failed;
+    }
+
+    size_t layer = 0;
+    if (!layerIdFromOptions(options, message, &layer))
+      return CommandStatus::Failed;
+
+    setActiveLayer(layer);
+    refreshDisplayTypes();
+
+    if (result != nullptr) {
+      result->insert("layer", static_cast<int>(layer));
+      result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    }
+    return CommandStatus::Finished;
+  } else if (command == "setLayerVisible" || command == "getLayerVisible") {
+    if (m_molecule == nullptr) {
+      if (message != nullptr)
+        *message = tr("No molecule is open.");
+      return CommandStatus::Failed;
+    }
+
+    size_t layer = 0;
+    if (!layerIdFromOptions(options, message, &layer))
+      return CommandStatus::Failed;
+
+    if (command == "setLayerVisible") {
+      if (!options.contains("visible") ||
+          options.value("visible").metaType().id() != QMetaType::Bool) {
+        if (message != nullptr)
+          *message = tr("'visible' must be true or false.");
+        return CommandStatus::Failed;
+      }
+      setLayerVisible(layer, options.value("visible").toBool());
+      refreshDisplayTypes();
+    }
+
+    if (result != nullptr) {
+      result->insert("layer", static_cast<int>(layer));
+      result->insert("visible", m_layerModel->layerVisible(layer));
+      result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    }
+    return CommandStatus::Finished;
+  } else if (command == "setLayerLocked" || command == "getLayerLocked") {
+    if (m_molecule == nullptr) {
+      if (message != nullptr)
+        *message = tr("No molecule is open.");
+      return CommandStatus::Failed;
+    }
+
+    size_t layer = 0;
+    if (!layerIdFromOptions(options, message, &layer))
+      return CommandStatus::Failed;
+
+    if (command == "setLayerLocked") {
+      if (!options.contains("locked") ||
+          options.value("locked").metaType().id() != QMetaType::Bool) {
+        if (message != nullptr)
+          *message = tr("'locked' must be true or false.");
+        return CommandStatus::Failed;
+      }
+      setLayerLocked(layer, options.value("locked").toBool());
+      refreshDisplayTypes();
+    }
+
+    if (result != nullptr) {
+      result->insert("layer", static_cast<int>(layer));
+      result->insert("locked", m_layerModel->layerLocked(layer));
+      result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    }
     return CommandStatus::Finished;
   }
 

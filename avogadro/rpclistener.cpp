@@ -81,6 +81,10 @@ struct BuiltinCommand
 /// and "kill". Kept sorted by name for readability; listCommands() sorts its
 /// output anyway.
 const BuiltinCommand builtinCommands[] = {
+  { "addLayer",
+    "Add a new layer to the active molecule, inheriting the active "
+    "layer's settings.",
+    false },
   { "exportFile",
     "Write the active molecule to a file, guessing the format from the "
     "extension.",
@@ -89,6 +93,12 @@ const BuiltinCommand builtinCommands[] = {
     "Report the active view's camera: distance to focus, "
     "focus point, projection and the model view matrix.",
     false },
+  { "getLayerLocked",
+    "Report whether a layer (by index, 0 = first layer) is locked "
+    "against edits.",
+    false },
+  { "getLayerVisible",
+    "Report whether a layer (by index, 0 = first layer) is visible.", false },
   { "getMolecule", "Return the active molecule serialized as a string.",
     false },
   { "internalPing", "Check whether the server is responsive.", false },
@@ -107,6 +117,10 @@ const BuiltinCommand builtinCommands[] = {
     false },
   { "openFile", "Read a file from disk and make it the active molecule.",
     false },
+  { "removeLayer",
+    "Remove a layer (by index, 0 = first layer) from the active "
+    "molecule. Fails if it is the last remaining layer.",
+    false },
   { "renderImage",
     "Render the current view to a PNG, inline or to a "
     "file. Omit width/height for the native framebuffer "
@@ -117,9 +131,21 @@ const BuiltinCommand builtinCommands[] = {
     "Render the current view and save it as an image at "
     "the window's current size.",
     false },
+  { "setActiveLayer",
+    "Make a layer (by index, 0 = first layer) of the active molecule "
+    "the active one.",
+    false },
   { "setCamera",
     "Apply a model view matrix and/or projection settings to "
     "the active view's camera.",
+    false },
+  { "setLayerLocked",
+    "Lock or unlock a layer (by index, 0 = first layer) of the active "
+    "molecule.",
+    false },
+  { "setLayerVisible",
+    "Show or hide a layer (by index, 0 = first layer) of the active "
+    "molecule.",
     false },
   { "setProjection", "Switch between perspective and orthographic projection.",
     false },
