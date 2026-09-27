@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-20 06:22+0000\n"
-"PO-Revision-Date: 2026-08-31 04:51+0000\n"
+"PO-Revision-Date: 2026-09-28 03:51+0000\n"
 "Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
@@ -247,7 +247,7 @@ msgstr ""
 
 #: mainwindow.cpp:1355
 msgid "The save was canceled."
-msgstr ""
+msgstr "保存は取り消されました。"
 
 #: mainwindow.cpp:1658
 #, fuzzy
@@ -728,11 +728,11 @@ msgstr "ウィンドウ(&W)"
 
 #: rpclistener.cpp:206
 msgid "Avogadro is shutting down."
-msgstr ""
+msgstr "Avogadroは終了中です。"
 
 #: rpclistener.cpp:521
 msgid "No molecule is open."
-msgstr ""
+msgstr "分子を開いていません。"
 
 #: rpclistener.cpp:550
 msgid "renderImage requires both width and height, or neither."
@@ -740,15 +740,16 @@ msgstr ""
 
 #: rpclistener.cpp:575
 msgid "Could not render the current view."
-msgstr ""
+msgstr "現在のビューをレンダーできませんでした。"
 
 #: rpclistener.cpp:603
+#, fuzzy
 msgid "Could not encode the render as PNG."
-msgstr ""
+msgstr "PNGとしてエンコードできませんでした。"
 
 #: rpclistener.cpp:643 rpclistener.cpp:654
 msgid "No active view."
-msgstr ""
+msgstr "アクティブなビューがありません。"
 
 #: rpclistener.cpp:664
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
@@ -756,15 +757,15 @@ msgstr ""
 
 #: rpclistener.cpp:728 rpclistener.cpp:796
 msgid "The command failed."
-msgstr ""
+msgstr "コマンドが失敗しました。"
 
 #: rpclistener.cpp:734
 msgid "That plugin is already running a command."
-msgstr ""
+msgstr "プラグインは既にコマンドを実行しています。"
 
 #: rpclistener.cpp:766
 msgid "The command timed out."
-msgstr ""
+msgstr "コマンドがタイムアウトしました。"
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
