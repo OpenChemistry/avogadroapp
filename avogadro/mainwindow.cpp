@@ -116,6 +116,18 @@ namespace Avogadro {
 
 namespace {
 
+// Plugin commands that create or load a molecule, and so must run even when
+// no molecule is active. Every other plugin command is refused up front with
+// "No molecule" (see MainWindow::handleCommand()).
+// TODO: replace with a flag on ExtensionPlugin::registerCommand() once
+// avogadrolibs can say which commands work without a molecule.
+bool commandCreatesMolecule(const QString& command)
+{
+  static const QStringList names = { QStringLiteral("fetchPDB"),
+                                     QStringLiteral("fetchByName") };
+  return names.contains(command, Qt::CaseInsensitive);
+}
+
 // The chemical format is named by the extension underneath any compression
 // suffix: "molecule.cjson.gz" is CJSON that happens to be gzipped, and
 // Io::FileFormat recovers the codec from the same file name on its own.
@@ -4063,6 +4075,19 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
       result->insert("count", static_cast<int>(m_layerModel->layerCount()));
     }
     return CommandStatus::Finished;
+  }
+
+  // Every remaining command comes from a plugin. Refuse them here when there
+  // is no active molecule (only possible before the first file has loaded),
+  // rather than relying on each plugin to notice. This is reported like a
+  // plugin's own commandFailed(), so RPC callers get a failure, not "Method
+  // not found". An empty molecule is still a molecule: plugins decide those.
+  if (m_molecule == nullptr && !commandCreatesMolecule(command) &&
+      (m_toolCommandMap.contains(command) ||
+       m_extensionCommandMap.contains(command))) {
+    if (message != nullptr)
+      *message = tr("No molecule");
+    return CommandStatus::Failed;
   }
 
   // pass any remaining commands to the tools or extensions
