@@ -131,8 +131,8 @@ namespace {
 bool isKnownOption(const QString& argument)
 {
   static const char* const knownOptions[] = {
-    "--rpc-name",         "--test-file",     "--test-no-exit",
-    "--disable-settings", "--skip-autosave", "--crash-test"
+    "--rpc-name",      "--test-file",    "--test-no-exit", "--disable-settings",
+    "--skip-autosave", "--skip-dialogs", "--crash-test"
   };
   for (const char* option : knownOptions) {
     if (argument == QLatin1String(option))
@@ -361,10 +361,18 @@ int main(int argc, char* argv[])
   delete offscreen;
 
   if (!contextIsValid) {
-    QMessageBox::information(
-      nullptr, QCoreApplication::translate("main.cpp", "Avogadro"),
-      QCoreApplication::translate("main.cpp",
-                                  "This system does not support OpenGL."));
+    // This check runs before the full argument parsing below, so look for the
+    // flags that suppress dialogs here (--rpc-name implies --skip-dialogs).
+    const QStringList earlyArgs = QCoreApplication::arguments();
+    if (earlyArgs.contains(QStringLiteral("--skip-dialogs")) ||
+        earlyArgs.contains(QStringLiteral("--rpc-name"))) {
+      qCritical("--skip-dialogs: This system does not support OpenGL.");
+    } else {
+      QMessageBox::information(
+        nullptr, QCoreApplication::translate("main.cpp", "Avogadro"),
+        QCoreApplication::translate("main.cpp",
+                                    "This system does not support OpenGL."));
+    }
     return 1;
   }
 
@@ -380,6 +388,8 @@ int main(int argc, char* argv[])
   QStringList fileNames;
   bool disableSettings = false;
   bool skipAutosave = false;
+  bool skipDialogs = false;
+  bool rpcNameGiven = false;
   QString rpcName = QStringLiteral("avogadro");
 #ifdef QTTESTING
   QString testFile;
@@ -394,6 +404,7 @@ int main(int argc, char* argv[])
         return EXIT_FAILURE;
       }
       rpcName = *(++it);
+      rpcNameGiven = true;
     } else if (*it == "--test-file") {
       if (it + 1 == args.constEnd() || isKnownOption(*(it + 1))) {
         qWarning("Avogadro called with --test-file but no file name.");
@@ -416,6 +427,8 @@ int main(int argc, char* argv[])
       disableSettings = true;
     } else if (*it == "--skip-autosave") {
       skipAutosave = true;
+    } else if (*it == "--skip-dialogs") {
+      skipDialogs = true;
     } else if (*it == "--crash-test") {
 #ifdef AVOGADRO_USE_SENTRY
       Avogadro::CrashReporter::triggerTestCrash();
@@ -432,7 +445,14 @@ int main(int argc, char* argv[])
     }
   }
 
-  Avogadro::MainWindow window(fileNames, disableSettings, skipAutosave);
+  // A scripted (RPC) launch has nobody to click on a startup dialog.
+  if (rpcNameGiven && !skipDialogs) {
+    skipDialogs = true;
+    qInfo("--rpc-name given: implying --skip-dialogs.");
+  }
+
+  Avogadro::MainWindow window(fileNames, disableSettings, skipAutosave,
+                              skipDialogs);
   window.setTranslationList(languages, codes);
 #ifdef QTTESTING
   window.playTest(testFile, testExit);
@@ -441,7 +461,15 @@ int main(int argc, char* argv[])
 
   // On a diagnostic build, ask about crash reporting the first time it runs.
   // A no-op everywhere else.
-  Avogadro::CrashReporter::promptForConsentIfNeeded(&window);
+  if (skipDialogs) {
+#ifdef AVOGADRO_USE_SENTRY
+    if (!Avogadro::CrashReporter::consentRequested())
+      qInfo("--skip-dialogs: skipped crash reporting consent dialog; assuming "
+            "no consent (stored choice untouched).");
+#endif
+  } else {
+    Avogadro::CrashReporter::promptForConsentIfNeeded(&window);
+  }
 
 #ifdef Avogadro_ENABLE_RPC
   // create rpc listener

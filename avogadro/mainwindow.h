@@ -69,7 +69,7 @@ class MainWindow : public QMainWindow
   Q_OBJECT
 public:
   MainWindow(const QStringList& fileNames, bool disableSettings = false,
-             bool skipAutosave = false);
+             bool skipAutosave = false, bool skipDialogs = false);
   ~MainWindow() override;
 
 public slots:
@@ -639,6 +639,8 @@ private:
   // Skip autosave recovery and writing autosaves entirely, so that a
   // scripted or automated run neither prompts nor leaves files behind.
   bool m_skipAutosave = false;
+  /// Decline every startup modal dialog (see --skip-dialogs)
+  bool m_skipDialogs = false;
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 

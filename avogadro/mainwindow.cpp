@@ -311,7 +311,7 @@ using std::string;
 using std::vector;
 
 MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
-                       bool skipAutosave)
+                       bool skipAutosave, bool skipDialogs)
   : m_molecule(nullptr)
   , m_rwMolecule(nullptr)
   , m_moleculeModel(nullptr)
@@ -352,8 +352,13 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 
   // check for auto-save files
   m_skipAutosave = skipAutosave;
-  if (!m_skipAutosave)
+  m_skipDialogs = skipDialogs;
+  if (m_skipDialogs) {
+    qInfo("--skip-dialogs: skipped autosave recovery check; autosave files "
+          "left untouched.");
+  } else if (!m_skipAutosave) {
     checkAutosaveRecovery();
+  }
 
   // check for version update
   checkUpdate();
@@ -1343,10 +1348,16 @@ void MainWindow::backgroundReaderFinished()
                                .arg(m_molecule->bondCount()),
                              5000);
   } else {
-    QMessageBox::critical(this, tr("File error"),
-                          tr("Error while reading file '%1':\n%2")
-                            .arg(fileName)
-                            .arg(m_threadedReader->error()));
+    if (m_skipDialogs) {
+      qWarning("--skip-dialogs: skipped 'File error' dialog; error while "
+               "reading file '%s': %s",
+               qPrintable(fileName), qPrintable(m_threadedReader->error()));
+    } else {
+      QMessageBox::critical(this, tr("File error"),
+                            tr("Error while reading file '%1':\n%2")
+                              .arg(fileName)
+                              .arg(m_threadedReader->error()));
+    }
     delete m_fileReadMolecule;
   }
   m_fileReadThread->deleteLater();
@@ -1690,27 +1701,32 @@ void MainWindow::loadPackages()
         QString sizeStr = QLocale().formattedDataSize(
           totalBytes, 1, QLocale::DataSizeTraditionalFormat);
 
-        QMessageBox msgBox(this);
-        msgBox.setWindowTitle(tr("Found Previous Avogadro Files"));
-        msgBox.setText(
-          tr("Files from a previous version of Avogadro were found in "
-             "the plugins directory, using %1 of space.\n\n"
-             "These files are no longer needed and can be safely removed.")
-            .arg(sizeStr));
-        msgBox.setDetailedText(oldEntries.join(QStringLiteral("\n")));
-        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-        msgBox.setDefaultButton(QMessageBox::Yes);
-        msgBox.setButtonText(QMessageBox::Yes, tr("Remove Old Files"));
-        msgBox.setButtonText(QMessageBox::No, tr("Keep Files"));
+        if (m_skipDialogs) {
+          qInfo("--skip-dialogs: skipped 'Found Previous Avogadro Files' "
+                "dialog; assuming 'Keep Files'.");
+        } else {
+          QMessageBox msgBox(this);
+          msgBox.setWindowTitle(tr("Found Previous Avogadro Files"));
+          msgBox.setText(
+            tr("Files from a previous version of Avogadro were found in "
+               "the plugins directory, using %1 of space.\n\n"
+               "These files are no longer needed and can be safely removed.")
+              .arg(sizeStr));
+          msgBox.setDetailedText(oldEntries.join(QStringLiteral("\n")));
+          msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+          msgBox.setDefaultButton(QMessageBox::Yes);
+          msgBox.setButtonText(QMessageBox::Yes, tr("Remove Old Files"));
+          msgBox.setButtonText(QMessageBox::No, tr("Keep Files"));
 
-        if (msgBox.exec() == QMessageBox::Yes) {
-          for (const QString& entry : oldEntries) {
-            QString path = appDataDir.filePath(entry);
-            QFileInfo info(path);
-            if (info.isDir())
-              QDir(path).removeRecursively();
-            else
-              QFile::remove(path);
+          if (msgBox.exec() == QMessageBox::Yes) {
+            for (const QString& entry : oldEntries) {
+              QString path = appDataDir.filePath(entry);
+              QFileInfo info(path);
+              if (info.isDir())
+                QDir(path).removeRecursively();
+              else
+                QFile::remove(path);
+            }
           }
         }
       }
@@ -1827,7 +1843,11 @@ void MainWindow::loadPackages()
   newPackages = writablePackages;
 
   // If there are new or updated packages, ask the user before installing
-  if (!newPackages.isEmpty()) {
+  if (!newPackages.isEmpty() && m_skipDialogs) {
+    qInfo("--skip-dialogs: skipped plugin setup/update prompt; assuming 'No' "
+          "(%d package(s) not installed).",
+          static_cast<int>(newPackages.size()));
+  } else if (!newPackages.isEmpty()) {
     QStringList packageNames;
     foreach (const QString& dir, newPackages) {
       packageNames << QFileInfo(dir).baseName();
@@ -1867,9 +1887,11 @@ void MainWindow::loadPackages()
     }
   }
 
-  settings.setValue("MainWindow/firstRun", false);
+  // Skipping the dialogs is not an answer to them; ask again next time.
+  if (!m_skipDialogs)
+    settings.setValue("MainWindow/firstRun", false);
 
-  // Load cached registrations so consumer plugins get their signals
+    // Load cached registrations so consumer plugins get their signals
 #ifndef NDEBUG
   qDebug() << "Load registered packages";
 #endif
@@ -1956,9 +1978,15 @@ void MainWindow::viewConfigActivated() {}
 void MainWindow::rendererInvalid()
 {
   auto* widget = qobject_cast<GLWidget*>(sender());
-  QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
-                       tr("OpenGL 4.0 or greater required, exiting.\n\n%1")
-                         .arg(widget ? widget->error() : tr("Unknown error")));
+  if (m_skipDialogs) {
+    qCritical("--skip-dialogs: OpenGL 4.0 or greater required, exiting. %s",
+              qPrintable(widget ? widget->error() : tr("Unknown error")));
+  } else {
+    QMessageBox::warning(
+      this, tr("Error: Failed to initialize OpenGL context"),
+      tr("OpenGL 4.0 or greater required, exiting.\n\n%1")
+        .arg(widget ? widget->error() : tr("Unknown error")));
+  }
   // Process events, and then set a single shot timer. This is needed to ensure
   // the RPC server also exits cleanly.
   QApplication::processEvents();
@@ -3554,8 +3582,12 @@ void MainWindow::checkUpdate()
 void MainWindow::finishUpdateRequest(QNetworkReply* reply)
 {
   if (!reply->isReadable()) {
-    QMessageBox::warning(this, tr("Network Download Failed"),
-                         tr("Network timeout or other error."));
+    if (m_skipDialogs)
+      qInfo("--skip-dialogs: skipped 'Network Download Failed' dialog "
+            "(update check).");
+    else
+      QMessageBox::warning(this, tr("Network Download Failed"),
+                           tr("Network timeout or other error."));
     reply->deleteLater();
     return;
   }
@@ -3629,6 +3661,13 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
 #ifndef NDEBUG
     qDebug() << "current version is newer than latest release";
 #endif
+    return;
+  }
+
+  if (m_skipDialogs) {
+    qInfo("--skip-dialogs: skipped 'Version Update' dialog (%s available); "
+          "assuming 'Cancel'.",
+          qPrintable(latestRelease));
     return;
   }
 
@@ -3718,10 +3757,16 @@ void MainWindow::readQueuedFiles()
       "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : nullptr)) {
-      QMessageBox::warning(this, tr("Cannot open file"),
-                           tr("Avogadro cannot open"
-                              " “%1”.")
-                             .arg(file));
+      if (m_skipDialogs) {
+        qWarning("--skip-dialogs: skipped 'Cannot open file' dialog; "
+                 "Avogadro cannot open '%s'.",
+                 qPrintable(file));
+      } else {
+        QMessageBox::warning(this, tr("Cannot open file"),
+                             tr("Avogadro cannot open"
+                                " “%1”.")
+                               .arg(file));
+      }
     }
   }
 }
@@ -3729,10 +3774,16 @@ void MainWindow::readQueuedFiles()
 void MainWindow::clearQueuedFiles()
 {
   if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
-    QMessageBox::warning(this, tr("Cannot open files"),
-                         tr("Avogadro cannot open"
-                            " “%1”.")
-                           .arg(m_queuedFiles.join("\n")));
+    if (m_skipDialogs) {
+      qWarning("--skip-dialogs: skipped 'Cannot open files' dialog; "
+               "Avogadro cannot open '%s'.",
+               qPrintable(m_queuedFiles.join("', '")));
+    } else {
+      QMessageBox::warning(this, tr("Cannot open files"),
+                           tr("Avogadro cannot open"
+                              " “%1”.")
+                             .arg(m_queuedFiles.join("\n")));
+    }
     m_queuedFiles.clear();
   }
 }
