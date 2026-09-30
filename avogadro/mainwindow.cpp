@@ -1348,10 +1348,16 @@ void MainWindow::backgroundReaderFinished()
                                .arg(m_molecule->bondCount()),
                              5000);
   } else {
-    QMessageBox::critical(this, tr("File error"),
-                          tr("Error while reading file '%1':\n%2")
-                            .arg(fileName)
-                            .arg(m_threadedReader->error()));
+    if (m_skipDialogs) {
+      qWarning("--skip-dialogs: skipped 'File error' dialog; error while "
+               "reading file '%s': %s",
+               qPrintable(fileName), qPrintable(m_threadedReader->error()));
+    } else {
+      QMessageBox::critical(this, tr("File error"),
+                            tr("Error while reading file '%1':\n%2")
+                              .arg(fileName)
+                              .arg(m_threadedReader->error()));
+    }
     delete m_fileReadMolecule;
   }
   m_fileReadThread->deleteLater();
@@ -1885,7 +1891,7 @@ void MainWindow::loadPackages()
   if (!m_skipDialogs)
     settings.setValue("MainWindow/firstRun", false);
 
-  // Load cached registrations so consumer plugins get their signals
+    // Load cached registrations so consumer plugins get their signals
 #ifndef NDEBUG
   qDebug() << "Load registered packages";
 #endif
@@ -3751,10 +3757,16 @@ void MainWindow::readQueuedFiles()
       "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : nullptr)) {
-      QMessageBox::warning(this, tr("Cannot open file"),
-                           tr("Avogadro cannot open"
-                              " “%1”.")
-                             .arg(file));
+      if (m_skipDialogs) {
+        qWarning("--skip-dialogs: skipped 'Cannot open file' dialog; "
+                 "Avogadro cannot open '%s'.",
+                 qPrintable(file));
+      } else {
+        QMessageBox::warning(this, tr("Cannot open file"),
+                             tr("Avogadro cannot open"
+                                " “%1”.")
+                               .arg(file));
+      }
     }
   }
 }
@@ -3762,10 +3774,16 @@ void MainWindow::readQueuedFiles()
 void MainWindow::clearQueuedFiles()
 {
   if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
-    QMessageBox::warning(this, tr("Cannot open files"),
-                         tr("Avogadro cannot open"
-                            " “%1”.")
-                           .arg(m_queuedFiles.join("\n")));
+    if (m_skipDialogs) {
+      qWarning("--skip-dialogs: skipped 'Cannot open files' dialog; "
+               "Avogadro cannot open '%s'.",
+               qPrintable(m_queuedFiles.join("', '")));
+    } else {
+      QMessageBox::warning(this, tr("Cannot open files"),
+                           tr("Avogadro cannot open"
+                              " “%1”.")
+                             .arg(m_queuedFiles.join("\n")));
+    }
     m_queuedFiles.clear();
   }
 }
