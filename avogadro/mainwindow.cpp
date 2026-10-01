@@ -2256,8 +2256,12 @@ void MainWindow::viewActivated(QWidget* widget)
       setActiveTool("Navigator");
       glWidget->updateScene();
     } else {
-      m_moleculeModel->setActiveMolecule(glWidget->molecule());
-      m_layerModel->addMolecule(m_molecule);
+      // Both models follow the view's molecule; m_molecule is only updated
+      // below, so it may still be the previous view's molecule here.
+      if (QtGui::Molecule* viewMolecule = glWidget->molecule()) {
+        m_moleculeModel->setActiveMolecule(viewMolecule);
+        m_layerModel->addMolecule(viewMolecule);
+      }
       // Figure out the active tool - reflect this in the toolbar.
       ToolPlugin* tool = glWidget->activeTool();
       if (tool) {
