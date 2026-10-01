@@ -157,6 +157,31 @@ QString otherAutosaveForm(const QString& fileName)
   return fileName + gz;
 }
 
+// Where autosaves live.
+QString autosaveDirPath()
+{
+  return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
+         "/autosave";
+}
+
+// Dynamic property on a molecule holding the file name (no directory) of its
+// autosave. It lives and dies with the QObject and, unlike Molecule::data(), is
+// never serialized into a saved file.
+const char* const autosaveProperty = "avogadroAutosaveFile";
+
+// True if the file is an autosave, i.e. in the autosave directory with an
+// autosave name.
+bool isAutosaveFile(const QString& path)
+{
+  const QFileInfo info(path);
+  if (info.absoluteDir().canonicalPath() !=
+      QDir(autosaveDirPath()).canonicalPath())
+    return false;
+  const QString name = info.fileName();
+  return name.endsWith(autosaveBaseSuffix) ||
+         name.endsWith(autosaveBaseSuffix + QStringLiteral(".gz"));
+}
+
 // The chemical format is named by the extension underneath any compression
 // suffix: "molecule.cjson.gz" is CJSON that happens to be gzipped, and
 // Io::FileFormat recovers the codec from the same file name on its own.
@@ -782,6 +807,7 @@ void MainWindow::closeActiveMolecule()
     setMolecule(molecules[idx - 1]);
   }
 
+  removeAutosave(currentMol);
   m_moleculeModel->removeItem(currentMol);
 }
 
@@ -860,6 +886,9 @@ void MainWindow::closeEvent(QCloseEvent* e)
     e->ignore();
     return;
   }
+  // Quitting: the active document was saved or discarded (or was clean).
+  // Other open documents keep their autosaves for recovery.
+  removeAutosave(m_molecule);
   QMainWindow::closeEvent(e);
 }
 
@@ -1334,7 +1363,16 @@ void MainWindow::backgroundReaderFinished()
   if (m_progressDialog->wasCanceled()) {
     delete m_fileReadMolecule;
   } else if (m_threadedReader->success()) {
-    if (!fileName.isEmpty()) {
+    const bool recovered = !fileName.isEmpty() && isAutosaveFile(fileName);
+    if (recovered) {
+      // A recovered autosave is an unsaved document, not a file called
+      // "..._autosave.cjson": leave it untitled and let the molecule own the
+      // autosave file, so further autosaves overwrite it and it is removed once
+      // the document is saved or discarded.
+      m_fileReadMolecule->setData("fileName", Core::Variant());
+      m_fileReadMolecule->setProperty(autosaveProperty,
+                                      QFileInfo(fileName).fileName());
+    } else if (!fileName.isEmpty()) {
       // Make sure the fileName is UTF-8 for serialization
       m_fileReadMolecule->setData("fileName", fileName.toStdString());
       m_recentFiles.prepend(fileName);
@@ -1344,6 +1382,11 @@ void MainWindow::backgroundReaderFinished()
     }
 
     setMolecule(m_fileReadMolecule);
+    if (recovered) {
+      // setMolecule() marks the document clean; it has not been saved.
+      m_moleculeDirty = true;
+      updateWindowTitle();
+    }
 
     // check if the modelView is set
     if (m_fileReadMolecule->hasData("modelView")) {
@@ -1407,6 +1450,10 @@ void MainWindow::backgroundReaderFinished()
 bool MainWindow::backgroundWriterFinished()
 {
   QString fileName = m_threadedWriter->fileName();
+  // The writer is always handed a QtGui::Molecule (see
+  // saveFile()/saveFileAs()).
+  QPointer<QtGui::Molecule> writtenMolecule =
+    dynamic_cast<QtGui::Molecule*>(m_threadedWriter->molecule());
   bool success = false;
   QString errorMessage;
   if (!m_progressDialog->wasCanceled()) {
@@ -1437,9 +1484,10 @@ bool MainWindow::backgroundWriterFinished()
   m_progressDialog->deleteLater();
   m_progressDialog = nullptr;
 
-  // On successful save, remove any autosave files
+  // On successful save (or Save As) the autosave is obsolete. The next autosave
+  // picks a new name, which follows the new file name.
   if (success)
-    cleanupAutosaves(fileName);
+    removeAutosave(writtenMolecule);
 
   // Report back to a script that is waiting on this export via RPC, the
   // same way a plugin command does.
@@ -1454,66 +1502,56 @@ bool MainWindow::backgroundWriterFinished()
   return success;
 }
 
-void MainWindow::cleanupAutosaves(QString fileName)
+void MainWindow::removeAutosave(QtGui::Molecule* molecule)
 {
-  if (fileName.isEmpty())
+  if (!molecule)
     return;
 
-#ifndef NDEBUG
-  qDebug() << "Cleaning up autosaves for " << fileName;
-#endif
+  const QString name = molecule->property(autosaveProperty).toString();
+  if (name.isEmpty())
+    return;
 
-  QString autosaveDirPath =
-    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
-    "/autosave";
-  QDir autosaveDir(autosaveDirPath);
-  QStringList autosaveFiles =
-    autosaveDir.entryList(autosaveNameFilters(), QDir::Files);
-  // check if fileName is in autosaveFiles
-  for (const QString& file : autosaveFiles) {
-    if (file.contains(fileName)) {
-      // we don't need this anymore because the real file is saved
-      QFile::remove(autosaveDir.absoluteFilePath(file));
-      break;
-    }
-  }
+  // Only ever the file this molecule wrote, in either (plain / gzip) form.
+  const QDir dir(autosaveDirPath());
+  QFile::remove(dir.absoluteFilePath(name));
+  QFile::remove(dir.absoluteFilePath(otherAutosaveForm(name)));
+  molecule->setProperty(autosaveProperty, QVariant());
 }
 
-void MainWindow::cleanupCurrentAutosave()
+QString MainWindow::autosaveNameFor(QtGui::Molecule* molecule)
 {
-  if (!m_molecule)
-    return;
+  QString name = molecule->property(autosaveProperty).toString();
+  if (!name.isEmpty())
+    return name;
 
-  QString autosaveDirPath =
-    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
-    "/autosave";
-  QDir autosaveDir(autosaveDirPath);
-  if (!autosaveDir.exists())
-    return;
-
-  QStringList autosaveFiles =
-    autosaveDir.entryList(autosaveNameFilters(), QDir::Files);
-
-  // Determine the search pattern based on whether the molecule has a filename
-  QString searchPattern;
-  if (m_molecule->hasData("fileName")) {
-    QFileInfo fileInfo(m_molecule->data("fileName").toString().c_str());
-    searchPattern = fileInfo.baseName();
+  QString prefix;
+  if (molecule->hasData("fileName")) {
+    prefix =
+      QFileInfo(QString::fromStdString(molecule->data("fileName").toString()))
+        .baseName()
+        .left(60);
   } else {
-    // For untitled documents, match by formula
-    searchPattern = QString::fromStdString(m_molecule->formula());
-    searchPattern.remove(QRegularExpression("[^A-Za-z0-9]"));
+    QString formula = QString::fromStdString(molecule->formula());
+    formula.remove(QRegularExpression("[^A-Za-z0-9]")); // sanitize
+    prefix = tr("untitled") + formula.left(60);
   }
+  if (prefix.isEmpty())
+    prefix = tr("untitled");
 
-  if (searchPattern.isEmpty())
-    return;
-
-  for (const QString& file : autosaveFiles) {
-    if (file.contains(searchPattern)) {
-      QFile::remove(autosaveDir.absoluteFilePath(file));
-      // Don't break - there might be multiple autosaves for untitled documents
-    }
+  // A random token, chosen once, keeps documents apart even when they share a
+  // base name (or a formula). Retry on the unlikely collision with a file
+  // already there.
+  const QDir dir(autosaveDirPath());
+  for (int attempt = 0; attempt < 100; ++attempt) {
+    const QString token =
+      QString::number(QRandomGenerator::global()->generate(), 16)
+        .rightJustified(8, QLatin1Char('0'));
+    name = prefix + "_" + token + autosaveSuffix();
+    if (!dir.exists(name) && !dir.exists(otherAutosaveForm(name)))
+      break;
   }
+  molecule->setProperty(autosaveProperty, name);
+  return name;
 }
 
 static bool copyDirectoryRecursively(const QString& srcPath,
@@ -1929,10 +1967,7 @@ void MainWindow::loadPackages()
 
 void MainWindow::checkAutosaveRecovery()
 {
-  QString autosaveDirPath =
-    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
-    "/autosave";
-  QDir autosaveDir(autosaveDirPath);
+  QDir autosaveDir(autosaveDirPath());
   if (!autosaveDir.exists())
     return;
 
@@ -1948,10 +1983,12 @@ void MainWindow::checkAutosaveRecovery()
     QMessageBox::Yes | QMessageBox::No);
 
   if (reply == QMessageBox::Yes) {
-    for (const QString& file : autosaveFiles) {
-      QString path = autosaveDir.absoluteFilePath(file);
-      openFile(path, new Io::CjsonFormat);
-    }
+    // Open them one after another through the queue: each read replaces the
+    // single in-flight reader state. backgroundReaderFinished() recognizes
+    // these as recovered autosaves and hands each one to its molecule.
+    for (const QString& file : autosaveFiles)
+      m_queuedFiles.append(autosaveDir.absoluteFilePath(file));
+    readQueuedFiles();
   }
 
   // Optionally, cleanup old autosaves
@@ -2137,6 +2174,7 @@ void MainWindow::moleculeActivated(const QModelIndex& idx)
           newMolecule();
         }
       }
+      removeAutosave(mol);
       m_moleculeModel->removeItem(mol);
     }
   }
@@ -2890,8 +2928,10 @@ void MainWindow::undoEdit()
     activeMoleculeEdited();
 
     // if the undo stack is empty, mark m_moleculeDirty false
-    if (!m_molecule->undoMolecule()->undoStack().canUndo())
+    if (!m_molecule->undoMolecule()->undoStack().canUndo()) {
       m_moleculeDirty = false;
+      removeAutosave(m_molecule); // back to the saved state
+    }
   }
 }
 
@@ -3317,30 +3357,16 @@ void MainWindow::autosaveDocument()
     return; // No molecule loaded or no changes made since the last save.
   }
 
-  QString autosaveDirPath =
-    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
-    "/autosave";
-  QDir autosaveDir(autosaveDirPath);
+  const QString dirPath = autosaveDirPath();
+  QDir autosaveDir(dirPath);
   if (!autosaveDir.exists()) {
     autosaveDir.mkpath(".");
   }
 
-  // Construct autosave file name
-  QString autosaveFileName;
-  if (m_molecule->hasData("fileName")) {
-    QFileInfo fileInfo(m_molecule->data("fileName").toString().c_str());
-    autosaveFileName = fileInfo.baseName() + autosaveSuffix();
-  } else {
-    QString formula = QString::fromStdString(m_molecule->formula());
-    formula.remove(QRegularExpression("[^A-Za-z0-9]")); // sanitize
-    QString uid =
-      QString::number(QRandomGenerator::global()->generate(), 16).left(5);
+  // One name for the molecule's lifetime, so every autosave replaces the last.
+  const QString autosaveFileName = autosaveNameFor(m_molecule);
 
-    autosaveFileName = tr("untitled") + QString("%1_%2").arg(formula).arg(uid) +
-                       autosaveSuffix();
-  }
-
-  QString autosaveFilePath = autosaveDirPath + "/" + autosaveFileName;
+  QString autosaveFilePath = dirPath + "/" + autosaveFileName;
 
   // Use CJSON format for autosaving
   Io::CjsonFormat writer;
@@ -3353,7 +3379,7 @@ void MainWindow::autosaveDocument()
   } else {
     qDebug() << "Document autosaved to" << autosaveFilePath;
     // Drop a leftover autosave of the same document in the other form.
-    QFile::remove(autosaveDirPath + "/" + otherAutosaveForm(autosaveFileName));
+    QFile::remove(dirPath + "/" + otherAutosaveForm(autosaveFileName));
   }
 }
 
@@ -3539,7 +3565,7 @@ bool MainWindow::saveFileIfNeeded()
         // fails:
         return saveFile(/*async=*/false);
       case QMessageBox::Discard:
-        cleanupCurrentAutosave();
+        removeAutosave(m_molecule);
         markMoleculeClean();
         return true;
       default:
