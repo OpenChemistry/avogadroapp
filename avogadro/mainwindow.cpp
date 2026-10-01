@@ -128,6 +128,35 @@ bool commandCreatesMolecule(const QString& command)
   return names.contains(command, Qt::CaseInsensitive);
 }
 
+// Autosaves are gzip-compressed when this build can do it. The plain form is
+// still recognized (and recovered, cleaned up) so that a change of build, or an
+// older version's autosave, is never orphaned.
+const QString autosaveBaseSuffix = QStringLiteral("_autosave.cjson");
+
+QString autosaveSuffix()
+{
+  if (Io::compressionSupported(Io::Compression::Gzip))
+    return autosaveBaseSuffix + QStringLiteral(".") +
+           QString::fromStdString(
+             Io::compressionExtension(Io::Compression::Gzip));
+  return autosaveBaseSuffix;
+}
+
+QStringList autosaveNameFilters()
+{
+  return QStringList() << "*" + autosaveBaseSuffix
+                       << "*" + autosaveBaseSuffix + ".gz";
+}
+
+// The name of the same autosave in the other (plain / gzip) form.
+QString otherAutosaveForm(const QString& fileName)
+{
+  const QString gz = QStringLiteral(".gz");
+  if (fileName.endsWith(gz))
+    return fileName.left(fileName.size() - gz.size());
+  return fileName + gz;
+}
+
 // The chemical format is named by the extension underneath any compression
 // suffix: "molecule.cjson.gz" is CJSON that happens to be gzipped, and
 // Io::FileFormat recovers the codec from the same file name on its own.
@@ -1439,7 +1468,7 @@ void MainWindow::cleanupAutosaves(QString fileName)
     "/autosave";
   QDir autosaveDir(autosaveDirPath);
   QStringList autosaveFiles =
-    autosaveDir.entryList(QStringList() << "*_autosave.cjson", QDir::Files);
+    autosaveDir.entryList(autosaveNameFilters(), QDir::Files);
   // check if fileName is in autosaveFiles
   for (const QString& file : autosaveFiles) {
     if (file.contains(fileName)) {
@@ -1463,7 +1492,7 @@ void MainWindow::cleanupCurrentAutosave()
     return;
 
   QStringList autosaveFiles =
-    autosaveDir.entryList(QStringList() << "*_autosave.cjson", QDir::Files);
+    autosaveDir.entryList(autosaveNameFilters(), QDir::Files);
 
   // Determine the search pattern based on whether the molecule has a filename
   QString searchPattern;
@@ -1908,7 +1937,7 @@ void MainWindow::checkAutosaveRecovery()
     return;
 
   QStringList autosaveFiles =
-    autosaveDir.entryList(QStringList() << "*_autosave.cjson", QDir::Files);
+    autosaveDir.entryList(autosaveNameFilters(), QDir::Files);
   if (autosaveFiles.isEmpty())
     return; // great, nothing to do
 
@@ -3300,15 +3329,15 @@ void MainWindow::autosaveDocument()
   QString autosaveFileName;
   if (m_molecule->hasData("fileName")) {
     QFileInfo fileInfo(m_molecule->data("fileName").toString().c_str());
-    autosaveFileName = fileInfo.baseName() + "_autosave.cjson";
+    autosaveFileName = fileInfo.baseName() + autosaveSuffix();
   } else {
     QString formula = QString::fromStdString(m_molecule->formula());
     formula.remove(QRegularExpression("[^A-Za-z0-9]")); // sanitize
     QString uid =
       QString::number(QRandomGenerator::global()->generate(), 16).left(5);
 
-    autosaveFileName =
-      tr("untitled") + QString("%1_%2_autosave.cjson").arg(formula).arg(uid);
+    autosaveFileName = tr("untitled") + QString("%1_%2").arg(formula).arg(uid) +
+                       autosaveSuffix();
   }
 
   QString autosaveFilePath = autosaveDirPath + "/" + autosaveFileName;
@@ -3323,6 +3352,8 @@ void MainWindow::autosaveDocument()
     qWarning() << "Failed to autosave the document to" << autosaveFilePath;
   } else {
     qDebug() << "Document autosaved to" << autosaveFilePath;
+    // Drop a leftover autosave of the same document in the other form.
+    QFile::remove(autosaveDirPath + "/" + otherAutosaveForm(autosaveFileName));
   }
 }
 
