@@ -160,11 +160,18 @@ public:
 
   void startAutosaveTimer();
 
-  QString autosaveFilePath() const;
+  /**
+   * The autosave file name (no directory) of @p molecule. Chosen on first use
+   * and kept for the molecule's lifetime, in a dynamic property on the molecule
+   * so it is never written into saved files.
+   */
+  QString autosaveNameFor(QtGui::Molecule* molecule);
 
-  void cleanupAutosaves(QString filename);
-
-  void cleanupCurrentAutosave();
+  /**
+   * Delete exactly the autosave file (either form) that @p molecule wrote, if
+   * any, and forget its name.
+   */
+  void removeAutosave(QtGui::Molecule* molecule);
 
   /**
    * Set the list of possible translations
