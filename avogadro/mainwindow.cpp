@@ -3315,6 +3315,10 @@ void MainWindow::autosaveDocument()
 
   // Use CJSON format for autosaving
   Io::CjsonFormat writer;
+  // Cubes can reach hundreds of MB and are rewritten every interval; they can
+  // be recomputed from the basis set, so leave them out of the autosave.
+  // (Older libraries ignore the unknown option.)
+  writer.setOptions(R"({"cubes": false})");
   if (!writer.writeFile(autosaveFilePath.toLocal8Bit().data(), *m_molecule)) {
     qWarning() << "Failed to autosave the document to" << autosaveFilePath;
   } else {
