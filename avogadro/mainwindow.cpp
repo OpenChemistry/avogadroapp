@@ -100,7 +100,9 @@
 #include <QScreen>
 
 #include <cmath>
+#include <filesystem>
 #include <limits>
+#include <system_error>
 
 #ifdef QTTESTING
 #include <QXmlStreamReader>
@@ -168,6 +170,28 @@ QString autosaveDirPath()
 // autosave. It lives and dies with the QObject and, unlike Molecule::data(), is
 // never serialized into a saved file.
 const char* const autosaveProperty = "avogadroAutosaveFile";
+
+// Dynamic property: the molecule was recovered from an autosave, so it has no
+// saved copy and an empty undo stack. Its autosave is the only copy of the work
+// and must survive undoing back to the empty stack.
+const char* const recoveredProperty = "avogadroRecovered";
+
+// Dynamic property: the dirty state of a molecule that is not the active one
+// (the active molecule's state is MainWindow::m_moleculeDirty).
+const char* const dirtyProperty = "avogadroDirty";
+
+// The name an autosave is written under before it replaces the real one. It
+// keeps the compression suffix (the format picks compression by suffix) but
+// does not end in autosaveBaseSuffix (nor ".gz" of it), so it is never offered
+// for recovery.
+QString partialAutosaveName(const QString& autosaveName)
+{
+  const int pos = autosaveName.lastIndexOf(QStringLiteral("_autosave."));
+  if (pos < 0)
+    return QStringLiteral("partial-") + autosaveName;
+  return autosaveName.left(pos) + QStringLiteral("_autosave-partial.") +
+         autosaveName.mid(pos + 10);
+}
 
 // True if the file is an autosave, i.e. in the autosave directory with an
 // autosave name.
@@ -1024,6 +1048,9 @@ void MainWindow::setMolecule(Molecule* mol)
   }
 
   Molecule* oldMolecule(m_molecule);
+  // Dirty state travels with the molecule while it is not the active one.
+  if (oldMolecule && oldMolecule != mol)
+    oldMolecule->setProperty(dirtyProperty, m_moleculeDirty);
   m_molecule = mol;
 
   // If the molecule is empty, make the editor active. Otherwise, use the
@@ -1037,7 +1064,7 @@ void MainWindow::setMolecule(Molecule* mol)
   }
 
   emit moleculeChanged(m_molecule);
-  markMoleculeClean();
+  m_moleculeDirty = m_molecule->property(dirtyProperty).toBool();
   updateWindowTitle();
   m_moleculeModel->setActiveMolecule(m_molecule);
   m_layerModel->addMolecule(m_molecule);
@@ -1372,6 +1399,9 @@ void MainWindow::backgroundReaderFinished()
       m_fileReadMolecule->setData("fileName", Core::Variant());
       m_fileReadMolecule->setProperty(autosaveProperty,
                                       QFileInfo(fileName).fileName());
+      // Unsaved work: dirty, and undoing to an empty stack must not discard it.
+      m_fileReadMolecule->setProperty(recoveredProperty, true);
+      m_fileReadMolecule->setProperty(dirtyProperty, true);
     } else if (!fileName.isEmpty()) {
       // Make sure the fileName is UTF-8 for serialization
       m_fileReadMolecule->setData("fileName", fileName.toStdString());
@@ -1382,11 +1412,6 @@ void MainWindow::backgroundReaderFinished()
     }
 
     setMolecule(m_fileReadMolecule);
-    if (recovered) {
-      // setMolecule() marks the document clean; it has not been saved.
-      m_moleculeDirty = true;
-      updateWindowTitle();
-    }
 
     // check if the modelView is set
     if (m_fileReadMolecule->hasData("modelView")) {
@@ -1461,7 +1486,12 @@ bool MainWindow::backgroundWriterFinished()
       statusBar()->showMessage(
         tr("Saved file %1", "%1 = filename").arg(fileName));
       m_threadedWriter->molecule()->setData("fileName", fileName.toStdString());
-      markMoleculeClean();
+      // The written molecule is normally the active one, but may not be if the
+      // user switched while the write ran.
+      if (writtenMolecule == m_molecule)
+        markMoleculeClean();
+      else if (writtenMolecule)
+        writtenMolecule->setProperty(dirtyProperty, false);
       updateWindowTitle();
       m_recentFiles.prepend(fileName);
       updateRecentFiles();
@@ -1486,8 +1516,11 @@ bool MainWindow::backgroundWriterFinished()
 
   // On successful save (or Save As) the autosave is obsolete. The next autosave
   // picks a new name, which follows the new file name.
-  if (success)
+  if (success) {
     removeAutosave(writtenMolecule);
+    if (writtenMolecule)
+      writtenMolecule->setProperty(recoveredProperty, QVariant());
+  }
 
   // Report back to a script that is waiting on this export via RPC, the
   // same way a plugin command does.
@@ -2336,7 +2369,10 @@ void MainWindow::viewActivated(QWidget* widget)
     }
     if (m_molecule != glWidget->molecule() && glWidget->molecule()) {
       m_rwMolecule = nullptr;
+      if (m_molecule)
+        m_molecule->setProperty(dirtyProperty, m_moleculeDirty);
       m_molecule = glWidget->molecule();
+      m_moleculeDirty = m_molecule->property(dirtyProperty).toBool();
       emit moleculeChanged(m_molecule);
       m_moleculeModel->setActiveMolecule(m_molecule);
       m_layerModel->addMolecule(m_molecule);
@@ -2928,8 +2964,11 @@ void MainWindow::undoEdit()
     activeMoleculeEdited();
 
     // if the undo stack is empty, mark m_moleculeDirty false
-    if (!m_molecule->undoMolecule()->undoStack().canUndo()) {
-      m_moleculeDirty = false;
+    // (a recovered document has no saved state to return to: it stays dirty
+    // and keeps its autosave)
+    if (!m_molecule->undoMolecule()->undoStack().canUndo() &&
+        !m_molecule->property(recoveredProperty).toBool()) {
+      markMoleculeClean();
       removeAutosave(m_molecule); // back to the saved state
     }
   }
@@ -3367,6 +3406,13 @@ void MainWindow::autosaveDocument()
   const QString autosaveFileName = autosaveNameFor(m_molecule);
 
   QString autosaveFilePath = dirPath + "/" + autosaveFileName;
+  // Write to a side file and replace the autosave only once it is complete, so
+  // a crash or failure mid-write never leaves a truncated autosave.
+  const QString partialName = partialAutosaveName(autosaveFileName);
+  const QString partialPath = dirPath + "/" + partialName;
+  // Leftovers of an earlier interrupted write of this document (either form).
+  QFile::remove(partialPath);
+  QFile::remove(dirPath + "/" + otherAutosaveForm(partialName));
 
   // Use CJSON format for autosaving
   Io::CjsonFormat writer;
@@ -3374,7 +3420,17 @@ void MainWindow::autosaveDocument()
   // be recomputed from the basis set, so leave them out of the autosave.
   // (Older libraries ignore the unknown option.)
   writer.setOptions(R"({"cubes": false})");
-  if (!writer.writeFile(autosaveFilePath.toLocal8Bit().data(), *m_molecule)) {
+  bool saved = writer.writeFile(partialPath.toLocal8Bit().data(), *m_molecule);
+  if (saved) {
+    // Atomic replace (rename(2) on POSIX, MoveFileEx with replace on Windows).
+    std::error_code ec;
+    std::filesystem::rename(
+      std::filesystem::path(partialPath.toStdU16String()),
+      std::filesystem::path(autosaveFilePath.toStdU16String()), ec);
+    saved = !ec;
+  }
+  if (!saved) {
+    QFile::remove(partialPath);
     qWarning() << "Failed to autosave the document to" << autosaveFilePath;
   } else {
     qDebug() << "Document autosaved to" << autosaveFilePath;
