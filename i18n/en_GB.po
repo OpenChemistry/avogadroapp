@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-en_GB\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-09-27 06:38+0000\n"
-"PO-Revision-Date: 2026-09-26 10:51+0000\n"
+"PO-Revision-Date: 2026-10-02 20:50+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) <https://hosted.weblate.org/projects/"
 "avogadro/avogadroapp/en_GB/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.10\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
@@ -348,16 +348,16 @@ msgstr "Unknown error"
 
 #: mainwindow.cpp:1992
 msgid "Missing 'layer' parameter."
-msgstr ""
+msgstr "Missing 'layer' parameter."
 
 #: mainwindow.cpp:1999
 msgid "'layer' must be a whole number."
-msgstr ""
+msgstr "'layer' must be a whole number."
 
 #: mainwindow.cpp:2005
 #, qt-format
 msgid "'layer' %1 is out of range."
-msgstr ""
+msgstr "'layer' %1 is out of range."
 
 #: mainwindow.cpp:2139
 #, qt-format
@@ -730,15 +730,15 @@ msgstr "No molecule is open."
 
 #: mainwindow.cpp:3981
 msgid "Cannot remove the last remaining layer."
-msgstr ""
+msgstr "Cannot remove the last remaining layer."
 
 #: mainwindow.cpp:4025
 msgid "'visible' must be true or false."
-msgstr ""
+msgstr "'visible' must be true or false."
 
 #: mainwindow.cpp:4053
 msgid "'locked' must be true or false."
-msgstr ""
+msgstr "'locked' must be true or false."
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
