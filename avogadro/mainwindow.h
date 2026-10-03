@@ -77,8 +77,10 @@ public slots:
   void autosaveDocument(); // Autosave the current document
   /**
    * Update internal state to reflect that the molecule has been modified.
+   * @param changes The QtGui::Molecule::MoleculeChanges flags; the default
+   * (all bits) is treated as a real edit.
    */
-  void markMoleculeDirty();
+  void markMoleculeDirty(unsigned int changes = ~0u);
 
   /**
    * Update internal state to reflect that the molecule is not modified.

@@ -1092,9 +1092,14 @@ void MainWindow::setMolecule(Molecule* mol)
   }
 }
 
-void MainWindow::markMoleculeDirty()
+void MainWindow::markMoleculeDirty(unsigned int changes)
 {
+  // Always refresh the undo/redo text (selection pushes undo commands), but
+  // selecting atoms shouldn't prompt the user to save.
   activeMoleculeEdited();
+  const unsigned int selection = QtGui::Molecule::Selection;
+  if ((changes & ~selection) == 0)
+    return;
   if (!m_moleculeDirty) {
     m_moleculeDirty = true;
     updateWindowTitle();
