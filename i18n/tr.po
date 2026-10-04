@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2026-09-24 19:28+0000\n"
+"PO-Revision-Date: 2026-10-05 05:51+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/tr/>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.10.1.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
@@ -358,16 +358,16 @@ msgstr ""
 
 #: mainwindow.cpp:2131
 msgid "Missing 'layer' parameter."
-msgstr ""
+msgstr "'layer' parametresi eksik."
 
 #: mainwindow.cpp:2138
 msgid "'layer' must be a whole number."
-msgstr ""
+msgstr "'layer' tam sayı olmalıdır."
 
 #: mainwindow.cpp:2144
 #, qt-format
 msgid "'layer' %1 is out of range."
-msgstr ""
+msgstr "'layer' %1 aralık dışında."
 
 #: mainwindow.cpp:2279
 #, qt-format
@@ -737,19 +737,19 @@ msgstr "Açık molekül yok."
 
 #: mainwindow.cpp:4165
 msgid "Cannot remove the last remaining layer."
-msgstr ""
+msgstr "Kalan son katman kaldırılamıyor."
 
 #: mainwindow.cpp:4209
 msgid "'visible' must be true or false."
-msgstr ""
+msgstr "'visible' true veya false olmalıdır."
 
 #: mainwindow.cpp:4237
 msgid "'locked' must be true or false."
-msgstr ""
+msgstr "'locked' true veya false olmalıdır."
 
 #: mainwindow.cpp:4261
 msgid "No molecule"
-msgstr ""
+msgstr "Molekül yok"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -1061,12 +1061,12 @@ msgstr "Gölge Gücü:"
 #. i18n: file: renderingdialog.ui:130
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
 msgid "Thickness of the outline, in pixels"
-msgstr ""
+msgstr "Dış hattın kalınlığı, piksel cinsinden"
 
 #. i18n: file: renderingdialog.ui:133
 #. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
 msgid "Outline Width:"
-msgstr ""
+msgstr "Dış Hat Genişliği:"
 
 #. i18n: file: renderingdialog.ui:160
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
