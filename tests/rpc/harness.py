@@ -173,19 +173,29 @@ class AvogadroApp:
         self.log_path = None
         self.version = None
         self.args = []
+        self.extra_args = []  # appended to the launch line (see start())
         self.tests = []  # node ids run since the last launch
         # Set when a call never returned although the process lives (a modal
         # dialog, a hang): the app cannot be trusted for the next test.
         self.tainted = False
 
-    def start(self, timeout=STARTUP_TIMEOUT):
+    def start(self, timeout=STARTUP_TIMEOUT, extra_args=None):
+        """Launch the application. extra_args (for example a file to open)
+        are appended to the standard launch line and kept for restart()."""
+        if extra_args is not None:
+            self.extra_args = list(extra_args)
         self.name = "avotest-%d-%d" % (os.getpid(), next(self._counter))
         socket_path = Path(tempfile.gettempdir()) / self.name
         if socket_path.exists():
             socket_path.unlink()
         self.log_path = self.log_dir / (self.name + ".log")
         # --testing must never be passed (the parser rejects it).
-        self.args = ["--rpc-name", self.name, "--skip-autosave", "--disable-settings"]
+        self.args = [
+            "--rpc-name",
+            self.name,
+            "--skip-autosave",
+            "--disable-settings",
+        ] + self.extra_args
         self.tests = []
         self.tainted = False
         with open(self.log_path, "wb") as log:
@@ -252,6 +262,32 @@ def ping(name, timeout=PING_TIMEOUT):
         return False
 
 
+def probe(name, timeout=PING_TIMEOUT):
+    """The per-step liveness check: (answers ping, open modal dialog or None).
+
+    Both questions share one fresh connection, so the dialog check costs one
+    extra call per step. The dialog is activeDialog's {title, className}. A
+    modal dialog's nested event loop keeps both answerable, which is why a
+    request that opened a dialog can be told apart from a hang.
+    """
+    try:
+        with connect(name, timeout=timeout) as client:
+            if not client.ping():
+                return False, None
+            try:
+                reply = client.send("activeDialog")["result"]
+            except RPCError:
+                return True, None  # an app without activeDialog
+            if reply.get("open"):
+                return True, {
+                    "title": reply.get("title", ""),
+                    "className": reply.get("className", ""),
+                }
+            return True, None
+    except (ConnectionError, OSError):
+        return False, None
+
+
 # --------------------------------------------------------------------------
 # Talking to it
 # --------------------------------------------------------------------------
@@ -268,6 +304,13 @@ def summarize(value, limit=160):
             return [summarize(i, limit) for i in value[:20]] + ["...(%d items)" % len(value)]
         return [summarize(item, limit) for item in value]
     return value
+
+
+def ignorable_dialog(dialog):
+    """A modal that is not a stuck prompt. The progress dialog shown while a
+    file reads in the background (the command line, File > Open) is modal for
+    as long as the read lasts and goes away by itself."""
+    return dialog.get("className") == "QProgressDialog"
 
 
 class Session:
@@ -315,6 +358,26 @@ class Session:
     def load(self, content, format="xyz"):
         return self.call("loadMolecule", {"content": content, "format": format})
 
+    def molecules(self):
+        """The open molecules, as listMolecules reports them."""
+        return self.call("listMolecules")
+
+    def wait_for(self, predicate, what, method="listMolecules", timeout=30.0, interval=0.25):
+        """Poll a read-back until predicate(result) is true; fail after
+        timeout seconds. For things that happen on the app's own time, such
+        as a file named on the command line."""
+        deadline = time.monotonic() + timeout
+        while True:
+            result = self.call(method)
+            if predicate(result):
+                return result
+            if time.monotonic() > deadline:
+                raise AssertionError(
+                    "%s did not happen within %d s; last %s: %s"
+                    % (what, timeout, method, summarize(result))
+                )
+            time.sleep(interval)
+
     def data(self, method, params=None, timeout=None):
         """Run a waited plugin command and return its data dict."""
         return self.call(method, params, wait=True, timeout=timeout).get("data", {})
@@ -349,6 +412,7 @@ class Session:
         """The liveness oracle, run after every step."""
         app = self.app
         kind = None
+        dialog = None
         if isinstance(transport, ConnectionError):
             # The process may be a moment away from being reaped.
             try:
@@ -357,20 +421,26 @@ class Session:
                 pass
         if app.process.poll() is not None:
             kind = "exit"
-        elif not ping(app.name):
-            kind = "hang"
-        elif isinstance(transport, socket.timeout):
-            # Alive and answering pings, but this request never got a reply:
-            # a modal dialog's nested event loop answers pings too.
-            kind = "blocked"
-        elif transport is not None:
-            kind = "transport"
+        else:
+            answers, dialog = probe(app.name)
+            if not answers:
+                kind = "hang"
+            elif dialog is not None and not ignorable_dialog(dialog):
+                # Nothing in a test may leave a modal dialog open, whether or
+                # not the request that opened it ever got a reply.
+                kind = "dialog"
+            elif isinstance(transport, socket.timeout):
+                # Alive and answering pings, but this request never got a
+                # reply: a stuck command.
+                kind = "blocked"
+            elif transport is not None:
+                kind = "transport"
         if kind is None:
             return
 
         app.tainted = True
         last = self.steps[-1]
-        path = self._write_reproducer(kind)
+        path = self._write_reproducer(kind, dialog if kind == "dialog" else None)
         detail = {
             "exit": "Avogadro died (%s)"
             % (
@@ -379,8 +449,10 @@ class Session:
             ),
             "hang": "Avogadro stopped answering internalPing",
             "blocked": "the request got no reply although Avogadro still answers "
-            "pings (a modal dialog or a stuck command?)",
+            "pings (a stuck command?)",
             "transport": "the connection failed: %r" % (transport,),
+            "dialog": "a modal dialog is open: %r (%s)"
+            % tuple((dialog or {}).get(k, "") for k in ("title", "className")),
         }[kind]
         pytest.fail(
             "%s after step %d: %s %s\nreproducer: %s\nlog: %s"
@@ -395,7 +467,7 @@ class Session:
             pytrace=False,
         )
 
-    def _write_reproducer(self, kind):
+    def _write_reproducer(self, kind, dialog=None):
         app = self.app
         self.reproducer_dir.mkdir(parents=True, exist_ok=True)
         safe = re.sub(r"[^A-Za-z0-9_.-]+", "_", self.nodeid)[-120:]
@@ -414,6 +486,8 @@ class Session:
             "last_step": self.steps[-1],
             "log_tail": tail(app.log_path, 80),
         }
+        if dialog is not None:
+            document["dialog"] = dialog
         with open(path, "w") as handle:
             json.dump(document, handle, indent=2)
         return path

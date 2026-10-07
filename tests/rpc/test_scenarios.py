@@ -39,7 +39,15 @@ def expand(value):
 
 def contains(actual, expected):
     """True if every key in expected is in actual with a matching value;
-    nested dicts match recursively, floats compare approximately."""
+    nested dicts match recursively, floats compare approximately. A list
+    matches a list of the same length, element by element (each element
+    matched the same way, so a list of dicts may name only some keys)."""
+    if isinstance(expected, list):
+        return (
+            isinstance(actual, list)
+            and len(actual) == len(expected)
+            and all(contains(a, e) for a, e in zip(actual, expected))
+        )
     if isinstance(expected, dict):
         return isinstance(actual, dict) and all(
             key in actual and contains(actual[key], value)

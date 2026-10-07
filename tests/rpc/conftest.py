@@ -82,6 +82,27 @@ def avo(request, avogadro_exe, app_log_dir, reproducer_dir):
         app.stop()
 
 
+@pytest.fixture
+def launch(request, avogadro_exe, app_log_dir, reproducer_dir):
+    """Factory for tests that need command line arguments (a file to open at
+    startup): launch("path/to/file") returns a Session on a fresh Avogadro
+    started with those extra arguments. Every app it launched is stopped
+    after the test."""
+    launched = []
+
+    def _launch(*extra_args):
+        app = harness.AvogadroApp(avogadro_exe, app_log_dir)
+        app.start(extra_args=extra_args)
+        session = harness.Session(app, request.node.nodeid, reproducer_dir)
+        launched.append((session, app))
+        return session
+
+    yield _launch
+    for session, app in launched:
+        session.close()
+        app.stop()
+
+
 @pytest.fixture(scope="module")
 def shared_app(avogadro_exe, app_log_dir):
     app = harness.AvogadroApp(avogadro_exe, app_log_dir)
