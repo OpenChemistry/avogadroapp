@@ -386,6 +386,28 @@ def test_layer_errors(avo):
     assert avo.call("getLayerVisible", {"layer": 0}, wait=True)["data"]["count"] == 1
 
 
+@pytest.mark.parametrize(
+    "method, extra",
+    [
+        ("getLayerVisible", {}),
+        ("getLayerLocked", {}),
+        ("setActiveLayer", {}),
+        ("removeLayer", {}),
+        ("setLayerVisible", {"visible": True}),
+        ("setLayerLocked", {"locked": True}),
+    ],
+)
+@pytest.mark.parametrize("value", ["0", True], ids=["string", "boolean"])
+def test_layer_index_must_be_a_number(avo, method, extra, value):
+    """A string such as "0" or a boolean is not an index, although QVariant
+    would convert it: the layer verbs are as strict as the molecule verbs."""
+    avo.load(ETHANE)
+    avo.data("addLayer")  # so that layer 0 and layer 1 are both valid indices
+    error = avo.expect_error(method, dict(extra, layer=value), code=COMMAND_FAILED)
+    assert error.message == "'layer' must be a whole number."
+    assert avo.data("getLayerVisible", {"layer": 0})["count"] == 2  # nothing happened
+
+
 # -- molecules ---------------------------------------------------------------
 def test_list_molecules_on_startup(avo):
     molecules = avo.call("listMolecules")

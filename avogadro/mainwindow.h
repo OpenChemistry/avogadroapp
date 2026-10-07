@@ -166,6 +166,12 @@ public:
   QVariantList moleculeSummaries() const;
 
   /**
+   * "index" (in the molecule list) of the active molecule and "count" of open
+   * molecules: the reply data of the RPC molecule verbs.
+   */
+  QVariantMap moleculePosition() const;
+
+  /**
    * The active molecule's undo stack, for the RPC "undo", "redo" and
    * "moleculeInfo" methods: "canUndo", "canRedo", "undoText", "redoText"
    * (the stack's own text, without menu mnemonics) and "modified".

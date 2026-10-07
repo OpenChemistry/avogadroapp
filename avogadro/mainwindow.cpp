@@ -228,13 +228,27 @@ QString withChemicalExtension(const QString& fileName, const QString& extension)
                                 name.substr(stripped.size()));
 }
 
-// True if @p value holds a whole number that fits in an int, writing it to
-// @p out. Used to validate script-supplied layer indices: QVariant::toInt()
-// rounds a fractional double in Qt 6, which would silently accept something
-// like 2.5, and casting an out-of-range double to int is undefined behavior,
-// which a huge value like 1e20 would otherwise reach.
+// True if @p value is a JSON number holding a whole number that fits in an
+// int, writing it to @p out. Used to validate script-supplied indices, so it
+// is strict about both halves: a string such as "0" or a boolean is not a
+// number (QVariant would convert them), QVariant::toInt() rounds a fractional
+// double in Qt 6 (which would silently accept something like 2.5), and casting
+// an out-of-range double to int is undefined behavior, which a huge value like
+// 1e20 would otherwise reach.
 bool wholeNumber(const QVariant& value, int* out)
 {
+  switch (value.metaType().id()) {
+    case QMetaType::Double:
+    case QMetaType::Float:
+    case QMetaType::Int:
+    case QMetaType::UInt:
+    case QMetaType::LongLong:
+    case QMetaType::ULongLong:
+      break;
+    default:
+      return false;
+  }
+
   bool ok = false;
   const double asDouble = value.toDouble(&ok);
   if (!ok || !std::isfinite(asDouble) || asDouble != std::floor(asDouble))
@@ -244,6 +258,50 @@ bool wholeNumber(const QVariant& value, int* out)
     return false;
   *out = static_cast<int>(asDouble);
   return true;
+}
+
+// Why an index option was refused. The callers word the message themselves:
+// the layer verbs' messages are translated, the molecule verbs' are not.
+enum class IndexStatus
+{
+  Valid,
+  Missing,
+  NotWholeNumber,
+  OutOfRange
+};
+
+// Read the script-supplied index @p key from @p options, which must name one of
+// @p count items. @p out receives the number as soon as it is a whole number,
+// in range or not, so that an out-of-range message can quote it.
+IndexStatus indexFromOptions(const QVariantMap& options, const QString& key,
+                             int count, int* out)
+{
+  if (!options.contains(key))
+    return IndexStatus::Missing;
+  if (!wholeNumber(options.value(key), out))
+    return IndexStatus::NotWholeNumber;
+  if (*out < 0 || *out >= count)
+    return IndexStatus::OutOfRange;
+  return IndexStatus::Valid;
+}
+
+// The (untranslated) message for a molecule index that was refused.
+QString moleculeIndexMessage(IndexStatus status, int index, int count)
+{
+  switch (status) {
+    case IndexStatus::Missing:
+      return QStringLiteral("Missing 'index' parameter.");
+    case IndexStatus::NotWholeNumber:
+      return QStringLiteral("'index' must be a whole number.");
+    case IndexStatus::OutOfRange:
+      return QStringLiteral("'index' %1 is out of range (%2 molecules are "
+                            "open).")
+        .arg(index)
+        .arg(count);
+    case IndexStatus::Valid:
+      break;
+  }
+  return QString();
 }
 
 } // namespace
@@ -898,6 +956,15 @@ QVariantList MainWindow::moleculeSummaries() const
     summaries.append(entry);
   }
   return summaries;
+}
+
+QVariantMap MainWindow::moleculePosition() const
+{
+  const QList<Molecule*> molecules = m_moleculeModel->molecules();
+  QVariantMap position;
+  position["index"] = static_cast<int>(molecules.indexOf(m_molecule));
+  position["count"] = static_cast<int>(molecules.size());
+  return position;
 }
 
 QVariantMap MainWindow::undoState() const
@@ -2246,27 +2313,29 @@ void MainWindow::setLayerLocked(size_t layer, bool locked)
 bool MainWindow::layerIdFromOptions(const QVariantMap& options,
                                     QString* message, size_t* layer) const
 {
-  if (!options.contains("layer")) {
-    if (message != nullptr)
-      *message = tr("Missing 'layer' parameter.");
-    return false;
-  }
-
   int value = 0;
-  if (!wholeNumber(options.value("layer"), &value)) {
-    if (message != nullptr)
-      *message = tr("'layer' must be a whole number.");
-    return false;
-  }
+  const IndexStatus status =
+    indexFromOptions(options, QStringLiteral("layer"),
+                     static_cast<int>(m_layerModel->layerCount()), &value);
 
-  if (value < 0 || static_cast<size_t>(value) >= m_layerModel->layerCount()) {
-    if (message != nullptr)
-      *message = tr("'layer' %1 is out of range.").arg(value);
-    return false;
+  QString problem;
+  switch (status) {
+    case IndexStatus::Valid:
+      *layer = static_cast<size_t>(value);
+      return true;
+    case IndexStatus::Missing:
+      problem = tr("Missing 'layer' parameter.");
+      break;
+    case IndexStatus::NotWholeNumber:
+      problem = tr("'layer' must be a whole number.");
+      break;
+    case IndexStatus::OutOfRange:
+      problem = tr("'layer' %1 is out of range.").arg(value);
+      break;
   }
-
-  *layer = static_cast<size_t>(value);
-  return true;
+  if (message != nullptr)
+    *message = problem;
+  return false;
 }
 
 void MainWindow::layerActivated(const QModelIndex& idx)
@@ -4370,11 +4439,8 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
   // (not tr()): they are for scripts.
   if (command == "newMolecule") {
     newMolecule();
-    if (result != nullptr) {
-      const QList<Molecule*> molecules = m_moleculeModel->molecules();
-      result->insert("index", molecules.indexOf(m_molecule));
-      result->insert("count", static_cast<int>(molecules.size()));
-    }
+    if (result != nullptr)
+      *result = moleculePosition();
     return CommandStatus::Finished;
   } else if (command == "setActiveMolecule" || command == "closeMolecule") {
     const QList<Molecule*> molecules = m_moleculeModel->molecules();
@@ -4383,29 +4449,14 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
     // closeMolecule defaults to the active molecule; setActiveMolecule has to
     // be told which one.
     int index = molecules.indexOf(m_molecule);
-    if (!closing || options.contains("index")) {
-      if (!options.contains("index")) {
-        if (message != nullptr)
-          *message = QStringLiteral("Missing 'index' parameter.");
-        return CommandStatus::Failed;
-      }
-      // A JSON number only: wholeNumber() alone would take "0" and true.
-      const int type = options.value("index").metaType().id();
-      const bool isNumber = type == QMetaType::Double ||
-                            type == QMetaType::Int ||
-                            type == QMetaType::LongLong;
-      if (!isNumber || !wholeNumber(options.value("index"), &index)) {
-        if (message != nullptr)
-          *message = QStringLiteral("'index' must be a whole number.");
-        return CommandStatus::Failed;
-      }
-    }
-    if (index < 0 || index >= molecules.size()) {
+    IndexStatus status =
+      index >= 0 ? IndexStatus::Valid : IndexStatus::OutOfRange;
+    if (!closing || options.contains("index"))
+      status = indexFromOptions(options, QStringLiteral("index"),
+                                static_cast<int>(molecules.size()), &index);
+    if (status != IndexStatus::Valid) {
       if (message != nullptr)
-        *message = QStringLiteral("'index' %1 is out of range (%2 molecules "
-                                  "are open).")
-                     .arg(index)
-                     .arg(molecules.size());
+        *message = moleculeIndexMessage(status, index, molecules.size());
       return CommandStatus::Failed;
     }
     Molecule* target = molecules[index];
@@ -4427,11 +4478,8 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
       setMolecule(target);
     }
 
-    if (result != nullptr) {
-      const QList<Molecule*> remaining = m_moleculeModel->molecules();
-      result->insert("index", remaining.indexOf(m_molecule));
-      result->insert("count", static_cast<int>(remaining.size()));
-    }
+    if (result != nullptr)
+      *result = moleculePosition();
     return CommandStatus::Finished;
   } else if (command == "undo" || command == "redo") {
     const bool undoing = command == "undo";
