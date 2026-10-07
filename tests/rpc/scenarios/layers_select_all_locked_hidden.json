@@ -1,0 +1,288 @@
+{
+  "description": "Create layers from a selection while the layer holding the atoms is hidden, locked, or both. A locked layer's atoms cannot be selected, so the selection is empty and the new layer is empty.",
+  "steps": [
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "8\nethane\nC   0.000000   0.000000   0.765000\nC   0.000000   0.000000  -0.765000\nH   1.019000   0.000000   1.157000\nH  -0.509500   0.882000   1.157000\nH  -0.509500  -0.882000   1.157000\nH  -1.019000   0.000000  -1.157000\nH   0.509500  -0.882000  -1.157000\nH   0.509500   0.882000  -1.157000\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "setRenderTypes",
+      "params": {
+        "types": [
+          "Wireframe",
+          "Licorice"
+        ]
+      },
+      "result": true
+    },
+    {
+      "method": "setLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 0,
+        "visible": false
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "visible": false
+        }
+      }
+    },
+    {
+      "method": "setLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 0,
+        "locked": true
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "locked": true
+        }
+      }
+    },
+    {
+      "method": "selectAll",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": []
+        }
+      }
+    },
+    {
+      "method": "createLayerFromSelection",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": []
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 1
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 2,
+          "visible": true
+        }
+      }
+    },
+    {
+      "method": "setLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 0,
+        "locked": false
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "locked": false
+        }
+      }
+    },
+    {
+      "method": "selectAll",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "method": "createLayerFromSelection",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 2
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "setLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 2,
+        "visible": false
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "visible": false
+        }
+      }
+    },
+    {
+      "method": "setLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 2,
+        "locked": true
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "locked": true
+        }
+      }
+    },
+    {
+      "method": "selectAll",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": []
+        }
+      }
+    },
+    {
+      "method": "createLayerFromSelection",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": []
+        }
+      }
+    },
+    {
+      "method": "setLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 2,
+        "locked": false
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "locked": false
+        }
+      }
+    },
+    {
+      "method": "setLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 2,
+        "visible": true
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "visible": true
+        }
+      }
+    },
+    {
+      "method": "selectAll",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "method": "createLayerFromSelection",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 5
+        }
+      }
+    },
+    {
+      "method": "renderImage",
+      "params": {
+        "width": 32,
+        "height": 32
+      },
+      "result": {
+        "width": 32,
+        "height": 32
+      }
+    }
+  ]
+}

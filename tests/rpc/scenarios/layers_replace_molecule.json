@@ -1,0 +1,323 @@
+{
+  "description": "Build up layers, hide one and select atoms, then replace the molecule (inline and from a file) and use the layer verbs on each new molecule. The new molecule starts with a single visible, unlocked layer.",
+  "issue": "2.1: replacing the molecule with layers present",
+  "steps": [
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "8\nethane\nC   0.000000   0.000000   0.765000\nC   0.000000   0.000000  -0.765000\nH   1.019000   0.000000   1.157000\nH  -0.509500   0.882000   1.157000\nH  -0.509500  -0.882000   1.157000\nH  -1.019000   0.000000  -1.157000\nH   0.509500  -0.882000  -1.157000\nH   0.509500   0.882000  -1.157000\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "setRenderTypes",
+      "params": {
+        "types": [
+          "Wireframe",
+          "Licorice",
+          "VanDerWaals",
+          "Label"
+        ]
+      },
+      "result": true
+    },
+    {
+      "method": "addLayer",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "addLayer",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "setLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 1,
+        "visible": false
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "visible": false
+        }
+      }
+    },
+    {
+      "method": "setLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 2,
+        "locked": true
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "locked": true
+        }
+      }
+    },
+    {
+      "method": "setActiveLayer",
+      "wait": true,
+      "params": {
+        "layer": 2
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 2
+        }
+      }
+    },
+    {
+      "method": "selectElement",
+      "wait": true,
+      "params": {
+        "element": "H"
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "3\nwater\nO   0.000000   0.000000   0.117300\nH   0.000000   0.757200  -0.469200\nH   0.000000  -0.757200  -0.469200\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "formula": "H2O",
+        "selectedAtomCount": 0
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 0,
+          "visible": true,
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "getLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "locked": false,
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 1
+      },
+      "expect": "error",
+      "error_code": -2
+    },
+    {
+      "method": "addLayer",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "setLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 1,
+        "visible": false
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "visible": false
+        }
+      }
+    },
+    {
+      "method": "selectAll",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "method": "createLayerFromSelection",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 2
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "openFile",
+      "params": {
+        "fileName": "$MOLECULES/alkanes/butane.cjson"
+      },
+      "result": true
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "formula": "C4H10"
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "visible": true,
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "addLayer",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "setActiveLayer",
+      "wait": true,
+      "params": {
+        "layer": 1
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 1
+        }
+      }
+    },
+    {
+      "method": "selectAll",
+      "wait": true,
+      "result": {
+        "status": "finished"
+      }
+    },
+    {
+      "method": "createLayerFromSelection",
+      "wait": true,
+      "result": {
+        "status": "finished"
+      }
+    },
+    {
+      "method": "removeLayer",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "getLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 1
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "atomCount": 14
+      }
+    }
+  ]
+}
