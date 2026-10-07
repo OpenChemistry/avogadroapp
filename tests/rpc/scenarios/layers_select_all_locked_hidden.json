@@ -1,5 +1,6 @@
 {
   "description": "Create layers from a selection while the layer holding the atoms is hidden, locked, or both. A locked layer's atoms cannot be selected, so the selection is empty and the new layer is empty.",
+  "fresh": true,
   "steps": [
     {
       "method": "loadMolecule",

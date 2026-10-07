@@ -1,5 +1,6 @@
 {
   "description": "Create a layer from the selected hydrogens of ethane after several render plugins have registered per-layer state, then add, activate and remove layers.",
+  "fresh": true,
   "issue": "2.1 crash: Create New Layer from Selection on ethane with hydrogens selected",
   "steps": [
     {

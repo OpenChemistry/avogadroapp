@@ -21,8 +21,7 @@ python -m pytest tests/rpc --avogadro /path/to/Avogadro2 -m corpus
 reason; a configured path that does not exist is an error. With CMake the
 tests are `avogadro-rpc` and `avogadro-rpc-corpus` (label `rpc`).
 
-The app opens a real window while the tests run. Each test gets a fresh
-process; the corpus sweep shares one and relaunches it after a death.
+The app opens a real window while the tests run.
 
 Environment: `AVOGADRO_DATA_ROOT` (default `../avogadrodata`),
 `AVOGADRO_MOLECULES_DIR`, `AVOGADRO_CRYSTALS_DIR` (defaults `../molecules`,
@@ -35,16 +34,30 @@ when `avogadro` is not installed). Options: `--reproducer-dir`,
 * Never pass `--testing` to the app: argument parsing rejects it and the app
   exits, so the `kill` RPC is unusable. The harness stops the app by
   terminating the process (SIGTERM, then SIGKILL after 5 s).
-* Launch line: `--rpc-name <name> --skip-autosave --disable-settings`.
-  `--rpc-name` implies `--skip-dialogs`, so no startup dialog blocks.
+* The launch line is `--rpc-name <name> --skip-autosave --disable-settings`
+  (`harness.LAUNCH_ARGS`). `--rpc-name` implies `--skip-dialogs`, so no startup
+  dialog blocks.
 * Nothing in a test may open a modal dialog. Modal dialogs run a nested event
   loop: pings (and `activeDialog`) still answer, but the request that opened
   it never replies. The oracle below fails the test as soon as one is open.
   Do not call `fillUnitCell`, `fillTranslationalCell`, `show*` or
-  `fetchPDB`/`fetchByName`. Known app bugs that do open dialogs through RPC
-  are listed below. A failed `exportFile` or `saveGraphic` is safe: under
-  `--skip-dialogs` it is logged and answered with an error reply.
+  `fetchPDB`/`fetchByName`. A failed `exportFile` or `saveGraphic` is safe:
+  under `--skip-dialogs` it is logged and answered with an error reply.
 * Socket names are `avotest-<pid>-<n>` (macOS limits `sun_path` to 104 bytes).
+
+## Fixtures
+
+| Fixture | The app |
+| --- | --- |
+| `avo` | One app per test module, shared by its tests. Before each test every open molecule is closed (discarding changes), which leaves the startup document: one blank, unmodified molecule. The reset verifies that, and relaunches the app if it cannot reach it. Per-molecule state (undo, layers, selection) goes with the molecules; app-wide state does not |
+| `fresh` | A new app for this test alone. Use it when a test changes app-wide state (camera, projection, display types, the active tool), asserts the exact startup state, or taints the app |
+| `launch(*args)` | Factory for apps that need command line arguments, such as a file to open |
+| `shared` | The module's app exactly as the last test left it, with no reset (the corpus). Override the module fixture `app_ready` to run something after every (re)launch |
+| `butane`, `data_dir`, `molecules_dir` | Paths into the sample data; the test is skipped if they are missing |
+
+A shared app is relaunched when a test killed it, hung it or left it blocked.
+`record_property` values (the corpus records `ext`, `openFile`, `renderMO` and
+`message`) are visible with `--junitxml`.
 
 ## The oracle
 
@@ -53,7 +66,6 @@ Every request goes through `Session`, which records it as a step
 
 1. the process is still running,
 2. a fresh connection gets `internalPing` answered within 5 s, and
-
 3. no modal dialog is open. The same fresh connection that pings asks
    `activeDialog` (one extra call per step). An open modal is a failure of kind
    "dialog" whatever the step was, and takes precedence over "blocked"; the
@@ -64,9 +76,8 @@ Every request goes through `Session`, which records it as a step
 
 A request that gets no reply within its timeout (60 s by default) while the
 app still answers pings, and no dialog is open, is "blocked" (a stuck
-command). On
-any failure the test fails with a message naming the reproducer file.
-Error replies are not failures; tests assert them explicitly with
+command). On any failure the test fails with a message naming the reproducer
+file. Error replies are not failures; tests assert them explicitly with
 `expect_error`.
 
 ## Reproducers
@@ -81,26 +92,28 @@ tests_since_launch, steps (every request of the test), last_step,
 log_tail (last 80 lines), dialog ({title, className}, kind "dialog" only)
 ```
 
-`tests_since_launch` matters for the shared corpus app: the culprit may be an
-earlier file. Replaying `steps` against a fresh app reproduces a crash.
+`tests_since_launch` matters for a shared app: the culprit may be an earlier
+test or file. Replaying `steps` against a fresh app reproduces a crash.
 
 ## Scenarios
 
-`scenarios/*.json`, one test per file, run in order against a fresh app:
+`scenarios/*.json`, one test per file, run in order. Multi-step molecule
+sequences live here; one verb and its errors live in `test_builtins.py`.
 
 ```
 {
   "description": "text",
   "issue": "optional reference",
+  "fresh": true,                       // optional: run on a `fresh` app, for
+                                       // scenarios that change the camera,
+                                       // projection or display types
   "xfail": "optional: a real app bug; the test is xfail(strict=True)",
   "steps": [
     {
       "method": "addLayer",
-      "params": {"layer": 1},          // optional; strings starting with
-                                       // $MOLECULES, $AVOGADRODATA, $CRYSTALS
-                                       // expand to that corpus directory
+      "params": {"layer": 1},          // optional; "$MOLECULES/..." expands
+                                       // to the molecules directory
       "wait": true,                    // optional, default false
-      "timeout": 60,                   // optional
       "expect": "ok",                  // "ok" (default) | "error"
       "error_code": -2,                // with "error": required code
       "message": "out of range",       // with "error": substring of message
@@ -111,100 +124,56 @@ earlier file. Replaying `steps` against a fresh app reproduces a crash.
     }
   ],
   "checks": [                          // after all steps, on saved values
-    {"op": "lt", "a": "e1", "b": 0.0}, // "lt" | "gt" | "differs"
+    {"op": "lt", "a": "e1", "b": 0.0}, // "lt" | "differs"
     {"op": "differs", "a": "d1", "b": 1.9, "tolerance": 0.1}
   ]
 }
 ```
 
-A waited plugin command replies `{"status": "finished", "data": {...}}`;
-without `wait` the reply is `true`. Layer and molecule verbs fail with code -2.
-Operands of `checks` are saved names or plain numbers.
-
-`result` matches a list of the same length element by element, each element
-as a subset, so `listMolecules` can be checked as
+Operands of `checks` are saved names or plain numbers. `result` matches a list
+of the same length element by element, each element as a subset, so
+`listMolecules` can be checked as
 `[{"atomCount": 14}, {"atomCount": 3, "active": true}]`.
 
-## Application verbs the tests use
+## Rules of the verbs
 
-Besides the layer verbs, `MainWindow::handleCommand` answers these (listed by
-`listCommands` as `builtin`). They reuse the menu and molecule-list code and
-never open a dialog; their failure messages are plain strings, not `tr()`.
-Verbs marked "read-back" return their payload as the reply's `result`
-(no `wait`/`status` envelope).
+`listCommands` lists every command with its description; these are the parts
+that are not obvious from it.
 
-| Verb | Parameters | Reply data / result |
-| --- | --- | --- |
-| `listMolecules` (read-back) | | `[{index, active, atomCount, formula, fileName, modified}]` in molecule-list order; `modified` is the dirty state |
-| `newMolecule` | | `{index, count}`, like File > New |
-| `setActiveMolecule` | `index` (JSON number) | `{index, count}`; a bad or missing index fails |
-| `closeMolecule` | `index` (default: active), `discard` | `{index, count}` of the molecule that is active afterwards. A modified molecule fails ("The molecule has unsaved changes; pass discard: true to close it anyway.") unless `discard` is exactly `true`. Closing the last molecule leaves a new empty one |
-| `undo`, `redo` | | `{canUndo, canRedo, undoText, redoText, modified}`; fails when there is nothing to undo or redo |
-| `listTools` (read-back) | | `[{name, displayName, active}]` for the active view |
-| `activateTool` | `name` | `{tool}`. `name` is the tool's object name, the `name` that `listTools` reports (`Navigator`, `Editor`, `MeasureTool`); the translated display name (`ToolPlugin::name()`, "Navigate tool") is not accepted |
-| `activeDialog` (read-back) | | `{open, title, className}` of the active modal widget; answered even before the window exists |
-
-`moleculeInfo` also reports `modified`, `canUndo` and `canRedo`. After an RPC
-`openFile` its `fileName` is the opened file, as after File > Open.
-
-Selecting an atom range pushes an undo step ("Change Selection") but does not
-mark the document modified; redoing it does (see "avogadroapp #476" below).
-
-Tests that need command line arguments use the `launch(*args)` fixture instead
-of `avo`.
+* A waited command replies `{"status": "finished", "data": {...}}`; without
+  `wait` the reply is `true`. Failures of the layer and molecule verbs have
+  code -2.
+* Read-backs (`listMolecules`, `listTools`, `listDisplayTypes`, `getCamera`,
+  `activeDialog`, ...) reply with their payload directly as the `result`: no
+  `wait`, no `status`/`data` envelope.
+* `closeMolecule` fails on a molecule with unsaved changes unless `discard` is
+  exactly `true` (`"yes"` and `1` do not count).
+* `activateTool` takes the tool's object name, the `name` that `listTools`
+  reports (`Navigator`, `Editor`, `MeasureTool`), not the translated display
+  name.
+* Indices (`layer`, `index`) must be JSON numbers with a whole value; strings
+  such as `"0"` and booleans are refused.
+* After an RPC `openFile`, `moleculeInfo.fileName` is the opened file, as
+  after File > Open; `loadMolecule` has no file.
 
 ## Corpus
 
 `test_open_files.py` (marker `corpus`) opens every file under
-`avogadrodata/data`, `molecules` and `crystals` (skipping hidden files and
-png/svg/md/sh/py/csv/txt/README/LICENSE) and, when the file has orbitals,
-renders the HOMO with `renderMO` (`wait`, 120 s). An error reply is fine;
-only a death, hang or blocked request fails. After every (re)launch the shared
-app waits until it can read CIF (`harness.wait_for_cif_reader`), because Open
-Babel's formats register in the background a second or two after the window
-answers RPC. Each test records `ext`,
-`openFile`, `renderMO` and `message` properties (visible with `--junitxml`).
+`avogadrodata/data`, `molecules` and `crystals` (except the extensions in
+`harness.SKIP_EXTENSIONS`, hidden files and READMEs) and, when the file has
+orbitals, renders the HOMO with `renderMO` (`wait`, 120 s). An error reply is
+fine; only a death, hang or blocked request fails. After every (re)launch the
+shared app waits until it can read CIF (`harness.wait_for_cif_reader`), because
+Open Babel's formats register in the background a second or two after the
+window answers RPC.
 
-## Known app bugs seen while writing these
-
-(A failed export used to open a modal "Error saving file" dialog from
-`MainWindow::backgroundWriterFinished()` and left the writer busy; under
-`--skip-dialogs` it now logs the error and fails the waited request with the
-writer's message. `test_export_file_failure_is_an_error_not_a_dialog` guards it.)
+## Known failures
 
 * `renderMO` for the HOMO of `avogadrodata/data/fchk/CO-cc-6Z.fchk` crashes
-  the app (SIGTRAP): a libc++ hardening assertion, `vector[]` out of bounds in
-  `GaussianSetTools::calculateShellCutoff()` via `buildShellData()`, for its
-  h and i shells. Fixed on avogadrolibs `fix-gaussian-hi-shells` (pending);
-  the corpus fails on this file until that lands.
+  the app (SIGTRAP) on builds without the avogadrolibs commit "Skip
+  unsupported h/i shells": a libc++ hardening assertion, `vector[]` out of
+  bounds in `GaussianSetTools::calculateShellCutoff()` for its h and i shells.
 * An `openFile` sent right after launch can fail with "No file format
   available" for formats that Open Babel provides (CIF, ...): they are
   registered in the background after RPC already answers. The corpus works
   around it as described above; a script has to retry.
-
-(Fixed in avogadrolibs #3126: opening a CIF, or a periodic file such as
-`avogadrodata/data/cjson/rutile.cjson`, could run `SpaceGroup::fillHeuristic()`
--> `selectSpaceGroup()`, a modal "Select Space Group" dialog, and the RPC
-reply never came. Under `--skip-dialogs` the plugin no longer prompts, and a
-CIF's setting is resolved from its own symmetry operations.)
-
-## Findings from the molecule-verb scenarios
-
-* avogadroapp #634 (blank molecule left behind when a file is opened): not
-  reproducible with a command line file (the window then never creates the
-  blank one; `test_launch_with_file_leaves_exactly_one_molecule` pins that).
-  It reproduced with an RPC `openFile`/`loadMolecule` on a fresh start and with
-  the macOS open event (`test_finder_open_event_replaces_the_blank_molecule`);
-  both are fixed by `MainWindow::setOpenedMolecule()`.
-* Selecting the already-active molecule used to disable "modified" tracking
-  for it (`setMolecule()` ran again and `GLWidget::setMolecule()` dropped the
-  `changed` connection); fixed, see `test_selecting_the_active_molecule_again_keeps_it_tracked`.
-* avogadroapp #476 (spurious unsaved-changes prompts): no view-only operation
-  marks the document modified any more (camera, projection, render types,
-  layer visibility, `renderImage`, `listDisplayTypes`; see
-  `modified_flag_view_operations_476`). Selection does not set it either, but
-  it does push a "Change Selection" undo step, and *redoing* that step sets
-  `modified` (`redoEdit()` always emits `changed` with the atoms flag).
-  Whether a selection should be an undo step at all, and what it should do to
-  `modified`, is open; `test_selection_effect_on_modified_is_reported` records
-  the current behaviour without asserting it.

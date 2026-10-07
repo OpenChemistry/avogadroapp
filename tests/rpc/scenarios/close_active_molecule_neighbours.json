@@ -1,5 +1,5 @@
 {
-  "description": "Closing the active molecule activates its predecessor, or its successor when it is the first, exactly as the molecule list does.",
+  "description": "Closing the active molecule activates its predecessor, or its successor when it is the first, exactly as the molecule list does; closing a molecule that is not active leaves the active one alone.",
   "steps": [
     {
       "method": "loadMolecule",
@@ -125,6 +125,49 @@
       "result": {
         "formula": "C2H6"
       }
+    },
+    {
+      "method": "newMolecule",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "3\nwater\nO   0.000000   0.000000   0.117300\nH   0.000000   0.757200  -0.469200\nH   0.000000  -0.757200  -0.469200\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "closeMolecule",
+      "wait": true,
+      "params": {
+        "index": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 0,
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "index": 0,
+          "formula": "H2O",
+          "active": true
+        }
+      ]
     }
   ]
 }

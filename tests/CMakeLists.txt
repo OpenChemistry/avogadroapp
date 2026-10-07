@@ -49,26 +49,23 @@ else()
 endif()
 
 if(_avogadro_rpc_ready)
-  set(_rpc_common
-    ${Python3_EXECUTABLE} -m pytest ${CMAKE_CURRENT_SOURCE_DIR}/rpc -q
-      --avogadro $<TARGET_FILE:avogadro>
-      --reproducer-dir ${CMAKE_CURRENT_BINARY_DIR}/rpc-reproducers)
-  # Ensure we pass in an absolute path to the prefix so that we find the plugins
-  set(_rpc_environment
-    "AVOGADRO_DATA_ROOT=${AVOGADRO_DATA}"
-    "AVOGADRO_PLUGIN_DIR=${AvogadroLibs_INSTALL_PREFIX}")
+  # One test per pytest marker expression.
+  function(add_avogadro_rpc_test name marker labels timeout)
+    add_test(NAME ${name}
+      COMMAND ${Python3_EXECUTABLE} -m pytest ${CMAKE_CURRENT_SOURCE_DIR}/rpc -q
+        --avogadro $<TARGET_FILE:avogadro>
+        --reproducer-dir ${CMAKE_CURRENT_BINARY_DIR}/rpc-reproducers
+        -m "${marker}")
+    # Ensure we pass in an absolute path to the prefix so that we find the
+    # plugins
+    set_tests_properties(${name} PROPERTIES
+      ENVIRONMENT "AVOGADRO_DATA_ROOT=${AVOGADRO_DATA};AVOGADRO_PLUGIN_DIR=${AvogadroLibs_INSTALL_PREFIX}"
+      LABELS "${labels}"
+      TIMEOUT ${timeout})
+  endfunction()
 
-  add_test(NAME avogadro-rpc COMMAND ${_rpc_common} -m "not corpus")
-  set_tests_properties(avogadro-rpc PROPERTIES
-    ENVIRONMENT "${_rpc_environment}"
-    LABELS "rpc"
-    TIMEOUT 900)
-
+  add_avogadro_rpc_test(avogadro-rpc "not corpus" "rpc" 900)
   # Opens every sample file; slow, and a file that blocks the application
   # costs its timeout, so it is given a generous limit.
-  add_test(NAME avogadro-rpc-corpus COMMAND ${_rpc_common} -m corpus)
-  set_tests_properties(avogadro-rpc-corpus PROPERTIES
-    ENVIRONMENT "${_rpc_environment}"
-    LABELS "rpc;corpus"
-    TIMEOUT 7200)
+  add_avogadro_rpc_test(avogadro-rpc-corpus "corpus" "rpc;corpus" 7200)
 endif()

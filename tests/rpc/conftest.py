@@ -31,7 +31,6 @@ def pytest_addoption(parser):
 
 
 def pytest_configure(config):
-    config.addinivalue_line("markers", "corpus: sweep over every sample data file")
     requested = config.getoption("--avogadro") or os.environ.get("AVOGADRO_EXECUTABLE")
     config.avogadro_exe = None
     if requested:
@@ -42,20 +41,13 @@ def pytest_configure(config):
             raise pytest.UsageError(str(exc))
 
 
-def pytest_collection_modifyitems(config, items):
-    if config.avogadro_exe is not None:
-        return
-    skip = pytest.mark.skip(
-        reason="no Avogadro executable configured (use --avogadro PATH or "
-        "set AVOGADRO_EXECUTABLE)"
-    )
-    for item in items:
-        if HERE in Path(str(item.path)).parents:
-            item.add_marker(skip)
-
-
 @pytest.fixture(scope="session")
 def avogadro_exe(pytestconfig):
+    if pytestconfig.avogadro_exe is None:
+        pytest.skip(
+            "no Avogadro executable configured (use --avogadro PATH or set "
+            "AVOGADRO_EXECUTABLE)"
+        )
     return pytestconfig.avogadro_exe
 
 
@@ -70,24 +62,10 @@ def app_log_dir(tmp_path_factory):
 
 
 @pytest.fixture
-def avo(request, avogadro_exe, app_log_dir, reproducer_dir):
-    """A Session on a freshly launched Avogadro, stopped after the test."""
-    app = harness.AvogadroApp(avogadro_exe, app_log_dir)
-    app.start()
-    session = harness.Session(app, request.node.nodeid, reproducer_dir)
-    try:
-        yield session
-    finally:
-        session.close()
-        app.stop()
-
-
-@pytest.fixture
 def launch(request, avogadro_exe, app_log_dir, reproducer_dir):
-    """Factory for tests that need command line arguments (a file to open at
-    startup): launch("path/to/file") returns a Session on a fresh Avogadro
-    started with those extra arguments. Every app it launched is stopped
-    after the test."""
+    """Factory for a Session on a freshly launched Avogadro, which is stopped
+    after the test: launch() or, for command line arguments (a file to open at
+    startup), launch("path/to/file")."""
     launched = []
 
     def _launch(*extra_args):
@@ -103,27 +81,76 @@ def launch(request, avogadro_exe, app_log_dir, reproducer_dir):
         app.stop()
 
 
+@pytest.fixture
+def fresh(launch):
+    """A Session on an Avogadro launched for this test alone, exactly as it
+    starts. For a test that changes app-wide state (camera, projection, display
+    types) or depends on the startup state beyond `avo`'s blank molecule."""
+    return launch()
+
+
 @pytest.fixture(scope="module")
-def shared_app(avogadro_exe, app_log_dir):
+def app_ready():
+    """What to run on the module's shared app after every (re)launch; override
+    in a test module that needs the app warmed up."""
+    return None
+
+
+@pytest.fixture(scope="module")
+def shared_app(avogadro_exe, app_log_dir, app_ready):
     app = harness.AvogadroApp(avogadro_exe, app_log_dir)
-    # the corpus opens .cif files from the first test on
-    app.on_ready = harness.wait_for_cif_reader
+    app.on_ready = app_ready
     app.start()
     yield app
     app.stop()
 
 
+def _session(request, app, reproducer_dir):
+    """A Session on `app`, relaunched first if the last test killed it, hung it
+    or left it blocked."""
+    if not app.healthy():
+        app.restart()
+    return harness.Session(app, request.node.nodeid, reproducer_dir)
+
+
 @pytest.fixture
 def shared(request, shared_app, reproducer_dir):
-    """A Session on the module's shared app, relaunched first if the last
-    test killed it, hung it or left it blocked."""
-    if not shared_app.healthy():
-        shared_app.restart()
-    session = harness.Session(shared_app, request.node.nodeid, reproducer_dir)
+    """A Session on the module's shared app, exactly as the last test left it."""
+    session = _session(request, shared_app, reproducer_dir)
     try:
         yield session
     finally:
         session.close()
+
+
+@pytest.fixture
+def avo(request, shared_app, reproducer_dir):
+    """A Session on the module's shared app, reset to the startup document: one
+    blank, unmodified molecule. Per-molecule state (undo, layers, selection)
+    goes with the molecules that reset closes; app-wide state (camera,
+    projection, display types, windows) does not, so a test that changes any
+    of it uses `fresh`."""
+    session = _session(request, shared_app, reproducer_dir)
+    try:
+        if not session.reset():
+            # Whatever the last test did, close can't undo it: start over.
+            session.close()
+            shared_app.restart()
+            session = harness.Session(shared_app, request.node.nodeid, reproducer_dir)
+            if not session.reset():
+                pytest.fail("a freshly launched Avogadro is not in the startup state")
+        yield session
+    finally:
+        session.close()
+
+
+@pytest.fixture(scope="session")
+def butane(molecules_dir):
+    """Path of molecules/alkanes/butane.cjson (14 atoms, C4H10)."""
+    path = molecules_dir / "alkanes" / "butane.cjson"
+    if not path.is_file():
+        pytest.skip("%s missing" % path)
+    return path
 
 
 def _need_dir(path, what):

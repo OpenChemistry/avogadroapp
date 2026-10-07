@@ -1,5 +1,6 @@
 {
   "description": "Build up layers, hide one and select atoms, then replace the molecule (inline and from a file) and use the layer verbs on each new molecule. The new molecule starts with a single visible, unlocked layer.",
+  "fresh": true,
   "issue": "2.1: replacing the molecule with layers present",
   "steps": [
     {

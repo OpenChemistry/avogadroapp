@@ -19,16 +19,19 @@ def _param(entry):
     return pytest.param(path, id="%s/%s" % (name, path.relative_to(root).as_posix()))
 
 
+@pytest.fixture(scope="module")
+def app_ready():
+    # the corpus opens .cif files from the first test on
+    return harness.wait_for_cif_reader
+
+
 @pytest.fixture
 def open_timeout(pytestconfig):
     return pytestconfig.getoption("--open-timeout")
 
 
 @pytest.mark.parametrize("path", [_param(entry) for entry in FILES] or [pytest.param(None, marks=pytest.mark.skip(reason="no corpus directories found"))])
-def test_open_file(shared, path, open_timeout, request):
-    def record_property(name, value):
-        request.node.user_properties.append((name, value))
-
+def test_open_file(shared, path, open_timeout, record_property):
     record_property("ext", path.suffix.lower() or "(none)")
     try:
         shared.call("openFile", {"fileName": str(path)}, timeout=open_timeout)

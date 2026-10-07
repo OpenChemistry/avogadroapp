@@ -13,27 +13,26 @@ SCENARIO_DIR = Path(__file__).resolve().parent / "scenarios"
 def _scenario_params():
     params = []
     for path in sorted(SCENARIO_DIR.glob("*.json")):
+        scenario = json.loads(path.read_text())
         marks = []
-        reason = json.loads(path.read_text()).get("xfail")
-        if reason:
-            marks.append(pytest.mark.xfail(reason=reason, strict=True))
-        params.append(pytest.param(path, id=path.stem, marks=marks))
+        if scenario.get("xfail"):
+            marks.append(pytest.mark.xfail(reason=scenario["xfail"], strict=True))
+        params.append(pytest.param(path.stem, scenario, id=path.stem, marks=marks))
     return params
 
 
 def expand(value):
-    """Replace $MOLECULES / $AVOGADRODATA / $CRYSTALS in string params; skip
-    the test if the corpus directory they name does not exist."""
+    """Replace a leading $MOLECULES/ in string params with the molecules
+    directory; skip the test if it does not exist."""
     if isinstance(value, dict):
         return {key: expand(item) for key, item in value.items()}
     if isinstance(value, list):
         return [expand(item) for item in value]
-    if isinstance(value, str) and value.startswith("$"):
-        name, _, rest = value[1:].partition("/")
-        root = harness.corpus_roots().get(name.lower())
+    if isinstance(value, str) and value.startswith("$MOLECULES/"):
+        root = harness.corpus_roots().get("molecules")
         if root is None:
-            pytest.skip("corpus directory %s not found" % name)
-        return str(root / rest)
+            pytest.skip("molecules directory not found")
+        return str(root / value[len("$MOLECULES/") :])
     return value
 
 
@@ -73,8 +72,6 @@ def run_check(check, saved):
     op = check["op"]
     if op == "lt":
         ok = a < b
-    elif op == "gt":
-        ok = a > b
     elif op == "differs":
         ok = abs(a - b) > check.get("tolerance", 1e-6)
     else:
@@ -82,28 +79,28 @@ def run_check(check, saved):
     assert ok, "check %s failed: %s=%r %s %s=%r" % (check, check["a"], a, op, check["b"], b)
 
 
-@pytest.mark.parametrize("path", _scenario_params())
-def test_scenario(avo, path):
-    scenario = json.loads(path.read_text())
+@pytest.mark.parametrize("name, scenario", _scenario_params())
+def test_scenario(request, name, scenario):
+    avo = request.getfixturevalue("fresh" if scenario.get("fresh") else "avo")
     saved = {}
     for number, step in enumerate(scenario["steps"], 1):
-        label = "%s step %d (%s)" % (path.stem, number, step["method"])
+        label = "%s step %d (%s)" % (name, number, step["method"])
         args = (step["method"], expand(step.get("params")))
-        kwargs = {"wait": step.get("wait", False), "timeout": step.get("timeout")}
+        wait = step.get("wait", False)
         if step.get("expect", "ok") == "error":
-            error = avo.expect_error(*args, code=step.get("error_code"), **kwargs)
+            error = avo.expect_error(*args, code=step.get("error_code"), wait=wait)
             if "message" in step:
                 assert step["message"] in error.message, label
             continue
 
-        result = avo.call(*args, **kwargs)
+        result = avo.call(*args, wait=wait)
         if "result" in step:
             assert contains(result, step["result"]), "%s: wanted %s, got %s" % (
                 label,
                 step["result"],
                 result,
             )
-        for name, dotted in step.get("save", {}).items():
-            saved[name] = dig(result, dotted)
+        for key, dotted in step.get("save", {}).items():
+            saved[key] = dig(result, dotted)
     for check in scenario.get("checks", []):
         run_check(check, saved)

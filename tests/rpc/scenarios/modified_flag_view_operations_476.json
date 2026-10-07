@@ -1,5 +1,6 @@
 {
   "description": "Opening a file leaves the document unmodified, and so do view-only operations (camera, projection, render types, layer visibility, rendering an image): none of them may ask the user to save.",
+  "fresh": true,
   "issue": "avogadroapp #476",
   "steps": [
     {

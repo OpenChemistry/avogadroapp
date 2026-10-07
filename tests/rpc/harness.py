@@ -29,6 +29,14 @@ APP_ROOT = TESTS_DIR.parents[1]  # the avogadroapp checkout
 PING_TIMEOUT = 5.0
 CALL_TIMEOUT = 60.0
 STARTUP_TIMEOUT = 60.0
+POLL_INTERVAL = 0.05  # between attempts of every "wait until" loop
+WAIT_TIMEOUT = 30.0  # Session.wait_for()
+
+# After --rpc-name <name>. --testing must never be passed: the parser rejects it.
+LAUNCH_ARGS = ["--skip-autosave", "--disable-settings"]
+
+# The error code connect.py has no name for: the request could not be carried out.
+REQUEST_FAILED = -1
 
 
 # --------------------------------------------------------------------------
@@ -65,6 +73,7 @@ def _load_client():
 client_module = _load_client()
 RPCError = client_module.RPCError
 connect = client_module.connect
+result_data = client_module.result_data
 
 
 # --------------------------------------------------------------------------
@@ -86,9 +95,6 @@ def corpus_roots():
     return {name: path for name, path in roots.items() if path.is_dir()}
 
 
-# CIFs are excluded until the "Select Space Group" prompt on open is fixed:
-# SpaceGroup::fillHeuristic() runs a modal dialog when a crystal has no space
-# group, and a modal dialog blocks the RPC reply (and the sweep with it).
 SKIP_EXTENSIONS = {".png", ".svg", ".md", ".sh", ".py", ".csv", ".txt"}
 
 
@@ -118,6 +124,29 @@ class ConfigError(Exception):
 
 class AppStartError(Exception):
     """The application did not come up."""
+
+
+def wait_for_rpc(name, timeout=STARTUP_TIMEOUT, alive=None):
+    """Wait until the application listening on socket `name` has its window
+    (moleculeInfo fails until it does) and return its version reply.
+
+    `alive`, if given, is called between attempts; the wait fails at once when
+    it returns False (the process died). Raises AppStartError on either."""
+    deadline = time.monotonic() + timeout
+    while True:
+        if alive is not None and not alive():
+            raise AppStartError("Avogadro exited during startup")
+        try:
+            with connect(name, timeout=5) as client:
+                version = client.version()
+                client.molecule_info()
+            return version
+        except (ConnectionError, OSError, RPCError):
+            if time.monotonic() > deadline:
+                raise AppStartError(
+                    "Avogadro did not accept RPC connections within %d s" % timeout
+                )
+            time.sleep(POLL_INTERVAL)
 
 
 def resolve_executable(path):
@@ -191,13 +220,7 @@ class AvogadroApp:
         if socket_path.exists():
             socket_path.unlink()
         self.log_path = self.log_dir / (self.name + ".log")
-        # --testing must never be passed (the parser rejects it).
-        self.args = [
-            "--rpc-name",
-            self.name,
-            "--skip-autosave",
-            "--disable-settings",
-        ] + self.extra_args
+        self.args = ["--rpc-name", self.name] + LAUNCH_ARGS + self.extra_args
         self.tests = []
         self.tainted = False
         with open(self.log_path, "wb") as log:
@@ -208,26 +231,19 @@ class AvogadroApp:
                 stdin=subprocess.DEVNULL,
             )
 
-        deadline = time.monotonic() + timeout
-        while True:
-            if self.process.poll() is not None:
-                raise AppStartError(
-                    "Avogadro exited during startup (return code %s).\n%s"
-                    % (self.process.returncode, "\n".join(tail(self.log_path, 40)))
+        try:
+            self.version = wait_for_rpc(self.name, timeout, alive=self.alive)
+        except AppStartError as exc:
+            returncode = self.process.poll()
+            self.stop()
+            raise AppStartError(
+                "%s%s\n%s"
+                % (
+                    exc,
+                    "" if returncode is None else " (return code %s)" % returncode,
+                    "\n".join(tail(self.log_path, 40)),
                 )
-            try:
-                with connect(self.name, timeout=5) as client:
-                    self.version = client.version()
-                    client.molecule_info()  # fails until the window exists
-                break
-            except (ConnectionError, OSError, RPCError):
-                if time.monotonic() > deadline:
-                    self.stop()
-                    raise AppStartError(
-                        "Avogadro did not accept RPC connections within %d s.\n%s"
-                        % (timeout, "\n".join(tail(self.log_path, 40)))
-                    )
-                time.sleep(0.25)
+            )
         if self.on_ready is not None:
             self.on_ready(self)
 
@@ -235,7 +251,8 @@ class AvogadroApp:
         return self.process is not None and self.process.poll() is None
 
     def healthy(self):
-        return self.alive() and not self.tainted and ping(self.name)
+        """Alive, answering, and not left in a state a test cannot trust."""
+        return self.alive() and not self.tainted and probe(self.name)[0]
 
     def stop(self):
         process = self.process
@@ -295,16 +312,7 @@ def wait_for_cif_reader(app, timeout=30.0):
                     "Avogadro could not read CIF within %d s of starting.\n%s"
                     % (timeout, "\n".join(tail(app.log_path, 40)))
                 )
-            time.sleep(0.25)
-
-
-def ping(name, timeout=PING_TIMEOUT):
-    """True if a fresh connection gets an answer to internalPing in time."""
-    try:
-        with connect(name, timeout=timeout) as client:
-            return client.ping()
-    except (ConnectionError, OSError):
-        return False
+            time.sleep(POLL_INTERVAL)
 
 
 def probe(name, timeout=PING_TIMEOUT):
@@ -407,25 +415,42 @@ class Session:
         """The open molecules, as listMolecules reports them."""
         return self.call("listMolecules")
 
-    def wait_for(self, predicate, what, method="listMolecules", timeout=30.0, interval=0.25):
-        """Poll a read-back until predicate(result) is true; fail after
-        timeout seconds. For things that happen on the app's own time, such
-        as a file named on the command line."""
-        deadline = time.monotonic() + timeout
+    def wait_for(self, predicate, what):
+        """Poll listMolecules until predicate(result) is true; fail after
+        WAIT_TIMEOUT seconds. For things that happen on the app's own time,
+        such as a file named on the command line."""
+        deadline = time.monotonic() + WAIT_TIMEOUT
         while True:
-            result = self.call(method)
+            result = self.molecules()
             if predicate(result):
                 return result
             if time.monotonic() > deadline:
                 raise AssertionError(
-                    "%s did not happen within %d s; last %s: %s"
-                    % (what, timeout, method, summarize(result))
+                    "%s did not happen within %d s; last listMolecules: %s"
+                    % (what, WAIT_TIMEOUT, summarize(result))
                 )
-            time.sleep(interval)
+            time.sleep(POLL_INTERVAL)
 
     def data(self, method, params=None, timeout=None):
-        """Run a waited plugin command and return its data dict."""
-        return self.call(method, params, wait=True, timeout=timeout).get("data", {})
+        """Run a waited command and return its data dict."""
+        reply = self.call(method, params, wait=True, timeout=timeout)
+        return result_data({"result": reply})
+
+    def reset(self):
+        """Bring the app back to its startup document: close every open
+        molecule, discarding changes, highest index first (closing the last
+        one leaves a new blank molecule). Returns True if that leaves exactly
+        one molecule with no atoms and no unsaved changes. The steps it takes
+        are not part of the test, so they are not recorded."""
+        for entry in reversed(self.molecules()):
+            self.call("closeMolecule", {"index": entry["index"], "discard": True}, wait=True)
+        molecules = self.molecules()
+        self.steps.clear()
+        return (
+            len(molecules) == 1
+            and molecules[0]["atomCount"] == 0
+            and not molecules[0]["modified"]
+        )
 
     # -- internals -------------------------------------------------------
     def _run(self, method, params, wait, timeout):
@@ -436,7 +461,7 @@ class Session:
         started = time.monotonic()
         try:
             if timeout is not None and not wait:
-                self.client.sock.settimeout(timeout)
+                self.client._set_socket_timeout(timeout)
             result = self.client.send(method, params, wait=wait, timeout=timeout)["result"]
             step["outcome"] = {"result": summarize(result)}
         except RPCError as exc:
@@ -446,8 +471,8 @@ class Session:
             transport = exc
             step["outcome"] = {"transport_error": repr(exc)}
         finally:
-            if timeout is not None and not wait and self.client.sock is not None:
-                self.client.sock.settimeout(self.call_timeout)
+            if timeout is not None and not wait:
+                self.client._set_socket_timeout(self.call_timeout)
         step["elapsed"] = round(time.monotonic() - started, 3)
         self.steps.append(step)
         self._police(transport)

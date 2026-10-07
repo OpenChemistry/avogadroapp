@@ -3,12 +3,11 @@
 import base64
 import json
 import math
-import re
 
 import pytest
 
 import harness
-from harness import APP_ROOT
+from harness import REQUEST_FAILED, RPCError
 
 ETHANE = """8
 ethane
@@ -29,18 +28,6 @@ H   0.000000   0.757200  -0.469200
 H   0.000000  -0.757200  -0.469200
 """
 
-COMMAND_FAILED = -2
-REQUEST_FAILED = -1
-METHOD_NOT_FOUND = -32601
-
-
-def builtin_names():
-    """Names in the table at the top of rpclistener.cpp, so a newly added
-    built-in is checked without anyone remembering to edit this file."""
-    source = (APP_ROOT / "avogadro" / "rpclistener.cpp").read_text()
-    table = source.split("builtinCommands[] = {", 1)[1].split("\n};", 1)[0]
-    return re.findall(r'^  \{ "(\w+)",', table, re.MULTILINE)
-
 
 # -- version / listCommands ---------------------------------------------
 def test_version(avo):
@@ -55,25 +42,44 @@ def test_ping(avo):
     assert avo.call("internalPing") == "pong"
 
 
-def test_list_commands_has_every_builtin(avo):
-    names = builtin_names()
-    assert len(names) >= 20, "failed to parse the builtin table: %s" % names
+def test_list_commands(avo):
     commands = avo.call("listCommands")
     by_name = {entry["name"]: entry for entry in commands}
-    for name in names:
-        assert name in by_name, "builtin %s missing from listCommands" % name
-        assert by_name[name]["kind"] == "builtin"
-        assert by_name[name]["plugin"] == ""
     # Sorted by name, and plugin commands are listed with their owner.
     listed = [entry["name"] for entry in commands]
     assert listed == sorted(listed)
+    assert all({"name", "description", "kind", "plugin", "async"} <= set(e) for e in commands)
+    assert all(e["plugin"] == "" for e in commands if e["kind"] == "builtin")
+    assert by_name["listCommands"]["kind"] == "builtin"
     assert by_name["selectAll"]["kind"] == "extension"
     assert by_name["editDistance"]["kind"] == "tool"
-    assert all({"name", "description", "kind", "plugin", "async"} <= set(e) for e in commands)
+
+
+def test_every_builtin_command_is_answered(fresh):
+    """Every built-in that listCommands reports is known: with no parameters it
+    answers, with a result or an error of its own, never "Method not found".
+    A newly added built-in is covered without editing this file.
+
+    Only "kill" is left out: it is refused without --testing, which the app
+    cannot be given (see README). Nothing else needs excluding. With empty
+    parameters each verb either fails validation or does something harmless
+    (a read-back, a new blank molecule, closing the blank one), and none of them
+    opens a dialog: the oracle would fail the test if one did. The app is
+    launched for this test alone because some of the calls change it."""
+    builtins = [e["name"] for e in fresh.call("listCommands") if e["kind"] == "builtin"]
+    assert len(builtins) >= 20, builtins
+    assert "kill" in builtins
+    for name in builtins:
+        if name == "kill":
+            continue
+        try:
+            fresh.call(name)
+        except RPCError as error:
+            assert error.code != RPCError.METHOD_NOT_FOUND, name
 
 
 def test_unknown_method(avo):
-    error = avo.expect_error("noSuchMethod", code=METHOD_NOT_FOUND)
+    error = avo.expect_error("noSuchMethod", code=RPCError.METHOD_NOT_FOUND)
     assert error.message == "Method not found"
 
 
@@ -94,6 +100,7 @@ def test_molecule_info_on_startup_molecule(avo):
     assert info["homoIndex"] == -1
     assert info["selectedAtomCount"] == 0
     assert info["hasUnitCell"] is False
+    assert (info["modified"], info["canUndo"], info["canRedo"]) == (False, False, False)
 
 
 def test_load_molecule_then_info(avo):
@@ -145,11 +152,8 @@ def test_open_file(avo, data_dir):
     assert (info["atomCount"], info["bondCount"], info["formula"]) == (3, 2, "H2O")
 
 
-def test_open_file_cjson_from_molecules(avo, molecules_dir):
-    path = molecules_dir / "alkanes" / "butane.cjson"
-    if not path.is_file():
-        pytest.skip("%s missing" % path)
-    avo.call("openFile", {"fileName": str(path)})
+def test_open_file_cjson_from_molecules(avo, butane):
+    avo.call("openFile", {"fileName": str(butane)})
     assert avo.info()["formula"] == "C4H10"
 
 
@@ -163,33 +167,33 @@ def test_open_file_errors(avo, tmp_path):
 
 
 # -- camera ------------------------------------------------------------
-def test_camera_round_trip(avo):
-    avo.load(ETHANE)
-    camera = avo.call("getCamera")
+def test_camera_round_trip(fresh):
+    fresh.load(ETHANE)
+    camera = fresh.call("getCamera")
     assert {"distance", "focus", "projection", "orthographicScale", "modelView"} <= set(camera)
     assert len(camera["modelView"]) == 16
 
     angle = math.radians(30)
     c, s = math.cos(angle), math.sin(angle)
     wanted = [c, -s, 0, 0, s, c, 0, 0, 0, 0, 1, camera["modelView"][11], 0, 0, 0, 1]
-    returned = avo.call("setCamera", {"modelView": wanted})
+    returned = fresh.call("setCamera", {"modelView": wanted})
     assert returned["modelView"] == pytest.approx(wanted, abs=1e-4)
-    assert avo.call("getCamera")["modelView"] == pytest.approx(wanted, abs=1e-4)
+    assert fresh.call("getCamera")["modelView"] == pytest.approx(wanted, abs=1e-4)
 
 
-def test_camera_projection(avo):
-    avo.load(ETHANE)
-    reply = avo.call("setCamera", {"projection": "orthographic", "orthographicScale": 2.5})
+def test_camera_projection(fresh):
+    fresh.load(ETHANE)
+    reply = fresh.call("setCamera", {"projection": "orthographic", "orthographicScale": 2.5})
     assert reply["projection"] == "orthographic"
     assert reply["orthographicScale"] == pytest.approx(2.5)
-    assert avo.call("getCamera")["projection"] == "orthographic"
+    assert fresh.call("getCamera")["projection"] == "orthographic"
     # Leaving everything out changes nothing.
-    assert avo.call("setCamera", {})["projection"] == "orthographic"
+    assert fresh.call("setCamera", {})["projection"] == "orthographic"
 
-    assert avo.call("setProjection", {"type": "perspective"}) is True
-    assert avo.call("getCamera")["projection"] == "perspective"
-    avo.call("setProjection", {"type": "orthographic"})
-    assert avo.call("getCamera")["projection"] == "orthographic"
+    assert fresh.call("setProjection", {"type": "perspective"}) is True
+    assert fresh.call("getCamera")["projection"] == "perspective"
+    fresh.call("setProjection", {"type": "orthographic"})
+    assert fresh.call("getCamera")["projection"] == "orthographic"
 
 
 def test_set_camera_rejects_wrong_matrix_size(avo):
@@ -210,18 +214,18 @@ def test_list_display_types(avo):
     assert "Wireframe" in types
 
 
-def test_set_render_types(avo):
-    avo.load(ETHANE)
-    assert display_types(avo)["Wireframe"]["enabled"] is False
+def test_set_render_types(fresh):
+    fresh.load(ETHANE)
+    assert display_types(fresh)["Wireframe"]["enabled"] is False
 
-    avo.call("setRenderTypes", {"Wireframe": True})
-    assert display_types(avo)["Wireframe"]["enabled"] is True
-    avo.call("setRenderTypes", {"Wireframe": False})
-    assert display_types(avo)["Wireframe"]["enabled"] is False
+    fresh.call("setRenderTypes", {"Wireframe": True})
+    assert display_types(fresh)["Wireframe"]["enabled"] is True
+    fresh.call("setRenderTypes", {"Wireframe": False})
+    assert display_types(fresh)["Wireframe"]["enabled"] is False
 
     # The list form enables, and a display name works as well as the id.
-    avo.call("setRenderTypes", {"types": ["Licorice", "Ball and Stick"]})
-    types = display_types(avo)
+    fresh.call("setRenderTypes", {"types": ["Licorice", "Ball and Stick"]})
+    types = display_types(fresh)
     assert types["Licorice"]["enabled"] and types["BallStick"]["enabled"]
 
 
@@ -309,7 +313,7 @@ def test_export_file_failure_is_an_error_not_a_dialog(avo, tmp_path):
     avo.load(ETHANE)
     bad = tmp_path / "no_such_directory" / "ethane.xyz"
     error = avo.expect_error(
-        "exportFile", {"fileName": str(bad)}, code=COMMAND_FAILED, wait=True, timeout=15
+        "exportFile", {"fileName": str(bad)}, code=RPCError.COMMAND_FAILED, wait=True, timeout=15
     )
     assert error.message  # the writer's own text, not the generic fallback
     assert error.message != "The command failed."
@@ -360,55 +364,68 @@ def test_layer_lifecycle(avo):
     assert avo.call("removeLayer", {"layer": 1}, wait=True)["data"] == {"count": 2}
     # The old layer 2 slid down to index 1 and kept its lock.
     assert avo.call("getLayerLocked", {"layer": 1}, wait=True)["data"]["locked"] is True
-    avo.expect_error("getLayerVisible", {"layer": 2}, code=COMMAND_FAILED, wait=True)
+    avo.expect_error("getLayerVisible", {"layer": 2}, code=RPCError.COMMAND_FAILED, wait=True)
 
 
-def test_layer_errors(avo):
+LAYER_VERBS = [
+    ("getLayerVisible", {}),
+    ("getLayerLocked", {}),
+    ("setActiveLayer", {}),
+    ("removeLayer", {}),
+    ("setLayerVisible", {"visible": True}),
+    ("setLayerLocked", {"locked": True}),
+]
+
+
+@pytest.mark.parametrize("method, extra", LAYER_VERBS)
+@pytest.mark.parametrize(
+    "layer, expected",
+    [
+        (5, "out of range"),
+        (-1, "out of range"),
+        (0.5, "must be a whole number"),
+        (1e20, "must be a whole number"),
+        # not numbers, although QVariant would convert them
+        ("0", "must be a whole number"),
+        (True, "must be a whole number"),
+    ],
+    ids=["too-big", "negative", "fractional", "huge", "string", "boolean"],
+)
+def test_layer_index_errors(avo, method, extra, layer, expected):
     avo.load(ETHANE)
-    for method in ("getLayerVisible", "getLayerLocked", "setActiveLayer", "removeLayer"):
-        error = avo.expect_error(method, {"layer": 5}, code=COMMAND_FAILED)
-        assert "out of range" in error.message
-        avo.expect_error(method, {"layer": -1}, code=COMMAND_FAILED)
-        avo.expect_error(method, {"layer": 0.5}, code=COMMAND_FAILED)
-        assert "Missing" in avo.expect_error(method, {}, code=COMMAND_FAILED).message
+    error = avo.expect_error(method, dict(extra, layer=layer), code=RPCError.COMMAND_FAILED)
+    assert expected in error.message
+    assert avo.data("getLayerVisible", {"layer": 0})["count"] == 1  # nothing happened
 
-    for value in ("yes", 1, None):
-        error = avo.expect_error(
-            "setLayerVisible", {"layer": 0, "visible": value}, code=COMMAND_FAILED
-        )
-        assert "true or false" in error.message
-        avo.expect_error("setLayerLocked", {"layer": 0, "locked": value}, code=COMMAND_FAILED)
-    avo.expect_error("setLayerVisible", {"layer": 0}, code=COMMAND_FAILED)
 
-    # Never remove the last remaining layer.
-    error = avo.expect_error("removeLayer", {"layer": 0}, code=COMMAND_FAILED)
+@pytest.mark.parametrize("method, extra", LAYER_VERBS)
+def test_layer_index_is_required(avo, method, extra):
+    avo.load(ETHANE)
+    error = avo.expect_error(method, extra, code=RPCError.COMMAND_FAILED)
+    assert "Missing" in error.message
+
+
+@pytest.mark.parametrize(
+    "method, key", [("setLayerVisible", "visible"), ("setLayerLocked", "locked")]
+)
+@pytest.mark.parametrize("value", ["yes", 1, None, "missing"])
+def test_layer_flag_must_be_a_boolean(avo, method, key, value):
+    avo.load(ETHANE)
+    params = {"layer": 0} if value == "missing" else {"layer": 0, key: value}
+    error = avo.expect_error(method, params, code=RPCError.COMMAND_FAILED)
+    assert "true or false" in error.message
+
+
+def test_cannot_remove_the_last_layer(avo):
+    avo.load(ETHANE)
+    error = avo.expect_error("removeLayer", {"layer": 0}, code=RPCError.COMMAND_FAILED)
     assert "last remaining layer" in error.message
     assert avo.call("getLayerVisible", {"layer": 0}, wait=True)["data"]["count"] == 1
 
 
-@pytest.mark.parametrize(
-    "method, extra",
-    [
-        ("getLayerVisible", {}),
-        ("getLayerLocked", {}),
-        ("setActiveLayer", {}),
-        ("removeLayer", {}),
-        ("setLayerVisible", {"visible": True}),
-        ("setLayerLocked", {"locked": True}),
-    ],
-)
-@pytest.mark.parametrize("value", ["0", True], ids=["string", "boolean"])
-def test_layer_index_must_be_a_number(avo, method, extra, value):
-    """A string such as "0" or a boolean is not an index, although QVariant
-    would convert it: the layer verbs are as strict as the molecule verbs."""
-    avo.load(ETHANE)
-    avo.data("addLayer")  # so that layer 0 and layer 1 are both valid indices
-    error = avo.expect_error(method, dict(extra, layer=value), code=COMMAND_FAILED)
-    assert error.message == "'layer' must be a whole number."
-    assert avo.data("getLayerVisible", {"layer": 0})["count"] == 2  # nothing happened
-
-
 # -- molecules ---------------------------------------------------------------
+# (Sequences of several molecules are the scenarios/; what is here is one verb
+# and its errors.)
 def test_list_molecules_on_startup(avo):
     molecules = avo.call("listMolecules")
     assert len(molecules) == 1
@@ -422,91 +439,83 @@ def test_list_molecules_on_startup(avo):
     }
 
 
-def test_molecule_info_modified_undo_and_file_name(avo, molecules_dir):
-    info = avo.info()
-    assert (info["modified"], info["canUndo"], info["canRedo"]) == (False, False, False)
+def test_new_molecule_and_set_active(avo):
+    assert avo.call("newMolecule") is True  # without wait the reply is a bare true
+    avo.load(WATER)  # fills the new, empty one
+    assert avo.data("newMolecule") == {"index": 2, "count": 3}
+    molecules = avo.molecules()
+    assert [m["index"] for m in molecules] == [0, 1, 2]
+    assert [m["active"] for m in molecules] == [False, False, True]
+    assert [m["atomCount"] for m in molecules] == [0, 3, 0]
 
-    path = molecules_dir / "alkanes" / "butane.cjson"
-    if not path.is_file():
-        pytest.skip("%s missing" % path)
-    avo.call("openFile", {"fileName": str(path)})
-    info = avo.info()
-    assert info["fileName"] == str(path)  # recorded the way File > Open does
-    assert info["modified"] is False
-
-    avo.data("editDistance", {"atoms": [0, 1], "value": 2.5})
-    info = avo.info()
-    assert (info["modified"], info["canUndo"], info["canRedo"]) == (True, True, False)
-    avo.data("undo")
-    info = avo.info()
-    assert (info["modified"], info["canUndo"], info["canRedo"]) == (False, False, True)
-
-    # loadMolecule has no file
-    avo.load(ETHANE)
-    assert avo.info()["fileName"] == ""
-
-
-def test_new_molecule(avo):
-    assert avo.call("newMolecule") is True
-    assert avo.call("newMolecule", wait=True) == {
-        "status": "finished",
-        "data": {"index": 2, "count": 3},
-    }
-    assert [m["active"] for m in avo.call("listMolecules")] == [False, False, True]
-
-
-def test_set_active_molecule_errors(avo):
-    avo.call("newMolecule")
-    avo.load(WATER)  # index 1 is active, index 0 is the blank startup molecule
-    assert "Missing" in avo.expect_error("setActiveMolecule", {}, code=COMMAND_FAILED).message
-    for bad in (-1, 2, 99, 0.5, "0", None, True, [0]):
-        error = avo.expect_error("setActiveMolecule", {"index": bad}, code=COMMAND_FAILED)
-        assert "'index'" in error.message
-    assert "out of range" in avo.expect_error(
-        "setActiveMolecule", {"index": 2}, code=COMMAND_FAILED
-    ).message
-    # none of that changed anything
-    assert [m["active"] for m in avo.call("listMolecules")] == [False, True]
+    assert avo.data("setActiveMolecule", {"index": 1}) == {"index": 1, "count": 3}
     assert avo.info()["formula"] == "H2O"
+    assert avo.data("setActiveMolecule", {"index": 1}) == {"index": 1, "count": 3}
 
 
-def test_close_molecule_errors(avo):
-    avo.expect_error("closeMolecule", {"index": 1}, code=COMMAND_FAILED)  # only one open
-    avo.expect_error("closeMolecule", {"index": -1}, code=COMMAND_FAILED)
-    avo.expect_error("closeMolecule", {"index": 0.5}, code=COMMAND_FAILED)
-    avo.expect_error("closeMolecule", {"index": "0"}, code=COMMAND_FAILED)
+OUT_OF_RANGE = [-1, 1, 99]  # one molecule is open
+NOT_WHOLE_NUMBERS = [0.5, 1e20, "0", None, True, [0]]
 
+
+@pytest.mark.parametrize("method", ["setActiveMolecule", "closeMolecule"])
+@pytest.mark.parametrize("index", OUT_OF_RANGE)
+def test_molecule_index_out_of_range(avo, method, index):
+    error = avo.expect_error(method, {"index": index}, code=RPCError.COMMAND_FAILED)
+    assert error.message == "'index' %d is out of range (1 molecules are open)." % index
+    assert [m["active"] for m in avo.molecules()] == [True]  # nothing changed
+
+
+@pytest.mark.parametrize("method", ["setActiveMolecule", "closeMolecule"])
+@pytest.mark.parametrize("index", NOT_WHOLE_NUMBERS, ids=repr)
+def test_molecule_index_must_be_a_number(avo, method, index):
+    error = avo.expect_error(method, {"index": index}, code=RPCError.COMMAND_FAILED)
+    assert error.message == "'index' must be a whole number."
+    assert [m["active"] for m in avo.molecules()] == [True]
+
+
+def test_set_active_molecule_needs_an_index(avo):
+    avo.data("newMolecule")
+    error = avo.expect_error("setActiveMolecule", code=RPCError.COMMAND_FAILED)
+    assert error.message == "Missing 'index' parameter."
+    assert [m["active"] for m in avo.molecules()] == [False, True]
+
+
+def test_close_molecule_refuses_unsaved_changes(avo):
     avo.load(ETHANE)
     avo.data("removeAllHydrogens")  # an edit: the molecule is now modified
     assert avo.info()["modified"] is True
-    for params in ({}, {"index": 0}, {"discard": False}, {"discard": "yes"}):
-        error = avo.expect_error("closeMolecule", params, code=COMMAND_FAILED)
+    # Only a real true discards.
+    for params in ({}, {"index": 0}, {"discard": False}, {"discard": "yes"}, {"discard": 1}):
+        error = avo.expect_error("closeMolecule", params, code=RPCError.COMMAND_FAILED)
         assert error.message == (
             "The molecule has unsaved changes; pass discard: true to close it anyway."
         )
     # nothing changed
-    molecules = avo.call("listMolecules")
+    molecules = avo.molecules()
     assert len(molecules) == 1
     assert (molecules[0]["atomCount"], molecules[0]["modified"]) == (2, True)
 
+    # closing the last molecule leaves a new blank one
     assert avo.data("closeMolecule", {"discard": True}) == {"index": 0, "count": 1}
-    assert avo.call("listMolecules")[0]["atomCount"] == 0
+    molecules = avo.molecules()
+    assert (molecules[0]["atomCount"], molecules[0]["modified"]) == (0, False)
 
 
-def test_undo_redo_with_nothing_to_do(avo):
-    assert avo.expect_error("undo", code=COMMAND_FAILED).message == "There is nothing to undo."
-    assert avo.expect_error("redo", code=COMMAND_FAILED).message == "There is nothing to redo."
-    avo.load(ETHANE)
-    avo.expect_error("undo", code=COMMAND_FAILED)
-    avo.expect_error("redo", code=COMMAND_FAILED)
-    avo.data("editDistance", {"atoms": [0, 1], "value": 2.0})
-    avo.expect_error("redo", code=COMMAND_FAILED)  # something to undo, nothing to redo
-    assert set(avo.data("undo")) == {"canUndo", "canRedo", "undoText", "redoText", "modified"}
-    avo.expect_error("undo", code=COMMAND_FAILED)
+@pytest.mark.parametrize(
+    "method, message",
+    [("undo", "There is nothing to undo."), ("redo", "There is nothing to redo.")],
+)
+@pytest.mark.parametrize("molecule", ["blank", "loaded"])
+def test_undo_redo_with_nothing_to_do(avo, method, message, molecule):
+    if molecule == "loaded":
+        avo.load(ETHANE)
+    error = avo.expect_error(method, code=RPCError.COMMAND_FAILED)
+    assert error.message == message
+    avo.expect_error(method, code=RPCError.COMMAND_FAILED, wait=True)
 
 
-def test_list_tools_and_activate_tool_errors(avo):
-    tools = avo.call("listTools")
+def test_list_tools_and_activate_tool_errors(fresh):
+    tools = fresh.call("listTools")
     assert tools
     assert all({"name", "displayName", "active"} <= set(tool) for tool in tools)
     by_name = {tool["name"]: tool for tool in tools}
@@ -514,12 +523,12 @@ def test_list_tools_and_activate_tool_errors(avo):
     assert by_name["Editor"]["active"] is True
     assert by_name["Navigator"]["displayName"] != by_name["Navigator"]["name"]
 
-    assert avo.data("activateTool", {"name": "Navigator"}) == {"tool": "Navigator"}
+    assert fresh.data("activateTool", {"name": "Navigator"}) == {"tool": "Navigator"}
     for params in ({}, {"name": ""}, {"name": "NoSuchTool"}, {"name": "navigator"}, {"name": 3}):
-        error = avo.expect_error("activateTool", params, code=COMMAND_FAILED)
+        error = fresh.expect_error("activateTool", params, code=RPCError.COMMAND_FAILED)
         assert "Unknown tool" in error.message
     # The display name is not accepted: only listTools' "name" is.
-    avo.expect_error(
-        "activateTool", {"name": by_name["Navigator"]["displayName"]}, code=COMMAND_FAILED
+    fresh.expect_error(
+        "activateTool", {"name": by_name["Navigator"]["displayName"]}, code=RPCError.COMMAND_FAILED
     )
-    assert [t["name"] for t in avo.call("listTools") if t["active"]] == ["Navigator"]
+    assert [t["name"] for t in fresh.call("listTools") if t["active"]] == ["Navigator"]

@@ -1,5 +1,5 @@
 {
-  "description": "Opening a file while the active molecule is empty and unmodified replaces it instead of leaving a blank document behind; switching molecules, and opening onto a non-empty molecule, keep what is there.",
+  "description": "Opening a file, or loading a molecule, while the active molecule is empty and unmodified replaces it instead of leaving a blank document behind; switching molecules, and opening onto a non-empty molecule, keep what is there.",
   "issue": "avogadroapp #634",
   "steps": [
     {
@@ -127,6 +127,46 @@
           "atomCount": 32,
           "active": true,
           "formula": "C10H22"
+        }
+      ]
+    },
+    {
+      "method": "newMolecule",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 3,
+          "count": 4
+        }
+      }
+    },
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "8\nethane\nC   0.000000   0.000000   0.765000\nC   0.000000   0.000000  -0.765000\nH   1.019000   0.000000   1.157000\nH  -0.509500   0.882000   1.157000\nH  -0.509500  -0.882000   1.157000\nH  -1.019000   0.000000  -1.157000\nH   0.509500  -0.882000  -1.157000\nH   0.509500   0.882000  -1.157000\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "atomCount": 14
+        },
+        {
+          "atomCount": 3
+        },
+        {
+          "atomCount": 32
+        },
+        {
+          "index": 3,
+          "atomCount": 8,
+          "formula": "C2H6",
+          "modified": false,
+          "active": true
         }
       ]
     }
