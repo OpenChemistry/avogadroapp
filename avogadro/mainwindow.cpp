@@ -809,30 +809,92 @@ void MainWindow::closeActiveMolecule()
     return;
   }
 
-  Molecule* currentMol = m_molecule;
+  closeMolecule(m_molecule);
+}
+
+void MainWindow::closeMolecule(Molecule* molecule)
+{
+  if (molecule == nullptr)
+    return;
+
   const QList<Molecule*> molecules = m_moleculeModel->molecules();
-  const int idx = molecules.indexOf(currentMol);
+  const int idx = molecules.indexOf(molecule);
 
   if (idx < 0 || molecules.isEmpty()) {
     return;
   }
 
-  if (idx == 0) {
-    // if the current molecule is the first one in the list, and it is not the
-    // only one we make the next molecule the starting one
-    if (molecules.size() > 1) {
-      setMolecule(molecules[idx + 1]);
-    } else {
-      newMolecule();
+  // Closing a molecule that is not the active one leaves the active one alone.
+  if (molecule == m_molecule) {
+    if (idx == 0) {
+      // if the current molecule is the first one in the list, and it is not
+      // the only one we make the next molecule the starting one
+      if (molecules.size() > 1) {
+        setMolecule(molecules[idx + 1]);
+      } else {
+        // the last molecule: there must always be one open
+        newMolecule();
+      }
+    }
+    // otherwise we just set the current molecule to the one before
+    else {
+      setMolecule(molecules[idx - 1]);
     }
   }
-  // otherwise we just set the current molecule to the one before
-  else {
-    setMolecule(molecules[idx - 1]);
-  }
 
-  removeAutosave(currentMol);
-  m_moleculeModel->removeItem(currentMol);
+  removeAutosave(molecule);
+  m_moleculeModel->removeItem(molecule);
+}
+
+bool MainWindow::isModified(const Molecule* molecule) const
+{
+  if (molecule == nullptr)
+    return false;
+  // Dirty state travels with a molecule while it is not the active one (see
+  // setMolecule()).
+  if (molecule == m_molecule)
+    return m_moleculeDirty;
+  return molecule->property(dirtyProperty).toBool();
+}
+
+QVariantList MainWindow::moleculeSummaries() const
+{
+  QVariantList summaries;
+  const QList<Molecule*> molecules = m_moleculeModel->molecules();
+  for (int i = 0; i < molecules.size(); ++i) {
+    const Molecule* mol = molecules[i];
+    QVariantMap entry;
+    entry["index"] = i;
+    entry["active"] = mol == m_molecule;
+    entry["atomCount"] = static_cast<qulonglong>(mol->atomCount());
+    entry["formula"] = QString::fromStdString(mol->formula());
+    entry["fileName"] =
+      QString::fromStdString(mol->data("fileName").toString());
+    entry["modified"] = isModified(mol);
+    summaries.append(entry);
+  }
+  return summaries;
+}
+
+QVariantMap MainWindow::undoState() const
+{
+  QVariantMap state;
+  bool canUndo = false;
+  bool canRedo = false;
+  QString undoText, redoText;
+  if (m_molecule != nullptr && m_molecule->undoMolecule() != nullptr) {
+    const QUndoStack& stack = m_molecule->undoMolecule()->undoStack();
+    canUndo = stack.canUndo();
+    canRedo = stack.canRedo();
+    undoText = stack.undoText();
+    redoText = stack.redoText();
+  }
+  state["canUndo"] = canUndo;
+  state["canRedo"] = canRedo;
+  state["undoText"] = undoText;
+  state["redoText"] = redoText;
+  state["modified"] = m_moleculeDirty;
+  return state;
 }
 
 namespace {
@@ -2209,20 +2271,8 @@ void MainWindow::moleculeActivated(const QModelIndex& idx)
       setMolecule(mol);
 
     // Deleting a molecule, we must also create a new one if it is the last.
-    if (idx.column() == 1) {
-      if (m_molecule == mol) {
-        int molIdx = molecules.indexOf(mol);
-        if (molIdx > 0)
-          setMolecule(molecules[molIdx - 1]);
-        else if (molIdx == 0 && molecules.size() > 1) {
-          setMolecule(molecules[1]);
-        } else {
-          newMolecule();
-        }
-      }
-      removeAutosave(mol);
-      m_moleculeModel->removeItem(mol);
-    }
+    if (idx.column() == 1)
+      closeMolecule(mol);
   }
 }
 
@@ -4271,6 +4321,126 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
       result->insert("layer", static_cast<int>(layer));
       result->insert("locked", m_layerModel->layerLocked(layer));
       result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    }
+    return CommandStatus::Finished;
+  }
+
+  // Molecule management. These reuse the code behind the menus and the
+  // molecule list, and never prompt: a molecule with unsaved changes is only
+  // closed when the caller says to discard them. Messages are plain strings
+  // (not tr()): they are for scripts.
+  if (command == "newMolecule") {
+    newMolecule();
+    if (result != nullptr) {
+      const QList<Molecule*> molecules = m_moleculeModel->molecules();
+      result->insert("index", molecules.indexOf(m_molecule));
+      result->insert("count", static_cast<int>(molecules.size()));
+    }
+    return CommandStatus::Finished;
+  } else if (command == "setActiveMolecule" || command == "closeMolecule") {
+    const QList<Molecule*> molecules = m_moleculeModel->molecules();
+    const bool closing = command == "closeMolecule";
+
+    // closeMolecule defaults to the active molecule; setActiveMolecule has to
+    // be told which one.
+    int index = molecules.indexOf(m_molecule);
+    if (!closing || options.contains("index")) {
+      if (!options.contains("index")) {
+        if (message != nullptr)
+          *message = QStringLiteral("Missing 'index' parameter.");
+        return CommandStatus::Failed;
+      }
+      // A JSON number only: wholeNumber() alone would take "0" and true.
+      const int type = options.value("index").metaType().id();
+      const bool isNumber = type == QMetaType::Double ||
+                            type == QMetaType::Int ||
+                            type == QMetaType::LongLong;
+      if (!isNumber || !wholeNumber(options.value("index"), &index)) {
+        if (message != nullptr)
+          *message = QStringLiteral("'index' must be a whole number.");
+        return CommandStatus::Failed;
+      }
+    }
+    if (index < 0 || index >= molecules.size()) {
+      if (message != nullptr)
+        *message = QStringLiteral("'index' %1 is out of range (%2 molecules "
+                                  "are open).")
+                     .arg(index)
+                     .arg(molecules.size());
+      return CommandStatus::Failed;
+    }
+    Molecule* target = molecules[index];
+
+    if (closing) {
+      // Only a real true discards; "yes" or 1 do not.
+      const QVariant discard = options.value("discard");
+      const bool discarding =
+        discard.metaType().id() == QMetaType::Bool && discard.toBool();
+      if (isModified(target) && !discarding) {
+        if (message != nullptr)
+          *message = QStringLiteral("The molecule has unsaved changes; pass "
+                                    "discard: true to close it anyway.");
+        return CommandStatus::Failed;
+      }
+      closeMolecule(target);
+    } else {
+      // Clicking the active molecule in the list does this too.
+      setMolecule(target);
+    }
+
+    if (result != nullptr) {
+      const QList<Molecule*> remaining = m_moleculeModel->molecules();
+      result->insert("index", remaining.indexOf(m_molecule));
+      result->insert("count", static_cast<int>(remaining.size()));
+    }
+    return CommandStatus::Finished;
+  } else if (command == "undo" || command == "redo") {
+    const bool undoing = command == "undo";
+    const QVariantMap before = undoState();
+    if (!before.value(undoing ? "canUndo" : "canRedo").toBool()) {
+      if (message != nullptr)
+        *message = undoing ? QStringLiteral("There is nothing to undo.")
+                           : QStringLiteral("There is nothing to redo.");
+      return CommandStatus::Failed;
+    }
+
+    if (undoing)
+      undoEdit();
+    else
+      redoEdit();
+
+    if (result != nullptr)
+      *result = undoState();
+    return CommandStatus::Finished;
+  } else if (command == "activateTool") {
+    auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+    if (glWidget == nullptr) {
+      if (message != nullptr)
+        *message = QStringLiteral("There is no active view.");
+      return CommandStatus::Failed;
+    }
+
+    // Tools are named by their object name, as "listTools" reports them;
+    // the same name setActiveTool() and the toolbar use. The display name
+    // (ToolPlugin::name(), translated) is not accepted.
+    const QString name = options.value("name").toString();
+    bool found = false;
+    foreach (ToolPlugin* toolPlugin, glWidget->tools()) {
+      if (!name.isEmpty() && toolPlugin->objectName() == name)
+        found = true;
+    }
+    if (!found) {
+      if (message != nullptr)
+        *message = QStringLiteral("Unknown tool '%1'.").arg(name);
+      return CommandStatus::Failed;
+    }
+
+    setActiveTool(name);
+
+    if (result != nullptr) {
+      ToolPlugin* active = glWidget->activeTool();
+      result->insert("tool",
+                     active != nullptr ? active->objectName() : QString());
     }
     return CommandStatus::Finished;
   }

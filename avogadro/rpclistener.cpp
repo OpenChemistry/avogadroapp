@@ -18,6 +18,7 @@
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
+#include <avogadro/qtgui/toolplugin.h>
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/rendering/camera.h>
 
@@ -32,6 +33,7 @@
 #include <QtGui/QImage>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QInputDialog>
+#include <QtWidgets/QMessageBox>
 
 #include <algorithm>
 
@@ -41,6 +43,7 @@ using Core::BasisSet;
 using Io::FileFormatManager;
 using QtGui::Molecule;
 using QtGui::ScenePlugin;
+using QtGui::ToolPlugin;
 using QtOpenGL::GLWidget;
 using Rendering::Camera;
 using Rendering::Projection;
@@ -81,9 +84,21 @@ struct BuiltinCommand
 /// and "kill". Kept sorted by name for readability; listCommands() sorts its
 /// output anyway.
 const BuiltinCommand builtinCommands[] = {
+  { "activateTool",
+    "Make the tool with the given name (as listTools reports it) the "
+    "active tool.",
+    false },
+  { "activeDialog",
+    "Report whether a modal dialog is open: open, title and className.",
+    false },
   { "addLayer",
     "Add a new layer to the active molecule, inheriting the active "
     "layer's settings.",
+    false },
+  { "closeMolecule",
+    "Close a molecule (index, default the active one). Fails if it has "
+    "unsaved changes unless discard is true; closing the last molecule "
+    "leaves a new empty one.",
     false },
   { "exportFile",
     "Write the active molecule to a file, guessing the format from the "
@@ -109,13 +124,25 @@ const BuiltinCommand builtinCommands[] = {
   { "listCommands", "List every command the server understands.", false },
   { "listDisplayTypes",
     "List the scene display types available for the active view.", false },
+  { "listMolecules",
+    "List the open molecules: index, active, atomCount, formula, fileName "
+    "and modified.",
+    false },
+  { "listTools",
+    "List the active view's tools by name, and which one is active.", false },
   { "loadMolecule",
     "Read molecule data from a string and make it the "
     "active molecule.",
     false },
   { "moleculeInfo", "Report summary statistics about the active molecule.",
     false },
+  { "newMolecule",
+    "Create a new empty molecule and make it active, like File > New.", false },
   { "openFile", "Read a file from disk and make it the active molecule.",
+    false },
+  { "redo",
+    "Redo the active molecule's last undone edit. Fails if there is "
+    "nothing to redo.",
     false },
   { "removeLayer",
     "Remove a layer (by index, 0 = first layer) from the active "
@@ -135,6 +162,8 @@ const BuiltinCommand builtinCommands[] = {
     "Make a layer (by index, 0 = first layer) of the active molecule "
     "the active one.",
     false },
+  { "setActiveMolecule",
+    "Make the open molecule at the given index the active molecule.", false },
   { "setCamera",
     "Apply a model view matrix and/or projection settings to "
     "the active view's camera.",
@@ -150,6 +179,10 @@ const BuiltinCommand builtinCommands[] = {
   { "setProjection", "Switch between perspective and orthographic projection.",
     false },
   { "setRenderTypes", "Enable or disable scene display types by name.", false },
+  { "undo",
+    "Undo the active molecule's last edit. Fails if there is nothing to "
+    "undo.",
+    false },
   { "version",
     "Report Avogadro application, library, Qt and protocol versions.", false },
 };
@@ -357,6 +390,34 @@ void RpcListener::messageReceived(const RPC::Message& message)
     return;
   }
 
+  // Also before the window check: a modal dialog's nested event loop is what
+  // keeps this answerable while another request waits on the dialog, which is
+  // exactly when a test needs to ask.
+  if (method == "activeDialog") {
+    QVariantMap result;
+    QWidget* modal = QApplication::activeModalWidget();
+    QString title;
+    QString className;
+    if (modal != nullptr) {
+      title = modal->windowTitle();
+      // Message boxes often have no window title (macOS sheets); their text
+      // says more anyway.
+      if (title.isEmpty()) {
+        if (auto* box = qobject_cast<QMessageBox*>(modal))
+          title = box->text();
+      }
+      className = QString::fromLatin1(modal->metaObject()->className());
+    }
+    result["open"] = modal != nullptr;
+    result["title"] = title;
+    result["className"] = className;
+
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonObject::fromVariantMap(result));
+    response.send();
+    return;
+  }
+
   // check if there's an active window
   if (m_window == nullptr) {
     // send error response
@@ -374,6 +435,9 @@ void RpcListener::messageReceived(const RPC::Message& message)
     auto* molecule = new Molecule(this);
     bool success = FileFormatManager::instance().readFile(*molecule, fileName);
     if (success) {
+      // Record the file the way the GUI's file-open path does, so the window
+      // title, "Save" and moleculeInfo know where the molecule came from.
+      molecule->setData("fileName", fileName);
       emit callSetMolecule(molecule);
 
       // set response
@@ -535,6 +599,12 @@ void RpcListener::messageReceived(const RPC::Message& message)
       mol != nullptr ? QString::fromStdString(mol->data("fileName").toString())
                      : QString();
 
+    // Unsaved-changes and undo state of the document, not of the model.
+    const QVariantMap undo = m_window->undoState();
+    info["modified"] = undo.value("modified");
+    info["canUndo"] = undo.value("canUndo");
+    info["canRedo"] = undo.value("canRedo");
+
     RPC::Message response = message.generateResponse();
     response.setResult(QJsonObject::fromVariantMap(info));
     response.send();
@@ -644,6 +714,34 @@ void RpcListener::messageReceived(const RPC::Message& message)
       response.setResult(QJsonObject::fromVariantMap(result));
       response.send();
     }
+  } else if (method == "listMolecules") {
+    // Read-back: the array goes straight in "result".
+    RPC::Message response = message.generateResponse();
+    response.setResult(
+      QJsonArray::fromVariantList(m_window->moleculeSummaries()));
+    response.send();
+  } else if (method == "listTools") {
+    // "name" is the tool's object name: what activateTool accepts, and what
+    // the toolbar and settings use. ToolPlugin::name() is the translated
+    // display name and is reported as "displayName" only.
+    QVariantList tools;
+    if (GLWidget* glWidget = m_window->activeGLWidget()) {
+      const ToolPlugin* active = glWidget->activeTool();
+      const QList<ToolPlugin*> plugins = glWidget->tools();
+      for (ToolPlugin* plugin : plugins) {
+        if (plugin == nullptr)
+          continue;
+        QVariantMap entry;
+        entry["name"] = plugin->objectName();
+        entry["displayName"] = plugin->name();
+        entry["active"] = plugin == active;
+        tools.append(entry);
+      }
+    }
+
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonArray::fromVariantList(tools));
+    response.send();
   } else if (method == "listDisplayTypes") {
     QVariantList types;
     if (GLWidget* glWidget = m_window->activeGLWidget()) {

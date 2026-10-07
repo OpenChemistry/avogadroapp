@@ -145,6 +145,25 @@ public:
   QtGui::Molecule* molecule() { return m_molecule; }
 
   /**
+   * Whether the active molecule has changes that were not saved.
+   */
+  bool isMoleculeModified() const { return m_moleculeDirty; }
+
+  /**
+   * One map per open molecule, in the molecule list's order, with "index",
+   * "active", "atomCount", "formula", "fileName" and "modified". For the RPC
+   * "listMolecules" method.
+   */
+  QVariantList moleculeSummaries() const;
+
+  /**
+   * The active molecule's undo stack, for the RPC "undo", "redo" and
+   * "moleculeInfo" methods: "canUndo", "canRedo", "undoText", "redoText"
+   * (the stack's own text, without menu mnemonics) and "modified".
+   */
+  QVariantMap undoState() const;
+
+  /**
    * Write out all application settings, normally done as part of the
    * application close event.
    */
@@ -545,6 +564,22 @@ private slots:
   void setProjectionPerspective();
 
 private:
+  /**
+   * Close @p molecule without asking to save it: make a neighbour (or a new
+   * empty molecule, if it was the only one) active when it is the active
+   * molecule, then remove its autosave and drop it from the molecule list.
+   * Shared by the molecule list's close button, File > Close and the RPC
+   * "closeMolecule" command; callers that must not lose work check
+   * isModified() first.
+   */
+  void closeMolecule(QtGui::Molecule* molecule);
+
+  /**
+   * Whether @p molecule has unsaved changes: m_moleculeDirty for the active
+   * molecule, the state saved by setMolecule() for any other.
+   */
+  bool isModified(const QtGui::Molecule* molecule) const;
+
   /**
    * Connect a plugin's command lifecycle signals. Safe to call repeatedly --
    * the connections are unique. Tool instances belong to each GLWidget rather
