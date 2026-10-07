@@ -25,6 +25,7 @@
 #include <QTextStream>
 
 #include <avogadro/core/version.h>
+#include <avogadro/qtgui/utilities.h>
 
 #include "application.h"
 #include "avogadroappconfig.h"
@@ -450,6 +451,12 @@ int main(int argc, char* argv[])
     skipDialogs = true;
     qInfo("--rpc-name given: implying --skip-dialogs.");
   }
+
+  // Plugins check this to avoid modal prompts in scripted runs. Set it before
+  // MainWindow exists: plugins load and receive molecules during its
+  // construction.
+  if (skipDialogs)
+    Avogadro::QtGui::Utilities::setDialogsSkipped(true);
 
   Avogadro::MainWindow window(fileNames, disableSettings, skipAutosave,
                               skipDialogs);
