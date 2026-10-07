@@ -1,0 +1,130 @@
+{
+  "description": "Closing the active molecule activates its predecessor, or its successor when it is the first, exactly as the molecule list does.",
+  "steps": [
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "3\nwater\nO   0.000000   0.000000   0.117300\nH   0.000000   0.757200  -0.469200\nH   0.000000  -0.757200  -0.469200\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "newMolecule",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "8\nethane\nC   0.000000   0.000000   0.765000\nC   0.000000   0.000000  -0.765000\nH   1.019000   0.000000   1.157000\nH  -0.509500   0.882000   1.157000\nH  -0.509500  -0.882000   1.157000\nH  -1.019000   0.000000  -1.157000\nH   0.509500  -0.882000  -1.157000\nH   0.509500   0.882000  -1.157000\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "newMolecule",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 2,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "2\nhydrogen\nH 0.0 0.0 0.0\nH 0.0 0.0 0.74\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "formula": "H2O"
+        },
+        {
+          "formula": "C2H6"
+        },
+        {
+          "formula": "H2",
+          "active": true
+        }
+      ]
+    },
+    {
+      "method": "closeMolecule",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "formula": "H2O",
+          "active": false
+        },
+        {
+          "formula": "C2H6",
+          "active": true
+        }
+      ]
+    },
+    {
+      "method": "setActiveMolecule",
+      "wait": true,
+      "params": {
+        "index": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 0,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "closeMolecule",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 0,
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "formula": "C2H6",
+          "active": true
+        }
+      ]
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "formula": "C2H6"
+      }
+    }
+  ]
+}

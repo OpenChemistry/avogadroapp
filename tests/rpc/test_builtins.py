@@ -384,3 +384,120 @@ def test_layer_errors(avo):
     error = avo.expect_error("removeLayer", {"layer": 0}, code=COMMAND_FAILED)
     assert "last remaining layer" in error.message
     assert avo.call("getLayerVisible", {"layer": 0}, wait=True)["data"]["count"] == 1
+
+
+# -- molecules ---------------------------------------------------------------
+def test_list_molecules_on_startup(avo):
+    molecules = avo.call("listMolecules")
+    assert len(molecules) == 1
+    assert molecules[0] == {
+        "index": 0,
+        "active": True,
+        "atomCount": 0,
+        "formula": "",
+        "fileName": "",
+        "modified": False,
+    }
+
+
+def test_molecule_info_modified_undo_and_file_name(avo, molecules_dir):
+    info = avo.info()
+    assert (info["modified"], info["canUndo"], info["canRedo"]) == (False, False, False)
+
+    path = molecules_dir / "alkanes" / "butane.cjson"
+    if not path.is_file():
+        pytest.skip("%s missing" % path)
+    avo.call("openFile", {"fileName": str(path)})
+    info = avo.info()
+    assert info["fileName"] == str(path)  # recorded the way File > Open does
+    assert info["modified"] is False
+
+    avo.data("editDistance", {"atoms": [0, 1], "value": 2.5})
+    info = avo.info()
+    assert (info["modified"], info["canUndo"], info["canRedo"]) == (True, True, False)
+    avo.data("undo")
+    info = avo.info()
+    assert (info["modified"], info["canUndo"], info["canRedo"]) == (False, False, True)
+
+    # loadMolecule has no file
+    avo.load(ETHANE)
+    assert avo.info()["fileName"] == ""
+
+
+def test_new_molecule(avo):
+    assert avo.call("newMolecule") is True
+    assert avo.call("newMolecule", wait=True) == {
+        "status": "finished",
+        "data": {"index": 2, "count": 3},
+    }
+    assert [m["active"] for m in avo.call("listMolecules")] == [False, False, True]
+
+
+def test_set_active_molecule_errors(avo):
+    avo.call("newMolecule")
+    avo.load(WATER)  # index 1 is active, index 0 is the blank startup molecule
+    assert "Missing" in avo.expect_error("setActiveMolecule", {}, code=COMMAND_FAILED).message
+    for bad in (-1, 2, 99, 0.5, "0", None, True, [0]):
+        error = avo.expect_error("setActiveMolecule", {"index": bad}, code=COMMAND_FAILED)
+        assert "'index'" in error.message
+    assert "out of range" in avo.expect_error(
+        "setActiveMolecule", {"index": 2}, code=COMMAND_FAILED
+    ).message
+    # none of that changed anything
+    assert [m["active"] for m in avo.call("listMolecules")] == [False, True]
+    assert avo.info()["formula"] == "H2O"
+
+
+def test_close_molecule_errors(avo):
+    avo.expect_error("closeMolecule", {"index": 1}, code=COMMAND_FAILED)  # only one open
+    avo.expect_error("closeMolecule", {"index": -1}, code=COMMAND_FAILED)
+    avo.expect_error("closeMolecule", {"index": 0.5}, code=COMMAND_FAILED)
+    avo.expect_error("closeMolecule", {"index": "0"}, code=COMMAND_FAILED)
+
+    avo.load(ETHANE)
+    avo.data("removeAllHydrogens")  # an edit: the molecule is now modified
+    assert avo.info()["modified"] is True
+    for params in ({}, {"index": 0}, {"discard": False}, {"discard": "yes"}):
+        error = avo.expect_error("closeMolecule", params, code=COMMAND_FAILED)
+        assert error.message == (
+            "The molecule has unsaved changes; pass discard: true to close it anyway."
+        )
+    # nothing changed
+    molecules = avo.call("listMolecules")
+    assert len(molecules) == 1
+    assert (molecules[0]["atomCount"], molecules[0]["modified"]) == (2, True)
+
+    assert avo.data("closeMolecule", {"discard": True}) == {"index": 0, "count": 1}
+    assert avo.call("listMolecules")[0]["atomCount"] == 0
+
+
+def test_undo_redo_with_nothing_to_do(avo):
+    assert avo.expect_error("undo", code=COMMAND_FAILED).message == "There is nothing to undo."
+    assert avo.expect_error("redo", code=COMMAND_FAILED).message == "There is nothing to redo."
+    avo.load(ETHANE)
+    avo.expect_error("undo", code=COMMAND_FAILED)
+    avo.expect_error("redo", code=COMMAND_FAILED)
+    avo.data("editDistance", {"atoms": [0, 1], "value": 2.0})
+    avo.expect_error("redo", code=COMMAND_FAILED)  # something to undo, nothing to redo
+    assert set(avo.data("undo")) == {"canUndo", "canRedo", "undoText", "redoText", "modified"}
+    avo.expect_error("undo", code=COMMAND_FAILED)
+
+
+def test_list_tools_and_activate_tool_errors(avo):
+    tools = avo.call("listTools")
+    assert tools
+    assert all({"name", "displayName", "active"} <= set(tool) for tool in tools)
+    by_name = {tool["name"]: tool for tool in tools}
+    # The empty startup molecule gets the editor.
+    assert by_name["Editor"]["active"] is True
+    assert by_name["Navigator"]["displayName"] != by_name["Navigator"]["name"]
+
+    assert avo.data("activateTool", {"name": "Navigator"}) == {"tool": "Navigator"}
+    for params in ({}, {"name": ""}, {"name": "NoSuchTool"}, {"name": "navigator"}, {"name": 3}):
+        error = avo.expect_error("activateTool", params, code=COMMAND_FAILED)
+        assert "Unknown tool" in error.message
+    # The display name is not accepted: only listTools' "name" is.
+    avo.expect_error(
+        "activateTool", {"name": by_name["Navigator"]["displayName"]}, code=COMMAND_FAILED
+    )
+    assert [t["name"] for t in avo.call("listTools") if t["active"]] == ["Navigator"]

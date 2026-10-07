@@ -1,0 +1,146 @@
+{
+  "description": "closeMolecule refuses a molecule with unsaved changes unless discard is true, can close a molecule that is not active, and leaves one new empty molecule when the last one closes.",
+  "steps": [
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "3\nwater\nO   0.000000   0.000000   0.117300\nH   0.000000   0.757200  -0.469200\nH   0.000000  -0.757200  -0.469200\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "newMolecule",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "8\nethane\nC   0.000000   0.000000   0.765000\nC   0.000000   0.000000  -0.765000\nH   1.019000   0.000000   1.157000\nH  -0.509500   0.882000   1.157000\nH  -0.509500  -0.882000   1.157000\nH  -1.019000   0.000000  -1.157000\nH   0.509500  -0.882000  -1.157000\nH   0.509500   0.882000  -1.157000\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "atomCount": 3
+        },
+        {
+          "atomCount": 8,
+          "active": true
+        }
+      ]
+    },
+    {
+      "method": "removeAllHydrogens",
+      "wait": true,
+      "result": {
+        "status": "finished"
+      }
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "modified": true,
+        "atomCount": 2
+      }
+    },
+    {
+      "method": "closeMolecule",
+      "wait": true,
+      "expect": "error",
+      "error_code": -2,
+      "message": "unsaved changes"
+    },
+    {
+      "method": "closeMolecule",
+      "wait": true,
+      "expect": "error",
+      "error_code": -2,
+      "params": {
+        "index": 1
+      },
+      "message": "pass discard: true"
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "atomCount": 3,
+          "modified": false
+        },
+        {
+          "atomCount": 2,
+          "modified": true,
+          "active": true
+        }
+      ]
+    },
+    {
+      "method": "closeMolecule",
+      "wait": true,
+      "params": {
+        "index": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 0,
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "index": 0,
+          "atomCount": 2,
+          "modified": true,
+          "active": true
+        }
+      ]
+    },
+    {
+      "method": "closeMolecule",
+      "wait": true,
+      "params": {
+        "discard": true
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 0,
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "index": 0,
+          "atomCount": 0,
+          "modified": false,
+          "active": true
+        }
+      ]
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "atomCount": 0,
+        "modified": false
+      }
+    }
+  ]
+}
