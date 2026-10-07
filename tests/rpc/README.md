@@ -39,9 +39,10 @@ when `avogadro` is not installed). Options: `--reproducer-dir`,
   `--rpc-name` implies `--skip-dialogs`, so no startup dialog blocks.
 * Nothing in a test may open a modal dialog. Modal dialogs run a nested event
   loop: pings still answer, but the request that opened it never replies.
-  Do not call `fillUnitCell`, `fillTranslationalCell`, `show*`,
-  `fetchPDB`/`fetchByName`, or export to an unwritable path. Known app bugs
-  that do open dialogs through RPC are listed below.
+  Do not call `fillUnitCell`, `fillTranslationalCell`, `show*` or
+  `fetchPDB`/`fetchByName`. Known app bugs that do open dialogs through RPC
+  are listed below. A failed `exportFile` or `saveGraphic` is safe: under
+  `--skip-dialogs` it is logged and answered with an error reply.
 * Socket names are `avotest-<pid>-<n>` (macOS limits `sun_path` to 104 bytes).
 
 ## The oracle
@@ -120,13 +121,14 @@ only a death, hang or blocked request fails. Each test records `ext`,
 
 ## Known app bugs seen while writing these
 
+(A failed export used to open a modal "Error saving file" dialog from
+`MainWindow::backgroundWriterFinished()` and left the writer busy; under
+`--skip-dialogs` it now logs the error and fails the waited request with the
+writer's message. `test_export_file_failure_is_an_error_not_a_dialog` guards it.)
+
 * Opening a CIF without a space group (`openFile`, `loadMolecule`) runs
   `SpaceGroup::fillHeuristic()` -> `selectSpaceGroup()`, a modal "Select
   Space Group" dialog. The RPC reply never comes until a person closes it.
-* An export that fails (for example an unwritable directory) opens a modal
-  "Error saving file" dialog from `MainWindow::backgroundWriterFinished()`
-  before replying; a waited export times out with -2 and later exports are
-  refused while the dialog is open.
 * `renderMO` for the HOMO of `avogadrodata/data/fchk/CO-cc-6Z.fchk` crashes
   the app (SIGTRAP): a libc++ hardening assertion, `vector[]` out of bounds in
   `GaussianSetTools::calculateShellCutoff()` via `buildShellData()`.

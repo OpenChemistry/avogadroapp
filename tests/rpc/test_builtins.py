@@ -302,6 +302,40 @@ def test_export_file_unknown_extension(avo, tmp_path):
     )
 
 
+def test_export_file_failure_is_an_error_not_a_dialog(avo, tmp_path):
+    """A failed write must not open "Error saving file" (--rpc-name implies
+    --skip-dialogs): the waited request fails fast with the writer's error and
+    the writer state is released for the next export."""
+    avo.load(ETHANE)
+    bad = tmp_path / "no_such_directory" / "ethane.xyz"
+    error = avo.expect_error(
+        "exportFile", {"fileName": str(bad)}, code=COMMAND_FAILED, wait=True, timeout=15
+    )
+    assert error.message  # the writer's own text, not the generic fallback
+    assert error.message != "The command failed."
+    assert error.message != "The command timed out."
+    assert not bad.exists()
+
+    # The same goes for a fire-and-forget export: it starts, and a later
+    # export is not refused afterwards.
+    assert avo.call("exportFile", {"fileName": str(bad)}) is True
+
+    good = tmp_path / "ethane.xyz"
+    result = avo.call("exportFile", {"fileName": str(good)}, wait=True, timeout=15)
+    assert result == {"status": "finished", "data": {"fileName": str(good)}}
+    assert good.read_text().splitlines()[0].strip() == "8"
+    assert avo.app.alive()
+
+
+def test_save_graphic_failure_is_an_error_not_a_dialog(avo, tmp_path):
+    avo.load(ETHANE)
+    bad = tmp_path / "no_such_directory" / "graphic.png"
+    avo.expect_error("saveGraphic", {"fileName": str(bad)}, code=REQUEST_FAILED, timeout=15)
+    good = tmp_path / "graphic.png"
+    assert avo.call("saveGraphic", {"fileName": str(good)}) is True
+    assert good.exists()
+
+
 # -- layers ------------------------------------------------------------
 def test_layer_lifecycle(avo):
     avo.load(ETHANE)

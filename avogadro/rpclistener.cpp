@@ -396,12 +396,14 @@ void RpcListener::messageReceived(const RPC::Message& message)
     QString fileName = params["fileName"].toString();
 
     // save the image
-    m_window->exportGraphics(fileName);
-
-    // set response
-    RPC::Message response = message.generateResponse();
-    response.setResult(true);
-    response.send();
+    if (m_window->exportGraphics(fileName)) {
+      RPC::Message response = message.generateResponse();
+      response.setResult(true);
+      response.send();
+    } else {
+      sendError(message, errorRequestFailed,
+                QString("Could not save the graphic to %1.").arg(fileName));
+    }
   } else if (method == "exportFile") {
     // Save to the supplied file name
     QString filename = params["fileName"].toString();

@@ -105,7 +105,13 @@ public slots:
    */
   void setDefaultFileDialogPath(const QString& path);
 
-  void exportGraphics(QString fileName);
+  /**
+   * Save a picture of the active view to @p fileName (".png" is added when
+   * there is no suffix). Under --skip-dialogs a failed save is logged instead
+   * of shown in a message box.
+   * @return True if the image was written.
+   */
+  bool exportGraphics(QString fileName);
 
   /**
    * Export a file, using the full selection of formats capable of writing.

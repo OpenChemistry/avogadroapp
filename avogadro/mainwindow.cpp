@@ -1503,11 +1503,19 @@ bool MainWindow::backgroundWriterFinished()
       success = true;
     } else {
       errorMessage = m_threadedWriter->error();
-      QMessageBox::critical(
-        this, tr("Error saving file"),
-        tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
-          .arg(fileName)
-          .arg(errorMessage));
+      if (m_skipDialogs) {
+        // A scripted run has nobody to close the box, and the nested event
+        // loop would hold the RPC reply (and the writer state) hostage. The
+        // error reaches a waiting RPC caller through commandCompleted() below.
+        qWarning("Error while saving '%s': %s", qPrintable(fileName),
+                 qPrintable(errorMessage));
+      } else {
+        QMessageBox::critical(this, tr("Error saving file"),
+                              tr("Error while saving '%1':\n%2",
+                                 "%1 = file name, %2 = error message")
+                                .arg(fileName)
+                                .arg(errorMessage));
+      }
     }
   } else {
     errorMessage = tr("The save was canceled.");
@@ -2542,10 +2550,10 @@ void MainWindow::exportGraphics()
   exportGraphics(fileName);
 }
 
-void MainWindow::exportGraphics(QString fileName)
+bool MainWindow::exportGraphics(QString fileName)
 {
   if (fileName.isEmpty())
-    return;
+    return false;
   if (QFileInfo(fileName).suffix().isEmpty())
     fileName += ".png";
 
@@ -2555,9 +2563,17 @@ void MainWindow::exportGraphics(QString fileName)
   QImage exportImage = renderToImage();
 
   if (!exportImage.save(fileName)) {
-    QMessageBox::warning(this, tr("Avogadro"),
-                         tr("Cannot save file %1.").arg(fileName));
+    if (m_skipDialogs) {
+      // Nobody can close the box in a scripted run, and it would hold the RPC
+      // reply hostage.
+      qWarning("Cannot save file %s.", qPrintable(fileName));
+    } else {
+      QMessageBox::warning(this, tr("Avogadro"),
+                           tr("Cannot save file %1.").arg(fileName));
+    }
+    return false;
   }
+  return true;
 }
 
 void MainWindow::copyGraphics()
@@ -2793,7 +2809,12 @@ bool MainWindow::exportFile(const QString& fileName, bool async, quint64 token)
     // effect for an async write; harmless otherwise since it is cleared
     // there before it could be read again.
     m_pendingExportToken = token;
-    return saveFileAs(fileName, writer, async);
+    const bool started = saveFileAs(fileName, writer, async);
+    // A refused write never reaches backgroundWriterFinished(), which is the
+    // only other place the token is cleared.
+    if (!started && m_fileWriteThread == nullptr)
+      m_pendingExportToken = 0;
+    return started;
   }
 
   return false;
