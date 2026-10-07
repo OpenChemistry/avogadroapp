@@ -124,3 +124,18 @@ def test_launch_with_two_files_opens_both(launch, molecules_dir):
     molecules = avo.wait_for(lambda m: len(m) >= 2, "both files to open")
     assert sorted(entry["formula"] for entry in molecules) == ["C10H22", "C4H10"]
     assert all(entry["atomCount"] > 0 for entry in molecules)
+
+
+# -- molecule management ---------------------------------------------------------
+def test_selecting_the_active_molecule_again_keeps_it_tracked(avo, molecules_dir):
+    """Clicking the active molecule in the list calls setMolecule() with it
+    again. That used to sever the connection that marks it modified, so a later
+    edit never asked to be saved."""
+    avo.call("openFile", {"fileName": str(butane(molecules_dir))})
+    avo.data("setActiveMolecule", {"index": 0})
+    assert avo.info()["modified"] is False
+    avo.data("editDistance", {"atoms": [0, 1], "value": 2.5})
+    assert avo.info()["modified"] is True
+    assert avo.data("undo")["modified"] is False
+    avo.data("editDistance", {"atoms": [0, 1], "value": 2.2})
+    assert avo.info()["modified"] is True

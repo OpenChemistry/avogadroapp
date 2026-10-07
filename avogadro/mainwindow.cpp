@@ -1101,6 +1101,12 @@ void MainWindow::setMolecule(Molecule* mol)
   if (!mol)
     return;
 
+  // Selecting the molecule that is already active changes nothing. It must not
+  // run on: GLWidget::setMolecule() drops every connection from the molecule
+  // it is given, including the one below that marks the molecule modified, so
+  // later edits would never ask to be saved.
+  if (mol == m_molecule && m_moleculeModel->molecules().contains(mol))
+    return;
   // Set the new molecule, ensure both molecules are in the model.
   if (m_molecule && !m_moleculeModel->molecules().contains(m_molecule)) {
     m_moleculeModel->addItem(m_molecule);
