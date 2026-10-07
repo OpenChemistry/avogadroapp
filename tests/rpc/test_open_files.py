@@ -11,9 +11,6 @@ import harness
 
 pytestmark = pytest.mark.corpus
 
-# NOTE: .cif files are excluded from the corpus (see harness.SKIP_EXTENSIONS):
-# opening one without a space group raises a modal "Select Space Group"
-# dialog that blocks the RPC socket. Re-enable once that prompt is fixed.
 FILES = harness.corpus_files()
 
 

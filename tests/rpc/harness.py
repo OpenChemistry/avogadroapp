@@ -89,7 +89,7 @@ def corpus_roots():
 # CIFs are excluded until the "Select Space Group" prompt on open is fixed:
 # SpaceGroup::fillHeuristic() runs a modal dialog when a crystal has no space
 # group, and a modal dialog blocks the RPC reply (and the sweep with it).
-SKIP_EXTENSIONS = {".png", ".svg", ".md", ".sh", ".py", ".csv", ".txt", ".cif"}
+SKIP_EXTENSIONS = {".png", ".svg", ".md", ".sh", ".py", ".csv", ".txt"}
 
 
 def corpus_files():
@@ -178,6 +178,8 @@ class AvogadroApp:
         # Set when a call never returned although the process lives (a modal
         # dialog, a hang): the app cannot be trusted for the next test.
         self.tainted = False
+        # Called with this app after every (re)launch, once RPC answers.
+        self.on_ready = None
 
     def start(self, timeout=STARTUP_TIMEOUT, extra_args=None):
         """Launch the application. extra_args (for example a file to open)
@@ -217,7 +219,7 @@ class AvogadroApp:
                 with connect(self.name, timeout=5) as client:
                     self.version = client.version()
                     client.molecule_info()  # fails until the window exists
-                return
+                break
             except (ConnectionError, OSError, RPCError):
                 if time.monotonic() > deadline:
                     self.stop()
@@ -226,6 +228,8 @@ class AvogadroApp:
                         % (timeout, "\n".join(tail(self.log_path, 40)))
                     )
                 time.sleep(0.25)
+        if self.on_ready is not None:
+            self.on_ready(self)
 
     def alive(self):
         return self.process is not None and self.process.poll() is None
@@ -251,6 +255,47 @@ class AvogadroApp:
     def restart(self):
         self.stop()
         self.start()
+
+
+# The smallest CIF that Open Babel reads: one atom in a P 1 cell.
+_WARMUP_CIF = """data_warmup
+_cell_length_a 5
+_cell_length_b 5
+_cell_length_c 5
+_cell_angle_alpha 90
+_cell_angle_beta 90
+_cell_angle_gamma 90
+_symmetry_space_group_name_H-M 'P 1'
+loop_
+_atom_site_label
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+C1 0 0 0
+"""
+
+
+def wait_for_cif_reader(app, timeout=30.0):
+    """Wait until Avogadro can read CIF (an Open Babel format).
+
+    Open Babel's formats are registered in the background after the window
+    answers RPC, so for a second or two every openFile of a .cif fails with
+    "No file format available". Loading a CIF replaces the active molecule,
+    so this is only for apps whose state does not matter (the corpus sweep).
+    """
+    deadline = time.monotonic() + timeout
+    while True:
+        try:
+            with connect(app.name, timeout=10) as client:
+                client.load_molecule(_WARMUP_CIF, "cif")
+            return
+        except (ConnectionError, OSError, RPCError):
+            if time.monotonic() > deadline:
+                raise AppStartError(
+                    "Avogadro could not read CIF within %d s of starting.\n%s"
+                    % (timeout, "\n".join(tail(app.log_path, 40)))
+                )
+            time.sleep(0.25)
 
 
 def ping(name, timeout=PING_TIMEOUT):

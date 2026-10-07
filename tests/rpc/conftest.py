@@ -106,6 +106,8 @@ def launch(request, avogadro_exe, app_log_dir, reproducer_dir):
 @pytest.fixture(scope="module")
 def shared_app(avogadro_exe, app_log_dir):
     app = harness.AvogadroApp(avogadro_exe, app_log_dir)
+    # the corpus opens .cif files from the first test on
+    app.on_ready = harness.wait_for_cif_reader
     app.start()
     yield app
     app.stop()

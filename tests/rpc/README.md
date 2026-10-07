@@ -157,9 +157,12 @@ of `avo`.
 
 `test_open_files.py` (marker `corpus`) opens every file under
 `avogadrodata/data`, `molecules` and `crystals` (skipping hidden files and
-png/svg/md/sh/py/csv/txt/README/LICENSE, and all `.cif` files while the space-group prompt below is unfixed) and, when the file has orbitals,
+png/svg/md/sh/py/csv/txt/README/LICENSE) and, when the file has orbitals,
 renders the HOMO with `renderMO` (`wait`, 120 s). An error reply is fine;
-only a death, hang or blocked request fails. Each test records `ext`,
+only a death, hang or blocked request fails. After every (re)launch the shared
+app waits until it can read CIF (`harness.wait_for_cif_reader`), because Open
+Babel's formats register in the background a second or two after the window
+answers RPC. Each test records `ext`,
 `openFile`, `renderMO` and `message` properties (visible with `--junitxml`).
 
 ## Known app bugs seen while writing these
@@ -169,23 +172,21 @@ only a death, hang or blocked request fails. Each test records `ext`,
 `--skip-dialogs` it now logs the error and fails the waited request with the
 writer's message. `test_export_file_failure_is_an_error_not_a_dialog` guards it.)
 
-* Opening a CIF without a space group (`openFile`, `loadMolecule`) runs
-  `SpaceGroup::fillHeuristic()` -> `selectSpaceGroup()`, a modal "Select
-  Space Group" dialog. The RPC reply never comes until a person closes it.
 * `renderMO` for the HOMO of `avogadrodata/data/fchk/CO-cc-6Z.fchk` crashes
   the app (SIGTRAP): a libc++ hardening assertion, `vector[]` out of bounds in
-  `GaussianSetTools::calculateShellCutoff()` via `buildShellData()`.
-* Periodic, non-CIF files that open the same space-group dialog, now
-  reported by the oracle as failure kind "dialog" ("Select Space Group",
-  `QDialog`): `avogadrodata/cjson/rutile.cjson` and `cjson/si.cjson` in the
-  last corpus run. It is not deterministic: `rutile.cjson` opened without a
-  dialog in about five of six single launches. `nwchem/band.out`,
-  `turbomole/periodic/mgo.coord` and `vasp/corundum-conventional.POSCAR`,
-  which earlier runs blocked on or were slow with, opened normally in the last
-  run. These fail until the avogadrolibs fix lands; they are not excluded.
-* In the build these runs used, no `.cif` file can be opened at all: every one
-  is answered with "No file format available to read" (the corpus still skips
-  them, as above, for builds that do have a CIF reader).
+  `GaussianSetTools::calculateShellCutoff()` via `buildShellData()`, for its
+  h and i shells. Fixed on avogadrolibs `fix-gaussian-hi-shells` (pending);
+  the corpus fails on this file until that lands.
+* An `openFile` sent right after launch can fail with "No file format
+  available" for formats that Open Babel provides (CIF, ...): they are
+  registered in the background after RPC already answers. The corpus works
+  around it as described above; a script has to retry.
+
+(Fixed in avogadrolibs #3126: opening a CIF, or a periodic file such as
+`avogadrodata/data/cjson/rutile.cjson`, could run `SpaceGroup::fillHeuristic()`
+-> `selectSpaceGroup()`, a modal "Select Space Group" dialog, and the RPC
+reply never came. Under `--skip-dialogs` the plugin no longer prompts, and a
+CIF's setting is resolved from its own symmetry operations.)
 
 ## Findings from the molecule-verb scenarios
 
