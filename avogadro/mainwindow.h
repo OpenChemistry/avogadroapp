@@ -68,6 +68,12 @@ class MainWindow : public QMainWindow
 {
   Q_OBJECT
 public:
+  /**
+   * @param skipDialogs Decline every modal dialog a script could not answer
+   * (see --skip-dialogs). This is recorded in
+   * QtGui::Utilities::dialogsSkipped(), which plugins read too; there is no
+   * other copy of the flag.
+   */
   MainWindow(const QStringList& fileNames, bool disableSettings = false,
              bool skipAutosave = false, bool skipDialogs = false);
   ~MainWindow() override;
@@ -154,9 +160,16 @@ public:
   QtGui::Molecule* molecule() { return m_molecule; }
 
   /**
-   * Whether the active molecule has changes that were not saved.
+   * Whether @p molecule has unsaved changes: m_moleculeDirty for the active
+   * molecule, the state saved by setMolecule() for any other.
    */
-  bool isMoleculeModified() const { return m_moleculeDirty; }
+  bool isModified(const QtGui::Molecule* molecule) const;
+
+  /// Whether the active molecule's undo stack has an edit to undo.
+  bool canUndo() const;
+
+  /// Whether the active molecule's undo stack has an edit to redo.
+  bool canRedo() const;
 
   /**
    * One map per open molecule, in the molecule list's order, with "index",
@@ -164,6 +177,14 @@ public:
    * "listMolecules" method.
    */
   QVariantList moleculeSummaries() const;
+
+  /**
+   * One map per tool of the active view, with "name" (the tool's object name:
+   * what activateTool and the toolbar use), "displayName" (ToolPlugin::name(),
+   * translated, for people only) and "active". Empty when there is no GL view.
+   * For the RPC "listTools" and "activateTool" methods.
+   */
+  QVariantList toolSummaries() const;
 
   /**
    * "index" (in the molecule list) of the active molecule and "count" of open
@@ -583,9 +604,7 @@ private:
    * Close @p molecule without asking to save it: make a neighbour (or a new
    * empty molecule, if it was the only one) active when it is the active
    * molecule, then remove its autosave and drop it from the molecule list.
-   * Shared by the molecule list's close button, File > Close and the RPC
-   * "closeMolecule" command; callers that must not lose work check
-   * isModified() first.
+   * Callers that must not lose work ask to save, or check isModified(), first.
    */
   void closeMolecule(QtGui::Molecule* molecule);
 
@@ -605,12 +624,6 @@ private:
    * ask nothing: a question has to be declined or answered by its own caller.
    */
   void warnUser(Severity severity, const QString& title, const QString& text);
-
-  /**
-   * Whether @p molecule has unsaved changes: m_moleculeDirty for the active
-   * molecule, the state saved by setMolecule() for any other.
-   */
-  bool isModified(const QtGui::Molecule* molecule) const;
 
   /**
    * Connect a plugin's command lifecycle signals. Safe to call repeatedly --
@@ -721,8 +734,6 @@ private:
   // Skip autosave recovery and writing autosaves entirely, so that a
   // scripted or automated run neither prompts nor leaves files behind.
   bool m_skipAutosave = false;
-  /// Decline every startup modal dialog (see --skip-dialogs)
-  bool m_skipDialogs = false;
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 

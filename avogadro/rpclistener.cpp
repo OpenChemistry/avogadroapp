@@ -18,7 +18,6 @@
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/qtgui/sceneplugin.h>
 #include <avogadro/qtgui/scenepluginmodel.h>
-#include <avogadro/qtgui/toolplugin.h>
 #include <avogadro/qtopengl/glwidget.h>
 #include <avogadro/rendering/camera.h>
 
@@ -43,7 +42,6 @@ using Core::BasisSet;
 using Io::FileFormatManager;
 using QtGui::Molecule;
 using QtGui::ScenePlugin;
-using QtGui::ToolPlugin;
 using QtOpenGL::GLWidget;
 using Rendering::Camera;
 using Rendering::Projection;
@@ -79,10 +77,12 @@ struct BuiltinCommand
   bool async;
 };
 
-/// Every method this listener answers itself, i.e. everything handled below
-/// in messageReceived() plus "internalPing" (answered earlier, in JsonRpc)
-/// and "kill". Kept sorted by name for readability; listCommands() sorts its
-/// output anyway.
+/// Every built-in method, for "listCommands". The answers come from two places:
+/// read-backs (version, listMolecules, getCamera, ...) are answered here in
+/// messageReceived(), and so are "internalPing" (earlier, in JsonRpc) and
+/// "kill"; commands that change the document (layers, molecules, undo, tools)
+/// are answered in MainWindow::handleCommand(). Kept sorted by name for
+/// readability; listCommands() sorts its output anyway.
 const BuiltinCommand builtinCommands[] = {
   { "activateTool",
     "Make the tool with the given name (as listTools reports it) the "
@@ -254,7 +254,7 @@ RpcListener::RpcListener(const QString& connectionName, QObject* parent_)
       break;
 
   if (m_window) {
-    connect(this, &RpcListener::callSetMolecule, m_window,
+    connect(this, &RpcListener::openedMolecule, m_window,
             &MainWindow::setOpenedMolecule);
     connect(m_window, &MainWindow::commandCompleted, this,
             &RpcListener::resolvePending);
@@ -438,7 +438,7 @@ void RpcListener::messageReceived(const RPC::Message& message)
       // Record the file the way the GUI's file-open path does, so the window
       // title, "Save" and moleculeInfo know where the molecule came from.
       molecule->setData("fileName", fileName);
-      emit callSetMolecule(molecule);
+      emit openedMolecule(molecule);
 
       // set response
       RPC::Message response = message.generateResponse();
@@ -501,7 +501,7 @@ void RpcListener::messageReceived(const RPC::Message& message)
     bool success =
       FileFormatManager::instance().readString(*molecule, content, format);
     if (success) {
-      emit callSetMolecule(molecule);
+      emit openedMolecule(molecule);
 
       // send response
       RPC::Message response = message.generateResponse();
@@ -600,10 +600,9 @@ void RpcListener::messageReceived(const RPC::Message& message)
                      : QString();
 
     // Unsaved-changes and undo state of the document, not of the model.
-    const QVariantMap undo = m_window->undoState();
-    info["modified"] = undo.value("modified");
-    info["canUndo"] = undo.value("canUndo");
-    info["canRedo"] = undo.value("canRedo");
+    info["modified"] = m_window->isModified(mol);
+    info["canUndo"] = m_window->canUndo();
+    info["canRedo"] = m_window->canRedo();
 
     RPC::Message response = message.generateResponse();
     response.setResult(QJsonObject::fromVariantMap(info));
@@ -721,26 +720,8 @@ void RpcListener::messageReceived(const RPC::Message& message)
       QJsonArray::fromVariantList(m_window->moleculeSummaries()));
     response.send();
   } else if (method == "listTools") {
-    // "name" is the tool's object name: what activateTool accepts, and what
-    // the toolbar and settings use. ToolPlugin::name() is the translated
-    // display name and is reported as "displayName" only.
-    QVariantList tools;
-    if (GLWidget* glWidget = m_window->activeGLWidget()) {
-      const ToolPlugin* active = glWidget->activeTool();
-      const QList<ToolPlugin*> plugins = glWidget->tools();
-      for (ToolPlugin* plugin : plugins) {
-        if (plugin == nullptr)
-          continue;
-        QVariantMap entry;
-        entry["name"] = plugin->objectName();
-        entry["displayName"] = plugin->name();
-        entry["active"] = plugin == active;
-        tools.append(entry);
-      }
-    }
-
     RPC::Message response = message.generateResponse();
-    response.setResult(QJsonArray::fromVariantList(tools));
+    response.setResult(QJsonArray::fromVariantList(m_window->toolSummaries()));
     response.send();
   } else if (method == "listDisplayTypes") {
     QVariantList types;

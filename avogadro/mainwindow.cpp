@@ -99,6 +99,7 @@
 
 #include <QScreen>
 
+#include <algorithm>
 #include <cmath>
 #include <filesystem>
 #include <limits>
@@ -440,6 +441,7 @@ using QtGui::ScenePluginFactory;
 using QtGui::ScenePluginModel;
 using QtGui::ToolPlugin;
 using QtGui::ToolPluginFactory;
+using QtGui::Utilities::dialogsSkipped;
 using QtOpenGL::ActiveObjects;
 using QtOpenGL::GLWidget;
 using QtPlugins::PluginManager;
@@ -477,6 +479,11 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
   // layer view).
   qApp->installEventFilter(this);
 
+  // Plugins check this to avoid modal prompts in scripted runs, and they load
+  // and receive molecules during this constructor: set it before anything else.
+  if (skipDialogs)
+    QtGui::Utilities::setDialogsSkipped(true);
+
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
     QSettings settings;
@@ -488,8 +495,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 
   // check for auto-save files
   m_skipAutosave = skipAutosave;
-  m_skipDialogs = skipDialogs;
-  if (m_skipDialogs) {
+  if (dialogsSkipped()) {
     qInfo("--skip-dialogs: skipped autosave recovery check; autosave files "
           "left untouched.");
   } else if (!m_skipAutosave) {
@@ -878,9 +884,8 @@ void MainWindow::closeMolecule(Molecule* molecule)
   const QList<Molecule*> molecules = m_moleculeModel->molecules();
   const int idx = molecules.indexOf(molecule);
 
-  if (idx < 0 || molecules.isEmpty()) {
+  if (idx < 0)
     return;
-  }
 
   // Closing a molecule that is not the active one leaves the active one alone.
   if (molecule == m_molecule) {
@@ -918,7 +923,7 @@ bool MainWindow::isModified(const Molecule* molecule) const
 void MainWindow::warnUser(Severity severity, const QString& title,
                           const QString& text)
 {
-  if (m_skipDialogs) {
+  if (dialogsSkipped()) {
     QString oneLine = text;
     oneLine.replace(QLatin1Char('\n'), QLatin1Char(' '));
     qWarning("--skip-dialogs: skipped '%s' dialog; %s", qPrintable(title),
@@ -958,6 +963,27 @@ QVariantList MainWindow::moleculeSummaries() const
   return summaries;
 }
 
+QVariantList MainWindow::toolSummaries() const
+{
+  QVariantList tools;
+  const GLWidget* glWidget = activeGLWidget();
+  if (glWidget == nullptr)
+    return tools;
+
+  const ToolPlugin* active = glWidget->activeTool();
+  const QList<ToolPlugin*> plugins = glWidget->tools();
+  for (const ToolPlugin* plugin : plugins) {
+    if (plugin == nullptr)
+      continue;
+    QVariantMap entry;
+    entry["name"] = plugin->objectName();
+    entry["displayName"] = plugin->name();
+    entry["active"] = plugin == active;
+    tools.append(entry);
+  }
+  return tools;
+}
+
 QVariantMap MainWindow::moleculePosition() const
 {
   const QList<Molecule*> molecules = m_moleculeModel->molecules();
@@ -967,21 +993,29 @@ QVariantMap MainWindow::moleculePosition() const
   return position;
 }
 
+bool MainWindow::canUndo() const
+{
+  return m_molecule != nullptr && m_molecule->undoMolecule() != nullptr &&
+         m_molecule->undoMolecule()->undoStack().canUndo();
+}
+
+bool MainWindow::canRedo() const
+{
+  return m_molecule != nullptr && m_molecule->undoMolecule() != nullptr &&
+         m_molecule->undoMolecule()->undoStack().canRedo();
+}
+
 QVariantMap MainWindow::undoState() const
 {
   QVariantMap state;
-  bool canUndo = false;
-  bool canRedo = false;
   QString undoText, redoText;
   if (m_molecule != nullptr && m_molecule->undoMolecule() != nullptr) {
     const QUndoStack& stack = m_molecule->undoMolecule()->undoStack();
-    canUndo = stack.canUndo();
-    canRedo = stack.canRedo();
     undoText = stack.undoText();
     redoText = stack.redoText();
   }
-  state["canUndo"] = canUndo;
-  state["canRedo"] = canRedo;
+  state["canUndo"] = canUndo();
+  state["canRedo"] = canRedo();
   state["undoText"] = undoText;
   state["redoText"] = redoText;
   state["modified"] = m_moleculeDirty;
@@ -1630,7 +1664,7 @@ void MainWindow::backgroundReaderFinished()
                                .arg(m_molecule->bondCount()),
                              5000);
   } else {
-    if (m_skipDialogs) {
+    if (dialogsSkipped()) {
       qWarning("--skip-dialogs: skipped 'File error' dialog; error while "
                "reading file '%s': %s",
                qPrintable(fileName), qPrintable(m_threadedReader->error()));
@@ -1988,7 +2022,7 @@ void MainWindow::loadPackages()
         QString sizeStr = QLocale().formattedDataSize(
           totalBytes, 1, QLocale::DataSizeTraditionalFormat);
 
-        if (m_skipDialogs) {
+        if (dialogsSkipped()) {
           qInfo("--skip-dialogs: skipped 'Found Previous Avogadro Files' "
                 "dialog; assuming 'Keep Files'.");
         } else {
@@ -2130,7 +2164,7 @@ void MainWindow::loadPackages()
   newPackages = writablePackages;
 
   // If there are new or updated packages, ask the user before installing
-  if (!newPackages.isEmpty() && m_skipDialogs) {
+  if (!newPackages.isEmpty() && dialogsSkipped()) {
     qInfo("--skip-dialogs: skipped plugin setup/update prompt; assuming 'No' "
           "(%d package(s) not installed).",
           static_cast<int>(newPackages.size()));
@@ -2175,7 +2209,7 @@ void MainWindow::loadPackages()
   }
 
   // Skipping the dialogs is not an answer to them; ask again next time.
-  if (!m_skipDialogs)
+  if (!dialogsSkipped())
     settings.setValue("MainWindow/firstRun", false);
 
     // Load cached registrations so consumer plugins get their signals
@@ -2264,7 +2298,7 @@ void MainWindow::viewConfigActivated() {}
 void MainWindow::rendererInvalid()
 {
   auto* widget = qobject_cast<GLWidget*>(sender());
-  if (m_skipDialogs) {
+  if (dialogsSkipped()) {
     qCritical("--skip-dialogs: OpenGL 4.0 or greater required, exiting. %s",
               qPrintable(widget ? widget->error() : tr("Unknown error")));
   } else {
@@ -2384,7 +2418,7 @@ void MainWindow::moleculeActivated(const QModelIndex& idx)
     if (idx.column() == 0)
       setMolecule(mol);
 
-    // Deleting a molecule, we must also create a new one if it is the last.
+    // The second column is the close button.
     if (idx.column() == 1)
       closeMolecule(mol);
   }
@@ -3887,7 +3921,7 @@ void MainWindow::checkUpdate()
 void MainWindow::finishUpdateRequest(QNetworkReply* reply)
 {
   if (!reply->isReadable()) {
-    if (m_skipDialogs)
+    if (dialogsSkipped())
       qInfo("--skip-dialogs: skipped 'Network Download Failed' dialog "
             "(update check).");
     else
@@ -3969,7 +4003,7 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
     return;
   }
 
-  if (m_skipDialogs) {
+  if (dialogsSkipped()) {
     qInfo("--skip-dialogs: skipped 'Version Update' dialog (%s available); "
           "assuming 'Cancel'.",
           qPrintable(latestRelease));
@@ -4062,7 +4096,7 @@ void MainWindow::readQueuedFiles()
       "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : nullptr)) {
-      if (m_skipDialogs) {
+      if (dialogsSkipped()) {
         qWarning("--skip-dialogs: skipped 'Cannot open file' dialog; "
                  "Avogadro cannot open '%s'.",
                  qPrintable(file));
@@ -4079,7 +4113,7 @@ void MainWindow::readQueuedFiles()
 void MainWindow::clearQueuedFiles()
 {
   if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
-    if (m_skipDialogs) {
+    if (dialogsSkipped()) {
       qWarning("--skip-dialogs: skipped 'Cannot open files' dialog; "
                "Avogadro cannot open '%s'.",
                qPrintable(m_queuedFiles.join("', '")));
@@ -4483,8 +4517,7 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
     return CommandStatus::Finished;
   } else if (command == "undo" || command == "redo") {
     const bool undoing = command == "undo";
-    const QVariantMap before = undoState();
-    if (!before.value(undoing ? "canUndo" : "canRedo").toBool()) {
+    if (!(undoing ? canUndo() : canRedo())) {
       if (message != nullptr)
         *message = undoing ? QStringLiteral("There is nothing to undo.")
                            : QStringLiteral("There is nothing to redo.");
@@ -4500,22 +4533,20 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
       *result = undoState();
     return CommandStatus::Finished;
   } else if (command == "activateTool") {
-    auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
-    if (glWidget == nullptr) {
+    if (activeGLWidget() == nullptr) {
       if (message != nullptr)
         *message = QStringLiteral("There is no active view.");
       return CommandStatus::Failed;
     }
 
-    // Tools are named by their object name, as "listTools" reports them;
-    // the same name setActiveTool() and the toolbar use. The display name
-    // (ToolPlugin::name(), translated) is not accepted.
+    // By object name, the "name" that toolSummaries() reports.
     const QString name = options.value("name").toString();
-    bool found = false;
-    foreach (ToolPlugin* toolPlugin, glWidget->tools()) {
-      if (!name.isEmpty() && toolPlugin->objectName() == name)
-        found = true;
-    }
+    const QVariantList tools = toolSummaries();
+    const bool found =
+      !name.isEmpty() &&
+      std::any_of(tools.begin(), tools.end(), [&name](const QVariant& tool) {
+        return tool.toMap().value("name") == name;
+      });
     if (!found) {
       if (message != nullptr)
         *message = QStringLiteral("Unknown tool '%1'.").arg(name);
@@ -4525,9 +4556,12 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
     setActiveTool(name);
 
     if (result != nullptr) {
-      ToolPlugin* active = glWidget->activeTool();
-      result->insert("tool",
-                     active != nullptr ? active->objectName() : QString());
+      QString activeName;
+      for (const QVariant& tool : toolSummaries()) {
+        if (tool.toMap().value("active").toBool())
+          activeName = tool.toMap().value("name").toString();
+      }
+      result->insert("tool", activeName);
     }
     return CommandStatus::Finished;
   }
