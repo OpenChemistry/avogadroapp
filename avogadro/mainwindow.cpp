@@ -857,6 +857,30 @@ bool MainWindow::isModified(const Molecule* molecule) const
   return molecule->property(dirtyProperty).toBool();
 }
 
+void MainWindow::warnUser(Severity severity, const QString& title,
+                          const QString& text)
+{
+  if (m_skipDialogs) {
+    QString oneLine = text;
+    oneLine.replace(QLatin1Char('\n'), QLatin1Char(' '));
+    qWarning("--skip-dialogs: skipped '%s' dialog; %s", qPrintable(title),
+             qPrintable(oneLine));
+    return;
+  }
+
+  switch (severity) {
+    case Severity::Information:
+      QMessageBox::information(this, title, text);
+      break;
+    case Severity::Warning:
+      QMessageBox::warning(this, title, text);
+      break;
+    case Severity::Critical:
+      QMessageBox::critical(this, title, text);
+      break;
+  }
+}
+
 QVariantList MainWindow::moleculeSummaries() const
 {
   QVariantList summaries;
@@ -1043,7 +1067,7 @@ void MainWindow::moleculeReady(int)
   if (extension) {
     auto* mol = new Molecule(this);
     if (extension->readMolecule(*mol))
-      setMolecule(mol);
+      setOpenedMolecule(mol);
   }
 }
 
@@ -1101,10 +1125,13 @@ void MainWindow::setMolecule(Molecule* mol)
   if (!mol)
     return;
 
-  // Selecting the molecule that is already active changes nothing. It must not
-  // run on: GLWidget::setMolecule() drops every connection from the molecule
-  // it is given, including the one below that marks the molecule modified, so
-  // later edits would never ask to be saved.
+  // Selecting the molecule that is already active changes nothing, so stop
+  // here. Running on would sever the connection below that marks the molecule
+  // modified (later edits would never ask to be saved), in two ways: this
+  // function disconnects the old molecule, and GLWidget::setMolecule() in
+  // avogadrolibs disconnects every connection of the molecule it already shows.
+  // The first is also handled below; the second is being fixed in avogadrolibs,
+  // and until then this return is what protects the connection.
   if (mol == m_molecule && m_moleculeModel->molecules().contains(mol))
     return;
   // Set the new molecule, ensure both molecules are in the model.
@@ -1128,7 +1155,7 @@ void MainWindow::setMolecule(Molecule* mol)
       m_molecule->atomCount() > 0 ? "Navigator" : "Editor";
     setActiveTool(targetToolName);
     connect(m_molecule, &QtGui::Molecule::changed, this,
-            &MainWindow::markMoleculeDirty);
+            &MainWindow::markMoleculeDirty, Qt::UniqueConnection);
   }
 
   emit moleculeChanged(m_molecule);
@@ -1145,7 +1172,8 @@ void MainWindow::setMolecule(Molecule* mol)
 
   ActiveObjects::instance().setActiveMolecule(m_molecule);
 
-  if (oldMolecule)
+  // Never the molecule that was just connected above.
+  if (oldMolecule && oldMolecule != mol)
     oldMolecule->disconnect(this);
 
   // start the autosave timer
@@ -1344,8 +1372,8 @@ void MainWindow::openFile()
     reader = new Io::CjsonFormat;
 
   if (!openFile(fileName, reader)) {
-    QMessageBox::information(this, tr("Cannot open file"),
-                             tr("Can't open supplied file %1").arg(fileName));
+    warnUser(Severity::Information, tr("Cannot open file"),
+             tr("Can't open supplied file %1").arg(fileName));
   }
 }
 
@@ -1367,9 +1395,8 @@ void MainWindow::importFile()
   settings.setValue("MainWindow/lastOpenDir", dir);
 
   if (!openFile(reply.second, reply.first->newInstance())) {
-    QMessageBox::information(
-      this, tr("Cannot open file"),
-      tr("Can't open supplied file %1").arg(reply.second));
+    warnUser(Severity::Information, tr("Cannot open file"),
+             tr("Can't open supplied file %1").arg(reply.second));
   }
 }
 
@@ -1588,20 +1615,14 @@ bool MainWindow::backgroundWriterFinished()
       updateRecentFiles();
       success = true;
     } else {
+      // Under --skip-dialogs the error reaches a waiting RPC caller through
+      // commandCompleted() below.
       errorMessage = m_threadedWriter->error();
-      if (m_skipDialogs) {
-        // A scripted run has nobody to close the box, and the nested event
-        // loop would hold the RPC reply (and the writer state) hostage. The
-        // error reaches a waiting RPC caller through commandCompleted() below.
-        qWarning("Error while saving '%s': %s", qPrintable(fileName),
-                 qPrintable(errorMessage));
-      } else {
-        QMessageBox::critical(this, tr("Error saving file"),
-                              tr("Error while saving '%1':\n%2",
-                                 "%1 = file name, %2 = error message")
-                                .arg(fileName)
-                                .arg(errorMessage));
-      }
+      warnUser(
+        Severity::Critical, tr("Error saving file"),
+        tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
+          .arg(fileName)
+          .arg(errorMessage));
     }
   } else {
     errorMessage = tr("The save was canceled.");
@@ -2637,14 +2658,8 @@ bool MainWindow::exportGraphics(QString fileName)
   QImage exportImage = renderToImage();
 
   if (!exportImage.save(fileName)) {
-    if (m_skipDialogs) {
-      // Nobody can close the box in a scripted run, and it would hold the RPC
-      // reply hostage.
-      qWarning("Cannot save file %s.", qPrintable(fileName));
-    } else {
-      QMessageBox::warning(this, tr("Avogadro"),
-                           tr("Cannot save file %1.").arg(fileName));
-    }
+    warnUser(Severity::Warning, tr("Avogadro"),
+             tr("Cannot save file %1.").arg(fileName));
     return false;
   }
   return true;
@@ -2679,8 +2694,8 @@ void MainWindow::openRecentFile()
                                        FileFormat::File | FileFormat::Read);
 
     if (!openFile(fileName, format ? format->newInstance() : nullptr)) {
-      QMessageBox::information(this, tr("Cannot open file"),
-                               tr("Can't open supplied file %1").arg(fileName));
+      warnUser(Severity::Information, tr("Cannot open file"),
+               tr("Can't open supplied file %1").arg(fileName));
     }
   }
 }

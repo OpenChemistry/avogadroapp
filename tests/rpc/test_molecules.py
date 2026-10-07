@@ -267,6 +267,21 @@ def test_selecting_the_active_molecule_again_keeps_it_tracked(avo, molecules_dir
     assert avo.info()["modified"] is True
 
 
+def test_switching_away_and_back_keeps_a_molecule_tracked(avo, molecules_dir):
+    """Switching to another molecule and back runs the whole of setMolecule()
+    (unlike re-selecting the active one, which returns early): the connection
+    that marks the molecule modified must be made again, exactly once."""
+    avo.call("openFile", {"fileName": str(butane(molecules_dir))})
+    avo.data("newMolecule")
+    avo.data("setActiveMolecule", {"index": 0})
+    assert avo.info()["modified"] is False
+    avo.data("editDistance", {"atoms": [0, 1], "value": 2.5})
+    assert avo.info()["modified"] is True
+    assert avo.data("undo")["modified"] is False
+    avo.data("editDistance", {"atoms": [0, 1], "value": 2.2})
+    assert avo.info()["modified"] is True
+
+
 def test_new_molecule_and_set_active(avo):
     assert avo.data("newMolecule") == {"index": 1, "count": 2}
     avo.load(WATER)  # fills the new, empty one

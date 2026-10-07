@@ -583,6 +583,23 @@ private:
    */
   void closeMolecule(QtGui::Molecule* molecule);
 
+  /// The icon (and weight) of a message-only dialog; see warnUser().
+  enum class Severity
+  {
+    Information,
+    Warning,
+    Critical
+  };
+
+  /**
+   * Tell the user something with a message-only dialog (just an OK button).
+   * Under --skip-dialogs nobody can close the box, and its nested event loop
+   * would hold an RPC reply hostage, so the message is logged instead, as
+   * "--skip-dialogs: skipped '<title>' dialog; <text>". Only for dialogs that
+   * ask nothing: a question has to be declined or answered by its own caller.
+   */
+  void warnUser(Severity severity, const QString& title, const QString& text);
+
   /**
    * Whether @p molecule has unsaved changes: m_moleculeDirty for the active
    * molecule, the state saved by setMolecule() for any other.
