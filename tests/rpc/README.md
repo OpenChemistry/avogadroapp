@@ -38,7 +38,8 @@ when `avogadro` is not installed). Options: `--reproducer-dir`,
 * Launch line: `--rpc-name <name> --skip-autosave --disable-settings`.
   `--rpc-name` implies `--skip-dialogs`, so no startup dialog blocks.
 * Nothing in a test may open a modal dialog. Modal dialogs run a nested event
-  loop: pings still answer, but the request that opened it never replies.
+  loop: pings (and `activeDialog`) still answer, but the request that opened
+  it never replies. The oracle below fails the test as soon as one is open.
   Do not call `fillUnitCell`, `fillTranslationalCell`, `show*` or
   `fetchPDB`/`fetchByName`. Known app bugs that do open dialogs through RPC
   are listed below. A failed `exportFile` or `saveGraphic` is safe: under
@@ -50,11 +51,20 @@ when `avogadro` is not installed). Options: `--reproducer-dir`,
 Every request goes through `Session`, which records it as a step
 `{method, params, wait, timeout, outcome, elapsed}` and then checks that
 
-1. the process is still running, and
-2. a fresh connection gets `internalPing` answered within 5 s.
+1. the process is still running,
+2. a fresh connection gets `internalPing` answered within 5 s, and
+
+3. no modal dialog is open. The same fresh connection that pings asks
+   `activeDialog` (one extra call per step). An open modal is a failure of kind
+   "dialog" whatever the step was, and takes precedence over "blocked"; the
+   failure message and the reproducer carry the dialog's title and class. The
+   one exception is a `QProgressDialog`, which a background file read shows
+   while it lasts (the command line, File > Open) and which goes away by
+   itself.
 
 A request that gets no reply within its timeout (60 s by default) while the
-app still answers pings is "blocked" (a modal dialog or stuck command). On
+app still answers pings, and no dialog is open, is "blocked" (a stuck
+command). On
 any failure the test fails with a message naming the reproducer file.
 Error replies are not failures; tests assert them explicitly with
 `expect_error`.
@@ -65,9 +75,10 @@ Written to `--reproducer-dir` (default `tests/rpc/reproducers/`, git-ignored)
 as `<test id>-<timestamp>.json`:
 
 ```
-test, failure ("exit" | "hang" | "blocked" | "transport"), returncode,
-signal, app_version, executable, launch_args, tests_since_launch,
-steps (every request of the test), last_step, log_tail (last 80 lines)
+test, failure ("exit" | "hang" | "blocked" | "dialog" | "transport"),
+returncode, signal, app_version, executable, launch_args,
+tests_since_launch, steps (every request of the test), last_step,
+log_tail (last 80 lines), dialog ({title, className}, kind "dialog" only)
 ```
 
 `tests_since_launch` matters for the shared corpus app: the culprit may be an
@@ -107,8 +118,40 @@ earlier file. Replaying `steps` against a fresh app reproduces a crash.
 ```
 
 A waited plugin command replies `{"status": "finished", "data": {...}}`;
-without `wait` the reply is `true`. Layer verbs fail with code -2.
+without `wait` the reply is `true`. Layer and molecule verbs fail with code -2.
 Operands of `checks` are saved names or plain numbers.
+
+`result` matches a list of the same length element by element, each element
+as a subset, so `listMolecules` can be checked as
+`[{"atomCount": 14}, {"atomCount": 3, "active": true}]`.
+
+## Application verbs the tests use
+
+Besides the layer verbs, `MainWindow::handleCommand` answers these (listed by
+`listCommands` as `builtin`). They reuse the menu and molecule-list code and
+never open a dialog; their failure messages are plain strings, not `tr()`.
+Verbs marked "read-back" return their payload as the reply's `result`
+(no `wait`/`status` envelope).
+
+| Verb | Parameters | Reply data / result |
+| --- | --- | --- |
+| `listMolecules` (read-back) | | `[{index, active, atomCount, formula, fileName, modified}]` in molecule-list order; `modified` is the dirty state |
+| `newMolecule` | | `{index, count}`, like File > New |
+| `setActiveMolecule` | `index` (JSON number) | `{index, count}`; a bad or missing index fails |
+| `closeMolecule` | `index` (default: active), `discard` | `{index, count}` of the molecule that is active afterwards. A modified molecule fails ("The molecule has unsaved changes; pass discard: true to close it anyway.") unless `discard` is exactly `true`. Closing the last molecule leaves a new empty one |
+| `undo`, `redo` | | `{canUndo, canRedo, undoText, redoText, modified}`; fails when there is nothing to undo or redo |
+| `listTools` (read-back) | | `[{name, displayName, active}]` for the active view |
+| `activateTool` | `name` | `{tool}`. `name` is the tool's object name, the `name` that `listTools` reports (`Navigator`, `Editor`, `MeasureTool`); the translated display name (`ToolPlugin::name()`, "Navigate tool") is not accepted |
+| `activeDialog` (read-back) | | `{open, title, className}` of the active modal widget; answered even before the window exists |
+
+`moleculeInfo` also reports `modified`, `canUndo` and `canRedo`. After an RPC
+`openFile` its `fileName` is the opened file, as after File > Open.
+
+Selecting an atom range pushes an undo step ("Change Selection") but does not
+mark the document modified; redoing it does (see "avogadroapp #476" below).
+
+Tests that need command line arguments use the `launch(*args)` fixture instead
+of `avo`.
 
 ## Corpus
 
@@ -132,7 +175,35 @@ writer's message. `test_export_file_failure_is_an_error_not_a_dialog` guards it.
 * `renderMO` for the HOMO of `avogadrodata/data/fchk/CO-cc-6Z.fchk` crashes
   the app (SIGTRAP): a libc++ hardening assertion, `vector[]` out of bounds in
   `GaussianSetTools::calculateShellCutoff()` via `buildShellData()`.
-* Periodic, non-CIF files that probably hit the same space-group dialog
-  (the request blocks): `avogadrodata/cjson/rutile.cjson`,
-  `nwchem/band.out`, `turbomole/periodic/mgo.coord`; `vasp/corundum-conventional.POSCAR`
-  took 21 s, most likely waiting on the same dialog until it was closed.
+* Periodic, non-CIF files that open the same space-group dialog, now
+  reported by the oracle as failure kind "dialog" ("Select Space Group",
+  `QDialog`): `avogadrodata/cjson/rutile.cjson` and `cjson/si.cjson` in the
+  last corpus run. It is not deterministic: `rutile.cjson` opened without a
+  dialog in about five of six single launches. `nwchem/band.out`,
+  `turbomole/periodic/mgo.coord` and `vasp/corundum-conventional.POSCAR`,
+  which earlier runs blocked on or were slow with, opened normally in the last
+  run. These fail until the avogadrolibs fix lands; they are not excluded.
+* In the build these runs used, no `.cif` file can be opened at all: every one
+  is answered with "No file format available to read" (the corpus still skips
+  them, as above, for builds that do have a CIF reader).
+
+## Findings from the molecule-verb scenarios
+
+* avogadroapp #634 (blank molecule left behind when a file is opened): not
+  reproducible with a command line file (the window then never creates the
+  blank one; `test_launch_with_file_leaves_exactly_one_molecule` pins that).
+  It reproduced with an RPC `openFile`/`loadMolecule` on a fresh start and with
+  the macOS open event (`test_finder_open_event_replaces_the_blank_molecule`);
+  both are fixed by `MainWindow::setOpenedMolecule()`.
+* Selecting the already-active molecule used to disable "modified" tracking
+  for it (`setMolecule()` ran again and `GLWidget::setMolecule()` dropped the
+  `changed` connection); fixed, see `test_selecting_the_active_molecule_again_keeps_it_tracked`.
+* avogadroapp #476 (spurious unsaved-changes prompts): no view-only operation
+  marks the document modified any more (camera, projection, render types,
+  layer visibility, `renderImage`, `listDisplayTypes`; see
+  `modified_flag_view_operations_476`). Selection does not set it either, but
+  it does push a "Change Selection" undo step, and *redoing* that step sets
+  `modified` (`redoEdit()` always emits `changed` with the atoms flag).
+  Whether a selection should be an undo step at all, and what it should do to
+  `modified`, is open; `test_selection_effect_on_modified_is_reported` records
+  the current behaviour without asserting it.
