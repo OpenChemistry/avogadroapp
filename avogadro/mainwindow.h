@@ -74,6 +74,15 @@ public:
 
 public slots:
   void setMolecule(Avogadro::QtGui::Molecule* molecule);
+
+  /**
+   * Show a molecule that was just read from a file (the command line, File >
+   * Open, or an RPC openFile/loadMolecule). Like setMolecule(), except that
+   * an empty, unmodified active molecule -- the blank document Avogadro starts
+   * with -- is closed instead of being left behind next to the new one.
+   * Plain switching between molecules must keep using setMolecule().
+   */
+  void setOpenedMolecule(Avogadro::QtGui::Molecule* molecule);
   void autosaveDocument(); // Autosave the current document
   /**
    * Update internal state to reflect that the molecule has been modified.

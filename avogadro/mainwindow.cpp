@@ -1154,6 +1154,24 @@ void MainWindow::setMolecule(Molecule* mol)
   }
 }
 
+void MainWindow::setOpenedMolecule(Molecule* mol)
+{
+  if (!mol)
+    return;
+
+  // A blank document that was never touched has nothing to lose: the opened
+  // file takes its place. The dirty state is read before setMolecule() swaps
+  // it for the new molecule's.
+  Molecule* previous = m_molecule;
+  const bool replacePrevious = previous != nullptr && previous != mol &&
+                               previous->atomCount() == 0 && !m_moleculeDirty;
+
+  setMolecule(mol);
+
+  if (replacePrevious)
+    closeMolecule(previous);
+}
+
 void MainWindow::markMoleculeDirty(unsigned int changes)
 {
   // Always refresh the undo/redo text (selection pushes undo commands), but
@@ -1478,7 +1496,7 @@ void MainWindow::backgroundReaderFinished()
       m_fileReadMolecule->setData("fileName", Core::Variant());
     }
 
-    setMolecule(m_fileReadMolecule);
+    setOpenedMolecule(m_fileReadMolecule);
 
     // check if the modelView is set
     if (m_fileReadMolecule->hasData("modelView")) {

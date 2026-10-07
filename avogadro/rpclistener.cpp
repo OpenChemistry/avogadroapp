@@ -255,7 +255,7 @@ RpcListener::RpcListener(const QString& connectionName, QObject* parent_)
 
   if (m_window) {
     connect(this, &RpcListener::callSetMolecule, m_window,
-            &MainWindow::setMolecule);
+            &MainWindow::setOpenedMolecule);
     connect(m_window, &MainWindow::commandCompleted, this,
             &RpcListener::resolvePending);
   }

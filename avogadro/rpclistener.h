@@ -54,7 +54,9 @@ public:
 
 signals:
   /**
-   * Calls the MainWidow::setMolecule() method with @p molecule.
+   * Calls the MainWindow::setOpenedMolecule() method with @p molecule: the
+   * molecule was just read (from a file or a string), so it replaces an
+   * empty, unmodified active molecule.
    */
   void callSetMolecule(QtGui::Molecule* molecule);
 

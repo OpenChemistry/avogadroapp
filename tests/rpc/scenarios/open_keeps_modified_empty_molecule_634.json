@@ -1,0 +1,65 @@
+{
+  "description": "An empty molecule that was edited and then emptied again is modified, so it is real work: opening a file must not discard it.",
+  "issue": "avogadroapp #634",
+  "steps": [
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "2\nhydrogen\nH 0.0 0.0 0.0\nH 0.0 0.0 0.74\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "atomCount": 2,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "method": "removeAllHydrogens",
+      "wait": true,
+      "result": {
+        "status": "finished"
+      }
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "index": 0,
+          "atomCount": 0,
+          "modified": true,
+          "active": true
+        }
+      ]
+    },
+    {
+      "method": "openFile",
+      "params": {
+        "fileName": "$MOLECULES/alkanes/butane.cjson"
+      },
+      "result": true
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "index": 0,
+          "atomCount": 0,
+          "modified": true,
+          "active": false
+        },
+        {
+          "index": 1,
+          "atomCount": 14,
+          "modified": false,
+          "active": true
+        }
+      ]
+    }
+  ]
+}

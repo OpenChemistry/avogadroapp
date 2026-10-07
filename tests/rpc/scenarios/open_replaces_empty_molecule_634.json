@@ -1,0 +1,134 @@
+{
+  "description": "Opening a file while the active molecule is empty and unmodified replaces it instead of leaving a blank document behind; switching molecules, and opening onto a non-empty molecule, keep what is there.",
+  "issue": "avogadroapp #634",
+  "steps": [
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "index": 0,
+          "active": true,
+          "atomCount": 0,
+          "modified": false
+        }
+      ]
+    },
+    {
+      "method": "openFile",
+      "params": {
+        "fileName": "$MOLECULES/alkanes/butane.cjson"
+      },
+      "result": true
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "index": 0,
+          "active": true,
+          "atomCount": 14,
+          "formula": "C4H10",
+          "modified": false
+        }
+      ]
+    },
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "3\nwater\nO   0.000000   0.000000   0.117300\nH   0.000000   0.757200  -0.469200\nH   0.000000  -0.757200  -0.469200\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "atomCount": 14,
+          "active": false
+        },
+        {
+          "atomCount": 3,
+          "active": true
+        }
+      ]
+    },
+    {
+      "method": "newMolecule",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 2,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "setActiveMolecule",
+      "wait": true,
+      "params": {
+        "index": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 0,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "setActiveMolecule",
+      "wait": true,
+      "params": {
+        "index": 2
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 2,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "atomCount": 14
+        },
+        {
+          "atomCount": 3
+        },
+        {
+          "atomCount": 0,
+          "active": true
+        }
+      ]
+    },
+    {
+      "method": "openFile",
+      "params": {
+        "fileName": "$MOLECULES/alkanes/decane.cjson"
+      },
+      "result": true
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "atomCount": 14
+        },
+        {
+          "atomCount": 3
+        },
+        {
+          "atomCount": 32,
+          "active": true,
+          "formula": "C10H22"
+        }
+      ]
+    }
+  ]
+}

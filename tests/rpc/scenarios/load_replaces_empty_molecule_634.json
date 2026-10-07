@@ -1,0 +1,41 @@
+{
+  "description": "loadMolecule on a fresh start leaves exactly one molecule: the loaded one replaces the blank startup document.",
+  "issue": "avogadroapp #634",
+  "steps": [
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "atomCount": 0
+        }
+      ]
+    },
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "8\nethane\nC   0.000000   0.000000   0.765000\nC   0.000000   0.000000  -0.765000\nH   1.019000   0.000000   1.157000\nH  -0.509500   0.882000   1.157000\nH  -0.509500  -0.882000   1.157000\nH  -1.019000   0.000000  -1.157000\nH   0.509500  -0.882000  -1.157000\nH   0.509500   0.882000  -1.157000\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "index": 0,
+          "active": true,
+          "atomCount": 8,
+          "formula": "C2H6",
+          "modified": false
+        }
+      ]
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "atomCount": 8,
+        "modified": false
+      }
+    }
+  ]
+}
