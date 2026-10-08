@@ -601,6 +601,11 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 #endif
   updateRecentFiles();
 
+  // Open Babel registers its file formats only when its format query returns
+  // (see fileFormatsReady()). Stop waiting for them after a while, so that a
+  // missing or broken Open Babel does not hold up file requests for good.
+  QTimer::singleShot(10000, this, &MainWindow::settlePluginFormats);
+
   // Try to open the file(s) passed in.
   if (!fileNames.isEmpty()) {
     m_queuedFiles = fileNames;
@@ -4082,7 +4087,16 @@ void MainWindow::fileFormatsReady()
       delete format;
     }
   }
+  settlePluginFormats();
   readQueuedFiles();
+}
+
+void MainWindow::settlePluginFormats()
+{
+  if (m_pluginFormatsSettled)
+    return;
+  m_pluginFormatsSettled = true;
+  emit pluginFormatsReady();
 }
 
 void MainWindow::readQueuedFiles()

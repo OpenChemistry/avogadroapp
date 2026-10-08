@@ -323,7 +323,19 @@ public:
                        bool transparentBackground = true,
                        QSize* nativeSize = nullptr);
 
+  /**
+   * True once the file formats that plugins register after startup (Open
+   * Babel's) are available, or once Avogadro has stopped waiting for them.
+   * Until then, reading or writing a file may fail for those formats.
+   */
+  bool pluginFormatsSettled() const { return m_pluginFormatsSettled; }
+
 signals:
+  /**
+   * Emitted once, when pluginFormatsSettled() becomes true.
+   */
+  void pluginFormatsReady();
+
   /**
    * Emitted when the active molecule in the application has changed.
    */
@@ -518,6 +530,12 @@ private slots:
    * delayed file readying within the first few seconds of application start up.
    */
   void clearQueuedFiles();
+
+  /**
+   * @brief Mark the plugin file formats as settled (once), see
+   * pluginFormatsSettled().
+   */
+  void settlePluginFormats();
 
   /**
    * @brief Register molequeue open-with handlers for RPC and executable file
@@ -730,6 +748,7 @@ private:
   QtGui::ScenePlugin* m_activeScenePlugin;
   bool m_queuedFilesStarted;
   QStringList m_queuedFiles;
+  bool m_pluginFormatsSettled = false;
   QTimer* m_autosaveTimer = nullptr; // for the autosave timer
   // Skip autosave recovery and writing autosaves entirely, so that a
   // scripted or automated run neither prompts nor leaves files behind.
