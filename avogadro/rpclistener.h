@@ -93,7 +93,9 @@ private:
 
   /**
    * Run, in the order they arrived, the requests that waited for the plugin
-   * file formats (see MainWindow::pluginFormatsSettled()).
+   * file formats (see MainWindow::pluginFormatsSettled()). A replayed request
+   * whose reply is held (e.g. a waited exportFile) pauses the replay until
+   * that reply is resolved.
    */
   void replayDeferred();
 
@@ -117,6 +119,19 @@ private:
    * their order.
    */
   QList<PendingCommand> m_deferred;
+
+  /** True while replayDeferred() is dispatching a deferred request. */
+  bool m_replaying = false;
+
+  /** The token most recently passed to holdReply(), for replayDeferred(). */
+  quint64 m_lastHeldToken = 0;
+
+  /**
+   * The held request the replay is waiting on, or 0. Later requests stay
+   * deferred until it is resolved.
+   */
+  quint64 m_replayBlocker = 0;
+
   quint64 m_nextToken = 0;
 };
 

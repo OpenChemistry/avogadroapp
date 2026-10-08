@@ -443,8 +443,9 @@ void RpcListener::messageReceived(const RPC::Message& message)
   // Open Babel's file formats are registered a second or two after the window
   // answers, so a file request this early would fail with "No file format
   // available". Hold it until they are ready (or MainWindow stops waiting).
-  if (!m_deferred.isEmpty() ||
-      (needsPluginFormats(method) && !m_window->pluginFormatsSettled())) {
+  if (!m_replaying &&
+      (!m_deferred.isEmpty() || m_replayBlocker != 0 ||
+       (needsPluginFormats(method) && !m_window->pluginFormatsSettled()))) {
     PendingCommand deferred;
     deferred.request = message;
     deferred.connection = message.connection();
@@ -902,6 +903,7 @@ void RpcListener::holdReply(const RPC::Message& message, quint64 token,
   });
 
   m_pending.insert(token, pending);
+  m_lastHeldToken = token;
   pending.timer->start();
 }
 
@@ -918,6 +920,13 @@ void RpcListener::resolvePending(quint64 token, bool success,
 
   if (pending.timer != nullptr)
     pending.timer->deleteLater();
+
+  // Resume the deferred requests that were waiting behind this one, after
+  // this reply has gone out.
+  if (token == m_replayBlocker) {
+    m_replayBlocker = 0;
+    QTimer::singleShot(0, this, &RpcListener::replayDeferred);
+  }
 
   // The client may have gone away while the command was running. The request
   // holds a bare pointer to the connection, so check before answering.
@@ -937,6 +946,7 @@ void RpcListener::failAllPending(const QString& reason)
   foreach (quint64 token, tokens)
     resolvePending(token, false, reason, QVariantMap());
 
+  m_replayBlocker = 0;
   QList<PendingCommand> deferred;
   deferred.swap(m_deferred);
   for (const PendingCommand& entry : deferred) {
@@ -947,14 +957,28 @@ void RpcListener::failAllPending(const QString& reason)
 
 void RpcListener::replayDeferred()
 {
-  // Take the queue first, so that the replayed requests are not deferred
-  // again.
-  QList<PendingCommand> deferred;
-  deferred.swap(m_deferred);
-  for (const PendingCommand& entry : deferred) {
+  // Still waiting on a held reply; resolvePending() resumes the replay.
+  if (m_replaying || m_replayBlocker != 0)
+    return;
+
+  while (!m_deferred.isEmpty()) {
+    const PendingCommand entry = m_deferred.takeFirst();
     // The client may have gone away while its request waited.
-    if (!entry.connection.isNull())
-      messageReceived(entry.request);
+    if (entry.connection.isNull())
+      continue;
+
+    m_lastHeldToken = 0;
+    m_replaying = true;
+    messageReceived(entry.request);
+    m_replaying = false;
+
+    // The request's reply is held (e.g. a waited exportFile), so the next one
+    // must wait for it to keep the replies in order. Requests that arrive
+    // meanwhile queue up behind it.
+    if (m_lastHeldToken != 0 && m_pending.contains(m_lastHeldToken)) {
+      m_replayBlocker = m_lastHeldToken;
+      return;
+    }
   }
 }
 
