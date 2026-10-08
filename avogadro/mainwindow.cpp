@@ -1015,9 +1015,13 @@ void setDefaultViews(MultiViewWidget* viewWidget)
     // restore the default behavior
     for (ScenePlugin* plugin : sceneModel->scenePlugins()) {
       QString settingsKey("MainWindow/" + plugin->objectName());
-      bool enabled = settings.value(settingsKey, plugin->isEnabled()).toBool();
-      if (plugin->defaultBehavior() != ScenePlugin::DefaultBehavior::Ignore &&
-          enabled) {
+      auto behavior = plugin->defaultBehavior();
+      // with no saved value (e.g., a newly added plugin), use the default
+      bool fallback = plugin->isEnabled();
+      if (behavior != ScenePlugin::DefaultBehavior::Ignore)
+        fallback = (behavior == ScenePlugin::DefaultBehavior::True);
+      bool enabled = settings.value(settingsKey, fallback).toBool();
+      if (behavior != ScenePlugin::DefaultBehavior::Ignore && enabled) {
         anyPluginTrue = true;
       }
       plugin->setEnabled(enabled);
