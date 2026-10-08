@@ -8,6 +8,7 @@
 
 #include <QtCore/QHash>
 #include <QtCore/QJsonObject>
+#include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QPointer>
 
@@ -90,6 +91,12 @@ private:
   /** Fail every held request, e.g. when the application is closing. */
   void failAllPending(const QString& reason);
 
+  /**
+   * Run, in the order they arrived, the requests that waited for the plugin
+   * file formats (see MainWindow::pluginFormatsSettled()).
+   */
+  void replayDeferred();
+
   /** Send a completed response for @p request. */
   static void sendSuccess(const RPC::Message& request, const QString& message,
                           const QVariantMap& result);
@@ -103,6 +110,13 @@ private:
   MainWindow* m_window;
   RPC::JsonRpcClient* m_pingClient;
   QHash<quint64, PendingCommand> m_pending;
+
+  /**
+   * Requests received before the plugin file formats were registered. Once
+   * one is waiting, every later request waits behind it, so that replies keep
+   * their order.
+   */
+  QList<PendingCommand> m_deferred;
   quint64 m_nextToken = 0;
 };
 

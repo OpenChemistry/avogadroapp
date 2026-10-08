@@ -187,6 +187,16 @@ const BuiltinCommand builtinCommands[] = {
     "Report Avogadro application, library, Qt and protocol versions.", false },
 };
 
+/// Requests that read or write molecule files, and so need the formats that
+/// plugins register after startup (Open Babel's, e.g. CIF).
+bool needsPluginFormats(const QString& method)
+{
+  return method == QLatin1String("openFile") ||
+         method == QLatin1String("loadMolecule") ||
+         method == QLatin1String("exportFile") ||
+         method == QLatin1String("getMolecule");
+}
+
 QString projectionToString(Projection projection)
 {
   return projection == Rendering::Orthographic ? QStringLiteral("orthographic")
@@ -258,6 +268,8 @@ RpcListener::RpcListener(const QString& connectionName, QObject* parent_)
             &MainWindow::setOpenedMolecule);
     connect(m_window, &MainWindow::commandCompleted, this,
             &RpcListener::resolvePending);
+    connect(m_window, &MainWindow::pluginFormatsReady, this,
+            &RpcListener::replayDeferred);
   }
 
   // Do not leave a script waiting on a reply that will never come.
@@ -425,6 +437,18 @@ void RpcListener::messageReceived(const RPC::Message& message)
     errorMessage.setErrorCode(errorRequestFailed);
     errorMessage.setErrorMessage("No Active Avogadro Window");
     errorMessage.send();
+    return;
+  }
+
+  // Open Babel's file formats are registered a second or two after the window
+  // answers, so a file request this early would fail with "No file format
+  // available". Hold it until they are ready (or MainWindow stops waiting).
+  if (!m_deferred.isEmpty() ||
+      (needsPluginFormats(method) && !m_window->pluginFormatsSettled())) {
+    PendingCommand deferred;
+    deferred.request = message;
+    deferred.connection = message.connection();
+    m_deferred.append(deferred);
     return;
   }
 
@@ -912,6 +936,26 @@ void RpcListener::failAllPending(const QString& reason)
   const QList<quint64> tokens = m_pending.keys();
   foreach (quint64 token, tokens)
     resolvePending(token, false, reason, QVariantMap());
+
+  QList<PendingCommand> deferred;
+  deferred.swap(m_deferred);
+  for (const PendingCommand& entry : deferred) {
+    if (!entry.connection.isNull())
+      sendError(entry.request, errorRequestFailed, reason);
+  }
+}
+
+void RpcListener::replayDeferred()
+{
+  // Take the queue first, so that the replayed requests are not deferred
+  // again.
+  QList<PendingCommand> deferred;
+  deferred.swap(m_deferred);
+  for (const PendingCommand& entry : deferred) {
+    // The client may have gone away while its request waited.
+    if (!entry.connection.isNull())
+      messageReceived(entry.request);
+  }
 }
 
 void RpcListener::sendSuccess(const RPC::Message& request,
