@@ -68,12 +68,27 @@ class MainWindow : public QMainWindow
 {
   Q_OBJECT
 public:
+  /**
+   * @param skipDialogs Decline every modal dialog a script could not answer
+   * (see --skip-dialogs). This is recorded in
+   * QtGui::Utilities::dialogsSkipped(), which plugins read too; there is no
+   * other copy of the flag.
+   */
   MainWindow(const QStringList& fileNames, bool disableSettings = false,
              bool skipAutosave = false, bool skipDialogs = false);
   ~MainWindow() override;
 
 public slots:
   void setMolecule(Avogadro::QtGui::Molecule* molecule);
+
+  /**
+   * Show a molecule that was just read from a file (the command line, File >
+   * Open, or an RPC openFile/loadMolecule). Like setMolecule(), except that
+   * an empty, unmodified active molecule -- the blank document Avogadro starts
+   * with -- is closed instead of being left behind next to the new one.
+   * Plain switching between molecules must keep using setMolecule().
+   */
+  void setOpenedMolecule(Avogadro::QtGui::Molecule* molecule);
   void autosaveDocument(); // Autosave the current document
   /**
    * Update internal state to reflect that the molecule has been modified.
@@ -105,7 +120,13 @@ public slots:
    */
   void setDefaultFileDialogPath(const QString& path);
 
-  void exportGraphics(QString fileName);
+  /**
+   * Save a picture of the active view to @p fileName (".png" is added when
+   * there is no suffix). Under --skip-dialogs a failed save is logged instead
+   * of shown in a message box.
+   * @return True if the image was written.
+   */
+  bool exportGraphics(QString fileName);
 
   /**
    * Export a file, using the full selection of formats capable of writing.
@@ -137,6 +158,46 @@ public slots:
 
 public:
   QtGui::Molecule* molecule() { return m_molecule; }
+
+  /**
+   * Whether @p molecule has unsaved changes: m_moleculeDirty for the active
+   * molecule, the state saved by setMolecule() for any other.
+   */
+  bool isModified(const QtGui::Molecule* molecule) const;
+
+  /// Whether the active molecule's undo stack has an edit to undo.
+  bool canUndo() const;
+
+  /// Whether the active molecule's undo stack has an edit to redo.
+  bool canRedo() const;
+
+  /**
+   * One map per open molecule, in the molecule list's order, with "index",
+   * "active", "atomCount", "formula", "fileName" and "modified". For the RPC
+   * "listMolecules" method.
+   */
+  QVariantList moleculeSummaries() const;
+
+  /**
+   * One map per tool of the active view, with "name" (the tool's object name:
+   * what activateTool and the toolbar use), "displayName" (ToolPlugin::name(),
+   * translated, for people only) and "active". Empty when there is no GL view.
+   * For the RPC "listTools" and "activateTool" methods.
+   */
+  QVariantList toolSummaries() const;
+
+  /**
+   * "index" (in the molecule list) of the active molecule and "count" of open
+   * molecules: the reply data of the RPC molecule verbs.
+   */
+  QVariantMap moleculePosition() const;
+
+  /**
+   * The active molecule's undo stack, for the RPC "undo", "redo" and
+   * "moleculeInfo" methods: "canUndo", "canRedo", "undoText", "redoText"
+   * (the stack's own text, without menu mnemonics) and "modified".
+   */
+  QVariantMap undoState() const;
 
   /**
    * Write out all application settings, normally done as part of the
@@ -540,6 +601,31 @@ private slots:
 
 private:
   /**
+   * Close @p molecule without asking to save it: make a neighbour (or a new
+   * empty molecule, if it was the only one) active when it is the active
+   * molecule, then remove its autosave and drop it from the molecule list.
+   * Callers that must not lose work ask to save, or check isModified(), first.
+   */
+  void closeMolecule(QtGui::Molecule* molecule);
+
+  /// The icon (and weight) of a message-only dialog; see warnUser().
+  enum class Severity
+  {
+    Information,
+    Warning,
+    Critical
+  };
+
+  /**
+   * Tell the user something with a message-only dialog (just an OK button).
+   * Under --skip-dialogs nobody can close the box, and its nested event loop
+   * would hold an RPC reply hostage, so the message is logged instead, as
+   * "--skip-dialogs: skipped '<title>' dialog; <text>". Only for dialogs that
+   * ask nothing: a question has to be declined or answered by its own caller.
+   */
+  void warnUser(Severity severity, const QString& title, const QString& text);
+
+  /**
    * Connect a plugin's command lifecycle signals. Safe to call repeatedly --
    * the connections are unique. Tool instances belong to each GLWidget rather
    * than to m_tools, so this is done on first use rather than at load time.
@@ -648,8 +734,6 @@ private:
   // Skip autosave recovery and writing autosaves entirely, so that a
   // scripted or automated run neither prompts nor leaves files behind.
   bool m_skipAutosave = false;
-  /// Decline every startup modal dialog (see --skip-dialogs)
-  bool m_skipDialogs = false;
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 

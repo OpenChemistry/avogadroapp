@@ -1,0 +1,294 @@
+{
+  "description": "Two molecules with different layer setups: switching between them with setActiveMolecule shows each molecule's own layers, layer state and selection.",
+  "steps": [
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "3\nwater\nO   0.000000   0.000000   0.117300\nH   0.000000   0.757200  -0.469200\nH   0.000000  -0.757200  -0.469200\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "addLayer",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "addLayer",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 2,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "setLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 1,
+        "visible": false
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "visible": false,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "newMolecule",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "visible": true,
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "expect": "error",
+      "error_code": -2,
+      "params": {
+        "layer": 1
+      }
+    },
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "8\nethane\nC   0.000000   0.000000   0.765000\nC   0.000000   0.000000  -0.765000\nH   1.019000   0.000000   1.157000\nH  -0.509500   0.882000   1.157000\nH  -0.509500  -0.882000   1.157000\nH  -1.019000   0.000000  -1.157000\nH   0.509500  -0.882000  -1.157000\nH   0.509500   0.882000  -1.157000\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "addLayer",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "setLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 0,
+        "locked": true
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "locked": true,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "listMolecules",
+      "result": [
+        {
+          "formula": "H2O"
+        },
+        {
+          "formula": "C2H6",
+          "active": true
+        }
+      ]
+    },
+    {
+      "method": "setActiveMolecule",
+      "wait": true,
+      "params": {
+        "index": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 0,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 2
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 1
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "visible": false,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "getLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "locked": false,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "expect": "error",
+      "error_code": -2,
+      "params": {
+        "layer": 3
+      }
+    },
+    {
+      "method": "setActiveMolecule",
+      "wait": true,
+      "params": {
+        "index": 1
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "getLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "locked": true,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "expect": "error",
+      "error_code": -2,
+      "params": {
+        "layer": 2
+      }
+    },
+    {
+      "method": "removeLayer",
+      "wait": true,
+      "params": {
+        "layer": 1
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "setActiveMolecule",
+      "wait": true,
+      "params": {
+        "index": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 0,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 2
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "setActiveMolecule",
+      "wait": true,
+      "params": {
+        "index": 1
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "index": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "expect": "error",
+      "error_code": -2,
+      "params": {
+        "layer": 1
+      }
+    }
+  ]
+}

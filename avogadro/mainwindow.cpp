@@ -99,6 +99,7 @@
 
 #include <QScreen>
 
+#include <algorithm>
 #include <cmath>
 #include <filesystem>
 #include <limits>
@@ -228,13 +229,27 @@ QString withChemicalExtension(const QString& fileName, const QString& extension)
                                 name.substr(stripped.size()));
 }
 
-// True if @p value holds a whole number that fits in an int, writing it to
-// @p out. Used to validate script-supplied layer indices: QVariant::toInt()
-// rounds a fractional double in Qt 6, which would silently accept something
-// like 2.5, and casting an out-of-range double to int is undefined behavior,
-// which a huge value like 1e20 would otherwise reach.
+// True if @p value is a JSON number holding a whole number that fits in an
+// int, writing it to @p out. Used to validate script-supplied indices, so it
+// is strict about both halves: a string such as "0" or a boolean is not a
+// number (QVariant would convert them), QVariant::toInt() rounds a fractional
+// double in Qt 6 (which would silently accept something like 2.5), and casting
+// an out-of-range double to int is undefined behavior, which a huge value like
+// 1e20 would otherwise reach.
 bool wholeNumber(const QVariant& value, int* out)
 {
+  switch (value.metaType().id()) {
+    case QMetaType::Double:
+    case QMetaType::Float:
+    case QMetaType::Int:
+    case QMetaType::UInt:
+    case QMetaType::LongLong:
+    case QMetaType::ULongLong:
+      break;
+    default:
+      return false;
+  }
+
   bool ok = false;
   const double asDouble = value.toDouble(&ok);
   if (!ok || !std::isfinite(asDouble) || asDouble != std::floor(asDouble))
@@ -244,6 +259,50 @@ bool wholeNumber(const QVariant& value, int* out)
     return false;
   *out = static_cast<int>(asDouble);
   return true;
+}
+
+// Why an index option was refused. The callers word the message themselves:
+// the layer verbs' messages are translated, the molecule verbs' are not.
+enum class IndexStatus
+{
+  Valid,
+  Missing,
+  NotWholeNumber,
+  OutOfRange
+};
+
+// Read the script-supplied index @p key from @p options, which must name one of
+// @p count items. @p out receives the number as soon as it is a whole number,
+// in range or not, so that an out-of-range message can quote it.
+IndexStatus indexFromOptions(const QVariantMap& options, const QString& key,
+                             int count, int* out)
+{
+  if (!options.contains(key))
+    return IndexStatus::Missing;
+  if (!wholeNumber(options.value(key), out))
+    return IndexStatus::NotWholeNumber;
+  if (*out < 0 || *out >= count)
+    return IndexStatus::OutOfRange;
+  return IndexStatus::Valid;
+}
+
+// The (untranslated) message for a molecule index that was refused.
+QString moleculeIndexMessage(IndexStatus status, int index, int count)
+{
+  switch (status) {
+    case IndexStatus::Missing:
+      return QStringLiteral("Missing 'index' parameter.");
+    case IndexStatus::NotWholeNumber:
+      return QStringLiteral("'index' must be a whole number.");
+    case IndexStatus::OutOfRange:
+      return QStringLiteral("'index' %1 is out of range (%2 molecules are "
+                            "open).")
+        .arg(index)
+        .arg(count);
+    case IndexStatus::Valid:
+      break;
+  }
+  return QString();
 }
 
 } // namespace
@@ -382,6 +441,7 @@ using QtGui::ScenePluginFactory;
 using QtGui::ScenePluginModel;
 using QtGui::ToolPlugin;
 using QtGui::ToolPluginFactory;
+using QtGui::Utilities::dialogsSkipped;
 using QtOpenGL::ActiveObjects;
 using QtOpenGL::GLWidget;
 using QtPlugins::PluginManager;
@@ -419,6 +479,11 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
   // layer view).
   qApp->installEventFilter(this);
 
+  // Plugins check this to avoid modal prompts in scripted runs, and they load
+  // and receive molecules during this constructor: set it before anything else.
+  if (skipDialogs)
+    QtGui::Utilities::setDialogsSkipped(true);
+
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
     QSettings settings;
@@ -430,8 +495,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 
   // check for auto-save files
   m_skipAutosave = skipAutosave;
-  m_skipDialogs = skipDialogs;
-  if (m_skipDialogs) {
+  if (dialogsSkipped()) {
     qInfo("--skip-dialogs: skipped autosave recovery check; autosave files "
           "left untouched.");
   } else if (!m_skipAutosave) {
@@ -809,30 +873,153 @@ void MainWindow::closeActiveMolecule()
     return;
   }
 
-  Molecule* currentMol = m_molecule;
-  const QList<Molecule*> molecules = m_moleculeModel->molecules();
-  const int idx = molecules.indexOf(currentMol);
+  closeMolecule(m_molecule);
+}
 
-  if (idx < 0 || molecules.isEmpty()) {
+void MainWindow::closeMolecule(Molecule* molecule)
+{
+  if (molecule == nullptr)
+    return;
+
+  const QList<Molecule*> molecules = m_moleculeModel->molecules();
+  const int idx = molecules.indexOf(molecule);
+
+  if (idx < 0)
+    return;
+
+  // Closing a molecule that is not the active one leaves the active one alone.
+  if (molecule == m_molecule) {
+    if (idx == 0) {
+      // if the current molecule is the first one in the list, and it is not
+      // the only one we make the next molecule the starting one
+      if (molecules.size() > 1) {
+        setMolecule(molecules[idx + 1]);
+      } else {
+        // the last molecule: there must always be one open
+        newMolecule();
+      }
+    }
+    // otherwise we just set the current molecule to the one before
+    else {
+      setMolecule(molecules[idx - 1]);
+    }
+  }
+
+  removeAutosave(molecule);
+  m_moleculeModel->removeItem(molecule);
+}
+
+bool MainWindow::isModified(const Molecule* molecule) const
+{
+  if (molecule == nullptr)
+    return false;
+  // Dirty state travels with a molecule while it is not the active one (see
+  // setMolecule()).
+  if (molecule == m_molecule)
+    return m_moleculeDirty;
+  return molecule->property(dirtyProperty).toBool();
+}
+
+void MainWindow::warnUser(Severity severity, const QString& title,
+                          const QString& text)
+{
+  if (dialogsSkipped()) {
+    QString oneLine = text;
+    oneLine.replace(QLatin1Char('\n'), QLatin1Char(' '));
+    qWarning("--skip-dialogs: skipped '%s' dialog; %s", qPrintable(title),
+             qPrintable(oneLine));
     return;
   }
 
-  if (idx == 0) {
-    // if the current molecule is the first one in the list, and it is not the
-    // only one we make the next molecule the starting one
-    if (molecules.size() > 1) {
-      setMolecule(molecules[idx + 1]);
-    } else {
-      newMolecule();
-    }
+  switch (severity) {
+    case Severity::Information:
+      QMessageBox::information(this, title, text);
+      break;
+    case Severity::Warning:
+      QMessageBox::warning(this, title, text);
+      break;
+    case Severity::Critical:
+      QMessageBox::critical(this, title, text);
+      break;
   }
-  // otherwise we just set the current molecule to the one before
-  else {
-    setMolecule(molecules[idx - 1]);
-  }
+}
 
-  removeAutosave(currentMol);
-  m_moleculeModel->removeItem(currentMol);
+QVariantList MainWindow::moleculeSummaries() const
+{
+  QVariantList summaries;
+  const QList<Molecule*> molecules = m_moleculeModel->molecules();
+  for (int i = 0; i < molecules.size(); ++i) {
+    const Molecule* mol = molecules[i];
+    QVariantMap entry;
+    entry["index"] = i;
+    entry["active"] = mol == m_molecule;
+    entry["atomCount"] = static_cast<qulonglong>(mol->atomCount());
+    entry["formula"] = QString::fromStdString(mol->formula());
+    entry["fileName"] =
+      QString::fromStdString(mol->data("fileName").toString());
+    entry["modified"] = isModified(mol);
+    summaries.append(entry);
+  }
+  return summaries;
+}
+
+QVariantList MainWindow::toolSummaries() const
+{
+  QVariantList tools;
+  const GLWidget* glWidget = activeGLWidget();
+  if (glWidget == nullptr)
+    return tools;
+
+  const ToolPlugin* active = glWidget->activeTool();
+  const QList<ToolPlugin*> plugins = glWidget->tools();
+  for (const ToolPlugin* plugin : plugins) {
+    if (plugin == nullptr)
+      continue;
+    QVariantMap entry;
+    entry["name"] = plugin->objectName();
+    entry["displayName"] = plugin->name();
+    entry["active"] = plugin == active;
+    tools.append(entry);
+  }
+  return tools;
+}
+
+QVariantMap MainWindow::moleculePosition() const
+{
+  const QList<Molecule*> molecules = m_moleculeModel->molecules();
+  QVariantMap position;
+  position["index"] = static_cast<int>(molecules.indexOf(m_molecule));
+  position["count"] = static_cast<int>(molecules.size());
+  return position;
+}
+
+bool MainWindow::canUndo() const
+{
+  return m_molecule != nullptr && m_molecule->undoMolecule() != nullptr &&
+         m_molecule->undoMolecule()->undoStack().canUndo();
+}
+
+bool MainWindow::canRedo() const
+{
+  return m_molecule != nullptr && m_molecule->undoMolecule() != nullptr &&
+         m_molecule->undoMolecule()->undoStack().canRedo();
+}
+
+QVariantMap MainWindow::undoState() const
+{
+  QVariantMap state;
+  QString undoText, redoText;
+  if (m_molecule != nullptr && m_molecule->undoMolecule() != nullptr) {
+    const QUndoStack& stack = m_molecule->undoMolecule()->undoStack();
+    undoText = stack.undoText();
+    redoText = stack.redoText();
+  }
+  state["canUndo"] = canUndo();
+  state["canRedo"] = canRedo();
+  state["undoText"] = undoText;
+  state["redoText"] = redoText;
+  state["modified"] = m_moleculeDirty;
+  return state;
 }
 
 namespace {
@@ -981,7 +1168,7 @@ void MainWindow::moleculeReady(int)
   if (extension) {
     auto* mol = new Molecule(this);
     if (extension->readMolecule(*mol))
-      setMolecule(mol);
+      setOpenedMolecule(mol);
   }
 }
 
@@ -1039,6 +1226,15 @@ void MainWindow::setMolecule(Molecule* mol)
   if (!mol)
     return;
 
+  // Selecting the molecule that is already active changes nothing, so stop
+  // here. Running on would sever the connection below that marks the molecule
+  // modified (later edits would never ask to be saved), in two ways: this
+  // function disconnects the old molecule, and GLWidget::setMolecule() in
+  // avogadrolibs disconnects every connection of the molecule it already shows.
+  // The first is also handled below; the second is being fixed in avogadrolibs,
+  // and until then this return is what protects the connection.
+  if (mol == m_molecule && m_moleculeModel->molecules().contains(mol))
+    return;
   // Set the new molecule, ensure both molecules are in the model.
   if (m_molecule && !m_moleculeModel->molecules().contains(m_molecule)) {
     m_moleculeModel->addItem(m_molecule);
@@ -1060,7 +1256,7 @@ void MainWindow::setMolecule(Molecule* mol)
       m_molecule->atomCount() > 0 ? "Navigator" : "Editor";
     setActiveTool(targetToolName);
     connect(m_molecule, &QtGui::Molecule::changed, this,
-            &MainWindow::markMoleculeDirty);
+            &MainWindow::markMoleculeDirty, Qt::UniqueConnection);
   }
 
   emit moleculeChanged(m_molecule);
@@ -1077,7 +1273,8 @@ void MainWindow::setMolecule(Molecule* mol)
 
   ActiveObjects::instance().setActiveMolecule(m_molecule);
 
-  if (oldMolecule)
+  // Never the molecule that was just connected above.
+  if (oldMolecule && oldMolecule != mol)
     oldMolecule->disconnect(this);
 
   // start the autosave timer
@@ -1090,6 +1287,24 @@ void MainWindow::setMolecule(Molecule* mol)
     setWidgetMolecule(glWidget, mol);
     glWidget->setFocus();
   }
+}
+
+void MainWindow::setOpenedMolecule(Molecule* mol)
+{
+  if (!mol)
+    return;
+
+  // A blank document that was never touched has nothing to lose: the opened
+  // file takes its place. The dirty state is read before setMolecule() swaps
+  // it for the new molecule's.
+  Molecule* previous = m_molecule;
+  const bool replacePrevious = previous != nullptr && previous != mol &&
+                               previous->atomCount() == 0 && !m_moleculeDirty;
+
+  setMolecule(mol);
+
+  if (replacePrevious)
+    closeMolecule(previous);
 }
 
 void MainWindow::markMoleculeDirty(unsigned int changes)
@@ -1258,8 +1473,8 @@ void MainWindow::openFile()
     reader = new Io::CjsonFormat;
 
   if (!openFile(fileName, reader)) {
-    QMessageBox::information(this, tr("Cannot open file"),
-                             tr("Can't open supplied file %1").arg(fileName));
+    warnUser(Severity::Information, tr("Cannot open file"),
+             tr("Can't open supplied file %1").arg(fileName));
   }
 }
 
@@ -1281,9 +1496,8 @@ void MainWindow::importFile()
   settings.setValue("MainWindow/lastOpenDir", dir);
 
   if (!openFile(reply.second, reply.first->newInstance())) {
-    QMessageBox::information(
-      this, tr("Cannot open file"),
-      tr("Can't open supplied file %1").arg(reply.second));
+    warnUser(Severity::Information, tr("Cannot open file"),
+             tr("Can't open supplied file %1").arg(reply.second));
   }
 }
 
@@ -1416,7 +1630,7 @@ void MainWindow::backgroundReaderFinished()
       m_fileReadMolecule->setData("fileName", Core::Variant());
     }
 
-    setMolecule(m_fileReadMolecule);
+    setOpenedMolecule(m_fileReadMolecule);
 
     // check if the modelView is set
     if (m_fileReadMolecule->hasData("modelView")) {
@@ -1450,7 +1664,7 @@ void MainWindow::backgroundReaderFinished()
                                .arg(m_molecule->bondCount()),
                              5000);
   } else {
-    if (m_skipDialogs) {
+    if (dialogsSkipped()) {
       qWarning("--skip-dialogs: skipped 'File error' dialog; error while "
                "reading file '%s': %s",
                qPrintable(fileName), qPrintable(m_threadedReader->error()));
@@ -1502,9 +1716,11 @@ bool MainWindow::backgroundWriterFinished()
       updateRecentFiles();
       success = true;
     } else {
+      // Under --skip-dialogs the error reaches a waiting RPC caller through
+      // commandCompleted() below.
       errorMessage = m_threadedWriter->error();
-      QMessageBox::critical(
-        this, tr("Error saving file"),
+      warnUser(
+        Severity::Critical, tr("Error saving file"),
         tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
           .arg(fileName)
           .arg(errorMessage));
@@ -1806,7 +2022,7 @@ void MainWindow::loadPackages()
         QString sizeStr = QLocale().formattedDataSize(
           totalBytes, 1, QLocale::DataSizeTraditionalFormat);
 
-        if (m_skipDialogs) {
+        if (dialogsSkipped()) {
           qInfo("--skip-dialogs: skipped 'Found Previous Avogadro Files' "
                 "dialog; assuming 'Keep Files'.");
         } else {
@@ -1948,7 +2164,7 @@ void MainWindow::loadPackages()
   newPackages = writablePackages;
 
   // If there are new or updated packages, ask the user before installing
-  if (!newPackages.isEmpty() && m_skipDialogs) {
+  if (!newPackages.isEmpty() && dialogsSkipped()) {
     qInfo("--skip-dialogs: skipped plugin setup/update prompt; assuming 'No' "
           "(%d package(s) not installed).",
           static_cast<int>(newPackages.size()));
@@ -1993,7 +2209,7 @@ void MainWindow::loadPackages()
   }
 
   // Skipping the dialogs is not an answer to them; ask again next time.
-  if (!m_skipDialogs)
+  if (!dialogsSkipped())
     settings.setValue("MainWindow/firstRun", false);
 
     // Load cached registrations so consumer plugins get their signals
@@ -2082,7 +2298,7 @@ void MainWindow::viewConfigActivated() {}
 void MainWindow::rendererInvalid()
 {
   auto* widget = qobject_cast<GLWidget*>(sender());
-  if (m_skipDialogs) {
+  if (dialogsSkipped()) {
     qCritical("--skip-dialogs: OpenGL 4.0 or greater required, exiting. %s",
               qPrintable(widget ? widget->error() : tr("Unknown error")));
   } else {
@@ -2131,27 +2347,29 @@ void MainWindow::setLayerLocked(size_t layer, bool locked)
 bool MainWindow::layerIdFromOptions(const QVariantMap& options,
                                     QString* message, size_t* layer) const
 {
-  if (!options.contains("layer")) {
-    if (message != nullptr)
-      *message = tr("Missing 'layer' parameter.");
-    return false;
-  }
-
   int value = 0;
-  if (!wholeNumber(options.value("layer"), &value)) {
-    if (message != nullptr)
-      *message = tr("'layer' must be a whole number.");
-    return false;
-  }
+  const IndexStatus status =
+    indexFromOptions(options, QStringLiteral("layer"),
+                     static_cast<int>(m_layerModel->layerCount()), &value);
 
-  if (value < 0 || static_cast<size_t>(value) >= m_layerModel->layerCount()) {
-    if (message != nullptr)
-      *message = tr("'layer' %1 is out of range.").arg(value);
-    return false;
+  QString problem;
+  switch (status) {
+    case IndexStatus::Valid:
+      *layer = static_cast<size_t>(value);
+      return true;
+    case IndexStatus::Missing:
+      problem = tr("Missing 'layer' parameter.");
+      break;
+    case IndexStatus::NotWholeNumber:
+      problem = tr("'layer' must be a whole number.");
+      break;
+    case IndexStatus::OutOfRange:
+      problem = tr("'layer' %1 is out of range.").arg(value);
+      break;
   }
-
-  *layer = static_cast<size_t>(value);
-  return true;
+  if (message != nullptr)
+    *message = problem;
+  return false;
 }
 
 void MainWindow::layerActivated(const QModelIndex& idx)
@@ -2200,21 +2418,9 @@ void MainWindow::moleculeActivated(const QModelIndex& idx)
     if (idx.column() == 0)
       setMolecule(mol);
 
-    // Deleting a molecule, we must also create a new one if it is the last.
-    if (idx.column() == 1) {
-      if (m_molecule == mol) {
-        int molIdx = molecules.indexOf(mol);
-        if (molIdx > 0)
-          setMolecule(molecules[molIdx - 1]);
-        else if (molIdx == 0 && molecules.size() > 1) {
-          setMolecule(molecules[1]);
-        } else {
-          newMolecule();
-        }
-      }
-      removeAutosave(mol);
-      m_moleculeModel->removeItem(mol);
-    }
+    // The second column is the close button.
+    if (idx.column() == 1)
+      closeMolecule(mol);
   }
 }
 
@@ -2542,10 +2748,10 @@ void MainWindow::exportGraphics()
   exportGraphics(fileName);
 }
 
-void MainWindow::exportGraphics(QString fileName)
+bool MainWindow::exportGraphics(QString fileName)
 {
   if (fileName.isEmpty())
-    return;
+    return false;
   if (QFileInfo(fileName).suffix().isEmpty())
     fileName += ".png";
 
@@ -2555,9 +2761,11 @@ void MainWindow::exportGraphics(QString fileName)
   QImage exportImage = renderToImage();
 
   if (!exportImage.save(fileName)) {
-    QMessageBox::warning(this, tr("Avogadro"),
-                         tr("Cannot save file %1.").arg(fileName));
+    warnUser(Severity::Warning, tr("Avogadro"),
+             tr("Cannot save file %1.").arg(fileName));
+    return false;
   }
+  return true;
 }
 
 void MainWindow::copyGraphics()
@@ -2589,8 +2797,8 @@ void MainWindow::openRecentFile()
                                        FileFormat::File | FileFormat::Read);
 
     if (!openFile(fileName, format ? format->newInstance() : nullptr)) {
-      QMessageBox::information(this, tr("Cannot open file"),
-                               tr("Can't open supplied file %1").arg(fileName));
+      warnUser(Severity::Information, tr("Cannot open file"),
+               tr("Can't open supplied file %1").arg(fileName));
     }
   }
 }
@@ -2793,7 +3001,12 @@ bool MainWindow::exportFile(const QString& fileName, bool async, quint64 token)
     // effect for an async write; harmless otherwise since it is cleared
     // there before it could be read again.
     m_pendingExportToken = token;
-    return saveFileAs(fileName, writer, async);
+    const bool started = saveFileAs(fileName, writer, async);
+    // A refused write never reaches backgroundWriterFinished(), which is the
+    // only other place the token is cleared.
+    if (!started && m_fileWriteThread == nullptr)
+      m_pendingExportToken = 0;
+    return started;
   }
 
   return false;
@@ -3708,7 +3921,7 @@ void MainWindow::checkUpdate()
 void MainWindow::finishUpdateRequest(QNetworkReply* reply)
 {
   if (!reply->isReadable()) {
-    if (m_skipDialogs)
+    if (dialogsSkipped())
       qInfo("--skip-dialogs: skipped 'Network Download Failed' dialog "
             "(update check).");
     else
@@ -3790,7 +4003,7 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
     return;
   }
 
-  if (m_skipDialogs) {
+  if (dialogsSkipped()) {
     qInfo("--skip-dialogs: skipped 'Version Update' dialog (%s available); "
           "assuming 'Cancel'.",
           qPrintable(latestRelease));
@@ -3883,7 +4096,7 @@ void MainWindow::readQueuedFiles()
       "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : nullptr)) {
-      if (m_skipDialogs) {
+      if (dialogsSkipped()) {
         qWarning("--skip-dialogs: skipped 'Cannot open file' dialog; "
                  "Avogadro cannot open '%s'.",
                  qPrintable(file));
@@ -3900,7 +4113,7 @@ void MainWindow::readQueuedFiles()
 void MainWindow::clearQueuedFiles()
 {
   if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
-    if (m_skipDialogs) {
+    if (dialogsSkipped()) {
       qWarning("--skip-dialogs: skipped 'Cannot open files' dialog; "
                "Avogadro cannot open '%s'.",
                qPrintable(m_queuedFiles.join("', '")));
@@ -4250,6 +4463,105 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
       result->insert("layer", static_cast<int>(layer));
       result->insert("locked", m_layerModel->layerLocked(layer));
       result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    }
+    return CommandStatus::Finished;
+  }
+
+  // Molecule management. These reuse the code behind the menus and the
+  // molecule list, and never prompt: a molecule with unsaved changes is only
+  // closed when the caller says to discard them. Messages are plain strings
+  // (not tr()): they are for scripts.
+  if (command == "newMolecule") {
+    newMolecule();
+    if (result != nullptr)
+      *result = moleculePosition();
+    return CommandStatus::Finished;
+  } else if (command == "setActiveMolecule" || command == "closeMolecule") {
+    const QList<Molecule*> molecules = m_moleculeModel->molecules();
+    const bool closing = command == "closeMolecule";
+
+    // closeMolecule defaults to the active molecule; setActiveMolecule has to
+    // be told which one.
+    int index = molecules.indexOf(m_molecule);
+    IndexStatus status =
+      index >= 0 ? IndexStatus::Valid : IndexStatus::OutOfRange;
+    if (!closing || options.contains("index"))
+      status = indexFromOptions(options, QStringLiteral("index"),
+                                static_cast<int>(molecules.size()), &index);
+    if (status != IndexStatus::Valid) {
+      if (message != nullptr)
+        *message = moleculeIndexMessage(status, index, molecules.size());
+      return CommandStatus::Failed;
+    }
+    Molecule* target = molecules[index];
+
+    if (closing) {
+      // Only a real true discards; "yes" or 1 do not.
+      const QVariant discard = options.value("discard");
+      const bool discarding =
+        discard.metaType().id() == QMetaType::Bool && discard.toBool();
+      if (isModified(target) && !discarding) {
+        if (message != nullptr)
+          *message = QStringLiteral("The molecule has unsaved changes; pass "
+                                    "discard: true to close it anyway.");
+        return CommandStatus::Failed;
+      }
+      closeMolecule(target);
+    } else {
+      // Clicking the active molecule in the list does this too.
+      setMolecule(target);
+    }
+
+    if (result != nullptr)
+      *result = moleculePosition();
+    return CommandStatus::Finished;
+  } else if (command == "undo" || command == "redo") {
+    const bool undoing = command == "undo";
+    if (!(undoing ? canUndo() : canRedo())) {
+      if (message != nullptr)
+        *message = undoing ? QStringLiteral("There is nothing to undo.")
+                           : QStringLiteral("There is nothing to redo.");
+      return CommandStatus::Failed;
+    }
+
+    if (undoing)
+      undoEdit();
+    else
+      redoEdit();
+
+    if (result != nullptr)
+      *result = undoState();
+    return CommandStatus::Finished;
+  } else if (command == "activateTool") {
+    if (activeGLWidget() == nullptr) {
+      if (message != nullptr)
+        *message = QStringLiteral("There is no active view.");
+      return CommandStatus::Failed;
+    }
+
+    // By object name, the "name" that toolSummaries() reports.
+    const QString name = options.value("name").toString();
+    const QVariantList tools = toolSummaries();
+    const bool found =
+      !name.isEmpty() &&
+      std::any_of(tools.begin(), tools.end(), [&name](const QVariant& tool) {
+        return tool.toMap().value("name") == name;
+      });
+    if (!found) {
+      if (message != nullptr)
+        *message = QStringLiteral("Unknown tool '%1'.").arg(name);
+      return CommandStatus::Failed;
+    }
+
+    setActiveTool(name);
+
+    if (result != nullptr) {
+      QString activeName;
+      for (const QVariant& tool : toolSummaries()) {
+        if (tool.toMap().value("active").toBool())
+          activeName = tool.toMap().value("name").toString();
+      }
+      result->insert("tool", activeName);
     }
     return CommandStatus::Finished;
   }

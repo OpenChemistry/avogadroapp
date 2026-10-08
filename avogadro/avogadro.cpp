@@ -451,6 +451,7 @@ int main(int argc, char* argv[])
     qInfo("--rpc-name given: implying --skip-dialogs.");
   }
 
+  // MainWindow records skipDialogs in QtGui::Utilities, which plugins read.
   Avogadro::MainWindow window(fileNames, disableSettings, skipAutosave,
                               skipDialogs);
   window.setTranslationList(languages, codes);

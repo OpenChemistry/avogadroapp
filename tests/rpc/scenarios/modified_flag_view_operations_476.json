@@ -1,0 +1,136 @@
+{
+  "description": "Opening a file leaves the document unmodified, and so do view-only operations (camera, projection, render types, layer visibility, rendering an image): none of them may ask the user to save.",
+  "fresh": true,
+  "issue": "avogadroapp #476",
+  "steps": [
+    {
+      "method": "openFile",
+      "params": {
+        "fileName": "$MOLECULES/alkanes/butane.cjson"
+      },
+      "result": true
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "atomCount": 14,
+        "modified": false,
+        "canUndo": false
+      }
+    },
+    {
+      "method": "setCamera",
+      "params": {
+        "projection": "orthographic"
+      }
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "modified": false
+      }
+    },
+    {
+      "method": "setCamera",
+      "params": {
+        "projection": "perspective"
+      }
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "modified": false
+      }
+    },
+    {
+      "method": "rotateScene",
+      "params": {
+        "x": 15.0,
+        "y": 10.0
+      },
+      "wait": true
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "modified": false
+      }
+    },
+    {
+      "method": "setRenderTypes",
+      "params": {
+        "types": [
+          "Wireframe"
+        ]
+      }
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "modified": false
+      }
+    },
+    {
+      "method": "setProjection",
+      "params": {
+        "type": "orthographic"
+      }
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "modified": false
+      }
+    },
+    {
+      "method": "setLayerVisible",
+      "params": {
+        "layer": 0,
+        "visible": false
+      },
+      "wait": true
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "modified": false
+      }
+    },
+    {
+      "method": "setLayerVisible",
+      "params": {
+        "layer": 0,
+        "visible": true
+      },
+      "wait": true
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "modified": false
+      }
+    },
+    {
+      "method": "renderImage",
+      "params": {
+        "width": 64,
+        "height": 64
+      }
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "modified": false
+      }
+    },
+    {
+      "method": "listDisplayTypes"
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "modified": false
+      }
+    }
+  ]
+}

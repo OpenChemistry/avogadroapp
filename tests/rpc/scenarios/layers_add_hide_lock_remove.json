@@ -1,0 +1,244 @@
+{
+  "description": "Add layers, hide and lock some, remove from the middle, then remove down to the last layer and past it; verbs on a removed index fail.",
+  "steps": [
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "8\nethane\nC   0.000000   0.000000   0.765000\nC   0.000000   0.000000  -0.765000\nH   1.019000   0.000000   1.157000\nH  -0.509500   0.882000   1.157000\nH  -0.509500  -0.882000   1.157000\nH  -1.019000   0.000000  -1.157000\nH   0.509500  -0.882000  -1.157000\nH   0.509500   0.882000  -1.157000\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "addLayer",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 1,
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "addLayer",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 2,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "addLayer",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 3,
+          "count": 4
+        }
+      }
+    },
+    {
+      "method": "setLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 1,
+        "visible": false
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 1,
+          "visible": false,
+          "count": 4
+        }
+      }
+    },
+    {
+      "method": "setLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 2,
+        "locked": true
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 2,
+          "locked": true,
+          "count": 4
+        }
+      }
+    },
+    {
+      "method": "setLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 3,
+        "visible": false
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 3,
+          "visible": false,
+          "count": 4
+        }
+      }
+    },
+    {
+      "method": "setLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 1,
+        "locked": true
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 1,
+          "locked": true,
+          "count": 4
+        }
+      }
+    },
+    {
+      "method": "removeLayer",
+      "wait": true,
+      "params": {
+        "layer": 2
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 2
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 2,
+          "visible": false,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "getLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 2
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 2,
+          "locked": false,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "getLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 1
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 1,
+          "locked": true,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "removeLayer",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "removeLayer",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "removeLayer",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "expect": "error",
+      "error_code": -2,
+      "message": "last remaining layer"
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 1
+      },
+      "expect": "error",
+      "error_code": -2,
+      "message": "out of range"
+    },
+    {
+      "method": "setLayerLocked",
+      "wait": true,
+      "params": {
+        "layer": 1,
+        "locked": true
+      },
+      "expect": "error",
+      "error_code": -2
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 0
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 0,
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "atomCount": 8
+      }
+    }
+  ]
+}
