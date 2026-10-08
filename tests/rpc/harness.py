@@ -245,7 +245,11 @@ class AvogadroApp:
                 )
             )
         if self.on_ready is not None:
-            self.on_ready(self)
+            try:
+                self.on_ready(self)
+            except BaseException:
+                self.stop()
+                raise
 
     def alive(self):
         return self.process is not None and self.process.poll() is None

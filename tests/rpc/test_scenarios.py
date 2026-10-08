@@ -52,6 +52,13 @@ def contains(actual, expected):
             key in actual and contains(actual[key], value)
             for key, value in expected.items()
         )
+    # bool is an int in Python: keep true/false from matching 1/0 (and 1.0)
+    if isinstance(expected, bool) or isinstance(actual, bool):
+        return (
+            isinstance(expected, bool)
+            and isinstance(actual, bool)
+            and actual == expected
+        )
     if isinstance(expected, float):
         return isinstance(actual, (int, float)) and actual == pytest.approx(expected)
     return actual == expected

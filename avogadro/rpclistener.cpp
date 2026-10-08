@@ -432,7 +432,9 @@ void RpcListener::messageReceived(const RPC::Message& message)
   if (method == "openFile") {
     // Read the supplied file.
     string fileName = params["fileName"].toString().toStdString();
-    auto* molecule = new Molecule(this);
+    // MainWindow owns the molecules it shows (this listener is destroyed
+    // first when Avogadro quits).
+    auto* molecule = new Molecule(m_window);
     bool success = FileFormatManager::instance().readFile(*molecule, fileName);
     if (success) {
       // Record the file the way the GUI's file-open path does, so the window
@@ -497,7 +499,9 @@ void RpcListener::messageReceived(const RPC::Message& message)
     string format = params["format"].toString().toStdString();
 
     // read molecule data
-    auto* molecule = new Molecule(this);
+    // MainWindow owns the molecules it shows (this listener is destroyed
+    // first when Avogadro quits).
+    auto* molecule = new Molecule(m_window);
     bool success =
       FileFormatManager::instance().readString(*molecule, content, format);
     if (success) {
