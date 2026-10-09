@@ -9,8 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
 "PO-Revision-Date: 2026-10-09 19:34+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"Last-Translator: Gansas <gamingfox5566@gmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/lt/>\n"
 "Language: lt\n"
@@ -23,36 +22,36 @@ msgstr ""
 
 #: aboutdialog.cpp:26
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Molekulių redaktorius ir vizualizacimo įrankis"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
 #: aboutdialog.cpp:33 :3
 msgid "Version:"
-msgstr ""
+msgstr "Versija:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
 #: aboutdialog.cpp:34 :9
 msgid "Avogadro Library Version:"
-msgstr ""
+msgstr "Avogadro Bibliotekos Versija:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
 #: aboutdialog.cpp:35 :15
 msgid "Qt Version:"
-msgstr "Versija:"
+msgstr "Qt Versija:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:36 :21
 msgid "SSL Version:"
-msgstr ""
+msgstr "SSL Versija:"
 
 #: aboutdialog.cpp:47
-#, qt-format
+#, fuzzy, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1 (Diagnostika)"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
@@ -76,6 +75,9 @@ msgid ""
 "developers when Avogadro crashes, which helps us fix crashes we cannot "
 "reproduce ourselves."
 msgstr ""
+"Tai yra diagnostinė Avogadro versija. Ji gali nusiųsti ataskaitą Avogadro "
+"kūrėjams kai šis užlūžta, kas gali jiems padėti sutvarkyti užlūžimus, kurių "
+"patys negali atkurti."
 
 #: crashreportdialog.cpp:38
 msgid ""
@@ -85,111 +87,119 @@ msgid ""
 "useful, but it may incidentally include fragments of what you were working "
 "on, such as part of a file name or a molecule you had open."
 msgstr ""
+"Užlūžimo ataskaitoje saugoma Avogadro atminties kopija tą sekundę kai "
+"užlūžo, kartu su jūsų operacine sistema, grafikų varikliais, programos "
+"versija ir paskutinių veiklų sarašai. Atminties kopija padaro ataskaitą "
+"naudingą, bet taip pat gali išsaugoti dalis jūsų darbo, pavyzdžiui dalį "
+"failo pavadinimo arba molekulę, kurią buvot atsidarę."
 
 #: crashreportdialog.cpp:52
 msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"Niekas nėra išsiunčiama nebent jūs su tuo sutinkat. Jūs galite tai pakeisti "
+"bet kada paspaudę Pagalba -> Užlūžimo Ataskaita."
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "Siųsti Užlūžimo Ataskaitas"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "Nesiūsti"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "Siūsti užlūžimo ataskaitas Avogadro kūrėjams"
 
 #: mainwindow.cpp:557
 msgid "Ready…"
-msgstr ""
+msgstr "Pasiruošęs…"
 
 #: mainwindow.cpp:669
 msgid "Tool"
-msgstr ""
+msgstr "Įrankis"
 
 #: mainwindow.cpp:673
 msgid "Display Types"
-msgstr ""
+msgstr "Rodymo Tipai"
 
 #: mainwindow.cpp:683
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Rodymo Tipų Nustatymai"
 
 #: mainwindow.cpp:687
 msgid "Files"
-msgstr ""
+msgstr "Failai"
 
 #: mainwindow.cpp:698
 msgid "Layers"
-msgstr ""
+msgstr "Sluoksniai"
 
 #: mainwindow.cpp:726
 msgctxt "File toolbar"
 msgid "File"
-msgstr ""
+msgstr "Failas"
 
 #: mainwindow.cpp:731
 msgctxt "Tools toolbar"
 msgid "Tools"
-msgstr ""
+msgstr "Įrankiai"
 
 #: mainwindow.cpp:1126
 msgid "Untitled"
-msgstr ""
+msgstr "Neužvadinta"
 
 #: mainwindow.cpp:1131
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
-msgstr ""
+msgstr "%1%2 - Avogadro %3"
 
 #: mainwindow.cpp:1187
 msgid "Restart needed"
-msgstr ""
+msgstr "Reikalingas perkrovimas"
 
 #: mainwindow.cpp:1188
 msgid "Please restart Avogadro to use the new language."
-msgstr ""
+msgstr "Prašau perkrauti Avogadro jei norite naudoti naują kalbą."
 
 #: mainwindow.cpp:1231 mainwindow.cpp:2701
+#, fuzzy
 msgid "Chemical Markup Language"
-msgstr ""
+msgstr "Chemijos Žymėjimo Kalba"
 
 #: mainwindow.cpp:1232 mainwindow.cpp:2700
 msgid "Chemical JSON"
-msgstr ""
+msgstr "Chemijos JSON"
 
 #: mainwindow.cpp:1238
 msgid "Open chemical file"
-msgstr ""
+msgstr "Atidaryti chemijos failą"
 
 #: mainwindow.cpp:1256 mainwindow.cpp:1280 mainwindow.cpp:2587
 #: mainwindow.cpp:3886
 msgid "Cannot open file"
-msgstr ""
+msgstr "Programa negalėjo atidaryti failo"
 
 #: mainwindow.cpp:1257 mainwindow.cpp:1281 mainwindow.cpp:2588
 #, qt-format
 msgid "Can't open supplied file %1"
-msgstr ""
+msgstr "Programa negalėjo atidaryti pasirinkto failo %1"
 
 #: mainwindow.cpp:1270
 msgid "Open Molecule"
-msgstr ""
+msgstr "Atidaryti Molekulę"
 
 #: mainwindow.cpp:1294 mainwindow.cpp:2583
 msgid "Select file reader"
-msgstr ""
+msgstr "Pasirinkti failų skaitytuvę"
 
 #: mainwindow.cpp:1329
 msgid "Reading File"
-msgstr ""
+msgstr "Skaitomas Failas"
 
 #: mainwindow.cpp:1331 mainwindow.cpp:1355
 #, qt-format
@@ -197,15 +207,17 @@ msgid ""
 "Opening file '%1'\n"
 "with '%2'"
 msgstr ""
+"Atidaromas failas '%1'\n"
+"naudojant '%2'"
 
 #: mainwindow.cpp:1443
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
-msgstr ""
+msgstr "Molekulė pakrauta (%1 atomas/ai/ų, %2ryšys/iai/ių)"
 
 #: mainwindow.cpp:1453
 msgid "File error"
-msgstr ""
+msgstr "Failo klaida"
 
 #: mainwindow.cpp:1454
 #, qt-format
@@ -213,16 +225,18 @@ msgid ""
 "Error while reading file '%1':\n"
 "%2"
 msgstr ""
+"Klaida skaitant failą '%1'\n"
+"%2"
 
 #: mainwindow.cpp:1487
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
-msgstr ""
+msgstr "Išsaugotas failas %1"
 
 #: mainwindow.cpp:1502
 msgid "Error saving file"
-msgstr ""
+msgstr "Klaida išsaugant failą"
 
 #: mainwindow.cpp:1503
 #, qt-format
@@ -231,18 +245,20 @@ msgid ""
 "Error while saving '%1':\n"
 "%2"
 msgstr ""
+"Klaida išsaugant failą '%1'\n"
+"%2"
 
 #: mainwindow.cpp:1508
 msgid "The save was canceled."
-msgstr ""
+msgstr "Failo išsaugojimas atšauktas."
 
 #: mainwindow.cpp:1569 mainwindow.cpp:1572
 msgid "untitled"
-msgstr ""
+msgstr "neužvadinta"
 
 #: mainwindow.cpp:1809
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "Rasta Ankstesnių Avogadro Failų"
 
 #: mainwindow.cpp:1811
 #, qt-format
@@ -252,14 +268,18 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Failai iš ankstesnės Avogadro versijos buvo rasti pridėtų programų "
+"direktorijoje, naudojantys '%1' vietos\n"
+"\n"
+"Šie failai yra nereikalingi ir gali būti saugiai pašalinti."
 
 #: mainwindow.cpp:1818
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Ištrinti Senus Failus"
 
 #: mainwindow.cpp:1819
 msgid "Keep Files"
-msgstr ""
+msgstr "Pasilikti Failus"
 
 #: mainwindow.cpp:1959
 msgid "Let’s finish your setup"
