@@ -19,12 +19,6 @@ def _param(entry):
     return pytest.param(path, id="%s/%s" % (name, path.relative_to(root).as_posix()))
 
 
-@pytest.fixture(scope="module")
-def app_ready():
-    # the corpus opens .cif files from the first test on
-    return harness.wait_for_cif_reader
-
-
 @pytest.fixture
 def open_timeout(pytestconfig):
     return pytestconfig.getoption("--open-timeout")

@@ -62,6 +62,14 @@ if(_avogadro_rpc_ready)
       ENVIRONMENT "AVOGADRO_DATA_ROOT=${AVOGADRO_DATA};AVOGADRO_PLUGIN_DIR=${AvogadroLibs_INSTALL_PREFIX}"
       LABELS "${labels}"
       TIMEOUT ${timeout})
+    # The plugins look for obabel and obmm next to the executable, then on
+    # PATH. Neither is next to the build-tree avogadro2, so put the prefix's
+    # bin first; otherwise CI has no Open Babel and a developer machine uses
+    # whatever obabel happens to be installed.
+    if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.22)
+      set_property(TEST ${name} PROPERTY ENVIRONMENT_MODIFICATION
+        "PATH=path_list_prepend:${AvogadroLibs_INSTALL_PREFIX}/bin")
+    endif()
   endfunction()
 
   add_avogadro_rpc_test(avogadro-rpc "not corpus" "rpc" 900)

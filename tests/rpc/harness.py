@@ -278,47 +278,6 @@ class AvogadroApp:
         self.start()
 
 
-# The smallest CIF that Open Babel reads: one atom in a P 1 cell.
-_WARMUP_CIF = """data_warmup
-_cell_length_a 5
-_cell_length_b 5
-_cell_length_c 5
-_cell_angle_alpha 90
-_cell_angle_beta 90
-_cell_angle_gamma 90
-_symmetry_space_group_name_H-M 'P 1'
-loop_
-_atom_site_label
-_atom_site_fract_x
-_atom_site_fract_y
-_atom_site_fract_z
-C1 0 0 0
-"""
-
-
-def wait_for_cif_reader(app, timeout=30.0):
-    """Wait until Avogadro can read CIF (an Open Babel format).
-
-    Open Babel's formats are registered in the background after the window
-    answers RPC, so for a second or two every openFile of a .cif fails with
-    "No file format available". Loading a CIF replaces the active molecule,
-    so this is only for apps whose state does not matter (the corpus sweep).
-    """
-    deadline = time.monotonic() + timeout
-    while True:
-        try:
-            with connect(app.name, timeout=10) as client:
-                client.load_molecule(_WARMUP_CIF, "cif")
-            return
-        except (ConnectionError, OSError, RPCError):
-            if time.monotonic() > deadline:
-                raise AppStartError(
-                    "Avogadro could not read CIF within %d s of starting.\n%s"
-                    % (timeout, "\n".join(tail(app.log_path, 40)))
-                )
-            time.sleep(POLL_INTERVAL)
-
-
 def probe(name, timeout=PING_TIMEOUT):
     """The per-step liveness check: (answers ping, open modal dialog or None).
 
