@@ -161,87 +161,49 @@ jobs:
           avogadroapp avogadrolibs prefix/bin
 
     # End-to-end check of crash reporting: crash the freshly built application
-    # on purpose, then poll the Sentry API until the event turns up. Runs after
-    # the symbol upload so the event can symbolicate, and before packaging
-    # moves prefix/. Qt comes from install-qt-action, which puts its bin
-    # directory on PATH and sets QT_PLUGIN_PATH for the whole job; the bin
+    # on purpose. The event is tagged crash_test:1 plus ci.run_id and
+    # ci.run_attempt, and Sentry's own alert reports its arrival; the CI token
+    # only has symbol-upload scope, so this step does not query the API. Runs
+    # after the symbol upload so the event can symbolicate, and before
+    # packaging moves prefix/. Qt comes from install-qt-action, which puts its
+    # bin directory on PATH and sets QT_PLUGIN_PATH for the whole job; the bin
     # directory is prepended again below so this step does not depend on that.
-    # Use a repository variable SENTRY_URL for orgs outside the US region, for
-    # example https://de.sentry.io.
-    - name: Verify crash reporting
+    - name: Send a test crash report
       if: matrix.config.sentry && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/master'))
       shell: bash
       working-directory: ${{ runner.workspace }}/build
       env:
         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-        SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
-        SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
-        SENTRY_URL: ${{ vars.SENTRY_URL || 'https://sentry.io' }}
       run: |
         if [ -z "${SENTRY_AUTH_TOKEN:-}" ]; then
-          echo "SENTRY_AUTH_TOKEN is not set - skipping the crash reporting check."
+          echo "SENTRY_AUTH_TOKEN is not set - skipping the test crash."
           exit 0
-        fi
-        PY=$(command -v python3 || command -v python)
-        if [ -z "${PY}" ]; then
-          echo "No python found to parse the Sentry API response."
-          exit 1
         fi
         if [ -n "${QT_ROOT_DIR:-}" ]; then
           export PATH="$(cygpath -u "${QT_ROOT_DIR}")/bin:${PATH}"
         fi
 
-        # The application tags the event with these (GITHUB_RUN_ID and
-        # GITHUB_RUN_ATTEMPT are already in its environment) and exits
-        # abnormally. Exiting cleanly would mean it never crashed.
+        # The application tags the event (GITHUB_RUN_ID and GITHUB_RUN_ATTEMPT
+        # are already in its environment) and exits abnormally. Exiting
+        # cleanly would mean it never crashed.
         status=0
         timeout 120 prefix/bin/avogadro2.exe --crash-test || status=$?
         echo "avogadro2 --crash-test exited with status ${status}"
-        if [ "${status}" -eq 0 ] || [ "${status}" -eq 124 ]; then
-          echo "Expected the application to crash, but it exited with ${status}."
-          exit 1
-        fi
 
-        # Issue search filters on event tags. Minidumps are processed
-        # server-side and can take minutes to show up.
-        query="crash_test:1 ci.run_id:${GITHUB_RUN_ID} ci.run_attempt:${GITHUB_RUN_ATTEMPT}"
-        encoded=$("${PY}" -c 'import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1]))' "${query}")
-        url="${SENTRY_URL%/}/api/0/projects/${SENTRY_ORG}/${SENTRY_PROJECT}/issues/?query=${encoded}&statsPeriod=24h"
-        for attempt in $(seq 1 30); do
-          http_code=$(curl -sS -o response.json -w '%{http_code}' \
-            -H "Authorization: Bearer ${SENTRY_AUTH_TOKEN}" "${url}") || http_code=000
-          case "${http_code}" in
-            200)
-              permalink=$("${PY}" -c 'import json, sys; issues = json.load(open("response.json")); print(issues[0].get("permalink", "") if issues else "")')
-              if [ -n "${permalink}" ]; then
-                echo "Crash event received: ${permalink}"
-                exit 0
-              fi
-              echo "Attempt ${attempt}/30: not arrived yet."
-              ;;
-            401|403)
-              echo "Sentry API returned ${http_code}: the token needs event:read and project:read scope."
-              cat response.json
-              exit 1
-              ;;
-            *)
-              echo "Attempt ${attempt}/30: Sentry API returned HTTP ${http_code}."
-              ;;
-          esac
-          sleep 20
-        done
-
-        # Tell "never captured" apart from "captured but not uploaded". This is
-        # QStandardPaths::AppLocalDataLocation for the organization and
+        # Shows whether crashpad captured the crash, in case no event arrives.
+        # This is QStandardPaths::AppLocalDataLocation for the organization and
         # application names set in avogadro.cpp, plus the crashpad-db that
         # crashreporter.cpp creates there.
-        echo "Timed out waiting for the crash event. Local crashpad database:"
         db="$(cygpath -u "${LOCALAPPDATA}")/OpenChemistry/Avogadro/crashpad-db"
         for dir in reports pending completed; do
           echo "--- ${db}/${dir} ---"
           find "${db}/${dir}" 2>/dev/null || echo "(missing)"
         done
-        exit 1
+
+        if [ "${status}" -eq 0 ] || [ "${status}" -eq 124 ]; then
+          echo "Expected the application to crash, but it exited with ${status}."
+          exit 1
+        fi
 
     - name: Create Windows Packages
       if: runner.os == 'Windows'
