@@ -100,6 +100,12 @@ public:
    * This exists only to validate the reporting pipeline end to end, and is
    * reachable solely through the --crash-test command line option in a build
    * configured with USE_SENTRY.
+   *
+   * To make that possible it bypasses the stored consent choice for this run
+   * (without changing it), and tags the event with crash_test=1 plus, when
+   * set in the environment, ci.run_id and ci.run_attempt from GITHUB_RUN_ID
+   * and GITHUB_RUN_ATTEMPT. If crash reporting is not active it warns that
+   * nothing will be reported, then crashes anyway.
    */
   static void triggerTestCrash();
 };

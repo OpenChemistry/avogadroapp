@@ -474,6 +474,25 @@ void CrashReporter::addBreadcrumb(const QString& category,
 
 void CrashReporter::triggerTestCrash()
 {
+  if (sentryInitialized) {
+    // Give consent for this run only. The stored choice is deliberately left
+    // alone: a test crash must not opt anyone in, and without this a machine
+    // that has never been asked (such as a CI runner) would never upload.
+    sentry_user_consent_give();
+    sentry_set_tag("crash_test", "1");
+
+    // Lets CI find this exact event again through the Sentry API.
+    const QString runId = qEnvironmentVariable("GITHUB_RUN_ID");
+    if (!runId.isEmpty())
+      sentry_set_tag("ci.run_id", runId.toUtf8().constData());
+    const QString runAttempt = qEnvironmentVariable("GITHUB_RUN_ATTEMPT");
+    if (!runAttempt.isEmpty())
+      sentry_set_tag("ci.run_attempt", runAttempt.toUtf8().constData());
+  } else {
+    qWarning("Crash reporting is not active, so this test crash will not be "
+             "reported.");
+  }
+
   // Deliberate null dereference. This is the one place in the application
   // that is meant to crash: it exists to prove the handler, the symbols and
   // the upload path all work, and is only reachable via --crash-test.
