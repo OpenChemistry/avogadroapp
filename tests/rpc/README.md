@@ -162,10 +162,7 @@ that are not obvious from it.
 `avogadrodata/data`, `molecules` and `crystals` (except the extensions in
 `harness.SKIP_EXTENSIONS`, hidden files and READMEs) and, when the file has
 orbitals, renders the HOMO with `renderMO` (`wait`, 120 s). An error reply is
-fine; only a death, hang or blocked request fails. After every (re)launch the
-shared app waits until it can read CIF (`harness.wait_for_cif_reader`), because
-Open Babel's formats register in the background a second or two after the
-window answers RPC.
+fine; only a death, hang or blocked request fails.
 
 ## Known failures
 
