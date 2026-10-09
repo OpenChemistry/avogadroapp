@@ -78,9 +78,8 @@ jobs:
         sudo apt-get -qq install libfuse2
         if [ "${{ matrix.config.build_type }}" = "ubsan" ]; then
           # the RPC tests run the built application under a virtual display
-          # (Xvfb) with Mesa's software OpenGL; pytest must be installed before
-          # Configure, or CMake leaves the avogadro-rpc tests out
-          sudo apt-get -qq install python3-pytest xvfb libgl1-mesa-dri libglx-mesa0 libegl1 libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-xkb1
+          # (Xvfb) with Mesa's software OpenGL
+          sudo apt-get -qq install xvfb libgl1-mesa-dri libglx-mesa0 libegl1 libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-xkb1
         fi
 
     - name: Install Qt
@@ -88,6 +87,15 @@ jobs:
       with:
         cache: true
         version: ${{ env.QT_VERSION }}
+
+    # install-qt-action runs setup-python, so CMake finds that interpreter
+    # (Python3_ROOT_DIR), not /usr/bin/python3. pytest has to go into it before
+    # Configure, or CMake leaves the avogadro-rpc tests out.
+    - name: Install pytest
+      if: matrix.config.build_type == 'ubsan'
+      run: |
+        "${Python3_ROOT_DIR:-/usr}/bin/python3" -m pip install pytest
+      shell: bash
 
     - name: Configure
       run: |
