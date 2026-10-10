@@ -159,7 +159,9 @@ if(APPLE)
   list(APPEND avogadro_srcs icons/cml.icns)
   list(APPEND avogadro_srcs icons/cjson.icns)
   set(MACOSX_BUNDLE_ICON_FILE AppIcon)
-  set(MACOSX_BUNDLE_BUNDLE_VERSION "${AvogadroApp_VERSION}")
+  # CFBundleVersion must be numeric, so leave the date/hash to the info string
+  set(MACOSX_BUNDLE_BUNDLE_VERSION
+    "${AvogadroApp_VERSION_MAJOR}.${AvogadroApp_VERSION_MINOR}.${AvogadroApp_VERSION_PATCH}")
   set(MACOSX_BUNDLE_INFO_STRING "Avogadro - version ${AvogadroApp_VERSION}")
 
   # Change following line to point to actual icns file in bundle.
