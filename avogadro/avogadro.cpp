@@ -141,10 +141,44 @@ bool isKnownOption(const QString& argument)
   return false;
 }
 
+#ifdef Q_OS_LINUX
+// Remove the AppImage's bundled libraries from LD_LIBRARY_PATH
+void removeAppImageLibraryPath()
+{
+  const QString appDir = qEnvironmentVariable("APPDIR");
+  if (appDir.isEmpty())
+    return;
+
+  const QString root = QDir::cleanPath(appDir);
+  const QString rootPrefix = root + '/';
+  QStringList kept;
+  const auto entries =
+    qEnvironmentVariable("LD_LIBRARY_PATH").split(':', Qt::SkipEmptyParts);
+  for (const auto& entry : entries) {
+    const QString clean = QDir::cleanPath(entry);
+    if (clean != root && !clean.startsWith(rootPrefix))
+      kept << entry;
+  }
+
+  if (kept.isEmpty())
+    qunsetenv("LD_LIBRARY_PATH");
+  else
+    qputenv("LD_LIBRARY_PATH", kept.join(':').toLocal8Bit());
+}
+#endif
+
 } // namespace
 
 int main(int argc, char* argv[])
 {
+#ifdef Q_OS_LINUX
+  // AppRun puts the AppImage's bundled libraries on LD_LIBRARY_PATH. Every
+  // child process (xdg-open and the browser, obabel, plugin scripts, user
+  // programs) would inherit them and can fail to start (avogadrolibs#3150).
+  // The dynamic loader has already read it, so this only affects children.
+  removeAppImageLibraryPath();
+#endif
+
 #ifdef Q_OS_MAC
   // call some Objective-C++
   // removeMacSpecificMenuItems();
