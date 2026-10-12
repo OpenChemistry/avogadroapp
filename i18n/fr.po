@@ -12,14 +12,14 @@
 # Alexander Krappe <alexander.krappe@fu-berlin.de>, 2026.
 # Li Chaoyu <2395074867@qq.com>, 2026.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2026.
+# Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
 "PO-Revision-Date: 2026-10-13 17:25+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
 "Language: fr\n"
@@ -315,7 +315,7 @@ msgstr "Les plugins suivants sont disponibles :"
 
 #: mainwindow.cpp:1975
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "Voulez-vous les mettre à jour ?"
 
 #: mainwindow.cpp:2013
 msgid "Recover Autosaved Files"
@@ -794,7 +794,7 @@ msgstr "L’action a échoué."
 
 #: rpclistener.cpp:760
 msgid "That plugin is already running a command."
-msgstr ""
+msgstr "Le greffon est déjà en train d'exécuter une commande."
 
 #: rpclistener.cpp:792
 msgid "The command timed out."
