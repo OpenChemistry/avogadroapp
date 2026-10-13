@@ -9,18 +9,19 @@
 # Robert Adam <dev@robert-adam.de>, 2022.
 # "Jörg S." <joerg.schwerdtfeger@gmail.com>, 2023.
 # Norwid Behrnd <nbehrnd@yahoo.com>, 2023, 2024, 2025, 2026.
-# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024.
+# Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2024, 2026.
 # Frank Hoffmann <kohaerenz@gmail.com>, 2026.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2026.
 # Jakob Blahusch <jakob.blahusch@blahusch.com>, 2026.
 # Alexander Krappe <alexander.krappe@fu-berlin.de>, 2026.
+# Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2026-10-05 05:51+0000\n"
-"Last-Translator: Norwid Behrnd <nbehrnd@yahoo.com>\n"
+"PO-Revision-Date: 2026-10-13 17:25+0000\n"
+"Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -28,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.10.1.dev0\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
@@ -117,7 +118,7 @@ msgstr ""
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "Nicht senden"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
@@ -327,7 +328,7 @@ msgstr "Folgende Erweiterungen sind verfügbar:"
 
 #: mainwindow.cpp:1975
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "Möchten Sie diese aktualisieren?"
 
 #: mainwindow.cpp:2013
 msgid "Recover Autosaved Files"
@@ -742,7 +743,7 @@ msgstr ""
 
 #: mainwindow.cpp:4165
 msgid "Cannot remove the last remaining layer."
-msgstr ""
+msgstr "Die letzte Ebene kann nicht entfernt werden."
 
 #: mainwindow.cpp:4209
 msgid "'visible' must be true or false."
@@ -808,7 +809,7 @@ msgstr ""
 
 #: rpclistener.cpp:760
 msgid "That plugin is already running a command."
-msgstr ""
+msgstr "Das Plugin führt bereits ein Kommando aus."
 
 #: rpclistener.cpp:792
 msgid "The command timed out."
