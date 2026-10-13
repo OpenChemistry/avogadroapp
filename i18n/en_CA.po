@@ -56,7 +56,7 @@ msgstr "SSL Version:"
 #: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1 (Diagnostic)"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
@@ -72,7 +72,7 @@ msgstr "No file name set in BackgroundFileFormat!"
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"
-msgstr ""
+msgstr "Crash Reporting"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -80,6 +80,9 @@ msgid ""
 "developers when Avogadro crashes, which helps us fix crashes we cannot "
 "reproduce ourselves."
 msgstr ""
+"This is a diagnostic build of Avogadro. It can send a report to the "
+"developers when Avogadro crashes, which helps us fix crashes we cannot "
+"reproduce ourselves."
 
 #: crashreportdialog.cpp:38
 msgid ""
@@ -89,24 +92,31 @@ msgid ""
 "useful, but it may incidentally include fragments of what you were working "
 "on, such as part of a file name or a molecule you had open."
 msgstr ""
+"A crash report contains a snapshot of Avogadro's memory at the moment it "
+"failed, along with your operating system, graphics driver and Avogadro "
+"version, and a log of recent activity. That memory snapshot makes the report "
+"useful, but it may incidentally include fragments of what you were working "
+"on, such as part of a file name or a molecule you had open."
 
 #: crashreportdialog.cpp:52
 msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"Nothing is sent unless you agree. You can change this at any time under Help "
+"→ Crash Reporting."
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "Send Crash Reports"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "Don't Send"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "Send crash reports to the Avogadro developers"
 
 #: mainwindow.cpp:557
 msgid "Ready…"
@@ -244,7 +254,7 @@ msgstr ""
 
 #: mainwindow.cpp:1508
 msgid "The save was canceled."
-msgstr ""
+msgstr "The save was cancelled."
 
 #: mainwindow.cpp:1569 mainwindow.cpp:1572
 msgid "untitled"
@@ -309,7 +319,7 @@ msgstr "The following plugins are available:"
 
 #: mainwindow.cpp:1975
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "Would you like to update them?"
 
 #: mainwindow.cpp:2013
 msgid "Recover Autosaved Files"
@@ -344,16 +354,16 @@ msgstr ""
 
 #: mainwindow.cpp:2131
 msgid "Missing 'layer' parameter."
-msgstr ""
+msgstr "Missing 'layer' parameter."
 
 #: mainwindow.cpp:2138
 msgid "'layer' must be a whole number."
-msgstr ""
+msgstr "'layer' must be a whole number."
 
 #: mainwindow.cpp:2144
 #, qt-format
 msgid "'layer' %1 is out of range."
-msgstr ""
+msgstr "'layer' %1 is out of range."
 
 #: mainwindow.cpp:2279
 #, qt-format
@@ -626,7 +636,7 @@ msgstr "&Report a Bug"
 
 #: mainwindow.cpp:3383
 msgid "&Crash Reporting…"
-msgstr ""
+msgstr "&Crash Reporting…"
 
 #: mainwindow.cpp:3389
 msgid "&Suggest a Feature"
@@ -713,28 +723,28 @@ msgstr "Cannot open files"
 
 #: mainwindow.cpp:4088
 msgid "The plugin was unloaded."
-msgstr ""
+msgstr "The plugin was unloaded."
 
 #: mainwindow.cpp:4136 mainwindow.cpp:4155 mainwindow.cpp:4178
 #: mainwindow.cpp:4197 mainwindow.cpp:4225 rpclistener.cpp:547
 msgid "No molecule is open."
-msgstr ""
+msgstr "No molecule is open."
 
 #: mainwindow.cpp:4165
 msgid "Cannot remove the last remaining layer."
-msgstr ""
+msgstr "Cannot remove the last remaining layer."
 
 #: mainwindow.cpp:4209
 msgid "'visible' must be true or false."
-msgstr ""
+msgstr "'visible' must be true or false."
 
 #: mainwindow.cpp:4237
 msgid "'locked' must be true or false."
-msgstr ""
+msgstr "'locked' must be true or false."
 
 #: mainwindow.cpp:4261
 msgid "No molecule"
-msgstr ""
+msgstr "No molecule"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -758,39 +768,39 @@ msgstr "&Window"
 
 #: rpclistener.cpp:232
 msgid "Avogadro is shutting down."
-msgstr ""
+msgstr "Avogadro is shutting down."
 
 #: rpclistener.cpp:576
 msgid "renderImage requires both width and height, or neither."
-msgstr ""
+msgstr "renderImage requires both width and height, or neither."
 
 #: rpclistener.cpp:601
 msgid "Could not render the current view."
-msgstr ""
+msgstr "Could not render the current view."
 
 #: rpclistener.cpp:629
 msgid "Could not encode the render as PNG."
-msgstr ""
+msgstr "Could not encode the render as PNG."
 
 #: rpclistener.cpp:669 rpclistener.cpp:680
 msgid "No active view."
-msgstr ""
+msgstr "No active view."
 
 #: rpclistener.cpp:690
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
-msgstr ""
+msgstr "setCamera's modelView must be exactly 16 numbers, in row-major order."
 
 #: rpclistener.cpp:754 rpclistener.cpp:822
 msgid "The command failed."
-msgstr ""
+msgstr "The command failed."
 
 #: rpclistener.cpp:760
 msgid "That plugin is already running a command."
-msgstr ""
+msgstr "That plugin is already running a command."
 
 #: rpclistener.cpp:792
 msgid "The command timed out."
-msgstr ""
+msgstr "The command timed out."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
@@ -816,7 +826,7 @@ msgid ""
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
 "<html><head/><body><p><span style=\" font-size:10pt; font-"
-"weight:600;\">License: </span><a href=\"https://opensource.org/licenses/"
+"weight:600;\">Licence: </span><a href=\"https://opensource.org/licenses/"
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 
@@ -1042,12 +1052,12 @@ msgstr "Shadow Strength:"
 #. i18n: file: renderingdialog.ui:130
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
 msgid "Thickness of the outline, in pixels"
-msgstr ""
+msgstr "Thickness of the outline, in pixels"
 
 #. i18n: file: renderingdialog.ui:133
 #. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
 msgid "Outline Width:"
-msgstr ""
+msgstr "Outline Width:"
 
 #. i18n: file: renderingdialog.ui:160
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)

@@ -742,7 +742,7 @@ msgstr "'locked' must be true or false."
 
 #: mainwindow.cpp:4261
 msgid "No molecule"
-msgstr ""
+msgstr "No molecule"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
