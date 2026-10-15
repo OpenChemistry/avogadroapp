@@ -34,7 +34,7 @@ jobs:
         sudo apt-get -qq install clang-tidy
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@48d3ad6db93f3627c8ee7a0454bc6f3744f7e730 # v3
+      uses: jurplel/install-qt-action@a9c63c7c123f3069cff414e7e482d95dfa9d8125 # v3
       with:
         cache: true
         version: ${{ env.QT_VERSION }}
@@ -43,7 +43,7 @@ jobs:
       uses: ./.github/actions/checkout-repositories
 
     - name: Grab cache files
-      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       if: runner.os != 'Windows'
       with:
         path: |
@@ -94,4 +94,4 @@ jobs:
 
     - name: Setup tmate session
       if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@c0afd6f790e3a5564914980036ebf83216678101 # v3.23
+      uses: mxschmitt/action-tmate@35b54afac29c97fb54faba5b513f8fbd1882f113 # v3.24

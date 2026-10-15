@@ -1,0 +1,241 @@
+{
+  "description": "Geometry optimization works more than once: optimize, distort the C-C bond with editDistance, optimize again (same force field), distort again and optimize with a different force field. Every run converges and moves the structure. Energies are only compared within one force field. Force fields available for ethane on this build: GAFF, LJ, MMFF94, UFF (no Python-backed ones were listed).",
+  "issue": "avogadrolibs #2235: structure can only be geometry optimised once",
+  "steps": [
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "8\nethane\nC   0.000000   0.000000   0.765000\nC   0.000000   0.000000  -0.765000\nH   1.019000   0.000000   1.157000\nH  -0.509500   0.882000   1.157000\nH  -0.509500  -0.882000   1.157000\nH  -1.019000   0.000000  -1.157000\nH   0.509500  -0.882000  -1.157000\nH   0.509500   0.882000  -1.157000\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "listForceFields",
+      "wait": true,
+      "result": {
+        "status": "finished"
+      }
+    },
+    {
+      "method": "optimize",
+      "wait": true,
+      "params": {
+        "method": "UFF"
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "converged": true,
+          "method": "UFF",
+          "unit": "kJ/mol"
+        }
+      }
+    },
+    {
+      "method": "measureDistance",
+      "wait": true,
+      "params": {
+        "atoms": [
+          0,
+          1
+        ]
+      },
+      "save": {
+        "d_opt1": "data.distance"
+      }
+    },
+    {
+      "method": "editDistance",
+      "wait": true,
+      "params": {
+        "atoms": [
+          0,
+          1
+        ],
+        "value": 1.9
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "atoms": [
+            0,
+            1
+          ],
+          "distance": 1.9
+        }
+      }
+    },
+    {
+      "method": "energy",
+      "wait": true,
+      "params": {
+        "method": "UFF"
+      },
+      "save": {
+        "e_edit1": "data.energy"
+      }
+    },
+    {
+      "method": "optimize",
+      "wait": true,
+      "params": {
+        "method": "UFF"
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "converged": true,
+          "method": "UFF"
+        }
+      },
+      "save": {
+        "e_opt2": "data.energy"
+      }
+    },
+    {
+      "method": "measureDistance",
+      "wait": true,
+      "params": {
+        "atoms": [
+          0,
+          1
+        ]
+      },
+      "save": {
+        "d_opt2": "data.distance"
+      }
+    },
+    {
+      "method": "energy",
+      "wait": true,
+      "params": {
+        "method": "UFF"
+      },
+      "save": {
+        "e_check2": "data.energy"
+      }
+    },
+    {
+      "method": "editDistance",
+      "wait": true,
+      "params": {
+        "atoms": [
+          0,
+          1
+        ],
+        "value": 1.9
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "atoms": [
+            0,
+            1
+          ],
+          "distance": 1.9
+        }
+      }
+    },
+    {
+      "method": "energy",
+      "wait": true,
+      "params": {
+        "method": "MMFF94"
+      },
+      "save": {
+        "e_edit3": "data.energy"
+      }
+    },
+    {
+      "method": "optimize",
+      "wait": true,
+      "params": {
+        "method": "MMFF94"
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "converged": true,
+          "method": "MMFF94"
+        }
+      },
+      "save": {
+        "e_opt3": "data.energy"
+      }
+    },
+    {
+      "method": "measureDistance",
+      "wait": true,
+      "params": {
+        "atoms": [
+          0,
+          1
+        ]
+      },
+      "save": {
+        "d_opt3": "data.distance"
+      }
+    },
+    {
+      "method": "energy",
+      "wait": true,
+      "params": {
+        "method": "MMFF94"
+      },
+      "save": {
+        "e_check3": "data.energy"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "op": "lt",
+      "a": "e_opt2",
+      "b": "e_edit1"
+    },
+    {
+      "op": "lt",
+      "a": "d_opt2",
+      "b": 1.7
+    },
+    {
+      "op": "differs",
+      "a": "d_opt2",
+      "b": 1.9,
+      "tolerance": 0.1
+    },
+    {
+      "op": "lt",
+      "a": "e_opt3",
+      "b": "e_edit3"
+    },
+    {
+      "op": "lt",
+      "a": "d_opt3",
+      "b": 1.7
+    },
+    {
+      "op": "differs",
+      "a": "e_opt2",
+      "b": "e_edit1",
+      "tolerance": 50
+    },
+    {
+      "op": "differs",
+      "a": "e_opt3",
+      "b": "e_edit3",
+      "tolerance": 50
+    },
+    {
+      "op": "lt",
+      "a": "e_check2",
+      "b": "e_edit1"
+    },
+    {
+      "op": "lt",
+      "a": "e_check3",
+      "b": "e_edit3"
+    }
+  ]
+}

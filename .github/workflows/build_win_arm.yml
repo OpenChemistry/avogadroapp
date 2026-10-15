@@ -10,9 +10,7 @@ name: Windows ARM Build
 on: [push, pull_request, workflow_dispatch]
 
 env:
-  QT_VERSION: 6.10.0
-  # this is different from MACOSX_DEPLOYMENT_TARGET to prevent build problems
-  # we set MACOSX_DEPLOYMENT_TARGET later
+  QT_VERSION: 6.10.1
   FEATURES: -DBUILD_GPL_PLUGINS=ON -DWITH_COORDGEN=OFF -DQT_VERSION=6 -DUSE_3DCONNEXION=OFF -DBUILD_MOLEQUEUE=OFF
 
 concurrency:
@@ -38,13 +36,13 @@ jobs:
 
     steps:
     - name: Checkout workflow repository
-      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Checkout Repositories
       uses: ./.github/actions/checkout-repositories
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@48d3ad6db93f3627c8ee7a0454bc6f3744f7e730 # v4.3.1
+      uses: jurplel/install-qt-action@a9c63c7c123f3069cff414e7e482d95dfa9d8125 # v4.4.1
       with:
         cache: true
         version: ${{ env.QT_VERSION }}
@@ -55,12 +53,14 @@ jobs:
       with:
         arch: arm64
 
+    - name: Ensure vcpkg is up to date
+      if: runner.os == 'Windows'
+      uses: ./.github/actions/update-vcpkg
+
     - name: Install Dependencies (Windows)
       if: runner.os == 'Windows'
       run: |
         choco install nsis
-        cd /c/vcpkg
-        git pull origin master
         vcpkg install libarchive eigen3 libxml2 zlib
       shell: bash
 
@@ -116,7 +116,7 @@ jobs:
 
     - name: Sign Windows release
       if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/')
-      uses: signpath/github-action-submit-signing-request@b9d91eadd323de506c0c81cf0c7fe7438f3360fd # v2.2
+      uses: signpath/github-action-submit-signing-request@f6d04783b4569d051e0c80105fe66e82819d0092 # v3.0
       continue-on-error: true
       with:
         api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
@@ -145,5 +145,5 @@ jobs:
 
     - name: Setup tmate session
       if: failure()
-      uses: mxschmitt/action-tmate@c0afd6f790e3a5564914980036ebf83216678101 # v3.23
+      uses: mxschmitt/action-tmate@35b54afac29c97fb54faba5b513f8fbd1882f113 # v3.24
       timeout-minutes: 60

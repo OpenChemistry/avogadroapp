@@ -6,9 +6,13 @@
 #ifndef AVOGADRO_MAINWINDOW_H
 #define AVOGADRO_MAINWINDOW_H
 
+#include <QtCore/QHash>
+#include <QtCore/QList>
 #include <QtCore/QStringList>
 #include <QtCore/QVariantMap>
 #include <QtWidgets/QMainWindow>
+
+#include <vector>
 
 #ifdef QTTESTING
 class pqTestUtility;
@@ -64,16 +68,34 @@ class MainWindow : public QMainWindow
 {
   Q_OBJECT
 public:
-  MainWindow(const QStringList& fileNames, bool disableSettings = false);
+  /**
+   * @param skipDialogs Decline every modal dialog a script could not answer
+   * (see --skip-dialogs). This is recorded in
+   * QtGui::Utilities::dialogsSkipped(), which plugins read too; there is no
+   * other copy of the flag.
+   */
+  MainWindow(const QStringList& fileNames, bool disableSettings = false,
+             bool skipAutosave = false, bool skipDialogs = false);
   ~MainWindow() override;
 
 public slots:
   void setMolecule(Avogadro::QtGui::Molecule* molecule);
+
+  /**
+   * Show a molecule that was just read from a file (the command line, File >
+   * Open, or an RPC openFile/loadMolecule). Like setMolecule(), except that
+   * an empty, unmodified active molecule -- the blank document Avogadro starts
+   * with -- is closed instead of being left behind next to the new one.
+   * Plain switching between molecules must keep using setMolecule().
+   */
+  void setOpenedMolecule(Avogadro::QtGui::Molecule* molecule);
   void autosaveDocument(); // Autosave the current document
   /**
    * Update internal state to reflect that the molecule has been modified.
+   * @param changes The QtGui::Molecule::MoleculeChanges flags; the default
+   * (all bits) is treated as a real edit.
    */
-  void markMoleculeDirty();
+  void markMoleculeDirty(unsigned int changes = ~0u);
 
   /**
    * Update internal state to reflect that the molecule is not modified.
@@ -98,18 +120,29 @@ public slots:
    */
   void setDefaultFileDialogPath(const QString& path);
 
-  void exportGraphics(QString fileName);
+  /**
+   * Save a picture of the active view to @p fileName (".png" is added when
+   * there is no suffix). Under --skip-dialogs a failed save is logged instead
+   * of shown in a message box.
+   * @return True if the image was written.
+   */
+  bool exportGraphics(QString fileName);
 
   /**
    * Export a file, using the full selection of formats capable of writing.
    * The format will be guessed based on the filename extension.
    * If @a async is true (default), the file is saved asynchronously.
+   * @param token When @a async is true and non-zero, commandCompleted() is
+   * emitted with this token once the background write finishes, the same
+   * way a plugin command reports back. Used by the RPC listener's "wait"
+   * support; ignored otherwise.
    * @return If @a async is true, this function returns true if a suitable
    * writer was found (not if the write was successful). If @a async is
    * false, the return value indicates whether or not the file was written
    * successfully.
    */
-  bool exportFile(const QString& fileName, bool async = true);
+  bool exportFile(const QString& fileName, bool async = true,
+                  quint64 token = 0);
 
   /**
    * Export a file, using the full selection of formats capable of writing.
@@ -125,6 +158,46 @@ public slots:
 
 public:
   QtGui::Molecule* molecule() { return m_molecule; }
+
+  /**
+   * Whether @p molecule has unsaved changes: m_moleculeDirty for the active
+   * molecule, the state saved by setMolecule() for any other.
+   */
+  bool isModified(const QtGui::Molecule* molecule) const;
+
+  /// Whether the active molecule's undo stack has an edit to undo.
+  bool canUndo() const;
+
+  /// Whether the active molecule's undo stack has an edit to redo.
+  bool canRedo() const;
+
+  /**
+   * One map per open molecule, in the molecule list's order, with "index",
+   * "active", "atomCount", "formula", "fileName" and "modified". For the RPC
+   * "listMolecules" method.
+   */
+  QVariantList moleculeSummaries() const;
+
+  /**
+   * One map per tool of the active view, with "name" (the tool's object name:
+   * what activateTool and the toolbar use), "displayName" (ToolPlugin::name(),
+   * translated, for people only) and "active". Empty when there is no GL view.
+   * For the RPC "listTools" and "activateTool" methods.
+   */
+  QVariantList toolSummaries() const;
+
+  /**
+   * "index" (in the molecule list) of the active molecule and "count" of open
+   * molecules: the reply data of the RPC molecule verbs.
+   */
+  QVariantMap moleculePosition() const;
+
+  /**
+   * The active molecule's undo stack, for the RPC "undo", "redo" and
+   * "moleculeInfo" methods: "canUndo", "canRedo", "undoText", "redoText"
+   * (the stack's own text, without menu mnemonics) and "modified".
+   */
+  QVariantMap undoState() const;
 
   /**
    * Write out all application settings, normally done as part of the
@@ -146,17 +219,24 @@ public:
   /**
    * Scan standard directories for pyproject.toml-based plugin packages.
    */
-#ifdef AVOGADRO_ENABLE_SUBPROCESS
+#ifdef AVOGADRO_USE_SUBPROCESS
   void loadPackages();
 #endif
 
   void startAutosaveTimer();
 
-  QString autosaveFilePath() const;
+  /**
+   * The autosave file name (no directory) of @p molecule. Chosen on first use
+   * and kept for the molecule's lifetime, in a dynamic property on the molecule
+   * so it is never written into saved files.
+   */
+  QString autosaveNameFor(QtGui::Molecule* molecule);
 
-  void cleanupAutosaves(QString filename);
-
-  void cleanupCurrentAutosave();
+  /**
+   * Delete exactly the autosave file (either form) that @p molecule wrote, if
+   * any, and forget its name.
+   */
+  void removeAutosave(QtGui::Molecule* molecule);
 
   /**
    * Set the list of possible translations
@@ -168,19 +248,110 @@ public:
   }
 
   /**
+   * The outcome of dispatching a script command.
+   */
+  enum class CommandStatus
+  {
+    NotHandled, ///< No tool or extension claims this command.
+    Finished,   ///< The command ran to completion.
+    Failed,     ///< The command was claimed, but could not be carried out.
+    Started,    ///< Still running; commandCompleted() will follow.
+    Busy        ///< That plugin is already running a command.
+  };
+
+  /**
    * Handle script commands
    * @param command The command to execute
    * @param options The options to the command
+   * @param token Identifies this command in a later commandCompleted()
+   * @param message Set to a message from the plugin, if it supplied one
+   * @param result Set to any results the plugin returned
    *
-   * @return True if the command was handled, false otherwise
+   * @return The outcome of the command. A return of CommandStatus::Started
+   * means the command is still running, and commandCompleted() will be
+   * emitted with @a token once it ends.
    */
-  bool handleCommand(const QString& command, const QVariantMap& options);
+  CommandStatus handleCommand(const QString& command,
+                              const QVariantMap& options, quint64 token = 0,
+                              QString* message = nullptr,
+                              QVariantMap* result = nullptr);
+
+  /**
+   * Stop waiting for the command identified by @a token.
+   *
+   * The plugin may still be working -- this does not cancel anything -- but
+   * its result will be ignored and it is free to accept another command.
+   * Used when the caller has given up waiting, so that a plugin which never
+   * reports back does not stay busy for the life of the session.
+   */
+  void abandonCommand(quint64 token);
+
+  /**
+   * The commands registered by tools and extensions, for RPC introspection
+   * (the "listCommands" method). Built-in commands answered directly by the
+   * RPC listener are not included; it has its own static table for those.
+   *
+   * Each entry is a map with "name", "description", "kind" ("tool" or
+   * "extension") and "plugin" (the owning plugin's display name).
+   */
+  QVariantList pluginCommands() const;
+
+  /**
+   * The size, in pixels, of the currently active view. An empty size if
+   * there is no active view.
+   */
+  QSize activeViewSize() const;
+
+  /**
+   * The active view, if it is an OpenGL widget. Returns nullptr for a
+   * non-GL view (e.g. a VTK crystal view) or when there is no active view.
+   */
+  QtOpenGL::GLWidget* activeGLWidget() const;
+
+  /**
+   * Render the active view to an image.
+   * @param requestedSize The desired output size, in pixels. If null or
+   * empty (the default), the native framebuffer grab is returned untouched,
+   * at whatever resolution the view actually rendered (i.e. widget size
+   * times device pixel ratio). Otherwise the native grab is scaled with
+   * Qt::KeepAspectRatio and centred on a canvas of exactly this size.
+   * @param transparentBackground If true (the default, matching prior
+   * behaviour) the background is left transparent; otherwise the image is
+   * composited over the view's current background colour.
+   * @param nativeSize If non-null, receives the native grab's actual
+   * dimensions (before any scaling to requestedSize was applied).
+   */
+  QImage renderToImage(const QSize& requestedSize = QSize(),
+                       bool transparentBackground = true,
+                       QSize* nativeSize = nullptr);
+
+  /**
+   * True once the file formats that plugins register after startup (Open
+   * Babel's) are available, or once Avogadro has stopped waiting for them.
+   * Until then, reading or writing a file may fail for those formats.
+   */
+  bool pluginFormatsSettled() const { return m_pluginFormatsSettled; }
 
 signals:
+  /**
+   * Emitted once, when pluginFormatsSettled() becomes true.
+   */
+  void pluginFormatsReady();
+
   /**
    * Emitted when the active molecule in the application has changed.
    */
   void moleculeChanged(QtGui::Molecule* molecue);
+
+  /**
+   * Emitted when a command that returned CommandStatus::Started has ended.
+   * @param token The token that was passed to handleCommand()
+   * @param success True if the command finished, false if it failed
+   * @param message An optional message from the plugin
+   * @param result Any results the plugin returned
+   */
+  void commandCompleted(quint64 token, bool success, const QString& message,
+                        const QVariantMap& result);
 
 protected:
   void closeEvent(QCloseEvent* event) override;
@@ -191,6 +362,10 @@ protected:
 
   // handle theme changes
   void changeEvent(QEvent* event) override;
+
+  // Route the reserved camera-navigation keyboard shortcut to the GL widget
+  // even when keyboard focus is elsewhere (docks, tool settings, layer view).
+  bool eventFilter(QObject* watched, QEvent* event) override;
 
 protected slots:
 
@@ -327,6 +502,18 @@ private slots:
 
   void registerExtensionCommand(QString command, QString description);
 
+  /** A plugin reports that a command is running in the background. */
+  void pluginCommandStarted();
+
+  /** A plugin reports that a command has finished. */
+  void pluginCommandFinished(const QString& message, const QVariantMap& result);
+
+  /** A plugin reports that a started command could not be completed. */
+  void pluginCommandFailed(const QString& message);
+
+  /** Drop a destroyed plugin from the in-flight command map. */
+  void pluginDestroyed(QObject* plugin);
+
   /**
    * @brief Register file formats from extensions when ready.
    */
@@ -345,6 +532,12 @@ private slots:
    * delayed file readying within the first few seconds of application start up.
    */
   void clearQueuedFiles();
+
+  /**
+   * @brief Mark the plugin file formats as settled (once), see
+   * pluginFormatsSettled().
+   */
+  void settlePluginFormats();
 
   /**
    * @brief Register molequeue open-with handlers for RPC and executable file
@@ -413,8 +606,6 @@ private slots:
    */
   void viewActivated(QWidget* widget);
 
-  QImage renderToImage(const QSize& size);
-
   void exportGraphics();
 
   void copyGraphics();
@@ -429,6 +620,129 @@ private slots:
   void setProjectionPerspective();
 
 private:
+  /**
+   * Close @p molecule without asking to save it: make a neighbour (or a new
+   * empty molecule, if it was the only one) active when it is the active
+   * molecule, then remove its autosave and drop it from the molecule list.
+   * Callers that must not lose work ask to save, or check isModified(), first.
+   */
+  void closeMolecule(QtGui::Molecule* molecule);
+
+  /// The icon (and weight) of a message-only dialog; see warnUser().
+  enum class Severity
+  {
+    Information,
+    Warning,
+    Critical
+  };
+
+  /**
+   * Tell the user something with a message-only dialog (just an OK button).
+   * Under --skip-dialogs nobody can close the box, and its nested event loop
+   * would hold an RPC reply hostage, so the message is logged instead, as
+   * "--skip-dialogs: skipped '<title>' dialog; <text>". Only for dialogs that
+   * ask nothing: a question has to be declined or answered by its own caller.
+   */
+  void warnUser(Severity severity, const QString& title, const QString& text);
+
+  /**
+   * Connect a plugin's command lifecycle signals. Safe to call repeatedly --
+   * the connections are unique. Tool instances belong to each GLWidget rather
+   * than to m_tools, so this is done on first use rather than at load time.
+   */
+  template<typename PluginType>
+  void connectCommandSignals(PluginType* plugin)
+  {
+    // Each connection is remembered so that ~MainWindow can sever it while
+    // this object's members are still alive. See disconnectCommandSignals().
+    rememberConnection(connect(plugin, &PluginType::commandStarted, this,
+                               &MainWindow::pluginCommandStarted,
+                               Qt::UniqueConnection));
+    rememberConnection(connect(plugin, &PluginType::commandFinished, this,
+                               &MainWindow::pluginCommandFinished,
+                               Qt::UniqueConnection));
+    rememberConnection(connect(plugin, &PluginType::commandFailed, this,
+                               &MainWindow::pluginCommandFailed,
+                               Qt::UniqueConnection));
+    rememberConnection(connect(plugin, &QObject::destroyed, this,
+                               &MainWindow::pluginDestroyed,
+                               Qt::UniqueConnection));
+  }
+
+  /**
+   * Keep a connection made by connectCommandSignals() so it can be undone.
+   * A repeated Qt::UniqueConnection returns an invalid handle, which is
+   * dropped rather than accumulated.
+   */
+  void rememberConnection(const QMetaObject::Connection& connection)
+  {
+    if (connection)
+      m_pluginCommandConnections.append(connection);
+  }
+
+  /**
+   * Sever every connection made by connectCommandSignals().
+   *
+   * This must happen before ~MainWindow lets its members go. Plugins are
+   * parented to the views, which QWidget::~QWidget deletes *after* our own
+   * members are destroyed but *before* QObject::~QObject would have severed
+   * these connections. Without this, a plugin's destroyed() signal still
+   * reaches pluginDestroyed(), which then reads a destroyed
+   * m_inFlightCommands and the application crashes on quit.
+   */
+  void disconnectCommandSignals();
+
+  /** Start tracking the signals a plugin emits while handling a command. */
+  void beginPluginCommand(QObject* plugin);
+
+  /** Stop tracking, and work out how the command ended. */
+  CommandStatus endPluginCommand(QObject* plugin, bool claimed, quint64 token,
+                                 QString* message, QVariantMap* result);
+
+  /**
+   * @name Layer actions
+   * The per-action bodies behind the Layers dock's click handler
+   * (layerActivated()), shared with the addLayer/removeLayer/
+   * setActiveLayer/setLayerVisible/setLayerLocked RPC commands so that both
+   * drive the exact same code. Every layer is identified by its id (as
+   * QtGui::LayerModel::layerForRow() and layerCount() report it), not by a
+   * Layers dock row.
+   */
+  ///@{
+
+  /** Add a new layer, inheriting the active layer's settings. */
+  void addLayer();
+
+  /** Remove @p layer. */
+  void removeLayer(size_t layer);
+
+  /** Make @p layer the active layer. */
+  void setActiveLayer(size_t layer);
+
+  /**
+   * Show or hide @p layer, updating the active view if it changed. A no-op
+   * if it already matches @p visible.
+   */
+  void setLayerVisible(size_t layer, bool visible);
+
+  /**
+   * Lock or unlock @p layer against edits. A no-op if it already matches
+   * @p locked.
+   */
+  void setLayerLocked(size_t layer, bool locked);
+
+  /**
+   * Validate and translate the "layer" RPC option: on success, fills
+   * @p layer with the requested layer id and returns true; on failure,
+   * fills @p message with a translated explanation and returns false.
+   * Callers must check for an open molecule themselves first, since that
+   * failure uses a different message.
+   */
+  bool layerIdFromOptions(const QVariantMap& options, QString* message,
+                          size_t* layer) const;
+
+  ///@}
+
   QtGui::Molecule* m_molecule;
   QtGui::RWMolecule* m_rwMolecule;
   QtGui::MoleculeModel* m_moleculeModel;
@@ -436,7 +750,11 @@ private:
   QtGui::ScenePlugin* m_activeScenePlugin;
   bool m_queuedFilesStarted;
   QStringList m_queuedFiles;
+  bool m_pluginFormatsSettled = false;
   QTimer* m_autosaveTimer = nullptr; // for the autosave timer
+  // Skip autosave recovery and writing autosaves entirely, so that a
+  // scripted or automated run neither prompts nor leaves files behind.
+  bool m_skipAutosave = false;
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
 
@@ -453,6 +771,9 @@ private:
   BackgroundFileFormat* m_threadedWriter;
   QProgressDialog* m_progressDialog;
   QtGui::Molecule* m_fileReadMolecule;
+  // Set by exportFile() when the RPC listener is waiting on an async write;
+  // backgroundWriterFinished() reports back through commandCompleted().
+  quint64 m_pendingExportToken = 0;
 
   QToolBar* m_fileToolBar;
   QToolBar* m_toolToolBar;
@@ -476,6 +797,20 @@ private:
   // used for help - provide description for a command
   QMap<QString, QString> m_commandDescriptionsMap;
 
+  // Tracks the command currently inside handleCommand(), so that a plugin
+  // emitting commandStarted() / commandFinished() / commandFailed() during
+  // the call can be attributed without waiting for the signal to come back.
+  QObject* m_currentCommandPlugin = nullptr;
+  bool m_currentCommandStarted = false;
+  bool m_currentCommandEnded = false;
+  bool m_currentCommandFailed = false;
+  QString m_currentCommandMessage;
+  QVariantMap m_currentCommandResult;
+  // Plugins running a command in the background, and the token to report.
+  QHash<QObject*, quint64> m_inFlightCommands;
+  // Connections made by connectCommandSignals(), undone in ~MainWindow.
+  QList<QMetaObject::Connection> m_pluginCommandConnections;
+
   QAction* m_undo;
   QAction* m_redo;
   QAction* m_copyImage;
@@ -491,15 +826,21 @@ private:
 #endif
 
 #ifdef QTTESTING
-  pqTestUtility* m_testUtility;
+  pqTestUtility* m_testUtility = nullptr;
   QString m_testFile;
-  bool m_testExit;
+  bool m_testExit = true;
 #endif
 
   /**
    * Set up the main window widgets, connect signals and slots, etc.
    */
   void setupInterface();
+
+  /**
+   * Add the dock widgets contributed by extension plugins to the window.
+   * Called once, after the plugins are loaded and the built-in docks exist.
+   */
+  void setupExtensionDocks();
 
   /**
    * If the window is not visible on any available screen, move it to the

@@ -5,6 +5,7 @@
 
 #include "aboutdialog.h"
 #include "avogadroappconfig.h"
+#include "crashreporter.h"
 #include "ui_aboutdialog.h"
 
 #include <QSslSocket>
@@ -35,7 +36,16 @@ AboutDialog::AboutDialog(QWidget* parent_)
   m_ui->sslVersionLabel->setText(html.arg("10").arg(tr("SSL Version:")));
 
   // Add the version numbers
-  m_ui->version->setText(html.arg("20").arg(AvogadroApp_VERSION));
+  // Mark the diagnostic build, which ships crash reporting and can be
+  // installed alongside a normal Avogadro - otherwise there is no way to tell
+  // the two apart once they are running. Asking CrashReporter rather than the
+  // build macro keeps this in step with the rest of the application: a build
+  // made with USE_SENTRY but no DSN configured reports nothing, and so should
+  // not call itself a diagnostic build either.
+  QString versionText(AvogadroApp_VERSION);
+  if (CrashReporter::isAvailable())
+    versionText = tr("%1 (Diagnostic)").arg(versionText);
+  m_ui->version->setText(html.arg("20").arg(versionText));
   m_ui->libsVersion->setText(html.arg("10").arg(version()));
   m_ui->qtVersion->setText(html.arg("10").arg(qVersion()));
   m_ui->sslVersion->setText(

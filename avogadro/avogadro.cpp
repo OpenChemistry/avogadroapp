@@ -28,6 +28,7 @@
 
 #include "application.h"
 #include "avogadroappconfig.h"
+#include "crashreporter.h"
 #include "mainwindow.h"
 
 #ifdef Q_OS_MAC
@@ -121,8 +122,63 @@ void configureOpenGLContext()
 #endif
 }
 
+namespace {
+
+/// Every command line option main() recognizes below. Used so that an option
+/// following a value-taking option (e.g. "--rpc-name --disable-settings") is
+/// not silently swallowed as that option's value. A value that merely starts
+/// with a dash, such as the socket name "-my-socket", is still accepted.
+bool isKnownOption(const QString& argument)
+{
+  static const char* const knownOptions[] = {
+    "--rpc-name",      "--test-file",    "--test-no-exit", "--disable-settings",
+    "--skip-autosave", "--skip-dialogs", "--crash-test"
+  };
+  for (const char* option : knownOptions) {
+    if (argument == QLatin1String(option))
+      return true;
+  }
+  return false;
+}
+
+#ifdef Q_OS_LINUX
+// Remove the AppImage's bundled libraries from LD_LIBRARY_PATH
+void removeAppImageLibraryPath()
+{
+  const QString appDir = qEnvironmentVariable("APPDIR");
+  if (appDir.isEmpty())
+    return;
+
+  const QString root = QDir::cleanPath(appDir);
+  const QString rootPrefix = root + '/';
+  QStringList kept;
+  const auto entries =
+    qEnvironmentVariable("LD_LIBRARY_PATH").split(':', Qt::SkipEmptyParts);
+  for (const auto& entry : entries) {
+    const QString clean = QDir::cleanPath(entry);
+    if (clean != root && !clean.startsWith(rootPrefix))
+      kept << entry;
+  }
+
+  if (kept.isEmpty())
+    qunsetenv("LD_LIBRARY_PATH");
+  else
+    qputenv("LD_LIBRARY_PATH", kept.join(':').toLocal8Bit());
+}
+#endif
+
+} // namespace
+
 int main(int argc, char* argv[])
 {
+#ifdef Q_OS_LINUX
+  // AppRun puts the AppImage's bundled libraries on LD_LIBRARY_PATH. Every
+  // child process (xdg-open and the browser, obabel, plugin scripts, user
+  // programs) would inherit them and can fail to start (avogadrolibs#3150).
+  // The dynamic loader has already read it, so this only affects children.
+  removeAppImageLibraryPath();
+#endif
+
 #ifdef Q_OS_MAC
   // call some Objective-C++
   // removeMacSpecificMenuItems();
@@ -158,6 +214,7 @@ int main(int argc, char* argv[])
   // We need to ensure desktop OpenGL is loaded for our rendering.
   QCoreApplication::setAttribute(Qt::AA_UseDesktopOpenGL);
 
+#ifndef AVOGADRO_USE_SENTRY
   // remove the previous log file
   QString writableDocs =
     QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
@@ -167,6 +224,14 @@ int main(int argc, char* argv[])
   // install the message handler (goes to Documents / avogadro2.log)
   qInstallMessageHandler(myMessageOutput);
 #endif
+#endif
+
+  // Start crash reporting before the QApplication instance exists, so that a
+  // crash while Qt loads its platform plugin is still caught. This also has to
+  // come after the message handler above: the Qt integration chains to
+  // whichever handler was installed first, so installing one afterwards would
+  // silently discard every breadcrumb.
+  Avogadro::CrashReporterGuard crashReporterGuard;
 
   // output the version information
   qDebug() << "Avogadroapp version: " << AvogadroApp_VERSION;
@@ -330,10 +395,18 @@ int main(int argc, char* argv[])
   delete offscreen;
 
   if (!contextIsValid) {
-    QMessageBox::information(
-      nullptr, QCoreApplication::translate("main.cpp", "Avogadro"),
-      QCoreApplication::translate("main.cpp",
-                                  "This system does not support OpenGL."));
+    // This check runs before the full argument parsing below, so look for the
+    // flags that suppress dialogs here (--rpc-name implies --skip-dialogs).
+    const QStringList earlyArgs = QCoreApplication::arguments();
+    if (earlyArgs.contains(QStringLiteral("--skip-dialogs")) ||
+        earlyArgs.contains(QStringLiteral("--rpc-name"))) {
+      qCritical("--skip-dialogs: This system does not support OpenGL.");
+    } else {
+      QMessageBox::information(
+        nullptr, QCoreApplication::translate("main.cpp", "Avogadro"),
+        QCoreApplication::translate("main.cpp",
+                                    "This system does not support OpenGL."));
+    }
     return 1;
   }
 
@@ -348,6 +421,10 @@ int main(int argc, char* argv[])
 
   QStringList fileNames;
   bool disableSettings = false;
+  bool skipAutosave = false;
+  bool skipDialogs = false;
+  bool rpcNameGiven = false;
+  QString rpcName = QStringLiteral("avogadro");
 #ifdef QTTESTING
   QString testFile;
   bool testExit = true;
@@ -355,7 +432,18 @@ int main(int argc, char* argv[])
   QStringList args = QCoreApplication::arguments();
   for (QStringList::const_iterator it = args.constBegin() + 1;
        it != args.constEnd(); ++it) {
-    if (*it == "--test-file" && it + 1 != args.constEnd()) {
+    if (*it == "--rpc-name") {
+      if (it + 1 == args.constEnd() || isKnownOption(*(it + 1))) {
+        qWarning("Avogadro called with --rpc-name but no socket name.");
+        return EXIT_FAILURE;
+      }
+      rpcName = *(++it);
+      rpcNameGiven = true;
+    } else if (*it == "--test-file") {
+      if (it + 1 == args.constEnd() || isKnownOption(*(it + 1))) {
+        qWarning("Avogadro called with --test-file but no file name.");
+        return EXIT_FAILURE;
+      }
 #ifdef QTTESTING
       testFile = *(++it);
 #else
@@ -371,6 +459,18 @@ int main(int argc, char* argv[])
 #endif
     } else if (*it == "--disable-settings") {
       disableSettings = true;
+    } else if (*it == "--skip-autosave") {
+      skipAutosave = true;
+    } else if (*it == "--skip-dialogs") {
+      skipDialogs = true;
+    } else if (*it == "--crash-test") {
+#ifdef AVOGADRO_USE_SENTRY
+      Avogadro::CrashReporter::triggerTestCrash();
+#else
+      qWarning("Avogadro called with --crash-test but crash reporting is "
+               "disabled.");
+      return EXIT_FAILURE;
+#endif
     } else if (it->startsWith("-")) {
       qWarning("Unknown command line option '%s'", qPrintable(*it));
       return EXIT_FAILURE;
@@ -379,16 +479,36 @@ int main(int argc, char* argv[])
     }
   }
 
-  Avogadro::MainWindow window(fileNames, disableSettings);
+  // A scripted (RPC) launch has nobody to click on a startup dialog.
+  if (rpcNameGiven && !skipDialogs) {
+    skipDialogs = true;
+    qInfo("--rpc-name given: implying --skip-dialogs.");
+  }
+
+  // MainWindow records skipDialogs in QtGui::Utilities, which plugins read.
+  Avogadro::MainWindow window(fileNames, disableSettings, skipAutosave,
+                              skipDialogs);
   window.setTranslationList(languages, codes);
 #ifdef QTTESTING
   window.playTest(testFile, testExit);
 #endif
   window.show();
 
+  // On a diagnostic build, ask about crash reporting the first time it runs.
+  // A no-op everywhere else.
+  if (skipDialogs) {
+#ifdef AVOGADRO_USE_SENTRY
+    if (!Avogadro::CrashReporter::consentRequested())
+      qInfo("--skip-dialogs: skipped crash reporting consent dialog; assuming "
+            "no consent (stored choice untouched).");
+#endif
+  } else {
+    Avogadro::CrashReporter::promptForConsentIfNeeded(&window);
+  }
+
 #ifdef Avogadro_ENABLE_RPC
   // create rpc listener
-  Avogadro::RpcListener listener;
+  Avogadro::RpcListener listener(rpcName);
   listener.start();
 #endif
 

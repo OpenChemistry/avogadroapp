@@ -4,35 +4,250 @@
 ******************************************************************************/
 
 #include "rpclistener.h"
+#include "avogadroappconfig.h"
 #include "mainwindow.h"
 
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QInputDialog>
-
-#include <QtCore/QJsonValue>
-#include <QtCore/QTimer>
-
-#include <avogadro/io/fileformatmanager.h>
-#include <avogadro/qtgui/molecule.h>
-
+#include "rpc/connection.h"
 #include "rpc/jsonrpc.h"
 #include "rpc/jsonrpcclient.h"
 #include "rpc/localsocketconnectionlistener.h"
 
+#include <avogadro/core/basisset.h>
+#include <avogadro/core/version.h>
+#include <avogadro/io/fileformatmanager.h>
+#include <avogadro/qtgui/molecule.h>
+#include <avogadro/qtgui/sceneplugin.h>
+#include <avogadro/qtgui/scenepluginmodel.h>
+#include <avogadro/qtopengl/glwidget.h>
+#include <avogadro/rendering/camera.h>
+
+#include <QtCore/QBuffer>
+#include <QtCore/QByteArray>
+#include <QtCore/QFileInfo>
+#include <QtCore/QJsonArray>
+#include <QtCore/QJsonValue>
+#include <QtCore/QSize>
+#include <QtCore/QTimer>
+#include <QtCore/QVariantMap>
+#include <QtGui/QImage>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QInputDialog>
+#include <QtWidgets/QMessageBox>
+
+#include <algorithm>
+
 namespace Avogadro {
 
+using Core::BasisSet;
 using Io::FileFormatManager;
 using QtGui::Molecule;
+using QtGui::ScenePlugin;
+using QtOpenGL::GLWidget;
+using Rendering::Camera;
+using Rendering::Projection;
 using std::string;
 
-RpcListener::RpcListener(QObject* parent_)
+namespace {
+/// How long to wait for a command before giving up on it, in seconds. Most
+/// commands are fast; a script that expects a slow one passes "timeout".
+constexpr int defaultCommandTimeout = 60;
+
+/// The request could not be carried out.
+constexpr int errorRequestFailed = -1;
+/// A command that was started failed, or timed out.
+constexpr int errorCommandFailed = -2;
+/// The plugin is already running a command.
+constexpr int errorPluginBusy = -3;
+/// No tool or extension claims this method.
+constexpr int errorMethodNotFound = -32601;
+
+/// The RPC protocol version reported by "version". Bumped whenever the wire
+/// contract changes; "1" was the immediate-reply era and is never reported
+/// by a build that has this command.
+constexpr int rpcProtocolVersion = 2;
+
+/// A single row of the "listCommands" table for a built-in method.
+struct BuiltinCommand
+{
+  const char* name;
+  const char* description;
+  /// True when the command can outlive the call that starts it, i.e. a
+  /// request that passes "wait" may have its reply held until the work
+  /// finishes. False means the reply is always sent immediately.
+  bool async;
+};
+
+/// Every built-in method, for "listCommands". The answers come from two places:
+/// read-backs (version, listMolecules, getCamera, ...) are answered here in
+/// messageReceived(), and so are "internalPing" (earlier, in JsonRpc) and
+/// "kill"; commands that change the document (layers, molecules, undo, tools)
+/// are answered in MainWindow::handleCommand(). Kept sorted by name for
+/// readability; listCommands() sorts its output anyway.
+const BuiltinCommand builtinCommands[] = {
+  { "activateTool",
+    "Make the tool with the given name (as listTools reports it) the "
+    "active tool.",
+    false },
+  { "activeDialog",
+    "Report whether a modal dialog is open: open, title and className.",
+    false },
+  { "addLayer",
+    "Add a new layer to the active molecule, inheriting the active "
+    "layer's settings.",
+    false },
+  { "closeMolecule",
+    "Close a molecule (index, default the active one). Fails if it has "
+    "unsaved changes unless discard is true; closing the last molecule "
+    "leaves a new empty one.",
+    false },
+  { "exportFile",
+    "Write the active molecule to a file, guessing the format from the "
+    "extension.",
+    true },
+  { "getCamera",
+    "Report the active view's camera: distance to focus, "
+    "focus point, projection and the model view matrix.",
+    false },
+  { "getLayerLocked",
+    "Report whether a layer (by index, 0 = first layer) is locked "
+    "against edits.",
+    false },
+  { "getLayerVisible",
+    "Report whether a layer (by index, 0 = first layer) is visible.", false },
+  { "getMolecule", "Return the active molecule serialized as a string.",
+    false },
+  { "internalPing", "Check whether the server is responsive.", false },
+  { "kill",
+    "Shut down Avogadro. Only enabled when started with "
+    "--testing.",
+    false },
+  { "listCommands", "List every command the server understands.", false },
+  { "listDisplayTypes",
+    "List the scene display types available for the active view.", false },
+  { "listMolecules",
+    "List the open molecules: index, active, atomCount, formula, fileName "
+    "and modified.",
+    false },
+  { "listTools",
+    "List the active view's tools by name, and which one is active.", false },
+  { "loadMolecule",
+    "Read molecule data from a string and make it the "
+    "active molecule.",
+    false },
+  { "moleculeInfo", "Report summary statistics about the active molecule.",
+    false },
+  { "newMolecule",
+    "Create a new empty molecule and make it active, like File > New.", false },
+  { "openFile", "Read a file from disk and make it the active molecule.",
+    false },
+  { "redo",
+    "Redo the active molecule's last undone edit. Fails if there is "
+    "nothing to redo.",
+    false },
+  { "removeLayer",
+    "Remove a layer (by index, 0 = first layer) from the active "
+    "molecule. Fails if it is the last remaining layer.",
+    false },
+  { "renderImage",
+    "Render the current view to a PNG, inline or to a "
+    "file. Omit width/height for the native framebuffer "
+    "resolution, or supply both together to fit that "
+    "render onto a canvas of exactly that size.",
+    false },
+  { "saveGraphic",
+    "Render the current view and save it as an image at "
+    "the window's current size.",
+    false },
+  { "setActiveLayer",
+    "Make a layer (by index, 0 = first layer) of the active molecule "
+    "the active one.",
+    false },
+  { "setActiveMolecule",
+    "Make the open molecule at the given index the active molecule.", false },
+  { "setCamera",
+    "Apply a model view matrix and/or projection settings to "
+    "the active view's camera.",
+    false },
+  { "setLayerLocked",
+    "Lock or unlock a layer (by index, 0 = first layer) of the active "
+    "molecule.",
+    false },
+  { "setLayerVisible",
+    "Show or hide a layer (by index, 0 = first layer) of the active "
+    "molecule.",
+    false },
+  { "setProjection", "Switch between perspective and orthographic projection.",
+    false },
+  { "setRenderTypes", "Enable or disable scene display types by name.", false },
+  { "undo",
+    "Undo the active molecule's last edit. Fails if there is nothing to "
+    "undo.",
+    false },
+  { "version",
+    "Report Avogadro application, library, Qt and protocol versions.", false },
+};
+
+/// Requests that read or write molecule files, and so need the formats that
+/// plugins register after startup (Open Babel's, e.g. CIF).
+bool needsPluginFormats(const QString& method)
+{
+  return method == QLatin1String("openFile") ||
+         method == QLatin1String("loadMolecule") ||
+         method == QLatin1String("exportFile") ||
+         method == QLatin1String("getMolecule");
+}
+
+QString projectionToString(Projection projection)
+{
+  return projection == Rendering::Orthographic ? QStringLiteral("orthographic")
+                                               : QStringLiteral("perspective");
+}
+
+Projection projectionFromString(const QString& name)
+{
+  return name == QLatin1String("orthographic") ? Rendering::Orthographic
+                                               : Rendering::Perspective;
+}
+
+/// Flatten the camera's model view matrix into 16 floats in row-major order,
+/// i.e. element [row * 4 + col] is modelView(row, col). This is the order
+/// "setCamera" expects back, and the order every "getCamera" reply uses.
+QVariantList modelViewToVariantList(const Camera& camera)
+{
+  QVariantList result;
+  result.reserve(16);
+  const auto& matrix = camera.modelView().matrix();
+  for (int row = 0; row < 4; ++row) {
+    for (int col = 0; col < 4; ++col)
+      result.append(static_cast<double>(matrix(row, col)));
+  }
+  return result;
+}
+
+/// Serialize the read-back shape shared by "getCamera" and "setCamera".
+QVariantMap cameraToVariantMap(const Camera& camera)
+{
+  QVariantMap result;
+  result["distance"] = static_cast<double>(camera.distance(camera.focus()));
+  const Vector3f focus = camera.focus();
+  result["focus"] = QVariantList{ static_cast<double>(focus.x()),
+                                  static_cast<double>(focus.y()),
+                                  static_cast<double>(focus.z()) };
+  result["projection"] = projectionToString(camera.projectionType());
+  result["orthographicScale"] = static_cast<double>(camera.orthographicScale());
+  result["modelView"] = modelViewToVariantList(camera);
+  return result;
+}
+} // namespace
+
+RpcListener::RpcListener(const QString& connectionName, QObject* parent_)
   : QObject(parent_)
   , m_pingClient(nullptr)
 {
   m_rpc = new RPC::JsonRpc(this);
 
   m_connectionListener =
-    new RPC::LocalSocketConnectionListener(this, "avogadro");
+    new RPC::LocalSocketConnectionListener(this, connectionName);
 
   connect(m_connectionListener, &RPC::ConnectionListener::connectionError, this,
           &RpcListener::connectionError);
@@ -49,9 +264,17 @@ RpcListener::RpcListener(QObject* parent_)
       break;
 
   if (m_window) {
-    connect(this, &RpcListener::callSetMolecule, m_window,
-            &MainWindow::setMolecule);
+    connect(this, &RpcListener::openedMolecule, m_window,
+            &MainWindow::setOpenedMolecule);
+    connect(m_window, &MainWindow::commandCompleted, this,
+            &RpcListener::resolvePending);
+    connect(m_window, &MainWindow::pluginFormatsReady, this,
+            &RpcListener::replayDeferred);
   }
+
+  // Do not leave a script waiting on a reply that will never come.
+  connect(qApp, &QCoreApplication::aboutToQuit, this,
+          [this]() { failAllPending(tr("Avogadro is shutting down.")); });
 }
 
 RpcListener::~RpcListener()
@@ -119,6 +342,17 @@ void RpcListener::messageReceived(const RPC::Message& message)
   QString method = message.method();
   QJsonObject params = message.params().toObject();
 
+  // "wait" and "timeout" are reserved: they configure how this request is
+  // answered, and are removed so that no plugin ever sees them as an option.
+  const bool wait = params.take("wait").toBool(false);
+  const QJsonValue timeoutValue = params.take("timeout");
+  int timeoutSeconds = defaultCommandTimeout;
+  if (timeoutValue.isDouble()) {
+    timeoutSeconds = static_cast<int>(timeoutValue.toDouble());
+    if (timeoutSeconds < 1)
+      timeoutSeconds = 1;
+  }
+
   // check for quit message first, since it doesn't require a window
   if (method == "kill") {
     // Only allow avogadro to be killed through RPC if it was started with the
@@ -132,20 +366,90 @@ void RpcListener::messageReceived(const RPC::Message& message)
     } else {
       // send error response
       RPC::Message errorMessage = message.generateErrorResponse();
-      errorMessage.setErrorCode(-1);
+      errorMessage.setErrorCode(errorRequestFailed);
       errorMessage.setErrorMessage(
         "Ignoring kill command. Start with '--testing' to enable.");
       errorMessage.send();
     }
+    // Either way the request has been answered. Without this the message
+    // falls through to the handler chain below and a second reply is sent.
+    return;
+  }
+
+  // Also answered before the window check, next to "kill": a client needs
+  // to be able to negotiate compatibility while Avogadro is still starting.
+  if (method == "version") {
+    QVariantMap result;
+    result["avogadroApp"] = QLatin1String(AvogadroApp_VERSION);
+    result["avogadroLibs"] = QLatin1String(Avogadro::version());
+    result["qt"] = QLatin1String(qVersion());
+#if defined(Q_OS_MAC)
+    result["platform"] = QStringLiteral("macos");
+#elif defined(Q_OS_WIN)
+    result["platform"] = QStringLiteral("windows");
+#elif defined(Q_OS_LINUX)
+    result["platform"] = QStringLiteral("linux");
+#elif defined(Q_OS_BSD4)
+    result["platform"] = QStringLiteral("bsd");
+#else
+    result["platform"] = QStringLiteral("unknown");
+#endif
+    result["rpcProtocol"] = rpcProtocolVersion;
+
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonObject::fromVariantMap(result));
+    response.send();
+    return;
+  }
+
+  // Also before the window check: a modal dialog's nested event loop is what
+  // keeps this answerable while another request waits on the dialog, which is
+  // exactly when a test needs to ask.
+  if (method == "activeDialog") {
+    QVariantMap result;
+    QWidget* modal = QApplication::activeModalWidget();
+    QString title;
+    QString className;
+    if (modal != nullptr) {
+      title = modal->windowTitle();
+      // Message boxes often have no window title (macOS sheets); their text
+      // says more anyway.
+      if (title.isEmpty()) {
+        if (auto* box = qobject_cast<QMessageBox*>(modal))
+          title = box->text();
+      }
+      className = QString::fromLatin1(modal->metaObject()->className());
+    }
+    result["open"] = modal != nullptr;
+    result["title"] = title;
+    result["className"] = className;
+
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonObject::fromVariantMap(result));
+    response.send();
+    return;
   }
 
   // check if there's an active window
   if (m_window == nullptr) {
     // send error response
     RPC::Message errorMessage = message.generateErrorResponse();
-    errorMessage.setErrorCode(-1);
+    errorMessage.setErrorCode(errorRequestFailed);
     errorMessage.setErrorMessage("No Active Avogadro Window");
     errorMessage.send();
+    return;
+  }
+
+  // Open Babel's file formats are registered a second or two after the window
+  // answers, so a file request this early would fail with "No file format
+  // available". Hold it until they are ready (or MainWindow stops waiting).
+  if (!m_replaying &&
+      (!m_deferred.isEmpty() || m_replayBlocker != 0 ||
+       (needsPluginFormats(method) && !m_window->pluginFormatsSettled()))) {
+    PendingCommand deferred;
+    deferred.request = message;
+    deferred.connection = message.connection();
+    m_deferred.append(deferred);
     return;
   }
 
@@ -153,10 +457,15 @@ void RpcListener::messageReceived(const RPC::Message& message)
   if (method == "openFile") {
     // Read the supplied file.
     string fileName = params["fileName"].toString().toStdString();
-    auto* molecule = new Molecule(this);
+    // MainWindow owns the molecules it shows (this listener is destroyed
+    // first when Avogadro quits).
+    auto* molecule = new Molecule(m_window);
     bool success = FileFormatManager::instance().readFile(*molecule, fileName);
     if (success) {
-      emit callSetMolecule(molecule);
+      // Record the file the way the GUI's file-open path does, so the window
+      // title, "Save" and moleculeInfo know where the molecule came from.
+      molecule->setData("fileName", fileName);
+      emit openedMolecule(molecule);
 
       // set response
       RPC::Message response = message.generateResponse();
@@ -167,7 +476,7 @@ void RpcListener::messageReceived(const RPC::Message& message)
 
       // send error response
       RPC::Message errorMessage = message.generateErrorResponse();
-      errorMessage.setErrorCode(-1);
+      errorMessage.setErrorCode(errorRequestFailed);
       errorMessage.setErrorMessage(
         QString("Failed to read file: %1")
           .arg(QString::fromStdString(FileFormatManager::instance().error())));
@@ -178,33 +487,50 @@ void RpcListener::messageReceived(const RPC::Message& message)
     QString fileName = params["fileName"].toString();
 
     // save the image
-    m_window->exportGraphics(fileName);
-
-    // set response
-    RPC::Message response = message.generateResponse();
-    response.setResult(true);
-    response.send();
+    if (m_window->exportGraphics(fileName)) {
+      RPC::Message response = message.generateResponse();
+      response.setResult(true);
+      response.send();
+    } else {
+      sendError(message, errorRequestFailed,
+                QString("Could not save the graphic to %1.").arg(fileName));
+    }
   } else if (method == "exportFile") {
     // Save to the supplied file name
     QString filename = params["fileName"].toString();
 
-    bool result = m_window->exportFile(filename);
+    if (wait) {
+      // Hold the reply until the background write finishes, the same way a
+      // waited plugin command does.
+      const quint64 token = ++m_nextToken;
+      bool started = m_window->exportFile(filename, true, token);
+      if (started) {
+        holdReply(message, token, timeoutSeconds);
+      } else {
+        sendError(message, errorRequestFailed,
+                  QString("Could not start exporting to %1.").arg(filename));
+      }
+    } else {
+      bool result = m_window->exportFile(filename);
 
-    // set response
-    RPC::Message response = message.generateResponse();
-    response.setResult(result);
-    response.send();
+      // set response
+      RPC::Message response = message.generateResponse();
+      response.setResult(result);
+      response.send();
+    }
   } else if (method == "loadMolecule") {
     // get molecule data and format
     string content = params["content"].toString().toStdString();
     string format = params["format"].toString().toStdString();
 
     // read molecule data
-    auto* molecule = new Molecule(this);
+    // MainWindow owns the molecules it shows (this listener is destroyed
+    // first when Avogadro quits).
+    auto* molecule = new Molecule(m_window);
     bool success =
       FileFormatManager::instance().readString(*molecule, content, format);
     if (success) {
-      emit callSetMolecule(molecule);
+      emit openedMolecule(molecule);
 
       // send response
       RPC::Message response = message.generateResponse();
@@ -215,32 +541,469 @@ void RpcListener::messageReceived(const RPC::Message& message)
 
       // send error response
       RPC::Message errorMessage = message.generateErrorResponse();
-      errorMessage.setErrorCode(-1);
+      errorMessage.setErrorCode(errorRequestFailed);
       errorMessage.setErrorMessage(
         QString("Failed to read Chemical JSON: %1")
           .arg(QString::fromStdString(FileFormatManager::instance().error())));
       errorMessage.send();
     }
+  } else if (method == "listCommands") {
+    // Builtins come from the static table above; tool and extension
+    // commands come from the main window's command maps. Read-backs answer
+    // their payload directly as "result", not wrapped in the usual
+    // "status"/"data" envelope.
+    QVariantList commands;
+    for (const auto& builtin : builtinCommands) {
+      QVariantMap entry;
+      entry["name"] = QLatin1String(builtin.name);
+      entry["description"] = QLatin1String(builtin.description);
+      entry["kind"] = QStringLiteral("builtin");
+      entry["plugin"] = QString();
+      entry["async"] = builtin.async;
+      commands.append(entry);
+    }
+    // Any tool or extension command may report itself as started and finish
+    // later, so they are all flagged as possibly asynchronous; whether a
+    // given call actually defers its reply is only known once it runs.
+    const QVariantList pluginCommands = m_window->pluginCommands();
+    for (const QVariant& item : pluginCommands) {
+      QVariantMap entry = item.toMap();
+      commands.append(entry);
+    }
+    std::sort(commands.begin(), commands.end(),
+              [](const QVariant& a, const QVariant& b) {
+                return a.toMap().value("name").toString() <
+                       b.toMap().value("name").toString();
+              });
+
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonArray::fromVariantList(commands));
+    response.send();
+  } else if (method == "moleculeInfo") {
+    QVariantMap info;
+    auto* mol = m_window->molecule();
+
+    info["atomCount"] =
+      mol != nullptr ? static_cast<qulonglong>(mol->atomCount()) : 0;
+    info["bondCount"] =
+      mol != nullptr ? static_cast<qulonglong>(mol->bondCount()) : 0;
+    info["formula"] =
+      mol != nullptr ? QString::fromStdString(mol->formula()) : QString();
+    info["mass"] = mol != nullptr ? mol->mass() : 0.0;
+    info["totalCharge"] =
+      mol != nullptr ? static_cast<int>(mol->totalCharge()) : 0;
+    info["spinMultiplicity"] =
+      mol != nullptr ? static_cast<int>(mol->totalSpinMultiplicity()) : 0;
+    info["coordinateSetCount"] =
+      mol != nullptr ? static_cast<qulonglong>(mol->coordinate3dCount()) : 0;
+
+    size_t selectedAtomCount = 0;
+    if (mol != nullptr) {
+      for (Index i = 0; i < mol->atomCount(); ++i) {
+        if (mol->atomSelected(i))
+          ++selectedAtomCount;
+      }
+    }
+    info["selectedAtomCount"] = static_cast<qulonglong>(selectedAtomCount);
+
+    const Index residueCount = mol != nullptr ? mol->residueCount() : 0;
+    info["residueCount"] = static_cast<qulonglong>(residueCount);
+    info["hasResidues"] = residueCount > 0;
+    info["hasUnitCell"] = mol != nullptr && mol->unitCell() != nullptr;
+    info["hasCustomElements"] = mol != nullptr && mol->hasCustomElements();
+
+    const BasisSet* basis = mol != nullptr ? mol->basisSet() : nullptr;
+    info["hasBasisSet"] = basis != nullptr;
+    info["orbitalCount"] =
+      basis != nullptr ? static_cast<int>(basis->molecularOrbitalCount()) : 0;
+    info["homoIndex"] = basis != nullptr ? static_cast<int>(basis->homo()) : -1;
+
+    info["cubeCount"] =
+      mol != nullptr ? static_cast<qulonglong>(mol->cubeCount()) : 0;
+    info["vibrationCount"] =
+      mol != nullptr
+        ? static_cast<qulonglong>(mol->vibrationFrequencies().size())
+        : 0;
+    info["fileName"] =
+      mol != nullptr ? QString::fromStdString(mol->data("fileName").toString())
+                     : QString();
+
+    // Unsaved-changes and undo state of the document, not of the model.
+    info["modified"] = m_window->isModified(mol);
+    info["canUndo"] = m_window->canUndo();
+    info["canRedo"] = m_window->canRedo();
+
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonObject::fromVariantMap(info));
+    response.send();
+  } else if (method == "getMolecule") {
+    QString format = params.contains("format") ? params["format"].toString()
+                                               : QStringLiteral("cjson");
+    if (format.isEmpty())
+      format = QStringLiteral("cjson");
+
+    auto* mol = m_window->molecule();
+    if (mol == nullptr) {
+      sendError(message, errorRequestFailed, tr("No molecule is open."));
+    } else {
+      string content;
+      bool ok = FileFormatManager::instance().writeString(*mol, content,
+                                                          format.toStdString());
+      if (ok) {
+        QVariantMap result;
+        result["format"] = format;
+        result["content"] = QString::fromStdString(content);
+
+        RPC::Message response = message.generateResponse();
+        response.setResult(QJsonObject::fromVariantMap(result));
+        response.send();
+      } else {
+        sendError(message, errorRequestFailed,
+                  QString("Failed to write molecule: %1")
+                    .arg(QString::fromStdString(
+                      FileFormatManager::instance().error())));
+      }
+    }
+  } else if (method == "renderImage") {
+    // Width and height must be given together, or not at all: with only
+    // one of the two, there is no native size available yet (the grab
+    // hasn't happened) to derive the other from without rendering twice, so
+    // rather than guess an aspect ratio we reject the request outright.
+    const bool haveWidth = params.contains("width");
+    const bool haveHeight = params.contains("height");
+    if (haveWidth != haveHeight) {
+      sendError(message, errorRequestFailed,
+                tr("renderImage requires both width and height, or "
+                   "neither."));
+      return;
+    }
+
+    QSize requestedSize;
+    if (haveWidth && haveHeight) {
+      int width = qBound(1, params["width"].toInt(), 8192);
+      int height = qBound(1, params["height"].toInt(), 8192);
+      requestedSize = QSize(width, height);
+    }
+    // else: leave requestedSize null, so renderToImage() returns the
+    // native framebuffer grab untouched, at the maximum quality available.
+
+    const bool transparentBackground =
+      params["transparentBackground"].toBool(false);
+    QString fileName = params["fileName"].toString();
+
+    QSize nativeSize;
+    QImage image = m_window->renderToImage(requestedSize, transparentBackground,
+                                           &nativeSize);
+    if (image.isNull()) {
+      // No active GL view, or the grab failed: there is nothing to save or
+      // encode, so report it rather than reply with a zero-sized image.
+      sendError(message, errorRequestFailed,
+                tr("Could not render the current view."));
+      return;
+    }
+
+    if (!fileName.isEmpty()) {
+      if (QFileInfo(fileName).suffix().isEmpty())
+        fileName += ".png";
+      if (image.save(fileName, "PNG")) {
+        QVariantMap result;
+        result["width"] = image.width();
+        result["height"] = image.height();
+        result["nativeWidth"] = nativeSize.width();
+        result["nativeHeight"] = nativeSize.height();
+        result["fileName"] = fileName;
+
+        RPC::Message response = message.generateResponse();
+        response.setResult(QJsonObject::fromVariantMap(result));
+        response.send();
+      } else {
+        sendError(message, errorRequestFailed,
+                  QString("Could not write image to %1.").arg(fileName));
+      }
+    } else {
+      QByteArray bytes;
+      QBuffer buffer(&bytes);
+      buffer.open(QIODevice::WriteOnly);
+      if (!image.save(&buffer, "PNG")) {
+        sendError(message, errorRequestFailed,
+                  tr("Could not encode the render as PNG."));
+        return;
+      }
+
+      QVariantMap result;
+      result["width"] = image.width();
+      result["height"] = image.height();
+      result["nativeWidth"] = nativeSize.width();
+      result["nativeHeight"] = nativeSize.height();
+      result["format"] = QStringLiteral("png");
+      result["data"] = QString::fromLatin1(bytes.toBase64());
+
+      RPC::Message response = message.generateResponse();
+      response.setResult(QJsonObject::fromVariantMap(result));
+      response.send();
+    }
+  } else if (method == "listMolecules") {
+    // Read-back: the array goes straight in "result".
+    RPC::Message response = message.generateResponse();
+    response.setResult(
+      QJsonArray::fromVariantList(m_window->moleculeSummaries()));
+    response.send();
+  } else if (method == "listTools") {
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonArray::fromVariantList(m_window->toolSummaries()));
+    response.send();
+  } else if (method == "listDisplayTypes") {
+    QVariantList types;
+    if (GLWidget* glWidget = m_window->activeGLWidget()) {
+      const QList<ScenePlugin*> plugins = glWidget->sceneModel().scenePlugins();
+      for (ScenePlugin* plugin : plugins) {
+        if (plugin == nullptr)
+          continue;
+        QVariantMap entry;
+        entry["name"] = plugin->objectName();
+        entry["displayName"] = plugin->name();
+        entry["enabled"] = plugin->isEnabled();
+        entry["applicable"] = plugin->isApplicable();
+        entry["hasSettings"] = plugin->hasSetupWidget();
+        types.append(entry);
+      }
+    }
+
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonArray::fromVariantList(types));
+    response.send();
+  } else if (method == "getCamera") {
+    // Read-back: payload goes straight in "result", like "listDisplayTypes".
+    GLWidget* glWidget = m_window->activeGLWidget();
+    if (glWidget == nullptr) {
+      sendError(message, errorRequestFailed, tr("No active view."));
+      return;
+    }
+
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonObject::fromVariantMap(
+      cameraToVariantMap(glWidget->renderer().camera())));
+    response.send();
+  } else if (method == "setCamera") {
+    GLWidget* glWidget = m_window->activeGLWidget();
+    if (glWidget == nullptr) {
+      sendError(message, errorRequestFailed, tr("No active view."));
+      return;
+    }
+
+    Camera& camera = glWidget->renderer().camera();
+
+    if (params.contains("modelView")) {
+      const QJsonArray values = params["modelView"].toArray();
+      if (values.size() != 16) {
+        sendError(message, errorRequestFailed,
+                  tr("setCamera's modelView must be exactly 16 numbers, in "
+                     "row-major order."));
+        return;
+      }
+      Eigen::Matrix4f matrix;
+      for (int row = 0; row < 4; ++row) {
+        for (int col = 0; col < 4; ++col)
+          matrix(row, col) =
+            static_cast<float>(values.at(row * 4 + col).toDouble());
+      }
+      Eigen::Affine3f transform;
+      transform.matrix() = matrix;
+      camera.setModelView(transform);
+    }
+
+    if (params.contains("projection"))
+      camera.setProjectionType(
+        projectionFromString(params["projection"].toString()));
+
+    if (params.contains("orthographicScale")) {
+      camera.setOrthographicScale(
+        static_cast<float>(params["orthographicScale"].toDouble()));
+    }
+
+    glWidget->requestUpdate();
+
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonObject::fromVariantMap(cameraToVariantMap(camera)));
+    response.send();
   } else { // ask the main window to handle the message
     QVariantMap options = params.toVariantMap();
-    bool success = m_window->handleCommand(method, options);
+    // Only a request that asked to wait needs a token to report back with.
+    const quint64 token = wait ? ++m_nextToken : 0;
+    QString resultMessage;
+    QVariantMap resultData;
 
-    if (success) {
-      // send response
-      RPC::Message response = message.generateResponse();
-      response.setResult(true);
-      response.send();
-    } else {
-      // send error response
-      RPC::Message errorMessage = message.generateErrorResponse();
-      errorMessage.setErrorCode(-32601);
-      errorMessage.setErrorMessage("Method not found");
-      QJsonObject errorDataObject;
-      errorDataObject.insert("request", message.toJsonObject());
-      errorMessage.setErrorData(errorDataObject);
-      errorMessage.send();
+    MainWindow::CommandStatus status = m_window->handleCommand(
+      method, options, token, &resultMessage, &resultData);
+
+    switch (status) {
+      case MainWindow::CommandStatus::Started:
+        if (wait) {
+          // Hold the reply until the plugin reports back.
+          holdReply(message, token, timeoutSeconds);
+        } else {
+          // The caller did not ask to wait, so answer as we always have.
+          RPC::Message response = message.generateResponse();
+          response.setResult(true);
+          response.send();
+        }
+        break;
+
+      case MainWindow::CommandStatus::Finished:
+        if (wait) {
+          sendSuccess(message, resultMessage, resultData);
+        } else {
+          RPC::Message response = message.generateResponse();
+          response.setResult(true);
+          response.send();
+        }
+        break;
+
+      case MainWindow::CommandStatus::Failed:
+        sendError(message, errorCommandFailed,
+                  resultMessage.isEmpty() ? tr("The command failed.")
+                                          : resultMessage);
+        break;
+
+      case MainWindow::CommandStatus::Busy:
+        sendError(message, errorPluginBusy,
+                  tr("That plugin is already running a command."));
+        break;
+
+      case MainWindow::CommandStatus::NotHandled: {
+        // send error response
+        RPC::Message errorMessage = message.generateErrorResponse();
+        errorMessage.setErrorCode(errorMethodNotFound);
+        errorMessage.setErrorMessage("Method not found");
+        QJsonObject errorDataObject;
+        errorDataObject.insert("request", message.toJsonObject());
+        errorMessage.setErrorData(errorDataObject);
+        errorMessage.send();
+        break;
+      }
     }
   }
+}
+
+void RpcListener::holdReply(const RPC::Message& message, quint64 token,
+                            int timeoutSeconds)
+{
+  PendingCommand pending;
+  pending.request = message;
+  pending.connection = message.connection();
+  pending.timer = new QTimer(this);
+  pending.timer->setSingleShot(true);
+  pending.timer->setInterval(timeoutSeconds * 1000);
+  connect(pending.timer, &QTimer::timeout, this, [this, token]() {
+    // The caller has given up. Release the plugin as well, so that a command
+    // which never reports back does not leave it busy for the whole session.
+    if (m_window != nullptr)
+      m_window->abandonCommand(token);
+    resolvePending(token, false, tr("The command timed out."), QVariantMap());
+  });
+
+  m_pending.insert(token, pending);
+  m_lastHeldToken = token;
+  pending.timer->start();
+}
+
+void RpcListener::resolvePending(quint64 token, bool success,
+                                 const QString& message,
+                                 const QVariantMap& result)
+{
+  auto match = m_pending.find(token);
+  if (match == m_pending.end())
+    return; // already answered, or the caller never asked to wait
+
+  const PendingCommand pending = match.value();
+  m_pending.erase(match);
+
+  if (pending.timer != nullptr)
+    pending.timer->deleteLater();
+
+  // Resume the deferred requests that were waiting behind this one, after
+  // this reply has gone out.
+  if (token == m_replayBlocker) {
+    m_replayBlocker = 0;
+    QTimer::singleShot(0, this, &RpcListener::replayDeferred);
+  }
+
+  // The client may have gone away while the command was running. The request
+  // holds a bare pointer to the connection, so check before answering.
+  if (pending.connection.isNull())
+    return;
+
+  if (success)
+    sendSuccess(pending.request, message, result);
+  else
+    sendError(pending.request, errorCommandFailed,
+              message.isEmpty() ? tr("The command failed.") : message);
+}
+
+void RpcListener::failAllPending(const QString& reason)
+{
+  const QList<quint64> tokens = m_pending.keys();
+  foreach (quint64 token, tokens)
+    resolvePending(token, false, reason, QVariantMap());
+
+  m_replayBlocker = 0;
+  QList<PendingCommand> deferred;
+  deferred.swap(m_deferred);
+  for (const PendingCommand& entry : deferred) {
+    if (!entry.connection.isNull())
+      sendError(entry.request, errorRequestFailed, reason);
+  }
+}
+
+void RpcListener::replayDeferred()
+{
+  // Still waiting on a held reply; resolvePending() resumes the replay.
+  if (m_replaying || m_replayBlocker != 0)
+    return;
+
+  while (!m_deferred.isEmpty()) {
+    const PendingCommand entry = m_deferred.takeFirst();
+    // The client may have gone away while its request waited.
+    if (entry.connection.isNull())
+      continue;
+
+    m_lastHeldToken = 0;
+    m_replaying = true;
+    messageReceived(entry.request);
+    m_replaying = false;
+
+    // The request's reply is held (e.g. a waited exportFile), so the next one
+    // must wait for it to keep the replies in order. Requests that arrive
+    // meanwhile queue up behind it.
+    if (m_lastHeldToken != 0 && m_pending.contains(m_lastHeldToken)) {
+      m_replayBlocker = m_lastHeldToken;
+      return;
+    }
+  }
+}
+
+void RpcListener::sendSuccess(const RPC::Message& request,
+                              const QString& message, const QVariantMap& result)
+{
+  QJsonObject payload;
+  payload.insert("status", QStringLiteral("finished"));
+  if (!message.isEmpty())
+    payload.insert("message", message);
+  if (!result.isEmpty())
+    payload.insert("data", QJsonObject::fromVariantMap(result));
+
+  RPC::Message response = request.generateResponse();
+  response.setResult(payload);
+  response.send();
+}
+
+void RpcListener::sendError(const RPC::Message& request, int code,
+                            const QString& message)
+{
+  RPC::Message errorMessage = request.generateErrorResponse();
+  errorMessage.setErrorCode(code);
+  errorMessage.setErrorMessage(message);
+  errorMessage.send();
 }
 
 } // End of Avogadro namespace

@@ -6,10 +6,10 @@ name: Mac Build Matrix
 on: [push, pull_request, workflow_dispatch]
 
 env:
-  QT_VERSION: 6.10.0
+  QT_VERSION: 6.10.1
   # this is different from MACOSX_DEPLOYMENT_TARGET to prevent build problems
   # we set MACOSX_DEPLOYMENT_TARGET later
-  MACOS_TARGET: 13
+  MACOS_TARGET: 14
   FEATURES: -DBUILD_GPL_PLUGINS=ON -DBUILD_MOLEQUEUE=OFF -DWITH_COORDGEN=OFF -DQT_VERSION=6 -DUSE_YAEHMOP=ON
   CACHE: -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
   SCCACHE_GHA_ENABLED: "true"
@@ -39,7 +39,7 @@ jobs:
 
     steps:
     - name: Checkout workflow repository
-      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Checkout Repositories
       uses: ./.github/actions/checkout-repositories
@@ -47,15 +47,15 @@ jobs:
     - name: Install Dependencies (macOS)
       if: runner.os == 'macOS'
       run: |
-        brew install eigen glew pixi create-dmg
+        brew install eigen glew xz pixi create-dmg
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@48d3ad6db93f3627c8ee7a0454bc6f3744f7e730 # v4.3.1
+      uses: jurplel/install-qt-action@a9c63c7c123f3069cff414e7e482d95dfa9d8125 # v4.4.1
       with:
         version: ${{ env.QT_VERSION }}
 
     - name: Grab cache files
-      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
       with:
         path: |
           ${{ runner.workspace }}/build/Downloads
@@ -91,15 +91,15 @@ jobs:
           done
         done
         cd .. # build/prefix/lib
-        for plugin in libinchi.?.?.?.dylib libopenbabel.?.?.?.dylib; do
+        for plugin in libinchi.*.dylib libopenbabel.*.dylib; do
           for libpath in `otool -L ${plugin} | grep '/Users/runner/work' | awk '{print $1}'`; do
             export lib=`echo $libpath | cut -d '/' -f 9`;
             echo "Fixing $plugin $lib $libpath"
             install_name_tool -change $libpath @executable_path/../Frameworks/$lib $plugin
           done
         done
-        otool -L libinchi.?.?.?.dylib
-        otool -L libopenbabel.?.?.?.dylib
+        otool -L libinchi.*.dylib
+        otool -L libopenbabel.*.dylib
         # cp -p libinchi* ../Avogadro2.app/Contents/Frameworks/
         # cp -p libopenbabel* ../Avogadro2.app/Contents/Frameworks/
         # finally, fixup the binaries
@@ -221,5 +221,5 @@ jobs:
 
     - name: Setup tmate session
       if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@c0afd6f790e3a5564914980036ebf83216678101 # v3.23
+      uses: mxschmitt/action-tmate@35b54afac29c97fb54faba5b513f8fbd1882f113 # v3.24
       timeout-minutes: 60

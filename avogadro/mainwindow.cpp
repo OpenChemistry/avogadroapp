@@ -8,16 +8,19 @@
 #include "aboutdialog.h"
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
+#include "crashreporter.h"
 #include "menubuilder.h"
 #include "renderingdialog.h"
 #include "tdxcontroller.h"
 #include "tooltipfilter.h"
 #include "viewfactory.h"
 
+#include <avogadro/core/avogadrocore.h>
 #include <avogadro/core/elements.h>
 #include <avogadro/core/variant.h>
 #include <avogadro/io/cjsonformat.h>
 #include <avogadro/io/cmlformat.h>
+#include <avogadro/io/compression.h>
 #include <avogadro/io/fileformat.h>
 #include <avogadro/io/fileformatmanager.h>
 #include <avogadro/qtgui/customelementdialog.h>
@@ -27,7 +30,7 @@
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/qtgui/moleculemodel.h>
 #include <avogadro/qtgui/multiviewwidget.h>
-#ifdef AVOGADRO_ENABLE_SUBPROCESS
+#ifdef AVOGADRO_USE_SUBPROCESS
 #include <avogadro/qtgui/packagemanager.h>
 #endif
 #include <avogadro/qtgui/periodictableview.h>
@@ -50,6 +53,7 @@
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 #include <QtCore/QMimeData>
+#include <QtCore/QPointer>
 #include <QtCore/QProcess>
 #include <QtCore/QRandomGenerator>
 #include <QtCore/QSettings>
@@ -58,12 +62,16 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QTimer>
+#include <QtCore/QUrl>
+#include <QtCore/QVersionNumber>
 
 #include <QOpenGLFramebufferObject>
 #include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
+#include <QtGui/QKeyEvent>
 #include <QtGui/QKeySequence>
+#include <QtGui/QPainter>
 #include <QtGui/QPalette>
 #include <QtGui/QShortcut>
 
@@ -71,6 +79,7 @@
 #include <QtNetwork/QNetworkReply>
 
 #include <QActionGroup>
+#include <QtWidgets/QAbstractSpinBox>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QColorDialog>
 #include <QtWidgets/QDockWidget>
@@ -78,17 +87,26 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QInputDialog>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QMessageBox>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QProgressDialog>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QTreeView>
 
 #include <QScreen>
+
+#include <algorithm>
+#include <cmath>
+#include <filesystem>
+#include <limits>
+#include <system_error>
 
 #ifdef QTTESTING
 #include <QXmlStreamReader>
@@ -101,6 +119,196 @@
 // The registerMoleQueue() function is currently disabled
 
 namespace Avogadro {
+
+namespace {
+
+// Plugin commands that create or load a molecule, and so must run even when
+// no molecule is active. Every other plugin command is refused up front with
+// "No molecule" (see MainWindow::handleCommand()).
+// TODO: replace with a flag on ExtensionPlugin::registerCommand() once
+// avogadrolibs can say which commands work without a molecule.
+bool commandCreatesMolecule(const QString& command)
+{
+  static const QStringList names = { QStringLiteral("fetchPDB"),
+                                     QStringLiteral("fetchByName") };
+  return names.contains(command, Qt::CaseInsensitive);
+}
+
+// Autosaves are gzip-compressed when this build can do it. The plain form is
+// still recognized (and recovered, cleaned up) so that a change of build, or an
+// older version's autosave, is never orphaned.
+const QString autosaveBaseSuffix = QStringLiteral("_autosave.cjson");
+
+QString autosaveSuffix()
+{
+  if (Io::compressionSupported(Io::Compression::Gzip))
+    return autosaveBaseSuffix + QStringLiteral(".") +
+           QString::fromStdString(
+             Io::compressionExtension(Io::Compression::Gzip));
+  return autosaveBaseSuffix;
+}
+
+QStringList autosaveNameFilters()
+{
+  return QStringList() << "*" + autosaveBaseSuffix
+                       << "*" + autosaveBaseSuffix + ".gz";
+}
+
+// The name of the same autosave in the other (plain / gzip) form.
+QString otherAutosaveForm(const QString& fileName)
+{
+  const QString gz = QStringLiteral(".gz");
+  if (fileName.endsWith(gz))
+    return fileName.left(fileName.size() - gz.size());
+  return fileName + gz;
+}
+
+// Where autosaves live.
+QString autosaveDirPath()
+{
+  return QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
+         "/autosave";
+}
+
+// Dynamic property on a molecule holding the file name (no directory) of its
+// autosave. It lives and dies with the QObject and, unlike Molecule::data(), is
+// never serialized into a saved file.
+const char* const autosaveProperty = "avogadroAutosaveFile";
+
+// Dynamic property: the molecule was recovered from an autosave, so it has no
+// saved copy and an empty undo stack. Its autosave is the only copy of the work
+// and must survive undoing back to the empty stack.
+const char* const recoveredProperty = "avogadroRecovered";
+
+// Dynamic property: the dirty state of a molecule that is not the active one
+// (the active molecule's state is MainWindow::m_moleculeDirty).
+const char* const dirtyProperty = "avogadroDirty";
+
+// The name an autosave is written under before it replaces the real one. It
+// keeps the compression suffix (the format picks compression by suffix) but
+// does not end in autosaveBaseSuffix (nor ".gz" of it), so it is never offered
+// for recovery.
+QString partialAutosaveName(const QString& autosaveName)
+{
+  const int pos = autosaveName.lastIndexOf(QStringLiteral("_autosave."));
+  if (pos < 0)
+    return QStringLiteral("partial-") + autosaveName;
+  return autosaveName.left(pos) + QStringLiteral("_autosave-partial.") +
+         autosaveName.mid(pos + 10);
+}
+
+// True if the file is an autosave, i.e. in the autosave directory with an
+// autosave name.
+bool isAutosaveFile(const QString& path)
+{
+  const QFileInfo info(path);
+  if (info.absoluteDir().canonicalPath() !=
+      QDir(autosaveDirPath()).canonicalPath())
+    return false;
+  const QString name = info.fileName();
+  return name.endsWith(autosaveBaseSuffix) ||
+         name.endsWith(autosaveBaseSuffix + QStringLiteral(".gz"));
+}
+
+// The chemical format is named by the extension underneath any compression
+// suffix: "molecule.cjson.gz" is CJSON that happens to be gzipped, and
+// Io::FileFormat recovers the codec from the same file name on its own.
+QString chemicalSuffix(const QString& fileName)
+{
+  return QFileInfo(QString::fromStdString(
+                     Io::stripCompressionSuffix(fileName.toStdString())))
+    .suffix()
+    .toLower();
+}
+
+// Add @a extension ahead of any compression suffix, so that supplying a
+// default for "molecule.gz" yields "molecule.cjson.gz" rather than the
+// unreadable "molecule.gz.cjson".
+QString withChemicalExtension(const QString& fileName, const QString& extension)
+{
+  const std::string name = fileName.toStdString();
+  const std::string stripped = Io::stripCompressionSuffix(name);
+  return QString::fromStdString(stripped + "." + extension.toStdString() +
+                                name.substr(stripped.size()));
+}
+
+// True if @p value is a JSON number holding a whole number that fits in an
+// int, writing it to @p out. Used to validate script-supplied indices, so it
+// is strict about both halves: a string such as "0" or a boolean is not a
+// number (QVariant would convert them), QVariant::toInt() rounds a fractional
+// double in Qt 6 (which would silently accept something like 2.5), and casting
+// an out-of-range double to int is undefined behavior, which a huge value like
+// 1e20 would otherwise reach.
+bool wholeNumber(const QVariant& value, int* out)
+{
+  switch (value.metaType().id()) {
+    case QMetaType::Double:
+    case QMetaType::Float:
+    case QMetaType::Int:
+    case QMetaType::UInt:
+    case QMetaType::LongLong:
+    case QMetaType::ULongLong:
+      break;
+    default:
+      return false;
+  }
+
+  bool ok = false;
+  const double asDouble = value.toDouble(&ok);
+  if (!ok || !std::isfinite(asDouble) || asDouble != std::floor(asDouble))
+    return false;
+  if (asDouble < static_cast<double>(std::numeric_limits<int>::min()) ||
+      asDouble > static_cast<double>(std::numeric_limits<int>::max()))
+    return false;
+  *out = static_cast<int>(asDouble);
+  return true;
+}
+
+// Why an index option was refused. The callers word the message themselves:
+// the layer verbs' messages are translated, the molecule verbs' are not.
+enum class IndexStatus
+{
+  Valid,
+  Missing,
+  NotWholeNumber,
+  OutOfRange
+};
+
+// Read the script-supplied index @p key from @p options, which must name one of
+// @p count items. @p out receives the number as soon as it is a whole number,
+// in range or not, so that an out-of-range message can quote it.
+IndexStatus indexFromOptions(const QVariantMap& options, const QString& key,
+                             int count, int* out)
+{
+  if (!options.contains(key))
+    return IndexStatus::Missing;
+  if (!wholeNumber(options.value(key), out))
+    return IndexStatus::NotWholeNumber;
+  if (*out < 0 || *out >= count)
+    return IndexStatus::OutOfRange;
+  return IndexStatus::Valid;
+}
+
+// The (untranslated) message for a molecule index that was refused.
+QString moleculeIndexMessage(IndexStatus status, int index, int count)
+{
+  switch (status) {
+    case IndexStatus::Missing:
+      return QStringLiteral("Missing 'index' parameter.");
+    case IndexStatus::NotWholeNumber:
+      return QStringLiteral("'index' must be a whole number.");
+    case IndexStatus::OutOfRange:
+      return QStringLiteral("'index' %1 is out of range (%2 molecules are "
+                            "open).")
+        .arg(index)
+        .arg(count);
+    case IndexStatus::Valid:
+      break;
+  }
+  return QString();
+}
+
+} // namespace
 
 #ifdef QTTESTING
 class XMLEventObserver : public pqEventObserver
@@ -236,13 +444,15 @@ using QtGui::ScenePluginFactory;
 using QtGui::ScenePluginModel;
 using QtGui::ToolPlugin;
 using QtGui::ToolPluginFactory;
+using QtGui::Utilities::dialogsSkipped;
 using QtOpenGL::ActiveObjects;
 using QtOpenGL::GLWidget;
 using QtPlugins::PluginManager;
 using std::string;
 using std::vector;
 
-MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
+MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
+                       bool skipAutosave, bool skipDialogs)
   : m_molecule(nullptr)
   , m_rwMolecule(nullptr)
   , m_moleculeModel(nullptr)
@@ -267,6 +477,16 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   , m_TDxController(nullptr)
 #endif
 {
+  // Route the reserved camera-navigation shortcut (Ctrl/Cmd+arrow) to the
+  // GL widget even when keyboard focus is elsewhere (docks, tool settings,
+  // layer view).
+  qApp->installEventFilter(this);
+
+  // Plugins check this to avoid modal prompts in scripted runs, and they load
+  // and receive molecules during this constructor: set it before anything else.
+  if (skipDialogs)
+    QtGui::Utilities::setDialogsSkipped(true);
+
   // If disable settings, ensure we create a cleared QSettings object.
   if (disableSettings) {
     QSettings settings;
@@ -277,10 +497,24 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   readSettings();
 
   // check for auto-save files
-  checkAutosaveRecovery();
+  m_skipAutosave = skipAutosave;
+  if (dialogsSkipped()) {
+    qInfo("--skip-dialogs: skipped autosave recovery check; autosave files "
+          "left untouched.");
+  } else if (!m_skipAutosave) {
+    checkAutosaveRecovery();
+  }
 
   // check for version update
   checkUpdate();
+
+#ifdef QTTESTING
+  // Set up QtTesting before constructing any widgets so startup and plugin
+  // UI can participate in record/playback.
+  m_testUtility = new pqTestUtility(this);
+  m_testUtility->addEventObserver("xml", new XMLEventObserver(this));
+  m_testUtility->addEventSource("xml", new XMLEventSource(this));
+#endif
 
   // Now load the plugins.
   PluginManager* plugin = PluginManager::instance();
@@ -325,7 +559,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
     }
   }
 
-#ifdef AVOGADRO_ENABLE_SUBPROCESS
+#ifdef AVOGADRO_USE_SUBPROCESS
   // Clean the pixi cache if it's been more than 30 days
   QSettings settings;
   QDateTime lastCleaned = settings.value("pixi/lastCacheClean").toDateTime();
@@ -362,12 +596,6 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 #endif
   setupInterface();
 
-#ifdef QTTESTING
-  m_testUtility = new pqTestUtility(this);
-  m_testUtility->addEventObserver("xml", new XMLEventObserver(this));
-  m_testUtility->addEventSource("xml", new XMLEventSource(this));
-#endif
-
   // Build up the standard menus, incorporate dynamic menus.
 #ifdef Q_OS_WIN
   qDebug() << " building menu ";
@@ -378,6 +606,11 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
   qDebug() << " updating recent files ";
 #endif
   updateRecentFiles();
+
+  // Open Babel registers its file formats only when its format query returns
+  // (see fileFormatsReady()). Stop waiting for them after a while, so that a
+  // missing or broken Open Babel does not hold up file requests for good.
+  QTimer::singleShot(10000, this, &MainWindow::settlePluginFormats);
 
   // Try to open the file(s) passed in.
   if (!fileNames.isEmpty()) {
@@ -442,6 +675,10 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings)
 
 MainWindow::~MainWindow()
 {
+  // Do this first, while our members are still alive: the views, and the
+  // plugins parented to them, are deleted later by QWidget::~QWidget.
+  disconnectCommandSignals();
+
 #ifdef _3DCONNEXION
   m_TDxController->disableController();
 #endif
@@ -496,6 +733,8 @@ void MainWindow::setupInterface()
       settings.value("MainWindow/ao_strength", 1.0f).toFloat());
     pipeline->setEdEnabled(
       settings.value("MainWindow/ed_enabled", false).toBool());
+    pipeline->setEdStrength(
+      settings.value("MainWindow/ed_strength", 1.0f).toFloat());
 
     // set background color
     pipeline->setBackgroundColor(cColor);
@@ -613,10 +852,30 @@ void MainWindow::setupInterface()
 
   viewActivated(glWidget);
   buildTools();
+  CrashReporter::attachSessionContext(glWidget);
   // Connect to the invalid context signal, check whether GL is initialized.
   // connect(m_glWidget, SIGNAL(rendererInvalid()), SLOT(rendererInvalid()));
   connect(m_multiViewWidget, &QtGui::MultiViewWidget::activeWidgetChanged, this,
           &MainWindow::viewActivated);
+
+  setupExtensionDocks();
+}
+
+void MainWindow::setupExtensionDocks()
+{
+  foreach (QtGui::ExtensionPlugin* extension, m_extensions) {
+    foreach (QDockWidget* dock, extension->dockWidgets()) {
+      if (dock == nullptr)
+        continue;
+
+      addDockWidget(extension->preferredDockArea(dock), dock);
+
+      // Contributed docks start hidden -- the window already carries five of
+      // its own. The plugin shows its dock from its own menu action, which is
+      // also where it decides where that action lives.
+      dock->hide();
+    }
+  }
 }
 
 void MainWindow::closeActiveMolecule()
@@ -625,29 +884,221 @@ void MainWindow::closeActiveMolecule()
     return;
   }
 
-  Molecule* currentMol = m_molecule;
-  const QList<Molecule*> molecules = m_moleculeModel->molecules();
-  const int idx = molecules.indexOf(currentMol);
+  closeMolecule(m_molecule);
+}
 
-  if (idx < 0 || molecules.isEmpty()) {
+void MainWindow::closeMolecule(Molecule* molecule)
+{
+  if (molecule == nullptr)
+    return;
+
+  const QList<Molecule*> molecules = m_moleculeModel->molecules();
+  const int idx = molecules.indexOf(molecule);
+
+  if (idx < 0)
+    return;
+
+  // Closing a molecule that is not the active one leaves the active one alone.
+  if (molecule == m_molecule) {
+    if (idx == 0) {
+      // if the current molecule is the first one in the list, and it is not
+      // the only one we make the next molecule the starting one
+      if (molecules.size() > 1) {
+        setMolecule(molecules[idx + 1]);
+      } else {
+        // the last molecule: there must always be one open
+        newMolecule();
+      }
+    }
+    // otherwise we just set the current molecule to the one before
+    else {
+      setMolecule(molecules[idx - 1]);
+    }
+  }
+
+  removeAutosave(molecule);
+  m_moleculeModel->removeItem(molecule);
+}
+
+bool MainWindow::isModified(const Molecule* molecule) const
+{
+  if (molecule == nullptr)
+    return false;
+  // Dirty state travels with a molecule while it is not the active one (see
+  // setMolecule()).
+  if (molecule == m_molecule)
+    return m_moleculeDirty;
+  return molecule->property(dirtyProperty).toBool();
+}
+
+void MainWindow::warnUser(Severity severity, const QString& title,
+                          const QString& text)
+{
+  if (dialogsSkipped()) {
+    QString oneLine = text;
+    oneLine.replace(QLatin1Char('\n'), QLatin1Char(' '));
+    qWarning("--skip-dialogs: skipped '%s' dialog; %s", qPrintable(title),
+             qPrintable(oneLine));
     return;
   }
 
-  if (idx == 0) {
-    // if the current molecule is the first one in the list, and it is not the
-    // only one we make the next molecule the starting one
-    if (molecules.size() > 1) {
-      setMolecule(molecules[idx + 1]);
-    } else {
-      newMolecule();
-    }
+  switch (severity) {
+    case Severity::Information:
+      QMessageBox::information(this, title, text);
+      break;
+    case Severity::Warning:
+      QMessageBox::warning(this, title, text);
+      break;
+    case Severity::Critical:
+      QMessageBox::critical(this, title, text);
+      break;
   }
-  // otherwise we just set the current molecule to the one before
-  else {
-    setMolecule(molecules[idx - 1]);
+}
+
+QVariantList MainWindow::moleculeSummaries() const
+{
+  QVariantList summaries;
+  const QList<Molecule*> molecules = m_moleculeModel->molecules();
+  for (int i = 0; i < molecules.size(); ++i) {
+    const Molecule* mol = molecules[i];
+    QVariantMap entry;
+    entry["index"] = i;
+    entry["active"] = mol == m_molecule;
+    entry["atomCount"] = static_cast<qulonglong>(mol->atomCount());
+    entry["formula"] = QString::fromStdString(mol->formula());
+    entry["fileName"] =
+      QString::fromStdString(mol->data("fileName").toString());
+    entry["modified"] = isModified(mol);
+    summaries.append(entry);
+  }
+  return summaries;
+}
+
+QVariantList MainWindow::toolSummaries() const
+{
+  QVariantList tools;
+  const GLWidget* glWidget = activeGLWidget();
+  if (glWidget == nullptr)
+    return tools;
+
+  const ToolPlugin* active = glWidget->activeTool();
+  const QList<ToolPlugin*> plugins = glWidget->tools();
+  for (const ToolPlugin* plugin : plugins) {
+    if (plugin == nullptr)
+      continue;
+    QVariantMap entry;
+    entry["name"] = plugin->objectName();
+    entry["displayName"] = plugin->name();
+    entry["active"] = plugin == active;
+    tools.append(entry);
+  }
+  return tools;
+}
+
+QVariantMap MainWindow::moleculePosition() const
+{
+  const QList<Molecule*> molecules = m_moleculeModel->molecules();
+  QVariantMap position;
+  position["index"] = static_cast<int>(molecules.indexOf(m_molecule));
+  position["count"] = static_cast<int>(molecules.size());
+  return position;
+}
+
+bool MainWindow::canUndo() const
+{
+  return m_molecule != nullptr && m_molecule->undoMolecule() != nullptr &&
+         m_molecule->undoMolecule()->undoStack().canUndo();
+}
+
+bool MainWindow::canRedo() const
+{
+  return m_molecule != nullptr && m_molecule->undoMolecule() != nullptr &&
+         m_molecule->undoMolecule()->undoStack().canRedo();
+}
+
+QVariantMap MainWindow::undoState() const
+{
+  QVariantMap state;
+  QString undoText, redoText;
+  if (m_molecule != nullptr && m_molecule->undoMolecule() != nullptr) {
+    const QUndoStack& stack = m_molecule->undoMolecule()->undoStack();
+    undoText = stack.undoText();
+    redoText = stack.redoText();
+  }
+  state["canUndo"] = canUndo();
+  state["canRedo"] = canRedo();
+  state["undoText"] = undoText;
+  state["redoText"] = redoText;
+  state["modified"] = m_moleculeDirty;
+  return state;
+}
+
+namespace {
+
+// Ctrl (Command on macOS) + arrow keys always drive the camera. Ctrl+Shift is
+// excluded: it belongs to the manipulator tool.
+bool isNavigationShortcut(const QKeyEvent* e)
+{
+  if (!(e->modifiers() & Qt::ControlModifier) ||
+      (e->modifiers() & Qt::ShiftModifier))
+    return false;
+
+  switch (e->key()) {
+    case Qt::Key_Left:
+    case Qt::Key_Right:
+    case Qt::Key_Up:
+    case Qt::Key_Down:
+      return true;
+    default:
+      return false;
+  }
+}
+
+// Never steal the sequence from something the user is typing in.
+bool isTextEntry(const QWidget* widget)
+{
+  return qobject_cast<const QLineEdit*>(widget) != nullptr ||
+         qobject_cast<const QAbstractSpinBox*>(widget) != nullptr ||
+         qobject_cast<const QTextEdit*>(widget) != nullptr ||
+         qobject_cast<const QPlainTextEdit*>(widget) != nullptr;
+}
+
+} // namespace
+
+bool MainWindow::eventFilter(QObject* watched, QEvent* event)
+{
+  const QEvent::Type type = event->type();
+  if (type != QEvent::KeyPress && type != QEvent::ShortcutOverride)
+    return QMainWindow::eventFilter(watched, event);
+
+  auto* keyEvent = static_cast<QKeyEvent*>(event);
+  if (!isNavigationShortcut(keyEvent))
+    return QMainWindow::eventFilter(watched, event);
+
+  QWidget* focus = QApplication::focusWidget();
+  if (focus == nullptr || focus->window() != this || isTextEntry(focus))
+    return QMainWindow::eventFilter(watched, event);
+
+  GLWidget* glWidget = ActiveObjects::instance().activeGLWidget();
+  // watched == glWidget covers both "the view already has focus" (deliver
+  // normally) and the re-entrant pass from the sendEvent() below, which would
+  // otherwise recurse forever.
+  if (glWidget == nullptr || watched == glWidget)
+    return QMainWindow::eventFilter(watched, event);
+
+  // Claim the sequence before QShortcutMap can consume it; the matching key
+  // press arrives on the next pass.
+  if (type == QEvent::ShortcutOverride) {
+    event->accept();
+    return true;
   }
 
-  m_moleculeModel->removeItem(currentMol);
+  QKeyEvent forwarded(QEvent::KeyPress, keyEvent->key(), keyEvent->modifiers(),
+                      keyEvent->text(), keyEvent->isAutoRepeat(),
+                      static_cast<ushort>(keyEvent->count()));
+  forwarded.ignore();
+  QApplication::sendEvent(glWidget, &forwarded);
+  return forwarded.isAccepted();
 }
 
 void MainWindow::closeEvent(QCloseEvent* e)
@@ -657,6 +1108,9 @@ void MainWindow::closeEvent(QCloseEvent* e)
     e->ignore();
     return;
   }
+  // Quitting: the active document was saved or discarded (or was clean).
+  // Other open documents keep their autosaves for recovery.
+  removeAutosave(m_molecule);
   QMainWindow::closeEvent(e);
 }
 
@@ -725,7 +1179,7 @@ void MainWindow::moleculeReady(int)
   if (extension) {
     auto* mol = new Molecule(this);
     if (extension->readMolecule(*mol))
-      setMolecule(mol);
+      setOpenedMolecule(mol);
   }
 }
 
@@ -759,9 +1213,13 @@ void setDefaultViews(MultiViewWidget* viewWidget)
     // restore the default behavior
     for (ScenePlugin* plugin : sceneModel->scenePlugins()) {
       QString settingsKey("MainWindow/" + plugin->objectName());
-      bool enabled = settings.value(settingsKey, plugin->isEnabled()).toBool();
-      if (plugin->defaultBehavior() != ScenePlugin::DefaultBehavior::Ignore &&
-          enabled) {
+      auto behavior = plugin->defaultBehavior();
+      // with no saved value (e.g., a newly added plugin), use the default
+      bool fallback = plugin->isEnabled();
+      if (behavior != ScenePlugin::DefaultBehavior::Ignore)
+        fallback = (behavior == ScenePlugin::DefaultBehavior::True);
+      bool enabled = settings.value(settingsKey, fallback).toBool();
+      if (behavior != ScenePlugin::DefaultBehavior::Ignore && enabled) {
         anyPluginTrue = true;
       }
       plugin->setEnabled(enabled);
@@ -783,6 +1241,15 @@ void MainWindow::setMolecule(Molecule* mol)
   if (!mol)
     return;
 
+  // Selecting the molecule that is already active changes nothing, so stop
+  // here. Running on would sever the connection below that marks the molecule
+  // modified (later edits would never ask to be saved), in two ways: this
+  // function disconnects the old molecule, and GLWidget::setMolecule() in
+  // avogadrolibs disconnects every connection of the molecule it already shows.
+  // The first is also handled below; the second is being fixed in avogadrolibs,
+  // and until then this return is what protects the connection.
+  if (mol == m_molecule && m_moleculeModel->molecules().contains(mol))
+    return;
   // Set the new molecule, ensure both molecules are in the model.
   if (m_molecule && !m_moleculeModel->molecules().contains(m_molecule)) {
     m_moleculeModel->addItem(m_molecule);
@@ -792,6 +1259,9 @@ void MainWindow::setMolecule(Molecule* mol)
   }
 
   Molecule* oldMolecule(m_molecule);
+  // Dirty state travels with the molecule while it is not the active one.
+  if (oldMolecule && oldMolecule != mol)
+    oldMolecule->setProperty(dirtyProperty, m_moleculeDirty);
   m_molecule = mol;
 
   // If the molecule is empty, make the editor active. Otherwise, use the
@@ -801,11 +1271,11 @@ void MainWindow::setMolecule(Molecule* mol)
       m_molecule->atomCount() > 0 ? "Navigator" : "Editor";
     setActiveTool(targetToolName);
     connect(m_molecule, &QtGui::Molecule::changed, this,
-            &MainWindow::markMoleculeDirty);
+            &MainWindow::markMoleculeDirty, Qt::UniqueConnection);
   }
 
   emit moleculeChanged(m_molecule);
-  markMoleculeClean();
+  m_moleculeDirty = m_molecule->property(dirtyProperty).toBool();
   updateWindowTitle();
   m_moleculeModel->setActiveMolecule(m_molecule);
   m_layerModel->addMolecule(m_molecule);
@@ -818,11 +1288,13 @@ void MainWindow::setMolecule(Molecule* mol)
 
   ActiveObjects::instance().setActiveMolecule(m_molecule);
 
-  if (oldMolecule)
+  // Never the molecule that was just connected above.
+  if (oldMolecule && oldMolecule != mol)
     oldMolecule->disconnect(this);
 
   // start the autosave timer
-  startAutosaveTimer();
+  if (!m_skipAutosave)
+    startAutosaveTimer();
 
   // Check if the molecule needs to update the current one.
   QWidget* w = m_multiViewWidget->activeWidget();
@@ -832,9 +1304,32 @@ void MainWindow::setMolecule(Molecule* mol)
   }
 }
 
-void MainWindow::markMoleculeDirty()
+void MainWindow::setOpenedMolecule(Molecule* mol)
 {
+  if (!mol)
+    return;
+
+  // A blank document that was never touched has nothing to lose: the opened
+  // file takes its place. The dirty state is read before setMolecule() swaps
+  // it for the new molecule's.
+  Molecule* previous = m_molecule;
+  const bool replacePrevious = previous != nullptr && previous != mol &&
+                               previous->atomCount() == 0 && !m_moleculeDirty;
+
+  setMolecule(mol);
+
+  if (replacePrevious)
+    closeMolecule(previous);
+}
+
+void MainWindow::markMoleculeDirty(unsigned int changes)
+{
+  // Always refresh the undo/redo text (selection pushes undo commands), but
+  // selecting atoms shouldn't prompt the user to save.
   activeMoleculeEdited();
+  const unsigned int selection = QtGui::Molecule::Selection;
+  if ((changes & ~selection) == 0)
+    return;
   if (!m_moleculeDirty) {
     m_moleculeDirty = true;
     updateWindowTitle();
@@ -985,7 +1480,7 @@ void MainWindow::openFile()
   settings.setValue("MainWindow/lastOpenDir", dir);
 
   // Create one of our readers to read the file:
-  QString extension = info.suffix().toLower();
+  QString extension = chemicalSuffix(fileName);
   FileFormat* reader = nullptr;
   if (extension == "cml")
     reader = new Io::CmlFormat;
@@ -993,8 +1488,8 @@ void MainWindow::openFile()
     reader = new Io::CjsonFormat;
 
   if (!openFile(fileName, reader)) {
-    QMessageBox::information(this, tr("Cannot open file"),
-                             tr("Can't open supplied file %1").arg(fileName));
+    warnUser(Severity::Information, tr("Cannot open file"),
+             tr("Can't open supplied file %1").arg(fileName));
   }
 }
 
@@ -1016,9 +1511,8 @@ void MainWindow::importFile()
   settings.setValue("MainWindow/lastOpenDir", dir);
 
   if (!openFile(reply.second, reply.first->newInstance())) {
-    QMessageBox::information(
-      this, tr("Cannot open file"),
-      tr("Can't open supplied file %1").arg(reply.second));
+    warnUser(Severity::Information, tr("Cannot open file"),
+             tr("Can't open supplied file %1").arg(reply.second));
   }
 }
 
@@ -1040,6 +1534,10 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
     return false;
 
   QString ident = QString::fromStdString(reader->identifier());
+  if (CrashReporter::isAvailable()) {
+    CrashReporter::addBreadcrumb(QStringLiteral("file"),
+                                 QStringLiteral("open format=%1").arg(ident));
+  }
 
   // Prepare the background thread to read in the selected file.
   if (!m_fileReadThread)
@@ -1051,7 +1549,8 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
   if (m_fileReadMolecule)
     m_fileReadMolecule->deleteLater();
   m_fileReadMolecule = new Molecule(this);
-  m_fileReadMolecule->setData("fileName", qPrintable(fileName));
+  // make sure the filename is UTF-8 for serialization
+  m_fileReadMolecule->setData("fileName", fileName.toStdString());
   m_threadedReader->moveToThread(m_fileReadThread);
   m_threadedReader->setMolecule(m_fileReadMolecule);
   m_threadedReader->setFileName(fileName);
@@ -1066,6 +1565,32 @@ bool MainWindow::openFile(const QString& fileName, Io::FileFormat* reader)
     tr("Opening file '%1'\nwith '%2'").arg(fileName).arg(ident));
   /// @todo Add API to abort file ops
   m_progressDialog->setCancelButton(nullptr);
+
+  // Some readers (e.g. Generic Output) only know which program wrote the file
+  // after they start parsing it, so poll for a better identifier and refresh
+  // the label once it changes. The timer is a child of the dialog, so it goes
+  // away with it, and the guards cover a read finishing between timeouts.
+  QPointer<QProgressDialog> dialog(m_progressDialog);
+  QPointer<BackgroundFileFormat> backgroundReader(m_threadedReader);
+  auto* identifierTimer = new QTimer(m_progressDialog);
+  identifierTimer->setInterval(1000);
+  connect(
+    identifierTimer, &QTimer::timeout, this,
+    [dialog, backgroundReader, identifierTimer, fileName, ident] {
+      if (dialog.isNull() || backgroundReader.isNull()) {
+        identifierTimer->stop();
+        return;
+      }
+      QString current =
+        QString::fromStdString(backgroundReader->fileFormat()->identifier());
+      if (current == ident)
+        return;
+      dialog->setLabelText(
+        MainWindow::tr("Opening file '%1'\nwith '%2'").arg(fileName, current));
+      identifierTimer->stop();
+    });
+  identifierTimer->start();
+
   connect(m_fileReadThread, &QThread::started, m_threadedReader,
           &BackgroundFileFormat::read);
   connect(m_threadedReader, &BackgroundFileFormat::finished, m_fileReadThread,
@@ -1099,15 +1624,28 @@ void MainWindow::backgroundReaderFinished()
   if (m_progressDialog->wasCanceled()) {
     delete m_fileReadMolecule;
   } else if (m_threadedReader->success()) {
-    if (!fileName.isEmpty()) {
-      m_fileReadMolecule->setData("fileName", qPrintable(fileName));
+    const bool recovered = !fileName.isEmpty() && isAutosaveFile(fileName);
+    if (recovered) {
+      // A recovered autosave is an unsaved document, not a file called
+      // "..._autosave.cjson": leave it untitled and let the molecule own the
+      // autosave file, so further autosaves overwrite it and it is removed once
+      // the document is saved or discarded.
+      m_fileReadMolecule->setData("fileName", Core::Variant());
+      m_fileReadMolecule->setProperty(autosaveProperty,
+                                      QFileInfo(fileName).fileName());
+      // Unsaved work: dirty, and undoing to an empty stack must not discard it.
+      m_fileReadMolecule->setProperty(recoveredProperty, true);
+      m_fileReadMolecule->setProperty(dirtyProperty, true);
+    } else if (!fileName.isEmpty()) {
+      // Make sure the fileName is UTF-8 for serialization
+      m_fileReadMolecule->setData("fileName", fileName.toStdString());
       m_recentFiles.prepend(fileName);
       updateRecentFiles();
     } else {
       m_fileReadMolecule->setData("fileName", Core::Variant());
     }
 
-    setMolecule(m_fileReadMolecule);
+    setOpenedMolecule(m_fileReadMolecule);
 
     // check if the modelView is set
     if (m_fileReadMolecule->hasData("modelView")) {
@@ -1141,10 +1679,16 @@ void MainWindow::backgroundReaderFinished()
                                .arg(m_molecule->bondCount()),
                              5000);
   } else {
-    QMessageBox::critical(this, tr("File error"),
-                          tr("Error while reading file '%1':\n%2")
-                            .arg(fileName)
-                            .arg(m_threadedReader->error()));
+    if (dialogsSkipped()) {
+      qWarning("--skip-dialogs: skipped 'File error' dialog; error while "
+               "reading file '%s': %s",
+               qPrintable(fileName), qPrintable(m_threadedReader->error()));
+    } else {
+      QMessageBox::critical(this, tr("File error"),
+                            tr("Error while reading file '%1':\n%2")
+                              .arg(fileName)
+                              .arg(m_threadedReader->error()));
+    }
     delete m_fileReadMolecule;
   }
   m_fileReadThread->deleteLater();
@@ -1165,24 +1709,39 @@ void MainWindow::backgroundReaderFinished()
 bool MainWindow::backgroundWriterFinished()
 {
   QString fileName = m_threadedWriter->fileName();
+  // The writer is always handed a QtGui::Molecule (see
+  // saveFile()/saveFileAs()).
+  QPointer<QtGui::Molecule> writtenMolecule =
+    dynamic_cast<QtGui::Molecule*>(m_threadedWriter->molecule());
   bool success = false;
+  QString errorMessage;
   if (!m_progressDialog->wasCanceled()) {
     if (m_threadedWriter->success()) {
       statusBar()->showMessage(
         tr("Saved file %1", "%1 = filename").arg(fileName));
-      m_threadedWriter->molecule()->setData("fileName", qPrintable(fileName));
-      markMoleculeClean();
+      m_threadedWriter->molecule()->setData("fileName", fileName.toStdString());
+      // The written molecule is normally the active one, but may not be if the
+      // user switched while the write ran.
+      if (writtenMolecule == m_molecule)
+        markMoleculeClean();
+      else if (writtenMolecule)
+        writtenMolecule->setProperty(dirtyProperty, false);
       updateWindowTitle();
       m_recentFiles.prepend(fileName);
       updateRecentFiles();
       success = true;
     } else {
-      QMessageBox::critical(
-        this, tr("Error saving file"),
+      // Under --skip-dialogs the error reaches a waiting RPC caller through
+      // commandCompleted() below.
+      errorMessage = m_threadedWriter->error();
+      warnUser(
+        Severity::Critical, tr("Error saving file"),
         tr("Error while saving '%1':\n%2", "%1 = file name, %2 = error message")
           .arg(fileName)
-          .arg(m_threadedWriter->error()));
+          .arg(errorMessage));
     }
+  } else {
+    errorMessage = tr("The save was canceled.");
   }
   m_fileWriteThread->deleteLater();
   m_fileWriteThread = nullptr;
@@ -1191,76 +1750,80 @@ bool MainWindow::backgroundWriterFinished()
   m_progressDialog->deleteLater();
   m_progressDialog = nullptr;
 
-  // On successful save, remove any autosave files
-  if (success)
-    cleanupAutosaves(fileName);
+  // On successful save (or Save As) the autosave is obsolete. The next autosave
+  // picks a new name, which follows the new file name.
+  if (success) {
+    removeAutosave(writtenMolecule);
+    if (writtenMolecule)
+      writtenMolecule->setProperty(recoveredProperty, QVariant());
+  }
+
+  // Report back to a script that is waiting on this export via RPC, the
+  // same way a plugin command does.
+  if (m_pendingExportToken != 0) {
+    const quint64 token = m_pendingExportToken;
+    m_pendingExportToken = 0;
+    QVariantMap result;
+    result["fileName"] = fileName;
+    emit commandCompleted(token, success, errorMessage, result);
+  }
 
   return success;
 }
 
-void MainWindow::cleanupAutosaves(QString fileName)
+void MainWindow::removeAutosave(QtGui::Molecule* molecule)
 {
-  if (fileName.isEmpty())
+  if (!molecule)
     return;
 
-#ifndef NDEBUG
-  qDebug() << "Cleaning up autosaves for " << fileName;
-#endif
+  const QString name = molecule->property(autosaveProperty).toString();
+  if (name.isEmpty())
+    return;
 
-  QString autosaveDirPath =
-    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
-    "/autosave";
-  QDir autosaveDir(autosaveDirPath);
-  QStringList autosaveFiles =
-    autosaveDir.entryList(QStringList() << "*_autosave.cjson", QDir::Files);
-  // check if fileName is in autosaveFiles
-  for (const QString& file : autosaveFiles) {
-    if (file.contains(fileName)) {
-      // we don't need this anymore because the real file is saved
-      QFile::remove(autosaveDir.absoluteFilePath(file));
-      break;
-    }
-  }
+  // Only ever the file this molecule wrote, in either (plain / gzip) form.
+  const QDir dir(autosaveDirPath());
+  QFile::remove(dir.absoluteFilePath(name));
+  QFile::remove(dir.absoluteFilePath(otherAutosaveForm(name)));
+  molecule->setProperty(autosaveProperty, QVariant());
 }
 
-void MainWindow::cleanupCurrentAutosave()
+QString MainWindow::autosaveNameFor(QtGui::Molecule* molecule)
 {
-  if (!m_molecule)
-    return;
+  QString name = molecule->property(autosaveProperty).toString();
+  if (!name.isEmpty())
+    return name;
 
-  QString autosaveDirPath =
-    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
-    "/autosave";
-  QDir autosaveDir(autosaveDirPath);
-  if (!autosaveDir.exists())
-    return;
-
-  QStringList autosaveFiles =
-    autosaveDir.entryList(QStringList() << "*_autosave.cjson", QDir::Files);
-
-  // Determine the search pattern based on whether the molecule has a filename
-  QString searchPattern;
-  if (m_molecule->hasData("fileName")) {
-    QFileInfo fileInfo(m_molecule->data("fileName").toString().c_str());
-    searchPattern = fileInfo.baseName();
+  QString prefix;
+  if (molecule->hasData("fileName")) {
+    prefix =
+      QFileInfo(QString::fromStdString(molecule->data("fileName").toString()))
+        .baseName()
+        .left(60);
   } else {
-    // For untitled documents, match by formula
-    searchPattern = QString::fromStdString(m_molecule->formula());
-    searchPattern.remove(QRegularExpression("[^A-Za-z0-9]"));
+    QString formula = QString::fromStdString(molecule->formula());
+    formula.remove(QRegularExpression("[^A-Za-z0-9]")); // sanitize
+    prefix = tr("untitled") + formula.left(60);
   }
+  if (prefix.isEmpty())
+    prefix = tr("untitled");
 
-  if (searchPattern.isEmpty())
-    return;
-
-  for (const QString& file : autosaveFiles) {
-    if (file.contains(searchPattern)) {
-      QFile::remove(autosaveDir.absoluteFilePath(file));
-      // Don't break - there might be multiple autosaves for untitled documents
-    }
+  // A random token, chosen once, keeps documents apart even when they share a
+  // base name (or a formula). Retry on the unlikely collision with a file
+  // already there.
+  const QDir dir(autosaveDirPath());
+  for (int attempt = 0; attempt < 100; ++attempt) {
+    const QString token =
+      QString::number(QRandomGenerator::global()->generate(), 16)
+        .rightJustified(8, QLatin1Char('0'));
+    name = prefix + "_" + token + autosaveSuffix();
+    if (!dir.exists(name) && !dir.exists(otherAutosaveForm(name)))
+      break;
   }
+  molecule->setProperty(autosaveProperty, name);
+  return name;
 }
 
-#ifdef AVOGADRO_ENABLE_SUBPROCESS
+#ifdef AVOGADRO_USE_SUBPROCESS
 static bool copyDirectoryRecursively(const QString& srcPath,
                                      const QString& dstPath)
 {
@@ -1275,6 +1838,12 @@ static bool copyDirectoryRecursively(const QString& srcPath,
     srcDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
   QDir dstDir(dstPath);
   for (const QString& entry : entries) {
+    // Never carry a dot entry across. Those names are reserved for the
+    // Python environment at the destination, which is preserved rather than
+    // replaced, and QDir::Hidden would not agree across platforms about
+    // which of them are listed here in the first place.
+    if (entry.startsWith(QLatin1Char('.')))
+      continue;
     const QString src = srcDir.filePath(entry);
     const QString dst = dstDir.filePath(entry);
     if (QFileInfo(src).isDir()) {
@@ -1286,6 +1855,129 @@ static bool copyDirectoryRecursively(const QString& srcPath,
     }
   }
   return true;
+}
+
+// Rank of the PEP 440 suffix that follows a version's release numbers, and,
+// in @p number, the release count that goes with it. QVersionNumber stops at
+// the first non-digit and ignores everything after it, so without this a
+// 2.0.0 release would never replace the 2.0.0rc1 that preceded it. The
+// ordering is PEP 440's:
+//   2.0.dev1 < 2.0a1 < 2.0b1 < 2.0rc1 < 2.0 < 2.0.post1
+// Epochs and local versions are not handled: a local version ("+abc") does
+// not order against the release it is built from, so it ranks as final.
+static int versionSuffixRank(QString suffix, int& number)
+{
+  number = 0;
+
+  // PEP 440 allows ".", "-" and "_" as separators before the marker.
+  suffix = suffix.toLower();
+  while (!suffix.isEmpty() &&
+         (suffix.at(0) == QLatin1Char('.') ||
+          suffix.at(0) == QLatin1Char('-') || suffix.at(0) == QLatin1Char('_')))
+    suffix.remove(0, 1);
+
+  // A marker that is a prefix of another must come after it, so that "alpha"
+  // is not read as "a", "preview" as "pre", or "rc"/"rev" as "r".
+  static const struct
+  {
+    const char* marker;
+    int rank;
+  } markers[] = { { "dev", 0 }, { "alpha", 1 },   { "a", 1 },   { "beta", 2 },
+                  { "b", 2 },   { "preview", 3 }, { "pre", 3 }, { "rc", 3 },
+                  { "c", 3 },   { "post", 5 },    { "rev", 5 }, { "r", 5 } };
+
+  constexpr int finalRank = 4;
+  for (const auto& marker : markers) {
+    const QLatin1String name(marker.marker);
+    if (!suffix.startsWith(name))
+      continue;
+    // Digits after the marker are its release count ("rc2" beats "rc1").
+    number = QStringView(suffix).mid(name.size()).toInt();
+    return marker.rank;
+  }
+
+  // No marker: a plain release, or something we do not recognise and must
+  // not invent an ordering for.
+  return finalRank;
+}
+
+// Whether @p bundled is a strictly newer release than @p installed. An
+// installed version that is missing or unreadable counts as older: that copy
+// is damaged, and replacing it is the repair.
+static bool isNewerVersion(const QString& bundled, const QString& installed)
+{
+  if (installed.isEmpty())
+    return true;
+
+  qsizetype bundledSuffix = 0;
+  qsizetype installedSuffix = 0;
+  const QVersionNumber bundledVersion =
+    QVersionNumber::fromString(bundled, &bundledSuffix);
+  const QVersionNumber installedVersion =
+    QVersionNumber::fromString(installed, &installedSuffix);
+
+  // Nothing numeric to compare (a date, a git hash): only an exact match can
+  // safely be called "not newer".
+  if (bundledVersion.isNull() || installedVersion.isNull())
+    return bundled != installed;
+
+  const int release = QVersionNumber::compare(bundledVersion, installedVersion);
+  if (release != 0)
+    return release > 0;
+
+  // Same release numbers, so the suffixes decide.
+  int bundledNumber = 0;
+  int installedNumber = 0;
+  const int bundledRank =
+    versionSuffixRank(bundled.mid(bundledSuffix), bundledNumber);
+  const int installedRank =
+    versionSuffixRank(installed.mid(installedSuffix), installedNumber);
+
+  if (bundledRank != installedRank)
+    return bundledRank > installedRank;
+  return bundledNumber > installedNumber;
+}
+
+// Delete a package's own files, leaving anything whose name starts with a dot
+// (.pixi, .venv) in place: the Python environment is expensive to rebuild,
+// and installing the package again repairs it against the new manifest.
+// Entries are matched by name rather than by QDir::Hidden, whose meaning
+// differs between platforms.
+static void removePackageFiles(const QString& dirPath)
+{
+  QDir dir(dirPath);
+  const QStringList entries =
+    dir.entryList(QDir::AllEntries | QDir::Hidden | QDir::NoDotAndDotDot);
+  for (const QString& entry : entries) {
+    if (entry.startsWith(QLatin1Char('.')))
+      continue;
+    const QString path = dir.filePath(entry);
+    if (QFileInfo(path).isDir())
+      QDir(path).removeRecursively();
+    else
+      QFile::remove(path);
+  }
+}
+
+// Move every entry of @p srcPath into @p dstPath, creating it if needed.
+// Staging sits beside the destination on the same filesystem, so each move is
+// a rename rather than a second copy. Nothing staged is a dot entry, so the
+// Python environment left in place at the destination is never in the way.
+static bool movePackageFiles(const QString& srcPath, const QString& dstPath)
+{
+  if (!QDir().mkpath(dstPath))
+    return false;
+
+  QDir srcDir(srcPath);
+  QDir dstDir(dstPath);
+  const QStringList entries =
+    srcDir.entryList(QDir::AllEntries | QDir::Hidden | QDir::NoDotAndDotDot);
+  bool moved = true;
+  for (const QString& entry : entries) {
+    if (!QDir().rename(srcDir.filePath(entry), dstDir.filePath(entry)))
+      moved = false;
+  }
+  return moved;
 }
 
 static qint64 recursiveDirSize(const QString& dirPath)
@@ -1346,27 +2038,32 @@ void MainWindow::loadPackages()
         QString sizeStr = QLocale().formattedDataSize(
           totalBytes, 1, QLocale::DataSizeTraditionalFormat);
 
-        QMessageBox msgBox(this);
-        msgBox.setWindowTitle(tr("Found Previous Avogadro Files"));
-        msgBox.setText(
-          tr("Files from a previous version of Avogadro were found in "
-             "the plugins directory, using %1 of space.\n\n"
-             "These files are no longer needed and can be safely removed.")
-            .arg(sizeStr));
-        msgBox.setDetailedText(oldEntries.join(QStringLiteral("\n")));
-        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-        msgBox.setDefaultButton(QMessageBox::Yes);
-        msgBox.setButtonText(QMessageBox::Yes, tr("Remove Old Files"));
-        msgBox.setButtonText(QMessageBox::No, tr("Keep Files"));
+        if (dialogsSkipped()) {
+          qInfo("--skip-dialogs: skipped 'Found Previous Avogadro Files' "
+                "dialog; assuming 'Keep Files'.");
+        } else {
+          QMessageBox msgBox(this);
+          msgBox.setWindowTitle(tr("Found Previous Avogadro Files"));
+          msgBox.setText(
+            tr("Files from a previous version of Avogadro were found in "
+               "the plugins directory, using %1 of space.\n\n"
+               "These files are no longer needed and can be safely removed.")
+              .arg(sizeStr));
+          msgBox.setDetailedText(oldEntries.join(QStringLiteral("\n")));
+          msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+          msgBox.setDefaultButton(QMessageBox::Yes);
+          msgBox.setButtonText(QMessageBox::Yes, tr("Remove Old Files"));
+          msgBox.setButtonText(QMessageBox::No, tr("Keep Files"));
 
-        if (msgBox.exec() == QMessageBox::Yes) {
-          for (const QString& entry : oldEntries) {
-            QString path = appDataDir.filePath(entry);
-            QFileInfo info(path);
-            if (info.isDir())
-              QDir(path).removeRecursively();
-            else
-              QFile::remove(path);
+          if (msgBox.exec() == QMessageBox::Yes) {
+            for (const QString& entry : oldEntries) {
+              QString path = appDataDir.filePath(entry);
+              QFileInfo info(path);
+              if (info.isDir())
+                QDir(path).removeRecursively();
+              else
+                QFile::remove(path);
+            }
           }
         }
       }
@@ -1385,6 +2082,13 @@ void MainWindow::loadPackages()
   // Copy bundled packages to the writable location if not already present.
   // This handles read-only filesystems (AppImage, admin installs, etc.) in
   // which pixi/pip cannot create .pixi/.venv environments in the bundled path.
+
+  // Staging area for package copies. It sits outside the plugin directory so
+  // that a leftover from an interrupted copy is never scanned as a package in
+  // its own right, and under the same root so that moving files out of it is
+  // a rename rather than a second copy.
+  const QString stagingDir = writeableDir + QStringLiteral("/staging");
+
   QDir bundledDir(bundledPluginsDir);
   if (bundledDir.exists()) {
     const QStringList subdirs =
@@ -1395,15 +2099,58 @@ void MainWindow::loadPackages()
       if (!QDir(srcPath).exists(QStringLiteral("pyproject.toml")))
         continue;
       const QString dstPath = writablePluginsDir + QLatin1Char('/') + subdir;
-      if (!QDir(dstPath).exists()) {
-        qDebug() << "Copying bundled package" << subdir
-                 << "to writable location";
-        if (!copyDirectoryRecursively(srcPath, dstPath)) {
-          qWarning() << "Failed to copy bundled package" << srcPath << "to"
-                     << dstPath;
-        }
+
+      // Refresh the copy when the bundled package is a newer release, not
+      // only when there is no copy at all: an Avogadro upgrade ships fixes to
+      // these packages (a missing [tool.pixi] table, a renamed entry point),
+      // and a copy made by an older version would otherwise be kept for ever.
+      //
+      // The comparison is by version and never by content. The plugin
+      // downloader installs into this very directory, so a package the user
+      // has updated themselves must not be reverted to the bundled copy —
+      // and with only content to go on, every launch would revert it again.
+      const QString bundledVersion =
+        QtGui::PackageManager::packageVersion(srcPath);
+      if (bundledVersion.isEmpty())
+        continue; // unreadable; leave whatever is already installed alone
+
+      const bool haveCopy = QDir(dstPath).exists();
+      if (haveCopy &&
+          !isNewerVersion(bundledVersion,
+                          QtGui::PackageManager::packageVersion(dstPath)))
+        continue;
+
+      // Copy into a staging directory first. Copying straight over the
+      // installed package would destroy a working one the moment anything
+      // went wrong part way through — and since a half-copy can already
+      // carry the bundled version in its pyproject.toml, nothing above would
+      // ever offer to repair it.
+      const QString stagePath = stagingDir + QLatin1Char('/') + subdir;
+      QDir(stagePath).removeRecursively(); // leftovers from an interrupted run
+      if (!copyDirectoryRecursively(srcPath, stagePath)) {
+        qWarning() << "Failed to stage bundled package" << srcPath << "at"
+                   << stagePath;
+        QDir(stagePath).removeRecursively();
+        continue; // whatever is installed stays as it was
       }
+
+      qDebug() << (haveCopy ? "Refreshing bundled package"
+                            : "Copying bundled package")
+               << subdir;
+
+      // Only now replace the package's own files, so that the window in
+      // which the destination is incomplete is a few renames wide. Dot
+      // entries are left alone throughout: the Python environment is
+      // expensive to rebuild, and the install pass below repairs it against
+      // the new manifest.
+      removePackageFiles(dstPath);
+      if (!movePackageFiles(stagePath, dstPath)) {
+        qWarning() << "Failed to install bundled package" << subdir << "into"
+                   << dstPath;
+      }
+      QDir(stagePath).removeRecursively();
     }
+    QDir(stagingDir).removeRecursively();
   }
 
   // Scan writable AppLocalDataLocation/plugins paths for new packages.
@@ -1433,7 +2180,11 @@ void MainWindow::loadPackages()
   newPackages = writablePackages;
 
   // If there are new or updated packages, ask the user before installing
-  if (!newPackages.isEmpty()) {
+  if (!newPackages.isEmpty() && dialogsSkipped()) {
+    qInfo("--skip-dialogs: skipped plugin setup/update prompt; assuming 'No' "
+          "(%d package(s) not installed).",
+          static_cast<int>(newPackages.size()));
+  } else if (!newPackages.isEmpty()) {
     QStringList packageNames;
     foreach (const QString& dir, newPackages) {
       packageNames << QFileInfo(dir).baseName();
@@ -1458,7 +2209,7 @@ void MainWindow::loadPackages()
     } else {
       msgBox.setWindowTitle(tr("Install updated plugins?"));
       msgBox.setText(tr("The following plugins are available:"));
-      msgBox.setInformativeText(tr("Would you like to install them?"));
+      msgBox.setInformativeText(tr("Would you like to update them?"));
       msgBox.setDetailedText(packageNames.join("\n"));
     }
 
@@ -1473,9 +2224,11 @@ void MainWindow::loadPackages()
     }
   }
 
-  settings.setValue("MainWindow/firstRun", false);
+  // Skipping the dialogs is not an answer to them; ask again next time.
+  if (!dialogsSkipped())
+    settings.setValue("MainWindow/firstRun", false);
 
-  // Load cached registrations so consumer plugins get their signals
+    // Load cached registrations so consumer plugins get their signals
 #ifndef NDEBUG
   qDebug() << "Load registered packages";
 #endif
@@ -1485,15 +2238,12 @@ void MainWindow::loadPackages()
 
 void MainWindow::checkAutosaveRecovery()
 {
-  QString autosaveDirPath =
-    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
-    "/autosave";
-  QDir autosaveDir(autosaveDirPath);
+  QDir autosaveDir(autosaveDirPath());
   if (!autosaveDir.exists())
     return;
 
   QStringList autosaveFiles =
-    autosaveDir.entryList(QStringList() << "*_autosave.cjson", QDir::Files);
+    autosaveDir.entryList(autosaveNameFilters(), QDir::Files);
   if (autosaveFiles.isEmpty())
     return; // great, nothing to do
 
@@ -1504,10 +2254,12 @@ void MainWindow::checkAutosaveRecovery()
     QMessageBox::Yes | QMessageBox::No);
 
   if (reply == QMessageBox::Yes) {
-    for (const QString& file : autosaveFiles) {
-      QString path = autosaveDir.absoluteFilePath(file);
-      openFile(path, new Io::CjsonFormat);
-    }
+    // Open them one after another through the queue: each read replaces the
+    // single in-flight reader state. backgroundReaderFinished() recognizes
+    // these as recovered autosaves and hands each one to its molecule.
+    for (const QString& file : autosaveFiles)
+      m_queuedFiles.append(autosaveDir.absoluteFilePath(file));
+    readQueuedFiles();
   }
 
   // Optionally, cleanup old autosaves
@@ -1538,14 +2290,19 @@ void MainWindow::toolActivated()
   if (auto* action = qobject_cast<QAction*>(sender())) {
     if (auto* glWidget =
           qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())) {
-      glWidget->setActiveTool(action->data().toString());
+      const QString toolId = action->data().toString();
+      glWidget->setActiveTool(toolId);
+      if (CrashReporter::isAvailable()) {
+        CrashReporter::addBreadcrumb(
+          QStringLiteral("tool"), QStringLiteral("activated %1").arg(toolId));
+      }
       if (glWidget->activeTool()) {
         m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
 
         // uncheck the toolbar
         foreach (QAction* barAction, m_toolToolBar->actions()) {
-          if (action->data().toString() != barAction->data().toString())
+          if (toolId != barAction->data().toString())
             barAction->setChecked(false);
         }
       }
@@ -1558,50 +2315,107 @@ void MainWindow::viewConfigActivated() {}
 void MainWindow::rendererInvalid()
 {
   auto* widget = qobject_cast<GLWidget*>(sender());
-  QMessageBox::warning(this, tr("Error: Failed to initialize OpenGL context"),
-                       tr("OpenGL 4.0 or greater required, exiting.\n\n%1")
-                         .arg(widget ? widget->error() : tr("Unknown error")));
+  if (dialogsSkipped()) {
+    qCritical("--skip-dialogs: OpenGL 4.0 or greater required, exiting. %s",
+              qPrintable(widget ? widget->error() : tr("Unknown error")));
+  } else {
+    QMessageBox::warning(
+      this, tr("Error: Failed to initialize OpenGL context"),
+      tr("OpenGL 4.0 or greater required, exiting.\n\n%1")
+        .arg(widget ? widget->error() : tr("Unknown error")));
+  }
   // Process events, and then set a single shot timer. This is needed to ensure
   // the RPC server also exits cleanly.
   QApplication::processEvents();
   QTimer::singleShot(500, this, &QWidget::close);
 }
 
+void MainWindow::addLayer()
+{
+  m_layerModel->addLayer(m_molecule->undoMolecule());
+}
+
+void MainWindow::removeLayer(size_t layer)
+{
+  m_layerModel->removeLayerId(layer, m_molecule->undoMolecule());
+  QWidget* w = m_multiViewWidget->activeWidget();
+  if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w))
+    glWidget->updateScene();
+}
+
+void MainWindow::setActiveLayer(size_t layer)
+{
+  m_layerModel->setActiveLayerId(layer, m_molecule->undoMolecule());
+}
+
+void MainWindow::setLayerVisible(size_t layer, bool visible)
+{
+  m_layerModel->setLayerVisible(layer, visible);
+  QWidget* w = m_multiViewWidget->activeWidget();
+  if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w))
+    glWidget->updateScene();
+}
+
+void MainWindow::setLayerLocked(size_t layer, bool locked)
+{
+  m_layerModel->setLayerLocked(layer, locked);
+}
+
+bool MainWindow::layerIdFromOptions(const QVariantMap& options,
+                                    QString* message, size_t* layer) const
+{
+  int value = 0;
+  const IndexStatus status =
+    indexFromOptions(options, QStringLiteral("layer"),
+                     static_cast<int>(m_layerModel->layerCount()), &value);
+
+  QString problem;
+  switch (status) {
+    case IndexStatus::Valid:
+      *layer = static_cast<size_t>(value);
+      return true;
+    case IndexStatus::Missing:
+      problem = tr("Missing 'layer' parameter.");
+      break;
+    case IndexStatus::NotWholeNumber:
+      problem = tr("'layer' must be a whole number.");
+      break;
+    case IndexStatus::OutOfRange:
+      problem = tr("'layer' %1 is out of range.").arg(value);
+      break;
+  }
+  if (message != nullptr)
+    *message = problem;
+  return false;
+}
+
 void MainWindow::layerActivated(const QModelIndex& idx)
 {
   m_layerModel->updateRows();
   if (idx.row() == m_layerModel->items() - 1) {
-    m_layerModel->addLayer(m_molecule->undoMolecule());
+    addLayer();
   } else {
-    bool updateGL = false;
-    if (idx.column() == QtGui::LayerModel::ColumnType::Name) {
-      m_layerModel->setActiveLayer(idx.row(), m_molecule->undoMolecule());
-    } else if (idx.column() == QtGui::LayerModel::ColumnType::Remove) {
-      if (m_layerModel->layerCount() > 1) {
-        m_layerModel->removeItem(idx.row(), m_molecule->undoMolecule());
-        updateGL = true;
-      }
-    } else if (idx.column() == QtGui::LayerModel::ColumnType::Lock) {
-      m_layerModel->flipLocked(idx.row());
-    } else if (idx.column() == QtGui::LayerModel::ColumnType::Visible) {
-      m_layerModel->flipVisible(idx.row());
-      updateGL = true;
-    } else if (idx.column() == QtGui::LayerModel::ColumnType::Menu) {
-      m_layerModel->setActiveLayer(idx.row(), m_molecule->undoMolecule());
-      if (m_sceneDock->isHidden()) {
-        m_sceneDock->show();
-        m_viewDock->show();
-        resizeDocks({ m_sceneDock, m_viewDock }, { 250, 50 }, Qt::Vertical);
-      } else {
-        m_sceneDock->hide();
-        m_viewDock->hide();
-      }
-    }
-
-    if (updateGL) {
-      QWidget* w = m_multiViewWidget->activeWidget();
-      if (auto* glWidget = qobject_cast<QtOpenGL::GLWidget*>(w)) {
-        glWidget->updateScene();
+    const size_t layer = m_layerModel->layerForRow(idx.row());
+    if (layer != MaxIndex) {
+      if (idx.column() == QtGui::LayerModel::ColumnType::Name) {
+        setActiveLayer(layer);
+      } else if (idx.column() == QtGui::LayerModel::ColumnType::Remove) {
+        if (m_layerModel->layerCount() > 1)
+          removeLayer(layer);
+      } else if (idx.column() == QtGui::LayerModel::ColumnType::Lock) {
+        setLayerLocked(layer, !m_layerModel->layerLocked(layer));
+      } else if (idx.column() == QtGui::LayerModel::ColumnType::Visible) {
+        setLayerVisible(layer, !m_layerModel->layerVisible(layer));
+      } else if (idx.column() == QtGui::LayerModel::ColumnType::Menu) {
+        setActiveLayer(layer);
+        if (m_sceneDock->isHidden()) {
+          m_sceneDock->show();
+          m_viewDock->show();
+          resizeDocks({ m_sceneDock, m_viewDock }, { 250, 50 }, Qt::Vertical);
+        } else {
+          m_sceneDock->hide();
+          m_viewDock->hide();
+        }
       }
     }
   }
@@ -1621,20 +2435,9 @@ void MainWindow::moleculeActivated(const QModelIndex& idx)
     if (idx.column() == 0)
       setMolecule(mol);
 
-    // Deleting a molecule, we must also create a new one if it is the last.
-    if (idx.column() == 1) {
-      if (m_molecule == mol) {
-        int molIdx = molecules.indexOf(mol);
-        if (molIdx > 0)
-          setMolecule(molecules[molIdx - 1]);
-        else if (molIdx == 0 && molecules.size() > 1) {
-          setMolecule(molecules[1]);
-        } else {
-          newMolecule();
-        }
-      }
-      m_moleculeModel->removeItem(mol);
-    }
+    // The second column is the close button.
+    if (idx.column() == 1)
+      closeMolecule(mol);
   }
 }
 
@@ -1781,8 +2584,12 @@ void MainWindow::viewActivated(QWidget* widget)
       setActiveTool("Navigator");
       glWidget->updateScene();
     } else {
-      m_moleculeModel->setActiveMolecule(glWidget->molecule());
-      m_layerModel->addMolecule(m_molecule);
+      // Both models follow the view's molecule; m_molecule is only updated
+      // below, so it may still be the previous view's molecule here.
+      if (QtGui::Molecule* viewMolecule = glWidget->molecule()) {
+        m_moleculeModel->setActiveMolecule(viewMolecule);
+        m_layerModel->addMolecule(viewMolecule);
+      }
       // Figure out the active tool - reflect this in the toolbar.
       ToolPlugin* tool = glWidget->activeTool();
       if (tool) {
@@ -1794,7 +2601,10 @@ void MainWindow::viewActivated(QWidget* widget)
     }
     if (m_molecule != glWidget->molecule() && glWidget->molecule()) {
       m_rwMolecule = nullptr;
+      if (m_molecule)
+        m_molecule->setProperty(dirtyProperty, m_moleculeDirty);
       m_molecule = glWidget->molecule();
+      m_moleculeDirty = m_molecule->property(dirtyProperty).toBool();
       emit moleculeChanged(m_molecule);
       m_moleculeModel->setActiveMolecule(m_molecule);
       m_layerModel->addMolecule(m_molecule);
@@ -1805,9 +2615,21 @@ void MainWindow::viewActivated(QWidget* widget)
   activeMoleculeEdited();
 }
 
-QImage MainWindow::renderToImage(const QSize& size)
+QSize MainWindow::activeViewSize() const
 {
-  QImage exportImage(size, QImage::Format_ARGB32);
+  QWidget* widget = m_multiViewWidget->activeWidget();
+  return widget != nullptr ? widget->size() : QSize();
+}
+
+QtOpenGL::GLWidget* MainWindow::activeGLWidget() const
+{
+  return qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+}
+
+QImage MainWindow::renderToImage(const QSize& requestedSize,
+                                 bool transparentBackground, QSize* nativeSize)
+{
+  QImage exportImage;
 
   auto* glWidget =
     qobject_cast<QOpenGLWidget*>(m_multiViewWidget->activeWidget());
@@ -1819,6 +2641,12 @@ QImage MainWindow::renderToImage(const QSize& size)
          qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
     scene = &viewWidget->renderer().scene();
   }
+
+  // Without an active GL view there is nothing to grab; hand back a null
+  // image so callers can report the failure rather than crash here.
+  if (scene == nullptr || glWidget == nullptr)
+    return QImage();
+
   Vector4ub cColor = scene->backgroundColor();
   unsigned char red = cColor[0];
   unsigned char green = cColor[1];
@@ -1848,6 +2676,57 @@ QImage MainWindow::renderToImage(const QSize& size)
   cColor[3] = alpha; // previous color
   scene->setBackgroundColor(cColor);
   glWidget->repaint();
+
+  if (nativeSize != nullptr)
+    *nativeSize = exportImage.size();
+
+  if (requestedSize.isValid() && !requestedSize.isEmpty()) {
+    // Fit the native grab onto a canvas of exactly requestedSize: scale
+    // preserving aspect ratio, then centre it, filling any letterboxing
+    // with either the view's background colour or transparency. This also
+    // serves as the "!transparentBackground" composite for this path, so
+    // that block must not run again below.
+    //
+    // Note: padding to a different aspect ratio preserves the original
+    // framing rather than re-composing the scene, so a render padded to an
+    // aspect ratio it wasn't composed for will sit smaller in frame than a
+    // true render at that aspect would. This is a deliberate stopgap until
+    // a real offscreen framebuffer render path replaces the
+    // grab-and-resample approach here.
+    QImage fitted(requestedSize, QImage::Format_ARGB32_Premultiplied);
+    fitted.fill(transparentBackground ? QColor(Qt::transparent)
+                                      : QColor(red, green, blue, 255));
+    QImage scaled = exportImage.scaled(requestedSize, Qt::KeepAspectRatio,
+                                       Qt::SmoothTransformation);
+    // QImage::scaled() propagates the source's device pixel ratio (2 on a
+    // Retina grab). QPainter::drawImage() honours that ratio and draws at
+    // logical size, so without resetting it here the content lands scaled
+    // down into a corner of "fitted" instead of filling it. "fitted" itself
+    // is already ratio-1.0 (default-constructed), and requestedSize/painter
+    // coordinates below are in raw pixels, so the drawn image must match.
+    scaled.setDevicePixelRatio(1.0);
+    QPainter painter(&fitted);
+    painter.drawImage((requestedSize.width() - scaled.width()) / 2,
+                      (requestedSize.height() - scaled.height()) / 2, scaled);
+    painter.end();
+    exportImage = fitted.convertToFormat(QImage::Format_ARGB32);
+  } else if (!transparentBackground) {
+    // No resize requested: composite the transparent render over the
+    // view's actual background colour, so the caller gets an opaque image.
+    QImage opaqueImage(exportImage.size(), QImage::Format_ARGB32_Premultiplied);
+    opaqueImage.fill(QColor(red, green, blue, 255));
+    // Draw a ratio-1.0 copy of the source: opaqueImage was constructed with
+    // exportImage.size() (raw pixels) at the default ratio of 1.0, but a
+    // Retina grabFramebuffer() image carries devicePixelRatio() == 2.
+    // QPainter::drawImage() honours the source ratio and would draw it at
+    // half size into the top-left quadrant otherwise.
+    QImage source = exportImage;
+    source.setDevicePixelRatio(1.0);
+    QPainter painter(&opaqueImage);
+    painter.drawImage(0, 0, source);
+    painter.end();
+    exportImage = opaqueImage.convertToFormat(QImage::Format_ARGB32);
+  }
 
   // Now we embed molecular information into the file, if possible
   if (m_molecule && m_molecule->atomCount() < 1000) {
@@ -1886,25 +2765,32 @@ void MainWindow::exportGraphics()
   exportGraphics(fileName);
 }
 
-void MainWindow::exportGraphics(QString fileName)
+bool MainWindow::exportGraphics(QString fileName)
 {
   if (fileName.isEmpty())
-    return;
+    return false;
   if (QFileInfo(fileName).suffix().isEmpty())
     fileName += ".png";
 
-  const QSize size = m_multiViewWidget->activeWidget()->size();
-  QImage exportImage = renderToImage(size);
+  // Pass no size, so we get the untouched native framebuffer grab (full
+  // device resolution), not a copy resampled down to the logical widget
+  // size.
+  QImage exportImage = renderToImage();
 
   if (!exportImage.save(fileName)) {
-    QMessageBox::warning(this, tr("Avogadro"),
-                         tr("Cannot save file %1.").arg(fileName));
+    warnUser(Severity::Warning, tr("Avogadro"),
+             tr("Cannot save file %1.").arg(fileName));
+    return false;
   }
+  return true;
 }
 
 void MainWindow::copyGraphics()
 {
-  QImage exportImage = renderToImage(m_multiViewWidget->activeWidget()->size());
+  // Pass no size, so we get the untouched native framebuffer grab (full
+  // device resolution), not a copy resampled down to the logical widget
+  // size.
+  QImage exportImage = renderToImage();
   QApplication::clipboard()->setImage(exportImage);
 }
 
@@ -1928,8 +2814,8 @@ void MainWindow::openRecentFile()
                                        FileFormat::File | FileFormat::Read);
 
     if (!openFile(fileName, format ? format->newInstance() : nullptr)) {
-      QMessageBox::information(this, tr("Cannot open file"),
-                               tr("Can't open supplied file %1").arg(fileName));
+      warnUser(Severity::Information, tr("Cannot open file"),
+               tr("Can't open supplied file %1").arg(fileName));
     }
   }
 }
@@ -1987,11 +2873,11 @@ bool MainWindow::saveFile(bool async)
     return saveFileAs(async);
 
   string fileName = mol->data("fileName").toString();
-  QString extension =
-    QFileInfo(QString::fromStdString(fileName)).suffix().toLower();
+  QString extension = chemicalSuffix(QString::fromStdString(fileName));
 
   if (extension.isEmpty()) {
-    fileName += ".cjson";
+    fileName = withChemicalExtension(QString::fromStdString(fileName), "cjson")
+                 .toStdString();
     extension = QLatin1String("cjson");
   }
 
@@ -2062,8 +2948,9 @@ bool MainWindow::saveFileAs(bool async)
   dir = info.absoluteDir().absolutePath();
   settings.setValue("MainWindow/lastSaveDir", dir);
 
-  // Use manually entered extension if present
-  QString extension = info.suffix().toLower();
+  // Use manually entered extension if present, ignoring any compression
+  // suffix so that "molecule.cjson.gz" is recognised as CJSON.
+  QString extension = chemicalSuffix(fileName);
   // Otherwise, get extension from selected filter
   if (extension.isEmpty()) {
     QString filter = saveDialog.selectedNameFilter();
@@ -2072,7 +2959,7 @@ bool MainWindow::saveFileAs(bool async)
     else
       extension = "cjson";
 
-    fileName += "." + extension;
+    fileName = withChemicalExtension(fileName, extension);
   }
 
   // Create one of our writers to save the file:
@@ -2102,9 +2989,17 @@ bool MainWindow::exportFile(bool async)
   return saveFileAs(reply.second, reply.first->newInstance(), async);
 }
 
-bool MainWindow::exportFile(const QString& fileName, bool async)
+bool MainWindow::exportFile(const QString& fileName, bool async, quint64 token)
 {
   if (fileName.isEmpty()) {
+    return false;
+  }
+
+  // A background write is already in flight. Its completion token would be
+  // overwritten below, so refuse the request rather than misreport which
+  // export finished. Checked here as well as in saveFileAs() so the token is
+  // never clobbered before that check runs.
+  if (m_fileWriteThread != nullptr) {
     return false;
   }
 
@@ -2113,12 +3008,22 @@ bool MainWindow::exportFile(const QString& fileName, bool async)
 
   std::vector<const FileFormat*> writers =
     Io::FileFormatManager::instance().fileFormatsFromFileExtension(
-      QFileInfo(fileName).suffix().toStdString(),
+      chemicalSuffix(fileName).toStdString(),
       FileFormat::File | FileFormat::Write);
 
   if (!writers.empty()) {
     writer = writers[0]->newInstance();
-    return saveFileAs(fileName, writer, async);
+    // Remember the token so backgroundWriterFinished() can report back once
+    // the write completes, the same way a plugin command does. Only takes
+    // effect for an async write; harmless otherwise since it is cleared
+    // there before it could be read again.
+    m_pendingExportToken = token;
+    const bool started = saveFileAs(fileName, writer, async);
+    // A refused write never reaches backgroundWriterFinished(), which is the
+    // only other place the token is cleared.
+    if (!started && m_fileWriteThread == nullptr)
+      m_pendingExportToken = 0;
+    return started;
   }
 
   return false;
@@ -2145,25 +3050,29 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
   QString ident = QString::fromStdString(writer->identifier());
 
   // Figure out what molecule willl be saved, perform conversion if necessary.
-  QObject* molObj = m_moleculeModel->activeMolecule();
+  // Resolved before anything is allocated below: BackgroundFileFormat takes
+  // ownership of the writer, so bailing out after it is constructed would
+  // both double delete the writer and leave the write state half set up.
+  auto* mol = qobject_cast<Molecule*>(m_moleculeModel->activeMolecule());
 
-  if (!molObj) {
+  if (!mol) {
+    delete writer;
+    return false;
+  }
+
+  // Only one write can be in flight: m_threadedWriter, m_progressDialog and
+  // m_pendingExportToken are all single-slot state, so starting a second one
+  // now would strand the running thread and report its result against the
+  // wrong request. backgroundWriterFinished() clears the thread when it is
+  // done, so this only rejects genuinely concurrent writes.
+  if (m_fileWriteThread != nullptr) {
     delete writer;
     return false;
   }
 
   // Initialize out writer.
-  if (!m_fileWriteThread)
-    m_fileWriteThread = new QThread(this);
-  if (m_threadedWriter)
-    m_threadedWriter->deleteLater();
+  m_fileWriteThread = new QThread(this);
   m_threadedWriter = new BackgroundFileFormat(writer);
-
-  auto* mol = qobject_cast<Molecule*>(molObj);
-  if (!mol) {
-    delete writer;
-    return false;
-  }
 
   // get the camera modelView and projection to save it
   if (auto* glWidget =
@@ -2292,6 +3201,15 @@ void MainWindow::undoEdit()
     m_molecule->emitChanged(Molecule::Atoms | Molecule::Added);
     m_layerModel->updateRows();
     activeMoleculeEdited();
+
+    // if the undo stack is empty, mark m_moleculeDirty false
+    // (a recovered document has no saved state to return to: it stays dirty
+    // and keeps its autosave)
+    if (!m_molecule->undoMolecule()->undoStack().canUndo() &&
+        !m_molecule->property(recoveredProperty).toBool()) {
+      markMoleculeClean();
+      removeAutosave(m_molecule); // back to the saved state
+    }
   }
 }
 
@@ -2302,6 +3220,10 @@ void MainWindow::redoEdit()
     m_molecule->emitChanged(Molecule::Atoms | Molecule::Added);
     m_layerModel->updateRows();
     activeMoleculeEdited();
+
+    // we should have at least one undo command on the stack
+    if (!m_molecule->undoMolecule()->undoStack().canUndo())
+      m_moleculeDirty = true;
   }
 }
 
@@ -2376,6 +3298,7 @@ void MainWindow::setRenderingSettings()
     settings.setValue("MainWindow/dof_enabled", pipeline->getDofEnabled());
     settings.setValue("MainWindow/fog_enabled", pipeline->getFogEnabled());
     settings.setValue("MainWindow/ed_enabled", pipeline->getEdEnabled());
+    settings.setValue("MainWindow/ed_strength", pipeline->getEdStrength());
   }
 }
 
@@ -2408,16 +3331,18 @@ void MainWindow::setProjectionOrthographic()
 #ifdef QTTESTING
 void MainWindow::record()
 {
+  QFileDialog::Options options = QFileDialog::DontUseNativeDialog;
   QString fileName = QFileDialog::getSaveFileName(
-    this, "Test file name", QString(), "XML Files (*.xml)");
+    this, "Test file name", QString(), "XML Files (*.xml)", nullptr, options);
   if (!fileName.isEmpty())
     m_testUtility->recordTests(fileName);
 }
 
 void MainWindow::play()
 {
+  QFileDialog::Options options = QFileDialog::DontUseNativeDialog;
   QString fileName = QFileDialog::getOpenFileName(
-    this, "Test file name", QString(), "XML Files (*.xml)");
+    this, "Test file name", QString(), "XML Files (*.xml)", nullptr, options);
   if (!fileName.isEmpty())
     m_testUtility->playTests(fileName);
 }
@@ -2687,6 +3612,15 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(helpPath, bug, 20);
   connect(bug, &QAction::triggered, this, &MainWindow::openBugReport);
 
+  // Only present on the diagnostic build, which is the only one that has
+  // anything to report.
+  if (CrashReporter::isAvailable()) {
+    auto* crashReporting = new QAction(tr("&Crash Reporting…"), this);
+    m_menuBuilder->addAction(helpPath, crashReporting, 15);
+    connect(crashReporting, &QAction::triggered, this,
+            [this]() { CrashReporter::showSettingsDialog(this); });
+  }
+
   auto* feature = new QAction(tr("&Suggest a Feature"), this);
   m_menuBuilder->addAction(helpPath, feature, 10);
   connect(feature, &QAction::triggered, this, &MainWindow::openFeatureRequest);
@@ -2701,37 +3635,46 @@ void MainWindow::autosaveDocument()
     return; // No molecule loaded or no changes made since the last save.
   }
 
-  QString autosaveDirPath =
-    QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +
-    "/autosave";
-  QDir autosaveDir(autosaveDirPath);
+  const QString dirPath = autosaveDirPath();
+  QDir autosaveDir(dirPath);
   if (!autosaveDir.exists()) {
     autosaveDir.mkpath(".");
   }
 
-  // Construct autosave file name
-  QString autosaveFileName;
-  if (m_molecule->hasData("fileName")) {
-    QFileInfo fileInfo(m_molecule->data("fileName").toString().c_str());
-    autosaveFileName = fileInfo.baseName() + "_autosave.cjson";
-  } else {
-    QString formula = QString::fromStdString(m_molecule->formula());
-    formula.remove(QRegularExpression("[^A-Za-z0-9]")); // sanitize
-    QString uid =
-      QString::number(QRandomGenerator::global()->generate(), 16).left(5);
+  // One name for the molecule's lifetime, so every autosave replaces the last.
+  const QString autosaveFileName = autosaveNameFor(m_molecule);
 
-    autosaveFileName =
-      tr("untitled") + QString("%1_%2_autosave.cjson").arg(formula).arg(uid);
-  }
-
-  QString autosaveFilePath = autosaveDirPath + "/" + autosaveFileName;
+  QString autosaveFilePath = dirPath + "/" + autosaveFileName;
+  // Write to a side file and replace the autosave only once it is complete, so
+  // a crash or failure mid-write never leaves a truncated autosave.
+  const QString partialName = partialAutosaveName(autosaveFileName);
+  const QString partialPath = dirPath + "/" + partialName;
+  // Leftovers of an earlier interrupted write of this document (either form).
+  QFile::remove(partialPath);
+  QFile::remove(dirPath + "/" + otherAutosaveForm(partialName));
 
   // Use CJSON format for autosaving
   Io::CjsonFormat writer;
-  if (!writer.writeFile(autosaveFilePath.toLocal8Bit().data(), *m_molecule)) {
+  // Cubes can reach hundreds of MB and are rewritten every interval; they can
+  // be recomputed from the basis set, so leave them out of the autosave.
+  // (Older libraries ignore the unknown option.)
+  writer.setOptions(R"({"cubes": false})");
+  bool saved = writer.writeFile(partialPath.toLocal8Bit().data(), *m_molecule);
+  if (saved) {
+    // Atomic replace (rename(2) on POSIX, MoveFileEx with replace on Windows).
+    std::error_code ec;
+    std::filesystem::rename(
+      std::filesystem::path(partialPath.toStdU16String()),
+      std::filesystem::path(autosaveFilePath.toStdU16String()), ec);
+    saved = !ec;
+  }
+  if (!saved) {
+    QFile::remove(partialPath);
     qWarning() << "Failed to autosave the document to" << autosaveFilePath;
   } else {
     qDebug() << "Document autosaved to" << autosaveFilePath;
+    // Drop a leftover autosave of the same document in the other form.
+    QFile::remove(dirPath + "/" + otherAutosaveForm(autosaveFileName));
   }
 }
 
@@ -2917,7 +3860,7 @@ bool MainWindow::saveFileIfNeeded()
         // fails:
         return saveFile(/*async=*/false);
       case QMessageBox::Discard:
-        cleanupCurrentAutosave();
+        removeAutosave(m_molecule);
         markMoleculeClean();
         return true;
       default:
@@ -2970,13 +3913,7 @@ void MainWindow::showAboutDialog()
 
 void MainWindow::openURL(const QString& url)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0) || defined(Q_OS_MAC) ||            \
-  defined(Q_OS_WIN)
-  QDesktopServices::openUrl(url);
-#else
-  // On Qt5, AppImage can't use QDesktopServices::openUrl, so we use QProcess:
-  QProcess::execute(QString("xdg-open %1").arg(url));
-#endif
+  QDesktopServices::openUrl(QUrl(url));
 }
 
 void MainWindow::checkUpdate()
@@ -2995,8 +3932,12 @@ void MainWindow::checkUpdate()
 void MainWindow::finishUpdateRequest(QNetworkReply* reply)
 {
   if (!reply->isReadable()) {
-    QMessageBox::warning(this, tr("Network Download Failed"),
-                         tr("Network timeout or other error."));
+    if (dialogsSkipped())
+      qInfo("--skip-dialogs: skipped 'Network Download Failed' dialog "
+            "(update check).");
+    else
+      QMessageBox::warning(this, tr("Network Download Failed"),
+                           tr("Network timeout or other error."));
     reply->deleteLater();
     return;
   }
@@ -3073,6 +4014,13 @@ void MainWindow::finishUpdateRequest(QNetworkReply* reply)
     return;
   }
 
+  if (dialogsSkipped()) {
+    qInfo("--skip-dialogs: skipped 'Version Update' dialog (%s available); "
+          "assuming 'Cancel'.",
+          qPrintable(latestRelease));
+    return;
+  }
+
   // ask the user about fetching the latest release
   // download, skip, release notes, cancel
   // skip = save latestRelease in settings
@@ -3145,7 +4093,16 @@ void MainWindow::fileFormatsReady()
       delete format;
     }
   }
+  settlePluginFormats();
   readQueuedFiles();
+}
+
+void MainWindow::settlePluginFormats()
+{
+  if (m_pluginFormatsSettled)
+    return;
+  m_pluginFormatsSettled = true;
+  emit pluginFormatsReady();
 }
 
 void MainWindow::readQueuedFiles()
@@ -3159,10 +4116,16 @@ void MainWindow::readQueuedFiles()
       "Avogadro:");
 
     if (!openFile(file, format ? format->newInstance() : nullptr)) {
-      QMessageBox::warning(this, tr("Cannot open file"),
-                           tr("Avogadro cannot open"
-                              " “%1”.")
-                             .arg(file));
+      if (dialogsSkipped()) {
+        qWarning("--skip-dialogs: skipped 'Cannot open file' dialog; "
+                 "Avogadro cannot open '%s'.",
+                 qPrintable(file));
+      } else {
+        QMessageBox::warning(this, tr("Cannot open file"),
+                             tr("Avogadro cannot open"
+                                " “%1”.")
+                               .arg(file));
+      }
     }
   }
 }
@@ -3170,10 +4133,16 @@ void MainWindow::readQueuedFiles()
 void MainWindow::clearQueuedFiles()
 {
   if (!m_queuedFilesStarted && !m_queuedFiles.isEmpty()) {
-    QMessageBox::warning(this, tr("Cannot open files"),
-                         tr("Avogadro cannot open"
-                            " “%1”.")
-                           .arg(m_queuedFiles.join("\n")));
+    if (dialogsSkipped()) {
+      qWarning("--skip-dialogs: skipped 'Cannot open files' dialog; "
+               "Avogadro cannot open '%s'.",
+               qPrintable(m_queuedFiles.join("', '")));
+    } else {
+      QMessageBox::warning(this, tr("Cannot open files"),
+                           tr("Avogadro cannot open"
+                              " “%1”.")
+                             .arg(m_queuedFiles.join("\n")));
+    }
     m_queuedFiles.clear();
   }
 }
@@ -3208,9 +4177,167 @@ void MainWindow::registerExtensionCommand(QString command, QString description)
   m_extensionCommandMap.insert(command, extension);
 }
 
-bool MainWindow::handleCommand(const QString& command,
-                               const QVariantMap& options)
+QVariantList MainWindow::pluginCommands() const
 {
+  QVariantList commands;
+
+  for (auto it = m_toolCommandMap.constBegin();
+       it != m_toolCommandMap.constEnd(); ++it) {
+    QVariantMap entry;
+    entry["name"] = it.key();
+    entry["description"] = m_commandDescriptionsMap.value(it.key());
+    entry["kind"] = QStringLiteral("tool");
+    entry["plugin"] = it.value();
+    // Any plugin command may report itself as started and finish later, so
+    // a caller has to be ready for a deferred reply from all of them.
+    entry["async"] = true;
+    commands.append(entry);
+  }
+
+  for (auto it = m_extensionCommandMap.constBegin();
+       it != m_extensionCommandMap.constEnd(); ++it) {
+    QVariantMap entry;
+    entry["name"] = it.key();
+    entry["description"] = m_commandDescriptionsMap.value(it.key());
+    entry["kind"] = QStringLiteral("extension");
+    entry["plugin"] = it.value() != nullptr ? it.value()->name() : QString();
+    entry["async"] = true;
+    commands.append(entry);
+  }
+
+  return commands;
+}
+
+void MainWindow::beginPluginCommand(QObject* plugin)
+{
+  m_currentCommandPlugin = plugin;
+  m_currentCommandStarted = false;
+  m_currentCommandEnded = false;
+  m_currentCommandFailed = false;
+  m_currentCommandMessage.clear();
+  m_currentCommandResult.clear();
+}
+
+MainWindow::CommandStatus MainWindow::endPluginCommand(QObject* plugin,
+                                                       bool claimed,
+                                                       quint64 token,
+                                                       QString* message,
+                                                       QVariantMap* result)
+{
+  m_currentCommandPlugin = nullptr;
+
+  if (message != nullptr)
+    *message = m_currentCommandMessage;
+  if (result != nullptr)
+    *result = m_currentCommandResult;
+
+  if (!claimed)
+    return CommandStatus::NotHandled;
+  if (m_currentCommandFailed)
+    return CommandStatus::Failed;
+  // A plugin that finished during the call, or never asked to be waited for,
+  // is done. Anything else is still running.
+  if (m_currentCommandEnded || !m_currentCommandStarted)
+    return CommandStatus::Finished;
+
+  m_inFlightCommands.insert(plugin, token);
+  return CommandStatus::Started;
+}
+
+void MainWindow::pluginCommandStarted()
+{
+  if (sender() == m_currentCommandPlugin)
+    m_currentCommandStarted = true;
+}
+
+void MainWindow::pluginCommandFinished(const QString& message,
+                                       const QVariantMap& result)
+{
+  // Emitted from inside handleCommand(): the command never went asynchronous.
+  if (sender() == m_currentCommandPlugin) {
+    m_currentCommandEnded = true;
+    m_currentCommandMessage = message;
+    m_currentCommandResult = result;
+    return;
+  }
+
+  // Otherwise this belongs to a command that is still running. Plugins emit
+  // this for work the user started from the GUI as well, so only report it
+  // when a script is actually waiting on this plugin.
+  auto match = m_inFlightCommands.find(sender());
+  if (match == m_inFlightCommands.end())
+    return;
+
+  const quint64 token = match.value();
+  m_inFlightCommands.erase(match);
+  emit commandCompleted(token, true, message, result);
+}
+
+void MainWindow::pluginCommandFailed(const QString& message)
+{
+  if (sender() == m_currentCommandPlugin) {
+    m_currentCommandEnded = true;
+    m_currentCommandFailed = true;
+    m_currentCommandMessage = message;
+    return;
+  }
+
+  auto match = m_inFlightCommands.find(sender());
+  if (match == m_inFlightCommands.end())
+    return;
+
+  const quint64 token = match.value();
+  m_inFlightCommands.erase(match);
+  emit commandCompleted(token, false, message, QVariantMap());
+}
+
+void MainWindow::abandonCommand(quint64 token)
+{
+  for (auto it = m_inFlightCommands.begin(); it != m_inFlightCommands.end();
+       ++it) {
+    if (it.value() == token) {
+      m_inFlightCommands.erase(it);
+      return;
+    }
+  }
+}
+
+void MainWindow::disconnectCommandSignals()
+{
+  foreach (const QMetaObject::Connection& connection,
+           m_pluginCommandConnections)
+    disconnect(connection);
+
+  m_pluginCommandConnections.clear();
+  // Nothing can report back now, so no token is still owed a reply. The
+  // RPC listener fails any request still waiting when the application
+  // quits, so callers are not left hanging.
+  m_inFlightCommands.clear();
+}
+
+void MainWindow::pluginDestroyed(QObject* plugin)
+{
+  auto match = m_inFlightCommands.find(plugin);
+  if (match == m_inFlightCommands.end())
+    return;
+
+  const quint64 token = match.value();
+  m_inFlightCommands.erase(match);
+  emit commandCompleted(token, false, tr("The plugin was unloaded."),
+                        QVariantMap());
+}
+
+MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
+                                                    const QVariantMap& options,
+                                                    quint64 token,
+                                                    QString* message,
+                                                    QVariantMap* result)
+{
+  if (message != nullptr)
+    message->clear();
+  if (result != nullptr)
+    result->clear();
+
   // handle a few basic commands
   if (command == "setProjection") {
     if (options.contains("type")) {
@@ -3224,7 +4351,7 @@ bool MainWindow::handleCommand(const QString& command,
       setProjectionPerspective();
     else if (options.contains("orthographic"))
       setProjectionOrthographic();
-    return true;
+    return CommandStatus::Finished;
   } else if (command == "setRenderTypes") {
     QStringList enableTypes, disableTypes;
     if (options.contains("types")) {
@@ -3240,7 +4367,236 @@ bool MainWindow::handleCommand(const QString& command,
     }
     setActiveDisplayTypes(enableTypes);
     setDisabledDisplayTypes(disableTypes);
-    return true;
+    return CommandStatus::Finished;
+  } else if (command == "addLayer") {
+    if (m_molecule == nullptr) {
+      if (message != nullptr)
+        *message = tr("No molecule is open.");
+      return CommandStatus::Failed;
+    }
+
+    // A new layer is appended after every existing one (see
+    // QtGui::RWLayerManager::addLayer()), so its id is simply the layer
+    // count before it is added.
+    const size_t newLayerId = m_layerModel->layerCount();
+    addLayer();
+    refreshDisplayTypes();
+
+    if (result != nullptr) {
+      result->insert("layer", static_cast<int>(newLayerId));
+      result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    }
+    return CommandStatus::Finished;
+  } else if (command == "removeLayer") {
+    if (m_molecule == nullptr) {
+      if (message != nullptr)
+        *message = tr("No molecule is open.");
+      return CommandStatus::Failed;
+    }
+
+    size_t layer = 0;
+    if (!layerIdFromOptions(options, message, &layer))
+      return CommandStatus::Failed;
+
+    if (m_layerModel->layerCount() <= 1) {
+      if (message != nullptr)
+        *message = tr("Cannot remove the last remaining layer.");
+      return CommandStatus::Failed;
+    }
+
+    removeLayer(layer);
+    refreshDisplayTypes();
+
+    if (result != nullptr)
+      result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    return CommandStatus::Finished;
+  } else if (command == "setActiveLayer") {
+    if (m_molecule == nullptr) {
+      if (message != nullptr)
+        *message = tr("No molecule is open.");
+      return CommandStatus::Failed;
+    }
+
+    size_t layer = 0;
+    if (!layerIdFromOptions(options, message, &layer))
+      return CommandStatus::Failed;
+
+    setActiveLayer(layer);
+    refreshDisplayTypes();
+
+    if (result != nullptr) {
+      result->insert("layer", static_cast<int>(layer));
+      result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    }
+    return CommandStatus::Finished;
+  } else if (command == "setLayerVisible" || command == "getLayerVisible") {
+    if (m_molecule == nullptr) {
+      if (message != nullptr)
+        *message = tr("No molecule is open.");
+      return CommandStatus::Failed;
+    }
+
+    size_t layer = 0;
+    if (!layerIdFromOptions(options, message, &layer))
+      return CommandStatus::Failed;
+
+    if (command == "setLayerVisible") {
+      if (!options.contains("visible") ||
+          options.value("visible").metaType().id() != QMetaType::Bool) {
+        if (message != nullptr)
+          *message = tr("'visible' must be true or false.");
+        return CommandStatus::Failed;
+      }
+      setLayerVisible(layer, options.value("visible").toBool());
+      refreshDisplayTypes();
+    }
+
+    if (result != nullptr) {
+      result->insert("layer", static_cast<int>(layer));
+      result->insert("visible", m_layerModel->layerVisible(layer));
+      result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    }
+    return CommandStatus::Finished;
+  } else if (command == "setLayerLocked" || command == "getLayerLocked") {
+    if (m_molecule == nullptr) {
+      if (message != nullptr)
+        *message = tr("No molecule is open.");
+      return CommandStatus::Failed;
+    }
+
+    size_t layer = 0;
+    if (!layerIdFromOptions(options, message, &layer))
+      return CommandStatus::Failed;
+
+    if (command == "setLayerLocked") {
+      if (!options.contains("locked") ||
+          options.value("locked").metaType().id() != QMetaType::Bool) {
+        if (message != nullptr)
+          *message = tr("'locked' must be true or false.");
+        return CommandStatus::Failed;
+      }
+      setLayerLocked(layer, options.value("locked").toBool());
+      refreshDisplayTypes();
+    }
+
+    if (result != nullptr) {
+      result->insert("layer", static_cast<int>(layer));
+      result->insert("locked", m_layerModel->layerLocked(layer));
+      result->insert("count", static_cast<int>(m_layerModel->layerCount()));
+    }
+    return CommandStatus::Finished;
+  }
+
+  // Molecule management. These reuse the code behind the menus and the
+  // molecule list, and never prompt: a molecule with unsaved changes is only
+  // closed when the caller says to discard them. Messages are plain strings
+  // (not tr()): they are for scripts.
+  if (command == "newMolecule") {
+    newMolecule();
+    if (result != nullptr)
+      *result = moleculePosition();
+    return CommandStatus::Finished;
+  } else if (command == "setActiveMolecule" || command == "closeMolecule") {
+    const QList<Molecule*> molecules = m_moleculeModel->molecules();
+    const bool closing = command == "closeMolecule";
+
+    // closeMolecule defaults to the active molecule; setActiveMolecule has to
+    // be told which one.
+    int index = molecules.indexOf(m_molecule);
+    IndexStatus status =
+      index >= 0 ? IndexStatus::Valid : IndexStatus::OutOfRange;
+    if (!closing || options.contains("index"))
+      status = indexFromOptions(options, QStringLiteral("index"),
+                                static_cast<int>(molecules.size()), &index);
+    if (status != IndexStatus::Valid) {
+      if (message != nullptr)
+        *message = moleculeIndexMessage(status, index, molecules.size());
+      return CommandStatus::Failed;
+    }
+    Molecule* target = molecules[index];
+
+    if (closing) {
+      // Only a real true discards; "yes" or 1 do not.
+      const QVariant discard = options.value("discard");
+      const bool discarding =
+        discard.metaType().id() == QMetaType::Bool && discard.toBool();
+      if (isModified(target) && !discarding) {
+        if (message != nullptr)
+          *message = QStringLiteral("The molecule has unsaved changes; pass "
+                                    "discard: true to close it anyway.");
+        return CommandStatus::Failed;
+      }
+      closeMolecule(target);
+    } else {
+      // Clicking the active molecule in the list does this too.
+      setMolecule(target);
+    }
+
+    if (result != nullptr)
+      *result = moleculePosition();
+    return CommandStatus::Finished;
+  } else if (command == "undo" || command == "redo") {
+    const bool undoing = command == "undo";
+    if (!(undoing ? canUndo() : canRedo())) {
+      if (message != nullptr)
+        *message = undoing ? QStringLiteral("There is nothing to undo.")
+                           : QStringLiteral("There is nothing to redo.");
+      return CommandStatus::Failed;
+    }
+
+    if (undoing)
+      undoEdit();
+    else
+      redoEdit();
+
+    if (result != nullptr)
+      *result = undoState();
+    return CommandStatus::Finished;
+  } else if (command == "activateTool") {
+    if (activeGLWidget() == nullptr) {
+      if (message != nullptr)
+        *message = QStringLiteral("There is no active view.");
+      return CommandStatus::Failed;
+    }
+
+    // By object name, the "name" that toolSummaries() reports.
+    const QString name = options.value("name").toString();
+    const QVariantList tools = toolSummaries();
+    const bool found =
+      !name.isEmpty() &&
+      std::any_of(tools.begin(), tools.end(), [&name](const QVariant& tool) {
+        return tool.toMap().value("name") == name;
+      });
+    if (!found) {
+      if (message != nullptr)
+        *message = QStringLiteral("Unknown tool '%1'.").arg(name);
+      return CommandStatus::Failed;
+    }
+
+    setActiveTool(name);
+
+    if (result != nullptr) {
+      QString activeName;
+      for (const QVariant& tool : toolSummaries()) {
+        if (tool.toMap().value("active").toBool())
+          activeName = tool.toMap().value("name").toString();
+      }
+      result->insert("tool", activeName);
+    }
+    return CommandStatus::Finished;
+  }
+
+  // Every remaining command comes from a plugin. Refuse them here when there
+  // is no active molecule (only possible before the first file has loaded),
+  // rather than relying on each plugin to notice. This is reported like a
+  // plugin's own commandFailed(), so RPC callers get a failure, not "Method
+  // not found". An empty molecule is still a molecule: plugins decide those.
+  if (m_molecule == nullptr && !commandCreatesMolecule(command) &&
+      (m_toolCommandMap.contains(command) ||
+       m_extensionCommandMap.contains(command))) {
+    if (message != nullptr)
+      *message = tr("No molecule");
+    return CommandStatus::Failed;
   }
 
   // pass any remaining commands to the tools or extensions
@@ -3250,7 +4606,7 @@ bool MainWindow::handleCommand(const QString& command,
       qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
 
     if (glWidget == nullptr)
-      return false;
+      return CommandStatus::NotHandled;
 
     QString toolName = m_toolCommandMap.value(command);
     auto* currentTool = glWidget->activeTool();
@@ -3265,14 +4621,29 @@ bool MainWindow::handleCommand(const QString& command,
       }
     }
 
-    bool result = tool->handleCommand(command, options);
+    if (tool == nullptr)
+      return CommandStatus::NotHandled;
+    if (m_inFlightCommands.contains(tool))
+      return CommandStatus::Busy;
+
+    connectCommandSignals(tool);
+    beginPluginCommand(tool);
+    bool claimed = tool->handleCommand(command, options);
     glWidget->setActiveTool(currentTool);
-    return result;
+    return endPluginCommand(tool, claimed, token, message, result);
   } else if (m_extensionCommandMap.contains(command)) {
     auto* extension = m_extensionCommandMap.value(command);
-    return extension->handleCommand(command, options);
+    if (extension == nullptr)
+      return CommandStatus::NotHandled;
+    if (m_inFlightCommands.contains(extension))
+      return CommandStatus::Busy;
+
+    connectCommandSignals(extension);
+    beginPluginCommand(extension);
+    bool claimed = extension->handleCommand(command, options);
+    return endPluginCommand(extension, claimed, token, message, result);
   }
-  return false;
+  return CommandStatus::NotHandled;
 }
 
 } // End of Avogadro namespace

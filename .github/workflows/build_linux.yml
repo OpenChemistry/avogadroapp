@@ -66,7 +66,7 @@ jobs:
 
     steps:
     - name: Checkout workflow repository
-      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Checkout Repositories
       uses: ./.github/actions/checkout-repositories
@@ -74,14 +74,28 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get -qq update
-        sudo apt-get -qq install ninja-build libeigen3-dev libboost-all-dev libglew-dev libxml2-dev
+        sudo apt-get -qq install ninja-build libeigen3-dev libboost-all-dev libglew-dev libxml2-dev zlib1g-dev libbz2-dev liblzma-dev libzstd-dev
         sudo apt-get -qq install libfuse2
+        if [ "${{ matrix.config.build_type }}" = "ubsan" ]; then
+          # the RPC tests run the built application under a virtual display
+          # (Xvfb) with Mesa's software OpenGL
+          sudo apt-get -qq install xvfb libgl1-mesa-dri libglx-mesa0 libegl1 libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-xkb1
+        fi
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@48d3ad6db93f3627c8ee7a0454bc6f3744f7e730 # v4.3.1
+      uses: jurplel/install-qt-action@a9c63c7c123f3069cff414e7e482d95dfa9d8125 # v4.4.1
       with:
         cache: true
         version: ${{ env.QT_VERSION }}
+
+    # install-qt-action runs setup-python, so CMake finds that interpreter
+    # (Python3_ROOT_DIR), not /usr/bin/python3. pytest has to go into it before
+    # Configure, or CMake leaves the avogadro-rpc tests out.
+    - name: Install pytest
+      if: matrix.config.build_type == 'ubsan'
+      run: |
+        "${Python3_ROOT_DIR:-/usr}/bin/python3" -m pip install pytest
+      shell: bash
 
     - name: Configure
       run: |
@@ -104,6 +118,9 @@ jobs:
         ProcessorCount(N)
         set(ENV{CTEST_OUTPUT_ON_FAILURE} "ON")
         set(ENV{ASAN_OPTIONS} "new_delete_type_mismatch=0")
+        set(ENV{TSAN_OPTIONS} "suppressions=$ENV{GITHUB_WORKSPACE}/openchemistry/avogadrolibs/.github/tsan-suppressions.txt halt_on_error=0 second_deadlock_stack=1")
+        # ASan runs LSan at exit too, so this covers both sanitizer jobs.
+        set(ENV{LSAN_OPTIONS} "suppressions=$ENV{GITHUB_WORKSPACE}/openchemistry/avogadrolibs/.github/lsan-suppressions.txt print_suppressions=0")
         execute_process(
           COMMAND ctest -j ${N}
           WORKING_DIRECTORY ${{ runner.workspace }}/build/avogadrolibs
@@ -112,6 +129,28 @@ jobs:
         if (NOT result EQUAL 0)
           message(FATAL_ERROR "Running tests failed!")
         endif()
+
+    # End-to-end tests (tests/rpc): the fast suite only, never the corpus sweep.
+    # The UBSan build is the quietest of the sanitizer builds: ASan, LSan and
+    # TSan would report leaks and races inside Mesa and Qt that we do not own.
+    - name: Run RPC tests
+      if: matrix.config.build_type == 'ubsan'
+      shell: bash
+      run: |
+        export UBSAN_OPTIONS="print_stacktrace=1"
+        export LIBGL_ALWAYS_SOFTWARE=1
+        export QT_QPA_PLATFORM=xcb
+        xvfb-run -a -s "-screen 0 1280x1024x24" \
+          ctest -R '^avogadro-rpc$' --no-tests=error --output-on-failure
+      working-directory: ${{ runner.workspace }}/build/avogadroapp
+
+    - name: Upload RPC test reproducers
+      if: failure() && matrix.config.build_type == 'ubsan'
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      with:
+        name: rpc-reproducers
+        path: ${{ runner.workspace }}/build/avogadroapp/tests/rpc-reproducers
+        if-no-files-found: ignore
 
     - name: Package AppImage
       if: matrix.config.name == 'AppImage x86'
@@ -150,5 +189,5 @@ jobs:
 
     - name: Setup tmate session
       if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@c0afd6f790e3a5564914980036ebf83216678101 # v3.23
+      uses: mxschmitt/action-tmate@35b54afac29c97fb54faba5b513f8fbd1882f113 # v3.24
       timeout-minutes: 60

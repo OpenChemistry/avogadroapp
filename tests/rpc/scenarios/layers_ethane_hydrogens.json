@@ -1,0 +1,158 @@
+{
+  "description": "Create a layer from the selected hydrogens of ethane after several render plugins have registered per-layer state, then add, activate and remove layers.",
+  "fresh": true,
+  "issue": "2.1 crash: Create New Layer from Selection on ethane with hydrogens selected",
+  "steps": [
+    {
+      "method": "loadMolecule",
+      "params": {
+        "content": "8\nethane\nC   0.000000   0.000000   0.765000\nC   0.000000   0.000000  -0.765000\nH   1.019000   0.000000   1.157000\nH  -0.509500   0.882000   1.157000\nH  -0.509500  -0.882000   1.157000\nH  -1.019000   0.000000  -1.157000\nH   0.509500  -0.882000  -1.157000\nH   0.509500   0.882000  -1.157000\n",
+        "format": "xyz"
+      },
+      "result": true
+    },
+    {
+      "method": "setRenderTypes",
+      "params": {
+        "types": [
+          "BallStick",
+          "Wireframe",
+          "Licorice",
+          "VanDerWaals",
+          "Label"
+        ]
+      },
+      "result": true
+    },
+    {
+      "method": "selectElement",
+      "wait": true,
+      "params": {
+        "element": "H"
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "method": "createLayerFromSelection",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "indices": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      }
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "atomCount": 8,
+        "bondCount": 7,
+        "formula": "C2H6",
+        "selectedAtomCount": 6
+      }
+    },
+    {
+      "method": "getLayerVisible",
+      "wait": true,
+      "params": {
+        "layer": 1
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 1,
+          "count": 2,
+          "visible": true
+        }
+      }
+    },
+    {
+      "method": "addLayer",
+      "wait": true,
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 2,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "setActiveLayer",
+      "wait": true,
+      "params": {
+        "layer": 1
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "layer": 1,
+          "count": 3
+        }
+      }
+    },
+    {
+      "method": "removeLayer",
+      "wait": true,
+      "params": {
+        "layer": 2
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 2
+        }
+      }
+    },
+    {
+      "method": "removeLayer",
+      "wait": true,
+      "params": {
+        "layer": 1
+      },
+      "result": {
+        "status": "finished",
+        "data": {
+          "count": 1
+        }
+      }
+    },
+    {
+      "method": "moleculeInfo",
+      "result": {
+        "atomCount": 8,
+        "bondCount": 7
+      }
+    },
+    {
+      "method": "renderImage",
+      "params": {
+        "width": 32,
+        "height": 32
+      },
+      "result": {
+        "width": 32,
+        "height": 32
+      }
+    }
+  ]
+}

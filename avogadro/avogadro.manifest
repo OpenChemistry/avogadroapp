@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+  <!--
+    Use UTF-8 as the process code page (Windows 10 1903 and later).
+    Narrow file APIs (fopen, std::ifstream) and QString::toLocal8Bit() then
+    use UTF-8, so file names outside the ANSI code page open correctly.
+    Older Windows ignores this and keeps the legacy code page.
+  -->
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <activeCodePage xmlns="http://schemas.microsoft.com/SMI/2019/WindowsSettings">UTF-8</activeCodePage>
+    </windowsSettings>
+  </application>
+</assembly>
