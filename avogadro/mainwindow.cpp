@@ -3749,8 +3749,9 @@ void MainWindow::buildTools()
     QAction* action = toolPlugin->activateAction();
     action->setParent(m_toolToolBar);
     action->setCheckable(true);
-    if (index < 10)
-      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index)));
+    // Ctrl+1 ... Ctrl+9, then Ctrl+0 for the tenth tool
+    if (index <= 10)
+      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index % 10)));
     action->setData(toolPlugin->objectName());
     m_toolToolBar->addAction(action);
 
