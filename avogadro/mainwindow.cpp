@@ -1334,13 +1334,21 @@ void MainWindow::markMoleculeDirty(unsigned int changes)
 void MainWindow::refreshDisplayTypes()
 {
   m_layerModel->updateRows();
+  // remember where keyboard focus was, so we can put it back afterwards
+  QPointer<QWidget> previousFocus = QApplication::focusWidget();
   // force m_sceneTreeView update (update doesn't update the checkbox)
   m_sceneTreeView->setFocus();
   if (m_activeScenePlugin != nullptr) {
     m_viewDock->setWidget(m_activeScenePlugin->setupWidget());
   }
-  // reset focus to m_layerTreeView
-  m_layerTreeView->setFocus();
+  // restore focus to where the user was (it may have been the old view dock
+  // widget, which is now hidden or deleted); otherwise use the 3D view
+  if (previousFocus != nullptr && previousFocus->isVisible())
+    previousFocus->setFocus();
+  else if (QWidget* view = m_multiViewWidget->activeWidget())
+    view->setFocus();
+  else
+    m_layerTreeView->setFocus();
 }
 
 void MainWindow::markMoleculeClean()
@@ -3741,8 +3749,9 @@ void MainWindow::buildTools()
     QAction* action = toolPlugin->activateAction();
     action->setParent(m_toolToolBar);
     action->setCheckable(true);
-    if (index < 10)
-      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index)));
+    // Ctrl+1 ... Ctrl+9, then Ctrl+0 for the tenth tool
+    if (index <= 10)
+      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index % 10)));
     action->setData(toolPlugin->objectName());
     m_toolToolBar->addAction(action);
 
