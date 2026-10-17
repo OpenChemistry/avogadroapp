@@ -219,7 +219,9 @@ public:
   /**
    * Scan standard directories for pyproject.toml-based plugin packages.
    */
+#ifdef AVOGADRO_USE_SUBPROCESS
   void loadPackages();
+#endif
 
   void startAutosaveTimer();
 
