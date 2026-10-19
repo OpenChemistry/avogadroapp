@@ -287,16 +287,16 @@ IndexStatus indexFromOptions(const QVariantMap& options, const QString& key,
   return IndexStatus::Valid;
 }
 
-// The (untranslated) message for a molecule index that was refused.
+// The message for a molecule index that was refused.
 QString moleculeIndexMessage(IndexStatus status, int index, int count)
 {
   switch (status) {
     case IndexStatus::Missing:
-      return QStringLiteral("Missing 'index' parameter.");
+      return MainWindow::tr("Missing 'index' parameter.");
     case IndexStatus::NotWholeNumber:
-      return QStringLiteral("'index' must be a whole number.");
+      return MainWindow::tr("'index' must be a whole number.");
     case IndexStatus::OutOfRange:
-      return QStringLiteral("'index' %1 is out of range (%2 molecules are "
+      return MainWindow::tr("'index' %1 is out of range (%2 molecules are "
                             "open).")
         .arg(index)
         .arg(count);
@@ -4524,8 +4524,8 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
         discard.metaType().id() == QMetaType::Bool && discard.toBool();
       if (isModified(target) && !discarding) {
         if (message != nullptr)
-          *message = QStringLiteral("The molecule has unsaved changes; pass "
-                                    "discard: true to close it anyway.");
+          *message = tr("The molecule has unsaved changes; pass "
+                        "discard: true to close it anyway.");
         return CommandStatus::Failed;
       }
       closeMolecule(target);
@@ -4541,8 +4541,8 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
     const bool undoing = command == "undo";
     if (!(undoing ? canUndo() : canRedo())) {
       if (message != nullptr)
-        *message = undoing ? QStringLiteral("There is nothing to undo.")
-                           : QStringLiteral("There is nothing to redo.");
+        *message = undoing ? tr("There is nothing to undo.")
+                           : tr("There is nothing to redo.");
       return CommandStatus::Failed;
     }
 
@@ -4557,7 +4557,7 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
   } else if (command == "activateTool") {
     if (activeGLWidget() == nullptr) {
       if (message != nullptr)
-        *message = QStringLiteral("There is no active view.");
+        *message = tr("There is no active view.");
       return CommandStatus::Failed;
     }
 
@@ -4571,7 +4571,7 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
       });
     if (!found) {
       if (message != nullptr)
-        *message = QStringLiteral("Unknown tool '%1'.").arg(name);
+        *message = tr("Unknown tool '%1'.").arg(name);
       return CommandStatus::Failed;
     }
 
