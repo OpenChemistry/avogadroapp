@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2026-10-15 08:51+0000\n"
+"PO-Revision-Date: 2026-10-20 03:05+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -805,7 +805,7 @@ msgstr ""
 
 #: rpclistener.cpp:754 rpclistener.cpp:822
 msgid "The command failed."
-msgstr ""
+msgstr "Der Befehl ist fehlgeschlagen."
 
 #: rpclistener.cpp:760
 msgid "That plugin is already running a command."
@@ -1065,12 +1065,12 @@ msgstr "Schattenstärke:"
 #. i18n: file: renderingdialog.ui:130
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
 msgid "Thickness of the outline, in pixels"
-msgstr ""
+msgstr "Breite der Kontur, in Pixeln"
 
 #. i18n: file: renderingdialog.ui:133
 #. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
 msgid "Outline Width:"
-msgstr ""
+msgstr "Breite der Kontur:"
 
 #. i18n: file: renderingdialog.ui:160
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
