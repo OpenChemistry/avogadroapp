@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2026-10-20 13:40+0000\n"
+"PO-Revision-Date: 2026-10-20 16:14+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -34,7 +34,7 @@ msgstr ""
 
 #: aboutdialog.cpp:26
 msgid "Molecular editor and visualizer"
-msgstr "Molekül-Editor und Visualisierungstool"
+msgstr "Molekül-Editor und Visualisierungswerkzeug"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
