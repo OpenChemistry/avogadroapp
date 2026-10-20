@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2026-10-20 03:05+0000\n"
+"PO-Revision-Date: 2026-10-20 13:40+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -111,6 +111,8 @@ msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"Erst mit Ihrer Zustimmung werden Daten gesendet. Die Einstellung ist "
+"jederzeit unter Hilfe → Fehlermeldung änderbar."
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
@@ -690,7 +692,7 @@ msgstr "Strg+D"
 
 #: mainwindow.cpp:3710
 msgid "Network Download Failed"
-msgstr "Herunterladen über das Netzwerk fehlgeschlagen"
+msgstr "Das Herunterladen über das Netzwerk ist fehlgeschlagen"
 
 #: mainwindow.cpp:3711
 msgid "Network timeout or other error."
@@ -708,7 +710,8 @@ msgstr "Neue Version: %1"
 
 #: mainwindow.cpp:3801
 msgid "An update is available, do you want to download it now?\n"
-msgstr "Ein Update ist verfügbar, möchten Sie es jetzt herunterladen?\n"
+msgstr ""
+"Eine Aktualisierung ist verfügbar, möchten Sie sie jetzt herunterladen?\n"
 
 #: mainwindow.cpp:3803
 msgid "Version Update"
@@ -999,7 +1002,7 @@ msgstr "Tutorien"
 #. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
-msgstr "Avogadro Hilfe"
+msgstr "Avogadro-Hilfe"
 
 #. i18n: file: mainwindow.ui:293
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
