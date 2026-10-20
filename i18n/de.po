@@ -15,13 +15,14 @@
 # Jakob Blahusch <jakob.blahusch@blahusch.com>, 2026.
 # Alexander Krappe <alexander.krappe@fu-berlin.de>, 2026.
 # Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>, 2026.
+# LibreTranslate <noreply-mt-libretranslate@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2026-10-15 08:51+0000\n"
-"Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2026-10-20 16:14+0000\n"
+"Last-Translator: LibreTranslate <noreply-mt-libretranslate@weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -34,7 +35,7 @@ msgstr ""
 
 #: aboutdialog.cpp:26
 msgid "Molecular editor and visualizer"
-msgstr "Molekül-Editor und Visualisierungstool"
+msgstr "Molekül-Editor und Visualisierungswerkzeug"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -111,6 +112,8 @@ msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"Erst mit Ihrer Zustimmung werden Daten gesendet. Die Einstellung ist "
+"jederzeit unter Hilfe → Fehlermeldung änderbar."
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
@@ -690,7 +693,7 @@ msgstr "Strg+D"
 
 #: mainwindow.cpp:3710
 msgid "Network Download Failed"
-msgstr "Herunterladen über das Netzwerk fehlgeschlagen"
+msgstr "Das Herunterladen über das Netzwerk ist fehlgeschlagen"
 
 #: mainwindow.cpp:3711
 msgid "Network timeout or other error."
@@ -708,7 +711,8 @@ msgstr "Neue Version: %1"
 
 #: mainwindow.cpp:3801
 msgid "An update is available, do you want to download it now?\n"
-msgstr "Ein Update ist verfügbar, möchten Sie es jetzt herunterladen?\n"
+msgstr ""
+"Eine Aktualisierung ist verfügbar, möchten Sie sie jetzt herunterladen?\n"
 
 #: mainwindow.cpp:3803
 msgid "Version Update"
@@ -755,7 +759,7 @@ msgstr ""
 
 #: mainwindow.cpp:4261
 msgid "No molecule"
-msgstr ""
+msgstr "Kein Molekül"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -805,7 +809,7 @@ msgstr ""
 
 #: rpclistener.cpp:754 rpclistener.cpp:822
 msgid "The command failed."
-msgstr ""
+msgstr "Der Befehl ist fehlgeschlagen."
 
 #: rpclistener.cpp:760
 msgid "That plugin is already running a command."
@@ -999,7 +1003,7 @@ msgstr "Tutorien"
 #. i18n: file: mainwindow.ui:288
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Avogadro Help"
-msgstr "Avogadro Hilfe"
+msgstr "Avogadro-Hilfe"
 
 #. i18n: file: mainwindow.ui:293
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -1065,12 +1069,12 @@ msgstr "Schattenstärke:"
 #. i18n: file: renderingdialog.ui:130
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
 msgid "Thickness of the outline, in pixels"
-msgstr ""
+msgstr "Breite der Kontur, in Pixeln"
 
 #. i18n: file: renderingdialog.ui:133
 #. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
 msgid "Outline Width:"
-msgstr ""
+msgstr "Breite der Kontur:"
 
 #. i18n: file: renderingdialog.ui:160
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
