@@ -264,7 +264,7 @@ msgstr ""
 
 #: mainwindow.cpp:1508
 msgid "The save was canceled."
-msgstr ""
+msgstr "Der Timer wurde gestoppt"
 
 #: mainwindow.cpp:1569 mainwindow.cpp:1572
 msgid "untitled"
