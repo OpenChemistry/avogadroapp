@@ -10,13 +10,15 @@
 # nicola zanna <zanna.nicola1@gmail.com>, 2023.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025.
 # Daniel Colciaghi <danielcolciaghi@gmail.com>, 2025.
+# Jonathan Di Pietro <jonathandip@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2025-08-27 08:02+0000\n"
-"Last-Translator: Daniel Colciaghi <danielcolciaghi@gmail.com>\n"
+"PO-Revision-Date: 2026-10-21 08:07+0000\n"
+"Last-Translator: Jonathan Di Pietro "
+"<jonathandip@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/it/>\n"
 "Language: it\n"
@@ -24,12 +26,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
 msgid "Molecular editor and visualizer"
-msgstr ""
+msgstr "Editor e visualizzatore molecolare"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
@@ -59,7 +61,7 @@ msgstr "Versione SSL:"
 #: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1 (Diagnostico)"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
@@ -75,7 +77,7 @@ msgstr "Nessun nome file impostato in BackgroundFileFormat!"
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"
-msgstr ""
+msgstr "Segnalazione degli arresti anomali"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -83,6 +85,9 @@ msgid ""
 "developers when Avogadro crashes, which helps us fix crashes we cannot "
 "reproduce ourselves."
 msgstr ""
+"Questa è una versione diagnostica di Avogadro. Può inviare un rapporto agli "
+"sviluppatori quando Avogadro si arresta in modo anomalo, aiutandoci a "
+"risolvere arresti anomali che non riusciamo a riprodurre autonomamente."
 
 #: crashreportdialog.cpp:38
 msgid ""
@@ -92,24 +97,34 @@ msgid ""
 "useful, but it may incidentally include fragments of what you were working "
 "on, such as part of a file name or a molecule you had open."
 msgstr ""
+"Una segnalazione di arresto anomalo contiene un'istantanea della memoria di "
+"Avogadro nel momento in cui si è verificato il problema, insieme al tuo "
+"sistema operativo, driver grafico e versione di Avogadro, e un registro "
+"delle attività recenti. Quell'istantanea della memoria rende la segnalazione "
+"utile, ma potrebbe includere, in modo accidentale, frammenti di ciò su cui "
+"stavi lavorando, come parte del nome di un file o una molecola che avevi "
+"aperto."
 
 #: crashreportdialog.cpp:52
 msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
 msgstr ""
+"Non verrà inviato nulla senza il tuo consenso. Puoi modificare questa "
+"impostazione in ogni momento dalla sezione Aiuto → Segnalazione degli "
+"arresti anomali."
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "Invia segnalazioni di arresti anomali"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "Non inviare"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "Invia segnalazioni di arresti anomali agli sviluppatori di Avogadro"
 
 #: mainwindow.cpp:557
 msgid "Ready…"
@@ -125,11 +140,11 @@ msgstr "Tipi di visualizzazione"
 
 #: mainwindow.cpp:683
 msgid "Display Type Settings"
-msgstr ""
+msgstr "Impostazioni del tipo di visualizzazione"
 
 #: mainwindow.cpp:687
 msgid "Files"
-msgstr ""
+msgstr "Files"
 
 #: mainwindow.cpp:698
 msgid "Layers"
@@ -247,15 +262,15 @@ msgstr ""
 
 #: mainwindow.cpp:1508
 msgid "The save was canceled."
-msgstr ""
+msgstr "Il salvataggio è stato annullato."
 
 #: mainwindow.cpp:1569 mainwindow.cpp:1572
 msgid "untitled"
-msgstr ""
+msgstr "senza titolo"
 
 #: mainwindow.cpp:1809
 msgid "Found Previous Avogadro Files"
-msgstr ""
+msgstr "File precedenti di Avogadro trovati"
 
 #: mainwindow.cpp:1811
 #, qt-format
@@ -265,58 +280,67 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
+"Nella cartella dei plugin sono stati rilevati file provenienti da una "
+"versione precedente di Avogadro, che occupano il %1 dello spazio.\n"
+"\n"
+"Questi file non sono più necessari e possono essere eliminati senza problemi."
 
 #: mainwindow.cpp:1818
 msgid "Remove Old Files"
-msgstr ""
+msgstr "Rimuovi i vecchi file"
 
 #: mainwindow.cpp:1819
 msgid "Keep Files"
-msgstr ""
+msgstr "Mantieni i file"
 
 #: mainwindow.cpp:1959
 msgid "Let’s finish your setup"
-msgstr ""
+msgstr "Completiamo la configurazione"
 
 #: mainwindow.cpp:1960
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
 msgstr ""
+"Avogadro può generare file di input per Gaussian, ORCA e altri pacchetti di "
+"chimica computazionale."
 
 #: mainwindow.cpp:1965
 msgid "This requires setup that will download and configure Python."
-msgstr ""
+msgstr "Ciò richiede una configurazione che scaricherà e configurerà Python."
 
 #: mainwindow.cpp:1967
 msgid "This requires setup to configure a Python environment."
-msgstr ""
+msgstr "Ciò richiede una procedura di configurazione dell'ambiente Python."
 
 #: mainwindow.cpp:1971
 msgid "This may require an Internet connection."
-msgstr ""
+msgstr "Ciò potrebbe richiedere una connessione a Internet."
 
 #: mainwindow.cpp:1973
 msgid "Install updated plugins?"
-msgstr ""
+msgstr "Installare i plugin aggiornati?"
 
 #: mainwindow.cpp:1974
 msgid "The following plugins are available:"
-msgstr ""
+msgstr "I seguenti plugin sono disponibili:"
 
 #: mainwindow.cpp:1975
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "Vuoi aggiornarli?"
 
 #: mainwindow.cpp:2013
 msgid "Recover Autosaved Files"
-msgstr ""
+msgstr "Recupera i file salvati automaticamente"
 
 #: mainwindow.cpp:2014
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
+"Sono stati rilevati file salvati automaticamente da una sessione "
+"precedente.\n"
+"Vuoi recuperarli?"
 
 #: mainwindow.cpp:2082 mainwindow.cpp:2087
 msgid "Unknown error"
@@ -333,25 +357,28 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
+"È richiesta la versione 4.0 o successiva di OpenGL, uscita in corso.\n"
+"\n"
+"%1"
 
 #: mainwindow.cpp:2131
 msgid "Missing 'layer' parameter."
-msgstr ""
+msgstr "Parametro 'layer' mancante."
 
 #: mainwindow.cpp:2138
 msgid "'layer' must be a whole number."
-msgstr ""
+msgstr "'layer' deve essere un numero intero."
 
 #: mainwindow.cpp:2144
 #, qt-format
 msgid "'layer' %1 is out of range."
-msgstr ""
+msgstr "'layer' %1 è fuori dall'intervallo."
 
 #: mainwindow.cpp:2279
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr ""
+msgstr "%1 Impostazioni"
 
 #: mainwindow.cpp:2523
 msgid "Common image formats"
@@ -423,13 +450,13 @@ msgid ""
 "Saving file “%1”\n"
 "with “%2”"
 msgstr ""
-"Salvataggio del file «%1»\n"
-"con «%2»"
+"Salvataggio del file “%1”\n"
+"con “%2”"
 
 #: mainwindow.cpp:3003
 #, qt-format
 msgid "&Undo %1"
-msgstr "& Annulla %1"
+msgstr "&Annulla %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -440,7 +467,7 @@ msgstr "&Annulla"
 #: mainwindow.cpp:3011
 #, qt-format
 msgid "&Redo %1"
-msgstr "& Ripeti %1"
+msgstr "&Ripeti %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -478,7 +505,7 @@ msgstr "&Nuovo"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:3166:52
 msgid "&Open…"
-msgstr "&Aprire…"
+msgstr "&Apri…"
 
 #. i18n: file: mainwindow.ui:134
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -500,7 +527,7 @@ msgstr "&Salva"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:3203:103
 msgid "Save &As…"
-msgstr "Salva come…"
+msgstr "Salva &come…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -516,7 +543,7 @@ msgstr "&Molecola…"
 #, fuzzy
 #| msgid "Export Molecule"
 msgid "Export Molecule…"
-msgstr "Esporta Molecola…"
+msgstr "Esporta molecola…"
 
 #: mainwindow.cpp:3231
 msgid "&Graphics…"
@@ -524,7 +551,7 @@ msgstr "&Grafica…"
 
 #: mainwindow.cpp:3238
 msgid "Export Graphics…"
-msgstr ""
+msgstr "Esporta grafica…"
 
 #. i18n: file: mainwindow.ui:95
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -552,7 +579,7 @@ msgstr "&Modifica"
 
 #: mainwindow.cpp:3293
 msgid "&Copy Graphics"
-msgstr "&Copia Grafica"
+msgstr "&Copia grafica"
 
 #: mainwindow.cpp:3297
 msgid "Ctrl+Alt+C"
@@ -590,7 +617,7 @@ msgstr "&Estensioni"
 
 #: mainwindow.cpp:3352
 msgid "User Interface Language…"
-msgstr "Lingua Interfaccia Utente…"
+msgstr "Lingua dell'interfaccia utente…"
 
 #: mainwindow.cpp:3356
 msgid "&Periodic Table…"
@@ -620,7 +647,7 @@ msgstr "&Segnala un bug"
 
 #: mainwindow.cpp:3383
 msgid "&Crash Reporting…"
-msgstr ""
+msgstr "&Segnalazione degli arresti anomali…"
 
 #: mainwindow.cpp:3389
 msgid "&Suggest a Feature"
@@ -628,7 +655,7 @@ msgstr "&Suggerisci una funzionalità"
 
 #: mainwindow.cpp:3462
 msgid "System Language"
-msgstr "Lingua Di Sistema"
+msgstr "Lingua di sistema"
 
 #: mainwindow.cpp:3470
 msgid "Language"
@@ -636,12 +663,12 @@ msgstr "Lingua"
 
 #: mainwindow.cpp:3470
 msgid "User Interface Language:"
-msgstr "Lingua Interfaccia Utente:"
+msgstr "Lingua dell'interfaccia utente:"
 
 #: mainwindow.cpp:3586
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
-msgstr "Tutti i formati supportati (%1) ;; Tutti i file (*) ;;"
+msgstr "Tutti i formati supportati (%1) ;;Tutti i file (*);;"
 
 #: mainwindow.cpp:3602
 msgid "Do you want to save the changes to the document?"
@@ -663,7 +690,7 @@ msgstr "Ctrl+D"
 
 #: mainwindow.cpp:3710
 msgid "Network Download Failed"
-msgstr "Download dalla Rete Fallito"
+msgstr "Download dalla rete non riuscito"
 
 #: mainwindow.cpp:3711
 msgid "Network timeout or other error."
@@ -677,7 +704,7 @@ msgstr "La tua verisione: %1"
 #: mainwindow.cpp:3799
 #, qt-format
 msgid "New version: %1"
-msgstr "(Nuova versione: %1)"
+msgstr "Nuova versione: %1"
 
 #: mainwindow.cpp:3801
 msgid "An update is available, do you want to download it now?\n"
@@ -685,7 +712,7 @@ msgstr "C'è un aggiornamento disponibile, vuoi scaricarlo ora?\n"
 
 #: mainwindow.cpp:3803
 msgid "Version Update"
-msgstr "Aggiornamento Versione"
+msgstr "Aggiornamento della versione"
 
 #: mainwindow.cpp:3861
 #, qt-format
@@ -707,28 +734,28 @@ msgstr "Impossibile aprire i file"
 
 #: mainwindow.cpp:4088
 msgid "The plugin was unloaded."
-msgstr ""
+msgstr "Il plugin è stato disattivato."
 
 #: mainwindow.cpp:4136 mainwindow.cpp:4155 mainwindow.cpp:4178
 #: mainwindow.cpp:4197 mainwindow.cpp:4225 rpclistener.cpp:547
 msgid "No molecule is open."
-msgstr ""
+msgstr "Nessuna molecola è aperta."
 
 #: mainwindow.cpp:4165
 msgid "Cannot remove the last remaining layer."
-msgstr ""
+msgstr "Impossibile rimuovere l'ultimo livello rimasto."
 
 #: mainwindow.cpp:4209
 msgid "'visible' must be true or false."
-msgstr ""
+msgstr "'visible' deve essere vero o falso."
 
 #: mainwindow.cpp:4237
 msgid "'locked' must be true or false."
-msgstr ""
+msgstr "'locked' deve essere vero o falso."
 
 #: mainwindow.cpp:4261
 msgid "No molecule"
-msgstr ""
+msgstr "Nessuna molecola"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -752,43 +779,47 @@ msgstr "&Finestra"
 
 #: rpclistener.cpp:232
 msgid "Avogadro is shutting down."
-msgstr ""
+msgstr "Avogadro si sta chiudendo."
 
 #: rpclistener.cpp:576
 msgid "renderImage requires both width and height, or neither."
 msgstr ""
+"renderImage richiede sia la larghezza che l'altezza, oppure nessuna delle "
+"due."
 
 #: rpclistener.cpp:601
 msgid "Could not render the current view."
-msgstr ""
+msgstr "Impossibile renderizzare la vista corrente."
 
 #: rpclistener.cpp:629
 msgid "Could not encode the render as PNG."
-msgstr ""
+msgstr "Impossibile codificare il rendering in formato PNG."
 
 #: rpclistener.cpp:669 rpclistener.cpp:680
 msgid "No active view."
-msgstr ""
+msgstr "Nessuna vista attiva."
 
 #: rpclistener.cpp:690
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
 msgstr ""
+"Il parametro modelView di setCamera deve contenere esattamente 16 numeri, "
+"ordinati per righe."
 
 #: rpclistener.cpp:754 rpclistener.cpp:822
 msgid "The command failed."
-msgstr ""
+msgstr "Il comando non è riuscito."
 
 #: rpclistener.cpp:760
 msgid "That plugin is already running a command."
-msgstr ""
+msgstr "Quel plugin sta già eseguendo un comando."
 
 #: rpclistener.cpp:792
 msgid "The command timed out."
-msgstr ""
+msgstr "Il tempo di esecuzione del comando è scaduto."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
-msgstr "Visuale 3D"
+msgstr "Vista 3D"
 
 #. i18n: file: aboutdialog.ui:75
 #. i18n: ectx: property (text), widget (QLabel, version)
@@ -799,7 +830,7 @@ msgstr "Visuale 3D"
 #. i18n: file: aboutdialog.ui:188
 #. i18n: ectx: property (text), widget (QLabel, sslVersion)
 msgid "0.1"
-msgstr ""
+msgstr "0.1"
 
 #. i18n: file: aboutdialog.ui:238
 #. i18n: ectx: property (text), widget (QLabel, licenseLabel)
@@ -809,6 +840,10 @@ msgid ""
 "BSD-3-Clause\"><span style=\" font-size:10pt; text-decoration: underline; "
 "color:#0096ff;\">BSD 3-Clause</span></a></p></body></html>"
 msgstr ""
+"<html><head/><body><p><span style=\" font-size:10pt; font-weight:600;\">"
+"Licenza: </span><a href=\"https://opensource.org/licenses/BSD-3-Clause\">"
+"<span style=\" font-size:10pt; text-decoration: underline; color:#0096ff;\">"
+"BSD 3-Clause</span></a></p></body></html>"
 
 #. i18n: file: aboutdialog.ui:337
 #. i18n: ectx: property (text), widget (QPushButton, OK)
@@ -869,7 +904,7 @@ msgstr "Ctrl+Maiusc+S"
 #. i18n: file: mainwindow.ui:168
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Revert To Saved"
-msgstr "Riporta A Salvato"
+msgstr "Ripristina la versione salvata"
 
 #. i18n: file: mainwindow.ui:177
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -896,7 +931,7 @@ msgstr "Centra"
 #. i18n: file: mainwindow.ui:227
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Align View To Axes"
-msgstr "Allinea Visualizzazione Agli Assi"
+msgstr "Allinea la vista agli assi"
 
 #. i18n: file: mainwindow.ui:232
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -1001,7 +1036,7 @@ msgstr "&Importa"
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, enableAO_label)
 msgid "Enable ambient occlusion shadows"
-msgstr ""
+msgstr "Abilita le ombre con occlusione ambientale"
 
 #. i18n: file: renderingdialog.ui:34
 #. i18n: ectx: property (text), widget (QLabel, enableAO_label)
@@ -1022,37 +1057,37 @@ msgstr "Abilita"
 #. i18n: file: renderingdialog.ui:85
 #. i18n: ectx: property (toolTip), widget (QLabel, shadow_label)
 msgid "Strength of the ambient shadows"
-msgstr ""
+msgstr "Intensità delle ombre ambientali"
 
 #. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (text), widget (QLabel, shadow_label)
 msgid "Shadow Strength:"
-msgstr "Intensità delle Ombre:"
+msgstr "Intensità delle ombre:"
 
 #. i18n: file: renderingdialog.ui:130
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
 msgid "Thickness of the outline, in pixels"
-msgstr ""
+msgstr "Spessore del contorno, in pixel"
 
 #. i18n: file: renderingdialog.ui:133
 #. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
 msgid "Outline Width:"
-msgstr ""
+msgstr "Spessore del contorno:"
 
 #. i18n: file: renderingdialog.ui:160
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
 msgid "Add an outline to edge atoms"
-msgstr ""
+msgstr "Aggiungi un contorno agli atomi esterni"
 
 #. i18n: file: renderingdialog.ui:163
 #. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
 msgid "Edge Outline:"
-msgstr ""
+msgstr "Contorno del bordo:"
 
 #. i18n: file: renderingdialog.ui:181
 #. i18n: ectx: property (toolTip), widget (QLabel, enableFog_label)
 msgid "Fog effect for depth cue"
-msgstr ""
+msgstr "Effetto nebbia per la percezione della profondità"
 
 #. i18n: file: renderingdialog.ui:184
 #. i18n: ectx: property (text), widget (QLabel, enableFog_label)
@@ -1062,42 +1097,42 @@ msgstr "Nebbia:"
 #. i18n: file: renderingdialog.ui:215
 #. i18n: ectx: property (text), widget (QLabel, fogStrength_label)
 msgid "Fog Strength:"
-msgstr ""
+msgstr "Intensità della nebbia:"
 
 #. i18n: file: renderingdialog.ui:245
 #. i18n: ectx: property (text), widget (QLabel, fogPosition_label)
 msgid "Fog Position:"
-msgstr ""
+msgstr "Posizione della nebbia:"
 
 #. i18n: file: renderingdialog.ui:283
 #. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
 msgid "Add a depth blur"
-msgstr ""
+msgstr "Aggiungi una sfocatura di profondità"
 
 #. i18n: file: renderingdialog.ui:286
 #. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
 msgid "Depth Blur:"
-msgstr ""
+msgstr "Sfocatura di profondità:"
 
 #. i18n: file: renderingdialog.ui:317
 #. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
 msgid "Strength of the depth blur"
-msgstr ""
+msgstr "Intensità della sfocatura di profondità"
 
 #. i18n: file: renderingdialog.ui:320
 #. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
 msgid "Blur Strength :"
-msgstr ""
+msgstr "Intensità della sfocatura:"
 
 #. i18n: file: renderingdialog.ui:347
 #. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
 msgid "Position of the depth blur"
-msgstr ""
+msgstr "Posizione della sfocatura di profondità"
 
 #. i18n: file: renderingdialog.ui:350
 #. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
 msgid "Blur Position:"
-msgstr ""
+msgstr "Posizione della sfocatura:"
 
 #. i18n: file: renderingdialog.ui:384
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
