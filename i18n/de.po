@@ -16,13 +16,14 @@
 # Alexander Krappe <alexander.krappe@fu-berlin.de>, 2026.
 # Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>, 2026.
 # LibreTranslate <noreply-mt-libretranslate@weblate.org>, 2026.
+# Jakob Blahusch <jabla@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
 "PO-Revision-Date: 2026-10-22 00:16+0000\n"
-"Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
+"Last-Translator: Jakob Blahusch <jabla@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -141,7 +142,7 @@ msgstr "Darstellungsarten"
 
 #: mainwindow.cpp:683
 msgid "Display Type Settings"
-msgstr "Darstellungsoptionen"
+msgstr "Einstellungen für den Anzeigetyp"
 
 #: mainwindow.cpp:687
 msgid "Files"
@@ -289,7 +290,7 @@ msgstr ""
 
 #: mainwindow.cpp:1818
 msgid "Remove Old Files"
-msgstr "Alte Dateien entfernen"
+msgstr "Entferne alte Dateien"
 
 #: mainwindow.cpp:1819
 msgid "Keep Files"
@@ -327,7 +328,7 @@ msgstr "Aktualisierte Erweiterungen installieren?"
 
 #: mainwindow.cpp:1974
 msgid "The following plugins are available:"
-msgstr "Folgende Erweiterungen sind verfügbar:"
+msgstr "Folgende Plugins stehen zur Verfügung:"
 
 #: mainwindow.cpp:1975
 msgid "Would you like to update them?"
