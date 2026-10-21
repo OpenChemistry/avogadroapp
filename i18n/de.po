@@ -651,7 +651,7 @@ msgstr "&Fehler melden"
 
 #: mainwindow.cpp:3383
 msgid "&Crash Reporting…"
-msgstr ""
+msgstr "Absturzberichte"
 
 #: mainwindow.cpp:3389
 msgid "&Suggest a Feature"
