@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2026-10-22 00:16+0000\n"
-"Last-Translator: Jakob Blahusch <jabla@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2026-10-22 10:17+0000\n"
+"Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -264,7 +264,7 @@ msgstr ""
 
 #: mainwindow.cpp:1508
 msgid "The save was canceled."
-msgstr "Das Abspeichern wurde gestoppt"
+msgstr "Das Abspeichern wurde gestoppt."
 
 #: mainwindow.cpp:1569 mainwindow.cpp:1572
 msgid "untitled"
