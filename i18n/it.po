@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2026-10-21 08:07+0000\n"
+"PO-Revision-Date: 2026-10-21 15:18+0000\n"
 "Last-Translator: Jonathan Di Pietro "
 "<jonathandip@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/avogadro/"
@@ -73,7 +73,7 @@ msgstr "Nessun formato di file impostato in BackgroundFileFormat!"
 
 #: backgroundfileformat.cpp:42 backgroundfileformat.cpp:119
 msgid "No file name set in BackgroundFileFormat!"
-msgstr "Nessun nome file impostato in BackgroundFileFormat!"
+msgstr "Nessun nome del file impostato in BackgroundFileFormat!"
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"

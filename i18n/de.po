@@ -16,13 +16,14 @@
 # Alexander Krappe <alexander.krappe@fu-berlin.de>, 2026.
 # Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>, 2026.
 # LibreTranslate <noreply-mt-libretranslate@weblate.org>, 2026.
+# Jakob Blahusch <jabla@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2026-10-20 16:14+0000\n"
-"Last-Translator: LibreTranslate <noreply-mt-libretranslate@weblate.org>\n"
+"PO-Revision-Date: 2026-10-22 14:23+0000\n"
+"Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -64,7 +65,7 @@ msgstr "SSL-Version:"
 #: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1 (Diagnose)"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
@@ -80,7 +81,7 @@ msgstr "Es wurde kein Dateiname im BackgroundFileFormat festgelegt!"
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"
-msgstr ""
+msgstr "Absturzberichte"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -117,7 +118,7 @@ msgstr ""
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "Absturzberichte senden"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
@@ -125,7 +126,7 @@ msgstr "Nicht senden"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "Absturzberichte den Avogadroentwicklern senden"
 
 #: mainwindow.cpp:557
 msgid "Ready…"
@@ -141,7 +142,7 @@ msgstr "Darstellungsarten"
 
 #: mainwindow.cpp:683
 msgid "Display Type Settings"
-msgstr "Darstellungsoptionen"
+msgstr "Einstellungen für den Anzeigetyp"
 
 #: mainwindow.cpp:687
 msgid "Files"
@@ -263,7 +264,7 @@ msgstr ""
 
 #: mainwindow.cpp:1508
 msgid "The save was canceled."
-msgstr ""
+msgstr "Das Abspeichern wurde gestoppt."
 
 #: mainwindow.cpp:1569 mainwindow.cpp:1572
 msgid "untitled"
@@ -289,7 +290,7 @@ msgstr ""
 
 #: mainwindow.cpp:1818
 msgid "Remove Old Files"
-msgstr "Alte Dateien entfernen"
+msgstr "Entferne alte Dateien"
 
 #: mainwindow.cpp:1819
 msgid "Keep Files"
@@ -319,7 +320,7 @@ msgstr "Dazu muss zunächst eine Python-Umgebung eingerichtet werden."
 
 #: mainwindow.cpp:1971
 msgid "This may require an Internet connection."
-msgstr "Dies benötigt eine Internetverbindung."
+msgstr "Das kann eine Internetverbindung benötigen ."
 
 #: mainwindow.cpp:1973
 msgid "Install updated plugins?"
@@ -327,7 +328,7 @@ msgstr "Aktualisierte Erweiterungen installieren?"
 
 #: mainwindow.cpp:1974
 msgid "The following plugins are available:"
-msgstr "Folgende Erweiterungen sind verfügbar:"
+msgstr "Folgende Plugins stehen zur Verfügung:"
 
 #: mainwindow.cpp:1975
 msgid "Would you like to update them?"
@@ -367,16 +368,16 @@ msgstr ""
 
 #: mainwindow.cpp:2131
 msgid "Missing 'layer' parameter."
-msgstr ""
+msgstr "Fehlender 'layer'-Parameter."
 
 #: mainwindow.cpp:2138
 msgid "'layer' must be a whole number."
-msgstr ""
+msgstr "'layer' muss eine ganze Zahl sein."
 
 #: mainwindow.cpp:2144
 #, qt-format
 msgid "'layer' %1 is out of range."
-msgstr ""
+msgstr "'layer' %1 befindet sich außerhalb des erwarteten Intervalls."
 
 #: mainwindow.cpp:2279
 #, qt-format
@@ -650,7 +651,7 @@ msgstr "&Fehler melden"
 
 #: mainwindow.cpp:3383
 msgid "&Crash Reporting…"
-msgstr ""
+msgstr "Absturzberichte…"
 
 #: mainwindow.cpp:3389
 msgid "&Suggest a Feature"
@@ -738,12 +739,12 @@ msgstr "Dateien können nicht geöffnet werden"
 
 #: mainwindow.cpp:4088
 msgid "The plugin was unloaded."
-msgstr ""
+msgstr "Das Plugin wurde deaktiviert."
 
 #: mainwindow.cpp:4136 mainwindow.cpp:4155 mainwindow.cpp:4178
 #: mainwindow.cpp:4197 mainwindow.cpp:4225 rpclistener.cpp:547
 msgid "No molecule is open."
-msgstr ""
+msgstr "Es ist kein Molekül geöffnet."
 
 #: mainwindow.cpp:4165
 msgid "Cannot remove the last remaining layer."
@@ -751,11 +752,11 @@ msgstr "Die letzte Ebene kann nicht entfernt werden."
 
 #: mainwindow.cpp:4209
 msgid "'visible' must be true or false."
-msgstr ""
+msgstr "'visible' erlaubt nur true oder false."
 
 #: mainwindow.cpp:4237
 msgid "'locked' must be true or false."
-msgstr ""
+msgstr "'locked' erlaubt nur true oder false."
 
 #: mainwindow.cpp:4261
 msgid "No molecule"
@@ -801,11 +802,11 @@ msgstr "Die Darstellung konnte nicht als PNG kodiert werden."
 
 #: rpclistener.cpp:669 rpclistener.cpp:680
 msgid "No active view."
-msgstr ""
+msgstr "Es ist keine Ansicht aktiv."
 
 #: rpclistener.cpp:690
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
-msgstr ""
+msgstr "'moldView' von 'setCamera' erwartet exakt 16 Zahlen (row-major order)."
 
 #: rpclistener.cpp:754 rpclistener.cpp:822
 msgid "The command failed."
@@ -817,7 +818,7 @@ msgstr "Das Plugin führt bereits ein Kommando aus."
 
 #: rpclistener.cpp:792
 msgid "The command timed out."
-msgstr ""
+msgstr "Zeitüberschreitung für den Befehl."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
