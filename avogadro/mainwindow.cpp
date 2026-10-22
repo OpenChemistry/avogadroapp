@@ -2300,12 +2300,6 @@ void MainWindow::toolActivated()
       if (glWidget->activeTool()) {
         m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
-
-        // uncheck the toolbar
-        foreach (QAction* barAction, m_toolToolBar->actions()) {
-          if (toolId != barAction->data().toString())
-            barAction->setChecked(false);
-        }
       }
     }
   }
@@ -3739,6 +3733,10 @@ void MainWindow::buildTools()
   // sort them based on priority
   std::sort(m_tools.begin(), m_tools.end(), ToolSort);
 
+  // exclusive group: clicking the active tool again won't uncheck it
+  auto* toolGroup = new QActionGroup(m_toolToolBar);
+  toolGroup->setExclusionPolicy(QActionGroup::ExclusionPolicy::Exclusive);
+
   int index = 1;
   foreach (ToolPlugin* toolPlugin, m_tools) {
 #ifdef Q_OS_WIN
@@ -3753,6 +3751,7 @@ void MainWindow::buildTools()
     if (index <= 10)
       action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index % 10)));
     action->setData(toolPlugin->objectName());
+    toolGroup->addAction(action);
     m_toolToolBar->addAction(action);
 
     connect(action, &QAction::triggered, this, &MainWindow::toolActivated);
