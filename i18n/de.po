@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2026-10-22 10:17+0000\n"
+"PO-Revision-Date: 2026-10-22 14:23+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -806,7 +806,7 @@ msgstr "Es ist keine Ansicht aktiv."
 
 #: rpclistener.cpp:690
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
-msgstr ""
+msgstr "'moldView' von 'setCamera' erwartet exakt 16 Zahlen (row-major order)."
 
 #: rpclistener.cpp:754 rpclistener.cpp:822
 msgid "The command failed."
@@ -818,7 +818,7 @@ msgstr "Das Plugin führt bereits ein Kommando aus."
 
 #: rpclistener.cpp:792
 msgid "The command timed out."
-msgstr ""
+msgstr "Zeitüberschreitung für den Befehl."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
