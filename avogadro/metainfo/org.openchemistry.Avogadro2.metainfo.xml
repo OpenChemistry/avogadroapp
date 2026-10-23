@@ -78,6 +78,22 @@
     </screenshot>
   </screenshots>
   <releases>
+      <release version="2.1.0" date="2026-10-23">
+      <url type="details">https://avogadro.cc/install/versions/v210.html</url>
+      <description>
+        <p>Highlights</p>
+        <ul>
+        <li>Faster, smoother geometry optimizations using a hybrid optimizer</li>
+        <li>Much faster orbitals and surfaces. Gaussian basis sets are now over 20x faster and ORCA output loads faster too</li>
+        <li>Improved conformer and dynamics plot including geometry parameters, velocities, temperature, etc.</li>
+        <li>New builder features including a polymer builder, a z-matrix editor, editing distances and angles in the measure tool and more</li>
+        <li>Improved camera controls including keyboard controls, click and drag around an atom</li>
+        <li>Added scripting and automation using the avogadro.connect Python module and local JSON-RPC connections.</li>
+        <li>Transparent compression support: read and write compressed files directly (e.g., `.gz`, `.xz` and `.zstd`).</li>
+        <li>Lots of bug fixes, accessibility improvements, and more</li>
+        </ul>
+      </description>
+      </release>
       <release version="2.0.0" date="2026-04-01">
       <url type="details">https://avogadro.cc/install/versions/v200.html</url>
       <description>
