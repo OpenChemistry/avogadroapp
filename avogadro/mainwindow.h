@@ -6,6 +6,8 @@
 #ifndef AVOGADRO_MAINWINDOW_H
 #define AVOGADRO_MAINWINDOW_H
 
+#include <avogadro/qtopengl/renderoptions.h>
+
 #include <QtCore/QHash>
 #include <QtCore/QList>
 #include <QtCore/QStringList>
@@ -127,6 +129,9 @@ public slots:
    * @return True if the image was written.
    */
   bool exportGraphics(QString fileName);
+
+  /** As above, with explicit render options (size, background). */
+  bool exportGraphics(QString fileName, const QtOpenGL::RenderOptions& options);
 
   /**
    * Export a file, using the full selection of formats capable of writing.
@@ -307,21 +312,17 @@ public:
   QtOpenGL::GLWidget* activeGLWidget() const;
 
   /**
-   * Render the active view to an image.
-   * @param requestedSize The desired output size, in pixels. If null or
-   * empty (the default), the native framebuffer grab is returned untouched,
-   * at whatever resolution the view actually rendered (i.e. widget size
-   * times device pixel ratio). Otherwise the native grab is scaled with
-   * Qt::KeepAspectRatio and centred on a canvas of exactly this size.
-   * @param transparentBackground If true (the default, matching prior
-   * behaviour) the background is left transparent; otherwise the image is
-   * composited over the view's current background colour.
-   * @param nativeSize If non-null, receives the native grab's actual
-   * dimensions (before any scaling to requestedSize was applied).
+   * Render the active view to an image of exactly options.size pixels (the
+   * view size times the device pixel ratio if that is invalid), framed for
+   * that size, with the molecule embedded as CML when it is small.
+   * @param nativeSize If non-null, receives the view size times the device
+   * pixel ratio.
+   * @param error If non-null, receives the reason when a null image is
+   * returned.
    */
-  QImage renderToImage(const QSize& requestedSize = QSize(),
-                       bool transparentBackground = true,
-                       QSize* nativeSize = nullptr);
+  QImage renderToImage(
+    const QtOpenGL::RenderOptions& options = QtOpenGL::RenderOptions(),
+    QSize* nativeSize = nullptr, QString* error = nullptr);
 
   /**
    * True once the file formats that plugins register after startup (Open
