@@ -679,48 +679,47 @@ void RpcListener::messageReceived(const RPC::Message& message)
     // natively (not scaled from the window). With only one of the two, the
     // other follows the aspect ratio of the view; with neither, the image is
     // the view size times the device pixel ratio.
-    const qreal dpr = glWidget->devicePixelRatioF();
-    const QSize viewPixels(qRound(glWidget->width() * dpr),
-                           qRound(glWidget->height() * dpr));
-    constexpr int maxSize = 8192;
+    const QSize viewPixels = glWidget->pixelSize();
 
-    auto readDimension = [&](const char* key, int& value) {
+    // A whole number of lo to hi in params[key]; sends the error otherwise.
+    auto readInt = [&](const char* key, int lo, int hi, int& out) {
       const QJsonValue v = params[key];
       const double d = v.toDouble(-1.0);
-      if (!v.isDouble() || d != std::floor(d) || d < 1.0 || d > maxSize) {
+      if (!v.isDouble() || d != std::floor(d) || d < lo || d > hi) {
         sendError(message, errorRequestFailed,
-                  tr("%1 must be a whole number of pixels from 1 to %2.")
+                  tr("%1 must be a whole number from %2 to %3.")
                     .arg(QString::fromLatin1(key))
-                    .arg(maxSize));
+                    .arg(lo)
+                    .arg(hi));
         return false;
       }
-      value = static_cast<int>(d);
+      out = static_cast<int>(d);
       return true;
     };
 
     QSize requestedSize;
     const bool haveWidth = params.contains("width");
     const bool haveHeight = params.contains("height");
+    const int maxSize = QtOpenGL::RenderOptions::MaxDimension;
     int width = 0;
     int height = 0;
-    if ((haveWidth && !readDimension("width", width)) ||
-        (haveHeight && !readDimension("height", height)))
+    if ((haveWidth && !readInt("width", 1, maxSize, width)) ||
+        (haveHeight && !readInt("height", 1, maxSize, height)))
       return;
     if (haveWidth != haveHeight) {
       // The other dimension follows the view's aspect ratio.
       const bool derivingHeight = haveWidth;
-      const double derived =
-        derivingHeight
-          ? std::round(static_cast<double>(width) * viewPixels.height() /
-                       std::max(1, viewPixels.width()))
-          : std::round(static_cast<double>(height) * viewPixels.width() /
-                       std::max(1, viewPixels.height()));
-      if (derived < 1.0 || derived > maxSize) {
+      const double aspect =
+        static_cast<double>(std::max(1, viewPixels.width())) /
+        std::max(1, viewPixels.height());
+      const long long derived =
+        std::llround(derivingHeight ? width / aspect : height * aspect);
+      if (derived < 1 || derived > maxSize) {
         sendError(message, errorRequestFailed,
                   tr("The %1 derived from the view's aspect ratio, %2, is "
                      "outside the range 1 to %3.")
                     .arg(derivingHeight ? tr("height") : tr("width"))
-                    .arg(static_cast<long long>(derived))
+                    .arg(derived)
                     .arg(maxSize));
         return;
       }
@@ -732,16 +731,10 @@ void RpcListener::messageReceived(const RPC::Message& message)
     // pixel ratio.
 
     int supersample = 1;
-    if (params.contains("supersample")) {
-      const QJsonValue v = params["supersample"];
-      const double d = v.toDouble(-1.0);
-      if (!v.isDouble() || d != std::floor(d) || d < 1.0 || d > 4.0) {
-        sendError(message, errorRequestFailed,
-                  tr("supersample must be a whole number from 1 to 4."));
-        return;
-      }
-      supersample = static_cast<int>(d);
-    }
+    if (params.contains("supersample") &&
+        !readInt("supersample", 1, QtOpenGL::RenderOptions::MaxSupersample,
+                 supersample))
+      return;
 
     QtOpenGL::RenderOptions options;
     options.size = requestedSize;
@@ -750,9 +743,8 @@ void RpcListener::messageReceived(const RPC::Message& message)
       params["transparentBackground"].toBool(false);
     QString fileName = params["fileName"].toString();
 
-    QSize nativeSize;
     QString renderError;
-    QImage image = m_window->renderToImage(options, &nativeSize, &renderError);
+    QImage image = m_window->renderToImage(options, &renderError);
     if (image.isNull()) {
       // The render failed (for instance, the size exceeds what the graphics
       // driver supports): there is nothing to save or encode, so report it
@@ -770,8 +762,8 @@ void RpcListener::messageReceived(const RPC::Message& message)
         QVariantMap result;
         result["width"] = image.width();
         result["height"] = image.height();
-        result["nativeWidth"] = nativeSize.width();
-        result["nativeHeight"] = nativeSize.height();
+        result["nativeWidth"] = viewPixels.width();
+        result["nativeHeight"] = viewPixels.height();
         result["fileName"] = fileName;
 
         RPC::Message response = message.generateResponse();
@@ -794,8 +786,8 @@ void RpcListener::messageReceived(const RPC::Message& message)
       QVariantMap result;
       result["width"] = image.width();
       result["height"] = image.height();
-      result["nativeWidth"] = nativeSize.width();
-      result["nativeHeight"] = nativeSize.height();
+      result["nativeWidth"] = viewPixels.width();
+      result["nativeHeight"] = viewPixels.height();
       result["format"] = QStringLiteral("png");
       result["data"] = QString::fromLatin1(bytes.toBase64());
 

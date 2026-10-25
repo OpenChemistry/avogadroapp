@@ -2621,7 +2621,7 @@ QtOpenGL::GLWidget* MainWindow::activeGLWidget() const
 }
 
 QImage MainWindow::renderToImage(const QtOpenGL::RenderOptions& options,
-                                 QSize* nativeSize, QString* error)
+                                 QString* error)
 {
   GLWidget* viewWidget = activeGLWidget();
 
@@ -2631,12 +2631,6 @@ QImage MainWindow::renderToImage(const QtOpenGL::RenderOptions& options,
     if (error != nullptr)
       *error = tr("There is no active 3D view to render.");
     return QImage();
-  }
-
-  if (nativeSize != nullptr) {
-    const qreal dpr = viewWidget->devicePixelRatioF();
-    *nativeSize = QSize(qRound(viewWidget->width() * dpr),
-                        qRound(viewWidget->height() * dpr));
   }
 
   QImage exportImage = viewWidget->renderImage(options, error);
@@ -2684,13 +2678,32 @@ void MainWindow::exportGraphics()
   exportGraphics(fileName, options);
 }
 
-bool MainWindow::exportGraphics(QString fileName)
+namespace {
+// The view size (times the device pixel ratio) with a transparent background,
+// which is what exports have always produced by default.
+QtOpenGL::RenderOptions transparentViewOptions()
 {
-  // No dialog: the view size (times the device pixel ratio), with a
-  // transparent background, as this has always produced.
   QtOpenGL::RenderOptions options;
   options.transparentBackground = true;
-  return exportGraphics(fileName, options);
+  return options;
+}
+} // namespace
+
+QImage MainWindow::renderForExport(const QtOpenGL::RenderOptions& options)
+{
+  QString error;
+  QImage image = renderToImage(options, &error);
+  if (image.isNull()) {
+    warnUser(Severity::Warning, tr("Avogadro"),
+             tr("Cannot render the image: %1").arg(error));
+  }
+  return image;
+}
+
+bool MainWindow::exportGraphics(QString fileName)
+{
+  // No dialog: the view size with a transparent background.
+  return exportGraphics(fileName, transparentViewOptions());
 }
 
 bool MainWindow::exportGraphics(QString fileName,
@@ -2701,13 +2714,9 @@ bool MainWindow::exportGraphics(QString fileName,
   if (QFileInfo(fileName).suffix().isEmpty())
     fileName += ".png";
 
-  QString error;
-  QImage exportImage = renderToImage(options, nullptr, &error);
-  if (exportImage.isNull()) {
-    warnUser(Severity::Warning, tr("Avogadro"),
-             tr("Cannot render the image: %1").arg(error));
+  const QImage exportImage = renderForExport(options);
+  if (exportImage.isNull())
     return false;
-  }
 
   if (!exportImage.save(fileName)) {
     warnUser(Severity::Warning, tr("Avogadro"),
@@ -2719,18 +2728,9 @@ bool MainWindow::exportGraphics(QString fileName,
 
 void MainWindow::copyGraphics()
 {
-  // The view size (times the device pixel ratio), with a transparent
-  // background, as before.
-  QtOpenGL::RenderOptions options;
-  options.transparentBackground = true;
-  QString error;
-  QImage exportImage = renderToImage(options, nullptr, &error);
-  if (exportImage.isNull()) {
-    warnUser(Severity::Warning, tr("Avogadro"),
-             tr("Cannot render the image: %1").arg(error));
-    return;
-  }
-  QApplication::clipboard()->setImage(exportImage);
+  const QImage exportImage = renderForExport(transparentViewOptions());
+  if (!exportImage.isNull())
+    QApplication::clipboard()->setImage(exportImage);
 }
 
 void MainWindow::reassignCustomElements()

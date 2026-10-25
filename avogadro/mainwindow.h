@@ -315,14 +315,12 @@ public:
    * Render the active view to an image of exactly options.size pixels (the
    * view size times the device pixel ratio if that is invalid), framed for
    * that size, with the molecule embedded as CML when it is small.
-   * @param nativeSize If non-null, receives the view size times the device
-   * pixel ratio.
    * @param error If non-null, receives the reason when a null image is
    * returned.
    */
   QImage renderToImage(
     const QtOpenGL::RenderOptions& options = QtOpenGL::RenderOptions(),
-    QSize* nativeSize = nullptr, QString* error = nullptr);
+    QString* error = nullptr);
 
   /**
    * True once the file formats that plugins register after startup (Open
@@ -619,6 +617,12 @@ private slots:
   void setProjectionPerspective();
 
 private:
+  /**
+   * Render the active view for export, warning the user if that fails.
+   * @return The image, or a null image after the warning.
+   */
+  QImage renderForExport(const QtOpenGL::RenderOptions& options);
+
   /**
    * Close @p molecule without asking to save it: make a neighbour (or a new
    * empty molecule, if it was the only one) active when it is the active
