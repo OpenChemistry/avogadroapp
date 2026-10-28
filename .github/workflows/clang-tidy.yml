@@ -34,7 +34,7 @@ jobs:
         sudo apt-get -qq install clang-tidy
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@a9c63c7c123f3069cff414e7e482d95dfa9d8125 # v3
+      uses: jurplel/install-qt-action@b344308e4483fc892e0d27b3cd1b173ebdd95f06 # v3
       with:
         cache: true
         version: ${{ env.QT_VERSION }}
