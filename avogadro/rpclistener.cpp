@@ -35,6 +35,7 @@
 #include <QtWidgets/QMessageBox>
 
 #include <algorithm>
+#include <cmath>
 
 namespace Avogadro {
 
@@ -149,14 +150,16 @@ const BuiltinCommand builtinCommands[] = {
     "molecule. Fails if it is the last remaining layer.",
     false },
   { "renderImage",
-    "Render the current view to a PNG, inline or to a "
-    "file. Omit width/height for the native framebuffer "
-    "resolution, or supply both together to fit that "
-    "render onto a canvas of exactly that size.",
+    "Render the current view to a PNG, inline or to a file, natively at "
+    "the requested size. Give width and height, or just one (the other "
+    "follows the view's aspect ratio), from 1 to 8192; omit both for the "
+    "view size times the device pixel ratio. Optional supersample (1-4) "
+    "renders larger and downsamples. Sizes the graphics driver cannot "
+    "render are rejected.",
     false },
   { "saveGraphic",
     "Render the current view and save it as an image at "
-    "the window's current size.",
+    "the view's size (times the device pixel ratio).",
     false },
   { "setActiveLayer",
     "Make a layer (by index, 0 = first layer) of the active molecule "
@@ -665,40 +668,90 @@ void RpcListener::messageReceived(const RPC::Message& message)
       }
     }
   } else if (method == "renderImage") {
-    // Width and height must be given together, or not at all: with only
-    // one of the two, there is no native size available yet (the grab
-    // hasn't happened) to derive the other from without rendering twice, so
-    // rather than guess an aspect ratio we reject the request outright.
-    const bool haveWidth = params.contains("width");
-    const bool haveHeight = params.contains("height");
-    if (haveWidth != haveHeight) {
+    GLWidget* glWidget = m_window->activeGLWidget();
+    if (glWidget == nullptr) {
       sendError(message, errorRequestFailed,
-                tr("renderImage requires both width and height, or "
-                   "neither."));
+                tr("There is no active 3D view to render."));
       return;
     }
 
-    QSize requestedSize;
-    if (haveWidth && haveHeight) {
-      int width = qBound(1, params["width"].toInt(), 8192);
-      int height = qBound(1, params["height"].toInt(), 8192);
-      requestedSize = QSize(width, height);
-    }
-    // else: leave requestedSize null, so renderToImage() returns the
-    // native framebuffer grab untouched, at the maximum quality available.
+    // Width and height are the size of the image in pixels, rendered
+    // natively (not scaled from the window). With only one of the two, the
+    // other follows the aspect ratio of the view; with neither, the image is
+    // the view size times the device pixel ratio.
+    const QSize viewPixels = glWidget->pixelSize();
 
-    const bool transparentBackground =
+    // A whole number of lo to hi in params[key]; sends the error otherwise.
+    auto readInt = [&](const char* key, int lo, int hi, int& out) {
+      const QJsonValue v = params[key];
+      const double d = v.toDouble(-1.0);
+      if (!v.isDouble() || d != std::floor(d) || d < lo || d > hi) {
+        sendError(message, errorRequestFailed,
+                  tr("%1 must be a whole number from %2 to %3.")
+                    .arg(QString::fromLatin1(key))
+                    .arg(lo)
+                    .arg(hi));
+        return false;
+      }
+      out = static_cast<int>(d);
+      return true;
+    };
+
+    QSize requestedSize;
+    const bool haveWidth = params.contains("width");
+    const bool haveHeight = params.contains("height");
+    const int maxSize = QtOpenGL::RenderOptions::MaxDimension;
+    int width = 0;
+    int height = 0;
+    if ((haveWidth && !readInt("width", 1, maxSize, width)) ||
+        (haveHeight && !readInt("height", 1, maxSize, height)))
+      return;
+    if (haveWidth != haveHeight) {
+      // The other dimension follows the view's aspect ratio.
+      const bool derivingHeight = haveWidth;
+      const double aspect =
+        static_cast<double>(std::max(1, viewPixels.width())) /
+        std::max(1, viewPixels.height());
+      const long long derived =
+        std::llround(derivingHeight ? width / aspect : height * aspect);
+      if (derived < 1 || derived > maxSize) {
+        sendError(message, errorRequestFailed,
+                  tr("The %1 derived from the view's aspect ratio, %2, is "
+                     "outside the range 1 to %3.")
+                    .arg(derivingHeight ? tr("height") : tr("width"))
+                    .arg(derived)
+                    .arg(maxSize));
+        return;
+      }
+      (derivingHeight ? height : width) = static_cast<int>(derived);
+    }
+    if (haveWidth || haveHeight)
+      requestedSize = QSize(width, height);
+    // else: the default (invalid) size is the view size times the device
+    // pixel ratio.
+
+    int supersample = 1;
+    if (params.contains("supersample") &&
+        !readInt("supersample", 1, QtOpenGL::RenderOptions::MaxSupersample,
+                 supersample))
+      return;
+
+    QtOpenGL::RenderOptions options;
+    options.size = requestedSize;
+    options.supersample = supersample;
+    options.transparentBackground =
       params["transparentBackground"].toBool(false);
     QString fileName = params["fileName"].toString();
 
-    QSize nativeSize;
-    QImage image = m_window->renderToImage(requestedSize, transparentBackground,
-                                           &nativeSize);
+    QString renderError;
+    QImage image = m_window->renderToImage(options, &renderError);
     if (image.isNull()) {
-      // No active GL view, or the grab failed: there is nothing to save or
-      // encode, so report it rather than reply with a zero-sized image.
+      // The render failed (for instance, the size exceeds what the graphics
+      // driver supports): there is nothing to save or encode, so report it
+      // rather than reply with a zero-sized image.
       sendError(message, errorRequestFailed,
-                tr("Could not render the current view."));
+                renderError.isEmpty() ? tr("Could not render the current view.")
+                                      : renderError);
       return;
     }
 
@@ -709,8 +762,8 @@ void RpcListener::messageReceived(const RPC::Message& message)
         QVariantMap result;
         result["width"] = image.width();
         result["height"] = image.height();
-        result["nativeWidth"] = nativeSize.width();
-        result["nativeHeight"] = nativeSize.height();
+        result["nativeWidth"] = viewPixels.width();
+        result["nativeHeight"] = viewPixels.height();
         result["fileName"] = fileName;
 
         RPC::Message response = message.generateResponse();
@@ -733,8 +786,8 @@ void RpcListener::messageReceived(const RPC::Message& message)
       QVariantMap result;
       result["width"] = image.width();
       result["height"] = image.height();
-      result["nativeWidth"] = nativeSize.width();
-      result["nativeHeight"] = nativeSize.height();
+      result["nativeWidth"] = viewPixels.width();
+      result["nativeHeight"] = viewPixels.height();
       result["format"] = QStringLiteral("png");
       result["data"] = QString::fromLatin1(bytes.toBase64());
 
