@@ -14,6 +14,7 @@ import os
 import re
 import signal
 import socket
+import stat
 import subprocess
 import sys
 import tempfile
@@ -216,8 +217,8 @@ class AvogadroApp:
         if extra_args is not None:
             self.extra_args = list(extra_args)
         self.name = "avotest-%d-%d" % (os.getpid(), next(self._counter))
-        socket_path = Path(tempfile.gettempdir()) / self.name
-        if socket_path.exists():
+        socket_path = socket_file(self.name)
+        if socket_path is not None and socket_path.exists():
             socket_path.unlink()
         self.log_path = self.log_dir / (self.name + ".log")
         self.args = ["--rpc-name", self.name] + LAUNCH_ARGS + self.extra_args
@@ -268,14 +269,42 @@ class AvogadroApp:
                 process.kill()
                 process.wait()
         if self.name:
-            try:
-                (Path(tempfile.gettempdir()) / self.name).unlink()
-            except OSError:
-                pass
+            path = socket_file(self.name)
+            if path is not None:
+                try:
+                    path.unlink()
+                except OSError:
+                    pass
 
     def restart(self):
         self.stop()
         self.start()
+
+
+def socket_file(name):
+    """Where the app's RPC socket file lives (None on Windows, a pipe).
+
+    Mirrors LocalSocketConnectionListener::resolveServerName: macOS keeps the
+    socket in the per-user temporary directory; other Unix systems use
+    $XDG_RUNTIME_DIR, else <tmp>/avogadro-<uid>.
+    """
+    if os.name == "nt":
+        return None
+    if os.path.isabs(name):
+        return Path(name)
+    if sys.platform != "darwin":
+        runtime = os.environ.get("XDG_RUNTIME_DIR")
+        if runtime and os.path.isabs(runtime):
+            info = os.lstat(runtime) if os.path.lexists(runtime) else None
+            if (
+                info is not None
+                and stat.S_ISDIR(info.st_mode)
+                and info.st_uid == os.getuid()
+                and not info.st_mode & 0o077
+            ):
+                return Path(runtime) / name
+        return Path(tempfile.gettempdir()) / ("avogadro-%d" % os.getuid()) / name
+    return Path(tempfile.gettempdir()) / name
 
 
 def probe(name, timeout=PING_TIMEOUT):
