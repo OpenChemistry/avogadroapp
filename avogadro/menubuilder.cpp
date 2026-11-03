@@ -22,9 +22,7 @@ namespace {
  */
 struct PriorityText
 {
-  PriorityText(QString string, int pri)
-    : text(std::move(string))
-    , priority(pri)
+  PriorityText(QString string, int pri) : text(std::move(string)), priority(pri)
   {
   }
 
@@ -45,7 +43,7 @@ int floor100(int x)
 {
   return x >= 0 ? (x / 100) * 100 : ((x - 99) / 100) * 100;
 }
-}
+} // namespace
 
 MenuBuilder::MenuBuilder()
 {

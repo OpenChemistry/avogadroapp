@@ -315,8 +315,7 @@ class XMLEventObserver : public pqEventObserver
   QString XMLString;
 
 public:
-  XMLEventObserver(QObject* p)
-    : pqEventObserver(p)
+  XMLEventObserver(QObject* p) : pqEventObserver(p)
   {
     this->XMLStream = nullptr;
   }
@@ -381,11 +380,7 @@ class XMLEventSource : public pqEventSource
   QXmlStreamReader* XMLStream;
 
 public:
-  XMLEventSource(QObject* p)
-    : Superclass(p)
-  {
-    this->XMLStream = nullptr;
-  }
+  XMLEventSource(QObject* p) : Superclass(p) { this->XMLStream = nullptr; }
   ~XMLEventSource() { delete this->XMLStream; }
 
 protected:
@@ -451,28 +446,18 @@ using std::vector;
 
 MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
                        bool skipAutosave, bool skipDialogs)
-  : m_molecule(nullptr)
-  , m_rwMolecule(nullptr)
-  , m_moleculeModel(nullptr)
-  , m_layerModel(nullptr)
-  , m_activeScenePlugin(nullptr)
-  , m_queuedFilesStarted(false)
-  , m_menuBuilder(new MenuBuilder)
-  , m_fileReadThread(nullptr)
-  , m_fileWriteThread(nullptr)
-  , m_threadedReader(nullptr)
-  , m_threadedWriter(nullptr)
-  , m_progressDialog(nullptr)
-  , m_fileReadMolecule(nullptr)
-  , m_fileToolBar(new QToolBar(this))
-  , m_toolToolBar(new QToolBar(this))
-  , m_moleculeDirty(false)
-  , m_undo(nullptr)
-  , m_redo(nullptr)
-  , m_copyImage(nullptr)
-  , m_viewFactory(new ViewFactory)
+  : m_molecule(nullptr), m_rwMolecule(nullptr), m_moleculeModel(nullptr),
+    m_layerModel(nullptr), m_activeScenePlugin(nullptr),
+    m_queuedFilesStarted(false), m_menuBuilder(new MenuBuilder),
+    m_fileReadThread(nullptr), m_fileWriteThread(nullptr),
+    m_threadedReader(nullptr), m_threadedWriter(nullptr),
+    m_progressDialog(nullptr), m_fileReadMolecule(nullptr),
+    m_fileToolBar(new QToolBar(this)), m_toolToolBar(new QToolBar(this)),
+    m_moleculeDirty(false), m_undo(nullptr), m_redo(nullptr),
+    m_copyImage(nullptr), m_viewFactory(new ViewFactory)
 #ifdef _3DCONNEXION
-  , m_TDxController(nullptr)
+    ,
+    m_TDxController(nullptr)
 #endif
 {
   // Route the reserved camera-navigation shortcut (Ctrl/Cmd+arrow) to the
@@ -1183,7 +1168,7 @@ void MainWindow::newMolecule()
   setMolecule(new Molecule(this));
 }
 
-template<class T, class M>
+template <class T, class M>
 void setWidgetMolecule(T* glWidget, M* mol)
 {
   // reset the camera when the previous molecule was empty
@@ -2230,7 +2215,7 @@ void MainWindow::loadPackages()
   if (!dialogsSkipped())
     settings.setValue("MainWindow/firstRun", false);
 
-    // Load cached registrations so consumer plugins get their signals
+  // Load cached registrations so consumer plugins get their signals
 #ifndef NDEBUG
   qDebug() << "Load registered packages";
 #endif
@@ -2532,7 +2517,7 @@ bool populatePluginModel(ScenePluginModel& model, QObject* p,
   return true;
 }
 
-template<class T>
+template <class T>
 bool populateTools(T* glWidget)
 {
   if (!glWidget->tools().isEmpty())
@@ -2911,7 +2896,7 @@ bool MainWindow::saveFile(bool async)
     else if (box.clickedButton() == cancelButton)
       return false;
     else if (box.clickedButton() == exportButton)
-      return exportFile(QString ::fromStdString(fileName),
+      return exportFile(QString::fromStdString(fileName),
                         async); // save in current format
   }
 
@@ -4647,4 +4632,4 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
   return CommandStatus::NotHandled;
 }
 
-} // End of Avogadro namespace
+} // namespace Avogadro

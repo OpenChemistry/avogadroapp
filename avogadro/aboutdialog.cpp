@@ -15,8 +15,7 @@
 namespace Avogadro {
 
 AboutDialog::AboutDialog(QWidget* parent_)
-  : QDialog(parent_)
-  , m_ui(new Ui::AboutDialog)
+  : QDialog(parent_), m_ui(new Ui::AboutDialog)
 {
   m_ui->setupUi(this);
 

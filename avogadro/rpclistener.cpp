@@ -241,8 +241,7 @@ QVariantMap cameraToVariantMap(const Camera& camera)
 } // namespace
 
 RpcListener::RpcListener(const QString& connectionName, QObject* parent_)
-  : QObject(parent_)
-  , m_pingClient(nullptr)
+  : QObject(parent_), m_pingClient(nullptr)
 {
   m_rpc = new RPC::JsonRpc(this);
 
@@ -1006,4 +1005,4 @@ void RpcListener::sendError(const RPC::Message& request, int code,
   errorMessage.send();
 }
 
-} // End of Avogadro namespace
+} // namespace Avogadro
