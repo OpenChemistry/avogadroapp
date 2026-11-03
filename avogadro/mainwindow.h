@@ -625,6 +625,8 @@ private slots:
 
   void copyGraphics();
 
+  void editPreferences();
+
   void setBackgroundColor();
 
   void setRenderingSettings();

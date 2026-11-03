@@ -10,6 +10,7 @@
 #include "backgroundfileformat.h"
 #include "crashreporter.h"
 #include "menubuilder.h"
+#include "preferencesdialog.h"
 #include "renderingdialog.h"
 #include "targetregistry.h"
 #include "tdxcontroller.h"
@@ -3408,6 +3409,12 @@ void MainWindow::activeMoleculeEdited()
   }
 }
 
+void MainWindow::editPreferences()
+{
+  PreferencesDialog dialog(this);
+  dialog.exec();
+}
+
 void MainWindow::setBackgroundColor()
 {
   auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
@@ -3534,7 +3541,10 @@ void MainWindow::buildMenu()
 #endif
 
   QStringList path;
+
+  // *** File Menu ***
   path << tr("&File");
+
   // New
   auto* action = new QAction(tr("&New"), this);
   // The object name matches the action of the same name in mainwindow.ui. The
@@ -3661,9 +3671,11 @@ void MainWindow::buildMenu()
   m_actionRecentFiles[0]->setVisible(true);
   m_actionRecentFiles[0]->setEnabled(false);
 
-  // Undo/redo
+  // ** Edit Menu **
   QStringList editPath;
   editPath << tr("&Edit");
+
+  // Undo/redo
   m_undo = new QAction(tr("&Undo"), this);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
   m_undo->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::EditUndo));
@@ -3695,9 +3707,19 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(editPath, m_redo, 990);
   m_menuBuilder->addAction(editPath, m_copyImage, 530);
 
-  // View menu
+  // Settings/preferences dialog
+  auto* preferences = new QAction(tr("Pre&ferences"), this);
+  // Lives under Edit on Windows/Linux, but the Application Menu on Mac
+  // (handled automatically by Qt)
+  preferences->setMenuRole(QAction::MenuRole::PreferencesRole);
+  preferences->setShortcut(tr("Ctrl+,")); // Standard for app preferences
+  m_menuBuilder->addAction(editPath, preferences, 10); // Should be last item
+  connect(preferences, &QAction::triggered, this, &MainWindow::editPreferences);
+
+  // *** View menu ***
   QStringList viewPath;
   viewPath << tr("&View");
+
   action = new QAction(tr("Set Background Color…"), this);
   m_menuBuilder->addAction(viewPath, action, 100);
   connect(action, &QAction::triggered, this, &MainWindow::setBackgroundColor);
@@ -3735,7 +3757,9 @@ void MainWindow::buildMenu()
   else
     setProjectionOrthographic();
 
-  // Periodic table.
+  // *** Build, Select, Analyse, Crystal, Input Menus: built elsewhere ***
+
+  // *** Extensions Menu ***
   QStringList extensionsPath;
   extensionsPath << tr("&Extensions");
 
@@ -3743,13 +3767,16 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(extensionsPath, action, 100);
   connect(action, &QAction::triggered, this, &MainWindow::showLanguageDialog);
 
+  // Periodic table.
   action = new QAction(tr("&Periodic Table…"), this);
   m_menuBuilder->addAction(extensionsPath, action, 0);
   auto* periodicTable = new QtGui::PeriodicTableView(this);
   connect(action, &QAction::triggered, periodicTable, &QWidget::show);
 
+  // *** Help Menu ***
   QStringList helpPath;
   helpPath << tr("&Help");
+
   auto* about = new QAction(tr("&About"), this);
   about->setIcon(QIcon::fromTheme("help-about"));
   m_menuBuilder->addAction(helpPath, about, 500);

@@ -52,6 +52,7 @@ set(avogadro_srcs
   mainwindow.cpp
   highlightoverlay.cpp
   menubuilder.cpp
+  preferencesdialog.cpp
   reducemotion.cpp
   renderingdialog.cpp
   targetregistry.cpp
@@ -68,6 +69,7 @@ endif()
 qt_wrap_ui(ui_srcs
   aboutdialog.ui
   mainwindow.ui
+  preferencesdialog.ui
   renderingdialog.ui
 )
 
