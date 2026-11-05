@@ -42,6 +42,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # sccache: true turns on the compiler cache for an entry. It is only on
+        # for the MSVC Release build, which passes no /Zi. The RelWithDebInfo
+        # entries (the Sentry diagnostic build and the Address Sanitizer
+        # entry below) are left out on purpose: /Zi writes every object's
+        # debug information into one shared PDB, which sccache cannot cache,
+        # so those compiles would all miss. Enabling them needs /Z7 (debug
+        # information embedded in each object), for example with CMP0141 NEW
+        # and CMAKE_MSVC_DEBUG_INFORMATION_FORMAT=Embedded. The asan flags in
+        # avogadrolibs/cmake/CompilerFlags.cmake hard-code /Zi as well, and
+        # would need the same change.
         config:
         - {
             name: "Windows Qt6", artifact: "Win64.exe",
@@ -49,8 +59,29 @@ jobs:
             cc: "cl", cxx: "cl",
             build_type: "Release",
             sccache: true,
-            cmake_flags: "-DCMAKE_TOOLCHAIN_FILE=/c/vcpkg/scripts/buildsystems/vcpkg.cmake -DUSE_SYSTEM_EIGEN=ON -DUSE_SYSTEM_LIBARCHIVE=ON -DUSE_SYSTEM_LIBXML2=ON -DUSE_SYSTEM_ZLIB=ON",
-            build_flags: "-j 2",
+            cmake_flags: "-G Ninja -DCMAKE_TOOLCHAIN_FILE=/c/vcpkg/scripts/buildsystems/vcpkg.cmake -DUSE_SYSTEM_EIGEN=ON -DUSE_SYSTEM_LIBARCHIVE=ON -DUSE_SYSTEM_LIBXML2=ON -DUSE_SYSTEM_ZLIB=ON",
+            build_flags: "--parallel",
+            package: "Avogadro2",
+            sentry: false,
+          }
+        # The same tests under MSVC's AddressSanitizer. Windows is where the
+        # crash reports come from, and ASan is the only sanitizer this
+        # toolchain has -- TSan, MSan and LSan are Linux-only, so this finds
+        # the heap-layout and uninitialized-stack differences that make the
+        # same undefined behaviour crash here and not there. The flags live in
+        # avogadrolibs/cmake/CompilerFlags.cmake under the MSVC branch, and the
+        # "Run tests" step below switches them on for avogadrolibs only -- see
+        # the comment there for why the superbuild cannot be built in that
+        # configuration.
+        - {
+            name: "Windows Address Sanitizer", artifact: "",
+            os: windows-latest,
+            cc: "cl", cxx: "cl",
+            build_type: "RelWithDebInfo",
+            test: true,
+            asan: true,
+            cmake_flags: "-G Ninja -DCMAKE_TOOLCHAIN_FILE=/c/vcpkg/scripts/buildsystems/vcpkg.cmake -DUSE_SYSTEM_EIGEN=ON -DUSE_SYSTEM_LIBARCHIVE=ON -DUSE_SYSTEM_LIBXML2=ON -DUSE_SYSTEM_ZLIB=ON",
+            build_flags: "--parallel",
             package: "Avogadro2",
             sentry: false,
           }
@@ -63,7 +94,7 @@ jobs:
       uses: ./.github/actions/checkout-repositories
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@a9c63c7c123f3069cff414e7e482d95dfa9d8125 # v4.4.1
+      uses: jurplel/install-qt-action@b344308e4483fc892e0d27b3cd1b173ebdd95f06 # v4.5.0
       with:
         cache: true
         version: ${{ env.QT_VERSION }}
@@ -74,15 +105,16 @@ jobs:
       with:
         arch: x64
 
-    - name: Ensure vcpkg is up to date
+    - name: Install vcpkg packages
       if: runner.os == 'Windows'
-      uses: ./.github/actions/update-vcpkg
+      uses: ./.github/actions/vcpkg-install
+      with:
+        packages: libarchive eigen3 libxml2 zlib gtest
 
     - name: Install Dependencies (Windows)
       if: runner.os == 'Windows'
       run: |
-        choco install nsis
-        vcpkg install libarchive eigen3 libxml2 zlib
+        choco install nsis ninja
       shell: bash
 
     # Must run before Configure: it exports the compiler-launcher variables
@@ -105,11 +137,20 @@ jobs:
           # as unavailable at runtime rather than failing to configure.
           SENTRY_ARGS="-DUSE_SENTRY=ON -DSENTRY_DSN=${SENTRY_DSN} -DSENTRY_ENVIRONMENT=nightly"
         fi
-        CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake $GITHUB_WORKSPACE/openchemistry ${{env.FEATURES}} -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} ${{matrix.config.cmake_flags}} $SENTRY_ARGS
+        CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake $GITHUB_WORKSPACE/openchemistry ${{env.FEATURES}} ${{ startsWith(github.ref, 'refs/tags/') && '-DAVOGADRO_RELEASE_BUILD=ON' || '' }} -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} ${{matrix.config.cmake_flags}} $SENTRY_ARGS
       shell: bash
       env:
         USE_SENTRY: ${{ matrix.config.sentry }}
         SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+
+    # Cache thirdparty builds (OpenBabel, etc.)
+    - name: Cache thirdparty
+      id: thirdparty-cache
+      uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: |
+          ${{ runner.workspace }}/build/Downloads
+        key: thirdparty-${{ runner.os }}-${{ runner.arch }}-${{ matrix.config.build_type }}-sentry${{ matrix.config.sentry }}-${{ hashFiles('openchemistry/cmake/External*.cmake', 'openchemistry/cmake/projects/*.cmake') }}
 
     - name: Build
       run: |
@@ -117,11 +158,76 @@ jobs:
       shell: bash
       working-directory: ${{ runner.workspace }}/build
 
-    # This job has no test step, so the cache is saved right after the build.
-    # !cancelled() lets the action run after a failed build. The action prints
-    # its statistics on every run and saves only on master, failures
-    # included: sccache entries are content-addressed, so a partial cache is
-    # still correct.
+    # Saved from master only, for the reason given in the vcpkg-install action.
+    - name: Save thirdparty cache
+      if: steps.thirdparty-cache.outputs.cache-hit != 'true' && github.ref == 'refs/heads/master'
+      uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: |
+          ${{ runner.workspace }}/build/Downloads
+        key: ${{ steps.thirdparty-cache.outputs.cache-primary-key }}
+
+    - name: Run tests
+      if: (matrix.config.test == true)
+      shell: bash
+      run: |
+        cd "${{ runner.workspace }}/build/avogadrolibs"
+        if [ "${{ matrix.config.asan }}" = "true" ]; then
+          # AddressSanitizer goes on here, for avogadrolibs alone, rather than
+          # by building the whole superbuild in an "asan" configuration the way
+          # the Linux job does. A configuration name MSVC does not recognise
+          # leaves CMAKE_CXX_FLAGS_<CONFIG> empty for every subproject that
+          # does not define one, and under CMP0091 OLD -- which is where Open
+          # Babel sits -- that is exactly where its /MD comes from. cl then
+          # falls back to the static CRT and Open Babel fails to link against
+          # its own DLL with a wall of LNK2005. avogadrolibs requires CMake
+          # 3.24, so CMP0091 is NEW for it and CMAKE_MSVC_RUNTIME_LIBRARY still
+          # yields /MD whatever the configuration is called.
+          #
+          # Instrumenting only our own code is what we wanted in any case: Qt
+          # and Open Babel stay uninstrumented, which is why the container
+          # annotations are disabled in cmake/CompilerFlags.cmake.
+          #
+          # Imported targets (e.g. vcpkg's find_package(GLEW CONFIG) result)
+          # know nothing of an "asan" configuration, so without a mapping
+          # CMake falls back to whichever configuration the target lists
+          # first -- the Debug build for vcpkg packages, whose DLLs are not
+          # on the PATH set up below. The test process then never starts and
+          # ctest just waits out its timeout with no output.
+          # CMAKE_MAP_IMPORTED_CONFIG_ASAN maps our "asan" configuration onto
+          # the release variants first; the empty entry is the
+          # configuration-less IMPORTED_LOCATION, and Debug stays in the list,
+          # last, because a mapped target that provides none of the listed
+          # configurations is treated as not found.
+          cmake -DENABLE_TESTING=ON -DCMAKE_BUILD_TYPE=asan \
+            -DCMAKE_MAP_IMPORTED_CONFIG_ASAN="RelWithDebInfo;Release;MinSizeRel;;Debug" .
+        else
+          # just turn on tests for
+          cmake -DENABLE_TESTING=ON .
+        fi
+        cmake --build .
+        # Add DLL directories to PATH so tests can find dependencies
+        export PATH="${QT_ROOT_DIR}/bin:/c/vcpkg/installed/x64-windows/bin:${{ runner.workspace }}/build/prefix/bin:$PATH"
+
+        if [ "${{ matrix.config.asan }}" = "true" ]; then
+          # windows_hook_rtl_allocators catches buffers that came from the
+          # Win32 heap APIs rather than from the CRT, which is most of what Qt
+          # hands us. There is no detect_leaks here: LeakSanitizer does not
+          # exist on Windows, so leaks stay the Linux job's business.
+          export ASAN_OPTIONS="windows_hook_rtl_allocators=true:print_stats=1"
+          # The ASan runtime DLL sits in the MSVC toolset's bin directory,
+          # which msvc-dev-cmd has already put on PATH. Say so in the log,
+          # because a missing one shows up as every test failing to start.
+          echo "ASan runtime: $(command -v clang_rt.asan_dynamic-x86_64.dll || echo 'not on PATH')"
+        fi
+
+        ctest --output-on-failure
+
+    # Saved after the tests, which build avogadrolibs again with tests
+    # enabled. !cancelled() lets the action run after a failed build or
+    # failed tests. The action prints its statistics on every run and saves
+    # only on master, failures included: sccache entries are content-addressed,
+    # so a partial cache is still correct.
     - name: Save compiler cache
       if: matrix.config.sccache && !cancelled()
       uses: ./.github/actions/compiler-cache
@@ -233,7 +339,7 @@ jobs:
         fi
 
     - name: Create Windows Packages
-      if: runner.os == 'Windows'
+      if: matrix.config.artifact != 0
       shell: bash
       run: |
         gh release download -R prefix-dev/pixi -p "pixi-x86_64-pc-windows-msvc.exe"
@@ -242,23 +348,27 @@ jobs:
         mv pixi-x86_64-pc-windows-msvc.exe prefix/bin/pixi.exe
         # run windeployqt
         windeployqt --release prefix/bin/avogadro2.exe
+        # Copy Qt DLLs that windeployqt misses (used by plugins and JKQTPlotter)
+        cp "${QT_ROOT_DIR}/bin/Qt6Concurrent.dll" prefix/bin/
+        cp "${QT_ROOT_DIR}/bin/Qt6PrintSupport.dll" prefix/bin/
+        cp "${QT_ROOT_DIR}/bin/Qt6Xml.dll" prefix/bin/
         mv prefix avogadro2
         # 7z a Avogadro2-windows.zip avogadro2
         cd avogadro2
         # create NSIS
-        /c/Program\ Files\ \(x86\)/NSIS/bin/makensis avogadro2.nsi
+        /c/Program\ Files\ \(x86\)/NSIS/makensis avogadro2.nsi
         if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
           # This is a tag - extract version
           VERSION="${GITHUB_REF#refs/tags/}"
           VERSION="${VERSION#v}"  # Remove 'v' prefix if present
         else
           # This is a nightly build - use current date
-          VERSION=$(date +%Y-%m-%d)
+          VERSION="continuous"
         fi
 
         # NSIS OutFile is "<package>-Setup.exe", set from NSIS_OUTFILE in
         # avogadro/CMakeLists.txt, so these two names have to stay in step.
-        mv ${{matrix.config.package}}-Setup.exe ../${{matrix.config.package}}-${VERSION}.exe
+        mv ${{matrix.config.package}}-Setup.exe ../${{matrix.config.package}}-${VERSION}-win64.exe
       working-directory: ${{ runner.workspace }}/build/
       env:
         GH_TOKEN: ${{ github.token }}
@@ -286,6 +396,8 @@ jobs:
         wait-for-completion: false
         output-artifact-directory: '../build/'
 
+    # MSIX is release-only: the diagnostic build installs beside a release
+    # install and has no Store identity of its own.
     - name: Create MSIX
       if: ${{ !matrix.config.sentry && github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/') }}
       shell: powershell
@@ -297,16 +409,20 @@ jobs:
         GH_TOKEN: ${{ github.token }}
 
     - name: Upload MSIX
-      if: ${{ !matrix.config.sentry }}
+      if: ${{ !matrix.config.sentry && github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags/') }}
       uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         path: ${{ runner.workspace }}/build/Avogadro2.msix
         name: Avogadro2.msix
 
+    # Only on a run someone started by hand to debug. On an ordinary push this
+    # held a runner for the full hour every time a job went red, even when the
+    # failure was a one-line upload problem. Start the workflow from the
+    # Actions tab when you actually want a shell.
     - name: Setup tmate session
-      if: failure()
+      if: failure() && github.event_name == 'workflow_dispatch'
       uses: mxschmitt/action-tmate@35b54afac29c97fb54faba5b513f8fbd1882f113 # v3.24
-      timeout-minutes: 60
+      timeout-minutes: 30
 
   # Diagnostic (Sentry) builds skip PRs to save runners: they only run on
   # pushes, releases and manual dispatches, or on a PR that has been labeled
@@ -322,8 +438,11 @@ jobs:
       fail-fast: false
       matrix:
         config:
+        # No sccache here: RelWithDebInfo compiles with /Zi (see the note on
+        # the build job's matrix).
         # Diagnostic build with Sentry crash reporting compiled in. Ships as a
-        # separate installer; the release build above gets no crash reporting.
+        # separate installer that installs beside a release install; the
+        # release build above gets no crash reporting.
         # RelWithDebInfo rather than Release: MSVC Release passes no /Zi, so it
         # emits no PDBs and every frame would come back as a raw address.
         - {
@@ -331,8 +450,8 @@ jobs:
             os: windows-latest,
             cc: "cl", cxx: "cl",
             build_type: "RelWithDebInfo",
-            cmake_flags: "-DCMAKE_TOOLCHAIN_FILE=/c/vcpkg/scripts/buildsystems/vcpkg.cmake -DUSE_SYSTEM_EIGEN=ON -DUSE_SYSTEM_LIBARCHIVE=ON -DUSE_SYSTEM_LIBXML2=ON -DUSE_SYSTEM_ZLIB=ON",
-            build_flags: "-j 2",
+            cmake_flags: "-G Ninja -DCMAKE_TOOLCHAIN_FILE=/c/vcpkg/scripts/buildsystems/vcpkg.cmake -DUSE_SYSTEM_EIGEN=ON -DUSE_SYSTEM_LIBARCHIVE=ON -DUSE_SYSTEM_LIBXML2=ON -DUSE_SYSTEM_ZLIB=ON",
+            build_flags: "--parallel",
             package: "Avogadro2-Diagnostic",
             sentry: true,
           }
