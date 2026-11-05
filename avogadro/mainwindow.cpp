@@ -2486,48 +2486,100 @@ void MainWindow::previousMolecule()
 
 namespace {
 // First widget within pane (including the pane itself) that accepts Tab focus,
-// or nullptr if there is none, e.g. the 3D view, or Display Type Settings 
+// or nullptr if there is none, e.g. the 3D view, or Display Type Settings
 // if no Display Type is selected
 QWidget* firstFocusableWidget(QWidget* pane)
 {
   auto canFocus = [](QWidget* w) {
-    return (w->focusPolicy() & Qt::TabFocus) && w->isEnabled() 
-    && w->isVisible();
+    return (w->focusPolicy() & Qt::TabFocus) && w->isEnabled() &&
+           w->isVisible();
   };
 
-  // in case a future pane is tab-focusable itself, 
+  // in case a future pane is tab-focusable itself,
   // or if 3D-view becomes tab-focusable
   if (canFocus(pane))
     return pane;
 
-  // findChildren is a depth-first, pre-order traversal
-  const auto children = pane->findChildren<QWidget*>();
-  for (QWidget* child : children) {
-    if (canFocus(child))
-      return child;
+  // The focus chain is the window's Tab order, a circular list;
+  // take the first widget inside this pane that Tab would stop on
+  for (QWidget* w = pane->nextInFocusChain(); w != pane;
+       w = w->nextInFocusChain()) {
+    if (pane->isAncestorOf(w) && canFocus(w))
+      return w;
   }
 
   return nullptr;
 }
 
-// Collect the 3D view plus every docked pane that is on screen, not floating
-// and has something to focus. The order of docks is the order F6 cycles
-// through.
-QList<QWidget*> visiblePanes(QWidget* view, const QList<QDockWidget*>& docks)
+// Rank of a dock area in the F6 cycle: top, left, right, then bottom,
+// matching the order Tab moves through the window
+int dockAreaRank(Qt::DockWidgetArea area)
 {
-  QList<QWidget*> panes;
-  if (view != nullptr && view->isVisible())
-    panes << view;
+  switch (area) {
+    case Qt::TopDockWidgetArea:
+      return 0;
+    case Qt::LeftDockWidgetArea:
+      return 1;
+    case Qt::RightDockWidgetArea:
+      return 2;
+    case Qt::BottomDockWidgetArea:
+      return 3;
+    default:
+      return 4;
+  }
+}
+
+// Collect the 3D view plus every docked pane that is on screen, not floating
+// and has something to focus. The 3D view comes first; the docks follow in
+// on-screen order (by dock area: top, left, right, bottom; then
+// top-to-bottom, then left-to-right within an area), so
+// the cycle still matches what the user sees after panes are rearranged.
+QList<QWidget*> visiblePanes(const QMainWindow* window, QWidget* view,
+                             const QList<QDockWidget*>& docks)
+{
+  // Collect shown docks
+  QList<QDockWidget*> shownDocks;
   for (QDockWidget* dock : docks) {
     if (dock == nullptr || !dock->isVisible() || dock->isFloating())
       continue;
+
     // A tabified dock that isn't the current tab is moved off screen rather
     // than hidden, so isVisible() is still true: check what is actually shown
     if (dock->visibleRegion().isEmpty())
       continue;
+
     if (firstFocusableWidget(dock) != nullptr)
-      panes << dock;
+      shownDocks << dock;
   }
+
+  // Sort the visible docks
+  auto dockSort = [window](QDockWidget* a, QDockWidget* b) {
+    const int rankA = dockAreaRank(window->dockWidgetArea(a));
+    const int rankB = dockAreaRank(window->dockWidgetArea(b));
+
+    // Sort docks by dock location
+    if (rankA != rankB)
+      return rankA < rankB;
+
+    // Docks are children of the main window, so geometry() is in window
+    // coordinates and can be compared directly
+
+    // For panes in left and right docks, sort top to bottom
+    if (a->geometry().top() != b->geometry().top())
+      return a->geometry().top() < b->geometry().top();
+
+    // For panes in top and bottom docks, sort left to right
+    return a->geometry().left() < b->geometry().left();
+  };
+
+  std::stable_sort(shownDocks.begin(), shownDocks.end(), dockSort);
+
+  // Build the final visible pane list to cycle focus
+  QList<QWidget*> panes;
+  if (view != nullptr && view->isVisible())
+    panes << view;
+  for (QDockWidget* dock : shownDocks)
+    panes << dock;
   return panes;
 }
 
@@ -2544,9 +2596,9 @@ int paneIndexWithFocus(const QList<QWidget*>& panes)
   return -1;
 }
 
-// Give focus to the first focusable widget within pane. 
-// Focus on the pane itself if it can be focused and it has no focusable widgets. 
-// (e.g., the 3D view)
+// Give focus to the first focusable widget within pane.
+// Focus on the pane itself if it can be focused and it has no focusable
+// widgets. (e.g., the 3D view)
 void focusPaneWidget(QWidget* pane)
 {
   QWidget* target = firstFocusableWidget(pane);
@@ -2557,10 +2609,9 @@ void focusPaneWidget(QWidget* pane)
 
 void MainWindow::focusNextPane()
 {
-  const QList<QWidget*> panes =
-    visiblePanes(m_multiViewWidget->activeWidget(),
-                 { m_toolDock, m_sceneDock, m_viewDock, m_moleculeDock,
-                   m_layerDock });
+  const QList<QWidget*> panes = visiblePanes(
+    this, m_multiViewWidget->activeWidget(),
+    { m_toolDock, m_sceneDock, m_viewDock, m_moleculeDock, m_layerDock });
   // Only 1 pane (or none), nothing to cycle
   if (panes.size() < 2)
     return;
@@ -2578,10 +2629,9 @@ void MainWindow::focusNextPane()
 
 void MainWindow::focusPreviousPane()
 {
-  const QList<QWidget*> panes =
-    visiblePanes(m_multiViewWidget->activeWidget(),
-                 { m_toolDock, m_sceneDock, m_viewDock, m_moleculeDock,
-                   m_layerDock });
+  const QList<QWidget*> panes = visiblePanes(
+    this, m_multiViewWidget->activeWidget(),
+    { m_toolDock, m_sceneDock, m_viewDock, m_moleculeDock, m_layerDock });
   // Only 1 pane (or none), nothing to cycle
   if (panes.size() < 2)
     return;
