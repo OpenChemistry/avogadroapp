@@ -3,15 +3,32 @@ name: Linux ARM64 Build Matrix
 # e.g. https://github.com/cristianadam/HelloWorld/blob/master/.github/workflows/build_cmake.yml
 # https://cristianadam.eu/20191222/using-github-actions-with-c-plus-plus-and-cmake/
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    # Bot branches get built by their pull_request event; building the push
+    # too just doubles the jobs. The tags line is required: with only a
+    # branch filter, tag pushes (release builds) would stop triggering.
+    branches-ignore:
+      - 'dependabot/**'
+      - 'update-i18n-templates'
+    tags:
+      - '**'
+  pull_request:
+  workflow_dispatch:
 
 env:
   QT_VERSION: 6.8.3
   FEATURES: -DBUILD_GPL_PLUGINS=ON -DBUILD_MOLEQUEUE=OFF -DWITH_COORDGEN=OFF -DQT_VERSION=6
 
+# Never cancel a master run: a cancelled run never saves its compiler cache,
+# and the slowest jobs, which gain the most from the cache, are exactly the
+# ones a following merge would cancel. The group still allows only one running
+# and one pending master run, so master runs queue one after another instead
+# of stacking up, and release-asset uploads never overlap. PRs and other
+# branches keep cancelling superseded runs.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 jobs:
   build:
@@ -20,6 +37,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # sccache: true turns on the compiler cache for an entry.
+        # sccache_size: the Debug build's objects are much larger than a
+        # Release build's; read the real size from `sccache --show-stats` on
+        # master and tune it.
         config:
         - {
             name: "Ubuntu ARM", artifact: "",
@@ -27,6 +48,7 @@ jobs:
             cc: "gcc", cxx: "g++",
             build_type: "Debug",
             cmake_flags: "-G Ninja -DUSE_SYSTEM_EIGEN=TRUE",
+            sccache: true, sccache_size: "1000M",
           }
         - {
             name: "AppImage ARM", artifact: "Avogadro2-arm64.AppImage",
@@ -34,6 +56,7 @@ jobs:
             cc: "gcc", cxx: "g++",
             build_type: "Release",
             cmake_flags: "-G Ninja -DINSTALL_BUNDLE_FILES=ON",
+            sccache: true,
           }
 
     steps:
@@ -50,16 +73,26 @@ jobs:
         sudo apt-get -qq install libfuse2
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@a9c63c7c123f3069cff414e7e482d95dfa9d8125 # v4.4.1
+      uses: jurplel/install-qt-action@b344308e4483fc892e0d27b3cd1b173ebdd95f06 # v4.5.0
       with:
         cache: true
         version: ${{ env.QT_VERSION }}
+
+    # Must run before Configure: it exports the compiler-launcher variables
+    # that the superbuild's subprojects read when they configure.
+    - name: Restore compiler cache
+      if: matrix.config.sccache
+      uses: ./.github/actions/compiler-cache
+      with:
+        mode: restore
+        name: ${{ matrix.config.name }}
+        size: ${{ matrix.config.sccache_size || '600M' }}
 
     - name: Configure
       run: |
         if [ ! -d "${{ runner.workspace }}/build" ]; then mkdir "${{ runner.workspace }}/build"; fi
         cd "${{ runner.workspace }}/build"
-        CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake $GITHUB_WORKSPACE/openchemistry ${{env.FEATURES}} -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} ${{matrix.config.cmake_flags}}
+        CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake $GITHUB_WORKSPACE/openchemistry ${{env.FEATURES}} ${{ startsWith(github.ref, 'refs/tags/') && '-DAVOGADRO_RELEASE_BUILD=ON' || '' }} -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} ${{matrix.config.cmake_flags}}
       shell: bash
 
     - name: Build
@@ -85,6 +118,18 @@ jobs:
           message(FATAL_ERROR "Running tests failed!")
         endif()
 
+    # !cancelled() lets the action run after a failed build or failed tests.
+    # The action prints its statistics on every run and saves only on master,
+    # failures included: sccache entries are content-addressed, so a partial
+    # cache is still correct.
+    - name: Save compiler cache
+      if: matrix.config.sccache && !cancelled()
+      uses: ./.github/actions/compiler-cache
+      with:
+        mode: save
+        name: ${{ matrix.config.name }}
+        size: ${{ matrix.config.sccache_size || '600M' }}
+
     - name: Package AppImage
       if: matrix.config.name == 'AppImage ARM'
       shell: bash
@@ -108,6 +153,31 @@ jobs:
         rm appdir/AppRun
         cp ../${{ github.event.repository.name }}/openchemistry/avogadrolibs/scripts/AppImage.sh appdir/AppRun
         chmod a+x appdir/AppRun
+        # Bundled programs must run without LD_LIBRARY_PATH, since Avogadro
+        # strips it from child processes
+        checked=0
+        missing=""
+        for f in appdir/usr/bin/* appdir/usr/lib/openbabel/*.so; do
+          if file -b "$f" | grep -q ELF; then
+            checked=$((checked + 1))
+            deps=$(env -u LD_LIBRARY_PATH ldd "$f" 2>&1 | grep "not found" || true)
+            if [ -n "$deps" ]; then
+              missing="$missing$(echo "$deps" | sed "s|^|$f: |")"$'\n'
+            fi
+          fi
+        done
+        echo "Checked $checked ELF files with ldd"
+        if [ "$checked" -eq 0 ]; then
+          echo "No ELF files found to check"
+          exit 1
+        fi
+        if [ -n "$missing" ]; then
+          printf '%s' "$missing"
+          exit 1
+        fi
+        out=$(env -u LD_LIBRARY_PATH BABEL_LIBDIR=appdir/usr/lib/openbabel BABEL_DATADIR=$(echo appdir/usr/share/openbabel/*) appdir/usr/bin/obabel -:CCO -oinchi)
+        echo "$out"
+        echo "$out" | grep -q "InChI=1S/C2H6O" || exit 1
         ./appimagetool-aarch64.AppImage appdir
         mv Avogadro*.AppImage avogadroapp/Avogadro2-aarch64.AppImage # for upload
       working-directory: ${{ runner.workspace }}/build

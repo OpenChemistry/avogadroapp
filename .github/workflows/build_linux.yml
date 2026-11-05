@@ -3,15 +3,32 @@ name: Linux Build Matrix
 # e.g. https://github.com/cristianadam/HelloWorld/blob/master/.github/workflows/build_cmake.yml
 # https://cristianadam.eu/20191222/using-github-actions-with-c-plus-plus-and-cmake/
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    # Bot branches get built by their pull_request event; building the push
+    # too just doubles the jobs. The tags line is required: with only a
+    # branch filter, tag pushes (release builds) would stop triggering.
+    branches-ignore:
+      - 'dependabot/**'
+      - 'update-i18n-templates'
+    tags:
+      - '**'
+  pull_request:
+  workflow_dispatch:
 
 env:
   QT_VERSION: 6.8.3
   FEATURES: -DBUILD_GPL_PLUGINS=ON -DBUILD_MOLEQUEUE=OFF -DWITH_COORDGEN=OFF -DQT_VERSION=6
 
+# Never cancel a master run: a cancelled run never saves its compiler cache,
+# and the slowest jobs, which gain the most from the cache, are exactly the
+# ones a following merge would cancel. The group still allows only one running
+# and one pending master run, so master runs queue one after another instead
+# of stacking up, and release-asset uploads never overlap. PRs and other
+# branches keep cancelling superseded runs.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
 
 jobs:
   build:
@@ -20,6 +37,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # sccache: true turns on the compiler cache for an entry; the other
+        # workflows use the same keys.
+        # sccache_size: sanitizer objects are much larger (the cold ASan build
+        # hit the 600M cap); read the real size from `sccache --show-stats`
+        # on master and tune it.
         config:
         - {
             name: "Ubuntu x86", artifact: "",
@@ -27,6 +49,7 @@ jobs:
             cc: "gcc", cxx: "g++",
             build_type: "Release",
             cmake_flags: "-G Ninja -DUSE_SYSTEM_EIGEN=TRUE",
+            sccache: true,
           }
         - {
             name: "AppImage x86", artifact: "Avogadro2-x86_64.AppImage",
@@ -34,34 +57,34 @@ jobs:
             cc: "gcc", cxx: "g++",
             build_type: "Release",
             cmake_flags: "-G Ninja -DUSE_SYSTEM_EIGEN=TRUE -DINSTALL_BUNDLE_FILES=ON -DUSE_YAEHMOP=ON",
+            sccache: true,
           }
         - {
-            name: "Ubuntu Address Sanitizer", artifact: "",
+            name: "Ubuntu Address + UB Sanitizer", artifact: "",
             os: ubuntu-latest,
             cc: "gcc", cxx: "g++",
             build_type: "asan",
-            cmake_flags: "-G Ninja -DUSE_SYSTEM_EIGEN=TRUE -DENABLE_TESTING=ON -DTEST_QTGL=OFF -USE_SYSTEM_ZLIB=ON",
+            cmake_flags: "-G Ninja -DUSE_SYSTEM_EIGEN=TRUE -DENABLE_TESTING=ON -DTEST_QTGL=OFF -DUSE_SYSTEM_ZLIB=ON",
+            sccache: true, sccache_size: "1500M",
           }
         - {
+            # Exists only to run the RPC tests (see "Run RPC tests"); the
+            # asan job already runs the unit tests with UBSan enabled.
             name: "Ubuntu Undefined Behavior Sanitizer", artifact: "",
             os: ubuntu-latest,
             cc: "gcc", cxx: "g++",
             build_type: "ubsan",
-            cmake_flags: "-G Ninja -DUSE_SYSTEM_EIGEN=TRUE -DENABLE_TESTING=ON -DTEST_QTGL=OFF -USE_SYSTEM_ZLIB=ON",
-          }
-        - {
-            name: "Ubuntu Leak Sanitizer", artifact: "",
-            os: ubuntu-latest,
-            cc: "gcc", cxx: "g++",
-            build_type: "lsan",
-            cmake_flags: "-G Ninja -DUSE_SYSTEM_EIGEN=TRUE -DENABLE_TESTING=ON -DTEST_QTGL=OFF -USE_SYSTEM_ZLIB=ON",
+            cmake_flags: "-G Ninja -DUSE_SYSTEM_EIGEN=TRUE -DENABLE_TESTING=ON -DTEST_QTGL=OFF -DUSE_SYSTEM_ZLIB=ON",
+            rpc: true,
+            sccache: true, sccache_size: "1000M",
           }
         - {
             name: "Ubuntu Thread Sanitizer", artifact: "",
             os: ubuntu-latest,
             cc: "gcc", cxx: "g++",
             build_type: "tsan",
-            cmake_flags: "-G Ninja -DUSE_SYSTEM_EIGEN=TRUE -DENABLE_TESTING=ON -DTEST_QTGL=OFF -USE_SYSTEM_ZLIB=ON",
+            cmake_flags: "-G Ninja -DUSE_SYSTEM_EIGEN=TRUE -DENABLE_TESTING=ON -DTEST_QTGL=OFF -DUSE_SYSTEM_ZLIB=ON",
+            sccache: true, sccache_size: "1500M",
           }
 
     steps:
@@ -76,14 +99,14 @@ jobs:
         sudo apt-get -qq update
         sudo apt-get -qq install ninja-build libeigen3-dev libboost-all-dev libglew-dev libxml2-dev zlib1g-dev libbz2-dev liblzma-dev libzstd-dev
         sudo apt-get -qq install libfuse2
-        if [ "${{ matrix.config.build_type }}" = "ubsan" ]; then
+        if [ "${{ matrix.config.rpc }}" = "true" ]; then
           # the RPC tests run the built application under a virtual display
           # (Xvfb) with Mesa's software OpenGL
           sudo apt-get -qq install xvfb libgl1-mesa-dri libglx-mesa0 libegl1 libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-shape0 libxcb-xinerama0 libxcb-xkb1
         fi
 
     - name: Install Qt
-      uses: jurplel/install-qt-action@a9c63c7c123f3069cff414e7e482d95dfa9d8125 # v4.4.1
+      uses: jurplel/install-qt-action@b344308e4483fc892e0d27b3cd1b173ebdd95f06 # v4.5.0
       with:
         cache: true
         version: ${{ env.QT_VERSION }}
@@ -92,16 +115,26 @@ jobs:
     # (Python3_ROOT_DIR), not /usr/bin/python3. pytest has to go into it before
     # Configure, or CMake leaves the avogadro-rpc tests out.
     - name: Install pytest
-      if: matrix.config.build_type == 'ubsan'
+      if: matrix.config.rpc
       run: |
         "${Python3_ROOT_DIR:-/usr}/bin/python3" -m pip install pytest
       shell: bash
+
+    # Must run before Configure: it exports the compiler-launcher variables
+    # that the superbuild's subprojects read when they configure.
+    - name: Restore compiler cache
+      if: matrix.config.sccache
+      uses: ./.github/actions/compiler-cache
+      with:
+        mode: restore
+        name: ${{ matrix.config.name }}
+        size: ${{ matrix.config.sccache_size || '600M' }}
 
     - name: Configure
       run: |
         if [ ! -d "${{ runner.workspace }}/build" ]; then mkdir "${{ runner.workspace }}/build"; fi
         cd "${{ runner.workspace }}/build"
-        CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake $GITHUB_WORKSPACE/openchemistry ${{env.FEATURES}} -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} ${{matrix.config.cmake_flags}}
+        CC=${{matrix.config.cc}} CXX=${{matrix.config.cxx}} cmake $GITHUB_WORKSPACE/openchemistry ${{env.FEATURES}} ${{ startsWith(github.ref, 'refs/tags/') && '-DAVOGADRO_RELEASE_BUILD=ON' || '' }} -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} ${{matrix.config.cmake_flags}}
       shell: bash
 
     - name: Build
@@ -111,7 +144,7 @@ jobs:
       working-directory: ${{ runner.workspace }}/build
 
     - name: Run tests
-      if: (matrix.config.build_type != 'Release')
+      if: matrix.config.build_type != 'Release' && !matrix.config.rpc
       shell: cmake -P {0}
       run: |
         include(ProcessorCount)
@@ -119,8 +152,11 @@ jobs:
         set(ENV{CTEST_OUTPUT_ON_FAILURE} "ON")
         set(ENV{ASAN_OPTIONS} "new_delete_type_mismatch=0")
         set(ENV{TSAN_OPTIONS} "suppressions=$ENV{GITHUB_WORKSPACE}/openchemistry/avogadrolibs/.github/tsan-suppressions.txt halt_on_error=0 second_deadlock_stack=1")
-        # ASan runs LSan at exit too, so this covers both sanitizer jobs.
+        # ASan runs LSan at exit too, and CompilerFlags.cmake now builds this
+        # job's "asan" configuration with -fsanitize=address,undefined, so
+        # this one job covers Address, Leak and Undefined Behavior sanitizers.
         set(ENV{LSAN_OPTIONS} "suppressions=$ENV{GITHUB_WORKSPACE}/openchemistry/avogadrolibs/.github/lsan-suppressions.txt print_suppressions=0")
+        set(ENV{UBSAN_OPTIONS} "print_stacktrace=1")
         execute_process(
           COMMAND ctest -j ${N}
           WORKING_DIRECTORY ${{ runner.workspace }}/build/avogadrolibs
@@ -134,7 +170,7 @@ jobs:
     # The UBSan build is the quietest of the sanitizer builds: ASan, LSan and
     # TSan would report leaks and races inside Mesa and Qt that we do not own.
     - name: Run RPC tests
-      if: matrix.config.build_type == 'ubsan'
+      if: matrix.config.rpc
       shell: bash
       run: |
         export UBSAN_OPTIONS="print_stacktrace=1"
@@ -145,12 +181,24 @@ jobs:
       working-directory: ${{ runner.workspace }}/build/avogadroapp
 
     - name: Upload RPC test reproducers
-      if: failure() && matrix.config.build_type == 'ubsan'
+      if: failure() && matrix.config.rpc
       uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         name: rpc-reproducers
         path: ${{ runner.workspace }}/build/avogadroapp/tests/rpc-reproducers
         if-no-files-found: ignore
+
+    # !cancelled() lets the action run after a failed build or failed tests.
+    # The action prints its statistics on every run and saves only on master
+    # pushes, failures included: sccache entries are content-addressed, so a partial
+    # cache is still correct.
+    - name: Save compiler cache
+      if: matrix.config.sccache && !cancelled()
+      uses: ./.github/actions/compiler-cache
+      with:
+        mode: save
+        name: ${{ matrix.config.name }}
+        size: ${{ matrix.config.sccache_size || '600M' }}
 
     - name: Package AppImage
       if: matrix.config.name == 'AppImage x86'
@@ -170,12 +218,41 @@ jobs:
         # wget -c -nv "https://github.com/prefix-dev/pixi/releases/latest/download/pixi-x86_64-unknown-linux-musl"
         # mv pixi-x86_64-unknown-linux-musl appdir/usr/bin/pixi
 
+        # Add Wayland support
+        export EXTRA_PLATFORM_PLUGINS="libqwayland-egl.so;libqwayland-generic.so"
+        export EXTRA_QT_MODULES=waylandcompositor
+
         # Though it is not great security practice, bundle libssl and libcrypto
         ./linuxdeploy-x86_64.AppImage -d appdir/usr/share/applications/*.desktop --plugin qt --library /lib/x86_64-linux-gnu/libssl.so.3 --library /lib/x86_64-linux-gnu/libcrypto.so.3 --appdir appdir
         # add the custom AppRun
         rm appdir/AppRun
         cp ../${{ github.event.repository.name }}/openchemistry/avogadrolibs/scripts/AppImage.sh appdir/AppRun
         chmod a+x appdir/AppRun
+        # Bundled programs must run without LD_LIBRARY_PATH, since Avogadro
+        # strips it from child processes
+        checked=0
+        missing=""
+        for f in appdir/usr/bin/* appdir/usr/lib/openbabel/*.so; do
+          if file -b "$f" | grep -q ELF; then
+            checked=$((checked + 1))
+            deps=$(env -u LD_LIBRARY_PATH ldd "$f" 2>&1 | grep "not found" || true)
+            if [ -n "$deps" ]; then
+              missing="$missing$(echo "$deps" | sed "s|^|$f: |")"$'\n'
+            fi
+          fi
+        done
+        echo "Checked $checked ELF files with ldd"
+        if [ "$checked" -eq 0 ]; then
+          echo "No ELF files found to check"
+          exit 1
+        fi
+        if [ -n "$missing" ]; then
+          printf '%s' "$missing"
+          exit 1
+        fi
+        out=$(env -u LD_LIBRARY_PATH BABEL_LIBDIR=appdir/usr/lib/openbabel BABEL_DATADIR=$(echo appdir/usr/share/openbabel/*) appdir/usr/bin/obabel -:CCO -oinchi)
+        echo "$out"
+        echo "$out" | grep -q "InChI=1S/C2H6O" || exit 1
         ./appimagetool-x86_64.AppImage appdir
         mv Avogadro*.AppImage avogadroapp/Avogadro2-x86_64.AppImage # for upload
       working-directory: ${{ runner.workspace }}/build
