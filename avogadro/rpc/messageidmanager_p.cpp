@@ -16,8 +16,7 @@ namespace Avogadro::RPC {
 
 MessageIdManager* MessageIdManager::m_instance = nullptr;
 
-MessageIdManager::MessageIdManager()
-  : m_generator(0)
+MessageIdManager::MessageIdManager() : m_generator(0)
 {
   // Clean up when program exits.
   atexit(&cleanup);

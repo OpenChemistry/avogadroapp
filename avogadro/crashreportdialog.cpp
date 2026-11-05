@@ -14,9 +14,7 @@
 namespace Avogadro {
 
 CrashReportDialog::CrashReportDialog(bool firstRun, QWidget* parent)
-  : QDialog(parent)
-  , m_firstRun(firstRun)
-  , m_sendReports(nullptr)
+  : QDialog(parent), m_firstRun(firstRun), m_sendReports(nullptr)
 {
   setWindowTitle(tr("Crash Reporting"));
   setMinimumWidth(480);

@@ -9,9 +9,7 @@
 namespace Avogadro {
 
 RenderingDialog::RenderingDialog(QWidget* parent_, SolidPipeline& pipeline)
-  : QDialog(parent_)
-  , m_ui(new Ui::RenderingDialog)
-  , m_solidPipeline(pipeline)
+  : QDialog(parent_), m_ui(new Ui::RenderingDialog), m_solidPipeline(pipeline)
 {
   m_ui->setupUi(this);
 

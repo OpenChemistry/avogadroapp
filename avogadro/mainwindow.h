@@ -51,7 +51,7 @@ class MoleculeModel;
 class MultiViewWidget;
 class RWMolecule;
 class LayerModel;
-}
+} // namespace QtGui
 
 #ifdef _3DCONNEXION
 class TDxController;
@@ -648,7 +648,7 @@ private:
    * the connections are unique. Tool instances belong to each GLWidget rather
    * than to m_tools, so this is done on first use rather than at load time.
    */
-  template<typename PluginType>
+  template <typename PluginType>
   void connectCommandSignals(PluginType* plugin)
   {
     // Each connection is remembered so that ~MainWindow can sever it while
@@ -885,6 +885,6 @@ private:
   bool saveFileIfNeeded();
 };
 
-} // End Avogadro namespace
+} // namespace Avogadro
 
 #endif

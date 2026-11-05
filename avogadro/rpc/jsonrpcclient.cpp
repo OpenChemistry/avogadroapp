@@ -16,9 +16,7 @@
 namespace Avogadro::RPC {
 
 JsonRpcClient::JsonRpcClient(QObject* parent_)
-  : QObject(parent_)
-  , m_packetCounter(0)
-  , m_socket(nullptr)
+  : QObject(parent_), m_packetCounter(0), m_socket(nullptr)
 {
   connect(this, SIGNAL(newPacket(QByteArray)), SLOT(readPacket(QByteArray)),
           Qt::QueuedConnection);

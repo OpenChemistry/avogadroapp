@@ -268,7 +268,7 @@ void recordOpenGLContextInfo(QOpenGLWidget* glWidget)
 }
 
 /// Sorted identifiers of every loaded plugin of one kind.
-template<typename Factory>
+template <typename Factory>
 QStringList pluginIdentifiers()
 {
   QStringList names;
