@@ -15,14 +15,14 @@
 # "Juan E. Arias Martinez" <jeam.professional@gmail.com>, 2026.
 # Francisco Serrador <fserrador@gmail.com>, 2026.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2026.
+# Adolfo Jayme Barrientos <fito@libreoffice.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-10-02 21:02+0000\n"
-"PO-Revision-Date: 2026-04-16 18:09+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"PO-Revision-Date: 2026-11-06 12:51+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fito@libreoffice.org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/es/>\n"
 "Language: es\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17.1-dev\n"
+"X-Generator: Weblate 2026.11.2.dev0\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: aboutdialog.cpp:26
@@ -59,12 +59,12 @@ msgstr "Versión de Qt:"
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
 #: aboutdialog.cpp:36:21
 msgid "SSL Version:"
-msgstr "Versión SSL:"
+msgstr "Versión de SSL:"
 
 #: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1 (diagnóstico)"
 
 #: backgroundfileformat.cpp:36 backgroundfileformat.cpp:113
 msgid "No molecule set in BackgroundFileFormat!"
@@ -81,7 +81,7 @@ msgstr ""
 
 #: crashreportdialog.cpp:21
 msgid "Crash Reporting"
-msgstr ""
+msgstr "Informes de cierres inesperados"
 
 #: crashreportdialog.cpp:27
 msgid ""
@@ -89,6 +89,9 @@ msgid ""
 "developers when Avogadro crashes, which helps us fix crashes we cannot "
 "reproduce ourselves."
 msgstr ""
+"Esta es una versión de diagnóstico de Avogadro. Puede enviar un informe a "
+"los desarrolladores cuando Avogadro se bloquee, lo que nos ayuda a "
+"solucionar los fallos que no podemos reproducir por nuestra cuenta."
 
 #: crashreportdialog.cpp:38
 msgid ""
@@ -98,6 +101,13 @@ msgid ""
 "useful, but it may incidentally include fragments of what you were working "
 "on, such as part of a file name or a molecule you had open."
 msgstr ""
+"Un informe de error contiene una instantánea de la memoria de Avogadro en el "
+"momento en que se produjo el fallo, junto con la información sobre su "
+"sistema operativo, el controlador de gráficos y la versión de Avogadro, así "
+"como un registro de la actividad reciente. Esa instantánea de la memoria "
+"hace que el informe resulte útil, pero puede que, de forma incidental, "
+"incluya fragmentos de aquello en lo que estaba trabajando, como parte del "
+"nombre de un archivo o una molécula que tenía abierta."
 
 #: crashreportdialog.cpp:52
 msgid ""
@@ -107,11 +117,11 @@ msgstr ""
 
 #: crashreportdialog.cpp:63
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "Enviar informes de cierres inesperados"
 
 #: crashreportdialog.cpp:64
 msgid "Don't Send"
-msgstr ""
+msgstr "No enviar"
 
 #: crashreportdialog.cpp:67
 msgid "Send crash reports to the Avogadro developers"
@@ -168,7 +178,7 @@ msgstr "Es necesario reiniciar el programa"
 
 #: mainwindow.cpp:1188
 msgid "Please restart Avogadro to use the new language."
-msgstr "Por favor reinicie Avogadro para usar el nuevo idioma."
+msgstr "Reinicie Avogadro para usar el idioma nuevo."
 
 #: mainwindow.cpp:1231 mainwindow.cpp:2701
 msgid "Chemical Markup Language"
@@ -253,7 +263,7 @@ msgstr ""
 
 #: mainwindow.cpp:1508
 msgid "The save was canceled."
-msgstr ""
+msgstr "Se canceló el guardado."
 
 #: mainwindow.cpp:1569 mainwindow.cpp:1572
 msgid "untitled"
@@ -261,7 +271,7 @@ msgstr "sin título"
 
 #: mainwindow.cpp:1809
 msgid "Found Previous Avogadro Files"
-msgstr "Se Encontraron Previos Archivos de Avogadro"
+msgstr "Se encontraron archivos anteriores de Avogadro"
 
 #: mainwindow.cpp:1811
 #, qt-format
@@ -271,10 +281,10 @@ msgid ""
 "\n"
 "These files are no longer needed and can be safely removed."
 msgstr ""
-"Archivos de una versión previa de Avogadro se encontraron en el directorio "
-"de extensiones, usando %1 de espacio.\n"
+"Se encontraron archivos de una versión anterior de Avogadro en el directorio "
+"de complementos, que ocupan %1 de espacio.\n"
 "\n"
-"Estos archivos ya no se necesitan y se pueden remover de forma segura."
+"Estos archivos ya no son necesarios y se pueden quitar sin ningún problema."
 
 #: mainwindow.cpp:1818
 msgid "Remove Old Files"
@@ -298,11 +308,14 @@ msgstr ""
 
 #: mainwindow.cpp:1965
 msgid "This requires setup that will download and configure Python."
-msgstr "Esto requiere configuración que bajará y configurará Python."
+msgstr ""
+"Para ello, es necesario realizar una instalación que descargará y "
+"configurará Python."
 
 #: mainwindow.cpp:1967
 msgid "This requires setup to configure a Python environment."
-msgstr "Esto requiere la configuración de un entorno de Python."
+msgstr ""
+"Para ello, es necesario realizar una instalación que configurará Python."
 
 #: mainwindow.cpp:1971
 msgid "This may require an Internet connection."
@@ -310,7 +323,7 @@ msgstr "Esto puede requerir de una conexión a Internet."
 
 #: mainwindow.cpp:1973
 msgid "Install updated plugins?"
-msgstr "¿Instalar las extensiones actualizadas?"
+msgstr "¿Quiere instalar los complementos actualizados?"
 
 #: mainwindow.cpp:1974
 msgid "The following plugins are available:"
@@ -318,19 +331,19 @@ msgstr "Están disponibles los siguientes complementos:"
 
 #: mainwindow.cpp:1975
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "¿Quiere ponerlos al día?"
 
 #: mainwindow.cpp:2013
 msgid "Recover Autosaved Files"
-msgstr "Recuperar Archivos Guardados Automáticamente"
+msgstr "Recuperar archivos guardados automáticamente"
 
 #: mainwindow.cpp:2014
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
 msgstr ""
-"Se encontraron archivos guardados automáticamente en la sesión anterior.\n"
-"¿ Le gustaría recuperarlos?"
+"Se encontraron archivos guardados automáticamente de una sesión anterior.\n"
+"¿Le gustaría recuperarlos?"
 
 #: mainwindow.cpp:2082 mainwindow.cpp:2087
 msgid "Unknown error"
@@ -353,11 +366,11 @@ msgstr ""
 
 #: mainwindow.cpp:2131
 msgid "Missing 'layer' parameter."
-msgstr ""
+msgstr "Falta el parámetro «layer»."
 
 #: mainwindow.cpp:2138
 msgid "'layer' must be a whole number."
-msgstr ""
+msgstr "«layer» debe ser un número entero."
 
 #: mainwindow.cpp:2144
 #, qt-format
@@ -368,7 +381,7 @@ msgstr ""
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
-msgstr "%1 Ajustes"
+msgstr "Configuración de %1"
 
 #: mainwindow.cpp:2523
 msgid "Common image formats"
@@ -722,16 +735,16 @@ msgstr "No se pueden abrir archivos"
 
 #: mainwindow.cpp:4088
 msgid "The plugin was unloaded."
-msgstr ""
+msgstr "Se desactivó el complemento."
 
 #: mainwindow.cpp:4136 mainwindow.cpp:4155 mainwindow.cpp:4178
 #: mainwindow.cpp:4197 mainwindow.cpp:4225 rpclistener.cpp:547
 msgid "No molecule is open."
-msgstr ""
+msgstr "No hay ninguna molécula abierta."
 
 #: mainwindow.cpp:4165
 msgid "Cannot remove the last remaining layer."
-msgstr ""
+msgstr "No se puede quitar la última capa."
 
 #: mainwindow.cpp:4209
 msgid "'visible' must be true or false."
@@ -743,7 +756,7 @@ msgstr ""
 
 #: mainwindow.cpp:4261
 msgid "No molecule"
-msgstr ""
+msgstr "No hay molécula"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -767,7 +780,7 @@ msgstr "&Ventana"
 
 #: rpclistener.cpp:232
 msgid "Avogadro is shutting down."
-msgstr ""
+msgstr "Avogadro se está cerrando."
 
 #: rpclistener.cpp:576
 msgid "renderImage requires both width and height, or neither."
@@ -775,31 +788,33 @@ msgstr ""
 
 #: rpclistener.cpp:601
 msgid "Could not render the current view."
-msgstr ""
+msgstr "No se pudo representar la vista actual."
 
 #: rpclistener.cpp:629
 msgid "Could not encode the render as PNG."
-msgstr ""
+msgstr "No se pudo codificar la representación como PNG."
 
 #: rpclistener.cpp:669 rpclistener.cpp:680
 msgid "No active view."
-msgstr ""
+msgstr "No hay ninguna vista activa."
 
 #: rpclistener.cpp:690
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
 msgstr ""
+"La modelView de setCamera debe constar exactamente de 16 números, en orden "
+"de filas."
 
 #: rpclistener.cpp:754 rpclistener.cpp:822
 msgid "The command failed."
-msgstr ""
+msgstr "Falló la orden."
 
 #: rpclistener.cpp:760
 msgid "That plugin is already running a command."
-msgstr ""
+msgstr "Ese complemento ya estaba ejecutando una orden."
 
 #: rpclistener.cpp:792
 msgid "The command timed out."
-msgstr ""
+msgstr "Se agotó el tiempo de espera de la orden."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
@@ -958,7 +973,7 @@ msgstr "Limpiar"
 #. i18n: file: mainwindow.ui:261
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Select All"
-msgstr "Seleccionar Todo"
+msgstr "Seleccionar todo"
 
 #. i18n: file: mainwindow.ui:264
 #. i18n: ectx: property (shortcut), widget (QMenu, menuSelect)
@@ -1051,12 +1066,12 @@ msgstr "Intensidad de la Sombra:"
 #. i18n: file: renderingdialog.ui:130
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
 msgid "Thickness of the outline, in pixels"
-msgstr ""
+msgstr "Grosor del contorno, en píxeles"
 
 #. i18n: file: renderingdialog.ui:133
 #. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
 msgid "Outline Width:"
-msgstr ""
+msgstr "Anchura de contorno:"
 
 #. i18n: file: renderingdialog.ui:160
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
@@ -1131,6 +1146,8 @@ msgstr "Cerrar"
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
+"Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2026\n"
+"\n"
 "Launchpad Contributions: Adonis, Alfonso E. Romero, Andres Montejo Martinez, "
 "Angel Herráez, Avogadro Team, Carrillo, DiegoJ, Edgardo Fredz, Enterhase, "
 "FJModrego, Feder Sáiz, Federico Vera, Fido, Gabriel Ruiz, Geoff Hutchison, "
@@ -1146,7 +1163,7 @@ msgstr ""
 "aherraez@users.sourceforge.net, alejandromoulia@gmail.com, avogadro-"
 "devel@lists.sourceforge.net, catastro1@tutopia.com, debianmaster@gmail.com, "
 "diegojromerolopez@gmail.com, diegosuarez@hotmail.es, "
-"djdracaufeu@hotmail.com, federsaiz@googlemail.com, fitoschido@gmail.com, "
+"djdracaufeu@hotmail.com, federsaiz@googlemail.com, fitojb@ubuntu.com, "
 "fjavilesn@gmail.com, grovertapia@hotmail.com, jdiegosuarez@hotmail.es, "
 "joseb.gutierrez@gmail.com, mauro.dec@gmail.com, medeshago@gmail.com, "
 "meilan@adinet.com.uy, memaljo@yahoo.com, monkey.libre@gmail.com, "
