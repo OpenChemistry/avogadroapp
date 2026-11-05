@@ -37,6 +37,24 @@ public:
 
   ~LocalSocketConnectionListener() override;
 
+  /**
+   * Resolve a server name to the address passed to QLocalServer::listen() and
+   * QLocalSocket::connectToServer().
+   *
+   * Absolute paths, Windows pipe names and macOS names (which Qt already puts
+   * in the per-user, mode 0700 temporary directory) are returned unchanged.
+   * On other Unix systems the socket goes in a private per-user directory:
+   * $XDG_RUNTIME_DIR if it is usable, otherwise <tmp>/avogadro-<uid>. A
+   * shared world-writable /tmp would let another user squat the name or, with
+   * group-writable umasks, connect to the server.
+   *
+   * @param name The server name.
+   * @param error If non-null, set to a message when resolution fails.
+   * @return the address to use, or an empty string if no safe location exists.
+   */
+  static QString resolveServerName(const QString& name,
+                                   QString* error = nullptr);
+
   /// Start listening for incoming connections.
   void start() override;
 
@@ -49,7 +67,7 @@ public:
   /// Calls stop(false)
   void stop() override;
 
-  /// @return the address the QLocalServer is listening on.
+  /// @return the resolved address the QLocalServer listens on.
   QString connectionString() const override;
 
   /// @return the full address the QLocalServer is listening on.
@@ -63,6 +81,7 @@ private:
     QAbstractSocket::SocketError error);
 
   QString m_connectionString;
+  QString m_resolveError;
   QLocalServer* m_server;
 };
 
