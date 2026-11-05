@@ -117,10 +117,7 @@ const BuiltinCommand builtinCommands[] = {
   { "getMolecule", "Return the active molecule serialized as a string.",
     false },
   { "internalPing", "Check whether the server is responsive.", false },
-  { "kill",
-    "Shut down Avogadro. Only enabled when started with "
-    "--testing.",
-    false },
+  { "kill", "Shut down Avogadro. Always refused: disabled over RPC.", false },
   { "listCommands", "List every command the server understands.", false },
   { "listDisplayTypes",
     "List the scene display types available for the active view.", false },
@@ -352,26 +349,15 @@ void RpcListener::messageReceived(const RPC::Message& message)
       timeoutSeconds = 1;
   }
 
-  // check for quit message first, since it doesn't require a window
+  // Answered first, since it doesn't require a window. Shutdown over RPC is
+  // disabled: main() has no testing mode to enable it, and scanning the raw
+  // arguments for "--testing" would also match an option's value (such as
+  // "--rpc-name --testing").
   if (method == "kill") {
-    // Only allow avogadro to be killed through RPC if it was started with the
-    // '--testing' flag.
-    if (qApp->arguments().contains("--testing")) {
-      RPC::Message response = message.generateResponse();
-      response.setResult(true);
-      response.send();
-
-      qApp->quit();
-    } else {
-      // send error response
-      RPC::Message errorMessage = message.generateErrorResponse();
-      errorMessage.setErrorCode(errorRequestFailed);
-      errorMessage.setErrorMessage(
-        "Ignoring kill command. Start with '--testing' to enable.");
-      errorMessage.send();
-    }
-    // Either way the request has been answered. Without this the message
-    // falls through to the handler chain below and a second reply is sent.
+    sendError(message, errorRequestFailed,
+              QStringLiteral("Shutting down Avogadro over RPC is disabled."));
+    // The request has been answered. Without this the message falls through
+    // to the handler chain below and a second reply is sent.
     return;
   }
 
