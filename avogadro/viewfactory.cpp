@@ -36,4 +36,4 @@ QWidget* ViewFactory::createView(const QString& view)
   return nullptr;
 }
 
-} // End Avogadro namespace
+} // namespace Avogadro

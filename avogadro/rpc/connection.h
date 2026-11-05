@@ -25,8 +25,7 @@ class Connection : public QObject
 {
   Q_OBJECT
 public:
-  explicit Connection(QObject* parentObject = nullptr)
-    : QObject(parentObject)
+  explicit Connection(QObject* parentObject = nullptr) : QObject(parentObject)
   {
   }
 

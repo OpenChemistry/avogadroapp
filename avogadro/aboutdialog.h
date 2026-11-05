@@ -30,6 +30,6 @@ private:
   Ui::AboutDialog* m_ui;
 };
 
-} // End Avogadro namespace
+} // namespace Avogadro
 
 #endif // AVOGADRO_ABOUTDIALOG_H

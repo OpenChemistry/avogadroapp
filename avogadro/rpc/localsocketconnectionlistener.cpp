@@ -19,9 +19,8 @@ namespace Avogadro::RPC {
 
 LocalSocketConnectionListener::LocalSocketConnectionListener(
   QObject* parentObject, const QString& connString)
-  : ConnectionListener(parentObject)
-  , m_connectionString(connString)
-  , m_server(new QLocalServer())
+  : ConnectionListener(parentObject), m_connectionString(connString),
+    m_server(new QLocalServer())
 {
   connect(m_server, SIGNAL(newConnection()), this,
           SLOT(newConnectionAvailable()));
