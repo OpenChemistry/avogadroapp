@@ -48,9 +48,12 @@ replies without changing those clients and bumping `rpcProtocolVersion` in
 - Read-backs (`listMolecules`, `getCamera`, `activeDialog`, ...) reply with
   their payload directly as `result`.
 - Commands reply `true` straight away, or, when the request passed
-  `"wait": true`, `{"status": "finished", "data": {...}}` once the work is
-  done. A plugin that finishes later returns `CommandStatus::Started` and
-  emits its result through the plugin's command signals.
+  `"wait": true`, `{"status": "finished"}` once the work is done, with
+  `message` and `data` added only when they are not empty. A plugin that
+  finishes later returns `CommandStatus::Started` and emits its result
+  through the plugin's command signals. Commands answered in
+  `rpclistener.cpp` itself (`openFile`, `loadMolecule`, `saveGraphic`) finish
+  before replying and reply `true` even with `"wait": true`.
 - `wait` and `timeout` are reserved request parameters, removed before any
   handler sees the options. Do not use them as option names.
 - Reuse the error codes defined at the top of `rpclistener.cpp`: -1 request
@@ -80,6 +83,7 @@ as hostile input.
 - Do not log request parameters or replies. They can contain whole molecules
   and file paths, and `qDebug`/`qWarning` output ends up in crash-report
   breadcrumbs.
-- `kill` only works when the app was started with `--testing`, which `main()`
-  does not currently accept, so in practice it always refuses. Keep shutdown
-  out of reach of ordinary clients.
+- `kill` always refuses: there is no testing mode that enables it. Keep
+  shutdown out of reach of ordinary clients; if a testing mode is added, gate
+  `kill` on the flag `main()` parsed, never on a scan of the raw arguments
+  (which would match an option's value, such as `--rpc-name --testing`).

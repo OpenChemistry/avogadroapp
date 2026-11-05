@@ -33,7 +33,7 @@ Contributions that appear to be mostly machine-generated may be rejected.
 from what the plugins provide, stores settings, dispatches RPC requests and
 packages everything for installation. Features belong in avogadrolibs, where
 they can be tested in isolation and reused by the Python package and other
-front ends.
+front ends (e.g., avogadro-web, Jupyter, etc.)
 
 Ask these questions in order:
 
@@ -149,20 +149,27 @@ everything a user opens or draws as confidential.
 
 Most developers build through the `openchemistry` superbuild, which builds
 avogadrolibs first; see the
-[build instructions](https://two.avogadro.cc/develop/build.html). The app needs
+[build instructions](https://avogadro.cc/develop/build.html). The app needs
 an installed avogadrolibs of the same vintage: the two repositories are
 developed together, and an app change often depends on a libraries change that
 must merge first.
 
+**The app tests clear your real Avogadro settings** (they launch with
+`--disable-settings`). Back up your settings, or run the tests as a different
+user, before running them.
+
 ```sh
 # in the superbuild build directory
 cmake --build .
-ctest --test-dir avogadroapp            # app tests (needs ENABLE_TESTING=ON)
-ctest --test-dir avogadroapp -L rpc     # only the RPC end-to-end tests
+ctest --test-dir avogadroapp --no-tests=error         # app tests
+ctest --test-dir avogadroapp -L rpc --no-tests=error  # only the RPC tests
 ```
 
-See [tests/AGENTS.md](tests/AGENTS.md) for what the tests cover and how to add
-one. Useful CMake options: `Avogadro_ENABLE_RPC` (on), `ENABLE_TESTING`
+The tests are only registered with `ENABLE_TESTING=ON` and an avogadrodata
+checkout; the RPC tests also need a Python that can `import pytest`. Check
+that they were selected (`ctest -N -L rpc`): an empty selection is not a
+passing run. See [tests/AGENTS.md](tests/AGENTS.md) for what the tests cover
+and how to add one. Useful CMake options: `Avogadro_ENABLE_RPC` (on), `ENABLE_TESTING`
 (off), `USE_3DCONNEXION` (off; superbuild option, Windows and macOS only) and
 `USE_SENTRY` (off; Windows diagnostic builds only).
 
@@ -177,7 +184,7 @@ Before submitting:
 - Build with warnings visible. CI builds with ASan, TSan and UBSan, and runs
   the RPC suite in the UBSan build.
 - Commit messages: a short imperative sentence, optionally followed by a blank
-  line and details.
+  line and summarized details.
 
 ### Translations
 
@@ -190,7 +197,7 @@ not edit the `.po` or `.pot` files by hand.
 
 ## References
 
-- API documentation: https://two.avogadro.cc/develop/classlist.html
-- Build guide: https://two.avogadro.cc/develop/build.html
+- API documentation: https://avogadro.cc/develop/classlist.html
+- Build guide: https://avogadro.cc/develop/build.html
 - Forum: https://discuss.avogadro.cc/
 - [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md)

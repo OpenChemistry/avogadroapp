@@ -21,12 +21,16 @@ verb. Read it before writing a test. See the top-level
 ## Running
 
 ```sh
-ctest --test-dir <build>/avogadroapp -L rpc -E corpus -V
+ctest --test-dir <build>/avogadroapp -L rpc -E corpus -V --no-tests=error
 python -m pytest tests/rpc --avogadro /path/to/Avogadro2 -m "not corpus"
 ```
 
-ctest only adds the RPC tests when the Python that CMake found can
-`import pytest`; otherwise configure prints a warning and they are missing.
+ctest only registers tests when `ENABLE_TESTING=ON` and CMake finds
+avogadrodata (a sibling checkout, or the `AVOGADRO_DATA_ROOT` environment
+variable or cache entry). The RPC tests also need the Python that CMake found
+to `import pytest`; otherwise configure prints a warning and they are
+missing. `--no-tests=error` makes ctest fail instead of passing with nothing
+run.
 The suite opens real windows. On Linux CI it runs under Xvfb with Mesa
 software OpenGL, in the UBSan build only, and never the corpus.
 

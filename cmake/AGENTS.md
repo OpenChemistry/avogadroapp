@@ -51,9 +51,14 @@ DMG names).
 - Do not change the MSIX `Identity` (name and publisher) or the macOS bundle
   identifier (`cc.avogadro`). They tie installs, updates and store listings
   to the project; changing them makes a different application.
-- Signing identities, certificates and the Sentry DSN come from CI secrets
-  and environment variables (`CODESIGN_IDENTITY`, `SENTRY_DSN`). Never commit
-  them or write them into a file that gets installed or logged.
+- Signing identities and certificates come from CI secrets and environment
+  variables (`CODESIGN_IDENTITY`). Never commit them or write them into a
+  file that gets installed or logged.
+- The Sentry DSN (`SENTRY_DSN`) is a public client key: it only allows
+  sending events, so it is compiled into the diagnostic build
+  (`avogadroappconfig.h`). It still comes from a CI secret so that it is not
+  in the repository or in builds that should not report. Never put a Sentry
+  auth token (used to upload symbols) anywhere that gets installed.
 - Keep entitlements and sandbox permissions to what the app needs. The macOS
   entitlements allow JIT and loading libraries that are not signed by the
   project; the Flatpak has display, GPU, and network for plugin downloads,

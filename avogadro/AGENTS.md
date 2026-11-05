@@ -65,9 +65,10 @@ machine whose settings matter.
 ## Settings
 
 Settings are read in `readSettings()` and written in `writeSettings()`, both
-in `mainwindow.cpp`. Window geometry and dock state keys (`pos`, `size`,
-`moleculeDock`, ...) are top level for historical reasons; keep new keys in a
-group. The top-level rules on keeping keys stable apply. Plugins share the
+in `mainwindow.cpp`. Window geometry (`size`, `pos`) and `perspective` are in
+the `MainWindow` group, while dock visibility (`moleculeDock`, `viewDock`,
+...) and `recentFiles` are top level for historical reasons. Leave existing
+keys where they are, and put new keys in the group they belong to. The top-level rules on keeping keys stable apply. Plugins share the
 same store under their own keys, so grep avogadrolibs before reusing a name.
 
 ## Platform code
@@ -96,7 +97,10 @@ compile the no-op inline functions in `crashreporter.h` instead. Rules:
   `require_user_consent` so reports are held locally until then. Under
   `--skip-dialogs` the question is not asked: a user who never answered is
   treated as not consenting, and the stored choice is left alone. Keep it
-  that way.
+  that way. The one exception is `--crash-test`: it gives consent for that
+  run only, without the dialog and without changing the stored choice, then
+  crashes, so it can upload a test crash. It exists for CI and support; no
+  other path may grant consent.
 - **Add no user data.** Tags and context describe the build, OpenGL driver and
   loaded plugins. Do not add molecule names, formulas, structures, file names
   or paths, window titles, or the user's name. Breadcrumbs follow the same

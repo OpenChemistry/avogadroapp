@@ -32,7 +32,7 @@ when `avogadro` is not installed). Options: `--reproducer-dir`,
 ## Ground rules
 
 * Never pass `--testing` to the app: argument parsing rejects it and the app
-  exits, so the `kill` RPC is unusable. The harness stops the app by
+  exits. The `kill` RPC is always refused, so the harness stops the app by
   terminating the process (SIGTERM, then SIGKILL after 5 s).
 * The launch line is `--rpc-name <name> --skip-autosave --disable-settings`
   (`harness.LAUNCH_ARGS`). `--rpc-name` implies `--skip-dialogs`, so no startup
