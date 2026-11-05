@@ -590,6 +590,17 @@ private slots:
   void previousMolecule();
 
   /**
+   * @brief Shortcut to move keyboard focus to the next visible pane
+   * (3D view, then docked panes)
+   */
+  void focusNextPane();
+
+  /**
+   * @brief Shortcut to move keyboard focus to the previous visible pane
+   */
+  void focusPreviousPane();
+
+  /**
    * @brief Change the active layer
    */
   void layerActivated(const QModelIndex& index);
