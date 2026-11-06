@@ -4,6 +4,9 @@
 ******************************************************************************/
 
 #import <AppKit/NSWindow.h>
+#import <AppKit/AppKit.h>
+
+#include "reducemotion.h"
 
 // Set some Mac compatibility bits using Objective-C++
 // From https://forum.qt.io/topic/60623/qt-5-4-2-os-x-10-11-el-capitan-how-to-remove-the-enter-full-screen-menu-item/
@@ -21,3 +24,15 @@ void removeMacSpecificMenuItems() {
 
   return;
 }
+
+namespace Avogadro {
+
+// System Settings > Accessibility > Display > Reduce motion
+bool systemPrefersReducedMotion()
+{
+  return [[NSWorkspace sharedWorkspace] accessibilityDisplayShouldReduceMotion]
+           ? true
+           : false;
+}
+
+} // namespace Avogadro

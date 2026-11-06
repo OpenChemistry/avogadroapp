@@ -11,6 +11,7 @@
 #include "crashreporter.h"
 #include "menubuilder.h"
 #include "renderingdialog.h"
+#include "targetregistry.h"
 #include "tdxcontroller.h"
 #include "tooltipfilter.h"
 #include "viewfactory.h"
@@ -499,6 +500,9 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
   m_testUtility->addEventSource("xml", new XMLEventSource(this));
 #endif
 
+  m_targets = new TargetRegistry(this);
+  m_targets->setToolBar(m_toolToolBar);
+
   // Now load the plugins.
   PluginManager* plugin = PluginManager::instance();
   plugin->load();
@@ -534,9 +538,12 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
       connect(extension, &QtGui::ExtensionPlugin::actionsChanged, this,
               [this, extension]() {
                 buildMenu(extension);
-                if (m_initialized)
+                if (m_initialized) {
                   m_menuBuilder->buildMenuBar(menuBar());
+                  m_targets->menusRebuilt();
+                }
               });
+      m_targets->addExtension(extension);
       extension->registerCommands();
       m_extensions.append(extension);
     }
@@ -582,6 +589,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 #endif
   buildMenu();
   m_initialized = true;
+  m_targets->start();
 #ifdef Q_OS_WIN
   qDebug() << " updating recent files ";
 #endif
@@ -722,6 +730,7 @@ void MainWindow::setupInterface()
 
   // Our tool dock.
   m_toolDock = new QDockWidget(tr("Tool"), this);
+  m_targets->setToolDock(m_toolDock);
   addDockWidget(Qt::LeftDockWidgetArea, m_toolDock);
 
   // Our dock for toggling different display types.
@@ -2286,6 +2295,7 @@ void MainWindow::toolActivated()
         m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
       }
+      m_targets->activeToolChanged();
     }
   }
 }
@@ -3122,6 +3132,7 @@ void MainWindow::setActiveTool(QString toolName)
       }
     }
     glWidget->setFocus();
+    m_targets->activeToolChanged();
   }
 
   if (!toolName.isEmpty()) {
@@ -3368,6 +3379,8 @@ void MainWindow::buildMenu()
   path << tr("&File");
   // New
   auto* action = new QAction(tr("&New"), this);
+  action->setObjectName(QStringLiteral("actionNew"));
+  m_targets->addAction(QStringLiteral("new"), action);
   action->setShortcut(QKeySequence::New);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
   action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentNew));
@@ -3379,6 +3392,8 @@ void MainWindow::buildMenu()
   connect(action, &QAction::triggered, this, &MainWindow::newMolecule);
   // Open
   action = new QAction(tr("&Open…"), this);
+  action->setObjectName(QStringLiteral("actionOpen"));
+  m_targets->addAction(QStringLiteral("open"), action);
   action->setShortcut(QKeySequence::Open);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
   action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentOpen));
@@ -3738,6 +3753,8 @@ void MainWindow::buildTools()
     action->setData(toolPlugin->objectName());
     toolGroup->addAction(action);
     m_toolToolBar->addAction(action);
+
+    m_targets->addTool(toolPlugin);
 
     connect(action, &QAction::triggered, this, &MainWindow::toolActivated);
     connect(toolPlugin, &ToolPlugin::registerCommand, this,
