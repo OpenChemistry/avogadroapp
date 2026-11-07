@@ -64,6 +64,9 @@ if(ENABLE_TESTING)
   enable_testing()
 endif()
 
+if(EMSCRIPTEN OR AVOGADRO_WEB_EDITOR)
+  message(FATAL_ERROR "The web editor has moved to the avogadro-web repository. Build that project, or use the OpenChemistry superbuild with AVOGADRO_WEB_EDITOR=ON.")
+endif()
 option(Avogadro_ENABLE_RPC "Enable RPC server" ON)
 
 # Crash reporting via sentry-native, used only by the separate Windows
