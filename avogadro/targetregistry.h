@@ -88,15 +88,21 @@ protected:
   bool eventFilter(QObject* watched, QEvent* event) override;
 
 private slots:
+  // Slots for the extension signals that are connected by name.
   void onRequestHighlight(const QString& target, const QString& callout);
   void onRequestReveal(const QString& target);
+  // Report a real change (an action ran, an Editor widget changed) to the
+  // extensions.
   void onActionTriggered();
   void onEditorValueChanged();
+  /// Push the current target map to the extensions' setUiTargets slot.
   void sendTargets();
 
 private:
+  /// What a name refers to right now; defined in the source file.
   struct Resolved;
 
+  /// Look a name up. Nothing is cached, since menus and docks are rebuilt.
   Resolved resolve(const QString& name) const;
   QStringList knownNames() const;
   QAction* findAction(const QString& name) const;
@@ -106,12 +112,16 @@ private:
   QString activeToolName() const;
   QString menuPathText(QAction* action) const;
   QString actionText(QAction* action) const;
+  /// The menu bar holding @p action; @p chain gets the menus, outermost first.
   QMenuBar* menuBarFor(QAction* action, QList<QPointer<QMenu>>* chain) const;
   QWidget* toolbarButton(QAction* action) const;
 
+  /// Shared body of highlight() and reveal().
   bool show(const QString& target, const QString& callout, bool reveal,
             QString* error);
+  /// Open the menus leading to @p action (non-native menu bars only).
   void openMenuChain(QAction* action);
+  /// Open level @p level of the chain, then schedule the next level.
   void stepMenuChain(int level);
   void closeOpenedMenus();
   HighlightOverlay* overlayFor(QWidget* window);
@@ -120,21 +130,29 @@ private:
   void announce(const QString& text, QObject* object);
 
   MainWindow* m_window;
+  // The pointers below are QPointers because tools, menus and docks can be
+  // deleted or rebuilt while the registry lives on.
   QPointer<QToolBar> m_toolBar;
   QPointer<QDockWidget> m_toolDock;
   QList<QPointer<QtGui::ToolPlugin>> m_tools;
+  /// Every extension, for finding action:<objectName> targets.
   QList<QPointer<QtGui::ExtensionPlugin>> m_extensionList;
   /// name -> action for the main window's own actions ("new", "open").
   QList<QPair<QString, QPointer<QAction>>> m_actions;
   /// Extensions with the setUiTargets slot, and with uiTargetChanged.
   QList<QPointer<QObject>> m_targetListeners;
   QList<QPointer<QObject>> m_changeListeners;
+  /// One overlay per top-level window that has had a target outlined.
   QList<QPointer<HighlightOverlay>> m_overlays;
+  /// State of the menus opened by reveal(), so they can be closed again.
   QPointer<QMenuBar> m_openedMenuBar;
   QList<QPointer<QMenu>> m_menuChain; ///< top-level menu first
   QPointer<QAction> m_menuLeaf;
+  /// The last tool reported, so a repeated switch is not announced twice.
   QString m_lastTool;
+  /// A sendTargets() call is already queued.
   bool m_pushPending = false;
+  /// The application-wide Escape/close filter is installed.
   bool m_filterInstalled = false;
 };
 

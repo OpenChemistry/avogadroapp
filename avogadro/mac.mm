@@ -6,6 +6,7 @@
 #import <AppKit/NSWindow.h>
 #import <AppKit/AppKit.h>
 
+// For systemPrefersReducedMotion(), defined at the end of this file.
 #include "reducemotion.h"
 
 // Set some Mac compatibility bits using Objective-C++
@@ -28,6 +29,8 @@ void removeMacSpecificMenuItems() {
 namespace Avogadro {
 
 // System Settings > Accessibility > Display > Reduce motion
+// The cross-platform declaration is in reducemotion.h; the other platforms are
+// in reducemotion.cpp. The ternary turns the Objective-C BOOL into a C++ bool.
 bool systemPrefersReducedMotion()
 {
   return [[NSWorkspace sharedWorkspace] accessibilityDisplayShouldReduceMotion]

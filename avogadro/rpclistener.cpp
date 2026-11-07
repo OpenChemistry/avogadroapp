@@ -756,18 +756,26 @@ void RpcListener::messageReceived(const RPC::Message& message)
     response.setResult(QJsonArray::fromVariantList(m_window->toolSummaries()));
     response.send();
   } else if (method == "listUiTargets") {
-    // Read-back: { target: { text, value, resolved, visible } }.
+    // Read-back: { target: { text, value, resolved, visible } }. Includes
+    // targets that are not resolved or visible, so callers can see why.
     RPC::Message response = message.generateResponse();
     response.setResult(QJsonObject::fromVariantMap(
       m_window->targetRegistry()->describeTargets()));
     response.send();
   } else if (method == "highlightTarget" || method == "revealTarget") {
+    // Two verbs, one body: reveal also moves focus or opens the menu. Both
+    // reply true once the outline is up, and fail with a message (unknown,
+    // unavailable or hidden target) otherwise. Neither blocks: a menu opened
+    // by reveal is a popup, not a modal dialog.
     const bool reveal = method == "revealTarget";
     if (!params.value("target").isString()) {
       sendError(message, errorRequestFailed,
                 tr("%1 needs a \"target\" string.").arg(method));
       return;
     }
+    // The optional callout text applies to highlightTarget only; a reveal
+    // always uses the target's own text. Without one, the target's text is
+    // used.
     QString callout;
     if (!reveal && params.contains("callout")) {
       if (!params.value("callout").isString()) {
@@ -790,6 +798,8 @@ void RpcListener::messageReceived(const RPC::Message& message)
     response.setResult(true);
     response.send();
   } else if (method == "clearHighlight") {
+    // Always succeeds, even when nothing is highlighted. Also closes a menu
+    // that revealTarget opened.
     m_window->targetRegistry()->clearHighlight();
     RPC::Message response = message.generateResponse();
     response.setResult(true);

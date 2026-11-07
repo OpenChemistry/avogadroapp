@@ -307,7 +307,10 @@ public:
    */
   QtOpenGL::GLWidget* activeGLWidget() const;
 
-  /** The named UI targets and the highlight overlay (see TargetRegistry). */
+  /**
+   * The named UI targets and the highlight overlay (see TargetRegistry).
+   * Created in the constructor, so it is never null; RpcListener uses it.
+   */
   TargetRegistry* targetRegistry() const { return m_targets; }
 
   /**
@@ -764,6 +767,7 @@ private:
   QStringList m_localeCodes;
 
   MenuBuilder* m_menuBuilder;
+  /// Owned by this window (a QObject child); see TargetRegistry.
   TargetRegistry* m_targets = nullptr;
   bool m_initialized = false; ///< true after the initial buildMenu() completes
 

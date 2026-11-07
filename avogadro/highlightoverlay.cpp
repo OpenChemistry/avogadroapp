@@ -18,15 +18,23 @@
 namespace Avogadro {
 
 namespace {
+// Repaint interval while pulsing (about 25 frames a second), in milliseconds.
 constexpr int kPulseTickMs = 40;
+// With reduce motion nothing animates, so the timer only needs to notice that
+// the target moved, or (after kStaticRevealMs) that the thick ring should end.
 constexpr int kStaticTickMs = 250;
+// One full cycle of the ring's brightness pulse, in milliseconds.
 constexpr double kPulsePeriodMs = 1200.0;
+// A reveal starts with the ring enlarged and shrinks it over this long (ms).
 constexpr double kRevealGrowMs = 400.0;
 constexpr double kRevealGrowPixels = 10.0;
+// With reduce motion, how long a reveal keeps the thicker static ring (ms).
 constexpr qint64 kStaticRevealMs = 2000;
+// Pen widths in pixels: the normal ring, and the reduce-motion reveal ring.
 constexpr int kRingWidth = 3;
 constexpr int kThickRingWidth = 5;
 constexpr int kHaloExtra = 2; // each side
+// Gap, in pixels, between the target and the ring when not enlarged.
 constexpr int kRingMargin = 3;
 constexpr int kMaxGrow = 14; // farthest the ring reaches past the target
 constexpr double kTwoPi = 6.28318530717958647692;
@@ -34,6 +42,8 @@ constexpr double kTwoPi = 6.28318530717958647692;
 // characters). The text is laid out on every tick, so cap the work.
 constexpr int kMaxCalloutLength = 512;
 
+// std::clamp is undefined when lo > hi, which happens when the bubble is too
+// narrow (under 24 pixels) for the pointer's inset; centre in that case.
 int clampInt(int value, int lo, int hi)
 {
   if (lo > hi)
@@ -51,8 +61,11 @@ HighlightOverlay::HighlightOverlay(QWidget* window) : QWidget(window)
   setAttribute(Qt::WA_ShowWithoutActivating);
   setFocusPolicy(Qt::NoFocus);
 
+  // Not started until there is a target to follow.
   connect(&m_timer, &QTimer::timeout, this, &HighlightOverlay::tick);
 
+  // The overlay is a child covering the window; watch the window to follow
+  // its resizes.
   if (window != nullptr)
     window->installEventFilter(this);
   syncToWindow();
@@ -63,9 +76,12 @@ void HighlightOverlay::showTarget(const Locator& locator,
                                   const QString& callout, bool reveal,
                                   bool reduceMotion)
 {
+  // Remember what was painted before, so that region can be repainted too if
+  // the new target is somewhere else.
   const QRect oldArea = paintedArea();
   m_locator = locator;
   m_callout = callout;
+  // The callout text may come from an RPC client; bound the layout work.
   if (m_callout.size() > kMaxCalloutLength - 1) {
     int keep = kMaxCalloutLength - 1;
     // Don't split a surrogate pair.
@@ -75,22 +91,28 @@ void HighlightOverlay::showTarget(const Locator& locator,
   }
   m_reveal = reveal;
   m_reduceMotion = reduceMotion;
-  m_clock.start();
+  m_clock.start(); // restarts the pulse and the reveal enlargement
 
   syncToWindow();
+  // Forget the old position so relocate() always repaints.
   m_target = QRect();
   relocate();
   show();
+  // Siblings created after the overlay would otherwise draw over it.
   raise();
   update(oldArea);
   update(paintedArea());
 
+  // The timer both animates and keeps the outline on a target that moves
+  // (the window is dragged, a dock floats, the view is resized).
   m_timer.setInterval(reduceMotion ? kStaticTickMs : kPulseTickMs);
   m_timer.start();
 }
 
 void HighlightOverlay::clearTarget()
 {
+  // Invalidate before the state is cleared, while paintedArea() still knows
+  // what was drawn.
   update(paintedArea());
   m_locator = nullptr;
   m_target = QRect();
@@ -105,12 +127,15 @@ bool HighlightOverlay::eventFilter(QObject* watched, QEvent* event)
     switch (event->type()) {
       case QEvent::Resize:
       case QEvent::Show:
+        // Keep covering the window, and move the ring in case the layout
+        // changed under the target.
         syncToWindow();
         relocate();
         break;
       case QEvent::ChildAdded:
         // New children (e.g. a re-created panel) stack on top; get back above
-        // them once they are in place.
+        // them once they are in place. Deferred because the child is not fully
+        // constructed when ChildAdded arrives.
         if (isVisible())
           QTimer::singleShot(0, this, [this]() { raise(); });
         break;
@@ -123,19 +148,26 @@ bool HighlightOverlay::eventFilter(QObject* watched, QEvent* event)
 
 void HighlightOverlay::changeEvent(QEvent* event)
 {
-  // The colours are read from the palette every time we paint.
+  // The colours are read from the palette every time we paint; the callout
+  // size follows the font, so a font change needs a repaint too.
   if (event->type() == QEvent::PaletteChange ||
       event->type() == QEvent::FontChange)
     update();
   QWidget::changeEvent(event);
 }
 
+// The overlay is always exactly the window's size, so its coordinates are the
+// window's client coordinates.
 void HighlightOverlay::syncToWindow()
 {
   if (QWidget* host = parentWidget())
     setGeometry(host->rect());
 }
 
+// The locator returns global (screen) coordinates; mapFromGlobal() turns the
+// corner into this widget's coordinates (the size is unchanged). An empty
+// result means the target is gone or hidden: nothing is outlined, but the
+// callout stays.
 void HighlightOverlay::relocate()
 {
   if (!m_locator)
@@ -146,6 +178,7 @@ void HighlightOverlay::relocate()
                         : QRect(mapFromGlobal(global.topLeft()), global.size());
   if (local == m_target)
     return;
+  // Repaint both where it was and where it is now.
   update(paintedArea());
   m_target = local;
   update(paintedArea());
@@ -157,6 +190,8 @@ void HighlightOverlay::tick()
   update(paintedArea());
 }
 
+// The largest the ring can be, not the current size, so one rectangle is
+// enough for invalidation and for placing the callout clear of the ring.
 QRect HighlightOverlay::ringRect(const QRect& target) const
 {
   if (target.isEmpty())
@@ -164,6 +199,8 @@ QRect HighlightOverlay::ringRect(const QRect& target) const
   return target.adjusted(-kMaxGrow, -kMaxGrow, kMaxGrow, kMaxGrow);
 }
 
+// Chooses the bubble's rectangle in local coordinates: sized to the wrapped
+// text, placed beside the target if it fits, and clamped inside the window.
 QRect HighlightOverlay::calloutRect(const QRect& target) const
 {
   if (m_callout.isEmpty())
@@ -173,9 +210,13 @@ QRect HighlightOverlay::calloutRect(const QRect& target) const
   const QFontMetrics metrics(font());
   const int padding = std::max(6, metrics.height() / 2);
   const int arrow = std::max(8, metrics.height() * 2 / 3);
+  // Keep a few pixels clear of the window edge.
   const QRect area = rect().adjusted(4, 4, -4, -4);
+  // About 18 line-heights wide, so the text wraps rather than running across
+  // the window.
   const int maxWidth = std::min(metrics.height() * 18, area.width());
 
+  // Measure the wrapped text; the height of 2000 is just "tall enough".
   const QRect text =
     metrics.boundingRect(QRect(0, 0, std::max(maxWidth - 2 * padding, 1), 2000),
                          Qt::TextWordWrap, m_callout);
@@ -194,6 +235,8 @@ QRect HighlightOverlay::calloutRect(const QRect& target) const
     bubble.moveLeft(target.center().x() - size.width() / 2);
   } else {
     const QRect ring = ringRect(target);
+    // Try below, then above, then to the side. The side that fits is checked
+    // against the ring so the bubble never covers the outline.
     const bool fitsBelow =
       ring.bottom() + arrow + size.height() <= area.bottom();
     const bool fitsAbove = ring.top() - arrow - size.height() >= area.top();
@@ -228,6 +271,8 @@ QRect HighlightOverlay::calloutRect(const QRect& target) const
   return bubble;
 }
 
+// A generous bound on what paintEvent() touches (ring, bubble, pointer and
+// antialiasing), used to limit repaints to the changed region.
 QRect HighlightOverlay::paintedArea() const
 {
   QRect area = ringRect(m_target);
@@ -243,16 +288,23 @@ void HighlightOverlay::paintEvent(QPaintEvent*)
   QPainter painter(this);
   painter.setRenderHint(QPainter::Antialiasing);
 
+  // Colours are read from the palette on every paint, so a theme change
+  // (including high contrast) is picked up.
   const QPalette colors = palette();
   const QColor halo = colors.color(QPalette::Base);
   const QColor ringColor = colors.color(QPalette::Highlight);
 
   const qint64 elapsed = m_clock.isValid() ? m_clock.elapsed() : 0;
 
+  // Draw the ring only when there is a target on screen; an empty target
+  // (native menu bar, hidden widget) leaves just the callout.
   if (!m_target.isEmpty()) {
     double grow = kRingMargin;
     int ringWidth = kRingWidth;
     double alpha = 1.0;
+    // Reduce motion: a steady ring, thicker for a short while on a reveal.
+    // Otherwise the alpha pulses between 0.7 and 1.0, and a reveal starts
+    // enlarged and settles over kRevealGrowMs.
     if (m_reduceMotion) {
       if (m_reveal && elapsed < kStaticRevealMs)
         ringWidth = kThickRingWidth;
@@ -264,6 +316,9 @@ void HighlightOverlay::paintEvent(QPaintEvent*)
         grow += kRevealGrowPixels * (1.0 - elapsed / kRevealGrowMs);
     }
     const QRectF ring = QRectF(m_target).adjusted(-grow, -grow, grow, grow);
+    // Two-tone: a halo in the base colour, wider than the ring by
+    // kHaloExtra on each side and fully opaque, under the ring in the
+    // highlight colour. One of the two contrasts with any background.
     painter.setBrush(Qt::NoBrush);
     painter.setPen(QPen(halo, ringWidth + 2 * kHaloExtra));
     painter.drawRoundedRect(ring, 6, 6);
@@ -284,7 +339,9 @@ void HighlightOverlay::paintEvent(QPaintEvent*)
   QPainterPath path;
   path.addRoundedRect(QRectF(bubble), 6, 6);
 
-  // A small pointer from the label toward the outline.
+  // A small pointer from the label toward the outline, on whichever side of
+  // the ring the bubble was placed, unless the bubble sits on the target
+  // itself (large targets such as the 3D view).
   if (!m_target.isEmpty() && !m_target.contains(bubble.center())) {
     const QRect ring = ringRect(m_target);
     QPolygonF pointer;
@@ -313,6 +370,8 @@ void HighlightOverlay::paintEvent(QPaintEvent*)
               << QPointF(bubble.right() + arrow, y)
               << QPointF(bubble.right() - 1, y + arrow);
     }
+    // The pointer is a triangle drawn overlapping the bubble's edge by a
+    // pixel, then merged with the bubble so the outline is one shape.
     if (!pointer.isEmpty()) {
       QPainterPath tip;
       tip.addPolygon(pointer);
@@ -325,6 +384,8 @@ void HighlightOverlay::paintEvent(QPaintEvent*)
   painter.setBrush(colors.color(QPalette::ToolTipBase));
   painter.drawPath(path);
 
+  // Text starts at the leading edge: left in left-to-right locales, right in
+  // right-to-left ones.
   painter.setFont(font());
   painter.setPen(colors.color(QPalette::ToolTipText));
   painter.setLayoutDirection(layoutDirection());

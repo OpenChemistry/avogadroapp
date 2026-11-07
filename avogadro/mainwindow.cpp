@@ -500,6 +500,8 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
   m_testUtility->addEventSource("xml", new XMLEventSource(this));
 #endif
 
+  // Created before the plugins load so buildTools() and the extension loop
+  // below can register with it.
   m_targets = new TargetRegistry(this);
   m_targets->setToolBar(m_toolToolBar);
 
@@ -540,9 +542,12 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
                 buildMenu(extension);
                 if (m_initialized) {
                   m_menuBuilder->buildMenuBar(menuBar());
+                  // The menus were replaced; tell the extensions again.
                   m_targets->menusRebuilt();
                 }
               });
+      // Connects the highlight signals by name; harmless for an extension
+      // (or an avogadrolibs) that does not have them.
       m_targets->addExtension(extension);
       extension->registerCommands();
       m_extensions.append(extension);
@@ -589,6 +594,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 #endif
   buildMenu();
   m_initialized = true;
+  // Everything is registered; send the first target map.
   m_targets->start();
 #ifdef Q_OS_WIN
   qDebug() << " updating recent files ";
@@ -730,6 +736,7 @@ void MainWindow::setupInterface()
 
   // Our tool dock.
   m_toolDock = new QDockWidget(tr("Tool"), this);
+  // The Editor targets are only visible while this dock shows its widget.
   m_targets->setToolDock(m_toolDock);
   addDockWidget(Qt::LeftDockWidgetArea, m_toolDock);
 
@@ -2295,6 +2302,7 @@ void MainWindow::toolActivated()
         m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
       }
+      // Report the switch to the extensions (see also setActiveTool()).
       m_targets->activeToolChanged();
     }
   }
@@ -3132,6 +3140,8 @@ void MainWindow::setActiveTool(QString toolName)
       }
     }
     glWidget->setFocus();
+    // Triggering the tool's action above may also reach toolActivated(); the
+    // registry ignores a repeated report of the same tool.
     m_targets->activeToolChanged();
   }
 
@@ -3379,6 +3389,8 @@ void MainWindow::buildMenu()
   path << tr("&File");
   // New
   auto* action = new QAction(tr("&New"), this);
+  // The object name matches the action of the same name in mainwindow.ui. The
+  // registry name is what a tutorial uses ("action:new").
   action->setObjectName(QStringLiteral("actionNew"));
   m_targets->addAction(QStringLiteral("new"), action);
   action->setShortcut(QKeySequence::New);
@@ -3754,6 +3766,7 @@ void MainWindow::buildTools()
     toolGroup->addAction(action);
     m_toolToolBar->addAction(action);
 
+    // Becomes "tool:<short name>".
     m_targets->addTool(toolPlugin);
 
     connect(action, &QAction::triggered, this, &MainWindow::toolActivated);
