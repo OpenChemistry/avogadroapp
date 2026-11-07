@@ -30,6 +30,9 @@ constexpr int kHaloExtra = 2; // each side
 constexpr int kRingMargin = 3;
 constexpr int kMaxGrow = 14; // farthest the ring reaches past the target
 constexpr double kTwoPi = 6.28318530717958647692;
+// Longest callout kept, counting a terminating null as in a C buffer (so 511
+// characters). The text is laid out on every tick, so cap the work.
+constexpr int kMaxCalloutLength = 512;
 
 int clampInt(int value, int lo, int hi)
 {
@@ -63,6 +66,13 @@ void HighlightOverlay::showTarget(const Locator& locator,
   const QRect oldArea = paintedArea();
   m_locator = locator;
   m_callout = callout;
+  if (m_callout.size() > kMaxCalloutLength - 1) {
+    int keep = kMaxCalloutLength - 1;
+    // Don't split a surrogate pair.
+    if (m_callout.at(keep - 1).isHighSurrogate())
+      --keep;
+    m_callout.truncate(keep);
+  }
   m_reveal = reveal;
   m_reduceMotion = reduceMotion;
   m_clock.start();
