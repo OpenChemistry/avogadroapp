@@ -10,13 +10,14 @@
 # Tomáš Poláček <ostriz2@seznam.cz>, 2024.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2025, 2026.
 # Michal Várady <miko.vaji@gmail.com>, 2026.
+# Michal Várady <majkl82@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-08 07:27+0000\n"
-"PO-Revision-Date: 2026-10-05 05:51+0000\n"
-"Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
+"PO-Revision-Date: 2026-11-09 13:51+0000\n"
+"Last-Translator: Michal Várady <majkl82@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/cs/>\n"
 "Language: cs\n"
@@ -24,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.10.1.dev0\n"
+"X-Generator: Weblate 2026.11.2.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -122,16 +123,17 @@ msgstr "Odesílat hlášení o pádech vývojářům Avogadra"
 
 #: mainwindow.cpp:296
 msgid "Missing 'index' parameter."
-msgstr ""
+msgstr "Chybí parametr 'index'."
 
 #: mainwindow.cpp:298
 msgid "'index' must be a whole number."
-msgstr ""
+msgstr "'index' musí být celé číslo."
 
 #: mainwindow.cpp:300
 #, qt-format
 msgid "'index' %1 is out of range (%2 molecules are open)."
 msgstr ""
+"Hodnota %1 parametru 'index' je mimo rozsah (počet otevřených molekul: %2)."
 
 #: mainwindow.cpp:626
 msgid "Ready…"
@@ -762,23 +764,25 @@ msgstr "„locked“ musí být true nebo false."
 msgid ""
 "The molecule has unsaved changes; pass discard: true to close it anyway."
 msgstr ""
+"Molekula má neuložené změny; pokud ji přesto chcete zavřít, předejte "
+"discard: true."
 
 #: mainwindow.cpp:4562
 msgid "There is nothing to undo."
-msgstr ""
+msgstr "Není co vrátit zpět."
 
 #: mainwindow.cpp:4563
 msgid "There is nothing to redo."
-msgstr ""
+msgstr "Není co provést znovu."
 
 #: mainwindow.cpp:4578
 msgid "There is no active view."
-msgstr ""
+msgstr "Není aktivní žádný pohled."
 
 #: mainwindow.cpp:4592
 #, qt-format
 msgid "Unknown tool '%1'."
-msgstr ""
+msgstr "Neznámý nástroj '%1'."
 
 #: mainwindow.cpp:4618
 msgid "No molecule"
@@ -823,11 +827,11 @@ msgstr "Výsledek vykreslení se nepodařilo zakódovat jako PNG."
 #: rpclistener.cpp:773
 #, qt-format
 msgid "%1 needs a \"target\" string."
-msgstr ""
+msgstr "%1 vyžaduje řetězcový parametr \"target\"."
 
 #: rpclistener.cpp:783
 msgid "highlightTarget's callout must be a string."
-msgstr ""
+msgstr "Hodnota callout pro highlightTarget musí být řetězec."
 
 #: rpclistener.cpp:831 rpclistener.cpp:842
 msgid "No active view."
@@ -853,42 +857,44 @@ msgstr "Vypršel časový limit příkazu."
 
 #: targetregistry.cpp:517
 msgid "3D view"
-msgstr ""
+msgstr "3D pohled"
 
 #: targetregistry.cpp:523
 msgid "The 3D view is not showing."
-msgstr ""
+msgstr "3D pohled není zobrazen."
 
 #: targetregistry.cpp:534
 msgid "\"tool\" reports the active tool; it has nothing to outline."
-msgstr ""
+msgstr "\"tool\" hlásí aktivní nástroj; není co orámovat."
 
 #: targetregistry.cpp:573
 msgid "The tool bar button is not showing."
-msgstr ""
+msgstr "Tlačítko na nástrojové liště není zobrazeno."
 
 #: targetregistry.cpp:621
 msgid "The Draw tool's settings are not showing. Choose the Draw tool first."
 msgstr ""
+"Nastavení nástroje „Nakreslit“ není zobrazeno. Nejprve vyberte nástroj „"
+"Nakreslit“."
 
 #: targetregistry.cpp:821
 #, qt-format
 msgid "Unknown UI target \"%1\"."
-msgstr ""
+msgstr "Neznámý cíl v uživatelském rozhraní \"%1\"."
 
 #: targetregistry.cpp:837
 #, qt-format
 msgid "UI target \"%1\" is not available."
-msgstr ""
+msgstr "Cíl \"%1\" v uživatelském rozhraní není dostupný."
 
 #: targetregistry.cpp:840
 #, qt-format
 msgid "UI target \"%1\" is not visible."
-msgstr ""
+msgstr "Cíl \"%1\" v uživatelském rozhraní není viditelný."
 
 #: targetregistry.cpp:908
 msgid "There is no window to draw on."
-msgstr ""
+msgstr "Není k dispozici okno pro vykreslení."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
