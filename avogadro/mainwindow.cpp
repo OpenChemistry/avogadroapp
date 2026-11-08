@@ -1432,7 +1432,11 @@ void MainWindow::readSettings()
 {
   QSettings settings;
   settings.beginGroup("MainWindow");
-  resize(settings.value("size", QSize(800, 600)).toSize());
+  // The default must be wide enough for the toolbars to fit on one row
+  QSize defaultSize(1024, 768);
+  if (QScreen* screen = QGuiApplication::primaryScreen())
+    defaultSize = defaultSize.boundedTo(screen->availableGeometry().size());
+  resize(settings.value("size", defaultSize).toSize());
   move(settings.value("pos", QPoint(20, 20)).toPoint());
   settings.endGroup();
   m_recentFiles = settings.value("recentFiles", QStringList()).toStringList();
