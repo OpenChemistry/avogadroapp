@@ -89,6 +89,17 @@ def fresh(launch):
     return launch()
 
 
+@pytest.fixture
+def narrow(launch, tmp_path):
+    """A Session on an Avogadro whose Tools toolbar does not fit its window, so
+    some tool buttons are hidden behind the toolbar's "»" button. The window
+    cannot be narrower than its docks (about 555 px), which is wider than the
+    toolbar on macOS, so the buttons are also padded out by a style sheet."""
+    sheet = tmp_path / "wide-buttons.qss"
+    sheet.write_text("QToolBar QToolButton { padding: 16px; }\n")
+    return launch("-qwindowgeometry", "420x700+20+40", "-stylesheet", str(sheet))
+
+
 @pytest.fixture(scope="module")
 def app_ready():
     """What to run on the module's shared app after every (re)launch; override

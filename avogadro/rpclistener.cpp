@@ -6,6 +6,7 @@
 #include "rpclistener.h"
 #include "avogadroappconfig.h"
 #include "mainwindow.h"
+#include "targetregistry.h"
 
 #include "rpc/connection.h"
 #include "rpc/jsonrpc.h"
@@ -95,6 +96,10 @@ const BuiltinCommand builtinCommands[] = {
     "Add a new layer to the active molecule, inheriting the active "
     "layer's settings.",
     false },
+  { "clearHighlight",
+    "Remove the highlight outline, and close a menu opened by "
+    "revealTarget.",
+    false },
   { "closeMolecule",
     "Close a molecule (index, default the active one). Fails if it has "
     "unsaved changes unless discard is true; closing the last molecule "
@@ -116,6 +121,11 @@ const BuiltinCommand builtinCommands[] = {
     "Report whether a layer (by index, 0 = first layer) is visible.", false },
   { "getMolecule", "Return the active molecule serialized as a string.",
     false },
+  { "highlightTarget",
+    "Outline a named part of the interface (see listUiTargets) with a "
+    "text callout, without moving focus. Params: target, and an optional "
+    "callout; the target's own text is used without one.",
+    false },
   { "internalPing", "Check whether the server is responsive.", false },
   { "kill", "Shut down Avogadro. Always refused: disabled over RPC.", false },
   { "listCommands", "List every command the server understands.", false },
@@ -127,6 +137,10 @@ const BuiltinCommand builtinCommands[] = {
     false },
   { "listTools",
     "List the active view's tools by name, and which one is active.", false },
+  { "listUiTargets",
+    "List the named interface targets that highlightTarget accepts: "
+    "text, value, resolved and visible for each.",
+    false },
   { "loadMolecule",
     "Read molecule data from a string and make it the "
     "active molecule.",
@@ -150,6 +164,10 @@ const BuiltinCommand builtinCommands[] = {
     "file. Omit width/height for the native framebuffer "
     "resolution, or supply both together to fit that "
     "render onto a canvas of exactly that size.",
+    false },
+  { "revealTarget",
+    "Like highlightTarget, and also move focus to the target, or open "
+    "the menu that holds a menu action, and announce it to screen readers.",
     false },
   { "saveGraphic",
     "Render the current view and save it as an image at "
@@ -736,6 +754,55 @@ void RpcListener::messageReceived(const RPC::Message& message)
   } else if (method == "listTools") {
     RPC::Message response = message.generateResponse();
     response.setResult(QJsonArray::fromVariantList(m_window->toolSummaries()));
+    response.send();
+  } else if (method == "listUiTargets") {
+    // Read-back: { target: { text, value, resolved, visible } }. Includes
+    // targets that are not resolved or visible, so callers can see why.
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonObject::fromVariantMap(
+      m_window->targetRegistry()->describeTargets()));
+    response.send();
+  } else if (method == "highlightTarget" || method == "revealTarget") {
+    // Two verbs, one body: reveal also moves focus or opens the menu. Both
+    // reply true once the outline is up, and fail with a message (unknown,
+    // unavailable or hidden target) otherwise. Neither blocks: a menu opened
+    // by reveal is a popup, not a modal dialog.
+    const bool reveal = method == "revealTarget";
+    if (!params.value("target").isString()) {
+      sendError(message, errorRequestFailed,
+                tr("%1 needs a \"target\" string.").arg(method));
+      return;
+    }
+    // The optional callout text applies to highlightTarget only; a reveal
+    // always uses the target's own text. Without one, the target's text is
+    // used.
+    QString callout;
+    if (!reveal && params.contains("callout")) {
+      if (!params.value("callout").isString()) {
+        sendError(message, errorRequestFailed,
+                  tr("highlightTarget's callout must be a string."));
+        return;
+      }
+      callout = params.value("callout").toString();
+    }
+    const QString target = params.value("target").toString();
+    QString reason;
+    TargetRegistry* registry = m_window->targetRegistry();
+    const bool shown = reveal ? registry->reveal(target, &reason)
+                              : registry->highlight(target, callout, &reason);
+    if (!shown) {
+      sendError(message, errorRequestFailed, reason);
+      return;
+    }
+    RPC::Message response = message.generateResponse();
+    response.setResult(true);
+    response.send();
+  } else if (method == "clearHighlight") {
+    // Always succeeds, even when nothing is highlighted. Also closes a menu
+    // that revealTarget opened.
+    m_window->targetRegistry()->clearHighlight();
+    RPC::Message response = message.generateResponse();
+    response.setResult(true);
     response.send();
   } else if (method == "listDisplayTypes") {
     QVariantList types;

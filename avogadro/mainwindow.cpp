@@ -11,6 +11,7 @@
 #include "crashreporter.h"
 #include "menubuilder.h"
 #include "renderingdialog.h"
+#include "targetregistry.h"
 #include "tdxcontroller.h"
 #include "tooltipfilter.h"
 #include "viewfactory.h"
@@ -499,6 +500,11 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
   m_testUtility->addEventSource("xml", new XMLEventSource(this));
 #endif
 
+  // Created before the plugins load so buildTools() and the extension loop
+  // below can register with it.
+  m_targets = new TargetRegistry(this);
+  m_targets->setToolBar(m_toolToolBar);
+
   // Now load the plugins.
   PluginManager* plugin = PluginManager::instance();
   plugin->load();
@@ -534,9 +540,15 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
       connect(extension, &QtGui::ExtensionPlugin::actionsChanged, this,
               [this, extension]() {
                 buildMenu(extension);
-                if (m_initialized)
+                if (m_initialized) {
                   m_menuBuilder->buildMenuBar(menuBar());
+                  // The menus were replaced; tell the extensions again.
+                  m_targets->menusRebuilt();
+                }
               });
+      // Connects the highlight signals by name; harmless for an extension
+      // (or an avogadrolibs) that does not have them.
+      m_targets->addExtension(extension);
       extension->registerCommands();
       m_extensions.append(extension);
     }
@@ -582,6 +594,8 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 #endif
   buildMenu();
   m_initialized = true;
+  // Everything is registered; send the first target map.
+  m_targets->start();
 #ifdef Q_OS_WIN
   qDebug() << " updating recent files ";
 #endif
@@ -722,6 +736,8 @@ void MainWindow::setupInterface()
 
   // Our tool dock.
   m_toolDock = new QDockWidget(tr("Tool"), this);
+  // The Editor targets are only visible while this dock shows its widget.
+  m_targets->setToolDock(m_toolDock);
   addDockWidget(Qt::LeftDockWidgetArea, m_toolDock);
 
   // Our dock for toggling different display types.
@@ -1416,7 +1432,11 @@ void MainWindow::readSettings()
 {
   QSettings settings;
   settings.beginGroup("MainWindow");
-  resize(settings.value("size", QSize(800, 600)).toSize());
+  // The default must be wide enough for the toolbars to fit on one row
+  QSize defaultSize(1024, 768);
+  if (QScreen* screen = QGuiApplication::primaryScreen())
+    defaultSize = defaultSize.boundedTo(screen->availableGeometry().size());
+  resize(settings.value("size", defaultSize).toSize());
   move(settings.value("pos", QPoint(20, 20)).toPoint());
   settings.endGroup();
   m_recentFiles = settings.value("recentFiles", QStringList()).toStringList();
@@ -2286,6 +2306,8 @@ void MainWindow::toolActivated()
         m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
       }
+      // Report the switch to the extensions (see also setActiveTool()).
+      m_targets->activeToolChanged();
     }
   }
 }
@@ -3122,6 +3144,9 @@ void MainWindow::setActiveTool(QString toolName)
       }
     }
     glWidget->setFocus();
+    // Triggering the tool's action above may also reach toolActivated(); the
+    // registry ignores a repeated report of the same tool.
+    m_targets->activeToolChanged();
   }
 
   if (!toolName.isEmpty()) {
@@ -3368,6 +3393,10 @@ void MainWindow::buildMenu()
   path << tr("&File");
   // New
   auto* action = new QAction(tr("&New"), this);
+  // The object name matches the action of the same name in mainwindow.ui. The
+  // registry name is what a tutorial uses ("action:new").
+  action->setObjectName(QStringLiteral("actionNew"));
+  m_targets->addAction(QStringLiteral("new"), action);
   action->setShortcut(QKeySequence::New);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
   action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentNew));
@@ -3379,6 +3408,8 @@ void MainWindow::buildMenu()
   connect(action, &QAction::triggered, this, &MainWindow::newMolecule);
   // Open
   action = new QAction(tr("&Open…"), this);
+  action->setObjectName(QStringLiteral("actionOpen"));
+  m_targets->addAction(QStringLiteral("open"), action);
   action->setShortcut(QKeySequence::Open);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
   action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentOpen));
@@ -3738,6 +3769,9 @@ void MainWindow::buildTools()
     action->setData(toolPlugin->objectName());
     toolGroup->addAction(action);
     m_toolToolBar->addAction(action);
+
+    // Becomes "tool:<short name>".
+    m_targets->addTool(toolPlugin);
 
     connect(action, &QAction::triggered, this, &MainWindow::toolActivated);
     connect(toolPlugin, &ToolPlugin::registerCommand, this,

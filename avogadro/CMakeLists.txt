@@ -50,8 +50,11 @@ set(avogadro_srcs
   avogadro.cpp
   backgroundfileformat.cpp
   mainwindow.cpp
+  highlightoverlay.cpp
   menubuilder.cpp
+  reducemotion.cpp
   renderingdialog.cpp
+  targetregistry.cpp
   tooltipfilter.cpp
   viewfactory.cpp
 )
@@ -128,7 +131,7 @@ endif()
 # Handle Mac OS X specific icons etc.
 if(APPLE)
   # add some Objective-C++ code
-  # list(APPEND avogadro_srcs mac.mm)
+  list(APPEND avogadro_srcs mac.mm)
 
   # for all the translations, create a .lproj directory
   # Migrated from Avo 1.x - contributed by Geoff Hutchison
@@ -251,6 +254,9 @@ endif()
 add_executable(avogadro WIN32 MACOSX_BUNDLE
   ${avogadro_srcs} ${ui_srcs} ${rcc_srcs})
 target_link_libraries(avogadro Qt::Widgets Qt::Network Qt::Concurrent)
+if(APPLE)
+  target_link_libraries(avogadro "-framework AppKit")
+endif()
 if(WIN32)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD")
 endif()

@@ -32,6 +32,7 @@ namespace Avogadro {
 
 class BackgroundFileFormat;
 class MenuBuilder;
+class TargetRegistry;
 class ViewFactory;
 
 namespace QtOpenGL {
@@ -305,6 +306,12 @@ public:
    * non-GL view (e.g. a VTK crystal view) or when there is no active view.
    */
   QtOpenGL::GLWidget* activeGLWidget() const;
+
+  /**
+   * The named UI targets and the highlight overlay (see TargetRegistry).
+   * Created in the constructor, so it is never null; RpcListener uses it.
+   */
+  TargetRegistry* targetRegistry() const { return m_targets; }
 
   /**
    * Render the active view to an image.
@@ -760,6 +767,8 @@ private:
   QStringList m_localeCodes;
 
   MenuBuilder* m_menuBuilder;
+  /// Owned by this window (a QObject child); see TargetRegistry.
+  TargetRegistry* m_targets = nullptr;
   bool m_initialized = false; ///< true after the initial buildMenu() completes
 
   // These variables take care of background file reading.
