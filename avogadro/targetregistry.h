@@ -18,6 +18,7 @@ class QDockWidget;
 class QMenu;
 class QMenuBar;
 class QToolBar;
+class QToolButton;
 class QWidget;
 
 namespace Avogadro {
@@ -81,7 +82,7 @@ public:
   bool highlight(const QString& target, const QString& callout, QString* error);
   /// Like highlight(), but also moves focus or opens the menu, and announces.
   bool reveal(const QString& target, QString* error);
-  /// Remove the outline and close a menu opened by reveal().
+  /// Remove the outline; close a menu or tool bar overflow opened by reveal().
   void clearHighlight();
 
 protected:
@@ -115,6 +116,8 @@ private:
   /// The menu bar holding @p action; @p chain gets the menus, outermost first.
   QMenuBar* menuBarFor(QAction* action, QList<QPointer<QMenu>>* chain) const;
   QWidget* toolbarButton(QAction* action) const;
+  /// The tool bar's overflow ("»") button, shown or not, or nullptr.
+  QToolButton* toolbarExtension() const;
 
   /// Shared body of highlight() and reveal().
   bool show(const QString& target, const QString& callout, bool reveal,
@@ -124,6 +127,8 @@ private:
   /// Open level @p level of the chain, then schedule the next level.
   void stepMenuChain(int level);
   void closeOpenedMenus();
+  /// Collapse the tool bar overflow if a reveal expanded it.
+  void collapseToolBar();
   HighlightOverlay* overlayFor(QWidget* window);
   void connectChangeSignals();
   void notifyChange(const QString& target, const QVariant& value);
@@ -148,6 +153,8 @@ private:
   QPointer<QMenuBar> m_openedMenuBar;
   QList<QPointer<QMenu>> m_menuChain; ///< top-level menu first
   QPointer<QAction> m_menuLeaf;
+  /// The tool bar whose overflow a reveal expanded, so it can be collapsed.
+  QPointer<QToolBar> m_expandedToolBar;
   /// The last tool reported, so a repeated switch is not announced twice.
   QString m_lastTool;
   /// A sendTargets() call is already queued.

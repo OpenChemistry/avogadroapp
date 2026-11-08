@@ -29,6 +29,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QToolButton>
 
 #include <functional>
 
@@ -174,6 +175,9 @@ struct TargetRegistry::Resolved
   QVariant value;
   QPointer<QAction> action;
   QPointer<QWidget> widget; ///< What to outline, if there is a widget.
+  /// The tool bar's extension ("»") button, shown instead of a tool button
+  /// that is hidden in the tool bar overflow (visible or not).
+  QPointer<QToolButton> extension;
   QString reason;           ///< Why it is not visible, for the caller.
 };
 
@@ -467,6 +471,16 @@ QString TargetRegistry::menuPathText(QAction* action) const
   return path + stripMnemonic(action->text());
 }
 
+// The tool bar's "»" button, shown when some buttons do not fit. It belongs to
+// QToolBar's private layout, so it is found by its object name.
+QToolButton* TargetRegistry::toolbarExtension() const
+{
+  if (m_toolBar.isNull())
+    return nullptr;
+  return m_toolBar->findChild<QToolButton*>(
+    QStringLiteral("qt_toolbar_ext_button"), Qt::FindDirectChildrenOnly);
+}
+
 // The text a tutorial shows for a menu action: path plus shortcut.
 QString TargetRegistry::actionText(QAction* action) const
 {
@@ -550,6 +564,11 @@ TargetRegistry::Resolved TargetRegistry::resolve(const QString& name) const
     r.text = withShortcut(stripMnemonic(action->text()), action);
     r.widget = m_toolBar ? m_toolBar->widgetForAction(action) : nullptr;
     r.visible = !r.widget.isNull() && r.widget->isVisible();
+    // A narrow window hides the buttons that do not fit behind the tool bar's
+    // extension button; the target can still be shown at that button.
+    r.extension = toolbarExtension();
+    if (!r.visible && !r.widget.isNull() && !r.extension.isNull())
+      r.visible = m_toolBar->isVisible() && r.extension->isVisible();
     if (!r.visible)
       r.reason = tr("The tool bar button is not showing.");
     return r;
@@ -792,6 +811,11 @@ bool TargetRegistry::show(const QString& target, const QString& callout,
   // The target name comes from an RPC client; keep it short in messages.
   const QString shown = target.left(64);
 
+  // A tool bar expanded by an earlier reveal goes back before the lookup,
+  // unless this reveals a tool button too (it may need the overflow open).
+  if (!(reveal && target.startsWith(QLatin1String("tool:"))))
+    collapseToolBar();
+
   Resolved r = resolve(target);
   if (!r.known)
     return fail(tr("Unknown UI target \"%1\".").arg(shown));
@@ -819,6 +843,17 @@ bool TargetRegistry::show(const QString& target, const QString& callout,
 
   // A menu opened by an earlier reveal must not be left hanging.
   closeOpenedMenus();
+
+  // A reveal of a tool button in the tool bar overflow opens the overflow
+  // (unless it is open already, which a click would close). The tool bar
+  // lays out and collapses its buttons later, so the outline below follows
+  // whichever of the button and the "»" button is showing at each tick.
+  if (reveal && !r.extension.isNull() && !r.widget.isNull() &&
+      !r.widget->isVisible() && r.extension->isVisible() &&
+      !r.extension->isChecked()) {
+    r.extension->click();
+    m_expandedToolBar = m_toolBar;
+  }
 
   const bool isMenuAction =
     target.startsWith(QLatin1String("action:")) && !r.action.isNull();
@@ -858,8 +893,16 @@ bool TargetRegistry::show(const QString& target, const QString& callout,
   } else if (!r.widget.isNull()) {
     // A plain widget target (tool button, Editor widget, 3D view).
     QPointer<QWidget> widget = r.widget;
+    QPointer<QToolButton> extension = r.extension;
+    QPointer<QToolBar> toolBar = m_toolBar;
     anchor = widget;
-    locator = [widget]() { return globalRectOf(widget); };
+    locator = [widget, extension, toolBar]() {
+      if (!widget.isNull() && widget->isVisible())
+        return globalRectOf(widget);
+      if (!extension.isNull() && !toolBar.isNull() && toolBar->isVisible())
+        return globalRectOf(extension);
+      return QRect();
+    };
   }
   if (anchor == nullptr)
     return fail(tr("There is no window to draw on."));
@@ -893,7 +936,10 @@ bool TargetRegistry::show(const QString& target, const QString& callout,
       if (!menuIsNative)
         openMenuChain(r.action);
     } else if (!r.widget.isNull()) {
-      r.widget->setFocus(Qt::OtherFocusReason);
+      QWidget* focus = r.widget;
+      if (!r.widget->isVisible() && !r.extension.isNull())
+        focus = r.extension;
+      focus->setFocus(Qt::OtherFocusReason);
     }
     // Announce on reveal only; the extension already announces its step on a
     // highlight, so doing it here too would read it twice.
@@ -970,10 +1016,23 @@ void TargetRegistry::closeOpenedMenus()
   m_menuLeaf.clear();
 }
 
+// Closes the tool bar overflow if a reveal opened it. A tool bar the user
+// expanded is left alone.
+void TargetRegistry::collapseToolBar()
+{
+  if (m_expandedToolBar.isNull())
+    return;
+  QToolButton* extension = toolbarExtension();
+  if (extension != nullptr && extension->isChecked())
+    extension->click();
+  m_expandedToolBar.clear();
+}
+
 // Removes the outline everywhere, and stops watching for Escape.
 void TargetRegistry::clearHighlight()
 {
   closeOpenedMenus();
+  collapseToolBar();
   for (const auto& overlay : m_overlays) {
     if (!overlay.isNull())
       overlay->clearTarget();

@@ -160,3 +160,28 @@ def test_reveal_widgets(fresh):
     assert fresh.call("revealTarget", {"target": "editor:bondOrder"}) is True
     assert fresh.call("activeDialog")["open"] is False
     assert fresh.call("clearHighlight") is True
+
+
+def test_tools_in_the_toolbar_overflow(narrow):
+    # Some tool buttons are hidden behind the tool bar's "»" button; they can
+    # still be highlighted (at the "»" button) and revealed (it is opened).
+    for name in TOOL_TARGETS:
+        assert narrow.call("highlightTarget", {"target": name}) is True, name
+        assert narrow.call("revealTarget", {"target": name}) is True, name
+
+    assert narrow.call("revealTarget", {"target": "tool:measure"}) is True
+    assert narrow.call("highlightTarget", {"target": "tool:draw"}) is True
+    assert narrow.call("clearHighlight") is True
+
+    # The overflow opens and closes later, so repeated calls must not lose the
+    # target: the same tool twice, then another hidden tool right after.
+    assert narrow.call("revealTarget", {"target": "tool:measure"}) is True
+    assert narrow.call("revealTarget", {"target": "tool:measure"}) is True
+    assert narrow.call("revealTarget", {"target": "tool:measure"}) is True
+    assert narrow.call("highlightTarget", {"target": "tool:playertool"}) is True
+    assert narrow.call("clearHighlight") is True
+
+    targets = list_targets(narrow)
+    for name in TOOL_TARGETS:
+        assert targets[name]["visible"] is True, name
+    assert narrow.call("activeDialog")["open"] is False
