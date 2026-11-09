@@ -4,13 +4,15 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
 # Irina Puscas <irinapuscas82@gmail.com>, 2021.
 # Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>, 2023, 2024, 2025, 2026.
+# Remus-Gabriel Chelu <remus-gabriel@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-08 07:27+0000\n"
-"PO-Revision-Date: 2026-10-05 05:51+0000\n"
-"Last-Translator: Remus-Gabriel Chelu <remusgabriel.chelu@disroot.org>\n"
+"PO-Revision-Date: 2026-11-09 22:06+0000\n"
+"Last-Translator: Remus-Gabriel Chelu <remus-"
+"gabriel@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ro/>\n"
 "Language: ro\n"
@@ -19,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 2026.10.1.dev0\n"
+"X-Generator: Weblate 2026.11.2.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -118,16 +120,16 @@ msgstr "Trimiteți rapoartele de erori către dezvoltatorii Avogadro"
 
 #: mainwindow.cpp:296
 msgid "Missing 'index' parameter."
-msgstr ""
+msgstr "Lipsește parametrul „index”."
 
 #: mainwindow.cpp:298
 msgid "'index' must be a whole number."
-msgstr ""
+msgstr "„index” trebuie să fie un număr întreg."
 
 #: mainwindow.cpp:300
 #, qt-format
 msgid "'index' %1 is out of range (%2 molecules are open)."
-msgstr ""
+msgstr "„index” %1 se află în afara intervalului (%2 molecule sunt deschise)."
 
 #: mainwindow.cpp:626
 msgid "Ready…"
@@ -761,23 +763,25 @@ msgstr "„locked” trebuie să fie true sau false."
 msgid ""
 "The molecule has unsaved changes; pass discard: true to close it anyway."
 msgstr ""
+"Molecula conține modificări nesalvate; pasați parametrul „discard: true” "
+"pentru a o închide oricum."
 
 #: mainwindow.cpp:4562
 msgid "There is nothing to undo."
-msgstr ""
+msgstr "Nu e nimic de anulat."
 
 #: mainwindow.cpp:4563
 msgid "There is nothing to redo."
-msgstr ""
+msgstr "Nu e nimic de refăcut."
 
 #: mainwindow.cpp:4578
 msgid "There is no active view."
-msgstr ""
+msgstr "Nu există nicio vizualizare activă."
 
 #: mainwindow.cpp:4592
 #, qt-format
 msgid "Unknown tool '%1'."
-msgstr ""
+msgstr "Instrument necunoscut „%1”."
 
 #: mainwindow.cpp:4618
 msgid "No molecule"
@@ -824,11 +828,13 @@ msgstr "Nu s-a putut codifica imaginea generată în format PNG."
 #: rpclistener.cpp:773
 #, qt-format
 msgid "%1 needs a \"target\" string."
-msgstr ""
+msgstr "%1 necesită un șir de caractere pentru „target”."
 
 #: rpclistener.cpp:783
 msgid "highlightTarget's callout must be a string."
 msgstr ""
+"Textul din caseta de informații a highlightTarget trebuie să fie un șir de "
+"caractere."
 
 #: rpclistener.cpp:831 rpclistener.cpp:842
 msgid "No active view."
@@ -854,42 +860,44 @@ msgstr "Comanda a depășit limita de timp."
 
 #: targetregistry.cpp:517
 msgid "3D view"
-msgstr ""
+msgstr "Vizualizare în 3D"
 
 #: targetregistry.cpp:523
 msgid "The 3D view is not showing."
-msgstr ""
+msgstr "Vizualizarea în 3D nu se afișează."
 
 #: targetregistry.cpp:534
 msgid "\"tool\" reports the active tool; it has nothing to outline."
-msgstr ""
+msgstr "„tool” indică unealta activă; nu are nimic de conturat."
 
 #: targetregistry.cpp:573
 msgid "The tool bar button is not showing."
-msgstr ""
+msgstr "Butonul din bara de instrumente nu se afișează."
 
 #: targetregistry.cpp:621
 msgid "The Draw tool's settings are not showing. Choose the Draw tool first."
 msgstr ""
+"Opțiunile instrumentului „Desenare” nu sunt afișate. Selectați mai întâi "
+"instrumentul „Desenare”."
 
 #: targetregistry.cpp:821
 #, qt-format
 msgid "Unknown UI target \"%1\"."
-msgstr ""
+msgstr "Element țintă al interfeței utilizatorului necunoscut „%1”."
 
 #: targetregistry.cpp:837
 #, qt-format
 msgid "UI target \"%1\" is not available."
-msgstr ""
+msgstr "Elementul țintă al interfeței utilizatorului „%1” nu este disponibil."
 
 #: targetregistry.cpp:840
 #, qt-format
 msgid "UI target \"%1\" is not visible."
-msgstr ""
+msgstr "Elementul țintă al interfeței utilizatorului „%1” nu este vizibil."
 
 #: targetregistry.cpp:908
 msgid "There is no window to draw on."
-msgstr ""
+msgstr "Nu există nicio fereastră pe care să se poată desena."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
