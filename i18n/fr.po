@@ -13,13 +13,14 @@
 # Li Chaoyu <2395074867@qq.com>, 2026.
 # Weblate Translation Memory <noreply-mt-weblate-translation-memory@weblate.org>, 2026.
 # Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>, 2026.
+# Eric Remy <eremy@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-08 07:27+0000\n"
-"PO-Revision-Date: 2026-10-13 17:25+0000\n"
-"Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2026-11-09 13:51+0000\n"
+"Last-Translator: Eric Remy <eremy@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/fr/>\n"
 "Language: fr\n"
@@ -27,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2026.11.dev0\n"
+"X-Generator: Weblate 2026.11.2.dev0\n"
 "X-Launchpad-Export-Date: 2020-09-11 19:12+0000\n"
 
 #: aboutdialog.cpp:25
@@ -881,7 +882,7 @@ msgstr ""
 
 #: targetregistry.cpp:908
 msgid "There is no window to draw on."
-msgstr ""
+msgstr "Il n'y a pas de fenêtre dans laquelle tracer."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
@@ -1077,7 +1078,7 @@ msgstr "Notes sur cette version"
 #. i18n: file: mainwindow.ui:298
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "Report a Bug"
-msgstr "Signaler un &bogue"
+msgstr "Signaler un bogue"
 
 #. i18n: file: mainwindow.ui:303
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
@@ -1133,12 +1134,12 @@ msgstr "Force de l'Ombre :"
 #. i18n: file: renderingdialog.ui:130
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
 msgid "Thickness of the outline, in pixels"
-msgstr ""
+msgstr "Épaisseur du contour, en pixels"
 
 #. i18n: file: renderingdialog.ui:133
 #. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
 msgid "Outline Width:"
-msgstr ""
+msgstr "Épaisseur du contour :"
 
 #. i18n: file: renderingdialog.ui:160
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
@@ -1158,7 +1159,7 @@ msgstr "Effet de brouillard pour la perception de profondeur"
 #. i18n: file: renderingdialog.ui:184
 #. i18n: ectx: property (text), widget (QLabel, enableFog_label)
 msgid "Fog:"
-msgstr "Brume :"
+msgstr "Brume :"
 
 #. i18n: file: renderingdialog.ui:215
 #. i18n: ectx: property (text), widget (QLabel, fogStrength_label)
@@ -1173,7 +1174,7 @@ msgstr "Position du brouillard :"
 #. i18n: file: renderingdialog.ui:283
 #. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
 msgid "Add a depth blur"
-msgstr "Ajouter a flou de profondeur"
+msgstr "Ajouter un flou de profondeur"
 
 #. i18n: file: renderingdialog.ui:286
 #. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
@@ -1215,7 +1216,7 @@ msgid "Your names"
 msgstr ""
 "Contributions du Launchpad : Geoffrey Hutchison, Laurent Peuch, Louis "
 "Ricard, Maijin, Nizar Kerkeni, Benoit Jacob, Mathieu Pasquet, Pierre "
-"Slamich, Jean-Marc, etc et les traducteurs via Weblate"
+"Slamich, Jean-Marc, etc., et les traducteurs via Weblate"
 
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
@@ -1223,7 +1224,7 @@ msgstr ""
 "benoitjacob@users.sourceforge.net, louis.ricard@polytechnique.fr, "
 "psycojoker@gmail.com, louis.ricard@polytechnique.edu "
 "nizar.kerkeni@gmail.com, jacob.benoit.1@gmail.com, nizarus@nizarus.org, "
-"nizarus@nizarus.tn, pierre.slamich@gmail.com, etc"
+"nizarus@nizarus.tn, pierre.slamich@gmail.com, etc."
 
 #~ msgid "Would you like to install them?"
 #~ msgstr "Voulez-vous les installer ?"
