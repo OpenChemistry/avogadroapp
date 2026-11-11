@@ -3035,6 +3035,8 @@ std::string MainWindow::exportString(const std::string& format)
 {
   std::string output;
   auto* mol = qobject_cast<Molecule*>(m_moleculeModel->activeMolecule());
+  if (!mol)
+    return output;
 
   Io::FileFormatManager::instance().writeString(*mol, output, format);
 
@@ -3162,11 +3164,10 @@ void MainWindow::setActiveTool(QString toolName)
 
 void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel* scenePluginModel(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scenePluginModel = &glWidget->sceneModel();
-  }
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  ScenePluginModel* scenePluginModel = &glWidget->sceneModel();
 
   //  foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
   //    scene->setEnabled(false);
@@ -3178,25 +3179,22 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
         scene->setEnabled(true);
     }
 
-  if (glWidget)
-    glWidget->updateScene();
+  glWidget->updateScene();
 }
 
 void MainWindow::setDisabledDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel* scenePluginModel(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scenePluginModel = &glWidget->sceneModel();
-  }
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  ScenePluginModel* scenePluginModel = &glWidget->sceneModel();
 
   foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
     foreach (const QString& name, displayTypes)
       if (scene->objectName() == name)
         scene->setEnabled(false);
 
-  if (glWidget)
-    glWidget->updateScene();
+  glWidget->updateScene();
 }
 
 void MainWindow::undoEdit()
@@ -3261,30 +3259,25 @@ void MainWindow::activeMoleculeEdited()
 
 void MainWindow::setBackgroundColor()
 {
-  Rendering::SolidPipeline* pipeline(nullptr);
-  Rendering::Scene* scene(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
-    scene = &glWidget->renderer().scene();
-  pipeline = &glWidget->renderer().solidPipeline();
-  if (scene) {
-    Vector4ub cColor = scene->backgroundColor();
-    QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
-    QColor color = QColorDialog::getColor(qtColor, this);
-    if (color.isValid()) {
-      cColor[0] = static_cast<unsigned char>(color.red());
-      cColor[1] = static_cast<unsigned char>(color.green());
-      cColor[2] = static_cast<unsigned char>(color.blue());
-      cColor[3] = static_cast<unsigned char>(color.alpha());
-      scene->setBackgroundColor(cColor);
-      if (pipeline)
-        pipeline->setBackgroundColor(cColor);
-      if (glWidget)
-        glWidget->update();
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  Rendering::Scene* scene = &glWidget->renderer().scene();
+  Rendering::SolidPipeline* pipeline = &glWidget->renderer().solidPipeline();
+  Vector4ub cColor = scene->backgroundColor();
+  QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
+  QColor color = QColorDialog::getColor(qtColor, this);
+  if (color.isValid()) {
+    cColor[0] = static_cast<unsigned char>(color.red());
+    cColor[1] = static_cast<unsigned char>(color.green());
+    cColor[2] = static_cast<unsigned char>(color.blue());
+    cColor[3] = static_cast<unsigned char>(color.alpha());
+    scene->setBackgroundColor(cColor);
+    pipeline->setBackgroundColor(cColor);
+    glWidget->update();
 
-      QSettings settings;
-      settings.setValue("backgroundColor", color);
-    }
+    QSettings settings;
+    settings.setValue("backgroundColor", color);
   }
 }
 
@@ -3740,10 +3733,11 @@ void MainWindow::buildTools()
     plugin->pluginFactories<ToolPluginFactory>();
   foreach (ToolPluginFactory* factory, toolPluginFactories) {
     ToolPlugin* tool = factory->createInstance(QCoreApplication::instance());
-    tool->setParent(this);
-    tool->setIcon(darkMode);
-    if (tool)
+    if (tool) {
+      tool->setParent(this);
+      tool->setIcon(darkMode);
       m_tools << tool;
+    }
   }
 
   // sort them based on priority
