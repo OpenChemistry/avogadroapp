@@ -23,8 +23,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-08 07:27+0000\n"
 "PO-Revision-Date: 2026-11-12 17:51+0000\n"
-"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
-"memory@weblate.org>\n"
+"Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -135,7 +134,7 @@ msgstr ""
 
 #: mainwindow.cpp:298
 msgid "'index' must be a whole number."
-msgstr ""
+msgstr "'index' muss eine Ganzzahl sein."
 
 #: mainwindow.cpp:300
 #, qt-format
@@ -779,7 +778,7 @@ msgstr ""
 
 #: mainwindow.cpp:4562
 msgid "There is nothing to undo."
-msgstr ""
+msgstr "Es gibt nichts zurückzusetzen."
 
 #: mainwindow.cpp:4563
 msgid "There is nothing to redo."
@@ -787,12 +786,12 @@ msgstr ""
 
 #: mainwindow.cpp:4578
 msgid "There is no active view."
-msgstr ""
+msgstr "Es gibt keine aktive Ansicht."
 
 #: mainwindow.cpp:4592
 #, qt-format
 msgid "Unknown tool '%1'."
-msgstr "Unbekanntes Werkzeug %d"
+msgstr "Unbekanntes Werkzeug '%1'."
 
 #: mainwindow.cpp:4618
 msgid "No molecule"
@@ -871,7 +870,7 @@ msgstr ""
 
 #: targetregistry.cpp:523
 msgid "The 3D view is not showing."
-msgstr ""
+msgstr "Die 3D-Ansicht wird nicht wiedergegeben."
 
 #: targetregistry.cpp:534
 msgid "\"tool\" reports the active tool; it has nothing to outline."
@@ -888,21 +887,21 @@ msgstr ""
 #: targetregistry.cpp:821
 #, qt-format
 msgid "Unknown UI target \"%1\"."
-msgstr ""
+msgstr "Unbekanntes UI-Ziel: \"%1\"."
 
 #: targetregistry.cpp:837
 #, qt-format
 msgid "UI target \"%1\" is not available."
-msgstr ""
+msgstr "Das UI-Ziel \"%1\" ist nicht verfügbar."
 
 #: targetregistry.cpp:840
 #, qt-format
 msgid "UI target \"%1\" is not visible."
-msgstr ""
+msgstr "Das UI-Ziel \"%1\" ist nicht sichtbar."
 
 #: targetregistry.cpp:908
 msgid "There is no window to draw on."
-msgstr ""
+msgstr "Es ist kein Fenster zum Zeichnen vorhanden."
 
 #: viewfactory.cpp:19 viewfactory.cpp:25
 msgid "3D View"
