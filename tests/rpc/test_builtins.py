@@ -253,10 +253,110 @@ def test_render_image_native_size(avo):
     )
 
 
-def test_render_image_needs_both_dimensions(avo):
+def _inline_size(avo, params):
+    result = avo.call("renderImage", params)
+    assert (result["width"], result["height"]) == harness.png_size(
+        base64.b64decode(result["data"])
+    )
+    return result
+
+
+def test_render_image_wide_and_tall_are_native(avo):
     avo.load(ETHANE)
-    avo.expect_error("renderImage", {"width": 64}, code=REQUEST_FAILED)
-    avo.expect_error("renderImage", {"height": 64}, code=REQUEST_FAILED)
+    for size in [(1200, 400), (400, 1200), (3000, 1963), (7, 5)]:
+        result = _inline_size(avo, {"width": size[0], "height": size[1]})
+        assert (result["width"], result["height"]) == size
+
+
+def test_render_image_one_dimension_follows_view_aspect(avo):
+    avo.load(ETHANE)
+    native = avo.call("renderImage")
+    nw, nh = native["nativeWidth"], native["nativeHeight"]
+    by_width = _inline_size(avo, {"width": 900})
+    assert by_width["width"] == 900
+    assert by_width["height"] == round(900 * nh / nw)
+    by_height = _inline_size(avo, {"height": 300})
+    assert by_height["height"] == 300
+    assert by_height["width"] == round(300 * nw / nh)
+
+
+def test_render_image_supersample(avo):
+    avo.load(ETHANE)
+    for factor in (1, 2, 4):
+        result = _inline_size(avo, {"width": 320, "height": 200, "supersample": factor})
+        assert (result["width"], result["height"]) == (320, 200)
+    for bad in (0, 5, -1, 1.5, "2"):
+        avo.expect_error(
+            "renderImage",
+            {"width": 64, "height": 48, "supersample": bad},
+            code=REQUEST_FAILED,
+        )
+
+
+def test_render_image_rejects_bad_sizes(avo):
+    avo.load(ETHANE)
+    # Oversize is an error now, not silently clamped to 8192.
+    for params in [
+        {"width": 8193, "height": 100},
+        {"width": 100, "height": 100000},
+        {"width": 8192, "height": 100, "supersample": 2},
+        {"width": 0, "height": 100},
+        {"width": -4, "height": 100},
+        {"width": 12.5, "height": 100},
+        {"width": "100", "height": 100},
+        {"width": 5000, "height": 5000, "supersample": 4},
+        {"height": 9000},
+    ]:
+        error = avo.expect_error("renderImage", params, code=REQUEST_FAILED)
+        assert error.message
+    # And the app still renders afterwards.
+    assert _inline_size(avo, {"width": 50, "height": 50})["width"] == 50
+
+
+def test_render_image_rejects_out_of_range_derived_dimension(avo):
+    avo.load(ETHANE)
+    native = avo.call("renderImage")
+    nw, nh = native["nativeWidth"], native["nativeHeight"]
+    # The dimension that follows the view's aspect ratio is never clamped:
+    # if it would leave 1..8192, the request fails.
+    if nw > nh:
+        error = avo.expect_error("renderImage", {"height": 8192}, code=REQUEST_FAILED)
+    elif nh > nw:
+        error = avo.expect_error("renderImage", {"width": 8192}, code=REQUEST_FAILED)
+    else:
+        pytest.skip("square view: a derived dimension cannot overflow")
+    assert "derived" in error.message
+
+
+def test_render_image_transparent_flag(avo):
+    avo.load(ETHANE)
+    result = _inline_size(avo, {"width": 64, "height": 48, "transparentBackground": True})
+    assert (result["width"], result["height"]) == (64, 48)
+
+
+def test_render_image_leaves_view_size_alone(avo, tmp_path):
+    avo.load(ETHANE)
+    before = avo.call("renderImage")
+    for params in [
+        {"width": 1200, "height": 400},
+        {"width": 400, "height": 1200, "supersample": 2},
+        {"width": 4000, "height": 2000},
+    ]:
+        avo.call("renderImage", params)
+    avo.call("saveGraphic", {"fileName": str(tmp_path / "g.png")})
+    after = avo.call("renderImage")
+    # The native size is the view size times the device pixel ratio: it only
+    # stays put if the window and view were not resized.
+    assert (after["nativeWidth"], after["nativeHeight"]) == (
+        before["nativeWidth"],
+        before["nativeHeight"],
+    )
+    assert (after["width"], after["height"]) == (before["width"], before["height"])
+    # saveGraphic renders at the view size.
+    assert harness.png_size((tmp_path / "g.png").read_bytes()) == (
+        before["nativeWidth"],
+        before["nativeHeight"],
+    )
 
 
 def test_render_image_to_file(avo, tmp_path):
@@ -266,6 +366,11 @@ def test_render_image_to_file(avo, tmp_path):
     assert result["fileName"] == str(path) + ".png"
     assert "data" not in result
     assert harness.png_size((tmp_path / "view.png").read_bytes()) == (40, 30)
+    # A file at a size other than the view's, in either orientation.
+    wide = tmp_path / "wide.png"
+    result = avo.call("renderImage", {"width": 1200, "height": 400, "fileName": str(wide)})
+    assert (result["width"], result["height"]) == (1200, 400)
+    assert harness.png_size(wide.read_bytes()) == (1200, 400)
     avo.expect_error(
         "renderImage",
         {"width": 40, "height": 30, "fileName": str(tmp_path / "no" / "such" / "dir.png")},
