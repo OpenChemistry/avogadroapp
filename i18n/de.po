@@ -23,7 +23,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-08 07:27+0000\n"
 "PO-Revision-Date: 2026-11-12 17:51+0000\n"
-"Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
+"Last-Translator: Weblate Translation Memory <noreply-mt-weblate-translation-"
+"memory@weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -866,7 +867,7 @@ msgstr "Zeitüberschreitung für den Befehl."
 
 #: targetregistry.cpp:517
 msgid "3D view"
-msgstr ""
+msgstr "3D-Ansicht"
 
 #: targetregistry.cpp:523
 msgid "The 3D view is not showing."
