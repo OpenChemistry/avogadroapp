@@ -6,6 +6,7 @@
 #include "rpclistener.h"
 #include "avogadroappconfig.h"
 #include "mainwindow.h"
+#include "targetregistry.h"
 
 #include "rpc/connection.h"
 #include "rpc/jsonrpc.h"
@@ -96,6 +97,10 @@ const BuiltinCommand builtinCommands[] = {
     "Add a new layer to the active molecule, inheriting the active "
     "layer's settings.",
     false },
+  { "clearHighlight",
+    "Remove the highlight outline, and close a menu opened by "
+    "revealTarget.",
+    false },
   { "closeMolecule",
     "Close a molecule (index, default the active one). Fails if it has "
     "unsaved changes unless discard is true; closing the last molecule "
@@ -117,11 +122,13 @@ const BuiltinCommand builtinCommands[] = {
     "Report whether a layer (by index, 0 = first layer) is visible.", false },
   { "getMolecule", "Return the active molecule serialized as a string.",
     false },
-  { "internalPing", "Check whether the server is responsive.", false },
-  { "kill",
-    "Shut down Avogadro. Only enabled when started with "
-    "--testing.",
+  { "highlightTarget",
+    "Outline a named part of the interface (see listUiTargets) with a "
+    "text callout, without moving focus. Params: target, and an optional "
+    "callout; the target's own text is used without one.",
     false },
+  { "internalPing", "Check whether the server is responsive.", false },
+  { "kill", "Shut down Avogadro. Always refused: disabled over RPC.", false },
   { "listCommands", "List every command the server understands.", false },
   { "listDisplayTypes",
     "List the scene display types available for the active view.", false },
@@ -131,6 +138,10 @@ const BuiltinCommand builtinCommands[] = {
     false },
   { "listTools",
     "List the active view's tools by name, and which one is active.", false },
+  { "listUiTargets",
+    "List the named interface targets that highlightTarget accepts: "
+    "text, value, resolved and visible for each.",
+    false },
   { "loadMolecule",
     "Read molecule data from a string and make it the "
     "active molecule.",
@@ -156,6 +167,10 @@ const BuiltinCommand builtinCommands[] = {
     "view size times the device pixel ratio. Optional supersample (1-4) "
     "renders larger and downsamples. Sizes the graphics driver cannot "
     "render are rejected.",
+    false },
+  { "revealTarget",
+    "Like highlightTarget, and also move focus to the target, or open "
+    "the menu that holds a menu action, and announce it to screen readers.",
     false },
   { "saveGraphic",
     "Render the current view and save it as an image at "
@@ -244,8 +259,7 @@ QVariantMap cameraToVariantMap(const Camera& camera)
 } // namespace
 
 RpcListener::RpcListener(const QString& connectionName, QObject* parent_)
-  : QObject(parent_)
-  , m_pingClient(nullptr)
+  : QObject(parent_), m_pingClient(nullptr)
 {
   m_rpc = new RPC::JsonRpc(this);
 
@@ -356,26 +370,15 @@ void RpcListener::messageReceived(const RPC::Message& message)
       timeoutSeconds = 1;
   }
 
-  // check for quit message first, since it doesn't require a window
+  // Answered first, since it doesn't require a window. Shutdown over RPC is
+  // disabled: main() has no testing mode to enable it, and scanning the raw
+  // arguments for "--testing" would also match an option's value (such as
+  // "--rpc-name --testing").
   if (method == "kill") {
-    // Only allow avogadro to be killed through RPC if it was started with the
-    // '--testing' flag.
-    if (qApp->arguments().contains("--testing")) {
-      RPC::Message response = message.generateResponse();
-      response.setResult(true);
-      response.send();
-
-      qApp->quit();
-    } else {
-      // send error response
-      RPC::Message errorMessage = message.generateErrorResponse();
-      errorMessage.setErrorCode(errorRequestFailed);
-      errorMessage.setErrorMessage(
-        "Ignoring kill command. Start with '--testing' to enable.");
-      errorMessage.send();
-    }
-    // Either way the request has been answered. Without this the message
-    // falls through to the handler chain below and a second reply is sent.
+    sendError(message, errorRequestFailed,
+              QStringLiteral("Shutting down Avogadro over RPC is disabled."));
+    // The request has been answered. Without this the message falls through
+    // to the handler chain below and a second reply is sent.
     return;
   }
 
@@ -805,6 +808,55 @@ void RpcListener::messageReceived(const RPC::Message& message)
     RPC::Message response = message.generateResponse();
     response.setResult(QJsonArray::fromVariantList(m_window->toolSummaries()));
     response.send();
+  } else if (method == "listUiTargets") {
+    // Read-back: { target: { text, value, resolved, visible } }. Includes
+    // targets that are not resolved or visible, so callers can see why.
+    RPC::Message response = message.generateResponse();
+    response.setResult(QJsonObject::fromVariantMap(
+      m_window->targetRegistry()->describeTargets()));
+    response.send();
+  } else if (method == "highlightTarget" || method == "revealTarget") {
+    // Two verbs, one body: reveal also moves focus or opens the menu. Both
+    // reply true once the outline is up, and fail with a message (unknown,
+    // unavailable or hidden target) otherwise. Neither blocks: a menu opened
+    // by reveal is a popup, not a modal dialog.
+    const bool reveal = method == "revealTarget";
+    if (!params.value("target").isString()) {
+      sendError(message, errorRequestFailed,
+                tr("%1 needs a \"target\" string.").arg(method));
+      return;
+    }
+    // The optional callout text applies to highlightTarget only; a reveal
+    // always uses the target's own text. Without one, the target's text is
+    // used.
+    QString callout;
+    if (!reveal && params.contains("callout")) {
+      if (!params.value("callout").isString()) {
+        sendError(message, errorRequestFailed,
+                  tr("highlightTarget's callout must be a string."));
+        return;
+      }
+      callout = params.value("callout").toString();
+    }
+    const QString target = params.value("target").toString();
+    QString reason;
+    TargetRegistry* registry = m_window->targetRegistry();
+    const bool shown = reveal ? registry->reveal(target, &reason)
+                              : registry->highlight(target, callout, &reason);
+    if (!shown) {
+      sendError(message, errorRequestFailed, reason);
+      return;
+    }
+    RPC::Message response = message.generateResponse();
+    response.setResult(true);
+    response.send();
+  } else if (method == "clearHighlight") {
+    // Always succeeds, even when nothing is highlighted. Also closes a menu
+    // that revealTarget opened.
+    m_window->targetRegistry()->clearHighlight();
+    RPC::Message response = message.generateResponse();
+    response.setResult(true);
+    response.send();
   } else if (method == "listDisplayTypes") {
     QVariantList types;
     if (GLWidget* glWidget = m_window->activeGLWidget()) {
@@ -1059,4 +1111,4 @@ void RpcListener::sendError(const RPC::Message& request, int code,
   errorMessage.send();
 }
 
-} // End of Avogadro namespace
+} // namespace Avogadro

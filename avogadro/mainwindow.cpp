@@ -11,6 +11,7 @@
 #include "crashreporter.h"
 #include "menubuilder.h"
 #include "renderingdialog.h"
+#include "targetregistry.h"
 #include "tdxcontroller.h"
 #include "tooltipfilter.h"
 #include "viewfactory.h"
@@ -47,6 +48,7 @@
 
 #include <QtCore/QDateTime>
 #include <QtCore/QDebug>
+#include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QJsonDocument>
@@ -286,16 +288,16 @@ IndexStatus indexFromOptions(const QVariantMap& options, const QString& key,
   return IndexStatus::Valid;
 }
 
-// The (untranslated) message for a molecule index that was refused.
+// The message for a molecule index that was refused.
 QString moleculeIndexMessage(IndexStatus status, int index, int count)
 {
   switch (status) {
     case IndexStatus::Missing:
-      return QStringLiteral("Missing 'index' parameter.");
+      return MainWindow::tr("Missing 'index' parameter.");
     case IndexStatus::NotWholeNumber:
-      return QStringLiteral("'index' must be a whole number.");
+      return MainWindow::tr("'index' must be a whole number.");
     case IndexStatus::OutOfRange:
-      return QStringLiteral("'index' %1 is out of range (%2 molecules are "
+      return MainWindow::tr("'index' %1 is out of range (%2 molecules are "
                             "open).")
         .arg(index)
         .arg(count);
@@ -314,8 +316,7 @@ class XMLEventObserver : public pqEventObserver
   QString XMLString;
 
 public:
-  XMLEventObserver(QObject* p)
-    : pqEventObserver(p)
+  XMLEventObserver(QObject* p) : pqEventObserver(p)
   {
     this->XMLStream = nullptr;
   }
@@ -380,11 +381,7 @@ class XMLEventSource : public pqEventSource
   QXmlStreamReader* XMLStream;
 
 public:
-  XMLEventSource(QObject* p)
-    : Superclass(p)
-  {
-    this->XMLStream = nullptr;
-  }
+  XMLEventSource(QObject* p) : Superclass(p) { this->XMLStream = nullptr; }
   ~XMLEventSource() { delete this->XMLStream; }
 
 protected:
@@ -450,28 +447,18 @@ using std::vector;
 
 MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
                        bool skipAutosave, bool skipDialogs)
-  : m_molecule(nullptr)
-  , m_rwMolecule(nullptr)
-  , m_moleculeModel(nullptr)
-  , m_layerModel(nullptr)
-  , m_activeScenePlugin(nullptr)
-  , m_queuedFilesStarted(false)
-  , m_menuBuilder(new MenuBuilder)
-  , m_fileReadThread(nullptr)
-  , m_fileWriteThread(nullptr)
-  , m_threadedReader(nullptr)
-  , m_threadedWriter(nullptr)
-  , m_progressDialog(nullptr)
-  , m_fileReadMolecule(nullptr)
-  , m_fileToolBar(new QToolBar(this))
-  , m_toolToolBar(new QToolBar(this))
-  , m_moleculeDirty(false)
-  , m_undo(nullptr)
-  , m_redo(nullptr)
-  , m_copyImage(nullptr)
-  , m_viewFactory(new ViewFactory)
+  : m_molecule(nullptr), m_rwMolecule(nullptr), m_moleculeModel(nullptr),
+    m_layerModel(nullptr), m_activeScenePlugin(nullptr),
+    m_queuedFilesStarted(false), m_menuBuilder(new MenuBuilder),
+    m_fileReadThread(nullptr), m_fileWriteThread(nullptr),
+    m_threadedReader(nullptr), m_threadedWriter(nullptr),
+    m_progressDialog(nullptr), m_fileReadMolecule(nullptr),
+    m_fileToolBar(new QToolBar(this)), m_toolToolBar(new QToolBar(this)),
+    m_moleculeDirty(false), m_undo(nullptr), m_redo(nullptr),
+    m_copyImage(nullptr), m_viewFactory(new ViewFactory)
 #ifdef _3DCONNEXION
-  , m_TDxController(nullptr)
+    ,
+    m_TDxController(nullptr)
 #endif
 {
   // Route the reserved camera-navigation shortcut (Ctrl/Cmd+arrow) to the
@@ -513,6 +500,11 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
   m_testUtility->addEventSource("xml", new XMLEventSource(this));
 #endif
 
+  // Created before the plugins load so buildTools() and the extension loop
+  // below can register with it.
+  m_targets = new TargetRegistry(this);
+  m_targets->setToolBar(m_toolToolBar);
+
   // Now load the plugins.
   PluginManager* plugin = PluginManager::instance();
   plugin->load();
@@ -548,9 +540,15 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
       connect(extension, &QtGui::ExtensionPlugin::actionsChanged, this,
               [this, extension]() {
                 buildMenu(extension);
-                if (m_initialized)
+                if (m_initialized) {
                   m_menuBuilder->buildMenuBar(menuBar());
+                  // The menus were replaced; tell the extensions again.
+                  m_targets->menusRebuilt();
+                }
               });
+      // Connects the highlight signals by name; harmless for an extension
+      // (or an avogadrolibs) that does not have them.
+      m_targets->addExtension(extension);
       extension->registerCommands();
       m_extensions.append(extension);
     }
@@ -596,6 +594,8 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 #endif
   buildMenu();
   m_initialized = true;
+  // Everything is registered; send the first target map.
+  m_targets->start();
 #ifdef Q_OS_WIN
   qDebug() << " updating recent files ";
 #endif
@@ -736,6 +736,8 @@ void MainWindow::setupInterface()
 
   // Our tool dock.
   m_toolDock = new QDockWidget(tr("Tool"), this);
+  // The Editor targets are only visible while this dock shows its widget.
+  m_targets->setToolDock(m_toolDock);
   addDockWidget(Qt::LeftDockWidgetArea, m_toolDock);
 
   // Our dock for toggling different display types.
@@ -1182,7 +1184,7 @@ void MainWindow::newMolecule()
   setMolecule(new Molecule(this));
 }
 
-template<class T, class M>
+template <class T, class M>
 void setWidgetMolecule(T* glWidget, M* mol)
 {
   // reset the camera when the previous molecule was empty
@@ -1430,7 +1432,11 @@ void MainWindow::readSettings()
 {
   QSettings settings;
   settings.beginGroup("MainWindow");
-  resize(settings.value("size", QSize(800, 600)).toSize());
+  // The default must be wide enough for the toolbars to fit on one row
+  QSize defaultSize(1024, 768);
+  if (QScreen* screen = QGuiApplication::primaryScreen())
+    defaultSize = defaultSize.boundedTo(screen->availableGeometry().size());
+  resize(settings.value("size", defaultSize).toSize());
   move(settings.value("pos", QPoint(20, 20)).toPoint());
   settings.endGroup();
   m_recentFiles = settings.value("recentFiles", QStringList()).toStringList();
@@ -2229,7 +2235,7 @@ void MainWindow::loadPackages()
   if (!dialogsSkipped())
     settings.setValue("MainWindow/firstRun", false);
 
-    // Load cached registrations so consumer plugins get their signals
+  // Load cached registrations so consumer plugins get their signals
 #ifndef NDEBUG
   qDebug() << "Load registered packages";
 #endif
@@ -2300,6 +2306,8 @@ void MainWindow::toolActivated()
         m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
       }
+      // Report the switch to the extensions (see also setActiveTool()).
+      m_targets->activeToolChanged();
     }
   }
 }
@@ -2531,7 +2539,7 @@ bool populatePluginModel(ScenePluginModel& model, QObject* p,
   return true;
 }
 
-template<class T>
+template <class T>
 bool populateTools(T* glWidget)
 {
   if (!glWidget->tools().isEmpty())
@@ -2652,14 +2660,48 @@ QImage MainWindow::renderToImage(const QtOpenGL::RenderOptions& options,
 void MainWindow::exportGraphics()
 {
   // ask the user for a filename
+  const QString pngFilter = tr("PNG") + " (*.png)";
+  QStringList filters;
+// Omit "common image formats" on Mac
+#ifdef Q_OS_MAC
+  filters
+#else
+  filters << tr("Common image formats") + " (*.png *.jpg *.jpeg)"
+#endif
+    << tr("All files") + " (* *.*)" << tr("BMP") + " (*.bmp)" << pngFilter
+    << tr("JPEG") + " (*.jpg *.jpeg)";
+
+  // Use QFileInfo to get the parts of the path we want
   QString baseFileName;
   if (m_molecule)
     baseFileName = m_molecule->data("fileName").toString().c_str();
+  QFileInfo info(baseFileName);
 
+  QSettings settings;
+  QString dir = settings.value("MainWindow/lastExportDir").toString();
+  if (dir.isEmpty() && !baseFileName.isEmpty())
+    dir = info.absolutePath();
+
+  QString initialPath = dir;
+  if (!baseFileName.isEmpty()) {
+    // "benzene.cjson.gz" suggests "benzene.png", not "benzene.cjson.png".
+    const QString stem =
+      QFileInfo(QString::fromStdString(
+                  Io::stripCompressionSuffix(info.fileName().toStdString())))
+        .completeBaseName();
+    const QString suggested = stem + ".png";
+    initialPath = dir.isEmpty() ? suggested : QDir(dir).filePath(suggested);
+  }
+
+  QString selectedFilter = pngFilter;
   QString fileName = QFileDialog::getSaveFileName(
-    this, tr("Export Bitmap Graphics"), "", "PNG (*.png)");
+    this, tr("Export Bitmap Graphics"), initialPath, filters.join(";;"),
+    &selectedFilter);
   if (fileName.isEmpty())
     return;
+
+  settings.setValue("MainWindow/lastExportDir",
+                    QFileInfo(fileName).absolutePath());
 
   // Ask for the size (and background) of the image.
   // Exports have always been transparent, so that is the first-run default.
@@ -2855,7 +2897,7 @@ bool MainWindow::saveFile(bool async)
     else if (box.clickedButton() == cancelButton)
       return false;
     else if (box.clickedButton() == exportButton)
-      return exportFile(QString ::fromStdString(fileName),
+      return exportFile(QString::fromStdString(fileName),
                         async); // save in current format
   }
 
@@ -2972,6 +3014,8 @@ std::string MainWindow::exportString(const std::string& format)
 {
   std::string output;
   auto* mol = qobject_cast<Molecule*>(m_moleculeModel->activeMolecule());
+  if (!mol)
+    return output;
 
   Io::FileFormatManager::instance().writeString(*mol, output, format);
 
@@ -3081,6 +3125,9 @@ void MainWindow::setActiveTool(QString toolName)
       }
     }
     glWidget->setFocus();
+    // Triggering the tool's action above may also reach toolActivated(); the
+    // registry ignores a repeated report of the same tool.
+    m_targets->activeToolChanged();
   }
 
   if (!toolName.isEmpty()) {
@@ -3096,11 +3143,10 @@ void MainWindow::setActiveTool(QString toolName)
 
 void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel* scenePluginModel(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scenePluginModel = &glWidget->sceneModel();
-  }
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  ScenePluginModel* scenePluginModel = &glWidget->sceneModel();
 
   //  foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
   //    scene->setEnabled(false);
@@ -3112,25 +3158,22 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
         scene->setEnabled(true);
     }
 
-  if (glWidget)
-    glWidget->updateScene();
+  glWidget->updateScene();
 }
 
 void MainWindow::setDisabledDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel* scenePluginModel(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scenePluginModel = &glWidget->sceneModel();
-  }
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  ScenePluginModel* scenePluginModel = &glWidget->sceneModel();
 
   foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
     foreach (const QString& name, displayTypes)
       if (scene->objectName() == name)
         scene->setEnabled(false);
 
-  if (glWidget)
-    glWidget->updateScene();
+  glWidget->updateScene();
 }
 
 void MainWindow::undoEdit()
@@ -3195,30 +3238,25 @@ void MainWindow::activeMoleculeEdited()
 
 void MainWindow::setBackgroundColor()
 {
-  Rendering::SolidPipeline* pipeline(nullptr);
-  Rendering::Scene* scene(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
-    scene = &glWidget->renderer().scene();
-  pipeline = &glWidget->renderer().solidPipeline();
-  if (scene) {
-    Vector4ub cColor = scene->backgroundColor();
-    QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
-    QColor color = QColorDialog::getColor(qtColor, this);
-    if (color.isValid()) {
-      cColor[0] = static_cast<unsigned char>(color.red());
-      cColor[1] = static_cast<unsigned char>(color.green());
-      cColor[2] = static_cast<unsigned char>(color.blue());
-      cColor[3] = static_cast<unsigned char>(color.alpha());
-      scene->setBackgroundColor(cColor);
-      if (pipeline)
-        pipeline->setBackgroundColor(cColor);
-      if (glWidget)
-        glWidget->update();
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  Rendering::Scene* scene = &glWidget->renderer().scene();
+  Rendering::SolidPipeline* pipeline = &glWidget->renderer().solidPipeline();
+  Vector4ub cColor = scene->backgroundColor();
+  QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
+  QColor color = QColorDialog::getColor(qtColor, this);
+  if (color.isValid()) {
+    cColor[0] = static_cast<unsigned char>(color.red());
+    cColor[1] = static_cast<unsigned char>(color.green());
+    cColor[2] = static_cast<unsigned char>(color.blue());
+    cColor[3] = static_cast<unsigned char>(color.alpha());
+    scene->setBackgroundColor(cColor);
+    pipeline->setBackgroundColor(cColor);
+    glWidget->update();
 
-      QSettings settings;
-      settings.setValue("backgroundColor", color);
-    }
+    QSettings settings;
+    settings.setValue("backgroundColor", color);
   }
 }
 
@@ -3327,6 +3365,10 @@ void MainWindow::buildMenu()
   path << tr("&File");
   // New
   auto* action = new QAction(tr("&New"), this);
+  // The object name matches the action of the same name in mainwindow.ui. The
+  // registry name is what a tutorial uses ("action:new").
+  action->setObjectName(QStringLiteral("actionNew"));
+  m_targets->addAction(QStringLiteral("new"), action);
   action->setShortcut(QKeySequence::New);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
   action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentNew));
@@ -3338,6 +3380,8 @@ void MainWindow::buildMenu()
   connect(action, &QAction::triggered, this, &MainWindow::newMolecule);
   // Open
   action = new QAction(tr("&Open…"), this);
+  action->setObjectName(QStringLiteral("actionOpen"));
+  m_targets->addAction(QStringLiteral("open"), action);
   action->setShortcut(QKeySequence::Open);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
   action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentOpen));
@@ -3668,10 +3712,11 @@ void MainWindow::buildTools()
     plugin->pluginFactories<ToolPluginFactory>();
   foreach (ToolPluginFactory* factory, toolPluginFactories) {
     ToolPlugin* tool = factory->createInstance(QCoreApplication::instance());
-    tool->setParent(this);
-    tool->setIcon(darkMode);
-    if (tool)
+    if (tool) {
+      tool->setParent(this);
+      tool->setIcon(darkMode);
       m_tools << tool;
+    }
   }
 
   // sort them based on priority
@@ -3697,6 +3742,9 @@ void MainWindow::buildTools()
     action->setData(toolPlugin->objectName());
     toolGroup->addAction(action);
     m_toolToolBar->addAction(action);
+
+    // Becomes "tool:<short name>".
+    m_targets->addTool(toolPlugin);
 
     connect(action, &QAction::triggered, this, &MainWindow::toolActivated);
     connect(toolPlugin, &ToolPlugin::registerCommand, this,
@@ -4467,8 +4515,8 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
         discard.metaType().id() == QMetaType::Bool && discard.toBool();
       if (isModified(target) && !discarding) {
         if (message != nullptr)
-          *message = QStringLiteral("The molecule has unsaved changes; pass "
-                                    "discard: true to close it anyway.");
+          *message = tr("The molecule has unsaved changes; pass "
+                        "discard: true to close it anyway.");
         return CommandStatus::Failed;
       }
       closeMolecule(target);
@@ -4484,8 +4532,8 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
     const bool undoing = command == "undo";
     if (!(undoing ? canUndo() : canRedo())) {
       if (message != nullptr)
-        *message = undoing ? QStringLiteral("There is nothing to undo.")
-                           : QStringLiteral("There is nothing to redo.");
+        *message = undoing ? tr("There is nothing to undo.")
+                           : tr("There is nothing to redo.");
       return CommandStatus::Failed;
     }
 
@@ -4500,7 +4548,7 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
   } else if (command == "activateTool") {
     if (activeGLWidget() == nullptr) {
       if (message != nullptr)
-        *message = QStringLiteral("There is no active view.");
+        *message = tr("There is no active view.");
       return CommandStatus::Failed;
     }
 
@@ -4514,7 +4562,7 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
       });
     if (!found) {
       if (message != nullptr)
-        *message = QStringLiteral("Unknown tool '%1'.").arg(name);
+        *message = tr("Unknown tool '%1'.").arg(name);
       return CommandStatus::Failed;
     }
 
@@ -4591,4 +4639,4 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
   return CommandStatus::NotHandled;
 }
 
-} // End of Avogadro namespace
+} // namespace Avogadro

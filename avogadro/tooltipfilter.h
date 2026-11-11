@@ -8,10 +8,10 @@
 
 class ToolTipFilter : public QObject
 {
-Q_OBJECT
+  Q_OBJECT
 
 public:
-ToolTipFilter(QObject *parent);
+  ToolTipFilter(QObject* parent);
 
-bool eventFilter(QObject* object, QEvent* event) override;
+  bool eventFilter(QObject* object, QEvent* event) override;
 };

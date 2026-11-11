@@ -21,7 +21,7 @@ namespace Avogadro::RPC {
 class Connection;
 class JsonRpc;
 class JsonRpcClient;
-}
+} // namespace Avogadro::RPC
 
 namespace Avogadro {
 
@@ -135,6 +135,6 @@ private:
   quint64 m_nextToken = 0;
 };
 
-} // End Avogadro namespace
+} // namespace Avogadro
 
 #endif

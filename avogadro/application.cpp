@@ -17,10 +17,7 @@
 
 namespace Avogadro {
 
-Application::Application(int& argc, char** argv)
-  : QApplication(argc, argv)
-{
-}
+Application::Application(int& argc, char** argv) : QApplication(argc, argv) {}
 
 // Handle open events (e.g., Mac OS X open files)
 bool Application::event(QEvent* event)

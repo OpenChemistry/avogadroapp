@@ -10,9 +10,7 @@
 #include <QtWidgets/QToolTip>
 #include <QtWidgets/QWidget>
 
-ToolTipFilter::ToolTipFilter(QObject* parent)
-  : QObject(parent)
-{}
+ToolTipFilter::ToolTipFilter(QObject* parent) : QObject(parent) {}
 
 bool ToolTipFilter::eventFilter(QObject* object, QEvent* event)
 {

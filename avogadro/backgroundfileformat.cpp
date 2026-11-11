@@ -15,10 +15,7 @@ namespace Avogadro {
 
 BackgroundFileFormat::BackgroundFileFormat(Io::FileFormat* format,
                                            QObject* aparent)
-  : QObject(aparent)
-  , m_format(format)
-  , m_molecule(nullptr)
-  , m_success(false)
+  : QObject(aparent), m_format(format), m_molecule(nullptr), m_success(false)
 {
 }
 

@@ -26,7 +26,7 @@ namespace Avogadro {
 namespace Rendering {
 class Camera;
 class GLRenderer;
-}
+} // namespace Rendering
 
 namespace QtOpenGL {
 class GLWidget;
@@ -35,14 +35,13 @@ class GLWidget;
 namespace QtGui {
 class Molecule;
 class ToolPlugin;
-}
+} // namespace QtGui
 
 /**
  * This class is responsible for handling the TDx navigation in Avogadro2.
  */
-class TDxController
-  : private TDx::SpaceMouse::Navigation3D::CNavigation3D
-  , public QObject
+class TDxController : private TDx::SpaceMouse::Navigation3D::CNavigation3D,
+                      public QObject
 {
 public:
   TDxController(MainWindow* const mainWindow,
@@ -74,8 +73,7 @@ private:
     std::string m_nodeName;
     std::vector<std::shared_ptr<ActionTreeNode>> m_children;
     std::vector<QAction*> m_actions;
-    explicit ActionTreeNode(const std::string& nodeName)
-      : m_nodeName(nodeName)
+    explicit ActionTreeNode(const std::string& nodeName) : m_nodeName(nodeName)
     {
     }
   };
@@ -157,7 +155,7 @@ private:
   virtual long SetActiveCommand(std::string commandId) override;
   virtual long SetTransaction(long value) override;
 };
-}
+} // namespace Avogadro
 
 #endif // ! AVOGADRO_TDXCONTROLLER_H
 #endif //  _3DCONNEXION

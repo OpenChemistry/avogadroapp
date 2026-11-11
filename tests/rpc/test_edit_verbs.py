@@ -5,7 +5,8 @@ avogadrolibs #3135.
 The contract, from avogadro/qtplugins/select/select.cpp and
 avogadro/qtplugins/editor/editor.cpp: a recognised command with bad options
 fails with COMMAND_FAILED (-2) and changes nothing, not even the undo stack; a
-success replies {"indices": [...]} (selectAtoms), {"index": n} (addAtom,
+success replies {"atoms": [...], "indices": [...]} (selectAtoms; "indices" is
+deprecated), {"index": n} (addAtom,
 addBond), {"removed": n} (removeSelectedAtoms) or no data at all (removeBond).
 Every edit is one undo step. A locked active layer refuses every edit, and so
 does a locked layer holding an atom that the edit bonds to, unbonds or deletes.
@@ -88,15 +89,15 @@ def undo_redo_roundtrip(avo, before, after, text):
 # =============================================================================
 def test_select_atoms_modes(avo):
     avo.load(ETHANE)
-    assert avo.data("selectAtoms", {"indices": [0, 1]}) == {"indices": [0, 1]}
+    assert avo.data("selectAtoms", {"atoms": [0, 1]})["atoms"] == [0, 1]
     assert selected(avo) == 2
     # "replace" is the default, and replaces
-    assert avo.data("selectAtoms", {"indices": [4]}) == {"indices": [4]}
-    assert avo.data("selectAtoms", {"indices": [2, 3], "mode": "replace"}) == {"indices": [2, 3]}
-    assert avo.data("selectAtoms", {"indices": [3, 5], "mode": "add"}) == {"indices": [2, 3, 5]}
-    assert avo.data("selectAtoms", {"indices": [2, 7], "mode": "remove"}) == {"indices": [3, 5]}
+    assert avo.data("selectAtoms", {"atoms": [4]})["atoms"] == [4]
+    assert avo.data("selectAtoms", {"atoms": [2, 3], "mode": "replace"})["atoms"] == [2, 3]
+    assert avo.data("selectAtoms", {"atoms": [3, 5], "mode": "add"})["atoms"] == [2, 3, 5]
+    assert avo.data("selectAtoms", {"atoms": [2, 7], "mode": "remove"})["atoms"] == [3, 5]
     assert selected(avo) == 2
-    assert avo.data("selectAtoms", {"indices": []}) == {"indices": []}
+    assert avo.data("selectAtoms", {"atoms": []})["atoms"] == []
     assert selected(avo) == 0
     # the selection changes nothing about the molecule itself
     assert bonds(avo) and avo.info()["atomCount"] == ETHANE_ATOMS
@@ -105,35 +106,45 @@ def test_select_atoms_modes(avo):
 def test_select_atoms_accepts_unsorted_duplicate_and_whole_float_indices(avo):
     avo.load(ETHANE)
     # JSON 1.0 is a whole number; duplicates and order do not matter
-    assert avo.data("selectAtoms", {"indices": [7, 1.0, 1, 7, 3]}) == {"indices": [1, 3, 7]}
+    assert avo.data("selectAtoms", {"atoms": [7, 1.0, 1, 7, 3]})["atoms"] == [1, 3, 7]
+
+
+def test_select_atoms_indices_alias(avo):
+    """The deprecated "indices" alias is still accepted and still replied."""
+    avo.load(ETHANE)
+    reply = avo.data("selectAtoms", {"indices": [1, 3]})
+    assert reply["atoms"] == [1, 3]
+    assert reply["indices"] == reply["atoms"]
+    assert selected(avo) == 2
+    assert_refused(avo, "selectAtoms", {"atoms": [0], "indices": [1]}, "same option")
 
 
 def test_select_atoms_unwaited_reply(avo):
     avo.load(ETHANE)
-    assert avo.call("selectAtoms", {"indices": [0]}) is True
+    assert avo.call("selectAtoms", {"atoms": [0]}) is True
     assert selected(avo) == 1
 
 
 INVALID_SELECT = [
-    ({}, "requires an \"indices\""),
-    ({"indices": None}, "requires an \"indices\""),
-    ({"indices": "0"}, "requires an \"indices\""),
-    ({"indices": 0}, "requires an \"indices\""),
-    ({"indices": {"0": 1}}, "requires an \"indices\""),
-    ({"indices": [0.5]}, "must be a whole number"),
-    ({"indices": ["0"]}, "must be a whole number"),
-    ({"indices": [True]}, "must be a whole number"),
-    ({"indices": [None]}, "must be a whole number"),
-    ({"indices": [[0]]}, "must be a whole number"),
-    ({"indices": [-1]}, "negative"),
-    ({"indices": [ETHANE_ATOMS]}, "out of range"),
-    ({"indices": [0, 99]}, "out of range"),
-    ({"indices": [1e30]}, "out of range"),
-    ({"indices": [0], "mode": "Add"}, "mode must be"),
-    ({"indices": [0], "mode": "toggle"}, "mode must be"),
-    ({"indices": [0], "mode": ""}, "mode must be"),
-    ({"indices": [0], "mode": 1}, "mode must be"),
-    ({"indices": [0], "mode": None}, "mode must be"),
+    ({}, "missing required option \"atoms\""),
+    ({"atoms": None}, "atoms must be a list"),
+    ({"atoms": "0"}, "atoms must be a list"),
+    ({"atoms": 0}, "atoms must be a list"),
+    ({"atoms": {"0": 1}}, "atoms must be a list"),
+    ({"atoms": [0.5]}, "must be a whole number"),
+    ({"atoms": ["0"]}, "must be a whole number"),
+    ({"atoms": [True]}, "must be a whole number"),
+    ({"atoms": [None]}, "must be a whole number"),
+    ({"atoms": [[0]]}, "must be a whole number"),
+    ({"atoms": [-1]}, "negative"),
+    ({"atoms": [ETHANE_ATOMS]}, "out of range"),
+    ({"atoms": [0, 99]}, "out of range"),
+    ({"atoms": [1e30]}, "out of range"),
+    ({"atoms": [0], "mode": "Add"}, "mode must be"),
+    ({"atoms": [0], "mode": "toggle"}, "mode must be"),
+    ({"atoms": [0], "mode": ""}, "mode must be"),
+    ({"atoms": [0], "mode": 1}, "mode must be"),
+    ({"atoms": [0], "mode": None}, "mode must be"),
 ]
 
 
@@ -141,7 +152,7 @@ INVALID_SELECT = [
 @pytest.mark.parametrize("options, fragment", INVALID_SELECT)
 def test_select_atoms_invalid_options(avo, options, fragment, wait):
     avo.load(ETHANE)
-    avo.data("selectAtoms", {"indices": [1, 2]})  # a selection that must survive
+    avo.data("selectAtoms", {"atoms": [1, 2]})  # a selection that must survive
     assert_refused(avo, "selectAtoms", options, fragment, wait=wait)
     assert selected(avo) == 2
 
@@ -149,42 +160,42 @@ def test_select_atoms_invalid_options(avo, options, fragment, wait):
 def test_select_atoms_one_bad_index_selects_nothing(avo):
     """The list is validated whole before anything is selected."""
     avo.load(ETHANE)
-    assert_refused(avo, "selectAtoms", {"indices": [0, 1, 99]}, "out of range")
+    assert_refused(avo, "selectAtoms", {"atoms": [0, 1, 99]}, "out of range")
     assert selected(avo) == 0
 
 
 def test_select_atoms_on_empty_molecule(avo):
     assert avo.info()["atomCount"] == 0
-    assert avo.data("selectAtoms", {"indices": []}) == {"indices": []}
+    assert avo.data("selectAtoms", {"atoms": []})["atoms"] == []
     assert avo.info()["canUndo"] is False
-    assert_refused(avo, "selectAtoms", {"indices": [0]}, "out of range")
-    assert_refused(avo, "selectAtoms", {"indices": [0], "mode": "add"}, "out of range")
+    assert_refused(avo, "selectAtoms", {"atoms": [0]}, "out of range")
+    assert_refused(avo, "selectAtoms", {"atoms": [0], "mode": "add"}, "out of range")
 
 
 def test_select_atoms_undo_redo(avo):
     avo.load(ETHANE)
     assert avo.info()["canUndo"] is False
-    avo.data("selectAtoms", {"indices": [2, 3]})
+    avo.data("selectAtoms", {"atoms": [2, 3]})
     assert avo.info()["canUndo"] is True
     avo.data("undo")
     assert selected(avo) == 0
     avo.data("redo")
     assert selected(avo) == 2
-    assert avo.data("selectAtoms", {"indices": [], "mode": "add"}) == {"indices": [2, 3]}
+    assert avo.data("selectAtoms", {"atoms": [], "mode": "add"})["atoms"] == [2, 3]
 
 
 def test_select_atoms_that_changes_nothing_pushes_no_undo_entry(avo):
     avo.load(ETHANE)
-    avo.data("selectAtoms", {"indices": []})  # nothing selected, nothing requested
+    avo.data("selectAtoms", {"atoms": []})  # nothing selected, nothing requested
     assert avo.info()["canUndo"] is False
-    avo.data("selectAtoms", {"indices": [4, 5]})
+    avo.data("selectAtoms", {"atoms": [4, 5]})
     avo.data("undo")  # the single entry
     assert avo.info()["canUndo"] is False
     avo.data("redo")
     # asking for the selection it already is, in each mode
-    avo.data("selectAtoms", {"indices": [4, 5]})
-    avo.data("selectAtoms", {"indices": [4], "mode": "add"})
-    avo.data("selectAtoms", {"indices": [0], "mode": "remove"})
+    avo.data("selectAtoms", {"atoms": [4, 5]})
+    avo.data("selectAtoms", {"atoms": [4], "mode": "add"})
+    avo.data("selectAtoms", {"atoms": [0], "mode": "remove"})
     avo.data("undo")
     assert selected(avo) == 0
     assert avo.info()["canUndo"] is False  # one entry in all, not four
@@ -195,10 +206,10 @@ def test_select_atoms_skips_locked_atoms_without_an_error(avo):
     reply is the resulting selection, so the caller sees what was skipped."""
     avo.load(ETHANE)
     avo.data("setLayerLocked", {"layer": 0, "locked": True})
-    assert avo.data("selectAtoms", {"indices": [0, 1, 2]}) == {"indices": []}
-    assert avo.data("selectAtoms", {"indices": [3], "mode": "add"}) == {"indices": []}
+    assert avo.data("selectAtoms", {"atoms": [0, 1, 2]})["atoms"] == []
+    assert avo.data("selectAtoms", {"atoms": [3], "mode": "add"})["atoms"] == []
     avo.data("setLayerLocked", {"layer": 0, "locked": False})
-    assert avo.data("selectAtoms", {"indices": [0, 1, 2]}) == {"indices": [0, 1, 2]}
+    assert avo.data("selectAtoms", {"atoms": [0, 1, 2]})["atoms"] == [0, 1, 2]
 
 
 # =============================================================================
@@ -452,7 +463,7 @@ def test_remove_bond_on_an_empty_molecule(avo):
 # =============================================================================
 def test_remove_selected_atoms(avo):
     avo.load(ETHANE)
-    avo.data("selectAtoms", {"indices": [2, 3, 6]})
+    avo.data("selectAtoms", {"atoms": [2, 3, 6]})
     assert avo.data("removeSelectedAtoms") == {"removed": 3}
     info = avo.info()
     assert (info["atomCount"], info["bondCount"], info["selectedAtomCount"]) == (5, 4, 0)
@@ -466,7 +477,7 @@ def test_remove_selected_atoms(avo):
 
 def test_remove_selected_atoms_takes_the_bonds_with_it(avo):
     avo.load(ETHANE)
-    avo.data("selectAtoms", {"indices": [0]})
+    avo.data("selectAtoms", {"atoms": [0]})
     assert avo.data("removeSelectedAtoms") == {"removed": 1}
     info = avo.info()
     assert (info["atomCount"], info["bondCount"]) == (ETHANE_ATOMS - 1, ETHANE_BONDS - 4)
@@ -484,7 +495,7 @@ def test_remove_selected_atoms_all(avo):
 
 def test_remove_selected_atoms_unwaited_reply(avo):
     avo.load(ETHANE)
-    avo.data("selectAtoms", {"indices": [7]})
+    avo.data("selectAtoms", {"atoms": [7]})
     assert avo.call("removeSelectedAtoms") is True
     assert avo.info()["atomCount"] == ETHANE_ATOMS - 1
 
@@ -507,7 +518,7 @@ def test_remove_selected_atoms_on_an_empty_molecule(avo):
 
 def test_remove_selected_atoms_undo_redo(avo):
     avo.load(ETHANE)
-    avo.data("selectAtoms", {"indices": [1, 4, 5]})
+    avo.data("selectAtoms", {"atoms": [1, 4, 5]})
     before = model(avo)
     avo.data("removeSelectedAtoms")
     after = model(avo)
@@ -521,7 +532,7 @@ def test_remove_selected_atoms_undo_redo(avo):
 @pytest.mark.parametrize("options", [{"unexpected": 1}, {"indices": [0]}, {"removed": 5}])
 def test_remove_selected_atoms_ignores_options(avo, options):
     avo.load(ETHANE)
-    avo.data("selectAtoms", {"indices": [2]})
+    avo.data("selectAtoms", {"atoms": [2]})
     assert avo.data("removeSelectedAtoms", options) == {"removed": 1}
 
 
@@ -535,7 +546,7 @@ def test_build_up_then_undo_everything_in_order(avo):
         ("addAtom", {"element": "O", "position": [2.5, 0, 0], "bondTo": 0}),
         ("addBond", {"atoms": [2, 3]}),
         ("removeBond", {"atoms": [0, 1]}),
-        ("selectAtoms", {"indices": [4, 5, 6]}),
+        ("selectAtoms", {"atoms": [4, 5, 6]}),
         ("removeSelectedAtoms", {}),
     ]
     for method, options in steps:
@@ -557,7 +568,7 @@ def locked_ethane(avo):
     """ETHANE with atoms 2, 3 and 4 selected and then locked on layer 0, and a
     new unlocked layer 1 as the active one. Returns the state to compare."""
     avo.load(ETHANE)
-    avo.data("selectAtoms", {"indices": [2, 3, 4]})
+    avo.data("selectAtoms", {"atoms": [2, 3, 4]})
     avo.data("setLayerLocked", {"layer": 0, "locked": True})
     avo.data("addLayer")
     avo.data("setActiveLayer", {"layer": 1})
@@ -606,7 +617,7 @@ def test_a_new_atom_cannot_bond_to_a_locked_atom_but_can_stand_alone(avo):
 
 def test_a_locked_active_layer_refuses_every_edit(avo):
     avo.load(ETHANE)
-    avo.data("selectAtoms", {"indices": [2]})
+    avo.data("selectAtoms", {"atoms": [2]})
     avo.data("setLayerLocked", {"layer": 0, "locked": True})
     before = state(avo)
     for method, options in (
@@ -640,7 +651,7 @@ def test_an_unlocked_atom_bonded_to_a_locked_one_cannot_be_removed(avo):
     assert avo.data("addAtom", {"element": "O", "position": [2.5, 0, 0], "bondTo": 0}) == {
         "index": ETHANE_ATOMS
     }
-    avo.data("selectAtoms", {"indices": [ETHANE_ATOMS]})
+    avo.data("selectAtoms", {"atoms": [ETHANE_ATOMS]})
     avo.data("setLayerLocked", {"layer": 0, "locked": True})
     before = state(avo)
     assert selected(avo) == 1

@@ -34,6 +34,7 @@ namespace Avogadro {
 
 class BackgroundFileFormat;
 class MenuBuilder;
+class TargetRegistry;
 class ViewFactory;
 
 namespace QtOpenGL {
@@ -53,7 +54,7 @@ class MoleculeModel;
 class MultiViewWidget;
 class RWMolecule;
 class LayerModel;
-}
+} // namespace QtGui
 
 #ifdef _3DCONNEXION
 class TDxController;
@@ -310,6 +311,12 @@ public:
    * non-GL view (e.g. a VTK crystal view) or when there is no active view.
    */
   QtOpenGL::GLWidget* activeGLWidget() const;
+
+  /**
+   * The named UI targets and the highlight overlay (see TargetRegistry).
+   * Created in the constructor, so it is never null; RpcListener uses it.
+   */
+  TargetRegistry* targetRegistry() const { return m_targets; }
 
   /**
    * Render the active view to an image of exactly options.size pixels (the
@@ -653,7 +660,7 @@ private:
    * the connections are unique. Tool instances belong to each GLWidget rather
    * than to m_tools, so this is done on first use rather than at load time.
    */
-  template<typename PluginType>
+  template <typename PluginType>
   void connectCommandSignals(PluginType* plugin)
   {
     // Each connection is remembered so that ~MainWindow can sever it while
@@ -765,6 +772,8 @@ private:
   QStringList m_localeCodes;
 
   MenuBuilder* m_menuBuilder;
+  /// Owned by this window (a QObject child); see TargetRegistry.
+  TargetRegistry* m_targets = nullptr;
   bool m_initialized = false; ///< true after the initial buildMenu() completes
 
   // These variables take care of background file reading.
@@ -890,6 +899,6 @@ private:
   bool saveFileIfNeeded();
 };
 
-} // End Avogadro namespace
+} // namespace Avogadro
 
 #endif

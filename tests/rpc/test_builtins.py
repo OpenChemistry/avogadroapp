@@ -60,8 +60,8 @@ def test_every_builtin_command_is_answered(fresh):
     answers, with a result or an error of its own, never "Method not found".
     A newly added built-in is covered without editing this file.
 
-    Only "kill" is left out: it is refused without --testing, which the app
-    cannot be given (see README). Nothing else needs excluding. With empty
+    Only "kill" is left out: it is always refused (see README). Nothing else
+    needs excluding. With empty
     parameters each verb either fails validation or does something harmless
     (a read-back, a new blank molecule, closing the blank one), and none of them
     opens a dialog: the oracle would fail the test if one did. The app is
@@ -83,7 +83,7 @@ def test_unknown_method(avo):
     assert error.message == "Method not found"
 
 
-def test_kill_is_refused_without_testing_flag(avo):
+def test_kill_is_refused(avo):
     avo.expect_error("kill", code=REQUEST_FAILED)
     assert avo.app.alive()
 

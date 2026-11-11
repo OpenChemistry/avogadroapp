@@ -22,44 +22,29 @@ namespace Avogadro::RPC {
 QJsonValue dummyValue(QJsonValue::Null);
 
 Message::Message(Connection* conn, EndpointIdType endpoint_)
-  : m_type(Invalid)
-  , m_errorCode(0)
-  , m_connection(conn)
-  , m_endpoint(endpoint_)
+  : m_type(Invalid), m_errorCode(0), m_connection(conn), m_endpoint(endpoint_)
 {
 }
 
 Message::Message(Message::MessageType type_, Connection* conn,
                  EndpointIdType endpoint_)
-  : m_type(type_)
-  , m_errorCode(0)
-  , m_connection(conn)
-  , m_endpoint(endpoint_)
+  : m_type(type_), m_errorCode(0), m_connection(conn), m_endpoint(endpoint_)
 {
 }
 
 Message::Message(const QJsonObject& rawJson, Connection* conn,
                  EndpointIdType endpoint_)
-  : m_type(Raw)
-  , m_errorCode(0)
-  , m_rawJson(rawJson)
-  , m_connection(conn)
-  , m_endpoint(endpoint_)
+  : m_type(Raw), m_errorCode(0), m_rawJson(rawJson), m_connection(conn),
+    m_endpoint(endpoint_)
 {
 }
 
 Message::Message(const Message& other)
-  : m_type(other.m_type)
-  , m_method(other.m_method)
-  , m_id(other.m_id)
-  , m_params(other.m_params)
-  , m_result(other.m_result)
-  , m_errorCode(other.m_errorCode)
-  , m_errorMessage(other.m_errorMessage)
-  , m_errorData(other.m_errorData)
-  , m_rawJson(other.m_rawJson)
-  , m_connection(other.m_connection)
-  , m_endpoint(other.m_endpoint)
+  : m_type(other.m_type), m_method(other.m_method), m_id(other.m_id),
+    m_params(other.m_params), m_result(other.m_result),
+    m_errorCode(other.m_errorCode), m_errorMessage(other.m_errorMessage),
+    m_errorData(other.m_errorData), m_rawJson(other.m_rawJson),
+    m_connection(other.m_connection), m_endpoint(other.m_endpoint)
 {
 }
 
@@ -381,7 +366,6 @@ bool Message::parse(Message& errorMessage_)
     errorMessage_.setErrorData(errorDataObject);
     return false;
   }
-  
 
   // Results, errors, and notifications cannot return errors. Parse them
   // as best we can and return true.
