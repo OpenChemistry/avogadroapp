@@ -24,6 +24,7 @@
 #include <avogadro/io/compression.h>
 #include <avogadro/io/fileformat.h>
 #include <avogadro/io/fileformatmanager.h>
+#include <avogadro/qtgui/colortheme.h>
 #include <avogadro/qtgui/customelementdialog.h>
 #include <avogadro/qtgui/extensionplugin.h>
 #include <avogadro/qtgui/fileformatdialog.h>
@@ -71,6 +72,7 @@
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QKeySequence>
+#include <QtGui/QPainter>
 #include <QtGui/QPalette>
 #include <QtGui/QShortcut>
 
@@ -1119,10 +1121,7 @@ void MainWindow::changeEvent(QEvent* e)
       e->type() == QEvent::PaletteChange || e->type() == QEvent::ThemeChange) {
     e->accept();
 
-    const QPalette defaultPalette;
-    // is the text lighter than the window color?
-    bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
-                     defaultPalette.color(QPalette::Window).lightness());
+    const bool darkMode = QtGui::colorTheme() == QtGui::ColorTheme::Dark;
 
     // Handle theme changes by telling tools to update their icons.
     for (ToolPlugin* tool : m_tools) {
@@ -3702,10 +3701,7 @@ void MainWindow::buildTools()
 
   // determine if need dark mode or light mode icons
   // e.g. https://www.qt.io/blog/dark-mode-on-windows-11-with-qt-6.5
-  const QPalette defaultPalette;
-  // is the text lighter than the window color?
-  bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
-                   defaultPalette.color(QPalette::Window).lightness());
+  const bool darkMode = QtGui::colorTheme() == QtGui::ColorTheme::Dark;
 
   // Now the tool plugins need to be built/added.
   QList<ToolPluginFactory*> toolPluginFactories =
