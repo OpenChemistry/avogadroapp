@@ -42,12 +42,14 @@
 #include <avogadro/qtgui/utilities.h>
 #include <avogadro/qtopengl/activeobjects.h>
 #include <avogadro/qtopengl/glwidget.h>
+#include <avogadro/qtopengl/imagesizedialog.h>
 #include <avogadro/qtplugins/pluginmanager.h>
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
 #include <QtCore/QDateTime>
 #include <QtCore/QDebug>
+#include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QJsonDocument>
@@ -65,13 +67,13 @@
 #include <QtCore/QUrl>
 #include <QtCore/QVersionNumber>
 
-#include <QOpenGLFramebufferObject>
 #include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QKeyEvent>
 #include <QtGui/QKeySequence>
 #include <QtGui/QPainter>
+#include <QtGui/QPalette>
 #include <QtGui/QShortcut>
 
 #include <QtNetwork/QNetworkAccessManager>
@@ -2625,107 +2627,22 @@ QtOpenGL::GLWidget* MainWindow::activeGLWidget() const
   return qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
 }
 
-QImage MainWindow::renderToImage(const QSize& requestedSize,
-                                 bool transparentBackground, QSize* nativeSize)
+QImage MainWindow::renderToImage(const QtOpenGL::RenderOptions& options,
+                                 QString* error)
 {
-  QImage exportImage;
+  GLWidget* viewWidget = activeGLWidget();
 
-  auto* glWidget =
-    qobject_cast<QOpenGLWidget*>(m_multiViewWidget->activeWidget());
-
-  // render it (with alpha channel)
-  Rendering::Scene* scene(nullptr);
-  GLWidget* viewWidget(nullptr);
-  if ((viewWidget =
-         qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scene = &viewWidget->renderer().scene();
-  }
-
-  // Without an active GL view there is nothing to grab; hand back a null
+  // Without an active GL view there is nothing to render; hand back a null
   // image so callers can report the failure rather than crash here.
-  if (scene == nullptr || glWidget == nullptr)
+  if (viewWidget == nullptr) {
+    if (error != nullptr)
+      *error = tr("There is no active 3D view to render.");
     return QImage();
-
-  Vector4ub cColor = scene->backgroundColor();
-  unsigned char red = cColor[0];
-  unsigned char green = cColor[1];
-  unsigned char blue = cColor[2];
-  unsigned char alpha = cColor[3];
-  cColor[0] = 0;
-  cColor[1] = 0;
-  cColor[2] = 0;
-  cColor[3] = 0; // 100% transparent for export
-  scene->setBackgroundColor(cColor);
-
-  glWidget->raise();
-  glWidget->repaint();
-  if (QOpenGLFramebufferObject::hasOpenGLFramebufferObjects()) {
-    exportImage = glWidget->grabFramebuffer();
-  } else {
-    auto* screen = QGuiApplication::primaryScreen();
-    auto pixmap = screen->grabWindow(glWidget->winId());
-    exportImage = pixmap.toImage();
   }
 
-  // set the GL widget back to the right background color (i.e., not 100%
-  // transparent)
-  cColor[0] = red;
-  cColor[1] = green;
-  cColor[2] = blue;
-  cColor[3] = alpha; // previous color
-  scene->setBackgroundColor(cColor);
-  glWidget->repaint();
-
-  if (nativeSize != nullptr)
-    *nativeSize = exportImage.size();
-
-  if (requestedSize.isValid() && !requestedSize.isEmpty()) {
-    // Fit the native grab onto a canvas of exactly requestedSize: scale
-    // preserving aspect ratio, then centre it, filling any letterboxing
-    // with either the view's background colour or transparency. This also
-    // serves as the "!transparentBackground" composite for this path, so
-    // that block must not run again below.
-    //
-    // Note: padding to a different aspect ratio preserves the original
-    // framing rather than re-composing the scene, so a render padded to an
-    // aspect ratio it wasn't composed for will sit smaller in frame than a
-    // true render at that aspect would. This is a deliberate stopgap until
-    // a real offscreen framebuffer render path replaces the
-    // grab-and-resample approach here.
-    QImage fitted(requestedSize, QImage::Format_ARGB32_Premultiplied);
-    fitted.fill(transparentBackground ? QColor(Qt::transparent)
-                                      : QColor(red, green, blue, 255));
-    QImage scaled = exportImage.scaled(requestedSize, Qt::KeepAspectRatio,
-                                       Qt::SmoothTransformation);
-    // QImage::scaled() propagates the source's device pixel ratio (2 on a
-    // Retina grab). QPainter::drawImage() honours that ratio and draws at
-    // logical size, so without resetting it here the content lands scaled
-    // down into a corner of "fitted" instead of filling it. "fitted" itself
-    // is already ratio-1.0 (default-constructed), and requestedSize/painter
-    // coordinates below are in raw pixels, so the drawn image must match.
-    scaled.setDevicePixelRatio(1.0);
-    QPainter painter(&fitted);
-    painter.drawImage((requestedSize.width() - scaled.width()) / 2,
-                      (requestedSize.height() - scaled.height()) / 2, scaled);
-    painter.end();
-    exportImage = fitted.convertToFormat(QImage::Format_ARGB32);
-  } else if (!transparentBackground) {
-    // No resize requested: composite the transparent render over the
-    // view's actual background colour, so the caller gets an opaque image.
-    QImage opaqueImage(exportImage.size(), QImage::Format_ARGB32_Premultiplied);
-    opaqueImage.fill(QColor(red, green, blue, 255));
-    // Draw a ratio-1.0 copy of the source: opaqueImage was constructed with
-    // exportImage.size() (raw pixels) at the default ratio of 1.0, but a
-    // Retina grabFramebuffer() image carries devicePixelRatio() == 2.
-    // QPainter::drawImage() honours the source ratio and would draw it at
-    // half size into the top-left quadrant otherwise.
-    QImage source = exportImage;
-    source.setDevicePixelRatio(1.0);
-    QPainter painter(&opaqueImage);
-    painter.drawImage(0, 0, source);
-    painter.end();
-    exportImage = opaqueImage.convertToFormat(QImage::Format_ARGB32);
-  }
+  QImage exportImage = viewWidget->renderImage(options, error);
+  if (exportImage.isNull())
+    return exportImage;
 
   // Now we embed molecular information into the file, if possible
   if (m_molecule && m_molecule->atomCount() < 1000) {
@@ -2742,6 +2659,7 @@ QImage MainWindow::renderToImage(const QSize& requestedSize,
 void MainWindow::exportGraphics()
 {
   // ask the user for a filename
+  const QString pngFilter = tr("PNG") + " (*.png)";
   QStringList filters;
 // Omit "common image formats" on Mac
 #ifdef Q_OS_MAC
@@ -2749,8 +2667,8 @@ void MainWindow::exportGraphics()
 #else
   filters << tr("Common image formats") + " (*.png *.jpg *.jpeg)"
 #endif
-    << tr("All files") + " (* *.*)" << tr("BMP") + " (*.bmp)"
-    << tr("PNG") + " (*.png)" << tr("JPEG") + " (*.jpg *.jpeg)";
+    << tr("All files") + " (* *.*)" << tr("BMP") + " (*.bmp)" << pngFilter
+    << tr("JPEG") + " (*.jpg *.jpeg)";
 
   // Use QFileInfo to get the parts of the path we want
   QString baseFileName;
@@ -2758,23 +2676,88 @@ void MainWindow::exportGraphics()
     baseFileName = m_molecule->data("fileName").toString().c_str();
   QFileInfo info(baseFileName);
 
-  QString fileName = QFileDialog::getSaveFileName(
-    this, tr("Export Bitmap Graphics"), "", "PNG (*.png)");
+  QSettings settings;
+  QString dir = settings.value("MainWindow/lastExportDir").toString();
+  if (dir.isEmpty() && !baseFileName.isEmpty())
+    dir = info.absolutePath();
 
-  exportGraphics(fileName);
+  QString initialPath = dir;
+  if (!baseFileName.isEmpty()) {
+    // "benzene.cjson.gz" suggests "benzene.png", not "benzene.cjson.png".
+    const QString stem =
+      QFileInfo(QString::fromStdString(
+                  Io::stripCompressionSuffix(info.fileName().toStdString())))
+        .completeBaseName();
+    const QString suggested = stem + ".png";
+    initialPath = dir.isEmpty() ? suggested : QDir(dir).filePath(suggested);
+  }
+
+  QString selectedFilter = pngFilter;
+  QString fileName = QFileDialog::getSaveFileName(
+    this, tr("Export Bitmap Graphics"), initialPath, filters.join(";;"),
+    &selectedFilter);
+  if (fileName.isEmpty())
+    return;
+
+  settings.setValue("MainWindow/lastExportDir",
+                    QFileInfo(fileName).absolutePath());
+
+  // Ask for the size (and background) of the image.
+  // Exports have always been transparent, so that is the first-run default.
+  QtOpenGL::ImageSizeDialog dialog(activeGLWidget(), "exportGraphics", true,
+                                   false, this, true);
+  if (dialog.exec() != QDialog::Accepted)
+    return;
+
+  QtOpenGL::RenderOptions options = dialog.renderOptions();
+  // Formats without an alpha channel would flatten a transparent background
+  // to black.
+  const QString suffix = QFileInfo(fileName).suffix().toLower();
+  if (suffix == "jpg" || suffix == "jpeg" || suffix == "bmp")
+    options.transparentBackground = false;
+
+  exportGraphics(fileName, options);
+}
+
+namespace {
+// The view size (times the device pixel ratio) with a transparent background,
+// which is what exports have always produced by default.
+QtOpenGL::RenderOptions transparentViewOptions()
+{
+  QtOpenGL::RenderOptions options;
+  options.transparentBackground = true;
+  return options;
+}
+} // namespace
+
+QImage MainWindow::renderForExport(const QtOpenGL::RenderOptions& options)
+{
+  QString error;
+  QImage image = renderToImage(options, &error);
+  if (image.isNull()) {
+    warnUser(Severity::Warning, tr("Avogadro"),
+             tr("Cannot render the image: %1").arg(error));
+  }
+  return image;
 }
 
 bool MainWindow::exportGraphics(QString fileName)
+{
+  // No dialog: the view size with a transparent background.
+  return exportGraphics(fileName, transparentViewOptions());
+}
+
+bool MainWindow::exportGraphics(QString fileName,
+                                const QtOpenGL::RenderOptions& options)
 {
   if (fileName.isEmpty())
     return false;
   if (QFileInfo(fileName).suffix().isEmpty())
     fileName += ".png";
 
-  // Pass no size, so we get the untouched native framebuffer grab (full
-  // device resolution), not a copy resampled down to the logical widget
-  // size.
-  QImage exportImage = renderToImage();
+  const QImage exportImage = renderForExport(options);
+  if (exportImage.isNull())
+    return false;
 
   if (!exportImage.save(fileName)) {
     warnUser(Severity::Warning, tr("Avogadro"),
@@ -2786,11 +2769,9 @@ bool MainWindow::exportGraphics(QString fileName)
 
 void MainWindow::copyGraphics()
 {
-  // Pass no size, so we get the untouched native framebuffer grab (full
-  // device resolution), not a copy resampled down to the logical widget
-  // size.
-  QImage exportImage = renderToImage();
-  QApplication::clipboard()->setImage(exportImage);
+  const QImage exportImage = renderForExport(transparentViewOptions());
+  if (!exportImage.isNull())
+    QApplication::clipboard()->setImage(exportImage);
 }
 
 void MainWindow::reassignCustomElements()
@@ -3032,6 +3013,8 @@ std::string MainWindow::exportString(const std::string& format)
 {
   std::string output;
   auto* mol = qobject_cast<Molecule*>(m_moleculeModel->activeMolecule());
+  if (!mol)
+    return output;
 
   Io::FileFormatManager::instance().writeString(*mol, output, format);
 
@@ -3159,11 +3142,10 @@ void MainWindow::setActiveTool(QString toolName)
 
 void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel* scenePluginModel(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scenePluginModel = &glWidget->sceneModel();
-  }
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  ScenePluginModel* scenePluginModel = &glWidget->sceneModel();
 
   //  foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
   //    scene->setEnabled(false);
@@ -3175,25 +3157,22 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
         scene->setEnabled(true);
     }
 
-  if (glWidget)
-    glWidget->updateScene();
+  glWidget->updateScene();
 }
 
 void MainWindow::setDisabledDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel* scenePluginModel(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scenePluginModel = &glWidget->sceneModel();
-  }
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  ScenePluginModel* scenePluginModel = &glWidget->sceneModel();
 
   foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
     foreach (const QString& name, displayTypes)
       if (scene->objectName() == name)
         scene->setEnabled(false);
 
-  if (glWidget)
-    glWidget->updateScene();
+  glWidget->updateScene();
 }
 
 void MainWindow::undoEdit()
@@ -3258,30 +3237,25 @@ void MainWindow::activeMoleculeEdited()
 
 void MainWindow::setBackgroundColor()
 {
-  Rendering::SolidPipeline* pipeline(nullptr);
-  Rendering::Scene* scene(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
-    scene = &glWidget->renderer().scene();
-  pipeline = &glWidget->renderer().solidPipeline();
-  if (scene) {
-    Vector4ub cColor = scene->backgroundColor();
-    QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
-    QColor color = QColorDialog::getColor(qtColor, this);
-    if (color.isValid()) {
-      cColor[0] = static_cast<unsigned char>(color.red());
-      cColor[1] = static_cast<unsigned char>(color.green());
-      cColor[2] = static_cast<unsigned char>(color.blue());
-      cColor[3] = static_cast<unsigned char>(color.alpha());
-      scene->setBackgroundColor(cColor);
-      if (pipeline)
-        pipeline->setBackgroundColor(cColor);
-      if (glWidget)
-        glWidget->update();
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  Rendering::Scene* scene = &glWidget->renderer().scene();
+  Rendering::SolidPipeline* pipeline = &glWidget->renderer().solidPipeline();
+  Vector4ub cColor = scene->backgroundColor();
+  QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
+  QColor color = QColorDialog::getColor(qtColor, this);
+  if (color.isValid()) {
+    cColor[0] = static_cast<unsigned char>(color.red());
+    cColor[1] = static_cast<unsigned char>(color.green());
+    cColor[2] = static_cast<unsigned char>(color.blue());
+    cColor[3] = static_cast<unsigned char>(color.alpha());
+    scene->setBackgroundColor(cColor);
+    pipeline->setBackgroundColor(cColor);
+    glWidget->update();
 
-      QSettings settings;
-      settings.setValue("backgroundColor", color);
-    }
+    QSettings settings;
+    settings.setValue("backgroundColor", color);
   }
 }
 
@@ -3734,10 +3708,11 @@ void MainWindow::buildTools()
     plugin->pluginFactories<ToolPluginFactory>();
   foreach (ToolPluginFactory* factory, toolPluginFactories) {
     ToolPlugin* tool = factory->createInstance(QCoreApplication::instance());
-    tool->setParent(this);
-    tool->setIcon(darkMode);
-    if (tool)
+    if (tool) {
+      tool->setParent(this);
+      tool->setIcon(darkMode);
       m_tools << tool;
+    }
   }
 
   // sort them based on priority
