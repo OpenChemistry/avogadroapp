@@ -47,6 +47,7 @@
 
 #include <QtCore/QDateTime>
 #include <QtCore/QDebug>
+#include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QJsonDocument>
@@ -2745,6 +2746,7 @@ QImage MainWindow::renderToImage(const QSize& requestedSize,
 void MainWindow::exportGraphics()
 {
   // ask the user for a filename
+  const QString pngFilter = tr("PNG") + " (*.png)";
   QStringList filters;
 // Omit "common image formats" on Mac
 #ifdef Q_OS_MAC
@@ -2752,8 +2754,8 @@ void MainWindow::exportGraphics()
 #else
   filters << tr("Common image formats") + " (*.png *.jpg *.jpeg)"
 #endif
-    << tr("All files") + " (* *.*)" << tr("BMP") + " (*.bmp)"
-    << tr("PNG") + " (*.png)" << tr("JPEG") + " (*.jpg *.jpeg)";
+    << tr("All files") + " (* *.*)" << tr("BMP") + " (*.bmp)" << pngFilter
+    << tr("JPEG") + " (*.jpg *.jpeg)";
 
   // Use QFileInfo to get the parts of the path we want
   QString baseFileName;
@@ -2761,8 +2763,31 @@ void MainWindow::exportGraphics()
     baseFileName = m_molecule->data("fileName").toString().c_str();
   QFileInfo info(baseFileName);
 
+  QSettings settings;
+  QString dir = settings.value("MainWindow/lastExportDir").toString();
+  if (dir.isEmpty() && !baseFileName.isEmpty())
+    dir = info.absolutePath();
+
+  QString initialPath = dir;
+  if (!baseFileName.isEmpty()) {
+    // "benzene.cjson.gz" suggests "benzene.png", not "benzene.cjson.png".
+    const QString stem =
+      QFileInfo(QString::fromStdString(
+                  Io::stripCompressionSuffix(info.fileName().toStdString())))
+        .completeBaseName();
+    const QString suggested = stem + ".png";
+    initialPath = dir.isEmpty() ? suggested : QDir(dir).filePath(suggested);
+  }
+
+  QString selectedFilter = pngFilter;
   QString fileName = QFileDialog::getSaveFileName(
-    this, tr("Export Bitmap Graphics"), "", "PNG (*.png)");
+    this, tr("Export Bitmap Graphics"), initialPath, filters.join(";;"),
+    &selectedFilter);
+
+  if (!fileName.isEmpty()) {
+    settings.setValue("MainWindow/lastExportDir",
+                      QFileInfo(fileName).absolutePath());
+  }
 
   exportGraphics(fileName);
 }
