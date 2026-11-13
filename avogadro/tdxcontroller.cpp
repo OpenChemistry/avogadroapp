@@ -23,15 +23,11 @@
 
 Avogadro::TDxController::TDxController(
   MainWindow* const mainWindow, Avogadro::QtOpenGL::GLWidget* const pGLWidget)
-  : CNavigation3D(false, true)
-  , QObject(mainWindow)
-  , m_pRootNode(std::make_shared<ActionTreeNode>("User Interface"))
-  , m_pGLWidget(pGLWidget)
-  , m_pMolecule(mainWindow->molecule())
-  , m_pGLRenderer(&pGLWidget->renderer())
-  , m_eyePosition({ 0.0, 0.0, 0.0 })
-  , m_lookDirection({ 0.0, 0.0, 0.0 })
-  , m_hitTestRadius(0.0)
+  : CNavigation3D(false, true), QObject(mainWindow),
+    m_pRootNode(std::make_shared<ActionTreeNode>("User Interface")),
+    m_pGLWidget(pGLWidget), m_pMolecule(mainWindow->molecule()),
+    m_pGLRenderer(&pGLWidget->renderer()), m_eyePosition({ 0.0, 0.0, 0.0 }),
+    m_lookDirection({ 0.0, 0.0, 0.0 }), m_hitTestRadius(0.0)
 {
   if (rayCount > 0) {
     m_rayOrigins[0].x = 0.0;

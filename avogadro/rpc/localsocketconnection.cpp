@@ -17,22 +17,16 @@ namespace Avogadro::RPC {
 
 LocalSocketConnection::LocalSocketConnection(QObject* parentObject,
                                              QLocalSocket* socket)
-  : Connection(parentObject)
-  , m_connectionString(socket->serverName())
-  , m_socket(nullptr)
-  , m_dataStream(new QDataStream)
-  , m_holdRequests(true)
+  : Connection(parentObject), m_connectionString(socket->serverName()),
+    m_socket(nullptr), m_dataStream(new QDataStream), m_holdRequests(true)
 {
   setSocket(socket);
 }
 
 LocalSocketConnection::LocalSocketConnection(QObject* parentObject,
                                              const QString& serverName)
-  : Connection(parentObject)
-  , m_connectionString(serverName)
-  , m_socket(nullptr)
-  , m_dataStream(new QDataStream)
-  , m_holdRequests(true)
+  : Connection(parentObject), m_connectionString(serverName), m_socket(nullptr),
+    m_dataStream(new QDataStream), m_holdRequests(true)
 {
   setSocket(new QLocalSocket);
 }

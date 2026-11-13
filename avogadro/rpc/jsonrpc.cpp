@@ -15,8 +15,7 @@
 
 namespace Avogadro::RPC {
 
-JsonRpc::JsonRpc(QObject* parent_)
-  : QObject(parent_)
+JsonRpc::JsonRpc(QObject* parent_) : QObject(parent_)
 {
   qRegisterMetaType<Message>("Avogadro::RPC::Message");
   qRegisterMetaType<PacketType>("Avogadro::RPC::PacketType");

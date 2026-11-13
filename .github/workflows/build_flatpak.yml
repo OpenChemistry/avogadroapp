@@ -1,11 +1,26 @@
 name: Build Flatpak
 
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+    # Bot branches get built by their pull_request event; building the push
+    # too just doubles the jobs. The tags line is required: with only a
+    # branch filter, tag pushes (release builds) would stop triggering.
+    branches-ignore:
+      - 'dependabot/**'
+      - 'update-i18n-templates'
+    tags:
+      - '**'
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   flatpak:
     name: "Flatpak"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Install dependencies
@@ -98,7 +113,7 @@ jobs:
       run: flatpak build-bundle repo Avogadro2.flatpak org.openchemistry.Avogadro2 test
 
     - name: Upload bundle
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         path: Avogadro2.flatpak
 

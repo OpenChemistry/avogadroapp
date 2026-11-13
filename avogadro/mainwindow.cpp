@@ -11,6 +11,7 @@
 #include "crashreporter.h"
 #include "menubuilder.h"
 #include "renderingdialog.h"
+#include "targetregistry.h"
 #include "tdxcontroller.h"
 #include "tooltipfilter.h"
 #include "viewfactory.h"
@@ -23,6 +24,7 @@
 #include <avogadro/io/compression.h>
 #include <avogadro/io/fileformat.h>
 #include <avogadro/io/fileformatmanager.h>
+#include <avogadro/qtgui/colortheme.h>
 #include <avogadro/qtgui/customelementdialog.h>
 #include <avogadro/qtgui/extensionplugin.h>
 #include <avogadro/qtgui/fileformatdialog.h>
@@ -42,12 +44,14 @@
 #include <avogadro/qtgui/utilities.h>
 #include <avogadro/qtopengl/activeobjects.h>
 #include <avogadro/qtopengl/glwidget.h>
+#include <avogadro/qtopengl/imagesizedialog.h>
 #include <avogadro/qtplugins/pluginmanager.h>
 #include <avogadro/rendering/glrenderer.h>
 #include <avogadro/rendering/scene.h>
 
 #include <QtCore/QDateTime>
 #include <QtCore/QDebug>
+#include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QJsonDocument>
@@ -65,7 +69,6 @@
 #include <QtCore/QUrl>
 #include <QtCore/QVersionNumber>
 
-#include <QOpenGLFramebufferObject>
 #include <QtGui/QClipboard>
 #include <QtGui/QCloseEvent>
 #include <QtGui/QDesktopServices>
@@ -289,16 +292,16 @@ IndexStatus indexFromOptions(const QVariantMap& options, const QString& key,
   return IndexStatus::Valid;
 }
 
-// The (untranslated) message for a molecule index that was refused.
+// The message for a molecule index that was refused.
 QString moleculeIndexMessage(IndexStatus status, int index, int count)
 {
   switch (status) {
     case IndexStatus::Missing:
-      return QStringLiteral("Missing 'index' parameter.");
+      return MainWindow::tr("Missing 'index' parameter.");
     case IndexStatus::NotWholeNumber:
-      return QStringLiteral("'index' must be a whole number.");
+      return MainWindow::tr("'index' must be a whole number.");
     case IndexStatus::OutOfRange:
-      return QStringLiteral("'index' %1 is out of range (%2 molecules are "
+      return MainWindow::tr("'index' %1 is out of range (%2 molecules are "
                             "open).")
         .arg(index)
         .arg(count);
@@ -317,8 +320,7 @@ class XMLEventObserver : public pqEventObserver
   QString XMLString;
 
 public:
-  XMLEventObserver(QObject* p)
-    : pqEventObserver(p)
+  XMLEventObserver(QObject* p) : pqEventObserver(p)
   {
     this->XMLStream = nullptr;
   }
@@ -383,11 +385,7 @@ class XMLEventSource : public pqEventSource
   QXmlStreamReader* XMLStream;
 
 public:
-  XMLEventSource(QObject* p)
-    : Superclass(p)
-  {
-    this->XMLStream = nullptr;
-  }
+  XMLEventSource(QObject* p) : Superclass(p) { this->XMLStream = nullptr; }
   ~XMLEventSource() { delete this->XMLStream; }
 
 protected:
@@ -453,28 +451,18 @@ using std::vector;
 
 MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
                        bool skipAutosave, bool skipDialogs)
-  : m_molecule(nullptr)
-  , m_rwMolecule(nullptr)
-  , m_moleculeModel(nullptr)
-  , m_layerModel(nullptr)
-  , m_activeScenePlugin(nullptr)
-  , m_queuedFilesStarted(false)
-  , m_menuBuilder(new MenuBuilder)
-  , m_fileReadThread(nullptr)
-  , m_fileWriteThread(nullptr)
-  , m_threadedReader(nullptr)
-  , m_threadedWriter(nullptr)
-  , m_progressDialog(nullptr)
-  , m_fileReadMolecule(nullptr)
-  , m_fileToolBar(new QToolBar(this))
-  , m_toolToolBar(new QToolBar(this))
-  , m_moleculeDirty(false)
-  , m_undo(nullptr)
-  , m_redo(nullptr)
-  , m_copyImage(nullptr)
-  , m_viewFactory(new ViewFactory)
+  : m_molecule(nullptr), m_rwMolecule(nullptr), m_moleculeModel(nullptr),
+    m_layerModel(nullptr), m_activeScenePlugin(nullptr),
+    m_queuedFilesStarted(false), m_menuBuilder(new MenuBuilder),
+    m_fileReadThread(nullptr), m_fileWriteThread(nullptr),
+    m_threadedReader(nullptr), m_threadedWriter(nullptr),
+    m_progressDialog(nullptr), m_fileReadMolecule(nullptr),
+    m_fileToolBar(new QToolBar(this)), m_toolToolBar(new QToolBar(this)),
+    m_moleculeDirty(false), m_undo(nullptr), m_redo(nullptr),
+    m_copyImage(nullptr), m_viewFactory(new ViewFactory)
 #ifdef _3DCONNEXION
-  , m_TDxController(nullptr)
+    ,
+    m_TDxController(nullptr)
 #endif
 {
   // Route the reserved camera-navigation shortcut (Ctrl/Cmd+arrow) to the
@@ -516,6 +504,11 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
   m_testUtility->addEventSource("xml", new XMLEventSource(this));
 #endif
 
+  // Created before the plugins load so buildTools() and the extension loop
+  // below can register with it.
+  m_targets = new TargetRegistry(this);
+  m_targets->setToolBar(m_toolToolBar);
+
   // Now load the plugins.
   PluginManager* plugin = PluginManager::instance();
   plugin->load();
@@ -551,9 +544,15 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
       connect(extension, &QtGui::ExtensionPlugin::actionsChanged, this,
               [this, extension]() {
                 buildMenu(extension);
-                if (m_initialized)
+                if (m_initialized) {
                   m_menuBuilder->buildMenuBar(menuBar());
+                  // The menus were replaced; tell the extensions again.
+                  m_targets->menusRebuilt();
+                }
               });
+      // Connects the highlight signals by name; harmless for an extension
+      // (or an avogadrolibs) that does not have them.
+      m_targets->addExtension(extension);
       extension->registerCommands();
       m_extensions.append(extension);
     }
@@ -602,6 +601,8 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 #endif
   buildMenu();
   m_initialized = true;
+  // Everything is registered; send the first target map.
+  m_targets->start();
 #ifdef Q_OS_WIN
   qDebug() << " updating recent files ";
 #endif
@@ -649,6 +650,15 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 #endif
   connect(prevShortcut, &QShortcut::activated, this,
           &MainWindow::previousMolecule);
+
+  // Cycle keyboard focus between the 3D view and the visible docked panes
+  auto* nextPaneShortcut = new QShortcut(QKeySequence("F6"), this);
+  connect(nextPaneShortcut, &QShortcut::activated, this,
+          &MainWindow::focusNextPane);
+
+  auto* prevPaneShortcut = new QShortcut(QKeySequence("Shift+F6"), this);
+  connect(prevPaneShortcut, &QShortcut::activated, this,
+          &MainWindow::focusPreviousPane);
 
 #ifdef _3DCONNEXION
   GLWidget* glWidget =
@@ -742,6 +752,8 @@ void MainWindow::setupInterface()
 
   // Our tool dock.
   m_toolDock = new QDockWidget(tr("Tool"), this);
+  // The Editor targets are only visible while this dock shows its widget.
+  m_targets->setToolDock(m_toolDock);
   addDockWidget(Qt::LeftDockWidgetArea, m_toolDock);
 
   // Our dock for toggling different display types.
@@ -1123,10 +1135,7 @@ void MainWindow::changeEvent(QEvent* e)
       e->type() == QEvent::PaletteChange || e->type() == QEvent::ThemeChange) {
     e->accept();
 
-    const QPalette defaultPalette;
-    // is the text lighter than the window color?
-    bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
-                     defaultPalette.color(QPalette::Window).lightness());
+    const bool darkMode = QtGui::colorTheme() == QtGui::ColorTheme::Dark;
 
     // Handle theme changes by telling tools to update their icons.
     for (ToolPlugin* tool : m_tools) {
@@ -1188,7 +1197,7 @@ void MainWindow::newMolecule()
   setMolecule(new Molecule(this));
 }
 
-template<class T, class M>
+template <class T, class M>
 void setWidgetMolecule(T* glWidget, M* mol)
 {
   // reset the camera when the previous molecule was empty
@@ -1339,13 +1348,21 @@ void MainWindow::markMoleculeDirty(unsigned int changes)
 void MainWindow::refreshDisplayTypes()
 {
   m_layerModel->updateRows();
+  // remember where keyboard focus was, so we can put it back afterwards
+  QPointer<QWidget> previousFocus = QApplication::focusWidget();
   // force m_sceneTreeView update (update doesn't update the checkbox)
   m_sceneTreeView->setFocus();
   if (m_activeScenePlugin != nullptr) {
     m_viewDock->setWidget(m_activeScenePlugin->setupWidget());
   }
-  // reset focus to m_layerTreeView
-  m_layerTreeView->setFocus();
+  // restore focus to where the user was (it may have been the old view dock
+  // widget, which is now hidden or deleted); otherwise use the 3D view
+  if (previousFocus != nullptr && previousFocus->isVisible())
+    previousFocus->setFocus();
+  else if (QWidget* view = m_multiViewWidget->activeWidget())
+    view->setFocus();
+  else
+    m_layerTreeView->setFocus();
 }
 
 void MainWindow::markMoleculeClean()
@@ -1428,7 +1445,11 @@ void MainWindow::readSettings()
 {
   QSettings settings;
   settings.beginGroup("MainWindow");
-  resize(settings.value("size", QSize(800, 600)).toSize());
+  // The default must be wide enough for the toolbars to fit on one row
+  QSize defaultSize(1024, 768);
+  if (QScreen* screen = QGuiApplication::primaryScreen())
+    defaultSize = defaultSize.boundedTo(screen->availableGeometry().size());
+  resize(settings.value("size", defaultSize).toSize());
   move(settings.value("pos", QPoint(20, 20)).toPoint());
   settings.endGroup();
   m_recentFiles = settings.value("recentFiles", QStringList()).toStringList();
@@ -2228,7 +2249,7 @@ void MainWindow::loadPackages()
   if (!dialogsSkipped())
     settings.setValue("MainWindow/firstRun", false);
 
-    // Load cached registrations so consumer plugins get their signals
+  // Load cached registrations so consumer plugins get their signals
 #ifndef NDEBUG
   qDebug() << "Load registered packages";
 #endif
@@ -2299,13 +2320,9 @@ void MainWindow::toolActivated()
       if (glWidget->activeTool()) {
         m_toolDock->setWidget(glWidget->activeTool()->toolWidget());
         m_toolDock->setWindowTitle(action->text());
-
-        // uncheck the toolbar
-        foreach (QAction* barAction, m_toolToolBar->actions()) {
-          if (toolId != barAction->data().toString())
-            barAction->setChecked(false);
-        }
       }
+      // Report the switch to the extensions (see also setActiveTool()).
+      m_targets->activeToolChanged();
     }
   }
 }
@@ -2480,6 +2497,170 @@ void MainWindow::previousMolecule()
   setMolecule(molecules[prevMol]);
 }
 
+namespace {
+// First widget within pane (including the pane itself) that accepts Tab focus,
+// or nullptr if there is none, e.g. the 3D view, or Display Type Settings
+// if no Display Type is selected
+QWidget* firstFocusableWidget(QWidget* pane)
+{
+  auto canFocus = [](QWidget* w) {
+    return (w->focusPolicy() & Qt::TabFocus) && w->isEnabled() &&
+           w->isVisible();
+  };
+
+  // in case a future pane is tab-focusable itself,
+  // or if 3D-view becomes tab-focusable
+  if (canFocus(pane))
+    return pane;
+
+  // The focus chain is the window's Tab order, a circular list;
+  // take the first widget inside this pane that Tab would stop on
+  for (QWidget* w = pane->nextInFocusChain(); w != pane;
+       w = w->nextInFocusChain()) {
+    if (pane->isAncestorOf(w) && canFocus(w))
+      return w;
+  }
+
+  return nullptr;
+}
+
+// Rank of a dock area in the F6 cycle: top, left, right, then bottom,
+// matching the order Tab moves through the window
+int dockAreaRank(Qt::DockWidgetArea area)
+{
+  switch (area) {
+    case Qt::TopDockWidgetArea:
+      return 0;
+    case Qt::LeftDockWidgetArea:
+      return 1;
+    case Qt::RightDockWidgetArea:
+      return 2;
+    case Qt::BottomDockWidgetArea:
+      return 3;
+    default:
+      return 4;
+  }
+}
+
+// Collect the 3D view plus every docked pane that is on screen, not floating
+// and has something to focus. The 3D view comes first; the docks follow in
+// on-screen order (by dock area: top, left, right, bottom; then
+// top-to-bottom, then left-to-right within an area), so
+// the cycle still matches what the user sees after panes are rearranged.
+QList<QWidget*> visiblePanes(const QMainWindow* window, QWidget* view,
+                             const QList<QDockWidget*>& docks)
+{
+  // Collect shown docks
+  QList<QDockWidget*> shownDocks;
+  for (QDockWidget* dock : docks) {
+    if (dock == nullptr || !dock->isVisible() || dock->isFloating())
+      continue;
+
+    // A tabified dock that isn't the current tab is moved off screen rather
+    // than hidden, so isVisible() is still true: check what is actually shown
+    if (dock->visibleRegion().isEmpty())
+      continue;
+
+    if (firstFocusableWidget(dock) != nullptr)
+      shownDocks << dock;
+  }
+
+  // Sort the visible docks
+  auto dockSort = [window](QDockWidget* a, QDockWidget* b) {
+    const int rankA = dockAreaRank(window->dockWidgetArea(a));
+    const int rankB = dockAreaRank(window->dockWidgetArea(b));
+
+    // Sort docks by dock location
+    if (rankA != rankB)
+      return rankA < rankB;
+
+    // Docks are children of the main window, so geometry() is in window
+    // coordinates and can be compared directly
+
+    // For panes in left and right docks, sort top to bottom
+    if (a->geometry().top() != b->geometry().top())
+      return a->geometry().top() < b->geometry().top();
+
+    // For panes in top and bottom docks, sort left to right
+    return a->geometry().left() < b->geometry().left();
+  };
+
+  std::stable_sort(shownDocks.begin(), shownDocks.end(), dockSort);
+
+  // Build the final visible pane list to cycle focus
+  QList<QWidget*> panes;
+  if (view != nullptr && view->isVisible())
+    panes << view;
+  for (QDockWidget* dock : shownDocks)
+    panes << dock;
+  return panes;
+}
+
+// Index of the pane containing the focus widget, or -1 if none does
+int paneIndexWithFocus(const QList<QWidget*>& panes)
+{
+  QWidget* focused = QApplication::focusWidget();
+  if (focused == nullptr)
+    return -1;
+  for (int i = 0; i < panes.size(); ++i) {
+    if (panes[i] == focused || panes[i]->isAncestorOf(focused))
+      return i;
+  }
+  return -1;
+}
+
+// Give focus to the first focusable widget within pane.
+// Focus on the pane itself if it can be focused and it has no focusable
+// widgets. (e.g., the 3D view)
+void focusPaneWidget(QWidget* pane)
+{
+  QWidget* target = firstFocusableWidget(pane);
+  (target != nullptr ? target : pane)->setFocus(Qt::ShortcutFocusReason);
+}
+
+} // namespace
+
+void MainWindow::focusNextPane()
+{
+  const QList<QWidget*> panes = visiblePanes(
+    this, m_multiViewWidget->activeWidget(),
+    { m_toolDock, m_sceneDock, m_viewDock, m_moleculeDock, m_layerDock });
+  // Only 1 pane (or none), nothing to cycle
+  if (panes.size() < 2)
+    return;
+
+  int current = paneIndexWithFocus(panes);
+  // Focus is not in any pane, so start at the 3D view
+  if (current < 0) {
+    focusPaneWidget(panes.first());
+    return;
+  }
+
+  int nextPane = (current + 1) % panes.size();
+  focusPaneWidget(panes[nextPane]);
+}
+
+void MainWindow::focusPreviousPane()
+{
+  const QList<QWidget*> panes = visiblePanes(
+    this, m_multiViewWidget->activeWidget(),
+    { m_toolDock, m_sceneDock, m_viewDock, m_moleculeDock, m_layerDock });
+  // Only 1 pane (or none), nothing to cycle
+  if (panes.size() < 2)
+    return;
+
+  int current = paneIndexWithFocus(panes);
+  // Focus is not in any pane, so start at the 3D view
+  if (current < 0) {
+    focusPaneWidget(panes.first());
+    return;
+  }
+
+  // 0 is the 3D view, e.g. (0 - 1 + 6) % 6 = 5 <- last pane
+  int prevPane = (current - 1 + panes.size()) % panes.size();
+  focusPaneWidget(panes[prevPane]);
+}
+
 void MainWindow::sceneItemActivated(const QModelIndex& idx)
 {
   if (!idx.isValid())
@@ -2537,7 +2718,7 @@ bool populatePluginModel(ScenePluginModel& model, QObject* p,
   return true;
 }
 
-template<class T>
+template <class T>
 bool populateTools(T* glWidget)
 {
   if (!glWidget->tools().isEmpty())
@@ -2626,107 +2807,22 @@ QtOpenGL::GLWidget* MainWindow::activeGLWidget() const
   return qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
 }
 
-QImage MainWindow::renderToImage(const QSize& requestedSize,
-                                 bool transparentBackground, QSize* nativeSize)
+QImage MainWindow::renderToImage(const QtOpenGL::RenderOptions& options,
+                                 QString* error)
 {
-  QImage exportImage;
+  GLWidget* viewWidget = activeGLWidget();
 
-  auto* glWidget =
-    qobject_cast<QOpenGLWidget*>(m_multiViewWidget->activeWidget());
-
-  // render it (with alpha channel)
-  Rendering::Scene* scene(nullptr);
-  GLWidget* viewWidget(nullptr);
-  if ((viewWidget =
-         qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scene = &viewWidget->renderer().scene();
-  }
-
-  // Without an active GL view there is nothing to grab; hand back a null
+  // Without an active GL view there is nothing to render; hand back a null
   // image so callers can report the failure rather than crash here.
-  if (scene == nullptr || glWidget == nullptr)
+  if (viewWidget == nullptr) {
+    if (error != nullptr)
+      *error = tr("There is no active 3D view to render.");
     return QImage();
-
-  Vector4ub cColor = scene->backgroundColor();
-  unsigned char red = cColor[0];
-  unsigned char green = cColor[1];
-  unsigned char blue = cColor[2];
-  unsigned char alpha = cColor[3];
-  cColor[0] = 0;
-  cColor[1] = 0;
-  cColor[2] = 0;
-  cColor[3] = 0; // 100% transparent for export
-  scene->setBackgroundColor(cColor);
-
-  glWidget->raise();
-  glWidget->repaint();
-  if (QOpenGLFramebufferObject::hasOpenGLFramebufferObjects()) {
-    exportImage = glWidget->grabFramebuffer();
-  } else {
-    auto* screen = QGuiApplication::primaryScreen();
-    auto pixmap = screen->grabWindow(glWidget->winId());
-    exportImage = pixmap.toImage();
   }
 
-  // set the GL widget back to the right background color (i.e., not 100%
-  // transparent)
-  cColor[0] = red;
-  cColor[1] = green;
-  cColor[2] = blue;
-  cColor[3] = alpha; // previous color
-  scene->setBackgroundColor(cColor);
-  glWidget->repaint();
-
-  if (nativeSize != nullptr)
-    *nativeSize = exportImage.size();
-
-  if (requestedSize.isValid() && !requestedSize.isEmpty()) {
-    // Fit the native grab onto a canvas of exactly requestedSize: scale
-    // preserving aspect ratio, then centre it, filling any letterboxing
-    // with either the view's background colour or transparency. This also
-    // serves as the "!transparentBackground" composite for this path, so
-    // that block must not run again below.
-    //
-    // Note: padding to a different aspect ratio preserves the original
-    // framing rather than re-composing the scene, so a render padded to an
-    // aspect ratio it wasn't composed for will sit smaller in frame than a
-    // true render at that aspect would. This is a deliberate stopgap until
-    // a real offscreen framebuffer render path replaces the
-    // grab-and-resample approach here.
-    QImage fitted(requestedSize, QImage::Format_ARGB32_Premultiplied);
-    fitted.fill(transparentBackground ? QColor(Qt::transparent)
-                                      : QColor(red, green, blue, 255));
-    QImage scaled = exportImage.scaled(requestedSize, Qt::KeepAspectRatio,
-                                       Qt::SmoothTransformation);
-    // QImage::scaled() propagates the source's device pixel ratio (2 on a
-    // Retina grab). QPainter::drawImage() honours that ratio and draws at
-    // logical size, so without resetting it here the content lands scaled
-    // down into a corner of "fitted" instead of filling it. "fitted" itself
-    // is already ratio-1.0 (default-constructed), and requestedSize/painter
-    // coordinates below are in raw pixels, so the drawn image must match.
-    scaled.setDevicePixelRatio(1.0);
-    QPainter painter(&fitted);
-    painter.drawImage((requestedSize.width() - scaled.width()) / 2,
-                      (requestedSize.height() - scaled.height()) / 2, scaled);
-    painter.end();
-    exportImage = fitted.convertToFormat(QImage::Format_ARGB32);
-  } else if (!transparentBackground) {
-    // No resize requested: composite the transparent render over the
-    // view's actual background colour, so the caller gets an opaque image.
-    QImage opaqueImage(exportImage.size(), QImage::Format_ARGB32_Premultiplied);
-    opaqueImage.fill(QColor(red, green, blue, 255));
-    // Draw a ratio-1.0 copy of the source: opaqueImage was constructed with
-    // exportImage.size() (raw pixels) at the default ratio of 1.0, but a
-    // Retina grabFramebuffer() image carries devicePixelRatio() == 2.
-    // QPainter::drawImage() honours the source ratio and would draw it at
-    // half size into the top-left quadrant otherwise.
-    QImage source = exportImage;
-    source.setDevicePixelRatio(1.0);
-    QPainter painter(&opaqueImage);
-    painter.drawImage(0, 0, source);
-    painter.end();
-    exportImage = opaqueImage.convertToFormat(QImage::Format_ARGB32);
-  }
+  QImage exportImage = viewWidget->renderImage(options, error);
+  if (exportImage.isNull())
+    return exportImage;
 
   // Now we embed molecular information into the file, if possible
   if (m_molecule && m_molecule->atomCount() < 1000) {
@@ -2743,6 +2839,7 @@ QImage MainWindow::renderToImage(const QSize& requestedSize,
 void MainWindow::exportGraphics()
 {
   // ask the user for a filename
+  const QString pngFilter = tr("PNG") + " (*.png)";
   QStringList filters;
 // Omit "common image formats" on Mac
 #ifdef Q_OS_MAC
@@ -2750,8 +2847,8 @@ void MainWindow::exportGraphics()
 #else
   filters << tr("Common image formats") + " (*.png *.jpg *.jpeg)"
 #endif
-    << tr("All files") + " (* *.*)" << tr("BMP") + " (*.bmp)"
-    << tr("PNG") + " (*.png)" << tr("JPEG") + " (*.jpg *.jpeg)";
+    << tr("All files") + " (* *.*)" << tr("BMP") + " (*.bmp)" << pngFilter
+    << tr("JPEG") + " (*.jpg *.jpeg)";
 
   // Use QFileInfo to get the parts of the path we want
   QString baseFileName;
@@ -2759,23 +2856,88 @@ void MainWindow::exportGraphics()
     baseFileName = m_molecule->data("fileName").toString().c_str();
   QFileInfo info(baseFileName);
 
-  QString fileName = QFileDialog::getSaveFileName(
-    this, tr("Export Bitmap Graphics"), "", "PNG (*.png)");
+  QSettings settings;
+  QString dir = settings.value("MainWindow/lastExportDir").toString();
+  if (dir.isEmpty() && !baseFileName.isEmpty())
+    dir = info.absolutePath();
 
-  exportGraphics(fileName);
+  QString initialPath = dir;
+  if (!baseFileName.isEmpty()) {
+    // "benzene.cjson.gz" suggests "benzene.png", not "benzene.cjson.png".
+    const QString stem =
+      QFileInfo(QString::fromStdString(
+                  Io::stripCompressionSuffix(info.fileName().toStdString())))
+        .completeBaseName();
+    const QString suggested = stem + ".png";
+    initialPath = dir.isEmpty() ? suggested : QDir(dir).filePath(suggested);
+  }
+
+  QString selectedFilter = pngFilter;
+  QString fileName = QFileDialog::getSaveFileName(
+    this, tr("Export Bitmap Graphics"), initialPath, filters.join(";;"),
+    &selectedFilter);
+  if (fileName.isEmpty())
+    return;
+
+  settings.setValue("MainWindow/lastExportDir",
+                    QFileInfo(fileName).absolutePath());
+
+  // Ask for the size (and background) of the image.
+  // Exports have always been transparent, so that is the first-run default.
+  QtOpenGL::ImageSizeDialog dialog(activeGLWidget(), "exportGraphics", true,
+                                   false, this, true);
+  if (dialog.exec() != QDialog::Accepted)
+    return;
+
+  QtOpenGL::RenderOptions options = dialog.renderOptions();
+  // Formats without an alpha channel would flatten a transparent background
+  // to black.
+  const QString suffix = QFileInfo(fileName).suffix().toLower();
+  if (suffix == "jpg" || suffix == "jpeg" || suffix == "bmp")
+    options.transparentBackground = false;
+
+  exportGraphics(fileName, options);
+}
+
+namespace {
+// The view size (times the device pixel ratio) with a transparent background,
+// which is what exports have always produced by default.
+QtOpenGL::RenderOptions transparentViewOptions()
+{
+  QtOpenGL::RenderOptions options;
+  options.transparentBackground = true;
+  return options;
+}
+} // namespace
+
+QImage MainWindow::renderForExport(const QtOpenGL::RenderOptions& options)
+{
+  QString error;
+  QImage image = renderToImage(options, &error);
+  if (image.isNull()) {
+    warnUser(Severity::Warning, tr("Avogadro"),
+             tr("Cannot render the image: %1").arg(error));
+  }
+  return image;
 }
 
 bool MainWindow::exportGraphics(QString fileName)
+{
+  // No dialog: the view size with a transparent background.
+  return exportGraphics(fileName, transparentViewOptions());
+}
+
+bool MainWindow::exportGraphics(QString fileName,
+                                const QtOpenGL::RenderOptions& options)
 {
   if (fileName.isEmpty())
     return false;
   if (QFileInfo(fileName).suffix().isEmpty())
     fileName += ".png";
 
-  // Pass no size, so we get the untouched native framebuffer grab (full
-  // device resolution), not a copy resampled down to the logical widget
-  // size.
-  QImage exportImage = renderToImage();
+  const QImage exportImage = renderForExport(options);
+  if (exportImage.isNull())
+    return false;
 
   if (!exportImage.save(fileName)) {
     warnUser(Severity::Warning, tr("Avogadro"),
@@ -2787,11 +2949,9 @@ bool MainWindow::exportGraphics(QString fileName)
 
 void MainWindow::copyGraphics()
 {
-  // Pass no size, so we get the untouched native framebuffer grab (full
-  // device resolution), not a copy resampled down to the logical widget
-  // size.
-  QImage exportImage = renderToImage();
-  QApplication::clipboard()->setImage(exportImage);
+  const QImage exportImage = renderForExport(transparentViewOptions());
+  if (!exportImage.isNull())
+    QApplication::clipboard()->setImage(exportImage);
 }
 
 void MainWindow::reassignCustomElements()
@@ -2916,7 +3076,7 @@ bool MainWindow::saveFile(bool async)
     else if (box.clickedButton() == cancelButton)
       return false;
     else if (box.clickedButton() == exportButton)
-      return exportFile(QString ::fromStdString(fileName),
+      return exportFile(QString::fromStdString(fileName),
                         async); // save in current format
   }
 
@@ -3033,6 +3193,8 @@ std::string MainWindow::exportString(const std::string& format)
 {
   std::string output;
   auto* mol = qobject_cast<Molecule*>(m_moleculeModel->activeMolecule());
+  if (!mol)
+    return output;
 
   Io::FileFormatManager::instance().writeString(*mol, output, format);
 
@@ -3142,6 +3304,9 @@ void MainWindow::setActiveTool(QString toolName)
       }
     }
     glWidget->setFocus();
+    // Triggering the tool's action above may also reach toolActivated(); the
+    // registry ignores a repeated report of the same tool.
+    m_targets->activeToolChanged();
   }
 
   if (!toolName.isEmpty()) {
@@ -3157,11 +3322,10 @@ void MainWindow::setActiveTool(QString toolName)
 
 void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel* scenePluginModel(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scenePluginModel = &glWidget->sceneModel();
-  }
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  ScenePluginModel* scenePluginModel = &glWidget->sceneModel();
 
   //  foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
   //    scene->setEnabled(false);
@@ -3173,25 +3337,22 @@ void MainWindow::setActiveDisplayTypes(QStringList displayTypes)
         scene->setEnabled(true);
     }
 
-  if (glWidget)
-    glWidget->updateScene();
+  glWidget->updateScene();
 }
 
 void MainWindow::setDisabledDisplayTypes(QStringList displayTypes)
 {
-  ScenePluginModel* scenePluginModel(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget()))) {
-    scenePluginModel = &glWidget->sceneModel();
-  }
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  ScenePluginModel* scenePluginModel = &glWidget->sceneModel();
 
   foreach (ScenePlugin* scene, scenePluginModel->scenePlugins())
     foreach (const QString& name, displayTypes)
       if (scene->objectName() == name)
         scene->setEnabled(false);
 
-  if (glWidget)
-    glWidget->updateScene();
+  glWidget->updateScene();
 }
 
 void MainWindow::undoEdit()
@@ -3256,30 +3417,25 @@ void MainWindow::activeMoleculeEdited()
 
 void MainWindow::setBackgroundColor()
 {
-  Rendering::SolidPipeline* pipeline(nullptr);
-  Rendering::Scene* scene(nullptr);
-  GLWidget* glWidget(nullptr);
-  if ((glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget())))
-    scene = &glWidget->renderer().scene();
-  pipeline = &glWidget->renderer().solidPipeline();
-  if (scene) {
-    Vector4ub cColor = scene->backgroundColor();
-    QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
-    QColor color = QColorDialog::getColor(qtColor, this);
-    if (color.isValid()) {
-      cColor[0] = static_cast<unsigned char>(color.red());
-      cColor[1] = static_cast<unsigned char>(color.green());
-      cColor[2] = static_cast<unsigned char>(color.blue());
-      cColor[3] = static_cast<unsigned char>(color.alpha());
-      scene->setBackgroundColor(cColor);
-      if (pipeline)
-        pipeline->setBackgroundColor(cColor);
-      if (glWidget)
-        glWidget->update();
+  auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
+  if (!glWidget)
+    return;
+  Rendering::Scene* scene = &glWidget->renderer().scene();
+  Rendering::SolidPipeline* pipeline = &glWidget->renderer().solidPipeline();
+  Vector4ub cColor = scene->backgroundColor();
+  QColor qtColor(cColor[0], cColor[1], cColor[2], cColor[3]);
+  QColor color = QColorDialog::getColor(qtColor, this);
+  if (color.isValid()) {
+    cColor[0] = static_cast<unsigned char>(color.red());
+    cColor[1] = static_cast<unsigned char>(color.green());
+    cColor[2] = static_cast<unsigned char>(color.blue());
+    cColor[3] = static_cast<unsigned char>(color.alpha());
+    scene->setBackgroundColor(cColor);
+    pipeline->setBackgroundColor(cColor);
+    glWidget->update();
 
-      QSettings settings;
-      settings.setValue("backgroundColor", color);
-    }
+    QSettings settings;
+    settings.setValue("backgroundColor", color);
   }
 }
 
@@ -3388,6 +3544,10 @@ void MainWindow::buildMenu()
   path << tr("&File");
   // New
   auto* action = new QAction(tr("&New"), this);
+  // The object name matches the action of the same name in mainwindow.ui. The
+  // registry name is what a tutorial uses ("action:new").
+  action->setObjectName(QStringLiteral("actionNew"));
+  m_targets->addAction(QStringLiteral("new"), action);
   action->setShortcut(QKeySequence::New);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
   action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentNew));
@@ -3399,6 +3559,8 @@ void MainWindow::buildMenu()
   connect(action, &QAction::triggered, this, &MainWindow::newMolecule);
   // Open
   action = new QAction(tr("&Open…"), this);
+  action->setObjectName(QStringLiteral("actionOpen"));
+  m_targets->addAction(QStringLiteral("open"), action);
   action->setShortcut(QKeySequence::Open);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
   action->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::DocumentOpen));
@@ -3719,24 +3881,26 @@ void MainWindow::buildTools()
 
   // determine if need dark mode or light mode icons
   // e.g. https://www.qt.io/blog/dark-mode-on-windows-11-with-qt-6.5
-  const QPalette defaultPalette;
-  // is the text lighter than the window color?
-  bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
-                   defaultPalette.color(QPalette::Window).lightness());
+  const bool darkMode = QtGui::colorTheme() == QtGui::ColorTheme::Dark;
 
   // Now the tool plugins need to be built/added.
   QList<ToolPluginFactory*> toolPluginFactories =
     plugin->pluginFactories<ToolPluginFactory>();
   foreach (ToolPluginFactory* factory, toolPluginFactories) {
     ToolPlugin* tool = factory->createInstance(QCoreApplication::instance());
-    tool->setParent(this);
-    tool->setIcon(darkMode);
-    if (tool)
+    if (tool) {
+      tool->setParent(this);
+      tool->setIcon(darkMode);
       m_tools << tool;
+    }
   }
 
   // sort them based on priority
   std::sort(m_tools.begin(), m_tools.end(), ToolSort);
+
+  // exclusive group: clicking the active tool again won't uncheck it
+  auto* toolGroup = new QActionGroup(m_toolToolBar);
+  toolGroup->setExclusionPolicy(QActionGroup::ExclusionPolicy::Exclusive);
 
   int index = 1;
   foreach (ToolPlugin* toolPlugin, m_tools) {
@@ -3748,10 +3912,15 @@ void MainWindow::buildTools()
     QAction* action = toolPlugin->activateAction();
     action->setParent(m_toolToolBar);
     action->setCheckable(true);
-    if (index < 10)
-      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index)));
+    // Ctrl+1 ... Ctrl+9, then Ctrl+0 for the tenth tool
+    if (index <= 10)
+      action->setShortcut(QKeySequence(QString("Ctrl+%1").arg(index % 10)));
     action->setData(toolPlugin->objectName());
+    toolGroup->addAction(action);
     m_toolToolBar->addAction(action);
+
+    // Becomes "tool:<short name>".
+    m_targets->addTool(toolPlugin);
 
     connect(action, &QAction::triggered, this, &MainWindow::toolActivated);
     connect(toolPlugin, &ToolPlugin::registerCommand, this,
@@ -4522,8 +4691,8 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
         discard.metaType().id() == QMetaType::Bool && discard.toBool();
       if (isModified(target) && !discarding) {
         if (message != nullptr)
-          *message = QStringLiteral("The molecule has unsaved changes; pass "
-                                    "discard: true to close it anyway.");
+          *message = tr("The molecule has unsaved changes; pass "
+                        "discard: true to close it anyway.");
         return CommandStatus::Failed;
       }
       closeMolecule(target);
@@ -4539,8 +4708,8 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
     const bool undoing = command == "undo";
     if (!(undoing ? canUndo() : canRedo())) {
       if (message != nullptr)
-        *message = undoing ? QStringLiteral("There is nothing to undo.")
-                           : QStringLiteral("There is nothing to redo.");
+        *message = undoing ? tr("There is nothing to undo.")
+                           : tr("There is nothing to redo.");
       return CommandStatus::Failed;
     }
 
@@ -4555,7 +4724,7 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
   } else if (command == "activateTool") {
     if (activeGLWidget() == nullptr) {
       if (message != nullptr)
-        *message = QStringLiteral("There is no active view.");
+        *message = tr("There is no active view.");
       return CommandStatus::Failed;
     }
 
@@ -4569,7 +4738,7 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
       });
     if (!found) {
       if (message != nullptr)
-        *message = QStringLiteral("Unknown tool '%1'.").arg(name);
+        *message = tr("Unknown tool '%1'.").arg(name);
       return CommandStatus::Failed;
     }
 
@@ -4646,4 +4815,4 @@ MainWindow::CommandStatus MainWindow::handleCommand(const QString& command,
   return CommandStatus::NotHandled;
 }
 
-} // End of Avogadro namespace
+} // namespace Avogadro

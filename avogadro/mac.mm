@@ -4,6 +4,10 @@
 ******************************************************************************/
 
 #import <AppKit/NSWindow.h>
+#import <AppKit/AppKit.h>
+
+// For systemPrefersReducedMotion(), defined at the end of this file.
+#include "reducemotion.h"
 
 // Set some Mac compatibility bits using Objective-C++
 // From https://forum.qt.io/topic/60623/qt-5-4-2-os-x-10-11-el-capitan-how-to-remove-the-enter-full-screen-menu-item/
@@ -21,3 +25,17 @@ void removeMacSpecificMenuItems() {
 
   return;
 }
+
+namespace Avogadro {
+
+// System Settings > Accessibility > Display > Reduce motion
+// The cross-platform declaration is in reducemotion.h; the other platforms are
+// in reducemotion.cpp. The ternary turns the Objective-C BOOL into a C++ bool.
+bool systemPrefersReducedMotion()
+{
+  return [[NSWorkspace sharedWorkspace] accessibilityDisplayShouldReduceMotion]
+           ? true
+           : false;
+}
+
+} // namespace Avogadro

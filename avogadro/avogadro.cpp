@@ -11,6 +11,7 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
+#include <QtCore/QFileInfo>
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QLocale>
 #include <QtCore/QOperatingSystemVersion>
@@ -301,39 +302,66 @@ int main(int argc, char* argv[])
   bool libsLoaded = false;
   QString successfulPath;
 
+  // First find the Avogadro translation for the requested locale.
   foreach (const QString& translationPath, translationPaths) {
-    if (!qtLoaded &&
-        qtTranslator->load(currentLocale, "qt", "_", translationPath)) {
-      if (app.installTranslator(qtTranslator)) {
-        qDebug() << "qt Translation successfully loaded.";
-        qtLoaded = true;
-      }
-    }
-    if (!qtLoaded &&
-        qtBaseTranslator->load(currentLocale, "qtbase", "_", translationPath)) {
-      if (app.installTranslator(qtBaseTranslator)) {
-        qDebug() << "qtbase Translation successfully loaded.";
-        qtLoaded = true;
-      }
-    }
-    if (!avoLoaded && avoTranslator->load(currentLocale, "avogadroapp", "-",
-                                          translationPath)) {
+    if (avoTranslator->load(currentLocale, "avogadroapp", "-",
+                            translationPath)) {
       if (app.installTranslator(avoTranslator)) {
-        qDebug() << "AvogadroApp Translation " << currentLocale.name()
-                 << " loaded " << translationPath;
         avoLoaded = true;
         successfulPath = translationPath;
+        break;
       }
     }
-    if (!libsLoaded && avoLibsTranslator->load(currentLocale, "avogadrolibs",
-                                               "-", translationPath)) {
-      if (app.installTranslator(avoLibsTranslator)) {
-        qDebug() << "AvogadroLibs Translation " << currentLocale.name()
-                 << " loaded " << translationPath;
-        libsLoaded = true;
+  }
+
+  // Load the other translators in the language Avogadro actually used.
+  // Loading each with currentLocale can fall through its uiLanguages() list
+  // differently (e.g., Indonesian for Avogadro, but Arabic for Qt, which has
+  // no Indonesian file), mixing languages and mirroring the UI right-to-left.
+  if (avoLoaded) {
+    // Use the loaded file's name (e.g., id, pt_BR, ca@valencia); the language
+    // stored in the .qm metadata can differ (ar -> ar_EG, ca@valencia -> ca_ES)
+    QString translationLanguage =
+      QFileInfo(avoTranslator->filePath()).completeBaseName();
+    const QString prefix = "avogadroapp-";
+    if (translationLanguage.startsWith(prefix))
+      translationLanguage = translationLanguage.mid(prefix.length());
+    const QLocale translationLocale(translationLanguage);
+
+    qDebug() << "AvogadroApp Translation " << translationLanguage << " loaded "
+             << successfulPath;
+
+    foreach (const QString& translationPath, translationPaths) {
+      if (!qtLoaded &&
+          qtTranslator->load(translationLocale, "qt", "_", translationPath)) {
+        if (app.installTranslator(qtTranslator)) {
+          qDebug() << "qt Translation " << translationLanguage << " loaded "
+                   << translationPath;
+          qtLoaded = true;
+        }
       }
-    }
-  } // done looking for translations
+      if (!qtLoaded && qtBaseTranslator->load(translationLocale, "qtbase", "_",
+                                              translationPath)) {
+        if (app.installTranslator(qtBaseTranslator)) {
+          qDebug() << "qtbase Translation " << translationLanguage << " loaded "
+                   << translationPath;
+          qtLoaded = true;
+        }
+      }
+      if (!libsLoaded &&
+          avoLibsTranslator->load("avogadrolibs-" + translationLanguage,
+                                  translationPath)) {
+        if (app.installTranslator(avoLibsTranslator)) {
+          qDebug() << "AvogadroLibs Translation " << translationLanguage
+                   << " loaded " << translationPath;
+          libsLoaded = true;
+        }
+      }
+    } // done looking for translations
+
+    // Only right-to-left languages (e.g., ar, fa, he) should mirror the UI
+    app.setLayoutDirection(translationLocale.textDirection());
+  }
 
   // Go through the possible translations / locale codes
   // to get the localized names for the language dialog

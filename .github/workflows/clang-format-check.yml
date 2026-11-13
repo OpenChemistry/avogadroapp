@@ -1,5 +1,15 @@
 name: clang-format Check
-on: [push, pull_request]
+on:
+  push:
+    # Bot branches get built by their pull_request event; building the push
+    # too just doubles the jobs. The tags line is required: with only a
+    # branch filter, tag pushes (release builds) would stop triggering.
+    branches-ignore:
+      - 'dependabot/**'
+      - 'update-i18n-templates'
+    tags:
+      - '**'
+  pull_request:
 
 jobs:
   formatting-check:
@@ -11,29 +21,32 @@ jobs:
       run: sudo apt-get -qq install clang-format
 
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        fetch-depth: 0
 
     - name: 'Run clang-format-diff'
+      env:
+        BASE_REF: ${{ github.base_ref || 'master' }}
       run: |
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/openchemistry/avogadroapp
-        git fetch origin master:master
+        # Compare against this repository's base branch (the PR target, or
+        # master for pushes), not avogadrolibs.
+        git fetch origin "${BASE_REF}"
+        BASE_SHA=$(git merge-base "origin/${BASE_REF}" HEAD)
+        echo BASE_SHA=${BASE_SHA}
 
-        echo `which clang-format-diff`
-        export MASTER_SHA=`cat .git/refs/heads/master`
-        echo MASTER_SHA=${MASTER_SHA}
-
-        git diff `cat .git/refs/heads/master` --name-only
-        DIFF=`git diff -U0 ${MASTER_SHA} -- '*.h' '*.cpp' | clang-format-diff -p1`
+        git diff ${BASE_SHA} --name-only
+        DIFF=$(git diff -U0 ${BASE_SHA} -- '*.h' '*.cpp' | clang-format-diff -p1)
         if [ -z "$DIFF" ]; then
           printf "clang-format-diff reports no problems"
           exit 0
         else
-          git diff -U0 ${MASTER_SHA} -- '*.h' '*.cpp' | clang-format-diff -p1 >${{ runner.workspace }}/clang-format.diff
+          printf '%s\n' "$DIFF" >${{ runner.workspace }}/clang-format.diff
           exit 1
         fi
 
     - name: Upload patch
       if: failure()
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
       with:
         path: ${{ runner.workspace }}/clang-format.diff
         name: clang-format.diff

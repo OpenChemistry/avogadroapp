@@ -11,12 +11,12 @@
 #include <QSslSocket>
 
 #include <avogadro/core/version.h>
+#include <avogadro/qtgui/colortheme.h>
 
 namespace Avogadro {
 
 AboutDialog::AboutDialog(QWidget* parent_)
-  : QDialog(parent_)
-  , m_ui(new Ui::AboutDialog)
+  : QDialog(parent_), m_ui(new Ui::AboutDialog)
 {
   m_ui->setupUi(this);
 
@@ -52,11 +52,8 @@ AboutDialog::AboutDialog(QWidget* parent_)
     html.arg("10").arg(QSslSocket::sslLibraryVersionString()));
 
   // check for light or dark mode
-  const QPalette defaultPalette;
-  // is the text lighter than the window color?
-  bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
-                   defaultPalette.color(QPalette::Window).lightness());
-  QString theme = darkMode ? "dark" : "light";
+  const QString theme =
+    QtGui::colorTheme() == QtGui::ColorTheme::Dark ? "dark" : "light";
   loadImage(theme);
 }
 
@@ -82,12 +79,8 @@ void AboutDialog::changeEvent(QEvent* e)
       e->type() == QEvent::PaletteChange || e->type() == QEvent::ThemeChange) {
     e->accept();
 
-    const QPalette defaultPalette;
-    // is the text lighter than the window color?
-    bool darkMode = (defaultPalette.color(QPalette::WindowText).lightness() >
-                     defaultPalette.color(QPalette::Window).lightness());
-
-    QString theme = darkMode ? "dark" : "light";
+    const QString theme =
+      QtGui::colorTheme() == QtGui::ColorTheme::Dark ? "dark" : "light";
     loadImage(theme);
   }
 }
