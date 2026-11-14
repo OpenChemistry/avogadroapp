@@ -15,14 +15,14 @@
 # gmkeebiy <gmkeebiy@sharklasers.com>, 2025.
 # eNoWater <rf_sun@users.noreply.hosted.weblate.org>, 2026.
 # reducedradius <137701630+flytothehighest@users.noreply.github.com>, 2026.
+# Pengbo Gao <gravitylead@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-08 07:27+0000\n"
-"PO-Revision-Date: 2026-08-03 20:23+0000\n"
-"Last-Translator: reducedradius "
-"<137701630+flytothehighest@users.noreply.github.com>\n"
+"PO-Revision-Date: 2026-11-14 05:09+0000\n"
+"Last-Translator: Pengbo Gao <gravitylead@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.8.1.dev0\n"
+"X-Generator: Weblate 2026.12.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -80,7 +80,7 @@ msgstr "没有在 BackgroundFileFormat 中设置文件名！"
 
 #: crashreportdialog.cpp:19
 msgid "Crash Reporting"
-msgstr ""
+msgstr "崩溃报告"
 
 #: crashreportdialog.cpp:25
 msgid ""
@@ -106,28 +106,28 @@ msgstr ""
 
 #: crashreportdialog.cpp:61
 msgid "Send Crash Reports"
-msgstr ""
+msgstr "发送崩溃报告"
 
 #: crashreportdialog.cpp:62
 msgid "Don't Send"
-msgstr ""
+msgstr "不发送"
 
 #: crashreportdialog.cpp:65
 msgid "Send crash reports to the Avogadro developers"
-msgstr ""
+msgstr "发送崩溃报告给 Avogadro 的开发者"
 
 #: mainwindow.cpp:296
 msgid "Missing 'index' parameter."
-msgstr ""
+msgstr "缺少“index”参数。"
 
 #: mainwindow.cpp:298
 msgid "'index' must be a whole number."
-msgstr ""
+msgstr "“index” 必须是整数。"
 
 #: mainwindow.cpp:300
 #, qt-format
 msgid "'index' %1 is out of range (%2 molecules are open)."
-msgstr ""
+msgstr "“index” %1 超出范围（已打开 %2 个分子）。"
 
 #: mainwindow.cpp:626
 msgid "Ready…"
@@ -730,24 +730,24 @@ msgstr "无法打开文件"
 
 #: mainwindow.cpp:4346
 msgid "The plugin was unloaded."
-msgstr ""
+msgstr "插件未加载。"
 
 #: mainwindow.cpp:4394 mainwindow.cpp:4413 mainwindow.cpp:4436
 #: mainwindow.cpp:4455 mainwindow.cpp:4483 rpclistener.cpp:650
 msgid "No molecule is open."
-msgstr ""
+msgstr "未打开分子。"
 
 #: mainwindow.cpp:4423
 msgid "Cannot remove the last remaining layer."
-msgstr ""
+msgstr "无法移除最后一个图层。"
 
 #: mainwindow.cpp:4467
 msgid "'visible' must be true or false."
-msgstr ""
+msgstr "“visible” 必须为 true 或 false。"
 
 #: mainwindow.cpp:4495
 msgid "'locked' must be true or false."
-msgstr ""
+msgstr "“locked” 必须为 true 或 false。"
 
 #: mainwindow.cpp:4545
 msgid ""
@@ -769,11 +769,11 @@ msgstr ""
 #: mainwindow.cpp:4592
 #, qt-format
 msgid "Unknown tool '%1'."
-msgstr ""
+msgstr "未知工具 “%1”。"
 
 #: mainwindow.cpp:4618
 msgid "No molecule"
-msgstr ""
+msgstr "无分子"
 
 #. i18n: file: mainwindow.ui:49
 #. i18n: ectx: property (title), widget (QMenu, menuBuild)
@@ -834,15 +834,15 @@ msgstr ""
 
 #: rpclistener.cpp:922
 msgid "That plugin is already running a command."
-msgstr ""
+msgstr "该插件已在执行命令。"
 
 #: rpclistener.cpp:954
 msgid "The command timed out."
-msgstr ""
+msgstr "指令超时。"
 
 #: targetregistry.cpp:517
 msgid "3D view"
-msgstr ""
+msgstr "3D 视图"
 
 #: targetregistry.cpp:523
 msgid "The 3D view is not showing."
@@ -1129,12 +1129,12 @@ msgstr "阴影强度："
 #. i18n: file: renderingdialog.ui:130
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
 msgid "Thickness of the outline, in pixels"
-msgstr ""
+msgstr "轮廓粗细（单位：像素）"
 
 #. i18n: file: renderingdialog.ui:133
 #. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
 msgid "Outline Width:"
-msgstr ""
+msgstr "轮廓宽度："
 
 #. i18n: file: renderingdialog.ui:160
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
