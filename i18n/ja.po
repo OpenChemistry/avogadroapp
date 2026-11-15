@@ -4,13 +4,14 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
 # Takaki Iekura <tacostea@gmail.com>, 2021.
 # Eisuke Kawashima <e.kawaschima+weblate@gmail.com>, 2021, 2022, 2023, 2024, 2025, 2026.
+# Eisuke Kawashima <e-kwsm@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-08 07:27+0000\n"
-"PO-Revision-Date: 2026-10-04 02:51+0000\n"
-"Last-Translator: Eisuke Kawashima <e.kawaschima+weblate@gmail.com>\n"
+"PO-Revision-Date: 2026-11-15 19:04+0000\n"
+"Last-Translator: Eisuke Kawashima <e-kwsm@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/ja/>\n"
 "Language: ja\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.10.1.dev0\n"
+"X-Generator: Weblate 2026.12.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:25
@@ -769,7 +770,7 @@ msgstr ""
 #: mainwindow.cpp:4592
 #, qt-format
 msgid "Unknown tool '%1'."
-msgstr ""
+msgstr "不明なツール 「%1」"
 
 #: mainwindow.cpp:4618
 #, fuzzy
@@ -844,7 +845,7 @@ msgstr "コマンドがタイムアウトしました。"
 
 #: targetregistry.cpp:517
 msgid "3D view"
-msgstr ""
+msgstr "3Dビュー"
 
 #: targetregistry.cpp:523
 msgid "The 3D view is not showing."
