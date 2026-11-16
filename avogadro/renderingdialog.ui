@@ -33,6 +33,9 @@
        <property name="text">
         <string>Ambient Occlusion:</string>
        </property>
+       <property name="buddy">
+        <cstring>aoEnableCheckBox</cstring>
+       </property>
       </widget>
      </item>
      <item row="0" column="1">
@@ -87,6 +90,9 @@
        <property name="text">
         <string>Shadow Strength:</string>
        </property>
+       <property name="buddy">
+        <cstring>aoStrengthDoubleSpinBox</cstring>
+       </property>
       </widget>
      </item>
     </layout>
@@ -132,6 +138,9 @@
        <property name="text">
         <string>Outline Width:</string>
        </property>
+       <property name="buddy">
+        <cstring>edStrengthDoubleSpinBox</cstring>
+       </property>
       </widget>
      </item>
      <item row="1" column="1">
@@ -162,6 +171,9 @@
        <property name="text">
         <string>Edge Outline:</string>
        </property>
+       <property name="buddy">
+        <cstring>edEnableCheckBox</cstring>
+       </property>
       </widget>
      </item>
     </layout>
@@ -182,6 +194,9 @@
        </property>
        <property name="text">
         <string>Fog:</string>
+       </property>
+       <property name="buddy">
+        <cstring>fogEnableCheckBox</cstring>
        </property>
       </widget>
      </item>
@@ -214,6 +229,9 @@
        <property name="text">
         <string>Fog Strength:</string>
        </property>
+       <property name="buddy">
+        <cstring>fogStrengthDoubleSpinBox</cstring>
+       </property>
       </widget>
      </item>
      <item row="1" column="1">
@@ -243,6 +261,9 @@
        </property>
        <property name="text">
         <string>Fog Position:</string>
+       </property>
+       <property name="buddy">
+        <cstring>fogPositionDoubleSpinBox</cstring>
        </property>
       </widget>
      </item>
@@ -285,6 +306,9 @@
        <property name="text">
         <string>Depth Blur:</string>
        </property>
+       <property name="buddy">
+        <cstring>dofEnableCheckBox</cstring>
+       </property>
       </widget>
      </item>
      <item row="0" column="1">
@@ -319,6 +343,9 @@
        <property name="text">
         <string>Blur Strength :</string>
        </property>
+       <property name="buddy">
+        <cstring>dofStrengthDoubleSpinBox</cstring>
+       </property>
       </widget>
      </item>
      <item row="1" column="1">
@@ -348,6 +375,9 @@
        </property>
        <property name="text">
         <string>Blur Position:</string>
+       </property>
+       <property name="buddy">
+        <cstring>dofPositionDoubleSpinBox</cstring>
        </property>
       </widget>
      </item>
