@@ -51,6 +51,7 @@ set(avogadro_srcs
   backgroundfileformat.cpp
   mainwindow.cpp
   highlightoverlay.cpp
+  i18n.cpp
   menubuilder.cpp
   preferencesdialog.cpp
   reducemotion.cpp

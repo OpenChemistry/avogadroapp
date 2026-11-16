@@ -80,7 +80,7 @@
       <enum>Qt::Orientation::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::StandardButton::Apply|QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
+      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
      </property>
     </widget>
    </item>
@@ -93,7 +93,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="general">
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -102,20 +102,21 @@
          <item row="0" column="0">
           <widget class="QLabel" name="userInterfaceLanguageLabel">
            <property name="text">
-            <string>User Interface Language:</string>
+            <string>Interface Language:</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QComboBox" name="userInterfaceLanguageComboBox">
-           <item>
-            <property name="text">
-             <string>System Default</string>
-            </property>
-           </item>
-          </widget>
+          <widget class="QComboBox" name="userInterfaceLanguageComboBox"/>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Avogadro must be restarted for this to take effect.</string>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="Line" name="line">
@@ -197,20 +198,6 @@
      </widget>
      <widget class="QWidget" name="view">
       <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <layout class="QFormLayout" name="formLayout_6">
-         <item row="0" column="0">
-          <widget class="QLabel" name="overlayAxesLabel">
-           <property name="text">
-            <string>Overlay Axes:</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QCheckBox" name="overlayAxesCheckBox"/>
-         </item>
-        </layout>
-       </item>
        <item>
         <spacer name="verticalSpacer_7">
          <property name="orientation">

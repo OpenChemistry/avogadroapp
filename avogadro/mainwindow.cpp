@@ -108,6 +108,7 @@
 #include <cmath>
 #include <filesystem>
 #include <limits>
+#include <qlogging.h>
 #include <system_error>
 
 #ifdef QTTESTING
@@ -1421,20 +1422,6 @@ void MainWindow::writeSettings()
       settings.setValue(settingsKey, plugin->isEnabled());
     }
   }
-}
-
-void MainWindow::setLocale(const QString& locale)
-{
-  QSettings settings;
-  if (locale.isEmpty()) {
-    settings.remove("locale"); // system is the default
-  } else {
-    settings.setValue("locale", locale);
-  }
-
-  QMessageBox::information(this, tr("Restart needed"),
-                           tr("Please restart Avogadro to use the new "
-                              "language."));
 }
 
 void MainWindow::readSettings()
@@ -3411,8 +3398,19 @@ void MainWindow::activeMoleculeEdited()
 
 void MainWindow::editPreferences()
 {
-  PreferencesDialog dialog(this);
-  dialog.exec();
+  // Ideally we would cache the last viewed/used page and open at it, as per
+  // https://developer.apple.com/design/human-interface-guidelines/settings
+  auto* dialog = new PreferencesDialog(this, 0);
+  dialog->setAttribute(Qt::WA_DeleteOnClose);
+  connect(dialog, &QDialog::accepted, this, &MainWindow::applyPreferences);
+  dialog->open();
+}
+
+void MainWindow::applyPreferences()
+{
+  // For settings for which changes don't permeate through the application just
+  // by being changed in QSettings and which must be manually applied
+  // e.g. a change to the background color
 }
 
 void MainWindow::setBackgroundColor()
@@ -3708,7 +3706,7 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(editPath, m_copyImage, 530);
 
   // Settings/preferences dialog
-  auto* preferences = new QAction(tr("Pre&ferences"), this);
+  auto* preferences = new QAction(tr("Pre&ferences…"), this);
   // Lives under Edit on Windows/Linux, but the Application Menu on Mac
   // (handled automatically by Qt)
   preferences->setMenuRole(QAction::MenuRole::PreferencesRole);
@@ -3762,10 +3760,6 @@ void MainWindow::buildMenu()
   // *** Extensions Menu ***
   QStringList extensionsPath;
   extensionsPath << tr("&Extensions");
-
-  action = new QAction(tr("User Interface Language…"), this);
-  m_menuBuilder->addAction(extensionsPath, action, 100);
-  connect(action, &QAction::triggered, this, &MainWindow::showLanguageDialog);
 
   // Periodic table.
   action = new QAction(tr("&Periodic Table…"), this);
@@ -3870,29 +3864,6 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin* extension)
 bool ToolSort(const ToolPlugin* a, const ToolPlugin* b)
 {
   return a->priority() < b->priority();
-}
-
-void MainWindow::showLanguageDialog()
-{
-  bool ok;
-  int currentIndex = 0;
-  m_translationList[0] = tr("System Language");
-
-  QSettings settings;
-  QString currentLanguage = settings.value("locale", "System").toString();
-  if (currentLanguage != "System")
-    currentIndex = m_localeCodes.indexOf(currentLanguage);
-
-  QString item =
-    QInputDialog::getItem(this, tr("Language"), tr("User Interface Language:"),
-                          m_translationList, currentIndex, false, &ok);
-
-  if (ok && !item.isEmpty()) {
-    auto index = m_translationList.indexOf(item);
-    if (index != -1) {
-      setLocale(m_localeCodes[index]);
-    }
-  }
 }
 
 void MainWindow::buildTools()

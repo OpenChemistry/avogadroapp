@@ -6,17 +6,223 @@
 #include "preferencesdialog.h"
 #include "ui_preferencesdialog.h"
 
+#include "i18n.h"
+
+#include <QtWidgets/QListWidget>
+
+#include <QtCore/QSettings>
+
 namespace Avogadro {
 
-PreferencesDialog::PreferencesDialog(QWidget* parent_)
-  : QDialog(parent_), m_ui(new Ui::PreferencesDialog)
+PreferencesDialog::PreferencesDialog(QWidget* parent_, int initialPageIndex)
+  : QDialog(parent_), m_ui(new Ui::PreferencesDialog), m_settings(),
+    m_availableLocales(availableLocales())
 {
   m_ui->setupUi(this);
+
+  // Each page may have a corresponding setup method, but it is optional. It
+  // should be defined if the page has any widgets that require additional setup
+  // that cannot be done in the .ui file (for example, a combobox with a set of
+  // options that can only be known discovered at runtime).
+  setupAll();
+
+  // Each page should have a corresponding update method that changes the state
+  // of the widgets to reflect the state of m_settings. The method should not
+  // change the settings in any way while doing this.
+  updateAll();
+
+  m_ui->pageList->setCurrentRow(initialPageIndex);
+  changePage(initialPageIndex);
+
+  connect(m_ui->pageList, &QListWidget::currentRowChanged, this,
+          &PreferencesDialog::changePage);
+
+  // Each page should have a corresponding apply method that changes m_settings
+  // to reflect the state of the widgets. The method is then called if the
+  // preferences dialog is closed by clicking OK. It is never called if the
+  // dialog is closed with Cancel.
+  connect(this, &QDialog::accepted, this, &PreferencesDialog::applyAll);
 }
 
 PreferencesDialog::~PreferencesDialog()
 {
   delete m_ui;
 }
+
+void PreferencesDialog::changePage(int index)
+{
+  m_ui->pageView->setCurrentIndex(index);
+}
+
+void PreferencesDialog::setupAll()
+{
+  setupGeneral();
+}
+
+void PreferencesDialog::updateAll()
+{
+  updateGeneral();
+  updateControls();
+  updateView();
+  updateRendering();
+  updateColors();
+  updateAccessibility();
+  updateBonding();
+}
+
+void PreferencesDialog::applyAll()
+{
+  applyGeneral();
+  applyControls();
+  applyView();
+  applyRendering();
+  applyColors();
+  applyAccessibility();
+  applyBonding();
+}
+
+// General
+// [General/locale] = UI lang
+// userInterfaceLanguageLabel     QLabel
+// userInterfaceLanguageComboBox  QComboBox
+// [NONE] = global indexing convention
+// line                           Line
+// indexingLabel                  QLabel
+// indexingComboBox               QComboBox
+
+void PreferencesDialog::setupGeneral()
+{
+  m_ui->userInterfaceLanguageComboBox->addItem("English (Default)");
+  // Populate the language selection box with available translations
+  if (!m_availableLocales.isEmpty()) {
+    // This is gated by the availability of translations so that we don't
+    // pretend to the user they can have the system language if they can't!
+    m_ui->userInterfaceLanguageComboBox->addItem(tr("System Language"));
+    // Displaying in the native script causes a long delay if no appropriate
+    // font can be found (at least when there are lots of fonts installed).
+    // To save Qt loading and trying fonts to see if they work, we will check
+    // if the language is even supported, and if not, omit it.
+    auto availableWritingSystems = QFontDatabase::writingSystems();
+    foreach (const QString& localeCode, m_availableLocales) {
+      QLocale locale(localeCode);
+      auto writingSystem = Avogadro::scriptToWritingSystem(locale.script());
+      if (writingSystem && availableWritingSystems.contains(writingSystem)) {
+        QString languageLabel = locale.nativeLanguageName();
+        // Add the territory to disambiguate if the locale code has it too
+        // (but not for locales where Qt's "native name" already says it)
+        if (localeCode.contains('_') && !localeCode.startsWith("en") &&
+            !(localeCode == "fr_CA"))
+          languageLabel += " (" + locale.nativeTerritoryName() + ")";
+        languageLabel += " [" + localeCode + "]";
+        m_ui->userInterfaceLanguageComboBox->addItem(languageLabel);
+      } else {
+        // No point even offering it to the user, since they can't render it
+        qDebug() << "No font support for" << locale << "(should use"
+                 << locale.script() << ")";
+        continue;
+      }
+    }
+  } // Finished listing translations
+}
+
+void PreferencesDialog::updateGeneral()
+{
+  // If there are no translations available then there is only one option:
+  // English (Default)
+  if (!m_availableLocales.isEmpty()) {
+    int languageIndex;
+    if (m_settings.contains("locale")) {
+      QString configLocale = m_settings.value("locale").toString();
+      qDebug() << "Locale is configured as:" << configLocale;
+      if (configLocale == "default") {
+        languageIndex = 0;
+      } else if (configLocale == "system") {
+        languageIndex = 1;
+      } else {
+        // Add 2 as the first combobox item is for default English with no
+        // translation and the second is for the system locale
+        languageIndex = m_availableLocales.indexOf(configLocale) + 2;
+      }
+    } else {
+      // No explicit setting in the config indicates to use the system
+      // language, which the second item in the combobox corresponds to
+      languageIndex = 1;
+    }
+    m_ui->userInterfaceLanguageComboBox->setCurrentIndex(languageIndex);
+  }
+}
+
+void PreferencesDialog::applyGeneral()
+{
+  int languageIndex = m_ui->userInterfaceLanguageComboBox->currentIndex();
+  qDebug() << "Selected language:"
+           << m_ui->userInterfaceLanguageComboBox->currentText();
+  if (languageIndex == -1) {
+    // Nothing was selected, so don't change anything
+  } else if (languageIndex == 0) {
+    // Choice is to not translate at all
+    m_settings.setValue("locale", "default");
+  } else if (languageIndex == 1) {
+    // Choice is to follow the system language
+    m_settings.setValue("locale", "system");
+  } else {
+    // Take off 2 as system and default aren't locales and aren't in the list
+    int localeIndex = languageIndex - 2;
+    // at will cause crash if index is out-of-range, but there's no reason why
+    // the combobox shouldn't contain one row per available locale
+    QString chosenLocale = m_availableLocales.at(localeIndex);
+    qDebug() << "Corresponding locale code:" << chosenLocale;
+    m_settings.setValue("locale", chosenLocale);
+  }
+}
+
+// Controls
+// [NONE] = invert scroll direction
+// invertScrollDirectionLabel     QLabel
+// invertScrollDirectionCheckBox  QCheckBox
+
+void PreferencesDialog::updateControls() {}
+
+void PreferencesDialog::applyControls() {}
+
+// View
+// [overlayAxes/enabled] = show reference axes
+// This is now a display type and is configured by that mechanism!
+// overlayAxesLabel               QLabel
+// overlayAxesCheckBox            QCheckBox
+
+void PreferencesDialog::updateView() {}
+
+void PreferencesDialog::applyView() {}
+
+// Rendering
+
+void PreferencesDialog::updateRendering() {}
+
+void PreferencesDialog::applyRendering() {}
+
+// Colors
+
+void PreferencesDialog::updateColors() {}
+
+void PreferencesDialog::applyColors() {}
+
+// Accessibility
+
+void PreferencesDialog::updateAccessibility() {}
+
+void PreferencesDialog::applyAccessibility() {}
+
+// Bonding
+// [bonding/tolerance]
+// distanceToleranceLabel         QLabel
+// distanceToleranceDoubleSpinBox QDoubleSpinBox
+// [bonding/minDistance]
+// minimumDistanceLabel           QLabel
+// minimumDistanceLineEdit        QLineEdit
+
+void PreferencesDialog::updateBonding() {}
+
+void PreferencesDialog::applyBonding() {}
 
 } // End namespace Avogadro
