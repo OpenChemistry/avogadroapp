@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-11-08 07:27+0000\n"
+"POT-Creation-Date: 2026-11-15 07:54+0000\n"
 "PO-Revision-Date: 2026-03-21 04:09+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/avogadro/"
@@ -22,35 +22,35 @@ msgstr ""
 "X-Generator: Weblate 5.17-dev\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
-#: aboutdialog.cpp:25
+#: aboutdialog.cpp:26
 msgid "Molecular editor and visualizer"
 msgstr "மொலிக்யூலர் எடிட்டர் மற்றும் விசுவலைஸர்"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
-#: aboutdialog.cpp:32:3
+#: aboutdialog.cpp:33:3
 msgid "Version:"
 msgstr "பதிப்பு:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
-#: aboutdialog.cpp:33:9
+#: aboutdialog.cpp:34:9
 msgid "Avogadro Library Version:"
 msgstr "அவோகாட்ரோ நூலக பதிப்பு:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
-#: aboutdialog.cpp:34:15
+#: aboutdialog.cpp:35:15
 msgid "Qt Version:"
 msgstr "கியுடி பதிப்பு:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
-#: aboutdialog.cpp:35:21
+#: aboutdialog.cpp:36:21
 msgid "SSL Version:"
 msgstr "SSL பதிப்பு:"
 
-#: aboutdialog.cpp:46
+#: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
 msgstr ""
@@ -105,107 +105,107 @@ msgstr ""
 msgid "Send crash reports to the Avogadro developers"
 msgstr ""
 
-#: mainwindow.cpp:296
+#: mainwindow.cpp:298
 msgid "Missing 'index' parameter."
 msgstr ""
 
-#: mainwindow.cpp:298
+#: mainwindow.cpp:300
 msgid "'index' must be a whole number."
 msgstr ""
 
-#: mainwindow.cpp:300
+#: mainwindow.cpp:302
 #, qt-format
 msgid "'index' %1 is out of range (%2 molecules are open)."
 msgstr ""
 
-#: mainwindow.cpp:626
+#: mainwindow.cpp:628
 msgid "Ready…"
 msgstr "தயார்…"
 
-#: mainwindow.cpp:738
+#: mainwindow.cpp:749
 msgid "Tool"
 msgstr "கருவி"
 
-#: mainwindow.cpp:744
+#: mainwindow.cpp:755
 msgid "Display Types"
 msgstr "காட்சி வகைகள்"
 
-#: mainwindow.cpp:754
+#: mainwindow.cpp:765
 msgid "Display Type Settings"
 msgstr "காட்சி வகை அமைப்புகள்"
 
-#: mainwindow.cpp:758
+#: mainwindow.cpp:769
 msgid "Files"
 msgstr "கோப்புகள்"
 
-#: mainwindow.cpp:769
+#: mainwindow.cpp:780
 msgid "Layers"
 msgstr "அடுக்குகள்"
 
-#: mainwindow.cpp:797
+#: mainwindow.cpp:808
 msgctxt "File toolbar"
 msgid "File"
 msgstr "கோப்பு"
 
-#: mainwindow.cpp:802
+#: mainwindow.cpp:813
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "கருவிகள்"
 
-#: mainwindow.cpp:1365
+#: mainwindow.cpp:1373
 msgid "Untitled"
 msgstr "தலைப்பிடப்படாத"
 
-#: mainwindow.cpp:1370
+#: mainwindow.cpp:1378
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1 %2 - அவோகாட்ரோ %3"
 
-#: mainwindow.cpp:1426
+#: mainwindow.cpp:1434
 msgid "Restart needed"
 msgstr "மறுதொடக்கம் தேவை"
 
-#: mainwindow.cpp:1427
+#: mainwindow.cpp:1435
 msgid "Please restart Avogadro to use the new language."
 msgstr "புதிய மொழியைப் பயன்படுத்த அவோகாட்ரோவை மறுதொடக்கம் செய்யுங்கள்."
 
-#: mainwindow.cpp:1474 mainwindow.cpp:2933
+#: mainwindow.cpp:1482 mainwindow.cpp:3084
 msgid "Chemical Markup Language"
 msgstr "வேதியியல் மார்க்அப் மொழி"
 
-#: mainwindow.cpp:1475 mainwindow.cpp:2932
+#: mainwindow.cpp:1483 mainwindow.cpp:3083
 msgid "Chemical JSON"
 msgstr "வேதியியல் சாதொபொகு"
 
-#: mainwindow.cpp:1481
+#: mainwindow.cpp:1489
 msgid "Open chemical file"
 msgstr "வேதியியல் கோப்பு திறந்த"
 
-#: mainwindow.cpp:1499 mainwindow.cpp:1522 mainwindow.cpp:2819
-#: mainwindow.cpp:4144
+#: mainwindow.cpp:1507 mainwindow.cpp:1530 mainwindow.cpp:2970
+#: mainwindow.cpp:4286
 msgid "Cannot open file"
 msgstr "கோப்பைத் திறக்க முடியாது"
 
-#: mainwindow.cpp:1500 mainwindow.cpp:1523 mainwindow.cpp:2820
+#: mainwindow.cpp:1508 mainwindow.cpp:1531 mainwindow.cpp:2971
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "வழங்கப்பட்ட கோப்பு %1 ஐ திறக்க முடியாது"
 
-#: mainwindow.cpp:1513
+#: mainwindow.cpp:1521
 msgid "Open Molecule"
 msgstr "திறந்த மூலக்கூறு"
 
-#: mainwindow.cpp:1536 mainwindow.cpp:2815
+#: mainwindow.cpp:1544 mainwindow.cpp:2966
 msgid "Select file reader"
 msgstr "கோப்பு வாசகரைத் தேர்ந்தெடுக்கவும்"
 
-#: mainwindow.cpp:1571
+#: mainwindow.cpp:1579
 msgid "Reading File"
 msgstr "கோப்பைப் படித்தல்"
 
-#: mainwindow.cpp:1573 mainwindow.cpp:1597
+#: mainwindow.cpp:1581 mainwindow.cpp:1605
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -214,16 +214,16 @@ msgstr ""
 "'%1' கோப்பைத் திறக்கும்\n"
 " '%2' உடன்"
 
-#: mainwindow.cpp:1685
+#: mainwindow.cpp:1693
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "மூலக்கூறு ஏற்றப்பட்டது ( %1 அணுக்கள், %2 பிணைப்புகள்)"
 
-#: mainwindow.cpp:1695
+#: mainwindow.cpp:1703
 msgid "File error"
 msgstr "கோப்பு பிழை"
 
-#: mainwindow.cpp:1696
+#: mainwindow.cpp:1704
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -232,17 +232,17 @@ msgstr ""
 "'%1' கோப்பைப் படிக்கும்போது பிழை:\n"
 " %2"
 
-#: mainwindow.cpp:1729
+#: mainwindow.cpp:1737
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "சேமித்த கோப்பு %1"
 
-#: mainwindow.cpp:1746
+#: mainwindow.cpp:1754
 msgid "Error saving file"
 msgstr "கோப்பைச் சேமிப்பதில் பிழை"
 
-#: mainwindow.cpp:1747
+#: mainwindow.cpp:1755
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -252,19 +252,19 @@ msgstr ""
 "'%1' சேமிக்கும் போது பிழை:\n"
 " %2"
 
-#: mainwindow.cpp:1752
+#: mainwindow.cpp:1760
 msgid "The save was canceled."
 msgstr ""
 
-#: mainwindow.cpp:1813 mainwindow.cpp:1816
+#: mainwindow.cpp:1821 mainwindow.cpp:1824
 msgid "untitled"
 msgstr "தலைப்பிடப்படாத"
 
-#: mainwindow.cpp:2053
+#: mainwindow.cpp:2061
 msgid "Found Previous Avogadro Files"
 msgstr "முந்தைய அவகாட்ரோ கோப்புகள் கண்டுபிடிக்கப்பட்டன"
 
-#: mainwindow.cpp:2055
+#: mainwindow.cpp:2063
 #, qt-format
 msgid ""
 "Files from a previous version of Avogadro were found in the plugins "
@@ -277,19 +277,19 @@ msgstr ""
 "\n"
 "இந்தக் கோப்புகள் இனி தேவைப்படாது மற்றும் பாதுகாப்பாக அகற்றப்படலாம்."
 
-#: mainwindow.cpp:2062
+#: mainwindow.cpp:2070
 msgid "Remove Old Files"
 msgstr "பழைய கோப்புகளை அகற்று"
 
-#: mainwindow.cpp:2063
+#: mainwindow.cpp:2071
 msgid "Keep Files"
 msgstr "கோப்புகளை வைத்திருங்கள்"
 
-#: mainwindow.cpp:2203
+#: mainwindow.cpp:2211
 msgid "Let’s finish your setup"
 msgstr "உங்கள் அமைப்பை முடிப்போம்"
 
-#: mainwindow.cpp:2204
+#: mainwindow.cpp:2212
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
@@ -297,35 +297,35 @@ msgstr ""
 "அவகாட்ரோ காசியன், ORCA மற்றும் பிற கணக்கீட்டு வேதியியல் தொகுப்புகளுக்கான உள்ளீட்டு "
 "கோப்புகளை உருவாக்க முடியும்."
 
-#: mainwindow.cpp:2209
+#: mainwindow.cpp:2217
 msgid "This requires setup that will download and configure Python."
 msgstr "இதற்கு பைத்தானைப் பதிவிறக்கி உள்ளமைக்கும் அமைப்பு தேவை."
 
-#: mainwindow.cpp:2211
+#: mainwindow.cpp:2219
 msgid "This requires setup to configure a Python environment."
 msgstr "இதற்கு பைதான் சூழலை உள்ளமைக்க அமைக்க வேண்டும்."
 
-#: mainwindow.cpp:2215
+#: mainwindow.cpp:2223
 msgid "This may require an Internet connection."
 msgstr "இதற்கு இணைய இணைப்பு தேவைப்படலாம்."
 
-#: mainwindow.cpp:2217
+#: mainwindow.cpp:2225
 msgid "Install updated plugins?"
 msgstr "புதுப்பிக்கப்பட்ட செருகுநிரல்களை நிறுவவா?"
 
-#: mainwindow.cpp:2218
+#: mainwindow.cpp:2226
 msgid "The following plugins are available:"
 msgstr "பின்வரும் செருகுநிரல்கள் கிடைக்கின்றன:"
 
-#: mainwindow.cpp:2219
+#: mainwindow.cpp:2227
 msgid "Would you like to update them?"
 msgstr ""
 
-#: mainwindow.cpp:2257
+#: mainwindow.cpp:2265
 msgid "Recover Autosaved Files"
 msgstr "தானாக சேமிக்கப்பட்ட கோப்புகளை மீட்டெடுக்கவும்"
 
-#: mainwindow.cpp:2258
+#: mainwindow.cpp:2266
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
@@ -333,15 +333,15 @@ msgstr ""
 "முந்தைய அமர்விலிருந்து தானாகச் சேமிக்கும் கோப்புகள் கண்டறியப்பட்டன. \n"
 "அவற்றை மீட்டெடுக்க விரும்புகிறீர்களா?"
 
-#: mainwindow.cpp:2322 mainwindow.cpp:2327
+#: mainwindow.cpp:2330 mainwindow.cpp:2335
 msgid "Unknown error"
 msgstr "தெரியாத பிழை"
 
-#: mainwindow.cpp:2325
+#: mainwindow.cpp:2333
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "பிழை: ஓபன்சிஎல் சூழலைத் தொடங்குவதில் தோல்வி"
 
-#: mainwindow.cpp:2326
+#: mainwindow.cpp:2334
 #, qt-format
 msgid ""
 "OpenGL 4.0 or greater required, exiting.\n"
@@ -352,61 +352,71 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:2380
+#: mainwindow.cpp:2388
 msgid "Missing 'layer' parameter."
 msgstr ""
 
-#: mainwindow.cpp:2383
+#: mainwindow.cpp:2391
 msgid "'layer' must be a whole number."
 msgstr ""
 
-#: mainwindow.cpp:2386
+#: mainwindow.cpp:2394
 #, qt-format
 msgid "'layer' %1 is out of range."
 msgstr ""
 
-#: mainwindow.cpp:2509
+#: mainwindow.cpp:2681
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
 msgstr "%1 அமைப்புகள்"
 
-#: mainwindow.cpp:2753
-msgid "Common image formats"
-msgstr "பொதுவான பட வடிவங்கள்"
+#: mainwindow.cpp:2812 rpclistener.cpp:677
+msgid "There is no active 3D view to render."
+msgstr ""
 
-#: mainwindow.cpp:2755
-msgid "All files"
-msgstr "அனைத்து கோப்புகள்"
-
-#: mainwindow.cpp:2755
-msgid "BMP"
-msgstr "பி.எம்.பி."
-
-#: mainwindow.cpp:2756
+#: mainwindow.cpp:2835
 msgid "PNG"
 msgstr "பி.என்.சி."
 
-#: mainwindow.cpp:2756
+#: mainwindow.cpp:2841
+msgid "Common image formats"
+msgstr "பொதுவான பட வடிவங்கள்"
+
+#: mainwindow.cpp:2843
+msgid "All files"
+msgstr "அனைத்து கோப்புகள்"
+
+#: mainwindow.cpp:2843
+msgid "BMP"
+msgstr "பி.எம்.பி."
+
+#: mainwindow.cpp:2844
 msgid "JPEG"
 msgstr "Jpeg"
 
-#: mainwindow.cpp:2765
+#: mainwindow.cpp:2870
 msgid "Export Bitmap Graphics"
 msgstr "பிட்மேப் கிராபிக்ச் ஏற்றுமதி"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:2783 mainwindow.cpp:2905 mainwindow.cpp:3856:34
+#: mainwindow.cpp:2911 mainwindow.cpp:2936 mainwindow.cpp:3056
+#: mainwindow.cpp:3998:34
 msgid "Avogadro"
 msgstr "அவோகாட்ரோ"
 
-#: mainwindow.cpp:2784
+#: mainwindow.cpp:2912
+#, qt-format
+msgid "Cannot render the image: %1"
+msgstr ""
+
+#: mainwindow.cpp:2937
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "கோப்பு %1 ஐ சேமிக்க முடியாது."
 
-#: mainwindow.cpp:2906
+#: mainwindow.cpp:3057
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -419,23 +429,23 @@ msgstr ""
 " தற்போதைய வடிவமைப்பிற்கு ஏற்றுமதி செய்ய விரும்புகிறீர்களா, அல்லது நிலையான வடிவத்தில் "
 "சேமிக்க விரும்புகிறீர்களா?"
 
-#: mainwindow.cpp:2913
+#: mainwindow.cpp:3064
 msgid "Export"
 msgstr "ஏற்றுமதி"
 
-#: mainwindow.cpp:2938
+#: mainwindow.cpp:3089
 msgid "Save chemical file"
 msgstr "வேதியியல் கோப்பை சேமிக்கவும்"
 
-#: mainwindow.cpp:2983
+#: mainwindow.cpp:3134
 msgid "Export Molecule"
 msgstr "ஏற்றுமதி மூலக்கூறு"
 
-#: mainwindow.cpp:3104
+#: mainwindow.cpp:3257
 msgid "Saving File in Progress…"
 msgstr "கோப்பைச் சேமிப்பது முன்னேற்றத்தில் உள்ளது…"
 
-#: mainwindow.cpp:3106
+#: mainwindow.cpp:3259
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -445,43 +455,43 @@ msgstr ""
 "கோப்பு “%1”\n"
 " “%2” உடன்"
 
-#: mainwindow.cpp:3243
+#: mainwindow.cpp:3392
 #, qt-format
 msgid "&Undo %1"
 msgstr "& %1 ஐ செயல்தவிர்க்கவும்"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3246 mainwindow.cpp:3523:118
+#: mainwindow.cpp:3395 mainwindow.cpp:3667:118
 msgid "&Undo"
 msgstr "செயல்தவிர் (&u)"
 
-#: mainwindow.cpp:3251
+#: mainwindow.cpp:3400
 #, qt-format
 msgid "&Redo %1"
 msgstr "& மீண்டும் %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3254 mainwindow.cpp:3531:124
+#: mainwindow.cpp:3403 mainwindow.cpp:3675:124
 msgid "&Redo"
 msgstr "மீண்டும்செய் (&r)"
 
-#: mainwindow.cpp:3379
+#: mainwindow.cpp:3523
 msgid "&Testing"
 msgstr "& சோதனை"
 
-#: mainwindow.cpp:3381
+#: mainwindow.cpp:3525
 msgid "&Record Test…"
 msgstr "&பதிவு சோதனை…"
 
-#: mainwindow.cpp:3384
+#: mainwindow.cpp:3528
 msgid "&Play Test…"
 msgstr "&சோதனை விளையாடு…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:3393 menubuilder.cpp:114:37
+#: mainwindow.cpp:3537 menubuilder.cpp:114:37
 msgid "&File"
 msgstr "கோப்பு (&f)"
 
@@ -489,13 +499,13 @@ msgstr "கோப்பு (&f)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3395:76 rc.cpp:82
+#: mainwindow.cpp:3539:76 rc.cpp:82
 msgid "&New"
 msgstr "&புதிய"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3410:52
+#: mainwindow.cpp:3554:52
 msgid "&Open…"
 msgstr "& திறந்த…"
 
@@ -503,7 +513,7 @@ msgstr "& திறந்த…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3424:85 rc.cpp:91
+#: mainwindow.cpp:3568:85 rc.cpp:91
 msgid "&Close"
 msgstr "மூடு (&c)"
 
@@ -511,35 +521,35 @@ msgstr "மூடு (&c)"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3437:94 rc.cpp:100
+#: mainwindow.cpp:3581:94 rc.cpp:100
 msgid "&Save"
 msgstr "சேமி (&s)"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3449:103
+#: mainwindow.cpp:3593:103
 msgid "Save &As…"
 msgstr "சேமிக்கவும்…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3462:196
+#: mainwindow.cpp:3606:196
 msgid "&Export"
 msgstr "& ஏற்றுமதி"
 
-#: mainwindow.cpp:3463
+#: mainwindow.cpp:3607
 msgid "&Molecule…"
 msgstr "& மூலக்கூறு…"
 
-#: mainwindow.cpp:3470
+#: mainwindow.cpp:3614
 msgid "Export Molecule…"
 msgstr "ஏற்றுமதி மூலக்கூறு…"
 
-#: mainwindow.cpp:3477
+#: mainwindow.cpp:3621
 msgid "&Graphics…"
 msgstr "& கிராபிக்ச்…"
 
-#: mainwindow.cpp:3484
+#: mainwindow.cpp:3628
 msgid "Export Graphics…"
 msgstr "கிராபிக்ச் ஏற்றுமதி…"
 
@@ -547,225 +557,225 @@ msgstr "கிராபிக்ச் ஏற்றுமதி…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3492:61 rc.cpp:67
+#: mainwindow.cpp:3636:61 rc.cpp:67
 msgid "&Quit"
 msgstr "&வெளியேறு"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3502:190
+#: mainwindow.cpp:3646:190
 msgid "Open Recent"
 msgstr "அண்மைக் கால திறப்பு"
 
-#: mainwindow.cpp:3516
+#: mainwindow.cpp:3660
 msgid "No recent files"
 msgstr "அண்மைக் கால கோப்புகள் இல்லை"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:3522 menubuilder.cpp:114:46
+#: mainwindow.cpp:3666 menubuilder.cpp:114:46
 msgid "&Edit"
 msgstr "திருத்து (&e)"
 
-#: mainwindow.cpp:3539
+#: mainwindow.cpp:3683
 msgid "&Copy Graphics"
 msgstr "& கிராபிக்ச் நகலெடுக்கவும்"
 
-#: mainwindow.cpp:3543
+#: mainwindow.cpp:3687
 msgid "Ctrl+Alt+C"
 msgstr "Ctrl+alt+c"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:3556 menubuilder.cpp:114:43
+#: mainwindow.cpp:3700 menubuilder.cpp:114:43
 msgid "&View"
 msgstr "காண்க (&v)"
 
-#: mainwindow.cpp:3557
+#: mainwindow.cpp:3701
 msgid "Set Background Color…"
 msgstr "பின்னணி நிறத்தை அமைக்கவும்…"
 
-#: mainwindow.cpp:3561
+#: mainwindow.cpp:3705
 msgid "Rendering…"
 msgstr "ரெண்டரிங்…"
 
-#: mainwindow.cpp:3569
+#: mainwindow.cpp:3713
 msgid "Projection"
 msgstr "திட்டம்"
 
-#: mainwindow.cpp:3570
+#: mainwindow.cpp:3714
 msgid "Perspective"
 msgstr "முன்னோக்கு"
 
-#: mainwindow.cpp:3577
+#: mainwindow.cpp:3721
 msgid "Orthographic"
 msgstr "ஆர்த்தோகிராஃபிக்"
 
-#: mainwindow.cpp:3596
+#: mainwindow.cpp:3740
 msgid "&Extensions"
 msgstr "நீட்டிப்புகள்"
 
-#: mainwindow.cpp:3598
+#: mainwindow.cpp:3742
 msgid "User Interface Language…"
 msgstr "பயனர் இடைமுக மொழி…"
 
-#: mainwindow.cpp:3602
+#: mainwindow.cpp:3746
 msgid "&Periodic Table…"
 msgstr "கால அட்டவணை…"
 
-#: mainwindow.cpp:3608 menubuilder.cpp:118
+#: mainwindow.cpp:3752 menubuilder.cpp:118
 msgid "&Help"
 msgstr "உதவி (&h)"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3609:115
+#: mainwindow.cpp:3753:115
 msgid "&About"
 msgstr "&பற்றி"
 
-#: mainwindow.cpp:3614
+#: mainwindow.cpp:3758
 msgid "&Discussion Forum"
 msgstr "கலந்துரையாடல் மன்றம்"
 
-#: mainwindow.cpp:3618
+#: mainwindow.cpp:3762
 msgid "&Avogadro Website"
 msgstr "& அவோகாட்ரோ வலைத்தளம்"
 
-#: mainwindow.cpp:3622
+#: mainwindow.cpp:3766
 msgid "&Report a Bug"
 msgstr "ஒரு பிழையைப் புகாரளிக்கவும்"
 
-#: mainwindow.cpp:3629
+#: mainwindow.cpp:3773
 msgid "&Crash Reporting…"
 msgstr ""
 
-#: mainwindow.cpp:3635
+#: mainwindow.cpp:3779
 msgid "&Suggest a Feature"
 msgstr "ஒரு அம்சத்தை பரிந்துரைக்கவும்"
 
-#: mainwindow.cpp:3708
+#: mainwindow.cpp:3852
 msgid "System Language"
 msgstr "கணினி மொழி"
 
-#: mainwindow.cpp:3716
+#: mainwindow.cpp:3860
 msgid "Language"
 msgstr "மொழி"
 
-#: mainwindow.cpp:3716
+#: mainwindow.cpp:3860
 msgid "User Interface Language:"
 msgstr "பயனர் இடைமுக மொழி:"
 
-#: mainwindow.cpp:3841
+#: mainwindow.cpp:3983
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "அனைத்து உதவி வடிவங்களும் (%1) ;; அனைத்து கோப்புகளும் (*) ;;"
 
-#: mainwindow.cpp:3857
+#: mainwindow.cpp:3999
 msgid "Do you want to save the changes to the document?"
 msgstr "ஆவணத்தில் மாற்றங்களைச் சேமிக்க விரும்புகிறீர்களா?"
 
-#: mainwindow.cpp:3865
+#: mainwindow.cpp:4007
 msgid "Your changes will be lost if you don't save them."
 msgstr "நீங்கள் அவற்றைக் காப்பாற்றாவிட்டால் உங்கள் மாற்றங்கள் இழக்கப்படும்."
 
-#: mainwindow.cpp:3870
+#: mainwindow.cpp:4012
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+s"
 
-#: mainwindow.cpp:3872
+#: mainwindow.cpp:4014
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+d"
 
-#: mainwindow.cpp:3959
+#: mainwindow.cpp:4101
 msgid "Network Download Failed"
 msgstr "பிணையம் பதிவிறக்கம் தோல்வியடைந்தது"
 
-#: mainwindow.cpp:3960
+#: mainwindow.cpp:4102
 msgid "Network timeout or other error."
 msgstr "பிணைய நேரம் முடிந்தது அல்லது பிற பிழை."
 
-#: mainwindow.cpp:4047
+#: mainwindow.cpp:4189
 #, qt-format
 msgid "Your version: %1"
 msgstr "உங்கள் பதிப்பு: %1"
 
-#: mainwindow.cpp:4048
+#: mainwindow.cpp:4190
 #, qt-format
 msgid "New version: %1"
 msgstr "புதிய பதிப்பு: %1"
 
-#: mainwindow.cpp:4050
+#: mainwindow.cpp:4192
 msgid "An update is available, do you want to download it now?\n"
 msgstr "ஒரு புதுப்பிப்பு கிடைக்கிறது, இப்போது அதை பதிவிறக்கம் செய்ய விரும்புகிறீர்களா?\n"
 
-#: mainwindow.cpp:4052
+#: mainwindow.cpp:4194
 msgid "Version Update"
 msgstr "பதிப்பு புதுப்பிப்பு"
 
-#: mainwindow.cpp:4110
+#: mainwindow.cpp:4252
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "“%1” கோப்பு வடிவமைப்பை ஏற்றும்போது பிழை."
 
-#: mainwindow.cpp:4135
+#: mainwindow.cpp:4277
 msgid "Select file format"
 msgstr "கோப்பு வடிவமைப்பைத் தேர்ந்தெடுக்கவும்"
 
-#: mainwindow.cpp:4145 mainwindow.cpp:4162
+#: mainwindow.cpp:4287 mainwindow.cpp:4304
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "அவோகாட்ரோ “%1” ஐ திறக்க முடியாது."
 
-#: mainwindow.cpp:4161
+#: mainwindow.cpp:4303
 msgid "Cannot open files"
 msgstr "கோப்புகளைத் திறக்க முடியாது"
 
-#: mainwindow.cpp:4346
+#: mainwindow.cpp:4488
 msgid "The plugin was unloaded."
 msgstr ""
 
-#: mainwindow.cpp:4394 mainwindow.cpp:4413 mainwindow.cpp:4436
-#: mainwindow.cpp:4455 mainwindow.cpp:4483 rpclistener.cpp:650
+#: mainwindow.cpp:4536 mainwindow.cpp:4555 mainwindow.cpp:4578
+#: mainwindow.cpp:4597 mainwindow.cpp:4625 rpclistener.cpp:653
 msgid "No molecule is open."
 msgstr ""
 
-#: mainwindow.cpp:4423
+#: mainwindow.cpp:4565
 msgid "Cannot remove the last remaining layer."
 msgstr ""
 
-#: mainwindow.cpp:4467
+#: mainwindow.cpp:4609
 msgid "'visible' must be true or false."
 msgstr ""
 
-#: mainwindow.cpp:4495
+#: mainwindow.cpp:4637
 msgid "'locked' must be true or false."
 msgstr ""
 
-#: mainwindow.cpp:4545
+#: mainwindow.cpp:4687
 msgid ""
 "The molecule has unsaved changes; pass discard: true to close it anyway."
 msgstr ""
 
-#: mainwindow.cpp:4562
+#: mainwindow.cpp:4704
 msgid "There is nothing to undo."
 msgstr ""
 
-#: mainwindow.cpp:4563
+#: mainwindow.cpp:4705
 msgid "There is nothing to redo."
 msgstr ""
 
-#: mainwindow.cpp:4578
+#: mainwindow.cpp:4720
 msgid "There is no active view."
 msgstr ""
 
-#: mainwindow.cpp:4592
+#: mainwindow.cpp:4734
 #, qt-format
 msgid "Unknown tool '%1'."
 msgstr ""
 
-#: mainwindow.cpp:4618
+#: mainwindow.cpp:4760
 msgid "No molecule"
 msgstr ""
 
@@ -789,48 +799,64 @@ msgstr "Se & ttings"
 msgid "&Window"
 msgstr "சாளரம் (&w)"
 
-#: rpclistener.cpp:291
+#: rpclistener.cpp:294
 msgid "Avogadro is shutting down."
 msgstr ""
 
-#: rpclistener.cpp:679
-msgid "renderImage requires both width and height, or neither."
+#: rpclistener.cpp:693
+#, qt-format
+msgid "%1 must be a whole number from %2 to %3."
 msgstr ""
 
-#: rpclistener.cpp:704
+#: rpclistener.cpp:722
+#, qt-format
+msgid ""
+"The %1 derived from the view's aspect ratio, %2, is outside the range 1 to "
+"%3."
+msgstr ""
+
+#: rpclistener.cpp:724
+msgid "height"
+msgstr ""
+
+#: rpclistener.cpp:724
+msgid "width"
+msgstr ""
+
+#: rpclistener.cpp:756
 msgid "Could not render the current view."
 msgstr ""
 
-#: rpclistener.cpp:732
+#: rpclistener.cpp:785
 msgid "Could not encode the render as PNG."
 msgstr ""
 
-#: rpclistener.cpp:773
+#: rpclistener.cpp:826
 #, qt-format
 msgid "%1 needs a \"target\" string."
 msgstr ""
 
-#: rpclistener.cpp:783
+#: rpclistener.cpp:836
 msgid "highlightTarget's callout must be a string."
 msgstr ""
 
-#: rpclistener.cpp:831 rpclistener.cpp:842
+#: rpclistener.cpp:884 rpclistener.cpp:895
 msgid "No active view."
 msgstr ""
 
-#: rpclistener.cpp:852
+#: rpclistener.cpp:905
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
 msgstr ""
 
-#: rpclistener.cpp:916 rpclistener.cpp:992
+#: rpclistener.cpp:969 rpclistener.cpp:1045
 msgid "The command failed."
 msgstr ""
 
-#: rpclistener.cpp:922
+#: rpclistener.cpp:975
 msgid "That plugin is already running a command."
 msgstr ""
 
-#: rpclistener.cpp:954
+#: rpclistener.cpp:1007
 msgid "The command timed out."
 msgstr ""
 
