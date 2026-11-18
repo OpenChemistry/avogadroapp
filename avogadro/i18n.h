@@ -11,6 +11,10 @@
 #include <QtCore/QDir>
 #include <QtCore/QList>
 #include <QtCore/QStringList>
+#include <QtCore/QLocale>
+
+#include <optional>
+#include <utility>
 
 namespace Avogadro {
 
@@ -20,13 +24,6 @@ namespace Avogadro {
  * not checked.
  */
 std::pair<QStringList, QStringList> translationPaths();
-
-/**
- * @brief Collects confirmed locations of translation files for:
- * 1) avogadroapp; 2) avogadrolibs. Only directories that actually exist and
- * contain translation files are returned.
- */
-std::pair<QList<QDir>, QList<QDir>> translationDirs();
 
 /**
  * @brief Assembles a list of locales for which translation files are available

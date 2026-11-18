@@ -3,14 +3,26 @@
   This source code is released under the 3-Clause BSD License, (see "LICENSE").
 ******************************************************************************/
 
+#include "i18n.h"
+
 #include <QtWidgets/QApplication>
 
 #include <QtGui/QFontDatabase>
 
-#include <QtCore/QDebug>
+#include <QtCore/QCoreApplication>
 #include <QtCore/QDir>
+#include <QtCore/QtEnvironmentVariables>
+#include <QtCore/QLatin1StringView>
+#include <QtCore/QList>
 #include <QtCore/QProcess>
 #include <QtCore/QStandardPaths>
+#include <QtCore/QString>
+
+#include <optional>
+#include <qnamespace.h>
+#include <utility>
+
+using namespace Qt::StringLiterals;
 
 namespace Avogadro {
 
@@ -22,22 +34,18 @@ std::pair<QStringList, QStringList> translationPaths()
   QStringList libsPaths;
 
   // Environment variable takes priority
-  foreach (const QString& variable, QProcess::systemEnvironment()) {
-    QStringList split1 = variable.split('=');
-    if (split1[0] == "AVOGADRO_TRANSLATIONS") {
-      foreach (const QString& path, split1[1].split(':')) {
-        appPaths << path;
-        libsPaths << path;
-      }
-    }
-  }
+  const QStringList envVarPaths =
+    qEnvironmentVariable("AVOGADRO_TRANSLATIONS")
+      .split(QDir::listSeparator(), Qt::SkipEmptyParts);
+  appPaths << envVarPaths;
+  libsPaths << envVarPaths;
 
   // Next look in the user's data directory
   QStringList stdPaths =
     QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
   foreach (const QString& dirStr, stdPaths) {
-    appPaths << (dirStr + "/i18n/avogadro-i18n/avogadroapp");
-    libsPaths << (dirStr + "/i18n/avogadro-i18n/avogadrolibs");
+    appPaths << (dirStr + "/i18n/avogadro-i18n/avogadroapp"_L1);
+    libsPaths << (dirStr + "/i18n/avogadro-i18n/avogadrolibs"_L1);
   }
 
   // Otherwise we can expect them to be installed next to the binary,
@@ -45,62 +53,29 @@ std::pair<QStringList, QStringList> translationPaths()
   // Linux: /usr/bin/avogadro2 -> /usr/share/avogadro2/i18n/
   // macOS: -> /Applications/Avogadro2.app/Contents/share/avogadro2/i18n/
   QString path =
-    QCoreApplication::applicationDirPath() + "/../share/avogadro2/i18n/";
+    QCoreApplication::applicationDirPath() + "/../share/avogadro2/i18n/"_L1;
   appPaths << path;
   libsPaths << path;
 
   return { std::move(appPaths), std::move(libsPaths) };
 }
 
-std::pair<QList<QDir>, QList<QDir>> translationDirs()
-{
-  auto [appPaths, libsPaths] = translationPaths();
-
-  // Check if paths exist and contain translation files
-  QList<QDir> appDirs;
-  QList<QDir> libsDirs;
-
-  auto hasQmFiles = [](QDir dir) {
-    if (!dir.exists())
-      return false;
-    dir.setFilter(QDir::Files);
-    dir.setNameFilters(QStringList("*.qm"));
-    // count() is equivalent to entryList().count() so filters are applied
-    return (dir.entryList().count() > 0);
-  };
-
-  foreach (const QString& dirStr, appPaths) {
-    QDir dir(dirStr);
-    if (hasQmFiles(dir)) {
-      appDirs << dir;
-    }
-  }
-
-  foreach (const QString& dirStr, libsPaths) {
-    QDir dir(dirStr);
-    if (hasQmFiles(dir)) {
-      libsDirs << dir;
-    }
-  }
-
-  return { std::move(appDirs), std::move(libsDirs) };
-}
-
 QStringList availableLocales()
 {
   QStringList available;
 
-  auto [appPaths, _libsPaths] = translationPaths();
+  auto appPaths = translationPaths().first;
   foreach (const QString& dirStr, appPaths) {
     QDir dir(dirStr);
     if (!dir.exists())
       continue;
     qDebug() << "Looking for app translation files in" << dir.absolutePath();
     dir.setFilter(QDir::Files);
-    dir.setNameFilters(QStringList("avogadroapp-*.qm"));
+    dir.setNameFilters(QStringList("avogadroapp-*.qm"_L1));
     foreach (const QString& file, dir.entryList()) {
       // remove "avogadroapp-" and the ".qm"
-      QString localeCode = file.left(file.indexOf('.')).remove("avogadroapp-");
+      QString localeCode =
+        file.left(file.indexOf(u'.')).remove("avogadroapp-"_L1);
       if (!available.contains(localeCode)) {
         qDebug() << "Found translation file for" << localeCode << ":" << file;
         available << localeCode;

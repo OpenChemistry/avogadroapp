@@ -6,8 +6,10 @@
 #ifndef AVOGADRO_PREFERENCESDIALOG_H
 #define AVOGADRO_PREFERENCESDIALOG_H
 
-#include <QtCore/QSettings>
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QWidget>
+
+#include <QtCore/QSettings>
 
 namespace Ui {
 class PreferencesDialog;
@@ -20,16 +22,18 @@ class PreferencesDialog : public QDialog
   Q_OBJECT
 
 public:
-  PreferencesDialog(QWidget* Parent, int initialPageIndex);
+  explicit PreferencesDialog(QWidget* parent, int initialPageIndex = 0);
   ~PreferencesDialog() override;
 
-protected slots:
+public slots:
+  void accept() override;
+
+private slots:
   void changePage(int index);
 
 private:
   Ui::PreferencesDialog* m_ui;
   QSettings m_settings;
-  QStringList m_availableLocales;
 
   void setupAll();
   void updateAll();

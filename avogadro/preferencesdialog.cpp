@@ -8,15 +8,22 @@
 
 #include "i18n.h"
 
+#include <QtWidgets/QDialog>
 #include <QtWidgets/QListWidget>
+#include <QtWidgets/QWidget>
 
+#include <QtGui/QFontDatabase>
+
+#include <QtCore/QLatin1StringView>
 #include <QtCore/QSettings>
+#include <QtCore/QString>
+
+using namespace Qt::StringLiterals;
 
 namespace Avogadro {
 
-PreferencesDialog::PreferencesDialog(QWidget* parent_, int initialPageIndex)
-  : QDialog(parent_), m_ui(new Ui::PreferencesDialog), m_settings(),
-    m_availableLocales(availableLocales())
+PreferencesDialog::PreferencesDialog(QWidget* parent, int initialPageIndex)
+  : QDialog(parent), m_ui(new Ui::PreferencesDialog)
 {
   m_ui->setupUi(this);
 
@@ -36,17 +43,21 @@ PreferencesDialog::PreferencesDialog(QWidget* parent_, int initialPageIndex)
 
   connect(m_ui->pageList, &QListWidget::currentRowChanged, this,
           &PreferencesDialog::changePage);
-
-  // Each page should have a corresponding apply method that changes m_settings
-  // to reflect the state of the widgets. The method is then called if the
-  // preferences dialog is closed by clicking OK. It is never called if the
-  // dialog is closed with Cancel.
-  connect(this, &QDialog::accepted, this, &PreferencesDialog::applyAll);
 }
 
 PreferencesDialog::~PreferencesDialog()
 {
   delete m_ui;
+}
+
+void PreferencesDialog::accept()
+{
+  // Each page should have a corresponding apply method that changes m_settings
+  // to reflect the state of the widgets. The method is then called if the
+  // preferences dialog is closed by clicking OK. It is thus never called if the
+  // dialog is closed with Cancel.
+  applyAll();
+  QDialog::accept();
 }
 
 void PreferencesDialog::changePage(int index)
@@ -85,29 +96,33 @@ void PreferencesDialog::applyAll()
 
 void PreferencesDialog::setupGeneral()
 {
-  m_ui->userInterfaceLanguageComboBox->addItem("English (Default)");
+  m_ui->userInterfaceLanguageComboBox->addItem(
+    "English (Default)"_L1, // Don't translate as this is the "native name"
+    "default"_L1);
   // Populate the language selection box with available translations
-  if (!m_availableLocales.isEmpty()) {
+  QStringList availableLocales = Avogadro::availableLocales();
+  if (!availableLocales.isEmpty()) {
     // This is gated by the availability of translations so that we don't
     // pretend to the user they can have the system language if they can't!
-    m_ui->userInterfaceLanguageComboBox->addItem(tr("System Language"));
+    m_ui->userInterfaceLanguageComboBox->addItem(tr("System Language"),
+                                                 "system"_L1);
     // Displaying in the native script causes a long delay if no appropriate
     // font can be found (at least when there are lots of fonts installed).
     // To save Qt loading and trying fonts to see if they work, we will check
     // if the language is even supported, and if not, omit it.
     auto availableWritingSystems = QFontDatabase::writingSystems();
-    foreach (const QString& localeCode, m_availableLocales) {
+    foreach (const QString& localeCode, availableLocales) {
       QLocale locale(localeCode);
       auto writingSystem = Avogadro::scriptToWritingSystem(locale.script());
-      if (writingSystem && availableWritingSystems.contains(writingSystem)) {
+      if (writingSystem && availableWritingSystems.contains(*writingSystem)) {
         QString languageLabel = locale.nativeLanguageName();
         // Add the territory to disambiguate if the locale code has it too
         // (but not for locales where Qt's "native name" already says it)
-        if (localeCode.contains('_') && !localeCode.startsWith("en") &&
-            !(localeCode == "fr_CA"))
-          languageLabel += " (" + locale.nativeTerritoryName() + ")";
-        languageLabel += " [" + localeCode + "]";
-        m_ui->userInterfaceLanguageComboBox->addItem(languageLabel);
+        if (localeCode.contains(u'_') && !localeCode.startsWith("en"_L1) &&
+            !(localeCode == "fr_CA"_L1))
+          languageLabel += " ("_L1 + locale.nativeTerritoryName() + ")"_L1;
+        languageLabel += " ["_L1 + localeCode + "]"_L1;
+        m_ui->userInterfaceLanguageComboBox->addItem(languageLabel, localeCode);
       } else {
         // No point even offering it to the user, since they can't render it
         qDebug() << "No font support for" << locale << "(should use"
@@ -121,32 +136,16 @@ void PreferencesDialog::setupGeneral()
 void PreferencesDialog::updateGeneral()
 {
   // Interface language
-  // If there are no translations available, we can skip this as there is only
-  // one option anyway: English (Default)
-  if (!m_availableLocales.isEmpty()) {
-    int languageIndex;
-    if (m_settings.contains("locale")) {
-      QString configLocale = m_settings.value("locale").toString();
-      qDebug() << "Locale is configured as:" << configLocale;
-      if (configLocale == "default") {
-        languageIndex = 0;
-      } else if (configLocale == "system") {
-        languageIndex = 1;
-      } else {
-        // Add 2 as the first combobox item is for default English with no
-        // translation and the second is for the system locale
-        languageIndex = m_availableLocales.indexOf(configLocale) + 2;
-      }
-    } else {
-      // No explicit setting in the config indicates to use the system
-      // language, which the second item in the combobox corresponds to
-      languageIndex = 1;
-    }
-    m_ui->userInterfaceLanguageComboBox->setCurrentIndex(languageIndex);
+  // Only bother if there are even translations available
+  if (m_ui->userInterfaceLanguageComboBox->count() > 1) {
+    // We made the locale string the associated data for each item
+    m_ui->userInterfaceLanguageComboBox->findData(
+      // No explicit setting in the config indicates to use the system language
+      m_settings.value("locale"_L1, "system"_L1).toString());
   }
 
   // Indexing convention
-  unsigned indexing = m_settings.value("indexing", 1).toUInt();
+  unsigned indexing = m_settings.value("indexing"_L1, 1).toUInt();
   // Options are 0 and 1, anything else becomes the default (1)
   if (indexing > 1) {
     m_ui->indexingComboBox->setCurrentIndex(1);
@@ -158,35 +157,25 @@ void PreferencesDialog::updateGeneral()
 void PreferencesDialog::applyGeneral()
 {
   // Interface language
-  // If there are no translations available, the item in the combobox must be
+  // If there are no translations available, the item in the combobox will be
   // English (Default) because it's the only option; however, should translation
-  // files later be installed we want the default to remain "system". Simply
-  // don't overwrite the config value if the user couldn't make an active choice
-  if (!m_availableLocales.isEmpty()) {
-    int languageIndex = m_ui->userInterfaceLanguageComboBox->currentIndex();
-    qDebug() << "Selected language:"
-             << m_ui->userInterfaceLanguageComboBox->currentText();
-    if (languageIndex == -1) {
-      // Nothing was selected, so don't change anything
-    } else if (languageIndex == 0) {
-      // Choice is to not translate at all
-      m_settings.setValue("locale", "default");
-    } else if (languageIndex == 1) {
-      // Choice is to follow the system language
-      m_settings.setValue("locale", "system");
-    } else {
-      // Take off 2 as system and default aren't locales and aren't in the list
-      int localeIndex = languageIndex - 2;
-      // at will cause crash if index is out-of-range, but there's no reason why
-      // the combobox shouldn't contain one row per available locale
-      QString chosenLocale = m_availableLocales.at(localeIndex);
+  // files later be installed we want the default to remain "system", so don't
+  // overwrite the config value if the user couldn't make an active choice
+  if (m_ui->userInterfaceLanguageComboBox->count() > 1) {
+    QVariant currentData = m_ui->userInterfaceLanguageComboBox->currentData();
+    if (currentData.isValid()) {
+      qDebug() << "Selected language:"
+               << m_ui->userInterfaceLanguageComboBox->currentText();
+      QString chosenLocale = currentData.toString();
       qDebug() << "Corresponding locale code:" << chosenLocale;
-      m_settings.setValue("locale", chosenLocale);
-    }
-  }
+      m_settings.setValue("locale"_L1, chosenLocale);
+    } else {
+      // Nothing was selected, so don't change anything in the settings
+    };
+  };
 
   // Indexing convention
-  m_settings.setValue("indexing", m_ui->indexingComboBox->currentIndex());
+  m_settings.setValue("indexing"_L1, m_ui->indexingComboBox->currentIndex());
 }
 
 // Controls
@@ -195,7 +184,7 @@ void PreferencesDialog::applyGeneral()
 void PreferencesDialog::updateControls()
 {
   // Scroll inversion
-  int zoom = m_settings.value("navigator/zoom", 1).toInt();
+  int zoom = m_settings.value("navigator/zoom"_L1, 1).toInt();
   // Options are -1 (inversion) and 1 (none), clamp to sign, 0 or missing -> 1
   if (zoom < 0) {
     m_ui->invertScrollDirectionCheckBox->setChecked(true);
@@ -209,9 +198,9 @@ void PreferencesDialog::applyControls()
   // Scroll inversion
   // Inverted = -1, normal = 1
   if (m_ui->invertScrollDirectionCheckBox->isChecked()) {
-    m_settings.setValue("navigator/zoom", -1);
+    m_settings.setValue("navigator/zoom"_L1, -1);
   } else {
-    m_settings.setValue("navigator/zoom", 1);
+    m_settings.setValue("navigator/zoom"_L1, 1);
   }
 }
 
@@ -242,19 +231,19 @@ void PreferencesDialog::updateBonding()
 {
   // Bonding tolerance
   m_ui->distanceToleranceDoubleSpinBox->setValue(
-    m_settings.value("bonding/tolerance", 0.450).toDouble());
+    m_settings.value("bonding/tolerance"_L1, 0.450).toDouble());
   // Minimum distance
   m_ui->minimumDistanceDoubleSpinBox->setValue(
-    m_settings.value("bonding/minDistance", 0.320).toDouble());
+    m_settings.value("bonding/minDistance"_L1, 0.320).toDouble());
 }
 
 void PreferencesDialog::applyBonding()
 {
   // Bonding tolerance
-  m_settings.setValue("bonding/tolerance",
+  m_settings.setValue("bonding/tolerance"_L1,
                       m_ui->distanceToleranceDoubleSpinBox->value());
   // Minimum distance
-  m_settings.setValue("bonding/minDistance",
+  m_settings.setValue("bonding/minDistance"_L1,
                       m_ui->minimumDistanceDoubleSpinBox->value());
 }
 
