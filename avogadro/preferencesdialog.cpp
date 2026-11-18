@@ -158,25 +158,31 @@ void PreferencesDialog::updateGeneral()
 void PreferencesDialog::applyGeneral()
 {
   // Interface language
-  int languageIndex = m_ui->userInterfaceLanguageComboBox->currentIndex();
-  qDebug() << "Selected language:"
-           << m_ui->userInterfaceLanguageComboBox->currentText();
-  if (languageIndex == -1) {
-    // Nothing was selected, so don't change anything
-  } else if (languageIndex == 0) {
-    // Choice is to not translate at all
-    m_settings.setValue("locale", "default");
-  } else if (languageIndex == 1) {
-    // Choice is to follow the system language
-    m_settings.setValue("locale", "system");
-  } else {
-    // Take off 2 as system and default aren't locales and aren't in the list
-    int localeIndex = languageIndex - 2;
-    // at will cause crash if index is out-of-range, but there's no reason why
-    // the combobox shouldn't contain one row per available locale
-    QString chosenLocale = m_availableLocales.at(localeIndex);
-    qDebug() << "Corresponding locale code:" << chosenLocale;
-    m_settings.setValue("locale", chosenLocale);
+  // If there are no translations available, the item in the combobox must be
+  // English (Default) because it's the only option; however, should translation
+  // files later be installed we want the default to remain "system". Simply
+  // don't overwrite the config value if the user couldn't make an active choice
+  if (!m_availableLocales.isEmpty()) {
+    int languageIndex = m_ui->userInterfaceLanguageComboBox->currentIndex();
+    qDebug() << "Selected language:"
+             << m_ui->userInterfaceLanguageComboBox->currentText();
+    if (languageIndex == -1) {
+      // Nothing was selected, so don't change anything
+    } else if (languageIndex == 0) {
+      // Choice is to not translate at all
+      m_settings.setValue("locale", "default");
+    } else if (languageIndex == 1) {
+      // Choice is to follow the system language
+      m_settings.setValue("locale", "system");
+    } else {
+      // Take off 2 as system and default aren't locales and aren't in the list
+      int localeIndex = languageIndex - 2;
+      // at will cause crash if index is out-of-range, but there's no reason why
+      // the combobox shouldn't contain one row per available locale
+      QString chosenLocale = m_availableLocales.at(localeIndex);
+      qDebug() << "Corresponding locale code:" << chosenLocale;
+      m_settings.setValue("locale", chosenLocale);
+    }
   }
 
   // Indexing convention
@@ -228,8 +234,9 @@ void PreferencesDialog::updateAccessibility() {}
 void PreferencesDialog::applyAccessibility() {}
 
 // Bonding
-// [bonding/tolerance] = added to vdW radii -> max distance for bond perception
-// [bonding/minDistance] = square of min distance for bond perception
+// [bonding/tolerance] = added to vdW radii -> max distance for bond
+// perception [bonding/minDistance] = square of min distance for bond
+// perception
 
 void PreferencesDialog::updateBonding()
 {
