@@ -42,9 +42,6 @@ private:
   void updateControls();
   void applyControls();
 
-  void updateView();
-  void applyView();
-
   void updateRendering();
   void applyRendering();
 

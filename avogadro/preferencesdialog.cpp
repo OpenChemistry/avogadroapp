@@ -63,7 +63,6 @@ void PreferencesDialog::updateAll()
 {
   updateGeneral();
   updateControls();
-  updateView();
   updateRendering();
   updateColors();
   updateAccessibility();
@@ -74,7 +73,6 @@ void PreferencesDialog::applyAll()
 {
   applyGeneral();
   applyControls();
-  applyView();
   applyRendering();
   applyColors();
   applyAccessibility();
@@ -82,13 +80,8 @@ void PreferencesDialog::applyAll()
 }
 
 // General
-// [General/locale] = UI lang
-// userInterfaceLanguageLabel     QLabel
-// userInterfaceLanguageComboBox  QComboBox
-// [NONE] = global indexing convention
-// line                           Line
-// indexingLabel                  QLabel
-// indexingComboBox               QComboBox
+// [locale] = UI lang
+// [indexing] = global indexing convention
 
 void PreferencesDialog::setupGeneral()
 {
@@ -127,8 +120,9 @@ void PreferencesDialog::setupGeneral()
 
 void PreferencesDialog::updateGeneral()
 {
-  // If there are no translations available then there is only one option:
-  // English (Default)
+  // Interface language
+  // If there are no translations available, we can skip this as there is only
+  // one option anyway: English (Default)
   if (!m_availableLocales.isEmpty()) {
     int languageIndex;
     if (m_settings.contains("locale")) {
@@ -150,10 +144,20 @@ void PreferencesDialog::updateGeneral()
     }
     m_ui->userInterfaceLanguageComboBox->setCurrentIndex(languageIndex);
   }
+
+  // Indexing convention
+  unsigned indexing = m_settings.value("indexing", 1).toUInt();
+  // Options are 0 and 1, anything else becomes the default (1)
+  if (indexing > 1) {
+    m_ui->indexingComboBox->setCurrentIndex(1);
+  } else {
+    m_ui->indexingComboBox->setCurrentIndex(indexing);
+  }
 }
 
 void PreferencesDialog::applyGeneral()
 {
+  // Interface language
   int languageIndex = m_ui->userInterfaceLanguageComboBox->currentIndex();
   qDebug() << "Selected language:"
            << m_ui->userInterfaceLanguageComboBox->currentText();
@@ -174,26 +178,36 @@ void PreferencesDialog::applyGeneral()
     qDebug() << "Corresponding locale code:" << chosenLocale;
     m_settings.setValue("locale", chosenLocale);
   }
+
+  // Indexing convention
+  m_settings.setValue("indexing", m_ui->indexingComboBox->currentIndex());
 }
 
 // Controls
-// [NONE] = invert scroll direction
-// invertScrollDirectionLabel     QLabel
-// invertScrollDirectionCheckBox  QCheckBox
+// [navigator/zoom] = invert scroll direction
 
-void PreferencesDialog::updateControls() {}
+void PreferencesDialog::updateControls()
+{
+  // Scroll inversion
+  int zoom = m_settings.value("navigator/zoom", 1).toInt();
+  // Options are -1 (inversion) and 1 (none), clamp to sign, 0 or missing -> 1
+  if (zoom < 0) {
+    m_ui->invertScrollDirectionCheckBox->setChecked(true);
+  } else {
+    m_ui->invertScrollDirectionCheckBox->setChecked(false);
+  }
+}
 
-void PreferencesDialog::applyControls() {}
-
-// View
-// [overlayAxes/enabled] = show reference axes
-// This is now a display type and is configured by that mechanism!
-// overlayAxesLabel               QLabel
-// overlayAxesCheckBox            QCheckBox
-
-void PreferencesDialog::updateView() {}
-
-void PreferencesDialog::applyView() {}
+void PreferencesDialog::applyControls()
+{
+  // Scroll inversion
+  // Inverted = -1, normal = 1
+  if (m_ui->invertScrollDirectionCheckBox->isChecked()) {
+    m_settings.setValue("navigator/zoom", -1);
+  } else {
+    m_settings.setValue("navigator/zoom", 1);
+  }
+}
 
 // Rendering
 
@@ -214,15 +228,27 @@ void PreferencesDialog::updateAccessibility() {}
 void PreferencesDialog::applyAccessibility() {}
 
 // Bonding
-// [bonding/tolerance]
-// distanceToleranceLabel         QLabel
-// distanceToleranceDoubleSpinBox QDoubleSpinBox
-// [bonding/minDistance]
-// minimumDistanceLabel           QLabel
-// minimumDistanceLineEdit        QLineEdit
+// [bonding/tolerance] = added to vdW radii -> max distance for bond perception
+// [bonding/minDistance] = square of min distance for bond perception
 
-void PreferencesDialog::updateBonding() {}
+void PreferencesDialog::updateBonding()
+{
+  // Bonding tolerance
+  m_ui->distanceToleranceDoubleSpinBox->setValue(
+    m_settings.value("bonding/tolerance", 0.450).toDouble());
+  // Minimum distance
+  m_ui->minimumDistanceDoubleSpinBox->setValue(
+    m_settings.value("bonding/minDistance", 0.320).toDouble());
+}
 
-void PreferencesDialog::applyBonding() {}
+void PreferencesDialog::applyBonding()
+{
+  // Bonding tolerance
+  m_settings.setValue("bonding/tolerance",
+                      m_ui->distanceToleranceDoubleSpinBox->value());
+  // Minimum distance
+  m_settings.setValue("bonding/minDistance",
+                      m_ui->minimumDistanceDoubleSpinBox->value());
+}
 
 } // End namespace Avogadro

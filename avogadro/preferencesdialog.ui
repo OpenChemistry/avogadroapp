@@ -49,26 +49,6 @@
      </item>
      <item>
       <property name="text">
-       <string>View</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Rendering</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Colors</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Accessibility</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
        <string>Bonding</string>
       </property>
      </item>
@@ -196,74 +176,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="view">
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <spacer name="verticalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>349</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="rendering">
-      <layout class="QVBoxLayout" name="verticalLayout_5">
-       <item>
-        <spacer name="verticalSpacer_6">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>377</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="colors">
-      <layout class="QVBoxLayout" name="verticalLayout_7">
-       <item>
-        <spacer name="verticalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>377</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="accessibility">
-      <layout class="QVBoxLayout" name="verticalLayout_6">
-       <item>
-        <spacer name="verticalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Orientation::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>377</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="bonding">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -287,10 +199,10 @@
             <double>0.010000000000000</double>
            </property>
            <property name="singleStep">
-            <double>0.050000000000000</double>
+            <double>0.010000000000000</double>
            </property>
            <property name="value">
-            <double>0.400000000000000</double>
+            <double>0.450000000000000</double>
            </property>
           </widget>
          </item>
@@ -302,9 +214,32 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLineEdit" name="minimumDistanceLineEdit"/>
+          <widget class="QDoubleSpinBox" name="minimumDistanceDoubleSpinBox">
+           <property name="suffix">
+            <string> Å</string>
+           </property>
+           <property name="decimals">
+            <number>3</number>
+           </property>
+           <property name="minimum">
+            <double>0.010000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.010000000000000</double>
+           </property>
+           <property name="value">
+            <double>0.320000000000000</double>
+           </property>
+          </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bonds are perceived between atoms at distance &lt;span style=&quot; font-style:italic;&quot;&gt;d&lt;/span&gt;  if:&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;d&lt;/span&gt; &amp;lt; the sum of the van der Waals radii + the distance tolerance&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;d&lt;/span&gt; &amp;gt; (the minimum distance)&lt;span style=&quot; vertical-align:super;&quot;&gt;2&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
        </item>
        <item>
         <spacer name="verticalSpacer_3">
