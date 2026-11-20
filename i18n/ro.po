@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-11-08 07:27+0000\n"
-"PO-Revision-Date: 2026-11-09 22:06+0000\n"
+"POT-Creation-Date: 2026-11-15 07:54+0000\n"
+"PO-Revision-Date: 2026-11-19 12:51+0000\n"
 "Last-Translator: Remus-Gabriel Chelu <remus-"
 "gabriel@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/avogadro/"
@@ -21,38 +21,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 2026.11.2.dev0\n"
+"X-Generator: Weblate 2026.12.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
-#: aboutdialog.cpp:25
+#: aboutdialog.cpp:26
 msgid "Molecular editor and visualizer"
 msgstr "Editor și vizor molecular"
 
 #. i18n: file: aboutdialog.ui:62
 #. i18n: ectx: property (text), widget (QLabel, versionLabel)
-#: aboutdialog.cpp:32:3
+#: aboutdialog.cpp:33:3
 msgid "Version:"
 msgstr "Versiunea:"
 
 #. i18n: file: aboutdialog.ui:117
 #. i18n: ectx: property (text), widget (QLabel, libsLabel)
-#: aboutdialog.cpp:33:9
+#: aboutdialog.cpp:34:9
 msgid "Avogadro Library Version:"
 msgstr "Versiunea bibliotecii Avogadro:"
 
 #. i18n: file: aboutdialog.ui:164
 #. i18n: ectx: property (text), widget (QLabel, qtVersionLabel)
-#: aboutdialog.cpp:34:15
+#: aboutdialog.cpp:35:15
 msgid "Qt Version:"
 msgstr "Versiunea Qt:"
 
 #. i18n: file: aboutdialog.ui:181
 #. i18n: ectx: property (text), widget (QLabel, sslVersionLabel)
-#: aboutdialog.cpp:35:21
+#: aboutdialog.cpp:36:21
 msgid "SSL Version:"
 msgstr "Versiunea SSL:"
 
-#: aboutdialog.cpp:46
+#: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
 msgstr "%1 (Diagnostic)"
@@ -118,107 +118,107 @@ msgstr "Nu trimiteți"
 msgid "Send crash reports to the Avogadro developers"
 msgstr "Trimiteți rapoartele de erori către dezvoltatorii Avogadro"
 
-#: mainwindow.cpp:296
+#: mainwindow.cpp:298
 msgid "Missing 'index' parameter."
 msgstr "Lipsește parametrul „index”."
 
-#: mainwindow.cpp:298
+#: mainwindow.cpp:300
 msgid "'index' must be a whole number."
 msgstr "„index” trebuie să fie un număr întreg."
 
-#: mainwindow.cpp:300
+#: mainwindow.cpp:302
 #, qt-format
 msgid "'index' %1 is out of range (%2 molecules are open)."
 msgstr "„index” %1 se află în afara intervalului (%2 molecule sunt deschise)."
 
-#: mainwindow.cpp:626
+#: mainwindow.cpp:628
 msgid "Ready…"
 msgstr "Gata…"
 
-#: mainwindow.cpp:738
+#: mainwindow.cpp:749
 msgid "Tool"
 msgstr "Instrument"
 
-#: mainwindow.cpp:744
+#: mainwindow.cpp:755
 msgid "Display Types"
 msgstr "Tipuri de afișare"
 
-#: mainwindow.cpp:754
+#: mainwindow.cpp:765
 msgid "Display Type Settings"
 msgstr "Configurarea tipului de afișare"
 
-#: mainwindow.cpp:758
+#: mainwindow.cpp:769
 msgid "Files"
 msgstr "Fișiere"
 
-#: mainwindow.cpp:769
+#: mainwindow.cpp:780
 msgid "Layers"
 msgstr "Straturi"
 
-#: mainwindow.cpp:797
+#: mainwindow.cpp:808
 msgctxt "File toolbar"
 msgid "File"
 msgstr "Fişier"
 
-#: mainwindow.cpp:802
+#: mainwindow.cpp:813
 msgctxt "Tools toolbar"
 msgid "Tools"
 msgstr "Instrumente"
 
-#: mainwindow.cpp:1365
+#: mainwindow.cpp:1373
 msgid "Untitled"
 msgstr "Fără titlu"
 
-#: mainwindow.cpp:1370
+#: mainwindow.cpp:1378
 #, qt-format
 msgctxt ""
 "window title: %1 = file name, %2 = • for modified file, %3 = Avogadro version"
 msgid "%1%2 - Avogadro %3"
 msgstr "%1%2 - Avogadro %3"
 
-#: mainwindow.cpp:1426
+#: mainwindow.cpp:1434
 msgid "Restart needed"
 msgstr "Este necesară repornirea"
 
-#: mainwindow.cpp:1427
+#: mainwindow.cpp:1435
 msgid "Please restart Avogadro to use the new language."
 msgstr "Trebuie să reporniți Avogadro pentru a utiliza noua limbă."
 
-#: mainwindow.cpp:1474 mainwindow.cpp:2933
+#: mainwindow.cpp:1482 mainwindow.cpp:3084
 msgid "Chemical Markup Language"
 msgstr "Limbaj de marcare chimică"
 
-#: mainwindow.cpp:1475 mainwindow.cpp:2932
+#: mainwindow.cpp:1483 mainwindow.cpp:3083
 msgid "Chemical JSON"
 msgstr "JSON chimic"
 
-#: mainwindow.cpp:1481
+#: mainwindow.cpp:1489
 msgid "Open chemical file"
 msgstr "Deschide fișierul cu datele de chimie"
 
-#: mainwindow.cpp:1499 mainwindow.cpp:1522 mainwindow.cpp:2819
-#: mainwindow.cpp:4144
+#: mainwindow.cpp:1507 mainwindow.cpp:1530 mainwindow.cpp:2970
+#: mainwindow.cpp:4286
 msgid "Cannot open file"
 msgstr "Nu se poate deschide fișierul"
 
-#: mainwindow.cpp:1500 mainwindow.cpp:1523 mainwindow.cpp:2820
+#: mainwindow.cpp:1508 mainwindow.cpp:1531 mainwindow.cpp:2971
 #, qt-format
 msgid "Can't open supplied file %1"
 msgstr "Nu se poate deschide fișierul furnizat %1"
 
-#: mainwindow.cpp:1513
+#: mainwindow.cpp:1521
 msgid "Open Molecule"
 msgstr "Deschideți molecula"
 
-#: mainwindow.cpp:1536 mainwindow.cpp:2815
+#: mainwindow.cpp:1544 mainwindow.cpp:2966
 msgid "Select file reader"
 msgstr "Selectați cititorul de fișiere"
 
-#: mainwindow.cpp:1571
+#: mainwindow.cpp:1579
 msgid "Reading File"
 msgstr "Se citește fișierul"
 
-#: mainwindow.cpp:1573 mainwindow.cpp:1597
+#: mainwindow.cpp:1581 mainwindow.cpp:1605
 #, qt-format
 msgid ""
 "Opening file '%1'\n"
@@ -227,16 +227,16 @@ msgstr ""
 "Se deschide fișierul „%1”\n"
 "cu „%2”"
 
-#: mainwindow.cpp:1685
+#: mainwindow.cpp:1693
 #, qt-format
 msgid "Molecule loaded (%1 atoms, %2 bonds)"
 msgstr "Moleculă încărcată (%1 atomi, %2 legături)"
 
-#: mainwindow.cpp:1695
+#: mainwindow.cpp:1703
 msgid "File error"
 msgstr "Eroare de fișier"
 
-#: mainwindow.cpp:1696
+#: mainwindow.cpp:1704
 #, qt-format
 msgid ""
 "Error while reading file '%1':\n"
@@ -245,17 +245,17 @@ msgstr ""
 "Eroare la citirea fișierului „%1”:\n"
 "%2"
 
-#: mainwindow.cpp:1729
+#: mainwindow.cpp:1737
 #, qt-format
 msgctxt "%1 = filename"
 msgid "Saved file %1"
 msgstr "Fișier salvat ca %1"
 
-#: mainwindow.cpp:1746
+#: mainwindow.cpp:1754
 msgid "Error saving file"
 msgstr "Eroare la salvarea fișierului"
 
-#: mainwindow.cpp:1747
+#: mainwindow.cpp:1755
 #, qt-format
 msgctxt "%1 = file name, %2 = error message"
 msgid ""
@@ -265,19 +265,19 @@ msgstr ""
 "Eroare la salvarea fișierului „%1”:\n"
 "%2"
 
-#: mainwindow.cpp:1752
+#: mainwindow.cpp:1760
 msgid "The save was canceled."
 msgstr "Salvarea a fost anulată."
 
-#: mainwindow.cpp:1813 mainwindow.cpp:1816
+#: mainwindow.cpp:1821 mainwindow.cpp:1824
 msgid "untitled"
 msgstr "fără titlu"
 
-#: mainwindow.cpp:2053
+#: mainwindow.cpp:2061
 msgid "Found Previous Avogadro Files"
 msgstr "S-au găsit fișiere Avogadro dintr-o versiune anterioară"
 
-#: mainwindow.cpp:2055
+#: mainwindow.cpp:2063
 #, qt-format
 msgid ""
 "Files from a previous version of Avogadro were found in the plugins "
@@ -290,19 +290,19 @@ msgstr ""
 "\n"
 "Aceste fișiere nu mai sunt necesare și pot fi șterse în siguranță."
 
-#: mainwindow.cpp:2062
+#: mainwindow.cpp:2070
 msgid "Remove Old Files"
 msgstr "Elimină fișierele vechi"
 
-#: mainwindow.cpp:2063
+#: mainwindow.cpp:2071
 msgid "Keep Files"
 msgstr "Păstrează fișierele"
 
-#: mainwindow.cpp:2203
+#: mainwindow.cpp:2211
 msgid "Let’s finish your setup"
 msgstr "Să finalizăm configurarea"
 
-#: mainwindow.cpp:2204
+#: mainwindow.cpp:2212
 msgid ""
 "Avogadro can generate input files for Gaussian, ORCA, and other "
 "computational chemistry packages."
@@ -310,37 +310,37 @@ msgstr ""
 "Avogadro poate genera fișiere de intrare pentru Gaussian, ORCA și alte "
 "pachete de chimie computațională."
 
-#: mainwindow.cpp:2209
+#: mainwindow.cpp:2217
 msgid "This requires setup that will download and configure Python."
 msgstr ""
 "Aceasta necesită o operație de instalare care va descărca și configura "
 "Python."
 
-#: mainwindow.cpp:2211
+#: mainwindow.cpp:2219
 msgid "This requires setup to configure a Python environment."
 msgstr "Acest lucru necesită instalarea pentru a configura un mediu Python."
 
-#: mainwindow.cpp:2215
+#: mainwindow.cpp:2223
 msgid "This may require an Internet connection."
 msgstr "Acest lucru poate necesita o conexiune la Internet."
 
-#: mainwindow.cpp:2217
+#: mainwindow.cpp:2225
 msgid "Install updated plugins?"
 msgstr "Instalați modulele actualizate?"
 
-#: mainwindow.cpp:2218
+#: mainwindow.cpp:2226
 msgid "The following plugins are available:"
 msgstr "Sunt disponibile următoarele module:"
 
-#: mainwindow.cpp:2219
+#: mainwindow.cpp:2227
 msgid "Would you like to update them?"
 msgstr "Doriți să le actualizați?"
 
-#: mainwindow.cpp:2257
+#: mainwindow.cpp:2265
 msgid "Recover Autosaved Files"
 msgstr "Recuperează fișierele salvate automat"
 
-#: mainwindow.cpp:2258
+#: mainwindow.cpp:2266
 msgid ""
 "Autosave files were found from a previous session.\n"
 "Would you like to recover them?"
@@ -348,15 +348,15 @@ msgstr ""
 "Au fost găsite fișiere salvate automat dintr-o sesiune anterioară.\n"
 "Doriți să le recuperați?"
 
-#: mainwindow.cpp:2322 mainwindow.cpp:2327
+#: mainwindow.cpp:2330 mainwindow.cpp:2335
 msgid "Unknown error"
 msgstr "Eroare necunoscută"
 
-#: mainwindow.cpp:2325
+#: mainwindow.cpp:2333
 msgid "Error: Failed to initialize OpenGL context"
 msgstr "Eroare: Nu s-a reușit inițializarea contextului OpenGL"
 
-#: mainwindow.cpp:2326
+#: mainwindow.cpp:2334
 #, qt-format
 msgid ""
 "OpenGL 4.0 or greater required, exiting.\n"
@@ -367,61 +367,71 @@ msgstr ""
 "\n"
 "%1"
 
-#: mainwindow.cpp:2380
+#: mainwindow.cpp:2388
 msgid "Missing 'layer' parameter."
 msgstr "Lipsește parametrul „layer”."
 
-#: mainwindow.cpp:2383
+#: mainwindow.cpp:2391
 msgid "'layer' must be a whole number."
 msgstr "„layer” trebuie să fie un număr întreg."
 
-#: mainwindow.cpp:2386
+#: mainwindow.cpp:2394
 #, qt-format
 msgid "'layer' %1 is out of range."
 msgstr "„layer” %1 este în afara intervalului."
 
-#: mainwindow.cpp:2509
+#: mainwindow.cpp:2681
 #, qt-format
 msgctxt "settings for a particular display type like wireframe"
 msgid "%1 Settings"
 msgstr "Configurări %1"
 
-#: mainwindow.cpp:2753
-msgid "Common image formats"
-msgstr "Formate comune pentru imagini"
+#: mainwindow.cpp:2812 rpclistener.cpp:677
+msgid "There is no active 3D view to render."
+msgstr "Nu există nicio vizualizare 3D activă pentru redare."
 
-#: mainwindow.cpp:2755
-msgid "All files"
-msgstr "Toate fișierele"
-
-#: mainwindow.cpp:2755
-msgid "BMP"
-msgstr "BMP"
-
-#: mainwindow.cpp:2756
+#: mainwindow.cpp:2835
 msgid "PNG"
 msgstr "PNG"
 
-#: mainwindow.cpp:2756
+#: mainwindow.cpp:2841
+msgid "Common image formats"
+msgstr "Formate comune pentru imagini"
+
+#: mainwindow.cpp:2843
+msgid "All files"
+msgstr "Toate fișierele"
+
+#: mainwindow.cpp:2843
+msgid "BMP"
+msgstr "BMP"
+
+#: mainwindow.cpp:2844
 msgid "JPEG"
 msgstr "JPEG"
 
-#: mainwindow.cpp:2765
+#: mainwindow.cpp:2870
 msgid "Export Bitmap Graphics"
 msgstr "Exportă ca imagine bitmap"
 
 #. i18n: file: mainwindow.ui:14
 #. i18n: ectx: property (windowTitle), widget (QMainWindow, MainWindow)
-#: mainwindow.cpp:2783 mainwindow.cpp:2905 mainwindow.cpp:3856:34
+#: mainwindow.cpp:2911 mainwindow.cpp:2936 mainwindow.cpp:3056
+#: mainwindow.cpp:3998:34
 msgid "Avogadro"
 msgstr "Avogadro"
 
-#: mainwindow.cpp:2784
+#: mainwindow.cpp:2912
+#, qt-format
+msgid "Cannot render the image: %1"
+msgstr "Nu se poate reda imaginea: %1"
+
+#: mainwindow.cpp:2937
 #, qt-format
 msgid "Cannot save file %1."
 msgstr "Nu se poate salva fișierul %1."
 
-#: mainwindow.cpp:2906
+#: mainwindow.cpp:3057
 msgid ""
 "This file was imported from a non-standard format which may not be able to "
 "write all of the information in the molecule.\n"
@@ -434,23 +444,23 @@ msgstr ""
 "Doriți să exportați în formatul curent sau să salvați într-un format "
 "standard?"
 
-#: mainwindow.cpp:2913
+#: mainwindow.cpp:3064
 msgid "Export"
 msgstr "Exportare"
 
-#: mainwindow.cpp:2938
+#: mainwindow.cpp:3089
 msgid "Save chemical file"
 msgstr "Salvează fișierul cu datele de chimie"
 
-#: mainwindow.cpp:2983
+#: mainwindow.cpp:3134
 msgid "Export Molecule"
 msgstr "Exportare moleculă"
 
-#: mainwindow.cpp:3104
+#: mainwindow.cpp:3257
 msgid "Saving File in Progress…"
 msgstr "Salvarea fișierului în curs…"
 
-#: mainwindow.cpp:3106
+#: mainwindow.cpp:3259
 #, qt-format
 msgctxt "%1 = file name, %2 = format"
 msgid ""
@@ -460,43 +470,43 @@ msgstr ""
 "Se salvează fișierul „%1”\n"
 "cu „%2”"
 
-#: mainwindow.cpp:3243
+#: mainwindow.cpp:3392
 #, qt-format
 msgid "&Undo %1"
 msgstr "&Anulează %1"
 
 #. i18n: file: mainwindow.ui:194
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3246 mainwindow.cpp:3523:118
+#: mainwindow.cpp:3395 mainwindow.cpp:3667:118
 msgid "&Undo"
 msgstr "&Anulează"
 
-#: mainwindow.cpp:3251
+#: mainwindow.cpp:3400
 #, qt-format
 msgid "&Redo %1"
 msgstr "&Refă %1"
 
 #. i18n: file: mainwindow.ui:206
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3254 mainwindow.cpp:3531:124
+#: mainwindow.cpp:3403 mainwindow.cpp:3675:124
 msgid "&Redo"
 msgstr "&Refă"
 
-#: mainwindow.cpp:3379
+#: mainwindow.cpp:3523
 msgid "&Testing"
 msgstr "&Testare"
 
-#: mainwindow.cpp:3381
+#: mainwindow.cpp:3525
 msgid "&Record Test…"
 msgstr "&Înregistrare test…"
 
-#: mainwindow.cpp:3384
+#: mainwindow.cpp:3528
 msgid "&Play Test…"
 msgstr "&Redare test…"
 
 #. i18n: file: mainwindow.ui:32
 #. i18n: ectx: property (title), widget (QMenu, menuFile)
-#: mainwindow.cpp:3393 menubuilder.cpp:114:37
+#: mainwindow.cpp:3537 menubuilder.cpp:114:37
 msgid "&File"
 msgstr "&Fişier"
 
@@ -504,13 +514,13 @@ msgstr "&Fişier"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:129
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3395:76 rc.cpp:82
+#: mainwindow.cpp:3539:76 rc.cpp:82
 msgid "&New"
 msgstr "&Nou"
 
 #. i18n: file: mainwindow.ui:82
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3410:52
+#: mainwindow.cpp:3554:52
 msgid "&Open…"
 msgstr "&Deschide…"
 
@@ -518,7 +528,7 @@ msgstr "&Deschide…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:142
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3424:85 rc.cpp:91
+#: mainwindow.cpp:3568:85 rc.cpp:91
 msgid "&Close"
 msgstr "În&chide"
 
@@ -526,35 +536,35 @@ msgstr "În&chide"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:155
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3437:94 rc.cpp:100
+#: mainwindow.cpp:3581:94 rc.cpp:100
 msgid "&Save"
 msgstr "&Salvează"
 
 #. i18n: file: mainwindow.ui:160
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3449:103
+#: mainwindow.cpp:3593:103
 msgid "Save &As…"
 msgstr "Salve&ază ca…"
 
 #. i18n: file: mainwindow.ui:328
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3462:196
+#: mainwindow.cpp:3606:196
 msgid "&Export"
 msgstr "&Exportare"
 
-#: mainwindow.cpp:3463
+#: mainwindow.cpp:3607
 msgid "&Molecule…"
 msgstr "&Moleculă…"
 
-#: mainwindow.cpp:3470
+#: mainwindow.cpp:3614
 msgid "Export Molecule…"
 msgstr "Exportare moleculă…"
 
-#: mainwindow.cpp:3477
+#: mainwindow.cpp:3621
 msgid "&Graphics…"
 msgstr "&Imagini…"
 
-#: mainwindow.cpp:3484
+#: mainwindow.cpp:3628
 msgid "Export Graphics…"
 msgstr "Exportare imagini…"
 
@@ -562,228 +572,228 @@ msgstr "Exportare imagini…"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #. i18n: file: mainwindow.ui:106
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3492:61 rc.cpp:67
+#: mainwindow.cpp:3636:61 rc.cpp:67
 msgid "&Quit"
 msgstr "&Ieșire"
 
 #. i18n: file: mainwindow.ui:318
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3502:190
+#: mainwindow.cpp:3646:190
 msgid "Open Recent"
 msgstr "Deschide recent"
 
-#: mainwindow.cpp:3516
+#: mainwindow.cpp:3660
 msgid "No recent files"
 msgstr "Nu există fișiere recente"
 
 #. i18n: file: mainwindow.ui:59
 #. i18n: ectx: property (title), widget (QMenu, menuEdit)
-#: mainwindow.cpp:3522 menubuilder.cpp:114:46
+#: mainwindow.cpp:3666 menubuilder.cpp:114:46
 msgid "&Edit"
 msgstr "&Editare"
 
-#: mainwindow.cpp:3539
+#: mainwindow.cpp:3683
 msgid "&Copy Graphics"
 msgstr "&Copiere imagini"
 
-#: mainwindow.cpp:3543
+#: mainwindow.cpp:3687
 msgid "Ctrl+Alt+C"
 msgstr "Ctrl+Alt+C"
 
 #. i18n: file: mainwindow.ui:54
 #. i18n: ectx: property (title), widget (QMenu, menuView)
-#: mainwindow.cpp:3556 menubuilder.cpp:114:43
+#: mainwindow.cpp:3700 menubuilder.cpp:114:43
 msgid "&View"
 msgstr "&Vizualizare"
 
-#: mainwindow.cpp:3557
+#: mainwindow.cpp:3701
 msgid "Set Background Color…"
 msgstr "Stabilește culoarea de fundal…"
 
-#: mainwindow.cpp:3561
+#: mainwindow.cpp:3705
 msgid "Rendering…"
 msgstr "Procesare…"
 
-#: mainwindow.cpp:3569
+#: mainwindow.cpp:3713
 msgid "Projection"
 msgstr "Proiecție"
 
-#: mainwindow.cpp:3570
+#: mainwindow.cpp:3714
 msgid "Perspective"
 msgstr "Perspectivă"
 
-#: mainwindow.cpp:3577
+#: mainwindow.cpp:3721
 msgid "Orthographic"
 msgstr "Ortografic"
 
-#: mainwindow.cpp:3596
+#: mainwindow.cpp:3740
 msgid "&Extensions"
 msgstr "&Extensii"
 
-#: mainwindow.cpp:3598
+#: mainwindow.cpp:3742
 msgid "User Interface Language…"
 msgstr "Limba interfeței cu utilizatorul…"
 
-#: mainwindow.cpp:3602
+#: mainwindow.cpp:3746
 msgid "&Periodic Table…"
 msgstr "&Tabel periodic…"
 
-#: mainwindow.cpp:3608 menubuilder.cpp:118
+#: mainwindow.cpp:3752 menubuilder.cpp:118
 msgid "&Help"
 msgstr "&Ajutor"
 
 #. i18n: file: mainwindow.ui:182
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
-#: mainwindow.cpp:3609:115
+#: mainwindow.cpp:3753:115
 msgid "&About"
 msgstr "&Despre"
 
-#: mainwindow.cpp:3614
+#: mainwindow.cpp:3758
 msgid "&Discussion Forum"
 msgstr "Forum &de discuții"
 
-#: mainwindow.cpp:3618
+#: mainwindow.cpp:3762
 msgid "&Avogadro Website"
 msgstr "Situl web &al Avogadro"
 
-#: mainwindow.cpp:3622
+#: mainwindow.cpp:3766
 msgid "&Report a Bug"
 msgstr "&Raportați o eroare"
 
-#: mainwindow.cpp:3629
+#: mainwindow.cpp:3773
 msgid "&Crash Reporting…"
 msgstr "Raportarea &erorilor…"
 
-#: mainwindow.cpp:3635
+#: mainwindow.cpp:3779
 msgid "&Suggest a Feature"
 msgstr "&Sugerați o caracteristică"
 
-#: mainwindow.cpp:3708
+#: mainwindow.cpp:3852
 msgid "System Language"
 msgstr "Limba sistemului"
 
-#: mainwindow.cpp:3716
+#: mainwindow.cpp:3860
 msgid "Language"
 msgstr "Limba"
 
-#: mainwindow.cpp:3716
+#: mainwindow.cpp:3860
 msgid "User Interface Language:"
 msgstr "Limba interfeței cu utilizatorul:"
 
-#: mainwindow.cpp:3841
+#: mainwindow.cpp:3983
 #, qt-format
 msgid "All supported formats (%1);;All files (*);;"
 msgstr "Toate formatele acceptate (%1);;Toate fișierele (*);;"
 
-#: mainwindow.cpp:3857
+#: mainwindow.cpp:3999
 msgid "Do you want to save the changes to the document?"
 msgstr "Doriți să salvați schimbările efectuate în document?"
 
-#: mainwindow.cpp:3865
+#: mainwindow.cpp:4007
 msgid "Your changes will be lost if you don't save them."
 msgstr "Modificările vor fi pierdute dacă nu le salvați."
 
-#: mainwindow.cpp:3870
+#: mainwindow.cpp:4012
 msgctxt "Save"
 msgid "Ctrl+S"
 msgstr "Ctrl+S"
 
-#: mainwindow.cpp:3872
+#: mainwindow.cpp:4014
 msgctxt "Discard"
 msgid "Ctrl+D"
 msgstr "Ctrl+D"
 
-#: mainwindow.cpp:3959
+#: mainwindow.cpp:4101
 msgid "Network Download Failed"
 msgstr "Descărcarea din rețea a eșuat"
 
-#: mainwindow.cpp:3960
+#: mainwindow.cpp:4102
 msgid "Network timeout or other error."
 msgstr ""
 "Depășire a timpului de așteptare pentru conectarea la rețea sau altă eroare."
 
-#: mainwindow.cpp:4047
+#: mainwindow.cpp:4189
 #, qt-format
 msgid "Your version: %1"
 msgstr "Versiunea dvs.: %1"
 
-#: mainwindow.cpp:4048
+#: mainwindow.cpp:4190
 #, qt-format
 msgid "New version: %1"
 msgstr "Versiunea nouă: %1"
 
-#: mainwindow.cpp:4050
+#: mainwindow.cpp:4192
 msgid "An update is available, do you want to download it now?\n"
 msgstr "O actualizare este disponibilă, doriți să o descărcați acum?\n"
 
-#: mainwindow.cpp:4052
+#: mainwindow.cpp:4194
 msgid "Version Update"
 msgstr "Actualizare versiune"
 
-#: mainwindow.cpp:4110
+#: mainwindow.cpp:4252
 #, qt-format
 msgid "Error while loading the “%1” file format."
 msgstr "Eroare la încărcarea formatului de fișier „%1”."
 
-#: mainwindow.cpp:4135
+#: mainwindow.cpp:4277
 msgid "Select file format"
 msgstr "Selectați formatul fișierului"
 
-#: mainwindow.cpp:4145 mainwindow.cpp:4162
+#: mainwindow.cpp:4287 mainwindow.cpp:4304
 #, qt-format
 msgid "Avogadro cannot open “%1”."
 msgstr "Avogadro nu poate deschide „%1”."
 
-#: mainwindow.cpp:4161
+#: mainwindow.cpp:4303
 msgid "Cannot open files"
 msgstr "Nu se pot deschide fișierele"
 
-#: mainwindow.cpp:4346
+#: mainwindow.cpp:4488
 msgid "The plugin was unloaded."
 msgstr "Modulul a fost descărcat(dezactivat)."
 
-#: mainwindow.cpp:4394 mainwindow.cpp:4413 mainwindow.cpp:4436
-#: mainwindow.cpp:4455 mainwindow.cpp:4483 rpclistener.cpp:650
+#: mainwindow.cpp:4536 mainwindow.cpp:4555 mainwindow.cpp:4578
+#: mainwindow.cpp:4597 mainwindow.cpp:4625 rpclistener.cpp:653
 msgid "No molecule is open."
 msgstr "Nicio moleculă nu este deschisă."
 
-#: mainwindow.cpp:4423
+#: mainwindow.cpp:4565
 msgid "Cannot remove the last remaining layer."
 msgstr "Nu se poate elimina ultimul strat rămas."
 
-#: mainwindow.cpp:4467
+#: mainwindow.cpp:4609
 msgid "'visible' must be true or false."
 msgstr "„visible” trebuie să fie true sau false."
 
-#: mainwindow.cpp:4495
+#: mainwindow.cpp:4637
 msgid "'locked' must be true or false."
 msgstr "„locked” trebuie să fie true sau false."
 
-#: mainwindow.cpp:4545
+#: mainwindow.cpp:4687
 msgid ""
 "The molecule has unsaved changes; pass discard: true to close it anyway."
 msgstr ""
 "Molecula conține modificări nesalvate; pasați parametrul „discard: true” "
 "pentru a o închide oricum."
 
-#: mainwindow.cpp:4562
+#: mainwindow.cpp:4704
 msgid "There is nothing to undo."
 msgstr "Nu e nimic de anulat."
 
-#: mainwindow.cpp:4563
+#: mainwindow.cpp:4705
 msgid "There is nothing to redo."
 msgstr "Nu e nimic de refăcut."
 
-#: mainwindow.cpp:4578
+#: mainwindow.cpp:4720
 msgid "There is no active view."
 msgstr "Nu există nicio vizualizare activă."
 
-#: mainwindow.cpp:4592
+#: mainwindow.cpp:4734
 #, qt-format
 msgid "Unknown tool '%1'."
 msgstr "Instrument necunoscut „%1”."
 
-#: mainwindow.cpp:4618
+#: mainwindow.cpp:4760
 msgid "No molecule"
 msgstr "Nicio moleculă"
 
@@ -807,54 +817,70 @@ msgstr "Con&figurări"
 msgid "&Window"
 msgstr "&Fereastră"
 
-#: rpclistener.cpp:291
+#: rpclistener.cpp:294
 msgid "Avogadro is shutting down."
 msgstr "Avogadro se închide."
 
-#: rpclistener.cpp:679
-msgid "renderImage requires both width and height, or neither."
-msgstr ""
-"«renderImage» necesită atât lățimea, cât și înălțimea, sau niciuna dintre "
-"ele."
+#: rpclistener.cpp:693
+#, qt-format
+msgid "%1 must be a whole number from %2 to %3."
+msgstr "%1 trebuie să fie un număr întreg cuprins între %2 și %3."
 
-#: rpclistener.cpp:704
+#: rpclistener.cpp:722
+#, qt-format
+msgid ""
+"The %1 derived from the view's aspect ratio, %2, is outside the range 1 to "
+"%3."
+msgstr ""
+"Valoarea %1, calculată pe baza raportului de aspect al vizualizării, %2, se "
+"află în afara intervalului cuprins între 1 și %3."
+
+#: rpclistener.cpp:724
+msgid "height"
+msgstr "înălțime"
+
+#: rpclistener.cpp:724
+msgid "width"
+msgstr "lățime"
+
+#: rpclistener.cpp:756
 msgid "Could not render the current view."
 msgstr "Nu s-a putut afișa vizualizarea curentă."
 
-#: rpclistener.cpp:732
+#: rpclistener.cpp:785
 msgid "Could not encode the render as PNG."
 msgstr "Nu s-a putut codifica imaginea generată în format PNG."
 
-#: rpclistener.cpp:773
+#: rpclistener.cpp:826
 #, qt-format
 msgid "%1 needs a \"target\" string."
 msgstr "%1 necesită un șir de caractere pentru „target”."
 
-#: rpclistener.cpp:783
+#: rpclistener.cpp:836
 msgid "highlightTarget's callout must be a string."
 msgstr ""
 "Textul din caseta de informații a highlightTarget trebuie să fie un șir de "
 "caractere."
 
-#: rpclistener.cpp:831 rpclistener.cpp:842
+#: rpclistener.cpp:884 rpclistener.cpp:895
 msgid "No active view."
 msgstr "Nu există nicio vizualizare activă."
 
-#: rpclistener.cpp:852
+#: rpclistener.cpp:905
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
 msgstr ""
 "modelView din setCamera trebuie să conțină exact 16 numere, în ordinea "
 "majoră a liniilor (row-major)."
 
-#: rpclistener.cpp:916 rpclistener.cpp:992
+#: rpclistener.cpp:969 rpclistener.cpp:1045
 msgid "The command failed."
 msgstr "Comanda a eșuat."
 
-#: rpclistener.cpp:922
+#: rpclistener.cpp:975
 msgid "That plugin is already running a command."
 msgstr "Acest modul execută deja o comandă."
 
-#: rpclistener.cpp:954
+#: rpclistener.cpp:1007
 msgid "The command timed out."
 msgstr "Comanda a depășit limita de timp."
 
@@ -1233,6 +1259,11 @@ msgstr "Remus-Gabriel Chelu"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "remusgabriel.chelu@disroot.org, 2023, 2024, 2025, 2026"
+
+#~ msgid "renderImage requires both width and height, or neither."
+#~ msgstr ""
+#~ "«renderImage» necesită atât lățimea, cât și înălțimea, sau niciuna dintre "
+#~ "ele."
 
 #~ msgid "Would you like to install them?"
 #~ msgstr "Doriți să le instalați?"
