@@ -32,7 +32,9 @@
 #include <avogadro/qtgui/molecule.h>
 #include <avogadro/qtgui/moleculemodel.h>
 #include <avogadro/qtgui/multiviewwidget.h>
+#ifdef AVOGADRO_USE_SUBPROCESS
 #include <avogadro/qtgui/packagemanager.h>
+#endif
 #include <avogadro/qtgui/periodictableview.h>
 #include <avogadro/qtgui/richtextdelegate.h>
 #include <avogadro/qtgui/rwmolecule.h>
@@ -556,6 +558,7 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
     }
   }
 
+#ifdef AVOGADRO_USE_SUBPROCESS
   // Clean the pixi cache if it's been more than 30 days
   QSettings settings;
   QDateTime lastCleaned = settings.value("pixi/lastCacheClean").toDateTime();
@@ -578,6 +581,8 @@ MainWindow::MainWindow(const QStringList& fileNames, bool disableSettings,
 
   // Scan for pyproject.toml-based plugin packages.
   loadPackages();
+
+#endif
 
   // now we can build the menus for extensions
   foreach (ExtensionPlugin* extension, m_extensions) {
@@ -1839,6 +1844,7 @@ QString MainWindow::autosaveNameFor(QtGui::Molecule* molecule)
   return name;
 }
 
+#ifdef AVOGADRO_USE_SUBPROCESS
 static bool copyDirectoryRecursively(const QString& srcPath,
                                      const QString& dstPath)
 {
@@ -2249,6 +2255,7 @@ void MainWindow::loadPackages()
 #endif
   pkgManager->loadRegisteredPackages();
 }
+#endif
 
 void MainWindow::checkAutosaveRecovery()
 {
