@@ -10,6 +10,7 @@
 #include "backgroundfileformat.h"
 #include "crashreporter.h"
 #include "menubuilder.h"
+#include "preferencesdialog.h"
 #include "renderingdialog.h"
 #include "targetregistry.h"
 #include "tdxcontroller.h"
@@ -107,6 +108,7 @@
 #include <cmath>
 #include <filesystem>
 #include <limits>
+#include <qlogging.h>
 #include <system_error>
 
 #ifdef QTTESTING
@@ -1420,20 +1422,6 @@ void MainWindow::writeSettings()
       settings.setValue(settingsKey, plugin->isEnabled());
     }
   }
-}
-
-void MainWindow::setLocale(const QString& locale)
-{
-  QSettings settings;
-  if (locale.isEmpty()) {
-    settings.remove("locale"); // system is the default
-  } else {
-    settings.setValue("locale", locale);
-  }
-
-  QMessageBox::information(this, tr("Restart needed"),
-                           tr("Please restart Avogadro to use the new "
-                              "language."));
 }
 
 void MainWindow::readSettings()
@@ -3408,6 +3396,23 @@ void MainWindow::activeMoleculeEdited()
   }
 }
 
+void MainWindow::editPreferences()
+{
+  // Ideally we would cache the last viewed/used page and open at it, as per
+  // https://developer.apple.com/design/human-interface-guidelines/settings
+  auto* dialog = new PreferencesDialog(this, 0);
+  dialog->setAttribute(Qt::WA_DeleteOnClose);
+  connect(dialog, &QDialog::accepted, this, &MainWindow::applyPreferences);
+  dialog->open();
+}
+
+void MainWindow::applyPreferences()
+{
+  // For settings for which changes don't permeate through the application just
+  // by being changed in QSettings and which must be manually applied
+  // e.g. a change to the background color
+}
+
 void MainWindow::setBackgroundColor()
 {
   auto* glWidget = qobject_cast<GLWidget*>(m_multiViewWidget->activeWidget());
@@ -3534,7 +3539,10 @@ void MainWindow::buildMenu()
 #endif
 
   QStringList path;
+
+  // *** File Menu ***
   path << tr("&File");
+
   // New
   auto* action = new QAction(tr("&New"), this);
   // The object name matches the action of the same name in mainwindow.ui. The
@@ -3661,9 +3669,11 @@ void MainWindow::buildMenu()
   m_actionRecentFiles[0]->setVisible(true);
   m_actionRecentFiles[0]->setEnabled(false);
 
-  // Undo/redo
+  // ** Edit Menu **
   QStringList editPath;
   editPath << tr("&Edit");
+
+  // Undo/redo
   m_undo = new QAction(tr("&Undo"), this);
 #if QT_VERSION >= QT_VERSION_CHECK(6, 7, 0)
   m_undo->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::EditUndo));
@@ -3695,9 +3705,19 @@ void MainWindow::buildMenu()
   m_menuBuilder->addAction(editPath, m_redo, 990);
   m_menuBuilder->addAction(editPath, m_copyImage, 530);
 
-  // View menu
+  // Settings/preferences dialog
+  auto* preferences = new QAction(tr("Pre&ferences…"), this);
+  // Lives under Edit on Windows/Linux, but the Application Menu on Mac
+  // (handled automatically by Qt)
+  preferences->setMenuRole(QAction::MenuRole::PreferencesRole);
+  preferences->setShortcut(tr("Ctrl+,")); // Standard for app preferences
+  m_menuBuilder->addAction(editPath, preferences, 10); // Should be last item
+  connect(preferences, &QAction::triggered, this, &MainWindow::editPreferences);
+
+  // *** View menu ***
   QStringList viewPath;
   viewPath << tr("&View");
+
   action = new QAction(tr("Set Background Color…"), this);
   m_menuBuilder->addAction(viewPath, action, 100);
   connect(action, &QAction::triggered, this, &MainWindow::setBackgroundColor);
@@ -3735,21 +3755,22 @@ void MainWindow::buildMenu()
   else
     setProjectionOrthographic();
 
-  // Periodic table.
+  // *** Build, Select, Analyse, Crystal, Input Menus: built elsewhere ***
+
+  // *** Extensions Menu ***
   QStringList extensionsPath;
   extensionsPath << tr("&Extensions");
 
-  action = new QAction(tr("User Interface Language…"), this);
-  m_menuBuilder->addAction(extensionsPath, action, 100);
-  connect(action, &QAction::triggered, this, &MainWindow::showLanguageDialog);
-
+  // Periodic table.
   action = new QAction(tr("&Periodic Table…"), this);
   m_menuBuilder->addAction(extensionsPath, action, 0);
   auto* periodicTable = new QtGui::PeriodicTableView(this);
   connect(action, &QAction::triggered, periodicTable, &QWidget::show);
 
+  // *** Help Menu ***
   QStringList helpPath;
   helpPath << tr("&Help");
+
   auto* about = new QAction(tr("&About"), this);
   about->setIcon(QIcon::fromTheme("help-about"));
   m_menuBuilder->addAction(helpPath, about, 500);
@@ -3843,29 +3864,6 @@ void MainWindow::buildMenu(QtGui::ExtensionPlugin* extension)
 bool ToolSort(const ToolPlugin* a, const ToolPlugin* b)
 {
   return a->priority() < b->priority();
-}
-
-void MainWindow::showLanguageDialog()
-{
-  bool ok;
-  int currentIndex = 0;
-  m_translationList[0] = tr("System Language");
-
-  QSettings settings;
-  QString currentLanguage = settings.value("locale", "System").toString();
-  if (currentLanguage != "System")
-    currentIndex = m_localeCodes.indexOf(currentLanguage);
-
-  QString item =
-    QInputDialog::getItem(this, tr("Language"), tr("User Interface Language:"),
-                          m_translationList, currentIndex, false, &ok);
-
-  if (ok && !item.isEmpty()) {
-    auto index = m_translationList.indexOf(item);
-    if (index != -1) {
-      setLocale(m_localeCodes[index]);
-    }
-  }
 }
 
 void MainWindow::buildTools()

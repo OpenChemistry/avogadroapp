@@ -243,15 +243,6 @@ public:
   void removeAutosave(QtGui::Molecule* molecule);
 
   /**
-   * Set the list of possible translations
-   */
-  void setTranslationList(const QStringList& list, const QStringList& codes)
-  {
-    m_translationList = list;
-    m_localeCodes = codes;
-  }
-
-  /**
    * The outcome of dispatching a script command.
    */
   enum class CommandStatus
@@ -374,11 +365,6 @@ protected:
 protected slots:
 
   /**
-   * Set the preferred locale
-   */
-  void setLocale(const QString& locale);
-
-  /**
    * Slot provided for extensions to indicate a molecule is ready to be read in.
    * This slot will then pass a molecule to the extension for the data to be
    * read in to.
@@ -483,8 +469,6 @@ protected slots:
 
 private slots:
   void showAboutDialog();
-
-  void showLanguageDialog();
 
   void openURL(const QString& url);
 
@@ -624,6 +608,20 @@ private slots:
   void exportGraphics();
 
   void copyGraphics();
+
+  /**
+   * @brief Open the preferences dialog.
+   */
+  void editPreferences();
+
+  /**
+   * @brief Adapt the application to reflect any changes to global preferences
+   * that aren't permeated automatically just by changing the application's
+   * QSettings.
+   * Triggered by the user closing the preferences dialog with "OK" rather than
+   * "Cancel".
+   */
+  void applyPreferences();
 
   void setBackgroundColor();
 
@@ -778,9 +776,6 @@ private:
   bool m_skipAutosave = false;
   QStringList m_recentFiles;
   QList<QAction*> m_actionRecentFiles;
-
-  QStringList m_translationList;
-  QStringList m_localeCodes;
 
   MenuBuilder* m_menuBuilder;
   /// Owned by this window (a QObject child); see TargetRegistry.
