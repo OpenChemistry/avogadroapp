@@ -17,13 +17,15 @@
 # Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>, 2026.
 # LibreTranslate <noreply-mt-libretranslate@weblate.org>, 2026.
 # Jakob Blahusch <jabla@users.noreply.hosted.weblate.org>, 2026.
+# Alexander Krappe <rubialab@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-15 07:54+0000\n"
 "PO-Revision-Date: 2026-11-22 23:47+0000\n"
-"Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
+"Last-Translator: Alexander Krappe <rubialab@users.noreply.hosted.weblate.org>"
+"\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
 "Language: de\n"
@@ -592,7 +594,7 @@ msgstr "&Beenden"
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 #: mainwindow.cpp:3646:190
 msgid "Open Recent"
-msgstr "Vor Kurzem geöffnet"
+msgstr "Zuletzt geöffnet"
 
 #: mainwindow.cpp:3660
 msgid "No recent files"
