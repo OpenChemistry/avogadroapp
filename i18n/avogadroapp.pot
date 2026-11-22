@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Avogadro 2.1.0\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2026-11-15 07:54+0000\n"
+"POT-Creation-Date: 2026-11-22 08:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1092,103 +1092,103 @@ msgstr ""
 msgid "Ambient Occlusion:"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:43
+#. i18n: file: renderingdialog.ui:46
 #. i18n: ectx: property (text), widget (QCheckBox, aoEnableCheckBox)
-#. i18n: file: renderingdialog.ui:108
+#. i18n: file: renderingdialog.ui:114
 #. i18n: ectx: property (text), widget (QCheckBox, edEnableCheckBox)
-#. i18n: file: renderingdialog.ui:193
+#. i18n: file: renderingdialog.ui:208
 #. i18n: ectx: property (text), widget (QCheckBox, fogEnableCheckBox)
-#. i18n: file: renderingdialog.ui:295
+#. i18n: file: renderingdialog.ui:319
 #. i18n: ectx: property (text), widget (QCheckBox, dofEnableCheckBox)
 msgid "Enable"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:85
+#. i18n: file: renderingdialog.ui:88
 #. i18n: ectx: property (toolTip), widget (QLabel, shadow_label)
 msgid "Strength of the ambient shadows"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:88
+#. i18n: file: renderingdialog.ui:91
 #. i18n: ectx: property (text), widget (QLabel, shadow_label)
 msgid "Shadow Strength:"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:130
+#. i18n: file: renderingdialog.ui:136
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeStrength_label)
 msgid "Thickness of the outline, in pixels"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:133
+#. i18n: file: renderingdialog.ui:139
 #. i18n: ectx: property (text), widget (QLabel, edgeStrength_label)
 msgid "Outline Width:"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:160
+#. i18n: file: renderingdialog.ui:169
 #. i18n: ectx: property (toolTip), widget (QLabel, edgeOutline_label)
 msgid "Add an outline to edge atoms"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:163
+#. i18n: file: renderingdialog.ui:172
 #. i18n: ectx: property (text), widget (QLabel, edgeOutline_label)
 msgid "Edge Outline:"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:181
+#. i18n: file: renderingdialog.ui:193
 #. i18n: ectx: property (toolTip), widget (QLabel, enableFog_label)
 msgid "Fog effect for depth cue"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:184
+#. i18n: file: renderingdialog.ui:196
 #. i18n: ectx: property (text), widget (QLabel, enableFog_label)
 msgid "Fog:"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:215
+#. i18n: file: renderingdialog.ui:230
 #. i18n: ectx: property (text), widget (QLabel, fogStrength_label)
 msgid "Fog Strength:"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:245
+#. i18n: file: renderingdialog.ui:263
 #. i18n: ectx: property (text), widget (QLabel, fogPosition_label)
 msgid "Fog Position:"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:283
+#. i18n: file: renderingdialog.ui:304
 #. i18n: ectx: property (toolTip), widget (QLabel, depthBlurEnable_label)
 msgid "Add a depth blur"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:286
+#. i18n: file: renderingdialog.ui:307
 #. i18n: ectx: property (text), widget (QLabel, depthBlurEnable_label)
 msgid "Depth Blur:"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:317
+#. i18n: file: renderingdialog.ui:341
 #. i18n: ectx: property (toolTip), widget (QLabel, blurStrength_label)
 msgid "Strength of the depth blur"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:320
+#. i18n: file: renderingdialog.ui:344
 #. i18n: ectx: property (text), widget (QLabel, blurStrength_label)
 msgid "Blur Strength :"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:347
+#. i18n: file: renderingdialog.ui:374
 #. i18n: ectx: property (toolTip), widget (QLabel, blurPosition_label)
 msgid "Position of the depth blur"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:350
+#. i18n: file: renderingdialog.ui:377
 #. i18n: ectx: property (text), widget (QLabel, blurPosition_label)
 msgid "Blur Position:"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:384
+#. i18n: file: renderingdialog.ui:414
 #. i18n: ectx: property (text), widget (QPushButton, saveButton)
 msgid "Save"
 msgstr ""
 
-#. i18n: file: renderingdialog.ui:404
+#. i18n: file: renderingdialog.ui:434
 #. i18n: ectx: property (text), widget (QPushButton, closeButton)
 msgid "Close"
 msgstr ""
