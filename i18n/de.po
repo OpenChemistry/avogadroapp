@@ -22,7 +22,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-15 07:54+0000\n"
-"PO-Revision-Date: 2026-11-17 23:51+0000\n"
+"PO-Revision-Date: 2026-11-22 23:47+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -400,7 +400,7 @@ msgstr "%1 Einstellungen"
 
 #: mainwindow.cpp:2812 rpclistener.cpp:677
 msgid "There is no active 3D view to render."
-msgstr ""
+msgstr "Es gibt keine aktive 3D-Ansicht darzustellen."
 
 #: mainwindow.cpp:2835
 msgid "PNG"
@@ -436,7 +436,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:2912
 #, qt-format
 msgid "Cannot render the image: %1"
-msgstr ""
+msgstr "Das Bild kann nicht gerendert werden: %1"
 
 #: mainwindow.cpp:2937
 #, qt-format
@@ -792,7 +792,7 @@ msgstr "Es gibt nichts zurückzusetzen."
 
 #: mainwindow.cpp:4705
 msgid "There is nothing to redo."
-msgstr ""
+msgstr "Es gibt nichts, das abermals auszuführen wäre."
 
 #: mainwindow.cpp:4720
 msgid "There is no active view."
@@ -834,7 +834,7 @@ msgstr "Avogadro wird heruntergefahren."
 #: rpclistener.cpp:693
 #, qt-format
 msgid "%1 must be a whole number from %2 to %3."
-msgstr ""
+msgstr "%1 muss eine ganze Zahl im Intervall von %2 bis %3 sein."
 
 #: rpclistener.cpp:722
 #, qt-format
@@ -1141,7 +1141,7 @@ msgstr "Diskussionsforum"
 #. i18n: file: mainwindow.ui:323
 #. i18n: ectx: property (text), widget (QMenu, menuSelect)
 msgid "&Import"
-msgstr "Importieren"
+msgstr "&Importieren"
 
 #. i18n: file: renderingdialog.ui:31
 #. i18n: ectx: property (toolTip), widget (QLabel, enableAO_label)
