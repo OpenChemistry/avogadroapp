@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: avogadro\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-15 07:54+0000\n"
-"PO-Revision-Date: 2026-11-09 13:51+0000\n"
+"PO-Revision-Date: 2026-11-22 23:46+0000\n"
 "Last-Translator: Michal Várady <majkl82@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/cs/>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.11.2.dev0\n"
+"X-Generator: Weblate 2026.12.dev0\n"
 "X-Launchpad-Export-Date: 2018-04-13 16:02+0000\n"
 
 #: aboutdialog.cpp:26
@@ -390,7 +390,7 @@ msgstr "Nastavení – %1"
 
 #: mainwindow.cpp:2812 rpclistener.cpp:677
 msgid "There is no active 3D view to render."
-msgstr ""
+msgstr "Není aktivní žádný 3D pohled, který by bylo možné vykreslit."
 
 #: mainwindow.cpp:2835
 msgid "PNG"
@@ -426,7 +426,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:2912
 #, qt-format
 msgid "Cannot render the image: %1"
-msgstr ""
+msgstr "Obrázek nelze vykreslit: %1"
 
 #: mainwindow.cpp:2937
 #, qt-format
@@ -825,22 +825,22 @@ msgstr "Avogadro se ukončuje."
 #: rpclistener.cpp:693
 #, qt-format
 msgid "%1 must be a whole number from %2 to %3."
-msgstr ""
+msgstr "%1 musí být celé číslo od %2 do %3."
 
 #: rpclistener.cpp:722
 #, qt-format
 msgid ""
 "The %1 derived from the view's aspect ratio, %2, is outside the range 1 to "
 "%3."
-msgstr ""
+msgstr "%1 odvozená z poměru stran pohledu, %2, je mimo rozsah 1 až %3."
 
 #: rpclistener.cpp:724
 msgid "height"
-msgstr ""
+msgstr "výška"
 
 #: rpclistener.cpp:724
 msgid "width"
-msgstr ""
+msgstr "šířka"
 
 #: rpclistener.cpp:756
 msgid "Could not render the current view."
