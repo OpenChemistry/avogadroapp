@@ -351,8 +351,9 @@ ToolPlugin* TargetRegistry::editorTool() const
 
 // One of the Editor's settings widgets by object name, searched only inside
 // the Editor's own panel so a same-named widget elsewhere cannot match. The
-// Editor builds its panel in its constructor, so this works before the tool has
-// ever been activated.
+// panel is built on the first call to toolWidget(), so asking for it here
+// creates it even before the tool has been activated; the Editor keeps it
+// hidden until the tool dock takes it.
 QWidget* TargetRegistry::editorWidget(const QString& name) const
 {
   ToolPlugin* editor = editorTool();
