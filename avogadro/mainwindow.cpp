@@ -75,6 +75,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QPalette>
 #include <QtGui/QShortcut>
+#include <QtGui/QUndoStack>
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -1276,6 +1277,19 @@ void MainWindow::setMolecule(Molecule* mol)
     setActiveTool(targetToolName);
     connect(m_molecule, &QtGui::Molecule::changed, this,
             &MainWindow::markMoleculeDirty, Qt::UniqueConnection);
+
+    // The undo stack can change without the molecule emitting changed(): a
+    // macro (e.g. a whole AutoOpt run) only becomes undoable when it closes.
+    // Follow the stack itself so Undo/Redo never go stale.
+    QUndoStack* stack = &m_molecule->undoMolecule()->undoStack();
+    connect(stack, &QUndoStack::canUndoChanged, this,
+            &MainWindow::activeMoleculeEdited, Qt::UniqueConnection);
+    connect(stack, &QUndoStack::canRedoChanged, this,
+            &MainWindow::activeMoleculeEdited, Qt::UniqueConnection);
+    connect(stack, &QUndoStack::undoTextChanged, this,
+            &MainWindow::activeMoleculeEdited, Qt::UniqueConnection);
+    connect(stack, &QUndoStack::redoTextChanged, this,
+            &MainWindow::activeMoleculeEdited, Qt::UniqueConnection);
   }
 
   emit moleculeChanged(m_molecule);
@@ -1293,8 +1307,10 @@ void MainWindow::setMolecule(Molecule* mol)
   ActiveObjects::instance().setActiveMolecule(m_molecule);
 
   // Never the molecule that was just connected above.
-  if (oldMolecule && oldMolecule != mol)
+  if (oldMolecule && oldMolecule != mol) {
     oldMolecule->disconnect(this);
+    oldMolecule->undoMolecule()->undoStack().disconnect(this);
+  }
 
   // start the autosave timer
   if (!m_skipAutosave)
