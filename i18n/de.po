@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: _avogadro-de\n"
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-15 07:54+0000\n"
-"PO-Revision-Date: 2026-11-24 11:39+0000\n"
+"PO-Revision-Date: 2026-11-25 08:05+0000\n"
 "Last-Translator: Norwid Behrnd <nbehrnd@users.noreply.hosted.weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/avogadro/"
 "avogadroapp/de/>\n"
@@ -376,7 +376,7 @@ msgid ""
 "\n"
 "%1"
 msgstr ""
-"OpenGL 4.0 oder höher benötigt, beende das Programm.\n"
+"OpenGL 4.0 oder höher erforderlich, das Programm wird beendet.\n"
 "\n"
 "%1"
 
@@ -908,6 +908,8 @@ msgstr ""
 #: targetregistry.cpp:621
 msgid "The Draw tool's settings are not showing. Choose the Draw tool first."
 msgstr ""
+"Die Einstellungen für das Zeichenwerkzeug werden nicht angezeigt. Wählen Sie "
+"zuerst das Zeichenwerkzeug aus."
 
 #: targetregistry.cpp:821
 #, qt-format
