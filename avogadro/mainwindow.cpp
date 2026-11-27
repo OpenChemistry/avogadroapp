@@ -9,6 +9,7 @@
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
 #include "crashreporter.h"
+#include "exportcopy.h"
 #include "menubuilder.h"
 #include "renderingdialog.h"
 #include "targetregistry.h"
@@ -2836,8 +2837,15 @@ QImage MainWindow::renderToImage(const QtOpenGL::RenderOptions& options,
   // Now we embed molecular information into the file, if possible
   if (m_molecule && m_molecule->atomCount() < 1000) {
     string tmpCml;
+    // CML is not the native format: leave hidden atoms out of the copy.
+    std::unique_ptr<Core::Molecule> visible;
+    const Core::Molecule* toWrite = m_molecule;
+    if (hasHiddenAtoms(*m_molecule)) {
+      visible = copyWithoutHiddenAtoms(*m_molecule);
+      toWrite = visible.get();
+    }
     bool ok =
-      FileFormatManager::instance().writeString(*m_molecule, tmpCml, "cml");
+      FileFormatManager::instance().writeString(*toWrite, tmpCml, "cml");
     if (ok)
       exportImage.setText("CML", tmpCml.c_str());
   }
@@ -3205,7 +3213,14 @@ std::string MainWindow::exportString(const std::string& format)
   if (!mol)
     return output;
 
-  Io::FileFormatManager::instance().writeString(*mol, output, format);
+  // Hidden atoms only go to the native format.
+  std::unique_ptr<Core::Molecule> visible;
+  const Core::Molecule* toWrite = mol;
+  if (!isNativeFormat(format) && hasHiddenAtoms(*mol)) {
+    visible = copyWithoutHiddenAtoms(*mol);
+    toWrite = visible.get();
+  }
+  Io::FileFormatManager::instance().writeString(*toWrite, output, format);
 
   return output;
 }
@@ -3259,6 +3274,10 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
     Core::Variant projection(m);
     mol->setData("projection", projection);
   }
+
+  // Hidden atoms only go to the native format, which stores the layers.
+  if (!isNativeFormat(ident.toStdString()) && hasHiddenAtoms(*mol))
+    m_threadedWriter->setMoleculeToWrite(copyWithoutHiddenAtoms(*mol));
 
   // Prepare the background thread to write the selected file.
   m_threadedWriter->moveToThread(m_fileWriteThread);

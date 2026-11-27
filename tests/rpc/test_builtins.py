@@ -404,6 +404,38 @@ def test_export_file_wait(avo, tmp_path):
     assert json.loads(cjson.read_text())["chemicalJson"] == 1
 
 
+def _hide_atoms_on_layer(avo, atoms):
+    """Move the atoms to a new layer and hide it."""
+    avo.data("selectAtoms", {"atoms": atoms})
+    avo.data("createLayerFromSelection")
+    avo.data("selectAtoms", {"atoms": []})
+    avo.call("setLayerVisible", {"layer": 1, "visible": False}, wait=True)
+
+
+def test_export_leaves_out_hidden_atoms(avo, tmp_path):
+    """Only the native format (CJSON, which stores the layers) keeps atoms on
+    a hidden layer."""
+    avo.load(ETHANE)
+    _hide_atoms_on_layer(avo, [5, 6, 7])
+
+    xyz = tmp_path / "ethane.xyz"
+    avo.call("exportFile", {"fileName": str(xyz)}, wait=True)
+    assert xyz.read_text().splitlines()[0].strip() == "5"
+
+    cjson = tmp_path / "ethane.cjson"
+    avo.call("exportFile", {"fileName": str(cjson)}, wait=True)
+    assert len(json.loads(cjson.read_text())["atoms"]["elements"]["number"]) == 8
+
+    # getMolecule follows the same rule.
+    as_xyz = avo.call("getMolecule", {"format": "xyz"})
+    assert as_xyz["content"].splitlines()[0].strip() == "5"
+    as_cjson = avo.call("getMolecule")
+    assert len(json.loads(as_cjson["content"])["atoms"]["elements"]["number"]) == 8
+
+    # The document itself still has every atom.
+    assert avo.info()["atomCount"] == 8
+
+
 def test_export_file_unknown_extension(avo, tmp_path):
     avo.load(ETHANE)
     avo.expect_error(

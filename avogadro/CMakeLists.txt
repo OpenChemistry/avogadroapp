@@ -49,6 +49,7 @@ set(avogadro_srcs
   application.cpp
   avogadro.cpp
   backgroundfileformat.cpp
+  exportcopy.cpp
   mainwindow.cpp
   highlightoverlay.cpp
   menubuilder.cpp

@@ -9,6 +9,8 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
+#include <memory>
+
 namespace Avogadro {
 
 namespace Core {
@@ -40,6 +42,13 @@ public:
   void setMolecule(Core::Molecule* mol) { m_molecule = mol; }
   Core::Molecule* molecule() const { return m_molecule; }
   /**@}*/
+
+  /**
+   * Write @a mol instead of molecule(), which stays the document the write
+   * is about. Takes ownership. Used to leave hidden atoms out of a non-native
+   * export.
+   */
+  void setMoleculeToWrite(std::unique_ptr<Core::Molecule> mol);
 
   /**
    * The name of the file to read/write.
@@ -86,6 +95,7 @@ public slots:
 private:
   Io::FileFormat* m_format;
   Core::Molecule* m_molecule;
+  std::unique_ptr<Core::Molecule> m_moleculeToWrite;
   QString m_fileName;
   QString m_error;
   bool m_success;
