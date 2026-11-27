@@ -908,6 +908,15 @@ private:
    * if the molecule is not saved, or the user cancels.
    */
   bool saveFileIfNeeded();
+
+  /**
+   * Interactive saves and exports only. Warn the user, with a modal dialog,
+   * if writing @a format would leave out atoms on hidden layers.
+   * @param format A format identifier or file extension (any case).
+   * @return true to go ahead (no hidden atoms, native format, or the user chose
+   * Save), false if the user cancelled.
+   */
+  bool confirmDropHiddenAtoms(const std::string& format);
 };
 
 } // namespace Avogadro
