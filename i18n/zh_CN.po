@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: avogadro-devel@lists.sourceforge.net\n"
 "POT-Creation-Date: 2026-11-15 07:54+0000\n"
 "PO-Revision-Date: 2026-11-28 13:51+0000\n"
-"Last-Translator: Pengbo Gao <gravitylead@users.noreply.hosted.weblate.org>\n"
+"Last-Translator: eNoWater <rf_sun@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/avogadro/avogadroapp/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -64,7 +64,7 @@ msgstr "SSL 版本："
 #: aboutdialog.cpp:47
 #, qt-format
 msgid "%1 (Diagnostic)"
-msgstr ""
+msgstr "%1（诊断 ）"
 
 #: backgroundfileformat.cpp:33 backgroundfileformat.cpp:110
 msgid "No molecule set in BackgroundFileFormat!"
@@ -99,12 +99,16 @@ msgid ""
 "useful, but it may incidentally include fragments of what you were working "
 "on, such as part of a file name or a molecule you had open."
 msgstr ""
+"崩溃报告包含了 Avogadro 崩溃瞬间的内存快照，以及关于您的操作系统、图形驱动程"
+"序和 Avogadro 版本的详细信息，以及最近活动的日志。正是这个内存快照使报告具有"
+"参考价值，但它也可能会意外包含您正在处理的部分内容，例如文件名的一部分或您已"
+"打开的分子。"
 
 #: crashreportdialog.cpp:50
 msgid ""
 "Nothing is sent unless you agree. You can change this at any time under Help "
 "→ Crash Reporting."
-msgstr ""
+msgstr "除非您同意，否则不会发送任何内容。您可随时在 帮助 → 崩溃报告 中更改此选项。"
 
 #: crashreportdialog.cpp:61
 msgid "Send Crash Reports"
@@ -267,7 +271,7 @@ msgstr ""
 
 #: mainwindow.cpp:1760
 msgid "The save was canceled."
-msgstr ""
+msgstr "保存已取消。"
 
 #: mainwindow.cpp:1821 mainwindow.cpp:1824
 msgid "untitled"
@@ -329,7 +333,7 @@ msgstr "以下插件可用："
 
 #: mainwindow.cpp:2227
 msgid "Would you like to update them?"
-msgstr ""
+msgstr "您想更新它们吗？"
 
 #: mainwindow.cpp:2265
 msgid "Recover Autosaved Files"
@@ -364,16 +368,16 @@ msgstr ""
 
 #: mainwindow.cpp:2388
 msgid "Missing 'layer' parameter."
-msgstr ""
+msgstr "缺少 “layer” 参数。"
 
 #: mainwindow.cpp:2391
 msgid "'layer' must be a whole number."
-msgstr ""
+msgstr "“layer”必须是一个整数。"
 
 #: mainwindow.cpp:2394
 #, qt-format
 msgid "'layer' %1 is out of range."
-msgstr ""
+msgstr "“layer” %1 超出范围。"
 
 #: mainwindow.cpp:2681
 #, qt-format
@@ -383,7 +387,7 @@ msgstr "%1 设置"
 
 #: mainwindow.cpp:2812 rpclistener.cpp:677
 msgid "There is no active 3D view to render."
-msgstr ""
+msgstr "没有活动的3D试图可供渲染。"
 
 #: mainwindow.cpp:2835
 msgid "PNG"
@@ -419,7 +423,7 @@ msgstr "Avogadro"
 #: mainwindow.cpp:2912
 #, qt-format
 msgid "Cannot render the image: %1"
-msgstr ""
+msgstr "无法渲染此图像：%1"
 
 #: mainwindow.cpp:2937
 #, qt-format
@@ -655,7 +659,7 @@ msgstr "报告问题(&R)"
 
 #: mainwindow.cpp:3773
 msgid "&Crash Reporting…"
-msgstr ""
+msgstr "崩溃报告…"
 
 #: mainwindow.cpp:3779
 msgid "&Suggest a Feature"
@@ -764,19 +768,19 @@ msgstr "“locked” 必须为 true 或 false。"
 #: mainwindow.cpp:4687
 msgid ""
 "The molecule has unsaved changes; pass discard: true to close it anyway."
-msgstr ""
+msgstr "该分子存在未保存的更改；传入 discard: true 仍可将其关闭。"
 
 #: mainwindow.cpp:4704
 msgid "There is nothing to undo."
-msgstr ""
+msgstr "没有可撤销的操作。"
 
 #: mainwindow.cpp:4705
 msgid "There is nothing to redo."
-msgstr ""
+msgstr "没有可恢复的操作。"
 
 #: mainwindow.cpp:4720
 msgid "There is no active view."
-msgstr ""
+msgstr "没有活动的视图。"
 
 #: mainwindow.cpp:4734
 #, qt-format
@@ -809,40 +813,40 @@ msgstr "窗口(&W)"
 
 #: rpclistener.cpp:294
 msgid "Avogadro is shutting down."
-msgstr ""
+msgstr "Avogadro正在关闭中。"
 
 #: rpclistener.cpp:693
 #, qt-format
 msgid "%1 must be a whole number from %2 to %3."
-msgstr ""
+msgstr "%1 必须是从 %2 到 %3 的整数。"
 
 #: rpclistener.cpp:722
 #, qt-format
 msgid ""
 "The %1 derived from the view's aspect ratio, %2, is outside the range 1 to "
 "%3."
-msgstr ""
+msgstr "基于视图宽高比 %2 得出的 %1 超出范围 1 至 %3。"
 
 #: rpclistener.cpp:724
 msgid "height"
-msgstr ""
+msgstr "高度"
 
 #: rpclistener.cpp:724
 msgid "width"
-msgstr ""
+msgstr "宽度"
 
 #: rpclistener.cpp:756
 msgid "Could not render the current view."
-msgstr ""
+msgstr "无法渲染当前视图。"
 
 #: rpclistener.cpp:785
 msgid "Could not encode the render as PNG."
-msgstr ""
+msgstr "无法将渲染内容编码为 PNG。"
 
 #: rpclistener.cpp:826
 #, qt-format
 msgid "%1 needs a \"target\" string."
-msgstr ""
+msgstr "%1 需要一个目标字符串。"
 
 #: rpclistener.cpp:836
 msgid "highlightTarget's callout must be a string."
@@ -850,7 +854,7 @@ msgstr ""
 
 #: rpclistener.cpp:884 rpclistener.cpp:895
 msgid "No active view."
-msgstr ""
+msgstr "无活动的视图。"
 
 #: rpclistener.cpp:905
 msgid "setCamera's modelView must be exactly 16 numbers, in row-major order."
@@ -858,7 +862,7 @@ msgstr ""
 
 #: rpclistener.cpp:969 rpclistener.cpp:1045
 msgid "The command failed."
-msgstr ""
+msgstr "操作执行失败。"
 
 #: rpclistener.cpp:975
 msgid "That plugin is already running a command."
@@ -874,7 +878,7 @@ msgstr "3D 视图"
 
 #: targetregistry.cpp:523
 msgid "The 3D view is not showing."
-msgstr ""
+msgstr "3D试图未显示。"
 
 #: targetregistry.cpp:534
 msgid "\"tool\" reports the active tool; it has nothing to outline."
@@ -882,26 +886,26 @@ msgstr ""
 
 #: targetregistry.cpp:573
 msgid "The tool bar button is not showing."
-msgstr ""
+msgstr "工具栏按钮未显示。"
 
 #: targetregistry.cpp:621
 msgid "The Draw tool's settings are not showing. Choose the Draw tool first."
-msgstr ""
+msgstr "未显示绘制工具的设置，请先选择“绘制”工具。"
 
 #: targetregistry.cpp:821
 #, qt-format
 msgid "Unknown UI target \"%1\"."
-msgstr ""
+msgstr "未知UI 目标“%1”。"
 
 #: targetregistry.cpp:837
 #, qt-format
 msgid "UI target \"%1\" is not available."
-msgstr ""
+msgstr "UI 目标“%1”不可用。"
 
 #: targetregistry.cpp:840
 #, qt-format
 msgid "UI target \"%1\" is not visible."
-msgstr ""
+msgstr "UI 目标“%1”不可见。"
 
 #: targetregistry.cpp:908
 msgid "There is no window to draw on."
