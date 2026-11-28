@@ -108,7 +108,6 @@
 #include <cmath>
 #include <filesystem>
 #include <limits>
-#include <qlogging.h>
 #include <system_error>
 
 #ifdef QTTESTING

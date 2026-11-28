@@ -3,20 +3,39 @@
   This source code is released under the 3-Clause BSD License, (see "LICENSE").
 ******************************************************************************/
 
-#ifndef AVOGADRO_TRANSLATIONS_H
-#define AVOGADRO_TRANSLATIONS_H
+#ifndef AVOGADRO_I18N_H
+#define AVOGADRO_I18N_H
 
 #include <QtGui/QFontDatabase>
 
 #include <QtCore/QDir>
 #include <QtCore/QList>
-#include <QtCore/QStringList>
 #include <QtCore/QLocale>
+#include <QtCore/QStringList>
+#include <QtCore/QTranslator>
 
 #include <optional>
 #include <utility>
 
 namespace Avogadro {
+
+/**
+ * @brief Loads the best-match translation file and installs the translator.
+ *
+ * Returns the locale code of the installed file, if one was found and
+ * successfully installed, or an empty string otherwise.
+ *
+ * If `localeCode` is not an empty string, first attempts to install a file that
+ * matches the exact `localeCode` (with the name `filename + "-" + localeCode`).
+ * If this is unsuccessful, or if `localeCode` is an empty string, `locale` is
+ * used as the basis for resolving to a best-match translation.
+ *
+ */
+QString loadBestMatchTranslation(QTranslator* translator,
+                                 const QString& localeCode,
+                                 const QLocale& locale, const QString& filename,
+                                 const QString& prefix,
+                                 const QStringList& translationPaths);
 
 /**
  * @brief Collects possible locations of translation files for:
@@ -48,4 +67,4 @@ std::optional<QFontDatabase::WritingSystem> scriptToWritingSystem(
 
 } // namespace Avogadro
 
-#endif // AVOGADRO_TRANSLATIONS_H
+#endif // AVOGADRO_I18N_H

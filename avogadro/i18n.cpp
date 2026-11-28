@@ -12,19 +12,73 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDir>
 #include <QtCore/QtEnvironmentVariables>
+#include <QtCore/QFileInfo>
 #include <QtCore/QLatin1StringView>
 #include <QtCore/QList>
 #include <QtCore/QProcess>
+#include <QtCore/QTranslator>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QString>
 
 #include <optional>
-#include <qnamespace.h>
 #include <utility>
 
 using namespace Qt::StringLiterals;
 
 namespace Avogadro {
+
+QString loadBestMatchTranslation(QTranslator* translator,
+                                 const QString& localeCode,
+                                 const QLocale& locale, const QString& filename,
+                                 const QString& prefix,
+                                 const QStringList& translationPaths)
+{
+  QCoreApplication* app = QCoreApplication::instance();
+  bool loaded = false;
+  QString translationLocaleCode;
+  // Try to find a translation file that corresponds to the exact locale code,
+  // if one was provided
+  if (!loaded && !localeCode.isEmpty()) {
+    for (const QString& translationPath : translationPaths) {
+      if (!loaded &&
+          // Don't allow stripping of parts, we want only an exact match here
+          translator->load(filename + prefix + localeCode, translationPath)) {
+        if (app->installTranslator(translator)) {
+          loaded = true;
+          translationLocaleCode = localeCode;
+          qDebug() << "Translation (exact match for configured locale code):"
+                   << translationLocaleCode << "loaded from" << translationPath;
+        }
+      }
+    }
+  }
+  // If that fails, try to resolve to a translation file based on the locale
+  if (!loaded) {
+    for (const QString& translationPath : translationPaths) {
+      if (!loaded &&
+          translator->load(locale, filename, prefix, translationPath)) {
+        if (app->installTranslator(translator)) {
+          loaded = true;
+          // Get the actual locale code of the loaded file (e.g., id, pt_BR,
+          // ca@valencia), not the locale we started from, and not the one
+          // stored in the .qm metadata, which can differ (ar -> ar_EG,
+          // ca@valencia -> ca_ES)
+          QString translationBaseName =
+            QFileInfo(translator->filePath()).completeBaseName();
+          if (translationBaseName.startsWith(filename)) {
+            translationLocaleCode =
+              translationBaseName.mid((filename + prefix).length());
+          } else {
+            translationLocaleCode = translationBaseName;
+          }
+          qDebug() << "Translation (best match for locale):"
+                   << translationLocaleCode << "loaded from" << translationPath;
+        }
+      }
+    }
+  }
+  return translationLocaleCode;
+}
 
 std::pair<QStringList, QStringList> translationPaths()
 {

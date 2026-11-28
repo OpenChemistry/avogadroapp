@@ -14,6 +14,7 @@
 
 #include <QtGui/QFontDatabase>
 
+#include <QtCore/QHash>
 #include <QtCore/QLatin1StringView>
 #include <QtCore/QSettings>
 #include <QtCore/QString>
@@ -111,16 +112,32 @@ void PreferencesDialog::setupGeneral()
     // To save Qt loading and trying fonts to see if they work, we will check
     // if the language is even supported, and if not, omit it.
     auto availableWritingSystems = QFontDatabase::writingSystems();
-    foreach (const QString& localeCode, availableLocales) {
+    for (const QString& localeCode : availableLocales) {
       QLocale locale(localeCode);
       auto writingSystem = Avogadro::scriptToWritingSystem(locale.script());
       if (writingSystem && availableWritingSystems.contains(*writingSystem)) {
-        QString languageLabel = locale.nativeLanguageName();
-        // Add the territory to disambiguate if the locale code has it too
-        // (but not for locales where Qt's "native name" already says it)
-        if (localeCode.contains(u'_') && !localeCode.startsWith("en"_L1) &&
-            !(localeCode == "fr_CA"_L1))
-          languageLabel += " ("_L1 + locale.nativeTerritoryName() + ")"_L1;
+        QString languageLabel;
+        // Some languages Qt just gets plain wrong (e.g. variations with @ are
+        // ignored) and we just need to override the whole thing
+        const QHash<QString, QString> locale_exceptions = {
+          { "ca@valencia"_L1, u"valencià"_s },
+        };
+        if (locale_exceptions.contains(localeCode)) {
+          languageLabel = locale_exceptions.value(localeCode);
+        } else {
+          // Some Qt locales include the location in the native name for some
+          // reason
+          const QHash<QString, QString> lang_exceptions = {
+            { "es"_L1, u"español"_s },
+            { "fr"_L1, u"français"_s },
+            { "en"_L1, u"English"_s }
+          };
+          languageLabel = lang_exceptions.value(localeCode.split('_').first(),
+                                                locale.nativeLanguageName());
+          // Add the territory to disambiguate if the locale code has it too
+          if (localeCode.contains(u'_'))
+            languageLabel += " ("_L1 + locale.nativeTerritoryName() + ")"_L1;
+        }
         languageLabel += " ["_L1 + localeCode + "]"_L1;
         m_ui->userInterfaceLanguageComboBox->addItem(languageLabel, localeCode);
       } else {
@@ -139,9 +156,12 @@ void PreferencesDialog::updateGeneral()
   // Only bother if there are even translations available
   if (m_ui->userInterfaceLanguageComboBox->count() > 1) {
     // We made the locale string the associated data for each item
-    m_ui->userInterfaceLanguageComboBox->findData(
+    int index = m_ui->userInterfaceLanguageComboBox->findData(
       // No explicit setting in the config indicates to use the system language
       m_settings.value("locale"_L1, "system"_L1).toString());
+    // If the language specified in the config isn't available, system is used
+    index = (index != -1) ? index : 1;
+    m_ui->userInterfaceLanguageComboBox->setCurrentIndex(index);
   }
 
   // Indexing convention
@@ -163,16 +183,16 @@ void PreferencesDialog::applyGeneral()
   // overwrite the config value if the user couldn't make an active choice
   if (m_ui->userInterfaceLanguageComboBox->count() > 1) {
     QVariant currentData = m_ui->userInterfaceLanguageComboBox->currentData();
+    // Shouldn't happen, but if the box has no current item, don't change
+    // anything in the settings
     if (currentData.isValid()) {
       qDebug() << "Selected language:"
                << m_ui->userInterfaceLanguageComboBox->currentText();
       QString chosenLocale = currentData.toString();
       qDebug() << "Corresponding locale code:" << chosenLocale;
       m_settings.setValue("locale"_L1, chosenLocale);
-    } else {
-      // Nothing was selected, so don't change anything in the settings
-    };
-  };
+    }
+  }
 
   // Indexing convention
   m_settings.setValue("indexing"_L1, m_ui->indexingComboBox->currentIndex());

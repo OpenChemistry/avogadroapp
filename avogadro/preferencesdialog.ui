@@ -94,7 +94,7 @@
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Avogadro must be restarted for this to take effect.</string>
+          <string>Requires Avogadro to be restarted to take effect.</string>
          </property>
         </widget>
        </item>
@@ -216,7 +216,7 @@
          <item row="1" column="1">
           <widget class="QDoubleSpinBox" name="minimumDistanceDoubleSpinBox">
            <property name="suffix">
-            <string> Å</string>
+            <string notr="true"> Å</string>
            </property>
            <property name="decimals">
             <number>3</number>
@@ -237,7 +237,13 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Bonds are perceived between atoms at distance &lt;span style=&quot; font-style:italic;&quot;&gt;d&lt;/span&gt;  if:&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;d&lt;/span&gt; &amp;lt; the sum of the van der Waals radii + the distance tolerance&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;d&lt;/span&gt; &amp;gt; (the minimum distance)&lt;span style=&quot; vertical-align:super;&quot;&gt;2&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>Bonds are perceived between atoms at distance d if:
+
+d &lt; the sum of the covalent radii + the distance tolerance
+d &gt; the minimum distance</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::TextFormat::PlainText</enum>
          </property>
         </widget>
        </item>
