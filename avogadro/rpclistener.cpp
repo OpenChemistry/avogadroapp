@@ -5,6 +5,7 @@
 
 #include "rpclistener.h"
 #include "avogadroappconfig.h"
+#include "exportcopy.h"
 #include "mainwindow.h"
 #include "targetregistry.h"
 
@@ -37,6 +38,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <memory>
 
 namespace Avogadro {
 
@@ -653,7 +655,15 @@ void RpcListener::messageReceived(const RPC::Message& message)
       sendError(message, errorRequestFailed, tr("No molecule is open."));
     } else {
       string content;
-      bool ok = FileFormatManager::instance().writeString(*mol, content,
+      // Hidden atoms are only part of the native format, which stores the
+      // layers; every other format gets the visible atoms.
+      std::unique_ptr<Core::Molecule> visible;
+      const Core::Molecule* toWrite = mol;
+      if (!isNativeFormat(format.toStdString()) && hasHiddenAtoms(*mol)) {
+        visible = copyWithoutHiddenAtoms(*mol);
+        toWrite = visible.get();
+      }
+      bool ok = FileFormatManager::instance().writeString(*toWrite, content,
                                                           format.toStdString());
       if (ok) {
         QVariantMap result;

@@ -5,6 +5,7 @@
 
 #include "backgroundfileformat.h"
 
+#include <avogadro/core/molecule.h>
 #include <avogadro/io/fileformat.h>
 
 #include <QtCore/QFile>
@@ -101,6 +102,12 @@ void BackgroundFileFormat::read()
   emit finished();
 }
 
+void BackgroundFileFormat::setMoleculeToWrite(
+  std::unique_ptr<Core::Molecule> mol)
+{
+  m_moleculeToWrite = std::move(mol);
+}
+
 void BackgroundFileFormat::write()
 {
   m_success = false;
@@ -116,8 +123,9 @@ void BackgroundFileFormat::write()
     m_error = tr("No file name set in BackgroundFileFormat!");
 
   if (m_error.isEmpty()) {
-    m_success =
-      m_format->writeFile(m_fileName.toLocal8Bit().data(), *m_molecule);
+    const Core::Molecule& toWrite =
+      m_moleculeToWrite ? *m_moleculeToWrite : *m_molecule;
+    m_success = m_format->writeFile(m_fileName.toLocal8Bit().data(), toWrite);
 
     if (!m_success)
       m_error = QString::fromStdString(m_format->error());

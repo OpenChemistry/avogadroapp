@@ -9,6 +9,7 @@
 #include "avogadroappconfig.h"
 #include "backgroundfileformat.h"
 #include "crashreporter.h"
+#include "exportcopy.h"
 #include "menubuilder.h"
 #include "renderingdialog.h"
 #include "targetregistry.h"
@@ -2836,8 +2837,15 @@ QImage MainWindow::renderToImage(const QtOpenGL::RenderOptions& options,
   // Now we embed molecular information into the file, if possible
   if (m_molecule && m_molecule->atomCount() < 1000) {
     string tmpCml;
+    // CML is not the native format: leave hidden atoms out of the copy.
+    std::unique_ptr<Core::Molecule> visible;
+    const Core::Molecule* toWrite = m_molecule;
+    if (hasHiddenAtoms(*m_molecule)) {
+      visible = copyWithoutHiddenAtoms(*m_molecule);
+      toWrite = visible.get();
+    }
     bool ok =
-      FileFormatManager::instance().writeString(*m_molecule, tmpCml, "cml");
+      FileFormatManager::instance().writeString(*toWrite, tmpCml, "cml");
     if (ok)
       exportImage.setText("CML", tmpCml.c_str());
   }
@@ -3052,6 +3060,8 @@ bool MainWindow::saveFile(bool async)
 
   // Was the original format standard, or imported?
   if (extension == QLatin1String("cml")) {
+    if (!confirmDropHiddenAtoms("cml"))
+      return false;
     return saveFileAs(QString::fromStdString(fileName), new Io::CmlFormat,
                       async);
   } else if (extension == QLatin1String("cjson")) {
@@ -3084,9 +3094,12 @@ bool MainWindow::saveFile(bool async)
       return saveFileAs(async);
     else if (box.clickedButton() == cancelButton)
       return false;
-    else if (box.clickedButton() == exportButton)
+    else if (box.clickedButton() == exportButton) {
+      if (!confirmDropHiddenAtoms(extension.toStdString()))
+        return false;
       return exportFile(QString::fromStdString(fileName),
                         async); // save in current format
+    }
   }
 
   // Otherwise, prompt for a new valid format.
@@ -3138,6 +3151,11 @@ bool MainWindow::saveFileAs(bool async)
   else if (extension == "cml")
     writer = new Io::CmlFormat;
 
+  if (writer && !confirmDropHiddenAtoms(writer->identifier())) {
+    delete writer;
+    return false;
+  }
+
   return saveFileAs(fileName, writer, async);
 }
 
@@ -3155,7 +3173,32 @@ bool MainWindow::exportFile(bool async)
   dir = QFileInfo(reply.second).absoluteDir().absolutePath();
   settings.setValue("MainWindow/lastSaveDir", dir);
 
+  if (!confirmDropHiddenAtoms(reply.first->identifier()))
+    return false;
+
   return saveFileAs(reply.second, reply.first->newInstance(), async);
+}
+
+bool MainWindow::confirmDropHiddenAtoms(const std::string& format)
+{
+  if (isNativeFormat(format))
+    return true;
+
+  auto* mol = qobject_cast<Molecule*>(m_moleculeModel->activeMolecule());
+  if (!mol || !hasHiddenAtoms(*mol))
+    return true;
+
+  QMessageBox box(this);
+  box.setIcon(QMessageBox::Warning);
+  box.setModal(true);
+  box.setWindowTitle(tr("Avogadro"));
+  box.setText(tr("Atoms on hidden layers will not be saved in this format."));
+  box.setInformativeText(
+    tr("Only Chemical JSON (.cjson) keeps hidden layers. Show the layers "
+       "first to include their atoms, or save as Chemical JSON."));
+  box.setStandardButtons(QMessageBox::Save | QMessageBox::Cancel);
+  box.setDefaultButton(QMessageBox::Cancel);
+  return box.exec() == QMessageBox::Save;
 }
 
 bool MainWindow::exportFile(const QString& fileName, bool async, quint64 token)
@@ -3205,7 +3248,14 @@ std::string MainWindow::exportString(const std::string& format)
   if (!mol)
     return output;
 
-  Io::FileFormatManager::instance().writeString(*mol, output, format);
+  // Hidden atoms only go to the native format.
+  std::unique_ptr<Core::Molecule> visible;
+  const Core::Molecule* toWrite = mol;
+  if (!isNativeFormat(format) && hasHiddenAtoms(*mol)) {
+    visible = copyWithoutHiddenAtoms(*mol);
+    toWrite = visible.get();
+  }
+  Io::FileFormatManager::instance().writeString(*toWrite, output, format);
 
   return output;
 }
@@ -3259,6 +3309,10 @@ bool MainWindow::saveFileAs(const QString& fileName, Io::FileFormat* writer,
     Core::Variant projection(m);
     mol->setData("projection", projection);
   }
+
+  // Hidden atoms only go to the native format, which stores the layers.
+  if (!isNativeFormat(ident.toStdString()) && hasHiddenAtoms(*mol))
+    m_threadedWriter->setMoleculeToWrite(copyWithoutHiddenAtoms(*mol));
 
   // Prepare the background thread to write the selected file.
   m_threadedWriter->moveToThread(m_fileWriteThread);
