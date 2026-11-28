@@ -9,9 +9,11 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QMessageBox>
 
+#include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
+#include <QtCore/QLatin1StringView>
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QLocale>
 #include <QtCore/QOperatingSystemVersion>
@@ -19,6 +21,9 @@
 #include <QtCore/QSettings>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QTranslator>
+#include <QtCore/QString>
+
+using namespace Qt::StringLiterals;
 
 // install a message handler (for Windows)
 #include <QFile>
@@ -30,6 +35,7 @@
 #include "application.h"
 #include "avogadroappconfig.h"
 #include "crashreporter.h"
+#include "i18n.h"
 #include "mainwindow.h"
 
 #ifdef Q_OS_MAC
@@ -242,174 +248,143 @@ int main(int argc, char* argv[])
 
   Avogadro::Application app(argc, argv);
 
+  // Load user configuration
   QSettings settings;
-  QString language = settings.value("locale", "System").toString();
+  qDebug() << "App configuration loaded from"_L1 << settings.fileName();
 
   // Before we do much else, load translations
   // This ensures help messages and debugging info can be translated
-  QLocale currentLocale;
-  if (language != "System") {
-    currentLocale = QLocale(language);
-  }
-#ifdef Q_OS_MAC
-  else {
-    // On macOS, we can get the system language from the AppleLanguages
-    // setting, which is a list of preferred languages.
-    // https://www.qtcentre.org/threads/57433-SOLVED-Get-system-language-on-Mac-OS-X
-    QVariant osxLanguageSettings = settings.value("AppleLanguages");
-    QStringList displayLanguages = osxLanguageSettings.toStringList();
-    QString preferredLanguage = displayLanguages.first();
-    qDebug() << "preferred language is:" << preferredLanguage;
-    if (!preferredLanguage.isEmpty()) {
-      currentLocale = QLocale(preferredLanguage);
+
+  QString preferredLocaleCode;
+  bool noTranslation = false;
+  bool useSystem = false;
+  if (settings.contains("locale"_L1)) {
+    preferredLocaleCode = settings.value("locale"_L1).toString();
+    qDebug() << "Preference for locale found in configuration:"
+             << preferredLocaleCode;
+    if (preferredLocaleCode == "system"_L1) {
+      // Explicit request for the system language
+      useSystem = true;
+    } else if (preferredLocaleCode == "default"_L1) {
+      // Explicit request not to translate at all, just use the hard-coded text
+      noTranslation = true;
+      useSystem = false;
+    } else {
+      // If a language has been specified, we should use it
+      useSystem = false;
+      qDebug() << "Attempting to use configured locale:" << preferredLocaleCode;
     }
-  }
-#endif
-
-  qDebug() << "Using locale: " << currentLocale.name();
-
-  QStringList translationPaths;
-  // check environment variable and local paths
-  foreach (const QString& variable, QProcess::systemEnvironment()) {
-    QStringList split1 = variable.split('=');
-    if (split1[0] == "AVOGADRO_TRANSLATIONS") {
-      foreach (const QString& path, split1[1].split(':'))
-        translationPaths << path;
-    }
+  } else {
+    // Otherwise, the system language should be used
+    useSystem = true;
   }
 
-  translationPaths << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-  translationPaths << QCoreApplication::applicationDirPath() +
-                        "/../share/avogadro2/i18n/";
-  // add the possible plugin download paths
-  QStringList stdPaths =
-    QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
-  foreach (const QString& dirStr, stdPaths) {
-    QString path = dirStr + "/i18n/avogadro-i18n/avogadroapp";
-    translationPaths << path; // we'll check if these exist below
-    path = dirStr + "/i18n/avogadro-i18n/avogadrolibs";
-    translationPaths << path;
+  QLocale preferredLocale;
+  if (useSystem) {
+    // Default constructor uses the default locale, which is determined from the
+    // system's locale settings at application startup
+    preferredLocale = QLocale();
+    qDebug() << "Attempting to use system locale: "
+             << preferredLocale.bcp47Name();
+  } else {
+    preferredLocale = QLocale(preferredLocaleCode);
   }
 
-  // Make sure to use pointers:
-  //
-  auto* qtTranslator = new QTranslator;
-  auto* qtBaseTranslator = new QTranslator;
-  auto* avoTranslator = new QTranslator;
-  auto* avoLibsTranslator = new QTranslator;
-  bool qtLoaded = false;
-  bool avoLoaded = false;
-  bool libsLoaded = false;
-  QString successfulPath;
+  // We can skip all of this if the user wants to just use the default interface
+  // without any translation
+  if (!noTranslation) {
+    // Note that if the user uses multiple languages on their system, the list
+    // of fallback languages for the system locale will be different to the
+    // fallback list for the basic locale e.g. fr-CA falls back only to fr, but
+    // if the user has both fr-CA and de as system interface langs, the lookups
+    // will check first for fr-CA, then fr, then de.
 
-  // First find the Avogadro translation for the requested locale.
-  foreach (const QString& translationPath, translationPaths) {
-    if (avoTranslator->load(currentLocale, "avogadroapp", "-",
-                            translationPath)) {
-      if (app.installTranslator(avoTranslator)) {
-        avoLoaded = true;
-        successfulPath = translationPath;
-        break;
+    // The different components use translation files stored in different
+    // places, so collect lists of possible locations separately for each
+    // component
+    QStringList qtTranslationPaths{
+      // With system copies of the Qt libraries for installs from distro repos
+      QLibraryInfo::location(QLibraryInfo::TranslationsPath),
+      // With the Avogadro installation for bundles (Win, Mac, Flatpak etc.)
+      QCoreApplication::applicationDirPath() + "/../share/avogadro2/i18n/"_L1,
+    };
+
+    // Get all the paths that *might* have translation files
+    // We don't confirm that they actually exist or have translation files, we
+    // will just try to load translations from each of them in turn until we
+    // find an appropriate file
+    auto [appTranslationPaths, libsTranslationPaths] =
+      Avogadro::translationPaths();
+
+    // We will need translators for each component -- make sure to use pointers
+    auto* qtTranslator = new QTranslator(&app);
+    auto* libsTranslator = new QTranslator(&app);
+    auto* appTranslator = new QTranslator(&app);
+
+    // First, find an appropriate avogadroapp translation file
+    qDebug() << "Loading AvogadroApp translations..."_L1;
+    QString appLoaded = Avogadro::loadBestMatchTranslation(
+      appTranslator, preferredLocaleCode, preferredLocale, "avogadroapp"_L1,
+      "-"_L1, appTranslationPaths);
+
+    if (appLoaded.isEmpty()) {
+      // Interface will not be translated, nothing else to do with the locale
+      qDebug() << "No translation file found, interface language will be "
+                  "untranslated English";
+    } else {
+      // avogadroapp can be translated, so now we need to load files for the
+      // other translators to match.
+      // The locale code and locale of the translation that we actually ended up
+      // using for avogadroapp
+      const QString& translationLocaleCode = appLoaded;
+      const QLocale translationLocale(translationLocaleCode);
+      qDebug() << "Corresponding locale: " << translationLocale.bcp47Name();
+      // We resolve starting from the locale code/locale of the
+      // translation we actually found, *not* from preferredLocale, because:
+      //
+      // If preferredLocale is the system locale and the user has a multilingual
+      // setup, then the list of fallback options for the resolution (which
+      // comes from the uiLanguages() list for a QLocale) may be mutually
+      // incompatible. Resolution starting from preferredLocale for each
+      // component individually could resolve to different languages from the
+      // uiLanguages() list, depending on the translation files available,
+      // potentially resulting in inconsistency.
+      //
+      // For example, if preferredLocale.uiLanguages() has Indonesian followed
+      // by Arabic, Avogadro will use Indonesian as it has a translation file
+      // for it, but Qt does not and will fall back to Arabic, mixing the
+      // languages (and in this example even the text direction would in theory
+      // differ!).
+
+      // Find translations for Qt itself
+      // To translate Qt all we really need is a qtbase_*.qm catalogue, which
+      // has translations for all the important modules (Qt Core, Gui, Widgets)
+      qDebug() << "Loading Qt translations..."_L1;
+      QString qtLoaded = Avogadro::loadBestMatchTranslation(
+        qtTranslator, translationLocaleCode, translationLocale, "qtbase"_L1,
+        "_"_L1, qtTranslationPaths);
+      // The qt_*.qm files are "meta-catalogues" that pull in the qtbase ones +
+      // some others (generally just Qt Multimedia), but might fail, so the base
+      // ones are preferable. This is here in case the meta-catalogue is the
+      // only one available, for whatever reason.
+      // See https://doc.qt.io/qt-6/localization.html#available-catalogs
+      if (!qtLoaded.isEmpty()) {
+        qtLoaded = Avogadro::loadBestMatchTranslation(
+          qtTranslator, translationLocaleCode, translationLocale, "qt"_L1,
+          "_"_L1, qtTranslationPaths);
       }
+
+      // Now find translations for avogadrolibs
+      qDebug() << "Loading AvogadroLibs translations..."_L1;
+      QString libsLoaded = Avogadro::loadBestMatchTranslation(
+        libsTranslator, translationLocaleCode, translationLocale,
+        "avogadrolibs"_L1, "-"_L1, libsTranslationPaths);
+
+      // Done looking for translations
+
+      // Right-to-left languages (e.g., ar, fa, he) should mirror the UI
+      app.setLayoutDirection(translationLocale.textDirection());
     }
-  }
-
-  // Load the other translators in the language Avogadro actually used.
-  // Loading each with currentLocale can fall through its uiLanguages() list
-  // differently (e.g., Indonesian for Avogadro, but Arabic for Qt, which has
-  // no Indonesian file), mixing languages and mirroring the UI right-to-left.
-  if (avoLoaded) {
-    // Use the loaded file's name (e.g., id, pt_BR, ca@valencia); the language
-    // stored in the .qm metadata can differ (ar -> ar_EG, ca@valencia -> ca_ES)
-    QString translationLanguage =
-      QFileInfo(avoTranslator->filePath()).completeBaseName();
-    const QString prefix = "avogadroapp-";
-    if (translationLanguage.startsWith(prefix))
-      translationLanguage = translationLanguage.mid(prefix.length());
-    const QLocale translationLocale(translationLanguage);
-
-    qDebug() << "AvogadroApp Translation " << translationLanguage << " loaded "
-             << successfulPath;
-
-    foreach (const QString& translationPath, translationPaths) {
-      if (!qtLoaded &&
-          qtTranslator->load(translationLocale, "qt", "_", translationPath)) {
-        if (app.installTranslator(qtTranslator)) {
-          qDebug() << "qt Translation " << translationLanguage << " loaded "
-                   << translationPath;
-          qtLoaded = true;
-        }
-      }
-      if (!qtLoaded && qtBaseTranslator->load(translationLocale, "qtbase", "_",
-                                              translationPath)) {
-        if (app.installTranslator(qtBaseTranslator)) {
-          qDebug() << "qtbase Translation " << translationLanguage << " loaded "
-                   << translationPath;
-          qtLoaded = true;
-        }
-      }
-      if (!libsLoaded &&
-          avoLibsTranslator->load("avogadrolibs-" + translationLanguage,
-                                  translationPath)) {
-        if (app.installTranslator(avoLibsTranslator)) {
-          qDebug() << "AvogadroLibs Translation " << translationLanguage
-                   << " loaded " << translationPath;
-          libsLoaded = true;
-        }
-      }
-    } // done looking for translations
-
-    // Only right-to-left languages (e.g., ar, fa, he) should mirror the UI
-    app.setLayoutDirection(translationLocale.textDirection());
-  }
-
-  // Go through the possible translations / locale codes
-  // to get the localized names for the language dialog
-  if (successfulPath.isEmpty()) {
-    // the default for most systems
-    // (e.g., /usr/bin/avogadro2 -> /usr/share/avogadro2/i18n/)
-    // or /Applications/Avogadro2.app/Contents/share/avogadro2/i18n/
-    // .. etc.
-    successfulPath =
-      QCoreApplication::applicationDirPath() + "/../share/avogadro2/i18n/";
-  }
-
-  QDir dir(successfulPath);
-  QStringList files =
-    dir.entryList(QStringList() << "avogadroapp*.qm", QDir::Files);
-  QStringList languages, codes;
-
-  languages << "System"; // we handle this in the dialog
-  codes << "";           // default is the system language
-
-  bool addedUS = false;
-
-  // check what files exist
-  foreach (const QString& file, files) {
-    // remove "avogadroapp-" and the ".qm"
-    QString localeCode = file.left(file.indexOf('.')).remove("avogadroapp-");
-
-    if (localeCode.startsWith("en") && !addedUS) {
-      // add US English (default)
-      addedUS = true;
-      QLocale us("en_US");
-      languages << us.nativeLanguageName();
-      codes << "en_US";
-    }
-
-    QLocale locale(localeCode);
-    QString languageName = locale.nativeLanguageName();
-    if (languageName.isEmpty() && localeCode == "oc")
-      languageName = "Occitan";
-    // potentially other exceptions here
-
-    // cases like Brazilian Portuguese show up as duplicates
-    if (languages.contains(languageName)) {
-      languageName += " (" + locale.nativeCountryName() + ")";
-    }
-
-    languages << languageName;
-    codes << localeCode;
   }
 
   // Check for valid OpenGL support.
@@ -516,7 +491,6 @@ int main(int argc, char* argv[])
   // MainWindow records skipDialogs in QtGui::Utilities, which plugins read.
   Avogadro::MainWindow window(fileNames, disableSettings, skipAutosave,
                               skipDialogs);
-  window.setTranslationList(languages, codes);
 #ifdef QTTESTING
   window.playTest(testFile, testExit);
 #endif
